@@ -48,7 +48,7 @@ theorem scalePhaseResidual_contDiffAt
         scalePhaseObservable Splus Sminus ((w, (0 : V)), (0 : Param)))
     ((w, (0 : V)), (0 : Param))
   exact (scalePhaseObservable_contDiffAt Splus Sminus
-    (w, (0 : V)) hPlusC1 hMinusC1).sub_const _
+    (w, (0 : V)) hPlusC1 hMinusC1).sub contDiffAt_const
 
 /-- No separate Jacobian hypothesis: the partial Jacobian is -I2
 provided the scale-mode normalization and the negative-channel phase
