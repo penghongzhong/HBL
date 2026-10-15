@@ -1,4 +1,4 @@
-import HBL.CompactSupportTransport
+import HBL.ManuscriptModulationConstraint
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -198,3 +198,6 @@ import HBL.CompactSupportTransport
 
 #print axioms HBL.Modulation.transportedRadialTestIntegral_fixed_eq_dynamic_of_support
 #print axioms HBL.Modulation.transportedRadialTestIntegral_eq_compactThresholdPairing_of_support
+
+#print axioms HBL.Modulation.scalePhaseResidual_on_smoothCore_eq_manuscript
+#print axioms HBL.Modulation.radialDotH1_standard_local_modulation
