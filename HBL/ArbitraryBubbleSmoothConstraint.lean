@@ -84,8 +84,13 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zPlus uRe
         hzPlus.continuous huRe.continuous hsuppPlus a₀ b hb'
-    rw [hab]
-    exact ht
+    calc
+      transportedRadialTestIntegral
+          (Real.exp (-a₀) * R₀) zPlus uRe (a₀ + b) =
+        compactThresholdPairing S zPlus
+          (scalePullback uRe (a₀ + b)) := ht
+      _ = compactThresholdPairing S zPlus
+          (scalePullback uRe (Real.log p.1)) := by rw [hab]
   have hPI :
       Splus b qIm =
         compactThresholdPairing S zPlus
@@ -99,8 +104,13 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zPlus uIm
         hzPlus.continuous huIm.continuous hsuppPlus a₀ b hb'
-    rw [hab]
-    exact ht
+    calc
+      transportedRadialTestIntegral
+          (Real.exp (-a₀) * R₀) zPlus uIm (a₀ + b) =
+        compactThresholdPairing S zPlus
+          (scalePullback uIm (a₀ + b)) := ht
+      _ = compactThresholdPairing S zPlus
+          (scalePullback uIm (Real.log p.1)) := by rw [hab]
   have hMR :
       Sminus b qRe =
         compactThresholdPairing S zMinus
@@ -114,8 +124,13 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zMinus uRe
         hzMinus.continuous huRe.continuous hsuppMinus a₀ b hb'
-    rw [hab]
-    exact ht
+    calc
+      transportedRadialTestIntegral
+          (Real.exp (-a₀) * R₀) zMinus uRe (a₀ + b) =
+        compactThresholdPairing S zMinus
+          (scalePullback uRe (a₀ + b)) := ht
+      _ = compactThresholdPairing S zMinus
+          (scalePullback uRe (Real.log p.1)) := by rw [hab]
   have hMI :
       Sminus b qIm =
         compactThresholdPairing S zMinus
@@ -129,8 +144,13 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zMinus uIm
         hzMinus.continuous huIm.continuous hsuppMinus a₀ b hb'
-    rw [hab]
-    exact ht
+    calc
+      transportedRadialTestIntegral
+          (Real.exp (-a₀) * R₀) zMinus uIm (a₀ + b) =
+        compactThresholdPairing S zMinus
+          (scalePullback uIm (a₀ + b)) := ht
+      _ = compactThresholdPairing S zMinus
+          (scalePullback uIm (Real.log p.1)) := by rw [hab]
   have hzero : (0 : ℝ) ∈ Icc (-1 : ℝ) 1 := by
     norm_num
   have hBP :
@@ -138,12 +158,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
         compactThresholdPairing S zPlus bubble := by
     dsimp [Splus, w, Rcut, hRcut]
     unfold bubbleAtLogScaleRadialDotH1
-    change
-      fullTransportedEnergyThresholdDual
-        (Real.exp (-a₀) * R₀) hRcut zPlus hzPlus a₀
-        (smoothToRadialDotH1 (bubbleAtLogScale a₀)
-          (radialU_bubbleAtLogScale_deriv_memLp a₀)) =
-        compactThresholdPairing S zPlus bubble
+    simp only [add_zero]
     rw [fullTransportedEnergyThresholdDual_on_smoothCore
       (Real.exp (-a₀) * R₀)
       (scaledBubbleCutoff_nonneg R₀ a₀ hR₀)
