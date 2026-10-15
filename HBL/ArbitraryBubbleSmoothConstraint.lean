@@ -173,7 +173,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
         S R₀ hS hcover zPlus bubble
         hzPlus.continuous bubble_contDiff.continuous
         hsuppPlus 0 hzero
-    simpa using hrec.trans hs
+    simpa [scalePullback] using hrec.trans hs
   have hCurrent :
       scalePhaseObservable Splus Sminus
         ((qRe, qIm), (b, gamma₀ + delta)) =
