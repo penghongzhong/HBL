@@ -47,6 +47,10 @@ theorem transportedEnergyCoefficient_recenter
     congr 1
     ring
   rw [hfac, Real.exp_add]
+  have harg :
+      (Real.exp a₀ * Real.exp b) * r =
+        Real.exp a₀ * (Real.exp b * r) := by ring
+  rw [harg]
   ring
 
 /-- The corrected Hilbert tail is exactly translated by the same recentering. -/
@@ -115,8 +119,12 @@ theorem transportedEnergyThresholdDual_contDiffAt
         (transportedEnergyThresholdDual R hR z₀ hz₀)
         (a₀ - a₀) := by
     simpa using hzero
-  have hcomp :=
-    hzero'.comp a₀ hsub
+  have hcomp :
+      ContDiffAt ℝ 1
+        (fun a : ℝ =>
+          transportedEnergyThresholdDual R hR z₀ hz₀ (a - a₀)) a₀ := by
+    simpa [Function.comp_def] using
+      hzero'.comp (f := fun a : ℝ => a - a₀) a₀ hsub
   have heq :
       (fun a : ℝ =>
         transportedEnergyThresholdDual R hR z₀ hz₀ (a - a₀)) =
