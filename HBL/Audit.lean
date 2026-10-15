@@ -1,4 +1,4 @@
-import HBL.TransportedTestTailL2Derivative
+import HBL.TransportedEnergyCoefficient
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -124,3 +124,10 @@ import HBL.TransportedTestTailL2Derivative
 #print axioms HBL.Modulation.transportedRadialTest_increment_bound
 #print axioms HBL.Modulation.transportedTestTail_increment_bound
 #print axioms HBL.Modulation.transportedTestTailL2_hasDerivAt_zero
+
+#print axioms HBL.Modulation.transportedRadialTest_eq_energyCoefficient_mul
+#print axioms HBL.Modulation.transportedRadialTestDerivative_eq_energyCoefficientDerivative_mul
+#print axioms HBL.Modulation.transportedEnergyCoefficient_zero
+#print axioms HBL.Modulation.transportedEnergyCoefficient_hasDerivAt
+#print axioms HBL.Modulation.transportedEnergyTail_zero
+#print axioms HBL.Modulation.transportedEnergyTail_pairing_eq_testIntegral
