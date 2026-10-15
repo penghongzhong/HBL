@@ -36,3 +36,4 @@ import HBL.TransportedEnergyDual
 import HBL.TransportedEnergyLocalDerivative
 import HBL.TransportedEnergyC1
 import HBL.FiniteRadialModulation
+import HBL.TailLiftedModulation
