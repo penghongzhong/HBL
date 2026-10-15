@@ -21,3 +21,4 @@ import HBL.BubbleScaleConnection
 import HBL.HardyCoreBridge
 import HBL.RadialEnergyIsometry
 import HBL.RadialEnergyCompletion
+import HBL.RadialTestPrimitive
