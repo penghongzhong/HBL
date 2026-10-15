@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           lake update
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-          lake exe cache get Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring
+          lake exe cache get Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Analysis.Calculus.ImplicitContDiff Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring
       - name: Compile HBL proof components
         shell: bash
         run: |
@@ -75,7 +75,7 @@ jobs:
           from pathlib import Path
           import re
           text = Path('/tmp/hbl-axioms.txt').read_text()
-          expected = ['bubble_differentiable', 'scalePullback_hasDerivAt', 'bubble_scale_derivative', 'phasePullback_hasDerivAt', 'tangentCoordinates_eq_neg', 'tangentCoordinates_bijective']
+          expected = ['bubble_differentiable', 'scalePullback_hasDerivAt', 'bubble_scale_derivative', 'phasePullback_hasDerivAt', 'tangentCoordinates_eq_neg', 'tangentCoordinates_bijective', 'parameterNegId_isInvertible', 'tangentCoordinates_eq_parameterNegId', 'local_modulation_from_normalized_jacobian']
           for name in expected:
               if 'HBL.Modulation.' + name not in text:
                   raise SystemExit('Missing dependency report: ' + name)
@@ -86,5 +86,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print('Six component dependency reports checked; no whole-paper theorem is certified.')
+          print('Nine component dependency reports checked; no whole-paper theorem is certified.')
           PY
