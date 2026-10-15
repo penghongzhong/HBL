@@ -154,21 +154,23 @@ theorem transportedEnergyTailScaleDerivativeL2_continuousAt_of_mem
   have ht :=
     realLp2_tendsto_dominated F g hF hg
       (fun _ => 2 * (C * R)) hw hb hlim
-  show Tendsto
-    (transportedEnergyTailScaleDerivativeL2 R hR zeta hzeta)
-    (𝓝 a₀)
-    (𝓝 (transportedEnergyTailScaleDerivativeL2
-      R hR zeta hzeta a₀))
-  convert ht using 1
-  · funext a
+  have hsource :
+      (fun a => (hF a).toLp (F a)) =
+        transportedEnergyTailScaleDerivativeL2 R hR zeta hzeta := by
+    funext a
     dsimp [F, μ]
     unfold transportedEnergyTailScaleDerivativeL2
     apply MemLp.toLp_congr
     exact Filter.EventuallyEq.rfl
-  · dsimp [g, μ]
+  have htarget :
+      hg.toLp g =
+        transportedEnergyTailScaleDerivativeL2 R hR zeta hzeta a₀ := by
+    dsimp [g, μ]
     unfold transportedEnergyTailScaleDerivativeL2
     apply MemLp.toLp_congr
     exact Filter.EventuallyEq.rfl
+  rw [hsource, htarget] at ht
+  exact ht
 
 theorem transportedEnergyTailScaleDerivativeL2_continuousOn
     (R : ℝ) (hR : 0 ≤ R)
