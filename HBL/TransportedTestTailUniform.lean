@@ -20,7 +20,7 @@ rather than only pointwise in s.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ContDiff Topology
+open scoped ContDiff Topology Interval
 
 namespace HBL.Modulation
 
@@ -83,7 +83,10 @@ theorem transportedTestTailScaleDerivative_contDiff_one
   have hz : Continuous zeta := hzeta.continuous
   have hdz : Continuous (deriv zeta) := hzeta.continuous_deriv_one
   have hD : Continuous (transportedRadialTestDerivative zeta a) := by
-    dsimp [transportedRadialTestDerivative]
+    change Continuous (fun r : ℝ =>
+      Real.exp ((3 / 2 : ℝ) * a) *
+        ((3 / 2 : ℝ) * zeta (Real.exp a * r) +
+          (Real.exp a * r) * deriv zeta (Real.exp a * r)) * r)
     fun_prop
   change ContDiff ℝ 1
     (fun s : ℝ => ∫ r in s..R, transportedRadialTestDerivative zeta a r)
@@ -96,7 +99,8 @@ theorem transportedTestTail_contDiff_one_in_s
     ContDiff ℝ 1 (transportedTestTail R zeta a) := by
   have hz : Continuous zeta := hzeta.continuous
   have hK : Continuous (transportedRadialTest zeta a) := by
-    dsimp [transportedRadialTest]
+    change Continuous (fun r : ℝ =>
+      Real.exp ((3 / 2 : ℝ) * a) * zeta (Real.exp a * r) * r)
     fun_prop
   change ContDiff ℝ 1
     (fun s : ℝ => ∫ r in s..R, transportedRadialTest zeta a r)
