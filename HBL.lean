@@ -4,3 +4,4 @@ import HBL.ConstraintJacobian
 import HBL.DualTestRegularity
 import HBL.PhysicalParameters
 import HBL.HilbertTestRegularity
+import HBL.RadialHardy3D
