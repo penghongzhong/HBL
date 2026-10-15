@@ -45,7 +45,8 @@ theorem dualTestConstraint_contDiffAt
   have happ :
       ContDiffAt ℝ 1 (fun v : E × Param => B v.2 v.1) (u₀, p₀) :=
     hBp.clm_apply hu
-  simpa [dualTestConstraint] using happ.sub contDiffAt_const
+  change ContDiffAt ℝ 1 (fun v : E × Param => B v.2 v.1 - c) (u₀, p₀)
+  exact happ.sub contDiffAt_const
 
 /-- The value of the dual constraint at the base point is zero exactly when
 the normalization vector is the tested base state. -/
