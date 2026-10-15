@@ -1,4 +1,4 @@
-import HBL.ModulationLemmaCertified
+import HBL.PhaseQuotient
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -253,3 +253,8 @@ import HBL.ModulationLemmaCertified
 
 #print axioms HBL.Modulation.manuscript_standardBubble_jacobian_eq_negId
 #print axioms HBL.Modulation.manuscript_modulation_local_corrected
+
+#print axioms HBL.Modulation.phaseClass_add_int_two_pi
+#print axioms HBL.Modulation.scalePhaseObservable_phase_add_int_two_pi
+#print axioms HBL.Modulation.scalePhaseResidual_phase_add_int_two_pi
+#print axioms HBL.Modulation.phasedAbsoluteResidual_phase_add_int_two_pi
