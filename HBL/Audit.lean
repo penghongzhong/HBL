@@ -1,4 +1,4 @@
-import HBL.RadialEnergyIsometry
+import HBL.RadialEnergyCompletion
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -84,3 +84,8 @@ import HBL.RadialEnergyIsometry
 #print axioms HBL.Modulation.radialU_hasDerivAt
 #print axioms HBL.Modulation.radialU_deriv
 #print axioms HBL.Modulation.radialU_energy_identity
+
+#print axioms HBL.Modulation.radialU_contDiff_one
+#print axioms HBL.Modulation.radialU_integral_deriv
+#print axioms HBL.Modulation.energyCoreTestExtension_apply
+#print axioms HBL.Modulation.energyCoreTestExtension_unique
