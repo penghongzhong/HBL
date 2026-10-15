@@ -1,4 +1,4 @@
-import HBL.FullBubbleRadialEnergy
+import HBL.RadialDotH1Model
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -186,3 +186,8 @@ import HBL.FullBubbleRadialEnergy
 #print axioms HBL.Modulation.bubbleRadialEnergyDerivative_memLp
 #print axioms HBL.Modulation.fullBubbleRadialEnergyL2_restrict
 #print axioms HBL.Modulation.fullRadialEnergy_local_modulation
+
+#print axioms HBL.Modulation.smoothToRadialDotH1_ae
+#print axioms HBL.Modulation.smoothToRadialDotH1_restrict
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_on_smoothCore
+#print axioms HBL.Modulation.smoothBubbleToRadialDotH1_eq
