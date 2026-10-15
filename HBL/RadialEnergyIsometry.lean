@@ -28,7 +28,8 @@ theorem radialU_hasDerivAt (f : ℝ → ℝ) (hf : ContDiff ℝ 1 f) (r : ℝ) :
     HasDerivAt (radialU f) (f r + r * deriv f r) r := by
   have h := (hasDerivAt_id r).mul
     ((hf.differentiable (by norm_num) r).hasDerivAt)
-  convert h using 1 <;> simp [radialU] <;> ring
+  change HasDerivAt (fun x : ℝ => x * f x) (f r + r * deriv f r) r
+  simpa only [Pi.mul_apply, id_eq, one_mul] using h
 
 /-- Pointwise radial derivative formula; the derivative is the sum of the
 profile and its weighted derivative. -/
@@ -72,8 +73,9 @@ theorem radialU_energy_identity
         (∫ r in (0 : ℝ)..R, A r) := by
           apply intervalIntegral.integral_congr
           intro r _
+          change (deriv (radialU f) r) ^ 2 =
+            (f r + r * deriv f r) ^ 2
           rw [radialU_deriv f hf r]
-          rfl
     _ = ∫ r in (0 : ℝ)..R, r ^ 2 * (deriv f r) ^ 2 := hEq
 
 end HBL.Modulation
