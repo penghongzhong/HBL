@@ -8,3 +8,4 @@ import HBL.RadialHardy3D
 import HBL.CompactTestLp
 import HBL.CompactTestCauchy
 import HBL.ThresholdFunctionalBound
+import HBL.LocalModulationClosure
