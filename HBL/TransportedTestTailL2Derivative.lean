@@ -164,7 +164,18 @@ theorem transportedTestTailL2_hasDerivAt_zero
   have hstrong :=
     realLp2_hasDerivAt_of_increment_bound
       (μ := μ) F g 0 hF hg (fun _ => C * R) hw hb hgb hd
-  simpa [F, g, μ, transportedTestTailL2,
-    transportedTestTailScaleDerivativeL2] using hstrong
+  change HasDerivAt
+    (transportedTestTailL2 R hR zeta hzeta)
+    (transportedTestTailScaleDerivativeL2 R hR zeta hzeta 0) 0
+  convert hstrong using 1
+  · funext a
+    dsimp [F, μ]
+    unfold transportedTestTailL2
+    apply MemLp.toLp_congr
+    exact Filter.EventuallyEq.rfl
+  · dsimp [g, μ]
+    unfold transportedTestTailScaleDerivativeL2
+    apply MemLp.toLp_congr
+    exact Filter.EventuallyEq.rfl
 
 end HBL.Modulation
