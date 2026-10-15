@@ -106,6 +106,9 @@ theorem scalePhaseResidual_on_smoothCore_eq_manuscript
       S R hS hcover zMinus uIm hzMinus.continuous huIm.continuous
       hsuppMinus a ha
   have hzero : (0 : ℝ) ∈ Icc (-1 : ℝ) 1 := by norm_num
+  have hscale0 : scalePullback bubble 0 = bubble := by
+    funext r
+    simp [scalePullback]
   have hBP :
       fullTransportedEnergyThresholdDual R hR zPlus hzPlus 0
           fullBubbleRadialEnergyL2 =
@@ -117,11 +120,64 @@ theorem scalePhaseResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_eq_compactThresholdPairing_of_support
         S R hS hcover zPlus bubble hzPlus.continuous
         bubble_contDiff.continuous hsuppPlus 0 hzero
-    simpa [scalePullback] using ht
-  unfold scalePhaseResidual scalePhaseObservable manuscriptSmoothResidual
-  simp only [Prod.fst, Prod.snd, map_zero, mul_zero, add_zero,
-    Real.cos_zero, Real.sin_zero, one_mul, neg_zero]
-  rw [hPR', hPI', hMR', hMI', hBP]
+    rw [hscale0] at ht
+    exact ht
+  let Splus : ℝ → (RadialDotH1 →L[ℝ] ℝ) :=
+    fullTransportedEnergyThresholdDual R hR zPlus hzPlus
+  let Sminus : ℝ → (RadialDotH1 →L[ℝ] ℝ) :=
+    fullTransportedEnergyThresholdDual R hR zMinus hzMinus
+  have hCurrent :
+      scalePhaseObservable Splus Sminus
+        ((smoothToRadialDotH1 uRe hmemRe,
+          smoothToRadialDotH1 uIm hmemIm), (a, gamma)) =
+      (Real.cos gamma *
+          compactThresholdPairing S zPlus (scalePullback uRe a) +
+        Real.sin gamma *
+          compactThresholdPairing S zPlus (scalePullback uIm a),
+       -Real.sin gamma *
+          compactThresholdPairing S zMinus (scalePullback uRe a) +
+        Real.cos gamma *
+          compactThresholdPairing S zMinus (scalePullback uIm a)) := by
+    unfold scalePhaseObservable
+    change
+      (Real.cos gamma *
+          fullTransportedEnergyThresholdDual R hR zPlus hzPlus a
+            (smoothToRadialDotH1 uRe hmemRe) +
+        Real.sin gamma *
+          fullTransportedEnergyThresholdDual R hR zPlus hzPlus a
+            (smoothToRadialDotH1 uIm hmemIm),
+       -Real.sin gamma *
+          fullTransportedEnergyThresholdDual R hR zMinus hzMinus a
+            (smoothToRadialDotH1 uRe hmemRe) +
+        Real.cos gamma *
+          fullTransportedEnergyThresholdDual R hR zMinus hzMinus a
+            (smoothToRadialDotH1 uIm hmemIm)) = _
+    rw [hPR', hPI', hMR', hMI']
+  have hBase :
+      scalePhaseObservable Splus Sminus
+        ((fullBubbleRadialEnergyL2, (0 : RadialDotH1)), (0 : Param)) =
+      (compactThresholdPairing S zPlus bubble, 0) := by
+    have hp0 : (0 : Param) = ((0 : ℝ), (0 : ℝ)) := rfl
+    rw [hp0]
+    rw [scalePhaseObservable_real_state]
+    change
+      (Real.cos 0 *
+          fullTransportedEnergyThresholdDual R hR zPlus hzPlus 0
+            fullBubbleRadialEnergyL2,
+       -Real.sin 0 *
+          fullTransportedEnergyThresholdDual R hR zMinus hzMinus 0
+            fullBubbleRadialEnergyL2) =
+      (compactThresholdPairing S zPlus bubble, 0)
+    simp [hBP]
+  change
+    scalePhaseObservable Splus Sminus
+        ((smoothToRadialDotH1 uRe hmemRe,
+          smoothToRadialDotH1 uIm hmemIm), (a, gamma)) -
+      scalePhaseObservable Splus Sminus
+        ((fullBubbleRadialEnergyL2, (0 : RadialDotH1)), (0 : Param)) =
+      manuscriptSmoothResidual S zPlus zMinus uRe uIm a gamma
+  rw [hCurrent, hBase]
+  simp [manuscriptSmoothResidual]
 
 /-- Standard-bubble local dynamic modulation in the concrete radial
 homogeneous-energy model.  This is the full Banach/Hilbert implicit-function
