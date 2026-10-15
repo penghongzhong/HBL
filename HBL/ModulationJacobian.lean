@@ -49,9 +49,15 @@ theorem scalePullback_hasDerivAt {f : ℝ → ℝ} {r d : ℝ}
   have hfr : HasDerivAt f d (Real.exp (-(0 : ℝ)) * r) := by simpa using hf
   have h₃ : HasDerivAt (fun a : ℝ => f (Real.exp (-a) * r)) (d * (-r)) 0 :=
     hfr.comp 0 h₂
-  convert h₁.mul h₃ using 1 <;>
-    simp only [scalePullback, neg_zero, zero_div, Real.exp_zero, one_mul] <;>
-    (try funext a) <;> ring
+  have hfun : ((fun a : ℝ => Real.exp (-a / 2)) *
+      (fun a : ℝ => f (Real.exp (-a) * r))) =
+      (fun a : ℝ => scalePullback f a r) := by
+    funext a
+    simp only [Pi.mul_apply, scalePullback]
+  have hm := h₁.mul h₃
+  rw [hfun] at hm
+  have hd : -(1 / 2 : ℝ) * f r + d * (-r) = -(f r / 2 + r * d) := by ring
+  simpa only [neg_zero, zero_div, Real.exp_zero, one_mul, hd] using hm
 
 theorem bubble_scale_derivative (r : ℝ) :
     HasDerivAt (fun a => scalePullback bubble a r)
