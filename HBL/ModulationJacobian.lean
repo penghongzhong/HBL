@@ -49,7 +49,9 @@ theorem scalePullback_hasDerivAt {f : ℝ → ℝ} {r d : ℝ}
   have hfr : HasDerivAt f d (Real.exp (-(0 : ℝ)) * r) := by simpa using hf
   have h₃ : HasDerivAt (fun a : ℝ => f (Real.exp (-a) * r)) (d * (-r)) 0 :=
     hfr.comp 0 h₂
-  convert h₁.mul h₃ using 1 <;> simp [scalePullback] <;> ring
+  convert h₁.mul h₃ using 1 <;>
+    simp only [scalePullback, neg_zero, zero_div, Real.exp_zero, one_mul] <;>
+    (try funext a) <;> ring
 
 theorem bubble_scale_derivative (r : ℝ) :
     HasDerivAt (fun a => scalePullback bubble a r)
