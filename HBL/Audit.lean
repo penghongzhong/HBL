@@ -1,4 +1,4 @@
-import HBL.ThresholdFunctionalBound
+import HBL.LocalModulationClosure
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -36,3 +36,7 @@ import HBL.ThresholdFunctionalBound
 #print axioms HBL.Modulation.compactThresholdPairing_abs_le
 #print axioms HBL.Modulation.radialU_L2_sq_le_local
 #print axioms HBL.Modulation.compactThresholdPairing_abs_le_of_hardy
+
+#print axioms HBL.Modulation.continuousFunctionalOfBound_apply
+#print axioms HBL.Modulation.continuousFunctionalOfBound_norm_le
+#print axioms HBL.Modulation.local_modulation_physical_from_tested_residual
