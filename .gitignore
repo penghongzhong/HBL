@@ -1,0 +1,21 @@
+# Source-only formal verification repository.
+.lake/
+*.olean
+*.ilean
+*.trace
+*.log
+*.zip
+*.tar
+*.gz
+*.pdf
+*.tex
+*.bib
+*.aux
+*.toc
+*.out
+*.doc
+*.docx
+source/
+paper/
+manuscript/
+private-audit/
