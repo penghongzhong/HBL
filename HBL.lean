@@ -45,3 +45,4 @@ import HBL.CompactSupportTransport
 import HBL.ManuscriptModulationConstraint
 import HBL.TransportedEnergyRecenter
 import HBL.ScaledBubbleRadialEnergy
+import HBL.PhaseRotationEnergy

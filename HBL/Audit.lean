@@ -1,4 +1,4 @@
-import HBL.ScaledBubbleRadialEnergy
+import HBL.PhaseRotationEnergy
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -218,3 +218,9 @@ import HBL.ScaledBubbleRadialEnergy
 #print axioms HBL.Modulation.scaledBubbleRadialEnergyDerivative_sq_integrable
 #print axioms HBL.Modulation.radialU_bubbleAtLogScale_deriv_memLp
 #print axioms HBL.Modulation.bubbleAtLogScaleRadialDotH1_zero
+
+#print axioms HBL.Modulation.phaseRotationCLM_apply
+#print axioms HBL.Modulation.phaseRotationCLM_neg_leftInverse
+#print axioms HBL.Modulation.phaseRotationCLM_neg_rightInverse
+#print axioms HBL.Modulation.phaseRotationCLE_apply
+#print axioms HBL.Modulation.phaseRotationCLE_phasedBubble
