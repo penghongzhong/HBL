@@ -17,3 +17,4 @@ import HBL.ScalePhaseJacobian
 import HBL.ScalePhaseLocalIFT
 import HBL.ScaleTestKernel
 import HBL.ScaleTestIntegral
+import HBL.BubbleScaleConnection
