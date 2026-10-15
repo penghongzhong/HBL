@@ -34,7 +34,7 @@ theorem scalePhase_slice_hasFDerivAt
   let G : Param → Param :=
     fun p => scalePhaseObservable Splus Sminus ((w, 0), p)
   have hEmbed :
-      ContDiffAt ℝ 1 (fun p : Param => ((w, 0), p))
+      ContDiffAt ℝ 1 (fun p : Param => ((w, (0 : V)), p))
         (0 : Param) := by fun_prop
   have hGC1 : ContDiffAt ℝ 1 G (0 : Param) :=
     (scalePhaseObservable_contDiffAt Splus Sminus (w, 0)
@@ -69,20 +69,30 @@ theorem scalePhase_slice_hasFDerivAt
     rw [heq]
     exact phaseChannelTest_hasDerivAt_real_state
       (Splus 0) (Sminus 0) w hMinusNorm
-  have hScaleComp :=
-    (hGD.comp (0 : ℝ)
-      (hasFDerivAt_prodMk_left (0 : ℝ) (0 : ℝ))).hasDerivAt
-  have hPhaseComp :=
-    (hGD.comp (0 : ℝ)
-      (hasFDerivAt_prodMk_right (0 : ℝ) (0 : ℝ))).hasDerivAt
+  have hScaleIn :
+      HasFDerivAt (fun a : ℝ => (a, (0 : ℝ)))
+        (ContinuousLinearMap.inl ℝ ℝ ℝ) (0 : ℝ) :=
+    hasFDerivAt_prodMk_left (0 : ℝ) (0 : ℝ)
+  have hPhaseIn :
+      HasFDerivAt (fun gamma : ℝ => ((0 : ℝ), gamma))
+        (ContinuousLinearMap.inr ℝ ℝ ℝ) (0 : ℝ) :=
+    hasFDerivAt_prodMk_right (0 : ℝ) (0 : ℝ)
+  have hScaleComp :
+      HasDerivAt (fun a : ℝ => G (a, 0))
+        ((fderiv ℝ G (0 : Param)) ((1 : ℝ), 0)) (0 : ℝ) := by
+    have h := hGD.comp (0 : ℝ) hScaleIn
+    simpa using h.hasDerivAt
+  have hPhaseComp :
+      HasDerivAt (fun gamma : ℝ => G (0, gamma))
+        ((fderiv ℝ G (0 : Param)) ((0 : ℝ), 1)) (0 : ℝ) := by
+    have h := hGD.comp (0 : ℝ) hPhaseIn
+    simpa using h.hasDerivAt
   have hDScale :
-      (fderiv ℝ G (0 : Param)) ((1 : ℝ), 0) = (-1, 0) := by
-    have h := hScaleComp.unique hAxisScale
-    simpa using h
+      (fderiv ℝ G (0 : Param)) ((1 : ℝ), 0) = (-1, 0) :=
+    hScaleComp.unique hAxisScale
   have hDPhase :
-      (fderiv ℝ G (0 : Param)) ((0 : ℝ), 1) = (0, -1) := by
-    have h := hPhaseComp.unique hAxisPhase
-    simpa using h
+      (fderiv ℝ G (0 : Param)) ((0 : ℝ), 1) = (0, -1) :=
+    hPhaseComp.unique hAxisPhase
   have hDecomp (p : Param) :
       p = p.1 • ((1 : ℝ), (0 : ℝ)) +
             p.2 • ((0 : ℝ), (1 : ℝ)) := by
