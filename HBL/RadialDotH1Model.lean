@@ -101,20 +101,25 @@ theorem fullTransportedEnergyThresholdDual_on_smoothCore
   exact transportedEnergyThresholdDual_on_radialCore
     R hR zeta f hzeta hf a
 
+/-- The classical derivative of U W belongs to the full half-line L2
+energy space.  This is the same MemLp statement as for the explicit closed
+formula, transferred by pointwise equality. -/
+theorem radialU_bubble_deriv_memLp :
+    MemLp (deriv (radialU bubble)) 2
+      (volume.restrict (Ioi (0 : ℝ))) := by
+  exact bubbleRadialEnergyDerivative_memLp.ae_eq
+    (Filter.Eventually.of_forall
+      (fun r => (radialU_bubble_deriv_closed r).symm))
+
 /-- The explicit stationary bubble in the dot-H1 coordinate model is the
 same vector previously constructed analytically. -/
 theorem smoothBubbleToRadialDotH1_eq :
-    smoothToRadialDotH1 bubble
-      (by
-        simpa [radialU_bubble_deriv_closed] using
-          bubbleRadialEnergyDerivative_memLp) =
+    smoothToRadialDotH1 bubble radialU_bubble_deriv_memLp =
       fullBubbleRadialEnergyL2 := by
+  unfold fullBubbleRadialEnergyL2
   apply Lp.ext
   filter_upwards [
-    smoothToRadialDotH1_ae bubble
-      (by
-        simpa [radialU_bubble_deriv_closed] using
-          bubbleRadialEnergyDerivative_memLp),
+    smoothToRadialDotH1_ae bubble radialU_bubble_deriv_memLp,
     bubbleRadialEnergyDerivative_memLp.coeFn_toLp
   ] with r h1 h2
   rw [h1, h2, radialU_bubble_deriv_closed]

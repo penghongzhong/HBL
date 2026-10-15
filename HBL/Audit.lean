@@ -190,4 +190,5 @@ import HBL.RadialDotH1Model
 #print axioms HBL.Modulation.smoothToRadialDotH1_ae
 #print axioms HBL.Modulation.smoothToRadialDotH1_restrict
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_on_smoothCore
+#print axioms HBL.Modulation.radialU_bubble_deriv_memLp
 #print axioms HBL.Modulation.smoothBubbleToRadialDotH1_eq
