@@ -1,4 +1,4 @@
-import HBL.RadialDotH1Model
+import HBL.TransportedThresholdIdentity
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -192,3 +192,6 @@ import HBL.RadialDotH1Model
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_on_smoothCore
 #print axioms HBL.Modulation.radialU_bubble_deriv_memLp
 #print axioms HBL.Modulation.smoothBubbleToRadialDotH1_eq
+
+#print axioms HBL.Modulation.transportedRadialTest_scaled_pullback_integrand
+#print axioms HBL.Modulation.transportedRadialTestIntegral_dynamic_eq_scalePullback
