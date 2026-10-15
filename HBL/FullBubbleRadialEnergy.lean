@@ -31,7 +31,10 @@ theorem radialU_bubble_hasDerivAt_closed (r : ℝ) :
       (bubbleRadialEnergyDerivative r) r := by
   have hq :
       HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
-    convert ((hasDerivAt_id r).pow 2).const_add 1 using 1 <;> ring
+    have h :=
+      (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
+    simpa only [Pi.add_apply, Pi.pow_apply, id_eq, zero_add, one_mul,
+      pow_one, Nat.cast_ofNat] using h
   have hqpos : 0 < (1 + r ^ 2 : ℝ) := by positivity
   have hs :
       HasDerivAt (fun x : ℝ => Real.sqrt (1 + x ^ 2))
@@ -54,8 +57,12 @@ theorem radialU_bubble_hasDerivAt_closed (r : ℝ) :
     unfold bubbleRadialEnergyDerivative
     field_simp [hsne]
     nlinarith [hs2]
-  rw [hder] at hdiv
-  simpa [radialU, bubble, div_eq_mul_inv, id_eq] using hdiv
+  have hdiv' :
+      HasDerivAt (id / fun x : ℝ => Real.sqrt (1 + x ^ 2))
+        (bubbleRadialEnergyDerivative r) r := by
+    convert hdiv using 1
+    simpa only [id_eq] using hder
+  simpa [radialU, bubble, div_eq_mul_inv, id_eq] using hdiv'
 
 /-- The classical derivative equals the closed energy-density formula. -/
 theorem radialU_bubble_deriv_closed (r : ℝ) :
@@ -99,7 +106,6 @@ theorem bubbleRadialEnergyDerivative_sq_le (r : ℝ) :
     unfold bubbleRadialEnergyDerivative
     dsimp [s]
     field_simp [ne_of_gt hspos]
-    ring
   have hright : (1 + r ^ 2)⁻¹ = (s ^ 2)⁻¹ := by
     rw [hs2]
   rw [hleft, hright]
@@ -141,12 +147,12 @@ theorem fullBubbleRadialEnergyL2_restrict
       bubbleRadialEnergyL2 R hR := by
   apply Lp.ext
   let μR : Measure ℝ := volume.restrict (Ioc (0 : ℝ) R)
-  let μ∞ : Measure ℝ := volume.restrict (Ioi (0 : ℝ))
-  have hμ : μR ≤ μ∞ := by
-    simpa [μR, μ∞] using finiteRadialMeasure_le_full R
-  have hac : μR ≪ μ∞ := Measure.absolutelyContinuous_of_le hμ
+  let μFull : Measure ℝ := volume.restrict (Ioi (0 : ℝ))
+  have hμ : μR ≤ μFull := by
+    simpa [μR, μFull] using finiteRadialMeasure_le_full R
+  have hac : μR ≪ μFull := Measure.absolutelyContinuous_of_le hμ
   have hfull :
-      (fullBubbleRadialEnergyL2 : ℝ → ℝ) =ᵐ[μ∞]
+      (fullBubbleRadialEnergyL2 : ℝ → ℝ) =ᵐ[μFull]
         bubbleRadialEnergyDerivative := by
     unfold fullBubbleRadialEnergyL2
     exact bubbleRadialEnergyDerivative_memLp.coeFn_toLp
