@@ -88,8 +88,11 @@ theorem radialDotH1_phasedBubble_absolute_local_modulation
   let LambdaGamma : ComplexRadialDotH1 → Param :=
     fun u => relativePhysicalToAbsolute a₀ gamma₀ (Phi u)
   have hLG0 : LambdaGamma u₀ = p₀ := by
-    rw [show Phi u₀ = (1, 0) by simpa [u₀] using hPhi0]
-    simp [LambdaGamma, p₀]
+    change relativePhysicalToAbsolute a₀ gamma₀ (Phi u₀) = p₀
+    have h0 : Phi u₀ = (1, 0) := by
+      simpa [u₀] using hPhi0
+    rw [h0]
+    simp [p₀]
   have hMapC1 :
       ContDiffAt ℝ 1
         (relativePhysicalToAbsolute a₀ gamma₀)
@@ -172,8 +175,12 @@ theorem radialDotH1_phasedBubble_absolute_local_modulation
       ContDiffAt ℝ 1
         (fun v : ComplexRadialDotH1 × Param =>
           absolutePhysicalToRelativeLog a₀ gamma₀ v.2)
-        (u₀, p₀) :=
-    hParamC1.comp (u₀, p₀) hsndC1
+        (u₀, p₀) := by
+    have h :=
+      hParamC1.comp
+        (f := fun v : ComplexRadialDotH1 × Param => v.2)
+        (u₀, p₀) hsndC1
+    simpa [Function.comp_def] using h
   have hPairC1 :
       ContDiffAt ℝ 1 ToRelativePair (u₀, p₀) := by
     exact hfstC1.prodMk hrelC1
