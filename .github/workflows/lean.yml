@@ -75,7 +75,7 @@ jobs:
           from pathlib import Path
           import re
           text = Path('/tmp/hbl-axioms.txt').read_text()
-          expected = ['bubble_differentiable', 'scalePullback_hasDerivAt', 'bubble_scale_derivative', 'phasePullback_hasDerivAt', 'tangentCoordinates_eq_neg', 'tangentCoordinates_bijective', 'parameterNegId_isInvertible', 'tangentCoordinates_eq_parameterNegId', 'local_modulation_from_normalized_jacobian', 'testPair_comp_symmetryTangent', 'testedConstraint_contDiffAt', 'testedConstraint_partial_fderiv', 'local_modulation_from_tested_residual']
+          expected = ['bubble_differentiable', 'scalePullback_hasDerivAt', 'bubble_scale_derivative', 'phasePullback_hasDerivAt', 'tangentCoordinates_eq_neg', 'tangentCoordinates_bijective', 'parameterNegId_isInvertible', 'tangentCoordinates_eq_parameterNegId', 'local_modulation_from_normalized_jacobian', 'testPair_comp_symmetryTangent', 'testedConstraint_contDiffAt', 'testedConstraint_partial_fderiv', 'local_modulation_from_tested_residual', 'dualTestConstraint_contDiffAt', 'dualTestConstraint_base_zero']
           for name in expected:
               if 'HBL.Modulation.' + name not in text:
                   raise SystemExit('Missing dependency report: ' + name)
@@ -86,5 +86,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print('Thirteen component dependency reports checked; no whole-paper theorem is certified.')
+          print('Fifteen component dependency reports checked; no whole-paper theorem is certified.')
           PY
