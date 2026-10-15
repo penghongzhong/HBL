@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           lake update
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-          lake exe cache get Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Analysis.Calculus.ImplicitContDiff Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring
+          lake exe cache get Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Analysis.Calculus.ImplicitContDiff Mathlib.Analysis.InnerProductSpace.Calculus Mathlib.Analysis.InnerProductSpace.Dual Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Analysis.Calculus.ContDiff.Deriv Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring Mathlib.Tactic.Linarith
       - name: Compile HBL proof components
         shell: bash
         run: |
