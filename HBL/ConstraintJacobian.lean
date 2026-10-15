@@ -73,7 +73,7 @@ theorem testedConstraint_contDiffAt
     (ellPlus ellMinus : E →L[ℝ] ℝ) (R : E × Param → E)
     (v₀ : E × Param) (hR : ContDiffAt ℝ 1 R v₀) :
     ContDiffAt ℝ 1 (testedConstraint ellPlus ellMinus R) v₀ := by
-  simpa [testedConstraint, Function.comp_def] using
+  simpa [testedConstraint, testPair, Function.comp_def] using
     hR.continuousLinearMap_comp (testPair ellPlus ellMinus)
 
 theorem testedConstraint_hasFDerivAt
@@ -82,7 +82,7 @@ theorem testedConstraint_hasFDerivAt
     (hR : HasFDerivAt R R' v₀) :
     HasFDerivAt (testedConstraint ellPlus ellMinus R)
       ((testPair ellPlus ellMinus).comp R') v₀ := by
-  simpa [testedConstraint, Function.comp_def] using
+  simpa [testedConstraint, testPair, Function.comp_def] using
     (testPair ellPlus ellMinus).hasFDerivAt.comp v₀ hR
 
 /-- The parameter derivative of the tested residual is the normalized
