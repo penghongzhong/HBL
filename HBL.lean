@@ -49,3 +49,4 @@ import HBL.PhaseRotationEnergy
 import HBL.ScaledBubbleTestIdentity
 import HBL.ScaledBubbleModulation
 import HBL.PhasedBubbleModulation
+import HBL.AbsoluteModulationParameters
