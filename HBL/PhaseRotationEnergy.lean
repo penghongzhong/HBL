@@ -1,6 +1,7 @@
 import HBL.ScaledBubbleRadialEnergy
 import Mathlib.Topology.Algebra.Module.Equiv.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Tactic.Module
 
 /-!
 Fixed phase rotation on the complex radial dot-H1 energy model.

@@ -39,13 +39,15 @@ theorem transportedEnergyCoefficient_recenter
       transportedEnergyCoefficient
         (recenteredThresholdTest zeta a₀) b r := by
   unfold transportedEnergyCoefficient recenteredThresholdTest
-  rw [Real.exp_add, Real.exp_add]
-  ring_nf
-  congr 2
-  · congr 1
+  have hfac :
+      Real.exp ((3 / 2 : ℝ) * (a₀ + b)) =
+        Real.exp ((3 / 2 : ℝ) * a₀) *
+          Real.exp ((3 / 2 : ℝ) * b) := by
+    rw [← Real.exp_add]
+    congr 1
     ring
-  · congr 1
-    ring
+  rw [hfac, Real.exp_add]
+  ring
 
 /-- The corrected Hilbert tail is exactly translated by the same recentering. -/
 theorem transportedEnergyTail_recenter
@@ -108,8 +110,13 @@ theorem transportedEnergyThresholdDual_contDiffAt
   have hsub :
       ContDiffAt ℝ 1 (fun a : ℝ => a - a₀) a₀ := by
     fun_prop
+  have hzero' :
+      ContDiffAt ℝ 1
+        (transportedEnergyThresholdDual R hR z₀ hz₀)
+        (a₀ - a₀) := by
+    simpa using hzero
   have hcomp :=
-    hzero.comp a₀ hsub
+    hzero'.comp a₀ hsub
   have heq :
       (fun a : ℝ =>
         transportedEnergyThresholdDual R hR z₀ hz₀ (a - a₀)) =
