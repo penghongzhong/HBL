@@ -31,9 +31,11 @@ theorem parameterNegId_apply (p : ℝ × ℝ) :
 theorem parameterNegId_isInvertible : parameterNegId.IsInvertible := by
   refine ContinuousLinearMap.IsInvertible.of_inverse
     (f := parameterNegId) (g := parameterNegId) ?_ ?_
-  · ext p
+  · apply ContinuousLinearMap.ext
+    intro p
     simp [parameterNegId]
-  · ext p
+  · apply ContinuousLinearMap.ext
+    intro p
     simp [parameterNegId]
 
 section TangentNormalization
