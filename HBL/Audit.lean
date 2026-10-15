@@ -1,4 +1,4 @@
-import HBL.ScalePhaseJacobian
+import HBL.ScalePhaseLocalIFT
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -57,3 +57,8 @@ import HBL.ScalePhaseJacobian
 #print axioms HBL.Modulation.scalePhaseObservable_real_state
 
 #print axioms HBL.Modulation.scalePhase_slice_hasFDerivAt
+
+#print axioms HBL.Modulation.scalePhaseResidual_base_zero
+#print axioms HBL.Modulation.scalePhaseResidual_contDiffAt
+#print axioms HBL.Modulation.scalePhaseResidual_partial_jacobian
+#print axioms HBL.Modulation.scalePhase_local_modulation_physical
