@@ -1,4 +1,4 @@
-import HBL.BubbleScaleConnection
+import HBL.HardyCoreBridge
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -77,3 +77,6 @@ import HBL.BubbleScaleConnection
 #print axioms HBL.Modulation.bubble_normalized_scale_integral
 #print axioms HBL.Modulation.bubble_phase_pairing_at_zero
 #print axioms HBL.Modulation.bubble_normalized_phase_derivative
+
+#print axioms HBL.Modulation.radialHardy3D_restrict
+#print axioms HBL.Modulation.compactThresholdPairing_energyCore_bound
