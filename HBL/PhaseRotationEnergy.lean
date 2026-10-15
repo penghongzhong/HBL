@@ -48,9 +48,9 @@ theorem phaseRotationCLM_neg_leftInverse (gamma : ℝ) :
   intro u
   rcases u with ⟨x, y⟩
   ext <;>
-    simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg,
-      Real.sin_sq_add_cos_sq] <;>
-    module
+    simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg] <;>
+    module <;>
+    nlinarith [Real.sin_sq_add_cos_sq gamma]
 
 /-- Rotation by -gamma is also a right inverse. -/
 theorem phaseRotationCLM_neg_rightInverse (gamma : ℝ) :
@@ -60,9 +60,9 @@ theorem phaseRotationCLM_neg_rightInverse (gamma : ℝ) :
   intro u
   rcases u with ⟨x, y⟩
   ext <;>
-    simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg,
-      Real.sin_sq_add_cos_sq] <;>
-    module
+    simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg] <;>
+    module <;>
+    nlinarith [Real.sin_sq_add_cos_sq gamma]
 
 /-- Fixed phase rotation as a continuous linear equivalence. -/
 def phaseRotationCLE (gamma : ℝ) : (E × E) ≃L[ℝ] (E × E) :=
@@ -93,15 +93,26 @@ theorem phaseRotationCLE_phasedBubble
     phaseRotationCLE (E := RadialDotH1) gamma₀
       (phasedBubbleRadialDotH1 a₀ gamma₀) =
       (bubbleAtLogScaleRadialDotH1 a₀, (0 : RadialDotH1)) := by
-  unfold phasedBubbleRadialDotH1
-  rw [phaseRotationCLE_apply, phaseRotationCLM_apply]
-  ext
-  · simp only [Prod.fst, Prod.snd, smul_smul, ← add_smul]
-    rw [add_comm (Real.cos gamma₀ ^ 2) (Real.sin gamma₀ ^ 2)]
-    rw [Real.sin_sq_add_cos_sq]
-    simp
-  · simp only [Prod.fst, Prod.snd, smul_smul, ← add_smul]
-    ring_nf
-    simp
+  let w : RadialDotH1 := bubbleAtLogScaleRadialDotH1 a₀
+  change phaseRotationCLM (E := RadialDotH1) gamma₀
+      (Real.cos gamma₀ • w, Real.sin gamma₀ • w) =
+    (w, (0 : RadialDotH1))
+  rw [phaseRotationCLM_apply]
+  apply Prod.ext
+  · change Real.cos gamma₀ • (Real.cos gamma₀ • w) +
+        Real.sin gamma₀ • (Real.sin gamma₀ • w) = w
+    rw [smul_smul, smul_smul, ← add_smul]
+    have htrig :
+        Real.cos gamma₀ * Real.cos gamma₀ +
+          Real.sin gamma₀ * Real.sin gamma₀ = 1 := by
+      nlinarith [Real.sin_sq_add_cos_sq gamma₀]
+    rw [htrig, one_smul]
+  · change (-Real.sin gamma₀) • (Real.cos gamma₀ • w) +
+        Real.cos gamma₀ • (Real.sin gamma₀ • w) = 0
+    rw [smul_smul, smul_smul, ← add_smul]
+    have hzero :
+        (-Real.sin gamma₀) * Real.cos gamma₀ +
+          Real.cos gamma₀ * Real.sin gamma₀ = 0 := by ring
+    rw [hzero, zero_smul]
 
 end HBL.Modulation
