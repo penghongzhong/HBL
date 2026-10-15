@@ -1,4 +1,4 @@
-import HBL.ArbitraryBubbleBridgeCore
+import HBL.ArbitraryBubbleSmoothConstraint
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -248,3 +248,5 @@ import HBL.ArbitraryBubbleBridgeCore
 #print axioms HBL.Modulation.scalePhaseResidual_phaseRotation_add
 #print axioms HBL.Modulation.transportedRadialTestIntegral_centered_fixed_eq_dynamic_of_support
 #print axioms HBL.Modulation.transportedRadialTestIntegral_centered_eq_compactThresholdPairing
+
+#print axioms HBL.Modulation.phasedAbsoluteResidual_on_smoothCore_eq_manuscript
