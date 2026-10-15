@@ -42,8 +42,6 @@ theorem transportedRadialTestIntegral_fixed_eq_dynamic_of_support
       mul_le_mul_of_nonneg_right he hS
     exact hmul.trans hcover
   have hF : Continuous F := by
-    have hdz : Continuous (deriv zeta) := by
-      exact continuous_zero
     dsimp [F, transportedRadialTest]
     fun_prop
   have h0D : IntervalIntegrable F volume 0 D :=
