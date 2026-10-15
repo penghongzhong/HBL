@@ -67,15 +67,41 @@ theorem transportedRadialTestIntegral_scaledBubble_recenter
       congr 1
       ring
     rw [hthree]
-    have haexp :
-        Real.exp a₀ ^ 2 =
-          Real.exp (a₀ * (3 / 2 : ℝ)) *
-            Real.exp (a₀ * (1 / 2 : ℝ)) := by
-      rw [pow_two, ← Real.exp_add]
-      congr 1
-      ring
-    rw [haexp]
-    ring
+    have hscale :
+        Real.exp a₀ * Real.exp a₀ =
+          Real.exp ((3 / 2 : ℝ) * a₀) *
+            Real.exp (a₀ / 2) := by
+      calc
+        Real.exp a₀ * Real.exp a₀ =
+            Real.exp (a₀ + a₀) := by rw [Real.exp_add]
+        _ = Real.exp ((3 / 2 : ℝ) * a₀ + a₀ / 2) := by
+              congr 1
+              ring
+        _ = Real.exp ((3 / 2 : ℝ) * a₀) *
+            Real.exp (a₀ / 2) := by rw [Real.exp_add]
+    have harg :
+        Real.exp b * (Real.exp a₀ * r) =
+          Real.exp a₀ * Real.exp b * r := by ring
+    rw [harg]
+    calc
+      Real.exp a₀ *
+          (Real.exp ((3 / 2 : ℝ) * b) *
+              zeta (Real.exp a₀ * Real.exp b * r) *
+              (Real.exp a₀ * r) *
+              bubble (Real.exp a₀ * r)) =
+          (Real.exp a₀ * Real.exp a₀) *
+            Real.exp ((3 / 2 : ℝ) * b) *
+            zeta (Real.exp a₀ * Real.exp b * r) * r *
+            bubble (Real.exp a₀ * r) := by ring
+      _ = (Real.exp ((3 / 2 : ℝ) * a₀) *
+            Real.exp (a₀ / 2)) *
+            Real.exp ((3 / 2 : ℝ) * b) *
+            zeta (Real.exp a₀ * Real.exp b * r) * r *
+            bubble (Real.exp a₀ * r) := by rw [hscale]
+      _ = Real.exp ((3 / 2 : ℝ) * a₀) *
+            Real.exp ((3 / 2 : ℝ) * b) *
+            zeta (Real.exp a₀ * Real.exp b * r) * r *
+            (Real.exp (a₀ / 2) * bubble (Real.exp a₀ * r)) := by ring
   rw [hbound] at hcv
   rw [hleft] at hcv
   change transportedRadialTestIntegral
