@@ -1,4 +1,4 @@
-import HBL.AbsoluteModulationParameters
+import HBL.AbsoluteBubbleModulation
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -241,3 +241,5 @@ import HBL.AbsoluteModulationParameters
 #print axioms HBL.Modulation.relativeLog_eq_absoluteLog_iff
 #print axioms HBL.Modulation.relativePhysicalToAbsolute_contDiffAt
 #print axioms HBL.Modulation.absolutePhysicalToRelativeLog_contDiffAt
+
+#print axioms HBL.Modulation.radialDotH1_phasedBubble_absolute_local_modulation

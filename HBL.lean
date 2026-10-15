@@ -50,3 +50,4 @@ import HBL.ScaledBubbleTestIdentity
 import HBL.ScaledBubbleModulation
 import HBL.PhasedBubbleModulation
 import HBL.AbsoluteModulationParameters
+import HBL.AbsoluteBubbleModulation
