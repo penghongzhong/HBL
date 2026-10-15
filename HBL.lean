@@ -47,3 +47,4 @@ import HBL.TransportedEnergyRecenter
 import HBL.ScaledBubbleRadialEnergy
 import HBL.PhaseRotationEnergy
 import HBL.ScaledBubbleTestIdentity
+import HBL.ScaledBubbleModulation

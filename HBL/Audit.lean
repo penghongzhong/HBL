@@ -1,4 +1,4 @@
-import HBL.ScaledBubbleTestIdentity
+import HBL.ScaledBubbleModulation
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -230,3 +230,5 @@ import HBL.ScaledBubbleTestIdentity
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_scaledBubble_hasDerivAt
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_scaledBubble_zero_eq_one
 #print axioms HBL.Modulation.shiftedFullTransportedEnergyThresholdDual_contDiffAt_zero
+
+#print axioms HBL.Modulation.radialDotH1_scaledBubble_local_modulation
