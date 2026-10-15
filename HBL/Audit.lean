@@ -1,4 +1,4 @@
-import HBL.TransportedEnergyRecenter
+import HBL.ScaledBubbleRadialEnergy
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -209,3 +209,12 @@ import HBL.TransportedEnergyRecenter
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_recenter
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_contDiffAt
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_contDiffAt
+
+#print axioms HBL.Modulation.bubbleAtLogScale_contDiff
+#print axioms HBL.Modulation.scalePullback_bubbleAtLogScale_self
+#print axioms HBL.Modulation.radialU_bubbleAtLogScale_hasDerivAt
+#print axioms HBL.Modulation.radialU_bubbleAtLogScale_deriv
+#print axioms HBL.Modulation.scaledBubbleRadialEnergyDerivative_continuous
+#print axioms HBL.Modulation.scaledBubbleRadialEnergyDerivative_sq_integrable
+#print axioms HBL.Modulation.radialU_bubbleAtLogScale_deriv_memLp
+#print axioms HBL.Modulation.bubbleAtLogScaleRadialDotH1_zero

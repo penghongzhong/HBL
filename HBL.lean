@@ -44,3 +44,4 @@ import HBL.TransportedThresholdIdentity
 import HBL.CompactSupportTransport
 import HBL.ManuscriptModulationConstraint
 import HBL.TransportedEnergyRecenter
+import HBL.ScaledBubbleRadialEnergy
