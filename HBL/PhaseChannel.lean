@@ -58,10 +58,13 @@ theorem phaseChannelTest_hasDerivAt_real_state
   have hm :
       HasDerivAt (fun gamma : ℝ => -Real.sin gamma * ellMinus w) (-1) 0 := by
     simpa [hMinus] using (Real.hasDerivAt_sin 0).neg.mul_const (ellMinus w)
-  have hPair := hp.prodMk hm
-  convert hPair using 1
-  · funext gamma
-    exact phaseChannelTest_real_state ellPlus ellMinus w gamma
+  have hPair :
+      HasDerivAt
+        (fun gamma : ℝ =>
+          (Real.cos gamma * ellPlus w, -Real.sin gamma * ellMinus w))
+        (0, -1) 0 := by
+    simpa using (hp.hasFDerivAt.prodMk hm.hasFDerivAt).hasDerivAt
+  simpa only [phaseChannelTest_real_state] using hPair
 
 end PhaseChannels
 
