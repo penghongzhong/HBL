@@ -89,7 +89,7 @@ theorem radialDotH1_phasedBubble_relative_local_modulation
   let Phi : ComplexRadialDotH1 → Param :=
     fun u => Psi (Rot u)
   have hPhi0 : Phi u₀ = (1, 0) := by
-    simp [Phi, hRotBase, hPsi0]
+    simpa [Phi, hRotBase, w₀] using hPsi0
   have hRotC1 : ContDiffAt ℝ 1 (fun u : ComplexRadialDotH1 => Rot u) u₀ :=
     Rot.toContinuousLinearMap.contDiff.contDiffAt
   have hPsiC1' : ContDiffAt ℝ 1 Psi (Rot u₀) := by
