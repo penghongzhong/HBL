@@ -35,8 +35,10 @@ theorem realLp2_tendsto_dominated
       (F := fun i y => ‖F i y - g y‖ ^ 2)
       (f := fun _ => (0 : ℝ)) (fun y => w y ^ 2)
       (Eventually.of_forall fun i => by
-        simpa only [Pi.sub_apply, Pi.pow_apply] using
-          ((hF i).aestronglyMeasurable.sub hg.aestronglyMeasurable).norm.pow 2)
+        have hi :=
+          ((hF i).aestronglyMeasurable.sub hg.aestronglyMeasurable).norm.pow 2
+        change AEStronglyMeasurable (fun y => ‖F i y - g y‖ ^ 2) μ at hi
+        exact hi)
       (by
         filter_upwards [hb] with i hi
         filter_upwards [hi] with y hiy
