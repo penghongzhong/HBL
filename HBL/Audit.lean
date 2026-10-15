@@ -1,4 +1,4 @@
-import HBL.HardyCoreBridge
+import HBL.RadialEnergyIsometry
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -80,3 +80,7 @@ import HBL.HardyCoreBridge
 
 #print axioms HBL.Modulation.radialHardy3D_restrict
 #print axioms HBL.Modulation.compactThresholdPairing_energyCore_bound
+
+#print axioms HBL.Modulation.radialU_hasDerivAt
+#print axioms HBL.Modulation.radialU_deriv
+#print axioms HBL.Modulation.radialU_energy_identity

@@ -19,3 +19,4 @@ import HBL.ScaleTestKernel
 import HBL.ScaleTestIntegral
 import HBL.BubbleScaleConnection
 import HBL.HardyCoreBridge
+import HBL.RadialEnergyIsometry
