@@ -1,0 +1,90 @@
+name: HBL Lean kernel check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hbl-lean-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Enforce source-only publication and proof policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          paths = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
+          configs = {'.gitignore', 'lean-toolchain', 'lake-manifest.json', '.github/workflows/lean.yml'}
+          for name in paths:
+              if not (name.endswith('.lean') or name in configs):
+                  raise SystemExit('Unexpected public file: ' + name)
+          prohibited = re.compile(r'\b(sorry|admit|axiom|native_decide)\b')
+          for name in paths:
+              if name.endswith('.lean') and prohibited.search(Path(name).read_text()):
+                  raise SystemExit('Disallowed proof token in ' + name)
+          print('Source-only and proof-token policy passed.')
+          PY
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Resolve exact dependencies and obtain targeted Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake update
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+          lake exe cache get Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring
+      - name: Compile HBL proof components
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL
+      - name: Inspect kernel dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean HBL/Audit.lean | tee /tmp/hbl-axioms.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          text = Path('/tmp/hbl-axioms.txt').read_text()
+          expected = ['bubble_differentiable', 'scalePullback_hasDerivAt', 'bubble_scale_derivative', 'phasePullback_hasDerivAt', 'tangentCoordinates_eq_neg', 'tangentCoordinates_bijective']
+          for name in expected:
+              if 'HBL.Modulation.' + name not in text:
+                  raise SystemExit('Missing dependency report: ' + name)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for block in re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text, flags=re.S):
+              found = {x.strip() for x in block.split(',') if x.strip()}
+              if not found <= allowed:
+                  raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
+          if 'sorryAx' in text:
+              raise SystemExit('Unfinished proof dependency found.')
+          print('Six component dependency reports checked; no whole-paper theorem is certified.')
+          PY
