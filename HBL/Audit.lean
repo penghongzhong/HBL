@@ -1,4 +1,4 @@
-import HBL.ScaledBubbleModulation
+import HBL.PhasedBubbleModulation
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -232,3 +232,5 @@ import HBL.ScaledBubbleModulation
 #print axioms HBL.Modulation.shiftedFullTransportedEnergyThresholdDual_contDiffAt_zero
 
 #print axioms HBL.Modulation.radialDotH1_scaledBubble_local_modulation
+
+#print axioms HBL.Modulation.radialDotH1_phasedBubble_relative_local_modulation
