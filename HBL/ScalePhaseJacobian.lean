@@ -84,7 +84,7 @@ theorem scalePhase_slice_hasFDerivAt
         (G ∘ fun a : ℝ => (a, (0 : ℝ)))
         ((fderiv ℝ G (0 : Param)).comp
           (ContinuousLinearMap.inl ℝ ℝ ℝ)) (0 : ℝ) :=
-      hGD.comp (0 : ℝ) hScaleIn
+      hGD.comp (f := fun a : ℝ => (a, (0 : ℝ))) (0 : ℝ) hScaleIn
     simpa [Function.comp_def] using h.hasDerivAt
   have hPhaseComp :
       HasDerivAt (fun gamma : ℝ => G (0, gamma))
@@ -93,7 +93,7 @@ theorem scalePhase_slice_hasFDerivAt
         (G ∘ fun gamma : ℝ => ((0 : ℝ), gamma))
         ((fderiv ℝ G (0 : Param)).comp
           (ContinuousLinearMap.inr ℝ ℝ ℝ)) (0 : ℝ) :=
-      hGD.comp (0 : ℝ) hPhaseIn
+      hGD.comp (f := fun gamma : ℝ => ((0 : ℝ), gamma)) (0 : ℝ) hPhaseIn
     simpa [Function.comp_def] using h.hasDerivAt
   have hDScale :
       (fderiv ℝ G (0 : Param)) ((1 : ℝ), 0) = (-1, 0) :=
