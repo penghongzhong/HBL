@@ -54,11 +54,11 @@ theorem scalePhaseObservable_contDiffAt
   have hPlusFam :
       ContDiffAt ℝ 1 (fun v : (V × V) × Param => Splus v.2.1)
         (u₀, (0 : Param)) :=
-    hPlus.comp _ hScale
+    hPlus.comp (u₀, (0 : Param)) hScale
   have hMinusFam :
       ContDiffAt ℝ 1 (fun v : (V × V) × Param => Sminus v.2.1)
         (u₀, (0 : Param)) :=
-    hMinus.comp _ hScale
+    hMinus.comp (u₀, (0 : Param)) hScale
   have hPR :
       ContDiffAt ℝ 1
         (fun v : (V × V) × Param => Splus v.2.1 v.1.1)
