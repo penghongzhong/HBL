@@ -1,5 +1,6 @@
 import HBL.DualTestRegularity
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-!
 Conversion of the two implicit coordinates into the manuscript's physical
@@ -29,6 +30,7 @@ theorem physicalParameters_scale_pos (p : Param) :
 /-- The log-scale/phase to scale/phase coordinate map is C1 everywhere. -/
 theorem physicalParameters_contDiffAt (p : Param) :
     ContDiffAt ℝ 1 physicalParameters p := by
+  change ContDiffAt ℝ 1 (fun q : Param => (Real.exp q.1, q.2)) p
   fun_prop
 
 /-- A C1 implicit selector in logarithmic coordinates gives C1 physical
@@ -50,9 +52,9 @@ theorem physical_selector_from_log_selector
 
 /-- Positive scale is recovered exactly from its logarithmic coordinate. -/
 theorem physicalParameters_log_left_inverse
-    {λ γ : ℝ} (hλ : 0 < λ) :
-    physicalParameters (Real.log λ, γ) = (λ, γ) := by
-  simp [physicalParameters, Real.exp_log hλ]
+    {lam gam : ℝ} (hlam : 0 < lam) :
+    physicalParameters (Real.log lam, gam) = (lam, gam) := by
+  simp [physicalParameters, Real.exp_log hlam]
 
 /-- Logarithmic coordinates are recovered exactly from physical coordinates. -/
 theorem log_physicalParameters_left_inverse (p : Param) :
