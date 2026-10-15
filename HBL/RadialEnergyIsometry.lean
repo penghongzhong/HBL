@@ -28,8 +28,8 @@ theorem radialU_hasDerivAt (f : ℝ → ℝ) (hf : ContDiff ℝ 1 f) (r : ℝ) :
     HasDerivAt (radialU f) (f r + r * deriv f r) r := by
   have h := (hasDerivAt_id r).mul
     ((hf.differentiable (by norm_num) r).hasDerivAt)
-  change HasDerivAt (fun x : ℝ => x * f x) (f r + r * deriv f r) r
-  simpa only [Pi.mul_apply, id_eq, one_mul] using h
+  change HasDerivAt (id * f) (f r + r * deriv f r) r
+  simpa only [one_mul, id_eq] using h
 
 /-- Pointwise radial derivative formula; the derivative is the sum of the
 profile and its weighted derivative. -/
