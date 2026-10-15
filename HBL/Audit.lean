@@ -1,4 +1,4 @@
-import HBL.CompactTestCauchy
+import HBL.ThresholdFunctionalBound
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -31,3 +31,8 @@ import HBL.CompactTestCauchy
 #print axioms HBL.Modulation.continuous_memLp_restrict_Ioc
 
 #print axioms HBL.Modulation.compactTest_cauchySchwarz
+
+#print axioms HBL.Modulation.radialU_continuous
+#print axioms HBL.Modulation.compactThresholdPairing_abs_le
+#print axioms HBL.Modulation.radialU_L2_sq_le_local
+#print axioms HBL.Modulation.compactThresholdPairing_abs_le_of_hardy
