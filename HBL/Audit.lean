@@ -1,4 +1,4 @@
-import HBL.FullRadialEnergy
+import HBL.FullBubbleRadialEnergy
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -177,3 +177,12 @@ import HBL.FullRadialEnergy
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_bubble_hasDerivAt_of_restrict
 #print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_bubble_zero_eq_one_of_restrict
 #print axioms HBL.Modulation.fullRadialEnergy_local_modulation_of_restrict_bubble
+
+#print axioms HBL.Modulation.radialU_bubble_hasDerivAt_closed
+#print axioms HBL.Modulation.radialU_bubble_deriv_closed
+#print axioms HBL.Modulation.bubbleRadialEnergyDerivative_continuous
+#print axioms HBL.Modulation.bubbleRadialEnergyDerivative_sq_le
+#print axioms HBL.Modulation.bubbleRadialEnergyDerivative_sq_integrable
+#print axioms HBL.Modulation.bubbleRadialEnergyDerivative_memLp
+#print axioms HBL.Modulation.fullBubbleRadialEnergyL2_restrict
+#print axioms HBL.Modulation.fullRadialEnergy_local_modulation

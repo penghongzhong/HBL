@@ -38,3 +38,4 @@ import HBL.TransportedEnergyC1
 import HBL.FiniteRadialModulation
 import HBL.TailLiftedModulation
 import HBL.FullRadialEnergy
+import HBL.FullBubbleRadialEnergy
