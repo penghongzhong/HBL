@@ -1,4 +1,4 @@
-import HBL.HilbertTestRegularity
+import HBL.RadialHardy3D
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -25,3 +25,5 @@ import HBL.HilbertTestRegularity
 #print axioms HBL.Modulation.dualRepresenter_pairing
 #print axioms HBL.Modulation.rieszTestConstraint_contDiffAt
 #print axioms HBL.Modulation.rieszTestConstraint_base_zero
+
+#print axioms HBL.Modulation.radialHardy3D
