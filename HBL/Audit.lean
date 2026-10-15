@@ -1,4 +1,4 @@
-import HBL.RadialTestPrimitive
+import HBL.RadialTestEnergyBound
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -94,3 +94,6 @@ import HBL.RadialTestPrimitive
 #print axioms HBL.Modulation.testTailPrimitive_right
 #print axioms HBL.Modulation.testTailPrimitive_contDiff_one
 #print axioms HBL.Modulation.compactTest_energy_coordinate_identity
+
+#print axioms HBL.Modulation.compactTest_energyCoordinate_bound
+#print axioms HBL.Modulation.compactTest_gradientEnergy_bound
