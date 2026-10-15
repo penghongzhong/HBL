@@ -1,4 +1,4 @@
-import HBL.RadialEnergyL2
+import HBL.RadialEnergyHilbertBridge
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -102,3 +102,5 @@ import HBL.RadialEnergyL2
 #print axioms HBL.Modulation.radialUDerivativeL2_ae
 #print axioms HBL.Modulation.energyThresholdDual_apply
 #print axioms HBL.Modulation.energyThresholdDual_bound
+
+#print axioms HBL.Modulation.energyThresholdDual_on_radialCore
