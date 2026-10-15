@@ -28,3 +28,4 @@ import HBL.RadialEnergyHilbertBridge
 import HBL.TransportedTestTail
 import HBL.TransportedTestTailUniform
 import HBL.L2DominatedDerivative
+import HBL.TransportedTestTailL2Derivative

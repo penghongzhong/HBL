@@ -1,4 +1,4 @@
-import HBL.L2DominatedDerivative
+import HBL.TransportedTestTailL2Derivative
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -120,3 +120,7 @@ import HBL.L2DominatedDerivative
 #print axioms HBL.Modulation.realLp2_tendsto_dominated
 #print axioms HBL.Modulation.realLp2_hasDerivAt
 #print axioms HBL.Modulation.realLp2_hasDerivAt_of_increment_bound
+
+#print axioms HBL.Modulation.transportedRadialTest_increment_bound
+#print axioms HBL.Modulation.transportedTestTail_increment_bound
+#print axioms HBL.Modulation.transportedTestTailL2_hasDerivAt_zero
