@@ -1,4 +1,4 @@
-import HBL.DualTestClosure
+import HBL.ModulationSliceJacobians
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -43,3 +43,8 @@ import HBL.DualTestClosure
 
 #print axioms HBL.Modulation.local_modulation_from_dual_tests
 #print axioms HBL.Modulation.local_modulation_physical_from_dual_tests
+
+#print axioms HBL.Modulation.partial_jacobian_from_slice
+#print axioms HBL.Modulation.dualTest_partial_jacobian_from_slice
+#print axioms HBL.Modulation.local_modulation_physical_from_dual_slice
+#print axioms HBL.Modulation.local_modulation_physical_from_riesz_slice

@@ -10,3 +10,4 @@ import HBL.CompactTestCauchy
 import HBL.ThresholdFunctionalBound
 import HBL.LocalModulationClosure
 import HBL.DualTestClosure
+import HBL.ModulationSliceJacobians
