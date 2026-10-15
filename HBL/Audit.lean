@@ -1,4 +1,4 @@
-import HBL.TransportedEnergyDual
+import HBL.TransportedEnergyLocalDerivative
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -151,3 +151,8 @@ import HBL.TransportedEnergyDual
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_on_radialCore
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_bubble_hasDerivAt
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_bubble_zero_eq_one
+
+#print axioms HBL.Modulation.transportedEnergyTail_hasDerivAt_of_mem
+#print axioms HBL.Modulation.transportedEnergyCoefficient_increment_bound_between
+#print axioms HBL.Modulation.transportedEnergyTail_increment_bound_between
+#print axioms HBL.Modulation.transportedEnergyTailL2_hasDerivAt_of_mem
