@@ -46,16 +46,24 @@ theorem transportedTestTail_hasDerivAt_zero
       HasDerivAt
         (fun a : ℝ => ∫ r in (0 : ℝ)..R, transportedRadialTest zeta a r)
         (∫ r in (0 : ℝ)..R, transportedRadialTestDerivative zeta 0 r) 0 := by
-    simpa only [transportedRadialTestIntegral, mul_one] using
-      transportedRadialTestIntegral_hasDerivAt R hR
-        zeta (fun _ : ℝ => (1 : ℝ)) hzeta contDiff_const
+    have hd := transportedRadialTestIntegral_hasDerivAt R hR
+      zeta (fun _ : ℝ => (1 : ℝ)) hzeta contDiff_const
+    change HasDerivAt
+      (fun a : ℝ => ∫ r in (0 : ℝ)..R, transportedRadialTest zeta a r * (1 : ℝ))
+      (∫ r in (0 : ℝ)..R, transportedRadialTestDerivative zeta 0 r * (1 : ℝ))
+      0 at hd
+    simpa only [mul_one] using hd
   have hsderiv :
       HasDerivAt
         (fun a : ℝ => ∫ r in (0 : ℝ)..s, transportedRadialTest zeta a r)
         (∫ r in (0 : ℝ)..s, transportedRadialTestDerivative zeta 0 r) 0 := by
-    simpa only [transportedRadialTestIntegral, mul_one] using
-      transportedRadialTestIntegral_hasDerivAt s hs
-        zeta (fun _ : ℝ => (1 : ℝ)) hzeta contDiff_const
+    have hd := transportedRadialTestIntegral_hasDerivAt s hs
+      zeta (fun _ : ℝ => (1 : ℝ)) hzeta contDiff_const
+    change HasDerivAt
+      (fun a : ℝ => ∫ r in (0 : ℝ)..s, transportedRadialTest zeta a r * (1 : ℝ))
+      (∫ r in (0 : ℝ)..s, transportedRadialTestDerivative zeta 0 r * (1 : ℝ))
+      0 at hd
+    simpa only [mul_one] using hd
   have hd := hRderiv.sub hsderiv
   have hEq (a : ℝ) :
       transportedTestTail R zeta a s =
@@ -73,9 +81,12 @@ theorem transportedTestTail_hasDerivAt_zero
         (∫ r in (0 : ℝ)..R, transportedRadialTestDerivative zeta 0 r) -
           ∫ r in (0 : ℝ)..s, transportedRadialTestDerivative zeta 0 r := by
     have hc : Continuous (transportedRadialTestDerivative zeta 0) := by
-      dsimp [transportedRadialTestDerivative]
       have hz : Continuous zeta := hzeta.continuous
       have hdz : Continuous (deriv zeta) := hzeta.continuous_deriv_one
+      change Continuous (fun r : ℝ =>
+        Real.exp ((3 / 2 : ℝ) * 0) *
+          ((3 / 2 : ℝ) * zeta (Real.exp 0 * r) +
+            (Real.exp 0 * r) * deriv zeta (Real.exp 0 * r)) * r)
       fun_prop
     exact (intervalIntegral.integral_interval_sub_left
       (hc.intervalIntegrable (μ := volume) (a := 0) (b := R))
@@ -83,6 +94,5 @@ theorem transportedTestTail_hasDerivAt_zero
   convert hd using 1
   · funext a
     exact hEq a
-  · exact hD.symm
 
 end HBL.Modulation
