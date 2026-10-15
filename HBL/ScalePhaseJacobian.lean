@@ -80,13 +80,21 @@ theorem scalePhase_slice_hasFDerivAt
   have hScaleComp :
       HasDerivAt (fun a : ℝ => G (a, 0))
         ((fderiv ℝ G (0 : Param)) ((1 : ℝ), 0)) (0 : ℝ) := by
-    have h := hGD.comp (0 : ℝ) hScaleIn
-    simpa using h.hasDerivAt
+    have h : HasFDerivAt
+        (G ∘ fun a : ℝ => (a, (0 : ℝ)))
+        ((fderiv ℝ G (0 : Param)).comp
+          (ContinuousLinearMap.inl ℝ ℝ ℝ)) (0 : ℝ) :=
+      hGD.comp (0 : ℝ) hScaleIn
+    simpa [Function.comp_def] using h.hasDerivAt
   have hPhaseComp :
       HasDerivAt (fun gamma : ℝ => G (0, gamma))
         ((fderiv ℝ G (0 : Param)) ((0 : ℝ), 1)) (0 : ℝ) := by
-    have h := hGD.comp (0 : ℝ) hPhaseIn
-    simpa using h.hasDerivAt
+    have h : HasFDerivAt
+        (G ∘ fun gamma : ℝ => ((0 : ℝ), gamma))
+        ((fderiv ℝ G (0 : Param)).comp
+          (ContinuousLinearMap.inr ℝ ℝ ℝ)) (0 : ℝ) :=
+      hGD.comp (0 : ℝ) hPhaseIn
+    simpa [Function.comp_def] using h.hasDerivAt
   have hDScale :
       (fderiv ℝ G (0 : Param)) ((1 : ℝ), 0) = (-1, 0) :=
     hScaleComp.unique hAxisScale
@@ -108,7 +116,7 @@ theorem scalePhase_slice_hasFDerivAt
               rw [← hDecomp p]
       _ = p.1 • (fderiv ℝ G (0 : Param)) ((1 : ℝ), 0) +
             p.2 • (fderiv ℝ G (0 : Param)) ((0 : ℝ), 1) := by
-              simp
+              rw [map_add, map_smul, map_smul]
       _ = parameterNegId p := by
             rw [hDScale, hDPhase]
             rcases p with ⟨a, gamma⟩
