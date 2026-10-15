@@ -1,4 +1,4 @@
-import HBL.TransportedEnergyC1
+import HBL.FiniteRadialModulation
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -162,3 +162,5 @@ import HBL.TransportedEnergyC1
 #print axioms HBL.Modulation.transportedEnergyTailScaleDerivativeL2_continuousOn
 #print axioms HBL.Modulation.transportedEnergyTailL2_contDiffAt_zero
 #print axioms HBL.Modulation.transportedEnergyThresholdDual_contDiffAt_zero
+
+#print axioms HBL.Modulation.finiteRadialEnergy_local_modulation
