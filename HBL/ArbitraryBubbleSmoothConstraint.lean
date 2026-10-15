@@ -84,7 +84,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zPlus uRe
         hzPlus.continuous huRe.continuous hsuppPlus a₀ b hb'
-    rw [hab] at ht
+    rw [hab]
     exact ht
   have hPI :
       Splus b qIm =
@@ -99,7 +99,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zPlus uIm
         hzPlus.continuous huIm.continuous hsuppPlus a₀ b hb'
-    rw [hab] at ht
+    rw [hab]
     exact ht
   have hMR :
       Sminus b qRe =
@@ -114,7 +114,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zMinus uRe
         hzMinus.continuous huRe.continuous hsuppMinus a₀ b hb'
-    rw [hab] at ht
+    rw [hab]
     exact ht
   have hMI :
       Sminus b qIm =
@@ -129,7 +129,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       transportedRadialTestIntegral_centered_eq_compactThresholdPairing
         S R₀ hS hcover zMinus uIm
         hzMinus.continuous huIm.continuous hsuppMinus a₀ b hb'
-    rw [hab] at ht
+    rw [hab]
     exact ht
   have hzero : (0 : ℝ) ∈ Icc (-1 : ℝ) 1 := by
     norm_num
@@ -138,6 +138,12 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
         compactThresholdPairing S zPlus bubble := by
     dsimp [Splus, w, Rcut, hRcut]
     unfold bubbleAtLogScaleRadialDotH1
+    change
+      fullTransportedEnergyThresholdDual
+        (Real.exp (-a₀) * R₀) hRcut zPlus hzPlus a₀
+        (smoothToRadialDotH1 (bubbleAtLogScale a₀)
+          (radialU_bubbleAtLogScale_deriv_memLp a₀)) =
+        compactThresholdPairing S zPlus bubble
     rw [fullTransportedEnergyThresholdDual_on_smoothCore
       (Real.exp (-a₀) * R₀)
       (scaledBubbleCutoff_nonneg R₀ a₀ hR₀)
