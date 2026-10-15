@@ -49,7 +49,7 @@ theorem phaseRotationCLM_neg_leftInverse (gamma : ℝ) :
   rcases u with ⟨x, y⟩
   ext <;>
     simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg] <;>
-    module <;>
+    match_scalars <;>
     nlinarith [Real.sin_sq_add_cos_sq gamma]
 
 /-- Rotation by -gamma is also a right inverse. -/
@@ -61,7 +61,7 @@ theorem phaseRotationCLM_neg_rightInverse (gamma : ℝ) :
   rcases u with ⟨x, y⟩
   ext <;>
     simp [phaseRotationCLM_apply, Real.cos_neg, Real.sin_neg] <;>
-    module <;>
+    match_scalars <;>
     nlinarith [Real.sin_sq_add_cos_sq gamma]
 
 /-- Fixed phase rotation as a continuous linear equivalence. -/
