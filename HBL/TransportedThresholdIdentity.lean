@@ -94,6 +94,6 @@ theorem transportedRadialTestIntegral_dynamic_eq_scalePullback
     exact transportedRadialTest_scaled_pullback_integrand zeta f a r
   rw [hbound] at hcv
   rw [hleft] at hcv
-  exact hcv
+  simpa [G] using hcv
 
 end HBL.Modulation
