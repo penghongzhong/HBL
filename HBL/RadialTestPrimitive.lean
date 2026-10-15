@@ -21,7 +21,7 @@ The next module will use Cauchy-Schwarz to obtain the operator norm bound.
 noncomputable section
 
 open MeasureTheory
-open scoped ContDiff
+open scoped ContDiff Topology
 
 namespace HBL.Modulation
 
