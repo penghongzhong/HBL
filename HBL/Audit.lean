@@ -1,4 +1,4 @@
-import HBL.PhaseRotationEnergy
+import HBL.ScaledBubbleTestIdentity
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -224,3 +224,9 @@ import HBL.PhaseRotationEnergy
 #print axioms HBL.Modulation.phaseRotationCLM_neg_rightInverse
 #print axioms HBL.Modulation.phaseRotationCLE_apply
 #print axioms HBL.Modulation.phaseRotationCLE_phasedBubble
+
+#print axioms HBL.Modulation.transportedRadialTestIntegral_scaledBubble_recenter
+#print axioms HBL.Modulation.scaledBubbleCutoff_nonneg
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_scaledBubble_hasDerivAt
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_scaledBubble_zero_eq_one
+#print axioms HBL.Modulation.shiftedFullTransportedEnergyThresholdDual_contDiffAt_zero
