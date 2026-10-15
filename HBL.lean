@@ -15,3 +15,4 @@ import HBL.PhaseChannel
 import HBL.ScalePhaseTests
 import HBL.ScalePhaseJacobian
 import HBL.ScalePhaseLocalIFT
+import HBL.ScaleTestKernel
