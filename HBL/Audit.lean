@@ -1,4 +1,4 @@
-import HBL.PhaseQuotient
+import HBL.ThresholdTestExistence
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -258,3 +258,25 @@ import HBL.PhaseQuotient
 #print axioms HBL.Modulation.scalePhaseObservable_phase_add_int_two_pi
 #print axioms HBL.Modulation.scalePhaseResidual_phase_add_int_two_pi
 #print axioms HBL.Modulation.phasedAbsoluteResidual_phase_add_int_two_pi
+
+#print axioms HBL.Modulation.bubble_contDiff_infty
+#print axioms HBL.Modulation.radialResonancePlus_contDiff_infty
+#print axioms HBL.Modulation.radialResonanceMinus_contDiff_infty
+#print axioms HBL.Modulation.dilationGenerator_bubble_closed
+#print axioms HBL.Modulation.radialResonancePlus_half_ne_zero
+#print axioms HBL.Modulation.radialResonanceMinus_half_ne_zero
+#print axioms HBL.Modulation.thresholdBump_zero_of_one_le
+#print axioms HBL.Modulation.thresholdBump_zero_of_nonpos
+#print axioms HBL.Modulation.thresholdPlusMass_pos
+#print axioms HBL.Modulation.thresholdMinusMass_pos
+#print axioms HBL.Modulation.normalizedZetaPlus_contDiff_infty
+#print axioms HBL.Modulation.normalizedZetaMinus_contDiff_infty
+#print axioms HBL.Modulation.normalizedZetaPlus_hasCompactSupport
+#print axioms HBL.Modulation.normalizedZetaMinus_hasCompactSupport
+#print axioms HBL.Modulation.normalizedZetaPlus_zero_of_one_le
+#print axioms HBL.Modulation.normalizedZetaMinus_zero_of_one_le
+#print axioms HBL.Modulation.normalizedZetaPlus_zero_of_nonpos
+#print axioms HBL.Modulation.normalizedZetaMinus_zero_of_nonpos
+#print axioms HBL.Modulation.normalizedZetaPlus_normalized
+#print axioms HBL.Modulation.normalizedZetaMinus_normalized
+#print axioms HBL.Modulation.normalizedThresholdTests_exist
