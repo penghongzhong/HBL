@@ -1,4 +1,4 @@
-import HBL.LocalModulationClosure
+import HBL.DualTestClosure
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -40,3 +40,6 @@ import HBL.LocalModulationClosure
 #print axioms HBL.Modulation.continuousFunctionalOfBound_apply
 #print axioms HBL.Modulation.continuousFunctionalOfBound_norm_le
 #print axioms HBL.Modulation.local_modulation_physical_from_tested_residual
+
+#print axioms HBL.Modulation.local_modulation_from_dual_tests
+#print axioms HBL.Modulation.local_modulation_physical_from_dual_tests
