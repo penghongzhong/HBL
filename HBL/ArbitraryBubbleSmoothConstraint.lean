@@ -177,7 +177,7 @@ theorem phasedAbsoluteResidual_on_smoothCore_eq_manuscript
       funext r
       simp [scalePullback]
     rw [hscale0] at hs
-    exact hrec.trans hs
+    simpa only [add_zero] using hrec.trans hs
   have hCurrent :
       scalePhaseObservable Splus Sminus
         ((qRe, qIm), (b, gamma₀ + delta)) =
