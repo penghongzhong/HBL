@@ -32,3 +32,4 @@ import HBL.TransportedTestTailL2Derivative
 import HBL.TransportedEnergyCoefficient
 import HBL.TransportedEnergyTail
 import HBL.TransportedEnergyTailL2
+import HBL.TransportedEnergyDual
