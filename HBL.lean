@@ -5,3 +5,4 @@ import HBL.DualTestRegularity
 import HBL.PhysicalParameters
 import HBL.HilbertTestRegularity
 import HBL.RadialHardy3D
+import HBL.CompactTestLp
