@@ -20,7 +20,8 @@ def radialU (f : ℝ → ℝ) (r : ℝ) : ℝ :=
 
 theorem radialU_continuous {f : ℝ → ℝ} (hf : Continuous f) :
     Continuous (radialU f) := by
-  simpa [radialU] using continuous_id.mul hf
+  change Continuous (fun r : ℝ => r * f r)
+  exact continuous_id.mul hf
 
 /-- The compact threshold pairing on a support interval. -/
 def compactThresholdPairing (R : ℝ) (zeta f : ℝ → ℝ) : ℝ :=
@@ -86,7 +87,8 @@ theorem radialU_L2_sq_le_local
       nlinarith
     simp only [radialU, norm_mul, Real.rpow_two]
     rw [Real.norm_of_nonneg hr0]
-    exact mul_le_mul_of_nonneg_right hrsq (sq_nonneg ‖f r‖)
+    simpa [mul_pow] using
+      (mul_le_mul_of_nonneg_right hrsq (sq_nonneg ‖f r‖))
   calc
     (∫ r, ‖radialU f r‖ ^ (2 : ℝ) ∂(volume.restrict (Ioc 0 R)))
         ≤ ∫ r, R ^ 2 * ‖f r‖ ^ (2 : ℝ) ∂mu := by
