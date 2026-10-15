@@ -41,3 +41,4 @@ import HBL.FullRadialEnergy
 import HBL.FullBubbleRadialEnergy
 import HBL.RadialDotH1Model
 import HBL.TransportedThresholdIdentity
+import HBL.CompactSupportTransport

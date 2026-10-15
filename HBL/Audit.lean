@@ -1,4 +1,4 @@
-import HBL.TransportedThresholdIdentity
+import HBL.CompactSupportTransport
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -195,3 +195,6 @@ import HBL.TransportedThresholdIdentity
 
 #print axioms HBL.Modulation.transportedRadialTest_scaled_pullback_integrand
 #print axioms HBL.Modulation.transportedRadialTestIntegral_dynamic_eq_scalePullback
+
+#print axioms HBL.Modulation.transportedRadialTestIntegral_fixed_eq_dynamic_of_support
+#print axioms HBL.Modulation.transportedRadialTestIntegral_eq_compactThresholdPairing_of_support
