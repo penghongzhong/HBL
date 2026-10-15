@@ -33,8 +33,10 @@ theorem radialU_bubble_hasDerivAt_closed (r : ℝ) :
       HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
     have h :=
       (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
-    simpa only [Pi.add_apply, Pi.pow_apply, id_eq, zero_add, one_mul,
-      pow_one, Nat.cast_ofNat] using h
+    convert h using 1
+    · funext x
+      simp
+    · norm_num
   have hqpos : 0 < (1 + r ^ 2 : ℝ) := by positivity
   have hs :
       HasDerivAt (fun x : ℝ => Real.sqrt (1 + x ^ 2))
@@ -61,8 +63,14 @@ theorem radialU_bubble_hasDerivAt_closed (r : ℝ) :
       HasDerivAt (id / fun x : ℝ => Real.sqrt (1 + x ^ 2))
         (bubbleRadialEnergyDerivative r) r := by
     convert hdiv using 1
-    simpa only [id_eq] using hder
-  simpa [radialU, bubble, div_eq_mul_inv, id_eq] using hdiv'
+    simpa only [id_eq] using hder.symm
+  have heq :
+      radialU bubble =
+        (id / fun x : ℝ => Real.sqrt (1 + x ^ 2)) := by
+    funext x
+    simp [radialU, bubble, div_eq_mul_inv]
+  rw [heq]
+  exact hdiv'
 
 /-- The classical derivative equals the closed energy-density formula. -/
 theorem radialU_bubble_deriv_closed (r : ℝ) :
@@ -145,6 +153,7 @@ theorem fullBubbleRadialEnergyL2_restrict
     (R : ℝ) (hR : 0 ≤ R) :
     fullToFiniteRadialEnergy R fullBubbleRadialEnergyL2 =
       bubbleRadialEnergyL2 R hR := by
+  unfold bubbleRadialEnergyL2
   apply Lp.ext
   let μR : Measure ℝ := volume.restrict (Ioc (0 : ℝ) R)
   let μFull : Measure ℝ := volume.restrict (Ioi (0 : ℝ))
