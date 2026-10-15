@@ -94,6 +94,8 @@ theorem transportedRadialTestIntegral_dynamic_eq_scalePullback
     exact transportedRadialTest_scaled_pullback_integrand zeta f a r
   rw [hbound] at hcv
   rw [hleft] at hcv
-  simpa [G] using hcv
+  change transportedRadialTestIntegral (Real.exp (-a) * R) zeta f a =
+    ∫ y in (0 : ℝ)..R, G y
+  simpa only [mul_zero] using hcv
 
 end HBL.Modulation
