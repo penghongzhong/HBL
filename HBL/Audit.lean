@@ -1,4 +1,4 @@
-import HBL.TailLiftedModulation
+import HBL.FullRadialEnergy
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -169,3 +169,11 @@ import HBL.TailLiftedModulation
 #print axioms HBL.Modulation.liftFiniteDualCLM_apply
 #print axioms HBL.Modulation.liftFiniteDual_contDiffAt
 #print axioms HBL.Modulation.finiteRadialEnergy_local_modulation_with_tail
+
+#print axioms HBL.Modulation.finiteRadialMeasure_le_full
+#print axioms HBL.Modulation.fullToFiniteRadialEnergy_ae
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_apply
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_contDiffAt_zero
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_bubble_hasDerivAt_of_restrict
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_bubble_zero_eq_one_of_restrict
+#print axioms HBL.Modulation.fullRadialEnergy_local_modulation_of_restrict_bubble
