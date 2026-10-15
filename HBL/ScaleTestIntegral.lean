@@ -155,8 +155,8 @@ theorem transportedRadialTestIntegral_scale_normalized
           r * ((3 / 2 : ℝ) * zeta r + r * deriv zeta r) * f r) := by
             apply intervalIntegral.integral_congr
             intro r _
-            simp [transportedRadialTestDerivative]
-            ring
+            simp [transportedRadialTestDerivative] <;>
+              (first | ring | simp)
       _ = -1 :=
         transportedRadialTest_scale_normalized
           R zeta f hzeta hf hzetaR hNorm
