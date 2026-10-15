@@ -52,13 +52,7 @@ theorem transportedRadialTest_hasDerivAt (zeta : ℝ → ℝ)
         (deriv zeta (Real.exp a * r) * (Real.exp a * r)) a :=
     ((hzeta.differentiable (by norm_num) (Real.exp a * r)).hasDerivAt).comp a harg
   have hcalc := (hcoeff.mul hz).mul_const r
-  have heq : (fun b : ℝ => transportedRadialTest zeta b r) =
-      (fun b : ℝ =>
-        (Real.exp ((3 / 2 : ℝ) * b) * zeta (Real.exp b * r)) * r) := by
-    funext b
-    simp only [transportedRadialTest]
-    ring
-  rw [← heq] at hcalc
+  change HasDerivAt (fun b : ℝ => transportedRadialTest zeta b r) _ a at hcalc
   convert hcalc using 1
   dsimp [transportedRadialTestDerivative]
   ring
@@ -106,7 +100,10 @@ theorem transportedRadialTest_scale_ibp
   have hBi := hB.intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := R)
   have hJ (r : ℝ) : HasDerivAt J (A r + B r) r := by
     have hp : HasDerivAt (fun x : ℝ => x ^ 2) (2 * r) r := by
-      convert (hasDerivAt_id r).pow 2 using 1 <;> simp [Pi.pow_apply] <;> ring
+      convert (hasDerivAt_id r).pow 2 using 1
+      · funext x
+        simp only [Pi.pow_apply, id_eq]
+      · ring
     have hz : HasDerivAt zeta (deriv zeta r) r :=
       (hzeta.differentiable (by norm_num) r).hasDerivAt
     have hfr : HasDerivAt f (deriv f r) r :=
