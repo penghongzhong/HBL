@@ -102,7 +102,10 @@ theorem radialDotH1_phasedBubble_relative_local_modulation
   have hRotTendsto :
       Tendsto (fun u : ComplexRadialDotH1 => Rot u)
         (𝓝 u₀) (𝓝 w₀) := by
-    have h := Rot.continuous.continuousAt
+    have h :
+        Tendsto (fun u : ComplexRadialDotH1 => Rot u)
+          (𝓝 u₀) (𝓝 (Rot u₀)) :=
+      Rot.continuous.continuousAt
     simpa [hRotBase] using h
   have hSolve' :=
     hRotTendsto.eventually hSolve
@@ -120,7 +123,11 @@ theorem radialDotH1_phasedBubble_relative_local_modulation
       Tendsto RotPair
         (𝓝 (u₀, (0 : Param)))
         (𝓝 (w₀, (0 : Param))) := by
-    have h := hRotPairCont.continuousAt
+    have h :
+        Tendsto RotPair
+          (𝓝 (u₀, (0 : Param)))
+          (𝓝 (RotPair (u₀, (0 : Param)))) :=
+      hRotPairCont.continuousAt
     simpa [hRotPairBase] using h
   have hUnique' :=
     hRotPairTendsto.eventually hUnique
