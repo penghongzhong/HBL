@@ -67,6 +67,14 @@ theorem transportedRadialTestIntegral_scaledBubble_recenter
       congr 1
       ring
     rw [hthree]
+    have haexp :
+        Real.exp a₀ ^ 2 =
+          Real.exp (a₀ * (3 / 2 : ℝ)) *
+            Real.exp (a₀ * (1 / 2 : ℝ)) := by
+      rw [pow_two, ← Real.exp_add]
+      congr 1
+      ring
+    rw [haexp]
     ring
   rw [hbound] at hcv
   rw [hleft] at hcv
@@ -145,9 +153,15 @@ theorem fullTransportedEnergyThresholdDual_scaledBubble_zero_eq_one
     zeta (bubbleAtLogScale a₀) hzeta
     (bubbleAtLogScale_contDiff a₀)
     (radialU_bubbleAtLogScale_deriv_memLp a₀) a₀]
-  rw [transportedRadialTestIntegral_scaledBubble_recenter
-    R₀ zeta a₀ 0]
-  rw [bubble_phase_pairing_at_zero]
+  have hrec :
+      transportedRadialTestIntegral
+          (Real.exp (-a₀) * R₀) zeta
+          (bubbleAtLogScale a₀) a₀ =
+        transportedRadialTestIntegral R₀ zeta bubble 0 := by
+    simpa using
+      transportedRadialTestIntegral_scaledBubble_recenter
+        R₀ zeta a₀ 0
+  rw [hrec, bubble_phase_pairing_at_zero]
   exact hNorm
 
 /-- The shifted full threshold dual is C1 at relative parameter zero. -/
@@ -170,6 +184,16 @@ theorem shiftedFullTransportedEnergyThresholdDual_contDiffAt_zero
   have hadd :
       ContDiffAt ℝ 1 (fun b : ℝ => a₀ + b) 0 := by
     fun_prop
-  exact hbase.comp 0 hadd
+  have hbase' :
+      ContDiffAt ℝ 1
+        (fullTransportedEnergyThresholdDual
+          (Real.exp (-a₀) * R₀)
+          (scaledBubbleCutoff_nonneg R₀ a₀ hR₀)
+          zeta hzeta)
+        (a₀ + 0) := by
+    simpa using hbase
+  have hcomp :=
+    hbase'.comp (f := fun b : ℝ => a₀ + b) 0 hadd
+  simpa [Function.comp_def] using hcomp
 
 end HBL.Modulation
