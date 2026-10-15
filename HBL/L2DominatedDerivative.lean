@@ -34,8 +34,9 @@ theorem realLp2_tendsto_dominated
     have hh := tendsto_integral_filter_of_dominated_convergence
       (F := fun i y => ‖F i y - g y‖ ^ 2)
       (f := fun _ => (0 : ℝ)) (fun y => w y ^ 2)
-      (fun i =>
-        ((hF i).aestronglyMeasurable.sub hg.aestronglyMeasurable).norm.pow 2)
+      (Eventually.of_forall fun i => by
+        simpa only [Pi.sub_apply] using
+          ((hF i).aestronglyMeasurable.sub hg.aestronglyMeasurable).norm.pow 2)
       (by
         filter_upwards [hb] with i hi
         filter_upwards [hi] with y hiy
