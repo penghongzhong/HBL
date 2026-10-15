@@ -53,10 +53,9 @@ theorem liftFiniteDual_contDiffAt
     (hS : ContDiffAt ℝ 1 S (0 : ℝ)) :
     ContDiffAt ℝ 1
       (fun a : ℝ => liftFiniteDual (T := T) (S a)) 0 := by
-  let L : (V →L[ℝ] ℝ) →L[ℝ] ((V × T) →L[ℝ] ℝ) :=
-    liftFiniteDualCLM (V := V) (T := T)
-  have h := L.contDiff.contDiffAt.comp 0 hS
-  simpa [L, liftFiniteDualCLM] using h
+  change ContDiffAt ℝ 1
+    (fun a : ℝ => liftFiniteDualCLM (V := V) (T := T) (S a)) 0
+  exact (liftFiniteDualCLM (V := V) (T := T)).contDiff.contDiffAt.comp 0 hS
 
 end LiftedDual
 
@@ -84,14 +83,14 @@ theorem finiteRadialEnergy_local_modulation_with_tail
     ∃ Phi :
       ((RadialEnergyL2 R × T) × (RadialEnergyL2 R × T)) → Param,
       Phi ((bubbleRadialEnergyL2 R hR, tailBubble),
-        ((0 : RadialEnergyL2 R), (0 : T))) = (1, 0) ∧
+        (0 : RadialEnergyL2 R × T)) = (1, 0) ∧
       ContDiffAt ℝ 1 Phi
         ((bubbleRadialEnergyL2 R hR, tailBubble),
-          ((0 : RadialEnergyL2 R), (0 : T))) ∧
+          (0 : RadialEnergyL2 R × T)) ∧
       (∀ u, 0 < (Phi u).1) ∧
       (∀ᶠ u in 𝓝
         ((bubbleRadialEnergyL2 R hR, tailBubble),
-          ((0 : RadialEnergyL2 R), (0 : T))),
+          (0 : RadialEnergyL2 R × T)),
         scalePhaseResidual
           (fun a => liftFiniteDual (T := T)
             (transportedEnergyThresholdDual R hR zPlus hzPlus a))
@@ -101,7 +100,7 @@ theorem finiteRadialEnergy_local_modulation_with_tail
           (u, (Real.log (Phi u).1, (Phi u).2)) = 0) ∧
       (∀ᶠ v in 𝓝
         (((bubbleRadialEnergyL2 R hR, tailBubble),
-            ((0 : RadialEnergyL2 R), (0 : T))),
+            (0 : RadialEnergyL2 R × T)),
           (0 : Param)),
         (scalePhaseResidual
           (fun a => liftFiniteDual (T := T)
