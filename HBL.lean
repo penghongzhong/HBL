@@ -51,3 +51,4 @@ import HBL.ScaledBubbleModulation
 import HBL.PhasedBubbleModulation
 import HBL.AbsoluteModulationParameters
 import HBL.AbsoluteBubbleModulation
+import HBL.ArbitraryBubbleBridgeCore

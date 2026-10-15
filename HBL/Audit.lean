@@ -1,4 +1,4 @@
-import HBL.AbsoluteBubbleModulation
+import HBL.ArbitraryBubbleBridgeCore
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -243,3 +243,8 @@ import HBL.AbsoluteBubbleModulation
 #print axioms HBL.Modulation.absolutePhysicalToRelativeLog_contDiffAt
 
 #print axioms HBL.Modulation.radialDotH1_phasedBubble_absolute_local_modulation
+
+#print axioms HBL.Modulation.scalePhaseObservable_phaseRotation_add
+#print axioms HBL.Modulation.scalePhaseResidual_phaseRotation_add
+#print axioms HBL.Modulation.transportedRadialTestIntegral_centered_fixed_eq_dynamic_of_support
+#print axioms HBL.Modulation.transportedRadialTestIntegral_centered_eq_compactThresholdPairing
