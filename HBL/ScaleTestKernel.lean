@@ -41,7 +41,8 @@ theorem transportedRadialTest_hasDerivAt (zeta : ℝ → ℝ)
   have hcoeff :
       HasDerivAt (fun b : ℝ => Real.exp ((3 / 2 : ℝ) * b))
         ((3 / 2 : ℝ) * Real.exp ((3 / 2 : ℝ) * a)) a := by
-    convert ((hasDerivAt_id a).const_mul (3 / 2 : ℝ)).exp using 1 <;> ring
+    have h := ((hasDerivAt_id a).mul_const (3 / 2 : ℝ)).exp
+    simpa only [id_eq, one_mul, mul_comm] using h
   have harg :
       HasDerivAt (fun b : ℝ => Real.exp b * r)
         (Real.exp a * r) a := by
@@ -51,8 +52,16 @@ theorem transportedRadialTest_hasDerivAt (zeta : ℝ → ℝ)
         (deriv zeta (Real.exp a * r) * (Real.exp a * r)) a :=
     ((hzeta.differentiable (by norm_num) (Real.exp a * r)).hasDerivAt).comp a harg
   have hcalc := (hcoeff.mul hz).mul_const r
-  convert hcalc using 1 <;>
-    simp only [transportedRadialTest, transportedRadialTestDerivative] <;> ring
+  have heq : (fun b : ℝ => transportedRadialTest zeta b r) =
+      (fun b : ℝ =>
+        (Real.exp ((3 / 2 : ℝ) * b) * zeta (Real.exp b * r)) * r) := by
+    funext b
+    simp only [transportedRadialTest]
+    ring
+  rw [← heq] at hcalc
+  convert hcalc using 1
+  dsimp [transportedRadialTestDerivative]
+  ring
 
 /-- At log-scale zero the transported test is the original test kernel. -/
 @[simp]
@@ -97,7 +106,7 @@ theorem transportedRadialTest_scale_ibp
   have hBi := hB.intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := R)
   have hJ (r : ℝ) : HasDerivAt J (A r + B r) r := by
     have hp : HasDerivAt (fun x : ℝ => x ^ 2) (2 * r) r := by
-      convert (hasDerivAt_id r).pow 2 using 1 <;> ring
+      convert (hasDerivAt_id r).pow 2 using 1 <;> simp [Pi.pow_apply] <;> ring
     have hz : HasDerivAt zeta (deriv zeta r) r :=
       (hzeta.differentiable (by norm_num) r).hasDerivAt
     have hfr : HasDerivAt f (deriv f r) r :=
@@ -127,7 +136,7 @@ theorem transportedRadialTest_scale_normalized
         zeta r * r * (f r / 2 + r * deriv f r)) = 1) :
     (∫ r in (0 : ℝ)..R,
       r * ((3 / 2 : ℝ) * zeta r + r * deriv zeta r) * f r) = -1 := by
-  rw [transportedRadialTest_scale_ibp R zeta f hzeta hf hzetaR, hNorm]
-  ring
+  simpa [hNorm] using
+    transportedRadialTest_scale_ibp R zeta f hzeta hf hzetaR
 
 end HBL.Modulation
