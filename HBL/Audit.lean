@@ -1,4 +1,4 @@
-import HBL.RadialHardy3D
+import HBL.CompactTestLp
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -27,3 +27,5 @@ import HBL.RadialHardy3D
 #print axioms HBL.Modulation.rieszTestConstraint_base_zero
 
 #print axioms HBL.Modulation.radialHardy3D
+
+#print axioms HBL.Modulation.continuous_memLp_restrict_Ioc
