@@ -73,8 +73,8 @@ theorem testedConstraint_contDiffAt
     (ellPlus ellMinus : E →L[ℝ] ℝ) (R : E × Param → E)
     (v₀ : E × Param) (hR : ContDiffAt ℝ 1 R v₀) :
     ContDiffAt ℝ 1 (testedConstraint ellPlus ellMinus R) v₀ := by
-  simpa [testedConstraint, testPair, Function.comp_def] using
-    hR.continuousLinearMap_comp (testPair ellPlus ellMinus)
+  change ContDiffAt ℝ 1 (fun x => (ellPlus (R x), ellMinus (R x))) v₀
+  exact hR.continuousLinearMap_comp (testPair ellPlus ellMinus)
 
 theorem testedConstraint_hasFDerivAt
     (ellPlus ellMinus : E →L[ℝ] ℝ) (R : E × Param → E)
@@ -82,8 +82,9 @@ theorem testedConstraint_hasFDerivAt
     (hR : HasFDerivAt R R' v₀) :
     HasFDerivAt (testedConstraint ellPlus ellMinus R)
       ((testPair ellPlus ellMinus).comp R') v₀ := by
-  simpa [testedConstraint, testPair, Function.comp_def] using
-    (testPair ellPlus ellMinus).hasFDerivAt.comp v₀ hR
+  change HasFDerivAt (fun x => (ellPlus (R x), ellMinus (R x)))
+    ((ellPlus.prod ellMinus).comp R') v₀
+  exact (testPair ellPlus ellMinus).hasFDerivAt.comp v₀ hR
 
 /-- The parameter derivative of the tested residual is the normalized
 Jacobian once the residual parameter derivative is the two symmetry tangents. -/
