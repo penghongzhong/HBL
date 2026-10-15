@@ -1,4 +1,4 @@
-import HBL.ScaleTestKernel
+import HBL.ScaleTestIntegral
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -68,3 +68,7 @@ import HBL.ScaleTestKernel
 #print axioms HBL.Modulation.transportedRadialTest_hasDerivAt_zero
 #print axioms HBL.Modulation.transportedRadialTest_scale_ibp
 #print axioms HBL.Modulation.transportedRadialTest_scale_normalized
+
+#print axioms HBL.Modulation.transportedRadialTestIntegral_hasDerivAt_of_bound
+#print axioms HBL.Modulation.transportedRadialTestIntegral_hasDerivAt
+#print axioms HBL.Modulation.transportedRadialTestIntegral_scale_normalized
