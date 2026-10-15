@@ -1,4 +1,4 @@
-import HBL.TransportedTestTail
+import HBL.TransportedTestTailUniform
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -107,3 +107,12 @@ import HBL.TransportedTestTail
 
 #print axioms HBL.Modulation.transportedTestTail_zero
 #print axioms HBL.Modulation.transportedTestTail_hasDerivAt_zero
+
+#print axioms HBL.Modulation.transportedRadialTestDerivative_joint_continuous
+#print axioms HBL.Modulation.transportedRadialTestDerivative_uniform_bound
+#print axioms HBL.Modulation.transportedTestTailScaleDerivative_abs_le
+#print axioms HBL.Modulation.transportedTestTailScaleDerivative_contDiff_one
+#print axioms HBL.Modulation.transportedTestTail_contDiff_one_in_s
+#print axioms HBL.Modulation.transportedTestTailL2_ae
+#print axioms HBL.Modulation.transportedTestTailScaleDerivativeL2_ae
+#print axioms HBL.Modulation.transportedTestTail_hasDerivAt_zero_as_scaleDerivative
