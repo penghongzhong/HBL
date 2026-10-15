@@ -1,4 +1,4 @@
-import HBL.DualTestRegularity
+import HBL.PhysicalParameters
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -16,3 +16,8 @@ import HBL.DualTestRegularity
 
 #print axioms HBL.Modulation.dualTestConstraint_contDiffAt
 #print axioms HBL.Modulation.dualTestConstraint_base_zero
+
+#print axioms HBL.Modulation.physicalParameters_contDiffAt
+#print axioms HBL.Modulation.physical_selector_from_log_selector
+#print axioms HBL.Modulation.physicalParameters_log_left_inverse
+#print axioms HBL.Modulation.log_physicalParameters_left_inverse
