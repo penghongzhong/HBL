@@ -12,3 +12,4 @@ import HBL.LocalModulationClosure
 import HBL.DualTestClosure
 import HBL.ModulationSliceJacobians
 import HBL.PhaseChannel
+import HBL.ScalePhaseTests
