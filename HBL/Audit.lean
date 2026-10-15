@@ -1,4 +1,4 @@
-import HBL.ManuscriptModulationConstraint
+import HBL.TransportedEnergyRecenter
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -201,3 +201,11 @@ import HBL.ManuscriptModulationConstraint
 
 #print axioms HBL.Modulation.scalePhaseResidual_on_smoothCore_eq_manuscript
 #print axioms HBL.Modulation.radialDotH1_standard_local_modulation
+
+#print axioms HBL.Modulation.recenteredThresholdTest_contDiff
+#print axioms HBL.Modulation.transportedEnergyCoefficient_recenter
+#print axioms HBL.Modulation.transportedEnergyTail_recenter
+#print axioms HBL.Modulation.transportedEnergyTailL2_recenter
+#print axioms HBL.Modulation.transportedEnergyThresholdDual_recenter
+#print axioms HBL.Modulation.transportedEnergyThresholdDual_contDiffAt
+#print axioms HBL.Modulation.fullTransportedEnergyThresholdDual_contDiffAt
