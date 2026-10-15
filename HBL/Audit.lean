@@ -1,4 +1,4 @@
-import HBL.ArbitraryBubbleSmoothConstraint
+import HBL.ModulationLemmaCertified
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -250,3 +250,6 @@ import HBL.ArbitraryBubbleSmoothConstraint
 #print axioms HBL.Modulation.transportedRadialTestIntegral_centered_eq_compactThresholdPairing
 
 #print axioms HBL.Modulation.phasedAbsoluteResidual_on_smoothCore_eq_manuscript
+
+#print axioms HBL.Modulation.manuscript_standardBubble_jacobian_eq_negId
+#print axioms HBL.Modulation.manuscript_modulation_local_corrected

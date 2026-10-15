@@ -53,3 +53,4 @@ import HBL.AbsoluteModulationParameters
 import HBL.AbsoluteBubbleModulation
 import HBL.ArbitraryBubbleBridgeCore
 import HBL.ArbitraryBubbleSmoothConstraint
+import HBL.ModulationLemmaCertified
