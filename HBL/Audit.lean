@@ -1,4 +1,4 @@
-import HBL.TransportedEnergyCoefficient
+import HBL.TransportedEnergyTail
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -131,3 +131,10 @@ import HBL.TransportedEnergyCoefficient
 #print axioms HBL.Modulation.transportedEnergyCoefficient_hasDerivAt
 #print axioms HBL.Modulation.transportedEnergyTail_zero
 #print axioms HBL.Modulation.transportedEnergyTail_pairing_eq_testIntegral
+
+#print axioms HBL.Modulation.transportedEnergyCoefficientDerivative_joint_continuous
+#print axioms HBL.Modulation.transportedEnergyCoefficientDerivative_uniform_bound
+#print axioms HBL.Modulation.transportedEnergyTailScaleDerivative_contDiff_one
+#print axioms HBL.Modulation.transportedEnergyTail_contDiff_one_in_s
+#print axioms HBL.Modulation.transportedEnergyTail_hasDerivAt_zero
+#print axioms HBL.Modulation.transportedEnergyTailScaleDerivative_abs_le
