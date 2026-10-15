@@ -103,7 +103,7 @@ theorem transportedRadialTest_scale_ibp
       convert (hasDerivAt_id r).pow 2 using 1
       · funext x
         simp only [Pi.pow_apply, id_eq]
-      · ring
+      · simp only [id_eq]
     have hz : HasDerivAt zeta (deriv zeta r) r :=
       (hzeta.differentiable (by norm_num) r).hasDerivAt
     have hfr : HasDerivAt f (deriv f r) r :=
