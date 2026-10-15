@@ -1,4 +1,4 @@
-import HBL.RadialEnergyHilbertBridge
+import HBL.TransportedTestTail
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -104,3 +104,6 @@ import HBL.RadialEnergyHilbertBridge
 #print axioms HBL.Modulation.energyThresholdDual_bound
 
 #print axioms HBL.Modulation.energyThresholdDual_on_radialCore
+
+#print axioms HBL.Modulation.transportedTestTail_zero
+#print axioms HBL.Modulation.transportedTestTail_hasDerivAt_zero

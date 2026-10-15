@@ -25,3 +25,4 @@ import HBL.RadialTestPrimitive
 import HBL.RadialTestEnergyBound
 import HBL.RadialEnergyL2
 import HBL.RadialEnergyHilbertBridge
+import HBL.TransportedTestTail
