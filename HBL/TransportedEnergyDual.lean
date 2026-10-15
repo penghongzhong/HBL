@@ -76,8 +76,12 @@ theorem transportedEnergyThresholdDual_hasDerivAt_zero
         (L (transportedEnergyTailScaleDerivativeL2
           R hR zeta hzeta 0)) 0 :=
     L.hasFDerivAt.comp_hasDerivAt 0 hQ
-  simpa [transportedEnergyThresholdDual, L, V,
-    Function.comp_def] using hcomp
+  change HasDerivAt
+    (fun a : ℝ => innerSL ℝ
+      (transportedEnergyTailL2 R hR zeta hzeta a))
+    (innerSL ℝ
+      (transportedEnergyTailScaleDerivativeL2 R hR zeta hzeta 0)) 0
+  simpa [L, V, Function.comp_def] using hcomp
 
 /-- On a smooth radial profile, the corrected Hilbert functional is
 exactly the manuscript's transported scalar threshold test. -/
@@ -109,7 +113,6 @@ theorem transportedEnergyThresholdDual_on_radialCore
           transportedEnergyTail R zeta a s *
             deriv (radialU f) s) := by
       rw [intervalIntegral.integral_of_le hR]
-      rfl
     _ = transportedRadialTestIntegral R zeta f a :=
       transportedEnergyTail_pairing_eq_testIntegral
         R zeta f hzeta hf a
