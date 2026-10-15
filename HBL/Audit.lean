@@ -1,4 +1,4 @@
-import HBL.ConstraintJacobian
+import HBL.DualTestRegularity
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -13,3 +13,6 @@ import HBL.ConstraintJacobian
 #print axioms HBL.Modulation.testedConstraint_contDiffAt
 #print axioms HBL.Modulation.testedConstraint_partial_fderiv
 #print axioms HBL.Modulation.local_modulation_from_tested_residual
+
+#print axioms HBL.Modulation.dualTestConstraint_contDiffAt
+#print axioms HBL.Modulation.dualTestConstraint_base_zero
