@@ -29,7 +29,8 @@ theorem bubbleAtLogScale_contDiff (a₀ : ℝ) :
     ContDiff ℝ 1 (bubbleAtLogScale a₀) := by
   change ContDiff ℝ 1 (fun r : ℝ =>
     Real.exp (a₀ / 2) * bubble (Real.exp a₀ * r))
-  fun_prop
+  exact contDiff_const.mul
+    (bubble_contDiff.comp (contDiff_const.mul contDiff_id))
 
 /-- Applying the manuscript scale pullback with the base scale returns W. -/
 theorem scalePullback_bubbleAtLogScale_self
@@ -48,8 +49,12 @@ theorem scalePullback_bubbleAtLogScale_self
   have hcoef :
       Real.exp (-a₀ / 2) * Real.exp (a₀ / 2) = 1 := by
     rw [← Real.exp_add]
-    simp
-  rw [hcoef, one_mul]
+    have hz : -a₀ / 2 + a₀ / 2 = (0 : ℝ) := by ring
+    rw [hz, Real.exp_zero]
+  calc
+    Real.exp (-a₀ / 2) * (Real.exp (a₀ / 2) * bubble r) =
+        (Real.exp (-a₀ / 2) * Real.exp (a₀ / 2)) * bubble r := by ring
+    _ = bubble r := by rw [hcoef]; simp
 
 /-- Closed energy-coordinate derivative of the scaled bubble. -/
 def scaledBubbleRadialEnergyDerivative (a₀ r : ℝ) : ℝ :=
@@ -86,8 +91,13 @@ theorem radialU_bubbleAtLogScale_hasDerivAt
       rw [← Real.exp_add]
       congr 1
       ring
-    rw [hc]
-    ring
+    calc
+      Real.exp (-a₀ / 2) *
+          (Real.exp a₀ * x * bubble (Real.exp a₀ * x)) =
+        (Real.exp (-a₀ / 2) * Real.exp a₀) *
+          x * bubble (Real.exp a₀ * x) := by ring
+      _ = Real.exp (a₀ / 2) * x * bubble (Real.exp a₀ * x) := by rw [hc]
+      _ = x * (Real.exp (a₀ / 2) * bubble (Real.exp a₀ * x)) := by ring
   rw [heq] at hmul
   convert hmul using 1
   unfold scaledBubbleRadialEnergyDerivative
@@ -97,7 +107,7 @@ theorem radialU_bubbleAtLogScale_hasDerivAt
     rw [← Real.exp_add]
     congr 1
     ring
-  rw [hc]
+  rw [← hc]
   ring
 
 theorem radialU_bubbleAtLogScale_deriv
@@ -111,7 +121,9 @@ theorem scaledBubbleRadialEnergyDerivative_continuous
     (a₀ : ℝ) :
     Continuous (scaledBubbleRadialEnergyDerivative a₀) := by
   unfold scaledBubbleRadialEnergyDerivative
-  fun_prop
+  exact continuous_const.mul
+    (bubbleRadialEnergyDerivative_continuous.comp
+      (continuous_const.mul continuous_id))
 
 /-- Its square is integrable on the full real line. -/
 theorem scaledBubbleRadialEnergyDerivative_sq_integrable
@@ -166,11 +178,14 @@ def bubbleAtLogScaleRadialDotH1 (a₀ : ℝ) : RadialDotH1 :=
 theorem bubbleAtLogScaleRadialDotH1_zero :
     bubbleAtLogScaleRadialDotH1 0 =
       fullBubbleRadialEnergyL2 := by
-  unfold bubbleAtLogScaleRadialDotH1
-  have hfun : bubbleAtLogScale 0 = bubble := by
-    funext r
-    simp [bubbleAtLogScale]
-  subst hfun
-  exact smoothBubbleToRadialDotH1_eq
+  unfold bubbleAtLogScaleRadialDotH1 fullBubbleRadialEnergyL2
+  apply Lp.ext
+  filter_upwards [
+    smoothToRadialDotH1_ae (bubbleAtLogScale 0)
+      (radialU_bubbleAtLogScale_deriv_memLp 0),
+    bubbleRadialEnergyDerivative_memLp.coeFn_toLp
+  ] with r h1 h2
+  rw [h1, h2, radialU_bubbleAtLogScale_deriv]
+  simp [scaledBubbleRadialEnergyDerivative]
 
 end HBL.Modulation
