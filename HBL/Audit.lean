@@ -1,4 +1,4 @@
-import HBL.AffineTailCutoff
+import HBL.AffineTailGreenLocal
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -302,3 +302,8 @@ import HBL.AffineTailCutoff
 #print axioms HBL.Modulation.AffineTail.model_contDiff_infty
 #print axioms HBL.Modulation.AffineTail.model_zero_of_le_one
 #print axioms HBL.Modulation.AffineTail.model_eq_id_of_two_le
+
+#print axioms HBL.Modulation.AffineTail.greenBoundary_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.green_secondDerivative
+#print axioms HBL.Modulation.AffineTail.localSchrodinger_commutator
+#print axioms HBL.Modulation.AffineTail.green_localSchrodinger
