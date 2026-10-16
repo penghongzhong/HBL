@@ -1,4 +1,4 @@
-import HBL.AffineTailOperators
+import HBL.AffineTailMinusZeroMode
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -314,3 +314,7 @@ import HBL.AffineTailOperators
 #print axioms HBL.Modulation.AffineTail.hartreeKernel_symm
 #print axioms HBL.Modulation.AffineTail.resonanceMinus_def
 #print axioms HBL.Modulation.AffineTail.resonancePlus_def
+
+#print axioms HBL.Modulation.AffineTail.bubbleRadialEnergyDerivative_hasDerivAt_closed
+#print axioms HBL.Modulation.AffineTail.resonanceMinus_second_deriv_closed
+#print axioms HBL.Modulation.AffineTail.hMinus_resonanceMinus_zero
