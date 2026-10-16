@@ -1,4 +1,4 @@
-import HBL.AffineTailPVAlgebra
+import HBL.AffineTailLogPrimitive
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -359,3 +359,7 @@ import HBL.AffineTailPVAlgebra
 #print axioms HBL.Modulation.AffineTail.bubble_cube_mul_scale_eq_rational
 #print axioms HBL.Modulation.AffineTail.hartree_scale_log_density
 #print axioms HBL.Modulation.AffineTail.affine_log_PV_rational_decomposition
+
+#print axioms HBL.Modulation.AffineTail.radialLogPrimitive_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.logBoundary_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.splitRadialLog_hasDerivAt
