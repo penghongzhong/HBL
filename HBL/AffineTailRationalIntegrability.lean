@@ -39,7 +39,7 @@ theorem second_rational_integrable :
   have hc : Continuous (fun x : ℝ => 1 + x ^ 2) := by fun_prop
   have hne (x : ℝ) : (1 + x ^ 2 : ℝ) ≠ 0 := by positivity
   have hd : Continuous (fun x : ℝ => ((1 + x ^ 2) ^ 2)⁻¹) :=
-    (hc.pow 2).inv
+    (hc.pow 2).inv₀ (fun x => pow_ne_zero 2 (hne x))
   exact Integrable.mono' integrable_inv_one_add_sq
     hd.aestronglyMeasurable
     (ae_of_all _ (fun x => by
