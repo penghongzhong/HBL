@@ -17,7 +17,7 @@ namespace HBL.Modulation.AffineTail
 
 /-- Rational primitive for the radial scaling-density integrand. -/
 def radialLogPrimitive (rho : ℝ) : ℝ :=
-  rho ^ 2 / (4 * (1 + rho ^ 2) ^ 2)
+  rho ^ 2 * ((1 + rho ^ 2) ^ 2)⁻¹ / 4
 
 /-- An exact derivative; the integrand has no singularity. -/
 theorem radialLogPrimitive_hasDerivAt (rho : ℝ) :
@@ -33,14 +33,13 @@ theorem radialLogPrimitive_hasDerivAt (rho : ℝ) :
   have hInv := (hA.pow 2).inv (pow_ne_zero 2 hAne)
   have h := ((hasDerivAt_id rho).pow 2).mul hInv
   have hdiv := h.div_const (4 : ℝ)
-  have hfun : radialLogPrimitive =
-      (fun x : ℝ => (x ^ 2 * ((1 + x ^ 2) ^ 2)⁻¹) / 4) := by
-    funext x
-    unfold radialLogPrimitive
-    simp only [div_eq_mul_inv, mul_inv_rev]
-    ring
-  rw [hfun]
+  change HasDerivAt radialLogPrimitive
+    ((2 * rho * ((1 + rho ^ 2) ^ 2)⁻¹ +
+      rho ^ 2 * (-(2 * (1 + rho ^ 2) * (2 * rho)) /
+        ((1 + rho ^ 2) ^ 2) ^ 2)) / 4) rho at hdiv
   convert hdiv using 1
+  · unfold radialLogPrimitive
+    rfl
   · field_simp [hAne]
     ring
 
@@ -65,9 +64,10 @@ theorem splitRadialLog_hasDerivAt (r rho : ℝ)
     intro hz
     have hz' : (r + rho) * (r - rho) = 0 := by nlinarith [hz]
     exact (mul_ne_zero hp hm) hz'
+  change HasDerivAt
+    (fun x : ℝ => Real.log (r + x) - Real.log (r - x))
+    ((0 + 1) / (r + rho) - (0 - 1) / (r - rho)) rho at h
   convert h using 1
-  · funext x
-    simp
   · field_simp [hp, hm, hden]
     ring
 
