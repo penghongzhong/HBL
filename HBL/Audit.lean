@@ -1,4 +1,4 @@
-import HBL.AffineTailLogPrimitive
+import HBL.AffineTailLogIntegralReduction
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -363,3 +363,7 @@ import HBL.AffineTailLogPrimitive
 #print axioms HBL.Modulation.AffineTail.radialLogPrimitive_hasDerivAt
 #print axioms HBL.Modulation.AffineTail.logBoundary_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.splitRadialLog_hasDerivAt
+
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_primitive_deriv
+#print axioms HBL.Modulation.AffineTail.radialLog_ratio_eq_sub
+#print axioms HBL.Modulation.AffineTail.nonlocalApply_resonancePlus_factor
