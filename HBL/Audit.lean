@@ -1,4 +1,4 @@
-import HBL.AffineTailNonlocalSymmetry
+import HBL.AffineTailOperators
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -310,3 +310,7 @@ import HBL.AffineTailNonlocalSymmetry
 
 #print axioms HBL.Modulation.AffineTail.symmetricKernel_pairing
 #print axioms HBL.Modulation.AffineTail.symmetricKernel_commutator_zero
+
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_symm
+#print axioms HBL.Modulation.AffineTail.resonanceMinus_def
+#print axioms HBL.Modulation.AffineTail.resonancePlus_def
