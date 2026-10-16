@@ -1,4 +1,4 @@
-import HBL.AffineTailLogIBPFinite
+import HBL.AffineTailPVWeightDecomposition
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -409,3 +409,6 @@ import HBL.AffineTailLogIBPFinite
 #print axioms HBL.Modulation.AffineTail.affineLogDensity_integral_left_ibp
 #print axioms HBL.Modulation.AffineTail.affineLogDensity_integral_right_ibp
 #print axioms HBL.Modulation.AffineTail.affineLogDensity_integral_split_ibp
+
+#print axioms HBL.Modulation.AffineTail.pv_weight_decomposition
+#print axioms HBL.Modulation.AffineTail.pv_weight_interval_decomposition
