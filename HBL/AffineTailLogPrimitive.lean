@@ -33,15 +33,10 @@ theorem radialLogPrimitive_hasDerivAt (rho : ℝ) :
   have hInv := (hA.pow 2).inv (pow_ne_zero 2 hAne)
   have h := ((hasDerivAt_id rho).pow 2).mul hInv
   have hdiv := h.div_const (4 : ℝ)
-  change HasDerivAt radialLogPrimitive
-    ((2 * rho * ((1 + rho ^ 2) ^ 2)⁻¹ +
-      rho ^ 2 * (-(2 * (1 + rho ^ 2) * (2 * rho)) /
-        ((1 + rho ^ 2) ^ 2) ^ 2)) / 4) rho at hdiv
-  convert hdiv using 1
-  · unfold radialLogPrimitive
-    rfl
-  · field_simp [hAne]
-    ring
+  convert hdiv using 1 <;>
+    simp only [radialLogPrimitive, Pi.pow_apply, Pi.inv_apply,
+      Pi.mul_apply, id_eq, Nat.reduceSubDiff, pow_one, one_mul] <;>
+    (first | rfl | (field_simp [hAne] <;> ring))
 
 /-- The boundary error epsilon * log(epsilon) vanishes at zero. -/
 theorem logBoundary_tendsto_zero :
