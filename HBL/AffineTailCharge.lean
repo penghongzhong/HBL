@@ -30,8 +30,10 @@ theorem charge_annihilates
     (ell : E →L[ℝ] ℝ) (c : ℝ) (hc : c ≠ 0)
     (F₀ qAff : E) (hq : ell qAff = -c) :
     ell (F₀ - charge ell c F₀ • qAff) = 0 := by
-  simp only [map_sub, map_smul, charge, hq]
-  field_simp [hc]
+  rw [map_sub, map_smul, hq]
+  change ell F₀ - charge ell c F₀ * (-c) = 0
+  unfold charge
+  field_simp [hc] <;> ring
 
 /-- Any scalar that annihilates the threshold pairing equals the proposed
 affine charge. -/
@@ -41,8 +43,11 @@ theorem charge_unique
     (alpha : ℝ)
     (hzero : ell (F₀ - alpha • qAff) = 0) :
     alpha = charge ell c F₀ := by
+  have hzero' := hzero
+  rw [map_sub, map_smul, hq] at hzero'
+  change ell F₀ - alpha * (-c) = 0 at hzero'
   have hlin : ell F₀ + alpha * c = 0 := by
-    simpa only [map_sub, map_smul, hq, smul_eq_mul, sub_neg_eq_add] using hzero
+    linarith
   unfold charge
   apply (eq_div_iff hc).2
   linarith
