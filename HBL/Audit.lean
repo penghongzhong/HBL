@@ -1,4 +1,4 @@
-import HBL.AffineTailMinusAsymptotics
+import HBL.AffineTailMinusFiniteGreen
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
