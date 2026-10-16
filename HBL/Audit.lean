@@ -1,4 +1,4 @@
-import HBL.AffineTailMinusZeroMode
+import HBL.AffineTailBoundaryData
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -318,3 +318,10 @@ import HBL.AffineTailMinusZeroMode
 #print axioms HBL.Modulation.AffineTail.bubbleRadialEnergyDerivative_hasDerivAt_closed
 #print axioms HBL.Modulation.AffineTail.resonanceMinus_second_deriv_closed
 #print axioms HBL.Modulation.AffineTail.hMinus_resonanceMinus_zero
+
+#print axioms HBL.Modulation.AffineTail.model_hasDerivAt_one_of_two_lt
+#print axioms HBL.Modulation.AffineTail.model_deriv_eq_one_of_two_lt
+#print axioms HBL.Modulation.AffineTail.model_zero
+#print axioms HBL.Modulation.AffineTail.resonanceMinus_zero
+#print axioms HBL.Modulation.AffineTail.greenBoundary_minus_at_zero
+#print axioms HBL.Modulation.AffineTail.greenBoundary_minus_far
