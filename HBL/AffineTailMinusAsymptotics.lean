@@ -57,7 +57,7 @@ theorem resonanceMinus_tendsto_one :
       Tendsto (fun r : ℝ => Real.sqrt (1 + (r⁻¹) ^ 2))
         atTop (𝓝 (1 : ℝ)) := by
     have h := Real.continuous_sqrt.continuousAt.tendsto.comp hadd
-    simpa using h
+    exact h
   have hnormal :
       Tendsto (fun r : ℝ =>
         (Real.sqrt (1 + (r⁻¹) ^ 2))⁻¹)
@@ -81,8 +81,9 @@ theorem greenBoundary_minus_far_eq_neg_cube
     Real.sq_sqrt (by positivity)
   unfold resonanceMinus radialResonanceMinus bubble
   unfold bubbleRadialEnergyDerivative
+  have hmul := congrArg (fun t : ℝ => R * t) hs2
   field_simp [hsne]
-  nlinarith [hs2]
+  nlinarith [hs2, hmul]
 
 /-- The Green boundary has the manuscript limit -c_- = -1. -/
 theorem greenBoundary_minus_tendsto_neg_one :
