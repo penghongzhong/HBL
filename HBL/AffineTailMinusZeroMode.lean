@@ -84,8 +84,10 @@ theorem hMinus_resonanceMinus_zero (r : ℝ) :
   have hs4 :
       (1 + r ^ 2) ^ 2 =
         Real.sqrt (1 + r ^ 2) ^ 4 := by
-    rw [← hs2]
-    ring
+    calc
+      (1 + r ^ 2) ^ 2 =
+          (Real.sqrt (1 + r ^ 2) ^ 2) ^ 2 := by rw [hs2]
+      _ = Real.sqrt (1 + r ^ 2) ^ 4 := by ring
   rw [hs4]
   field_simp [hsne]
   ring
