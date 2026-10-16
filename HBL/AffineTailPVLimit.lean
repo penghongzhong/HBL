@@ -44,6 +44,9 @@ theorem pvRationalPrimitive_tendsto_zero_atTop
           (r * rho⁻¹ + 1) / (r * rho⁻¹ - 1))
         atTop (𝓝 (-1 : ℝ)) := by
     have h := hnum.div hden (by norm_num : (-1 : ℝ) ≠ 0)
+    change Tendsto
+      (fun rho : ℝ => (r * rho⁻¹ + 1) / (r * rho⁻¹ - 1))
+      atTop (𝓝 ((1 : ℝ) / (-1))) at h
     simpa using h
   have hratio :
       Tendsto (fun rho : ℝ => (r + rho) / (r - rho))
@@ -57,21 +60,25 @@ theorem pvRationalPrimitive_tendsto_zero_atTop
     have hm : r - rho ≠ 0 := by
       have : r < rho := lt_of_le_of_lt (le_max_left r 0) (by linarith)
       linarith
+    have hrr : r < rho :=
+      lt_of_le_of_lt (le_max_left r 0) (by linarith)
     have hs : r * rho⁻¹ - 1 ≠ 0 := by
+      rw [sub_ne_zero]
       intro hz
-      have hz' : r = rho := by
-        apply (eq_div_iff hρ0).mp
-        change r / rho = 1
-        simpa [div_eq_mul_inv] using add_eq_zero_iff_eq_neg.mp (by linarith [hz])
-      exact hm (by linarith [hz'])
-    field_simp [hρ0, hm, hs]
-    ring
+      have hz' := congrArg (fun z : ℝ => z * rho) hz
+      have hrho : r = rho := by
+        simpa [hρ0, mul_assoc] using hz'
+      exact (ne_of_lt hrr) hrho
+    field_simp [hρ0, hm, hs] <;> ring
   have hlog :
       Tendsto
         (fun rho : ℝ => Real.log ((r + rho) / (r - rho)))
         atTop (𝓝 (0 : ℝ)) := by
     have h :=
       (Real.continuousAt_log (by norm_num : (-1 : ℝ) ≠ 0)).tendsto.comp hratio
+    change Tendsto
+      (fun rho : ℝ => Real.log ((r + rho) / (r - rho)))
+      atTop (𝓝 (Real.log (-1 : ℝ))) at h
     have hneg : Real.log (-1 : ℝ) = 0 := by
       rw [Real.log_neg_eq_log]
       simp
