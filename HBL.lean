@@ -87,3 +87,5 @@ import HBL.AffineTailPVWeightDecomposition
 import HBL.AffineTailPVWeightedPrimitive
 import HBL.AffineTailLogLocalIntegrability
 import HBL.AffineTailPVFiniteAssembly
+import HBL.AffineTailPrimitiveGapFactor
+import HBL.AffineTailLogFarBound
