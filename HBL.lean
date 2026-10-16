@@ -84,3 +84,4 @@ import HBL.AffineTailPVFiniteIntegral
 import HBL.AffineTailPVLimit
 import HBL.AffineTailLogIBPFinite
 import HBL.AffineTailPVWeightDecomposition
+import HBL.AffineTailPVWeightedPrimitive

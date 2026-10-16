@@ -1,4 +1,4 @@
-import HBL.AffineTailPVWeightDecomposition
+import HBL.AffineTailPVWeightedPrimitive
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -412,3 +412,8 @@ import HBL.AffineTailPVWeightDecomposition
 
 #print axioms HBL.Modulation.AffineTail.pv_weight_decomposition
 #print axioms HBL.Modulation.AffineTail.pv_weight_interval_decomposition
+
+#print axioms HBL.Modulation.AffineTail.affinePVWeightedPrimitive_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.affinePVWeightedPrimitive_zero
+#print axioms HBL.Modulation.AffineTail.affinePVWeightedPrimitive_tendsto_atTop
+#print axioms HBL.Modulation.AffineTail.affinePVWeightedPrimitive_gap_tendsto_zero
