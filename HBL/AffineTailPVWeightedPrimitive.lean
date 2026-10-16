@@ -44,13 +44,23 @@ theorem affinePVWeightedPrimitive_hasDerivAt
   have hscaled := hsum.const_mul (r / 2)
   convert hscaled using 1
   · funext x
-    simp only [affinePVWeightedPrimitive, A, B]
+    change
+      (r / 2) *
+        ((r ^ 2 / (1 + r ^ 2) ^ 2) * Real.arctan x -
+          (1 / (1 + r ^ 2)) * secondRationalPrimitive x +
+          (r ^ 2 / (1 + r ^ 2) ^ 2) *
+            pvRationalPrimitive r x) =
+      (r / 2) *
+        (A * Real.arctan x -
+          B * secondRationalPrimitive x +
+          A * pvRationalPrimitive r x)
+    rfl
   · have hsep : r ^ 2 - rho ^ 2 ≠ 0 := by
       intro hz
       have hz' : (r + rho) * (r - rho) = 0 := by nlinarith [hz]
       exact (mul_ne_zero hp hm) hz'
     simpa only [A, B] using
-      (pv_weight_decomposition r rho hsep).symm
+      (pv_weight_decomposition r rho hsep)
 
 @[simp]
 theorem affinePVWeightedPrimitive_zero (r : ℝ) :
@@ -74,13 +84,29 @@ theorem affinePVWeightedPrimitive_tendsto_atTop
   have hC := (pvRationalPrimitive_tendsto_zero_atTop r hr).const_mul A
   have hsum := (hA.sub hB).add hC
   have hscaled := hsum.const_mul (r / 2)
-  convert hscaled using 1
-  · funext x
-    simp only [affinePVWeightedPrimitive, A, B]
-  · have hden : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
+  have hden : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
+  have hval :
+      (r / 2) *
+        (A * (Real.pi / 2) - B * (Real.pi / 4) + A * 0) =
+      Real.pi * r * (r ^ 2 - 1) /
+        (8 * (1 + r ^ 2) ^ 2) := by
     dsimp [A, B]
     field_simp [hden]
     ring
+  rw [hval] at hscaled
+  convert hscaled using 1
+  funext x
+  change
+    (r / 2) *
+      ((r ^ 2 / (1 + r ^ 2) ^ 2) * Real.arctan x -
+        (1 / (1 + r ^ 2)) * secondRationalPrimitive x +
+        (r ^ 2 / (1 + r ^ 2) ^ 2) *
+          pvRationalPrimitive r x) =
+    (r / 2) *
+      (A * Real.arctan x -
+        B * secondRationalPrimitive x +
+        A * pvRationalPrimitive r x)
+  rfl
 
 /-- The symmetric jump of the complete primitive at rho=r vanishes.
 The singular part cancels in principal value and the two regular parts
@@ -111,7 +137,7 @@ theorem affinePVWeightedPrimitive_gap_tendsto_zero
         (fun e : ℝ =>
           Real.arctan (r - e) - Real.arctan (r + e))
         (𝓝 0) (𝓝 0) := by
-    simpa only [sub_self] using hArcL.sub hArcR
+    simpa only [Function.comp_apply, sub_self] using hArcL.sub hArcR
   have hSecL :=
     (secondRationalPrimitive_hasDerivAt r).continuousAt.tendsto.comp hargL
   have hSecR :=
@@ -122,17 +148,27 @@ theorem affinePVWeightedPrimitive_gap_tendsto_zero
           secondRationalPrimitive (r - e) -
             secondRationalPrimitive (r + e))
         (𝓝 0) (𝓝 0) := by
-    simpa only [sub_self] using hSecL.sub hSecR
+    simpa only [Function.comp_apply, sub_self] using hSecL.sub hSecR
   have hPV :=
     symmetricPV_primitive_gap_tendsto_zero r hr
   have hcomb :=
     ((hArc.const_mul A).sub (hSec.const_mul B)).add
       (hPV.const_mul A)
   have hscaled := hcomb.const_mul (r / 2)
-  convert hscaled using 1
-  · funext e
-    simp only [affinePVWeightedPrimitive, A, B]
-    ring
-  · ring
+  have hscaled0 :
+      Tendsto
+        (fun e : ℝ =>
+          (r / 2) *
+            (A * (Real.arctan (r - e) - Real.arctan (r + e)) -
+              B * (secondRationalPrimitive (r - e) -
+                secondRationalPrimitive (r + e)) +
+              A * (pvRationalPrimitive r (r - e) -
+                pvRationalPrimitive r (r + e))))
+        (𝓝 (0 : ℝ)) (𝓝 (0 : ℝ)) := by
+    simpa using hscaled
+  convert hscaled0 using 1
+  funext e
+  dsimp [affinePVWeightedPrimitive, A, B]
+  ring
 
 end HBL.Modulation.AffineTail
