@@ -1,4 +1,4 @@
-import HBL.AffineTailHPlusScalarBridge
+import HBL.AffineTailRationalIntegrability
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -378,3 +378,8 @@ import HBL.AffineTailHPlusScalarBridge
 
 #print axioms HBL.Modulation.AffineTail.hPlus_scalar_match
 #print axioms HBL.Modulation.AffineTail.hPlus_zero_of_affineLogIntegral_expected
+
+#print axioms HBL.Modulation.AffineTail.first_rational_integral
+#print axioms HBL.Modulation.AffineTail.inv_sq_rational_norm_le
+#print axioms HBL.Modulation.AffineTail.second_rational_integrable
+#print axioms HBL.Modulation.AffineTail.second_rational_integrableOn
