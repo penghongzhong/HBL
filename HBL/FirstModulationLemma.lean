@@ -142,7 +142,7 @@ theorem firstManuscriptModulationLemma_certified
             normalizedZetaPlus_contDiff_one normalizedZetaMinus_contDiff_one
             a₀ gamma₀ v.1 v.2 = 0 ↔
             LambdaGamma v.1 = v.2)) ∧
-      (∀ u n : ℤ,
+      (∀ (u : ComplexRadialDotH1) (n : ℤ),
         phaseClass
           ((LambdaGamma u).2 + (n : ℝ) * (2 * Real.pi)) =
         phaseClass (LambdaGamma u).2) := by
@@ -190,7 +190,7 @@ theorem firstManuscriptModulationEnvironment_closed
             normalizedZetaPlus_contDiff_one normalizedZetaMinus_contDiff_one
             a₀ gamma₀ v.1 v.2 = 0 ↔
             LambdaGamma v.1 = v.2)) ∧
-      (∀ u n : ℤ,
+      (∀ (u : ComplexRadialDotH1) (n : ℤ),
         phaseClass
           ((LambdaGamma u).2 + (n : ℝ) * (2 * Real.pi)) =
         phaseClass (LambdaGamma u).2)) ∧
