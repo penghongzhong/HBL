@@ -1,4 +1,4 @@
-import HBL.AffineTailPVFiniteIntegral
+import HBL.AffineTailPVLimit
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -400,3 +400,7 @@ import HBL.AffineTailPVFiniteIntegral
 #print axioms HBL.Modulation.AffineTail.pvKernel_integral_left
 #print axioms HBL.Modulation.AffineTail.pvKernel_integral_right
 #print axioms HBL.Modulation.AffineTail.pvKernel_integral_split
+
+#print axioms HBL.Modulation.AffineTail.pvRationalPrimitive_tendsto_zero_atTop
+#print axioms HBL.Modulation.AffineTail.pvKernel_integral_split_tendsto_gap
+#print axioms HBL.Modulation.AffineTail.pvKernel_gap_tendsto_zero
