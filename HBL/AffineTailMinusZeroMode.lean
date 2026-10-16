@@ -47,9 +47,8 @@ theorem bubbleRadialEnergyDerivative_hasDerivAt_closed (r : ℝ) :
     (fun x : ℝ => (Real.sqrt (1 + x ^ 2) ^ 3)⁻¹)
     (resonanceMinusSecondDerivative r) r
   convert hi using 1
-  · funext x
-    rfl
   · unfold resonanceMinusSecondDerivative
+    simp only [Pi.pow_apply]
     field_simp [hsne]
     ring
 
@@ -82,7 +81,12 @@ theorem hMinus_resonanceMinus_zero (r : ℝ) :
     -(-3 * r * (Real.sqrt (1 + r ^ 2) ^ 5)⁻¹) -
       (3 / (1 + r ^ 2) ^ 2) *
         (r * (Real.sqrt (1 + r ^ 2))⁻¹) = 0
-  rw [← hs2]
+  have hs4 :
+      (1 + r ^ 2) ^ 2 =
+        Real.sqrt (1 + r ^ 2) ^ 4 := by
+    rw [← hs2]
+    ring
+  rw [hs4]
   field_simp [hsne]
   ring
 
