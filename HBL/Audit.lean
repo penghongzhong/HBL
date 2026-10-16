@@ -1,4 +1,4 @@
-import HBL.FirstModulationLemma
+import HBL.AffineTailCharge
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -290,3 +290,8 @@ import HBL.FirstModulationLemma
 #print axioms HBL.Modulation.firstManuscriptModulation_standardJacobian
 #print axioms HBL.Modulation.firstManuscriptModulationLemma_certified
 #print axioms HBL.Modulation.firstManuscriptModulationEnvironment_closed
+
+#print axioms HBL.AffineTail.charge_annihilates
+#print axioms HBL.AffineTail.charge_unique
+#print axioms HBL.AffineTail.existsUnique_charge
+#print axioms HBL.AffineTail.zero_iff_eq_charge

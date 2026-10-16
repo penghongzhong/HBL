@@ -57,3 +57,4 @@ import HBL.ModulationLemmaCertified
 import HBL.PhaseQuotient
 import HBL.ThresholdTestExistence
 import HBL.FirstModulationLemma
+import HBL.AffineTailCharge
