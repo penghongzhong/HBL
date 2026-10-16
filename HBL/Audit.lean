@@ -1,4 +1,4 @@
-import HBL.AffineTailCharge
+import HBL.AffineTailCutoff
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -295,3 +295,10 @@ import HBL.AffineTailCharge
 #print axioms HBL.Modulation.AffineTail.charge_unique
 #print axioms HBL.Modulation.AffineTail.existsUnique_charge
 #print axioms HBL.Modulation.AffineTail.zero_iff_eq_charge
+
+#print axioms HBL.Modulation.AffineTail.cutoff_contDiff_infty
+#print axioms HBL.Modulation.AffineTail.cutoff_zero_of_le_one
+#print axioms HBL.Modulation.AffineTail.cutoff_one_of_two_le
+#print axioms HBL.Modulation.AffineTail.model_contDiff_infty
+#print axioms HBL.Modulation.AffineTail.model_zero_of_le_one
+#print axioms HBL.Modulation.AffineTail.model_eq_id_of_two_le

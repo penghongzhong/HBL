@@ -58,3 +58,4 @@ import HBL.PhaseQuotient
 import HBL.ThresholdTestExistence
 import HBL.FirstModulationLemma
 import HBL.AffineTailCharge
+import HBL.AffineTailCutoff
