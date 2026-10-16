@@ -41,7 +41,7 @@ theorem greenBoundary_hasDerivAt
     (psi r * (-ddq r) - (-ddpsi r) * q r) r
   convert hsum using 1
   · funext x
-    rfl
+    simp
   · ring
 
 /-- One-dimensional Green identity for the second-derivative part. -/
