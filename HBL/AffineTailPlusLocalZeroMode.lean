@@ -7,7 +7,7 @@ For a local potential V with psi_minus''=-V psi_minus, differentiation of
 psi_plus = r psi_minus' - psi_minus/2 gives the identity
   (-d^2-3V)psi_plus = 3V psi_minus + r V' psi_minus - 2r V psi_minus'.
 The real-channel zero-mode problem is therefore reduced to precisely one
-nonlocal integral formula.  That remaining formula is *not* an axiom here.
+nonlocal integral formula.  That remaining formula is an explicit analytic obligation.
 -/
 
 noncomputable section
