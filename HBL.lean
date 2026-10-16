@@ -69,3 +69,5 @@ import HBL.AffineTailMinusFiniteGreen
 import HBL.AffineTailPlusAsymptotics
 import HBL.AffineTailHartreePairing
 import HBL.AffineTailPlusBoundaryLimit
+import HBL.AffineTailPotentialDerivative
+import HBL.AffineTailPlusLocalZeroMode

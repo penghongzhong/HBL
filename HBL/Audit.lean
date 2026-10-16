@@ -1,4 +1,4 @@
-import HBL.AffineTailPlusBoundaryLimit
+import HBL.AffineTailPlusLocalZeroMode
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -347,3 +347,11 @@ import HBL.AffineTailPlusBoundaryLimit
 #print axioms HBL.Modulation.AffineTail.radius_sq_potential_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.radius_resonancePlus_deriv_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.greenBoundary_plus_tendsto_half
+
+#print axioms HBL.Modulation.AffineTail.potential_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.potential_deriv_eq
+#print axioms HBL.Modulation.AffineTail.resonanceMinus_second_eq_potential
+#print axioms HBL.Modulation.AffineTail.resonancePlus_deriv_from_minus
+#print axioms HBL.Modulation.AffineTail.resonancePlus_second_from_minus
+#print axioms HBL.Modulation.AffineTail.hPlus_local_on_scale
+#print axioms HBL.Modulation.AffineTail.hPlus_zero_of_nonlocal_formula
