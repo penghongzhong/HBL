@@ -101,4 +101,42 @@ theorem green_localSchrodinger
   exact green_secondDerivative a b psi dpsi ddpsi q dq ddq
     hpsi hdpsi hq hdq hint
 
+
+/-- Exact finite-interval Green identity for a nonlocal Schrödinger operator
+(Hq=-q''-Vq-Tq).  On finite intervals the nonlocal commutator survives;
+its cancellation requires a separate full-half-line Fubini argument. -/
+theorem green_nonlocalSchrodinger
+    (a b : ℝ)
+    (V psi dpsi ddpsi q dq ddq Tpsi Tq : ℝ → ℝ)
+    (hpsi : ∀ r, HasDerivAt psi (dpsi r) r)
+    (hdpsi : ∀ r, HasDerivAt dpsi (ddpsi r) r)
+    (hq : ∀ r, HasDerivAt q (dq r) r)
+    (hdq : ∀ r, HasDerivAt dq (ddq r) r)
+    (hpsiZero : ∀ r, -ddpsi r - V r * psi r - Tpsi r = 0)
+    (hlocal : IntervalIntegrable
+      (fun r => psi r * ((-ddq r) - V r * q r) -
+        (((-ddpsi r) - V r * psi r) * q r))
+      volume a b)
+    (hcomm : IntervalIntegrable
+      (fun r => q r * Tpsi r - psi r * Tq r)
+      volume a b) :
+    (∫ r in a..b, psi r * ((-ddq r) - V r * q r - Tq r)) =
+      greenBoundary psi dpsi q dq b -
+        greenBoundary psi dpsi q dq a +
+      (∫ r in a..b, q r * Tpsi r - psi r * Tq r) := by
+  have hdecomp :
+      (fun r => psi r * ((-ddq r) - V r * q r - Tq r)) =
+      (fun r =>
+        (psi r * ((-ddq r) - V r * q r) -
+          (((-ddpsi r) - V r * psi r) * q r)) +
+        (q r * Tpsi r - psi r * Tq r)) := by
+    funext r
+    have hz : -ddpsi r - V r * psi r = Tpsi r := by
+      linarith [hpsiZero r]
+    rw [hz]
+    ring
+  rw [hdecomp, intervalIntegral.integral_add hlocal hcomm]
+  rw [green_localSchrodinger a b V psi dpsi ddpsi q dq ddq
+    hpsi hdpsi hq hdq hlocal]
+
 end HBL.Modulation.AffineTail

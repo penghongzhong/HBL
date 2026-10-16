@@ -21,7 +21,7 @@ theorem model_hasDerivAt_one_of_two_lt
     (r : ℝ) (hr : 2 < r) :
     HasDerivAt model 1 r := by
   apply (hasDerivAt_id r).congr_of_eventuallyEq
-  filter_upwards [gt_mem_nhds hr] with x hx
+  filter_upwards [lt_mem_nhds hr] with x hx
   simpa only [id_eq] using model_eq_id_of_two_le x hx.le
 
 theorem model_deriv_eq_one_of_two_lt

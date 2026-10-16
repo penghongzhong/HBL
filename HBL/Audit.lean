@@ -307,6 +307,7 @@ import HBL.AffineTailMinusAsymptotics
 #print axioms HBL.Modulation.AffineTail.green_secondDerivative
 #print axioms HBL.Modulation.AffineTail.localSchrodinger_commutator
 #print axioms HBL.Modulation.AffineTail.green_localSchrodinger
+#print axioms HBL.Modulation.AffineTail.green_nonlocalSchrodinger
 
 #print axioms HBL.Modulation.AffineTail.symmetricKernel_pairing
 #print axioms HBL.Modulation.AffineTail.symmetricKernel_commutator_zero
