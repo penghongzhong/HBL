@@ -66,3 +66,5 @@ import HBL.AffineTailMinusZeroMode
 import HBL.AffineTailBoundaryData
 import HBL.AffineTailMinusAsymptotics
 import HBL.AffineTailMinusFiniteGreen
+import HBL.AffineTailPlusAsymptotics
+import HBL.AffineTailHartreePairing

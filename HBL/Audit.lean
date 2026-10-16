@@ -1,4 +1,4 @@
-import HBL.AffineTailMinusFiniteGreen
+import HBL.AffineTailHartreePairing
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -333,3 +333,12 @@ import HBL.AffineTailMinusFiniteGreen
 #print axioms HBL.Modulation.AffineTail.greenBoundary_minus_tendsto_neg_one
 #print axioms HBL.Modulation.AffineTail.hMinus_charge_finite
 #print axioms HBL.Modulation.AffineTail.hMinus_charge_interval_tendsto_neg_one
+
+#print axioms HBL.Modulation.AffineTail.resonancePlus_eq_radius_deriv_sub_half
+#print axioms HBL.Modulation.AffineTail.radius_resonanceMinus_deriv_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.resonancePlus_tendsto_neg_half
+#print axioms HBL.Modulation.AffineTail.resonancePlus_zero
+#print axioms HBL.Modulation.AffineTail.greenBoundary_plus_at_zero
+#print axioms HBL.Modulation.AffineTail.greenBoundary_plus_far
+#print axioms HBL.Modulation.AffineTail.hartree_nonlocal_pairing_of_integrable
+#print axioms HBL.Modulation.AffineTail.hartree_scale_affine_pairing_of_integrable
