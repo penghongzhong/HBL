@@ -39,10 +39,13 @@ theorem second_rational_integrable :
   have hc : Continuous (fun x : ℝ => 1 + x ^ 2) := by fun_prop
   have hne (x : ℝ) : (1 + x ^ 2 : ℝ) ≠ 0 := by positivity
   have hd : Continuous (fun x : ℝ => ((1 + x ^ 2) ^ 2)⁻¹) :=
-    (hc.pow 2).inv (fun x => pow_ne_zero 2 (hne x))
+    (hc.pow 2).inv
   exact Integrable.mono' integrable_inv_one_add_sq
     hd.aestronglyMeasurable
-    (ae_of_all _ inv_sq_rational_norm_le)
+    (ae_of_all _ (fun x => by
+      have hp : (0 : ℝ) < 1 + x ^ 2 := by positivity
+      simpa only [Real.norm_eq_abs, abs_of_pos (inv_pos.mpr hp)]
+        using inv_sq_rational_norm_le x))
 
 /-- This gives the required integrability on the positive half-line. -/
 theorem second_rational_integrableOn :
