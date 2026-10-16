@@ -31,11 +31,13 @@ theorem hPlus_scalar_match (r : ℝ) :
   have hs2 : Real.sqrt (1 + r ^ 2) ^ 2 = 1 + r ^ 2 :=
     Real.sq_sqrt (by positivity)
   have hs4 : (1 + r ^ 2) ^ 2 = Real.sqrt (1 + r ^ 2) ^ 4 := by
-    rw [← hs2]
-    ring
+    calc
+      (1 + r ^ 2) ^ 2 = (Real.sqrt (1 + r ^ 2) ^ 2) ^ 2 := by rw [hs2]
+      _ = Real.sqrt (1 + r ^ 2) ^ 4 := by ring
   have hs6 : (1 + r ^ 2) ^ 3 = Real.sqrt (1 + r ^ 2) ^ 6 := by
-    rw [← hs2]
-    ring
+    calc
+      (1 + r ^ 2) ^ 3 = (Real.sqrt (1 + r ^ 2) ^ 2) ^ 3 := by rw [hs2]
+      _ = Real.sqrt (1 + r ^ 2) ^ 6 := by ring
   unfold affineLogIntegralExpected hartreeKappa potential potentialDerivative
     bubble bubbleRadialEnergyDerivative
   rw [hs4, hs6]
