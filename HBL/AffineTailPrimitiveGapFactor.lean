@@ -54,6 +54,8 @@ theorem radialLogPrimitive_log_gap_tendsto_zero (r : ℝ) :
     simpa only [zero_mul] using h
   apply hlim.congr'
   exact Filter.Eventually.of_forall (fun e : ℝ => by
+    change e * Real.log e * symmetricPrimitiveSlope r e =
+      (radialLogPrimitive (r - e) - radialLogPrimitive (r + e)) * Real.log e
     rw [radialLogPrimitive_symmetric_gap_factor]
     ring)
 
