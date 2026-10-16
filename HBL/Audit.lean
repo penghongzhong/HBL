@@ -331,3 +331,5 @@ import HBL.AffineTailMinusAsymptotics
 #print axioms HBL.Modulation.AffineTail.resonanceMinus_tendsto_one
 #print axioms HBL.Modulation.AffineTail.greenBoundary_minus_far_eq_neg_cube
 #print axioms HBL.Modulation.AffineTail.greenBoundary_minus_tendsto_neg_one
+#print axioms HBL.Modulation.AffineTail.hMinus_charge_finite
+#print axioms HBL.Modulation.AffineTail.hMinus_charge_interval_tendsto_neg_one
