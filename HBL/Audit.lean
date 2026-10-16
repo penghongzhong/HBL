@@ -1,4 +1,4 @@
-import HBL.AffineTailGreenLocal
+import HBL.AffineTailNonlocalSymmetry
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -307,3 +307,6 @@ import HBL.AffineTailGreenLocal
 #print axioms HBL.Modulation.AffineTail.green_secondDerivative
 #print axioms HBL.Modulation.AffineTail.localSchrodinger_commutator
 #print axioms HBL.Modulation.AffineTail.green_localSchrodinger
+
+#print axioms HBL.Modulation.AffineTail.symmetricKernel_pairing
+#print axioms HBL.Modulation.AffineTail.symmetricKernel_commutator_zero
