@@ -58,10 +58,21 @@ theorem symmetricPV_log_gap_tendsto_zero (r : ℝ) (hr : 0 < r) :
   have hn : (2 * r : ℝ) ≠ 0 := by positivity
   have hl : ContinuousAt (fun e : ℝ => 2 * r - e) 0 := by fun_prop
   have hu : ContinuousAt (fun e : ℝ => 2 * r + e) 0 := by fun_prop
-  have hll := (Real.continuousAt_log hn).comp hl
-  have hru := (Real.continuousAt_log hn).comp hu
-  have h := hll.tendsto.sub hru.tendsto
-  simpa using h
+  have hlt : Tendsto (fun e : ℝ => 2 * r - e)
+      (𝓝 (0 : ℝ)) (𝓝 (2 * r)) := by
+    simpa using hl.tendsto
+  have hut : Tendsto (fun e : ℝ => 2 * r + e)
+      (𝓝 (0 : ℝ)) (𝓝 (2 * r)) := by
+    simpa using hu.tendsto
+  have hll : Tendsto (fun e : ℝ => Real.log (2 * r - e))
+      (𝓝 (0 : ℝ)) (𝓝 (Real.log (2 * r))) := by
+    simpa only [Function.comp_def] using
+      (Real.continuousAt_log hn).tendsto.comp hlt
+  have hru : Tendsto (fun e : ℝ => Real.log (2 * r + e))
+      (𝓝 (0 : ℝ)) (𝓝 (Real.log (2 * r))) := by
+    simpa only [Function.comp_def] using
+      (Real.continuousAt_log hn).tendsto.comp hut
+  simpa only [sub_self] using hll.sub hru
 
 /-- The symmetric principal-value cutoff has no surviving pole boundary. -/
 theorem symmetricPV_primitive_gap_tendsto_zero (r : ℝ) (hr : 0 < r) :
