@@ -82,3 +82,4 @@ import HBL.AffineTailPVPrimitive
 import HBL.AffineTailPVRegularConstant
 import HBL.AffineTailPVFiniteIntegral
 import HBL.AffineTailPVLimit
+import HBL.AffineTailLogIBPFinite
