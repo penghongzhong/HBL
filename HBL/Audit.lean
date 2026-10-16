@@ -1,4 +1,4 @@
-import HBL.ThresholdTestExistence
+import HBL.FirstModulationLemma
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -280,3 +280,13 @@ import HBL.ThresholdTestExistence
 #print axioms HBL.Modulation.normalizedZetaPlus_normalized
 #print axioms HBL.Modulation.normalizedZetaMinus_normalized
 #print axioms HBL.Modulation.normalizedThresholdTests_exist
+
+#print axioms HBL.Modulation.firstModulation_one_le_radius
+#print axioms HBL.Modulation.firstModulation_radius_nonneg
+#print axioms HBL.Modulation.normalizedZetaPlus_at_firstModulationRadius
+#print axioms HBL.Modulation.normalizedZetaPlus_contDiff_one
+#print axioms HBL.Modulation.normalizedZetaMinus_contDiff_one
+#print axioms HBL.Modulation.firstManuscriptModulation_residual_on_smoothCore
+#print axioms HBL.Modulation.firstManuscriptModulation_standardJacobian
+#print axioms HBL.Modulation.firstManuscriptModulationLemma_certified
+#print axioms HBL.Modulation.firstManuscriptModulationEnvironment_closed
