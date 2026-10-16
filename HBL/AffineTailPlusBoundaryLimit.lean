@@ -36,8 +36,14 @@ theorem resonancePlus_deriv_eq (r : ℝ) :
       (fun x : ℝ => x * deriv resonanceMinus x - resonanceMinus x / 2) := by
     funext x
     exact resonancePlus_eq_radius_deriv_sub_half x
-  rw [heq]
-  convert h.deriv using 1
+  have hformula : deriv resonancePlus r =
+      1 * deriv resonanceMinus r +
+        id r * deriv (deriv resonanceMinus) r -
+        deriv resonanceMinus r / 2 := by
+    rw [heq]
+    exact h.deriv
+  rw [hformula]
+  simp only [id_eq, one_mul]
   ring
 
 /-- The explicit local Hartree potential satisfies R^2 V(R) -> 0. -/
@@ -54,13 +60,20 @@ theorem radius_sq_potential_tendsto_zero :
     simpa using hinv2.const_mul 3
   have hden : Tendsto (fun R : ℝ => (1 + (R⁻¹) ^ 2) ^ 2)
       atTop (𝓝 (1 : ℝ)) := by
-    have h := (tendsto_const_nhds.add hinv2).pow 2
-    simpa using h
+    have hone : Tendsto (fun _ : ℝ => (1 : ℝ))
+        atTop (𝓝 (1 : ℝ)) := tendsto_const_nhds
+    have hadd : Tendsto (fun R : ℝ => 1 + (R⁻¹) ^ 2)
+        atTop (𝓝 (1 : ℝ)) := by
+      simpa using hone.add hinv2
+    simpa using hadd.pow 2
   have hrat : Tendsto
       (fun R : ℝ => (3 * (R⁻¹) ^ 2) / ((1 + (R⁻¹) ^ 2) ^ 2))
       atTop (𝓝 (0 : ℝ)) := by
     have h := hnum.div hden (by norm_num : (1 : ℝ) ≠ 0)
-    simpa using h
+    change Tendsto
+      (fun R : ℝ => (3 * (R⁻¹) ^ 2) / ((1 + (R⁻¹) ^ 2) ^ 2))
+      atTop (𝓝 ((0 : ℝ) / 1)) at h
+    simpa only [zero_div] using h
   apply hrat.congr'
   filter_upwards [eventually_gt_atTop (1 : ℝ)] with R hR
   have hne : R ≠ 0 := ne_of_gt (lt_trans (by norm_num : (0 : ℝ) < 1) hR)
@@ -84,7 +97,12 @@ theorem radius_resonancePlus_deriv_tendsto_zero :
     have h := radius_sq_potential_tendsto_zero.mul
       resonanceMinus_tendsto_one
     simpa using h.neg
-  have hsum := hfirst.add hsecond
+  have hsum : Tendsto
+      (fun R : ℝ =>
+        (R * deriv resonanceMinus R) / 2 -
+          ((R ^ 2 * potential R) * resonanceMinus R))
+      atTop (𝓝 (0 : ℝ)) := by
+    simpa using hfirst.add hsecond
   apply hsum.congr'
   exact Filter.Eventually.of_forall (fun R : ℝ => by
     rw [resonancePlus_deriv_eq R]
