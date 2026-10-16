@@ -1,4 +1,4 @@
-import HBL.AffineTailSecondRationalIntegral
+import HBL.AffineTailPVRegularConstant
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -388,3 +388,10 @@ import HBL.AffineTailSecondRationalIntegral
 #print axioms HBL.Modulation.AffineTail.rational_over_one_add_sq_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.secondRationalPrimitive_tendsto_pi_div_four
 #print axioms HBL.Modulation.AffineTail.second_rational_integral
+
+#print axioms HBL.Modulation.AffineTail.pvRationalPrimitive_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.pvRationalPrimitive_at_zero
+#print axioms HBL.Modulation.AffineTail.symmetricPV_gap_eq
+#print axioms HBL.Modulation.AffineTail.symmetricPV_log_gap_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.symmetricPV_primitive_gap_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.pv_regular_part_integral_value
