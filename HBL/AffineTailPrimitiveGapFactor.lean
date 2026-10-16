@@ -41,7 +41,10 @@ theorem radialLogPrimitive_log_gap_tendsto_zero (r : ℝ) :
         (radialLogPrimitive (r - e) -
           radialLogPrimitive (r + e)) * Real.log e)
       (𝓝 (0 : ℝ)) (𝓝 (0 : ℝ)) := by
-  have hco := (symmetricPrimitiveSlope_continuous r).continuousAt.tendsto
+  have hco : Tendsto (symmetricPrimitiveSlope r)
+      (𝓝 (0 : ℝ)) (𝓝 (symmetricPrimitiveSlope r 0)) :=
+    ((symmetricPrimitiveSlope_continuous r).continuousAt
+      (x := (0 : ℝ))).tendsto
   have hlim :
       Tendsto
         (fun e : ℝ =>
