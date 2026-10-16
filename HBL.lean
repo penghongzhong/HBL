@@ -71,3 +71,4 @@ import HBL.AffineTailHartreePairing
 import HBL.AffineTailPlusBoundaryLimit
 import HBL.AffineTailPotentialDerivative
 import HBL.AffineTailPlusLocalZeroMode
+import HBL.AffineTailPVAlgebra

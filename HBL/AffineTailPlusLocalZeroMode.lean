@@ -51,9 +51,7 @@ theorem resonancePlus_second_from_minus (r : ℝ) :
               potential r * deriv resonanceMinus r)) := by
     convert h.deriv using 1
     · congr 1
-      funext x
-      simp only [Pi.sub_apply, Pi.mul_apply, id_eq]
-    · simp only [Pi.mul_apply, id_eq]
+    · simp only [Pi.mul_apply, id_eq, one_mul]
   rw [hderiv]
   ring
 

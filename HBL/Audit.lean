@@ -1,4 +1,4 @@
-import HBL.AffineTailPlusLocalZeroMode
+import HBL.AffineTailPVAlgebra
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -355,3 +355,7 @@ import HBL.AffineTailPlusLocalZeroMode
 #print axioms HBL.Modulation.AffineTail.resonancePlus_second_from_minus
 #print axioms HBL.Modulation.AffineTail.hPlus_local_on_scale
 #print axioms HBL.Modulation.AffineTail.hPlus_zero_of_nonlocal_formula
+
+#print axioms HBL.Modulation.AffineTail.bubble_cube_mul_scale_eq_rational
+#print axioms HBL.Modulation.AffineTail.hartree_scale_log_density
+#print axioms HBL.Modulation.AffineTail.affine_log_PV_rational_decomposition
