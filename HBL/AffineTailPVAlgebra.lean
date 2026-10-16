@@ -29,7 +29,6 @@ theorem bubble_cube_mul_scale_eq_rational (rho : ℝ) :
   unfold bubble
   rw [← hs6]
   field_simp [hsne]
-  ring
 
 /-- Reduction of the Hartree bilinear integrand to a single rational-log
 integrand. This is an exact pointwise identity for all real inputs. -/
