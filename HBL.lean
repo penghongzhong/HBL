@@ -77,3 +77,4 @@ import HBL.AffineTailLogIntegralReduction
 import HBL.TransversalityExact
 import HBL.AffineTailHPlusScalarBridge
 import HBL.AffineTailRationalIntegrability
+import HBL.AffineTailSecondRationalIntegral
