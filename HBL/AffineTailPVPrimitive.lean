@@ -30,7 +30,7 @@ theorem pvRationalPrimitive_hasDerivAt (r rho : ℝ)
   have hd := (splitRadialLog_hasDerivAt r rho hp hm).div_const (2 * r)
   unfold pvRationalPrimitive
   convert hd using 1 <;>
-    simp only [Pi.sub_apply, Pi.div_apply] <;>
+    (try simp only [Pi.sub_apply, Pi.div_apply]) <;>
     (first | rfl | (field_simp [hr, hsep] <;> ring))
 
 @[simp]
@@ -58,8 +58,8 @@ theorem symmetricPV_log_gap_tendsto_zero (r : ℝ) (hr : 0 < r) :
   have hn : (2 * r : ℝ) ≠ 0 := by positivity
   have hl : ContinuousAt (fun e : ℝ => 2 * r - e) 0 := by fun_prop
   have hu : ContinuousAt (fun e : ℝ => 2 * r + e) 0 := by fun_prop
-  have hll := (Real.continuousAt_log hn).comp (0 : ℝ) hl
-  have hru := (Real.continuousAt_log hn).comp (0 : ℝ) hu
+  have hll := (Real.continuousAt_log hn).comp hl
+  have hru := (Real.continuousAt_log hn).comp hu
   have h := hll.tendsto.sub hru.tendsto
   simpa using h
 
