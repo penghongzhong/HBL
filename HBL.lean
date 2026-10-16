@@ -80,3 +80,4 @@ import HBL.AffineTailRationalIntegrability
 import HBL.AffineTailSecondRationalIntegral
 import HBL.AffineTailPVPrimitive
 import HBL.AffineTailPVRegularConstant
+import HBL.AffineTailPVFiniteIntegral
