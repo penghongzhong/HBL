@@ -42,10 +42,20 @@ theorem resonancePlus_second_from_minus (r : ℝ) :
     rw [resonancePlus_deriv_from_minus]
     ring
   rw [hfun]
-  convert h.deriv using 1
-  · funext x
-    ring
-  · ring
+  have hderiv :
+      deriv (fun x : ℝ => deriv resonanceMinus x / 2 -
+        x * (potential x * resonanceMinus x)) r =
+        -potential r * resonanceMinus r / 2 -
+          (potential r * resonanceMinus r +
+            r * (potentialDerivative r * resonanceMinus r +
+              potential r * deriv resonanceMinus r)) := by
+    convert h.deriv using 1
+    · congr 1
+      funext x
+      simp only [Pi.sub_apply, Pi.mul_apply, id_eq]
+    · simp only [Pi.mul_apply, id_eq]
+  rw [hderiv]
+  ring
 
 /-- Fully checked local real-channel residual before applying the Hartree
 nonlocal operator. No unproved integral identity enters this result. -/
