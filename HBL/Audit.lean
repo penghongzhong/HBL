@@ -1,4 +1,4 @@
-import HBL.TransversalityExact
+import HBL.AffineTailHPlusScalarBridge
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -375,3 +375,6 @@ import HBL.TransversalityExact
 #print axioms HBL.Modulation.Transversality.mainJet_fderiv
 #print axioms HBL.Modulation.Transversality.mainJet_unique
 #print axioms HBL.Modulation.Transversality.manuscript_transversality_environment_closed
+
+#print axioms HBL.Modulation.AffineTail.hPlus_scalar_match
+#print axioms HBL.Modulation.AffineTail.hPlus_zero_of_affineLogIntegral_expected
