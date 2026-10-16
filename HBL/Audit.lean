@@ -291,7 +291,7 @@ import HBL.AffineTailCharge
 #print axioms HBL.Modulation.firstManuscriptModulationLemma_certified
 #print axioms HBL.Modulation.firstManuscriptModulationEnvironment_closed
 
-#print axioms HBL.AffineTail.charge_annihilates
-#print axioms HBL.AffineTail.charge_unique
-#print axioms HBL.AffineTail.existsUnique_charge
-#print axioms HBL.AffineTail.zero_iff_eq_charge
+#print axioms HBL.Modulation.AffineTail.charge_annihilates
+#print axioms HBL.Modulation.AffineTail.charge_unique
+#print axioms HBL.Modulation.AffineTail.existsUnique_charge
+#print axioms HBL.Modulation.AffineTail.zero_iff_eq_charge

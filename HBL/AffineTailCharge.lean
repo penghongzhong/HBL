@@ -15,7 +15,7 @@ the next modules.
 
 noncomputable section
 
-namespace HBL.AffineTail
+namespace HBL.Modulation.AffineTail
 
 variable {E : Type*}
   [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -76,4 +76,4 @@ theorem zero_iff_eq_charge
     rw [h]
     exact charge_annihilates ell c hc F₀ qAff hq
 
-end HBL.AffineTail
+end HBL.Modulation.AffineTail
