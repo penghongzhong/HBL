@@ -32,8 +32,7 @@ theorem symmetricKernel_pairing
     (∫ x, psi x * (∫ y, K x y * q y ∂mu) ∂mu) =
       ∫ y, q y * (∫ x, K y x * psi x ∂mu) ∂mu := by
   have hswap :=
-    MeasureTheory.integral_integral_swap
-      (mu := mu) (nu := mu) hint
+    MeasureTheory.integral_integral_swap hint
   calc
     (∫ x, psi x * (∫ y, K x y * q y ∂mu) ∂mu) =
         ∫ x, ∫ y, psi x * K x y * q y ∂mu ∂mu := by
