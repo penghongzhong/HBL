@@ -57,12 +57,14 @@ theorem resonanceMinus_tendsto_one :
       Tendsto (fun r : ℝ => Real.sqrt (1 + (r⁻¹) ^ 2))
         atTop (𝓝 (1 : ℝ)) := by
     have h := Real.continuous_sqrt.continuousAt.tendsto.comp hadd
-    exact h
+    change Tendsto (fun r : ℝ => Real.sqrt (1 + (r⁻¹) ^ 2))
+      atTop (𝓝 (Real.sqrt (1 : ℝ))) at h
+    simpa only [Real.sqrt_one] using h
   have hnormal :
       Tendsto (fun r : ℝ =>
         (Real.sqrt (1 + (r⁻¹) ^ 2))⁻¹)
         atTop (𝓝 (1 : ℝ)) := by
-    simpa using hsqrt.inv₀ one_ne_zero
+    simpa only [inv_one] using hsqrt.inv₀ one_ne_zero
   apply hnormal.congr'
   filter_upwards [eventually_gt_atTop (0 : ℝ)] with r hr
   exact (resonanceMinus_eq_inv_sqrt_one_add_inv_sq r hr).symm
