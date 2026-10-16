@@ -89,8 +89,9 @@ theorem affineLogDensity_integral_left_ibp
       (v := radialLogPrimitive)
       (v' := fun x : ℝ =>
         x * (1 - x ^ 2) / (2 * (1 + x ^ 2) ^ 3))
-      hU hV hUcont.intervalIntegrable
-      hVcont.intervalIntegrable
+      hU hV
+      (hUcont.intervalIntegrable (μ := volume))
+      (hVcont.intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := r - e))
   calc
     (∫ rho in (0 : ℝ)..(r - e), affineLogDensity r rho) =
         ∫ rho in (0 : ℝ)..(r - e),
@@ -165,8 +166,9 @@ theorem affineLogDensity_integral_right_ibp
       (v := radialLogPrimitive)
       (v' := fun x : ℝ =>
         x * (1 - x ^ 2) / (2 * (1 + x ^ 2) ^ 3))
-      hU hV hUcont.intervalIntegrable
-      hVcont.intervalIntegrable
+      hU hV
+      (hUcont.intervalIntegrable (μ := volume))
+      (hVcont.intervalIntegrable (μ := volume) (a := r + e) (b := R))
   calc
     (∫ rho in (r + e)..R, affineLogDensity r rho) =
         ∫ rho in (r + e)..R,
