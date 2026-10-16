@@ -99,12 +99,15 @@ theorem radius_resonancePlus_deriv_tendsto_zero :
     simpa using h.neg
   have hsum : Tendsto
       (fun R : ℝ =>
-        (R * deriv resonanceMinus R) / 2 -
-          ((R ^ 2 * potential R) * resonanceMinus R))
+        (R * deriv resonanceMinus R) / 2 +
+          -((R ^ 2 * potential R) * resonanceMinus R))
       atTop (𝓝 (0 : ℝ)) := by
-    simpa using hfirst.add hsecond
+    simpa only [zero_add] using hfirst.add hsecond
   apply hsum.congr'
   exact Filter.Eventually.of_forall (fun R : ℝ => by
+    change (R * deriv resonanceMinus R) / 2 +
+      -((R ^ 2 * potential R) * resonanceMinus R) =
+      R * deriv resonancePlus R
     rw [resonancePlus_deriv_eq R]
     have hzero := hMinus_resonanceMinus_zero R
     change -deriv (deriv resonanceMinus) R -
