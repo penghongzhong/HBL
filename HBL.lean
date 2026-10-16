@@ -74,3 +74,4 @@ import HBL.AffineTailPlusLocalZeroMode
 import HBL.AffineTailPVAlgebra
 import HBL.AffineTailLogPrimitive
 import HBL.AffineTailLogIntegralReduction
+import HBL.TransversalityExact

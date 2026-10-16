@@ -1,4 +1,4 @@
-import HBL.AffineTailLogIntegralReduction
+import HBL.TransversalityExact
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -367,3 +367,11 @@ import HBL.AffineTailLogIntegralReduction
 #print axioms HBL.Modulation.AffineTail.affineLogDensity_primitive_deriv
 #print axioms HBL.Modulation.AffineTail.radialLog_ratio_eq_sub
 #print axioms HBL.Modulation.AffineTail.nonlocalApply_resonancePlus_factor
+
+#print axioms HBL.Modulation.Transversality.mainJet_first
+#print axioms HBL.Modulation.Transversality.mainJet_second
+#print axioms HBL.Modulation.Transversality.mainJet_eq
+#print axioms HBL.Modulation.Transversality.mainJet_eq_id
+#print axioms HBL.Modulation.Transversality.mainJet_fderiv
+#print axioms HBL.Modulation.Transversality.mainJet_unique
+#print axioms HBL.Modulation.Transversality.manuscript_transversality_environment_closed
