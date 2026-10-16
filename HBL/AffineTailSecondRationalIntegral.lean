@@ -52,7 +52,10 @@ theorem rational_over_one_add_sq_tendsto_zero :
       Tendsto (fun x : ℝ => x⁻¹ / (1 + (x⁻¹) ^ 2))
         atTop (𝓝 (0 : ℝ)) := by
     have h := hinv.div hden (by norm_num : (1 : ℝ) ≠ 0)
-    simpa using h
+    change Tendsto
+      (fun x : ℝ => x⁻¹ / (1 + (x⁻¹) ^ 2))
+      atTop (𝓝 ((0 : ℝ) / 1)) at h
+    simpa only [zero_div] using h
   apply hratio.congr'
   filter_upwards [eventually_gt_atTop (1 : ℝ)] with x hx
   have hne : x ≠ 0 := ne_of_gt (lt_trans (by norm_num : (0 : ℝ) < 1) hx)
