@@ -39,7 +39,10 @@ theorem greenBoundary_hasDerivAt
   change HasDerivAt
     (fun x => -psi x * dq x + dpsi x * q x)
     (psi r * (-ddq r) - (-ddpsi r) * q r) r
-  convert hsum using 1 <;> ring
+  convert hsum using 1
+  · funext x
+    rfl
+  · ring
 
 /-- One-dimensional Green identity for the second-derivative part. -/
 theorem green_secondDerivative
