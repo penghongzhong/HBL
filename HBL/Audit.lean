@@ -1,4 +1,5 @@
 import HBL.AffineTailLemmaClosed
+import HBL.HartreeKernelShortRange
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -542,3 +543,58 @@ import HBL.AffineTailLemmaClosed
 #print axioms HBL.Modulation.AffineTail.channel_corrected_pairing_eq
 #print axioms HBL.Modulation.AffineTail.affineTailOrthogonal_iff_charge_formula
 #print axioms HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed
+
+#print axioms HBL.L2Kernel.tensor_ae
+#print axioms HBL.L2Kernel.tensor_norm_sq
+#print axioms HBL.L2Kernel.tensor_norm
+#print axioms HBL.L2Kernel.tensor_add_left
+#print axioms HBL.L2Kernel.tensor_smul_left
+#print axioms HBL.L2Kernel.tensor_add_right
+#print axioms HBL.L2Kernel.tensor_smul_right
+#print axioms HBL.L2Kernel.kernelFunctional_apply
+#print axioms HBL.L2Kernel.kernelFunctional_norm_le
+#print axioms HBL.L2Kernel.kernelFunctional_add
+#print axioms HBL.L2Kernel.kernelFunctional_smul
+#print axioms HBL.L2Kernel.inner_operator
+#print axioms HBL.L2Kernel.operator_norm_le
+#print axioms HBL.L2Kernel.operator_isHilbertSchmidtKernelOperator
+
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_nonneg
+#print axioms HBL.Modulation.AffineTail.kernelSquareSqrtWeight_nonneg
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_closed
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_le
+#print axioms HBL.Modulation.AffineTail.kernelSquareSqrtWeight_le
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_continuous
+#print axioms HBL.Modulation.AffineTail.kernelSquareSqrtWeight_continuous
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_integrable
+#print axioms HBL.Modulation.AffineTail.kernelSquareSqrtWeight_integrable
+#print axioms HBL.Modulation.AffineTail.kernelSquareWeight_norm_le_one
+#print axioms HBL.Modulation.AffineTail.kernelSquareSqrtWeight_norm_le_one
+#print axioms HBL.Modulation.AffineTail.hartreeRadialLog_sq_sqrt_bound
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqNearMajorant_nonneg
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqFarMajorant_nonneg
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqNearMajorant_integrable
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqFarMajorant_integrable
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqMajorant_nonneg
+#print axioms HBL.Modulation.AffineTail.hartreeKernelSqMajorant_integrable
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_norm_sq_eq
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_norm_sq_le_majorant
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_sq_integrable
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_memLp_two
+#print axioms HBL.Modulation.AffineTail.hartreeKernelL2_ae
+#print axioms HBL.Modulation.AffineTail.hartreeKernelOperator_hilbertSchmidt
+#print axioms HBL.Modulation.AffineTail.hartreeKernelOperator_weak_apply
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_inner_tensor_swap
+#print axioms HBL.Modulation.AffineTail.hartreeKernelOperator_selfAdjoint
+#print axioms HBL.Modulation.AffineTail.kernelBracket_pos
+#print axioms HBL.Modulation.AffineTail.bubble_pow_three_le_inv_pow_three
+#print axioms HBL.Modulation.AffineTail.bubble_pow_three_eq_bracket
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_abs_eq
+#print axioms HBL.Modulation.AffineTail.hartreeRadialLog_separated_ordered
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_separated_ordered
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_separated
+#print axioms HBL.Modulation.AffineTail.hartreeRadialLog_diagonal_ordered
+#print axioms HBL.Modulation.AffineTail.bubble_pow_three_near_ordered
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_diagonal_ordered
+#print axioms HBL.Modulation.AffineTail.hartreeKernel_diagonal
+#print axioms HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed

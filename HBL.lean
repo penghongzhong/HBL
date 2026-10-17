@@ -91,3 +91,5 @@ import HBL.AffineTailPrimitiveGapFactor
 import HBL.AffineTailLogFarBound
 import HBL.AffineTailLogGlobalIntegrability
 import HBL.AffineTailLemmaClosed
+import HBL.L2KernelOperator
+import HBL.HartreeKernelShortRange
