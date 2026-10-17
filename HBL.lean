@@ -89,3 +89,4 @@ import HBL.AffineTailLogLocalIntegrability
 import HBL.AffineTailPVFiniteAssembly
 import HBL.AffineTailPrimitiveGapFactor
 import HBL.AffineTailLogFarBound
+import HBL.AffineTailLogGlobalIntegrability

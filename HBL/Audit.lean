@@ -1,4 +1,4 @@
-import HBL.AffineTailLogFarBound
+import HBL.AffineTailLogGlobalIntegrability
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -430,3 +430,12 @@ import HBL.AffineTailLogFarBound
 #print axioms HBL.Modulation.AffineTail.radialLogPrimitive_log_gap_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.radialLog_far_nonneg_le
 #print axioms HBL.Modulation.AffineTail.radialLog_far_inv_bound
+
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_measurable
+#print axioms HBL.Modulation.AffineTail.affineRationalFactor_abs_le
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_norm_far_le
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_intervalIntegrable
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_integrableOn_pos
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_integral_tendsto
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_gap_integral_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.affineLogDensity_cutoff_tendsto
