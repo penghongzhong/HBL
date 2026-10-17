@@ -1,6 +1,8 @@
 import HBL.AffineTailLemmaClosed
 import HBL.WeightedScaleResonance
 import HBL.WeightedScaleGreen
+import HBL.WeightedFreeGreenPointwise
+import HBL.WeightedFreeGreenODE
 import HBL.HartreeKernelShortRange
 import HBL.WeightedHartreeBirmanSchwinger
 import HBL.FredholmOrthogonalInverse
@@ -773,3 +775,41 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.weightedPotentialOperator_scale_eigen
 #print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_scale_fixed
 #print axioms HBL.Modulation.Monopole.weightedScaleResonance_cokernel_pairing
+#print axioms HBL.Modulation.Monopole.weightedGreenDecay_continuous
+#print axioms HBL.Modulation.Monopole.weightedGreenDecay_nonneg
+#print axioms HBL.Modulation.Monopole.weightedGreenDecay_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedGreen_source_integrable
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_integrable_kernel
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_lipschitz
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_continuous
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenPointwise_continuous
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_eq_decay_primitive
+#print axioms HBL.Modulation.Monopole.weightedGreenOutputMajorant_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenPointwise_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_ae_pointwise
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_split
+#print axioms HBL.Modulation.Monopole.halfLineGreenTail_eq_total_sub_interval
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_zero
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_hasDerivWithinAt_zero
+#print axioms HBL.Modulation.Monopole.halfLineGreenTail_hasDerivWithinAt_zero
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_hasDerivAt
+#print axioms HBL.Modulation.Monopole.halfLineGreenTail_hasDerivAt
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_second_hasDerivAt
+#print axioms HBL.Modulation.Monopole.weightedGreenEigenSource_continuous
+#print axioms HBL.Modulation.Monopole.weightedGreen_eigen_source_ae
+#print axioms HBL.Modulation.Monopole.weightedGreenEigenSource_integrableOn
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_eq_eigen_minGreen
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_eigen_second
+#print axioms HBL.Modulation.Monopole.weightedGreenEigenSource_one_fifteen
+#print axioms HBL.Modulation.Monopole.weightedGreenDecay_le_one
+#print axioms HBL.Modulation.Monopole.scaleGreenODEField_lipschitz
+#print axioms HBL.Modulation.Monopole.resonancePlus_deriv_zero
+#print axioms HBL.Modulation.Monopole.greenODEState_hasDerivWithinAt
+#print axioms HBL.Modulation.Monopole.greenODEState_one_fifteen_hasDerivWithinAt
+#print axioms HBL.Modulation.Monopole.scaleResonanceODEState_hasDerivAt
+#print axioms HBL.Modulation.Monopole.greenODEState_continuousOn_Icc
+#print axioms HBL.Modulation.Monopole.scaleResonanceODEState_continuousOn
+#print axioms HBL.Modulation.Monopole.weightedGreenPrimitive_one_fifteen_eq_resonance
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_one_fifteen_eigen_mem_span
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_scale_eigen_normalized
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_one_fifteen_eigen_iff
