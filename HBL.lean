@@ -98,6 +98,7 @@ import HBL.WeightedFreeGreen
 import HBL.LogKernelHilbertSchmidt
 import HBL.WeightedHartreeBirmanSchwinger
 import HBL.FredholmOrthogonalInverse
+import HBL.FredholmCokernelAlternative
 import HBL.MonopoleTailCharge
 import HBL.MonopoleLogCharge
 import HBL.MonopoleFredholmSource

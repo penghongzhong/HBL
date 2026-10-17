@@ -2,6 +2,7 @@ import HBL.AffineTailLemmaClosed
 import HBL.HartreeKernelShortRange
 import HBL.WeightedHartreeBirmanSchwinger
 import HBL.FredholmOrthogonalInverse
+import HBL.FredholmCokernelAlternative
 import HBL.MonopoleFredholmSource
 import HBL.MonopoleProfileCancellation
 
@@ -694,6 +695,11 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Fredholm.complementRestriction_no_fixed_vector
 #print axioms HBL.Fredholm.one_sub_complementRestriction_bijective
 #print axioms HBL.Fredholm.existsUnique_one_sub_apply_eq
+#print axioms HBL.Fredholm.one_sub_antilipschitz_on_kernelComplement
+#print axioms HBL.Fredholm.range_kernelComplementRestriction
+#print axioms HBL.Fredholm.one_sub_isClosed_range
+#print axioms HBL.Fredholm.one_sub_range_eq_adjointKernel_orthogonal
+#print axioms HBL.Fredholm.existsUnique_one_sub_apply_eq_of_mem_adjointKernel_orthogonal
 
 #print axioms HBL.Modulation.AffineTail.hartreeKernelOperator_compact
 #print axioms HBL.Modulation.AffineTail.productLogSqNearMajorant_nonneg
