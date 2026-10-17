@@ -368,6 +368,11 @@ import HBL.AffineTailLemmaClosed
 #print axioms HBL.Modulation.AffineTail.radialLog_ratio_eq_sub
 #print axioms HBL.Modulation.AffineTail.nonlocalApply_resonancePlus_factor
 
+#print axioms HBL.Modulation.Transversality.singularKummerJet_hasDerivAt
+#print axioms HBL.Modulation.Transversality.singularKummerJetDeriv_hasDerivAt
+#print axioms HBL.Modulation.Transversality.frozenKummerJetApply_decomposition
+#print axioms HBL.Modulation.Transversality.firstKummerCoefficient_indicial
+#print axioms HBL.Modulation.Transversality.firstKummerCoefficient_unique
 #print axioms HBL.Modulation.Transversality.mainJet_first
 #print axioms HBL.Modulation.Transversality.mainJet_second
 #print axioms HBL.Modulation.Transversality.mainJet_eq
