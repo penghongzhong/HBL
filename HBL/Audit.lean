@@ -1,4 +1,6 @@
 import HBL.AffineTailLemmaClosed
+import HBL.WeightedScaleResonance
+import HBL.WeightedScaleGreen
 import HBL.HartreeKernelShortRange
 import HBL.WeightedHartreeBirmanSchwinger
 import HBL.FredholmOrthogonalInverse
@@ -748,3 +750,26 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.weightedBirmanSchwingerOperator_adjoint
 #print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_adjoint_fixed_mem_span_iff
 #print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_adjointKernel_eq_span
+#print axioms HBL.Modulation.Monopole.affineJapaneseDecay_two
+#print axioms HBL.Modulation.Monopole.weightedScaleResonance_closed
+#print axioms HBL.Modulation.Monopole.weightedScaleResonance_continuous
+#print axioms HBL.Modulation.Monopole.weightedScaleResonance_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedScaleResonanceL2_ae
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_cokernel_pairing
+#print axioms HBL.Modulation.Monopole.resonancePlus_second_eq_weight
+#print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_eq_neg_second
+#print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_continuous
+#print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_integrable
+#print axioms HBL.Modulation.Monopole.resonancePlus_deriv_tendsto_zero
+#print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_left
+#print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_tail
+#print axioms HBL.Modulation.Monopole.min_weightedScaleGreenSource_integral
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_weak_apply
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_scale_eigen
+#print axioms HBL.Modulation.Monopole.nonlocalApply_resonancePlus_eq_six_weight
+#print axioms HBL.Modulation.Monopole.weightedHartree_scale_integral
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_weak_apply
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_scale_eigen
+#print axioms HBL.Modulation.Monopole.weightedPotentialOperator_scale_eigen
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_scale_fixed
+#print axioms HBL.Modulation.Monopole.weightedScaleResonance_cokernel_pairing

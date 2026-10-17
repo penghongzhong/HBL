@@ -97,6 +97,8 @@ import HBL.HartreeKernelShortRange
 import HBL.WeightedFreeGreen
 import HBL.LogKernelHilbertSchmidt
 import HBL.WeightedHartreeBirmanSchwinger
+import HBL.WeightedScaleResonance
+import HBL.WeightedScaleGreen
 import HBL.FredholmOrthogonalInverse
 import HBL.FredholmCokernelAlternative
 import HBL.MonopoleTailCharge
