@@ -92,7 +92,12 @@ import HBL.AffineTailLogFarBound
 import HBL.AffineTailLogGlobalIntegrability
 import HBL.AffineTailLemmaClosed
 import HBL.L2KernelOperator
+import HBL.L2KernelCompact
 import HBL.HartreeKernelShortRange
+import HBL.WeightedFreeGreen
+import HBL.LogKernelHilbertSchmidt
+import HBL.WeightedHartreeBirmanSchwinger
+import HBL.FredholmOrthogonalInverse
 import HBL.MonopoleTailCharge
 import HBL.MonopoleLogCharge
 import HBL.MonopoleFredholmSource

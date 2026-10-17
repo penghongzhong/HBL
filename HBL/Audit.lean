@@ -1,5 +1,7 @@
 import HBL.AffineTailLemmaClosed
 import HBL.HartreeKernelShortRange
+import HBL.WeightedHartreeBirmanSchwinger
+import HBL.FredholmOrthogonalInverse
 import HBL.MonopoleFredholmSource
 import HBL.MonopoleProfileCancellation
 
@@ -661,3 +663,74 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.static_profile_linear_source_cancels
 #print axioms HBL.Modulation.Monopole.integrableOn_of_abs_le_const_rpow
 #print axioms HBL.Modulation.Monopole.monopole_time_orders_integrable
+
+#print axioms HBL.L2Kernel.operator_add
+#print axioms HBL.L2Kernel.operator_smul
+#print axioms HBL.L2Kernel.operator_zero
+#print axioms HBL.L2Kernel.kernelToOperator_apply
+#print axioms HBL.L2Kernel.tensor_inner_tensor
+#print axioms HBL.L2Kernel.operator_tensor
+#print axioms HBL.L2Kernel.rankOne_isCompactOperator
+#print axioms HBL.L2Kernel.operator_tensor_isCompactOperator
+#print axioms HBL.L2Kernel.operator_isCompactOperator_of_mem_tensorSpan
+#print axioms HBL.L2Kernel.operator_isCompactOperator_of_mem_closure_tensorSpan
+#print axioms HBL.L2Kernel.tensorSpan_dense_of_measureDense
+#print axioms HBL.L2Kernel.operator_isCompactOperator_of_tensorSpan_dense
+#print axioms HBL.L2Kernel.measurableRectangles_generate
+#print axioms HBL.L2Kernel.measurableRectangles_measurable
+#print axioms HBL.L2Kernel.measurableRectangles_isSetSemiring
+#print axioms HBL.L2Kernel.measureDense_supClosure_of_generateFrom_isSetSemiring
+#print axioms HBL.L2Kernel.measurableRectangleUnions_measureDense
+#print axioms HBL.L2Kernel.rectangleIndicator_eq_tensor
+#print axioms HBL.L2Kernel.rectangleIndicator_mem_tensorSpan
+#print axioms HBL.L2Kernel.finiteRectangleUnion_measurable
+#print axioms HBL.L2Kernel.finiteDisjointRectangleUnionIndicator_mem_tensorSpan
+#print axioms HBL.L2Kernel.rectangleUnionIndicator_mem_tensorSpan
+#print axioms HBL.L2Kernel.tensorSpan_dense
+#print axioms HBL.L2Kernel.operator_isCompactOperator
+
+#print axioms HBL.Fredholm.map_fixedComplement
+#print axioms HBL.Fredholm.complementRestriction_compact
+#print axioms HBL.Fredholm.complementRestriction_no_fixed_vector
+#print axioms HBL.Fredholm.one_sub_complementRestriction_bijective
+#print axioms HBL.Fredholm.existsUnique_one_sub_apply_eq
+
+#print axioms HBL.Modulation.AffineTail.hartreeKernelOperator_compact
+#print axioms HBL.Modulation.AffineTail.productLogSqNearMajorant_nonneg
+#print axioms HBL.Modulation.AffineTail.productLogSqFarMajorant_nonneg
+#print axioms HBL.Modulation.AffineTail.productLogSqNearMajorant_integrable
+#print axioms HBL.Modulation.AffineTail.productLogSqFarMajorant_integrable
+#print axioms HBL.Modulation.AffineTail.product_log_kernel_sq_integrable
+
+#print axioms HBL.Modulation.Monopole.freeGreenMajorant_continuous
+#print axioms HBL.Modulation.Monopole.freeGreenMajorant_nonneg
+#print axioms HBL.Modulation.Monopole.freeGreenMajorant_le_cauchy
+#print axioms HBL.Modulation.Monopole.freeGreenMajorant_integrable
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_symm
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_uncurry_continuous
+#print axioms HBL.Modulation.Monopole.min_sq_le_mul_of_pos
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_sq_le_majorant
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_sq_integrable
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenL2_ae
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_kernel_certificate
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_compact
+
+#print axioms HBL.Modulation.Monopole.birmanSquareWeight_nonneg
+#print axioms HBL.Modulation.Monopole.birmanSquareSqrtWeight_nonneg
+#print axioms HBL.Modulation.Monopole.birmanSquareWeight_closed
+#print axioms HBL.Modulation.Monopole.birmanSquareWeight_continuous
+#print axioms HBL.Modulation.Monopole.birmanSquareSqrtWeight_continuous
+#print axioms HBL.Modulation.Monopole.birmanSquareWeight_integrable
+#print axioms HBL.Modulation.Monopole.birmanSquareSqrtWeight_le_rpow
+#print axioms HBL.Modulation.Monopole.birmanSquareSqrtWeight_integrable
+#print axioms HBL.Modulation.Monopole.birmanSquareWeight_norm_le_one
+#print axioms HBL.Modulation.Monopole.birmanSquareSqrtWeight_norm_le_one
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernel_symm
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernel_uncurry_measurable
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernel_sq_integrable
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernel_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernelL2_ae
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_kernel_certificate
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_compact
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwingerOperator_compact

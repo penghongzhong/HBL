@@ -1,4 +1,4 @@
-import HBL.L2KernelOperator
+import HBL.L2KernelCompact
 import HBL.AffineTailHartreeIntegrability
 
 /-!
@@ -395,6 +395,11 @@ theorem hartreeKernelOperator_hilbertSchmidt :
       hartreeKernelOperator hartreeKernelL2 :=
   HBL.L2Kernel.operator_isHilbertSchmidtKernelOperator hartreeKernelL2
 
+/-- The Hartree kernel operator is compact on the radial half-line L2 space. -/
+theorem hartreeKernelOperator_compact :
+    IsCompactOperator hartreeKernelOperator :=
+  HBL.L2Kernel.operator_isCompactOperator hartreeKernelL2
+
 /-- Weak integral action of the constructed operator, written with the
 actual radial kernel rather than its L2 equivalence class. -/
 theorem hartreeKernelOperator_weak_apply
@@ -708,6 +713,7 @@ theorem kernelShortManuscriptEnvironment_closed :
       (halfLineMeasure.prod halfLineMeasure) ∧
     HBL.L2Kernel.IsHilbertSchmidtKernelOperator
       hartreeKernelOperator hartreeKernelL2 ∧
+    IsCompactOperator hartreeKernelOperator ∧
     IsSelfAdjoint hartreeKernelOperator ∧
     (∀ f g : HBL.L2Kernel.RealL2 halfLineMeasure,
       inner ℝ (hartreeKernelOperator f) g =
@@ -727,6 +733,7 @@ theorem kernelShortManuscriptEnvironment_closed :
             (1 + |Real.log (|r - rho| / max r rho)|)) := by
   refine ⟨hartreeKernel_symm, hartreeKernel_memLp_two,
     hartreeKernelOperator_hilbertSchmidt,
+    hartreeKernelOperator_compact,
     hartreeKernelOperator_selfAdjoint,
     hartreeKernelOperator_weak_apply, ?_⟩
   let C : ℝ := 8 * |8 * Real.pi * hartreeKappa|
