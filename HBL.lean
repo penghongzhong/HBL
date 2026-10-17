@@ -90,3 +90,4 @@ import HBL.AffineTailPVFiniteAssembly
 import HBL.AffineTailPrimitiveGapFactor
 import HBL.AffineTailLogFarBound
 import HBL.AffineTailLogGlobalIntegrability
+import HBL.AffineTailLemmaClosed
