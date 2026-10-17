@@ -3,6 +3,7 @@ import HBL.WeightedScaleResonance
 import HBL.WeightedScaleGreen
 import HBL.WeightedFreeGreenPointwise
 import HBL.WeightedFreeGreenODE
+import HBL.WeightedFreeGreenSpectrum
 import HBL.HartreeKernelShortRange
 import HBL.WeightedHartreeBirmanSchwinger
 import HBL.FredholmOrthogonalInverse
@@ -813,3 +814,19 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.weightedFreeGreen_one_fifteen_eigen_mem_span
 #print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_scale_eigen_normalized
 #print axioms HBL.Modulation.Monopole.weightedFreeGreen_one_fifteen_eigen_iff
+#print axioms HBL.Modulation.Monopole.greenOscillation_hasDerivAt
+#print axioms HBL.Modulation.Monopole.greenOscillationVelocity_hasDerivAt
+#print axioms HBL.Modulation.Monopole.greenOscillation_zero
+#print axioms HBL.Modulation.Monopole.greenOscillationVelocity_zero
+#print axioms HBL.Modulation.Monopole.bubble_tendsto_zero
+#print axioms HBL.Modulation.Monopole.greenOscillationVelocity_tendsto
+#print axioms HBL.Modulation.Monopole.greenEigenODEField_lipschitz
+#print axioms HBL.Modulation.Monopole.greenFrequency_pos
+#print axioms HBL.Modulation.Monopole.greenFrequency_sq_sub_one
+#print axioms HBL.Modulation.Monopole.greenOscillationODEState_hasDerivAt
+#print axioms HBL.Modulation.Monopole.greenOscillationODEState_continuousOn
+#print axioms HBL.Modulation.Monopole.greenODEState_eigen_hasDerivWithinAt
+#print axioms HBL.Modulation.Monopole.weightedGreenEigen_state_eq_oscillation
+#print axioms HBL.Modulation.Monopole.weightedGreenEigen_oscillation_coefficient_ne_zero
+#print axioms HBL.Modulation.Monopole.weightedGreenEigen_frequency_sin_eq_zero
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_eigenvalue_eq_one_fifteen_of_band
