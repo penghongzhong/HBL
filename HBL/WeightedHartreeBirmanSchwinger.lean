@@ -196,6 +196,65 @@ theorem weightedHartreeOperator_kernel_certificate :
       weightedHartreeKernelL2 :=
   operator_isHilbertSchmidtKernelOperator weightedHartreeKernelL2
 
+theorem weightedHartreeKernel_inner_tensor_swap
+    (f g : RealL2 halfLineMeasure) :
+    inner ℝ weightedHartreeKernelL2 (tensor g f) =
+      inner ℝ weightedHartreeKernelL2 (tensor f g) := by
+  rw [L2.inner_def, L2.inner_def]
+  have hleft :
+      (fun p : ℝ × ℝ => inner ℝ (weightedHartreeKernelL2 p)
+        (tensor g f p)) =ᵐ[halfLineMeasure.prod halfLineMeasure]
+      fun p => weightedHartreeKernel p.1 p.2 * (g p.1 * f p.2) := by
+    filter_upwards [weightedHartreeKernelL2_ae, tensor_ae g f] with p hK ht
+    rw [hK, ht, Real.inner_apply]
+    change weightedHartreeKernel p.1 p.2 * (g p.1 * f p.2) = _
+    rfl
+  have hright :
+      (fun p : ℝ × ℝ => inner ℝ (weightedHartreeKernelL2 p)
+        (tensor f g p)) =ᵐ[halfLineMeasure.prod halfLineMeasure]
+      fun p => weightedHartreeKernel p.1 p.2 * (f p.1 * g p.2) := by
+    filter_upwards [weightedHartreeKernelL2_ae, tensor_ae f g] with p hK ht
+    rw [hK, ht, Real.inner_apply]
+    change weightedHartreeKernel p.1 p.2 * (f p.1 * g p.2) = _
+    rfl
+  rw [integral_congr_ae hleft, integral_congr_ae hright]
+  calc
+    (∫ p : ℝ × ℝ, weightedHartreeKernel p.1 p.2 * (g p.1 * f p.2)
+        ∂(halfLineMeasure.prod halfLineMeasure)) =
+        ∫ p : ℝ × ℝ,
+          (fun q : ℝ × ℝ =>
+            weightedHartreeKernel q.1 q.2 * (g q.1 * f q.2)) p.swap
+          ∂(halfLineMeasure.prod halfLineMeasure) := by
+      symm
+      simpa only using (MeasureTheory.integral_prod_swap
+        (μ := halfLineMeasure) (ν := halfLineMeasure)
+        (fun q : ℝ × ℝ =>
+          weightedHartreeKernel q.1 q.2 * (g q.1 * f q.2)))
+    _ = ∫ p : ℝ × ℝ,
+        weightedHartreeKernel p.1 p.2 * (f p.1 * g p.2)
+        ∂(halfLineMeasure.prod halfLineMeasure) := by
+      apply integral_congr_ae
+      filter_upwards with p
+      change weightedHartreeKernel p.2 p.1 * (g p.2 * f p.1) =
+        weightedHartreeKernel p.1 p.2 * (f p.1 * g p.2)
+      rw [weightedHartreeKernel_symm]
+      ring
+
+/-- The symmetric conjugated Hartree kernel realizes a self-adjoint
+operator. -/
+theorem weightedHartreeOperator_selfAdjoint :
+    IsSelfAdjoint weightedHartreeOperator := by
+  apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
+  intro f g
+  calc
+    inner ℝ (weightedHartreeOperator f) g =
+        inner ℝ weightedHartreeKernelL2 (tensor g f) := inner_operator _ _ _
+    _ = inner ℝ weightedHartreeKernelL2 (tensor f g) :=
+      weightedHartreeKernel_inner_tensor_swap f g
+    _ = inner ℝ (weightedHartreeOperator g) f :=
+      (inner_operator _ _ _).symm
+    _ = inner ℝ f (weightedHartreeOperator g) := real_inner_comm _ _
+
 theorem weightedHartreeOperator_compact :
     IsCompactOperator weightedHartreeOperator :=
   operator_isCompactOperator weightedHartreeKernelL2
@@ -204,8 +263,28 @@ theorem weightedHartreeOperator_compact :
 and the second summand is the conjugated nonlocal Hartree operator. -/
 def weightedPotentialOperator :
     RealL2 halfLineMeasure →L[ℝ] RealL2 halfLineMeasure :=
-  9 • ContinuousLinearMap.id ℝ (RealL2 halfLineMeasure) +
+  (9 : ℝ) • ContinuousLinearMap.id ℝ (RealL2 halfLineMeasure) +
     weightedHartreeOperator
+
+/-- The complete conjugated potential is self-adjoint. -/
+theorem weightedPotentialOperator_selfAdjoint :
+    IsSelfAdjoint weightedPotentialOperator := by
+  apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
+  unfold weightedPotentialOperator
+  rw [ContinuousLinearMap.toLinearMap_add,
+    ContinuousLinearMap.toLinearMap_smul, ContinuousLinearMap.coe_id]
+  have hid :
+      (LinearMap.id : RealL2 halfLineMeasure →ₗ[ℝ]
+        RealL2 halfLineMeasure).IsSymmetric := LinearMap.IsSymmetric.one
+  have hlocal :
+      ((9 : ℝ) • (LinearMap.id : RealL2 halfLineMeasure →ₗ[ℝ]
+        RealL2 halfLineMeasure)).IsSymmetric := hid.smul (by simp)
+  have hhartree :
+      (weightedHartreeOperator : RealL2 halfLineMeasure →ₗ[ℝ]
+        RealL2 halfLineMeasure).IsSymmetric :=
+    ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+      weightedHartreeOperator_selfAdjoint
+  exact hlocal.add hhartree
 
 /-- Compact Birman--Schwinger operator obtained by applying the weighted
 free Dirichlet Green operator to the complete conjugated potential. -/
@@ -217,5 +296,82 @@ theorem weightedBirmanSchwingerOperator_compact :
     IsCompactOperator weightedBirmanSchwingerOperator := by
   unfold weightedBirmanSchwingerOperator
   exact weightedFreeGreenOperator_compact.comp_clm weightedPotentialOperator
+
+/-- The actual adjoint of the generally non-self-adjoint
+Birman--Schwinger composite reverses its two self-adjoint factors. -/
+theorem weightedBirmanSchwingerOperator_adjoint :
+    ContinuousLinearMap.adjoint weightedBirmanSchwingerOperator =
+      weightedPotentialOperator ∘L weightedFreeGreenOperator := by
+  unfold weightedBirmanSchwingerOperator
+  rw [ContinuousLinearMap.adjoint_comp,
+    weightedPotentialOperator_selfAdjoint.adjoint_eq,
+    weightedFreeGreenOperator_selfAdjoint.adjoint_eq]
+
+/-- Once radial nondegeneracy identifies the fixed space of the actual
+Birman--Schwinger operator, the reversed-factor adjoint formula identifies
+its fixed space exactly, without an injectivity assumption on either
+factor. -/
+theorem weightedBirmanSchwinger_adjoint_fixed_mem_span_iff
+    (x0 y : RealL2 halfLineMeasure)
+    (hfixed : ∀ x : RealL2 halfLineMeasure,
+      weightedBirmanSchwingerOperator x = x ↔
+        x ∈ Submodule.span ℝ {x0}) :
+    ContinuousLinearMap.adjoint weightedBirmanSchwingerOperator y = y ↔
+      y ∈ Submodule.span ℝ {weightedPotentialOperator x0} := by
+  constructor
+  · intro hy
+    have hPG :
+        weightedPotentialOperator (weightedFreeGreenOperator y) = y := by
+      calc
+        weightedPotentialOperator (weightedFreeGreenOperator y) =
+            (weightedPotentialOperator ∘L weightedFreeGreenOperator) y := rfl
+        _ = ContinuousLinearMap.adjoint weightedBirmanSchwingerOperator y :=
+          congrArg (fun T : RealL2 halfLineMeasure →L[ℝ]
+            RealL2 halfLineMeasure => T y)
+            weightedBirmanSchwingerOperator_adjoint.symm
+        _ = y := hy
+    have hGy :
+        weightedBirmanSchwingerOperator (weightedFreeGreenOperator y) =
+          weightedFreeGreenOperator y := by
+      unfold weightedBirmanSchwingerOperator
+      rw [ContinuousLinearMap.comp_apply, hPG]
+    obtain ⟨c, hc⟩ := Submodule.mem_span_singleton.mp
+      ((hfixed (weightedFreeGreenOperator y)).mp hGy)
+    refine Submodule.mem_span_singleton.mpr ⟨c, ?_⟩
+    calc
+      c • weightedPotentialOperator x0 =
+          weightedPotentialOperator (c • x0) :=
+        (weightedPotentialOperator.map_smul c x0).symm
+      _ = weightedPotentialOperator (weightedFreeGreenOperator y) := by
+        rw [hc]
+      _ = y := hPG
+  · intro hy
+    obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.mp hy
+    have hx0 : weightedBirmanSchwingerOperator x0 = x0 :=
+      (hfixed x0).mpr (Submodule.mem_span_singleton_self x0)
+    have hGP : weightedFreeGreenOperator (weightedPotentialOperator x0) = x0 := by
+      simpa only [weightedBirmanSchwingerOperator,
+        ContinuousLinearMap.comp_apply] using hx0
+    rw [weightedBirmanSchwingerOperator_adjoint]
+    simp only [ContinuousLinearMap.comp_apply, map_smul]
+    rw [hGP]
+
+/-- Kernel form of the preceding fixed-space identification.  The
+hypothesis is precisely the radial nondegeneracy input still to be bridged
+from the differential Hartree operator. -/
+theorem weightedBirmanSchwinger_adjointKernel_eq_span
+    (x0 : RealL2 halfLineMeasure)
+    (hfixed : ∀ x : RealL2 halfLineMeasure,
+      weightedBirmanSchwingerOperator x = x ↔
+        x ∈ Submodule.span ℝ {x0}) :
+    (ContinuousLinearMap.id ℝ (RealL2 halfLineMeasure) -
+      ContinuousLinearMap.adjoint weightedBirmanSchwingerOperator).ker =
+        Submodule.span ℝ {weightedPotentialOperator x0} := by
+  ext y
+  rw [LinearMap.mem_ker]
+  change y - ContinuousLinearMap.adjoint weightedBirmanSchwingerOperator y = 0 ↔
+    y ∈ Submodule.span ℝ {weightedPotentialOperator x0}
+  rw [sub_eq_zero, eq_comm]
+  exact weightedBirmanSchwinger_adjoint_fixed_mem_span_iff x0 y hfixed
 
 end HBL.Modulation.Monopole

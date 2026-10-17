@@ -154,6 +154,72 @@ theorem weightedFreeGreenOperator_kernel_certificate :
       weightedFreeGreenL2 :=
   operator_isHilbertSchmidtKernelOperator weightedFreeGreenL2
 
+theorem weightedFreeGreen_inner_tensor_swap
+    (f g : RealL2 HBL.Modulation.AffineTail.halfLineMeasure) :
+    inner ℝ weightedFreeGreenL2 (tensor g f) =
+      inner ℝ weightedFreeGreenL2 (tensor f g) := by
+  rw [L2.inner_def, L2.inner_def]
+  have hleft :
+      (fun p : ℝ × ℝ => inner ℝ (weightedFreeGreenL2 p)
+        (tensor g f p)) =ᵐ[
+          HBL.Modulation.AffineTail.halfLineMeasure.prod
+            HBL.Modulation.AffineTail.halfLineMeasure]
+      fun p => weightedFreeGreen p.1 p.2 * (g p.1 * f p.2) := by
+    filter_upwards [weightedFreeGreenL2_ae, tensor_ae g f] with p hK ht
+    rw [hK, ht, Real.inner_apply]
+    change weightedFreeGreen p.1 p.2 * (g p.1 * f p.2) = _
+    rfl
+  have hright :
+      (fun p : ℝ × ℝ => inner ℝ (weightedFreeGreenL2 p)
+        (tensor f g p)) =ᵐ[
+          HBL.Modulation.AffineTail.halfLineMeasure.prod
+            HBL.Modulation.AffineTail.halfLineMeasure]
+      fun p => weightedFreeGreen p.1 p.2 * (f p.1 * g p.2) := by
+    filter_upwards [weightedFreeGreenL2_ae, tensor_ae f g] with p hK ht
+    rw [hK, ht, Real.inner_apply]
+    change weightedFreeGreen p.1 p.2 * (f p.1 * g p.2) = _
+    rfl
+  rw [integral_congr_ae hleft, integral_congr_ae hright]
+  calc
+    (∫ p : ℝ × ℝ, weightedFreeGreen p.1 p.2 * (g p.1 * f p.2)
+        ∂(HBL.Modulation.AffineTail.halfLineMeasure.prod
+          HBL.Modulation.AffineTail.halfLineMeasure)) =
+        ∫ p : ℝ × ℝ,
+          (fun q : ℝ × ℝ =>
+            weightedFreeGreen q.1 q.2 * (g q.1 * f q.2)) p.swap
+          ∂(HBL.Modulation.AffineTail.halfLineMeasure.prod
+            HBL.Modulation.AffineTail.halfLineMeasure) := by
+      symm
+      simpa only using (MeasureTheory.integral_prod_swap
+        (μ := HBL.Modulation.AffineTail.halfLineMeasure)
+        (ν := HBL.Modulation.AffineTail.halfLineMeasure)
+        (fun q : ℝ × ℝ =>
+          weightedFreeGreen q.1 q.2 * (g q.1 * f q.2)))
+    _ = ∫ p : ℝ × ℝ,
+        weightedFreeGreen p.1 p.2 * (f p.1 * g p.2)
+        ∂(HBL.Modulation.AffineTail.halfLineMeasure.prod
+          HBL.Modulation.AffineTail.halfLineMeasure) := by
+      apply integral_congr_ae
+      filter_upwards with p
+      change weightedFreeGreen p.2 p.1 * (g p.2 * f p.1) =
+        weightedFreeGreen p.1 p.2 * (f p.1 * g p.2)
+      rw [weightedFreeGreen_symm]
+      ring
+
+/-- The symmetric weighted Green kernel realizes a self-adjoint operator. -/
+theorem weightedFreeGreenOperator_selfAdjoint :
+    IsSelfAdjoint weightedFreeGreenOperator := by
+  apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
+  intro f g
+  calc
+    inner ℝ (weightedFreeGreenOperator f) g =
+        inner ℝ weightedFreeGreenL2 (tensor g f) := inner_operator _ _ _
+    _ = inner ℝ weightedFreeGreenL2 (tensor f g) :=
+      weightedFreeGreen_inner_tensor_swap f g
+    _ = inner ℝ (weightedFreeGreenOperator g) f :=
+      (inner_operator _ _ _).symm
+    _ = inner ℝ f (weightedFreeGreenOperator g) := real_inner_comm _ _
+
 /-- The doubly weighted free radial Green operator is compact. -/
 theorem weightedFreeGreenOperator_compact :
     IsCompactOperator weightedFreeGreenOperator :=

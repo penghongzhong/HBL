@@ -720,6 +720,8 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.weightedFreeGreen_memLp_two
 #print axioms HBL.Modulation.Monopole.weightedFreeGreenL2_ae
 #print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_kernel_certificate
+#print axioms HBL.Modulation.Monopole.weightedFreeGreen_inner_tensor_swap
+#print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_selfAdjoint
 #print axioms HBL.Modulation.Monopole.weightedFreeGreenOperator_compact
 
 #print axioms HBL.Modulation.Monopole.birmanSquareWeight_nonneg
@@ -738,5 +740,11 @@ import HBL.MonopoleProfileCancellation
 #print axioms HBL.Modulation.Monopole.weightedHartreeKernel_memLp_two
 #print axioms HBL.Modulation.Monopole.weightedHartreeKernelL2_ae
 #print axioms HBL.Modulation.Monopole.weightedHartreeOperator_kernel_certificate
+#print axioms HBL.Modulation.Monopole.weightedHartreeKernel_inner_tensor_swap
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_selfAdjoint
 #print axioms HBL.Modulation.Monopole.weightedHartreeOperator_compact
+#print axioms HBL.Modulation.Monopole.weightedPotentialOperator_selfAdjoint
 #print axioms HBL.Modulation.Monopole.weightedBirmanSchwingerOperator_compact
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwingerOperator_adjoint
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_adjoint_fixed_mem_span_iff
+#print axioms HBL.Modulation.Monopole.weightedBirmanSchwinger_adjointKernel_eq_span
