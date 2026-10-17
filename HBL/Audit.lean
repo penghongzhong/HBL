@@ -1,5 +1,7 @@
 import HBL.AffineTailLemmaClosed
 import HBL.HartreeKernelShortRange
+import HBL.MonopoleFredholmSource
+import HBL.MonopoleProfileCancellation
 
 #print axioms HBL.Modulation.bubble_differentiable
 #print axioms HBL.Modulation.scalePullback_hasDerivAt
@@ -598,3 +600,64 @@ import HBL.HartreeKernelShortRange
 #print axioms HBL.Modulation.AffineTail.hartreeKernel_diagonal_ordered
 #print axioms HBL.Modulation.AffineTail.hartreeKernel_diagonal
 #print axioms HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed
+
+#print axioms HBL.Modulation.AffineTail.thirdRationalPrimitive_hasDerivAt
+#print axioms HBL.Modulation.AffineTail.inv_cube_rational_norm_le
+#print axioms HBL.Modulation.AffineTail.third_rational_integrable
+#print axioms HBL.Modulation.AffineTail.third_rational_integrableOn
+#print axioms HBL.Modulation.AffineTail.inv_one_add_sq_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.rational_over_one_add_sq_sq_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.thirdRationalPrimitive_tendsto_three_pi_div_sixteen
+#print axioms HBL.Modulation.AffineTail.third_rational_integral
+#print axioms HBL.Modulation.AffineTail.resonancePlus_mul_monopoleSource
+#print axioms HBL.Modulation.AffineTail.monopolePairingDensity_decomposition
+#print axioms HBL.Modulation.AffineTail.monopolePairingDensity_integrableOn
+#print axioms HBL.Modulation.AffineTail.monopole_source_pairing_eq_neg_pi_div_sixteen
+#print axioms HBL.Modulation.AffineTail.monopoleAffineSlope_eq_neg_pi_div_eight
+
+#print axioms HBL.Modulation.AffineTail.smoothLogRadius_pos
+#print axioms HBL.Modulation.AffineTail.smoothLogRadius_contDiff_infty
+#print axioms HBL.Modulation.AffineTail.smoothLogRadius_eq_one_of_le_one
+#print axioms HBL.Modulation.AffineTail.smoothLogRadius_eq_self_of_two_le
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_contDiff_infty
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_zero_of_le_one
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_eq_log_of_two_le
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_nonneg
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_le_model
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_abs_le_model
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_deriv_eq_inv_of_two_lt
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_second_deriv_eq_neg_inv_sq_of_two_lt
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_zero
+#print axioms HBL.Modulation.AffineTail.monopoleLogModel_deriv_zero
+#print axioms HBL.Modulation.AffineTail.hartreeScaleLogDensity_measurable
+#print axioms HBL.Modulation.AffineTail.hartree_scale_log_product_integrable
+#print axioms HBL.Modulation.AffineTail.resonancePlus_nonlocal_log_integrableOn
+#print axioms HBL.Modulation.AffineTail.log_nonlocal_resonancePlus_integrableOn
+#print axioms HBL.Modulation.AffineTail.hartree_scale_log_pairing
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogDensity_continuous
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogDensity_far
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogDensity_norm_far_le
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogDensity_integrableOn
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogCommutator_continuous
+#print axioms HBL.Modulation.AffineTail.hPlusLocalLogCommutator_integrableOn
+#print axioms HBL.Modulation.AffineTail.greenBoundary_log_at_zero
+#print axioms HBL.Modulation.AffineTail.hPlus_log_local_commutator_finite
+#print axioms HBL.Modulation.AffineTail.log_div_self_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.greenBoundary_log_tendsto_zero
+#print axioms HBL.Modulation.AffineTail.hPlus_log_local_commutator_integral_eq_zero
+#print axioms HBL.Modulation.AffineTail.hPlusLogDensity_eq_local_sub_nonlocal
+#print axioms HBL.Modulation.AffineTail.hPlusLogDensity_integrableOn
+#print axioms HBL.Modulation.AffineTail.monopole_log_model_charge_eq_zero
+
+#print axioms HBL.Modulation.AffineTail.resonancePlus_monopoleSource_integrableOn
+#print axioms HBL.Modulation.AffineTail.resonancePlus_correctedSource_integrableOn
+#print axioms HBL.Modulation.AffineTail.monopole_corrected_pairing_formula
+#print axioms HBL.Modulation.AffineTail.monopole_corrected_pairing_zero_iff
+#print axioms HBL.Modulation.AffineTail.monopole_corrected_source_orthogonal
+
+#print axioms HBL.Modulation.Monopole.linearMap_fourth_power_expansion
+#print axioms HBL.Modulation.Monopole.hartree_nonlinearity_first_order_exact
+#print axioms HBL.Modulation.Monopole.local_cubic_first_order_exact
+#print axioms HBL.Modulation.Monopole.static_profile_linear_source_cancels
+#print axioms HBL.Modulation.Monopole.integrableOn_of_abs_le_const_rpow
+#print axioms HBL.Modulation.Monopole.monopole_time_orders_integrable

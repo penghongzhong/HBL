@@ -93,3 +93,7 @@ import HBL.AffineTailLogGlobalIntegrability
 import HBL.AffineTailLemmaClosed
 import HBL.L2KernelOperator
 import HBL.HartreeKernelShortRange
+import HBL.MonopoleTailCharge
+import HBL.MonopoleLogCharge
+import HBL.MonopoleFredholmSource
+import HBL.MonopoleProfileCancellation
