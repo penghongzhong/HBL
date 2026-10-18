@@ -385,6 +385,12 @@ import HBL
 #print axioms HBL.Modulation.Monopole.bubble_nonneg
 #print axioms HBL.Modulation.Monopole.bubble_sq
 #print axioms HBL.Modulation.Monopole.bubble_tendsto_zero
+#print axioms HBL.Modulation.Monopole.compactMonopoleNormalization_scale_eq_one
+#print axioms HBL.Modulation.Monopole.compactMonopoleNormalization_scale_ne_zero
+#print axioms HBL.Modulation.Monopole.compactMonopoleTest_memLp
+#print axioms HBL.Modulation.Monopole.compactMonopoleTest_model_zero
+#print axioms HBL.Modulation.Monopole.compactMonopoleTest_profile_eq_remainder
+#print axioms HBL.Modulation.Monopole.existsUnique_monopoleCompactNormalizedSolution
 #print axioms HBL.Modulation.Monopole.existsUnique_monopoleFredholmNormalizedSolution
 #print axioms HBL.Modulation.Monopole.existsUnique_monopoleFredholmSolution
 #print axioms HBL.Modulation.Monopole.exists_monopoleFredholmNormalizationFunctional
@@ -436,6 +442,8 @@ import HBL
 #print axioms HBL.Modulation.Monopole.local_cubic_first_order_exact
 #print axioms HBL.Modulation.Monopole.min_sq_le_mul_of_pos
 #print axioms HBL.Modulation.Monopole.min_weightedScaleGreenSource_integral
+#print axioms HBL.Modulation.Monopole.monopoleCompactNormalizedSolution_equation
+#print axioms HBL.Modulation.Monopole.monopoleCompactNormalizedSolution_normalization
 #print axioms HBL.Modulation.Monopole.monopoleCorrectedDecayConstant_nonneg
 #print axioms HBL.Modulation.Monopole.monopoleCorrectedSource_ae_norm_le
 #print axioms HBL.Modulation.Monopole.monopoleCorrectedSource_continuous

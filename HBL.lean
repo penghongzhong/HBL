@@ -116,3 +116,5 @@ import HBL.WeightedScaleNonzero
 import HBL.MonopoleFredholmAsymptotics
 import HBL.MonopoleProfileEquation
 import HBL.MonopoleFredholmNormalization
+import HBL.MonopoleCompactNormalization
+import HBL.MonopoleNormalizedProfile
