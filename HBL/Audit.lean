@@ -28,8 +28,12 @@ import HBL
 #print axioms HBL.Kinematic.phaseQuotient_tail_abs_le
 #print axioms HBL.Kinematic.phaseQuotient_tail_isBigO
 #print axioms HBL.Kinematic.phaseTailIntegral_hasDerivAt
+#print axioms HBL.Kinematic.physicalSliceGamma_hasDerivAt
+#print axioms HBL.Kinematic.physicalSliceGamma_hasDerivAt_time
 #print axioms HBL.Kinematic.physicalSliceGamma_log_error_at_terminal
 #print axioms HBL.Kinematic.physicalSliceGamma_log_error_isBigO
+#print axioms HBL.Kinematic.physicalSliceLambda_hasDerivAt_time
+#print axioms HBL.Kinematic.physicalSliceLambda_log_hasDerivAt
 #print axioms HBL.Kinematic.physicalSliceLambda_rate_error_at_terminal
 #print axioms HBL.Kinematic.physicalSliceLambda_rate_error_isBigO
 #print axioms HBL.Kinematic.remainingTime_tendsto_zero_right
@@ -89,6 +93,7 @@ import HBL
 #print axioms HBL.Kinematic.sliceTail_path_abs_le_of_path
 #print axioms HBL.Kinematic.sliceTail_sub_eq_parameterKernel
 #print axioms HBL.Kinematic.sliceTail_zero_parameter_abs_le
+#print axioms HBL.Kinematic.sliceTimeInverse_hasDerivAt_of_path
 #print axioms HBL.Kinematic.sliceTimeInverse_spec_of_path
 #print axioms HBL.Kinematic.sliceTimeInverse_tendsto_atTop_of_path
 #print axioms HBL.Kinematic.slice_inverse_scale_physical_power_tendsto_one
