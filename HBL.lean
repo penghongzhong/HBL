@@ -131,3 +131,5 @@ import HBL.KinematicPhaseDynamics
 import HBL.KinematicPhysicalTimeAsymptotics
 import HBL.KinematicPhysicalDynamics
 import HBL.MonopoleCutoffEquation
+import HBL.MonopoleQuadraticCutoff
+import HBL.MonopoleLocalCubicBound

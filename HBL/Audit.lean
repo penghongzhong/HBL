@@ -565,7 +565,10 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_unique
 #print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core
 #print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleInnerRadialProfile_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleInnerRadialProfile_local_cubic_abs_le
 #print axioms HBL.Modulation.Monopole.monopoleLinearGrowthConstant_pos
+#print axioms HBL.Modulation.Monopole.monopoleLocalCubicBoundConstant_pos
 #print axioms HBL.Modulation.Monopole.monopoleOuterTail_nonlocal_control
 #print axioms HBL.Modulation.Monopole.monopoleProfile_continuous
 #print axioms HBL.Modulation.Monopole.monopoleProfile_deriv_continuousOn
@@ -578,6 +581,10 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleProfile_sub_asymptotic_abs_le
 #print axioms HBL.Modulation.Monopole.monopoleProfile_sub_log_affine_tendsto_tailConstant
 #print axioms HBL.Modulation.Monopole.monopoleProfile_zero
+#print axioms HBL.Modulation.Monopole.monopoleQuadraticRadius_core_defect
+#print axioms HBL.Modulation.Monopole.monopoleQuadraticRadius_ge_four
+#print axioms HBL.Modulation.Monopole.monopoleRadialBoundConstant_pos
+#print axioms HBL.Modulation.Monopole.monopoleRadialProfile_abs_le
 #print axioms HBL.Modulation.Monopole.monopoleRadialProfile_eq_slope_add_log_remainder_div
 #print axioms HBL.Modulation.Monopole.monopoleRadialProfile_hasDerivAt
 #print axioms HBL.Modulation.Monopole.monopoleRadialProfile_sub_asymptotic_abs_le
