@@ -73,7 +73,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake env lean HBL/Audit.lean | tee /tmp/hbl-axioms.txt
+          lake env lean --trust=0 HBL/Audit.lean | tee /tmp/hbl-axioms.txt
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -506,6 +506,22 @@ jobs:
               'HBL.Modulation.Monopole.monopoleRadialStaticResidual_exact',
               'HBL.Modulation.Monopole.monopoleStaticRadialBoundConstant_pos',
               'HBL.Modulation.Monopole.monopoleRadialStaticResidual_core_quadratic_control',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffProfile_eq',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffProfile_hasDerivAt',
+              'HBL.Modulation.Monopole.cutoff_deriv_zero_of_lt_one',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffProfile_core_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleInnerProfile_eq_remainder_of_le',
+              'HBL.Modulation.Monopole.monopoleInnerProfile_eq_green_near',
+              'HBL.Modulation.Monopole.monopoleInnerRadialProfile_tendsto_origin',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_zero',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_eq',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_eventuallyEq',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_deriv_eq',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_continuousOn',
+              'HBL.Modulation.Monopole.monopoleInnerRadialProfile_flux_eq',
+              'HBL.Modulation.Monopole.monopoleInnerRadialProfile_flux_tendsto_zero',
+              'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_flux_tendsto_zero',
+              'HBL.Modulation.Monopole.monopoleQuadraticRadius_origin_control',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')

@@ -142,3 +142,5 @@ import HBL.MonopoleHartreeNonlinearBound
 import HBL.RadialHartreeBubbleExact
 import HBL.MonopoleRadialLinearization
 import HBL.MonopoleStaticRadialBound
+import HBL.MonopoleMovingCutoffDerivative
+import HBL.MonopoleRadialOrigin
