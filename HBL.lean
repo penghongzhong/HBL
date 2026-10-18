@@ -124,3 +124,4 @@ import HBL.HalfLineClassicalUniqueness
 import HBL.MonopoleFirstCorrectionCertified
 import HBL.KinematicSynchronizedSliceCertified
 import HBL.KinematicPhysicalRate
+import HBL.KinematicPhysicalRateError

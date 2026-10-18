@@ -116,12 +116,15 @@ jobs:
               'HBL.Kinematic.integral_Ioi_rpow_neg_one_sub',
               'HBL.Kinematic.integral_Ioi_rpow_neg_two',
               'HBL.Kinematic.inverseScale_div_physicalRate_eq',
+              'HBL.Kinematic.normalizedRateFactor_sub_one_isBigO',
+              'HBL.Kinematic.rpow_neg_isBigO_slicePhysicalTime_rpow',
               'HBL.Kinematic.scalarInverse_existsUnique_root',
               'HBL.Kinematic.scalarInverse_existsUnique_root_with_bound',
               'HBL.Kinematic.scalarInverse_root_bound',
               'HBL.Kinematic.scalarInverse_root_stability',
               'HBL.Kinematic.scalarInverse_separation',
               'HBL.Kinematic.sliceClock_continuousOn',
+              'HBL.Kinematic.sliceClock_div_affine_sub_one_isBigO',
               'HBL.Kinematic.sliceClock_div_affine_tendsto_one',
               'HBL.Kinematic.sliceClock_hasDerivAt',
               'HBL.Kinematic.sliceClock_initial',
@@ -148,8 +151,10 @@ jobs:
               'HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path',
               'HBL.Kinematic.sliceReferenceTime_eq_power',
               'HBL.Kinematic.sliceReferenceTime_tendsto_zero',
+              'HBL.Kinematic.sliceTailFrom_abs_le_of_path',
               'HBL.Kinematic.sliceTailFrom_eq_total_sub_interval',
               'HBL.Kinematic.sliceTailFrom_hasDerivAt',
+              'HBL.Kinematic.sliceTailFrom_isBigO_of_path',
               'HBL.Kinematic.sliceTailFrom_tendsto_zero',
               'HBL.Kinematic.sliceTail_abs_le',
               'HBL.Kinematic.sliceTail_continuousOn_of_path',
@@ -164,6 +169,8 @@ jobs:
               'HBL.Kinematic.sliceTail_zero_parameter_abs_le',
               'HBL.Kinematic.slice_inverse_scale_physical_power_tendsto_one',
               'HBL.Kinematic.slice_kinematics_of_path',
+              'HBL.Kinematic.slice_physical_rate_error_isBigO',
+              'HBL.Kinematic.slice_physical_rate_ratio_eq',
               'HBL.Kinematic.synchronizedSliceParameter_size_add_stability',
               'HBL.Kinematic.synchronizedSliceParameter_spec',
               'HBL.Kinematic.synchronizedSliceParameter_stability',
@@ -450,5 +457,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with relative error o(1); the main blowup theorem remains unaccepted.')
+          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the main blowup theorem remains unaccepted.')
           PY

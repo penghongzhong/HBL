@@ -22,12 +22,15 @@ import HBL
 #print axioms HBL.Kinematic.integral_Ioi_rpow_neg_one_sub
 #print axioms HBL.Kinematic.integral_Ioi_rpow_neg_two
 #print axioms HBL.Kinematic.inverseScale_div_physicalRate_eq
+#print axioms HBL.Kinematic.normalizedRateFactor_sub_one_isBigO
+#print axioms HBL.Kinematic.rpow_neg_isBigO_slicePhysicalTime_rpow
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root_with_bound
 #print axioms HBL.Kinematic.scalarInverse_root_bound
 #print axioms HBL.Kinematic.scalarInverse_root_stability
 #print axioms HBL.Kinematic.scalarInverse_separation
 #print axioms HBL.Kinematic.sliceClock_continuousOn
+#print axioms HBL.Kinematic.sliceClock_div_affine_sub_one_isBigO
 #print axioms HBL.Kinematic.sliceClock_div_affine_tendsto_one
 #print axioms HBL.Kinematic.sliceClock_hasDerivAt
 #print axioms HBL.Kinematic.sliceClock_initial
@@ -54,8 +57,10 @@ import HBL
 #print axioms HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path
 #print axioms HBL.Kinematic.sliceReferenceTime_eq_power
 #print axioms HBL.Kinematic.sliceReferenceTime_tendsto_zero
+#print axioms HBL.Kinematic.sliceTailFrom_abs_le_of_path
 #print axioms HBL.Kinematic.sliceTailFrom_eq_total_sub_interval
 #print axioms HBL.Kinematic.sliceTailFrom_hasDerivAt
+#print axioms HBL.Kinematic.sliceTailFrom_isBigO_of_path
 #print axioms HBL.Kinematic.sliceTailFrom_tendsto_zero
 #print axioms HBL.Kinematic.sliceTail_abs_le
 #print axioms HBL.Kinematic.sliceTail_continuousOn_of_path
@@ -70,6 +75,8 @@ import HBL
 #print axioms HBL.Kinematic.sliceTail_zero_parameter_abs_le
 #print axioms HBL.Kinematic.slice_inverse_scale_physical_power_tendsto_one
 #print axioms HBL.Kinematic.slice_kinematics_of_path
+#print axioms HBL.Kinematic.slice_physical_rate_error_isBigO
+#print axioms HBL.Kinematic.slice_physical_rate_ratio_eq
 #print axioms HBL.Kinematic.synchronizedSliceParameter_size_add_stability
 #print axioms HBL.Kinematic.synchronizedSliceParameter_spec
 #print axioms HBL.Kinematic.synchronizedSliceParameter_stability
