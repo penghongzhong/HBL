@@ -139,3 +139,4 @@ import HBL.RadialHartreeDomination
 import HBL.MonopoleOuterCubic
 import HBL.MonopoleHartreeExpansion
 import HBL.MonopoleHartreeNonlinearBound
+import HBL.RadialHartreeBubbleExact
