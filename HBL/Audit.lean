@@ -308,6 +308,7 @@ import HBL
 #print axioms HBL.Modulation.AffineTail.hartree_scale_log_density
 #print axioms HBL.Modulation.AffineTail.hartree_scale_log_pairing
 #print axioms HBL.Modulation.AffineTail.hartree_scale_log_product_integrable
+#print axioms HBL.Modulation.AffineTail.hartree_tail_linear_bound
 #print axioms HBL.Modulation.AffineTail.inv_cube_rational_norm_le
 #print axioms HBL.Modulation.AffineTail.inv_one_add_sq_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.inv_sq_rational_norm_le
@@ -562,11 +563,16 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_eq_green
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_equation
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_unique
+#print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core
+#print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleLinearGrowthConstant_pos
+#print axioms HBL.Modulation.Monopole.monopoleOuterTail_nonlocal_control
 #print axioms HBL.Modulation.Monopole.monopoleProfile_continuous
 #print axioms HBL.Modulation.Monopole.monopoleProfile_deriv_continuousOn
 #print axioms HBL.Modulation.Monopole.monopoleProfile_eq_log_affine_remainder
 #print axioms HBL.Modulation.Monopole.monopoleProfile_hPlus_equation
 #print axioms HBL.Modulation.Monopole.monopoleProfile_hasDerivAt
+#print axioms HBL.Modulation.Monopole.monopoleProfile_linear_growth
 #print axioms HBL.Modulation.Monopole.monopoleProfile_secondDeriv_continuousOn
 #print axioms HBL.Modulation.Monopole.monopoleProfile_second_hasDerivAt
 #print axioms HBL.Modulation.Monopole.monopoleProfile_sub_asymptotic_abs_le
