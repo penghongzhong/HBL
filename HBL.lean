@@ -122,3 +122,4 @@ import HBL.ClassicalWeightedL2
 import HBL.CompactPerturbationCharge
 import HBL.HalfLineClassicalUniqueness
 import HBL.MonopoleFirstCorrectionCertified
+import HBL.KinematicSynchronizedSliceCertified
