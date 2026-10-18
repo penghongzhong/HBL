@@ -122,6 +122,10 @@ jobs:
               'HBL.Modulation.Monopole.bubble_le_one',
               'HBL.Modulation.Monopole.bubble_nonneg',
               'HBL.Modulation.Monopole.bubble_sq',
+              'HBL.Modulation.Monopole.classicalWeightedL2_ae',
+              'HBL.Modulation.Monopole.classical_halfLine_norm_bounded_of_tendsto',
+              'HBL.Modulation.Monopole.classical_weighted_memLp_two_of_bound',
+              'HBL.Modulation.Monopole.classical_weighted_memLp_two_of_tendsto',
               'HBL.Modulation.Monopole.compactMonopoleNormalization_scale_eq_one',
               'HBL.Modulation.Monopole.compactMonopoleNormalization_scale_ne_zero',
               'HBL.Modulation.Monopole.compactMonopoleTest_memLp',
@@ -133,7 +137,12 @@ jobs:
               'HBL.Modulation.Monopole.exists_monopoleFredholmNormalizationFunctional',
               'HBL.Modulation.Monopole.hPlusApply_continuous_of_contDiff_weighted_memLp',
               'HBL.Modulation.Monopole.halfLineMeasure_restrict_Ioi',
+              'HBL.Modulation.Monopole.halfLine_affine_of_secondDeriv_zero',
+              'HBL.Modulation.Monopole.halfLine_classical_unique_of_sublinear_difference',
+              'HBL.Modulation.Monopole.halfLine_zero_of_secondDeriv_zero_sublinear',
               'HBL.Modulation.Monopole.hartreeRadialLog_neg_left',
+              'HBL.Modulation.Monopole.hartree_pairing_eq_of_weighted_memLp',
+              'HBL.Modulation.Monopole.hartree_pairing_integrable_of_weighted_memLp',
               'HBL.Modulation.Monopole.hasDerivAt_mul_sin_add_cos',
               'HBL.Modulation.Monopole.hasDerivAt_sin_sub_mul_cos',
               'HBL.Modulation.Monopole.hasDerivAt_sub_mul_cos_primitive',
@@ -197,6 +206,7 @@ jobs:
               'HBL.Modulation.Monopole.monopoleRemainder_weighted_memLp_two',
               'HBL.Modulation.Monopole.monopoleRemainder_weighted_toLp',
               'HBL.Modulation.Monopole.monopoleSourceDecayConstant_nonneg',
+              'HBL.Modulation.Monopole.monopole_first_correction_certified',
               'HBL.Modulation.Monopole.nonlocalApply_ae_norm_le_of_weighted_memLp',
               'HBL.Modulation.Monopole.nonlocalApply_continuous_of_weighted_memLp',
               'HBL.Modulation.Monopole.nonlocalApply_integrable_of_weighted_memLp',
@@ -258,6 +268,7 @@ jobs:
               'HBL.Modulation.Monopole.weightedMonopoleCancellation_norm_far_le',
               'HBL.Modulation.Monopole.weightedMonopoleDatumL2_ae',
               'HBL.Modulation.Monopole.weightedMonopoleDatum_memLp_two',
+              'HBL.Modulation.Monopole.weightedPerturbation_hartree_pairing_ae',
               'HBL.Modulation.Monopole.weightedScaleResonanceL2_ne_zero',
               'HBL.Modulation.Monopole.weightedScaleResonanceL2_span_finrank',
               'HBL.Modulation.Monopole.weightedScaleResonance_half_ne_zero',
@@ -373,5 +384,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; four manuscript theorem environments certified (4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the full first-correction manuscript environment and main blowup theorem remain unaccepted.')
+          print(f'{len(expected_reports)} component dependency reports checked; five revised manuscript environments certified (5/21); revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the main blowup theorem remains unaccepted.')
           PY

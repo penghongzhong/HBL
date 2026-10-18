@@ -385,6 +385,10 @@ import HBL
 #print axioms HBL.Modulation.Monopole.bubble_nonneg
 #print axioms HBL.Modulation.Monopole.bubble_sq
 #print axioms HBL.Modulation.Monopole.bubble_tendsto_zero
+#print axioms HBL.Modulation.Monopole.classicalWeightedL2_ae
+#print axioms HBL.Modulation.Monopole.classical_halfLine_norm_bounded_of_tendsto
+#print axioms HBL.Modulation.Monopole.classical_weighted_memLp_two_of_bound
+#print axioms HBL.Modulation.Monopole.classical_weighted_memLp_two_of_tendsto
 #print axioms HBL.Modulation.Monopole.compactMonopoleNormalization_scale_eq_one
 #print axioms HBL.Modulation.Monopole.compactMonopoleNormalization_scale_ne_zero
 #print axioms HBL.Modulation.Monopole.compactMonopoleTest_memLp
@@ -422,9 +426,14 @@ import HBL
 #print axioms HBL.Modulation.Monopole.halfLineMinGreen_second_hasDerivAt
 #print axioms HBL.Modulation.Monopole.halfLineMinGreen_split
 #print axioms HBL.Modulation.Monopole.halfLineMinGreen_zero
+#print axioms HBL.Modulation.Monopole.halfLine_affine_of_secondDeriv_zero
+#print axioms HBL.Modulation.Monopole.halfLine_classical_unique_of_sublinear_difference
+#print axioms HBL.Modulation.Monopole.halfLine_zero_of_secondDeriv_zero_sublinear
 #print axioms HBL.Modulation.Monopole.hartreeRadialLog_eq_angular
 #print axioms HBL.Modulation.Monopole.hartreeRadialLog_neg_left
 #print axioms HBL.Modulation.Monopole.hartree_nonlinearity_first_order_exact
+#print axioms HBL.Modulation.Monopole.hartree_pairing_eq_of_weighted_memLp
+#print axioms HBL.Modulation.Monopole.hartree_pairing_integrable_of_weighted_memLp
 #print axioms HBL.Modulation.Monopole.hasDerivAt_mul_sin_add_cos
 #print axioms HBL.Modulation.Monopole.hasDerivAt_sin_sub_mul_cos
 #print axioms HBL.Modulation.Monopole.hasDerivAt_sub_mul_cos_primitive
@@ -493,6 +502,7 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleRemainder_weighted_memLp_two
 #print axioms HBL.Modulation.Monopole.monopoleRemainder_weighted_toLp
 #print axioms HBL.Modulation.Monopole.monopoleSourceDecayConstant_nonneg
+#print axioms HBL.Modulation.Monopole.monopole_first_correction_certified
 #print axioms HBL.Modulation.Monopole.monopole_time_orders_integrable
 #print axioms HBL.Modulation.Monopole.nonlocalApply_ae_norm_le_of_weighted_memLp
 #print axioms HBL.Modulation.Monopole.nonlocalApply_continuous_of_weighted_memLp
@@ -628,6 +638,7 @@ import HBL
 #print axioms HBL.Modulation.Monopole.weightedMonopoleCancellation_norm_far_le
 #print axioms HBL.Modulation.Monopole.weightedMonopoleDatumL2_ae
 #print axioms HBL.Modulation.Monopole.weightedMonopoleDatum_memLp_two
+#print axioms HBL.Modulation.Monopole.weightedPerturbation_hartree_pairing_ae
 #print axioms HBL.Modulation.Monopole.weightedPotentialOperator_scale_eigen
 #print axioms HBL.Modulation.Monopole.weightedPotentialOperator_selfAdjoint
 #print axioms HBL.Modulation.Monopole.weightedScaleGreenSource_continuous

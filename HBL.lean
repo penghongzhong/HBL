@@ -118,3 +118,7 @@ import HBL.MonopoleProfileEquation
 import HBL.MonopoleFredholmNormalization
 import HBL.MonopoleCompactNormalization
 import HBL.MonopoleNormalizedProfile
+import HBL.ClassicalWeightedL2
+import HBL.CompactPerturbationCharge
+import HBL.HalfLineClassicalUniqueness
+import HBL.MonopoleFirstCorrectionCertified
