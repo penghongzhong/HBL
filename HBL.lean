@@ -135,3 +135,7 @@ import HBL.MonopoleQuadraticCutoff
 import HBL.MonopoleLocalCubicBound
 import HBL.MonopoleHartreePotential
 import HBL.MonopoleHartreePotentialBound
+import HBL.RadialHartreeDomination
+import HBL.MonopoleOuterCubic
+import HBL.MonopoleHartreeExpansion
+import HBL.MonopoleHartreeNonlinearBound

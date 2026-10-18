@@ -459,6 +459,18 @@ jobs:
               'HBL.re_angularLogDifference_fourierCoeff_pair',
               'HBL.sin_two_nat_periodic',
               'HBL.tsum_sin_product_div_nat_sq',
+              'HBL.Modulation.Monopole.radialHartreeRowBoundConstant_pos',
+              'HBL.Modulation.Monopole.radialHartreePotential_bubble_sq_domination',
+              'HBL.Modulation.Monopole.monopoleInnerRadialProfile_measurable',
+              'HBL.Modulation.Monopole.bubble_abs_le_one',
+              'HBL.Modulation.Monopole.monopoleHartreeBaseLinear_control',
+              'HBL.Modulation.Monopole.monopolePerturbedRadialProfile_abs_le',
+              'HBL.Modulation.Monopole.monopoleOuterCubic_difference_abs_le',
+              'HBL.Modulation.Monopole.monopoleOuterCubic_taylor_abs_le',
+              'HBL.Modulation.Monopole.monopoleHartreePotential_actual_expansion',
+              'HBL.Modulation.Monopole.monopoleRadialHartree_remainder_exact',
+              'HBL.Modulation.Monopole.monopoleHartreeNonlinearBoundConstant_pos',
+              'HBL.Modulation.Monopole.monopoleRadialHartree_nonlinear_quadratic_control',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')

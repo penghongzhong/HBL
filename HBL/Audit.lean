@@ -1101,3 +1101,15 @@ import HBL
 #print axioms HBL.tendsto_log_sin_mul_sin_nat_div
 #print axioms HBL.tendsto_truncated_intervalIntegral
 #print axioms HBL.tsum_sin_product_div_nat_sq
+#print axioms HBL.Modulation.Monopole.radialHartreeRowBoundConstant_pos
+#print axioms HBL.Modulation.Monopole.radialHartreePotential_bubble_sq_domination
+#print axioms HBL.Modulation.Monopole.monopoleInnerRadialProfile_measurable
+#print axioms HBL.Modulation.Monopole.bubble_abs_le_one
+#print axioms HBL.Modulation.Monopole.monopoleHartreeBaseLinear_control
+#print axioms HBL.Modulation.Monopole.monopolePerturbedRadialProfile_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleOuterCubic_difference_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleOuterCubic_taylor_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleHartreePotential_actual_expansion
+#print axioms HBL.Modulation.Monopole.monopoleRadialHartree_remainder_exact
+#print axioms HBL.Modulation.Monopole.monopoleHartreeNonlinearBoundConstant_pos
+#print axioms HBL.Modulation.Monopole.monopoleRadialHartree_nonlinear_quadratic_control
