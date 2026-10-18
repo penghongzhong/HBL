@@ -133,3 +133,5 @@ import HBL.KinematicPhysicalDynamics
 import HBL.MonopoleCutoffEquation
 import HBL.MonopoleQuadraticCutoff
 import HBL.MonopoleLocalCubicBound
+import HBL.MonopoleHartreePotential
+import HBL.MonopoleHartreePotentialBound

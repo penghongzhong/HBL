@@ -378,6 +378,8 @@ import HBL
 #print axioms HBL.Modulation.AffineTail.pv_weight_decomposition
 #print axioms HBL.Modulation.AffineTail.pv_weight_interval_decomposition
 #print axioms HBL.Modulation.AffineTail.pv_weight_split_decomposition
+#print axioms HBL.Modulation.AffineTail.radialHartreeBubbleBoundConstant_pos
+#print axioms HBL.Modulation.AffineTail.radialHartreeBubble_integrable_bound
 #print axioms HBL.Modulation.AffineTail.radialLogPrimitive_hasDerivAt
 #print axioms HBL.Modulation.AffineTail.radialLogPrimitive_log_gap_tendsto_zero
 #print axioms HBL.Modulation.AffineTail.radialLogPrimitive_symmetric_gap_factor
@@ -563,6 +565,14 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_eq_green
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_equation
 #print axioms HBL.Modulation.Monopole.monopoleFredholmSolution_unique
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityPolynomial_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityPotential_quadratic_control
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityRemainder_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityRemainder_eq_mul_polynomial
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityRemainder_measurable
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityRemainder_weighted_abs_le
+#print axioms HBL.Modulation.Monopole.monopoleHartreeDensityRemainder_zero_of_two_mul_le
+#print axioms HBL.Modulation.Monopole.monopoleHartreePotential_integrable
 #print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core
 #print axioms HBL.Modulation.Monopole.monopoleInnerProfile_hPlus_core_abs_le
 #print axioms HBL.Modulation.Monopole.monopoleInnerRadialProfile_abs_le
@@ -622,6 +632,7 @@ import HBL
 #print axioms HBL.Modulation.Monopole.nonlocalApply_monopoleRemainder_ae_norm_le
 #print axioms HBL.Modulation.Monopole.nonlocalApply_monopoleRemainder_continuous
 #print axioms HBL.Modulation.Monopole.nonlocalApply_resonancePlus_eq_six_weight
+#print axioms HBL.Modulation.Monopole.radialHartreePotential_integrable
 #print axioms HBL.Modulation.Monopole.radius_mul_bubble_le_one
 #print axioms HBL.Modulation.Monopole.radius_mul_weightedGreenDecay_sq_le_bubble_cube
 #print axioms HBL.Modulation.Monopole.resonancePlus_deriv_tendsto_zero
