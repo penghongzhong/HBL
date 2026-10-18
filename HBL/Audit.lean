@@ -23,6 +23,10 @@ import HBL
 #print axioms HBL.Kinematic.integral_Ioi_rpow_neg_two
 #print axioms HBL.Kinematic.inverseScale_div_physicalRate_eq
 #print axioms HBL.Kinematic.normalizedRateFactor_sub_one_isBigO
+#print axioms HBL.Kinematic.phaseQuotient_abs_le
+#print axioms HBL.Kinematic.phaseQuotient_integrableOn
+#print axioms HBL.Kinematic.phaseQuotient_tail_abs_le
+#print axioms HBL.Kinematic.phaseQuotient_tail_isBigO
 #print axioms HBL.Kinematic.rpow_neg_isBigO_slicePhysicalTime_rpow
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root_with_bound
@@ -37,6 +41,8 @@ import HBL
 #print axioms HBL.Kinematic.sliceClock_linear_bounds
 #print axioms HBL.Kinematic.sliceClock_sub_parameter
 #print axioms HBL.Kinematic.sliceClock_zero
+#print axioms HBL.Kinematic.sliceGamma_physical_error_isBigO
+#print axioms HBL.Kinematic.sliceGamma_sub_log_physicalTime_eq
 #print axioms HBL.Kinematic.sliceIntegrand_abs_le
 #print axioms HBL.Kinematic.sliceIntegrand_continuousOn
 #print axioms HBL.Kinematic.sliceIntegrand_eq_neg_shift_mul_inv
@@ -52,7 +58,9 @@ import HBL
 #print axioms HBL.Kinematic.sliceParameterKernel_bounds
 #print axioms HBL.Kinematic.sliceParameterKernel_integrableOn
 #print axioms HBL.Kinematic.sliceParameterKernel_integral_bounds
+#print axioms HBL.Kinematic.slicePhysicalTime_continuousOn_strictAntiOn_of_path
 #print axioms HBL.Kinematic.slicePhysicalTime_eq_reference_mul_exp
+#print axioms HBL.Kinematic.slicePhysicalTime_existsUnique_of_path
 #print axioms HBL.Kinematic.slicePhysicalTime_hasDerivAt
 #print axioms HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path
 #print axioms HBL.Kinematic.sliceReferenceTime_eq_power

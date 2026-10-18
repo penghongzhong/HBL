@@ -125,3 +125,5 @@ import HBL.MonopoleFirstCorrectionCertified
 import HBL.KinematicSynchronizedSliceCertified
 import HBL.KinematicPhysicalRate
 import HBL.KinematicPhysicalRateError
+import HBL.KinematicPhysicalPhase
+import HBL.KinematicPhysicalTimeInverse

@@ -117,6 +117,10 @@ jobs:
               'HBL.Kinematic.integral_Ioi_rpow_neg_two',
               'HBL.Kinematic.inverseScale_div_physicalRate_eq',
               'HBL.Kinematic.normalizedRateFactor_sub_one_isBigO',
+              'HBL.Kinematic.phaseQuotient_abs_le',
+              'HBL.Kinematic.phaseQuotient_integrableOn',
+              'HBL.Kinematic.phaseQuotient_tail_abs_le',
+              'HBL.Kinematic.phaseQuotient_tail_isBigO',
               'HBL.Kinematic.rpow_neg_isBigO_slicePhysicalTime_rpow',
               'HBL.Kinematic.scalarInverse_existsUnique_root',
               'HBL.Kinematic.scalarInverse_existsUnique_root_with_bound',
@@ -131,6 +135,8 @@ jobs:
               'HBL.Kinematic.sliceClock_linear_bounds',
               'HBL.Kinematic.sliceClock_sub_parameter',
               'HBL.Kinematic.sliceClock_zero',
+              'HBL.Kinematic.sliceGamma_physical_error_isBigO',
+              'HBL.Kinematic.sliceGamma_sub_log_physicalTime_eq',
               'HBL.Kinematic.sliceIntegrand_abs_le',
               'HBL.Kinematic.sliceIntegrand_continuousOn',
               'HBL.Kinematic.sliceIntegrand_eq_neg_shift_mul_inv',
@@ -146,7 +152,9 @@ jobs:
               'HBL.Kinematic.sliceParameterKernel_bounds',
               'HBL.Kinematic.sliceParameterKernel_integrableOn',
               'HBL.Kinematic.sliceParameterKernel_integral_bounds',
+              'HBL.Kinematic.slicePhysicalTime_continuousOn_strictAntiOn_of_path',
               'HBL.Kinematic.slicePhysicalTime_eq_reference_mul_exp',
+              'HBL.Kinematic.slicePhysicalTime_existsUnique_of_path',
               'HBL.Kinematic.slicePhysicalTime_hasDerivAt',
               'HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path',
               'HBL.Kinematic.sliceReferenceTime_eq_power',
@@ -457,5 +465,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the main blowup theorem remains unaccepted.')
+          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the actual phase has logarithmic physical-time expansion with error O(tau^(4*mu_infty*delta)) by exact reciprocal-tail cancellation; the actual physical clock is continuous, strictly decreasing and covers each time in (0,tau(s0)] uniquely; the main blowup theorem remains unaccepted.')
           PY
