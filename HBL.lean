@@ -102,9 +102,17 @@ import HBL.WeightedScaleGreen
 import HBL.WeightedFreeGreenPointwise
 import HBL.WeightedFreeGreenODE
 import HBL.WeightedFreeGreenSpectrum
+import HBL.WeightedArctanKernels
+import HBL.LogSinFourierCoefficient
+import HBL.WeightedBirmanSchwingerPolynomial
 import HBL.FredholmOrthogonalInverse
 import HBL.FredholmCokernelAlternative
 import HBL.MonopoleTailCharge
 import HBL.MonopoleLogCharge
 import HBL.MonopoleFredholmSource
 import HBL.MonopoleProfileCancellation
+import HBL.WeightedHartreeSquareIdentity
+import HBL.WeightedScaleNonzero
+import HBL.MonopoleFredholmAsymptotics
+import HBL.MonopoleProfileEquation
+import HBL.MonopoleFredholmNormalization

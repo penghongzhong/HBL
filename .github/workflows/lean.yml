@@ -61,8 +61,9 @@ jobs:
           lake update
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
           lake exe cache get Mathlib.Analysis.SpecialFunctions.SmoothTransition Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension Mathlib.Analysis.Calculus.ContDiff.Deriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Angle Mathlib.MeasureTheory.Measure.Haar.NormedSpace Mathlib.Analysis.SpecificLimits.Basic Mathlib.Analysis.SpecialFunctions.ImproperIntegrals Mathlib.Analysis.Calculus.MeanValue Mathlib.Analysis.Calculus.Deriv.Slope Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.MeasureTheory.Function.LpSpace.Complete Mathlib.MeasureTheory.Function.L2Space Mathlib.Topology.Algebra.LinearMapCompletion Mathlib.Analysis.Calculus.ParametricIntervalIntegral Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Analysis.Calculus.ImplicitContDiff Mathlib.Analysis.InnerProductSpace.Calculus Mathlib.Analysis.InnerProductSpace.Dual Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Analysis.Calculus.ContDiff.Deriv Mathlib.MeasureTheory.Function.LpSpace.Basic Mathlib.MeasureTheory.Integral.Bochner.Basic Mathlib.MeasureTheory.Measure.Typeclasses.Finite Mathlib.Topology.Order.Compact Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring Mathlib.Tactic.Linarith
-          lake exe cache get Mathlib.Analysis.Convolution Mathlib.Analysis.SpecialFunctions.Integrability.Basic Mathlib.Analysis.SpecialFunctions.Pow.Real Mathlib.Analysis.SpecialFunctions.JapaneseBracket Mathlib.MeasureTheory.Integral.IntegralEqImproper
+          lake exe cache get Mathlib.Analysis.Convolution Mathlib.Analysis.SpecialFunctions.Integrability.Basic Mathlib.Analysis.SpecialFunctions.Pow.Real Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics Mathlib.Analysis.SpecialFunctions.JapaneseBracket Mathlib.Analysis.SpecialFunctions.Integrals.Log Mathlib.Analysis.SpecialFunctions.Trigonometric.Sinc Mathlib.MeasureTheory.Integral.IntegralEqImproper
           lake exe cache get Mathlib.Analysis.Normed.Operator.Compact.FiniteDimension Mathlib.Analysis.InnerProductSpace.Spectrum Mathlib.MeasureTheory.Measure.MeasuredSets Mathlib.MeasureTheory.Measure.SeparableMeasure
+          lake exe cache get Mathlib.Analysis.Fourier.AddCircle Mathlib.NumberTheory.ZetaValues Mathlib.MeasureTheory.Function.JacobianOneDim Mathlib.MeasureTheory.Measure.OpenPos
       - name: Compile HBL proof components
         shell: bash
         run: |
@@ -98,13 +99,262 @@ jobs:
           generic_expected += ['HBL.L2Kernel.operator_add', 'HBL.L2Kernel.operator_smul', 'HBL.L2Kernel.operator_zero', 'HBL.L2Kernel.kernelToOperator_apply', 'HBL.L2Kernel.tensor_inner_tensor', 'HBL.L2Kernel.operator_tensor', 'HBL.L2Kernel.rankOne_isCompactOperator', 'HBL.L2Kernel.operator_tensor_isCompactOperator', 'HBL.L2Kernel.operator_isCompactOperator_of_mem_tensorSpan', 'HBL.L2Kernel.operator_isCompactOperator_of_mem_closure_tensorSpan', 'HBL.L2Kernel.tensorSpan_dense_of_measureDense', 'HBL.L2Kernel.operator_isCompactOperator_of_tensorSpan_dense', 'HBL.L2Kernel.measurableRectangles_generate', 'HBL.L2Kernel.measurableRectangles_measurable', 'HBL.L2Kernel.measurableRectangles_isSetSemiring', 'HBL.L2Kernel.measureDense_supClosure_of_generateFrom_isSetSemiring', 'HBL.L2Kernel.measurableRectangleUnions_measureDense', 'HBL.L2Kernel.rectangleIndicator_eq_tensor', 'HBL.L2Kernel.rectangleIndicator_mem_tensorSpan', 'HBL.L2Kernel.finiteRectangleUnion_measurable', 'HBL.L2Kernel.finiteDisjointRectangleUnionIndicator_mem_tensorSpan', 'HBL.L2Kernel.rectangleUnionIndicator_mem_tensorSpan', 'HBL.L2Kernel.tensorSpan_dense', 'HBL.L2Kernel.operator_isCompactOperator']
           fredholm_expected = ['HBL.Fredholm.map_fixedComplement', 'HBL.Fredholm.complementRestriction_compact', 'HBL.Fredholm.complementRestriction_no_fixed_vector', 'HBL.Fredholm.one_sub_complementRestriction_bijective', 'HBL.Fredholm.existsUnique_one_sub_apply_eq']
           fredholm_expected += ['HBL.Fredholm.one_sub_antilipschitz_on_kernelComplement', 'HBL.Fredholm.range_kernelComplementRestriction', 'HBL.Fredholm.one_sub_isClosed_range', 'HBL.Fredholm.one_sub_range_eq_adjointKernel_orthogonal', 'HBL.Fredholm.existsUnique_one_sub_apply_eq_of_mem_adjointKernel_orthogonal']
-          expected_full = {'HBL.Modulation.' + name for name in expected} | set(generic_expected) | set(fredholm_expected)
+          bridge_expected = ['HBL.selfAdjoint_quadratic_factor_eq_zero', 'HBL.birmanSchwinger_fixed_implies_green_one_fifteen', 'HBL.Modulation.Monopole.weightedBirmanSchwinger_fixed_mem_span_of_square_identity', 'HBL.Modulation.Monopole.weightedBirmanSchwinger_fixed_iff_span_of_square_identity']
+          bridge_expected += ['HBL.Modulation.Monopole.bubble_eq_cos_arctan', 'HBL.Modulation.Monopole.weightedGreenDecay_eq_cos_arctan_sq', 'HBL.Modulation.Monopole.sin_arctan_eq_mul_cos_arctan', 'HBL.Modulation.Monopole.sin_arctan_add', 'HBL.Modulation.Monopole.sin_arctan_sub', 'HBL.Modulation.Monopole.arctan_log_ratio', 'HBL.Modulation.Monopole.hartreeRadialLog_eq_angular', 'HBL.Modulation.Monopole.weightedHartreeKernel_eq_angular', 'HBL.Modulation.Monopole.weightedFreeGreen_eq_angular']
+          bridge_expected += ['HBL.tendsto_truncated_intervalIntegral', 'HBL.cotSinePolynomial_continuous', 'HBL.sin_mul_cotSinePolynomial', 'HBL.cotSinePolynomial_eq', 'HBL.intervalIntegrable_log_sin_mul_cos', 'HBL.integral_cos_two_nat_mul', 'HBL.cotSinePolynomial_succ', 'HBL.cotSinePolynomial_succ_fun', 'HBL.cotSinePolynomial_intervalIntegral', 'HBL.log_sin_cos_truncated_integration_by_parts', 'HBL.tendsto_log_sin_mul_sin_nat_div', 'HBL.integral_log_sin_mul_cos_two_nat']
+          expected_full = {'HBL.Modulation.' + name for name in expected} | set(generic_expected) | set(fredholm_expected) | set(bridge_expected)
+          new_chain_expected = [
+              'HBL.L2Kernel.operator_comp_toLp_eq_of_convolution',
+              'HBL.L2Kernel.operator_sub',
+              'HBL.L2Kernel.operator_toLp_ae_eq_integral',
+              'HBL.Modulation.Monopole.adjoint_one_sub_weightedBirmanSchwinger_kernel',
+              'HBL.Modulation.Monopole.angularFreeGreen_symm',
+              'HBL.Modulation.Monopole.angularGreen_resolvent',
+              'HBL.Modulation.Monopole.angularGreen_resolvent_of_ge',
+              'HBL.Modulation.Monopole.angularGreen_resolvent_of_le',
+              'HBL.Modulation.Monopole.angularHartreeLog_sq_integrableOn',
+              'HBL.Modulation.Monopole.angularHartreeLog_symm',
+              'HBL.Modulation.Monopole.angularLogDifference_eq_angularHartreeLog',
+              'HBL.Modulation.Monopole.angularZeroGreen_le_pi_div_two',
+              'HBL.Modulation.Monopole.angularZeroGreen_nonneg_of_mem',
+              'HBL.Modulation.Monopole.angularZeroGreen_symm',
+              'HBL.Modulation.Monopole.arctan_image_Ioi',
+              'HBL.Modulation.Monopole.bubble_le_one',
+              'HBL.Modulation.Monopole.bubble_nonneg',
+              'HBL.Modulation.Monopole.bubble_sq',
+              'HBL.Modulation.Monopole.existsUnique_monopoleFredholmNormalizedSolution',
+              'HBL.Modulation.Monopole.existsUnique_monopoleFredholmSolution',
+              'HBL.Modulation.Monopole.exists_monopoleFredholmNormalizationFunctional',
+              'HBL.Modulation.Monopole.hPlusApply_continuous_of_contDiff_weighted_memLp',
+              'HBL.Modulation.Monopole.halfLineMeasure_restrict_Ioi',
+              'HBL.Modulation.Monopole.hartreeRadialLog_neg_left',
+              'HBL.Modulation.Monopole.hasDerivAt_mul_sin_add_cos',
+              'HBL.Modulation.Monopole.hasDerivAt_sin_sub_mul_cos',
+              'HBL.Modulation.Monopole.hasDerivAt_sub_mul_cos_primitive',
+              'HBL.Modulation.Monopole.hasDerivAt_sub_mul_sin_primitive',
+              'HBL.Modulation.Monopole.integral_Ioi_rpow_neg_two',
+              'HBL.Modulation.Monopole.integral_Ioo_eq_integral_Ioi_arctan',
+              'HBL.Modulation.Monopole.integral_angularHartreeLog_product',
+              'HBL.Modulation.Monopole.integral_mul_cos',
+              'HBL.Modulation.Monopole.integral_mul_sin',
+              'HBL.Modulation.Monopole.integral_sub_mul_cos',
+              'HBL.Modulation.Monopole.integral_sub_mul_sin',
+              'HBL.Modulation.Monopole.intervalIntegral_eq_integral_Ioi_arctan',
+              'HBL.Modulation.Monopole.monopoleCorrectedDecayConstant_nonneg',
+              'HBL.Modulation.Monopole.monopoleCorrectedSource_ae_norm_le',
+              'HBL.Modulation.Monopole.monopoleCorrectedSource_continuous',
+              'HBL.Modulation.Monopole.monopoleCorrectedSource_decomposition',
+              'HBL.Modulation.Monopole.monopoleFredholmNormalizedSolution_equation',
+              'HBL.Modulation.Monopole.monopoleFredholmNormalizedSolution_normalization',
+              'HBL.Modulation.Monopole.monopoleFredholmNormalizedSolution_unique',
+              'HBL.Modulation.Monopole.monopoleFredholmRightHandSide_cokernel_inner_zero',
+              'HBL.Modulation.Monopole.monopoleFredholmRightHandSide_mem_adjointKernel_orthogonal',
+              'HBL.Modulation.Monopole.monopoleFredholmSolution_ae_remainder',
+              'HBL.Modulation.Monopole.monopoleFredholmSolution_eq_green',
+              'HBL.Modulation.Monopole.monopoleFredholmSolution_equation',
+              'HBL.Modulation.Monopole.monopoleFredholmSolution_unique',
+              'HBL.Modulation.Monopole.monopoleProfile_continuous',
+              'HBL.Modulation.Monopole.monopoleProfile_deriv_continuousOn',
+              'HBL.Modulation.Monopole.monopoleProfile_eq_log_affine_remainder',
+              'HBL.Modulation.Monopole.monopoleProfile_hPlus_equation',
+              'HBL.Modulation.Monopole.monopoleProfile_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleProfile_secondDeriv_continuousOn',
+              'HBL.Modulation.Monopole.monopoleProfile_second_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleProfile_sub_asymptotic_abs_le',
+              'HBL.Modulation.Monopole.monopoleProfile_sub_log_affine_tendsto_tailConstant',
+              'HBL.Modulation.Monopole.monopoleProfile_zero',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_eq_slope_add_log_remainder_div',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_sub_asymptotic_abs_le',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_tendsto_affineSlope',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_tendsto_neg_pi_div_eight',
+              'HBL.Modulation.Monopole.monopoleRemainderSource_ae_norm_le',
+              'HBL.Modulation.Monopole.monopoleRemainderSource_continuous',
+              'HBL.Modulation.Monopole.monopoleRemainderSource_firstMoment_ae',
+              'HBL.Modulation.Monopole.monopoleRemainderSource_firstMoment_integrable',
+              'HBL.Modulation.Monopole.monopoleRemainderSource_integrable',
+              'HBL.Modulation.Monopole.monopoleRemainder_abs_le',
+              'HBL.Modulation.Monopole.monopoleRemainder_continuous',
+              'HBL.Modulation.Monopole.monopoleRemainder_deriv_continuousOn',
+              'HBL.Modulation.Monopole.monopoleRemainder_eq_halfLineMinGreen',
+              'HBL.Modulation.Monopole.monopoleRemainder_hPlus_equation',
+              'HBL.Modulation.Monopole.monopoleRemainder_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleRemainder_minKernel_integrable',
+              'HBL.Modulation.Monopole.monopoleRemainder_secondDeriv_continuousOn',
+              'HBL.Modulation.Monopole.monopoleRemainder_second_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleRemainder_sub_tailConstant',
+              'HBL.Modulation.Monopole.monopoleRemainder_sub_tailConstant_abs_le',
+              'HBL.Modulation.Monopole.monopoleRemainder_tailIntegrand_integrableOn',
+              'HBL.Modulation.Monopole.monopoleRemainder_tendsto_tailConstant',
+              'HBL.Modulation.Monopole.monopoleRemainder_weighted_memLp_two',
+              'HBL.Modulation.Monopole.monopoleRemainder_weighted_toLp',
+              'HBL.Modulation.Monopole.monopoleSourceDecayConstant_nonneg',
+              'HBL.Modulation.Monopole.nonlocalApply_ae_norm_le_of_weighted_memLp',
+              'HBL.Modulation.Monopole.nonlocalApply_continuous_of_weighted_memLp',
+              'HBL.Modulation.Monopole.nonlocalApply_integrable_of_weighted_memLp',
+              'HBL.Modulation.Monopole.nonlocalApply_model_ae_norm_le',
+              'HBL.Modulation.Monopole.nonlocalApply_monopoleLogModel_ae_norm_le',
+              'HBL.Modulation.Monopole.nonlocalApply_monopoleProfile',
+              'HBL.Modulation.Monopole.nonlocalApply_monopoleRemainder_ae_norm_le',
+              'HBL.Modulation.Monopole.nonlocalApply_monopoleRemainder_continuous',
+              'HBL.Modulation.Monopole.radius_mul_bubble_le_one',
+              'HBL.Modulation.Monopole.radius_mul_weightedGreenDecay_sq_le_bubble_cube',
+              'HBL.Modulation.Monopole.rpow_neg_two_eq_inv_sq',
+              'HBL.Modulation.Monopole.weightedAffineCurvatureL2_ae',
+              'HBL.Modulation.Monopole.weightedAffineCurvature_continuous',
+              'HBL.Modulation.Monopole.weightedAffineCurvature_memLp_two',
+              'HBL.Modulation.Monopole.weightedAffineCurvature_zero_of_two_lt',
+              'HBL.Modulation.Monopole.weightedAffineModelL2_ae',
+              'HBL.Modulation.Monopole.weightedAffineModel_continuous',
+              'HBL.Modulation.Monopole.weightedAffineModel_memLp_two',
+              'HBL.Modulation.Monopole.weightedBirmanSchwinger_adjointKernel_eq_scale_span',
+              'HBL.Modulation.Monopole.weightedBirmanSchwinger_fixed_iff_span',
+              'HBL.Modulation.Monopole.weightedBirmanSchwinger_fixed_mem_span',
+              'HBL.Modulation.Monopole.weightedFreeGreen_nonneg',
+              'HBL.Modulation.Monopole.weightedGreenDecay_sq_le_bubble_cube',
+              'HBL.Modulation.Monopole.weightedGreenOutputMajorant_mul_integrable',
+              'HBL.Modulation.Monopole.weightedGreenPrimitiveBound_nonneg',
+              'HBL.Modulation.Monopole.weightedGreenPrimitive_abs_le_bound',
+              'HBL.Modulation.Monopole.weightedGreen_totalDatum_ae_source',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_neg_left',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_nonneg',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_row_memLp',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_row_sq_integrable',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_square_integral',
+              'HBL.Modulation.Monopole.weightedHartreeKernel_zero_left',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_ae_pointwise',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_affine_ae',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_conjugation',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_log_ae',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_square',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_ae_norm_le',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_conjugation',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_continuous',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_continuous_nonnegative',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_eq_inner',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_neg',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_solution_conjugation',
+              'HBL.Modulation.Monopole.weightedHartreePointwise_zero',
+              'HBL.Modulation.Monopole.weightedHartreeRow_ae',
+              'HBL.Modulation.Monopole.weightedHartreeRow_continuous',
+              'HBL.Modulation.Monopole.weightedHartreeRow_inner',
+              'HBL.Modulation.Monopole.weightedHartreeRow_norm_sub_sq',
+              'HBL.Modulation.Monopole.weightedHartreeSquareGreenIdentity',
+              'HBL.Modulation.Monopole.weightedLogModelL2_ae',
+              'HBL.Modulation.Monopole.weightedLogModel_continuous',
+              'HBL.Modulation.Monopole.weightedLogModel_memLp_two',
+              'HBL.Modulation.Monopole.weightedMonopoleCancellationL2_ae',
+              'HBL.Modulation.Monopole.weightedMonopoleCancellation_continuous',
+              'HBL.Modulation.Monopole.weightedMonopoleCancellation_far',
+              'HBL.Modulation.Monopole.weightedMonopoleCancellation_memLp_two',
+              'HBL.Modulation.Monopole.weightedMonopoleCancellation_norm_far_le',
+              'HBL.Modulation.Monopole.weightedMonopoleDatumL2_ae',
+              'HBL.Modulation.Monopole.weightedMonopoleDatum_memLp_two',
+              'HBL.Modulation.Monopole.weightedScaleResonanceL2_ne_zero',
+              'HBL.Modulation.Monopole.weightedScaleResonanceL2_span_finrank',
+              'HBL.Modulation.Monopole.weightedScaleResonance_half_ne_zero',
+              'HBL.Modulation.Monopole.weightedScaleResonance_inner_monopoleDatum',
+              'HBL.Modulation.Monopole.weightedScaleResonance_inner_monopoleDatum_zero',
+              'HBL.Modulation.Monopole.weightedZeroGreenL2_ae',
+              'HBL.Modulation.Monopole.weightedZeroGreenOperator_comp_free',
+              'HBL.Modulation.Monopole.weightedZeroGreen_diag_le',
+              'HBL.Modulation.Monopole.weightedZeroGreen_free_resolvent_integral',
+              'HBL.Modulation.Monopole.weightedZeroGreen_memLp_two',
+              'HBL.Modulation.Monopole.weightedZeroGreen_nonneg',
+              'HBL.Modulation.Monopole.weightedZeroGreen_resolvent',
+              'HBL.Modulation.Monopole.weightedZeroGreen_sq_integrable',
+              'HBL.Modulation.Monopole.weightedZeroGreen_sq_le_majorant',
+              'HBL.Modulation.Monopole.weightedZeroGreen_symm',
+              'HBL.Modulation.Monopole.weightedZeroGreen_uncurry_continuous',
+              'HBL.Modulation.Monopole.weightedZeroGreen_zero_left',
+              'HBL.Modulation.parameterNegId_apply',
+              'HBL.Modulation.physicalParameters_scale_pos',
+              'HBL.Modulation.physicalParameters_zero',
+              'HBL.Modulation.symmetryTangent_apply',
+              'HBL.Modulation.testPair_apply',
+              'HBL.Modulation.testedConstraint_hasFDerivAt',
+              'HBL.angularLogDifference_intervalIntegrable',
+              'HBL.angularLogDifference_reflect',
+              'HBL.cos_two_nat_periodic',
+              'HBL.fourierCoeffOn_angularLogDifferenceC_nat',
+              'HBL.fourierCoeffOn_angularLogDifferenceC_neg_nat',
+              'HBL.fourierCoeffOn_angularLogDifferenceC_zero',
+              'HBL.fourier_neg_nat_on_pi',
+              'HBL.fourier_neg_nat_on_pi_sub_zero',
+              'HBL.fourier_pos_nat_on_pi_sub_zero',
+              'HBL.hasSum_cos_two_pi_div_nat_sq',
+              'HBL.hasSum_prod_fourierCoeff',
+              'HBL.hasSum_prod_fourierCoeffOn',
+              'HBL.hasSum_sin_product_div_nat_sq',
+              'HBL.hasSum_sin_product_div_nat_sq_of_le',
+              'HBL.integrableOn_log_sin_sq_Ioo_zero_pi',
+              'HBL.integrableOn_log_sq_Ioo_zero_one',
+              'HBL.integrableOn_sin_inv_sqrt_Ioo_zero_pi',
+              'HBL.integrableOn_sin_inv_sqrt_Ioo_zero_pi_half',
+              'HBL.integral_angularLogDifference_mul_cos',
+              'HBL.integral_angularLogDifference_mul_sin',
+              'HBL.integral_angularLogDifference_product_full',
+              'HBL.integral_angularLogDifference_product_half',
+              'HBL.integral_logAbsSin_add_mul_sin',
+              'HBL.integral_logAbsSin_mul_cos_period',
+              'HBL.integral_logAbsSin_mul_cos_two_nat',
+              'HBL.integral_logAbsSin_mul_sin_period',
+              'HBL.integral_logAbsSin_mul_sin_two_nat',
+              'HBL.integral_logAbsSin_sub_mul_sin',
+              'HBL.intervalIntegrable_angularLogDifference_mul_cos',
+              'HBL.intervalIntegrable_angularLogDifference_mul_sin',
+              'HBL.intervalIntegrable_logAbsSin_mul_cos',
+              'HBL.intervalIntegrable_logAbsSin_mul_sin',
+              'HBL.logAbsSin_eq_log_sin',
+              'HBL.logAbsSin_intervalIntegrable',
+              'HBL.logAbsSin_mul_cos_periodic',
+              'HBL.logAbsSin_mul_sin_periodic',
+              'HBL.logAbsSin_periodic',
+              'HBL.logAbsSin_sq_intervalIntegrable',
+              'HBL.logAbsSin_sq_periodic',
+              'HBL.log_sq_le_inv_sqrt',
+              'HBL.memLp_angularLogDifferenceC_Ioc',
+              'HBL.memLp_angularLogDifference_Ioc',
+              'HBL.memLp_logAbsSin_add_Ioc',
+              'HBL.memLp_logAbsSin_sub_Ioc',
+              'HBL.re_angularLogDifference_fourierCoeff_pair',
+              'HBL.sin_two_nat_periodic',
+              'HBL.tsum_sin_product_div_nat_sq',
+          ]
+          if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
+              raise SystemExit('Duplicate new chain dependency report')
+          expected_full |= set(new_chain_expected)
           for name in expected_full:
               if name not in text:
                   raise SystemExit('Missing dependency report: ' + name)
           reports = re.findall(r"'([^']+)' depends on axioms:", text)
+          def strip_lean_comments(source):
+              result, i, depth, quoted = [], 0, 0, False
+              while i < len(source):
+                  if depth:
+                      if source.startswith('/-', i): depth += 1; i += 2
+                      elif source.startswith('-/', i): depth -= 1; i += 2
+                      else: result.append('\n' if source[i] == '\n' else ' '); i += 1
+                  elif quoted:
+                      if source[i] == '\\': i += 2
+                      elif source[i] == '"': quoted = False; i += 1
+                      else: result.append('\n' if source[i] == '\n' else ' '); i += 1
+                  elif source.startswith('/-', i): depth = 1; i += 2
+                  elif source.startswith('--', i):
+                      end = source.find('\n', i)
+                      i = len(source) if end < 0 else end
+                  elif source[i] == '"': quoted = True; i += 1
+                  else: result.append(source[i]); i += 1
+              return ''.join(result)
+          public_pattern = re.compile(r'^\s*(?:@\[[^\n]*\]\s*)?(?:(private|protected)\s+)?(?:theorem|lemma)\s+(\S+)', re.M)
+          public_count = sum(visibility != 'private'
+              for path in Path('HBL').glob('*.lean')
+              for visibility, name in public_pattern.findall(strip_lean_comments(path.read_text())))
+          if public_count != len(reports):
+              raise SystemExit(f'Public theorem/lemma coverage mismatch: {public_count} declarations, {len(reports)} reports')
+
           expected_reports = expected_full
-          if len(expected) + len(generic_expected) + len(fredholm_expected) != len(expected_reports):
+          if len(expected) + len(generic_expected) + len(fredholm_expected) + len(bridge_expected) + len(new_chain_expected) != len(expected_reports):
               raise SystemExit('Duplicate expected dependency report')
           if len(reports) != len(set(reports)) or set(reports) != expected_reports:
               raise SystemExit('Dependency report set does not match the audited inventory')
@@ -115,5 +365,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; four manuscript theorem environments certified (4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the joint Green--Hartree spectral bridge remains next.')
+          print(f'{len(expected_reports)} component dependency reports checked; four manuscript theorem environments certified (4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the full first-correction manuscript environment and main blowup theorem remain unaccepted.')
           PY
