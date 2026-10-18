@@ -21,6 +21,7 @@ import HBL
 #print axioms HBL.Kinematic.existsUnique_synchronized_slice_parameter
 #print axioms HBL.Kinematic.integral_Ioi_rpow_neg_one_sub
 #print axioms HBL.Kinematic.integral_Ioi_rpow_neg_two
+#print axioms HBL.Kinematic.inverseScale_div_physicalRate_eq
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root
 #print axioms HBL.Kinematic.scalarInverse_existsUnique_root_with_bound
 #print axioms HBL.Kinematic.scalarInverse_root_bound
@@ -50,6 +51,9 @@ import HBL
 #print axioms HBL.Kinematic.sliceParameterKernel_integral_bounds
 #print axioms HBL.Kinematic.slicePhysicalTime_eq_reference_mul_exp
 #print axioms HBL.Kinematic.slicePhysicalTime_hasDerivAt
+#print axioms HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path
+#print axioms HBL.Kinematic.sliceReferenceTime_eq_power
+#print axioms HBL.Kinematic.sliceReferenceTime_tendsto_zero
 #print axioms HBL.Kinematic.sliceTailFrom_eq_total_sub_interval
 #print axioms HBL.Kinematic.sliceTailFrom_hasDerivAt
 #print axioms HBL.Kinematic.sliceTailFrom_tendsto_zero
@@ -64,6 +68,7 @@ import HBL
 #print axioms HBL.Kinematic.sliceTail_path_abs_le_of_path
 #print axioms HBL.Kinematic.sliceTail_sub_eq_parameterKernel
 #print axioms HBL.Kinematic.sliceTail_zero_parameter_abs_le
+#print axioms HBL.Kinematic.slice_inverse_scale_physical_power_tendsto_one
 #print axioms HBL.Kinematic.slice_kinematics_of_path
 #print axioms HBL.Kinematic.synchronizedSliceParameter_size_add_stability
 #print axioms HBL.Kinematic.synchronizedSliceParameter_spec

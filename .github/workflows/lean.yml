@@ -115,6 +115,7 @@ jobs:
               'HBL.Kinematic.existsUnique_synchronized_slice_parameter',
               'HBL.Kinematic.integral_Ioi_rpow_neg_one_sub',
               'HBL.Kinematic.integral_Ioi_rpow_neg_two',
+              'HBL.Kinematic.inverseScale_div_physicalRate_eq',
               'HBL.Kinematic.scalarInverse_existsUnique_root',
               'HBL.Kinematic.scalarInverse_existsUnique_root_with_bound',
               'HBL.Kinematic.scalarInverse_root_bound',
@@ -144,6 +145,9 @@ jobs:
               'HBL.Kinematic.sliceParameterKernel_integral_bounds',
               'HBL.Kinematic.slicePhysicalTime_eq_reference_mul_exp',
               'HBL.Kinematic.slicePhysicalTime_hasDerivAt',
+              'HBL.Kinematic.slicePhysicalTime_tendsto_zero_of_path',
+              'HBL.Kinematic.sliceReferenceTime_eq_power',
+              'HBL.Kinematic.sliceReferenceTime_tendsto_zero',
               'HBL.Kinematic.sliceTailFrom_eq_total_sub_interval',
               'HBL.Kinematic.sliceTailFrom_hasDerivAt',
               'HBL.Kinematic.sliceTailFrom_tendsto_zero',
@@ -158,6 +162,7 @@ jobs:
               'HBL.Kinematic.sliceTail_path_abs_le_of_path',
               'HBL.Kinematic.sliceTail_sub_eq_parameterKernel',
               'HBL.Kinematic.sliceTail_zero_parameter_abs_le',
+              'HBL.Kinematic.slice_inverse_scale_physical_power_tendsto_one',
               'HBL.Kinematic.slice_kinematics_of_path',
               'HBL.Kinematic.synchronizedSliceParameter_size_add_stability',
               'HBL.Kinematic.synchronizedSliceParameter_spec',
@@ -445,5 +450,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the main blowup theorem remains unaccepted.')
+          print(f'{len(expected_reports)} component dependency reports checked; six revised manuscript environments certified (6/21); revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with relative error o(1); the main blowup theorem remains unaccepted.')
           PY
