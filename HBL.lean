@@ -127,3 +127,5 @@ import HBL.KinematicPhysicalRate
 import HBL.KinematicPhysicalRateError
 import HBL.KinematicPhysicalPhase
 import HBL.KinematicPhysicalTimeInverse
+import HBL.KinematicPhaseDynamics
+import HBL.KinematicPhysicalTimeAsymptotics
