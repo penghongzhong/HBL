@@ -1164,3 +1164,8 @@ import HBL
 #print axioms HBL.Modulation.Monopole.monopoleInnerRadialProfile_flux_tendsto_zero
 #print axioms HBL.Modulation.Monopole.monopoleInnerRadialContinuous_flux_tendsto_zero
 #print axioms HBL.Modulation.Monopole.monopoleQuadraticRadius_origin_control
+#print axioms HBL.Modulation.Monopole.monopoleMovingCutoffProfile_zero_hasDerivAt
+#print axioms HBL.Modulation.Monopole.monopoleMovingCutoffProfile_hasDerivAt_all
+#print axioms HBL.Modulation.Monopole.monopoleMovingCutoffTime_hasDerivAt
+#print axioms HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_hasDerivAt
+#print axioms HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_deriv_abs_le

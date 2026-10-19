@@ -522,6 +522,11 @@ jobs:
               'HBL.Modulation.Monopole.monopoleInnerRadialProfile_flux_tendsto_zero',
               'HBL.Modulation.Monopole.monopoleInnerRadialContinuous_flux_tendsto_zero',
               'HBL.Modulation.Monopole.monopoleQuadraticRadius_origin_control',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffProfile_zero_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffProfile_hasDerivAt_all',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffTime_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_deriv_abs_le',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
