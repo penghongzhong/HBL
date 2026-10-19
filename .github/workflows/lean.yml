@@ -593,6 +593,23 @@ jobs:
               'HBL.Shooting.unstableShootingSolution_unique_bounded',
               'HBL.Shooting.unstableShootingSolution_bounded',
               'HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffIncrement_eq',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffIncrement_zero',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffIncrement_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleGlobalEnergyConstant_pos',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffContinuous_eq',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffContinuous_origin',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffContinuous_continuousOn',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGradientEnergy_integrable',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGradientEnergy_bound',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGradientEnergy_tendsto_zero',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGradientSeminorm_bound',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGradientSeminorm_tendsto_zero',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffContinuous_increment_deriv_eq',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffGlobalEnergy_closed',
+              'HBL.Modulation.Monopole.radialAmplitude_four_dr_integrable',
+              'HBL.Modulation.Monopole.radialAmplitude_four_quadratic_flat',
+              'HBL.Modulation.Monopole.radialHartreeAmplitude_full_center_environment',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')

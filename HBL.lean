@@ -155,3 +155,5 @@ import HBL.UnstableShootingKernel
 import HBL.UnstableShootingMoments
 import HBL.UnstableShootingBounds
 import HBL.UnstableShootingTerminal
+import HBL.MonopoleGlobalEnergy
+import HBL.RadialHartreeAmplitudeCenter
