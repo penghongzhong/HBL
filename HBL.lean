@@ -148,3 +148,6 @@ import HBL.MonopoleMovingCutoffTime
 import HBL.MonopoleMovingCutoffSpatial
 import HBL.MonopoleComplexResidual
 import HBL.RadialHartreeMultipole
+import HBL.RadialHartreeCenter
+import HBL.MonopoleCoreIntegrability
+import HBL.MonopoleThresholdProjection
