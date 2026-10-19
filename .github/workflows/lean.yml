@@ -567,6 +567,32 @@ jobs:
               'HBL.Modulation.Monopole.monopoleThresholdCoordinateMinus_eq_halfLine',
               'HBL.Modulation.Monopole.monopoleThresholdCoordinates_integrable',
               'HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed',
+              'HBL.Shooting.unstableShootingKernel_pos',
+              'HBL.Shooting.unstableShootingKernel_self',
+              'HBL.Shooting.unstableShootingKernel_cocycle',
+              'HBL.Shooting.unstableShootingKernel_factorization',
+              'HBL.Shooting.unstableShootingKernel_hasDerivAt_right',
+              'HBL.Shooting.unstableShootingKernel_hasDerivAt_left',
+              'HBL.Shooting.unstableShootingKernel_continuous_right',
+              'HBL.Shooting.unstableShootingCoefficient_integral_lower_bound',
+              'HBL.Shooting.unstableShootingKernel_le_exp',
+              'HBL.Shooting.unstableShootingKernel_difference_bound',
+              'HBL.Shooting.shootingExp_integrable',
+              'HBL.Shooting.shootingExp_integral',
+              'HBL.Shooting.shootingFirstMoment_integrable',
+              'HBL.Shooting.shootingFirstMoment_integral',
+              'HBL.Shooting.unstableShootingIntegrand_bound',
+              'HBL.Shooting.unstableShootingSolution_integrable',
+              'HBL.Shooting.unstableShootingSolution_bound',
+              'HBL.Shooting.unstableShootingSolution_tendsto_zero',
+              'HBL.Shooting.unstableShootingIntegrand_difference_bound',
+              'HBL.Shooting.unstableShootingSolution_difference_bound',
+              'HBL.Shooting.unstableShootingSolution_difference_bound_of_rate_decay',
+              'HBL.Shooting.unstableShootingSolution_hasDerivAt',
+              'HBL.Shooting.unstableShootingSolution_continuousOn',
+              'HBL.Shooting.unstableShootingSolution_unique_bounded',
+              'HBL.Shooting.unstableShootingSolution_bounded',
+              'HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
@@ -612,5 +638,5 @@ jobs:
                   raise SystemExit('Unapproved kernel dependency: ' + repr(found - allowed))
           if 'sorryAx' in text:
               raise SystemExit('Unfinished proof dependency found.')
-          print(f'{len(expected_reports)} component dependency reports checked; seven revised manuscript environments certified (7/21); revised Lemma 2.6 certifies actual radial cutoff core cancellation and the original fixed compact coordinate integrals in space and time; its stronger three-dimensional radiation and matching form remains unproved; revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the actual phase has logarithmic physical-time expansion with error O(tau^(4*mu_infty*delta)) by exact reciprocal-tail cancellation; the actual physical clock is continuous, strictly decreasing and covers each time in (0,tau(s0)] uniquely; the actual inverse time tends to infinity as remaining time tends to zero, the scale and phase power errors are proved directly at the physical terminal time from below, and the original phase integral satisfies its differential equation; the main blowup theorem remains unaccepted.')
+          print(f'{len(expected_reports)} component dependency reports checked; eight revised manuscript environments certified (8/21); revised Lemma 2.6 certifies actual radial cutoff core cancellation and the original fixed compact coordinate integrals in space and time; its stronger three-dimensional radiation and matching form remains unproved; revised Lemma 5.1 certifies actual nonautonomous scalar terminal shooting and coefficient/source stability; its Hartree parameter and same-physical-time transport application remains unproved; revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the actual phase has logarithmic physical-time expansion with error O(tau^(4*mu_infty*delta)) by exact reciprocal-tail cancellation; the actual physical clock is continuous, strictly decreasing and covers each time in (0,tau(s0)] uniquely; the actual inverse time tends to infinity as remaining time tends to zero, the scale and phase power errors are proved directly at the physical terminal time from below, and the original phase integral satisfies its differential equation; the main blowup theorem remains unaccepted.')
           PY

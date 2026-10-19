@@ -151,3 +151,7 @@ import HBL.RadialHartreeMultipole
 import HBL.RadialHartreeCenter
 import HBL.MonopoleCoreIntegrability
 import HBL.MonopoleThresholdProjection
+import HBL.UnstableShootingKernel
+import HBL.UnstableShootingMoments
+import HBL.UnstableShootingBounds
+import HBL.UnstableShootingTerminal
