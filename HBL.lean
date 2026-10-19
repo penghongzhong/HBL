@@ -145,3 +145,6 @@ import HBL.MonopoleStaticRadialBound
 import HBL.MonopoleMovingCutoffDerivative
 import HBL.MonopoleRadialOrigin
 import HBL.MonopoleMovingCutoffTime
+import HBL.MonopoleMovingCutoffSpatial
+import HBL.MonopoleComplexResidual
+import HBL.RadialHartreeMultipole

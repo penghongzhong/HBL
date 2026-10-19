@@ -63,7 +63,7 @@ jobs:
           lake exe cache get Mathlib.Analysis.SpecialFunctions.SmoothTransition Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension Mathlib.Analysis.Calculus.ContDiff.Deriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Angle Mathlib.MeasureTheory.Measure.Haar.NormedSpace Mathlib.Analysis.SpecificLimits.Basic Mathlib.Analysis.SpecialFunctions.ImproperIntegrals Mathlib.Analysis.Calculus.MeanValue Mathlib.Analysis.Calculus.Deriv.Slope Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.MeasureTheory.Function.LpSpace.Complete Mathlib.MeasureTheory.Function.L2Space Mathlib.Topology.Algebra.LinearMapCompletion Mathlib.Analysis.Calculus.ParametricIntervalIntegral Mathlib.Analysis.SpecialFunctions.Sqrt Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv Mathlib.Analysis.Calculus.FDeriv.Prod Mathlib.Analysis.Calculus.ImplicitContDiff Mathlib.Analysis.InnerProductSpace.Calculus Mathlib.Analysis.InnerProductSpace.Dual Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Analysis.Calculus.ContDiff.Deriv Mathlib.MeasureTheory.Function.LpSpace.Basic Mathlib.MeasureTheory.Integral.Bochner.Basic Mathlib.MeasureTheory.Measure.Typeclasses.Finite Mathlib.Topology.Order.Compact Mathlib.Tactic.FunProp Mathlib.Tactic.NormNum Mathlib.Tactic.Positivity Mathlib.Tactic.Ring Mathlib.Tactic.Linarith
           lake exe cache get Mathlib.Analysis.Convolution Mathlib.Analysis.SpecialFunctions.Integrability.Basic Mathlib.Analysis.SpecialFunctions.Pow.Real Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics Mathlib.Analysis.SpecialFunctions.JapaneseBracket Mathlib.Analysis.SpecialFunctions.Integrals.Log Mathlib.Analysis.SpecialFunctions.Trigonometric.Sinc Mathlib.MeasureTheory.Integral.IntegralEqImproper
           lake exe cache get Mathlib.Analysis.Normed.Operator.Compact.FiniteDimension Mathlib.Analysis.InnerProductSpace.Spectrum Mathlib.MeasureTheory.Measure.MeasuredSets Mathlib.MeasureTheory.Measure.SeparableMeasure
-          lake exe cache get Mathlib.Analysis.Fourier.AddCircle Mathlib.NumberTheory.ZetaValues Mathlib.MeasureTheory.Function.JacobianOneDim Mathlib.MeasureTheory.Measure.OpenPos
+          lake exe cache get Mathlib.Analysis.Fourier.AddCircle Mathlib.NumberTheory.ZetaValues Mathlib.MeasureTheory.Function.JacobianOneDim Mathlib.MeasureTheory.Measure.OpenPos Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.Log.Deriv
       - name: Compile HBL proof components
         shell: bash
         run: |
@@ -527,6 +527,28 @@ jobs:
               'HBL.Modulation.Monopole.monopoleMovingCutoffTime_hasDerivAt',
               'HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_hasDerivAt',
               'HBL.Modulation.Monopole.monopoleMovingCutoffTime_core_deriv_abs_le',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffSpatial_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleMovingCutoffSpatial_core_hasDerivAt',
+              'HBL.Modulation.Monopole.monopoleMovingCutoff_dilation_eq',
+              'HBL.Modulation.Monopole.monopoleMovingCutoff_dilation_core_eq',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_dilation_green_eq',
+              'HBL.Modulation.Monopole.monopoleRadialProfile_dilation_bounded',
+              'HBL.Modulation.Monopole.monopoleMovingCutoff_dilation_core_bounded',
+              'HBL.Modulation.Monopole.complexRadialHartreeNonlinearity_ofReal',
+              'HBL.Modulation.Monopole.complexRadialDilation_ofReal',
+              'HBL.Modulation.Monopole.complexRadialLaplacian_ofReal',
+              'HBL.Modulation.Monopole.monopolePerturbedRadialProfile_differentiableAt',
+              'HBL.Modulation.Monopole.monopolePerturbedRadialProfile_deriv_differentiableAt',
+              'HBL.Modulation.Monopole.monopoleComplexRadial_effective_increment',
+              'HBL.Modulation.Monopole.monopoleRadialStaticResidual_core_quadratic_control_all',
+              'HBL.Modulation.Monopole.monopoleComplexEffectiveIncrement_core_eq',
+              'HBL.Modulation.Monopole.monopoleComplexEffectiveIncrement_core_quadratic_control',
+              'HBL.Modulation.Monopole.monopoleComplexEffectiveIncrement_core_bound',
+              'HBL.Modulation.Monopole.radialLog_cubic_remainder',
+              'HBL.Modulation.Monopole.radialHartreeRow_center_remainder',
+              'HBL.Modulation.Monopole.radialHartreeExteriorPotential_eq_indicator',
+              'HBL.Modulation.Monopole.radialHartreeExteriorPotential_quadratic_center',
+              'HBL.Modulation.Monopole.radialHartreeExteriorPotential_tendsto_center',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
