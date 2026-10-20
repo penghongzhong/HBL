@@ -2,7 +2,7 @@ import HBL.WeightedVolterraAPlusKernel
 import HBL.WeightedBirmanSineBounds
 
 /-!
-HBL (UNCOMPILED / NOT ACCEPTED): exact quadratic form and quantitative
+HBL: exact quadratic form and quantitative
 coercivity of the actual bounded Volterra-channel operator A₊ᵛ = I - V* P V.
 
 The actual output sine Hilbert basis gives the exact potential quadratic
@@ -12,9 +12,7 @@ The statement concerns the concrete half-line L² operator. It does not
 identify this operator with the physical radial Hessian and does not close
 the main blowup theorem.
 
-This independent candidate has not been compiled and must not be counted
-as an accepted module. No new axioms or conclusion-shaped hypotheses are
-introduced.
+No new axioms or conclusion-shaped hypotheses are introduced.
 -/
 
 noncomputable section

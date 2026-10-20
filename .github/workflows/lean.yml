@@ -92,8 +92,13 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusKernel.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusModes.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusCoercivity.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusMorse.lean
           lake env lean --trust=0 -DwarningAsError=true HBL.lean
-          lake env lean --trust=0 HBL/SpectralBridgeTypes.lean
+          lake env lean --trust=0 HBL/SpectralBridgeTypes.lean > /tmp/hbl-full-types.txt
+          git rev-parse HEAD > /tmp/hbl-commit.txt
+          sha256sum lean-toolchain lakefile.lean lake-manifest.json HBL/WeightedVolterraAPlus*.lean HBL/SpectralBridgeTypes.lean > /tmp/hbl-spectral-sources.sha256
+          wc -c /tmp/hbl-full-types.txt
+          sha256sum /tmp/hbl-full-types.txt
       - name: Inspect kernel dependencies
         shell: bash
         run: |
@@ -720,6 +725,11 @@ jobs:
               'HBL.Modulation.Monopole.weightedVolterraAPlus_quadratic',
               'HBL.Modulation.Monopole.weightedVolterraPotential_tail_le',
               'HBL.Modulation.Monopole.weightedVolterraAPlus_tail_coercive',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_nonneg_of_orthogonal_negative',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_finite',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
@@ -767,6 +777,18 @@ jobs:
               raise SystemExit('Unfinished proof dependency found.')
           print(f'{len(expected_reports)} component dependency reports checked; eight revised manuscript environments certified (8/21); revised Lemma 2.6 certifies actual radial cutoff core cancellation and the original fixed compact coordinate integrals in space and time; its stronger three-dimensional radiation and matching form remains unproved; revised Lemma 5.1 certifies actual nonautonomous scalar terminal shooting and coefficient/source stability; its Hartree parameter and same-physical-time transport application remains unproved; revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the actual phase has logarithmic physical-time expansion with error O(tau^(4*mu_infty*delta)) by exact reciprocal-tail cancellation; the actual physical clock is continuous, strictly decreasing and covers each time in (0,tau(s0)] uniquely; the actual inverse time tends to infinity as remaining time tends to zero, the scale and phase power errors are proved directly at the physical terminal time from below, and the original phase integral satisfies its differential equation; the main blowup theorem remains unaccepted.')
           PY
+      - name: Preserve exact spectral type and dependency evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hbl-spectral-audit-${{ github.sha }}
+          path: |
+            /tmp/hbl-full-types.txt
+            /tmp/hbl-axioms.txt
+            /tmp/hbl-commit.txt
+            /tmp/hbl-spectral-sources.sha256
+          if-no-files-found: warn
+          retention-days: 7
       - name: Retain intermediate proof build cache
         if: always() && steps.hbl_build_cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4

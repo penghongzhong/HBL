@@ -175,3 +175,4 @@ import HBL.WeightedVolterraSineModes
 import HBL.WeightedVolterraAPlusKernel
 import HBL.WeightedVolterraAPlusModes
 import HBL.WeightedVolterraAPlusCoercivity
+import HBL.WeightedVolterraAPlusMorse

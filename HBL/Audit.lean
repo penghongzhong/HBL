@@ -1338,3 +1338,9 @@ import HBL
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_quadratic
 #print axioms HBL.Modulation.Monopole.weightedVolterraPotential_tail_le
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_tail_coercive
+
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_nonneg_of_orthogonal_negative
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_finite
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one

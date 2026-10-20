@@ -97,3 +97,9 @@ set_option pp.all true
 #print HBL.Modulation.Monopole.weightedVolterraSineMode
 #print HBL.Modulation.Monopole.weightedHartreeOrthonormalSineMode
 #print HBL.Modulation.Monopole.weightedHartreeSineHilbertBasis
+
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_nonneg_of_orthogonal_negative
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_finite
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one

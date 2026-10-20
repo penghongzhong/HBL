@@ -5,8 +5,6 @@ import HBL.WeightedScaleNonzero
 /-!
 HBL: actual bounded Volterra-channel operator A₊ᵛ = I - V* P V.
 
-This is a recovered candidate submitted for strict remote validation.
-Its status is pending until the pinned build and dependency audit pass.
 It does not identify A₊ᵛ with the physical radial Hessian.
 -/
 

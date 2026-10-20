@@ -2,12 +2,11 @@ import HBL.WeightedVolterraAPlusKernel
 import HBL.WeightedBirmanSineBounds
 
 /-!
-HBL (UNCOMPILED / NOT ACCEPTED): short diagonalization of the ACTUAL bounded
+HBL: short diagonalization of the ACTUAL bounded
 Volterra-channel A₊ᵛ on the transferred orthonormal singular vectors.
 
-No new axioms or abstract PDE assumptions are introduced. This is a candidate
-for compilation with Lean 4.35.0-rc3 and Mathlib a98628e1; it is not a
-certification of the physical radial Hessian and does not close HBL's main
+No new axioms or abstract PDE assumptions are introduced. The fixed toolchain is Lean 4.35.0-rc3 / Mathlib a98628e1.
+This does not identify the physical radial Hessian or close HBL's main
 blowup theorem.
 -/
 
@@ -59,14 +58,14 @@ theorem weightedVolterraAPlus_sineMode (n : ℕ) :
   unfold weightedBirmanSineCoefficient
   rw [inv_pow, mul_comm, ← div_eq_mul_inv, hsq]
 
-/-- The first physical sine singular vector is a negative mode of A₊ᵛ. -/
+/-- The first actual transferred sine vector is a negative mode of A₊ᵛ. -/
 theorem weightedVolterraAPlus_negative_sineMode :
     weightedVolterraAPlus (weightedVolterraSineMode 0) =
       (-6 : ℝ) • weightedVolterraSineMode 0 := by
   rw [weightedVolterraAPlus_sineMode, weightedBirmanSineCoefficient_zero]
   norm_num
 
-/-- The second physical sine singular vector is a zero mode of A₊ᵛ. -/
+/-- The second actual transferred sine vector is a zero mode of A₊ᵛ. -/
 theorem weightedVolterraAPlus_zero_sineMode :
     weightedVolterraAPlus (weightedVolterraSineMode 1) = 0 := by
   rw [weightedVolterraAPlus_sineMode, weightedBirmanSineCoefficient_one]
