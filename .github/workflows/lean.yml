@@ -93,10 +93,13 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusModes.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusCoercivity.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusMorse.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraProfileBridge.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedHartreeProfileForm.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraRadialForm.lean
           lake env lean --trust=0 -DwarningAsError=true HBL.lean
           lake env lean --trust=0 HBL/SpectralBridgeTypes.lean > /tmp/hbl-full-types.txt
           git rev-parse HEAD > /tmp/hbl-commit.txt
-          sha256sum lean-toolchain lakefile.lean lake-manifest.json HBL/WeightedVolterraAPlus*.lean HBL/SpectralBridgeTypes.lean > /tmp/hbl-spectral-sources.sha256
+          sha256sum lean-toolchain lakefile.lean lake-manifest.json HBL/WeightedVolterraAPlus*.lean HBL/WeightedVolterraProfileBridge.lean HBL/WeightedHartreeProfileForm.lean HBL/WeightedVolterraRadialForm.lean HBL/SpectralBridgeTypes.lean > /tmp/hbl-spectral-sources.sha256
           wc -c /tmp/hbl-full-types.txt
           sha256sum /tmp/hbl-full-types.txt
       - name: Inspect kernel dependencies
@@ -730,6 +733,18 @@ jobs:
               'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span',
               'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists',
               'HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one',
+              'HBL.Modulation.Monopole.smoothToRadialDotH1_integral_Ioo',
+              'HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_ae',
+              'HBL.Modulation.Monopole.weightedRadialU_memLp',
+              'HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_eq',
+              'HBL.Modulation.Monopole.hartreeKernel_weighted_factorization',
+              'HBL.Modulation.Monopole.hartreeProfileForm_integrable',
+              'HBL.Modulation.Monopole.weightedHartreeOperator_profile_pairing',
+              'HBL.Modulation.Monopole.weightedProfile_inner',
+              'HBL.Modulation.Monopole.weightedPotentialOperator_profile_pairing',
+              'HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_pairing',
+              'HBL.Modulation.Monopole.weightedVolterraPotential_radial_profile_pairing',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_pairing',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')

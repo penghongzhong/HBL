@@ -1344,3 +1344,16 @@ import HBL
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one
+
+#print axioms HBL.Modulation.Monopole.smoothToRadialDotH1_integral_Ioo
+#print axioms HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_ae
+#print axioms HBL.Modulation.Monopole.weightedRadialU_memLp
+#print axioms HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_eq
+#print axioms HBL.Modulation.Monopole.hartreeKernel_weighted_factorization
+#print axioms HBL.Modulation.Monopole.hartreeProfileForm_integrable
+#print axioms HBL.Modulation.Monopole.weightedHartreeOperator_profile_pairing
+#print axioms HBL.Modulation.Monopole.weightedProfile_inner
+#print axioms HBL.Modulation.Monopole.weightedPotentialOperator_profile_pairing
+#print axioms HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_pairing
+#print axioms HBL.Modulation.Monopole.weightedVolterraPotential_radial_profile_pairing
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_pairing

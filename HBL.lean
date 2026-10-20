@@ -176,3 +176,6 @@ import HBL.WeightedVolterraAPlusKernel
 import HBL.WeightedVolterraAPlusModes
 import HBL.WeightedVolterraAPlusCoercivity
 import HBL.WeightedVolterraAPlusMorse
+import HBL.WeightedVolterraProfileBridge
+import HBL.WeightedHartreeProfileForm
+import HBL.WeightedVolterraRadialForm

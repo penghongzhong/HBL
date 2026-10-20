@@ -103,3 +103,16 @@ set_option pp.all true
 #check @HBL.Modulation.Monopole.weightedVolterraAPlus_negative_on_first_span
 #check @HBL.Modulation.Monopole.weightedVolterraAPlus_negative_subspace_exists
 #check @HBL.Modulation.Monopole.weightedVolterraAPlus_morse_index_one
+
+#check @HBL.Modulation.Monopole.smoothToRadialDotH1_integral_Ioo
+#check @HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_ae
+#check @HBL.Modulation.Monopole.weightedRadialU_memLp
+#check @HBL.Modulation.Monopole.weightedVolterraOperator_smoothToRadialDotH1_eq
+#check @HBL.Modulation.Monopole.hartreeKernel_weighted_factorization
+#check @HBL.Modulation.Monopole.hartreeProfileForm_integrable
+#check @HBL.Modulation.Monopole.weightedHartreeOperator_profile_pairing
+#check @HBL.Modulation.Monopole.weightedProfile_inner
+#check @HBL.Modulation.Monopole.weightedPotentialOperator_profile_pairing
+#check @HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_pairing
+#check @HBL.Modulation.Monopole.weightedVolterraPotential_radial_profile_pairing
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_pairing
