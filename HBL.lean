@@ -172,3 +172,6 @@ import HBL.L2KernelAdjoint
 import HBL.WeightedVolterraKernel
 import HBL.WeightedVolterraOperator
 import HBL.WeightedVolterraSineModes
+import HBL.WeightedVolterraAPlusKernel
+import HBL.WeightedVolterraAPlusModes
+import HBL.WeightedVolterraAPlusCoercivity

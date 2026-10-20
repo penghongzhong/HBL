@@ -69,6 +69,15 @@ jobs:
         run: |
           set -euo pipefail
           lake build HBL
+      - name: Strict spectral leaves and complete exported types
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusKernel.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusModes.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAPlusCoercivity.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL.lean
+          lake env lean --trust=0 HBL/SpectralBridgeTypes.lean
       - name: Inspect kernel dependencies
         shell: bash
         run: |
@@ -679,6 +688,22 @@ jobs:
               'HBL.Modulation.Monopole.weightedVolterraSineMode_inner',
               'HBL.Modulation.Monopole.weightedVolterraGram_sineMode',
               'HBL.Modulation.Monopole.weightedVolterraSineMode_bessel',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_selfAdjoint',
+              'HBL.Modulation.Monopole.weightedVolterra_scale_image',
+              'HBL.Modulation.Monopole.weightedVolterraScaleVector_ne_zero',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_eq_span',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_one_dimensional_kernel',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_sineMode_raw',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_zero_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_eq_sine_span',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_finrank',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_negative_quadratic',
+              'HBL.Modulation.Monopole.weightedVolterraPotential_hasSum',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_quadratic',
+              'HBL.Modulation.Monopole.weightedVolterraPotential_tail_le',
+              'HBL.Modulation.Monopole.weightedVolterraAPlus_tail_coercive',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')

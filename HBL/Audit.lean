@@ -1321,3 +1321,20 @@ import HBL
 #print axioms HBL.Modulation.Monopole.weightedVolterraSineMode_inner
 #print axioms HBL.Modulation.Monopole.weightedVolterraGram_sineMode
 #print axioms HBL.Modulation.Monopole.weightedVolterraSineMode_bessel
+
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_selfAdjoint
+#print axioms HBL.Modulation.Monopole.weightedVolterra_scale_image
+#print axioms HBL.Modulation.Monopole.weightedVolterraScaleVector_ne_zero
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_eq_span
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_one_dimensional_kernel
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_sineMode_raw
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_sineMode
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_sineMode
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_zero_sineMode
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_eq_sine_span
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_kernel_finrank
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_negative_quadratic
+#print axioms HBL.Modulation.Monopole.weightedVolterraPotential_hasSum
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_quadratic
+#print axioms HBL.Modulation.Monopole.weightedVolterraPotential_tail_le
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_tail_coercive
