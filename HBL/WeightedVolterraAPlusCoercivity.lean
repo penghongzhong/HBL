@@ -71,7 +71,8 @@ theorem weightedVolterraPotential_hasSum (f : RealL2 halfLineMeasure) :
     (weightedVolterraOperator f) using 1
   funext n
   simp only [weightedHartreeSineHilbertBasis_apply]
-  rw [real_inner_comm (weightedPotentialOperator (weightedVolterraOperator f)),
+  rw [real_inner_comm (weightedHartreeOrthonormalSineMode n)
+      (weightedPotentialOperator (weightedVolterraOperator f)),
     coercivity_potential_inner_sineMode]
   simp only [weightedVolterraSineMode_inner]
   rw [← coercivity_singular_coefficient n]

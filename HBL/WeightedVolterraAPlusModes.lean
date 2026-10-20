@@ -36,10 +36,9 @@ theorem weightedVolterraAPlus_sineMode_raw (n : ℕ) :
       ContinuousLinearMap.adjoint weightedVolterraOperator
         (weightedPotentialOperator
           (weightedVolterraOperator (weightedVolterraSineMode n))) = _
-  rw [weightedVolterraOperator_sineMode,
-      map_smul, weightedPotential_orthonormalSineMode,
-      map_smul, weightedVolterraOperator_adjoint_sineMode]
-  simp only [smul_smul]
+  simp only [weightedVolterraOperator_sineMode, map_smul,
+    weightedPotential_orthonormalSineMode,
+    weightedVolterraOperator_adjoint_sineMode, smul_smul]
   module
 
 /-- Spectral multiplier in exactly the normalization of the published
