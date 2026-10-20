@@ -36,8 +36,14 @@ theorem weightedVolterraAPlus_selfAdjoint :
   rw [inner_sub_left, inner_sub_right,
     ContinuousLinearMap.adjoint_inner_left,
     ContinuousLinearMap.adjoint_inner_right]
-  rw [ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
-    weightedPotentialOperator_selfAdjoint]
+  have hP : inner ℝ (weightedPotentialOperator (weightedVolterraOperator x))
+      (weightedVolterraOperator y) =
+      inner ℝ (weightedVolterraOperator x)
+        (weightedPotentialOperator (weightedVolterraOperator y)) :=
+    (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+      weightedPotentialOperator_selfAdjoint)
+      (weightedVolterraOperator x) (weightedVolterraOperator y)
+  exact congrArg (fun t : ℝ => inner ℝ x y - t) hP
 
 /-- Generator of the kernel pulled back from the *actual* Birman fixed
 vector, with no a priori injectivity hypothesis on V. -/

@@ -64,6 +64,22 @@ jobs:
           lake exe cache get Mathlib.Analysis.Convolution Mathlib.Analysis.SpecialFunctions.Integrability.Basic Mathlib.Analysis.SpecialFunctions.Pow.Real Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics Mathlib.Analysis.SpecialFunctions.JapaneseBracket Mathlib.Analysis.SpecialFunctions.Integrals.Log Mathlib.Analysis.SpecialFunctions.Trigonometric.Sinc Mathlib.MeasureTheory.Integral.IntegralEqImproper
           lake exe cache get Mathlib.Analysis.Normed.Operator.Compact.FiniteDimension Mathlib.Analysis.InnerProductSpace.Spectrum Mathlib.MeasureTheory.Measure.MeasuredSets Mathlib.MeasureTheory.Measure.SeparableMeasure
           lake exe cache get Mathlib.Analysis.Fourier.AddCircle Mathlib.NumberTheory.ZetaValues Mathlib.MeasureTheory.Function.JacobianOneDim Mathlib.MeasureTheory.Measure.OpenPos Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.Log.Deriv Mathlib.Analysis.Calculus.FDeriv.Measurable Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap Mathlib.MeasureTheory.Integral.Prod
+      - name: Restore source-bound project intermediates
+        id: hbl_build_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Record project cache provenance
+        shell: bash
+        run: |
+          printf 'Project cache exact hit: %s\n' '${{ steps.hbl_build_cache.outputs.cache-hit }}'
+          printf 'Project cache matched key: %s\n' '${{ steps.hbl_build_cache.outputs.cache-matched-key }}'
+          printf 'Project cache requested key: %s\n' '${{ steps.hbl_build_cache.outputs.cache-primary-key }}'
+          if [ -d .lake/build ]; then find .lake/build -type f -name '*.olean' | wc -l; fi
+          echo 'Restored intermediates are not acceptance evidence. Lake validates source/dependency traces; strict trust-zero checks and exact axiom coverage remain mandatory.'
       - name: Compile HBL proof components
         shell: bash
         run: |
@@ -751,3 +767,9 @@ jobs:
               raise SystemExit('Unfinished proof dependency found.')
           print(f'{len(expected_reports)} component dependency reports checked; eight revised manuscript environments certified (8/21); revised Lemma 2.6 certifies actual radial cutoff core cancellation and the original fixed compact coordinate integrals in space and time; its stronger three-dimensional radiation and matching form remains unproved; revised Lemma 5.1 certifies actual nonautonomous scalar terminal shooting and coefficient/source stability; its Hartree parameter and same-physical-time transport application remains unproved; revised Lemma 2.7 proves the actual synchronized initial slice by a reciprocal-tail integral and the intermediate value theorem, with a common terminal amplitude, explicit local uniqueness and quantitative path stability; revised Lemma 2.5 proves the fixed Hilbert-normalized profile for the concrete half-line operator; the three-dimensional radial-conjugation bridge remains unaudited; original all-classical uniqueness and cutoff invariance remain unproved (original stronger text 4/21); every nonzero positive Green eigenpair is quantized by the arctan Dirichlet boundary condition, and the only eigenvalue in [1/21,1/9] is 1/15 with eigenspace span{{x_0}}; the concrete Green--Hartree square identity and one-dimensional Birman--Schwinger fixed space are proved; the first monopole remainder has a certified O(1/r) tail; the physical power-law dictionary is proved for the actual reconstructed paths with quantitative relative error O(tau^(4*mu_infty*delta)), where 4*mu_infty*delta is positive; the actual phase has logarithmic physical-time expansion with error O(tau^(4*mu_infty*delta)) by exact reciprocal-tail cancellation; the actual physical clock is continuous, strictly decreasing and covers each time in (0,tau(s0)] uniquely; the actual inverse time tends to infinity as remaining time tends to zero, the scale and phase power errors are proved directly at the physical terminal time from below, and the original phase integral satisfies its differential equation; the main blowup theorem remains unaccepted.')
           PY
+      - name: Retain intermediate proof build cache
+        if: always() && steps.hbl_build_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: ${{ steps.hbl_build_cache.outputs.cache-primary-key }}
