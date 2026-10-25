@@ -98,6 +98,7 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraRadialForm.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/RadialEnergyBilinear.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraProfileCoercivity.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAMinus.lean
           lake env lean --trust=0 -DwarningAsError=true HBL.lean
           lake env lean --trust=0 HBL/SpectralBridgeTypes.lean > /tmp/hbl-full-types.txt
           git rev-parse HEAD > /tmp/hbl-commit.txt
@@ -750,6 +751,16 @@ jobs:
               'HBL.Modulation.radialU_energy_bilinear_identity',
               'HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_norm_sq',
               'HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_coercive',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_selfAdjoint',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_zero_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_second_sineMode',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_quadratic',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_pairing',
+              'HBL.Modulation.Monopole.weightedVolterraGram_hasSum',
+              'HBL.Modulation.Monopole.weightedVolterraGram_tail_le',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_tail_coercive',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_coercive',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
