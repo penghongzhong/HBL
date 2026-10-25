@@ -61,8 +61,10 @@ theorem radialU_deriv_memLp_of_upperSupport
       (Ioc (0 : ℝ) R) :=
     ((hc.pow 2).intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := R)).1
   have htail : IntegrableOn (fun r => (deriv (radialU f) r) ^ 2) (Ioi R) := by
-    apply (integrable_zero (μ := volume.restrict (Ioi R))).congr
+    apply (integrable_zero : Integrable (fun _ : ℝ => (0 : ℝ))
+      (volume.restrict (Ioi R))).congr
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with r hr
+    change (0 : ℝ) = (deriv (radialU f) r) ^ 2
     rw [phaseCore_U_deriv_zero f hf hcut hr]
     norm_num
   have hunion : Ioc (0 : ℝ) R ∪ Ioi R = Ioi (0 : ℝ) := by
