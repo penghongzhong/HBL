@@ -121,8 +121,6 @@ theorem weightedVolterraGram_bubble :
       have hlocal := ae_restrict_of_ae_restrict_of_subset
         (Ioi_subset_Ioi (show 0 ≤ s from le_of_lt hs)) phaseBubble_image_ae
       filter_upwards [hlocal] with r hr
-      change (1 + r ^ 2)⁻¹ * weightedVolterraOperator fullBubbleRadialEnergyL2 r =
-        phaseBubbleSource r
       rw [hr]
       dsimp [phaseBubbleSource, weightedGreenDecay]
       ring
