@@ -34,11 +34,11 @@ jobs:
           old = subprocess.check_output(['git','show',base+':.github/workflows/lean.yml'], text=True)
           Path('/tmp/hbl-baseline.yml').write_text(old)
           changed = set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'], text=True).splitlines())
-          permitted = {'.github/workflows/lean.yml','HBL/PhysicalRadial3PhaseCore.lean','HBL/PhaseCoreAudit.lean','HBL/PhaseBubbleKernel.lean','HBL/BubbleKernelAudit.lean','HBL/SlowFrameConnection.lean','HBL/SlowFrameAudit.lean'}
+          permitted = {'.github/workflows/lean.yml','HBL/PhysicalRadial3PhaseCore.lean','HBL/PhaseCoreAudit.lean','HBL/PhaseBubbleKernel.lean','HBL/BubbleKernelAudit.lean','HBL/SlowFrameConnection.lean','HBL/SlowFrameAudit.lean','HBL/PhaseEnergyInverse.lean','HBL/PhaseEnergyInverseAudit.lean'}
           if not changed <= permitted:
               raise SystemExit('Unexpected change outside frozen baseline: '+repr(changed-permitted))
-          prior = '132d579135d4b40cb064888ba86a606152f32ff9'
-          new_paths = {'.github/workflows/lean.yml','HBL/SlowFrameConnection.lean','HBL/SlowFrameAudit.lean'}
+          prior = '64619f47816dd4bf7302570b9693603839810166'
+          new_paths = {'.github/workflows/lean.yml','HBL/PhaseEnergyInverse.lean','HBL/PhaseEnergyInverseAudit.lean'}
           delta = set(subprocess.check_output(['git','diff','--name-only',prior,'HEAD'], text=True).splitlines())
           if not delta <= new_paths:
               raise SystemExit('Previous accepted source changed: '+repr(delta-new_paths))
@@ -67,11 +67,12 @@ jobs:
               'HBL.SlowFrame.connectionValue_norm_le',
               'HBL.SlowFrame.connectionValue_difference_le',
               'HBL.SlowFrame.movingConnection_positive_margin',
+              'HBL.Modulation.Monopole.phaseEnergyInverse_certified',
           ]
-          sources = [Path('HBL/PhaseCoreAudit.lean').read_text(), Path('HBL/BubbleKernelAudit.lean').read_text(), Path('HBL/SlowFrameAudit.lean').read_text()]
+          sources = [Path(p).read_text() for p in ['HBL/PhaseCoreAudit.lean','HBL/BubbleKernelAudit.lean','HBL/SlowFrameAudit.lean','HBL/PhaseEnergyInverseAudit.lean']]
           added = [name for source in sources for name in re.findall(r'^#print axioms (\S+)', source, re.M)]
           checked = [name for source in sources for name in re.findall(r'^#check @(\S+)', source, re.M)]
-          if added != names or checked != names or len(set(names)) != 18:
+          if added != names or checked != names or len(set(names)) != 19:
               raise SystemExit('Batch type/dependency inventory mismatch')
           audit = shell_body('Inspect kernel dependencies').split("python3 - <<'PY'\n",1)[1].rsplit('\nPY',1)[0]
           marker = 'if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):'
@@ -79,7 +80,7 @@ jobs:
               raise SystemExit('Immutable verifier injection anchor mismatch')
           audit = audit.replace(marker, 'new_chain_expected += '+repr(names)+'\n'+marker)
           Path('/tmp/hbl-audit.py').write_text(audit)
-          print('Frozen verifier preserved, 1397 explicit entries. Lemma 3.3 analytic implication only; actual background instantiation remains open; full acceptance 8/21.')
+          print('Frozen verifier retained: 1398 explicit entries. Actual phase energy inverse only; generator/Sylvester identification remains open. Manuscript acceptance 8/21.')
           PY
       - name: Install pinned compiler
         shell: bash
@@ -105,11 +106,11 @@ jobs:
           key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
           restore-keys: |
             hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
-      - name: Compile original HBL and numbered-lemma analytic implication
+      - name: Compile original HBL and actual normalized phase inverse
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL HBL.PhysicalRadial3PhaseCore HBL.PhaseBubbleKernel HBL.SlowFrameConnection
+          lake build HBL HBL.PhysicalRadial3PhaseCore HBL.PhaseBubbleKernel HBL.SlowFrameConnection HBL.PhaseEnergyInverse
       - name: Strict spectral leaves and complete exported types
         shell: bash
         run: |
@@ -118,9 +119,11 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalRadial3PhaseCore.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/PhaseBubbleKernel.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/SlowFrameConnection.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhaseEnergyInverse.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/PhaseCoreAudit.lean > /tmp/hbl-batch-types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/BubbleKernelAudit.lean >> /tmp/hbl-batch-types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/SlowFrameAudit.lean >> /tmp/hbl-batch-types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhaseEnergyInverseAudit.lean >> /tmp/hbl-batch-types-and-axioms.txt
           cat /tmp/hbl-batch-types-and-axioms.txt >> /tmp/hbl-full-types.txt
           git ls-files -z '*.lean' lean-toolchain lake-manifest.json .github/workflows/lean.yml | xargs -0 sha256sum > /tmp/hbl-all-sources.sha256
       - name: Inspect original and new kernel dependencies
