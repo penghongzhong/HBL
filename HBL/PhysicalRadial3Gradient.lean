@@ -49,8 +49,8 @@ theorem physicalRadial3_radial_fderiv_norm
       fderiv ℝ (physicalRadial3_radialLift f) x =
         (fderiv ℝ f ‖x‖).comp
           (fderiv ℝ (norm : PhysicalRadialSpace3 → ℝ) x) := by
-    simpa only [physicalRadial3_radialLift, Function.comp_def] using
-      (fderiv_comp (x := x) hfd hn)
+    change fderiv ℝ (fun y : PhysicalRadialSpace3 => f ‖y‖) x = _
+    exact fderiv_comp (x := x) hfd hn
   have hmap :
       (fderiv ℝ f ‖x‖).comp
           (fderiv ℝ (norm : PhysicalRadialSpace3 → ℝ) x) =
