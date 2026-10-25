@@ -27,7 +27,11 @@ private def w2 (r : ℝ) : ℝ := (2 * r ^ 2 - 1) / (1 + r ^ 2) ^ 2 * bubble r
 
 private theorem w_hasDerivAt (r : ℝ) : HasDerivAt bubble (w1 r) r := by
   have hq : HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
-    convert (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2) using 1 <;> ring
+    have h := (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
+    convert h using 1
+    · funext x
+      simp
+    · norm_num
   have hqpos : 0 < (1 + r ^ 2 : ℝ) := by positivity
   have hsne : Real.sqrt (1 + r ^ 2) ≠ 0 := ne_of_gt (Real.sqrt_pos.mpr hqpos)
   have hs2 := Real.sq_sqrt hqpos.le
@@ -40,17 +44,22 @@ private theorem w_hasDerivAt (r : ℝ) : HasDerivAt bubble (w1 r) r := by
   unfold w1 bubble
   rw [hs2]
   field_simp [hsne, ne_of_gt hqpos]
-  <;> ring
+  ring
 
 private theorem w1_hasDerivAt (r : ℝ) : HasDerivAt w1 (w2 r) r := by
   have hq : HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
-    convert (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2) using 1 <;> ring
+    have h := (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
+    convert h using 1
+    · funext x
+      simp
+    · norm_num
   have hqne : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
   have h := (((hasDerivAt_id r).neg).div hq hqne).mul (w_hasDerivAt r)
   apply h.congr_deriv
   unfold w1 w2
+  simp only [Pi.neg_apply, Pi.div_apply, id_eq]
   field_simp [hqne]
-  <;> ring
+  ring
 
 /-- A globally smooth odd numerator, without an artificial singularity at r=0. -/
 def jordanNumerator (r : ℝ) : ℝ :=
@@ -63,7 +72,11 @@ private def j2 (r : ℝ) : ℝ := 3 * r / 2 - 2 * Real.arctan r
 
 private theorem j_hasDerivAt (r : ℝ) : HasDerivAt jordanNumerator (j1 r) r := by
   have hq : HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
-    convert (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2) using 1 <;> ring
+    have h := (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
+    convert h using 1
+    · funext x
+      simp
+    · norm_num
   have hqne : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
   have h := ((((hasDerivAt_id r).pow 3).div_const 4).sub
     ((((hasDerivAt_id r).pow 2).sub_const 1).mul (Real.hasDerivAt_arctan r))).add
@@ -71,19 +84,25 @@ private theorem j_hasDerivAt (r : ℝ) : HasDerivAt jordanNumerator (j1 r) r := 
   have h' := h.sub (hasDerivAt_id r)
   apply h'.congr_deriv
   unfold j1
+  simp only [Pi.pow_apply, id_eq]
   field_simp [hqne]
-  <;> ring
+  ring
 
 private theorem j1_hasDerivAt (r : ℝ) : HasDerivAt j1 (j2 r) r := by
   have hq : HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
-    convert (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2) using 1 <;> ring
+    have h := (hasDerivAt_const r (1 : ℝ)).add ((hasDerivAt_id r).pow 2)
+    convert h using 1
+    · funext x
+      simp
+    · norm_num
   have hqne : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
   have h := (((((hasDerivAt_id r).pow 2).const_mul 3).div_const 4).sub
     (((hasDerivAt_id r).const_mul 2).mul (Real.hasDerivAt_arctan r))).add (hq.log hqne)
   apply h.congr_deriv
   unfold j2
+  simp only [id_eq]
   field_simp [hqne]
-  <;> ring
+  ring
 
 /-- Half-line generalized mode G=r g for the actual physical phase channel. -/
 def jordanHalfLine (r : ℝ) : ℝ := bubble r * jordanNumerator r
@@ -119,7 +138,7 @@ theorem jordanHalfLine_exact (r : ℝ) :
   unfold w1
   have hqne : (1 + r ^ 2 : ℝ) ≠ 0 := by positivity
   field_simp [hqne]
-  <;> ring
+  ring
 
 /-- A bounded map cannot annihilate a convergent range sequence and
 fix its nonzero limit. This is the topological step in the obstruction;
