@@ -52,7 +52,7 @@ theorem frame_norm_and_inverse_le (S : Aˣ)
         _ ≤ ‖(1 : A)‖ + ‖(↑(S⁻¹) : A) * ((↑S : A) - 1)‖ := norm_sub_le _ _
         _ ≤ 1 + ‖(↑(S⁻¹) : A)‖ * ‖(↑S : A) - 1‖ := by
           rw [norm_one]
-          exact add_le_add_left (norm_mul_le _ _) 1
+          exact add_le_add_left (norm_mul_le (↑(S⁻¹) : A) ((↑S : A) - 1)) 1
     have hmul := mul_le_mul_of_nonneg_left hS (norm_nonneg (↑(S⁻¹) : A))
     linarith
 
@@ -85,6 +85,7 @@ theorem frame_inverse_difference_le (S T : Aˣ)
         (norm_nonneg _) (by positivity)
     _ = 4 * ‖(↑S : A) - (↑T : A)‖ := by rw [norm_sub_rev]; ring
 
+omit [NormOneClass A] in
 private theorem residual_norm_le (S : Aˣ) (K C R : A) :
     ‖-K + C + R * (↑S : A)‖ ≤ ‖K‖ + ‖C‖ + ‖R‖ * ‖(↑S : A)‖ := by
   have h1 := norm_add_le (-K + C) (R * (↑S : A))
@@ -93,6 +94,7 @@ private theorem residual_norm_le (S : Aˣ) (K C R : A) :
   have h3 := norm_mul_le R (↑S : A)
   linarith
 
+omit [NormOneClass A] in
 private theorem residual_difference_norm_le (S T : Aˣ) (K L C D R U : A) :
     ‖(-K + C + R * (↑S : A)) - (-L + D + U * (↑T : A))‖ ≤
       ‖K - L‖ + ‖C - D‖ + ‖R - U‖ * ‖(↑S : A)‖ +
@@ -207,8 +209,6 @@ theorem movingConnection_positive_margin
   have hwz : 0 ≤ s ^ (-1 - κ - δ) := (Real.rpow_pos_of_pos hs _).le
   have hprod : s ^ (-1 - κ) * s ^ (-δ) = s ^ (-1 - κ - δ) := by
     rw [← Real.rpow_add hs]
-    congr 1
-    ring
   refine ⟨hκ, ?_, ?_⟩
   · have h := connectionValue_norm_le (S s)
       (deriv (fun t => (↑(S t) : A)) s) ((s⁻¹ : ℝ) • C s) (R s)
