@@ -34,7 +34,7 @@ jobs:
           old = subprocess.check_output(['git','show',base+':.github/workflows/lean.yml'], text=True)
           Path('/tmp/hbl-baseline.yml').write_text(old)
           changed = set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'], text=True).splitlines())
-          permitted = {'.github/workflows/lean.yml','HBL/PhysicalRadial3PhaseCore.lean','HBL/PhaseCoreAudit.lean'}
+          permitted = {'.github/workflows/lean.yml','HBL/PhysicalRadial3PhaseCore.lean','HBL/PhaseCoreAudit.lean','HBL/PhaseBubbleKernel.lean','HBL/BubbleKernelAudit.lean'}
           if not changed <= permitted:
               raise SystemExit('Unexpected change outside frozen baseline: '+repr(changed-permitted))
           def shell_body(name):
@@ -50,10 +50,18 @@ jobs:
               'HBL.Modulation.Monopole.physicalRadial3_phase_core_eq_volterra',
               'HBL.Modulation.Monopole.physicalRadial3_phase_core_nonnegative',
               'HBL.Modulation.Monopole.physicalRadial3_phase_core_coercive',
+              'HBL.Modulation.Monopole.weightedVolterraGram_bubble',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_bubble_zero',
+              'HBL.Modulation.Monopole.phaseBubble_energy_ne_zero',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_eq_bubble_span',
+              'HBL.Modulation.Monopole.phaseBubble_orthogonal_iff',
+              'HBL.Modulation.Monopole.phaseBubble_coordinate_pairing',
+              'HBL.Modulation.Monopole.physicalRadial3_phase_core_bubble_coercive',
           ]
-          added = re.findall(r'^#print axioms (\S+)', Path('HBL/PhaseCoreAudit.lean').read_text(), re.M)
-          checked = re.findall(r'^#check @(\S+)', Path('HBL/PhaseCoreAudit.lean').read_text(), re.M)
-          if added != names or checked != names or len(set(names)) != 6:
+          sources = [Path('HBL/PhaseCoreAudit.lean').read_text(), Path('HBL/BubbleKernelAudit.lean').read_text()]
+          added = [name for source in sources for name in re.findall(r'^#print axioms (\S+)', source, re.M)]
+          checked = [name for source in sources for name in re.findall(r'^#check @(\S+)', source, re.M)]
+          if added != names or checked != names or len(set(names)) != 13:
               raise SystemExit('Batch type/dependency inventory mismatch')
           audit = shell_body('Inspect kernel dependencies').split("python3 - <<'PY'\n",1)[1].rsplit('\nPY',1)[0]
           marker = 'if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):'
@@ -61,7 +69,7 @@ jobs:
               raise SystemExit('Immutable verifier injection anchor mismatch')
           audit = audit.replace(marker, 'new_chain_expected += '+repr(names)+'\n'+marker)
           Path('/tmp/hbl-audit.py').write_text(audit)
-          print('Frozen 1379-declaration verifier retained; six explicit new type/dependency entries added. Manuscript acceptance remains 8/21.')
+          print('Frozen 1379-declaration verifier retained; thirteen explicit type/dependency entries added. Manuscript acceptance remains 8/21.')
           PY
       - name: Install pinned compiler
         shell: bash
@@ -87,18 +95,20 @@ jobs:
           key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
           restore-keys: |
             hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
-      - name: Compile original HBL and physical phase core
+      - name: Compile original HBL and physical phase bridge
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL HBL.PhysicalRadial3PhaseCore
+          lake build HBL HBL.PhysicalRadial3PhaseCore HBL.PhaseBubbleKernel
       - name: Strict spectral leaves and complete exported types
         shell: bash
         run: |
           set -euo pipefail
           bash -euo pipefail /tmp/hbl-strict.sh
           lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalRadial3PhaseCore.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhaseBubbleKernel.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/PhaseCoreAudit.lean > /tmp/hbl-batch-types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/BubbleKernelAudit.lean >> /tmp/hbl-batch-types-and-axioms.txt
           cat /tmp/hbl-batch-types-and-axioms.txt >> /tmp/hbl-full-types.txt
           git ls-files -z '*.lean' lean-toolchain lake-manifest.json .github/workflows/lean.yml | xargs -0 sha256sum > /tmp/hbl-all-sources.sha256
       - name: Inspect original and new kernel dependencies
