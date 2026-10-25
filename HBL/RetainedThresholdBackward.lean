@@ -110,7 +110,7 @@ private theorem tail_hasDerivAt
     hw.aestronglyMeasurable.stronglyMeasurableAtFilter hw.continuousAt
   have hm : HasDerivAt
       (fun x => -(∫ t in Ioi s0, w t) + ∫ t in s0..x, w t) (w s) s := by
-    simpa only [zero_add] using (hasDerivAt_const s (-(∫ t in Ioi s0, w t))).add hd
+    exact hd.const_add (-(∫ t in Ioi s0, w t))
   apply hm.congr_of_eventuallyEq
   filter_upwards [Ioi_mem_nhds hs] with x hx
   exact tail_eq_fixed hi hx.le
@@ -155,7 +155,7 @@ private theorem source_bound
     ‖B (q t) + F t‖ ≤ (‖B‖ * Z) * t ^ (-p) + G * t ^ (-p - 1) := by
   calc
     ‖B (q t) + F t‖ ≤ ‖B (q t)‖ + ‖F t‖ := norm_add_le _ _
-    _ ≤ ‖B‖ * ‖q t‖ + ‖F t‖ := add_le_add_right (B.le_opNorm _) _
+    _ ≤ ‖B‖ * ‖q t‖ + ‖F t‖ := add_le_add (B.le_opNorm _) le_rfl
     _ ≤ ‖B‖ * (Z * t ^ (-p)) + G * t ^ (-p - 1) :=
       add_le_add (mul_le_mul_of_nonneg_left hq (norm_nonneg _)) hF
     _ = _ := by ring
