@@ -52,7 +52,7 @@ theorem frame_norm_and_inverse_le (S : Aˣ)
         _ ≤ ‖(1 : A)‖ + ‖(↑(S⁻¹) : A) * ((↑S : A) - 1)‖ := norm_sub_le _ _
         _ ≤ 1 + ‖(↑(S⁻¹) : A)‖ * ‖(↑S : A) - 1‖ := by
           rw [norm_one]
-          exact add_le_add_left (norm_mul_le (↑(S⁻¹) : A) ((↑S : A) - 1)) 1
+          exact add_le_add le_rfl (norm_mul_le (↑(S⁻¹) : A) ((↑S : A) - 1))
     have hmul := mul_le_mul_of_nonneg_left hS (norm_nonneg (↑(S⁻¹) : A))
     linarith
 
@@ -208,7 +208,7 @@ theorem movingConnection_positive_margin
   have hz : 0 ≤ s ^ (-δ) := (Real.rpow_pos_of_pos hs _).le
   have hwz : 0 ≤ s ^ (-1 - κ - δ) := (Real.rpow_pos_of_pos hs _).le
   have hprod : s ^ (-1 - κ) * s ^ (-δ) = s ^ (-1 - κ - δ) := by
-    rw [← Real.rpow_add hs]
+    simpa only [sub_eq_add_neg] using (Real.rpow_add hs (-1 - κ) (-δ)).symm
   refine ⟨hκ, ?_, ?_⟩
   · have h := connectionValue_norm_le (S s)
       (deriv (fun t => (↑(S t) : A)) s) ((s⁻¹ : ℝ) • C s) (R s)
