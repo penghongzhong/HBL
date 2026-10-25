@@ -120,3 +120,14 @@ set_option pp.all true
 #check @HBL.Modulation.radialU_energy_bilinear_identity
 #check @HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_norm_sq
 #check @HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_coercive
+
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_selfAdjoint
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_sineMode
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_zero_sineMode
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_second_sineMode
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_quadratic
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_pairing
+#check @HBL.Modulation.Monopole.weightedVolterraGram_hasSum
+#check @HBL.Modulation.Monopole.weightedVolterraGram_tail_le
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_tail_coercive
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_coercive
