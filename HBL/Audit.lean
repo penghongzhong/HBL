@@ -1382,3 +1382,8 @@ import HBL
 #print axioms HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm_sq
 #print axioms HBL.Modulation.Monopole.physicalRadial3_gradient_energy_integral
 #print axioms HBL.Modulation.Monopole.physicalRadial3_phase_local_quadratic_integral
+
+#print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_nonneg
+#print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_eq_sine_span
+#print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_finrank
+#print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_strict_positive_off_phase

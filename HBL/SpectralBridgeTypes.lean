@@ -141,3 +141,8 @@ set_option pp.all true
 #check @HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm_sq
 #check @HBL.Modulation.Monopole.physicalRadial3_gradient_energy_integral
 #check @HBL.Modulation.Monopole.physicalRadial3_phase_local_quadratic_integral
+
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_nonneg
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_eq_sine_span
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_finrank
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_strict_positive_off_phase
