@@ -116,3 +116,7 @@ set_option pp.all true
 #check @HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_pairing
 #check @HBL.Modulation.Monopole.weightedVolterraPotential_radial_profile_pairing
 #check @HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_pairing
+
+#check @HBL.Modulation.radialU_energy_bilinear_identity
+#check @HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_norm_sq
+#check @HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_coercive

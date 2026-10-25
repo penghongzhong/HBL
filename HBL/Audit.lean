@@ -1357,3 +1357,7 @@ import HBL
 #print axioms HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_pairing
 #print axioms HBL.Modulation.Monopole.weightedVolterraPotential_radial_profile_pairing
 #print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_pairing
+
+#print axioms HBL.Modulation.radialU_energy_bilinear_identity
+#print axioms HBL.Modulation.Monopole.smoothRadialEnergy_coordinate_norm_sq
+#print axioms HBL.Modulation.Monopole.weightedVolterraAPlus_radial_profile_coercive
