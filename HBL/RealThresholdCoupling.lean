@@ -74,7 +74,7 @@ private theorem kinetic_green
       (∫ r in (0 : ℝ)..R, deriv (radialU g) r * deriv (radialU f) r) +
       (∫ r in (0 : ℝ)..R, radialU g r * deriv (deriv (radialU f)) r) = 0 := by
     rw [intervalIntegral.integral_add hpi hti] at hFTC
-    simpa only [radialU, hgR, mul_zero, zero_mul, sub_zero] using hFTC
+    simpa only [Pi.mul_apply, radialU, hgR, mul_zero, zero_mul, sub_zero] using hFTC
   calc
     (∫ r in (0 : ℝ)..R, radialU g r * (-deriv (deriv (radialU f)) r)) =
         -(∫ r in (0 : ℝ)..R, radialU g r * deriv (deriv (radialU f)) r) := by
@@ -161,15 +161,17 @@ private theorem actual_real_coupling_identity
     apply intervalIntegral.integral_congr
     intro r _
     dsimp [potential, weightedGreenDecay]
+    simp only [div_eq_mul_inv, inv_pow]
     ring
   have hu : ContDiff ℝ 2 (radialU f) := contDiff_id.mul hf
   have hv : ContDiff ℝ 2 (radialU g) := contDiff_id.mul hg
   have hdu : ContDiff ℝ 1 (deriv (radialU f)) := hu.deriv'
   have hkI := (hv.continuous.mul hdu.continuous_deriv_one.neg).intervalIntegrable
     (μ := volume) (a := (0 : ℝ)) (b := R)
-  have hpI := (hv.continuous.mul
-    ((continuous_const.mul potential_continuous_real).mul hu.continuous)).intervalIntegrable
-    (μ := volume) (a := (0 : ℝ)) (b := R)
+  have hpC : Continuous
+      (fun r => radialU g r * (3 * potential r * radialU f r)) :=
+    hv.continuous.mul ((continuous_const.mul potential_continuous_real).mul hu.continuous)
+  have hpI := hpC.intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := R)
   have hnI : IntervalIntegrable
       (fun r => radialU g r * nonlocalApply (radialU f) r) volume 0 R := by
     apply (intervalIntegrable_iff_integrableOn_Ioc_of_le hR).2
