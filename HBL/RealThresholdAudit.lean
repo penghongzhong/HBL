@@ -1,7 +1,6 @@
 import HBL.RealThresholdCoupling
 
 set_option pp.all true
-set_option pp.maxDepth 1000000
 set_option pp.maxSteps 10000000
 set_option maxRecDepth 1000000
 
