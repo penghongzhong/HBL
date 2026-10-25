@@ -93,7 +93,8 @@ theorem weightedVolterraAMinus_kernel_eq_sine_span :
     have hAg : weightedVolterraAMinus g = 0 := by
       dsimp only [g]
       rw [map_sub, map_smul, weightedVolterraAMinus_zero_sineMode,
-        smul_zero, sub_zero, hx]
+        smul_zero, sub_zero]
+      exact hx
     have hgap := weightedVolterraAMinus_tail_coercive g hgorth
     rw [hAg, inner_zero_left] at hgap
     have hgzero : g = 0 := by
