@@ -188,3 +188,5 @@ import HBL.WeightedVolterraAMinus
 import HBL.PhysicalRadial3LocalPotential
 
 import HBL.PhysicalRadial3Gradient
+
+import HBL.WeightedVolterraAMinusKernel

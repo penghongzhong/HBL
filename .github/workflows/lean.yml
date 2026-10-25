@@ -101,6 +101,7 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAMinus.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalRadial3LocalPotential.lean
           lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalRadial3Gradient.lean
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedVolterraAMinusKernel.lean
           lake env lean --trust=0 -DwarningAsError=true HBL.lean
           lake env lean --trust=0 HBL/SpectralBridgeTypes.lean > /tmp/hbl-full-types.txt
           git rev-parse HEAD > /tmp/hbl-commit.txt
@@ -771,6 +772,10 @@ jobs:
               'HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm_sq',
               'HBL.Modulation.Monopole.physicalRadial3_gradient_energy_integral',
               'HBL.Modulation.Monopole.physicalRadial3_phase_local_quadratic_integral',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_nonneg',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_eq_sine_span',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_kernel_finrank',
+              'HBL.Modulation.Monopole.weightedVolterraAMinus_strict_positive_off_phase',
           ]
           if len(new_chain_expected) != len(set(new_chain_expected)) or expected_full & set(new_chain_expected):
               raise SystemExit('Duplicate new chain dependency report')
