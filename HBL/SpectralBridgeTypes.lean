@@ -131,3 +131,8 @@ set_option pp.all true
 #check @HBL.Modulation.Monopole.weightedVolterraGram_tail_le
 #check @HBL.Modulation.Monopole.weightedVolterraAMinus_tail_coercive
 #check @HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_coercive
+
+#check @HBL.Modulation.Monopole.physicalRadial3_volume_unitBall_real
+#check @HBL.Modulation.Monopole.physicalRadial3_integral
+#check @HBL.Modulation.Monopole.physicalRadial3_localHartreePotential_pairing
+#check @HBL.Modulation.Monopole.weightedVolterraAMinus_threeD_localPotential_bridge
