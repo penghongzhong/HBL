@@ -66,6 +66,8 @@ theorem physicalRadial3_localHartreePotential_pairing
       weightedGreenDecay r ^ 2 * radialU f r * radialU g r
   apply setIntegral_congr_fun measurableSet_Ioi
   intro r hr
+  change r ^ 2 * (bubble r ^ 4 * f r * g r) =
+    weightedGreenDecay r ^ 2 * radialU f r * radialU g r
   have hweight : weightedGreenDecay r = bubble r ^ 2 := by
     simp only [weightedGreenDecay, bubble_sq]
   rw [hweight]
