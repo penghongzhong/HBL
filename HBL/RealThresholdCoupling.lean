@@ -166,8 +166,10 @@ private theorem actual_real_coupling_identity
   have hu : ContDiff ℝ 2 (radialU f) := contDiff_id.mul hf
   have hv : ContDiff ℝ 2 (radialU g) := contDiff_id.mul hg
   have hdu : ContDiff ℝ 1 (deriv (radialU f)) := hu.deriv'
-  have hkI := (hv.continuous.mul hdu.continuous_deriv_one.neg).intervalIntegrable
-    (μ := volume) (a := (0 : ℝ)) (b := R)
+  have hkI : IntervalIntegrable
+      (fun r => radialU g r * (-deriv (deriv (radialU f)) r)) volume 0 R :=
+    (hv.continuous.mul hdu.continuous_deriv_one.neg).intervalIntegrable
+      (μ := volume) (a := (0 : ℝ)) (b := R)
   have hpC : Continuous
       (fun r => radialU g r * (3 * potential r * radialU f r)) :=
     hv.continuous.mul ((continuous_const.mul potential_continuous_real).mul hu.continuous)
