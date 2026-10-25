@@ -1372,3 +1372,8 @@ import HBL
 #print axioms HBL.Modulation.Monopole.weightedVolterraGram_tail_le
 #print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_tail_coercive
 #print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_radial_profile_coercive
+
+#print axioms HBL.Modulation.Monopole.physicalRadial3_volume_unitBall_real
+#print axioms HBL.Modulation.Monopole.physicalRadial3_integral
+#print axioms HBL.Modulation.Monopole.physicalRadial3_localHartreePotential_pairing
+#print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_threeD_localPotential_bridge
