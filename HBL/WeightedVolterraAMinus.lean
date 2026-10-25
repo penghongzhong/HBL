@@ -121,6 +121,8 @@ theorem weightedVolterraGram_hasSum (x : RealL2 halfLineMeasure) :
           inner ℝ (weightedVolterraSineMode n) x := by
     rw [real_inner_comm]
     exact weightedVolterraSineMode_inner n x
+  rw [real_inner_comm (weightedHartreeOrthonormalSineMode n)
+    (weightedVolterraOperator x)]
   simp only [hcoeff]
   ring
 
