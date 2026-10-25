@@ -114,7 +114,7 @@ theorem phaseThresholdCoupling_certified
     (hzeta : ContDiff ℝ 2 zeta)
     (hz0 : zeta 0 = 0) (hzR : zeta R = 0)
     (hdzR : deriv zeta R = 0) :
-    (∀ (f : ℝ → ℝ) (hf : ContDiff ℝ 2 f)
+    (∀ (f : ℝ → ℝ) (_hf : ContDiff ℝ 2 f)
       (hmem : MemLp (deriv (radialU f)) 2 (volume.restrict (Ioi (0 : ℝ)))),
       (∫ r in (0 : ℝ)..R, zeta r * hMinusApply (radialU f) r) =
         phaseThresholdCoupling R hR zeta hzeta (smoothToRadialDotH1 f hmem)) ∧
