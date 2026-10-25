@@ -191,6 +191,8 @@ theorem retainedFeedbackTail_certified
     simpa only [he, mul_zero] using
       (tendsto_rpow_neg_atTop (show 0 < nu - 1 by linarith)).const_mul
         ((L * C) / (p + nu - 1))
-  simpa only [retainedFeedbackSmallness, add_zero] using h1.add h2
+  change Tendsto (fun s : ℝ => (L * A) / (p + nu - 2) * s ^ (2 - nu) +
+    (L * C) / (p + nu - 1) * s ^ (1 - nu)) atTop (𝓝 0)
+  simpa only [add_zero] using h1.add h2
 
 end HBL.Modulation.TriangularRepair
