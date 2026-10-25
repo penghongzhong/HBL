@@ -1,0 +1,114 @@
+name: HBL triangular threshold repair
+
+on:
+  push:
+    branches: [hbl-triangular-threshold-coupling-20261025]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: hbl-triangular-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Protect accepted sources and pin dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import subprocess, pathlib, textwrap, re
+          base='16eea991ad72990e2c1e8c4651413a29e0bda040'
+          permitted={'HBL/TriangularThresholdCoupling.lean','HBL/TriangularThresholdAudit.lean','.github/workflows/triangular-repair.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= permitted, delta-permitted
+          s=pathlib.Path('HBL/TriangularThresholdCoupling.lean').read_text()
+          s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',s)
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          print('Accepted main unchanged; actual local coupling only, original manuscript remains 8/21.')
+          PY
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: bash -euo pipefail /tmp/hbl-dependencies.sh
+      - uses: actions/cache/restore@v4
+        id: proof_cache
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Compile actual coupling
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.TriangularThresholdCoupling 2>&1 | tee evidence/build.log
+      - name: Strict kernel and complete terminal statement
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -DwarningAsError=true HBL/TriangularThresholdCoupling.lean 2>&1 | tee evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TriangularThresholdAudit.lean > evidence/types-and-axioms.txt
+          git ls-files -z '*.lean' lean-toolchain lake-manifest.json lakefile.lean '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/all-sources.sha256
+      - name: Audit exact new declaration and all its dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re,json,pathlib
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          expected=['HBL.Modulation.TriangularRepair.phaseThresholdCoupling_certified']
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          assert len(reports)==1 and [n for n,a in reports]==expected, reports
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n,a in reports:
+              actual={x.strip() for x in a.split(',') if x.strip()}
+              assert actual <= allowed,(n,actual)
+          assert 'sorryAx' not in s and '⋯' not in s and '...' not in s
+          assert expected[0] in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({'new_declarations':expected,'axioms':{n:[x.strip() for x in a.split(',') if x.strip()] for n,a in reports},'strict_trust_zero':True,'main_modified':False,'original_acceptance':'8/21','nonlocal_block_formalized':False,'full_triangular_evolution_formalized':False},indent=2))
+          print('Exact actual-coupling theorem and its kernel dependencies passed; no main or manuscript count change.')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-triangular-repair-${{ github.sha }}
+          path: |
+            evidence
+            HBL/TriangularThresholdCoupling.lean
+            HBL/TriangularThresholdAudit.lean
+            .github/workflows/triangular-repair.yml
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/cache/save@v4
+        if: always() && steps.proof_cache.outputs.cache-hit != 'true'
+        with:
+          path: .lake/build
+          key: ${{ steps.proof_cache.outputs.cache-primary-key }}
