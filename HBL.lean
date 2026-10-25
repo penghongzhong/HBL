@@ -186,3 +186,5 @@ import HBL.WeightedVolterraProfileCoercivity
 import HBL.WeightedVolterraAMinus
 
 import HBL.PhysicalRadial3LocalPotential
+
+import HBL.PhysicalRadial3Gradient

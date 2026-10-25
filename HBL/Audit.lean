@@ -1377,3 +1377,8 @@ import HBL
 #print axioms HBL.Modulation.Monopole.physicalRadial3_integral
 #print axioms HBL.Modulation.Monopole.physicalRadial3_localHartreePotential_pairing
 #print axioms HBL.Modulation.Monopole.weightedVolterraAMinus_threeD_localPotential_bridge
+
+#print axioms HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm
+#print axioms HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm_sq
+#print axioms HBL.Modulation.Monopole.physicalRadial3_gradient_energy_integral
+#print axioms HBL.Modulation.Monopole.physicalRadial3_phase_local_quadratic_integral

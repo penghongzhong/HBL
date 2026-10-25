@@ -136,3 +136,8 @@ set_option pp.all true
 #check @HBL.Modulation.Monopole.physicalRadial3_integral
 #check @HBL.Modulation.Monopole.physicalRadial3_localHartreePotential_pairing
 #check @HBL.Modulation.Monopole.weightedVolterraAMinus_threeD_localPotential_bridge
+
+#check @HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm
+#check @HBL.Modulation.Monopole.physicalRadial3_radial_fderiv_norm_sq
+#check @HBL.Modulation.Monopole.physicalRadial3_gradient_energy_integral
+#check @HBL.Modulation.Monopole.physicalRadial3_phase_local_quadratic_integral
