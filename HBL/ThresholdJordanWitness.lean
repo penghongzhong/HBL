@@ -44,7 +44,6 @@ private theorem w_hasDerivAt (r : ℝ) : HasDerivAt bubble (w1 r) r := by
   unfold w1 bubble
   rw [hs2]
   field_simp [hsne, ne_of_gt hqpos]
-  ring
 
 private theorem w1_hasDerivAt (r : ℝ) : HasDerivAt w1 (w2 r) r := by
   have hq : HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * r) r := by
