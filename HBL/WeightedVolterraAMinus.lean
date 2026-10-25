@@ -114,9 +114,14 @@ theorem weightedVolterraGram_hasSum (x : RealL2 halfLineMeasure) :
     (weightedVolterraOperator x) (weightedVolterraOperator x) using 1
   funext n
   simp only [weightedHartreeSineHilbertBasis_apply]
-  rw [real_inner_comm (weightedVolterraOperator x)
-      (weightedHartreeOrthonormalSineMode n),
-    weightedVolterraSineMode_inner]
+  have hcoeff :
+      inner ℝ (weightedVolterraOperator x)
+          (weightedHartreeOrthonormalSineMode n) =
+        (weightedVolterraSineScale n)⁻¹ *
+          inner ℝ (weightedVolterraSineMode n) x := by
+    rw [real_inner_comm]
+    exact weightedVolterraSineMode_inner n x
+  simp only [hcoeff]
   ring
 
 /-- Outside the true phase zero mode, the squared Volterra norm is bounded
