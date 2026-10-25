@@ -125,7 +125,7 @@ theorem weightedPotentialOperator_profile_pairing
       ∫ p : ℝ × ℝ, hartreeKernel p.1 p.2 * (v p.1 * q p.2)
         ∂(halfLineMeasure.prod halfLineMeasure) := by
   unfold weightedPotentialOperator
-  rw [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
+  rw [add_apply, smul_apply,
     ContinuousLinearMap.id_apply, inner_add_left, real_inner_smul_left,
     weightedProfile_inner q v hq hv,
     weightedHartreeOperator_profile_pairing q v hq hv]
