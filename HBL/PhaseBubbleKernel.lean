@@ -65,7 +65,6 @@ private theorem phaseBubble_primitive_hasDerivAt (r : ℝ) :
     resonanceMinusSecondDerivative]
   rw [inv_pow, hs4]
   field_simp [hsne]
-  <;> ring
 
 private theorem phaseBubble_derivative_tendsto_zero :
     Tendsto bubbleRadialEnergyDerivative atTop (𝓝 (0 : ℝ)) := by
@@ -77,17 +76,20 @@ private theorem phaseBubble_derivative_tendsto_zero :
   have hsne : Real.sqrt (1 + r ^ 2) ≠ 0 := by positivity
   dsimp [resonanceMinus, radialResonanceMinus, bubble, bubbleRadialEnergyDerivative]
   field_simp [ne_of_gt hr, hsne]
-  <;> ring
 
 private theorem phaseBubble_source_tail (s : ℝ) (hs : 0 ≤ s) :
     (∫ r in Ioi s, phaseBubbleSource r) =
       (1 / 3 : ℝ) * bubbleRadialEnergyDerivative s := by
+  have hfull : IntegrableOn phaseBubbleSource (Ioi (0 : ℝ)) :=
+    phaseBubble_source_integrable
   have hint : IntegrableOn phaseBubbleSource (Ioi s) :=
-    phaseBubble_source_integrable.mono_set (Ioi_subset_Ioi hs)
+    hfull.mono_set (Ioi_subset_Ioi hs)
   have hlim : Tendsto
       (fun r => -(1 / 3 : ℝ) * bubbleRadialEnergyDerivative r)
       atTop (𝓝 (0 : ℝ)) := by
-    simpa using tendsto_const_nhds.mul phaseBubble_derivative_tendsto_zero
+    have hc : Tendsto (fun _ : ℝ => -(1 / 3 : ℝ)) atTop
+        (𝓝 (-(1 / 3 : ℝ))) := tendsto_const_nhds
+    simpa only [mul_zero] using hc.mul phaseBubble_derivative_tendsto_zero
   have h := integral_Ioi_of_hasDerivAt_of_tendsto
     (phaseBubble_primitive_hasDerivAt s).continuousAt.continuousWithinAt
     (fun r _ => phaseBubble_primitive_hasDerivAt r) hint hlim
@@ -106,10 +108,11 @@ theorem weightedVolterraGram_bubble :
       (weightedVolterraOperator fullBubbleRadialEnergyL2),
     Lp.coeFn_smul (1 / 3 : ℝ) fullBubbleRadialEnergyL2,
     phaseBubble_ae, ae_restrict_mem measurableSet_Ioi] with s ha hm hb hs
-  rw [ha, hm, hb]
+  rw [ha, hm]
   change (∫ r in Ioi s,
       (1 + r ^ 2)⁻¹ * weightedVolterraOperator fullBubbleRadialEnergyL2 r) =
-    (1 / 3 : ℝ) * bubbleRadialEnergyDerivative s
+    (1 / 3 : ℝ) * fullBubbleRadialEnergyL2 s
+  rw [hb]
   calc
     (∫ r in Ioi s,
         (1 + r ^ 2)⁻¹ * weightedVolterraOperator fullBubbleRadialEnergyL2 r) =
@@ -118,6 +121,8 @@ theorem weightedVolterraGram_bubble :
       have hlocal := ae_restrict_of_ae_restrict_of_subset
         (Ioi_subset_Ioi (show 0 ≤ s from le_of_lt hs)) phaseBubble_image_ae
       filter_upwards [hlocal] with r hr
+      change (1 + r ^ 2)⁻¹ * weightedVolterraOperator fullBubbleRadialEnergyL2 r =
+        phaseBubbleSource r
       rw [hr]
       dsimp [phaseBubbleSource, weightedGreenDecay]
       ring
