@@ -16,7 +16,7 @@ flow, nonlocal angular identity, or converse Sobolev density is asserted.
 
 noncomputable section
 open MeasureTheory Set Filter Metric
-open scoped Topology ContDiff RealInnerProductSpace
+open scoped Topology ContDiff RealInnerProductSpace NNReal
 
 namespace HBL.Modulation.Monopole
 open HBL.L2Kernel HBL.Modulation.AffineTail
@@ -152,8 +152,8 @@ private theorem core_lipschitz (f : PhysicalGradientCore) :
       rw [he.deriv_eq, deriv_const]
       simpa only [norm_zero] using (le_max_right M 0)
   have hl : LipschitzOnWith C (f : ℝ → ℝ) (Ici 0) :=
-    convex_Ici.lipschitzOnWith_of_nnnorm_deriv_le
-      (fun r _ => hf.differentiable (by norm_num) r) hb
+    Convex.lipschitzOnWith_of_nnnorm_deriv_le
+      (fun r _ => hf.differentiable (by norm_num) r) hb (convex_Ici (0 : ℝ))
   refine ⟨C, LipschitzWith.of_dist_le_mul (fun x y => ?_)⟩
   exact (hl.dist_le_mul ‖x‖ (norm_nonneg x) ‖y‖ (norm_nonneg y)).trans
     (mul_le_mul_of_nonneg_left (dist_norm_norm_le x y) C.coe_nonneg)
@@ -172,7 +172,9 @@ private theorem vectorTestMem (φ : PhysicalRadialSpace3 → ℝ)
     apply HasCompactSupport.of_support_subset_isCompact hc
     intro x hx
     by_contra hn
-    exact hx (by rw [image_eq_zero_of_notMem_tsupport hn, zero_smul])
+    apply hx
+    change φ x • v = 0
+    rw [image_eq_zero_of_notMem_tsupport hn, zero_smul]
   exact (hφ.continuous.smul continuous_const).memLp_of_hasCompactSupport hs
 
 private def derivativeTestPair (φ : PhysicalRadialSpace3 → ℝ)
@@ -268,7 +270,8 @@ private theorem gradient_weak (u : PhysicalRadialEnergyCompletion) :
   · have hi := memLp_one_iff_integrable.mp
       ((innerSL ℝ : PhysicalRadialSpace3 →L[ℝ] PhysicalRadialSpace3 →L[ℝ] ℝ).memLp_of_bilin 1
         (vectorTestMem φ hφ hc v) (Lp.memLp (physicalGradientRealization u)))
-    simpa only [innerSL_apply_apply, real_inner_smul_left] using hi
+    change Integrable (fun x => inner ℝ (φ x • v) (physicalGradientRealization u x)) at hi
+    simpa only [real_inner_smul_left] using hi
   · rw [← vector_pair φ hφ hc v, ← derivative_pair φ hφ hc v]
     exact completed_ibp u φ hφ hc v
 
