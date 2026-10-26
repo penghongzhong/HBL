@@ -54,7 +54,7 @@ private theorem kernel_split_bound (x : Space) : kernel x ≤ nearKernel x + 1 :
 /-- Absolute convergence and a uniform bound for the actual convolution,
 for every physical point. Only natural input density conditions are assumed. -/
 theorem potential_bound (ρ : Space → ℂ) (hρ : Integrable ρ)
-    (M : ℝ) (hM : 0 ≤ M) (hb : ∀ᵐ y, ‖ρ y‖ ≤ M) (x : Space) :
+    (M : ℝ) (_hM : 0 ≤ M) (hb : ∀ᵐ y, ‖ρ y‖ ≤ M) (x : Space) :
     Integrable (fun y : Space => (kernel (x - y) : ℂ) * ρ y) ∧
       ‖potential ρ x‖ ≤ nearMass * M + ∫ y : Space, ‖ρ y‖ := by
   have hm : Integrable (fun y : Space => nearKernel (x - y) * M + ‖ρ y‖) :=
@@ -94,7 +94,8 @@ theorem potential_sub_bound (ρ σ : Space → ℂ)
     simp_rw [mul_sub]
     exact integral_sub (potential_bound ρ hρ Mρ hMρ hρb x).1
       (potential_bound σ hσ Mσ hMσ hσb x).1
-  rwa [he] at h
+  rw [he] at h
+  exact h.2
 
 /-- The quartic density difference is controlled by the physical complex
 increment. This estimate is used before integrating the singular kernel. -/
@@ -106,17 +107,20 @@ theorem quartic_difference (z w : ℂ) (R : ℝ) (hz : ‖z‖ ≤ R) (hw : ‖w
       |‖z‖ - ‖w‖| * (‖z‖ + ‖w‖) * (‖z‖ ^ 2 + ‖w‖ ^ 2) := by
     rw [show ‖z‖ ^ 4 - ‖w‖ ^ 4 =
       (‖z‖ - ‖w‖) * (‖z‖ + ‖w‖) * (‖z‖ ^ 2 + ‖w‖ ^ 2) by ring]
-    rw [abs_mul, abs_mul, abs_of_nonneg (add_nonneg (norm_nonneg _) (norm_nonneg _)),
-      abs_of_nonneg (add_nonneg (sq_nonneg _) (sq_nonneg _))]
+    rw [abs_mul, abs_mul, abs_of_nonneg (show 0 ≤ ‖z‖ + ‖w‖ by positivity),
+      abs_of_nonneg (show 0 ≤ ‖z‖ ^ 2 + ‖w‖ ^ 2 by positivity)]
   have hsq : ‖z‖ ^ 2 + ‖w‖ ^ 2 ≤ 2 * R ^ 2 := by
     nlinarith [sq_nonneg (R - ‖z‖), sq_nonneg (R - ‖w‖),
       mul_nonneg (sub_nonneg.mpr hz) (add_nonneg hR (norm_nonneg z)),
       mul_nonneg (sub_nonneg.mpr hw) (add_nonneg hR (norm_nonneg w))]
   rw [ha]
+  have hfirst := mul_le_mul_of_nonneg_right (abs_norm_sub_norm_le z w)
+    (show 0 ≤ ‖z‖ + ‖w‖ by positivity)
+  have hprod := mul_le_mul hfirst hsq
+    (show 0 ≤ ‖z‖ ^ 2 + ‖w‖ ^ 2 by positivity)
+    (show 0 ≤ ‖z - w‖ * (‖z‖ + ‖w‖) by positivity)
   calc
-    _ ≤ ‖z - w‖ * (‖z‖ + ‖w‖) * (2 * R ^ 2) := by
-      gcongr
-      exact abs_norm_sub_norm_le z w
+    _ ≤ ‖z - w‖ * (‖z‖ + ‖w‖) * (2 * R ^ 2) := hprod
     _ = _ := by ring
 
 /-- This audit entry covers kernel estimates only. The original manuscript
