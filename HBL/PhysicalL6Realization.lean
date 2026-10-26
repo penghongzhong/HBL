@@ -72,9 +72,9 @@ private theorem squareIntegralExpansion (q : ℝ → ℝ) (hq : Continuous q) (r
     (∫ t in (0 : ℝ)..r, (q t - a) ^ 2) =
       (∫ t in (0 : ℝ)..r, (q t) ^ 2) -
         (2 * a) * (∫ t in (0 : ℝ)..r, q t) + r * a ^ 2 := by
-  have hqi : IntervalIntegrable q volume 0 r := hq.intervalIntegrable
+  have hqi : IntervalIntegrable q volume 0 r := hq.intervalIntegrable 0 r
   have hq2i : IntervalIntegrable (fun t => q t ^ 2) volume 0 r :=
-    (hq.pow 2).intervalIntegrable
+    (hq.pow 2).intervalIntegrable 0 r
   have hlin : IntervalIntegrable (fun t => (2 * a) * q t) volume 0 r :=
     hqi.const_mul (2 * a)
   calc
@@ -273,6 +273,6 @@ theorem physicalL6Realization_certified :
       realization_bound (physicalEnergyEquiv.symm q)
   · intro f u h
     have ht := physicalL6Realization.continuous.tendsto u |>.comp h
-    simpa only [realization_on_core] using ht
+    simpa only [Function.comp_def, realization_on_core] using ht
 
 end HBL.Modulation.Monopole
