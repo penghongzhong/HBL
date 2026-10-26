@@ -57,6 +57,12 @@ jobs:
         run: |
           bash -euo pipefail /tmp/hbl-dependencies.sh
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/SpecialFunctions/Pow/Integral.lean Mathlib/MeasureTheory/Group/Integral.lean Mathlib/MeasureTheory/Function/L2Space.lean Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean Mathlib/MeasureTheory/Integral/Prod.lean Mathlib/Tactic.lean)
+      - name: Obtain exact analysis cache for local work
+        if: contains(github.event.head_commit.message, '[export-env]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean Mathlib/Analysis/Convolution.lean Mathlib/Analysis/ODE/PicardLindelof.lean Mathlib/Analysis/Calculus/Implicit.lean Mathlib/MeasureTheory/Function/Holder.lean)
       - name: Compile actual radiation kernel and nonlinear estimates
         shell: bash
         run: |
@@ -96,3 +102,30 @@ jobs:
           name: hbl-existing-radiation-${{ github.sha }}
           path: evidence
           retention-days: 14
+      - name: Pack fixed local environment without repository credentials
+        if: always() && contains(github.event.head_commit.message, '[export-env]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p local-environment
+          root="$HOME/.elan/toolchains/leanprover--lean4---v4.35.0-rc3"
+          tar --zstd -cf local-environment/lean-4.35.0-rc3.tar.zst -C "$root" .
+          tar --zstd --exclude='*/.git' --exclude='*/.lake/build/ir' --exclude='*/.lake/build/bin' --exclude='*.ilean' -cf local-environment/pinned-dependencies.tar.zst .lake/packages
+          sha256sum local-environment/*.tar.zst > local-environment/SHA256SUMS
+          du -sh "$root" .lake/packages local-environment/*
+      - uses: actions/upload-artifact@v4
+        if: always() && contains(github.event.head_commit.message, '[export-env]')
+        with:
+          name: hbl-local-lean-4.35.0-rc3
+          path: local-environment/lean-4.35.0-rc3.tar.zst
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always() && contains(github.event.head_commit.message, '[export-env]')
+        with:
+          name: hbl-local-pinned-analysis
+          path: |
+            local-environment/pinned-dependencies.tar.zst
+            local-environment/SHA256SUMS
+          compression-level: 0
+          retention-days: 7
