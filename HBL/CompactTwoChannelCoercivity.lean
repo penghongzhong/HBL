@@ -42,9 +42,14 @@ private theorem scale_zero : weightedVolterraAPlus weightedVolterraScaleVector =
 
 private theorem scale_first_orthogonal :
     inner ℝ (weightedVolterraSineMode 0) weightedVolterraScaleVector = 0 := by
-  have hs := (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
-    weightedVolterraAPlus_selfAdjoint)
-    (weightedVolterraSineMode 0) weightedVolterraScaleVector
+  have hs :
+      inner ℝ (weightedVolterraAPlus (weightedVolterraSineMode 0))
+          weightedVolterraScaleVector =
+        inner ℝ (weightedVolterraSineMode 0)
+          (weightedVolterraAPlus weightedVolterraScaleVector) :=
+    (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+      weightedVolterraAPlus_selfAdjoint)
+      (weightedVolterraSineMode 0) weightedVolterraScaleVector
   rw [weightedVolterraAPlus_negative_sineMode, scale_zero,
     real_inner_smul_left, inner_zero_right] at hs
   linarith
