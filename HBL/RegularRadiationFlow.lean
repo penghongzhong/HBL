@@ -29,6 +29,12 @@ abbrev SobolevR (s : ℝ) :=
 
 abbrev Sobolev (L : ℕ) := SobolevR (L : ℝ)
 
+/-- Actual radiality predicate on the Bessel-potential representative:
+invariance under every orthogonal linear isometry of R^3. -/
+def IsRadialSobolev {L : ℕ} (f : Sobolev L) : Prop :=
+  ∀ U : Space ≃ₗᵢ[ℝ] Space,
+    (fun x => f.toLp (U x)) =ᵐ[volume] (fun x => f.toLp x)
+
 /-- Canonical loss-of-regularity map between Bessel-potential Sobolev spaces.
 It is built from Mathlib's proved monotonicity theorem, not assumed. -/
 def sobolevWeaken {s s' : ℝ} (h : s' ≤ s) (f : SobolevR s) : SobolevR s' :=
@@ -75,6 +81,10 @@ structure GeneralizedHartreeRegularLocalTheory (κ : ℝ) where
     ‖g‖ ≤ epsilon L →
     ∀ a : ℕ, ∀ t ∈ Icc (T - tau L) T,
       ‖jet L T g a t‖ ≤ boundConst L * ‖g‖
+  radial_preserved : ∀ L, 4 ≤ L → ∀ T g,
+    IsRadialSobolev g →
+    ∀ t ∈ Icc (T - tau L) T,
+      IsRadialSobolev (flow L T g t)
   local_lipschitz : ∀ L, 4 ≤ L → ∀ T g h,
     ‖g‖ ≤ epsilon L → ‖h‖ ≤ epsilon L →
     ∀ t ∈ Icc (T - tau L) T,
@@ -107,6 +117,8 @@ theorem regularRadiationFlow_certified (κ : ℝ)
         (∀ g, ‖g‖ ≤ ε₀ → ∀ a : ℕ, a ≤ N + 2 →
           ∀ t ∈ Icc (T - τ₀) T,
             ‖zjet g a t‖ ≤ C * ‖g‖) ∧
+        (∀ g, IsRadialSobolev g →
+          ∀ t ∈ Icc (T - τ₀) T, IsRadialSobolev (z g t)) ∧
         (∀ g h, ‖g‖ ≤ ε₀ → ‖h‖ ≤ ε₀ →
           ∀ t ∈ Icc (T - τ₀) T,
             ‖z g t - z h t‖ ≤ C * ‖g - h‖) ∧
@@ -120,7 +132,7 @@ theorem regularRadiationFlow_certified (κ : ℝ)
   let zj : Sobolev L → (a : ℕ) → ℝ →
       SobolevR ((L : ℝ) - 2 * (a : ℝ)) :=
     fun g a t => LT.jet L T g a t
-  refine ⟨z, zj, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨z, zj, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro g
     exact LT.endpoint L T g
   · intro g t
@@ -131,6 +143,8 @@ theorem regularRadiationFlow_certified (κ : ℝ)
     exact LT.local_bound L hL4 T g hg t ht
   · intro g hg a _ha t ht
     exact LT.jet_bound L hL4 T g hg a t ht
+  · intro g hrad t ht
+    exact LT.radial_preserved L hL4 T g hrad t ht
   · intro g h hg hh t ht
     exact LT.local_lipschitz L hL4 T g h hg hh t ht
   · intro t ht
@@ -141,6 +155,7 @@ theorem regularRadiation_actualKernel_check :
     Integrable nearKernel ∧ 0 ≤ nearMass :=
   ⟨regularRadiationKernel_checks.1, regularRadiationKernel_checks.2.1⟩
 
+#print axioms IsRadialSobolev
 #print axioms sobolevWeaken
 #print axioms regularRadiationFlow_certified
 #print axioms regularRadiation_actualKernel_check
