@@ -81,7 +81,7 @@ theorem innerSolve_eq_source
     C.H (innerSolve C F) = F := by
   rw [innerSolve, map_add, C.solveCompatible_eq, map_smul]
   unfold compatibleInnerSource
-  abel
+  abel_nf
 
 /-- The affine coefficient itself is unique. -/
 theorem innerCharge_unique
@@ -193,14 +193,14 @@ theorem minimalWeightCluster_gain
     rho + k ≤ wCutoff := by
   dsimp only
   constructor
-  · exact (add_le_add_left (kappaProf_le_delta delta epsilonFlat betaMinus rhoStar) rho).trans hParam
+  · linarith [kappaProf_le_delta delta epsilonFlat betaMinus rhoStar]
   constructor
-  · exact (add_le_add_left (kappaProf_le_flat delta epsilonFlat betaMinus rhoStar) rho).trans hFlat
+  · linarith [kappaProf_le_flat delta epsilonFlat betaMinus rhoStar]
   constructor
-  · exact (add_le_add_left (kappaProf_le_slow delta epsilonFlat betaMinus rhoStar) rho).trans hSlow
+  · linarith [kappaProf_le_slow delta epsilonFlat betaMinus rhoStar]
   constructor
-  · exact (add_le_add_left (kappaProf_le_frobenius delta epsilonFlat betaMinus rhoStar) rho).trans hFrob
-  · exact (add_le_add_left (kappaProf_le_cutoff delta epsilonFlat betaMinus rhoStar) rho).trans hCutoff
+  · linarith [kappaProf_le_frobenius delta epsilonFlat betaMinus rhoStar]
+  · linarith [kappaProf_le_cutoff delta epsilonFlat betaMinus rhoStar]
 
 /-- Single manuscript terminal for `prop:one-layer-stage3`: simultaneous
 regional cancellation, uniqueness of both real threshold charges, and a
