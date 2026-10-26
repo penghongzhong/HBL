@@ -25,7 +25,11 @@ private theorem cutoffDerivative_support : HasCompactSupport (deriv cutoff) := b
   intro r hr
   by_contra h
   have hc : deriv cutoff r = 0 := by
-    rcases not_mem_Icc.mp h with hleft | hright
+    have hout : r < 1 ∨ 2 < r := by
+      by_cases hleft : r < 1
+      · exact Or.inl hleft
+      · exact Or.inr (lt_of_not_ge (fun hright => h ⟨le_of_not_gt hleft, hright⟩))
+    rcases hout with hleft | hright
     · have he : cutoff =ᶠ[𝓝 r] (fun _ => (0 : ℝ)) := by
         filter_upwards [Iio_mem_nhds hleft] with t ht
         exact cutoff_zero_of_le_one t ht.le
@@ -74,7 +78,7 @@ private theorem corrected_test_is_core
     exact hg.sub (contDiff_const.mul cutoffDerivative_smooth)
   have hG0 : G 0 = 0 := by simp [G, cutoff_zero_of_le_one 0 (by norm_num)]
   have hgn : {r : ℝ | g r = 0} ∈ 𝓝 (0 : ℝ) := by
-    have h0 : (0 : ℝ) ∉ tsupport g := fun h => (hgp h).false
+    have h0 : (0 : ℝ) ∉ tsupport g := fun h => (lt_irrefl (0 : ℝ)) (hgp h)
     filter_upwards [(isClosed_tsupport g).isOpen_compl.mem_nhds h0] with r hr
     exact image_eq_zero_of_notMem_tsupport hr
   obtain ⟨δ, hδ, hsmall⟩ := Metric.mem_nhds_iff.mp hgn
@@ -106,7 +110,7 @@ private theorem corrected_test_is_core
     by_cases hr : r = 0
     · subst r
       apply (contDiffAt_const (c := (0 : ℝ))).congr_of_eventuallyEq
-      filter_upwards [Metric.ball_mem_nhds (0 : ℝ) (lt_min hδ (by norm_num))] with t ht
+      filter_upwards [Metric.ball_mem_nhds (0 : ℝ) (show 0 < min δ 1 from lt_min hδ zero_lt_one)] with t ht
       change G t / t = 0
       rw [hGnear t (by simpa [Metric.mem_ball, Real.dist_eq] using ht), zero_div]
     · exact (hGs.of_le (by norm_num)).contDiffAt.div contDiffAt_id hr
@@ -154,7 +158,7 @@ private theorem core_range_orthogonal_zero (h : FullRadialEnergyL2)
       (∫ r, g r * h r ∂halfLineMeasure) = (∫ r, g r ∂halfLineMeasure) * c := by
     obtain ⟨f, hf⟩ := corrected_test_is_core g hg hgc hgp
     have hz : inner ℝ (physicalCoreCoordinate f) h = 0 :=
-      (Submodule.mem_orthogonal.mp hh) _ ⟨f, rfl⟩
+      hh _ ⟨f, rfl⟩
     have hi : (∫ r, (g r - (∫ t, g t ∂halfLineMeasure) * deriv cutoff r) * h r
         ∂halfLineMeasure) = 0 := by
       rw [L2.inner_def] at hz
@@ -185,7 +189,7 @@ private theorem core_range_orthogonal_zero (h : FullRadialEnergyL2)
           sub_self])
     filter_upwards [hzero, ae_restrict_mem measurableSet_Ioi] with r hr hrpos
     exact sub_eq_zero.mp (hr hrpos)
-  have hcLp : MemLp (fun _ : ℝ => c) 2 halfLineMeasure := (Lp.memLp h).congr hae
+  have hcLp : MemLp (fun _ : ℝ => c) 2 halfLineMeasure := MemLp.ae_eq hae (Lp.memLp h)
   have hc0 : c = 0 := by
     rcases (memLp_const_iff (by norm_num : (2 : ENNReal) ≠ 0)
       (by norm_num : (2 : ENNReal) ≠ ⊤)).mp hcLp with hc | hfinite
@@ -196,8 +200,7 @@ private theorem core_range_orthogonal_zero (h : FullRadialEnergyL2)
       exact (lt_irrefl _ hfinite).elim
   apply Lp.ext
   filter_upwards [hae, Lp.coeFn_zero ℝ 2 halfLineMeasure] with r hr hz
-  rw [hr, hc0, hz]
-  rfl
+  simp only [hr, hc0, hz, Pi.zero_apply]
 
 private theorem core_range_dense : DenseRange physicalCoreCoordinate := by
   have ho : physicalCoreCoordinate.rangeᗮ = ⊥ := by
