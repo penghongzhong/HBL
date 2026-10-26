@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           bash -euo pipefail /tmp/hbl-dependencies.sh
-          lake exe cache get Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean)
       - uses: actions/cache/restore@v4
         id: proof_cache
         with:
