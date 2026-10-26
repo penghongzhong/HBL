@@ -239,7 +239,9 @@ private theorem majorant_integral (u v : E) :
       ‖physicalHartreeDensityL2 u p.1‖ * ‖physicalHartreeDensityL2 v p.2‖) μ₂ :=
     (density_integrable u).norm.mul_prod (density_integrable v).norm
   unfold majorant
-  rw [integral_add hA hB, integral_div_const,
+  rw [integral_add hA hB]
+  simp_rw [div_eq_mul_inv]
+  rw [integral_mul_const,
     integral_add (near_square u).1 (near_square_snd v).1,
     (near_square u).2, (near_square_snd v).2]
   rw [integral_prod _ hB]
@@ -355,7 +357,8 @@ private theorem form_symm (u v : E) : physicalNonlocalForm u v = physicalNonloca
   apply integral_congr_ae
   filter_upwards with p
   unfold kernelIntegrand physicalHartreeKernel
-  simp only [Prod.swap_fst, Prod.swap_snd]
+  change (‖p.2 - p.1‖ ^ 2)⁻¹ * physicalHartreeDensityL2 u p.1 * physicalHartreeDensityL2 v p.2 =
+    (‖p.1 - p.2‖ ^ 2)⁻¹ * physicalHartreeDensityL2 v p.2 * physicalHartreeDensityL2 u p.1
   rw [norm_sub_rev p.1 p.2]
   ring
 
