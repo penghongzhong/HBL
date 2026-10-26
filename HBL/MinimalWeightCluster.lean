@@ -1,6 +1,5 @@
 import HBL.AffineTailCharge
 import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.NormedSpace.OperatorNorm
 import Mathlib.Tactic
 
 /-!
@@ -222,7 +221,7 @@ theorem oneMinimalWeightCluster_certified
     (hSlow : rho + (2 * betaMinus - 1) ≤ wSlow)
     (hFrob : rho + (1 / 2 : ℝ) ≤ wFrob)
     (hCutoff : rho + rhoStar ≤ wCutoff) :
-    ∃ aPlus aMinus dPlus dMinus dK dR k : ℝ × ℝ × E × E × E × E × ℝ,
+    ∃ (aPlus aMinus : ℝ) (dPlus dMinus dK dR : E) (k : ℝ),
       aPlus = innerCharge Cplus Fplus ∧
       aMinus = innerCharge Cminus Fminus ∧
       dPlus = -innerSolve Cplus Fplus ∧
