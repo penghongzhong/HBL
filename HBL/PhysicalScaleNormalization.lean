@@ -42,9 +42,6 @@ private theorem scaleVector_actual_derivative :
   apply integral_congr_ae
   have htail := ae_restrict_of_ae_restrict_of_subset (Ioi_subset_Ioi hs.le) hf
   filter_upwards [htail] with r hr
-  change (1 + r ^ 2)⁻¹ *
-    ((15 : ℝ) • weightedScaleResonanceL2 : RealL2 halfLineMeasure) r =
-      weightedScaleGreenSource r
   rw [hr, weightedScaleResonance_closed]
   unfold weightedScaleGreenSource
   ring
