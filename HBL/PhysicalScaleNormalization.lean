@@ -25,8 +25,8 @@ open HBL.L2Kernel HBL.Modulation.AffineTail
 private theorem scaleVector_actual_derivative :
     (weightedVolterraScaleVector : ℝ → ℝ) =ᵐ[halfLineMeasure]
       deriv (radialU (dilationGenerator bubble)) := by
-  have hf : ((15 : ℝ) • weightedScaleResonanceL2 : ℝ → ℝ) =ᵐ[halfLineMeasure]
-      (fun r => 15 * weightedScaleResonance r) := by
+  have hf : (((15 : ℝ) • weightedScaleResonanceL2 : RealL2 halfLineMeasure) :
+      ℝ → ℝ) =ᵐ[halfLineMeasure] (fun r => 15 * weightedScaleResonance r) := by
     filter_upwards [Lp.coeFn_smul (15 : ℝ) weightedScaleResonanceL2,
       weightedScaleResonanceL2_ae] with r hsmul hscale
     rw [hsmul]
@@ -179,9 +179,12 @@ private theorem scaleInverse_norm :
   calc
     ‖scaleCompactInverse f‖ ≤ scaleCompactLoss * ‖realEnergyInverse f‖ :=
       scaleProjection_bound (realEnergyInverse f : FullRadialEnergyL2)
-    _ ≤ scaleCompactLoss * ((58 / 33 : ℝ) * ‖f‖) :=
-      mul_le_mul_of_nonneg_left hi scaleLoss_pos.le
-    _ = (scaleCompactLoss * (58 / 33 : ℝ)) * ‖f‖ := by ring
+    _ ≤ scaleCompactLoss * ((58 / 33 : ℝ)) * ‖f‖ := by
+      calc
+        scaleCompactLoss * ‖realEnergyInverse f‖ ≤
+            scaleCompactLoss * ((58 / 33 : ℝ) * ‖f‖) :=
+          mul_le_mul_of_nonneg_left hi scaleLoss_pos.le
+        _ = _ := by ring
 
 /-- One complete R10 environment: physical scale identification, actual
 compact normalization, source compatibility, and the uniquely normalized
