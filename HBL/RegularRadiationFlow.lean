@@ -93,9 +93,9 @@ theorem regularRadiationFlow_certified (κ : ℝ)
     ∃ ε₀ τ₀ C : ℝ,
       0 < ε₀ ∧ 0 < τ₀ ∧ 0 < C ∧
       ∀ T : ℝ, ∃
-        z : Sobolev L → ℝ → Sobolev L,
-        zjet : (g : Sobolev L) → (a : ℕ) → ℝ →
-          SobolevR ((L : ℝ) - 2 * (a : ℝ)),
+        (z : Sobolev L → ℝ → Sobolev L)
+        (zjet : (g : Sobolev L) → (a : ℕ) → ℝ →
+          SobolevR ((L : ℝ) - 2 * (a : ℝ))),
         (∀ g, z g T = g) ∧
         (∀ g t, (zjet g 0 t).toDistr = (z g t).toDistr) ∧
         (∀ g a t,
