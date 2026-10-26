@@ -1,0 +1,127 @@
+name: HBL R14 physical L6 realization
+
+on:
+  push:
+    branches: [hbl-physical-l6-realization-20261026]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-physical-l6-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Freeze R13 and check one complete mathematical environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap,re,json
+          base='bc4dd6745a9417cd88eb59e2062f3cb3c703b914'
+          allowed={'HBL/PhysicalL6Realization.lean','HBL/PhysicalL6RealizationAudit.lean','.github/workflows/physical-l6-realization.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= allowed,delta-allowed
+          s=pathlib.Path('HBL/PhysicalL6Realization.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
+          assert re.findall(r'^theorem (\w+)',clean,re.M)==['physicalL6Realization_certified']
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({'base':base,'new_environment':'R14','actual_R3_L6_representative_constructed':True,'sixth_power_bound_derived':True,'unique_continuous_linear_extension':True,'weak_derivative_realization_proved':False,'L6_realization_injectivity_proved':False,'three_dimensional_nonlocal_identity_proved':False,'Hamilton_evolution_proved':False,'parent_sources_unchanged':True,'main_theorem_closed':False},indent=2))
+          PY
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Resolve exact dependencies and existing distribution cache
+        shell: bash
+        run: |
+          bash -euo pipefail /tmp/hbl-dependencies.sh
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean Mathlib/MeasureTheory/Function/LpSpace/Complete.lean)
+      - uses: actions/cache/restore@v4
+        id: proof_cache
+        with:
+          path: .lake/build
+          key: hbl-physical-l6-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-physical-l6-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-physical-onto-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-physical-completion-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-environment-ledger-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Compile actual L6 realization and inherited environment closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          modules=$(sed -n 's/^import //p' HBL/CurrentEnvironmentAudit.lean | tr '\n' ' ')
+          lake build HBL.PhysicalL6Realization $modules 2>&1 | tee evidence/build.log
+      - name: Strict kernel checks and complete statement types
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalL6Realization.lean 2>&1 | tee evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/CurrentEnvironmentAudit.lean > evidence/prior-types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalEnergyCompletionAudit.lean > evidence/r12-type-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalEnergySurjectivityAudit.lean > evidence/r13-type-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalL6RealizationAudit.lean > evidence/new-type-and-axioms.txt
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git ls-files -z '*.lean' lean-toolchain lake-manifest.json lakefile.lean '.github/workflows/*.yml' 'verification/*.json' | xargs -0 sha256sum > evidence/all-sources.sha256
+      - name: Audit one new and all twenty-two prior terminals
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,json,re
+          m=json.loads(pathlib.Path('verification/current-environments-20261026.json').read_text())
+          prior=[t for e in m['environments'] if e['status']=='registered_accepted' for t in e['terminals']]
+          expected=prior+['HBL.Modulation.Monopole.physicalEnergyCompletion_certified','HBL.Modulation.Monopole.physicalEnergySurjectivity_certified','HBL.Modulation.Monopole.physicalL6Realization_certified']
+          logs=['prior-types-and-axioms.txt','r12-type-and-axioms.txt','r13-type-and-axioms.txt','new-type-and-axioms.txt']
+          s='\n'.join(pathlib.Path('evidence/'+p).read_text() for p in logs)
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          assert [r[0] for r in reports]==expected,[r[0] for r in reports]
+          inventory=[]
+          for name,raw in reports:
+              axioms={x.strip() for x in raw.split(',') if x.strip()}
+              assert axioms <= {'propext','Classical.choice','Quot.sound'},(name,axioms)
+              inventory.append({'declaration':name,'axioms':sorted(axioms)})
+          assert 'sorryAx' not in s and '⋯' not in s and '...' not in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({'declarations':inventory,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'new_environments':1,'prior_environments':21,'accepted_current_environments':22,'current_named_total_after_paper_sync':27,'main_theorem_closed':False,'coverage_is_not_main_theorem_completion':True},indent=2))
+          print('PASS: 23 complete terminal declarations; actual three-dimensional L6 realization')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-physical-l6-${{ github.sha }}
+          path: |
+            evidence
+            HBL/PhysicalL6Realization.lean
+            HBL/PhysicalL6RealizationAudit.lean
+            .github/workflows/physical-l6-realization.yml
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/cache/save@v4
+        if: always() && steps.proof_cache.outputs.cache-hit != 'true'
+        with:
+          path: .lake/build
+          key: ${{ steps.proof_cache.outputs.cache-primary-key }}
