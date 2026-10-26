@@ -1,0 +1,118 @@
+name: HBL R10 physical scale normalization
+
+on:
+  push:
+    branches: [hbl-physical-scale-gauge-20261026]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: hbl-physical-scale-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Freeze parent and enforce one full environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import subprocess,pathlib,textwrap,re,json
+          base='a79ba4e8bfbe56aa3fbad67cbde2f24d96b1f722'
+          permitted={'HBL/PhysicalScaleNormalization.lean','HBL/PhysicalScaleNormalizationAudit.lean','.github/workflows/physical-scale.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= permitted,delta-permitted
+          s=pathlib.Path('HBL/PhysicalScaleNormalization.lean').read_text()
+          s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',s)
+          assert re.findall(r'^theorem (\w+)',s,re.M)==['physicalScaleNormalization_certified']
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({'base':base,'environment':'R10','original_acceptance':'8/21','new_complete_environments':1,'prior_sources_unchanged':True,'target_only_audit':True,'physical_scale_coordinate_identified':True,'actual_compact_scale_test':True,'negative_direction_retained':True,'Hamilton_generator_inverse_verified':False,'full_physical_Sobolev_identification_verified':False},indent=2))
+          PY
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: bash -euo pipefail /tmp/hbl-dependencies.sh
+      - uses: actions/cache/restore@v4
+        id: proof_cache
+        with:
+          path: .lake/build
+          key: hbl-physical-scale-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-physical-scale-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-real-energy-inverse-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-compact-phase-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Compile physical scale and compact-gauge inverse
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.PhysicalScaleNormalization 2>&1 | tee evidence/build.log
+      - name: Strict kernel and untruncated theorem type
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalScaleNormalization.lean 2>&1 | tee evidence/strict-physical-scale.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/PhysicalScaleNormalizationAudit.lean > evidence/types-and-axioms.txt
+          git ls-files -z '*.lean' lean-toolchain lake-manifest.json lakefile.lean '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/all-sources.sha256
+      - name: Audit the complete environment and transitive axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re,json,pathlib
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          expected=['HBL.Modulation.Monopole.physicalScaleNormalization_certified']
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          assert [r[0] for r in reports]==expected,reports
+          inventory=[]
+          for name,raw in reports:
+              axioms={x.strip() for x in raw.split(',') if x.strip()}
+              assert axioms <= {'propext','Classical.choice','Quot.sound'},axioms
+              inventory.append({'declaration':name,'axioms':sorted(axioms)})
+          assert 'sorryAx' not in s and '⋯' not in s and '...' not in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({'declarations':inventory,'trust_zero':True,'warning_as_error':True,'untruncated_type':True,'original_acceptance':'8/21','full_environment':'R10','physical_scale_identified':True,'actual_compact_gauge':True,'Hamilton_generator_inverse_verified':False},indent=2))
+          print('PASS full environment R10:',expected)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-physical-scale-${{ github.sha }}
+          path: |
+            evidence
+            HBL/PhysicalScaleNormalization.lean
+            HBL/PhysicalScaleNormalizationAudit.lean
+            .github/workflows/physical-scale.yml
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/cache/save@v4
+        if: always() && steps.proof_cache.outputs.cache-hit != 'true'
+        with:
+          path: .lake/build
+          key: ${{ steps.proof_cache.outputs.cache-primary-key }}
