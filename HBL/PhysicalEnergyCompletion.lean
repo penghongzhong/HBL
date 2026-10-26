@@ -114,7 +114,7 @@ private theorem core_potential_integrable (f : PhysicalGradientCore) :
     (((bubble_contDiff.continuous.pow 4).mul (core_regular f).continuous).mul
       (core_regular f).continuous) R hR
   intro r hr
-  rw [hc r hr.le, mul_zero, mul_zero]
+  simp only [hc r hr.le, mul_zero]
 
 /-- Actual derivative coordinate of the physical core; membership is derived. -/
 def physicalCoreCoordinate : PhysicalGradientCore →ₗ[ℝ] FullRadialEnergyL2 where
