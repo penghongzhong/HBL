@@ -81,7 +81,8 @@ theorem innerSolve_eq_source
     C.H (innerSolve C F) = F := by
   rw [innerSolve, map_add, C.solveCompatible_eq, map_smul]
   unfold compatibleInnerSource
-  abel_nf
+  simp only [neg_one_smul]
+  abel
 
 /-- The affine coefficient itself is unique. -/
 theorem innerCharge_unique
