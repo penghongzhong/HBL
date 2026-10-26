@@ -21,8 +21,15 @@ namespace HBL.Modulation.Monopole
 open HBL.L2Kernel HBL.Modulation.AffineTail
 
 local instance : Fact ((1 : ENNReal) ≤ 6) := ⟨by norm_num⟩
-local instance : Fact ((1 : ENNReal) ≤ 6 / 5) := ⟨by norm_num⟩
-local instance : ENNReal.HolderConjugate (6 / 5) 6 := ⟨by norm_num⟩
+local instance : ENNReal.HolderConjugate (6 / 5) 6 where
+  inv_add_inv_eq_inv := by
+    rw [ENNReal.inv_div (Or.inl (by norm_num : (5 : ENNReal) ≠ ⊤))
+        (Or.inl (by norm_num : (5 : ENNReal) ≠ 0)),
+      ENNReal.div_eq_inv_mul, ← mul_add_one,
+      show (5 + 1 : ENNReal) = 6 by norm_num,
+      ENNReal.inv_mul_cancel (by norm_num) (by norm_num), inv_one]
+local instance : Fact ((1 : ENNReal) ≤ 6 / 5) :=
+  ⟨ENNReal.HolderConjugate.one_le (6 / 5) 6⟩
 
 /-- Nonsingular physical weight corresponding to the radial test r^2 phi. -/
 def physicalWeakRadialWeight (φ : ℝ → ℝ) (x : PhysicalRadialSpace3) : ℝ :=
@@ -35,7 +42,9 @@ private theorem test_coordinate_mem (φ : ℝ → ℝ)
     apply HasCompactSupport.of_support_subset_isCompact hc
     intro r hr
     by_contra hn
-    exact hr (by rw [image_eq_zero_of_notMem_tsupport hn, mul_zero])
+    exact hr (by
+      change r ^ 2 * φ r = 0
+      rw [image_eq_zero_of_notMem_tsupport hn, mul_zero])
   exact ((continuous_id.pow 2).mul hφ.continuous).memLp_of_hasCompactSupport hs
 
 private theorem physical_weight_mem (φ : ℝ → ℝ)
@@ -141,14 +150,14 @@ private theorem core_ibp (f : PhysicalGradientCore) (φ : ℝ → ℝ)
     image_eq_zero_of_notMem_tsupport (hout r hr)
   have hdz (r : ℝ) (hr : R ≤ r) : deriv φ r = 0 :=
     deriv_of_notMem_tsupport (hout r hr)
-  rw [halfLine_cap _ R hR (by intro r hr; simp only [hz r hr.le, hdz r hr.le, mul_zero, add_zero]),
+  rw [halfLine_cap _ R hR (by intro r hr; simp only [hz r hr.le, hdz r hr.le, mul_zero, add_zero, zero_mul]),
     halfLine_cap _ R hR (by intro r hr; simp only [hz r hr.le, mul_zero, zero_mul])]
   have hd (r : ℝ) : HasDerivAt (fun t : ℝ => t ^ 2 * φ t)
       (2 * r * φ r + r ^ 2 * deriv φ r) r := by
     have h := ((hasDerivAt_id r).pow 2).mul
       ((hφ.differentiable (by norm_num) r).hasDerivAt)
     apply h.congr_deriv
-    ring
+    simp
   have hdc : Continuous (fun r : ℝ => 2 * r * φ r + r ^ 2 * deriv φ r) :=
     ((continuous_const.mul continuous_id).mul hφ.continuous).add
       ((continuous_id.pow 2).mul ((contDiff_infty_iff_deriv.mp hφ).2).continuous)
@@ -272,7 +281,9 @@ private theorem weak_unique (v : PhysicalL6) (q p : FullRadialEnergyL2)
   intro φ hφ hc
   have he := (hq φ hφ hc).symm.trans (hp φ hφ hc)
   rw [← radial_pair_eq φ hφ hc, ← radial_pair_eq φ hφ hc] at he
-  exact mul_left_cancel₀ (by positivity : -(4 * Real.pi) ≠ 0) he
+  have hn : -(4 * Real.pi) ≠ 0 :=
+    neg_ne_zero.mpr (mul_ne_zero (by norm_num) Real.pi_pos.ne')
+  exact mul_left_cancel₀ hn he
 
 private theorem realization_injective : Function.Injective physicalL6Realization := by
   intro u v huv
