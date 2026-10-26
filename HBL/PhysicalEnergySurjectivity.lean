@@ -140,7 +140,8 @@ private theorem corrected_test_is_core
     · field_simp
   refine ⟨core, ?_⟩
   have he : (physicalCoreCoordinate core : ℝ → ℝ) =ᵐ[halfLineMeasure]
-      deriv (radialU (core : ℝ → ℝ)) := smoothToRadialDotH1_ae _ _
+      deriv (radialU (core : ℝ → ℝ)) :=
+    smoothToRadialDotH1_ae f (radialU_deriv_memLp_of_upperSupport f hfs R hR0 hfcut)
   rw [hU, hder] at he
   exact he
 
