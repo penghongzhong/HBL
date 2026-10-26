@@ -43,15 +43,22 @@ private def gradientCoreSubmodule : Submodule ℝ (ℝ → ℝ) where
       change c * f r = 0
       rw [hc r hr, mul_zero]
 
-/-- Concrete compact radial profiles, before quotienting zero gradient. -/
-abbrev PhysicalGradientCore := ↥gradientCoreSubmodule
+/-- Concrete compact radial profiles, with a separate energy topology. -/
+def PhysicalGradientCore := ↥gradientCoreSubmodule
 
-private theorem core_regular (f : PhysicalGradientCore) : ContDiff ℝ 1 (f : ℝ → ℝ) :=
-  f.property.1
+instance : AddCommGroup PhysicalGradientCore :=
+  inferInstanceAs (AddCommGroup ↥gradientCoreSubmodule)
+instance : Module ℝ PhysicalGradientCore :=
+  inferInstanceAs (Module ℝ ↥gradientCoreSubmodule)
+instance : CoeFun PhysicalGradientCore (fun _ => ℝ → ℝ) :=
+  ⟨fun f => (show ↥gradientCoreSubmodule from f).val⟩
+
+private theorem core_regular (f : PhysicalGradientCore) : ContDiff ℝ 1 f :=
+  (show ↥gradientCoreSubmodule from f).property.1
 
 private theorem core_support (f : PhysicalGradientCore) :
     ∃ R : ℝ, 0 ≤ R ∧ ∀ r : ℝ, R ≤ r → f r = 0 :=
-  f.property.2
+  (show ↥gradientCoreSubmodule from f).property.2
 
 private theorem core_memLp (f : PhysicalGradientCore) :
     MemLp (deriv (radialU f)) 2 halfLineMeasure := by
@@ -134,8 +141,9 @@ def physicalCoreCoordinate : PhysicalGradientCore →ₗ[ℝ] FullRadialEnergyL2
     filter_upwards [smoothToRadialDotH1_ae (c • f : PhysicalGradientCore) (core_memLp (c • f)),
       Lp.coeFn_smul c (smoothToRadialDotH1 f (core_memLp f)),
       smoothToRadialDotH1_ae f (core_memLp f)] with r hcf hc hf
+    simp only [RingHom.id_apply]
     rw [hcf, hc]
-    simp only [Pi.smul_apply, smul_eq_mul, hf, RingHom.id_apply]
+    simp only [Pi.smul_apply, smul_eq_mul, hf]
     have heq : radialU (c • f : PhysicalGradientCore) = fun t => c * radialU f t := by
       funext t
       change t * (c * f t) = c * (t * f t)
