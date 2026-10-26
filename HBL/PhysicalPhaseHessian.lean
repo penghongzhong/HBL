@@ -53,7 +53,7 @@ private theorem weightMem :
   rw [show -(6 : ℝ) / 2 = -3 by norm_num,
     abs_of_nonneg (sq_nonneg (bubble ‖x‖)), bubble_sq,
     Real.rpow_neg (by positivity)]
-  simp only [Real.rpow_natCast, inv_pow]
+  exact (Real.inv_rpow (by positivity : 0 ≤ 1 + ‖x‖ ^ 2) (3 : ℝ)).symm
 
 abbrev PhysicalScalarL2 := Lp ℝ 2 (volume : Measure PhysicalRadialSpace3)
 
@@ -72,7 +72,6 @@ private theorem weighted_ae (u : PhysicalRadialEnergyCompletion) :
   have h := (ContinuousLinearMap.mul ℝ ℝ).coeFn_holder
     (r := (2 : ENNReal)) (weightMem.toLp physicalPhaseWeight) (physicalL6Realization u)
   filter_upwards [h, weightMem.coeFn_toLp] with x hx hw
-  change (physicalWeightedState u : PhysicalRadialSpace3 → ℝ) x = _
   change physicalWeightedState u x =
     (weightMem.toLp physicalPhaseWeight : PhysicalRadialSpace3 → ℝ) x *
       physicalL6Realization u x at hx
@@ -163,9 +162,12 @@ private theorem hessian_coordinate (u v : PhysicalRadialEnergyCompletion) :
   have hsym : inner ℝ (weightedVolterraAMinus (physicalEnergyEmbedding v))
         (physicalEnergyEmbedding u) =
       inner ℝ (weightedVolterraAMinus (physicalEnergyEmbedding u)) (physicalEnergyEmbedding v) := by
-    rw [(ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
-      weightedVolterraAMinus_selfAdjoint) (physicalEnergyEmbedding v) (physicalEnergyEmbedding u)]
-    exact real_inner_comm _ _
+    have he : inner ℝ (weightedVolterraAMinus (physicalEnergyEmbedding v))
+        (physicalEnergyEmbedding u) =
+        inner ℝ (physicalEnergyEmbedding v) (weightedVolterraAMinus (physicalEnergyEmbedding u)) :=
+      (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+        weightedVolterraAMinus_selfAdjoint) (physicalEnergyEmbedding v) (physicalEnergyEmbedding u)
+    exact he.trans (real_inner_comm _ _)
   rw [hsym] at hs
   nlinarith only [hu, hv, hs]
 
@@ -186,7 +188,9 @@ private theorem hessian_bound (u v : PhysicalRadialEnergyCompletion) :
   have hi : |inner ℝ (weightedVolterraAMinus (physicalEnergyEmbedding u))
       (physicalEnergyEmbedding v)| ≤
       ‖weightedVolterraAMinus (physicalEnergyEmbedding u)‖ * ‖physicalEnergyEmbedding v‖ :=
-    norm_inner_le_norm _ _
+    by simpa only [Real.norm_eq_abs] using
+      (norm_inner_le_norm (𝕜 := ℝ) (weightedVolterraAMinus (physicalEnergyEmbedding u))
+        (physicalEnergyEmbedding v))
   have ho := weightedVolterraAMinus.le_opNorm (physicalEnergyEmbedding u)
   have hb := hi.trans (mul_le_mul_of_nonneg_right ho (norm_nonneg _))
   have h := mul_le_mul_of_nonneg_left hb (show 0 ≤ 4 * Real.pi by positivity)
