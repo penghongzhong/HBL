@@ -122,7 +122,7 @@ def quarticDensity (f : Space → ℂ) (x : Space) : ℂ := (‖f x‖ ^ 4 : ℝ
 
 /-- The original Hartree nonlinearity, with its physical coefficient. -/
 def hartreeNonlinearity (κ : ℝ) (f : Space → ℂ) (x : Space) : ℂ :=
-  (κ : ℂ) * potential (quarticDensity f) x * ((‖f x‖ ^ 2 : ℂ) * f x)
+  (κ : ℂ) * potential (quarticDensity f) x * (((‖f x‖ ^ 2 : ℝ) : ℂ) * f x)
 
 private theorem quartic_integrable (f : Space → ℂ) (hf : MemLp f 2)
     (R : ℝ) (hb : ∀ᵐ x, ‖f x‖ ≤ R) :
@@ -161,7 +161,7 @@ theorem quartic_potential_bound (f : Space → ℂ) (hf : MemLp f 2)
     simp only [quarticDensity, Complex.norm_real,
       Real.norm_of_nonneg (pow_nonneg (norm_nonneg _) 4)]
   rw [he] at h
-  exact ⟨h.1, h.2.trans (add_le_add_left hd.2 _)⟩
+  exact ⟨h.1, h.2.trans (add_le_add_right hd.2 _)⟩
 
 private theorem potential_measurable (ρ : Space → ℂ) (hρ : AEStronglyMeasurable ρ) :
     AEStronglyMeasurable (potential ρ) := by
@@ -177,7 +177,7 @@ private theorem potential_measurable (ρ : Space → ℂ) (hρ : AEStronglyMeasu
 /-- Genuine seventh-order Hartree L2 estimate. This is the order-zero
 estimate, not the H^L local-flow theorem. -/
 theorem hartree_L2_bound (κ : ℝ) (f : Space → ℂ) (hf : MemLp f 2)
-    (R : ℝ) (hR : 0 ≤ R) (hb : ∀ᵐ x, ‖f x‖ ≤ R)
+    (R : ℝ) (_hR : 0 ≤ R) (hb : ∀ᵐ x, ‖f x‖ ≤ R)
     (hE : (∫ x : Space, ‖f x‖ ^ 2) ≤ R ^ 2) :
     MemLp (hartreeNonlinearity κ f) 2 ∧
     (∫ x : Space, ‖hartreeNonlinearity κ f x‖ ^ 2) ≤
