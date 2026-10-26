@@ -68,36 +68,42 @@ private theorem coreFiniteEnergy (f : PhysicalGradientCore) (r : ℝ) (hr : 0 �
     (Filter.Eventually.of_forall fun t => sq_nonneg _)
     (Filter.Eventually.of_forall fun _ ht => ht.1)
 
+private theorem squareIntegralExpansion (q : ℝ → ℝ) (hq : Continuous q) (r a : ℝ) :
+    (∫ t in (0 : ℝ)..r, (q t - a) ^ 2) =
+      (∫ t in (0 : ℝ)..r, (q t) ^ 2) -
+        (2 * a) * (∫ t in (0 : ℝ)..r, q t) + r * a ^ 2 := by
+  have hqi : IntervalIntegrable q volume 0 r := hq.intervalIntegrable
+  have hq2i : IntervalIntegrable (fun t => q t ^ 2) volume 0 r :=
+    (hq.pow 2).intervalIntegrable
+  have hlin : IntervalIntegrable (fun t => (2 * a) * q t) volume 0 r :=
+    hqi.const_mul (2 * a)
+  calc
+    (∫ t in (0 : ℝ)..r, (q t - a) ^ 2) =
+        ∫ t in (0 : ℝ)..r, ((q t) ^ 2 - (2 * a) * q t) + a ^ 2 := by
+      apply intervalIntegral.integral_congr
+      intro t _
+      ring
+    _ = (∫ t in (0 : ℝ)..r, (q t) ^ 2 - (2 * a) * q t) +
+        (∫ _t in (0 : ℝ)..r, a ^ 2) :=
+      intervalIntegral.integral_add (hq2i.sub hlin) intervalIntegrable_const
+    _ = _ := by
+      rw [intervalIntegral.integral_sub hq2i hlin,
+        intervalIntegral.integral_const_mul, intervalIntegral.integral_const]
+      simp only [sub_zero, smul_eq_mul]
+
 private theorem corePointwise (f : PhysicalGradientCore) (r : ℝ) (hr : 0 ≤ r) :
     r * (f r) ^ 2 ≤ ‖f‖ ^ 2 := by
   let q : ℝ → ℝ := deriv (radialU f)
   have hq : Continuous q := (radialU_contDiff_one f (coreData f).1).continuous_deriv_one
-  have hqi := hq.intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := r)
-  have hq2i := (hq.pow 2).intervalIntegrable (μ := volume) (a := (0 : ℝ)) (b := r)
   have hpos : 0 ≤ ∫ t in (0 : ℝ)..r, (q t - f r) ^ 2 :=
     intervalIntegral.integral_nonneg hr (fun t _ => sq_nonneg _)
-  have hexp : (∫ t in (0 : ℝ)..r, (q t - f r) ^ 2) =
-      (∫ t in (0 : ℝ)..r, (q t) ^ 2) -
-        (2 * f r) * (∫ t in (0 : ℝ)..r, q t) + r * (f r) ^ 2 := by
-    calc
-      (∫ t in (0 : ℝ)..r, (q t - f r) ^ 2) =
-          ∫ t in (0 : ℝ)..r, ((q t) ^ 2 - (2 * f r) * q t) + (f r) ^ 2 := by
-        apply intervalIntegral.integral_congr
-        intro t _
-        ring
-      _ = _ := by
-        rw [intervalIntegral.integral_add (hq2i.sub (hqi.const_mul _))
-            (intervalIntegrable_const),
-          intervalIntegral.integral_sub hq2i (hqi.const_mul _),
-          intervalIntegral.integral_const_mul, intervalIntegral.integral_const]
-        simp only [sub_zero, smul_eq_mul]
-  rw [hexp] at hpos
+  have hpos' := hpos.trans_eq (squareIntegralExpansion q hq r (f r))
   have hprim : (∫ t in (0 : ℝ)..r, q t) = r * f r :=
     radialU_integral_deriv f (coreData f).1 r
-  rw [hprim] at hpos
   have hb := coreFiniteEnergy f r hr
   change (∫ t in (0 : ℝ)..r, (q t) ^ 2) ≤ ‖f‖ ^ 2 at hb
-  nlinarith
+  rw [hprim] at hpos'
+  nlinarith only [hpos', hb]
 
 private theorem coreHardy (f : PhysicalGradientCore) :
     (∫ r, (f r) ^ 2 ∂halfLineMeasure) ≤ 4 * ‖f‖ ^ 2 := by
@@ -138,8 +144,10 @@ private theorem coreSixth (f : PhysicalGradientCore) :
   have h := mul_le_mul_of_nonneg_left hrad (show (0 : ℝ) ≤ 4 * Real.pi by positivity)
   nlinarith only [h]
 
+local instance : Fact ((1 : ENNReal) ≤ 6) := ⟨by norm_num⟩
+
 /-- Actual three-dimensional real L6 space. -/
-abbrev PhysicalL6 := Lp ℝ 6 (volume : Measure PhysicalRadialSpace3)
+abbrev PhysicalL6 : Type := Lp ℝ 6 (volume : Measure PhysicalRadialSpace3)
 
 private theorem coreLiftMem (f : PhysicalGradientCore) :
     MemLp (physicalRadial3_radialLift f) 6 (volume : Measure PhysicalRadialSpace3) := by
@@ -199,7 +207,15 @@ private theorem coreL6_norm (f : PhysicalGradientCore) :
     MemLp.eLpNorm_eq_integral_rpow_norm (by norm_num : (6 : ENNReal) ≠ 0)
       (by norm_num : (6 : ENNReal) ≠ ⊤) (coreLiftMem f),
     ENNReal.toReal_ofReal (by positivity)]
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using hroot
+  change (∫ x : PhysicalRadialSpace3,
+    ‖physicalRadial3_radialLift f x‖ ^ (6 : ℝ)) ^ (6 : ℝ)⁻¹ ≤ 2 * ‖f‖
+  have heq : (fun x : PhysicalRadialSpace3 =>
+      ‖physicalRadial3_radialLift f x‖ ^ (6 : ℝ)) =
+      (fun x => ‖physicalRadial3_radialLift f x‖ ^ (6 : ℕ)) := by
+    funext x
+    exact Real.rpow_natCast _ 6
+  rw [heq]
+  exact hroot
 
 private def physicalCoreL6Continuous : PhysicalGradientCore →L[ℝ] PhysicalL6 :=
   physicalCoreL6.mkContinuous 2 coreL6_norm
