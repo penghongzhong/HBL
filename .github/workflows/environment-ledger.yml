@@ -1,0 +1,128 @@
+name: HBL current environment ledger audit
+
+on:
+  push:
+    branches: [hbl-environment-ledger-audit-20261026]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: hbl-environment-ledger-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Freeze every prior proof and check the environment inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import subprocess,pathlib,textwrap,re,json
+          base='a428677cbd61ec5273daa7ad613d8b7b66053e8c'
+          allowed={'HBL/CurrentEnvironmentAudit.lean','verification/current-environments-20261026.json','.github/workflows/environment-ledger.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= allowed,delta-allowed
+          m=json.loads(pathlib.Path('verification/current-environments-20261026.json').read_text())
+          es=m['environments']
+          accepted=[e for e in es if e['status']=='registered_accepted']
+          assert len(es)==24 and len(accepted)==19
+          expected=[t for e in accepted for t in e['terminals']]
+          assert len(expected)==20 and len(set(expected))==20
+          s=pathlib.Path('HBL/CurrentEnvironmentAudit.lean').read_text()
+          assert re.findall(r'^#check @(\S+)',s,re.M)==expected
+          assert re.findall(r'^#print axioms (\S+)',s,re.M)==expected
+          assert not re.search(r'^(?:theorem|axiom|def)\s',s,re.M)
+          assert len(m['retired_original_environments'])==8
+          assert len(m['mandatory_unnumbered_open_packages'])==5
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({'base':base,'new_theorems':0,'registered_current_environments':19,'terminals':20,'current_named_total':24,'open_named':5,'retired_original_environments':8,'mandatory_open_packages':5,'main_theorem_closed':False,'all_prior_proofs_unchanged':True,'historical_acceptance':'8/21','not_a_main_chain_completion_percentage':True},indent=2))
+          PY
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: bash -euo pipefail /tmp/hbl-dependencies.sh
+      - uses: actions/cache/restore@v4
+        id: proof_cache
+        with:
+          path: .lake/build
+          key: hbl-environment-ledger-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-environment-ledger-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-compact-two-channel-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-physical-scale-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Compile every registered environment and its dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          modules=$(sed -n 's/^import //p' HBL/CurrentEnvironmentAudit.lean | tr '\n' ' ')
+          lake build $modules 2>&1 | tee evidence/build.log
+      - name: Strict aggregate audit with complete statement types
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -DwarningAsError=true HBL/CurrentEnvironmentAudit.lean > evidence/types-and-axioms.txt
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git ls-files -z '*.lean' lean-toolchain lake-manifest.json lakefile.lean '.github/workflows/*.yml' 'verification/*.json' | xargs -0 sha256sum > evidence/all-sources.sha256
+      - name: Check all twenty declarations and their transitive axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re,json,pathlib
+          m=json.loads(pathlib.Path('verification/current-environments-20261026.json').read_text())
+          expected=[t for e in m['environments'] if e['status']=='registered_accepted' for t in e['terminals']]
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          assert [r[0] for r in reports]==expected, [r[0] for r in reports]
+          inventory=[]
+          for name,raw in reports:
+              axioms={x.strip() for x in raw.split(',') if x.strip()}
+              assert axioms <= {'propext','Classical.choice','Quot.sound'},(name,axioms)
+              inventory.append({'declaration':name,'axioms':sorted(axioms)})
+          assert 'sorryAx' not in s and '⋯' not in s and '...' not in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({'declarations':inventory,'trust_zero':True,'warning_as_error_on_aggregate_audit':True,'untruncated_types':True,'registered_environments':19,'new_mathematical_environments':0,'historical_acceptance':'8/21','current_named_coverage':'19/24','coverage_is_not_main_theorem_progress':True,'main_theorem_closed':False},indent=2))
+          print('PASS: 20 existing terminals, 19 registered environments. No new theorem. Main-chain obligations remain open.')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-environment-ledger-${{ github.sha }}
+          path: |
+            evidence
+            HBL/CurrentEnvironmentAudit.lean
+            verification/current-environments-20261026.json
+            .github/workflows/environment-ledger.yml
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/cache/save@v4
+        if: always() && steps.proof_cache.outputs.cache-hit != 'true'
+        with:
+          path: .lake/build
+          key: ${{ steps.proof_cache.outputs.cache-primary-key }}
