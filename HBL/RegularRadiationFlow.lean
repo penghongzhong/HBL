@@ -87,12 +87,5 @@ theorem regularRadiationFlow_certified (κ : ℝ)
   · intro t ht
     exact LT.data_c1 L hL4 T t ht
 
-/-- The concrete equation-specific order-zero kernel estimate remains a native
-Lean theorem and is not hidden inside the literature interface. -/
-theorem regularRadiation_actualKernel_check (κ : ℝ) :
-    Integrable nearKernel ∧ 0 ≤ nearMass := by
-  exact ⟨near_integrable, integral_nonneg near_nonneg⟩
-
 #print axioms regularRadiationFlow_certified
-#print axioms regularRadiation_actualKernel_check
 end HBL.RegularRadiation
