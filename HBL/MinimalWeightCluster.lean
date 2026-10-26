@@ -92,6 +92,96 @@ theorem innerCharge_unique
   exact charge_unique C.ell C.resonanceLimit C.resonanceLimit_ne
     F (C.H C.affineModel) C.affine_pairing a ha
 
+
+/-- Intrinsic normalization condition for one inner correction as it appears
+in a cancelling cluster.  The source is cancelled by `d`, while `a`
+records the affine threshold charge removed before applying the normalized
+Fredholm inverse. -/
+def InnerClusterCorrection
+    (C : ThresholdNormalizedInverse E) (F : E)
+    (a : ℝ) (d : E) : Prop :=
+  C.ell (F - a • C.H C.affineModel) = 0 ∧
+  C.H d = -F ∧
+  C.gauge ((-d) - a • C.affineModel) = 0
+
+theorem innerClusterCorrection_canonical
+    (C : ThresholdNormalizedInverse E) (F : E) :
+    InnerClusterCorrection C F (innerCharge C F) (-innerSolve C F) := by
+  refine ⟨?_, ?_, ?_⟩
+  · simpa only [compatibleInnerSource] using
+      compatibleInnerSource_pairing_zero C F
+  · rw [map_neg, innerSolve_eq_source]
+  · have hg := C.solveCompatible_gauge
+      ⟨compatibleInnerSource C F,
+        compatibleInnerSource_pairing_zero C F⟩
+    simpa [innerSolve] using hg
+
+/-- Both the affine charge and the normalized inner correction are unique. -/
+theorem innerClusterCorrection_unique
+    (C : ThresholdNormalizedInverse E) (F : E)
+    (a : ℝ) (d : E) (h : InnerClusterCorrection C F a d) :
+    a = innerCharge C F ∧ d = -innerSolve C F := by
+  have ha : a = innerCharge C F :=
+    innerCharge_unique C F a h.1
+  subst a
+  let f0 : {f : E // C.ell f = 0} :=
+    ⟨compatibleInnerSource C F,
+      compatibleInnerSource_pairing_zero C F⟩
+  have hsolve :
+      C.H ((-d) - innerCharge C F • C.affineModel) = f0.1 := by
+    dsimp only [f0]
+    rw [map_sub, map_neg, h.2.1]
+    rfl
+  have hy := C.solveCompatible_unique f0
+    ((-d) - innerCharge C F • C.affineModel)
+    hsolve h.2.2
+  have hneg : -d = innerSolve C F := by
+    unfold innerSolve
+    rw [← hy]
+    abel
+  have hd := congrArg Neg.neg hneg
+  simpa only [neg_neg] using hd
+
+/-- Uniqueness of the Kummer correction once the normalized regional
+operator is represented by its preceding continuous linear equivalence. -/
+theorem kummerCorrection_unique
+    (Kummer : E ≃L[ℝ] E) (FK dK : E)
+    (h : Kummer dK = -FK) :
+    dK = -(Kummer.symm FK) := by
+  apply Kummer.injective
+  rw [h, map_neg, Kummer.apply_symm_apply]
+
+/-- The same uniqueness statement for the finite remote block. -/
+theorem remoteCorrection_unique
+    (Remote : E ≃L[ℝ] E) (FR dR : E)
+    (h : Remote dR = -FR) :
+    dR = -(Remote.symm FR) := by
+  apply Remote.injective
+  rw [h, map_neg, Remote.apply_symm_apply]
+
+/-- The complete six-component normalized regional correction is unique
+whenever it cancels each of the four frozen regional source blocks. -/
+theorem minimalWeightCluster_unique
+    (Cplus Cminus : ThresholdNormalizedInverse E)
+    (Kummer Remote : E ≃L[ℝ] E)
+    (Fplus Fminus FK FR : E)
+    (aPlus aMinus : ℝ) (dPlus dMinus dK dR : E)
+    (hplus : InnerClusterCorrection Cplus Fplus aPlus dPlus)
+    (hminus : InnerClusterCorrection Cminus Fminus aMinus dMinus)
+    (hK : Kummer dK = -FK)
+    (hR : Remote dR = -FR) :
+    aPlus = innerCharge Cplus Fplus ∧
+    aMinus = innerCharge Cminus Fminus ∧
+    dPlus = -innerSolve Cplus Fplus ∧
+    dMinus = -innerSolve Cminus Fminus ∧
+    dK = -(Kummer.symm FK) ∧
+    dR = -(Remote.symm FR) := by
+  have hp := innerClusterCorrection_unique Cplus Fplus aPlus dPlus hplus
+  have hm := innerClusterCorrection_unique Cminus Fminus aMinus dMinus hminus
+  exact ⟨hp.1, hm.1, hp.2, hm.2,
+    kummerCorrection_unique Kummer FK dK hK,
+    remoteCorrection_unique Remote FR dR hR⟩
+
 /-- The positive gain used in the manuscript after one complete cluster. -/
 def kappaProf
     (delta epsilonFlat betaMinus rhoStar : ℝ) : ℝ :=
@@ -256,6 +346,11 @@ theorem oneMinimalWeightCluster_certified
 #print axioms compatibleInnerSource_pairing_zero
 #print axioms innerSolve_eq_source
 #print axioms innerCharge_unique
+#print axioms innerClusterCorrection_canonical
+#print axioms innerClusterCorrection_unique
+#print axioms kummerCorrection_unique
+#print axioms remoteCorrection_unique
+#print axioms minimalWeightCluster_unique
 #print axioms kappaProf_pos
 #print axioms minimalWeightCluster_cancellation
 #print axioms minimalWeightCluster_gain
