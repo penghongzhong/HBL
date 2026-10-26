@@ -88,8 +88,8 @@ private theorem compactProjection_bound (q : FullRadialEnergyL2) :
     _ = ‖q‖ + ‖phaseCompactTest q‖ * ‖fullBubbleRadialEnergyL2‖ := by
       rw [norm_smul]
     _ ≤ ‖q‖ + (‖phaseCompactTest‖ * ‖q‖) * ‖fullBubbleRadialEnergyL2‖ :=
-      add_le_add_left (mul_le_mul_of_nonneg_right (phaseCompactTest.le_opNorm q)
-        (norm_nonneg _)) _
+      add_le_add le_rfl (mul_le_mul_of_nonneg_right (phaseCompactTest.le_opNorm q)
+        (norm_nonneg _))
     _ = phaseCompactLoss * ‖q‖ := by unfold phaseCompactLoss; ring
 
 private theorem compactSlice_gap (q : FullRadialEnergyL2)
@@ -121,9 +121,12 @@ private theorem compactSlice_gap (q : FullRadialEnergyL2)
   have hsym := ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
     weightedVolterraAMinus_selfAdjoint
   have hcross : inner ℝ (weightedVolterraAMinus q) w = 0 := by
-    rw [hsym q w]
-    change inner ℝ q (weightedVolterraAMinus fullBubbleRadialEnergyL2) = 0
-    rw [weightedVolterraAMinus_bubble_zero, inner_zero_right]
+    calc
+      inner ℝ (weightedVolterraAMinus q) w =
+          inner ℝ q (weightedVolterraAMinus w) := hsym q w
+      _ = 0 := by
+        change inner ℝ q (weightedVolterraAMinus fullBubbleRadialEnergyL2) = 0
+        rw [weightedVolterraAMinus_bubble_zero, inner_zero_right]
   have hform : inner ℝ (weightedVolterraAMinus r) r =
       inner ℝ (weightedVolterraAMinus q) q := by
     rw [hAr]
@@ -157,8 +160,8 @@ theorem actualCompactPhaseSlice_certified :
         ∫ r in (0 : ℝ)..Real.exp 1, normalizedZetaMinus r * radialU f r) ∧
     (∀ q : FullRadialEnergyL2, phaseCompactTest q = 0 →
       phaseCompactGap * ‖q‖ ^ 2 ≤ inner ℝ (weightedVolterraAMinus q) q) ∧
-    (∀ (f : ℝ → ℝ) (hf : ContDiff ℝ 1 f) (R : ℝ) (hR : 0 ≤ R)
-      (hcut : ∀ r : ℝ, R ≤ r → f r = 0),
+    (∀ (f : ℝ → ℝ) (_hf : ContDiff ℝ 1 f) (R : ℝ) (_hR : 0 ≤ R)
+      (_hcut : ∀ r : ℝ, R ≤ r → f r = 0),
       (∫ r in (0 : ℝ)..Real.exp 1, normalizedZetaMinus r * radialU f r) = 0 →
       phaseCompactGap * (∫ x : PhysicalRadialSpace3,
         ‖fderiv ℝ (physicalRadial3_radialLift f) x‖ ^ 2) ≤
