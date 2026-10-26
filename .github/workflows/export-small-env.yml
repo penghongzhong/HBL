@@ -1,0 +1,63 @@
+name: Export fixed Lean environment in transport-sized parts
+on:
+  push:
+    branches: [hbl-local-compiler-export-20261026]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: hbl-local-lean-4.35.0-rc3
+          run-id: 40326840233
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: compiler
+      - uses: actions/download-artifact@v4
+        with:
+          name: hbl-local-pinned-analysis
+          run-id: 40326840233
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: dependencies
+      - name: Split without modifying any bytes
+        run: |
+          mkdir -p parts
+          split -b 400M -d compiler/lean-4.35.0-rc3.tar.zst parts/lean.part
+          split -b 400M -d dependencies/pinned-dependencies.tar.zst parts/deps.part
+          sha256sum compiler/lean-4.35.0-rc3.tar.zst dependencies/pinned-dependencies.tar.zst parts/* > parts/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-lean-part00
+          path: parts/lean.part00
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-lean-part01
+          path: parts/lean.part01
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-deps-part00
+          path: parts/deps.part00
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-deps-part01
+          path: parts/deps.part01
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixed-deps-part02-and-hashes
+          path: |
+            parts/deps.part02
+            parts/SHA256SUMS
+          compression-level: 0
+          retention-days: 7
