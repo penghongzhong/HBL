@@ -75,7 +75,8 @@ theorem domainTriangularDynamics_certified
     (elld (z s) + ell s (A ⟨z s, hz⟩)) + ell s F
   have hdaeq : elld (v s) + ell s (A ⟨v s, hvdom⟩ + F) = da := by
     dsimp only [da]
-    rw [hsplitd, hcancel, hAsplit, map_add, map_add, map_sub]
+    rw [hsplitd, hAsplit]
+    simp only [map_add, map_sub, hcancel]
     abel
   have hda : HasDerivAt a da s := by
     have h := helld.clm_apply hv
