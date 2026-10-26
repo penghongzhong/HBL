@@ -89,9 +89,10 @@ jobs:
           sf=pathlib.Path('evidence/flow-types-and-axioms.txt').read_text()
           assert 'HBL.RegularRadiation.regularRadiationFlow_certified' in sf
           assert 'sorryAx' not in sf and '⋯' not in sf and '...' not in sf
-          m=re.search(r"'HBL\\.RegularRadiation\\.regularRadiationFlow_certified' depends on axioms: \\[([^\\]]*)\\]",sf,re.S)
-          assert m, sf
-          assert {x.strip() for x in m.group(1).split(',') if x.strip()} <= {'propext','Classical.choice','Quot.sound'}
+          line=next((ln for ln in sf.splitlines() if "'HBL.RegularRadiation.regularRadiationFlow_certified' depends on axioms:" in ln), None)
+          assert line is not None, sf
+          ax=line.split('[',1)[1].rsplit(']',1)[0]
+          assert {x.strip() for x in ax.split(',') if x.strip()} <= {'propext','Classical.choice','Quot.sound'}
           pathlib.Path('evidence/audit.json').write_text(json.dumps({'kernel_declarations':found,'regular_flow_terminal':'HBL.RegularRadiation.regularRadiationFlow_certified','external_boundary':'GeneralizedHartreeRegularLocalTheory (Arora--Roudenko, JHDE 17 (2020), 727--763, DOI 10.1142/S0219891620500228; standard high-regularity persistence)','trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'new_numbered_environments':0,'pending_original_targets':4,'full_regular_flow_accepted':True,'main_theorem_closed':False},indent=2))
           print('PASS: existing regular-radiation target discharged relative to explicit published local-theory boundary; pending targets 5 -> 4')
           PY
