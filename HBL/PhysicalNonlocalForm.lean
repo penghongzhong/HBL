@@ -10,7 +10,7 @@ square majorants; in the far field use the L1 density. No HLS or angular
 reduction assumption is added. The radial logarithmic identity remains open.
 -/
 noncomputable section
-open MeasureTheory Set Filter Metric
+open MeasureTheory MeasureTheory.Measure Set Filter Metric
 open scoped Topology ContDiff RealInnerProductSpace NNReal
 namespace HBL.Modulation.Monopole
 open HBL.L2Kernel HBL.Modulation.AffineTail
@@ -28,10 +28,6 @@ private theorem ae_snd {f g : X → ℝ} (h : f =ᵐ[μ] g) :
 
 local instance : Fact ((1 : ENNReal) ≤ 3) := ⟨by norm_num⟩
 local instance : Fact ((1 : ENNReal) ≤ 6) := ⟨by norm_num⟩
-local instance : Fact ((1 : ENNReal) ≤ 6 / 5) := ⟨by
-  change ((1 : ℝ≥0) : ENNReal) ≤ ((6 : ℝ≥0) : ENNReal) / ((5 : ℝ≥0) : ENNReal)
-  rw [← ENNReal.coe_div (by norm_num : (5 : ℝ≥0) ≠ 0), ENNReal.coe_le_coe]
-  norm_num⟩
 local instance : ENNReal.HolderTriple 3 6 2 where
   inv_add_inv_eq_inv := by
     change ((3 : ℝ≥0) : ENNReal)⁻¹ + ((6 : ℝ≥0) : ENNReal)⁻¹ = ((2 : ℝ≥0) : ENNReal)⁻¹
@@ -47,6 +43,9 @@ local instance : ENNReal.HolderConjugate (6 / 5) 6 where
     rw [← ENNReal.coe_div (by norm_num : (6 : ℝ≥0) ≠ 0),
       ← ENNReal.coe_inv (by norm_num : (6 : ℝ≥0) ≠ 0), ← ENNReal.coe_add]
     norm_num
+
+local instance : Fact ((1 : ENNReal) ≤ 6 / 5) :=
+  ⟨ENNReal.HolderConjugate.one_le (6 / 5) 6⟩
 
 /-- The genuine cubic bubble density weight on physical Euclidean space. -/
 def physicalCubicWeight (x : PhysicalRadialSpace3) : ℝ := bubble ‖x‖ ^ 3
@@ -78,7 +77,8 @@ private theorem cubicWeight_mem (p : ENNReal) (hp0 : p ≠ 0) (hpt : p ≠ ⊤)
 private def cubicL3 : Lp ℝ 3 μ :=
   (cubicWeight_mem 3 (by norm_num) (by norm_num) (by norm_num)).toLp physicalCubicWeight
 private def cubicL65 : Lp ℝ (6 / 5) μ :=
-  (cubicWeight_mem (6 / 5) (by norm_num) (by norm_num) (by norm_num)).toLp physicalCubicWeight
+  (cubicWeight_mem (6 / 5) (by norm_num)
+      (ENNReal.div_ne_top (by norm_num) (by norm_num)) (by norm_num)).toLp physicalCubicWeight
 
 /-- The actual density as a bounded L2-valued map. -/
 def physicalHartreeDensityL2 : E →L[ℝ] PhysicalScalarL2 :=
@@ -102,7 +102,8 @@ private theorem density1_ae (u : E) :
   have h := (ContinuousLinearMap.mul ℝ ℝ).coeFn_holder
     (r := (1 : ENNReal)) cubicL65 (physicalL6Realization u)
   filter_upwards [h,
-    (cubicWeight_mem (6 / 5) (by norm_num) (by norm_num) (by norm_num)).coeFn_toLp]
+    (cubicWeight_mem (6 / 5) (by norm_num)
+      (ENNReal.div_ne_top (by norm_num) (by norm_num)) (by norm_num)).coeFn_toLp]
     with x hx hw
   change physicalHartreeDensityL1 u x = cubicL65 x * physicalL6Realization u x at hx
   rw [hx]
@@ -132,7 +133,7 @@ private theorem near_meas : Measurable nearKernel := kernel_meas.indicator measu
 private theorem near_nonneg (x : X) : 0 ≤ nearKernel x := by
   exact indicator_nonneg (fun _ _ => inv_nonneg.mpr (sq_nonneg _)) _
 private theorem near_even (x : X) : nearKernel (-x) = nearKernel x := by
-  simp [nearKernel, physicalHartreeKernel, Set.indicator, mem_ball_zero_iff]
+  simp [nearKernel, physicalHartreeKernel, Set.indicator]
 private theorem near_integrable : Integrable nearKernel μ := by
   apply (integrable_indicator_iff measurableSet_ball).mpr
   apply integrableOn_ball_of_norm_le_rpow (C := 1) (α := 2)
@@ -160,7 +161,7 @@ private theorem near_square (u : E) :
   have hs := (Lp.memLp (physicalHartreeDensityL2 u)).integrable_sq
   have hp := hs.mul_prod near_integrable
   have mp := measurePreserving_prod_sub μ μ
-  have hi := hp.comp_measurePreserving mp
+  have hi := (mp.integrable_comp hp.aestronglyMeasurable).mpr hp
   have he := mp.integral_comp (MeasurableEquiv.shearSubRight X).measurableEmbedding
     (fun p : X × X => (physicalHartreeDensityL2 u p.1) ^ 2 * nearKernel p.2)
   constructor
@@ -179,11 +180,22 @@ private theorem near_square_snd (u : E) :
       (∫ x, nearKernel x ∂μ) * ‖physicalHartreeDensityL2 u‖ ^ 2 := by
   have he (x y : X) : nearKernel (x - y) = nearKernel (y - x) := by
     rw [← neg_sub y x, near_even]
+  have heq : (fun p : X × X => nearKernel (p.1 - p.2) * (physicalHartreeDensityL2 u p.2) ^ 2) =
+      (fun p : X × X => nearKernel (p.2 - p.1) * (physicalHartreeDensityL2 u p.2) ^ 2) := by
+    funext p
+    rw [he p.1 p.2]
   constructor
-  · simpa only [Function.comp_def, he] using (near_square u).1.swap
+  · have hi := (near_square u).1.swap
+    change Integrable (fun p : X × X =>
+      nearKernel (p.1 - p.2) * (physicalHartreeDensityL2 u p.2) ^ 2) μ₂ at hi
+    rw [heq] at hi
+    exact hi
   · have hi := integral_prod_swap (μ := μ) (ν := μ)
       (fun p : X × X => nearKernel (p.2 - p.1) * (physicalHartreeDensityL2 u p.1) ^ 2)
-    simpa only [he, (near_square u).2] using hi
+    change (∫ p : X × X, nearKernel (p.1 - p.2) * (physicalHartreeDensityL2 u p.2) ^ 2 ∂μ₂) =
+      (∫ p : X × X, nearKernel (p.2 - p.1) * (physicalHartreeDensityL2 u p.1) ^ 2 ∂μ₂) at hi
+    rw [heq, (near_square u).2] at hi
+    exact hi
 private def kernelIntegrand (u v : E) (p : X × X) : ℝ :=
   physicalHartreeKernel (p.2 - p.1) * physicalHartreeDensityL2 u p.1 * physicalHartreeDensityL2 v p.2
 private def majorant (u v : E) (p : X × X) : ℝ :=
@@ -219,12 +231,18 @@ private theorem majorant_integral (u v : E) :
     (∫ p, majorant u v p ∂μ₂) =
       (∫ x, nearKernel x ∂μ) / 2 * (‖physicalHartreeDensityL2 u‖ ^ 2 + ‖physicalHartreeDensityL2 v‖ ^ 2) +
       ‖physicalHartreeDensityL1 u‖ * ‖physicalHartreeDensityL1 v‖ := by
+  have hA : Integrable (fun p : X × X =>
+      (nearKernel (p.2 - p.1) * (physicalHartreeDensityL2 u p.1) ^ 2 +
+        nearKernel (p.2 - p.1) * (physicalHartreeDensityL2 v p.2) ^ 2) / 2) μ₂ :=
+    ((near_square u).1.add (near_square_snd v).1).div_const 2
+  have hB : Integrable (fun p : X × X =>
+      ‖physicalHartreeDensityL2 u p.1‖ * ‖physicalHartreeDensityL2 v p.2‖) μ₂ :=
+    (density_integrable u).norm.mul_prod (density_integrable v).norm
   unfold majorant
-  rw [integral_add (((near_square u).1.add (near_square_snd v).1).div_const 2)
-      ((density_integrable u).norm.mul_prod (density_integrable v).norm), integral_div_const,
+  rw [integral_add hA hB, integral_div_const,
     integral_add (near_square u).1 (near_square_snd v).1,
     (near_square u).2, (near_square_snd v).2]
-  rw [integral_prod _ ((density_integrable u).norm.mul_prod (density_integrable v).norm)]
+  rw [integral_prod _ hB]
   simp only [integral_const_mul, integral_mul_const, density_norm_integral]
   ring
 
@@ -235,7 +253,7 @@ private theorem bound_nonneg : 0 ≤ physicalNonlocalBound := by
   exact add_nonneg (mul_nonneg (integral_nonneg near_nonneg) (sq_nonneg _)) (sq_nonneg _)
 private theorem square_bound (u v : E) :
     ‖∫ p, kernelIntegrand u v p ∂μ₂‖ ≤ physicalNonlocalBound / 2 * (‖u‖ ^ 2 + ‖v‖ ^ 2) := by
-  have hn := integral_nonneg (fun x => near_nonneg x)
+  have hn : 0 ≤ ∫ x, nearKernel x ∂μ := integral_nonneg near_nonneg
   have h0 := (norm_integral_le_integral_norm (kernelIntegrand u v)).trans
     (integral_mono (kernel_integrable u v).norm (majorant_integrable u v)
       (integrand_le_majorant u v))
@@ -260,17 +278,18 @@ private def nonlocalLinear : E →ₗ[ℝ] E →ₗ[ℝ] ℝ :=
       filter_upwards [ha] with p hp
       unfold kernelIntegrand
       rw [map_add, hp]
-      change _ * (_ + _) * _ = _
+      simp only [Pi.add_apply]
       ring)
     (by
       intro c u v
+      simp only [smul_eq_mul]
       rw [← integral_const_mul]
       apply integral_congr_ae
       have ha := ae_fst (Lp.coeFn_smul c (physicalHartreeDensityL2 u))
       filter_upwards [ha] with p hp
       unfold kernelIntegrand
       rw [map_smul, hp]
-      change _ * (c * _) * _ = c * (_ * _ * _)
+      simp only [Pi.smul_apply, smul_eq_mul]
       ring)
     (by
       intro u v w
@@ -280,17 +299,18 @@ private def nonlocalLinear : E →ₗ[ℝ] E →ₗ[ℝ] ℝ :=
       filter_upwards [ha] with p hp
       unfold kernelIntegrand
       rw [map_add, hp]
-      change _ * _ * (_ + _) = _
+      simp only [Pi.add_apply]
       ring)
     (by
       intro c u v
+      simp only [smul_eq_mul]
       rw [← integral_const_mul]
       apply integral_congr_ae
       have ha := ae_snd (Lp.coeFn_smul c (physicalHartreeDensityL2 v))
       filter_upwards [ha] with p hp
       unfold kernelIntegrand
       rw [map_smul, hp]
-      change _ * _ * (c * _) = c * (_ * _ * _)
+      simp only [Pi.smul_apply, smul_eq_mul]
       ring)
 private theorem product_bound (u v : E) :
     ‖nonlocalLinear u v‖ ≤ physicalNonlocalBound * ‖u‖ * ‖v‖ := by
@@ -335,6 +355,7 @@ private theorem form_symm (u v : E) : physicalNonlocalForm u v = physicalNonloca
   apply integral_congr_ae
   filter_upwards with p
   unfold kernelIntegrand physicalHartreeKernel
+  simp only [Prod.swap_fst, Prod.swap_snd]
   rw [norm_sub_rev p.1 p.2]
   ring
 
@@ -364,7 +385,7 @@ theorem physicalNonlocalForm_certified :
   refine ⟨?_, ?_, form_eq, hc, bound_nonneg, ?_, form_symm, ?_, ?_⟩
   · intro u
     exact ⟨(density_integrable u).congr (density2_ae u),
-      (Lp.memLp (physicalHartreeDensityL2 u)).congr (density2_ae u)⟩
+      (memLp_congr_ae (density2_ae u)).mp (Lp.memLp (physicalHartreeDensityL2 u))⟩
   · intro u v
     exact (kernel_integrable u v).congr (actual_integrand_ae u v)
   · intro u v
@@ -373,5 +394,7 @@ theorem physicalNonlocalForm_certified :
   · intro u v
     exact integral_prod _ ((kernel_integrable u v).congr (actual_integrand_ae u v))
   · intro u v un vn hu hv
-    exact (hc.tendsto (u, v)).comp (hu.prodMk_nhds hv)
+    have hp : Tendsto (fun n => (un n, vn n)) atTop (𝓝 (u, v)) := hu.prodMk_nhds hv
+    have ht := (hc.tendsto (u, v)).comp hp
+    exact ht
 end HBL.Modulation.Monopole
