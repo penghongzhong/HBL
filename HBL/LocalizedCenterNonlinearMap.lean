@@ -18,6 +18,7 @@ No original manuscript environment is newly accepted by this module.
 
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 open Set MeasureTheory
 open scoped Topology
@@ -82,10 +83,10 @@ private theorem radialClip_difference_of_norm_le
     _ = (R / a) * ‖x - y‖ + (R / a - R / b) * ‖y‖ := by
       rw [norm_smul, norm_smul, Real.norm_of_nonneg hc, Real.norm_of_nonneg hcd]
     _ ≤ (R / a) * ‖x - y‖ + (R / a - R / b) * b := by
-      exact add_le_add_left (mul_le_mul_of_nonneg_left hyb hcd) _
+      exact _root_.add_le_add le_rfl (mul_le_mul_of_nonneg_left hyb hcd)
     _ = (R / a) * ‖x - y‖ + (R / a) * (b - a) := by rw [halg]
     _ ≤ (R / a) * ‖x - y‖ + (R / a) * ‖x - y‖ := by
-      exact add_le_add_left (mul_le_mul_of_nonneg_left hba hc) _
+      exact _root_.add_le_add le_rfl (mul_le_mul_of_nonneg_left hba hc)
     _ ≤ 2 * ‖x - y‖ := by nlinarith [norm_nonneg (x - y)]
 
 theorem radialClip_difference_le
@@ -173,7 +174,8 @@ theorem localizedCenter_global_bound {s0 p delta Cnl R : ℝ}
     mul_nonneg hC (Real.rpow_nonneg (hs0.trans_le ht).le _)
   calc
     _ ≤ Cnl * t ^ (-1 - delta) *
-      ‖radialClip (lateRadius s0 p R t) z - radialClip (lateRadius s0 p R t) w‖ := hg
+      ‖radialClip (lateRadius s0 p R t) z - radialClip (lateRadius s0 p R t) w‖ := by
+        simpa only [localizedCenterNonlinearity, hr] using hg
     _ ≤ Cnl * t ^ (-1 - delta) * (2 * ‖z - w‖) :=
       mul_le_mul_of_nonneg_left (radialClip_difference_le hρ z w) hc
     _ = _ := by ring
@@ -273,13 +275,13 @@ theorem affine_fixedPoint_ball
     (hdiff : ∀ x y, ‖F x - F y‖ ≤ k * ‖x - y‖)
     (hforcing : ‖F 0‖ ≤ (1 - k) * R) :
     ∃! q, F q = q ∧ ‖q‖ ≤ R := by
-  let K : ℝ≥0 := ⟨k, hk⟩
+  let K : NNReal := ⟨k, hk⟩
   have hL : LipschitzWith K F := by
     apply LipschitzWith.of_dist_le_mul
     intro x y
     simpa only [dist_eq_norm] using hdiff x y
   have hcontract : ContractingWith K F := ⟨hk1, hL⟩
-  let q := hcontract.fixedPoint F
+  let q := ContractingWith.fixedPoint F hcontract
   have hq : F q = q := hcontract.fixedPoint_isFixedPt
   have hb : ‖q‖ ≤ k * ‖q‖ + ‖F 0‖ := by
     calc
@@ -288,10 +290,11 @@ theorem affine_fixedPoint_ball
       _ ≤ k * ‖q‖ + ‖F 0‖ := by
         have hd := hdiff q 0
         rw [sub_zero] at hd
-        exact add_le_add_right hd _
+        exact _root_.add_le_add hd le_rfl
   have hqr : ‖q‖ ≤ R := by
-    apply (mul_le_mul_left (sub_pos.mpr hk1)).mp
-    nlinarith
+    by_contra hqR
+    have hprod := mul_pos (sub_pos.mpr hk1) (sub_pos.mpr (lt_of_not_ge hqR))
+    nlinarith only [hb, hforcing, hprod]
   refine ⟨q, ⟨hq, hqr⟩, ?_⟩
   intro y hy
   exact hcontract.fixedPoint_unique hy.1
@@ -324,15 +327,20 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
   let F : CenterWeightedPath s0 p → CenterWeightedPath s0 p := fun q => b + M q
   have hdiff : ∀ q r, ‖F q - F r‖ ≤ k * ‖q - r‖ := by
     intro q r
-    simpa only [F, add_sub_add_left_eq_sub] using
-      localizedCenterMap_difference_norm CE G hs0 hp hdelta hC hR hcont hzero hloc q r
+    have hid : F q - F r = M q - M r := by
+      dsimp [F]
+      abel
+    rw [hid]
+    exact localizedCenterMap_difference_norm CE G hs0 hp hdelta hC hR hcont hzero hloc q r
   have hf : ‖F 0‖ ≤ (1 - k) * R := by
-    simpa only [F, hMzero, add_zero] using hforcing
+    change ‖b + M 0‖ ≤ (1 - k) * R
+    rw [hMzero, add_zero]
+    exact hforcing
   obtain ⟨q, hq, huniq⟩ := affine_fixedPoint_ball F hk hsmall hdiff hf
   refine ⟨q, ⟨hq.2, ?_⟩, ?_⟩
   · intro s
     have heq := congrArg (fun v : CenterWeightedPath s0 p => v s) hq.1.symm
-    change q s = b s + M q s at heq
+    change q s = b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc q s at heq
     rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc q hq.2 s] at heq
     exact heq
   · intro y hy
@@ -340,7 +348,7 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
     refine ⟨?_, hy.1⟩
     apply BoundedContinuousFunction.ext
     intro s
-    change b s + M y s = y s
+    change b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc y s = y s
     rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc y hy.1 s]
     exact (hy.2 s).symm
 
