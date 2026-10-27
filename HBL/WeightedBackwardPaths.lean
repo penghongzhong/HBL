@@ -30,12 +30,12 @@ abbrev WeightedPath (s0 : ℝ) (E : Type*)
 
 /-- Continuous projection of the full real line onto the late-time half-line. -/
 def lateTimeClamp (s0 : ℝ) (t : ℝ) : LateTime s0 :=
-  ⟨max s0 t, le_max_left _ _⟩
+  ⟨max s0 t, by simpa only [mem_Ici] using le_max_left s0 t⟩
 
 theorem lateTimeClamp_continuous (s0 : ℝ) :
     Continuous (lateTimeClamp s0) := by
-  apply continuous_subtype_mk
-  exact continuous_const.max continuous_id
+  exact Continuous.subtype_mk (continuous_const.max continuous_id)
+    (fun t => by simpa only [mem_Ici] using le_max_left s0 t)
 
 /-- Global clamped representative of a weighted path.  On t>=s0 it agrees
 with the genuine unweighted late-time path. -/
@@ -53,11 +53,11 @@ theorem unweightPathGlobal_continuous
   have hmpos : 0 < max s0 t := hs0.trans_le (le_max_left _ _)
   have hp : ContinuousAt (fun x : ℝ => (max s0 x) ^ (-p)) t := by
     exact (Real.continuousAt_rpow_const (max s0 t) (-p)
-      (Or.inl hmpos.ne')).comp t
+      (Or.inl hmpos.ne')).comp
         (continuous_const.max continuous_id).continuousAt
   have hq :
       ContinuousAt (fun x : ℝ => q (lateTimeClamp s0 x)) t :=
-    q.continuous.continuousAt.comp t (lateTimeClamp_continuous s0).continuousAt
+    q.continuous.continuousAt.comp (lateTimeClamp_continuous s0).continuousAt
   exact hp.smul hq
 
 theorem unweightPathGlobal_eq
@@ -66,7 +66,10 @@ theorem unweightPathGlobal_eq
     {t : ℝ} (ht : s0 ≤ t) :
     unweightPathGlobal p s0 q t =
       t ^ (-p) • q ⟨t, ht⟩ := by
-  simp [unweightPathGlobal, lateTimeClamp, max_eq_right ht]
+  have hclamp : lateTimeClamp s0 t = (⟨t, ht⟩ : LateTime s0) := by
+    apply Subtype.ext
+    simp [lateTimeClamp, max_eq_right ht]
+  rw [unweightPathGlobal, max_eq_right ht, hclamp]
 
 theorem unweightPathGlobal_norm_bound
     {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -96,7 +99,7 @@ theorem unweightPath_continuous
   have hp :
       ContinuousAt (fun t : LateTime s0 => ((t : ℝ) ^ (-p))) s := by
     exact (Real.continuousAt_rpow_const (s : ℝ) (-p)
-      (Or.inl hspos.ne')).comp s continuousAt_subtype_val
+      (Or.inl hspos.ne')).comp continuousAt_subtype_val
   exact hp.smul q.continuous.continuousAt
 
 theorem unweightPath_norm_bound
