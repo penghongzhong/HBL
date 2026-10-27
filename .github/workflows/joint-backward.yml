@@ -28,7 +28,7 @@ jobs:
           python3 - <<'PY'
           import pathlib, subprocess, re, textwrap
           base='aa38439a818d7acddfac87af6158d7d6fcff10fb'
-          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterDuhamelEstimates.lean','HBL/FiniteProfileResidualLedger.lean','HBL/ResidualDecayFromFiniteAtoms.lean','HBL/ConstrainedCenterSpace.lean','HBL/WeightedBackwardPaths.lean','HBL/WeightedThresholdMap.lean','HBL/WeightedCenterFeedbackMap.lean','HBL/WeightedCenterNonlinearMap.lean','HBL/WeightedAffineForcing.lean','HBL/WeightedJointBackward.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
+          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterDuhamelEstimates.lean','HBL/FiniteProfileResidualLedger.lean','HBL/ResidualDecayFromFiniteAtoms.lean','HBL/ConstrainedCenterSpace.lean','HBL/TriangularReconstruction.lean','HBL/WeightedBackwardPaths.lean','HBL/WeightedThresholdMap.lean','HBL/WeightedCenterFeedbackMap.lean','HBL/WeightedCenterNonlinearMap.lean','HBL/WeightedAffineForcing.lean','HBL/WeightedJointBackward.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
           delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert delta <= allowed, delta-allowed
           p=pathlib.Path('HBL/JointBackwardContraction.lean').read_text()
@@ -62,6 +62,7 @@ jobs:
           set -euo pipefail
           lake build HBL.MainBackwardAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/MainBackwardAudit.lean 2>&1 | tee evidence/strict.log
+          grep -q "HBL.Modulation.TriangularRepair.domainTriangularDynamics_reconstruct.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.two_stage_backward_fixed_point.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.propagatedFeedbackTail_difference_weighted.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.standardCenter_feedback_lipschitz.*depends on axioms" evidence/strict.log
