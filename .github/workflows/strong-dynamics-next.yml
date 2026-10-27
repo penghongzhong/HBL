@@ -20,9 +20,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p evidence
           curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          "$HOME/.elan/bin/lean" --version
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
       - name: Resolve fixed dependencies
         shell: bash
         run: |
@@ -35,14 +36,53 @@ jobs:
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean)
-      - name: Strict strong-next compile
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Strict bridges and physical nonlinearity compile
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities
-          lake env lean --trust=0 -DwarningAsError=true HBL/StrongConstrainedCenterEvolution.lean | tee strong.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedStrongDynamics.lean | tee dynamics.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedTailIdentities.lean | tee identities.log
-          ! grep -q "sorryAx" strong.log
-          ! grep -q "sorryAx" dynamics.log
-          ! grep -q "sorryAx" identities.log
+          lake build HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization 2>&1 | tee evidence/build.log
+          for name in StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization; do
+            lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" 2>&1 | tee "evidence/$name.log"
+          done
+          lake env lean --trust=0 -DwarningAsError=true HBL/FinalBridgeAudit.lean > evidence/types-and-axioms.txt 2>&1
+      - name: Exact inventory and conditional-boundary audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,re,json,subprocess
+          root=pathlib.Path('.')
+          a=(root/'HBL/FinalBridgeAudit.lean').read_text()
+          names=re.findall(r'^#print axioms (\S+)$',a,re.M)
+          checked=re.findall(r'^#check @(\S+)$',a,re.M)
+          assert len(names)==20 and len(set(names))==20 and checked==names
+          text=(root/'evidence/types-and-axioms.txt').read_text()
+          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",text,re.S)
+          assert [n for n,_ in found]==names, (names,found)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n,axs in found:
+            assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
+          assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
+          changed=set(subprocess.check_output(['git','diff','--name-only','020d69ab6d772f728f15912187b7cf93317eff1a','HEAD'],text=True).splitlines())
+          permitted={'HBL/WeightedTailIdentities.lean','HBL/WeightedStrongDynamics.lean','HBL/HartreePhysicalLinearization.lean','HBL/FinalBridgeAudit.lean','.github/workflows/strong-dynamics-next.yml'}
+          assert changed <= permitted, changed-permitted
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'strict_production_modules':4,'audited_declarations':20,'new_physical_expansion_theorems':6,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':{n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found},'conditional_boundary':'StrongConstrainedCenterPropagator remains an explicit, unconstructed input; physical expansion retains explicit kernel-density integrability hypotheses','original_environments_added':0,'main_theorem_closed':False}
+          (root/'evidence/audit.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Preserve sources and hashes
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git diff 020d69ab6d772f728f15912187b7cf93317eff1a HEAD > evidence/repair-and-expansion.patch
+          git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-final-bridge-${{ github.sha }}
+          path: evidence
+          retention-days: 14
