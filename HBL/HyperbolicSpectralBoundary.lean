@@ -31,9 +31,13 @@ structure FixedBubbleHyperbolicSpectralBoundary where
   e0 : ℝ
   e0_pos : 0 < e0
   growthCoordinate : CenterPair →L[ℝ] ℝ
+  decayCoordinate : CenterPair →L[ℝ] ℝ
   growth_generator :
     ∀ v : domain,
       growthCoordinate (generator v) = e0 * growthCoordinate v.1
+  decay_generator :
+    ∀ v : domain,
+      decayCoordinate (generator v) = -e0 * decayCoordinate v.1
 
 /-- The fixed Hamiltonian growth coordinate satisfies the scalar e0 equation
 for every strong trajectory in the common domain. -/
@@ -47,6 +51,18 @@ theorem fixedBubble_growthCoordinate_hasDerivAt
   have h := S.growthCoordinate.hasFDerivAt.comp_hasDerivAt s hv
   convert h using 1
   rw [map_add, S.growth_generator]
+
+/-- The fixed Hamiltonian decay coordinate satisfies the scalar -e0 equation. -/
+theorem fixedBubble_decayCoordinate_hasDerivAt
+    (S : FixedBubbleHyperbolicSpectralBoundary)
+    (v F : ℝ → CenterPair) (s : ℝ)
+    (hvdom : v s ∈ S.domain)
+    (hv : HasDerivAt v (S.generator ⟨v s, hvdom⟩ + F s) s) :
+    HasDerivAt (fun t => S.decayCoordinate (v t))
+      (-S.e0 * S.decayCoordinate (v s) + S.decayCoordinate (F s)) s := by
+  have h := S.decayCoordinate.hasFDerivAt.comp_hasDerivAt s hv
+  convert h using 1
+  rw [map_add, S.decay_generator]
 
 /-- Algebraic splitting of the moving perturbation into a correction to the
 hyperbolic rate and the projected total source. -/
@@ -88,6 +104,7 @@ theorem growthCoordinate_source_bound
   simpa only [Real.norm_eq_abs] using S.growthCoordinate.le_opNorm F
 
 #print axioms fixedBubble_growthCoordinate_hasDerivAt
+#print axioms fixedBubble_decayCoordinate_hasDerivAt
 #print axioms moving_growthCoordinate_hasDerivAt
 #print axioms moving_hyperbolic_rate_lower
 #print axioms growthCoordinate_source_bound
