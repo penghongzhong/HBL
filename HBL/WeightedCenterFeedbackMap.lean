@@ -113,9 +113,9 @@ theorem weightedCenterFeedbackSource_integrable
   have hmeas :
       AEStronglyMeasurable (weightedCenterFeedbackSource CE E p a s)
         (volume.restrict (Ioi s)) := by
-    exact (CE.orbit_continuous s
-      (fun t => E t (unweightThresholdPathGlobal s0 p a t)) hprim)
-        .aestronglyMeasurable.restrict
+    have hc := CE.orbit_continuous s
+      (fun t => E t (unweightThresholdPathGlobal s0 p a t)) hprim
+    exact hc.aestronglyMeasurable.restrict
   apply hmajor.mono' hmeas
   filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
   have hsrc := weightedCenterPrimitiveSource_bound E hs0 hL hE a (hs.trans ht.le)
@@ -248,7 +248,11 @@ theorem centerFeedbackLipschitzConstant_nonneg
     (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu) (hL : 0 ≤ L) :
     0 ≤ centerFeedbackLipschitzConstant CE p nu L := by
   unfold centerFeedbackLipschitzConstant
-  positivity
+  have hden : 0 < p + nu - 2 := by linarith
+  have hnum : 0 ≤ CE.boundConst * L :=
+    mul_nonneg CE.bound_nonneg hL
+  exact mul_nonneg (div_nonneg hnum hden.le)
+    (Real.rpow_nonneg hs0.le _)
 
 theorem weightedCenterFeedbackValue_bound
     {s0 p nu L : ℝ}
@@ -275,9 +279,12 @@ theorem weightedCenterFeedbackValue_bound
   have hmono :
       (s : ℝ) ^ (2 - nu) ≤ s0 ^ (2 - nu) :=
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
+  have hden : 0 < p + nu - 2 := by linarith
+  have hnum : 0 ≤ CE.boundConst * L * ‖a‖ :=
+    mul_nonneg (mul_nonneg CE.bound_nonneg hL) (norm_nonneg _)
   have hcoef :
-      0 ≤ (CE.boundConst * L * ‖a‖) / (p + nu - 2) := by
-    positivity
+      0 ≤ (CE.boundConst * L * ‖a‖) / (p + nu - 2) :=
+    div_nonneg hnum hden.le
   calc
     (s : ℝ) ^ p * ‖weightedCenterFeedbackTail CE E p a s‖
         ≤ (s : ℝ) ^ p *
@@ -341,12 +348,26 @@ theorem weightedCenterFeedbackTail_sub
     CE E hs0 hp hnu hL hEcont hE a hs
   have hib := weightedCenterFeedbackSource_integrable
     CE E hs0 hp hnu hL hEcont hE b hs
+  have hInt :
+      (∫ t in Ioi s, weightedCenterFeedbackSource CE E p a s t) -
+          (∫ t in Ioi s, weightedCenterFeedbackSource CE E p b s t) =
+        ∫ t in Ioi s, weightedCenterFeedbackSource CE E p (a - b) s t := by
+    calc
+      (∫ t in Ioi s, weightedCenterFeedbackSource CE E p a s t) -
+          (∫ t in Ioi s, weightedCenterFeedbackSource CE E p b s t)
+          = ∫ t in Ioi s,
+              (weightedCenterFeedbackSource CE E p a s t -
+                weightedCenterFeedbackSource CE E p b s t) := by
+              symm
+              exact integral_sub hia hib
+      _ = ∫ t in Ioi s,
+            weightedCenterFeedbackSource CE E p (a - b) s t := by
+              apply integral_congr_ae
+              filter_upwards with t
+              exact weightedCenterFeedbackSource_sub CE E p a b s t
   unfold weightedCenterFeedbackTail
-  rw [sub_eq_add_neg, ← neg_add]
-  rw [← integral_sub hia hib]
-  congr 1
-  funext t
-  exact weightedCenterFeedbackSource_sub CE E p a b s t
+  rw [← hInt]
+  abel
 
 theorem weightedCenterFeedbackMap_difference_norm
     {s0 p nu L : ℝ}
@@ -376,7 +397,16 @@ theorem weightedCenterFeedbackMap_difference_norm
         ((s : ℝ) ^ p) •
           weightedCenterFeedbackTail CE E p (a - b) s := by
     unfold weightedCenterFeedbackValue
-    rw [← smul_sub, hsub]
+    calc
+      ((s : ℝ) ^ p) • weightedCenterFeedbackTail CE E p a s -
+          ((s : ℝ) ^ p) • weightedCenterFeedbackTail CE E p b s =
+        ((s : ℝ) ^ p) •
+          (weightedCenterFeedbackTail CE E p a s -
+            weightedCenterFeedbackTail CE E p b s) := by
+              exact (smul_sub _ _ _).symm
+      _ = ((s : ℝ) ^ p) •
+          weightedCenterFeedbackTail CE E p (a - b) s :=
+            congrArg (fun x => ((s : ℝ) ^ p) • x) hsub
   rw [hval]
   exact weightedCenterFeedbackValue_bound
     CE E hs0 hp hnu hL hEcont hE (a - b) s
@@ -396,9 +426,9 @@ theorem weightedCenterFeedbackMap_lipschitz
   have hnon :
       0 ≤ centerFeedbackLipschitzConstant CE p nu L :=
     centerFeedbackLipschitzConstant_nonneg CE hs0 hp hnu hL
-  rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hnon]
-  exact weightedCenterFeedbackMap_difference_norm
-    CE E hs0 hp hnu hL hEcont hE a b
+  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
+    (weightedCenterFeedbackMap_difference_norm
+      CE E hs0 hp hnu hL hEcont hE a b)
 
 #print axioms weightedCenterFeedbackTail_bound
 #print axioms weightedCenterFeedbackValue_bound
