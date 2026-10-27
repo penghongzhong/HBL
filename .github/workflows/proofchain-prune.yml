@@ -1,0 +1,31 @@
+name: HBL proof-chain pruning audit
+on:
+  push:
+    branches: [hbl-proof-chain-prune-20261028]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Exact-revision import and declaration-reference audit
+        run: python3 verification/proofchain_scan.py
+      - name: Preserve audit and exact source snapshot
+        if: always()
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git diff 9d1c825880f90f4efa31f6bd32d90c5ad591ea90 HEAD > evidence/pruning.patch
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-proofchain-pruning-${{ github.sha }}
+          path: evidence
+          retention-days: 30
