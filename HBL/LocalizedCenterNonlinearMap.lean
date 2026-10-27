@@ -275,7 +275,7 @@ theorem affine_fixedPoint_ball
     (hdiff : ∀ x y, dist (F x) (F y) ≤ k * dist x y)
     (hforcing : dist (F o) o ≤ (1 - k) * R) :
     ∃! q, F q = q ∧ dist q o ≤ R := by
-  letI : Nonempty X := ⟨o⟩
+  let : Nonempty X := ⟨o⟩
   let K : NNReal := ⟨k, hk⟩
   have hL : LipschitzWith K F := by
     apply LipschitzWith.of_dist_le_mul
@@ -298,7 +298,8 @@ theorem affine_fixedPoint_ball
   intro y hy
   exact hcontract.fixedPoint_unique hy.1
 
-/-- Unique small-ball solution of the ORIGINAL nonlinear Duhamel equation.
+/-- Unique small-ball solution of the ORIGINAL nonlinear Duhamel equation,
+including integrability of its untruncated source at every late time.
 The propagator and local source-space bounds remain explicit assumptions. -/
 theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
     (CE : StandardConstrainedCenterPropagator s0)
@@ -313,7 +314,9 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
     (hforcing : ‖b‖ ≤
       (1 - centerNonlinearLipschitzConstant CE p delta (2 * Cnl)) * R) :
     ∃! q : CenterWeightedPath s0 p, ‖q‖ ≤ R ∧
-      ∀ s : LateTime s0, q s = b s + weightedCenterNonlinearValue CE G p q s := by
+      ∀ s : LateTime s0,
+        IntegrableOn (weightedCenterNonlinearSource CE G p q s) (Ioi (s : ℝ)) ∧
+        q s = b s + weightedCenterNonlinearValue CE G p q s := by
   let M := localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc
   let k := centerNonlinearLipschitzConstant CE p delta (2 * Cnl)
   have hk : 0 ≤ k := centerNonlinearLipschitzConstant_nonneg CE hs0 hp hdelta
@@ -334,6 +337,7 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
         change (max s0 t) ^ (-p) • (0 : ConstrainedCenterSpace) = 0
         exact smul_zero _
       rw [hz, localizedCenter_zero G hzero t (s.2.trans ht.le), map_zero]
+      rfl
     rw [hI, neg_zero, smul_zero]
   let F : CenterWeightedPath s0 p → CenterWeightedPath s0 p := fun q => b + M q
   have hdiff : ∀ q r, ‖F q - F r‖ ≤ k * ‖q - r‖ := by
@@ -369,10 +373,21 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
   have hqr : ‖q‖ ≤ R := by simpa only [hdist0 q] using hq.2
   refine ⟨q, ⟨hqr, ?_⟩, ?_⟩
   · intro s
-    have heq := congrArg (fun v : CenterWeightedPath s0 p => v s) hq.1.symm
-    change q s = b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc q s at heq
-    rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc q hqr s] at heq
-    exact heq
+    constructor
+    · have hc := weightedCenterNonlinearSource_integrable CE
+        (localizedCenterNonlinearity s0 p R G) hs0 hp hdelta
+        (mul_nonneg (by norm_num) hC)
+        (localizedCenter_continuous G hs0 hR hcont)
+        (localizedCenter_zero G hzero)
+        (localizedCenter_global_bound G hs0 hR hC hloc) q s.2
+      apply hc.congr
+      filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
+      unfold weightedCenterNonlinearSource
+      rw [localizedCenter_agrees_on_path G hs0 hR q hqr (s.2.trans ht.le)]
+    · have heq := congrArg (fun v : CenterWeightedPath s0 p => v s) hq.1.symm
+      change q s = b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc q s at heq
+      rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc q hqr s] at heq
+      exact heq
   · intro y hy
     apply huniq y
     refine ⟨?_, ?_⟩
@@ -380,7 +395,7 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
       intro s
       change b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc y s = y s
       rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc y hy.1 s]
-      exact (hy.2 s).symm
+      exact (hy.2 s).2.symm
     · rw [hdist0 y]
       exact hy.1
 
