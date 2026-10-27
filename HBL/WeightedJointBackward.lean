@@ -100,7 +100,12 @@ theorem fullWeightedCenterSelfMap_difference_norm
       ‖A q - A r‖ ≤ (‖B‖ / (p-1)) * ‖q-r‖ := by
     have h := (affineWeightedThresholdMap_lipschitz B s0 p hs0 hp a0).dist_le_mul q r
     have hnon : 0 ≤ ‖B‖/(p-1) := by positivity
-    simpa [A, dist_eq_norm, Real.coe_toNNReal _ hnon] using h
+    rw [Real.coe_toNNReal _ hnon] at h
+    have hout : dist (A q) (A r) = ‖A q - A r‖ := by
+      rw [dist_eq_norm_sub]
+    have hin := centerWeightedPath_dist_eq_norm_sub s0 p q r
+    rw [hout, hin] at h
+    exact h
   have hfb :
       ‖Cfb (A q) - Cfb (A r)‖ ≤
         centerFeedbackLipschitzConstant CE p nu L * ‖A q-A r‖ :=
@@ -165,7 +170,14 @@ theorem fullWeightedCenterSelfMap_lipschitz
   intro q r
   have hnon := weightedJointLipschitzConstant_nonneg
     B CE hs0 hp hnu hL hdelta hCnl
-  rw [dist_eq_norm,dist_eq_norm,Real.coe_toNNReal _ hnon]
+  rw [Real.coe_toNNReal _ hnon]
+  have hout := centerWeightedPath_dist_eq_norm_sub s0 p
+    (fullWeightedCenterSelfMap B CE E G hs0 hp hnu hL hEcont hE
+      hdelta hCnl hGcont hGzero hGlip q0 a0 q)
+    (fullWeightedCenterSelfMap B CE E G hs0 hp hnu hL hEcont hE
+      hdelta hCnl hGcont hGzero hGlip q0 a0 r)
+  have hin := centerWeightedPath_dist_eq_norm_sub s0 p q r
+  rw [hout, hin]
   exact fullWeightedCenterSelfMap_difference_norm B CE E G
     hs0 hp hnu hL hEcont hE hdelta hCnl hGcont hGzero hGlip q0 a0 q r
 
