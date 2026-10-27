@@ -9,7 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 30
     env:
       MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
@@ -43,32 +43,32 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean) >> evidence/dependencies.log 2>&1
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Clean project rebuild and strict physical-bridge audits
+      - name: Strict physical spatial-core validation and retained-chain regression
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/clean_retained_validation.py
-          python3 verification/clean_retained_validation.py
-      - name: Preserve exact validation reports without modifying proof sources
+          python3 -m py_compile verification/spatial_core_validation.py
+          python3 verification/spatial_core_validation.py
+      - name: Preserve exact validation reports without editing proofs
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/clean-retained-current-status.json; then
-            git add verification/clean-retained-current-status.json verification/clean-retained-current-errors.json
+          if test -f verification/spatial-core-current-status.json; then
+            git add verification/spatial-core-current-status.json verification/spatial-core-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record clean-source build and independent strict bridge audits [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record actual spatial-core compiler and axiom audit outcome [skip ci]'
               git push origin HEAD:hbl-retained-chain-repair-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 27124c6bd0ed84156ead31fa2c7009c72b24ee70 HEAD > evidence/changes-from-accepted-joint.patch
+          git diff 4999b1fc43c02841f7eb9b39b5c7f003f0b23655 HEAD > evidence/spatial-core.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-clean-retained-${{ github.sha }}
+          name: hbl-spatial-core-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -76,10 +76,11 @@ jobs:
         with:
           path: .lake
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Require clean build and all strict target audits
+      - name: Require actual proof, complete audit and retained-chain build
         run: |
           python3 - <<'PY'
-          import json
-          r=json.load(open('verification/clean-retained-current-status.json'))
-          assert r['validation_passed'], {k:v for k,v in r.items() if k not in ['source_hashes','protected_roots']}
+          import json,os
+          r=json.load(open('verification/spatial-core-current-status.json'))
+          assert r['source_commit']==os.environ['GITHUB_SHA']
+          assert r['validation_passed'],r
           PY
