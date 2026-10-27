@@ -192,7 +192,8 @@ theorem physical_hartree_expansion_from_function_bounds
         linearTerm κ w h x + remainder κ w h x := by
   have hc : Integrable (fun y : Space => ((|w y| ^ 4 : ℝ) : ℂ)) := hw4.ofReal
   have hbase : Integrable (quarticDensity (fun y => (w y : ℂ))) := by
-    simpa only [quarticDensity, Complex.norm_real, Real.norm_eq_abs] using hc
+    change Integrable (fun y : Space => ((‖(w y : ℂ)‖ ^ 4 : ℝ) : ℂ))
+    simpa only [Complex.norm_real, Real.norm_eq_abs] using hc
   have hb : ∀ᵐ y, ‖quarticDensity (fun v => (w v : ℂ)) y‖ ≤ M ^ 4 := by
     filter_upwards [hwb] with y hy
     simpa only [quarticDensity, Complex.norm_real, Real.norm_eq_abs,
