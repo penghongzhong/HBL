@@ -1,0 +1,45 @@
+name: HBL main leaf check 4
+on:
+  push:
+    branches: [hbl-main-leafcheck4-20261027]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install fixed compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+      - name: Resolve fixed dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, subprocess, textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Topology/MetricSpace/Contracting.lean)
+      - name: Strict weighted-map compile
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.WeightedThresholdMap HBL.WeightedCenterFeedbackMap HBL.WeightedCenterNonlinearMap HBL.WeightedAffineForcing HBL.WeightedJointBackward
+          for f in HBL/WeightedThresholdMap.lean HBL/WeightedCenterFeedbackMap.lean HBL/WeightedCenterNonlinearMap.lean HBL/WeightedAffineForcing.lean HBL/WeightedJointBackward.lean; do
+            lake env lean --trust=0 -DwarningAsError=true "$f"
+          done
