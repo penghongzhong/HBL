@@ -87,7 +87,7 @@ theorem parametric_contraction_fixed_point_C1
       HasFDerivAt H
         (ContinuousLinearMap.snd ℝ P X - fderiv ℝ Phi (p,x))
         (p,x) := by
-    exact hasFDerivAt_snd.sub hPhi.differentiableAt.hasFDerivAt
+    exact hasFDerivAt_snd.sub ((hPhi.differentiableAt one_ne_zero).hasFDerivAt)
   have hpartialH :
       fderiv ℝ H (p,x) ∘L ContinuousLinearMap.inr ℝ P X =
         ContinuousLinearMap.id ℝ X - D := by
