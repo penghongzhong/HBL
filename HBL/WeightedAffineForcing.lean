@@ -112,7 +112,7 @@ def weightedThresholdForcingPath
     intro s
     have hspos : 0 < (s:ℝ) := hs0.trans_le s.2
     have hpcont : ContinuousAt (fun x : LateTime s0 => (x:ℝ)^(p-1)) s :=
-      (Real.continuousAt_rpow_const (s:ℝ) (p-1) (Or.inl hspos.ne')).comp s
+      (Real.continuousAt_rpow_const (s:ℝ) (p-1) (Or.inl hspos.ne')).comp
         continuousAt_subtype_val
     exact hpcont.smul ht.continuousAt
   exact BoundedContinuousFunction.ofNormedAddCommGroup v hv
@@ -217,7 +217,7 @@ def weightedCenterForcingPath
     intro s
     have hspos : 0 < (s:ℝ) := hs0.trans_le s.2
     have hpcont : ContinuousAt (fun x : LateTime s0 => (x:ℝ)^p) s :=
-      (Real.continuousAt_rpow_const (s:ℝ) p (Or.inl hspos.ne')).comp s
+      (Real.continuousAt_rpow_const (s:ℝ) p (Or.inl hspos.ne')).comp
         continuousAt_subtype_val
     exact hpcont.smul ht.continuousAt
   exact BoundedContinuousFunction.ofNormedAddCommGroup v hv
