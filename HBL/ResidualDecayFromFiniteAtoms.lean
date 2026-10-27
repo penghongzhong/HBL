@@ -11,6 +11,9 @@ parameter derivative has exactly the same s^{-N} bound.
 -/
 
 noncomputable section
+
+open Filter
+open scoped Topology
 set_option autoImplicit false
 
 namespace HBL.MainBackward
