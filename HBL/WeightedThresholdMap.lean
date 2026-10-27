@@ -158,7 +158,7 @@ theorem weightedThresholdValue_continuous
   have hpow :
       ContinuousAt (fun t : LateTime s0 => ((t : ℝ) ^ (p - 1))) s := by
     exact (Real.continuousAt_rpow_const (s : ℝ) (p - 1)
-      (Or.inl hspos.ne')).comp s continuousAt_subtype_val
+      (Or.inl hspos.ne')).comp continuousAt_subtype_val
   exact hpow.smul htail.continuousAt
 
 theorem weightedThresholdValue_bound
