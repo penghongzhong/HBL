@@ -24,12 +24,13 @@ gradient norm.
 noncomputable section
 set_option autoImplicit false
 
-open Set
+open Set Filter
 open scoped Topology
 
 namespace HBL.Profile.GlobalH1
 
 open HBL.Profile.FiniteProfile
+open HBL.Modulation
 open HBL.Modulation.Monopole
 
 /-- Exact three-region decomposition after the finite terminal algebraic
@@ -74,20 +75,20 @@ theorem choose_three_region_scales
     simpa only [lt_min_iff] using And.intro hmIn (And.intro hmK hmRem)
   refine ⟨rhoIn, rhoK, rhoRem, m / 2,
     hrhoIn, hrhoK, hrhoRem, by linarith, ?_, ?_, ?_⟩
-  · have hle : m ≤ mIn := by
+  · change m / 2 ≤ mIn
+    have hle : m ≤ mIn := by
       dsimp [m]
       exact min_le_left _ _
-    dsimp [mIn]
     linarith
-  · have hle : m ≤ mK := by
+  · change m / 2 ≤ mK
+    have hle : m ≤ mK := by
       dsimp [m]
       exact (min_le_right _ _).trans (min_le_left _ _)
-    dsimp [mK]
     linarith
-  · have hle : m ≤ mRem := by
+  · change m / 2 ≤ mRem
+    have hle : m ≤ mRem := by
       dsimp [m]
       exact (min_le_right _ _).trans (min_le_right _ _)
-    dsimp [mRem]
     linarith
 
 /-- Three local radial-energy estimates with exponents above one common
@@ -117,9 +118,10 @@ theorem three_region_energy_bound
     hRem.trans (mul_le_mul_of_nonneg_left hpRem hCRem)
   calc
     ‖D.profile‖ = ‖D.inner + D.kummer + D.remote‖ := by rw [D.split]
-    _ ≤ ‖D.inner + D.kummer‖ + ‖D.remote‖ := norm_add_le _ _
+    _ ≤ ‖D.inner + D.kummer‖ + ‖D.remote‖ :=
+      norm_add_le (D.inner + D.kummer) D.remote
     _ ≤ (‖D.inner‖ + ‖D.kummer‖) + ‖D.remote‖ := by
-      exact add_le_add_right (norm_add_le _ _) _
+      exact add_le_add_right (norm_add_le D.inner D.kummer) ‖D.remote‖
     _ ≤ (CIn * s ^ (-nuE) + CK * s ^ (-nuE)) +
           CRem * s ^ (-nuE) := by
       exact add_le_add (add_le_add hIn' hK') hRem'
