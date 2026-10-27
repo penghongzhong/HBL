@@ -30,7 +30,7 @@ def jointBackwardProduct (p nu L B s : ℝ) : ℝ :=
 /-- For p>1 and nu>2 the repaired coupled Lipschitz product tends to zero.
 This is the quantitative reason the late-time backward map becomes a contraction. -/
 theorem jointBackwardProduct_tendsto_zero
-    (p nu L B : ℝ) (hp : 1 < p) (hnu : 2 < nu) :
+    (p nu L B : ℝ) (_hp : 1 < p) (hnu : 2 < nu) :
     Tendsto (jointBackwardProduct p nu L B) atTop (𝓝 0) := by
   have hpow : Tendsto (fun s : ℝ => s ^ (2 - nu)) atTop (𝓝 0) := by
     have he : -(nu - 2) = 2 - nu := by ring
@@ -45,7 +45,7 @@ is strictly below one. -/
 theorem eventually_jointBackwardProduct_lt_one
     (p nu L B : ℝ) (hp : 1 < p) (hnu : 2 < nu) :
     ∃ s0 : ℝ, ∀ s, s0 ≤ s → jointBackwardProduct p nu L B s < 1 := by
-  have h := jointBackwardProduct_tendsto_zero p nu L B hp hnu
+  have h := jointBackwardProduct_tendsto_zero p nu L B _hp hnu
   have hm : Iio (1 : ℝ) ∈ 𝓝 (0 : ℝ) := Iio_mem_nhds zero_lt_one
   have he := h.eventually hm
   rw [eventually_atTop] at he
@@ -57,7 +57,7 @@ theorem two_stage_backward_fixed_point
     {X Y : Type*}
     [MetricSpace X] [CompleteSpace X] [Nonempty X]
     [MetricSpace Y]
-    (KA KQ : ℝ≥0) (threshold : X → Y) (center : Y → X)
+    (KA KQ : NNReal) (threshold : X → Y) (center : Y → X)
     (hA : LipschitzWith KA threshold)
     (hQ : LipschitzWith KQ center)
     (hsmall : KQ * KA < 1) :
@@ -65,16 +65,7 @@ theorem two_stage_backward_fixed_point
       z.2 = threshold z.1 ∧ z.1 = center z.2 := by
   let Phi : X → X := fun x => center (threshold x)
   have hLip : LipschitzWith (KQ * KA) Phi := by
-    apply LipschitzWith.of_dist_le_mul
-    intro x y
-    calc
-      dist (Phi x) (Phi y) ≤ (KQ : ℝ) * dist (threshold x) (threshold y) :=
-        hQ.dist_le_mul _ _
-      _ ≤ (KQ : ℝ) * ((KA : ℝ) * dist x y) := by
-        exact mul_le_mul_of_nonneg_left (hA.dist_le_mul x y) (NNReal.zero_le_coe)
-      _ = ((KQ * KA : ℝ≥0) : ℝ) * dist x y := by
-        push_cast
-        ring
+    simpa only [Phi, Function.comp_def] using hQ.comp hA
   have hPhi : ContractingWith (KQ * KA) Phi := ⟨hsmall, hLip⟩
   let xstar : X := hPhi.fixedPoint Phi
   let ystar : Y := threshold xstar
@@ -92,7 +83,6 @@ theorem two_stage_backward_fixed_point
     apply Prod.ext
     · exact hzx
     · rw [hzA, hzx]
-      rfl
 
 #print axioms jointBackwardProduct_tendsto_zero
 #print axioms eventually_jointBackwardProduct_lt_one
