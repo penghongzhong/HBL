@@ -230,17 +230,14 @@ theorem weightedThresholdTail_sub
     simp only [unweightPathGlobal, BoundedContinuousFunction.sub_apply, smul_sub]
   have hiqs := hiq.mono_set (Ioi_subset_Ioi hs)
   have hirs := hir.mono_set (Ioi_subset_Ioi hs)
-  rw [sub_eq_add_neg, ← neg_add, ← integral_add]
-  · rw [← integral_neg]
-    congr 1
-    funext t
-    simp only [Pi.add_apply, Pi.neg_apply]
-    have h :=
-      congrFun hsrc t
-    simp only [Pi.sub_apply] at h
-    simpa [sub_eq_add_neg] using congrArg Neg.neg h
-  · exact hiqs
-  · exact hirs.neg
+  have hInt :
+      (∫ t in Ioi s, B (unweightPathGlobal p s0 q t)) -
+          (∫ t in Ioi s, B (unweightPathGlobal p s0 r t)) =
+        ∫ t in Ioi s, B (unweightPathGlobal p s0 (q - r) t) := by
+    rw [← integral_sub hiqs hirs]
+    rw [hsrc]
+  rw [← hInt]
+  abel
 
 theorem weightedThresholdMap_difference_norm
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
@@ -292,8 +289,9 @@ theorem weightedThresholdMap_lipschitz
   apply LipschitzWith.of_dist_le_mul
   intro q r
   have hnon : 0 ≤ ‖B‖ / (p - 1) := by positivity
-  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
-    (weightedThresholdMap_difference_norm B s0 p hs0 hp q r)
+  rw [Real.coe_toNNReal _ hnon]
+  rw [dist_eq_norm, dist_eq_norm]
+  exact weightedThresholdMap_difference_norm B s0 p hs0 hp q r
 
 #print axioms weightedThresholdSource_integrable
 #print axioms weightedThresholdTail_bound
