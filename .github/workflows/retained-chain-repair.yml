@@ -1,0 +1,49 @@
+name: HBL retained-chain repair
+on:
+  push:
+    branches: [hbl-retained-chain-repair-20261028]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 40540715955
+          path: prior-evidence
+      - name: Preserve exact compiler error blocks without infrastructure logs
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,json
+          files=list(Path('prior-evidence').rglob('retained-build.log'))
+          assert len(files)==1, files
+          text=files[0].read_text(encoding='utf-8')
+          text=re.sub(r'\x1b\[[0-9;]*m','',text)
+          lines=text.splitlines(); blocks=[]; current=[]
+          for line in lines:
+            if re.match(r'(?:error|warning): HBL/',line):
+              if current: blocks.append('\n'.join(current))
+              current=[line]
+            elif current and (line.startswith('trace:') or line.startswith('Some required') or ' Building HBL.' in line or ' Built HBL.' in line):
+              blocks.append('\n'.join(current)); current=[]
+            elif current:
+              current.append(line)
+          if current: blocks.append('\n'.join(current))
+          report={'source_run':40540715955,'source_job':122318024014,'source':'retained-build.log','compiler_diagnostic_blocks':blocks}
+          out=Path('verification/retained-chain-baseline-errors.json')
+          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          for block in blocks:
+            print(block+'\n')
+          print('DIAGNOSTIC_BLOCKS',len(blocks))
+          PY
+          git add verification/retained-chain-baseline-errors.json
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Preserve exact retained-chain compiler diagnostics [skip ci]'
+          git push origin HEAD:hbl-retained-chain-repair-20261028
