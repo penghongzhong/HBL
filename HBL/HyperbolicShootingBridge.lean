@@ -79,8 +79,8 @@ theorem growthCoordinate_eq_terminalShooting
     (hvcont : ContinuousOn v (Ici s0))
     (hdeltaCont : Continuous delta) (hf : Continuous f)
     (hvdom : ∀ t, s0 ≤ t → v t ∈ S.domain)
-    (hv : ∀ t, s0 < t →
-      HasDerivAt v (S.generator ⟨v t, hvdom t (le_of_lt t |> by assumption)⟩ + H t) t)
+    (hv : ∀ (t : ℝ) (ht : s0 < t) →
+      HasDerivAt v (S.generator ⟨v t, hvdom t ht.le⟩ + H t) t)
     (hproj : ∀ t, s0 ≤ t →
       S.growthCoordinate (H t) =
         delta t * S.growthCoordinate (v t) + f t)
@@ -98,9 +98,9 @@ theorem growthCoordinate_eq_terminalShooting
   have hrate : ∀ t, s0 ≤ t →
       S.e0 / 2 ≤ movingGrowthRate S delta t :=
     fun t ht => movingGrowthRate_half_gap S delta hdelta ht
-  have hycont : ContinuousOn (fun t => S.growthCoordinate (v t)) (Ici s0) :=
-    S.growthCoordinate.continuous.comp_continuousOn hvcont
-      (fun _ _ => Set.mem_univ _)
+  have hycont : ContinuousOn (fun t => S.growthCoordinate (v t)) (Ici s0) := by
+    simpa only [Function.comp_def] using
+      S.growthCoordinate.continuous.comp_continuousOn hvcont
   have hyderiv : ∀ t, s0 < t →
       HasDerivAt (fun r => S.growthCoordinate (v r))
         (movingGrowthRate S delta t * S.growthCoordinate (v t) + f t) t := by
