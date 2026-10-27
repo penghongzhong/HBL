@@ -11,15 +11,18 @@ import Mathlib.Tactic
 Unnumbered bridge for the final HBL main theorem.
 
 The threshold terminal integral is differentiated natively in Lean.
-For the infinite-dimensional centre equation we use only the explicit
-Kato--Kisyński strong-evolution boundary isolated in
-`StrongConstrainedCenterEvolution.lean`.
+The infinite-dimensional statements remain CONDITIONAL on the explicit
+StrongConstrainedCenterPropagator input. Its existence and identification
+with the actual Hartree generator are not proved in this file.
 
 No fixed point, shooting graph, blow-up solution, or final rate is assumed.
 -/
 
 noncomputable section
 set_option autoImplicit false
+-- Unfold definitionally equal product/subtype instance paths during elaboration.
+-- This does not change kernel checking, theorem hypotheses, or the axiom set.
+set_option backward.isDefEq.respectTransparency false
 
 open Set MeasureTheory Filter
 open scoped Topology
@@ -71,7 +74,7 @@ theorem weightedThresholdForcingTail_hasDerivAt
   simpa only [weightedThresholdForcingTail] using
     (neg_Ioi_integral_hasDerivAt F hF hInt hs)
 
-/-- Strong centre equation for the retained threshold feedback tail. -/
+/-- Conditional strong centre equation for the retained threshold feedback tail. -/
 theorem weightedCenterFeedbackTail_strong
     {s0 p nu L : ℝ}
     (S : StrongConstrainedCenterPropagator s0)
@@ -107,7 +110,7 @@ theorem weightedCenterFeedbackTail_strong
     weightedCenterFeedbackSource] using
     (strongCenterDuhamel_certified S F hFcont hInt hs)
 
-/-- Strong centre equation for the genuine nonlinear Duhamel tail. -/
+/-- Conditional strong centre equation for the nonlinear Duhamel tail. -/
 theorem weightedCenterNonlinearTail_strong
     {s0 p delta Cnl : ℝ}
     (S : StrongConstrainedCenterPropagator s0)
@@ -150,14 +153,14 @@ theorem weightedCenterNonlinearTail_strong
     weightedCenterNonlinearSource] using
     (strongCenterDuhamel_certified S F hFcont hInt hs)
 
-/-- Strong centre equation for the fixed high-order profile forcing tail. -/
+/-- Conditional strong centre equation for the high-order profile forcing tail. -/
 theorem weightedCenterForcingTail_strong
     {s0 : ℝ}
     (S : StrongConstrainedCenterPropagator s0)
     (F : ℝ → ConstrainedCenterSpace)
     (p N CF : ℝ)
     (hs0 : 0 < s0) (hp : 1 < p) (hN : p + 1 < N)
-    (hCF : 0 ≤ CF) (hFcont : Continuous F)
+    (_hCF : 0 ≤ CF) (hFcont : Continuous F)
     (hF : ∀ t, s0 ≤ t → ‖F t‖ ≤ CF * t ^ (-N))
     {s : ℝ} (hs : s0 < s) :
     ∃ hdom :

@@ -8,7 +8,7 @@ import Mathlib.Tactic
 # Unweighting identities for the actual HBL backward paths
 
 These identities convert the bounded weighted fixed-point variables back to
-the genuine terminal tails.  They are purely algebraic and use only positivity
+the genuine terminal tails. They are purely algebraic and use only positivity
 of the late-time variable.
 -/
 
@@ -41,7 +41,7 @@ theorem unweight_weightedThresholdMap
       (((s : ℝ) ^ (p - 1)) •
         weightedThresholdTail B s0 p q s) =
       weightedThresholdTail B s0 p q s
-  exact rpow_weight_unweight_cancel hspos _
+  exact rpow_weight_unweight_cancel (E := ℝ × ℝ) hspos _
 
 /-- Unweighting the threshold affine forcing recovers the actual forcing tail. -/
 theorem unweight_weightedThresholdForcingPath
@@ -58,7 +58,7 @@ theorem unweight_weightedThresholdForcingPath
   change ((s : ℝ) ^ (-(p - 1))) •
       (((s : ℝ) ^ (p - 1)) • weightedThresholdForcingTail F s) =
       weightedThresholdForcingTail F s
-  exact rpow_weight_unweight_cancel hspos _
+  exact rpow_weight_unweight_cancel (E := ℝ × ℝ) hspos _
 
 /-- Unweighting the retained feedback map recovers the actual centre tail. -/
 theorem unweight_weightedCenterFeedbackMap
@@ -76,7 +76,7 @@ theorem unweight_weightedCenterFeedbackMap
   change ((s : ℝ) ^ (-p)) •
       (((s : ℝ) ^ p) • weightedCenterFeedbackTail CE Eop p a s) =
       weightedCenterFeedbackTail CE Eop p a s
-  exact rpow_weight_unweight_cancel hspos _
+  exact rpow_weight_unweight_cancel (E := ConstrainedCenterSpace) hspos _
 
 /-- Unweighting the nonlinear centre map recovers the actual nonlinear tail. -/
 theorem unweight_weightedCenterNonlinearMap
@@ -100,7 +100,7 @@ theorem unweight_weightedCenterNonlinearMap
   change ((s : ℝ) ^ (-p)) •
       (((s : ℝ) ^ p) • weightedCenterNonlinearTail CE G p q s) =
       weightedCenterNonlinearTail CE G p q s
-  exact rpow_weight_unweight_cancel hspos _
+  exact rpow_weight_unweight_cancel (E := ConstrainedCenterSpace) hspos _
 
 /-- Unweighting the high-order centre forcing path recovers its Duhamel tail. -/
 theorem unweight_weightedCenterForcingPath
@@ -120,7 +120,7 @@ theorem unweight_weightedCenterForcingPath
   change ((s : ℝ) ^ (-p)) •
       (((s : ℝ) ^ p) • weightedCenterForcingTail CE F s) =
       weightedCenterForcingTail CE F s
-  exact rpow_weight_unweight_cancel hspos _
+  exact rpow_weight_unweight_cancel (E := ConstrainedCenterSpace) hspos _
 
 #print axioms unweight_weightedThresholdMap
 #print axioms unweight_weightedThresholdForcingPath
