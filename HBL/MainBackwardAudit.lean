@@ -21,6 +21,9 @@ import HBL.ResidualTangentDerivative
 import HBL.UnstableShootingTerminal
 import HBL.GlobalH1Matching
 import HBL.KinematicPhysicalTimeAsymptotics
+import HBL.ParametricFixedPointC1
+import HBL.BlowupNonextension
+import HBL.MainRateSelection
 
 set_option pp.universes false
 set_option pp.all false
@@ -86,3 +89,10 @@ set_option pp.all false
 #print axioms HBL.Profile.GlobalH1.globalH1Matching_certified
 #print axioms HBL.Kinematic.physicalSliceLambda_rate_error_at_terminal
 #print axioms HBL.Kinematic.physicalSliceGamma_log_error_at_terminal
+
+#check @HBL.MainBackward.selectedPhysicalRate_eq_two_iff
+#check @HBL.MainBackward.no_strong_limit_of_separated_profile
+#check @HBL.MainBackward.contracting_fixed_point_has_C1_local_graph
+#print axioms HBL.MainBackward.selectedPhysicalRate_eq_two_iff
+#print axioms HBL.MainBackward.no_strong_limit_of_separated_profile
+#print axioms HBL.MainBackward.contracting_fixed_point_has_C1_local_graph
