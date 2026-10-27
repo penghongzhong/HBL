@@ -27,6 +27,21 @@ text = text.replace(anchor, lemma+anchor)
 old = '    · rw [hza,hzqstar]\n      rfl\n'
 assert text.count(old) == 1
 text = text.replace(old, '    · rw [hza,hzqstar]\n')
+old_triangle = '''        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r‖ :=
+          norm_add_le _ _
+'''
+new_triangle = '''        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r‖ := by
+      apply (BoundedContinuousFunction.norm_le
+        (add_nonneg (norm_nonneg _) (norm_nonneg _))).2
+      intro t
+      change ‖(Cfb (A q) - Cfb (A r)) t + (CnlMap q - CnlMap r) t‖ ≤ _
+      exact (norm_add_le ((Cfb (A q) - Cfb (A r)) t)
+        ((CnlMap q - CnlMap r) t)).trans
+          (add_le_add ((Cfb (A q) - Cfb (A r)).norm_coe_le_norm t)
+            ((CnlMap q - CnlMap r).norm_coe_le_norm t))
+'''
+assert text.count(old_triangle) == 1
+text = text.replace(old_triangle, new_triangle)
 current = path.read_text()
 assert current in [original, text], 'Source changed; reconcile before applying repair'
 path.write_text(text)
