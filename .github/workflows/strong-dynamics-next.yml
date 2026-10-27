@@ -42,70 +42,58 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean)
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean)
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Strict bridges and physical nonlinearity compile
+      - name: Strict physical regular-radiation repair
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization 2>&1 | tee evidence/build.log
-          for name in StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization; do
+          lake build HBL.RegularRadiationFlow 2>&1 | tee evidence/radiation-build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/RegularRadiationFlow.lean 2>&1 | tee evidence/radiation-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/RegularRadiationFlowAudit.lean > evidence/radiation-types-and-axioms.txt 2>&1
+      - name: Recheck all previously accepted bridge and localization targets
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization HBL.LocalizedCenterNonlinearMap 2>&1 | tee evidence/previous-build.log
+          for name in StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization LocalizedCenterNonlinearMap; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" 2>&1 | tee "evidence/$name.log"
           done
           lake env lean --trust=0 -DwarningAsError=true HBL/FinalBridgeAudit.lean > evidence/types-and-axioms.txt 2>&1
-      - name: Exact inventory and conditional-boundary audit
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import pathlib,re,json,subprocess
-          root=pathlib.Path('.')
-          a=(root/'HBL/FinalBridgeAudit.lean').read_text()
-          names=re.findall(r'^#print axioms (\S+)$',a,re.M)
-          checked=re.findall(r'^#check @(\S+)$',a,re.M)
-          assert len(names)==20 and len(set(names))==20 and checked==names
-          text=(root/'evidence/types-and-axioms.txt').read_text()
-          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",text,re.S)
-          assert [n for n,_ in found]==names, (names,found)
-          allowed={'propext','Classical.choice','Quot.sound'}
-          for n,axs in found:
-            assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
-          assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
-          changed=set(subprocess.check_output(['git','diff','--name-only','020d69ab6d772f728f15912187b7cf93317eff1a','HEAD'],text=True).splitlines())
-          permitted={'HBL/WeightedTailIdentities.lean','HBL/WeightedStrongDynamics.lean','HBL/HartreePhysicalLinearization.lean','HBL/FinalBridgeAudit.lean','.github/workflows/strong-dynamics-next.yml','HBL/LocalizedCenterNonlinearMap.lean','HBL/LocalizedCenterAudit.lean'}
-          assert changed <= permitted, changed-permitted
-          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'strict_production_modules':4,'audited_declarations':20,'new_physical_expansion_theorems':6,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':{n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found},'conditional_boundary':'StrongConstrainedCenterPropagator remains an explicit, unconstructed input; physical expansion retains explicit kernel-density integrability hypotheses','original_environments_added':0,'main_theorem_closed':False}
-          (root/'evidence/audit.json').write_text(json.dumps(report,indent=2))
-          print(json.dumps(report,indent=2))
-          PY
-      - name: Strict localized nonlinear map and full type audit
-        shell: bash
-        run: |
-          set -euo pipefail
-          lake build HBL.LocalizedCenterNonlinearMap 2>&1 | tee evidence/localized-build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterNonlinearMap.lean 2>&1 | tee evidence/localized-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterAudit.lean > evidence/localized-types-and-axioms.txt 2>&1
+      - name: Exact inventories, complete types and conditional-boundary audit
+        shell: bash
+        run: |
+          set -euo pipefail
           python3 - <<'PY'
           import pathlib,re,json,subprocess
           root=pathlib.Path('.')
-          a=(root/'HBL/LocalizedCenterAudit.lean').read_text()
-          names=re.findall(r'^#print axioms (\S+)$',a,re.M)
-          checked=re.findall(r'^#check @(\S+)$',a,re.M)
-          assert len(names)==21 and len(set(names))==21 and checked==names
-          text=(root/'evidence/localized-types-and-axioms.txt').read_text()
-          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",text,re.S)
-          assert [n for n,_ in found]==names, (names,found)
+          base='46cbc19384a5c6503b0b90a6175b61c2714dc7aa'
+          permitted={'HBL/RegularRadiationFlow.lean','HBL/RegularRadiationFlowAudit.lean','.github/workflows/strong-dynamics-next.yml'}
+          changed=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert changed <= permitted, changed-permitted
+          inventories=[('FinalBridgeAudit','types-and-axioms.txt',20),('LocalizedCenterAudit','localized-types-and-axioms.txt',21),('RegularRadiationFlowAudit','radiation-types-and-axioms.txt',18)]
           allowed={'propext','Classical.choice','Quot.sound'}
-          for n,axs in found:
-            assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
-          assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
-          prior='6b076d5eadc1601d04be245dd492edcd718f913b'
-          delta=set(subprocess.check_output(['git','diff','--name-only',prior,'HEAD'],text=True).splitlines())
-          assert delta <= {'HBL/LocalizedCenterNonlinearMap.lean','HBL/LocalizedCenterAudit.lean','.github/workflows/strong-dynamics-next.yml'}, delta
-          source=(root/'HBL/LocalizedCenterNonlinearMap.lean').read_text()
+          groups={}
+          for module,filename,count in inventories:
+            a=(root/f'HBL/{module}.lean').read_text()
+            names=re.findall(r'^#print axioms (\S+)$',a,re.M)
+            checked=re.findall(r'^#check @(\S+)$',a,re.M)
+            assert len(names)==count and len(set(names))==count and checked==names
+            text=(root/'evidence'/filename).read_text()
+            pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+            found=[(m.group(1),m.group(2) or '') for m in re.finditer(pattern,text,re.S)]
+            assert [n for n,_ in found]==names, (module,names,found)
+            assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
+            for n,axs in found:
+              assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
+            groups[module]={n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found}
+          source=(root/'HBL/RegularRadiationFlow.lean').read_text()
           assert not re.search(r'\b(sorry|admit|axiom|unsafe)\b',source)
-          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'previous_accepted_source_commit':prior,'previous_sources_unchanged':True,'new_strict_production_modules':1,'new_audited_declarations':21,'new_public_theorems':16,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':{n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found},'conditional_boundary':'The original nonlinearity needs only shrinking-ball Lipschitz bounds. Actual constrained propagator, physical source-space mapping, and local Hartree estimates remain explicit inputs. No strong regularity or C1 parameter graph is concluded.','original_environments_added':0,'main_theorem_closed':False}
-          (root/'evidence/localized-audit.json').write_text(json.dumps(report,indent=2))
+          for required in ['physicalL2_toDistr','physicalQuarticPotential_bound','Laplacian.laplacian u.toDistr','hartreeNonlinearity κ (physicalL2 u)','  equation :','2 * (a + 1) ≤ L','2 * a ≤ L','ContDiffOn ℝ 1']:
+            assert required in source, required
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'base':base,'changed_paths':sorted(changed),'previous_bridge_and_localization_sources_unchanged':True,'strict_production_modules':6,'audited_named_declarations':59,'radiation_audited_named_declarations':18,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'native_results':['physical L2 representative defines the original tempered distribution','actual quartic convolution is absolutely integrable under the displayed L-infinity bound','distributional Laplacian has the correct two-derivative loss','jet derivative transfers to the original Sobolev curve'],'conditional_boundary':'Existence of GeneralizedHartreeRegularLocalTheory remains an explicit external obligation. Its equation field now states the actual Hartree PDE. High-regularity finite jets and local C1 dependence are not certified merely by the critical local-theory citation. StrongConstrainedCenterPropagator and physical centre source estimates remain unconstructed.','original_environments_added':0,'main_theorem_closed':False,'full_paper_percentage_recertified':False}
+          (root/'evidence/physical-radiation-repair-audit.json').write_text(json.dumps(report,indent=2))
           print(json.dumps(report,indent=2))
           PY
       - name: Preserve sources and hashes
@@ -115,7 +103,7 @@ jobs:
           set -euo pipefail
           mkdir -p evidence
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 020d69ab6d772f728f15912187b7cf93317eff1a HEAD > evidence/repair-and-expansion.patch
+          git diff 46cbc19384a5c6503b0b90a6175b61c2714dc7aa HEAD > evidence/physical-radiation-repair.patch
           git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
       - uses: actions/upload-artifact@v4
         if: always()
