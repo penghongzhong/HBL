@@ -121,7 +121,7 @@ theorem three_region_energy_bound
     _ ≤ ‖D.inner + D.kummer‖ + ‖D.remote‖ :=
       norm_add_le (D.inner + D.kummer) D.remote
     _ ≤ (‖D.inner‖ + ‖D.kummer‖) + ‖D.remote‖ := by
-      exact add_le_add_right (norm_add_le D.inner D.kummer) ‖D.remote‖
+      exact add_le_add (norm_add_le D.inner D.kummer) (le_refl ‖D.remote‖)
     _ ≤ (CIn * s ^ (-nuE) + CK * s ^ (-nuE)) +
           CRem * s ^ (-nuE) := by
       exact add_le_add (add_le_add hIn' hK') hRem'
