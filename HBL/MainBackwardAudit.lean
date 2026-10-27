@@ -15,6 +15,7 @@ import HBL.CenterCoercivity
 import HBL.ResidualDecayFromLipschitz
 import HBL.RetainedThresholdBackward
 import HBL.DomainTriangularDynamics
+import HBL.TriangularReconstruction
 import HBL.SlowFrameConnection
 import HBL.CompactTwoChannelCoercivity
 import HBL.ResidualTangentDerivative
@@ -50,6 +51,7 @@ set_option pp.all false
 #check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #check @HBL.MainBackward.two_stage_backward_fixed_point
 #check @HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
+#check @HBL.Modulation.TriangularRepair.domainTriangularDynamics_reconstruct
 #check @HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
 #check @HBL.Modulation.SlowFrame.movingConnection_positive_margin
 #check @HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified
@@ -81,6 +83,7 @@ set_option pp.all false
 #print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #print axioms HBL.MainBackward.two_stage_backward_fixed_point
 #print axioms HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
+#print axioms HBL.Modulation.TriangularRepair.domainTriangularDynamics_reconstruct
 #print axioms HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
 #print axioms HBL.Modulation.SlowFrame.movingConnection_positive_margin
 #print axioms HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified
