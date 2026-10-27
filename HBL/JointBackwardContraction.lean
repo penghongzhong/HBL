@@ -24,28 +24,28 @@ namespace HBL.MainBackward
 
 /-- Product of the one-power-loss threshold Lipschitz constant and the
 late-time feedback-tail constant. -/
-def jointBackwardProduct (p nu L B s : ℝ) : ℝ :=
-  (B / (p - 1)) * (L / (p + nu - 2) * s ^ (2 - nu))
+def jointBackwardProduct (p nu CU L B s : ℝ) : ℝ :=
+  (B / (p - 1)) * ((CU * L) / (p + nu - 2) * s ^ (2 - nu))
 
 /-- For p>1 and nu>2 the repaired coupled Lipschitz product tends to zero.
 This is the quantitative reason the late-time backward map becomes a contraction. -/
 theorem jointBackwardProduct_tendsto_zero
-    (p nu L B : ℝ) (_hp : 1 < p) (hnu : 2 < nu) :
-    Tendsto (jointBackwardProduct p nu L B) atTop (𝓝 0) := by
+    (p nu CU L B : ℝ) (_hp : 1 < p) (hnu : 2 < nu) :
+    Tendsto (jointBackwardProduct p nu CU L B) atTop (𝓝 0) := by
   have hpow : Tendsto (fun s : ℝ => s ^ (2 - nu)) atTop (𝓝 0) := by
     have he : -(nu - 2) = 2 - nu := by ring
     simpa only [he] using tendsto_rpow_neg_atTop (show 0 < nu - 2 by linarith)
   unfold jointBackwardProduct
-  have h1 := hpow.const_mul (L / (p + nu - 2))
+  have h1 := hpow.const_mul ((CU * L) / (p + nu - 2))
   have h2 := h1.const_mul (B / (p - 1))
   simpa only [mul_zero, mul_assoc] using h2
 
 /-- Hence one can choose a terminal scale after which the product constant
 is strictly below one. -/
 theorem eventually_jointBackwardProduct_lt_one
-    (p nu L B : ℝ) (hp : 1 < p) (hnu : 2 < nu) :
-    ∃ s0 : ℝ, ∀ s, s0 ≤ s → jointBackwardProduct p nu L B s < 1 := by
-  have h := jointBackwardProduct_tendsto_zero p nu L B _hp hnu
+    (p nu CU L B : ℝ) (hp : 1 < p) (hnu : 2 < nu) :
+    ∃ s0 : ℝ, ∀ s, s0 ≤ s → jointBackwardProduct p nu CU L B s < 1 := by
+  have h := jointBackwardProduct_tendsto_zero p nu CU L B hp hnu
   have hm : Iio (1 : ℝ) ∈ 𝓝 (0 : ℝ) := Iio_mem_nhds zero_lt_one
   have he := h.eventually hm
   rw [eventually_atTop] at he
