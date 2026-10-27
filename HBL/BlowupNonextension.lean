@@ -56,15 +56,21 @@ theorem no_strong_limit_of_separated_profile
   have htranslate :
       dist (bubble m + background) (bubble n + background) =
         dist (bubble m) (bubble n) := by
-    simpa only [dist_eq_norm] using
-      congrArg norm (sub_add_sub_cancel (bubble m) (bubble n) background)
+    simp [dist_eq_norm]
   rw [htranslate] at htri1
   have hln : dist limit (u n) = dist (u n) limit := dist_comm _ _
   rw [hln] at htri3
   have hbm : dist (bubble m + background) (u m) =
       dist (u m) (bubble m + background) := dist_comm _ _
   rw [hbm] at htri1
-  nlinarith [htri1, htri2, htri3]
+  have h3lt : dist limit (bubble n + background) < 2 * d := by
+    exact lt_of_le_of_lt htri3 (by nlinarith [hun, hen])
+  have h2lt : dist (u m) (bubble n + background) < 3 * d := by
+    exact lt_of_le_of_lt htri2 (by nlinarith [hum, h3lt])
+  have h1lt : dist (bubble m) (bubble n) < 4 * d := by
+    exact lt_of_le_of_lt htri1 (by nlinarith [hem, h2lt])
+  dsimp [d] at h1lt
+  nlinarith [hmn]
 
 #print axioms no_strong_limit_of_separated_profile
 
