@@ -343,9 +343,13 @@ theorem weightedCenterNonlinearMap_difference_norm
       (unweightPathGlobal p s0 r t)
     rw [heq] at hg
     have htpos : 0 < t := hs0.trans_le ht0
-    have hmul :=
-      mul_le_mul_of_nonneg_left hqr
-        (mul_nonneg hCnl (Real.rpow_nonneg htpos.le _))
+    have hcoef : 0 ≤ Cnl * t ^ (-1 - delta) :=
+      mul_nonneg hCnl (Real.rpow_nonneg htpos.le (-1 - delta))
+    have hmul :
+        Cnl * t ^ (-1 - delta) *
+            ‖unweightPathGlobal p s0 (q - r) t‖ ≤
+          Cnl * t ^ (-1 - delta) * (‖q - r‖ * t ^ (-p)) :=
+      mul_le_mul_of_nonneg_left hqr hcoef
     have hpw : t ^ (-1-delta) * t ^ (-p) =
         t ^ (-p-1-delta) := by
       rw [← Real.rpow_add htpos]
@@ -420,14 +424,22 @@ theorem weightedCenterNonlinearMap_difference_norm
               filter_upwards with t
               unfold weightedCenterNonlinearSource
               rw [map_sub]
+  have htailEq :
+      weightedCenterNonlinearTail CE G p q s -
+          weightedCenterNonlinearTail CE G p r s =
+        -(∫ t in Ioi (s : ℝ),
+          CE.U s t
+            (G t (unweightPathGlobal p s0 q t) -
+              G t (unweightPathGlobal p s0 r t))) := by
+    unfold weightedCenterNonlinearTail
+    rw [← hInt]
+    abel
   have htail :
       ‖weightedCenterNonlinearTail CE G p q s -
         weightedCenterNonlinearTail CE G p r s‖ ≤
       (CE.boundConst*Cnl*‖q-r‖)/(p+delta) *
         (s:ℝ)^(-p-delta) := by
-    unfold weightedCenterNonlinearTail
-    rw [← hInt]
-    rw [norm_neg]
+    rw [htailEq, norm_neg]
     calc
       ‖∫ t in Ioi (s : ℝ),
           CE.U s t
@@ -459,7 +471,7 @@ theorem weightedCenterNonlinearMap_difference_norm
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
   have hden2 : 0 < p + delta := by linarith
   have hnum2 : 0 ≤ CE.boundConst*Cnl*‖q-r‖ :=
-    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) (norm_nonneg _)
+    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) (norm_nonneg (q - r))
   have hc : 0 ≤ (CE.boundConst*Cnl*‖q-r‖)/(p+delta) :=
     div_nonneg hnum2 hden2.le
   calc
