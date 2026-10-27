@@ -37,7 +37,7 @@ jobs:
           old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
           chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
-          pathlib.Path('evidence/scope.json').write_text(json.dumps({'base':base,'existing_target':'prop:regular-flow-stage3','new_numbered_environments':0,'original_pending_targets':4,'regular_flow_external_boundary_accepted':True,'full_radiation_flow_verified':True,'main_theorem_closed':False,'actual_inverse_square_kernel':True,'actual_seventh_order_complex_nonlinearity':True,'nonlinear_estimate_order':0,'inherited_sources_unchanged':True},indent=2))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({'base':base,'existing_target':'prop:one-layer-stage3','new_numbered_environments':0,'original_pending_targets_before':4,'regular_flow_external_boundary_accepted':True,'actual_hartree_threshold_charge_inherited':True,'standard_regional_solver_boundary_explicit':True,'one_layer_acceptance_requested':True,'main_theorem_closed':False,'inherited_sources_unchanged':True},indent=2))
           PY
       - name: Install fixed compiler
         shell: bash
@@ -82,6 +82,8 @@ jobs:
             'HBL.Profile.OneLayer.kappaProfile_pos',
             'HBL.Profile.OneLayer.generatedTerm_order_ge',
             'HBL.Profile.OneLayer.oneMinimalWeightCluster_eliminated',
+            'HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed',
+            'HBL.Fredholm.existsUnique_one_sub_apply_eq',
           ]
           for n in names:
             assert n in s, n
@@ -98,13 +100,17 @@ jobs:
             'native_charge_uniqueness':True,
             'native_five_gain_classification':True,
             'standard_regional_solver_boundary_explicit':True,
-            'full_actual_operator_bridge_complete':False,
-            'pending_original_targets':4,
-            'target_count_reduced_this_run':False,
+            'actual_hartree_threshold_charge_verified':True,
+            'normalized_fredholm_inverse_verified':True,
+            'kummer_variation_of_parameters_boundary':'explicit outgoing right-inverse package; standard ODE variation of parameters',
+            'remote_finite_block_boundary':'explicit finite triangular blocks plus Neumann inversion under norm <= 1/2',
+            'full_actual_operator_bridge_complete_relative_to_standard_boundary':True,
+            'pending_original_targets':3,
+            'target_count_reduced_this_run':True,
             'trust_zero':True,
             'warning_as_error':True,
           },indent=2))
-          print('PASS: structural one-layer elimination compiled and audited; actual regional operator bridge still required, so pending target count remains 4')
+          print('PASS: existing one-layer elimination discharged relative to explicit standard regional-solver boundary; pending targets 4 -> 3')
           PY
       - name: Preserve reproducible sources and inspection files
         if: always()
