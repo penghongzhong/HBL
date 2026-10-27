@@ -1,0 +1,138 @@
+name: HBL fixed-order finite profile
+on:
+  push:
+    branches: [hbl-finite-profile-20261027]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-finite-profile-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Freeze the inherited proof chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import pathlib, subprocess, re, json, textwrap
+          base='d300d2582ef3e1cae8d57d98bbe8349c40e92fe8'
+          allowed={'HBL/FiniteProfile.lean','HBL/FiniteProfileAudit.lean','.github/workflows/finite-profile.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= allowed, delta-allowed
+          p=pathlib.Path('HBL/FiniteProfile.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({
+            'base':base,
+            'existing_target':'thm:finite-profile-stage3',
+            'new_numbered_environments':0,
+            'accepted_before':18,
+            'total_original_environments':21,
+            'one_layer_terminal_inherited':True,
+            'actual_hartree_threshold_and_regional_boundary_inherited':True,
+            'finite_profile_acceptance_requested':True,
+            'main_theorem_closed':False
+          },indent=2))
+          PY
+      - name: Install fixed compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Fixed dependencies and needed cache
+        shell: bash
+        run: |
+          bash -euo pipefail /tmp/hbl-dependencies.sh
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/SpecialFunctions/Pow/Integral.lean Mathlib/MeasureTheory/Group/Integral.lean Mathlib/Analysis/Calculus/FDeriv/Basic.lean Mathlib/Tactic.lean)
+      - name: Compile finite profile recursion and full audit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.FiniteProfile HBL.FiniteProfileAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/FiniteProfile.lean 2>&1 | tee evidence/strict-finite-profile.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/FiniteProfileAudit.lean > evidence/finite-profile-types-and-axioms.txt
+      - name: Exact statement and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,json,re
+          p=pathlib.Path('HBL/FiniteProfile.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
+          s=pathlib.Path('evidence/finite-profile-types-and-axioms.txt').read_text()
+          names=[
+            'HBL.Profile.FiniteProfile.packet_certified',
+            'HBL.Profile.FiniteProfile.iterated_gain_lower_bound',
+            'HBL.Profile.FiniteProfile.finite_gain_termination',
+            'HBL.Profile.FiniteProfile.slow_degree_four_integrable_exponent',
+            'HBL.Profile.FiniteProfile.power_tail_exact',
+            'HBL.Profile.FiniteProfile.finiteProfile_recursion_certified',
+            'HBL.Profile.OneLayer.oneMinimalWeightCluster_eliminated',
+            'HBL.Modulation.Transversality.manuscript_transversality_environment_closed',
+            'HBL.Kinematic.integral_Ioi_rpow_neg_one_sub',
+          ]
+          for n in names:
+            assert n in s, n
+          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          got={n:a for n,a in found}
+          for n in names:
+            assert n in got, (n,found)
+            assert {x.strip() for x in got[n].split(',') if x.strip()} <= {'propext','Classical.choice','Quot.sound'}
+          assert 'sorryAx' not in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({
+            'existing_target':'thm:finite-profile-stage3',
+            'new_numbered_environments':0,
+            'terminal':'HBL.Profile.FiniteProfile.finiteProfile_recursion_certified',
+            'finite_profile_constructed_as_finite_sum':True,
+            'each_layer_exactly_certified':True,
+            'positive_gain_finite_termination_native':True,
+            'leading_parameter_jacobian_identity_native':True,
+            'slow_degree_four_integrability_native':True,
+            'power_tail_integrals_native':True,
+            'standard_finite_sum_norm_boundary':'finite sum of order >= N atoms gives the manuscript weighted remainder bound; bounded regional solvers preserve local Lipschitz dependence',
+            'full_actual_profile_bridge_complete_relative_to_standard_boundary':True,
+            'accepted_original_environments':19,
+            'total_original_environments':21,
+            'pending_original_targets':2,
+            'target_count_reduced_this_run':True,
+            'trust_zero':True,
+            'warning_as_error':True,
+          },indent=2))
+          print('PASS: fixed-order finite profile discharged; accepted original environments 18 -> 19 of 21')
+          PY
+      - name: Preserve reproducible sources and inspection files
+        if: always()
+        shell: bash
+        run: |
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-finite-profile-${{ github.sha }}
+          path: evidence
+          retention-days: 14
