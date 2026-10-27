@@ -9,7 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     env:
       MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
@@ -45,82 +45,30 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile retained roots and audit the repaired joint map
+      - name: Clean project rebuild and strict physical-bridge audits
         shell: bash
         run: |
           set -euo pipefail
-          python3 verification/repair_joint_connection.py
-          python3 - <<'PY'
-          from pathlib import Path
-          import sys,subprocess,re,json,hashlib,os
-          sys.path.insert(0,'verification')
-          from proofchain_scan import ROOTS
-          report={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'main_theorem_closed':False,'new_original_environments_verified':0,'full_paper_percentage_recertified':False}
-          def run(cmd,filename):
-            with open('evidence/'+filename,'w') as f:
-              p=subprocess.run(cmd,stdout=f,stderr=subprocess.STDOUT)
-            return p.returncode
-          report['retained_build_exit']=run(['lake','build','HBL','HBL.SpectralBridgeTypes',*ROOTS],'retained-build.log')
-          text=Path('evidence/retained-build.log').read_text()
-          text=re.sub(r'\x1b\[[0-9;]*m','',text)
-          errors=re.findall(r'^error: HBL/([^:]+):',text,re.M)
-          report['failed_module_files']=sorted(set(errors))
-          blocks=[]; cur=[]
-          for line in text.splitlines():
-            if re.match(r'(?:error|warning|info): ',line) or line.startswith('trace:') or ' Built ' in line or ' Building ' in line:
-              if cur: blocks.append('\n'.join(cur)); cur=[]
-              if line.startswith('error: HBL/'): cur=[line]
-            elif cur: cur.append(line)
-          if cur: blocks.append('\n'.join(cur))
-          Path('verification/retained-chain-current-errors.json').write_text(json.dumps({'source_commit':os.environ['GITHUB_SHA'],'errors':blocks},ensure_ascii=False,indent=2)+'\n')
-          name='WeightedJointBackward'
-          built=run(['lake','build','HBL.'+name],'joint-build.log')
-          report['joint_build_exit']=built
-          report['joint_strict_exit']=None; report['joint_audit_passed']=False
-          if built==0:
-            strict=run(['lake','env','lean','--trust=0','-DwarningAsError=true','HBL/'+name+'.lean'],'joint-strict.log')
-            report['joint_strict_exit']=strict
-            if strict==0:
-              src=Path('HBL/'+name+'.lean').read_text()
-              names=['HBL.MainBackward.'+n for n in re.findall(r'^(?:def|theorem) (\w+)',src,re.M)]
-              audit='import HBL.'+name+'\nset_option pp.all true\nset_option pp.maxSteps 10000000\nset_option maxRecDepth 1000000\n'
-              audit+='\n'.join('#check @'+n for n in names)+'\n'
-              audit+='\n'.join('set_option pp.all false in\n#print axioms '+n for n in names)+'\n'
-              Path('evidence/RetainedJointAudit.lean').write_text(audit)
-              ae=run(['lake','env','lean','--trust=0','-DwarningAsError=true','evidence/RetainedJointAudit.lean'],'joint-types-and-axioms.txt')
-              out=Path('evidence/joint-types-and-axioms.txt').read_text()
-              pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
-              found=[(m.group(1),m.group(2) or '') for m in re.finditer(pattern,out,re.S)]
-              ok=ae==0 and [n for n,_ in found]==names and all({x.strip() for x in a.split(',') if x.strip()} <= {'propext','Classical.choice','Quot.sound'} for _,a in found)
-              ok=ok and not any(x in out for x in ['sorryAx','⋯','...']) and not re.search(r'\b(sorry|admit|axiom|unsafe)\b',src)
-              report['joint_audit_passed']=bool(ok)
-              report['joint_audited_declarations']=names
-              report['joint_source_sha256']=hashlib.sha256(src.encode()).hexdigest()
-          report['joint_diagnostics']=Path('evidence/joint-strict.log').read_text() if report['joint_strict_exit'] is not None else Path('evidence/joint-build.log').read_text()[-15000:]
-          report['conditional_boundary']='Joint map remains conditional on the displayed propagator and source bounds; no physical PDE reconstruction or C1 initial-data graph is claimed.'
-          Path('verification/retained-chain-current-status.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
-          Path('evidence/WeightedJointBackward.lean').write_text(Path('HBL/WeightedJointBackward.lean').read_text())
-          print(json.dumps({k:v for k,v in report.items() if k!='joint_diagnostics'},ensure_ascii=False,indent=2))
-          PY
-      - name: Save diagnostics and only strictly accepted source changes
+          python3 -m py_compile verification/clean_retained_validation.py
+          python3 verification/clean_retained_validation.py
+      - name: Preserve exact validation reports without modifying proof sources
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/retained-chain-current-status.json; then
-            git add verification/retained-chain-current-status.json verification/retained-chain-current-errors.json
-            if python3 -c "import json;assert json.load(open('verification/retained-chain-current-status.json'))['joint_audit_passed']"; then
-              git add HBL/WeightedJointBackward.lean
-            fi
+          if test -f verification/clean-retained-current-status.json; then
+            git add verification/clean-retained-current-status.json verification/clean-retained-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Preserve retained-chain diagnostics and strictly accepted joint repair [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record clean-source build and independent strict bridge audits [skip ci]'
               git push origin HEAD:hbl-retained-chain-repair-20261028
             fi
           fi
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git diff 27124c6bd0ed84156ead31fa2c7009c72b24ee70 HEAD > evidence/changes-from-accepted-joint.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-retained-repair-${{ github.sha }}
+          name: hbl-clean-retained-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -128,10 +76,10 @@ jobs:
         with:
           path: .lake
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Require both retained build and strict joint audit
+      - name: Require clean build and all strict target audits
         run: |
           python3 - <<'PY'
           import json
-          r=json.load(open('verification/retained-chain-current-status.json'))
-          assert r['retained_build_exit']==0 and r['joint_audit_passed'], r
+          r=json.load(open('verification/clean-retained-current-status.json'))
+          assert r['validation_passed'], {k:v for k,v in r.items() if k not in ['source_hashes','protected_roots']}
           PY
