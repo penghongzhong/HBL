@@ -4,6 +4,10 @@ import HBL.CenterEvolutionBoundary
 import HBL.CenterCoercivity
 import HBL.ResidualDecayFromLipschitz
 import HBL.RetainedThresholdBackward
+import HBL.DomainTriangularDynamics
+import HBL.SlowFrameConnection
+import HBL.CompactTwoChannelCoercivity
+import HBL.ResidualTangentDerivative
 import HBL.UnstableShootingTerminal
 import HBL.GlobalH1Matching
 import HBL.KinematicPhysicalTimeAsymptotics
@@ -17,6 +21,10 @@ set_option pp.all false
 #check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #check @HBL.MainBackward.two_stage_backward_fixed_point
+#check @HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
+#check @HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
+#check @HBL.Modulation.SlowFrame.movingConnection_positive_margin
+#check @HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified
 #check @HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified
 #check @HBL.Modulation.Unstable.revisedUnstableShootingManuscriptEnvironment_closed
 #check @HBL.Profile.GlobalH1.globalH1Matching_certified
@@ -29,6 +37,10 @@ set_option pp.all false
 #print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #print axioms HBL.MainBackward.two_stage_backward_fixed_point
+#print axioms HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
+#print axioms HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
+#print axioms HBL.Modulation.SlowFrame.movingConnection_positive_margin
+#print axioms HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified
 #print axioms HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified
 #print axioms HBL.Modulation.Unstable.revisedUnstableShootingManuscriptEnvironment_closed
 #print axioms HBL.Profile.GlobalH1.globalH1Matching_certified
