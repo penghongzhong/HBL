@@ -220,8 +220,7 @@ theorem fullRemainder_pointwise_difference
   have hcr := (cubic_differences (w x) (h x) (k x) hM hr.le hx hhx hkx).2
   have hCd := cubic_sum_difference (w x) (h x) (k x) hM hr.le hx hhx hkx
   have hCk : ‖Ck‖ ≤ cubicDifferenceConstant M r * ‖k x‖ := by
-    simpa only [cubicLinear, cubicRemainder, Complex.zero_re, Complex.ofReal_zero,
-      norm_zero, zero_pow (by decide : 2 ≠ 0), mul_zero, add_zero, sub_zero] using
+    simpa [Ck, cubicLinear, cubicRemainder] using
       cubic_sum_difference (w x) (k x) 0 hM hr.le hx hkx (by simpa using hr.le)
   have hC0 : ‖C0‖ = |w x| ^ 3 := by simp [C0, cubicZero, norm_pow]
   have hsum : ‖C0 + Ck‖ ≤ |w x| ^ 3 + cubicDifferenceConstant M r * ‖k x‖ := by
@@ -306,7 +305,10 @@ theorem fullRemainder_L2_difference
   have i3 := hw6.const_mul ((r*d*D)^2)
   have hI := integral_mono_ae hm.norm.integrable_sq (((i1.add i2).add i3).const_mul (3*|κ|^2)) hs
   simp only [Pi.add_apply, Pi.sub_apply] at hI
-  rw [integral_const_mul, integral_add (i1.add i2) i3, integral_add i1 i2,
+  have hadd := integral_add (i1.add i2) i3
+  have hadd12 := integral_add i1 i2
+  simp only [Pi.add_apply, Pi.sub_apply] at hadd hadd12
+  rw [integral_const_mul, hadd, hadd12,
     integral_const_mul, integral_const_mul, integral_const_mul] at hI
   calc
     _ ≤ 3*|κ|^2 * (((r*A)^2 * (∫ x : Space, ‖h x-k x‖^2) +

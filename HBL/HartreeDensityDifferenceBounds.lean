@@ -129,7 +129,9 @@ private theorem mixed_product_integral (f g : Space → ℂ)
     _ ≤ (b / a) * a ^ 2 + (a / b) * b ^ 2 :=
       add_le_add (mul_le_mul_of_nonneg_left hfa (by positivity))
         (mul_le_mul_of_nonneg_left hgb (by positivity))
-    _ = _ := by field_simp <;> ring
+    _ = _ := by
+      field_simp
+      ring
 
 /-- Difference estimate for the nonlocal quadratic density potential. -/
 theorem densityRemainder_potential_difference
