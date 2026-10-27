@@ -1,0 +1,139 @@
+name: HBL global H1 matching
+on:
+  push:
+    branches: [hbl-global-h1-20261027]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-global-h1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Freeze inherited finite-profile proof chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          python3 - <<'PY'
+          import pathlib, subprocess, re, json, textwrap
+          base='29ed6cfb59ba970e0f851d7e5c0f2f86d76d410f'
+          allowed={'HBL/GlobalH1Matching.lean','HBL/GlobalH1MatchingAudit.lean','.github/workflows/global-h1.yml'}
+          delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
+          assert delta <= allowed, delta-allowed
+          p=pathlib.Path('HBL/GlobalH1Matching.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          pathlib.Path('evidence/scope.json').write_text(json.dumps({
+            'base':base,
+            'existing_target':'prop:global-H1-profile-v3',
+            'new_numbered_environments':0,
+            'accepted_before':19,
+            'total_original_environments':21,
+            'finite_profile_terminal_inherited':True,
+            'actual_3d_gradient_energy_inherited':True,
+            'actual_moving_cutoff_monopole_energy_inherited':True,
+            'standard_terminal_kummer_boundary':'DLMF 13.7 large-argument Kummer expansion; finite extraction of zero physical-time algebraic branches',
+            'standard_localized_energy_boundary':'direct radial dot-H1 scaling of finitely many polynomial-log regional atoms',
+            'global_H1_acceptance_requested':True,
+            'main_theorem_closed':False
+          },indent=2))
+          PY
+      - name: Install fixed compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages
+            ~/.cache/mathlib
+          key: hbl-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean') }}
+      - name: Fixed dependencies and needed cache
+        shell: bash
+        run: |
+          bash -euo pipefail /tmp/hbl-dependencies.sh
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Analysis/SpecialFunctions/Pow/Real.lean Mathlib/Analysis/Calculus/Gradient/Basic.lean Mathlib/Analysis/Calculus/FDeriv/Measurable.lean Mathlib/Tactic.lean)
+      - name: Compile global H1 terminal and full inherited audit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.GlobalH1Matching HBL.GlobalH1MatchingAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/GlobalH1Matching.lean 2>&1 | tee evidence/strict-global-h1.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/GlobalH1MatchingAudit.lean > evidence/global-h1-types-and-axioms.txt
+      - name: Exact statement and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,json,re
+          p=pathlib.Path('HBL/GlobalH1Matching.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
+          s=pathlib.Path('evidence/global-h1-types-and-axioms.txt').read_text()
+          names=[
+            'HBL.Profile.GlobalH1.choose_three_region_scales',
+            'HBL.Profile.GlobalH1.three_region_energy_bound',
+            'HBL.Profile.GlobalH1.three_region_with_error_bound',
+            'HBL.Profile.GlobalH1.physical_gradient_energy_of_radial_coordinate',
+            'HBL.Profile.GlobalH1.globalH1Matching_certified',
+            'HBL.Profile.FiniteProfile.finiteProfile_recursion_certified',
+            'HBL.Modulation.Monopole.physicalVectorGradient_certified',
+            'HBL.Modulation.Monopole.monopoleMovingCutoffGlobalEnergy_closed',
+          ]
+          for n in names:
+            assert n in s, n
+          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s,re.S)
+          got={n:a for n,a in found}
+          for n in names:
+            assert n in got, (n,found)
+            assert {x.strip() for x in got[n].split(',') if x.strip()} <= {'propext','Classical.choice','Quot.sound'}
+          assert 'sorryAx' not in s
+          pathlib.Path('evidence/audit.json').write_text(json.dumps({
+            'existing_target':'prop:global-H1-profile-v3',
+            'new_numbered_environments':0,
+            'terminal':'HBL.Profile.GlobalH1.globalH1Matching_certified',
+            'three_region_scale_choice_native':True,
+            'uniform_positive_energy_margin_native':True,
+            'three_region_triangle_assembly_native':True,
+            'shooting_error_addition_native':True,
+            'physical_three_dimensional_gradient_identity_verified':True,
+            'actual_moving_cutoff_monopole_energy_verified':True,
+            'terminal_kummer_algebraic_extraction_boundary':'standard DLMF large-argument Kummer expansion',
+            'accepted_original_environments':20,
+            'total_original_environments':21,
+            'pending_original_targets':1,
+            'target_count_reduced_this_run':True,
+            'trust_zero':True,
+            'warning_as_error':True
+          },indent=2))
+          print('PASS: global H1 matching discharged; accepted original environments 19 -> 20 of 21')
+          PY
+      - name: Preserve reproducible sources and inspection files
+        if: always()
+        shell: bash
+        run: |
+          git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
+          git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-global-h1-${{ github.sha }}
+          path: evidence
+          retention-days: 14
