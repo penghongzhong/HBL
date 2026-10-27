@@ -426,9 +426,10 @@ theorem weightedCenterFeedbackMap_lipschitz
   have hnon :
       0 ≤ centerFeedbackLipschitzConstant CE p nu L :=
     centerFeedbackLipschitzConstant_nonneg CE hs0 hp hnu hL
-  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
-    (weightedCenterFeedbackMap_difference_norm
-      CE E hs0 hp hnu hL hEcont hE a b)
+  rw [Real.coe_toNNReal _ hnon]
+  rw [dist_eq_norm, dist_eq_norm]
+  exact weightedCenterFeedbackMap_difference_norm
+    CE E hs0 hp hnu hL hEcont hE a b
 
 #print axioms weightedCenterFeedbackTail_bound
 #print axioms weightedCenterFeedbackValue_bound
