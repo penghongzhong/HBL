@@ -44,7 +44,11 @@ theorem centerNonlinearLipschitzConstant_nonneg
     (hCnl : 0 ≤ Cnl) :
     0 ≤ centerNonlinearLipschitzConstant CE p delta Cnl := by
   unfold centerNonlinearLipschitzConstant
-  positivity
+  have hden : 0 < p + delta := by linarith
+  have hnum : 0 ≤ CE.boundConst * Cnl :=
+    mul_nonneg CE.bound_nonneg hCnl
+  exact mul_nonneg (div_nonneg hnum hden.le)
+    (Real.rpow_nonneg hs0.le _)
 
 private theorem nonlinearPrimitive_continuous
     {s0 p : ℝ}
@@ -259,7 +263,11 @@ theorem weightedCenterNonlinearValue_bound
     ring
   have hmono : (s : ℝ) ^ (-delta) ≤ s0 ^ (-delta) :=
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
-  have hc : 0 ≤ (CE.boundConst * Cnl * ‖q‖) / (p + delta) := by positivity
+  have hden : 0 < p + delta := by linarith
+  have hnum : 0 ≤ CE.boundConst * Cnl * ‖q‖ :=
+    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) (norm_nonneg _)
+  have hc : 0 ≤ (CE.boundConst * Cnl * ‖q‖) / (p + delta) :=
+    div_nonneg hnum hden.le
   calc
     (s : ℝ) ^ p * ‖weightedCenterNonlinearTail CE G p q s‖
         ≤ (s : ℝ) ^ p *
@@ -379,36 +387,57 @@ theorem weightedCenterNonlinearMap_difference_norm
     simpa only [h1,h2] using
       (HBL.Kinematic.integral_Ioi_rpow_neg_one_sub
         (s₀:=(s:ℝ)) (δ:=p+delta) hspos (by linarith))
+  have hiq := weightedCenterNonlinearSource_integrable
+    CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q s.2
+  have hir := weightedCenterNonlinearSource_integrable
+    CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r s.2
+  have hInt :
+      (∫ t in Ioi (s : ℝ),
+          weightedCenterNonlinearSource CE G p q s t) -
+        (∫ t in Ioi (s : ℝ),
+          weightedCenterNonlinearSource CE G p r s t) =
+      ∫ t in Ioi (s : ℝ),
+        CE.U s t
+          (G t (unweightPathGlobal p s0 q t) -
+            G t (unweightPathGlobal p s0 r t)) := by
+    calc
+      (∫ t in Ioi (s : ℝ),
+          weightedCenterNonlinearSource CE G p q s t) -
+        (∫ t in Ioi (s : ℝ),
+          weightedCenterNonlinearSource CE G p r s t)
+          = ∫ t in Ioi (s : ℝ),
+              (weightedCenterNonlinearSource CE G p q s t -
+                weightedCenterNonlinearSource CE G p r s t) := by
+              symm
+              exact integral_sub hiq hir
+      _ = ∫ t in Ioi (s : ℝ),
+          CE.U s t
+            (G t (unweightPathGlobal p s0 q t) -
+              G t (unweightPathGlobal p s0 r t)) := by
+              apply integral_congr_ae
+              filter_upwards with t
+              unfold weightedCenterNonlinearSource
+              rw [map_sub]
   have htail :
       ‖weightedCenterNonlinearTail CE G p q s -
         weightedCenterNonlinearTail CE G p r s‖ ≤
       (CE.boundConst*Cnl*‖q-r‖)/(p+delta) *
         (s:ℝ)^(-p-delta) := by
     unfold weightedCenterNonlinearTail
-    rw [sub_eq_add_neg, ← neg_add, ← integral_sub]
-    · rw [norm_neg]
-      calc
-        ‖∫ t in Ioi (s:ℝ),
-          CE.U s t (G t (unweightPathGlobal p s0 q t)) -
-          CE.U s t (G t (unweightPathGlobal p s0 r t))‖
-            = ‖∫ t in Ioi (s:ℝ),
-              CE.U s t
-                (G t (unweightPathGlobal p s0 q t) -
-                 G t (unweightPathGlobal p s0 r t))‖ := by
-                congr 1
-                funext t
-                rw [map_sub]
-        _ ≤ ∫ t in Ioi (s:ℝ),
-            (CE.boundConst*Cnl*‖q-r‖) * t^(-p-1-delta) :=
-              norm_integral_le_of_norm_le hmajor hpoint
-        _ = (CE.boundConst*Cnl*‖q-r‖) *
-            ((s:ℝ)^(-p-delta)/(p+delta)) := by
-              rw [integral_const_mul,hI]
-        _ = _ := by ring
-    · exact weightedCenterNonlinearSource_integrable
-        CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q s.2
-    · exact weightedCenterNonlinearSource_integrable
-        CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r s.2
+    rw [← hInt]
+    rw [norm_neg]
+    calc
+      ‖∫ t in Ioi (s : ℝ),
+          CE.U s t
+            (G t (unweightPathGlobal p s0 q t) -
+              G t (unweightPathGlobal p s0 r t))‖
+          ≤ ∫ t in Ioi (s:ℝ),
+              (CE.boundConst*Cnl*‖q-r‖) * t^(-p-1-delta) :=
+            norm_integral_le_of_norm_le hmajor hpoint
+      _ = (CE.boundConst*Cnl*‖q-r‖) *
+          ((s:ℝ)^(-p-delta)/(p+delta)) := by
+            rw [integral_const_mul,hI]
+      _ = _ := by ring
   have hval :
       weightedCenterNonlinearValue CE G p q s -
       weightedCenterNonlinearValue CE G p r s =
@@ -416,7 +445,7 @@ theorem weightedCenterNonlinearMap_difference_norm
         (weightedCenterNonlinearTail CE G p q s -
          weightedCenterNonlinearTail CE G p r s) := by
     unfold weightedCenterNonlinearValue
-    rw [smul_sub]
+    exact (smul_sub _ _ _).symm
   rw [hval,norm_smul,Real.norm_eq_abs,
     abs_of_pos (Real.rpow_pos_of_pos hspos _)]
   have hpw : (s:ℝ)^p * (s:ℝ)^(-p-delta) =
@@ -426,7 +455,11 @@ theorem weightedCenterNonlinearMap_difference_norm
     ring
   have hmono : (s:ℝ)^(-delta) ≤ s0^(-delta) :=
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
-  have hc : 0 ≤ (CE.boundConst*Cnl*‖q-r‖)/(p+delta) := by positivity
+  have hden2 : 0 < p + delta := by linarith
+  have hnum2 : 0 ≤ CE.boundConst*Cnl*‖q-r‖ :=
+    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) (norm_nonneg _)
+  have hc : 0 ≤ (CE.boundConst*Cnl*‖q-r‖)/(p+delta) :=
+    div_nonneg hnum2 hden2.le
   calc
     (s:ℝ)^p *
       ‖weightedCenterNonlinearTail CE G p q s -
@@ -460,9 +493,9 @@ theorem weightedCenterNonlinearMap_lipschitz
   intro q r
   have hnon : 0 ≤ centerNonlinearLipschitzConstant CE p delta Cnl :=
     centerNonlinearLipschitzConstant_nonneg CE hs0 hp hdelta hCnl
-  rw [dist_eq_norm,dist_eq_norm,Real.coe_toNNReal _ hnon]
-  exact weightedCenterNonlinearMap_difference_norm
-    CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q r
+  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
+    (weightedCenterNonlinearMap_difference_norm
+      CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q r)
 
 #print axioms weightedCenterNonlinearTail_bound
 #print axioms weightedCenterNonlinearMap_difference_norm
