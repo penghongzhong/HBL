@@ -268,30 +268,29 @@ theorem localizedCenterMap_apply (q : CenterWeightedPath s0 p)
   rw [localizedCenter_tail_eq CE G hs0 hR q hq s.2]
 end Map
 
-/-- A quantitative ball bound, not a new assumed fixed point. -/
+/-- A quantitative ball bound in the given metric, not an assumed fixed point. -/
 theorem affine_fixedPoint_ball
-    {X : Type*} [NormedAddCommGroup X] [CompleteSpace X]
-    (F : X → X) {k R : ℝ} (hk : 0 ≤ k) (hk1 : k < 1)
-    (hdiff : ∀ x y, ‖F x - F y‖ ≤ k * ‖x - y‖)
-    (hforcing : ‖F 0‖ ≤ (1 - k) * R) :
-    ∃! q, F q = q ∧ ‖q‖ ≤ R := by
+    {X : Type*} [MetricSpace X] [CompleteSpace X]
+    (F : X → X) (o : X) {k R : ℝ} (hk : 0 ≤ k) (hk1 : k < 1)
+    (hdiff : ∀ x y, dist (F x) (F y) ≤ k * dist x y)
+    (hforcing : dist (F o) o ≤ (1 - k) * R) :
+    ∃! q, F q = q ∧ dist q o ≤ R := by
+  letI : Nonempty X := ⟨o⟩
   let K : NNReal := ⟨k, hk⟩
   have hL : LipschitzWith K F := by
     apply LipschitzWith.of_dist_le_mul
     intro x y
-    simpa only [dist_eq_norm] using hdiff x y
+    change dist (F x) (F y) ≤ k * dist x y
+    exact hdiff x y
   have hcontract : ContractingWith K F := ⟨hk1, hL⟩
   let q := ContractingWith.fixedPoint F hcontract
   have hq : F q = q := hcontract.fixedPoint_isFixedPt
-  have hb : ‖q‖ ≤ k * ‖q‖ + ‖F 0‖ := by
+  have hb : dist q o ≤ k * dist q o + dist (F o) o := by
     calc
-      ‖q‖ = ‖(F q - F 0) + F 0‖ := by rw [sub_add_cancel, hq]
-      _ ≤ ‖F q - F 0‖ + ‖F 0‖ := norm_add_le _ _
-      _ ≤ k * ‖q‖ + ‖F 0‖ := by
-        have hd := hdiff q 0
-        rw [sub_zero] at hd
-        exact _root_.add_le_add hd le_rfl
-  have hqr : ‖q‖ ≤ R := by
+      dist q o = dist (F q) o := by rw [hq]
+      _ ≤ dist (F q) (F o) + dist (F o) o := dist_triangle _ _ _
+      _ ≤ k * dist q o + dist (F o) o := _root_.add_le_add (hdiff q o) le_rfl
+  have hqr : dist q o ≤ R := by
     by_contra hqR
     have hprod := mul_pos (sub_pos.mpr hk1) (sub_pos.mpr (lt_of_not_ge hqR))
     nlinarith only [hb, hforcing, hprod]
@@ -320,10 +319,22 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
   have hk : 0 ≤ k := centerNonlinearLipschitzConstant_nonneg CE hs0 hp hdelta
     (mul_nonneg (by norm_num) hC)
   have hMzero : M 0 = 0 := by
-    apply norm_eq_zero.mp
-    apply le_antisymm _ (norm_nonneg _)
-    simpa only [norm_zero, mul_zero] using
-      localizedCenterMap_norm_le CE G hs0 hp hdelta hC hR hcont hzero hloc 0
+    apply BoundedContinuousFunction.ext
+    intro s
+    change (s : ℝ) ^ p • (-(∫ t in Ioi (s : ℝ), CE.U s t
+      (localizedCenterNonlinearity s0 p R G t
+        (unweightPathGlobal p s0 (0 : CenterWeightedPath s0 p) t)))) =
+      (0 : ConstrainedCenterSpace)
+    have hI : (∫ t in Ioi (s : ℝ), CE.U s t
+        (localizedCenterNonlinearity s0 p R G t
+          (unweightPathGlobal p s0 (0 : CenterWeightedPath s0 p) t))) = 0 := by
+      apply integral_eq_zero_of_ae
+      filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
+      have hz : unweightPathGlobal p s0 (0 : CenterWeightedPath s0 p) t = 0 := by
+        change (max s0 t) ^ (-p) • (0 : ConstrainedCenterSpace) = 0
+        exact smul_zero _
+      rw [hz, localizedCenter_zero G hzero t (s.2.trans ht.le), map_zero]
+    rw [hI, neg_zero, smul_zero]
   let F : CenterWeightedPath s0 p → CenterWeightedPath s0 p := fun q => b + M q
   have hdiff : ∀ q r, ‖F q - F r‖ ≤ k * ‖q - r‖ := by
     intro q r
@@ -332,24 +343,45 @@ theorem localizedCenter_solution {s0 p delta Cnl R : ℝ}
       abel
     rw [hid]
     exact localizedCenterMap_difference_norm CE G hs0 hp hdelta hC hR hcont hzero hloc q r
-  have hf : ‖F 0‖ ≤ (1 - k) * R := by
-    change ‖b + M 0‖ ≤ (1 - k) * R
-    rw [hMzero, add_zero]
+  have hf0 : F 0 = b := by
+    apply BoundedContinuousFunction.ext
+    intro s
+    change b s + M 0 s = b s
+    have hz := congrArg (fun v : CenterWeightedPath s0 p => v s) hMzero
+    change M 0 s = (0 : ConstrainedCenterSpace) at hz
+    rw [hz, add_zero]
+  have hdist0 (v : CenterWeightedPath s0 p) : dist v 0 = ‖v‖ := by
+    have hz : v - (0 : CenterWeightedPath s0 p) = v := by
+      apply BoundedContinuousFunction.ext
+      intro s
+      change v s - (0 : ConstrainedCenterSpace) = v s
+      exact sub_zero _
+    rw [centerWeightedPath_dist_eq_norm_sub s0 p v 0, hz]
+  have hmetric : ∀ q r, dist (F q) (F r) ≤ k * dist q r := by
+    intro q r
+    rw [centerWeightedPath_dist_eq_norm_sub s0 p (F q) (F r),
+      centerWeightedPath_dist_eq_norm_sub s0 p q r]
+    exact hdiff q r
+  have hf : dist (F 0) 0 ≤ (1 - k) * R := by
+    rw [hf0, hdist0 b]
     exact hforcing
-  obtain ⟨q, hq, huniq⟩ := affine_fixedPoint_ball F hk hsmall hdiff hf
-  refine ⟨q, ⟨hq.2, ?_⟩, ?_⟩
+  obtain ⟨q, hq, huniq⟩ := affine_fixedPoint_ball F 0 hk hsmall hmetric hf
+  have hqr : ‖q‖ ≤ R := by simpa only [hdist0 q] using hq.2
+  refine ⟨q, ⟨hqr, ?_⟩, ?_⟩
   · intro s
     have heq := congrArg (fun v : CenterWeightedPath s0 p => v s) hq.1.symm
     change q s = b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc q s at heq
-    rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc q hq.2 s] at heq
+    rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc q hqr s] at heq
     exact heq
   · intro y hy
     apply huniq y
-    refine ⟨?_, hy.1⟩
-    apply BoundedContinuousFunction.ext
-    intro s
-    change b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc y s = y s
-    rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc y hy.1 s]
-    exact (hy.2 s).symm
+    refine ⟨?_, ?_⟩
+    · apply BoundedContinuousFunction.ext
+      intro s
+      change b s + localizedCenterMap CE G hs0 hp hdelta hC hR hcont hzero hloc y s = y s
+      rw [localizedCenterMap_apply CE G hs0 hp hdelta hC hR hcont hzero hloc y hy.1 s]
+      exact (hy.2 s).symm
+    · rw [hdist0 y]
+      exact hy.1
 
 end HBL.MainBackward.Localized
