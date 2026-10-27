@@ -30,12 +30,12 @@ abbrev WeightedPath (s0 : ℝ) (E : Type*)
 
 /-- Continuous projection of the full real line onto the late-time half-line. -/
 def lateTimeClamp (s0 : ℝ) (t : ℝ) : LateTime s0 :=
-  ⟨max s0 t, by simpa only [mem_Ici] using le_max_left s0 t⟩
+  ⟨max s0 t, by simp [LateTime]⟩
 
 theorem lateTimeClamp_continuous (s0 : ℝ) :
     Continuous (lateTimeClamp s0) := by
   exact Continuous.subtype_mk (continuous_const.max continuous_id)
-    (fun t => by simpa only [mem_Ici] using le_max_left s0 t)
+    (fun t => by simp [LateTime])
 
 /-- Global clamped representative of a weighted path.  On t>=s0 it agrees
 with the genuine unweighted late-time path. -/
