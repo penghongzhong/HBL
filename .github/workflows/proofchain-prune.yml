@@ -4,25 +4,149 @@ on:
     branches: [hbl-proof-chain-prune-20261028]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
-      - name: Exact-revision import and declaration-reference audit
-        run: python3 verification/proofchain_scan.py
-      - name: Preserve audit and exact source snapshot
+      - name: Archive the individually reviewed off-chain source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python3 -m py_compile verification/proofchain_scan.py verification/prune_reviewed_branch.py verification/prune_manuscript.py
+          if test -f HBL/WeightedArctanEnergyCore.lean; then
+            python3 verification/prune_reviewed_branch.py | tee evidence/applied-pruning.txt
+          else
+            test -f archive/proofchain-20261028/WeightedArctanEnergyCore.lean.txt
+            test -f verification/proofchain-pruning-applied-20261028.json
+          fi
+          python3 verification/proofchain_scan.py | tee evidence/dependency-summary.txt
+          python3 - <<'PY'
+          import pathlib,subprocess,json
+          base='9d1c825880f90f4efa31f6bd32d90c5ad591ea90'
+          changed={'HBL.lean','HBL/Audit.lean','HBL/SpectralBridgeTypes.lean'}
+          retired='HBL/WeightedArctanEnergyCore.lean'
+          old=subprocess.check_output(['git','ls-tree','-r','--name-only',base],text=True).splitlines()
+          preserved=[]
+          for name in old:
+            if not name.endswith('.lean') or name in changed or name==retired: continue
+            before=subprocess.check_output(['git','show',base+':'+name])
+            assert pathlib.Path(name).read_bytes()==before, name
+            preserved.append(name)
+          graph=json.loads(pathlib.Path('evidence/proofchain-import-audit.json').read_text())
+          assert not graph['candidate']['active_source_exists']
+          assert not graph['candidate']['all_external_lexical_references']
+          assert not graph['candidate']['in_protected_closure']
+          report={'all_other_Lean_sources_byte_identical':True,'preserved_Lean_files':len(preserved),'changed_nonproof_entrypoints':sorted(changed),'retired_module':retired,'new_main_theorem_obligations_removed':0}
+          pathlib.Path('evidence/preservation-audit.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Install fixed compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-pruned-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-final-bridge-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Resolve exact dependencies and targeted cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean)
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Compile retained component roots and pruned entrypoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' 2>&1 | tee evidence/retained-build.log
+          import sys,subprocess
+          sys.path.insert(0,'verification')
+          from proofchain_scan import ROOTS
+          subprocess.run(['lake','build','HBL','HBL.SpectralBridgeTypes',*ROOTS],check=True)
+          PY
+          lake env lean --trust=0 -DwarningAsError=true HBL.lean > evidence/entrypoint-strict.log 2>&1
+          lake env lean --trust=0 -DwarningAsError=true HBL/Audit.lean > evidence/historical-audit-strict.log 2>&1
+          lake env lean --trust=0 -DwarningAsError=true HBL/SpectralBridgeTypes.lean > evidence/spectral-types-strict.log 2>&1
+      - name: Recheck the 82 previously audited current declarations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,re,subprocess,json
+          production=['RegularRadiationFlow','StrongConstrainedCenterEvolution','WeightedStrongDynamics','WeightedTailIdentities','HartreePhysicalLinearization','LocalizedCenterNonlinearMap','HartreeDensitySourceBounds','HartreeFullRemainderBounds','HartreeDensityDifferenceBounds','HartreeFullDifferenceBounds']
+          for name in production:
+            with open('evidence/'+name+'-strict.log','w') as out:
+              subprocess.run(['lake','env','lean','--trust=0','-DwarningAsError=true','HBL/'+name+'.lean'],stdout=out,stderr=subprocess.STDOUT,check=True)
+          inventories=[(pathlib.Path('HBL')/(n+'.lean'),c) for n,c in [('FinalBridgeAudit',20),('LocalizedCenterAudit',21),('RegularRadiationFlowAudit',18),('HartreeDensitySourceAudit',5),('HartreeFullRemainderAudit',7)]]
+          for module,count in [('HartreeDensityDifferenceBounds',5),('HartreeFullDifferenceBounds',6)]:
+            source=pathlib.Path('HBL/'+module+'.lean').read_text()
+            names=['HBL.RegularRadiation.PhysicalExpansion.'+n for n in re.findall(r'^(?:def|theorem) (\w+)',source,re.M)]
+            assert len(names)==count
+            text='import HBL.'+module+'\nset_option pp.all true\nset_option pp.maxSteps 10000000\nset_option maxRecDepth 1000000\n'
+            text+='\n'.join('#check @'+n for n in names)+'\n'
+            text+='\n'.join('set_option pp.all false in\n#print axioms '+n for n in names)+'\n'
+            audit=pathlib.Path('evidence/'+module+'-audit.lean'); audit.write_text(text)
+            inventories.append((audit,count))
+          allowed={'propext','Classical.choice','Quot.sound'}
+          groups={}
+          for path,count in inventories:
+            text=path.read_text()
+            names=re.findall(r'^#print axioms (\S+)$',text,re.M)
+            checks=re.findall(r'^#check @(\S+)$',text,re.M)
+            assert len(names)==count and names==checks and len(set(names))==count
+            proc=subprocess.run(['lake','env','lean','--trust=0','-DwarningAsError=true',str(path)],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            pathlib.Path('evidence/'+path.stem+'-complete-types.txt').write_text(proc.stdout)
+            assert proc.returncode==0, (str(path),proc.stdout)
+            pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+            found=[(m.group(1),m.group(2) or '') for m in re.finditer(pattern,proc.stdout,re.S)]
+            assert [n for n,_ in found]==names
+            assert 'sorryAx' not in proc.stdout and '⋯' not in proc.stdout and '...' not in proc.stdout
+            for name,axs in found:
+              assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (name,axs)
+            groups[str(path)]={n:[x.strip() for x in a.split(',') if x.strip()] for n,a in found}
+          report={'specified_current_production_modules_rechecked':10,'specified_current_declarations_reaudited':82,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'new_original_environments_accepted':0,'main_theorem_closed':False,'manuscript_file_modified':False}
+          pathlib.Path('evidence/pruned-strict-audit.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Commit reviewed pruning only after all checks pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = hbl-proof-chain-prune-20261028
+          git add -- HBL.lean HBL/Audit.lean HBL/SpectralBridgeTypes.lean HBL/WeightedArctanEnergyCore.lean archive/proofchain-20261028/WeightedArctanEnergyCore.lean.txt verification/proofchain-pruning-applied-20261028.json
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Archive off-chain arctangent energy branch after strict retained-chain checks'
+            git push origin HEAD:hbl-proof-chain-prune-20261028
+          fi
+          git rev-parse HEAD | tee evidence/final-pruned-commit.txt
+      - name: Preserve exact final snapshot and pruning evidence
         if: always()
+        shell: bash
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 9d1c825880f90f4efa31f6bd32d90c5ad591ea90 HEAD > evidence/pruning.patch
+          git diff 9d1c825880f90f4efa31f6bd32d90c5ad591ea90 > evidence/pruning.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:

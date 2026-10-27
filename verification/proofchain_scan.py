@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only, pinned HBL dependency scan. Not a proof of the main PDE theorem."""
+"""Pinned source-level dependency scan, not kernel proof-term extraction."""
 from __future__ import annotations
 import hashlib
 import json
@@ -12,14 +12,15 @@ CANDIDATE = 'HBL.WeightedArctanEnergyCore'
 ROOTS = [
     'HBL.FirstModulationLemma', 'HBL.AffineTailLemmaClosed',
     'HBL.MonopoleFirstCorrectionCertified', 'HBL.MonopoleThresholdProjection',
-    'HBL.KinematicSynchronizedSliceCertified', 'HBL.RegularRadiationFlow',
-    'HBL.FiniteProfile', 'HBL.FiniteProfileResidualLedger', 'HBL.GlobalH1Matching',
-    'HBL.PhysicalEnergySurjectivity', 'HBL.PhysicalL6Realization',
-    'HBL.PhysicalWeakRadial', 'HBL.PhysicalVectorGradient',
-    'HBL.PhysicalNonlocalForm', 'HBL.PhysicalPhaseHessian',
-    'HBL.CompactTwoChannelCoercivity', 'HBL.ConstrainedCenterSpace',
-    'HBL.DomainTriangularDynamics', 'HBL.ResidualTangentDerivative',
-    'HBL.SlowFrameConnection', 'HBL.SpectralBridgeTypes',
+    'HBL.KinematicSynchronizedSliceCertified', 'HBL.KinematicPhysicalDynamics',
+    'HBL.KinematicPhaseDynamics', 'HBL.KinematicPhysicalTimeInverseDeriv',
+    'HBL.RadialHartreeAmplitudeCenter', 'HBL.RadialHartreeCenter', 'HBL.RadialHartreeMultipole',
+    'HBL.RegularRadiationFlow', 'HBL.FiniteProfile', 'HBL.FiniteProfileResidualLedger',
+    'HBL.GlobalH1Matching', 'HBL.PhysicalEnergySurjectivity', 'HBL.PhysicalL6Realization',
+    'HBL.PhysicalWeakRadial', 'HBL.PhysicalVectorGradient', 'HBL.PhysicalNonlocalForm',
+    'HBL.PhysicalPhaseHessian', 'HBL.CompactTwoChannelCoercivity',
+    'HBL.ConstrainedCenterSpace', 'HBL.DomainTriangularDynamics',
+    'HBL.ResidualTangentDerivative', 'HBL.SlowFrameConnection',
     'HBL.ResidualDecayFromFiniteAtoms', 'HBL.ResidualDecayFromLipschitz',
     'HBL.RetainedThresholdBackward', 'HBL.RetainedFeedbackTail',
     'HBL.StableInitialPropagation', 'HBL.UnstableShootingTerminal',
@@ -33,7 +34,6 @@ ROOTS = [
 
 
 def mask_comments_and_strings(text: str) -> str:
-    """Preserve line positions while masking nested Lean comments and strings."""
     chars = list(text)
     i, depth, quoted = 0, 0, False
     while i < len(text):
@@ -64,14 +64,12 @@ def mask_comments_and_strings(text: str) -> str:
             chars[i] = ' '; quoted = True; i += 1
         else:
             i += 1
-    if depth or quoted:
-        raise ValueError('Unterminated Lean comment or string')
+    if depth or quoted: raise ValueError('Unterminated Lean comment or string')
     return ''.join(chars)
 
 
 def main() -> None:
-    root = Path('.')
-    paths = sorted(root.glob('HBL/**/*.lean'))
+    paths = [Path('HBL.lean'), *sorted(Path('HBL').rglob('*.lean'))]
     modules = {'.'.join(p.with_suffix('').parts): p for p in paths}
     code = {m: mask_comments_and_strings(p.read_text()) for m, p in modules.items()}
     graph = {}
@@ -80,60 +78,57 @@ def main() -> None:
         for line in re.findall(r'^\s*(?:(?:public|private)\s+)?import\s+([^\n]+)', text, re.M):
             deps += re.findall(r'\bHBL(?:\.[A-Za-z_][A-Za-z0-9_]*)*\b', line)
         graph[module] = sorted(set(deps))
-    missing_roots = sorted(set(ROOTS) - set(modules))
-    assert not missing_roots, missing_roots
-    unresolved_imports = sorted({d for ds in graph.values() for d in ds if d not in modules and d != 'HBL'})
-    assert not unresolved_imports, unresolved_imports
+    assert not (set(ROOTS)-set(modules)), sorted(set(ROOTS)-set(modules))
+    missing = sorted({d for ds in graph.values() for d in ds if d not in modules})
+    assert not missing, missing
     closure, todo = set(), list(ROOTS)
     while todo:
         name = todo.pop()
         if name in closure: continue
-        closure.add(name)
-        todo.extend(d for d in graph[name] if d in graph)
-    production = {m for m in modules if not m.endswith('Audit') and m != 'HBL.Audit'}
-    outside = sorted(production - closure)
+        closure.add(name); todo.extend(graph[name])
+    diagnostics = {m for m in modules if m.endswith('Audit') or m == 'HBL.SpectralBridgeTypes'}
+    production = set(modules) - diagnostics - {'HBL'}
+    assert 'HBL.SpectralBridgeTypes' not in ROOTS
     candidate_path = Path('HBL/WeightedArctanEnergyCore.lean')
     original = subprocess.check_output(['git', 'show', f'{BASE}:{candidate_path}'], text=True)
     candidate_code = mask_comments_and_strings(original)
     declarations = re.findall(r'^(?:def|theorem|lemma)\s+([A-Za-z_][A-Za-z0-9_\']*)', candidate_code, re.M)
     references = []
-    for path in [Path('HBL.lean'), *paths]:
-        if path == candidate_path: continue
-        masked = mask_comments_and_strings(path.read_text())
-        for number, line in enumerate(masked.splitlines(), 1):
+    for module, path in modules.items():
+        if module == CANDIDATE: continue
+        for number, line in enumerate(code[module].splitlines(), 1):
             if CANDIDATE in line or any(re.search(r'(?<![A-Za-z0-9_\'])'+re.escape(n)+r'(?![A-Za-z0-9_\'])', line) for n in declarations):
                 references.append({'path': str(path), 'line': number, 'code': line.strip()})
     report = {
         'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
         'review_base': BASE,
-        'method': 'Exact-revision source import closure plus lexical named-declaration references; NOT Lean proof-term dependency extraction.',
+        'method': 'Source import closure (including HBL umbrella transitively) plus lexical declaration references; NOT kernel proof-term dependency extraction.',
+        'complete_main_PDE_root_constructed_in_this_audit': False,
         'main_theorem_closed': False,
-        'main_theorem_root_exists': False,
         'main_proof_obligations_removed': 0,
         'manuscript_acceptance_percentage_recomputed': False,
         'protected_component_roots': ROOTS,
-        'all_HBL_directory_lean_files': len(paths),
-        'production_modules_excluding_audits': len(production),
+        'all_HBL_directory_lean_files': len(paths)-1,
+        'production_modules_excluding_named_diagnostics': len(production),
         'protected_import_closure_count': len(closure),
-        'outside_protected_closure_candidates_NOT_auto_deletable': outside,
+        'umbrella_in_protected_closure': 'HBL' in closure,
+        'outside_protected_closure_NOT_auto_deletable': sorted(production-closure),
         'candidate': {
             'module': CANDIDATE,
+            'active_source_exists': candidate_path.exists(),
             'source_sha256_at_base': hashlib.sha256(original.encode()).hexdigest(),
             'declarations_at_base': declarations,
             'theorems_at_base': re.findall(r'^(?:theorem|lemma)\s+(\w+)', candidate_code, re.M),
             'in_protected_closure': CANDIDATE in closure,
-            'direct_importers': sorted(m for m, ds in graph.items() if CANDIDATE in ds),
+            'direct_importers_including_umbrella': sorted(m for m, ds in graph.items() if CANDIDATE in ds),
             'all_external_lexical_references': references,
         },
         'imports': graph,
-        'warning': 'Disconnected current components are not necessarily irrelevant: final physical assembly and several analytic obligations are still missing. Archive only individually reviewed alternatives; preserve all five manuscript conclusions.'
+        'warning': 'Disconnected modules are not automatically irrelevant. The final physical assembly and several analytic obligations remain open; all five manuscript conclusions are protected.'
     }
     Path('evidence').mkdir(exist_ok=True)
     Path('evidence/proofchain-import-audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
-    brief = {k: v for k, v in report.items() if k != 'imports'}
-    print('HBL_DEPENDENCY_AUDIT_BEGIN')
-    print(json.dumps(brief, ensure_ascii=False, indent=2))
-    print('HBL_DEPENDENCY_AUDIT_END')
+    print(json.dumps({k: v for k, v in report.items() if k != 'imports'}, ensure_ascii=False, indent=2))
 
 if __name__ == '__main__':
     main()
