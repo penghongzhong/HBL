@@ -51,14 +51,14 @@ theorem mem_constrainedCenterSubmodule_iff (z : CenterPair) :
       phaseCompactTest z.2 = 0 ∧
       inner ℝ fullBubbleRadialEnergyL2 z.1 = 0 := by
   simp [constrainedCenterSubmodule, centerScaleFunctional,
-    centerPhaseFunctional, centerNegativeFunctional]
+    centerPhaseFunctional, centerNegativeFunctional, and_assoc]
 
 theorem constrainedCenterSubmodule_isClosed :
     IsClosed (constrainedCenterSubmodule : Set CenterPair) := by
   unfold constrainedCenterSubmodule
-  exact centerScaleFunctional.isClosed_ker.inter
-    (centerPhaseFunctional.isClosed_ker.inter
-      centerNegativeFunctional.isClosed_ker)
+  exact (centerScaleFunctional.isClosed_ker.inter
+    centerPhaseFunctional.isClosed_ker).inter
+      centerNegativeFunctional.isClosed_ker
 
 noncomputable instance constrainedCenterCompleteSpace :
     CompleteSpace ConstrainedCenterSpace :=
@@ -84,8 +84,38 @@ theorem constrainedCenter_moving_coercive
         (‖z.1.1‖ ^ 2 + ‖z.1.2‖ ^ 2) ≤
       centerBaseForm z.1 + K z.1 z.1 := by
   have hz := (mem_constrainedCenterSubmodule_iff z.1).1 z.2
+  have hgap : 0 < compactTwoChannelGap :=
+    actualCompactTwoChannelCoercivity_certified.2.1
+  have hpair :
+      ‖z.1‖ ^ 2 ≤ ‖z.1.1‖ ^ 2 + ‖z.1.2‖ ^ 2 := by
+    rw [Prod.norm_def]
+    rcases le_total ‖z.1.1‖ ‖z.1.2‖ with h | h
+    · rw [max_eq_right h]
+      nlinarith [sq_nonneg ‖z.1.1‖]
+    · rw [max_eq_left h]
+      nlinarith [sq_nonneg ‖z.1.2‖]
+  have hquad0 :
+      |K z.1 z.1| ≤ ‖K‖ * ‖z.1‖ ^ 2 := by
+    rw [← Real.norm_eq_abs]
+    calc
+      ‖K z.1 z.1‖ ≤ ‖K z.1‖ * ‖z.1‖ := (K z.1).le_opNorm z.1
+      _ ≤ (‖K‖ * ‖z.1‖) * ‖z.1‖ := by
+        exact mul_le_mul_of_nonneg_right (K.le_opNorm z.1) (norm_nonneg _)
+      _ = ‖K‖ * ‖z.1‖ ^ 2 := by ring
+  have hquad :
+      |K z.1 z.1| ≤
+        (compactTwoChannelGap / 2) *
+          (‖z.1.1‖ ^ 2 + ‖z.1.2‖ ^ 2) := by
+    calc
+      |K z.1 z.1| ≤ ‖K‖ * ‖z.1‖ ^ 2 := hquad0
+      _ ≤ (compactTwoChannelGap / 2) * ‖z.1‖ ^ 2 :=
+        mul_le_mul_of_nonneg_right hK (sq_nonneg _)
+      _ ≤ (compactTwoChannelGap / 2) *
+          (‖z.1.1‖ ^ 2 + ‖z.1.2‖ ^ 2) :=
+        mul_le_mul_of_nonneg_left hpair (by linarith)
   exact center_coercive_under_small_form_perturbation
-    K hK z.1 hz.1 hz.2.1 hz.2.2
+    K (compactTwoChannelGap / 2) (by linarith)
+    (by linarith) z.1.1 z.1.2 hz.1 hz.2.1 hz.2.2 hquad
 
 #print axioms mem_constrainedCenterSubmodule_iff
 #print axioms constrainedCenterSubmodule_isClosed
