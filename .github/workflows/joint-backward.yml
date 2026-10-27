@@ -28,7 +28,7 @@ jobs:
           python3 - <<'PY'
           import pathlib, subprocess, re, textwrap
           base='aa38439a818d7acddfac87af6158d7d6fcff10fb'
-          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterDuhamelEstimates.lean','HBL/FiniteProfileResidualLedger.lean','HBL/ResidualDecayFromFiniteAtoms.lean','HBL/ConstrainedCenterSpace.lean','HBL/WeightedBackwardPaths.lean','HBL/WeightedThresholdMap.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
+          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterDuhamelEstimates.lean','HBL/FiniteProfileResidualLedger.lean','HBL/ResidualDecayFromFiniteAtoms.lean','HBL/ConstrainedCenterSpace.lean','HBL/WeightedBackwardPaths.lean','HBL/WeightedThresholdMap.lean','HBL/WeightedCenterFeedbackMap.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
           delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert delta <= allowed, delta-allowed
           p=pathlib.Path('HBL/JointBackwardContraction.lean').read_text()
@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterDuhamelEstimates HBL.FiniteProfileResidualLedger HBL.ResidualDecayFromFiniteAtoms HBL.ConstrainedCenterSpace HBL.WeightedBackwardPaths HBL.WeightedThresholdMap HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz HBL.MainBackwardAudit HBL.MainRateSelection HBL.BlowupNonextension HBL.ParametricFixedPointC1 2>&1 | tee evidence/build.log
+          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterDuhamelEstimates HBL.FiniteProfileResidualLedger HBL.ResidualDecayFromFiniteAtoms HBL.ConstrainedCenterSpace HBL.WeightedBackwardPaths HBL.WeightedThresholdMap HBL.WeightedCenterFeedbackMap HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz HBL.MainBackwardAudit HBL.MainRateSelection HBL.BlowupNonextension HBL.ParametricFixedPointC1 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/JointBackwardContraction.lean 2>&1 | tee evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/PropagatedFeedbackTail.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterEvolutionBoundary.lean 2>&1 | tee -a evidence/strict.log
@@ -70,6 +70,7 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/ConstrainedCenterSpace.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedBackwardPaths.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedThresholdMap.lean 2>&1 | tee -a evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedCenterFeedbackMap.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterCoercivity.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/ResidualDecayFromLipschitz.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/MainBackwardAudit.lean 2>&1 | tee -a evidence/strict.log
@@ -87,6 +88,7 @@ jobs:
           grep -q "HBL.MainBackward.constrainedCenter_moving_coercive.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.unweightThresholdPath_difference_bound.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.weightedThresholdMap_lipschitz.*depends on axioms" evidence/strict.log
+          grep -q "HBL.MainBackward.weightedCenterFeedbackMap_lipschitz.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.center_coercive_under_small_form_perturbation.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.retained_feedback_coefficient_bound_from_residual.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.selectedPhysicalRate_eq_two_iff.*depends on axioms" evidence/strict.log
