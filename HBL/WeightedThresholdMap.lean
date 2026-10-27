@@ -101,7 +101,7 @@ theorem weightedThresholdTail_continuousOn
       (intervalIntegral.differentiable_integral_of_continuous hscont).continuous
   apply hc.continuousOn.congr
   intro s hs
-  exact (weightedThresholdTail_eq_fixed B s0 p hs0 hp q hs).symm
+  exact weightedThresholdTail_eq_fixed B s0 p hs0 hp q hs
 
 theorem weightedThresholdTail_bound
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
@@ -184,9 +184,10 @@ theorem weightedThresholdValue_bound
         ≤ (s : ℝ) ^ (p - 1) *
           ((‖B‖ * ‖q‖) / (p - 1) * (s : ℝ) ^ (1 - p)) :=
             mul_le_mul_of_nonneg_left ht hnon
-    _ = (‖B‖ / (p - 1)) * ‖q‖ := by
-      field_simp [ne_of_gt (sub_pos.mpr hp)]
-      nlinarith [hpow]
+    _ = ((‖B‖ * ‖q‖) / (p - 1)) *
+          ((s : ℝ) ^ (p - 1) * (s : ℝ) ^ (1 - p)) := by ring
+    _ = (‖B‖ * ‖q‖) / (p - 1) := by rw [hpow, mul_one]
+    _ = (‖B‖ / (p - 1)) * ‖q‖ := by ring
 
 def weightedThresholdMap
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
@@ -213,7 +214,7 @@ theorem weightedThresholdMap_norm
 theorem weightedThresholdTail_sub
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
     (s0 p : ℝ) (hs0 : 0 < s0) (hp : 1 < p)
-    (q r : CenterWeightedPath s0 p) (s : ℝ) :
+    (q r : CenterWeightedPath s0 p) {s : ℝ} (hs : s0 ≤ s) :
     weightedThresholdTail B s0 p q s -
         weightedThresholdTail B s0 p r s =
       weightedThresholdTail B s0 p (q - r) s := by
@@ -227,8 +228,8 @@ theorem weightedThresholdTail_sub
     funext t
     rw [Pi.sub_apply, ← map_sub]
     simp only [unweightPathGlobal, BoundedContinuousFunction.sub_apply, smul_sub]
-  have hiqs := hiq.mono_set (Ioi_subset_Ioi (le_refl s))
-  have hirs := hir.mono_set (Ioi_subset_Ioi (le_refl s))
+  have hiqs := hiq.mono_set (Ioi_subset_Ioi hs)
+  have hirs := hir.mono_set (Ioi_subset_Ioi hs)
   rw [sub_eq_add_neg, ← neg_add, ← integral_add]
   · rw [← integral_neg]
     congr 1
@@ -255,7 +256,7 @@ theorem weightedThresholdMap_difference_norm
       weightedThresholdValue B s0 p r s‖ ≤ _
   have htail :=
     weightedThresholdTail_bound B s0 p hs0 hp (q - r) s.2
-  have hsub := weightedThresholdTail_sub B s0 p hs0 hp q r (s : ℝ)
+  have hsub := weightedThresholdTail_sub B s0 p hs0 hp q r s.2
   have hspos : 0 < (s : ℝ) := hs0.trans_le s.2
   have hval :
       weightedThresholdValue B s0 p q s -
@@ -278,9 +279,10 @@ theorem weightedThresholdMap_difference_norm
         ≤ (s : ℝ) ^ (p - 1) *
           ((‖B‖ * ‖q - r‖) / (p - 1) * (s : ℝ) ^ (1 - p)) :=
             mul_le_mul_of_nonneg_left htail hnon
-    _ = (‖B‖ / (p - 1)) * ‖q - r‖ := by
-      field_simp [ne_of_gt (sub_pos.mpr hp)]
-      nlinarith [hpow]
+    _ = ((‖B‖ * ‖q - r‖) / (p - 1)) *
+          ((s : ℝ) ^ (p - 1) * (s : ℝ) ^ (1 - p)) := by ring
+    _ = (‖B‖ * ‖q - r‖) / (p - 1) := by rw [hpow, mul_one]
+    _ = (‖B‖ / (p - 1)) * ‖q - r‖ := by ring
 
 theorem weightedThresholdMap_lipschitz
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
@@ -290,8 +292,8 @@ theorem weightedThresholdMap_lipschitz
   apply LipschitzWith.of_dist_le_mul
   intro q r
   have hnon : 0 ≤ ‖B‖ / (p - 1) := by positivity
-  rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hnon]
-  exact weightedThresholdMap_difference_norm B s0 p hs0 hp q r
+  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
+    (weightedThresholdMap_difference_norm B s0 p hs0 hp q r)
 
 #print axioms weightedThresholdSource_integrable
 #print axioms weightedThresholdTail_bound
