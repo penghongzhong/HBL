@@ -42,7 +42,7 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean)
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean)
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
       - name: Strict bridges and physical nonlinearity compile
         shell: bash
@@ -72,10 +72,40 @@ jobs:
             assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
           assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
           changed=set(subprocess.check_output(['git','diff','--name-only','020d69ab6d772f728f15912187b7cf93317eff1a','HEAD'],text=True).splitlines())
-          permitted={'HBL/WeightedTailIdentities.lean','HBL/WeightedStrongDynamics.lean','HBL/HartreePhysicalLinearization.lean','HBL/FinalBridgeAudit.lean','.github/workflows/strong-dynamics-next.yml'}
+          permitted={'HBL/WeightedTailIdentities.lean','HBL/WeightedStrongDynamics.lean','HBL/HartreePhysicalLinearization.lean','HBL/FinalBridgeAudit.lean','.github/workflows/strong-dynamics-next.yml','HBL/LocalizedCenterNonlinearMap.lean','HBL/LocalizedCenterAudit.lean'}
           assert changed <= permitted, changed-permitted
           report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'strict_production_modules':4,'audited_declarations':20,'new_physical_expansion_theorems':6,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':{n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found},'conditional_boundary':'StrongConstrainedCenterPropagator remains an explicit, unconstructed input; physical expansion retains explicit kernel-density integrability hypotheses','original_environments_added':0,'main_theorem_closed':False}
           (root/'evidence/audit.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Strict localized nonlinear map and full type audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.LocalizedCenterNonlinearMap 2>&1 | tee evidence/localized-build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterNonlinearMap.lean 2>&1 | tee evidence/localized-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterAudit.lean > evidence/localized-types-and-axioms.txt 2>&1
+          python3 - <<'PY'
+          import pathlib,re,json,subprocess
+          root=pathlib.Path('.')
+          a=(root/'HBL/LocalizedCenterAudit.lean').read_text()
+          names=re.findall(r'^#print axioms (\S+)$',a,re.M)
+          checked=re.findall(r'^#check @(\S+)$',a,re.M)
+          assert len(names)==21 and len(set(names))==21 and checked==names
+          text=(root/'evidence/localized-types-and-axioms.txt').read_text()
+          found=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",text,re.S)
+          assert [n for n,_ in found]==names, (names,found)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n,axs in found:
+            assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
+          assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
+          prior='6b076d5eadc1601d04be245dd492edcd718f913b'
+          delta=set(subprocess.check_output(['git','diff','--name-only',prior,'HEAD'],text=True).splitlines())
+          assert delta <= {'HBL/LocalizedCenterNonlinearMap.lean','HBL/LocalizedCenterAudit.lean','.github/workflows/strong-dynamics-next.yml'}, delta
+          source=(root/'HBL/LocalizedCenterNonlinearMap.lean').read_text()
+          assert not re.search(r'\b(sorry|admit|axiom|unsafe)\b',source)
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'previous_accepted_source_commit':prior,'previous_sources_unchanged':True,'new_strict_production_modules':1,'new_audited_declarations':21,'new_public_theorems':16,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':{n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found},'conditional_boundary':'The original nonlinearity needs only shrinking-ball Lipschitz bounds. Actual constrained propagator, physical source-space mapping, and local Hartree estimates remain explicit inputs. No strong regularity or C1 parameter graph is concluded.','original_environments_added':0,'main_theorem_closed':False}
+          (root/'evidence/localized-audit.json').write_text(json.dumps(report,indent=2))
           print(json.dumps(report,indent=2))
           PY
       - name: Preserve sources and hashes
