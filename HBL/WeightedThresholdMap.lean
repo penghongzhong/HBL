@@ -199,6 +199,17 @@ def weightedThresholdMap
       ((‖B‖ / (p - 1)) * ‖q‖)
       (weightedThresholdValue_bound B s0 p hs0 hp q)
 
+theorem weightedThresholdMap_norm
+    (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
+    (s0 p : ℝ) (hs0 : 0 < s0) (hp : 1 < p)
+    (q : CenterWeightedPath s0 p) :
+    ‖weightedThresholdMap B s0 p hs0 hp q‖ ≤
+      (‖B‖ / (p - 1)) * ‖q‖ := by
+  have hC : 0 ≤ (‖B‖ / (p - 1)) * ‖q‖ := by positivity
+  rw [BoundedContinuousFunction.norm_le hC]
+  intro s
+  exact weightedThresholdValue_bound B s0 p hs0 hp q s
+
 theorem weightedThresholdTail_sub
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
     (s0 p : ℝ) (hs0 : 0 < s0) (hp : 1 < p)
@@ -284,6 +295,7 @@ theorem weightedThresholdMap_lipschitz
 
 #print axioms weightedThresholdSource_integrable
 #print axioms weightedThresholdTail_bound
+#print axioms weightedThresholdMap_norm
 #print axioms weightedThresholdMap_difference_norm
 #print axioms weightedThresholdMap_lipschitz
 
