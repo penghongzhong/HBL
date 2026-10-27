@@ -43,7 +43,7 @@ private theorem density_linear_domination {a M : ℝ} (z : ℂ)
       · positivity
 
 private theorem density_remainder_domination {a M r : ℝ} (z : ℂ)
-    (hM : 0 ≤ M) (hr : 0 ≤ r) (ha : |a| ≤ M) (hz : ‖z‖ ≤ r) :
+    (hM : 0 ≤ M) (_hr : 0 ≤ r) (ha : |a| ≤ M) (hz : ‖z‖ ≤ r) :
     ‖((2 * a ^ 2 * ‖z‖ ^ 2 +
       (2 * a * z.re + ‖z‖ ^ 2) ^ 2 : ℝ) : ℂ)‖ ≤
       densityQuadraticConstant M r * ‖z‖ ^ 2 := by
@@ -150,7 +150,7 @@ theorem densityRemainder_source_bound
   calc
     _ ≤ nearMass * (densityQuadraticConstant M r * r ^ 2) +
         densityQuadraticConstant M r * (∫ y : Space, ‖h y‖ ^ 2) :=
-      hP.2.trans (add_le_add_left hI _)
+      hP.2.trans (add_le_add le_rfl hI)
     _ = _ := by ring
 
 /-- Quadratic small-ball control of the actual nonlocal density remainder. -/
@@ -170,7 +170,7 @@ theorem densityRemainder_small_ball_bound
         (nearMass * r ^ 2 + ∫ y : Space, ‖h y‖ ^ 2) :=
       ((densityRemainder_source_bound w h hw hh hM hr hwb hhb).2 x).2
     _ ≤ densityQuadraticConstant M r * (nearMass * r ^ 2 + r ^ 2) :=
-      mul_le_mul_of_nonneg_left (add_le_add_left hE _) hA
+      mul_le_mul_of_nonneg_left (add_le_add le_rfl hE) hA
     _ = _ := by ring
 
 /-- The exact physical Hartree expansion with all three convolution
@@ -190,8 +190,9 @@ theorem physical_hartree_expansion_from_function_bounds
     hartreeNonlinearity κ (fun y => (w y : ℂ) + h y) x =
       hartreeNonlinearity κ (fun y => (w y : ℂ)) x +
         linearTerm κ w h x + remainder κ w h x := by
+  have hc : Integrable (fun y : Space => ((|w y| ^ 4 : ℝ) : ℂ)) := hw4.ofReal
   have hbase : Integrable (quarticDensity (fun y => (w y : ℂ))) := by
-    simpa only [quarticDensity, Complex.norm_real, Real.norm_eq_abs] using hw4.ofReal
+    simpa only [quarticDensity, Complex.norm_real, Real.norm_eq_abs] using hc
   have hb : ∀ᵐ y, ‖quarticDensity (fun v => (w v : ℂ)) y‖ ≤ M ^ 4 := by
     filter_upwards [hwb] with y hy
     simpa only [quarticDensity, Complex.norm_real, Real.norm_eq_abs,
