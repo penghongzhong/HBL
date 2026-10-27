@@ -28,6 +28,58 @@ abbrev WeightedPath (s0 : ℝ) (E : Type*)
     [TopologicalSpace E] [PseudoMetricSpace E] :=
   BoundedContinuousFunction (LateTime s0) E
 
+/-- Continuous projection of the full real line onto the late-time half-line. -/
+def lateTimeClamp (s0 : ℝ) (t : ℝ) : LateTime s0 :=
+  ⟨max s0 t, le_max_left _ _⟩
+
+theorem lateTimeClamp_continuous (s0 : ℝ) :
+    Continuous (lateTimeClamp s0) := by
+  apply continuous_subtype_mk
+  exact continuous_const.max continuous_id
+
+/-- Global clamped representative of a weighted path.  On t>=s0 it agrees
+with the genuine unweighted late-time path. -/
+def unweightPathGlobal
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (p s0 : ℝ) (q : WeightedPath s0 E) (t : ℝ) : E :=
+  ((max s0 t) ^ (-p)) • q (lateTimeClamp s0 t)
+
+theorem unweightPathGlobal_continuous
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (p s0 : ℝ) (hs0 : 0 < s0) (q : WeightedPath s0 E) :
+    Continuous (unweightPathGlobal p s0 q) := by
+  apply continuous_iff_continuousAt.2
+  intro t
+  have hmpos : 0 < max s0 t := hs0.trans_le (le_max_left _ _)
+  have hp : ContinuousAt (fun x : ℝ => (max s0 x) ^ (-p)) t := by
+    exact (Real.continuousAt_rpow_const (max s0 t) (-p)
+      (Or.inl hmpos.ne')).comp t
+        (continuous_const.max continuous_id).continuousAt
+  have hq :
+      ContinuousAt (fun x : ℝ => q (lateTimeClamp s0 x)) t :=
+    q.continuous.continuousAt.comp t (lateTimeClamp_continuous s0).continuousAt
+  exact hp.smul hq
+
+theorem unweightPathGlobal_eq
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (p s0 : ℝ) (q : WeightedPath s0 E)
+    {t : ℝ} (ht : s0 ≤ t) :
+    unweightPathGlobal p s0 q t =
+      t ^ (-p) • q ⟨t, ht⟩ := by
+  simp [unweightPathGlobal, lateTimeClamp, max_eq_right ht]
+
+theorem unweightPathGlobal_norm_bound
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (p s0 : ℝ) (hs0 : 0 < s0)
+    (q : WeightedPath s0 E)
+    {t : ℝ} (ht : s0 ≤ t) :
+    ‖unweightPathGlobal p s0 q t‖ ≤ ‖q‖ * t ^ (-p) := by
+  rw [unweightPathGlobal_eq p s0 q ht, norm_smul, Real.norm_eq_abs]
+  have htpos : 0 < t := hs0.trans_le ht
+  rw [abs_of_pos (Real.rpow_pos_of_pos htpos _)]
+  have hq := q.norm_coe_le_norm ⟨t, ht⟩
+  nlinarith [Real.rpow_pos_of_pos htpos (-p)]
+
 /-- Recover an s^{-p} path from its bounded weighted representative. -/
 def unweightPath
     {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -111,6 +163,9 @@ theorem unweightThresholdPath_difference_bound
   have he : -(p - 1) = 1 - p := by ring
   simpa only [unweightThresholdPath, he] using h
 
+#print axioms lateTimeClamp_continuous
+#print axioms unweightPathGlobal_continuous
+#print axioms unweightPathGlobal_norm_bound
 #print axioms unweightPath_continuous
 #print axioms unweightPath_norm_bound
 #print axioms unweightPath_difference_bound
