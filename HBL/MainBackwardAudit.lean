@@ -1,6 +1,7 @@
 import HBL.JointBackwardContraction
 import HBL.PropagatedFeedbackTail
 import HBL.CenterEvolutionBoundary
+import HBL.CenterDuhamelEstimates
 import HBL.CenterCoercivity
 import HBL.ResidualDecayFromLipschitz
 import HBL.RetainedThresholdBackward
@@ -18,6 +19,8 @@ set_option pp.all false
 #check @HBL.MainBackward.center_coercive_under_small_form_perturbation
 #check @HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
 #check @HBL.MainBackward.standardCenter_feedback_lipschitz
+#check @HBL.MainBackward.propagatedNonlinearTail_difference_weighted
+#check @HBL.MainBackward.propagatedProfileForcing_weighted
 #check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #check @HBL.MainBackward.two_stage_backward_fixed_point
@@ -34,6 +37,8 @@ set_option pp.all false
 #print axioms HBL.MainBackward.center_coercive_under_small_form_perturbation
 #print axioms HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
 #print axioms HBL.MainBackward.standardCenter_feedback_lipschitz
+#print axioms HBL.MainBackward.propagatedNonlinearTail_difference_weighted
+#print axioms HBL.MainBackward.propagatedProfileForcing_weighted
 #print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #print axioms HBL.MainBackward.two_stage_backward_fixed_point
