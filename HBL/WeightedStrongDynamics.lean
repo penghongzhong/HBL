@@ -150,10 +150,58 @@ theorem weightedCenterNonlinearTail_strong
     weightedCenterNonlinearSource] using
     (strongCenterDuhamel_certified S F hFcont hInt hs)
 
+/-- Strong centre equation for the fixed high-order profile forcing tail. -/
+theorem weightedCenterForcingTail_strong
+    {s0 : ℝ}
+    (S : StrongConstrainedCenterPropagator s0)
+    (F : ℝ → ConstrainedCenterSpace)
+    (p N CF : ℝ)
+    (hs0 : 0 < s0) (hp : 1 < p) (hN : p + 1 < N)
+    (hCF : 0 ≤ CF) (hFcont : Continuous F)
+    (hF : ∀ t, s0 ≤ t → ‖F t‖ ≤ CF * t ^ (-N))
+    {s : ℝ} (hs : s0 < s) :
+    ∃ hdom :
+      constrainedCenterEmbedding
+          (weightedCenterForcingTail S.standard F s) ∈ S.domain,
+      HasDerivAt
+        (fun r => constrainedCenterEmbedding
+          (weightedCenterForcingTail S.standard F r))
+        (S.generator s
+            ⟨constrainedCenterEmbedding
+              (weightedCenterForcingTail S.standard F s), hdom⟩ +
+          constrainedCenterEmbedding (F s))
+        s := by
+  have hInt : ∀ r, s0 ≤ r →
+      IntegrableOn (fun t => S.standard.U r t (F t)) (Ioi r) := by
+    intro r hr
+    have hrpos : 0 < r := hs0.trans_le hr
+    have hmajor : IntegrableOn
+        (fun t : ℝ => (S.standard.boundConst * CF) * t ^ (-N)) (Ioi r) :=
+      (integrableOn_Ioi_rpow_of_lt (by linarith) hrpos).const_mul _
+    have hmeas :
+        AEStronglyMeasurable (fun t => S.standard.U r t (F t))
+          (volume.restrict (Ioi r)) :=
+      (S.standard.orbit_continuous r F hFcont).aestronglyMeasurable.restrict
+    apply hmajor.mono' hmeas
+    filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
+    calc
+      ‖S.standard.U r t (F t)‖
+          ≤ ‖S.standard.U r t‖ * ‖F t‖ :=
+            (S.standard.U r t).le_opNorm _
+      _ ≤ S.standard.boundConst * (CF * t ^ (-N)) := by
+        exact mul_le_mul
+          (S.standard.bound r t hr ht.le)
+          (hF t (hr.trans ht.le))
+          (norm_nonneg _) S.standard.bound_nonneg
+      _ = (S.standard.boundConst * CF) * t ^ (-N) := by ring
+  simpa only [centerDuhamelTail, weightedCenterForcingTail] using
+    (strongCenterDuhamel_certified S F hFcont hInt hs)
+
 #print axioms neg_Ioi_integral_hasDerivAt
 #print axioms weightedThresholdTail_hasDerivAt
 #print axioms weightedThresholdForcingTail_hasDerivAt
 #print axioms weightedCenterFeedbackTail_strong
 #print axioms weightedCenterNonlinearTail_strong
+#print axioms weightedCenterForcingTail_strong
 
 end HBL.MainBackward
