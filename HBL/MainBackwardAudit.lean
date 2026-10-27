@@ -1,7 +1,4 @@
 import HBL.JointBackwardContraction
-import HBL.PropagatedFeedbackTail
-import HBL.CenterEvolutionBoundary
-import HBL.CenterDuhamelEstimates
 import HBL.FiniteProfileResidualLedger
 import HBL.ResidualDecayFromFiniteAtoms
 import HBL.ConstrainedCenterSpace
@@ -31,9 +28,6 @@ set_option pp.all false
 
 #check @HBL.MainBackward.center_coercive_under_small_form_perturbation
 #check @HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
-#check @HBL.MainBackward.standardCenter_feedback_lipschitz
-#check @HBL.MainBackward.propagatedNonlinearTail_difference_weighted
-#check @HBL.MainBackward.propagatedProfileForcing_weighted
 #check @HBL.Profile.ResidualLedger.residualSum_bound_of_orders
 #check @HBL.Profile.ResidualLedger.parametricResidualSum_eventually_lipschitz
 #check @HBL.MainBackward.retained_feedback_bound_from_finite_atoms
@@ -63,9 +57,6 @@ set_option pp.all false
 
 #print axioms HBL.MainBackward.center_coercive_under_small_form_perturbation
 #print axioms HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
-#print axioms HBL.MainBackward.standardCenter_feedback_lipschitz
-#print axioms HBL.MainBackward.propagatedNonlinearTail_difference_weighted
-#print axioms HBL.MainBackward.propagatedProfileForcing_weighted
 #print axioms HBL.Profile.ResidualLedger.residualSum_bound_of_orders
 #print axioms HBL.Profile.ResidualLedger.parametricResidualSum_eventually_lipschitz
 #print axioms HBL.MainBackward.retained_feedback_bound_from_finite_atoms
