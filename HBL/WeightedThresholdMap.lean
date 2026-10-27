@@ -220,22 +220,23 @@ theorem weightedThresholdTail_sub
       weightedThresholdTail B s0 p (q - r) s := by
   have hiq := weightedThresholdSource_integrable B s0 p hs0 hp q
   have hir := weightedThresholdSource_integrable B s0 p hs0 hp r
-  unfold weightedThresholdTail weightedThresholdSource
-  have hsrc :
-      (fun t => B (unweightPathGlobal p s0 q t)) -
-        (fun t => B (unweightPathGlobal p s0 r t)) =
-      (fun t => B (unweightPathGlobal p s0 (q - r) t)) := by
-    funext t
-    rw [Pi.sub_apply, ← map_sub]
-    simp only [unweightPathGlobal, BoundedContinuousFunction.sub_apply, smul_sub]
   have hiqs := hiq.mono_set (Ioi_subset_Ioi hs)
   have hirs := hir.mono_set (Ioi_subset_Ioi hs)
+  have hsrc :
+      weightedThresholdSource B s0 p q -
+          weightedThresholdSource B s0 p r =
+        weightedThresholdSource B s0 p (q - r) := by
+    funext t
+    unfold weightedThresholdSource
+    rw [Pi.sub_apply, ← map_sub]
+    simp only [unweightPathGlobal, BoundedContinuousFunction.sub_apply, smul_sub]
   have hInt :
-      (∫ t in Ioi s, B (unweightPathGlobal p s0 q t)) -
-          (∫ t in Ioi s, B (unweightPathGlobal p s0 r t)) =
-        ∫ t in Ioi s, B (unweightPathGlobal p s0 (q - r) t) := by
+      (∫ t in Ioi s, weightedThresholdSource B s0 p q t) -
+          (∫ t in Ioi s, weightedThresholdSource B s0 p r t) =
+        ∫ t in Ioi s, weightedThresholdSource B s0 p (q - r) t := by
     rw [← integral_sub hiqs hirs]
     rw [hsrc]
+  unfold weightedThresholdTail
   rw [← hInt]
   abel
 
@@ -289,9 +290,8 @@ theorem weightedThresholdMap_lipschitz
   apply LipschitzWith.of_dist_le_mul
   intro q r
   have hnon : 0 ≤ ‖B‖ / (p - 1) := by positivity
-  rw [Real.coe_toNNReal _ hnon]
-  rw [dist_eq_norm, dist_eq_norm]
-  exact weightedThresholdMap_difference_norm B s0 p hs0 hp q r
+  have h := weightedThresholdMap_difference_norm B s0 p hs0 hp q r
+  simpa only [Real.coe_toNNReal _ hnon, ← dist_eq_norm_sub] using h
 
 #print axioms weightedThresholdSource_integrable
 #print axioms weightedThresholdTail_bound
