@@ -15,11 +15,12 @@ No propagator or blow-up solution is assumed.
 noncomputable section
 set_option autoImplicit false
 
-open Filter
+open Set Filter
 open scoped Topology RealInnerProductSpace
 
 namespace HBL.MainBackward
 
+open HBL.Modulation
 open HBL.Modulation.Monopole
 open HBL.L2Kernel
 
@@ -58,16 +59,17 @@ theorem eventually_center_form_small
       |eps s| ≤ compactTwoChannelGap / 2 := by
   have hgap : 0 < compactTwoChannelGap :=
     actualCompactTwoChannelCoercivity_certified.2.1
-  have hm : Set.Icc (-(compactTwoChannelGap / 2))
+  have hm : Icc (-(compactTwoChannelGap / 2))
       (compactTwoChannelGap / 2) ∈ 𝓝 (0 : ℝ) := by
-    exact Set.Icc_mem_nhds (by linarith) (by linarith)
+    exact Icc_mem_nhds (by linarith) (by linarith)
   have he := heps.eventually hm
   rw [eventually_atTop] at he
   rcases he with ⟨s0, hs0⟩
   refine ⟨s0, ?_⟩
   intro s hs
   have hmem := hs0 s hs
-  rw [Set.mem_Icc] at hmem
+  change -(compactTwoChannelGap / 2) ≤ eps s ∧
+      eps s ≤ compactTwoChannelGap / 2 at hmem
   exact abs_le.mpr hmem
 
 #print axioms center_coercive_under_small_form_perturbation
