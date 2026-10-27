@@ -54,7 +54,7 @@ private theorem nonlinearPrimitive_continuous
     (q : CenterWeightedPath s0 p) :
     Continuous (fun t => G t (unweightPathGlobal p s0 q t)) := by
   exact hGcont.comp
-    (continuous_id.prod_mk (unweightPathGlobal_continuous p s0 hs0 q))
+    (continuous_id.prodMk (unweightPathGlobal_continuous p s0 hs0 q))
 
 private theorem nonlinearPrimitive_bound
     {s0 p delta Cnl t : ℝ}
