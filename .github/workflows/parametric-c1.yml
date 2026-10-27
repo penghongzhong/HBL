@@ -38,7 +38,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.ParametricFixedPointC1
+          lake build HBL.ParametricFixedPointC1 HBL.UnstableShootingC1
           lake env lean --trust=0 -DwarningAsError=true HBL/ParametricFixedPointC1.lean | tee strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/UnstableShootingC1.lean | tee -a strict.log
           grep -q "HBL.MainBackward.parametric_contraction_fixed_point_C1.*depends on axioms" strict.log
+          grep -q "HBL.MainBackward.parameterShootingTail_hasFDerivAt_of_dominated.*depends on axioms" strict.log
           ! grep -q "sorryAx" strict.log
