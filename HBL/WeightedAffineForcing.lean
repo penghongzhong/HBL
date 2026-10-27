@@ -172,7 +172,11 @@ theorem weightedCenterForcing_bound
     ring
   have hmono : s^(p+1-N) ≤ s0^(p+1-N) :=
     Real.rpow_le_rpow_of_nonpos hs0 hs (by linarith)
-  have hc : 0 ≤ (CE.boundConst*CF)/(N-1) := by positivity
+  have hden : 0 < N - 1 := by linarith
+  have hnum : 0 ≤ CE.boundConst * CF :=
+    mul_nonneg CE.bound_nonneg hCF
+  have hc : 0 ≤ (CE.boundConst * CF) / (N - 1) :=
+    div_nonneg hnum hden.le
   calc
     s^p*‖weightedCenterForcingTail CE F s‖
         ≤ s^p*((CE.boundConst*CF)/(N-1)*s^(1-N)) :=
@@ -196,7 +200,9 @@ def weightedCenterForcingPath
     have hmajor : IntegrableOn
         (fun t : ℝ => (CE.boundConst*CF)*t^(-N)) (Ioi s) :=
       (integrableOn_Ioi_rpow_of_lt (by linarith) hsp).const_mul _
-    have hmeas :=
+    have hmeas :
+        AEStronglyMeasurable (fun t => CE.U s t (F t))
+          (volume.restrict (Ioi s)) :=
       (CE.orbit_continuous s F hFcont).aestronglyMeasurable.restrict
     apply hmajor.mono' hmeas
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
