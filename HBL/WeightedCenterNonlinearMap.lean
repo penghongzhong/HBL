@@ -264,8 +264,9 @@ theorem weightedCenterNonlinearValue_bound
   have hmono : (s : ℝ) ^ (-delta) ≤ s0 ^ (-delta) :=
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
   have hden : 0 < p + delta := by linarith
+  have hqnon : 0 ≤ ‖q‖ := norm_nonneg q
   have hnum : 0 ≤ CE.boundConst * Cnl * ‖q‖ :=
-    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) (norm_nonneg _)
+    mul_nonneg (mul_nonneg CE.bound_nonneg hCnl) hqnon
   have hc : 0 ≤ (CE.boundConst * Cnl * ‖q‖) / (p + delta) :=
     div_nonneg hnum hden.le
   calc
@@ -316,10 +317,11 @@ theorem weightedCenterNonlinearMap_difference_norm
     ‖weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q -
         weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r‖ ≤
       centerNonlinearLipschitzConstant CE p delta Cnl * ‖q - r‖ := by
+  have hqrnon : 0 ≤ ‖q - r‖ := norm_nonneg (q - r)
   have hC : 0 ≤ centerNonlinearLipschitzConstant CE p delta Cnl * ‖q-r‖ :=
     mul_nonneg
       (centerNonlinearLipschitzConstant_nonneg CE hs0 hp hdelta hCnl)
-      (norm_nonneg _)
+      hqrnon
   rw [BoundedContinuousFunction.norm_le hC]
   intro s
   change ‖weightedCenterNonlinearValue CE G p q s -
@@ -493,9 +495,21 @@ theorem weightedCenterNonlinearMap_lipschitz
   intro q r
   have hnon : 0 ≤ centerNonlinearLipschitzConstant CE p delta Cnl :=
     centerNonlinearLipschitzConstant_nonneg CE hs0 hp hdelta hCnl
-  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
-    (weightedCenterNonlinearMap_difference_norm
-      CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q r)
+  rw [Real.coe_toNNReal _ hnon]
+  have h := weightedCenterNonlinearMap_difference_norm
+    CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q r
+  have hout := centerWeightedPath_dist_eq_norm_sub s0 p
+    (weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q)
+    (weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r)
+  have hin := centerWeightedPath_dist_eq_norm_sub s0 p q r
+  calc
+    dist (weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q)
+        (weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r)
+        = ‖weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip q -
+            weightedCenterNonlinearMap CE G hs0 hp hdelta hCnl hGcont hGzero hGlip r‖ := hout
+    _ ≤ centerNonlinearLipschitzConstant CE p delta Cnl * ‖q - r‖ := h
+    _ = centerNonlinearLipschitzConstant CE p delta Cnl * dist q r := by
+      rw [hin]
 
 #print axioms weightedCenterNonlinearTail_bound
 #print axioms weightedCenterNonlinearMap_difference_norm
