@@ -130,4 +130,279 @@ theorem weightedCenterFeedbackSource_integrable
         CE.bound_nonneg
     _ = (CE.boundConst * L * ‖a‖) * t ^ (1 - p - nu) := by ring
 
+
+
+theorem weightedCenterFeedbackTail_bound
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a : ThresholdWeightedPath s0 p)
+    {s : ℝ} (hs : s0 ≤ s) :
+    ‖weightedCenterFeedbackTail CE E p a s‖ ≤
+      (CE.boundConst * L * ‖a‖) / (p + nu - 2) *
+        s ^ (2 - p - nu) := by
+  have hsp : 0 < s := hs0.trans_le hs
+  have hi := weightedCenterFeedbackSource_integrable
+    CE E hs0 hp hnu hL hEcont hE a hs
+  have hpow : IntegrableOn (fun t : ℝ => t ^ (1 - p - nu)) (Ioi s) :=
+    integrableOn_Ioi_rpow_of_lt (by linarith) hsp
+  have hmajor := hpow.const_mul (CE.boundConst * L * ‖a‖)
+  have hpoint : ∀ᵐ t ∂volume.restrict (Ioi s),
+      ‖weightedCenterFeedbackSource CE E p a s t‖ ≤
+        (CE.boundConst * L * ‖a‖) * t ^ (1 - p - nu) := by
+    filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
+    have hsrc := weightedCenterPrimitiveSource_bound
+      E hs0 hL hE a (hs.trans ht.le)
+    have hU := (CE.U s t).le_opNorm
+      (E t (unweightThresholdPathGlobal s0 p a t))
+    calc
+      ‖weightedCenterFeedbackSource CE E p a s t‖
+          ≤ ‖CE.U s t‖ *
+            ‖E t (unweightThresholdPathGlobal s0 p a t)‖ := hU
+      _ ≤ CE.boundConst *
+            ((L * ‖a‖) * t ^ (1 - p - nu)) := by
+          exact mul_le_mul (CE.bound s t hs ht.le) hsrc
+            (norm_nonneg _) CE.bound_nonneg
+      _ = (CE.boundConst * L * ‖a‖) * t ^ (1 - p - nu) := by ring
+  have hI : (∫ t in Ioi s, t ^ (1 - p - nu)) =
+      s ^ (2 - p - nu) / (p + nu - 2) := by
+    have h1 : -1 - (p + nu - 2) = 1 - p - nu := by ring
+    have h2 : -(p + nu - 2) = 2 - p - nu := by ring
+    simpa only [h1, h2] using
+      (HBL.Kinematic.integral_Ioi_rpow_neg_one_sub
+        (s₀ := s) (δ := p + nu - 2) hsp (by linarith))
+  unfold weightedCenterFeedbackTail
+  rw [norm_neg]
+  calc
+    ‖∫ t in Ioi s, weightedCenterFeedbackSource CE E p a s t‖
+        ≤ ∫ t in Ioi s,
+            (CE.boundConst * L * ‖a‖) * t ^ (1 - p - nu) :=
+          norm_integral_le_of_norm_le hmajor hpoint
+    _ = (CE.boundConst * L * ‖a‖) *
+          (s ^ (2 - p - nu) / (p + nu - 2)) := by
+          rw [integral_const_mul, hI]
+    _ = (CE.boundConst * L * ‖a‖) / (p + nu - 2) *
+          s ^ (2 - p - nu) := by ring
+
+theorem weightedCenterFeedbackTail_continuousOn
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a : ThresholdWeightedPath s0 p) :
+    ContinuousOn (weightedCenterFeedbackTail CE E p a) (Ici s0) := by
+  let F : ℝ → ConstrainedCenterSpace :=
+    fun t => E t (unweightThresholdPathGlobal s0 p a t)
+  have hF : Continuous F :=
+    weightedCenterPrimitiveSource_continuous E p hs0 hEcont a
+  have hInt : ∀ s, s0 ≤ s →
+      IntegrableOn (fun t => CE.U s t (F t)) (Ioi s) := by
+    intro s hs
+    exact weightedCenterFeedbackSource_integrable
+      CE E hs0 hp hnu hL hEcont hE a hs
+  exact CE.duhamel_continuous F hF hInt
+
+def weightedCenterFeedbackValue
+    {s0 : ℝ} (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (p : ℝ) (a : ThresholdWeightedPath s0 p)
+    (s : LateTime s0) : ConstrainedCenterSpace :=
+  ((s : ℝ) ^ p) • weightedCenterFeedbackTail CE E p a s
+
+theorem weightedCenterFeedbackValue_continuous
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a : ThresholdWeightedPath s0 p) :
+    Continuous (weightedCenterFeedbackValue CE E p a) := by
+  have htail :
+      Continuous (fun s : LateTime s0 =>
+        weightedCenterFeedbackTail CE E p a s) :=
+    (weightedCenterFeedbackTail_continuousOn
+      CE E hs0 hp hnu hL hEcont hE a).domRestrict
+  apply continuous_iff_continuousAt.2
+  intro s
+  have hspos : 0 < (s : ℝ) := hs0.trans_le s.2
+  have hpow :
+      ContinuousAt (fun t : LateTime s0 => ((t : ℝ) ^ p)) s := by
+    exact (Real.continuousAt_rpow_const (s : ℝ) p
+      (Or.inl hspos.ne')).comp s continuousAt_subtype_val
+  exact hpow.smul htail.continuousAt
+
+def centerFeedbackLipschitzConstant
+    {s0 : ℝ} (CE : StandardConstrainedCenterPropagator s0)
+    (p nu L : ℝ) : ℝ :=
+  (CE.boundConst * L) / (p + nu - 2) * s0 ^ (2 - nu)
+
+theorem centerFeedbackLipschitzConstant_nonneg
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu) (hL : 0 ≤ L) :
+    0 ≤ centerFeedbackLipschitzConstant CE p nu L := by
+  unfold centerFeedbackLipschitzConstant
+  positivity
+
+theorem weightedCenterFeedbackValue_bound
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a : ThresholdWeightedPath s0 p) (s : LateTime s0) :
+    ‖weightedCenterFeedbackValue CE E p a s‖ ≤
+      centerFeedbackLipschitzConstant CE p nu L * ‖a‖ := by
+  have hspos : 0 < (s : ℝ) := hs0.trans_le s.2
+  have ht := weightedCenterFeedbackTail_bound
+    CE E hs0 hp hnu hL hEcont hE a s.2
+  unfold weightedCenterFeedbackValue
+  rw [norm_smul, Real.norm_eq_abs,
+    abs_of_pos (Real.rpow_pos_of_pos hspos _)]
+  have hpow :
+      (s : ℝ) ^ p * (s : ℝ) ^ (2 - p - nu) =
+        (s : ℝ) ^ (2 - nu) := by
+    rw [← Real.rpow_add hspos]
+    congr 1
+    ring
+  have hmono :
+      (s : ℝ) ^ (2 - nu) ≤ s0 ^ (2 - nu) :=
+    Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
+  have hcoef :
+      0 ≤ (CE.boundConst * L * ‖a‖) / (p + nu - 2) := by
+    positivity
+  calc
+    (s : ℝ) ^ p * ‖weightedCenterFeedbackTail CE E p a s‖
+        ≤ (s : ℝ) ^ p *
+          ((CE.boundConst * L * ‖a‖) / (p + nu - 2) *
+            (s : ℝ) ^ (2 - p - nu)) := by
+          exact mul_le_mul_of_nonneg_left ht
+            (Real.rpow_nonneg hspos.le _)
+    _ = (CE.boundConst * L * ‖a‖) / (p + nu - 2) *
+          (s : ℝ) ^ (2 - nu) := by rw [← hpow]; ring
+    _ ≤ (CE.boundConst * L * ‖a‖) / (p + nu - 2) *
+          s0 ^ (2 - nu) :=
+        mul_le_mul_of_nonneg_left hmono hcoef
+    _ = centerFeedbackLipschitzConstant CE p nu L * ‖a‖ := by
+      unfold centerFeedbackLipschitzConstant
+      ring
+
+def weightedCenterFeedbackMap
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu)) :
+    ThresholdWeightedPath s0 p → CenterWeightedPath s0 p :=
+  fun a =>
+    BoundedContinuousFunction.ofNormedAddCommGroup
+      (weightedCenterFeedbackValue CE E p a)
+      (weightedCenterFeedbackValue_continuous
+        CE E hs0 hp hnu hL hEcont hE a)
+      (centerFeedbackLipschitzConstant CE p nu L * ‖a‖)
+      (weightedCenterFeedbackValue_bound
+        CE E hs0 hp hnu hL hEcont hE a)
+
+private theorem weightedCenterFeedbackSource_sub
+    {s0 : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (p : ℝ) (a b : ThresholdWeightedPath s0 p)
+    (s t : ℝ) :
+    weightedCenterFeedbackSource CE E p a s t -
+        weightedCenterFeedbackSource CE E p b s t =
+      weightedCenterFeedbackSource CE E p (a - b) s t := by
+  unfold weightedCenterFeedbackSource unweightThresholdPathGlobal
+    unweightPathGlobal
+  rw [← map_sub, ← map_sub]
+  simp only [BoundedContinuousFunction.sub_apply, smul_sub]
+
+theorem weightedCenterFeedbackTail_sub
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a b : ThresholdWeightedPath s0 p)
+    {s : ℝ} (hs : s0 ≤ s) :
+    weightedCenterFeedbackTail CE E p a s -
+        weightedCenterFeedbackTail CE E p b s =
+      weightedCenterFeedbackTail CE E p (a - b) s := by
+  have hia := weightedCenterFeedbackSource_integrable
+    CE E hs0 hp hnu hL hEcont hE a hs
+  have hib := weightedCenterFeedbackSource_integrable
+    CE E hs0 hp hnu hL hEcont hE b hs
+  unfold weightedCenterFeedbackTail
+  rw [sub_eq_add_neg, ← neg_add]
+  rw [← integral_sub hia hib]
+  congr 1
+  funext t
+  exact weightedCenterFeedbackSource_sub CE E p a b s t
+
+theorem weightedCenterFeedbackMap_difference_norm
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu))
+    (a b : ThresholdWeightedPath s0 p) :
+    ‖weightedCenterFeedbackMap CE E hs0 hp hnu hL hEcont hE a -
+        weightedCenterFeedbackMap CE E hs0 hp hnu hL hEcont hE b‖ ≤
+      centerFeedbackLipschitzConstant CE p nu L * ‖a - b‖ := by
+  have hC :
+      0 ≤ centerFeedbackLipschitzConstant CE p nu L * ‖a - b‖ :=
+    mul_nonneg
+      (centerFeedbackLipschitzConstant_nonneg CE hs0 hp hnu hL)
+      (norm_nonneg _)
+  rw [BoundedContinuousFunction.norm_le hC]
+  intro s
+  change ‖weightedCenterFeedbackValue CE E p a s -
+      weightedCenterFeedbackValue CE E p b s‖ ≤ _
+  have hsub := weightedCenterFeedbackTail_sub
+    CE E hs0 hp hnu hL hEcont hE a b s.2
+  have hval :
+      weightedCenterFeedbackValue CE E p a s -
+          weightedCenterFeedbackValue CE E p b s =
+        ((s : ℝ) ^ p) •
+          weightedCenterFeedbackTail CE E p (a - b) s := by
+    unfold weightedCenterFeedbackValue
+    rw [← smul_sub, hsub]
+  rw [hval]
+  exact weightedCenterFeedbackValue_bound
+    CE E hs0 hp hnu hL hEcont hE (a - b) s
+
+theorem weightedCenterFeedbackMap_lipschitz
+    {s0 p nu L : ℝ}
+    (CE : StandardConstrainedCenterPropagator s0)
+    (E : ℝ → (ℝ × ℝ) →L[ℝ] ConstrainedCenterSpace)
+    (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu)
+    (hL : 0 ≤ L) (hEcont : Continuous E)
+    (hE : ∀ t, s0 ≤ t → ‖E t‖ ≤ L * t ^ (-nu)) :
+    LipschitzWith
+      (Real.toNNReal (centerFeedbackLipschitzConstant CE p nu L))
+      (weightedCenterFeedbackMap CE E hs0 hp hnu hL hEcont hE) := by
+  apply LipschitzWith.of_dist_le_mul
+  intro a b
+  have hnon :
+      0 ≤ centerFeedbackLipschitzConstant CE p nu L :=
+    centerFeedbackLipschitzConstant_nonneg CE hs0 hp hnu hL
+  rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hnon]
+  exact weightedCenterFeedbackMap_difference_norm
+    CE E hs0 hp hnu hL hEcont hE a b
+
+#print axioms weightedCenterFeedbackTail_bound
+#print axioms weightedCenterFeedbackValue_bound
+#print axioms weightedCenterFeedbackMap_difference_norm
+#print axioms weightedCenterFeedbackMap_lipschitz
+
 end HBL.MainBackward
