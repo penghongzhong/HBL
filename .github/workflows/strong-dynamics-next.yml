@@ -44,25 +44,40 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean)
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Strict full physical Hartree remainder estimates
+      - name: Strict actual full Hartree difference estimates
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.HartreeFullRemainderBounds 2>&1 | tee evidence/full-remainder-build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeFullRemainderBounds.lean 2>&1 | tee evidence/full-remainder-strict.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeFullRemainderAudit.lean > evidence/full-remainder-types-and-axioms.txt 2>&1
-      - name: Recheck all previous radiation, bridge, localization and density targets
+          lake build HBL.HartreeDensityDifferenceBounds HBL.HartreeFullDifferenceBounds 2>&1 | tee evidence/difference-build.log
+          for name in HartreeDensityDifferenceBounds HartreeFullDifferenceBounds; do
+            lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" 2>&1 | tee "evidence/$name-strict.log"
+          done
+          python3 - <<'PY'
+          import pathlib,re,subprocess
+          for name,count in [('HartreeDensityDifferenceBounds',5),('HartreeFullDifferenceBounds',6)]:
+            source=pathlib.Path(f'HBL/{name}.lean').read_text()
+            assert not re.search(r'\b(sorry|admit|axiom|unsafe)\b',source)
+            names=['HBL.RegularRadiation.PhysicalExpansion.'+n for n in re.findall(r'^(?:def|theorem) (\w+)',source,re.M)]
+            assert len(names)==count and len(set(names))==count, (name,names)
+            text=f'import HBL.{name}\n\nset_option pp.all true\nset_option pp.maxSteps 10000000\nset_option maxRecDepth 1000000\n\n'
+            text+='\n'.join('#check @'+n for n in names)+'\n\n'
+            text+='\n'.join('set_option pp.all false in\n#print axioms '+n for n in names)+'\n'
+            audit=pathlib.Path(f'evidence/{name}-audit.lean')
+            audit.write_text(text)
+            with open(f'evidence/{name}-types.txt','w') as out:
+              subprocess.run(['lake','env','lean','--trust=0','-DwarningAsError=true',str(audit)],stdout=out,stderr=subprocess.STDOUT,check=True)
+          PY
+      - name: Recheck all eight previous production targets and audits
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.RegularRadiationFlow HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization HBL.LocalizedCenterNonlinearMap HBL.HartreeDensitySourceBounds 2>&1 | tee evidence/previous-build.log
-          for name in RegularRadiationFlow StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization LocalizedCenterNonlinearMap HartreeDensitySourceBounds; do
+          lake build HBL.RegularRadiationFlow HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization HBL.LocalizedCenterNonlinearMap HBL.HartreeDensitySourceBounds HBL.HartreeFullRemainderBounds 2>&1 | tee evidence/previous-build.log
+          for name in RegularRadiationFlow StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization LocalizedCenterNonlinearMap HartreeDensitySourceBounds HartreeFullRemainderBounds; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" 2>&1 | tee "evidence/$name.log"
           done
-          lake env lean --trust=0 -DwarningAsError=true HBL/FinalBridgeAudit.lean > evidence/types-and-axioms.txt 2>&1
-          lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterAudit.lean > evidence/localized-types-and-axioms.txt 2>&1
-          lake env lean --trust=0 -DwarningAsError=true HBL/RegularRadiationFlowAudit.lean > evidence/radiation-types-and-axioms.txt 2>&1
-          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeDensitySourceAudit.lean > evidence/density-types-and-axioms.txt 2>&1
+          for name in FinalBridgeAudit LocalizedCenterAudit RegularRadiationFlowAudit HartreeDensitySourceAudit HartreeFullRemainderAudit; do
+            lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" > "evidence/$name-types.txt" 2>&1
+          done
       - name: Exact inventories, complete types and conditional-boundary audit
         shell: bash
         run: |
@@ -70,33 +85,29 @@ jobs:
           python3 - <<'PY'
           import pathlib,re,json,subprocess
           root=pathlib.Path('.')
-          base='864a8ab550b81cd674f644ec0280176ac8b0bc4e'
-          permitted={'HBL/HartreeFullRemainderBounds.lean','HBL/HartreeFullRemainderAudit.lean','.github/workflows/strong-dynamics-next.yml'}
+          base='1c8b2519627653ac07d6ae5a39de406ae9af5b1f'
+          permitted={'HBL/HartreeDensityDifferenceBounds.lean','HBL/HartreeFullDifferenceBounds.lean','.github/workflows/strong-dynamics-next.yml'}
           changed=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert changed <= permitted, changed-permitted
-          inventories=[('FinalBridgeAudit','types-and-axioms.txt',20),('LocalizedCenterAudit','localized-types-and-axioms.txt',21),('RegularRadiationFlowAudit','radiation-types-and-axioms.txt',18),('HartreeDensitySourceAudit','density-types-and-axioms.txt',5),('HartreeFullRemainderAudit','full-remainder-types-and-axioms.txt',7)]
+          inventories=[(f'HBL/{n}.lean',f'{n}-types.txt',c) for n,c in [('FinalBridgeAudit',20),('LocalizedCenterAudit',21),('RegularRadiationFlowAudit',18),('HartreeDensitySourceAudit',5),('HartreeFullRemainderAudit',7)]]
+          inventories += [(f'evidence/{n}-audit.lean',f'{n}-types.txt',c) for n,c in [('HartreeDensityDifferenceBounds',5),('HartreeFullDifferenceBounds',6)]]
           allowed={'propext','Classical.choice','Quot.sound'}
           groups={}
-          for module,filename,count in inventories:
-            a=(root/f'HBL/{module}.lean').read_text()
+          for src,filename,count in inventories:
+            a=pathlib.Path(src).read_text()
             names=re.findall(r'^#print axioms (\S+)$',a,re.M)
             checked=re.findall(r'^#check @(\S+)$',a,re.M)
             assert len(names)==count and len(set(names))==count and checked==names
             text=(root/'evidence'/filename).read_text()
             pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
             found=[(m.group(1),m.group(2) or '') for m in re.finditer(pattern,text,re.S)]
-            assert [n for n,_ in found]==names, (module,names,found)
+            assert [n for n,_ in found]==names, (src,names,found)
             assert 'sorryAx' not in text and '⋯' not in text and '...' not in text
             for n,axs in found:
               assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
-            groups[module]={n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found}
-          source=(root/'HBL/HartreeFullRemainderBounds.lean').read_text()
-          assert not re.search(r'\b(sorry|admit|axiom|unsafe)\b',source)
-          public=re.findall(r'^(?:def|theorem) (\w+)',source,re.M)
-          checked=re.findall(r'^#check @HBL.RegularRadiation.PhysicalExpansion\.(\w+)$',(root/'HBL/HartreeFullRemainderAudit.lean').read_text(),re.M)
-          assert public==checked, (public,checked)
-          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'base':base,'changed_paths':sorted(changed),'all_previous_production_sources_unchanged':True,'strict_production_modules':8,'audited_named_declarations':71,'new_audited_named_declarations':7,'new_public_theorems':4,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'native_results':['the linear density potential is first order in the mixed L2/L-infinity radius','the complete physical seventh-order Taylor remainder has a pointwise r*|h| plus r^2*|W|^3 bound','the complete remainder is L2 with squared norm bounded by an explicit multiple of r^4','the complete remainder has an essential-supremum bound quadratic in r','background L2 membership is not required'],'conditional_boundary':'These are zero-spatial-derivative bounds for the actual full remainder. Difference/Lipschitz bounds, higher Sobolev source estimates, actual constrained evolution, local-theory existence and PDE reconstruction remain open. No original manuscript environment is newly certified.','original_environments_added':0,'main_theorem_closed':False,'full_paper_percentage_recertified':False}
-          (root/'evidence/full-remainder-audit.json').write_text(json.dumps(report,indent=2))
+            groups[src]={n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found}
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'base':base,'changed_paths':sorted(changed),'all_previous_production_sources_unchanged':True,'strict_production_modules':10,'audited_named_declarations':82,'new_audited_named_declarations':11,'new_public_theorems':6,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'native_results':['actual linear density potential difference is first order in difference radius','actual quadratic density potential difference retains radius times difference','full physical remainder difference includes the nonlocal W3 term','L2 squared difference is bounded by an explicit multiple of radius squared times difference squared','essential-supremum difference is bounded by an explicit multiple of radius times difference'],'conditional_boundary':'These are order-zero mixed L2/L-infinity estimates for two actual perturbations. Higher Sobolev source bounds, physical constrained evolution, high-regularity local-theory existence, reconstruction and the initial-data graph remain open. No original manuscript environment is newly certified.','original_environments_added':0,'main_theorem_closed':False,'full_paper_percentage_recertified':False}
+          (root/'evidence/full-difference-audit.json').write_text(json.dumps(report,indent=2))
           print(json.dumps(report,indent=2))
           PY
       - name: Preserve sources and hashes
@@ -106,7 +117,7 @@ jobs:
           set -euo pipefail
           mkdir -p evidence
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 864a8ab550b81cd674f644ec0280176ac8b0bc4e HEAD > evidence/full-remainder.patch
+          git diff 1c8b2519627653ac07d6ae5a39de406ae9af5b1f HEAD > evidence/full-difference.patch
           git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
       - uses: actions/upload-artifact@v4
         if: always()
