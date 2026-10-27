@@ -24,6 +24,13 @@ jobs:
           curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           "$HOME/.elan/bin/lean" --version | tee evidence/compiler.txt
+      - uses: actions/cache/restore@v4
+        id: project-cache
+        with:
+          path: .lake
+          key: hbl-final-bridge-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-final-bridge-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
       - name: Resolve fixed dependencies
         shell: bash
         run: |
@@ -86,3 +93,8 @@ jobs:
           name: hbl-final-bridge-${{ github.sha }}
           path: evidence
           retention-days: 14
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .lake
+          key: ${{ steps.project-cache.outputs.cache-primary-key }}

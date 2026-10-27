@@ -20,8 +20,6 @@ No fixed point, shooting graph, blow-up solution, or final rate is assumed.
 
 noncomputable section
 set_option autoImplicit false
--- Unfold definitionally equal product/subtype instance paths during elaboration.
--- This does not change kernel checking, theorem hypotheses, or the axiom set.
 set_option backward.isDefEq.respectTransparency false
 
 open Set MeasureTheory Filter
@@ -61,9 +59,9 @@ theorem weightedThresholdTail_hasDerivAt
       (weightedThresholdSource B s0 p q s) s := by
   have hF := weightedThresholdSource_continuous B s0 p hs0 q
   have hInt := weightedThresholdSource_integrable B s0 p hs0 hp q
-  simpa only [weightedThresholdTail] using
-    (neg_Ioi_integral_hasDerivAt
-      (weightedThresholdSource B s0 p q) hF hInt hs)
+  unfold weightedThresholdTail
+  exact neg_Ioi_integral_hasDerivAt
+    (weightedThresholdSource B s0 p q) hF hInt hs
 
 /-- The finite-profile threshold forcing tail has the same exact derivative. -/
 theorem weightedThresholdForcingTail_hasDerivAt
@@ -71,8 +69,8 @@ theorem weightedThresholdForcingTail_hasDerivAt
     (hF : Continuous F) (hInt : IntegrableOn F (Ioi s0))
     (hs : s0 < s) :
     HasDerivAt (weightedThresholdForcingTail F) (F s) s := by
-  simpa only [weightedThresholdForcingTail] using
-    (neg_Ioi_integral_hasDerivAt F hF hInt hs)
+  unfold weightedThresholdForcingTail
+  exact neg_Ioi_integral_hasDerivAt F hF hInt hs
 
 /-- Conditional strong centre equation for the retained threshold feedback tail. -/
 theorem weightedCenterFeedbackTail_strong
@@ -103,9 +101,9 @@ theorem weightedCenterFeedbackTail_strong
   have hInt : ∀ r, s0 ≤ r →
       IntegrableOn (fun t => S.standard.U r t (F t)) (Ioi r) := by
     intro r hr
-    simpa only [F, weightedCenterFeedbackSource] using
-      (weightedCenterFeedbackSource_integrable
-        S.standard E hs0 hp hnu hL hEcont hE a hr)
+    change IntegrableOn (weightedCenterFeedbackSource S.standard E p a r) (Ioi r)
+    exact weightedCenterFeedbackSource_integrable
+      S.standard E hs0 hp hnu hL hEcont hE a hr
   simpa only [F, centerDuhamelTail, weightedCenterFeedbackTail,
     weightedCenterFeedbackSource] using
     (strongCenterDuhamel_certified S F hFcont hInt hs)
@@ -146,9 +144,9 @@ theorem weightedCenterNonlinearTail_strong
   have hInt : ∀ r, s0 ≤ r →
       IntegrableOn (fun t => S.standard.U r t (F t)) (Ioi r) := by
     intro r hr
-    simpa only [F, weightedCenterNonlinearSource] using
-      (weightedCenterNonlinearSource_integrable
-        S.standard G hs0 hp hdelta hCnl hGcont hGzero hGlip q hr)
+    change IntegrableOn (weightedCenterNonlinearSource S.standard G p q r) (Ioi r)
+    exact weightedCenterNonlinearSource_integrable
+      S.standard G hs0 hp hdelta hCnl hGcont hGzero hGlip q hr
   simpa only [F, centerDuhamelTail, weightedCenterNonlinearTail,
     weightedCenterNonlinearSource] using
     (strongCenterDuhamel_certified S F hFcont hInt hs)
