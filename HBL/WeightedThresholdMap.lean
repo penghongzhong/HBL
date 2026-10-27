@@ -213,7 +213,7 @@ theorem weightedThresholdMap_norm
 theorem weightedThresholdTail_sub
     (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
     (s0 p : ℝ) (hs0 : 0 < s0) (hp : 1 < p)
-    (q r : CenterWeightedPath s0 p) (s : ℝ) :
+    (q r : CenterWeightedPath s0 p) (s : ℝ) (hs : s0 ≤ s) :
     weightedThresholdTail B s0 p q s -
         weightedThresholdTail B s0 p r s =
       weightedThresholdTail B s0 p (q - r) s := by
@@ -227,8 +227,8 @@ theorem weightedThresholdTail_sub
     funext t
     rw [Pi.sub_apply, ← map_sub]
     simp only [unweightPathGlobal, BoundedContinuousFunction.sub_apply, smul_sub]
-  have hiqs := hiq.mono_set (Ioi_subset_Ioi (le_refl s))
-  have hirs := hir.mono_set (Ioi_subset_Ioi (le_refl s))
+  have hiqs := hiq.mono_set (Ioi_subset_Ioi hs)
+  have hirs := hir.mono_set (Ioi_subset_Ioi hs)
   rw [sub_eq_add_neg, ← neg_add, ← integral_add]
   · rw [← integral_neg]
     congr 1
@@ -255,7 +255,7 @@ theorem weightedThresholdMap_difference_norm
       weightedThresholdValue B s0 p r s‖ ≤ _
   have htail :=
     weightedThresholdTail_bound B s0 p hs0 hp (q - r) s.2
-  have hsub := weightedThresholdTail_sub B s0 p hs0 hp q r (s : ℝ)
+  have hsub := weightedThresholdTail_sub B s0 p hs0 hp q r (s : ℝ) s.2
   have hspos : 0 < (s : ℝ) := hs0.trans_le s.2
   have hval :
       weightedThresholdValue B s0 p q s -
