@@ -44,7 +44,7 @@ theorem propagated_source_measurable
   have hs : Continuous (fun t => E t (a t - b t)) :=
     hE.clm_apply (ha.sub hb)
   have hp : Continuous (fun t => (t, E t (a t - b t))) :=
-    continuous_id.prod_mk hs
+    continuous_id.prodMk hs
   exact ((CE.continuous_action s).comp hp).aestronglyMeasurable.restrict
 
 /-- The standard centre-evolution boundary and the verified feedback source
