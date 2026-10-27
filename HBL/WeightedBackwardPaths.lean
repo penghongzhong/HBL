@@ -144,6 +144,44 @@ def unweightThresholdPath (s0 p : ℝ)
     ℝ × ℝ :=
   unweightPath (p - 1) s0 a s
 
+def unweightThresholdPathGlobal (s0 p : ℝ)
+    (a : ThresholdWeightedPath s0 p) (t : ℝ) : ℝ × ℝ :=
+  unweightPathGlobal (p - 1) s0 a t
+
+theorem unweightThresholdPathGlobal_continuous
+    (s0 p : ℝ) (hs0 : 0 < s0)
+    (a : ThresholdWeightedPath s0 p) :
+    Continuous (unweightThresholdPathGlobal s0 p a) := by
+  exact unweightPathGlobal_continuous (p - 1) s0 hs0 a
+
+theorem unweightThresholdPathGlobal_norm_bound
+    (s0 p : ℝ) (hs0 : 0 < s0)
+    (a : ThresholdWeightedPath s0 p)
+    {t : ℝ} (ht : s0 ≤ t) :
+    ‖unweightThresholdPathGlobal s0 p a t‖ ≤
+      ‖a‖ * t ^ (1 - p) := by
+  have h := unweightPathGlobal_norm_bound (p - 1) s0 hs0 a ht
+  have he : -(p - 1) = 1 - p := by ring
+  simpa only [unweightThresholdPathGlobal, he] using h
+
+theorem unweightThresholdPathGlobal_difference_bound
+    (s0 p : ℝ) (hs0 : 0 < s0)
+    (a b : ThresholdWeightedPath s0 p)
+    {t : ℝ} (ht : s0 ≤ t) :
+    ‖unweightThresholdPathGlobal s0 p a t -
+        unweightThresholdPathGlobal s0 p b t‖ ≤
+      ‖a - b‖ * t ^ (1 - p) := by
+  have h := unweightPathGlobal_norm_bound (p - 1) s0 hs0 (a - b) ht
+  have heq :
+      unweightThresholdPathGlobal s0 p a t -
+          unweightThresholdPathGlobal s0 p b t =
+        unweightPathGlobal (p - 1) s0 (a - b) t := by
+    unfold unweightThresholdPathGlobal unweightPathGlobal
+    simp only [BoundedContinuousFunction.sub_apply, smul_sub]
+  rw [heq]
+  have he : -(p - 1) = 1 - p := by ring
+  simpa only [he] using h
+
 theorem unweightThresholdPath_norm_bound
     (s0 p : ℝ) (hs0 : 0 < s0)
     (a : ThresholdWeightedPath s0 p) (s : LateTime s0) :
@@ -169,6 +207,7 @@ theorem unweightThresholdPath_difference_bound
 #print axioms unweightPath_continuous
 #print axioms unweightPath_norm_bound
 #print axioms unweightPath_difference_bound
+#print axioms unweightThresholdPathGlobal_difference_bound
 #print axioms unweightThresholdPath_difference_bound
 
 end HBL.MainBackward
