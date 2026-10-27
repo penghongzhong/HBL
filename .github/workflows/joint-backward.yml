@@ -28,7 +28,7 @@ jobs:
           python3 - <<'PY'
           import pathlib, subprocess, re, textwrap
           base='aa38439a818d7acddfac87af6158d7d6fcff10fb'
-          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','.github/workflows/joint-backward.yml'}
+          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','.github/workflows/joint-backward.yml'}
           delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert delta <= allowed, delta-allowed
           p=pathlib.Path('HBL/JointBackwardContraction.lean').read_text()
@@ -60,12 +60,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz 2>&1 | tee evidence/build.log
+          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz HBL.MainBackwardAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/JointBackwardContraction.lean 2>&1 | tee evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/PropagatedFeedbackTail.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterEvolutionBoundary.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterCoercivity.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/ResidualDecayFromLipschitz.lean 2>&1 | tee -a evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/MainBackwardAudit.lean 2>&1 | tee -a evidence/strict.log
           grep -q "HBL.MainBackward.two_stage_backward_fixed_point.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.propagatedFeedbackTail_difference_weighted.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.standardCenter_feedback_lipschitz.*depends on axioms" evidence/strict.log
