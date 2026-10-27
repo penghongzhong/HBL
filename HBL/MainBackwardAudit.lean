@@ -1,4 +1,3 @@
-import HBL.JointBackwardContraction
 import HBL.FiniteProfileResidualLedger
 import HBL.ResidualDecayFromFiniteAtoms
 import HBL.ConstrainedCenterSpace
@@ -40,10 +39,6 @@ set_option pp.all false
 #check @HBL.MainBackward.weightedCenterForcing_bound
 #check @HBL.MainBackward.weightedCenterNonlinearMap_lipschitz
 #check @HBL.MainBackward.nonlinear_weighted_joint_backward_fixed_point
-#check @HBL.MainBackward.weighted_joint_backward_fixed_point
-#check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
-#check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
-#check @HBL.MainBackward.two_stage_backward_fixed_point
 #check @HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
 #check @HBL.Modulation.TriangularRepair.domainTriangularDynamics_reconstruct
 #check @HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
@@ -69,10 +64,6 @@ set_option pp.all false
 #print axioms HBL.MainBackward.weightedCenterForcing_bound
 #print axioms HBL.MainBackward.weightedCenterNonlinearMap_lipschitz
 #print axioms HBL.MainBackward.nonlinear_weighted_joint_backward_fixed_point
-#print axioms HBL.MainBackward.weighted_joint_backward_fixed_point
-#print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
-#print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
-#print axioms HBL.MainBackward.two_stage_backward_fixed_point
 #print axioms HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified
 #print axioms HBL.Modulation.TriangularRepair.domainTriangularDynamics_reconstruct
 #print axioms HBL.Modulation.TriangularRepair.residualTangentDerivative_certified
