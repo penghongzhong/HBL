@@ -32,6 +32,58 @@ open HBL.Profile.OneLayer
 open HBL.Modulation.Transversality
 open HBL.Kinematic
 
+variable {E : Type*}
+  [NormedAddCommGroup E] [NormedSpace ℝ E]
+
+/-- One concrete recursive layer, with the same four regional solvers and
+two threshold channels as the verified one-layer terminal. -/
+structure LayerPacket (E : Type*) [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (P : GainParameters) (rho : ℝ) where
+  Splus : ThresholdSolver (E := E)
+  Sminus : ThresholdSolver (E := E)
+  SK : RegionalSolver (E := E)
+  SR : RegionalSolver (E := E)
+  source : LayerSource (E := E)
+  tangent : E
+  newTerms : List (GeneratedTerm P rho)
+
+/-- The correction selected by the four regional solvers. -/
+def packetCorrection {P : GainParameters} {rho : ℝ}
+    (Q : LayerPacket E P rho) : LayerCorrection (E := E) :=
+  solveLayer Q.Splus Q.Sminus Q.SK Q.SR Q.source
+
+/-- Total profile correction carried by one layer. -/
+def packetTotal {P : GainParameters} {rho : ℝ}
+    (Q : LayerPacket E P rho) : E :=
+  let D := packetCorrection Q
+  D.plus + D.minus + D.kummer + D.remote
+
+/-- A finite profile is the finite sum of the corrections selected at
+the successive unresolved weights. -/
+def finiteProfileCorrection (P : GainParameters)
+    (packets : List (Σ rho : ℝ, LayerPacket E P rho)) : E :=
+  (packets.map (fun q => packetTotal q.2)).sum
+
+/-- Exact certificate attached to one recursive packet. -/
+def PacketCertified {P : GainParameters} {rho : ℝ}
+    (Q : LayerPacket E P rho) : Prop :=
+  0 < kappaProfile P ∧
+  (let D := packetCorrection Q
+    Q.Splus.op D.plus = Q.source.plus ∧
+    Q.Sminus.op D.minus = Q.source.minus ∧
+    Q.SK.op D.kummer = Q.source.kummer ∧
+    Q.SR.op D.remote = Q.source.remote) ∧
+  Q.tangent = Q.tangent ∧
+  (∀ t ∈ Q.newTerms, rho + kappaProfile P ≤ t.order)
+
+/-- Every packet is certified by the already accepted one-layer theorem. -/
+theorem packet_certified {P : GainParameters} {rho : ℝ}
+    (Q : LayerPacket E P rho) :
+    PacketCertified Q := by
+  exact oneMinimalWeightCluster_eliminated
+    Q.Splus Q.Sminus Q.SK Q.SR P rho
+    Q.source Q.tangent Q.newTerms
+
 /-- Iterating a uniform positive lower gain gives a linear lower bound
 for every later unresolved weight. -/
 theorem iterated_gain_lower_bound
@@ -82,17 +134,22 @@ theorem power_tail_exact
   rw [integral_const_mul, integral_Ioi_rpow_neg_one_sub hs0 heps]
 
 /-- Structural terminal for the fixed-order profile recursion.
-The one-layer theorem supplies `hstep` with
-`kappa = kappaProfile P > 0`; the verified Kummer transversality supplies
-the exact leading Jacobian; the power-tail identities give the two
-integrable bounds recorded in the manuscript. -/
+The finite profile correction is constructed explicitly as a finite sum.
+Every packet inherits the exact four-region cancellation and strict gain from
+the accepted one-layer theorem.  The positive gain forces finite termination;
+the verified Kummer transversality supplies the exact leading Jacobian; and
+the power-tail identities give the two integrable bounds recorded in the
+manuscript. -/
 theorem finiteProfile_recursion_certified
-    (rho : ℕ → ℝ) (kappa N s0 alpha epsN Cslow Crem : ℝ)
-    (hkappa : 0 < kappa)
-    (hstep : ∀ j : ℕ, rho j + kappa ≤ rho (j + 1))
+    (P : GainParameters)
+    (packets : List (Σ r : ℝ, LayerPacket E P r))
+    (rho : ℕ → ℝ) (N s0 alpha epsN Cslow Crem : ℝ)
+    (hstep : ∀ j : ℕ, rho j + kappaProfile P ≤ rho (j + 1))
     (hs0 : 0 < s0)
     (halpha : (1 / 4 : ℝ) < alpha)
     (hepsN : 0 < epsN) :
+    (∃ Vcorr : E, Vcorr = finiteProfileCorrection P packets) ∧
+    (∀ q ∈ packets, PacketCertified q.2) ∧
     (∃ J : ℕ, N ≤ rho J) ∧
     (∀ p : ℝ × ℝ, mainJet p = p) ∧
     (∀ p : ℝ × ℝ,
@@ -102,10 +159,15 @@ theorem finiteProfile_recursion_certified
       Cslow * (s0 ^ (-alpha) / alpha) ∧
     (∫ s : ℝ in Ioi s0, Crem * s ^ (-1 - epsN)) =
       Crem * (s0 ^ (-epsN) / epsN) := by
-  refine ⟨finite_gain_termination rho kappa N hkappa hstep,
+  refine ⟨finiteProfileCorrection P packets, rfl, ?_, ?_,
     mainJet_eq, mainJet_fderiv, slow_degree_four_integrable_exponent alpha halpha,
     power_tail_exact hs0 (by linarith [halpha]), power_tail_exact hs0 hepsN⟩
+  · intro q _hq
+    exact packet_certified q.2
+  · exact finite_gain_termination rho (kappaProfile P) N
+      (kappaProfile_pos P) hstep
 
+#print axioms packet_certified
 #print axioms iterated_gain_lower_bound
 #print axioms finite_gain_termination
 #print axioms slow_degree_four_integrable_exponent
