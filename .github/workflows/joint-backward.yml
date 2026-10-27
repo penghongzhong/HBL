@@ -28,7 +28,7 @@ jobs:
           python3 - <<'PY'
           import pathlib, subprocess, re, textwrap
           base='aa38439a818d7acddfac87af6158d7d6fcff10fb'
-          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','.github/workflows/joint-backward.yml'}
+          allowed={'HBL/JointBackwardContraction.lean','HBL/PropagatedFeedbackTail.lean','HBL/CenterEvolutionBoundary.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
           delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert delta <= allowed, delta-allowed
           p=pathlib.Path('HBL/JointBackwardContraction.lean').read_text()
@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz HBL.MainBackwardAudit HBL.MainRateSelection HBL.BlowupNonextension 2>&1 | tee evidence/build.log
+          lake build HBL.JointBackwardContraction HBL.PropagatedFeedbackTail HBL.CenterEvolutionBoundary HBL.CenterCoercivity HBL.ResidualDecayFromLipschitz HBL.MainBackwardAudit HBL.MainRateSelection HBL.BlowupNonextension HBL.ParametricFixedPointC1 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/JointBackwardContraction.lean 2>&1 | tee evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/PropagatedFeedbackTail.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterEvolutionBoundary.lean 2>&1 | tee -a evidence/strict.log
@@ -69,6 +69,7 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/MainBackwardAudit.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/MainRateSelection.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/BlowupNonextension.lean 2>&1 | tee -a evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/ParametricFixedPointC1.lean 2>&1 | tee -a evidence/strict.log
           grep -q "HBL.MainBackward.two_stage_backward_fixed_point.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.propagatedFeedbackTail_difference_weighted.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.standardCenter_feedback_lipschitz.*depends on axioms" evidence/strict.log
@@ -76,6 +77,7 @@ jobs:
           grep -q "HBL.MainBackward.retained_feedback_coefficient_bound_from_residual.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.selectedPhysicalRate_eq_two_iff.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.no_strong_limit_of_separated_profile.*depends on axioms" evidence/strict.log
+          grep -q "HBL.MainBackward.contracting_fixed_point_has_C1_local_graph.*depends on axioms" evidence/strict.log
           ! grep -q "sorryAx" evidence/strict.log
           echo "PASS: generic two-stage backward contraction plus propagated feedback gain"
       - uses: actions/upload-artifact@v4
