@@ -72,6 +72,7 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedThresholdMap.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedCenterFeedbackMap.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedCenterNonlinearMap.lean 2>&1 | tee -a evidence/strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedCenterNonlinearMap.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/WeightedJointBackward.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/CenterCoercivity.lean 2>&1 | tee -a evidence/strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/ResidualDecayFromLipschitz.lean 2>&1 | tee -a evidence/strict.log
@@ -91,6 +92,7 @@ jobs:
           grep -q "HBL.MainBackward.unweightThresholdPath_difference_bound.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.weightedThresholdMap_lipschitz.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.weightedCenterFeedbackMap_lipschitz.*depends on axioms" evidence/strict.log
+          grep -q "HBL.MainBackward.weightedCenterNonlinearMap_lipschitz.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.weightedCenterNonlinearMap_lipschitz.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.nonlinear_weighted_joint_backward_fixed_point.*depends on axioms" evidence/strict.log
           grep -q "HBL.MainBackward.weighted_joint_backward_fixed_point.*depends on axioms" evidence/strict.log
