@@ -14,6 +14,7 @@ allowed as affine translations; they do not change the contraction constant.
 
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 namespace HBL.MainBackward
 
@@ -23,6 +24,19 @@ def affineWeightedThresholdMap
     (a0 : ThresholdWeightedPath s0 p)
     (q : CenterWeightedPath s0 p) : ThresholdWeightedPath s0 p :=
   a0 + weightedThresholdMap B s0 p hs0 hp q
+
+/-- Translation by the prescribed threshold path preserves the already
+proved Lipschitz bound of the actual threshold reconstruction. -/
+theorem affineWeightedThresholdMap_lipschitz
+    (B : ConstrainedCenterSpace →L[ℝ] (ℝ × ℝ))
+    (s0 p : ℝ) (hs0 : 0 < s0) (hp : 1 < p)
+    (a0 : ThresholdWeightedPath s0 p) :
+    LipschitzWith (Real.toNNReal (‖B‖ / (p - 1)))
+      (affineWeightedThresholdMap B s0 p hs0 hp a0) := by
+  apply LipschitzWith.of_dist_le_mul
+  intro q r
+  simpa only [affineWeightedThresholdMap, dist_add_left] using
+    (weightedThresholdMap_lipschitz B s0 p hs0 hp).dist_le_mul q r
 
 /-- Exact Lipschitz constant of the full repaired centre self-map:
 threshold feedback followed by threshold reconstruction, plus the direct
@@ -136,8 +150,18 @@ theorem fullWeightedCenterSelfMap_difference_norm
   rw [hid]
   calc
     ‖(Cfb (A q) - Cfb (A r)) + (CnlMap q-CnlMap r)‖
-        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r‖ :=
-          norm_add_le _ _
+        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r‖ := by
+      have hN : 0 ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q - CnlMap r‖ := by
+        rw [BoundedContinuousFunction.norm_def, BoundedContinuousFunction.norm_def]
+        exact add_nonneg dist_nonneg dist_nonneg
+      apply (BoundedContinuousFunction.norm_le
+        (f := (Cfb (A q) - Cfb (A r)) + (CnlMap q - CnlMap r)) hN).2
+      intro t
+      change ‖(Cfb (A q) - Cfb (A r)) t + (CnlMap q - CnlMap r) t‖ ≤ _
+      exact (norm_add_le ((Cfb (A q) - Cfb (A r)) t)
+        ((CnlMap q - CnlMap r) t)).trans
+          (add_le_add ((Cfb (A q) - Cfb (A r)).norm_coe_le_norm t)
+            ((CnlMap q - CnlMap r).norm_coe_le_norm t))
     _ ≤ (centerFeedbackLipschitzConstant CE p nu L * (‖B‖/(p-1))) *
           ‖q-r‖ +
         centerNonlinearLipschitzConstant CE p delta Cnl * ‖q-r‖ :=
@@ -232,7 +256,6 @@ theorem nonlinear_weighted_joint_backward_fixed_point
     apply Prod.ext
     · exact hzqstar
     · rw [hza,hzqstar]
-      rfl
 
 #print axioms affineWeightedThresholdMap_lipschitz
 #print axioms weightedJointLipschitzConstant
