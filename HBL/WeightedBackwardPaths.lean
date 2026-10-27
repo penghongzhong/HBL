@@ -133,6 +133,13 @@ theorem unweightPath_difference_bound
 abbrev CenterWeightedPath (s0 p : ℝ) :=
   WeightedPath s0 ConstrainedCenterSpace
 
+theorem centerWeightedPath_dist_eq_norm_sub
+    (s0 p : ℝ) (q r : CenterWeightedPath s0 p) :
+    dist q r = ‖q - r‖ := by
+  rw [BoundedContinuousFunction.dist_eq_iSup,
+    BoundedContinuousFunction.norm_eq_iSup_norm]
+  simp only [BoundedContinuousFunction.sub_apply, dist_eq_norm_sub]
+
 /-- Threshold path: a(s)=s^{1-p} ahat(s). -/
 abbrev ThresholdWeightedPath (s0 p : ℝ) :=
   WeightedPath s0 (ℝ × ℝ)
