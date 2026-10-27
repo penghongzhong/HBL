@@ -39,7 +39,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.CoupledThresholdMap
-          lake env lean --trust=0 -DwarningAsError=true HBL/CoupledThresholdMap.lean | tee strict.log
+          lake build HBL.WeightedThresholdSelfCoupling HBL.CoupledThresholdMap HBL.FullyCoupledWeightedBackward
+          lake env lean --trust=0 -DwarningAsError=true HBL/WeightedThresholdSelfCoupling.lean | tee strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/CoupledThresholdMap.lean | tee -a strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/FullyCoupledWeightedBackward.lean | tee -a strict.log
           grep -q "HBL.MainBackward.coupledThresholdMap_lipschitz.*depends on axioms" strict.log
+          grep -q "HBL.MainBackward.fullyCoupledWeightedBackward_existsUnique.*depends on axioms" strict.log
           ! grep -q "sorryAx" strict.log
