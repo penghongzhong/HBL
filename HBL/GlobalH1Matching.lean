@@ -180,13 +180,14 @@ theorem globalH1Matching_certified
       nu ≤ bIn - gIn * rIn ∧
       nu ≤ bK - gK * rK ∧
       nu ≤ bRem - gRem * rRem) ∧
+    0 < nuE ∧
     ‖D.profile + err‖ ≤
       (CIn + CK + CRem) * s ^ (-nuE) + CErr * s ^ (-M) ∧
     ‖physicalGradientRealization (physicalEnergyEquiv.symm D.profile)‖ ^ 2 =
       (4 * Real.pi) * ‖D.profile‖ ^ 2 ∧
     Tendsto monopoleMovingCutoffGradientSeminorm (𝓝 (0 : ℝ)) (𝓝 0) := by
   refine ⟨choose_three_region_scales bIn bK bRem gIn gK gRem hbIn hbK hbRem,
-    ?_, physical_gradient_energy_of_radial_coordinate D.profile,
+    hnu, ?_, physical_gradient_energy_of_radial_coordinate D.profile,
     monopoleMovingCutoffGradientSeminorm_tendsto_zero⟩
   exact three_region_with_error_bound D err s nuE
     (bIn - gIn * rhoIn) (bK - gK * rhoK) (bRem - gRem * rhoRem)
