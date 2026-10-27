@@ -96,7 +96,7 @@ jobs:
           pathlib.Path('evidence/audit.json').write_text(json.dumps({
             'existing_target':'prop:one-layer-stage3',
             'new_numbered_environments':0,
-            'structural_terminal':names[-1],
+            'structural_terminal':'HBL.Profile.OneLayer.oneMinimalWeightCluster_eliminated',
             'native_charge_uniqueness':True,
             'native_five_gain_classification':True,
             'standard_regional_solver_boundary_explicit':True,
