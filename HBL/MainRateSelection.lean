@@ -19,7 +19,7 @@ namespace HBL.MainBackward
 def selectedPhysicalRate (mu : ℝ) : ℝ := 2 * mu + 1 / 2
 
 theorem selectedPhysicalRate_contDiff :
-    ContDiff ℝ ∞ selectedPhysicalRate := by
+    ContDiff ℝ 1 selectedPhysicalRate := by
   unfold selectedPhysicalRate
   fun_prop
 
@@ -32,8 +32,8 @@ theorem selectedPhysicalRate_deriv :
     deriv selectedPhysicalRate = fun _ : ℝ => 2 := by
   funext mu
   have h : HasDerivAt selectedPhysicalRate 2 mu := by
-    unfold selectedPhysicalRate
-    convert ((hasDerivAt_id mu).const_mul 2).add_const (1 / 2) using 1 <;> ring
+    simpa [selectedPhysicalRate, mul_comm] using
+      ((hasDerivAt_id mu).const_mul 2).add_const (1 / 2)
   exact h.deriv
 
 #print axioms selectedPhysicalRate_contDiff
