@@ -235,7 +235,9 @@ theorem weightedThresholdTail_sub
           (∫ t in Ioi s, weightedThresholdSource B s0 p r t) =
         ∫ t in Ioi s, weightedThresholdSource B s0 p (q - r) t := by
     rw [← integral_sub hiqs hirs]
-    rw [hsrc]
+    apply integral_congr_ae
+    filter_upwards with t
+    simpa only [Pi.sub_apply] using congrFun hsrc t
   unfold weightedThresholdTail
   rw [← hInt]
   abel
@@ -290,8 +292,17 @@ theorem weightedThresholdMap_lipschitz
   apply LipschitzWith.of_dist_le_mul
   intro q r
   have hnon : 0 ≤ ‖B‖ / (p - 1) := by positivity
+  rw [Real.coe_toNNReal _ hnon]
   have h := weightedThresholdMap_difference_norm B s0 p hs0 hp q r
-  simpa only [Real.coe_toNNReal _ hnon, ← dist_eq_norm_sub] using h
+  have hd := centerWeightedPath_dist_eq_norm_sub s0 p q r
+  calc
+    dist (weightedThresholdMap B s0 p hs0 hp q)
+        (weightedThresholdMap B s0 p hs0 hp r)
+        = ‖weightedThresholdMap B s0 p hs0 hp q -
+            weightedThresholdMap B s0 p hs0 hp r‖ := by
+              rw [dist_eq_norm_sub]
+    _ ≤ (‖B‖ / (p - 1)) * ‖q - r‖ := h
+    _ = (‖B‖ / (p - 1)) * dist q r := by rw [hd]
 
 #print axioms weightedThresholdSource_integrable
 #print axioms weightedThresholdTail_bound
