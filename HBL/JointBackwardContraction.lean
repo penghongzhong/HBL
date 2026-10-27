@@ -45,9 +45,8 @@ The first term is the propagated threshold feedback; the second is the
 quadratic/higher Hartree remainder on a shrinking weighted ball. -/
 def jointBackwardProductWithNonlinear
     (p nu delta CU L CN R B s : ℝ) : ℝ :=
-  (B / (p - 1)) *
-    ((CU * L) / (p + nu - 2) * s ^ (2 - nu) +
-      (CU * CN * R) / (p + delta) * s ^ (-delta))
+  ((CU * L) / (p + nu - 2) * s ^ (2 - nu)) * (B / (p - 1)) +
+    (CU * CN * R) / (p + delta) * s ^ (-delta)
 
 theorem jointBackwardProductWithNonlinear_tendsto_zero
     (p nu delta CU L CN R B : ℝ)
@@ -68,9 +67,9 @@ theorem jointBackwardProductWithNonlinear_tendsto_zero
       (tendsto_rpow_neg_atTop hdelta).const_mul
         ((CU * CN * R) / (p + delta))
   unfold jointBackwardProductWithNonlinear
-  have hsum := hfb.add hnl
-  have hprod := hsum.const_mul (B / (p - 1))
-  simpa only [mul_zero, mul_assoc] using hprod
+  have hprod := hfb.mul_const (B / (p - 1))
+  have hsum := hprod.add hnl
+  simpa only [zero_mul, add_zero] using hsum
 
 theorem eventually_jointBackwardProductWithNonlinear_lt_one
     (p nu delta CU L CN R B : ℝ)
