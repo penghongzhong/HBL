@@ -1,0 +1,6 @@
+{
+  "source_commit": "f70c290500d825d3969f85a4e1f4bf1b7d1acde7",
+  "errors": [
+    "error: HBL/WeightedJointBackward.lean:154:10: Type mismatch\n  norm_add_le ?m.457 ?m.458\nhas type\n  ‖@HAdd.hAdd ?m.455 ?m.455 ?m.455 (@instHAdd ?m.455 SeminormedAddGroup.toAddGroup.toAddZeroClass.toAddZero.toAdd)\n        ?m.457 ?m.458‖ ≤\n    ‖?m.457‖ + ‖?m.458‖\nbut is expected to have type\n  ‖@HAdd.hAdd (CenterWeightedPath s0 p) (CenterWeightedPath s0 p) (CenterWeightedPath s0 p)\n        (@instHAdd (CenterWeightedPath s0 p) BoundedContinuousFunction.instAdd) (Cfb (A q) - Cfb (A r))\n        (CnlMap q - CnlMap r)‖ ≤\n    ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q - CnlMap r‖"
+  ]
+}
