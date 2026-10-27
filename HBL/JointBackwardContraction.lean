@@ -47,7 +47,7 @@ def jointBackwardProductWithNonlinear
     (p nu delta CU L CN R B s : ℝ) : ℝ :=
   (B / (p - 1)) *
     ((CU * L) / (p + nu - 2) * s ^ (2 - nu) +
-      CN * R * s ^ (-delta))
+      (CU * CN * R) / (p + delta) * s ^ (-delta))
 
 theorem jointBackwardProductWithNonlinear_tendsto_zero
     (p nu delta CU L CN R B : ℝ)
@@ -61,10 +61,12 @@ theorem jointBackwardProductWithNonlinear_tendsto_zero
     simpa only [he, mul_zero] using
       (tendsto_rpow_neg_atTop (show 0 < nu - 2 by linarith)).const_mul
         ((CU * L) / (p + nu - 2))
-  have hnl : Tendsto (fun s : ℝ => CN * R * s ^ (-delta))
+  have hnl : Tendsto
+      (fun s : ℝ => (CU * CN * R) / (p + delta) * s ^ (-delta))
       atTop (𝓝 0) := by
     simpa only [mul_zero] using
-      (tendsto_rpow_neg_atTop hdelta).const_mul (CN * R)
+      (tendsto_rpow_neg_atTop hdelta).const_mul
+        ((CU * CN * R) / (p + delta))
   unfold jointBackwardProductWithNonlinear
   have hsum := hfb.add hnl
   have hprod := hsum.const_mul (B / (p - 1))
