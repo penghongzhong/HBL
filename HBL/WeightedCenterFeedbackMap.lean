@@ -28,6 +28,9 @@ structure StandardConstrainedCenterPropagator (s0 : ℝ) where
   boundConst : ℝ
   bound_nonneg : 0 ≤ boundConst
   bound : ∀ s t, s0 ≤ s → s ≤ t → ‖U s t‖ ≤ boundConst
+  orbit_continuous :
+    ∀ s : ℝ, ∀ F : ℝ → ConstrainedCenterSpace,
+      Continuous F → Continuous (fun t => U s t (F t))
   duhamel_continuous :
     ∀ F : ℝ → ConstrainedCenterSpace,
       Continuous F →
@@ -110,16 +113,9 @@ theorem weightedCenterFeedbackSource_integrable
   have hmeas :
       AEStronglyMeasurable (weightedCenterFeedbackSource CE E p a s)
         (volume.restrict (Ioi s)) := by
-    have hUmeas :
-        AEStronglyMeasurable
-          (fun t => CE.U s t (E t (unweightThresholdPathGlobal s0 p a t)))
-          (volume.restrict (Ioi s)) := by
-      -- Strong measurability is part of the standard propagator regularity
-      -- encoded by the Duhamel-continuity boundary; obtain it from continuity
-      -- of the integrand whenever the propagator is evaluated on a continuous source.
-      exact (hprim.aestronglyMeasurable.restrict).clm_apply
-        (Filter.Eventually.of_forall fun _ => (CE.U s _).continuous)
-    exact hUmeas
+    exact (CE.orbit_continuous s
+      (fun t => E t (unweightThresholdPathGlobal s0 p a t)) hprim)
+        .aestronglyMeasurable.restrict
   apply hmajor.mono' hmeas
   filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
   have hsrc := weightedCenterPrimitiveSource_bound E hs0 hL hE a (hs.trans ht.le)
