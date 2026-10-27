@@ -5,6 +5,7 @@ import HBL.CenterDuhamelEstimates
 import HBL.FiniteProfileResidualLedger
 import HBL.ResidualDecayFromFiniteAtoms
 import HBL.ConstrainedCenterSpace
+import HBL.WeightedBackwardPaths
 import HBL.CenterCoercivity
 import HBL.ResidualDecayFromLipschitz
 import HBL.RetainedThresholdBackward
@@ -28,6 +29,7 @@ set_option pp.all false
 #check @HBL.Profile.ResidualLedger.parametricResidualSum_eventually_lipschitz
 #check @HBL.MainBackward.retained_feedback_bound_from_finite_atoms
 #check @HBL.MainBackward.constrainedCenter_moving_coercive
+#check @HBL.MainBackward.unweightThresholdPath_difference_bound
 #check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #check @HBL.MainBackward.two_stage_backward_fixed_point
@@ -50,6 +52,7 @@ set_option pp.all false
 #print axioms HBL.Profile.ResidualLedger.parametricResidualSum_eventually_lipschitz
 #print axioms HBL.MainBackward.retained_feedback_bound_from_finite_atoms
 #print axioms HBL.MainBackward.constrainedCenter_moving_coercive
+#print axioms HBL.MainBackward.unweightThresholdPath_difference_bound
 #print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
 #print axioms HBL.MainBackward.two_stage_backward_fixed_point
