@@ -113,8 +113,22 @@ theorem parametric_contraction_fixed_point_C1
   dsimp [H] at hy0
   exact sub_eq_zero.mp hy0
 
+/-- Composition of a C1 shooting functional with a C1 fixed-point
+graph remains C1. -/
+theorem shootingFunctional_along_C1_fixedPoint
+    {P X Y : Type*}
+    [NormedAddCommGroup P] [NormedSpace ℝ P] [CompleteSpace P]
+    [NormedAddCommGroup X] [NormedSpace ℝ X] [CompleteSpace X]
+    [NormedAddCommGroup Y] [NormedSpace ℝ Y]
+    (Gamma : P × X → Y) (psi : P → X) (p : P)
+    (hGamma : ContDiffAt ℝ 1 Gamma (p, psi p))
+    (hpsi : ContDiffAt ℝ 1 psi p) :
+    ContDiffAt ℝ 1 (fun y => Gamma (y, psi y)) p := by
+  exact hGamma.comp p (contDiffAt_id.prodMk hpsi)
+
 #print axioms id_sub_isInvertible_of_norm_lt_one
 #print axioms contracting_fixed_point_has_C1_local_graph
 #print axioms parametric_contraction_fixed_point_C1
+#print axioms shootingFunctional_along_C1_fixedPoint
 
 end HBL.MainBackward
