@@ -31,8 +31,11 @@ old_triangle = '''        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r
           norm_add_le _ _
 '''
 new_triangle = '''        ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q-CnlMap r‖ := by
+      have hN : 0 ≤ ‖Cfb (A q) - Cfb (A r)‖ + ‖CnlMap q - CnlMap r‖ := by
+        rw [BoundedContinuousFunction.norm_def, BoundedContinuousFunction.norm_def]
+        exact add_nonneg dist_nonneg dist_nonneg
       apply (BoundedContinuousFunction.norm_le
-        (add_nonneg (norm_nonneg _) (norm_nonneg _))).2
+        (f := (Cfb (A q) - Cfb (A r)) + (CnlMap q - CnlMap r)) hN).2
       intro t
       change ‖(Cfb (A q) - Cfb (A r)) t + (CnlMap q - CnlMap r) t‖ ≤ _
       exact (norm_add_le ((Cfb (A q) - Cfb (A r)) t)
