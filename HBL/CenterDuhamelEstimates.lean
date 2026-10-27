@@ -84,7 +84,12 @@ theorem propagatedNonlinearTail_difference_weighted
   calc
     ‖∫ t in Ioi s, U s t (G t (q t) - G t (r t))‖
         ≤ (CU * CN * R * D) / (p + delta) * s ^ (-p - delta) := by
-          nlinarith only [hraw, hden]
+          calc
+            ‖∫ t in Ioi s, U s t (G t (q t) - G t (r t))‖
+                ≤ (CU * CN * R * D) *
+                    (s ^ (-p - delta) / (p + delta)) := hraw
+            _ = (CU * CN * R * D) / (p + delta) *
+                  s ^ (-p - delta) := by ring
     _ = (CU * CN * R * D) / (p + delta) *
           (s ^ (-delta) * s ^ (-p)) := by rw [hpow]
     _ ≤ (CU * CN * R * D) / (p + delta) *
@@ -149,7 +154,10 @@ theorem propagatedProfileForcing_weighted
   calc
     ‖∫ t in Ioi s, U s t (F t)‖
         ≤ (CU * CF)/(N-1) * s^(1-N) := by
-          nlinarith only [hraw,hNm1]
+          calc
+            ‖∫ t in Ioi s, U s t (F t)‖
+                ≤ (CU * CF) * (s^(1-N)/(N-1)) := hraw
+            _ = (CU * CF)/(N-1) * s^(1-N) := by ring
     _ = (CU * CF)/(N-1) * (s^(p+1-N) * s^(-p)) := by rw [hpow]
     _ ≤ (CU * CF)/(N-1) * (s0^(p+1-N) * s^(-p)) := by
           exact mul_le_mul_of_nonneg_left
