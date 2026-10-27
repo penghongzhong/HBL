@@ -1,0 +1,36 @@
+import HBL.JointBackwardContraction
+import HBL.PropagatedFeedbackTail
+import HBL.CenterEvolutionBoundary
+import HBL.CenterCoercivity
+import HBL.ResidualDecayFromLipschitz
+import HBL.RetainedThresholdBackward
+import HBL.UnstableShootingTerminal
+import HBL.GlobalH1Matching
+import HBL.KinematicPhysicalTimeAsymptotics
+
+set_option pp.universes false
+set_option pp.all false
+
+#check @HBL.MainBackward.center_coercive_under_small_form_perturbation
+#check @HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
+#check @HBL.MainBackward.standardCenter_feedback_lipschitz
+#check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
+#check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
+#check @HBL.MainBackward.two_stage_backward_fixed_point
+#check @HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified
+#check @HBL.Modulation.Unstable.revisedUnstableShootingManuscriptEnvironment_closed
+#check @HBL.Profile.GlobalH1.globalH1Matching_certified
+#check @HBL.Kinematic.physicalSliceLambda_rate_error_at_terminal
+#check @HBL.Kinematic.physicalSliceGamma_log_error_at_terminal
+
+#print axioms HBL.MainBackward.center_coercive_under_small_form_perturbation
+#print axioms HBL.MainBackward.retained_feedback_coefficient_bound_from_residual
+#print axioms HBL.MainBackward.standardCenter_feedback_lipschitz
+#print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
+#print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
+#print axioms HBL.MainBackward.two_stage_backward_fixed_point
+#print axioms HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified
+#print axioms HBL.Modulation.Unstable.revisedUnstableShootingManuscriptEnvironment_closed
+#print axioms HBL.Profile.GlobalH1.globalH1Matching_certified
+#print axioms HBL.Kinematic.physicalSliceLambda_rate_error_at_terminal
+#print axioms HBL.Kinematic.physicalSliceGamma_log_error_at_terminal
