@@ -234,7 +234,7 @@ theorem weightedCenterFeedbackValue_continuous
   have hpow :
       ContinuousAt (fun t : LateTime s0 => ((t : ℝ) ^ p)) s := by
     exact (Real.continuousAt_rpow_const (s : ℝ) p
-      (Or.inl hspos.ne')).comp s continuousAt_subtype_val
+      (Or.inl hspos.ne')).comp continuousAt_subtype_val
   exact hpow.smul htail.continuousAt
 
 def centerFeedbackLipschitzConstant
