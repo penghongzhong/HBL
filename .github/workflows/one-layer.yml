@@ -61,7 +61,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.OneLayerElimination 2>&1 | tee evidence/build.log
+          lake build HBL.OneLayerElimination HBL.OneLayerEliminationAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/OneLayerElimination.lean 2>&1 | tee evidence/strict-one-layer.log
           lake env lean --trust=0 -DwarningAsError=true HBL/OneLayerEliminationAudit.lean > evidence/one-layer-types-and-axioms.txt
       - name: Exact statement and axiom audit
