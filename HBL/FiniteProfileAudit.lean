@@ -6,6 +6,7 @@ import HBL.KinematicTailEstimates
 set_option pp.universes false
 set_option pp.all false
 
+#check @HBL.Profile.FiniteProfile.packet_certified
 #check @HBL.Profile.FiniteProfile.iterated_gain_lower_bound
 #check @HBL.Profile.FiniteProfile.finite_gain_termination
 #check @HBL.Profile.FiniteProfile.slow_degree_four_integrable_exponent
@@ -15,6 +16,7 @@ set_option pp.all false
 #check @HBL.Modulation.Transversality.manuscript_transversality_environment_closed
 #check @HBL.Kinematic.integral_Ioi_rpow_neg_one_sub
 
+#print axioms HBL.Profile.FiniteProfile.packet_certified
 #print axioms HBL.Profile.FiniteProfile.iterated_gain_lower_bound
 #print axioms HBL.Profile.FiniteProfile.finite_gain_termination
 #print axioms HBL.Profile.FiniteProfile.slow_degree_four_integrable_exponent
