@@ -50,7 +50,13 @@ theorem fixedBubble_growthCoordinate_hasDerivAt
       (S.e0 * S.growthCoordinate (v s) + S.growthCoordinate (F s)) s := by
   have h := S.growthCoordinate.hasFDerivAt.comp_hasDerivAt s hv
   convert h using 1
-  rw [map_add, S.growth_generator]
+  calc
+    S.growthCoordinate (S.generator ⟨v s, hvdom⟩ + F s) =
+        S.growthCoordinate (S.generator ⟨v s, hvdom⟩) +
+          S.growthCoordinate (F s) := map_add _ _ _
+    _ = S.e0 * S.growthCoordinate (v s) +
+          S.growthCoordinate (F s) := by
+      rw [S.growth_generator]
 
 /-- The fixed Hamiltonian decay coordinate satisfies the scalar -e0 equation. -/
 theorem fixedBubble_decayCoordinate_hasDerivAt
@@ -62,7 +68,13 @@ theorem fixedBubble_decayCoordinate_hasDerivAt
       (-S.e0 * S.decayCoordinate (v s) + S.decayCoordinate (F s)) s := by
   have h := S.decayCoordinate.hasFDerivAt.comp_hasDerivAt s hv
   convert h using 1
-  rw [map_add, S.decay_generator]
+  calc
+    S.decayCoordinate (S.generator ⟨v s, hvdom⟩ + F s) =
+        S.decayCoordinate (S.generator ⟨v s, hvdom⟩) +
+          S.decayCoordinate (F s) := map_add _ _ _
+    _ = -S.e0 * S.decayCoordinate (v s) +
+          S.decayCoordinate (F s) := by
+      rw [S.decay_generator]
 
 /-- Algebraic splitting of the moving perturbation into a correction to the
 hyperbolic rate and the projected total source. -/
