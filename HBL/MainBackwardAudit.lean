@@ -8,6 +8,7 @@ import HBL.ConstrainedCenterSpace
 import HBL.WeightedBackwardPaths
 import HBL.WeightedThresholdMap
 import HBL.WeightedCenterFeedbackMap
+import HBL.WeightedCenterNonlinearMap
 import HBL.WeightedJointBackward
 import HBL.CenterCoercivity
 import HBL.ResidualDecayFromLipschitz
@@ -35,6 +36,8 @@ set_option pp.all false
 #check @HBL.MainBackward.unweightThresholdPath_difference_bound
 #check @HBL.MainBackward.weightedThresholdMap_lipschitz
 #check @HBL.MainBackward.weightedCenterFeedbackMap_lipschitz
+#check @HBL.MainBackward.weightedCenterNonlinearMap_lipschitz
+#check @HBL.MainBackward.nonlinear_weighted_joint_backward_fixed_point
 #check @HBL.MainBackward.weighted_joint_backward_fixed_point
 #check @HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #check @HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
@@ -61,6 +64,8 @@ set_option pp.all false
 #print axioms HBL.MainBackward.unweightThresholdPath_difference_bound
 #print axioms HBL.MainBackward.weightedThresholdMap_lipschitz
 #print axioms HBL.MainBackward.weightedCenterFeedbackMap_lipschitz
+#print axioms HBL.MainBackward.weightedCenterNonlinearMap_lipschitz
+#print axioms HBL.MainBackward.nonlinear_weighted_joint_backward_fixed_point
 #print axioms HBL.MainBackward.weighted_joint_backward_fixed_point
 #print axioms HBL.MainBackward.jointBackwardProductWithNonlinear_tendsto_zero
 #print axioms HBL.MainBackward.eventually_jointBackwardProductWithNonlinear_lt_one
