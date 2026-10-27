@@ -36,15 +36,16 @@ private theorem constants_nonneg {M r J : ℝ}
     0 ≤ quadraticPotentialConstant M r ∧
     0 ≤ fullRemainderHConstant M r J := by
   have hn := regularRadiationKernel_checks.2.1
-  unfold linearPotentialConstant quadraticPotentialConstant
-    fullRemainderHConstant densityQuadraticConstant
+  unfold fullRemainderHConstant linearPotentialConstant
+    quadraticPotentialConstant densityQuadraticConstant
   exact ⟨by positivity, by positivity, by positivity⟩
 
 private theorem background_density_integrable (w : Space → ℝ)
     (hw4 : Integrable (fun y : Space => |w y| ^ 4)) :
     Integrable (quarticDensity (fun y => (w y : ℂ))) := by
+  have hc : Integrable (fun y : Space => ((|w y| ^ 4 : ℝ) : ℂ)) := hw4.ofReal
   change Integrable (fun y : Space => ((‖(w y : ℂ)‖ ^ 4 : ℝ) : ℂ))
-  simpa only [Complex.norm_real, Real.norm_eq_abs] using hw4.ofReal
+  simpa only [Complex.norm_real, Real.norm_eq_abs] using hc
 
 private theorem background_potential_bound (w : Space → ℝ)
     (hw4 : Integrable (fun y : Space => |w y| ^ 4))
@@ -76,7 +77,6 @@ private theorem linear_density_scaled_bound (a : ℝ) (z : ℂ)
   have he : (r ^ 2 * |a| ^ 4 + ‖z‖ ^ 2) / r =
       r * |a| ^ 4 + r⁻¹ * ‖z‖ ^ 2 := by
     field_simp
-    ring
   rw [he] at hc
   simp only [Complex.norm_real, Real.norm_eq_abs, abs_mul, abs_pow,
     abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 4)]
@@ -103,6 +103,7 @@ theorem densityLinear_potential_small
     exact linear_density_scaled_bound (w y) (h y) hM hr hy
   have hI := integral_mono_ae hi.norm
     (((hw4.const_mul r).add (hh.norm.integrable_sq.const_mul r⁻¹)).const_mul (2 * M)) hdom
+  simp only [Pi.add_apply] at hI
   rw [integral_const_mul,
     integral_add (hw4.const_mul r) (hh.norm.integrable_sq.const_mul r⁻¹),
     integral_const_mul, integral_const_mul] at hI
@@ -147,7 +148,7 @@ private theorem cubic_bounds (a : ℝ) (z : ℂ) {M r : ℝ}
     linarith
   have hlin : ‖cubicLinear a z‖ ≤ 3 * M ^ 2 * ‖z‖ := by
     calc
-      _ = |a| ^ 2 * ‖2 * (z.re : ℂ) + z‖ := by simp [cubicLinear, norm_mul, norm_pow]
+      _ = |a| ^ 2 * ‖2 * (z.re : ℂ) + z‖ := by simp [cubicLinear, norm_pow]
       _ ≤ M ^ 2 * (3 * ‖z‖) := mul_le_mul ha2 hsum (norm_nonneg _) (sq_nonneg M)
       _ = _ := by ring
   have hab : ‖(a : ℂ) + z‖ ≤ M + r := by
@@ -188,7 +189,7 @@ private theorem product_sum_bound (P0 P1 PR c0 c1 cr : ℂ)
     (add_le_add ((norm_add_le c0 c1).trans (add_le_add hc0 hc1)) hcr)
   calc
     _ ≤ (‖P0 * cr‖ + ‖P1 * (c1 + cr)‖) + ‖PR * (c0 + c1 + cr)‖ :=
-      (norm_add_le _ _).trans (add_le_add_right (norm_add_le _ _) _)
+      (norm_add_le _ _).trans (add_le_add (norm_add_le _ _) le_rfl)
     _ = (‖P0‖ * ‖cr‖ + ‖P1‖ * ‖c1 + cr‖) + ‖PR‖ * ‖c0 + c1 + cr‖ := by
       simp only [norm_mul]
     _ ≤ _ := add_le_add
@@ -288,7 +289,8 @@ theorem fullRemainder_L2_bound
   have hw6 : Integrable (fun x : Space => |w x| ^ 6) := by
     apply (hw4.const_mul (M ^ 2)).mono' (hw.norm.pow 6)
     filter_upwards [h6le] with x hx
-    simpa only [Real.norm_of_nonneg (pow_nonneg (abs_nonneg _) 6)] using hx
+    simpa only [Pi.pow_apply, Real.norm_eq_abs,
+      abs_of_nonneg (pow_nonneg (abs_nonneg (w x)) 6)] using hx
   have hW6 := integral_mono_ae hw6 (hw4.const_mul (M ^ 2)) h6le
   rw [integral_const_mul] at hW6
   have hsq : ∀ᵐ x, ‖remainder κ w h x‖ ^ 2 ≤
@@ -309,9 +311,11 @@ theorem fullRemainder_L2_bound
   have hi2 : Integrable (fun x : Space => ‖remainder κ w h x‖ ^ 2) := by
     apply hD.mono' (hm.norm.pow 2)
     filter_upwards [hsq] with x hx
-    simpa only [Real.norm_of_nonneg (sq_nonneg _)] using hx
+    simpa only [Pi.pow_apply, Pi.add_apply,
+      Real.norm_of_nonneg (sq_nonneg ‖remainder κ w h x‖)] using hx
   refine ⟨(memLp_two_iff_integrable_sq_norm hm).2 hi2, ?_⟩
   have hI := integral_mono_ae hi2 hD hsq
+  simp only [Pi.add_apply] at hI
   rw [integral_const_mul,
     integral_add (hh.norm.integrable_sq.const_mul ((r * A) ^ 2))
       (hw6.const_mul ((B * r ^ 2) ^ 2)), integral_const_mul, integral_const_mul] at hI
