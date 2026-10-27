@@ -77,8 +77,11 @@ def fullThresholdCorrection (S : ThresholdSolver (E := E)) (F : E) : E :=
 theorem fullThresholdCorrection_solves
     (S : ThresholdSolver (E := E)) (F : E) :
     S.op (fullThresholdCorrection S F) = F := by
-  unfold fullThresholdCorrection normalizedCorrection compatibleSource
-  rw [map_add, map_smul, S.solve_eq]
+  have hnorm :
+      S.op (normalizedCorrection S F) = compatibleSource S F := by
+    exact S.solve_eq (compatibleSource S F) (compatibleSource_orthogonal S F)
+  rw [fullThresholdCorrection, map_add, map_smul, hnorm]
+  unfold compatibleSource
   abel
 
 theorem normalizedCorrection_normalized
@@ -207,19 +210,39 @@ def gain (P : GainParameters) : GainCause → ℝ
 
 theorem kappaProfile_pos (P : GainParameters) :
     0 < kappaProfile P := by
-  unfold kappaProfile
-  have hb : 0 < 2 * P.betaMinus - 1 := by linarith [P.beta_half]
-  positivity
+  have hb : 0 < 2 * P.betaMinus - 1 := by
+    linarith [P.beta_half]
+  simp only [kappaProfile, lt_min_iff]
+  exact ⟨P.delta_pos, P.epsFlat_pos, hb, by norm_num, P.rhoStar_pos⟩
 
 theorem kappaProfile_le_gain (P : GainParameters) (c : GainCause) :
     kappaProfile P ≤ gain P c := by
-  cases c <;> simp [kappaProfile, gain, min_le_left, min_le_right] <;>
-    exact le_trans (min_le_right _ _) (by
-      first
-      | exact le_trans (min_le_right _ _) (min_le_right _ _)
-      | exact le_trans (min_le_right _ _) (min_le_left _ _)
-      | exact min_le_left _ _
-      | exact le_trans (min_le_right _ _) (le_trans (min_le_right _ _) (min_le_left _ _)))
+  cases c with
+  | cutoff =>
+      dsimp [gain]
+      unfold kappaProfile
+      exact le_trans (min_le_right _ _)
+        (le_trans (min_le_right _ _)
+          (le_trans (min_le_right _ _) (min_le_right _ _)))
+  | parameter =>
+      dsimp [gain]
+      unfold kappaProfile
+      exact min_le_left _ _
+  | flatRadiation =>
+      dsimp [gain]
+      unfold kappaProfile
+      exact le_trans (min_le_right _ _) (min_le_left _ _)
+  | slowMonopole =>
+      dsimp [gain]
+      unfold kappaProfile
+      exact le_trans (min_le_right _ _)
+        (le_trans (min_le_right _ _) (min_le_left _ _))
+  | frobenius =>
+      dsimp [gain]
+      unfold kappaProfile
+      exact le_trans (min_le_right _ _)
+        (le_trans (min_le_right _ _)
+          (le_trans (min_le_right _ _) (min_le_left _ _)))
 
 /-- A generated term consists of one of the five actual mechanisms plus any
 further nonnegative order improvement.  Thus classification, not the desired
@@ -252,7 +275,7 @@ theorem oneMinimalWeightCluster_eliminated
     (F : LayerSource (E := E)) (tangent : E)
     (newTerms : List (GeneratedTerm P rho)) :
     0 < kappaProfile P ∧
-    (let D := solveLayer Splus Sminus SK SR F
+    (let D := solveLayer Splus Sminus SK SR F;
       Splus.op D.plus = F.plus ∧
       Sminus.op D.minus = F.minus ∧
       SK.op D.kummer = F.kummer ∧
