@@ -1,0 +1,12 @@
+{
+  "source_commit": "c0979edb2dfacf608610ed51ed7fb3ba5a56c0de",
+  "run_id": "40594415652",
+  "broad_build_errors": [],
+  "strict_targets": {
+    "KinematicPhysicalTimeInverseDeriv": [],
+    "KinematicPhysicalDynamics": [],
+    "TriangularReconstruction": [],
+    "PhysicalWeakRadial": [],
+    "WeightedJointBackward": []
+  }
+}
