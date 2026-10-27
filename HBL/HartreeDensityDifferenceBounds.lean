@@ -26,7 +26,7 @@ private theorem norm_sq_difference (z v : ℂ) :
     (abs_norm_sub_norm_le z v) (add_nonneg (norm_nonneg z) (norm_nonneg v))
 
 private theorem density_increment_bound (a : ℝ) (z : ℂ) {M r : ℝ}
-    (hM : 0 ≤ M) (hr : 0 ≤ r) (ha : |a| ≤ M) (hz : ‖z‖ ≤ r) :
+    (hM : 0 ≤ M) (_hr : 0 ≤ r) (ha : |a| ≤ M) (hz : ‖z‖ ≤ r) :
     |2 * a * z.re + ‖z‖ ^ 2| ≤ (2 * M + r) * ‖z‖ := by
   calc
     _ ≤ |2 * a * z.re| + |‖z‖ ^ 2| := abs_add_le _ _
@@ -110,13 +110,15 @@ private theorem mixed_product_integral (f g : Space → ℂ)
     rw [he]
     apply (le_div_iff₀ (mul_pos ha hb)).2
     nlinarith only [sq_nonneg (b * ‖f x‖ - a * ‖g x‖),
-      mul_nonneg (mul_nonneg ha.le hb.le) (mul_nonneg (norm_nonneg _) (norm_nonneg _))]
+      mul_nonneg (mul_nonneg ha.le hb.le)
+        (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))]
   have hd := (hf.norm.integrable_sq.const_mul (b / a)).add
     (hg.norm.integrable_sq.const_mul (a / b))
   have hi : Integrable (fun x : Space => ‖f x‖ * ‖g x‖) := by
     apply hd.mono' (hf.aestronglyMeasurable.norm.mul hg.aestronglyMeasurable.norm)
     filter_upwards with x
-    simpa only [Pi.add_apply, Real.norm_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))] using hp x
+    simpa only [Pi.add_apply, Pi.mul_apply,
+      Real.norm_of_nonneg (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))] using hp x
   refine ⟨hi, ?_⟩
   have hI := integral_mono_ae hi hd (Filter.Eventually.of_forall hp)
   simp only [Pi.add_apply] at hI
@@ -127,7 +129,7 @@ private theorem mixed_product_integral (f g : Space → ℂ)
     _ ≤ (b / a) * a ^ 2 + (a / b) * b ^ 2 :=
       add_le_add (mul_le_mul_of_nonneg_left hfa (by positivity))
         (mul_le_mul_of_nonneg_left hgb (by positivity))
-    _ = _ := by field_simp; <;> ring
+    _ = _ := by field_simp <;> ring
 
 /-- Difference estimate for the nonlocal quadratic density potential. -/
 theorem densityRemainder_potential_difference
@@ -157,27 +159,35 @@ theorem densityRemainder_potential_difference
   have bh : ∀ᵐ y, ‖densityRemainder w h y‖ ≤ D * r ^ 2 := by
     filter_upwards [hwb, hhb] with y hy hhy
     have ht := densityRemainder_pointwise_difference w h (fun _ => 0) hM hr.le y hy hhy (by simpa using hr.le)
-    simp only [densityRemainder, norm_zero, mul_zero, zero_pow (by decide : 2 ≠ 0), add_zero,
-      Complex.ofReal_zero, sub_zero] at ht
-    have hs := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) hhy 2) hD
-    dsimp [D] at hs
-    nlinarith only [ht, hs]
+    have hz : densityRemainder w (fun _ => 0) y = 0 := by simp [densityRemainder]
+    rw [hz] at ht
+    simp only [sub_zero, norm_zero, add_zero] at ht
+    calc
+      _ ≤ D * ‖h y‖ * ‖h y‖ := ht
+      _ = D * ‖h y‖ ^ 2 := by ring
+      _ ≤ _ := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) hhy 2) hD
   have bk : ∀ᵐ y, ‖densityRemainder w k y‖ ≤ D * r ^ 2 := by
     filter_upwards [hwb, hkb] with y hy hky
     have ht := densityRemainder_pointwise_difference w k (fun _ => 0) hM hr.le y hy hky (by simpa using hr.le)
-    simp only [densityRemainder, norm_zero, mul_zero, zero_pow (by decide : 2 ≠ 0), add_zero,
-      Complex.ofReal_zero, sub_zero] at ht
-    have hs := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) hky 2) hD
-    dsimp [D] at hs
-    nlinarith only [ht, hs]
+    have hz : densityRemainder w (fun _ => 0) y = 0 := by simp [densityRemainder]
+    rw [hz] at ht
+    simp only [sub_zero, norm_zero, add_zero] at ht
+    calc
+      _ ≤ D * ‖k y‖ * ‖k y‖ := ht
+      _ = D * ‖k y‖ ^ 2 := by ring
+      _ ≤ _ := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) hky 2) hD
   have ph := mixed_product_integral h (fun y => h y - k y) hh (hh.sub hk) hr hd hEh hEd
   have pk := mixed_product_integral k (fun y => h y - k y) hk (hh.sub hk) hr hd hEk hEd
   have hmajor := (ph.1.add pk.1).const_mul D
   have hI : (∫ y : Space, ‖densityRemainder w h y - densityRemainder w k y‖) ≤
       D * (4 * r * d) := by
     have hi := integral_mono_ae (ih.sub ik).norm hmajor (hpt.mono fun y hy => by
-      simpa only [Pi.add_apply, mul_add, add_mul, mul_assoc] using hy)
-    simp only [Pi.add_apply] at hi
+      change ‖densityRemainder w h y - densityRemainder w k y‖ ≤
+        D * (‖h y‖ * ‖h y - k y‖ + ‖k y‖ * ‖h y - k y‖)
+      calc
+        _ ≤ D * (‖h y‖ + ‖k y‖) * ‖h y - k y‖ := hy
+        _ = _ := by ring)
+    simp only [Pi.add_apply, Pi.sub_apply] at hi
     rw [integral_const_mul, integral_add ph.1 pk.1] at hi
     exact hi.trans (mul_le_mul_of_nonneg_left (by linarith [ph.2, pk.2]) hD)
   have hP := potential_sub_bound (densityRemainder w h) (densityRemainder w k)
