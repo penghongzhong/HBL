@@ -137,8 +137,12 @@ theorem propagatedFeedbackTail_difference_weighted
     ring
   have hmono : s ^ (2 - nu) ≤ s0 ^ (2 - nu) :=
     Real.rpow_le_rpow_of_nonpos hs0 hs (by linarith)
-  have hc : 0 ≤ (CU * L * D) / (p + nu - 2) := by
-    positivity
+  have hden : 0 < p + nu - 2 := by
+    linarith
+  have hnum : 0 ≤ CU * L * D := by
+    exact mul_nonneg (mul_nonneg hCU hL) hD
+  have hc : 0 ≤ (CU * L * D) / (p + nu - 2) :=
+    div_nonneg hnum hden.le
   rw [hpow] at h
   calc
     ‖propagatedFeedbackTail U E a b s‖
