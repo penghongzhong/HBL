@@ -44,7 +44,10 @@ theorem thresholdSelfLipschitzConstant_nonneg
     (hs0 : 0 < s0) (hp : 1 < p) (hnu : 2 < nu) (hLc : 0 ≤ Lc) :
     0 ≤ thresholdSelfLipschitzConstant s0 p nu Lc := by
   unfold thresholdSelfLipschitzConstant
-  positivity
+  have hden : 0 < p + nu - 2 := by linarith
+  have hquot : 0 ≤ Lc / (p + nu - 2) :=
+    div_nonneg hLc hden.le
+  exact mul_nonneg hquot (Real.rpow_nonneg hs0.le _)
 
 theorem thresholdSelfLipschitzConstant_tendsto_zero
     (p nu Lc : ℝ) (hnu : 2 < nu) :
@@ -182,8 +185,8 @@ theorem weightedThresholdSelfTail_continuousOn
       (intervalIntegral.differentiable_integral_of_continuous hsrc).continuous
   apply hc.continuousOn.congr
   intro s hs
-  exact (weightedThresholdSelfTail_eq_fixed
-    C hs0 hp hnu hLc hCcont hC a hs).symm
+  exact weightedThresholdSelfTail_eq_fixed
+    C hs0 hp hnu hLc hCcont hC a hs
 
 def weightedThresholdSelfValue
     (C : ℝ → (ℝ × ℝ) →L[ℝ] (ℝ × ℝ))
@@ -236,9 +239,12 @@ theorem weightedThresholdSelfValue_bound
   have hmono :
       (s : ℝ) ^ (1 - nu) ≤ s0 ^ (1 - nu) :=
     Real.rpow_le_rpow_of_nonpos hs0 s.2 (by linarith)
+  have hden : 0 < p + nu - 2 := by linarith
+  have hnum : 0 ≤ Lc * ‖a‖ :=
+    mul_nonneg hLc (norm_nonneg _)
   have hcoef :
-      0 ≤ (Lc * ‖a‖) / (p + nu - 2) := by
-    positivity
+      0 ≤ (Lc * ‖a‖) / (p + nu - 2) :=
+    div_nonneg hnum hden.le
   calc
     (s : ℝ) ^ (p - 1) * ‖weightedThresholdSelfTail C s0 p a s‖
         ≤ (s : ℝ) ^ (p - 1) *
@@ -295,11 +301,26 @@ theorem weightedThresholdSelfTail_sub
     C hs0 hp hnu hLc hCcont hC a hs
   have hib := weightedThresholdSelfSource_integrable
     C hs0 hp hnu hLc hCcont hC b hs
+  have hInt :
+      (∫ t in Ioi s, weightedThresholdSelfSource C s0 p a t) -
+          (∫ t in Ioi s, weightedThresholdSelfSource C s0 p b t) =
+        ∫ t in Ioi s, weightedThresholdSelfSource C s0 p (a - b) t := by
+    calc
+      (∫ t in Ioi s, weightedThresholdSelfSource C s0 p a t) -
+          (∫ t in Ioi s, weightedThresholdSelfSource C s0 p b t)
+          = ∫ t in Ioi s,
+              (weightedThresholdSelfSource C s0 p a t -
+                weightedThresholdSelfSource C s0 p b t) := by
+              symm
+              exact integral_sub hia hib
+      _ = ∫ t in Ioi s,
+            weightedThresholdSelfSource C s0 p (a - b) t := by
+              apply integral_congr_ae
+              filter_upwards with t
+              exact weightedThresholdSelfSource_sub C s0 p a b t
   unfold weightedThresholdSelfTail
-  rw [sub_eq_add_neg, ← neg_add, ← integral_sub hia hib]
-  congr 1
-  funext t
-  exact weightedThresholdSelfSource_sub C s0 p a b t
+  rw [← hInt]
+  abel
 
 theorem weightedThresholdSelfMap_difference_norm
     {s0 p nu Lc : ℝ}
@@ -328,7 +349,16 @@ theorem weightedThresholdSelfMap_difference_norm
         ((s : ℝ) ^ (p - 1)) •
           weightedThresholdSelfTail C s0 p (a-b) s := by
     unfold weightedThresholdSelfValue
-    rw [← smul_sub,hsub]
+    calc
+      ((s : ℝ) ^ (p - 1)) • weightedThresholdSelfTail C s0 p a s -
+          ((s : ℝ) ^ (p - 1)) • weightedThresholdSelfTail C s0 p b s =
+        ((s : ℝ) ^ (p - 1)) •
+          (weightedThresholdSelfTail C s0 p a s -
+            weightedThresholdSelfTail C s0 p b s) := by
+              exact (smul_sub _ _ _).symm
+      _ = ((s : ℝ) ^ (p - 1)) •
+          weightedThresholdSelfTail C s0 p (a-b) s :=
+            congrArg (fun x => ((s : ℝ) ^ (p - 1)) • x) hsub
   rw [hval]
   exact weightedThresholdSelfValue_bound
     C hs0 hp hnu hLc hCcont hC (a-b) s
@@ -347,9 +377,9 @@ theorem weightedThresholdSelfMap_lipschitz
   have hnon :
       0 ≤ thresholdSelfLipschitzConstant s0 p nu Lc :=
     thresholdSelfLipschitzConstant_nonneg hs0 hp hnu hLc
-  rw [dist_eq_norm,dist_eq_norm,Real.coe_toNNReal _ hnon]
-  exact weightedThresholdSelfMap_difference_norm
-    C hs0 hp hnu hLc hCcont hC a b
+  simpa [dist_eq_norm, Real.coe_toNNReal _ hnon] using
+    (weightedThresholdSelfMap_difference_norm
+      C hs0 hp hnu hLc hCcont hC a b)
 
 #print axioms thresholdSelfLipschitzConstant_tendsto_zero
 #print axioms weightedThresholdSelfTail_bound
