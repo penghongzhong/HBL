@@ -68,7 +68,7 @@ def finiteProfileCorrection (P : GainParameters)
 def PacketCertified {P : GainParameters} {rho : ℝ}
     (Q : LayerPacket E P rho) : Prop :=
   0 < kappaProfile P ∧
-  (let D := packetCorrection Q
+  (let D := packetCorrection Q;
     Q.Splus.op D.plus = Q.source.plus ∧
     Q.Sminus.op D.minus = Q.source.minus ∧
     Q.SK.op D.kummer = Q.source.kummer ∧
@@ -100,7 +100,7 @@ theorem iterated_gain_lower_bound
             = (rho 0 + (j : ℝ) * kappa) + kappa := by
                 rw [Nat.cast_succ]
                 ring
-        _ ≤ rho j + kappa := add_le_add_right ih kappa
+        _ ≤ rho j + kappa := by linarith [ih]
         _ ≤ rho (j + 1) := hstep j
 
 /-- Therefore a recursion whose unresolved weights gain at least `kappa > 0`
@@ -159,13 +159,23 @@ theorem finiteProfile_recursion_certified
       Cslow * (s0 ^ (-alpha) / alpha) ∧
     (∫ s : ℝ in Ioi s0, Crem * s ^ (-1 - epsN)) =
       Crem * (s0 ^ (-epsN) / epsN) := by
-  refine ⟨finiteProfileCorrection P packets, rfl, ?_, ?_,
-    mainJet_eq, mainJet_fderiv, slow_degree_four_integrable_exponent alpha halpha,
-    power_tail_exact hs0 (by linarith [halpha]), power_tail_exact hs0 hepsN⟩
+  constructor
+  · exact ⟨finiteProfileCorrection P packets, rfl⟩
+  constructor
   · intro q _hq
     exact packet_certified q.2
+  constructor
   · exact finite_gain_termination rho (kappaProfile P) N
       (kappaProfile_pos P) hstep
+  constructor
+  · exact mainJet_eq
+  constructor
+  · exact mainJet_fderiv
+  constructor
+  · exact slow_degree_four_integrable_exponent alpha halpha
+  constructor
+  · exact power_tail_exact hs0 (by linarith [halpha])
+  · exact power_tail_exact hs0 hepsN
 
 #print axioms packet_certified
 #print axioms iterated_gain_lower_bound
