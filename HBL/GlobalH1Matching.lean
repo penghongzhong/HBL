@@ -77,17 +77,17 @@ theorem choose_three_region_scales
     hrhoIn, hrhoK, hrhoRem, by linarith, ?_, ?_, ?_⟩
   · change m / 2 ≤ mIn
     have hle : m ≤ mIn := by
-      dsimp [m]
+      change min mIn (min mK mRem) ≤ mIn
       exact min_le_left _ _
     linarith
   · change m / 2 ≤ mK
     have hle : m ≤ mK := by
-      dsimp [m]
+      change min mIn (min mK mRem) ≤ mK
       exact (min_le_right _ _).trans (min_le_left _ _)
     linarith
   · change m / 2 ≤ mRem
     have hle : m ≤ mRem := by
-      dsimp [m]
+      change min mIn (min mK mRem) ≤ mRem
       exact (min_le_right _ _).trans (min_le_right _ _)
     linarith
 
@@ -118,8 +118,8 @@ theorem three_region_energy_bound
     hRem.trans (mul_le_mul_of_nonneg_left hpRem hCRem)
   calc
     ‖D.profile‖ = ‖D.inner + D.kummer + D.remote‖ := by rw [D.split]
-    _ ≤ ‖D.inner + D.kummer‖ + ‖D.remote‖ :=
-      norm_add_le (D.inner + D.kummer) D.remote
+    _ ≤ ‖D.inner + D.kummer‖ + ‖D.remote‖ := by
+      exact norm_add_le _ _
     _ ≤ (‖D.inner‖ + ‖D.kummer‖) + ‖D.remote‖ := by
       exact add_le_add (norm_add_le D.inner D.kummer) (le_refl ‖D.remote‖)
     _ ≤ (CIn * s ^ (-nuE) + CK * s ^ (-nuE)) +
