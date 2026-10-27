@@ -44,24 +44,25 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean Mathlib/Topology/MetricSpace/Contracting.lean Mathlib/Analysis/FunctionalSpaces/BesselPotentialSpace.lean)
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Strict actual Hartree density source estimates
+      - name: Strict full physical Hartree remainder estimates
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.HartreeDensitySourceBounds 2>&1 | tee evidence/density-build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeDensitySourceBounds.lean 2>&1 | tee evidence/density-strict.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeDensitySourceAudit.lean > evidence/density-types-and-axioms.txt 2>&1
-      - name: Recheck all previous radiation, bridge and localization targets
+          lake build HBL.HartreeFullRemainderBounds 2>&1 | tee evidence/full-remainder-build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeFullRemainderBounds.lean 2>&1 | tee evidence/full-remainder-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeFullRemainderAudit.lean > evidence/full-remainder-types-and-axioms.txt 2>&1
+      - name: Recheck all previous radiation, bridge, localization and density targets
         shell: bash
         run: |
           set -euo pipefail
-          lake build HBL.RegularRadiationFlow HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization HBL.LocalizedCenterNonlinearMap 2>&1 | tee evidence/previous-build.log
-          for name in RegularRadiationFlow StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization LocalizedCenterNonlinearMap; do
+          lake build HBL.RegularRadiationFlow HBL.StrongConstrainedCenterEvolution HBL.WeightedStrongDynamics HBL.WeightedTailIdentities HBL.HartreePhysicalLinearization HBL.LocalizedCenterNonlinearMap HBL.HartreeDensitySourceBounds 2>&1 | tee evidence/previous-build.log
+          for name in RegularRadiationFlow StrongConstrainedCenterEvolution WeightedStrongDynamics WeightedTailIdentities HartreePhysicalLinearization LocalizedCenterNonlinearMap HartreeDensitySourceBounds; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/$name.lean" 2>&1 | tee "evidence/$name.log"
           done
           lake env lean --trust=0 -DwarningAsError=true HBL/FinalBridgeAudit.lean > evidence/types-and-axioms.txt 2>&1
           lake env lean --trust=0 -DwarningAsError=true HBL/LocalizedCenterAudit.lean > evidence/localized-types-and-axioms.txt 2>&1
           lake env lean --trust=0 -DwarningAsError=true HBL/RegularRadiationFlowAudit.lean > evidence/radiation-types-and-axioms.txt 2>&1
+          lake env lean --trust=0 -DwarningAsError=true HBL/HartreeDensitySourceAudit.lean > evidence/density-types-and-axioms.txt 2>&1
       - name: Exact inventories, complete types and conditional-boundary audit
         shell: bash
         run: |
@@ -69,11 +70,11 @@ jobs:
           python3 - <<'PY'
           import pathlib,re,json,subprocess
           root=pathlib.Path('.')
-          base='24fdc7482fe64928f145d2c939cb291a071fce56'
-          permitted={'HBL/HartreeDensitySourceBounds.lean','HBL/HartreeDensitySourceAudit.lean','.github/workflows/strong-dynamics-next.yml'}
+          base='864a8ab550b81cd674f644ec0280176ac8b0bc4e'
+          permitted={'HBL/HartreeFullRemainderBounds.lean','HBL/HartreeFullRemainderAudit.lean','.github/workflows/strong-dynamics-next.yml'}
           changed=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert changed <= permitted, changed-permitted
-          inventories=[('FinalBridgeAudit','types-and-axioms.txt',20),('LocalizedCenterAudit','localized-types-and-axioms.txt',21),('RegularRadiationFlowAudit','radiation-types-and-axioms.txt',18),('HartreeDensitySourceAudit','density-types-and-axioms.txt',5)]
+          inventories=[('FinalBridgeAudit','types-and-axioms.txt',20),('LocalizedCenterAudit','localized-types-and-axioms.txt',21),('RegularRadiationFlowAudit','radiation-types-and-axioms.txt',18),('HartreeDensitySourceAudit','density-types-and-axioms.txt',5),('HartreeFullRemainderAudit','full-remainder-types-and-axioms.txt',7)]
           allowed={'propext','Classical.choice','Quot.sound'}
           groups={}
           for module,filename,count in inventories:
@@ -89,13 +90,13 @@ jobs:
             for n,axs in found:
               assert {x.strip() for x in axs.split(',') if x.strip()} <= allowed, (n,axs)
             groups[module]={n:[x.strip() for x in axs.split(',') if x.strip()] for n,axs in found}
-          source=(root/'HBL/HartreeDensitySourceBounds.lean').read_text()
+          source=(root/'HBL/HartreeFullRemainderBounds.lean').read_text()
           assert not re.search(r'\b(sorry|admit|axiom|unsafe)\b',source)
           public=re.findall(r'^(?:def|theorem) (\w+)',source,re.M)
-          checked=re.findall(r'^#check @HBL.RegularRadiation.PhysicalExpansion\.(\w+)$',(root/'HBL/HartreeDensitySourceAudit.lean').read_text(),re.M)
+          checked=re.findall(r'^#check @HBL.RegularRadiation.PhysicalExpansion\.(\w+)$',(root/'HBL/HartreeFullRemainderAudit.lean').read_text(),re.M)
           assert public==checked, (public,checked)
-          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'base':base,'changed_paths':sorted(changed),'all_previous_production_sources_unchanged':True,'strict_production_modules':7,'audited_named_declarations':64,'new_audited_named_declarations':5,'new_public_theorems':4,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'native_results':['all three physical Taylor convolution integrability conditions derived from background L4/L-infinity and perturbation L2/L-infinity bounds','actual quadratic density remainder potential has explicit L2/L-infinity control','background L2 membership is not required'],'conditional_boundary':'The new quadratic estimate is for the quartic density potential, not yet the full seven-degree remainder in the centre solver source space. Actual background/perturbation membership, high Sobolev source estimates, the constrained propagator and local-theory existence remain to be discharged in the main PDE construction.','original_environments_added':0,'main_theorem_closed':False,'full_paper_percentage_recertified':False}
-          (root/'evidence/density-source-audit.json').write_text(json.dumps(report,indent=2))
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'base':base,'changed_paths':sorted(changed),'all_previous_production_sources_unchanged':True,'strict_production_modules':8,'audited_named_declarations':71,'new_audited_named_declarations':7,'new_public_theorems':4,'trust_zero':True,'warning_as_error':True,'complete_statement_types':True,'axioms':groups,'native_results':['the linear density potential is first order in the mixed L2/L-infinity radius','the complete physical seventh-order Taylor remainder has a pointwise r*|h| plus r^2*|W|^3 bound','the complete remainder is L2 with squared norm bounded by an explicit multiple of r^4','the complete remainder has an essential-supremum bound quadratic in r','background L2 membership is not required'],'conditional_boundary':'These are zero-spatial-derivative bounds for the actual full remainder. Difference/Lipschitz bounds, higher Sobolev source estimates, actual constrained evolution, local-theory existence and PDE reconstruction remain open. No original manuscript environment is newly certified.','original_environments_added':0,'main_theorem_closed':False,'full_paper_percentage_recertified':False}
+          (root/'evidence/full-remainder-audit.json').write_text(json.dumps(report,indent=2))
           print(json.dumps(report,indent=2))
           PY
       - name: Preserve sources and hashes
@@ -105,7 +106,7 @@ jobs:
           set -euo pipefail
           mkdir -p evidence
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 24fdc7482fe64928f145d2c939cb291a071fce56 HEAD > evidence/density-source.patch
+          git diff 864a8ab550b81cd674f644ec0280176ac8b0bc4e HEAD > evidence/full-remainder.patch
           git ls-files -z '*.lean' lean-toolchain lakefile.lean lake-manifest.json '.github/workflows/*.yml' | xargs -0 sha256sum > evidence/source-hashes.sha256
       - uses: actions/upload-artifact@v4
         if: always()
