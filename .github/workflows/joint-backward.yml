@@ -31,7 +31,7 @@ jobs:
           allowed={'HBL/FiniteProfileResidualLedger.lean','HBL/ResidualDecayFromFiniteAtoms.lean','HBL/ConstrainedCenterSpace.lean','HBL/TriangularReconstruction.lean','HBL/WeightedBackwardPaths.lean','HBL/WeightedThresholdMap.lean','HBL/WeightedCenterFeedbackMap.lean','HBL/WeightedCenterNonlinearMap.lean','HBL/WeightedAffineForcing.lean','HBL/WeightedJointBackward.lean','HBL/CenterCoercivity.lean','HBL/ResidualDecayFromLipschitz.lean','HBL/MainBackwardAudit.lean','HBL/MainRateSelection.lean','HBL/BlowupNonextension.lean','HBL/ParametricFixedPointC1.lean','.github/workflows/joint-backward.yml'}
           delta=set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())
           assert delta <= allowed, delta-allowed
-          p=pathlib.Path('HBL/JointBackwardContraction.lean').read_text()
+          p=pathlib.Path('HBL/WeightedJointBackward.lean').read_text()
           clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b',clean)
           old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
