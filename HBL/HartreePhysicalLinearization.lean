@@ -60,7 +60,7 @@ theorem quartic_density_split (w : Space → ℝ) (h : Space → ℂ) (y : Space
       quarticDensity (fun x => (w x : ℂ)) y +
         densityLinear w h y + densityRemainder w h y := by
   have hbase : ‖(w y : ℂ)‖ ^ 2 = (w y) ^ 2 := by
-    simpa using norm_sq_real_add (w y) 0
+    simp
   have hfour :
       ‖(w y : ℂ) + h y‖ ^ 4 = ‖(w y : ℂ)‖ ^ 4 +
         4 * (w y) ^ 3 * (h y).re +
@@ -74,7 +74,8 @@ theorem quartic_density_split (w : Space → ℝ) (h : Space → ℂ) (y : Space
         rw [show ‖(w y : ℂ)‖ ^ 4 = (‖(w y : ℂ)‖ ^ 2) ^ 2 by ring, hbase]
         ring
   unfold quarticDensity densityLinear densityRemainder
-  exact_mod_cast hfour
+  simpa only [Complex.ofReal_add] using
+    congrArg (fun r : ℝ => (r : ℂ)) hfour
 
 /-- Actual convolution expansion; all three integrability obligations are visible. -/
 theorem potential_split (w : Space → ℝ) (h : Space → ℂ) (x : Space)
@@ -100,7 +101,10 @@ theorem potential_split (w : Space → ℝ) (h : Space → ℂ) (x : Space)
     _ = (∫ y : Space, (kernel (x - y) : ℂ) * quarticDensity (fun v => (w v : ℂ)) y) +
         (∫ y : Space, (kernel (x - y) : ℂ) * densityLinear w h y) +
         (∫ y : Space, (kernel (x - y) : ℂ) * densityRemainder w h y) := by
-      rw [integral_add (h0.add h1) hR, integral_add h0 h1]
+      exact (integral_add (h0.add h1) hR).trans
+        (congrArg (fun z : ℂ =>
+          z + ∫ y : Space, (kernel (x - y) : ℂ) * densityRemainder w h y)
+          (integral_add h0 h1))
     _ = _ := rfl
 
 def linearTerm (κ : ℝ) (w : Space → ℝ) (h : Space → ℂ) (x : Space) : ℂ :=
