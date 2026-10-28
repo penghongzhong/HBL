@@ -33,16 +33,18 @@ theorem perturbationBlock_isInvertible
     dsimp [K]
     linarith
   have hneg : ‖-K‖ < 1 := by simpa using hK
-  have hu : IsUnit ((1 : E →L[ℝ] E) - (-K)) := by
-    apply isUnit_one_sub_of_norm_lt_one
-    simpa using hneg
+  have hu0 : IsUnit (1 - (-K) : E →L[ℝ] E) :=
+    NormedRing.IsUnit.one_sub_of_norm_lt_one hneg
   have heq : (1 - (-K) : E →L[ℝ] E) = perturbationBlock G H := by
-    dsimp [K, perturbationBlock]
+    unfold perturbationBlock
+    dsimp [K]
     abel
-  rw [heq] at hu
-  rcases hu with ⟨u, hu⟩
+  rw [heq] at hu0
+  rcases hu0 with ⟨u, hu⟩
   refine ⟨ContinuousLinearEquiv.unitsEquiv ℝ E u, ?_⟩
-  simpa only [ContinuousLinearEquiv.coe_unitsEquiv] using hu
+  ext x
+  rw [ContinuousLinearEquiv.unitsEquiv_apply]
+  exact congrArg (fun T : E →L[ℝ] E => T x) hu
 
 def perturbedInverse
     (G H : E →L[ℝ] E) : E →L[ℝ] E :=
