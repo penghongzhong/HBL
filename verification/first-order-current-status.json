@@ -1,8 +1,8 @@
 {
-  "source_commit": "7edd1aeb4059ae47500144df927e2d2a6256efe8",
-  "run_id": "40615764580",
+  "source_commit": "9fe2e19de2b6659db42236d51b3c5a91a5aaf3a0",
+  "run_id": "40616165743",
   "baseline": "53274ac98628f02ee0a69d36223c7677f663802c",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
@@ -183,20 +183,49 @@
       }
     },
     "HartreeFirstOrderSource": {
-      "strict_exit": 1,
-      "audit_passed": false,
-      "source_sha256": "3729284241cd0752afaa8749e706ae9c49c3d33eb963788a7dbcf9acbb996f1d",
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "ae8c6e8a44f19cb74a33d21d191fe76558cb862ffe504228d2b67c904c0fb7e9",
       "declarations": [
         "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact",
         "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact",
         "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source"
-      ]
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
     }
   },
   "baseline_Lean_sources_byte_identical": 324,
   "new_target_cached_files_removed": [
+    ".lake/build/lib/lean/HBL/HartreeFirstOrderSource.ilean",
+    ".lake/build/lib/lean/HBL/HartreeFirstOrderSource.olean.hash",
+    ".lake/build/lib/lean/HBL/HartreeFirstOrderSource.ilean.hash",
+    ".lake/build/lib/lean/HBL/HartreeFirstOrderSource.olean",
+    ".lake/build/lib/lean/HBL/HartreeFirstOrderSource.trace",
+    ".lake/build/ir/HBL/HartreeFirstOrderSource.c",
+    ".lake/build/ir/HBL/HartreeFirstOrderSource.c.hash",
     ".lake/build/ir/HBL/HartreeFirstOrderSource.setup.json"
   ],
-  "new_source_sha256": "3729284241cd0752afaa8749e706ae9c49c3d33eb963788a7dbcf9acbb996f1d",
-  "build_exit": 0
+  "new_source_sha256": "ae8c6e8a44f19cb74a33d21d191fe76558cb862ffe504228d2b67c904c0fb7e9",
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "strict_named_declarations": 26,
+  "new_public_theorems": 3,
+  "trust_zero": true,
+  "warning_as_error": true
 }

@@ -1,3 +1,1 @@
-{
-  "HartreeFirstOrderSource-strict.log": "HBL/HartreeFirstOrderSource.lean:68:64: error: This simp argument is unused:\n  abs_mul\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg ‖f x‖),\n    abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n'HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]"
-}
+{}
