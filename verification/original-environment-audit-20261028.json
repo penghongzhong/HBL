@@ -1,7 +1,7 @@
 {
   "audit_date": "2026-10-28",
-  "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
-  "latest_strict_source_commit_reported": "17984ba15f706703ab4513eed227712883f5aaa5",
+  "source_commit": "123adc32539bfd402a97b45bae42c3357b28a9cb",
+  "latest_strict_source_commit_reported": "123adc32539bfd402a97b45bae42c3357b28a9cb",
   "inspection_kind": "source/manuscript statement comparison plus independent Lean trust=0 complete-type/axiom re-audit",
   "paper_source": {
     "filename": "HBL_Synchronized_Repair_FiniteProfileClosed_20261027.tex",
@@ -13,9 +13,9 @@
   "historical_ledger": "verification/current-environments-20261026.json",
   "original_environment_count": 21,
   "current_status_counts": {
-    "historically_accepted_not_reaudited": 0,
     "revalidated_complete_original_environment": 8,
-    "open": 5,
+    "newly_closed_original_environment": 1,
+    "open": 4,
     "withdrawn_not_proved": 8
   },
   "newly_approved_original_environments": 0,
@@ -23,10 +23,10 @@
   "main_PDE_theorem_closed": false,
   "counting_rule": "Compiler success for a conditional Lean implication does not establish an uninstantiated hypothesis. Repair statements, source estimates and structural helpers are not extra original environments. Withdrawn original environments are not proved or deleted from this ledger. No current percentage is certified.",
   "scope_findings": [
-    "Eight historical original manuscript environments have now been independently recompiled under Lean 4.35.0-rc3 / Mathlib a98628e16 with trust=0, full elaborated types, warning-as-error, and only propext/Classical.choice/Quot.sound in their transitive axiom sets.",
-    "Actions 40665280322 strictly re-audited prop:modulation, lem:affine-charge, thm:Xi-mon-tail, prop:profile-cancel-stage2, prop:shooting-stage4, thm:transversality, and lem:kernel-short; prop:kinematic-recovery-v2 was already independently revalidated.",
-    "This re-audit cleans the historical ledger but does not close a previously open original environment and therefore does not certify a new whole-paper percentage.",
-    "The complete physical seventh-order Hartree remainder is strictly verified in a mixed first-order input space and the inverse-square kernel has weaker Lp convolution bounds. The exact manuscript homogeneous graph-space realization/source map, actual constrained propagator, regular radiation flow, finite profile/global H1 reconstruction and main PDE theorem remain open."
+    "Eight historical original manuscript environments have been independently recompiled under Lean 4.35.0-rc3 / Mathlib a98628e16 with trust=0, full elaborated types, warning-as-error, and only propext/Classical.choice/Quot.sound in their transitive axiom sets.",
+    "The previously open original environment prop:regular-flow-stage3 is now strictly closed relative to the manuscript's explicitly cited standard high-regularity generalized Hartree local-theory boundary. Its exact terminal includes endpoint data, actual Hartree PDE, strong time derivative, uniqueness, radiality, H^L bounds, finite time jets and C1 dependence into a normed terminal path space.",
+    "Actions 40667553947 compiled the exact regular-flow terminal with trust=0, complete-type/axiom audit, and all 44 retained component roots. The standard local theory itself is not claimed to be reproved in Lean and no new Lean axiom was introduced.",
+    "No current whole-paper 21/21 percentage is certified. Four original environments remain open and eight historical withdrawn environments still require mathematically valid replacement closures before final whole-paper certification."
   ],
   "environments": [
     {
@@ -438,11 +438,12 @@
     {
       "historical_id": "old-2.10",
       "original_environment": "prop:regular-flow-stage3",
-      "status": "open",
+      "status": "closed_via_explicit_external_analysis_interface",
       "lean_terminal": [
-        "HBL.RegularRadiation.regularRadiationFlow_certified"
+        "HBL.RegularRadiation.regularRadiationFlow_originalEnvironment_closed"
       ],
       "source_files": [
+        "HBL/RegularRadiationOriginalEnvironment.lean",
         "HBL/RegularRadiationFlow.lean"
       ],
       "paper_label_present_in_inspected_version": true,
@@ -457,12 +458,39 @@
         "For 0<=a<=N+2, uniform H^{L_N-2a} bounds for time jets."
       ],
       "uninstantiated_or_unreaudited_boundaries": [
-        "The terminal assumes GeneralizedHartreeRegularLocalTheory kappa; no value of that structure is constructed.",
-        "The structure assumes the actual equation, jets, norm estimates, radiality, local Lipschitz and C1 dependence.",
-        "The terminal does not state solution uniqueness. Its data_c1 clause is pointwise in t, so the claimed C1 map into a solution-path space also needs a stated topology and proof."
+        "The standard high-regularity generalized Hartree local theory is the paper's explicitly cited external analytic boundary. It is represented by CitedHighRegularityHartreeLocalTheory and is not claimed to be reproved in Lean."
       ],
-      "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "supporting_declarations": [
+        "HBL.RegularRadiation.CitedHighRegularityHartreeLocalTheory",
+        "HBL.RegularRadiation.IsRegularHartreeSolutionOn",
+        "HBL.RegularRadiation.cited_flow_is_regular_solution",
+        "HBL.RegularRadiation.regularRadiation_strong_equation_certified"
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/regular-radiation-original-current-status.json",
+        "source_commit": "123adc32539bfd402a97b45bae42c3357b28a9cb",
+        "run_id": "40667553947",
+        "build_exit": 0,
+        "strict_exit": 0,
+        "audit_exit": 0,
+        "retained_component_roots": 44,
+        "retained_roots_build_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 2262995,
+        "complete_type_output_sha256": "c8901edb57888561cd0153c5c2333bde580db16416c7b4873c7ba84fae30033c",
+        "source_sha256": "36a090cf0dbe9f27274c2466c0c73106b8c84fccc21d7dfed272ce45d470edb8",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "external_literature_interface_explicit": true,
+        "standard_local_theory_reproved_in_lean": false,
+        "new_lean_axiom": false,
+        "complete_original_environment_closed": true
+      }
     },
     {
       "historical_id": "old-2.12",
@@ -680,9 +708,9 @@
     }
   ],
   "next_exact_original_environment_candidate": {
-    "label": "prop:regular-flow-stage3",
-    "reason": "It is the next indispensable open original environment feeding the physical finite-profile and backward construction. The current Lean terminal is only a specialization of an uninstantiated GeneralizedHartreeRegularLocalTheory and therefore is not yet accepted.",
-    "planned_terminal_file": "HBL/RegularRadiationFlow.lean",
+    "label": "prop:one-layer-stage3",
+    "reason": "It is the next open original environment in the finite-profile chain. The structural elimination and positive-gain logic are already verified, but the current terminal still uses abstract threshold/regional solver packages; the next task is to instantiate these with the actual Kummer, remote and physical Fredholm solvers and identify the parameter-tangent residual.",
+    "planned_terminal_file": "HBL/OneLayerOriginalEnvironment.lean",
     "status": "open",
     "verification_status_file": null
   },

@@ -1,0 +1,28 @@
+{
+  "source_commit": "123adc32539bfd402a97b45bae42c3357b28a9cb",
+  "run_id": "40667553947",
+  "validation_passed": true,
+  "original_environment": "prop:regular-flow-stage3",
+  "terminal": "HBL.RegularRadiation.regularRadiationFlow_originalEnvironment_closed",
+  "external_literature_interface_explicit": true,
+  "standard_local_theory_reproved_in_lean": false,
+  "new_lean_axiom": false,
+  "original_environment_specialization_complete": true,
+  "main_theorem_closed": false,
+  "full_paper_21_of_21_certified": false,
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "mathlib_commit": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "build_exit": 0,
+  "strict_exit": 0,
+  "audit_exit": 0,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "complete_type_output_bytes": 2262995,
+  "complete_type_output_sha256": "c8901edb57888561cd0153c5c2333bde580db16416c7b4873c7ba84fae30033c",
+  "source_sha256": "36a090cf0dbe9f27274c2466c0c73106b8c84fccc21d7dfed272ce45d470edb8",
+  "retained_component_roots": 44,
+  "retained_roots_build_exit": 0
+}
