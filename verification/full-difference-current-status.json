@@ -1,8 +1,8 @@
 {
-  "source_commit": "a4f938e89286b42073c9ec1db5e193735e656635",
-  "run_id": "40623146968",
+  "source_commit": "800e99b4adf70ba527437daa76139f8a7923b9c0",
+  "run_id": "40623601779",
   "baseline": "30c9b88b84d01af7008ad2e9bf09a918cbc83bc6",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
@@ -231,16 +231,39 @@
       }
     },
     "HartreeFullFirstOrderDifference": {
-      "strict_exit": 1,
-      "audit_passed": false,
-      "source_sha256": "0c4c0d8823bdec1e3ca1532eb594742be02529f0e21e093c8e6ea51e141ee8cc",
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "b5690200a29c2712b3b43f004b102be7bd6b27e34713be274e54d3035fde616b",
       "declarations": [
         "HBL.RegularRadiation.FullFirstOrderDifference.hartree_first_order_difference_noncompact"
-      ]
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.FullFirstOrderDifference.hartree_first_order_difference_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
     }
   },
   "baseline_Lean_sources_byte_identical": 326,
-  "target_cached_files_removed": [],
-  "new_source_sha256": "0c4c0d8823bdec1e3ca1532eb594742be02529f0e21e093c8e6ea51e141ee8cc",
-  "build_exit": 0
+  "target_cached_files_removed": [
+    ".lake/build/ir/HBL/HartreeFullFirstOrderDifference.setup.json",
+    ".lake/build/ir/HBL/HartreeFullFirstOrderDifference.c.hash",
+    ".lake/build/ir/HBL/HartreeFullFirstOrderDifference.c",
+    ".lake/build/lib/lean/HBL/HartreeFullFirstOrderDifference.ilean",
+    ".lake/build/lib/lean/HBL/HartreeFullFirstOrderDifference.ilean.hash",
+    ".lake/build/lib/lean/HBL/HartreeFullFirstOrderDifference.olean.hash",
+    ".lake/build/lib/lean/HBL/HartreeFullFirstOrderDifference.olean",
+    ".lake/build/lib/lean/HBL/HartreeFullFirstOrderDifference.trace"
+  ],
+  "new_source_sha256": "b5690200a29c2712b3b43f004b102be7bd6b27e34713be274e54d3035fde616b",
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "retained_component_roots": 44,
+  "strict_named_declarations": 29,
+  "new_public_theorems": 1,
+  "trust_zero": true,
+  "warning_as_error": true,
+  "prior_proof_sources_unchanged": true
 }
