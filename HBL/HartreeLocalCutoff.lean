@@ -55,8 +55,10 @@ private theorem cutoff_family :
   have hceq (n : ℕ) : c n * (2 * radius n) = 1 :=
     inv_mul_cancel₀ (ne_of_gt (mul_pos (by norm_num) (radius_pos n)))
   let χ : ℕ → Space → ℝ := fun n x => b (c n • x)
-  have hχ (n : ℕ) : ContDiff ℝ 1 (χ n) :=
-    hb.comp (contDiff_const.smul contDiff_id)
+  have hχ (n : ℕ) : ContDiff ℝ 1 (χ n) := by
+    have hs : ContDiff ℝ 1 (fun y : Space => c n • y) :=
+      (c n • ContinuousLinearMap.id ℝ Space).contDiff
+    exact hb.comp hs
   have hχc (n : ℕ) : HasCompactSupport (χ n) := by
     apply HasCompactSupport.of_support_subset_isCompact
       (isCompact_closedBall (0 : Space) (4 * radius n))
@@ -216,7 +218,12 @@ theorem potential_hasFDerivAt_noncompact
       ‖fderiv ℝ (q n) y - fderiv ℝ ρ y‖ ≤ ‖fderiv ℝ ρ y‖ + B * ‖ρ y‖ := by
     have he : fderiv ℝ (q n) y - fderiv ℝ ρ y =
         (χ n y - 1) • fderiv ℝ ρ y + (fderiv ℝ (χ n) y).smulRight (ρ y) := by
-      rw [hqd, sub_smul, one_smul]
+      rw [hqd]
+      ext v
+      change χ n y • (fderiv ℝ ρ y v) + (fderiv ℝ (χ n) y v) • ρ y -
+        fderiv ℝ ρ y v =
+        (χ n y - 1) • (fderiv ℝ ρ y v) + (fderiv ℝ (χ n) y v) • ρ y
+      rw [sub_smul, one_smul]
       abel
     rw [he]
     calc
@@ -248,7 +255,9 @@ theorem potential_hasFDerivAt_noncompact
       (∫ y : Space, ‖fderiv ℝ ρ y‖) + B * (∫ y : Space, ‖ρ y‖) := by
     have ht := integral_mono_ae ((hqDi n).sub hDi).norm (hDi.norm.add (hi.norm.const_mul B))
       (Filter.Eventually.of_forall (he1 n))
-    simpa only [integral_add hDi.norm (hi.norm.const_mul B), integral_const_mul] using ht
+    simp only [Pi.add_apply, Pi.sub_apply] at ht
+    rw [integral_add hDi.norm (hi.norm.const_mul B), integral_const_mul] at ht
+    exact ht
   have hv (n : ℕ) (z : Space) (hz : ‖z‖ ≤ radius n) :
       ‖potential (q n) z - potential ρ z‖ ≤
         ((radius n) ^ 2)⁻¹ * (∫ y : Space, ‖ρ y‖) := by
