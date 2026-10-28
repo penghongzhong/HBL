@@ -53,7 +53,7 @@ private theorem eight_norm_square {E : Type*} [NormedAddCommGroup E]
       eight_square ‖v 0‖ ‖v 1‖ ‖v 2‖ ‖v 3‖ ‖v 4‖ ‖v 5‖ ‖v 6‖ ‖v 7‖
   exact hs.trans hb
 
-private theorem eight_L2_combination {E : Type*}
+theorem eight_L2_combination {E : Type*}
     [NormedAddCommGroup E] [NormedSpace ℂ E]
     (F : Fin 8 → Space → E) (c : Fin 8 → ℂ)
     (hF : ∀ i, MemLp (F i) 2) {B S : ℝ} (_hB : 0 ≤ B)
@@ -113,7 +113,7 @@ def remainderFirstOrderConstant (κ M L J E : ℝ) : ℝ :=
     (κ ^ 2 * A ^ 2 * m ^ 2 * j +
       2 * κ ^ 2 * (B ^ 2 * m ^ 2 * j + 9 * A ^ 2 * m ^ 4 * e))
 
-private theorem affine_sample_data
+theorem affine_sample_data
     (w : Space → ℝ) (h : Space → ℂ) (hw : ContDiff ℝ 1 w) (hh : ContDiff ℝ 1 h)
     (hw4 : Integrable (fun x : Space => |w x| ^ 4))
     (hDw : MemLp (fderiv ℝ w) 2) (hh2 : MemLp h 2) (hDh : MemLp (fderiv ℝ h) 2)

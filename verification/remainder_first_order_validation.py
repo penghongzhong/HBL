@@ -11,7 +11,7 @@ GROUPS = {
  'HartreeFirstOrderSource': ('HBL.RegularRadiation.FirstOrderSource.',
   ['hartree_differential_noncompact','hartree_first_order_source_noncompact','hartree_weak_first_order_source']),
  TARGET: ('HBL.RegularRadiation.RemainderFirstOrder.',
-  ['remainderFirstOrderConstant','physical_remainder_first_order_quadratic'])
+  ['eight_L2_combination','remainderFirstOrderConstant','affine_sample_data','physical_remainder_first_order_quadratic'])
 }
 
 def main():

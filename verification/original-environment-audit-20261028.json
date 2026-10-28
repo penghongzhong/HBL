@@ -1,0 +1,567 @@
+{
+  "audit_date": "2026-10-28",
+  "source_commit": "3614e05c4525ac5b8d5fefea063eae16882dbed3",
+  "latest_strict_source_commit_reported": "036cc3fff18ca9faeecb4d33134d1c1b57334ae0",
+  "inspection_kind": "source and manuscript statement comparison; not an independent new compiler certificate",
+  "paper_source": {
+    "filename": "HBL_Synchronized_Repair_FiniteProfileClosed_20261027.tex",
+    "size_bytes": 222545,
+    "total_lines": 5628,
+    "modified_at": "2026-10-27T01:00:40.100029Z",
+    "access": "Original manuscript version inspected before the synchronized 2026-10-28 update; stored line windows refer to that inspected version. Private file identifiers are not included in the source repository."
+  },
+  "historical_ledger": "verification/current-environments-20261026.json",
+  "original_environment_count": 21,
+  "current_status_counts": {
+    "historically_accepted_not_reaudited": 7,
+    "revalidated_complete_original_environment": 1,
+    "open": 5,
+    "withdrawn_not_proved": 8
+  },
+  "newly_approved_original_environments": 0,
+  "full_paper_percentage_recertified": false,
+  "main_PDE_theorem_closed": false,
+  "counting_rule": "Compiler success for a conditional Lean implication does not establish an uninstantiated hypothesis. Repair statements, source estimates and structural helpers are not extra original environments. Withdrawn original environments are not proved or deleted from this ledger. No current percentage is certified.",
+  "scope_findings": [
+    "The inspected manuscript claims historical 19/21 in its introduction, but its conditional Lean terminals do not prove several full displayed physical statements. This source comparison does not validate that count or the later reported 20/21.",
+    "The 44 retained-root build proves buildability of that selected root closure, not exact original-statement coverage.",
+    "The synchronized-slice original environment has been strictly recompiled, checked with a complete elaborated type and allowed-axiom audit, and compared with the actual manuscript definitions and statement. All other statuses remain provisional; no whole-paper percentage is certified.",
+    "The new complete remainder theorem uses C1 representatives with finite value/differential L2 and Linfty norms. The manuscript graph space is homogeneous H1 intersect H25/16 and does not embed into this mixed space. Two new inverse-square kernel bounds remove the density L1 / gradient Linfty restriction at the convolution-estimate level only; graph embeddings, non-L1 density differentiation and the actual constrained source are still open."
+  ],
+  "environments": [
+    {
+      "historical_id": "old-2.1",
+      "original_environment": "prop:modulation",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.firstManuscriptModulationEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/FirstModulationLemma.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        445,
+        459
+      ],
+      "original_quantifiers": "For every phased, scaled bubble, in a sufficiently small radial energy neighborhood there are unique local C1 scale and phase parameters; scale is positive and phase is read modulo 2*pi.",
+      "original_conclusions": [
+        "The actual scale and phase constraints on the renormalized physical field vanish.",
+        "The Jacobian in log-scale and phase at the standard bubble is -I2."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The existing terminal is stated on ComplexRadialDotH1, an energy-coordinate model. Full alignment of the actual physical rescaling residual on the complete Sobolev space must be checked using the physical energy realization, not inferred from the terminal name."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.2",
+      "original_environment": "lem:affine-charge",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/AffineTailLemmaClosed.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        476,
+        490
+      ],
+      "original_quantifiers": "For either actual channel H_minus or H_plus, its explicit resonance psi with nonzero tail c, and F0 in the manuscript weighted L2 class.",
+      "original_conclusions": [
+        "There is exactly one alpha making the actual affine-tail source orthogonal to psi.",
+        "alpha = -<psi,F0>/c."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The Lean terminal explicitly assumes 3/2 < sigma < 2; confirm the global manuscript weighted-space convention before treating its locally unstated sigma range as matched."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.5",
+      "original_environment": "thm:Xi-mon-tail",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.Monopole.monopole_first_correction_certified"
+      ],
+      "source_files": [
+        "HBL/MonopoleFirstCorrectionCertified.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        1072,
+        1101
+      ],
+      "original_quantifiers": "With the fixed cutoff, construct the Hilbert-orthogonal Green representative h_mon and xi_mon = b_log - (pi/8)*chi_aff*r + h_mon.",
+      "original_conclusions": [
+        "xi_mon is continuous at zero, twice classically differentiable on the positive half-line, vanishes at zero and solves H_plus xi_mon = r W^3.",
+        "xi_mon = log r -(pi/8)r + d_mon + O(1/r), Xi_mon = -pi/8 +(log r+d_mon)/r + O(1/r^2)."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "Source inspection finds the fixed actual object, equation, regularity and both quantitative tails in the terminal. This audit did not independently rebuild and inspect its entire dependency closure."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.6",
+      "original_environment": "prop:profile-cancel-stage2",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/MonopoleThresholdProjection.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        1159,
+        1193
+      ],
+      "original_quantifiers": "For differentiable c and measurable b,omega with s0>0, beta>1/2, A>=0, |c|<=1 and the displayed s^(-beta), s^(-1-beta), s^(-1) bounds.",
+      "original_conclusions": [
+        "Absolute integrability of the actual radial Hartree kernel row and a uniform quadratic static residual estimate on the physical core.",
+        "Exact effective residual identity and absolute spatial integrability of the normalized threshold coordinates.",
+        "Both actual threshold coordinates belong to L1((s0,infinity))."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "This is the revised core/cutoff environment, not a global noncompact profile residual estimate. Current complete compiler/type/axiom re-audit is still required."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.7",
+      "original_environment": "prop:kinematic-recovery-v2",
+      "status": "revalidated_complete_original_environment",
+      "lean_terminal": [
+        "HBL.Kinematic.kinematicRecovery_originalEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/KinematicOriginalEnvironment.lean",
+        "HBL/KinematicSynchronizedSliceCertified.lean",
+        "HBL/KinematicPathTailDifference.lean",
+        "HBL/KinematicPathBounds.lean",
+        "HBL/KinematicSynchronizedSlice.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        1765,
+        1794
+      ],
+      "original_quantifiers": "A>0, s0>0, 0<delta<1, H>=0; continuous h on [s0,infinity) with |h(s)|<=H*s^(-delta) and (4H/(1-delta))*s0^(-delta)<=A*delta/32. A second path may use its own J and the same smallness criterion, with difference <=D*s^(-delta).",
+      "original_conclusions": [
+        "For every |kappa|<=A*s0/4 and s>=s0, A*s/2<=q_kappa[h](s)<=2*A*s and the defining tail integral is absolutely convergent.",
+        "There is exactly one admissible kappa synchronizing q/lambda^2 at s0 to the fixed reference slice.",
+        "|kappa_p[h]| <= 32*H/(delta*(1-delta))*s0^(1-delta).",
+        "|kappa_p[h]-kappa_p[k]| <= 64*D/(delta*(1-delta))*s0^(1-delta)."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
+      "supporting_declarations": [
+        "HBL.Kinematic.sliceClock_linear_bounds",
+        "HBL.Kinematic.sliceTail_integrable_of_path",
+        "HBL.Kinematic.synchronized_initial_slice_certified",
+        "HBL.Kinematic.synchronizedSliceParameter_stability"
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/kinematic-original-current-status.json",
+        "source_sha256": "aa74e4deb2b25a53b5029ef5b7115f0f0216ee0bc68d2003647f744ef1a6a839",
+        "complete_type_output_sha256": "c98e9917f9240afec7fe31414a1e9008657034e820ba188de853eb39d031c64b",
+        "strict_exit": 0,
+        "audit_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          1725,
+          1794
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
+    },
+    {
+      "historical_id": "old-5.1",
+      "original_environment": "prop:shooting-stage4",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/UnstableShootingTerminal.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        3828,
+        3861
+      ],
+      "original_quantifiers": "s0,p,e>0, F>=0; continuous scalar a,f with a>=e and |f(t)|<=F*t^(-p). For comparison, continuous b,g obey the displayed common positive rate and coefficient/source difference bounds.",
+      "original_conclusions": [
+        "The exponential integral kernel and backward tail are absolutely convergent; the tail is continuous, solves u_s=a*u+f, has the stated power bound and tends to zero.",
+        "Uniqueness among bounded scalar solutions and the exact two-background comparison bound."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The statement is a genuine scalar ODE theorem. It does not construct the physical Hamilton unstable coordinate or identify its actual coefficient/source."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-A.2",
+      "original_environment": "thm:transversality",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.Transversality.manuscript_transversality_environment_closed"
+      ],
+      "source_files": [
+        "HBL/TransversalityExact.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        4284,
+        4293
+      ],
+      "original_quantifiers": "For all real mu,theta and the actual leading Kummer indicial coefficient.",
+      "original_conclusions": [
+        "Theta^(0)(mu,theta)=(mu,theta), its derivative is I2 and the leading parameter is uniquely recoverable."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The leading indicial jet is covered. This does not prove the high-order matched Jacobian I2+o(1) or a physical initial-data chart."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-C.1",
+      "original_environment": "lem:kernel-short",
+      "status": "historically_accepted_not_reaudited",
+      "lean_terminal": [
+        "HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed"
+      ],
+      "source_files": [
+        "HBL/HartreeKernelShortRange.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        4790,
+        4803
+      ],
+      "original_quantifiers": "For the fixed actual radial Hartree kernel and all positive radii r,rho, with the stated separated or comparable radius conditions.",
+      "original_conclusions": [
+        "Symmetry and L2 membership of the two-variable kernel.",
+        "The represented L2 operator is self-adjoint, Hilbert-Schmidt and compact.",
+        "Separated-radius M^(-4)*m*<m>^(-3) and comparable-radius logarithmic bounds."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "Source inspection finds the actual kernel, weak representation, compactness, self-adjointness and both estimates in one terminal. Complete current strict rebuilding and type/axiom audit are still required."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-1.1",
+      "original_environment": "thm:main",
+      "status": "open",
+      "lean_terminal": [],
+      "source_files": [
+        "HBL/SelectedFixedPointC1.lean",
+        "HBL/WeightedStrongDynamics.lean",
+        "HBL/KinematicPhysicalDynamics.lean",
+        "HBL/BlowupNonextension.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        188,
+        237
+      ],
+      "original_quantifiers": "There exist N>=4, L_N>=2N+8, a compact parameter set K with nonempty interior meeting Re(zeta)=3/4 inside Re(zeta)>9/16, and epsilon_*,s_*>0. For every s0>=s_*, zeta_infinity in K, small radial terminal g in H^{L_N}, and stable alpha_- with |alpha_-|<=s0^(1-N), construct a unique unstable alpha_+ and a radial PDE solution on a finite interval.",
+      "original_conclusions": [
+        "A one-bubble type-II orbit with bounded homogeneous H1 norm and no strong continuation through the blow-up time.",
+        "Physical decomposition with the actual terminal radiation flow, eta_alg in homogeneous H1 intersect homogeneous H^{1+9/16}, and a vanishing homogeneous H1 error.",
+        "Modulation convergence/derivative estimates and exact scale/phase asymptotics.",
+        "A C1 shooting graph, a physical local Banach initial-data chart, codimension-one C1 data graph and C1 rate function."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "No unconditional complete main PDE theorem is present.",
+        "Actual constrained propagator/generator, physical Hartree source-space map, finite profile/radiation construction, physical reconstruction and local initial-data coordinate chart remain to be instantiated."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.10",
+      "original_environment": "prop:regular-flow-stage3",
+      "status": "open",
+      "lean_terminal": [
+        "HBL.RegularRadiation.regularRadiationFlow_certified"
+      ],
+      "source_files": [
+        "HBL/RegularRadiationFlow.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        2256,
+        2273
+      ],
+      "original_quantifiers": "There exist positive epsilon0 and tau0 such that every small radial terminal g in H^{L_N}, L_N>=2N+8, produces the actual solution on [T-tau0,T].",
+      "original_conclusions": [
+        "Existence and uniqueness of a radial Hartree solution with z_g(T)=g and uniform H^{L_N} bound.",
+        "C1 dependence of the solution family on g.",
+        "For 0<=a<=N+2, uniform H^{L_N-2a} bounds for time jets."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The terminal assumes GeneralizedHartreeRegularLocalTheory kappa; no value of that structure is constructed.",
+        "The structure assumes the actual equation, jets, norm estimates, radiality, local Lipschitz and C1 dependence.",
+        "The terminal does not state solution uniqueness. Its data_c1 clause is pointwise in t, so the claimed C1 map into a solution-path space also needs a stated topology and proof."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.12",
+      "original_environment": "prop:one-layer-stage3",
+      "status": "open",
+      "lean_terminal": [
+        "HBL.Profile.OneLayer.oneMinimalWeightCluster_eliminated"
+      ],
+      "source_files": [
+        "HBL/OneLayerElimination.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        2610,
+        2623
+      ],
+      "original_quantifiers": "For the actual minimum unresolved weight rho<N and the actual finite-atom regional source, construct the unique normalized three-region correction and two affine charges.",
+      "original_conclusions": [
+        "The actual PDE residual at weight rho is reduced exactly to the parameter-tangent term.",
+        "Every actual newly generated term has order at least rho+kappa_prof with kappa_prof>0."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "ThresholdSolver and RegionalSolver are arbitrary right-inverse packages, not actual Kummer/remote/physical Fredholm instances.",
+        "GeneratedTerm defines its order as rho+gain+extra with extra>=0; the actual PDE expansion has not been classified into those terms.",
+        "The tangent clause in the structural terminal is tangent=tangent, not an identified PDE residual equation."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.13",
+      "original_environment": "thm:finite-profile-stage3",
+      "status": "open",
+      "lean_terminal": [
+        "HBL.Profile.FiniteProfile.finiteProfile_recursion_certified"
+      ],
+      "source_files": [
+        "HBL/FiniteProfile.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        2650,
+        2683
+      ],
+      "original_quantifiers": "Fix M>4, ell_lr>=0 and N>M+3+ell_lr; uniformly on the stated compact parameter chart, small terminal-radiation ball and trapped path window, construct an actual finite three-region profile V_N[h;g].",
+      "original_conclusions": [
+        "F(V_N)=P_N*zeta_s+E_N with the required scaled strong-source norm bound.",
+        "The matched output has D_zeta Theta_N=I2+o(1).",
+        "The physical Hessian splits into L0+K_sl+R_int, with small slow form, integrable slow derivative and pointwise/integral bounds on R_int.",
+        "Actual profile coefficients and E_N depend locally Lipschitz on (h,g)."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The Lean terminal takes arbitrary LayerPacket lists and an independent increasing weight sequence hstep. It constructs only their formal finite sum.",
+        "It does not state the physical residual identity, strong-source norm, high-order Jacobian perturbation, physical Hessian splitting or parameter Lipschitz conclusions.",
+        "The existing leading mainJet=identity and power-tail integrals cannot replace those physical assertions."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-2.14",
+      "original_environment": "prop:global-H1-profile-v3",
+      "status": "open",
+      "lean_terminal": [
+        "HBL.Profile.GlobalH1.globalH1Matching_certified"
+      ],
+      "source_files": [
+        "HBL/GlobalH1Matching.lean"
+      ],
+      "paper_label_present_in_inspected_version": true,
+      "paper_line_window": [
+        2733,
+        2763
+      ],
+      "original_quantifiers": "For the actual V_N[h;g], construct the uniquely extracted finite terminal algebraic correction and choose positive cutoff exponents and a positive common energy margin.",
+      "original_conclusions": [
+        "The actual difference V_N-W-Z_g-Z_alg is bounded by C*s^(-nu_E) in homogeneous H1.",
+        "An actual transported remainder in X_M adds the displayed C*s^(-M)*||Q|| term and tends to zero."
+      ],
+      "uninstantiated_or_unreaudited_boundaries": [
+        "The terminal takes arbitrary ThreeRegionEnergyData and assumes all three local regional norm bounds and the error bound.",
+        "The actual Kummer extraction eta_alg, its uniqueness and physical identity with the regional remainder are not constructed.",
+        "The later source text requires eta_alg in homogeneous H1 intersect homogeneous H^{1+9/16} with C1 coefficient dependence; these properties are also absent from the terminal."
+      ],
+      "supporting_declarations": [],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-3.1",
+      "original_environment": "thm:form-splitting-stage5",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Exact bounded zero-centre invariant splitting withdrawn; physical Hessian and Hamilton spectral obligations remain.",
+      "necessary_replacement_obligations": [
+        "The original exact bounded zero-centre invariant splitting was withdrawn.",
+        "The actual physical Hamilton common domain, hyperbolic coordinates and valid constrained centre evolution must replace it; static H_plus/H_minus quadratic form coercivity is insufficient."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-3.2",
+      "original_environment": "thm:slow-Feshbach-stage3",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Zero-centre Sylvester route abandoned; physical moving coordinates must be reconstructed.",
+      "necessary_replacement_obligations": [
+        "The zero-centre Sylvester route was withdrawn.",
+        "Construct actual moving physical coordinate maps, their domains and exact residual/tangent coupling without an assumed bounded inverse at zero energy."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-3.3",
+      "original_environment": "lem:Esl-pointwise-v2",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Actual moving-frame estimates remain open; generic connection bounds are insufficient.",
+      "necessary_replacement_obligations": [
+        "Identify the actual moving-frame error, then prove its pointwise and two-path bounds from physical profiles.",
+        "Generic connection estimates with arbitrary operators do not identify the physical error."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-3.4",
+      "original_environment": "thm:full-slow-modulation-v2",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Full physical modulation and feedback control remain open.",
+      "necessary_replacement_obligations": [
+        "Construct the full physical modulation system and identify all actual retained threshold feedback terms.",
+        "The triangular domain-coordinate identity is structural and takes the evolution, domain and coordinate maps as hypotheses."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-4.1",
+      "original_environment": "prop:single-green-stage4",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Actual constrained evolution and weighted backward solver must be constructed.",
+      "necessary_replacement_obligations": [
+        "Construct the actual constraint-preserving propagator, prove identity/cocycle/generator laws and source/domain estimates, then instantiate the weighted backward solver.",
+        "StandardConstrainedCenterPropagator does not itself require U(s,s)=identity, a cocycle law or a Hamilton-generator equation."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-4.2",
+      "original_environment": "prop:lossy-green-stage4",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Two-background comparison in the actual source and domain spaces remains open.",
+      "necessary_replacement_obligations": [
+        "Prove actual two-background propagation comparison in the physical source/common-domain spaces, including the advertised derivative loss.",
+        "Existing weighted operator estimates for a supplied propagation kernel do not discharge this."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-5.2",
+      "original_environment": "thm:joint-contraction-stage4",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Coupled nonlinear fixed point with retained threshold feedback remains open.",
+      "necessary_replacement_obligations": [
+        "Instantiate the actual physical locally Lipschitz nonlinear source, affine residual and retained feedback coefficients; prove smallness and solve the localized coupled problem.",
+        "WeightedJointBackward assumes CE,E,G and quantitative bounds; LocalizedCenterNonlinearMap repairs the local/global Lipschitz interface but still assumes the physical source map and propagator."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    },
+    {
+      "historical_id": "old-5.3",
+      "original_environment": "prop:center-stable-C1-v52",
+      "status": "withdrawn_not_proved",
+      "lean_terminal": [],
+      "paper_label_present_in_inspected_version": false,
+      "original_quantifiers": null,
+      "original_conclusions": null,
+      "missing_original_text_notice": "The exact withdrawn statement is not present in the inspected revised manuscript. Its label and withdrawal are recovered from the tracked historical ledger; do not fabricate its original quantifiers.",
+      "recorded_withdrawal_reason": "Physical reconstruction and C1 initial-data graph remain open.",
+      "necessary_replacement_obligations": [
+        "Construct the physical reconstruction into strong radial initial data and its local Banach chart; prove C1 dependence for the whole physical parameter family.",
+        "SelectedFixedPointC1 supplies an abstract/local fixed-point regularity mechanism, not the physical chart."
+      ],
+      "current_strict_compilation_and_complete_type_axiom_audit": false
+    }
+  ],
+  "next_exact_original_environment_candidate": {
+    "label": "prop:kinematic-recovery-v2",
+    "reason": "All mathematical clauses appear in existing concrete scalar-clock theorems; combine their exact quantifiers in a single terminal, then compile and audit.",
+    "planned_terminal_file": "HBL/KinematicOriginalEnvironment.lean",
+    "status": "revalidated_complete_original_environment",
+    "verification_status_file": "verification/kinematic-original-current-status.json"
+  },
+  "spectral_shortcut_assessment": {
+    "physical_static_bridges_present": [
+      "HBL.PhysicalEnergySurjectivity",
+      "HBL.PhysicalL6Realization",
+      "HBL.PhysicalVectorGradient",
+      "HBL.PhysicalPhaseHessian",
+      "HBL.PhysicalNonlocalForm",
+      "HBL.CompactTwoChannelCoercivity"
+    ],
+    "does_not_imply": [
+      "a physical Hamilton-generator common domain",
+      "Hamilton hyperbolic eigenpairs",
+      "the withdrawn exact invariant zero-centre splitting",
+      "the nonautonomous constrained propagator"
+    ],
+    "conclusion": "Do not register a withdrawn spectral/dynamical original environment merely by combining the available static physical form bridges."
+  },
+  "strictly_revalidated_original_environments": 1
+}

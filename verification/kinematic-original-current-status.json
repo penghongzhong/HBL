@@ -1,0 +1,29 @@
+{
+  "source_parent": "3614e05c4525ac5b8d5fefea063eae16882dbed3",
+  "original_environment": "prop:kinematic-recovery-v2",
+  "terminal": "HBL.Kinematic.kinematicRecovery_originalEnvironment_closed",
+  "source_sha256": "aa74e4deb2b25a53b5029ef5b7115f0f0216ee0bc68d2003647f744ef1a6a839",
+  "strict_exit": 0,
+  "audit_exit": 0,
+  "trust_zero": true,
+  "warning_as_error": true,
+  "complete_type_output_bytes": 17866,
+  "complete_type_output_sha256": "c98e9917f9240afec7fe31414a1e9008657034e820ba188de853eb39d031c64b",
+  "type_output_truncated": false,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "paper_scope_checked": true,
+  "paper_context_lines": [
+    1725,
+    1794
+  ],
+  "paper_scope_note": "Every assertion in the revised original environment is present; Lambda>0, beta=(A+1)/(2A), clock, tail, scale and tau_sharp coincide with the immediately preceding manuscript definitions. The selected root is a concrete witness and uniqueness is among all admissible physical-slice roots.",
+  "new_original_environment_added": false,
+  "previously_accepted_original_environment_reaudited": true,
+  "global_21_environment_completion_recertified": false,
+  "main_theorem_closed": false,
+  "validation_passed": true
+}

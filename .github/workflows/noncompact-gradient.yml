@@ -1,4 +1,4 @@
-name: HBL full first-order quadratic remainder
+name: HBL physical H1 Lipschitz and original environment
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
@@ -56,32 +56,35 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean Mathlib/MeasureTheory/Function/LpSeminorm/LpNorm.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile whole remainder and audit all terminal types
+      - name: Compile H1 Lipschitz and audit every complete terminal type
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/remainder_first_order_validation.py
-          python3 verification/remainder_first_order_validation.py
+          python3 -m py_compile verification/remainder_h1_lipschitz_validation.py
+          python3 verification/remainder_h1_lipschitz_validation.py
       - name: Preserve actual compiler and audit status
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/remainder-first-order-current-status.json; then
-            git add verification/remainder-first-order-current-status.json verification/remainder-first-order-current-errors.json
+          if test -f verification/remainder-h1-lipschitz-current-status.json; then
+            git add verification/remainder-h1-lipschitz-current-status.json verification/remainder-h1-lipschitz-current-errors.json
+            if test -f verification/remainder-h1-complete-types-and-axioms.txt; then
+              git add verification/remainder-h1-complete-types-and-axioms.txt
+            fi
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record full first-order remainder compiler and axiom audit [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record physical H1 Lipschitz and original-environment strict audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 5e1ef8f6075cacc54ef4aae0bc1dc83ea2a1cde8 HEAD > evidence/remainder-first-order.patch
+          git diff 3614e05c4525ac5b8d5fefea063eae16882dbed3 HEAD > evidence/remainder-h1-lipschitz.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-remainder-first-order-${{ github.sha }}
+          name: hbl-remainder-h1-lipschitz-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -93,7 +96,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/remainder-first-order-current-status.json'))
+          r=json.load(open('verification/remainder-h1-lipschitz-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
