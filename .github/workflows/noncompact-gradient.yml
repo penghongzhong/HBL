@@ -1,4 +1,4 @@
-name: HBL noncompact gradient completion
+name: HBL reused main-graph verification
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
@@ -43,32 +43,32 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean Mathlib/Analysis/Calculus/FDeriv/Measurable.lean) >> evidence/dependencies.log 2>&1
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/ImplicitContDiff.lean Mathlib/Analysis/Calculus/FDeriv/Basic.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile full nonlinear differences and audit complete terminals
+      - name: Verify selected graph and reuse existing environment terminals
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/full_difference_validation.py
-          python3 verification/full_difference_validation.py
+          python3 -m py_compile verification/selected_graph_validation.py
+          python3 verification/selected_graph_validation.py
       - name: Preserve diagnostics without editing proof sources
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/full-difference-current-status.json; then
-            git add verification/full-difference-current-status.json verification/full-difference-current-errors.json
+          if test -f verification/selected-graph-current-status.json; then
+            git add verification/selected-graph-current-status.json verification/selected-graph-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record full first-order difference compiler and audit outcome [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record reused selected-graph and existing-environment audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 30c9b88b84d01af7008ad2e9bf09a918cbc83bc6 HEAD > evidence/full-difference.patch
+          git diff 6137fcc06efe539f70f4a2992d3c4cd665d718f7 HEAD > evidence/selected-graph.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-full-difference-${{ github.sha }}
+          name: hbl-selected-graph-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -76,11 +76,11 @@ jobs:
         with:
           path: .lake
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Require strict proofs, full audits and retained regression
+      - name: Require strict proofs, complete types and retained regression
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/full-difference-current-status.json'))
+          r=json.load(open('verification/selected-graph-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
