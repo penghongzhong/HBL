@@ -99,7 +99,10 @@ theorem coeffA_hasDerivAt (K : FundamentalPair) (z0 : ℝ)
   have hi := intervalIntegral.integral_hasDerivAt_right
     (hc.intervalIntegrable z0 z)
     hc.aestronglyMeasurable.stronglyMeasurableAtFilter hc.continuousAt
-  simpa only [coeffA] using hi.neg
+  change HasDerivAt
+    (fun u : ℝ => -(∫ r in z0..u, sourceA K F r))
+    (-sourceA K F z) z
+  exact hi.neg
 
 theorem coeffB_hasDerivAt (K : FundamentalPair) (z0 : ℝ)
     (F : ℝ → ℂ) (hF : Continuous F) (z : ℝ) :
@@ -108,7 +111,10 @@ theorem coeffB_hasDerivAt (K : FundamentalPair) (z0 : ℝ)
   have hi := intervalIntegral.integral_hasDerivAt_right
     (hc.intervalIntegrable z0 z)
     hc.aestronglyMeasurable.stronglyMeasurableAtFilter hc.continuousAt
-  simpa only [coeffB] using hi
+  change HasDerivAt
+    (fun u : ℝ => ∫ r in z0..u, sourceB K F r)
+    (sourceB K F z) z
+  exact hi
 
 def solution (K : FundamentalPair) (z0 : ℝ) (F : ℝ → ℂ) (z : ℝ) : ℂ :=
   K.phi z * coeffA K z0 F z + K.psi z * coeffB K z0 F z

@@ -78,8 +78,12 @@ theorem exceptionalInverse_hasDerivAt
         ((-a) * (r : ℂ) ^ (-a - 1)) r := by
     exact hc.comp_ofReal
   have hI := exceptionalPrimitive_hasDerivAt a F ha hF r
-  convert hp.mul hI using 1 <;>
-    simp [exceptionalInverse, exceptionalInverseDeriv] <;> ring
+  change HasDerivAt
+    (fun x : ℝ => (x : ℂ) ^ (-a) * exceptionalPrimitive a F x)
+    (exceptionalInverseDeriv a F r) r
+  convert hp.mul hI using 1
+  unfold exceptionalInverseDeriv
+  ring
 
 theorem exceptionalInverse_solves
     (a : ℂ) (F : ℝ → ℂ) (ha : 1 < a.re) (hF : Continuous F)
