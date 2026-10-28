@@ -50,7 +50,7 @@ theorem quarticDensity_fderiv_apply (f : Space → ℂ) {x : Space}
   change (fderiv ℝ (Complex.ofRealCLM ∘ fun y => (‖f y‖ ^ 2) ^ 2) x) v = _
   rw [hd.fderiv]
   simp only [ContinuousLinearMap.comp_apply, smul_apply, smul_eq_mul, nsmul_eq_mul,
-    Nat.reduceSub, pow_one, Complex.ofRealCLM_apply, innerSL_apply]
+    Nat.reduceSub, pow_one, Complex.ofRealCLM_apply, innerSL_apply_apply]
   congr 1
   ring
 
