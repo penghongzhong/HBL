@@ -1,4 +1,4 @@
-name: HBL differentiated density difference
+name: HBL exact physical remainder interpolation
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
@@ -19,7 +19,7 @@ jobs:
         with:
           path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
           key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
-      - name: Install verified pinned compiler without elan bootstrap
+      - name: Install hash-pinned compiler
         timeout-minutes: 10
         shell: bash
         run: |
@@ -58,30 +58,31 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile actual differentiated difference and audit full declarations
+      - name: Generate exact rationals and check physical source identity
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/density_gradient_difference_validation.py
-          python3 verification/density_gradient_difference_validation.py
-      - name: Preserve compiler and audit evidence
+          python3 -m py_compile verification/generate_remainder_interpolation.py verification/remainder_interpolation_validation.py
+          python3 verification/generate_remainder_interpolation.py
+          python3 verification/remainder_interpolation_validation.py
+      - name: Preserve generated source and actual audit status
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/density-gradient-difference-current-status.json; then
-            git add verification/density-gradient-difference-current-status.json verification/density-gradient-difference-current-errors.json
+          if test -f verification/remainder-interpolation-current-status.json; then
+            git add HBL/HartreeRemainderInterpolation.lean verification/remainder-interpolation-current-status.json verification/remainder-interpolation-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record density-gradient difference compiler and axiom audit [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Save generated interpolation proof and actual compiler audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 5a636e39b6667fdb6cadd60430e71073f97d4172 HEAD > evidence/density-gradient-difference.patch
+          git diff 4dbc0a1171189f73cd3335a983f9a0b618a34eb4 HEAD > evidence/remainder-interpolation.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-density-gradient-difference-${{ github.sha }}
+          name: hbl-remainder-interpolation-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -89,11 +90,11 @@ jobs:
         with:
           path: .lake
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Require strict success and retained chain regression
+      - name: Require strict success and retained-chain regression
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/density-gradient-difference-current-status.json'))
+          r=json.load(open('verification/remainder-interpolation-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
