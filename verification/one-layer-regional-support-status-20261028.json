@@ -2,7 +2,7 @@
   "audit_date": "2026-10-28",
   "project": "HBL 3D critical Hartree radial type-II blowup",
   "branch": "hbl-noncompact-gradient-20261028",
-  "latest_verified_source_commit": "0bd9c4b82e600bd2de1f5b8797c0ce6a23461905",
+  "latest_verified_source_commit": "aa6fd006ae740ba01a02cd97800ba7b8a9413308",
   "fixed_toolchain": {
     "lean": "4.35.0-rc3",
     "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
@@ -141,11 +141,15 @@
     {
       "name": "Both physical affine charges and unique normalized corrected H-plus/H-minus Hilbert Fredholm solutions",
       "run_id": 40730991964
+    },
+    {
+      "name": "Physical Kummer local compact-interval uniform bounds for basis, first derivatives and inverse Wronskian",
+      "run_id": 40732109454
     }
   ],
   "remaining_bearing_obligations": [
     "Upgrade the verified actual physical H-plus/H-minus weighted Hilbert Fredholm solutions to the original classical H_± equations with affine tails and the required L^{2,-sigma} output. H-plus affine-corrected input membership in L^{2,sigma} is now strictly proved.",
-    "Extend the verified nondegenerate physical local Kummer IVP pair across the selected compact positive annulus (or choose and rigorously match a sufficiently small annulus) and derive C^1 source bounds and parameter-jet estimates. Kummer local compact bound run 40732109454 is still pending/failing until green.",
+    "The physical local Kummer basis, positive Wronskian and compact-interval uniform bounds are now strictly proved. Derive the actual C→C1 annulus right-inverse bound, uniformity and parameter jets on the compact parameter graph, and extend or select the prescribed matching annulus rigorously.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
     "Prove every generated source term in the actual Hartree expansion gains at least kappa_prof, without assuming the GeneratedTerm classification.",
@@ -158,5 +162,7 @@
   "recorded_at_head": "ba828799d733165d3bf279a46e27a2320e4889ae",
   "last_audited_source_commit": "aa6fd006ae740ba01a02cd97800ba7b8a9413308",
   "next_exact_original_environment_candidate": "prop:one-layer-stage3",
-  "original_environment_audit_unchanged": true
+  "original_environment_audit_unchanged": true,
+  "current_latest_accepted_run": 40732109454,
+  "full_original_one_layer_accepted": false
 }
