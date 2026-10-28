@@ -101,7 +101,6 @@ theorem weightedSourceGreen_cokernel_pairing
           filter_upwards [weightedScaleResonanceL2_ae] with r hx0
           rw [hx0]
           unfold weightedSourceGreenKernel weightedScaleGreenSource
-            weightedScaleResonance
           rw [weightedScaleResonance_closed]
           ring
         _ = affineJapaneseDecay sigma rho * g rho *
