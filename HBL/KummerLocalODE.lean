@@ -71,6 +71,49 @@ theorem exists_local_frozenKummer_augmented_solution
     (ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀
       hreg 0)
 
+
+/-- Two genuinely constructed normalized local IVP solutions, sharing a
+positive time interval and with Wronskian determinant one at the base point.
+Neither solution nor the nondegenerate initial determinant is assumed. -/
+theorem exists_local_normalized_frozenKummer_pair
+    (mu theta z : ℝ) (hz : 0 < z) :
+    ∃ X Y : ℝ → KummerODEState,
+      ∃ eps : ℝ, 0 < eps ∧
+        X 0 = (z, ((1 : ℂ), 0)) ∧
+        Y 0 = (z, (0, (1 : ℂ))) ∧
+        (∀ t ∈ Set.Ioo (-eps) eps,
+          HasDerivAt X (frozenKummerAugmentedField mu theta (X t)) t) ∧
+        (∀ t ∈ Set.Ioo (-eps) eps,
+          HasDerivAt Y (frozenKummerAugmentedField mu theta (Y t)) t) ∧
+        ((X 0).2.1 * (Y 0).2.2 -
+            (X 0).2.2 * (Y 0).2.1 = (1 : ℂ)) := by
+  obtain ⟨X, hX, epsX, hEX, hDX⟩ :=
+    exists_local_frozenKummer_augmented_solution
+      mu theta z (1 : ℂ) 0 hz
+  obtain ⟨Y, hY, epsY, hEY, hDY⟩ :=
+    exists_local_frozenKummer_augmented_solution
+      mu theta z 0 (1 : ℂ) hz
+  refine ⟨X, Y, min epsX epsY, lt_min hEX hEY,
+    hX, hY, ?_, ?_, ?_⟩
+  · intro t ht
+    apply hDX t
+    constructor
+    · have he := min_le_left epsX epsY
+      linarith [ht.1]
+    · have he := min_le_left epsX epsY
+      linarith [ht.2]
+  · intro t ht
+    apply hDY t
+    constructor
+    · have he := min_le_right epsX epsY
+      linarith [ht.1]
+    · have he := min_le_right epsX epsY
+      linarith [ht.2]
+  · rw [hX, hY]
+    norm_num
+
+#print axioms exists_local_normalized_frozenKummer_pair
+
 #print axioms frozenFirstCoeff_contDiffAt
 #print axioms frozenKummerAugmentedField_contDiffAt
 #print axioms exists_local_frozenKummer_augmented_solution
