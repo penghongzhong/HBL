@@ -25,6 +25,8 @@ open scoped Interval
 
 namespace HBL.Profile.Remote
 
+local instance : NormedAddCommGroup ℂ := Complex.instNormedAddCommGroup
+
 def exceptionalIntegrand (a : ℂ) (F : ℝ → ℂ) (rho : ℝ) : ℂ :=
   (rho : ℂ) ^ (a - 1) * F rho
 
@@ -64,11 +66,17 @@ theorem exceptionalInverse_hasDerivAt
     intro h
     rw [h] at ha
     norm_num at ha
+  have hslit : (r : ℂ) ∈ Complex.slitPlane := by
+    simp [hr]
+  have hc :
+      HasDerivAt (fun z : ℂ => z ^ (-a))
+        ((-a) * (r : ℂ) ^ (-a - 1)) (r : ℂ) := by
+    simpa using
+      (Complex.hasStrictDerivAt_cpow_const (c := -a) hslit).hasDerivAt
   have hp :
       HasDerivAt (fun x : ℝ => (x : ℂ) ^ (-a))
         ((-a) * (r : ℂ) ^ (-a - 1)) r := by
-    exact hasDerivAt_ofReal_cpow_const hr.ne'
-      (neg_ne_zero.mpr ha0)
+    exact hc.comp_ofReal
   have hI := exceptionalPrimitive_hasDerivAt a F ha hF r
   convert hp.mul hI using 1 <;>
     simp [exceptionalInverse, exceptionalInverseDeriv] <;> ring

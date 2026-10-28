@@ -55,6 +55,8 @@ theorem frozenRadialJetResidual_reduction
     reconstructedSecondJet confluentResidual kummerVariable kummerA kummerB
   push_cast
   field_simp [hz]
+  have hI : Complex.I ^ 2 = -(1 : ℂ) := by norm_num
+  rw [hI]
   ring
 
 theorem frozenRadialJetResidual_zero_of_confluent
