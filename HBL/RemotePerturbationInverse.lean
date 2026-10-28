@@ -55,7 +55,7 @@ theorem free_factorization_right
       L (perturbationBlock G H x) = (L + H) x := by
   intro x
   unfold perturbationBlock
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply,
+  simp only [add_apply, ContinuousLinearMap.id_apply,
     ContinuousLinearMap.comp_apply, map_add]
   have h := congrArg (fun T : E →L[ℝ] E => T (H x)) hLG
   simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply] using
@@ -68,7 +68,7 @@ theorem free_factorization_left
       G ((L + H) x) = perturbationBlock G H x := by
   intro x
   unfold perturbationBlock
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply,
+  simp only [add_apply, ContinuousLinearMap.id_apply,
     ContinuousLinearMap.comp_apply, map_add]
   have h := congrArg (fun T : E →L[ℝ] E => T x) hGL
   simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply] using
