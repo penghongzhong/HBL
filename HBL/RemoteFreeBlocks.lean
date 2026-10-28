@@ -87,6 +87,7 @@ theorem logSolve_equation
       simp only [logEquation]
       constructor
       · field_simp [hvarpi]
+        ring
       · exact ih (ell + 1)
 
 theorem logSolve_unique

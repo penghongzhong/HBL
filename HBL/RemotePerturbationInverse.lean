@@ -1,4 +1,5 @@
 import Mathlib.Analysis.SpecificLimits.Normed
+import Mathlib.Analysis.Normed.Operator.NormedSpace
 import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Invertible
 import Mathlib.Tactic
 
