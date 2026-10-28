@@ -66,7 +66,7 @@ def IsRadialSobolev {L : ℕ} (f : Sobolev L) : Prop :=
   ∀ U : Space ≃ₗᵢ[ℝ] Space,
     (fun x => physicalL2 f (U x)) =ᵐ[volume] (fun x => physicalL2 f x)
 
-private theorem jetExponent_step (L a : ℕ) :
+theorem jetExponent_step (L a : ℕ) :
     (L : ℝ) - 2 * ((a + 1 : ℕ) : ℝ) ≤ (L : ℝ) - 2 * (a : ℝ) := by
   push_cast
   linarith

@@ -45,7 +45,7 @@ def IsRegularHartreeSolutionOn (κ : ℝ) (L : ℕ) (T τ : ℝ)
     (g : Sobolev L) (u : ℝ → Sobolev L) : Prop :=
   u T = g ∧
   ContinuousOn u (Icc (T - τ) T) ∧
-  ∃ du : ℝ → SobolevR ((L : ℝ) - 2),
+  ∃ du : ℝ → SobolevR ((L : ℝ) - 2 * ((1 : ℕ) : ℝ)),
     ∀ t ∈ Icc (T - τ) T,
       HasDerivAt (fun s => sobolevDropTwo (u s)) (du t) t ∧
       HartreeEquationAt κ (u t) (du t).toDistr
