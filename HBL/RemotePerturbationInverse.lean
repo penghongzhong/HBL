@@ -34,7 +34,7 @@ theorem perturbationBlock_isInvertible
     linarith
   have hneg : ‖-K‖ < 1 := by simpa using hK
   have hu0 : IsUnit (1 - (-K) : E →L[ℝ] E) :=
-    IsUnit.one_sub_of_norm_lt_one hneg
+    IsUnit.one_sub_of_norm_lt_one (x := (-K : E →L[ℝ] E)) hneg
   have heq : (1 - (-K) : E →L[ℝ] E) = perturbationBlock G H := by
     unfold perturbationBlock
     simp only [sub_neg_eq_add, ContinuousLinearMap.one_def]
