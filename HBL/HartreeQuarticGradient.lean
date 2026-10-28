@@ -46,9 +46,11 @@ theorem quarticDensity_fderiv_apply (f : Space → ℂ) {x : Space}
     congr 1
     ring
   have hd := Complex.ofRealCLM.hasFDerivAt.comp x (hf.hasFDerivAt.norm_sq.pow 2)
-  rw [he, hd.fderiv]
-  simp only [ContinuousLinearMap.comp_apply, smul_apply, smul_eq_mul, pow_one,
-    Nat.cast_ofNat, Nat.reduceSub, Complex.ofRealCLM_apply, innerSL_apply]
+  rw [he]
+  change (fderiv ℝ (Complex.ofRealCLM ∘ fun y => (‖f y‖ ^ 2) ^ 2) x) v = _
+  rw [hd.fderiv]
+  simp only [ContinuousLinearMap.comp_apply, smul_apply, smul_eq_mul, nsmul_eq_mul,
+    Nat.reduceSub, pow_one, Complex.ofRealCLM_apply, innerSL_apply]
   congr 1
   ring
 
@@ -81,7 +83,7 @@ theorem quarticDensity_gradient_source
     (f : Space → ℂ) (hf : ContDiff ℝ 1 f)
     (h4 : Integrable (fun y : Space => ‖f y‖ ^ 4))
     (hd : MemLp (fderiv ℝ f) 2)
-    (M L : ℝ) (hM : 0 ≤ M) (hL : 0 ≤ L)
+    (M L : ℝ) (hM : 0 ≤ M) (_hL : 0 ≤ L)
     (hfb : ∀ᵐ y : Space, ‖f y‖ ≤ M)
     (hdb : ∀ᵐ y : Space, ‖fderiv ℝ f y‖ ≤ L) :
     Integrable (quarticDensity f) ∧
@@ -116,7 +118,9 @@ theorem quarticDensity_gradient_source
   have hI : (∫ y : Space, ‖fderiv ℝ (quarticDensity f) y‖) ≤
       2 * ((∫ y : Space, ‖f y‖ ^ 6) + ∫ y : Space, ‖fderiv ℝ f y‖ ^ 2) := by
     have hi := integral_mono_ae hDρ.norm ((h6.add hgrad2).const_mul 2) hdom
-    rwa [integral_const_mul, integral_add h6 hgrad2] at hi
+    rw [integral_const_mul] at hi
+    simp only [Pi.add_apply] at hi
+    rwa [integral_add h6 hgrad2] at hi
   refine ⟨h4.ofReal, hDρ, ?_, ?_⟩
   · exact hI.trans (mul_le_mul_of_nonneg_left (add_le_add hI6 le_rfl) (by norm_num))
   · filter_upwards [hfb, hdb] with y hy hdy
