@@ -1,6 +1,6 @@
 {
-  "source_commit": "1091f0412108d8665cfd77bdff2ba7d6293bb118",
-  "run_id": "40612653531",
+  "source_commit": "4537704bfdaaf5fc69ca17780f71f636ee72de06",
+  "run_id": "40613024706",
   "baseline": "db6be8c0f0a47cfca9dc629d5b96177cd280a6c1",
   "validation_passed": false,
   "main_theorem_closed": false,
@@ -9,7 +9,9 @@
   "boundary": "The compact-core approximation premise is removed from the two new terminal derivative theorems by internally constructed cutoffs and local uniform convergence. The field remains C1 with L4 mass, L2 differential, and uniform field/differential bounds. Higher Sobolev realization, full differentiated remainder estimates and the actual constrained evolution are not concluded.",
   "strict_targets": {},
   "baseline_Lean_sources_byte_identical": 323,
-  "new_target_cached_files_removed": [],
-  "new_source_sha256": "daa63497a88ff738a70a6a350a26c6dd54553fa61ebde791773c5e80a18c122e",
+  "new_target_cached_files_removed": [
+    ".lake/build/ir/HBL/HartreeLocalCutoff.setup.json"
+  ],
+  "new_source_sha256": "05f405877806e6f2d2b6f8b7d0757505781b910668ec82e1263d18fc0ad05138",
   "build_exit": 1
 }
