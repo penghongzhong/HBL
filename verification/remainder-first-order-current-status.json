@@ -1,16 +1,122 @@
 {
-  "source_commit": "2744169ad0b507f6c92ab961be8b24187bece39e",
-  "run_id": "40639981176",
+  "source_commit": "036cc3fff18ca9faeecb4d33134d1c1b57334ae0",
+  "run_id": "40640320839",
   "baseline": "5e1ef8f6075cacc54ef4aae0bc1dc83ea2a1cde8",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
   "boundary": "The complete physical seventh-order remainder and its actual weak spatial differential have a uniform quadratic bound on the normalized mixed first-order perturbation ball. Every affine sample hypothesis is derived from original field data. No background L2, compact support, source-sample bound or approximation sequence is assumed. This does not close the differentiated two-perturbation remainder, higher Sobolev estimates, constrained propagator, or original main theorem.",
-  "strict_targets": {},
+  "strict_targets": {
+    "HartreeRemainderInterpolation": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "3832fd805c2061d25474f7622f1994c773a6981a9011f0992e85786f0b23af2b",
+      "declarations": [
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationCoefficients",
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight",
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationBound",
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight_bound",
+        "HBL.RegularRadiation.PhysicalInterpolation.sampleField",
+        "HBL.RegularRadiation.PhysicalInterpolation.sample_kernel_integrable",
+        "HBL.RegularRadiation.PhysicalInterpolation.physical_remainder_interpolation"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationCoefficients": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationBound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.sampleField": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.sample_kernel_integrable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.physical_remainder_interpolation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeFirstOrderSource": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "ae8c6e8a44f19cb74a33d21d191fe76558cb862ffe504228d2b67c904c0fb7e9",
+      "declarations": [
+        "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact",
+        "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact",
+        "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeRemainderFirstOrderQuadratic": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "03aeb660c792e3a10a5d228f03cceadc3426ad8c67edce6a2ac5b25ab00ad2f0",
+      "declarations": [
+        "HBL.RegularRadiation.RemainderFirstOrder.remainderFirstOrderConstant",
+        "HBL.RegularRadiation.RemainderFirstOrder.physical_remainder_first_order_quadratic"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.RemainderFirstOrder.remainderFirstOrderConstant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrder.physical_remainder_first_order_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    }
+  },
   "baseline_Lean_sources_byte_identical": 331,
   "target_cached_files_removed": [
     ".lake/build/ir/HBL/HartreeRemainderFirstOrderQuadratic.setup.json"
   ],
-  "build_exit": 1
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "retained_component_roots": 44,
+  "strict_named_declarations": 12,
+  "new_public_theorems": 1,
+  "trust_zero": true,
+  "warning_as_error": true
 }
