@@ -1,0 +1,15 @@
+{
+  "source_commit": "2ceb09ac7ee8c89af09beb2472763ffb7a5f1d74",
+  "run_id": "40620190309",
+  "baseline": "dfd259d57d5b3008d719f8617b3dd46bd08b2137",
+  "validation_passed": false,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "boundary": "Both actual quartic potentials and their actual Frechet differentials have linear difference bounds derived from C1/L4 fields, L2 derivatives, and bounded fields and derivatives; the difference and its differential have the displayed L2 and uniform bounds. Neither field is assumed L2 or compactly supported. Full nonlinear Taylor-remainder gradient differences, higher Sobolev closure and the actual constrained evolution are not concluded.",
+  "strict_targets": {},
+  "baseline_Lean_sources_byte_identical": 325,
+  "new_target_cached_files_removed": [],
+  "new_source_sha256": "9095cc3b6d180b21841e4e1edb7b95710c2d160cf39d85f08287b6c2eee00818",
+  "build_exit": 1
+}
