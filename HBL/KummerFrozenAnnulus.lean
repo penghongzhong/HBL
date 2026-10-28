@@ -48,9 +48,9 @@ theorem annulusSolution_actual_frozenResidual
       (annulusSolutionSecondDeriv K zMinus zPlus F z) = F z := by
   have h := annulusSolution_actual_frozen_equation
     mu theta K hK zMinus zPlus F hz
-  unfold frozenRadialJetResidual frozenFirstCoeff frozenZeroCoeff at h ⊢
-  push_cast at h ⊢
-  simpa [mul_assoc] using h
+  unfold frozenRadialJetResidual
+  push_cast
+  simpa [frozenFirstCoeff, frozenZeroCoeff, mul_add, add_mul, mul_assoc] using h
 
 theorem actualKummerAnnulus_certified
     (mu theta : ℝ) (K : FundamentalPair)
