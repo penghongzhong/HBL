@@ -1,5 +1,5 @@
 {
-  "audit_date": "2026-10-28",
+  "audit_date": "2026-10-29",
   "project": "HBL 3D critical Hartree radial type-II blowup",
   "branch": "hbl-noncompact-gradient-20261028",
   "latest_verified_source_commit": "aa6fd006ae740ba01a02cd97800ba7b8a9413308",
@@ -145,6 +145,13 @@
     {
       "name": "Physical Kummer local compact-interval uniform bounds for basis, first derivatives and inverse Wronskian",
       "run_id": 40732109454
+    },
+    {
+      "name": "Lipschitz bounds for both actual affine charges and both affine-corrected weighted sources",
+      "mode": "local pinned strict compilation",
+      "verification": "verification/actual-inner-affine-estimates-status.json",
+      "base_commit": "23ae4a7ff11bdfd8d8326b0d807a0383fc41b0e3",
+      "new_supporting_theorems": 9
     }
   ],
   "remaining_bearing_obligations": [
@@ -157,12 +164,20 @@
   ],
   "axiom_policy": "No sorry/admit, no new axiom; only standard foundational axioms permitted in inspected supporting certificates.",
   "root_original_acceptance_changed": false,
-  "last_updated_utc_date": "2026-10-28",
+  "last_updated_utc_date": "2026-10-29",
   "physical_kummer_localized_warning": "Global IsFrozenHartreePair on all z>0 with singular a=2/z+i z/2 is not compatible with global regularity and normalized W. Only the localized positive-annulus interface is mathematically valid.",
   "recorded_at_head": "ba828799d733165d3bf279a46e27a2320e4889ae",
   "last_audited_source_commit": "aa6fd006ae740ba01a02cd97800ba7b8a9413308",
   "next_exact_original_environment_candidate": "prop:one-layer-stage3",
   "original_environment_audit_unchanged": true,
   "current_latest_accepted_run": 40732109454,
-  "full_original_one_layer_accepted": false
+  "full_original_one_layer_accepted": false,
+  "latest_local_verified_extension": {
+    "date": "2026-10-29",
+    "verification": "verification/actual-inner-affine-estimates-status.json",
+    "complete_types_and_axioms": "verification/actual-inner-affine-estimates-types-and-axioms.txt",
+    "new_supporting_theorems": 9,
+    "new_original_environments": 0,
+    "root_original_acceptance_changed": false
+  }
 }

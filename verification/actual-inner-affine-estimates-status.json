@@ -1,0 +1,77 @@
+{
+  "validation_passed": true,
+  "supporting_certificate_only": true,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "23ae4a7ff11bdfd8d8326b0d807a0383fc41b0e3",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "strict_source_exit_codes": {
+    "HBL/ActualInnerAffineEstimates.lean": 0
+  },
+  "axioms": {
+    "HBL.Profile.ActualInner.actualPlusCharge_eq_twice_pairing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.actualMinusCharge_eq_neg_pairing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.actualPlusCharge_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.actualMinusCharge_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.weightedSourceDataL2_sub_const_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.correctedPlusDataL2_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.correctedMinusDataL2_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.correctedPlusDataL2_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.ActualInner.correctedMinusDataL2_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_bytes": 672886,
+  "complete_type_output_sha256": "cc76012cdcb42447101a5bbf211de74dffc4086a568114634123eb863a8cafad",
+  "source_sha256": {
+    "HBL/ActualInnerAffineEstimates.lean": "6ac25bda98da68d389abf6a3a801ed038dcf307d452aa43efa1034566a1191ff",
+    "HBL/ActualInnerAffineEstimatesAudit.lean": "e188551779acbd6eb87e0868bf95605ce225619076b30257c7315e37fbb5f53e"
+  }
+}
