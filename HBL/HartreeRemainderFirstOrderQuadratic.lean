@@ -275,7 +275,6 @@ theorem physical_remainder_first_order_quadratic
     apply Finset.sum_congr rfl
     intro i _
     dsimp [c, N, F]
-    simp only [smul_eq_mul]
     ring
   have hRd (x : Space) : HasFDerivAt R (∑ i : Fin 8, c i • fderiv ℝ (N i) x) x := by
     rw [hR]
