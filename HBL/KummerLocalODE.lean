@@ -41,7 +41,9 @@ theorem frozenFirstCoeff_contDiffAt
   have hcast : ContDiffAt ℝ 1 (fun x : ℝ => (x : ℂ)) z :=
     Complex.ofRealCLM.contDiff.contDiffAt
   have hr := (hcomplex.restrict_scalars ℝ).comp z hcast
-  simpa only [Function.comp_def, frozenFirstCoeff] using hr
+  change ContDiffAt ℝ 1 (fun x : ℝ =>
+    (2 : ℂ) / (x : ℂ) + Complex.I * (x : ℂ) / 2) z
+  simpa only [Function.comp_def] using hr
 
 theorem frozenZeroCoeff_contDiff
     (mu theta : ℝ) :
