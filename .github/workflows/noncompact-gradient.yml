@@ -2,6 +2,16 @@ name: HBL physical H1 Lipschitz and original environment
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
+    paths:
+      - 'HBL/HartreeRemainderInterpolation.lean'
+      - 'HBL/HartreeFirstOrderSource.lean'
+      - 'HBL/HartreeFullFirstOrderDifference.lean'
+      - 'HBL/HartreeRemainderFirstOrderQuadratic.lean'
+      - 'HBL/HartreeRemainderFirstOrderLipschitz.lean'
+      - 'HBL/HartreeRemainderH1Lipschitz.lean'
+      - 'HBL/HartreeGraphKernelBounds.lean'
+      - 'HBL/KinematicOriginalEnvironment.lean'
+      - 'verification/remainder_h1_lipschitz_validation.py'
   workflow_dispatch:
 permissions:
   contents: write
