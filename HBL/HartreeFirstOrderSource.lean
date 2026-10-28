@@ -65,7 +65,7 @@ private theorem cubic_derivative_norm (f : Space → ℂ) {x : Space}
         ‖((2 * inner ℝ (f x) (fderiv ℝ f x v) : ℝ) : ℂ) * f x‖ := norm_add_le _ _
     _ = ‖f x‖ ^ 2 * ‖fderiv ℝ f x v‖ +
         (2 * |inner ℝ (f x) (fderiv ℝ f x v)|) * ‖f x‖ := by
-      simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_mul,
+      simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs,
         abs_of_nonneg (sq_nonneg ‖f x‖), abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
     _ ≤ ‖f x‖ ^ 2 * ‖fderiv ℝ f x v‖ +
         (2 * (‖f x‖ * ‖fderiv ℝ f x v‖)) * ‖f x‖ := by
