@@ -1,0 +1,3 @@
+{
+  "spatial-build.log": "error: HBL/HartreeSpatialCore.lean:120:6: Type mismatch\n  add_le_add_left hI ?m.707\nhas type\n  (∫ (y : Space), ‖(fderiv ℝ ρ y) v‖) + ?m.707 ≤ (∫ (y : Space), ‖fderiv ℝ ρ y‖) * ‖v‖ + ?m.707\nbut is expected to have type\n  nearMass * (M * ‖v‖) + ∫ (y : Space), ‖(fderiv ℝ ρ y) v‖ ≤\n    nearMass * (M * ‖v‖) + (∫ (y : Space), ‖fderiv ℝ ρ y‖) * ‖v‖"
+}

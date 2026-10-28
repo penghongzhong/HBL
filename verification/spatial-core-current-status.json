@@ -1,0 +1,27 @@
+{
+  "source_commit": "d41dfc4b55b6a8c1ef01aecc93e0cb8829c89663",
+  "run_id": "40605864479",
+  "module": "HartreeSpatialCore",
+  "baseline": "4999b1fc43c02841f7eb9b39b5c7f003f0b23655",
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "validation_passed": false,
+  "strict_exit": null,
+  "audit_passed": false,
+  "retained_roots_build_exit": null,
+  "boundary": "C1 compactly supported densities; no noncompact Sobolev extension, full remainder gradient bound, or constrained Hartree evolution is claimed.",
+  "unchanged_existing_lean_sources": 320,
+  "audited_declarations": [
+    "HBL.RegularRadiation.SpatialCore.complexKernel",
+    "HBL.RegularRadiation.SpatialCore.complexKernel_locallyIntegrable",
+    "HBL.RegularRadiation.SpatialCore.potential_eq_convolution",
+    "HBL.RegularRadiation.SpatialCore.potential_contDiff",
+    "HBL.RegularRadiation.SpatialCore.potential_hasFDerivAt",
+    "HBL.RegularRadiation.SpatialCore.potential_fderiv_apply",
+    "HBL.RegularRadiation.SpatialCore.potential_fderiv_bound"
+  ],
+  "source_sha256": "d34b348c36e10c268015c03557d5e1f356b5407055ccbd3f7f9eebe400b37297",
+  "removed_new_target_cached_files": [],
+  "build_exit": 1
+}
