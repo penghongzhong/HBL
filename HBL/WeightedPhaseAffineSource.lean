@@ -20,6 +20,7 @@ noncomputable section
 set_option autoImplicit false
 
 open Set MeasureTheory
+open scoped ContDiff
 
 namespace HBL.Modulation.AffineTail
 
@@ -92,7 +93,6 @@ theorem phaseAffineSource_weighted_sq_far
         mul_le_mul_of_nonneg_right hw (by positivity)
       _ = 3 * r * (1 + r ^ 2)⁻¹ := by
         field_simp [hden]
-        ring
   have hsq :
       (affineJapaneseWeight sigma r *
         channelAffineSource HartreeChannel.minus r) ^ 2 ≤
@@ -100,7 +100,12 @@ theorem phaseAffineSource_weighted_sq_far
     have h := mul_self_le_mul_self
       (abs_nonneg (affineJapaneseWeight sigma r *
         channelAffineSource HartreeChannel.minus r)) habs
-    simpa only [sq_abs, pow_two] using h
+    have hsqabs :
+        |affineJapaneseWeight sigma r *
+          channelAffineSource HartreeChannel.minus r| ^ 2 ≤
+        (3 * r * (1 + r ^ 2)⁻¹) ^ 2 := by
+      simpa only [pow_two] using h
+    simpa only [sq_abs] using hsqabs
   calc
     (affineJapaneseWeight sigma r *
         channelAffineSource HartreeChannel.minus r) ^ 2 ≤
@@ -111,7 +116,6 @@ theorem phaseAffineSource_weighted_sq_far
         9 * r ^ 2 ≤ 9 * (1 + r ^ 2) by nlinarith) (by positivity)
     _ = 9 * (1 + r ^ 2)⁻¹ := by
       field_simp [hden]
-      ring
 
 theorem phaseAffineSource_inWeightedL2
     (sigma : ℝ) (hsigma : sigma ≤ 2) :
