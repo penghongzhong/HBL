@@ -40,7 +40,7 @@ theorem frozenFirstCoeff_contDiffAt
     fun_prop (disch := exact hcz)
   have hcast : ContDiffAt ℝ 1 (fun x : ℝ => (x : ℂ)) z :=
     Complex.ofRealCLM.contDiff.contDiffAt
-  have hr := (hcomplex.restrict_scalars ℝ).comp (z : ℂ) hcast
+  have hr := (hcomplex.restrict_scalars ℝ).comp z hcast
   simpa only [Function.comp_def, frozenFirstCoeff] using hr
 
 theorem frozenZeroCoeff_contDiff
