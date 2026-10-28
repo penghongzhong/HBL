@@ -1,4 +1,5 @@
 import HBL.AffineTailPlusGreen
+import HBL.HartreeKernelShortRange
 import Mathlib.Analysis.SpecialFunctions.JapaneseBracket
 import Mathlib.MeasureTheory.Function.L2Space
 
@@ -165,7 +166,7 @@ theorem affineJapaneseDecay_continuous (sigma : ℝ) :
 /-- Exact function-level definition of `L^{2,σ}(0,∞)`. -/
 def InWeightedL2 (sigma : ℝ) (F : ℝ → ℝ) : Prop :=
   MemLp (fun r => affineJapaneseWeight sigma r * F r) 2
-    (volume.restrict (Ioi (0 : ℝ)))
+    halfLineMeasure
 
 theorem affineJapaneseDecay_sq (sigma r : ℝ) :
     affineJapaneseDecay sigma r ^ 2 =
@@ -178,7 +179,7 @@ theorem affineJapaneseDecay_sq (sigma r : ℝ) :
 theorem affineJapaneseDecay_memLp_two
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
     MemLp (affineJapaneseDecay sigma) 2
-      (volume.restrict (Ioi (0 : ℝ))) := by
+      halfLineMeasure := by
   have hdim : (Module.finrank ℝ ℝ : ℝ) < 2 * sigma := by
     rw [Module.finrank_self]
     norm_num
@@ -200,7 +201,7 @@ theorem channelResonance_decay_memLp_two
     (ch : HartreeChannel) (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
     MemLp (fun r => channelResonance ch r *
       affineJapaneseDecay sigma r) 2
-      (volume.restrict (Ioi (0 : ℝ))) := by
+      halfLineMeasure := by
   refine (affineJapaneseDecay_memLp_two sigma hsigma).mono'
     ((channelResonance_continuous ch).mul
       (affineJapaneseDecay_continuous sigma)).aestronglyMeasurable.restrict ?_
