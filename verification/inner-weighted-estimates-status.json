@@ -1,0 +1,296 @@
+{
+  "validation_passed": true,
+  "one_theorem_per_file": true,
+  "new_supporting_theorems": 37,
+  "supporting_certificate_only": true,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "7aa1cb0e95eafe018c9e1e36f1a8ff938f8e9b1a",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "strict_source_exit_codes": {
+    "HBL/InnerEstimates/ActualBoundedSolvers.lean": 0,
+    "HBL/InnerEstimates/AffineWeightedDifference.lean": 0,
+    "HBL/InnerEstimates/BoundedWeightedNorm.lean": 0,
+    "HBL/InnerEstimates/Definitions.lean": 0,
+    "HBL/InnerEstimates/FirstMomentNorm.lean": 0,
+    "HBL/InnerEstimates/FredholmDifference.lean": 0,
+    "HBL/InnerEstimates/GreenBoundNorm.lean": 0,
+    "HBL/InnerEstimates/GreenPrimitiveNorm.lean": 0,
+    "HBL/InnerEstimates/IntegralCauchySchwarz.lean": 0,
+    "HBL/InnerEstimates/MinusEquation.lean": 0,
+    "HBL/InnerEstimates/MinusHilbertDifference.lean": 0,
+    "HBL/InnerEstimates/MinusOutputBound.lean": 0,
+    "HBL/InnerEstimates/MinusOutputClassical.lean": 0,
+    "HBL/InnerEstimates/MinusOutputDifference.lean": 0,
+    "HBL/InnerEstimates/MinusOutputProperties.lean": 0,
+    "HBL/InnerEstimates/MinusRemainderDifference.lean": 0,
+    "HBL/InnerEstimates/MinusRemainderProperties.lean": 0,
+    "HBL/InnerEstimates/MinusRemainderWeightedDifference.lean": 0,
+    "HBL/InnerEstimates/NormalizedZero.lean": 0,
+    "HBL/InnerEstimates/OutputZero.lean": 0,
+    "HBL/InnerEstimates/PlusEquation.lean": 0,
+    "HBL/InnerEstimates/PlusHilbertDifference.lean": 0,
+    "HBL/InnerEstimates/PlusOutputBound.lean": 0,
+    "HBL/InnerEstimates/PlusOutputClassical.lean": 0,
+    "HBL/InnerEstimates/PlusOutputDifference.lean": 0,
+    "HBL/InnerEstimates/PlusOutputProperties.lean": 0,
+    "HBL/InnerEstimates/PlusRemainderDifference.lean": 0,
+    "HBL/InnerEstimates/PlusRemainderProperties.lean": 0,
+    "HBL/InnerEstimates/PlusRemainderWeightedDifference.lean": 0,
+    "HBL/InnerEstimates/RepresentativeDifferenceBound.lean": 0,
+    "HBL/InnerEstimates/RepresentativeDifferenceIdentity.lean": 0,
+    "HBL/InnerEstimates/RepresentativeZeroSource.lean": 0,
+    "HBL/InnerEstimates/WeightedAffineNorm.lean": 0,
+    "HBL/InnerEstimates/WeightedNormDifference.lean": 0,
+    "HBL/InnerEstimates/WeightedNormIdentity.lean": 0,
+    "HBL/InnerEstimates/WeightedNormNonnegative.lean": 0,
+    "HBL/InnerEstimates/WeightedSubMembership.lean": 0,
+    "HBL/InnerEstimates/ZeroData.lean": 0
+  },
+  "axioms": {
+    "HBL.Modulation.Monopole.exists_actualInner_bounded_classical_solvers": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_weighted_difference_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedNorm_le_of_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_firstMoment_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerFredholm_norm_sub_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenBound_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_greenPrimitiveBound_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_integral_norm_mul_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusInner_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusInner_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_weighted_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_weighted_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_weighted_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedInner_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedOutput_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusInner_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusInner_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_weighted_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_weighted_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_weighted_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_sub": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_zero_source": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeighted_sub_const_mul_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedNorm_sub_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedNorm_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedNorm_nonneg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeighted_sub_mem": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedData_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/inner-weighted-estimates-types-and-axioms.txt.gz",
+  "compressed_output_bytes": 458217,
+  "compressed_output_sha256": "81bf49c1da281051a421f7a1e6570d4736e30a2343b6ad9fab1ee502e6885a81",
+  "complete_type_output_bytes": 19918376,
+  "complete_type_output_sha256": "c8ba91763a6fa436cb84053de3a0b4ff472ae6feec14c82be2208be25297d3fb",
+  "source_sha256": {
+    "HBL/InnerEstimates/ActualBoundedSolvers.lean": "951cba8f1e2c2e9cfbdab7628b72ddc80ba743e317531d2b5fa0d24ad0dd8760",
+    "HBL/InnerEstimates/AffineWeightedDifference.lean": "7162025502913bc99c4c8f01b819ab408c2e8110d7d42007ee62b57919fe35ee",
+    "HBL/InnerEstimates/BoundedWeightedNorm.lean": "dd8c3f338d8ebefc407acd7fe0bbd06f5fb3bbb57f32d144e67f3845d8c6b5f8",
+    "HBL/InnerEstimates/Definitions.lean": "700e8597c7a81e47ce44edb2012dbb4be982882955c6a241c17f3f9d1ecc5c71",
+    "HBL/InnerEstimates/FirstMomentNorm.lean": "98738110c78a04e0bef8ee90bd9ee40aa4105ca012d739429162312ae295ea14",
+    "HBL/InnerEstimates/FredholmDifference.lean": "6a76d5a7e0ac82d9e931e8ea2c0c551e629a53a4a57ef5fc6567882fbfb482f1",
+    "HBL/InnerEstimates/GreenBoundNorm.lean": "b790bb13dc490c91a37def1fd85453610ed79fc86702c54d911a73cb6d8a1a12",
+    "HBL/InnerEstimates/GreenPrimitiveNorm.lean": "1377408032e2e8f047c3d861b75007c2050c3551db3010d30b19ea1feac96a8c",
+    "HBL/InnerEstimates/IntegralCauchySchwarz.lean": "b2fb25161ed1cce0a91eb3b7c17733754abf6a432506d2b98d8eb6b030445ed8",
+    "HBL/InnerEstimates/MinusEquation.lean": "1651f542aa641e93e81ee5920f87200b23af1e9a91d87ada4c76d019642bdbd1",
+    "HBL/InnerEstimates/MinusHilbertDifference.lean": "8fd5157af95dc86e0cfabb7eb9227cdfa8639a7fbc2f2bf181eba14331be991d",
+    "HBL/InnerEstimates/MinusOutputBound.lean": "6d480f6c2ef478d881bce8f4cafaedc29d23fe1079c72f631e60806b9273fea7",
+    "HBL/InnerEstimates/MinusOutputClassical.lean": "1e1c9eaa0921b333b07acd447192aeea021b4f5097ed1baa4a31081234f8fa24",
+    "HBL/InnerEstimates/MinusOutputDifference.lean": "3df3af694880a93f31694dd6425b99543a5fda89c615c4749bd59ce3117162de",
+    "HBL/InnerEstimates/MinusOutputProperties.lean": "f1c3e3db017dc522f253a5bf078cc468c3d7a88eae87ba159132f6b58087e5bc",
+    "HBL/InnerEstimates/MinusRemainderDifference.lean": "362d09eac16f53f39e4741cf05a7cb668d47172bd7c95244ffb992eb078776ac",
+    "HBL/InnerEstimates/MinusRemainderProperties.lean": "b6f64f3b55783a5d99fffdf68ed85a338baf69a047de67e475c09f74bd0d6735",
+    "HBL/InnerEstimates/MinusRemainderWeightedDifference.lean": "416df6aef5f938cd1c9cd352d511a3f7b18833ac448ca4d1d4b93699d46e88c3",
+    "HBL/InnerEstimates/NormalizedZero.lean": "39fb76e5811de160c75b01d3d04bd261fbc5a96e03068110caf88680be162e81",
+    "HBL/InnerEstimates/OutputZero.lean": "b73699538c1e562cc2e7f51aa8d44b24d3a846875e24bf618e296081046e9b6c",
+    "HBL/InnerEstimates/PlusEquation.lean": "e6bca3f65b6263ad0a3c47195eeee157f341ea39eee5080d82d5dd27b2c7c195",
+    "HBL/InnerEstimates/PlusHilbertDifference.lean": "853508c9700e16d4d7bfc0445c5a5cd9c237ffbcdcc137f5103badb99e9e125d",
+    "HBL/InnerEstimates/PlusOutputBound.lean": "47f0e90ac9e16960660d4d0e4d5fbb3a4a1ac21c84bdd231093ac98087283851",
+    "HBL/InnerEstimates/PlusOutputClassical.lean": "cbc3af0dd1c1fad32d6af27a1d2be87ad7ab4650dc7d12661ee460fa298c027d",
+    "HBL/InnerEstimates/PlusOutputDifference.lean": "2d372eb1491bfebd526016cd46cee455e7467cce9356064d7d8bd54f31cf5e95",
+    "HBL/InnerEstimates/PlusOutputProperties.lean": "30f52cdd46a8c858a34db2908a40d557faf232984ca4b3d713fd93df3b47c2d0",
+    "HBL/InnerEstimates/PlusRemainderDifference.lean": "cec0dc15520b359762d6864ad7508e64699428c571722f564401c9229542716d",
+    "HBL/InnerEstimates/PlusRemainderProperties.lean": "bfe8057626bf116a9dbf3e19ed66feca838080b29aaf28144b7262dbf89d7092",
+    "HBL/InnerEstimates/PlusRemainderWeightedDifference.lean": "ea5348208adb35c5c32d4e2600f90ddb570a0b091cc9fb03672832bc3d374888",
+    "HBL/InnerEstimates/RepresentativeDifferenceBound.lean": "c992a3f2cebf77d38e9f099c22ae9aeb33b93a411a50b4f80d526ccae147465f",
+    "HBL/InnerEstimates/RepresentativeDifferenceIdentity.lean": "4802cb9127660df902258bfec5ff860892600b05a655aa05090a8cd79595cfcb",
+    "HBL/InnerEstimates/RepresentativeZeroSource.lean": "d546faae635cab932445e28e3d610c392928859b4b9c59bca58a99c17e2908b8",
+    "HBL/InnerEstimates/WeightedAffineNorm.lean": "711a7ddb49a977bc3afcc0d719e0adfd70184a94a8ceb5a62c4684ab6ba35edd",
+    "HBL/InnerEstimates/WeightedNormDifference.lean": "ec5e3cf59fa2f179c0e9a9ccc8cc0379c4ee50d5524b25a12593fc7d0fe0ec0a",
+    "HBL/InnerEstimates/WeightedNormIdentity.lean": "e65d8374bf06f6ec38afdf69b4d9ef88171ca1f73adc0991bd59331235e94af8",
+    "HBL/InnerEstimates/WeightedNormNonnegative.lean": "509b8ddd6f0e74b93e3b88448cd2f87ecec856fa022bbe47a2e6ac548734f355",
+    "HBL/InnerEstimates/WeightedSubMembership.lean": "b75717246f04b0e687b54e1c83b519030f94fb6a487995a4dd072fa9f52e5caf",
+    "HBL/InnerEstimates/ZeroData.lean": "d78ce3843e0cacd96f2daf6cb7a7f9badece460d65b160749042989e184f6cb4",
+    "HBL/InnerEstimates/EstimatesAudit.lean": "e3900da012bf52a5676cbee911e6af461c51c5fabc86b53a1caa65214c4aa839"
+  }
+}

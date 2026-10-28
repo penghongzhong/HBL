@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — actual classical affine H-plus/H-minus inner solutions and weighted output verified; exact manuscript one-layer nonlinear residual not yet formalized.",
+  "target_status": "OPEN — actual classical affine inner solutions and fixed-weight norm/Lipschitz bounds verified; exact manuscript one-layer nonlinear residual not yet formalized.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -160,10 +160,18 @@
       "base_commit": "219e1ea35412331745b00dd02897ca6a3bd07e36",
       "new_supporting_theorems": 34,
       "new_original_environments": 0
+    },
+    {
+      "name": "Source-independent weighted norm and Lipschitz bounds for both actual normalized affine inner inverses at fixed weights",
+      "mode": "local pinned strict compilation; one new theorem per file",
+      "verification": "verification/inner-weighted-estimates-status.json",
+      "base_commit": "7aa1cb0e95eafe018c9e1e36f1a8ff938f8e9b1a",
+      "new_supporting_theorems": 37,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
-    "The actual normalized H-plus/H-minus Hilbert solves now reconstruct to continuous bounded remainders with finite constant tails. For continuous L^{2,sigma} sources, 3/2 < sigma < 2, affine restoration solves the original classical equations, vanishes at the origin, has the forced affine slopes, and lies in L^{2,-sigma}. Still derive the quantitative weighted inverse/derivative norms, uniform parameter bounds and jets, and derivative/tail rates required for the one-layer construction.",
+    "For fixed 3/2 < sigma < 2 and tau > 3/2, both actual normalized affine inverses now satisfy L^{2,sigma} to L^{2,-tau} norm and Lipschitz bounds with source-independent constants. Remainders also satisfy a uniform positive-radius pointwise difference bound and weighted difference bounds for every tau > 1/2. Original classical equations hold for continuous sources. Still prove weighted derivative bounds, uniformity over varying weight/parameter families, parameter jets, and quantitative derivative/tail rates required by the one-layer construction.",
     "The physical local Kummer basis, positive Wronskian and compact-interval uniform bounds are now strictly proved. Derive the actual C→C1 annulus right-inverse bound, uniformity and parameter jets on the compact parameter graph, and extend or select the prescribed matching annulus rigorously.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
@@ -181,10 +189,10 @@
   "current_latest_accepted_run": 40732109454,
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
-    "date": "2026-10-28",
-    "verification": "verification/inner-reconstruction-status.json",
-    "complete_types_and_axioms": "verification/inner-reconstruction-types-and-axioms.txt.gz",
-    "new_supporting_theorems": 34,
+    "date": "2026-10-29",
+    "verification": "verification/inner-weighted-estimates-status.json",
+    "complete_types_and_axioms": "verification/inner-weighted-estimates-types-and-axioms.txt.gz",
+    "new_supporting_theorems": 37,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }
