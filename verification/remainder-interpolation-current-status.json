@@ -1,0 +1,14 @@
+{
+  "source_commit": "eec9538fab39cf3bf66ec49445bb65b5bc6eb004",
+  "run_id": "40634782254",
+  "baseline": "4dbc0a1171189f73cd3335a983f9a0b618a34eb4",
+  "validation_passed": false,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "boundary": "Exact physical seventh-order Taylor remainder as t^2 times eight actual nonlinear source samples. Coefficients and identities are checked by Lean, and kernel integrability is derived from the original field bounds. This reduces differentiated remainder estimates to previously proved whole-source estimates, but does not by itself instantiate every Sobolev sample bound or construct the constrained evolution. No original manuscript environment is newly accepted.",
+  "strict_targets": {},
+  "baseline_Lean_sources_byte_identical": 330,
+  "target_cached_files_removed": [],
+  "build_exit": 1
+}
