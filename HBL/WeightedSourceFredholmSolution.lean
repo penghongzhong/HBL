@@ -106,7 +106,8 @@ theorem weightedSourceFredholmSolution_green_equation
       weightedSourceFredholmRightHandSide sigma hsigma F hF at heq
   unfold weightedBirmanSchwingerOperator at heq
   rw [ContinuousLinearMap.comp_apply] at heq
-  exact (sub_eq_iff_eq_add).mp heq
+  have hsum := (sub_eq_iff_eq_add).mp heq
+  simpa only [add_comm] using hsum
 
 #print axioms weightedSourceFredholmRightHandSide_mem_range
 #print axioms existsUnique_weightedSourceFredholmSolution
