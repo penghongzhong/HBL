@@ -1,0 +1,278 @@
+{
+  "source_commit": "9a777159b6d1aebf0c912553bb67fea1d900dd3c",
+  "run_id": "40645619292",
+  "baseline": "3614e05c4525ac5b8d5fefea063eae16882dbed3",
+  "validation_passed": true,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "revalidated_original_environments": [
+    "prop:kinematic-recovery-v2"
+  ],
+  "full_paper_percentage_recertified": false,
+  "boundary": "The actual seventh-order Hartree remainder is locally Lipschitz from the mixed first-order X ball to classical Cartesian H1, including the zero increment and the weak derivative identities. All source samples and their bounds are derived from the original fields. The background is real C1, L4 and bounded, with bounded/L2 differential; background L2 is not assumed. The constrained propagator, high Sobolev local flow, physical reconstruction and full main theorem remain unconstructed. This mixed X is not the manuscript homogeneous H1/intersect H25/16 graph space; no embedding of that graph space into X is claimed. Two further actual kernel bounds use density Linfty/intersect L3/2 and differential L1/intersect L25/8; they do not yet identify the non-L1 density derivative or supply the homogeneous Sobolev bridge. The synchronized-slice original environment is revalidated, not added to the historical denominator.",
+  "strict_targets": {
+    "HartreeRemainderInterpolation": {
+      "strict_exit": 0,
+      "source_sha256": "3832fd805c2061d25474f7622f1994c773a6981a9011f0992e85786f0b23af2b",
+      "declarations": [
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationCoefficients",
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight",
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationBound",
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight_bound",
+        "HBL.RegularRadiation.PhysicalInterpolation.sampleField",
+        "HBL.RegularRadiation.PhysicalInterpolation.sample_kernel_integrable",
+        "HBL.RegularRadiation.PhysicalInterpolation.physical_remainder_interpolation"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 423412,
+      "complete_type_output_sha256": "365c645f6b8ff4369b3715662a478d043d42b25015eef5010fe6a615463b46cc",
+      "axioms": {
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationCoefficients": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.interpolationBound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.remainderWeight_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.sampleField": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.sample_kernel_integrable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalInterpolation.physical_remainder_interpolation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeFirstOrderSource": {
+      "strict_exit": 0,
+      "source_sha256": "ae8c6e8a44f19cb74a33d21d191fe76558cb862ffe504228d2b67c904c0fb7e9",
+      "declarations": [
+        "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact",
+        "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact",
+        "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 1555435,
+      "complete_type_output_sha256": "3b6b48da5e89e6937fbbeac985138dfafe6e1960f5907aef7a58fbe260fe0521",
+      "axioms": {
+        "HBL.RegularRadiation.FirstOrderSource.hartree_differential_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_first_order_source_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.FirstOrderSource.hartree_weak_first_order_source": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeFullFirstOrderDifference": {
+      "strict_exit": 0,
+      "source_sha256": "b5690200a29c2712b3b43f004b102be7bd6b27e34713be274e54d3035fde616b",
+      "declarations": [
+        "HBL.RegularRadiation.FullFirstOrderDifference.hartree_first_order_difference_noncompact"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 1473680,
+      "complete_type_output_sha256": "fd13fd146bad40141cd1c760a76b9b7e017ce6077ca0899eb0802a8200e638d8",
+      "axioms": {
+        "HBL.RegularRadiation.FullFirstOrderDifference.hartree_first_order_difference_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeRemainderFirstOrderQuadratic": {
+      "strict_exit": 0,
+      "source_sha256": "478f6b2ee301e15f897b156dcbd032bba1b79ff775bd4ab425ad5c519d963e22",
+      "declarations": [
+        "HBL.RegularRadiation.RemainderFirstOrder.eight_L2_combination",
+        "HBL.RegularRadiation.RemainderFirstOrder.remainderFirstOrderConstant",
+        "HBL.RegularRadiation.RemainderFirstOrder.affine_sample_data",
+        "HBL.RegularRadiation.RemainderFirstOrder.physical_remainder_first_order_quadratic"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 2324337,
+      "complete_type_output_sha256": "1b28e53a75feeccc174cb1d7a3940918cff18e6309e229bfe013894bc749e10d",
+      "axioms": {
+        "HBL.RegularRadiation.RemainderFirstOrder.eight_L2_combination": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrder.remainderFirstOrderConstant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrder.affine_sample_data": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrder.physical_remainder_first_order_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeRemainderFirstOrderLipschitz": {
+      "strict_exit": 0,
+      "source_sha256": "df7f9180ff33917ead2a35fdff1f1edac909e3a8116420e353bd6f1c4fd60105",
+      "declarations": [
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.remainderFirstOrderLipschitzConstant",
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.physical_remainder_first_order_normalized_difference",
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.FirstOrderBall",
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.physical_remainder_first_order_lipschitz"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 3309446,
+      "complete_type_output_sha256": "b81ef72174e3fabe12b4e96c724102adcfe73c57af0afebb947d2c1448571949",
+      "axioms": {
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.remainderFirstOrderLipschitzConstant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.physical_remainder_first_order_normalized_difference": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.FirstOrderBall": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderFirstOrderLipschitz.physical_remainder_first_order_lipschitz": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeRemainderH1Lipschitz": {
+      "strict_exit": 0,
+      "source_sha256": "b68f7fce0c979a44ef069f3aee076f1e26ccfff6db6dff345761f0f9f83abc44",
+      "declarations": [
+        "HBL.RegularRadiation.RemainderH1.mixedFirstOrderNorm",
+        "HBL.RegularRadiation.RemainderH1.physicalH1Norm",
+        "HBL.RegularRadiation.RemainderH1.physical_remainder_h1_lipschitz"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 895039,
+      "complete_type_output_sha256": "ed889cd1bd2b7064c5671a0a38234e1b79465a77bba188a1e2f7bf7bd8c86c41",
+      "axioms": {
+        "HBL.RegularRadiation.RemainderH1.mixedFirstOrderNorm": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderH1.physicalH1Norm": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.RemainderH1.physical_remainder_h1_lipschitz": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeGraphKernelBounds": {
+      "strict_exit": 0,
+      "source_sha256": "3294a09ca7dcc91c4edf81fde6029b794ce95057f42b88c36b731b806c38a311",
+      "declarations": [
+        "HBL.RegularRadiation.GraphKernel.farKernel",
+        "HBL.RegularRadiation.GraphKernel.potential_graph_bound",
+        "HBL.RegularRadiation.GraphKernel.gradientPotential_graph_bound"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 504386,
+      "complete_type_output_sha256": "3006d966144d8f95fff7fe62a5d4167e8f3697bdc1178ec52a79c1ed16ada162",
+      "axioms": {
+        "HBL.RegularRadiation.GraphKernel.farKernel": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.GraphKernel.potential_graph_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.GraphKernel.gradientPotential_graph_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "KinematicOriginalEnvironment": {
+      "strict_exit": 0,
+      "source_sha256": "aa74e4deb2b25a53b5029ef5b7115f0f0216ee0bc68d2003647f744ef1a6a839",
+      "declarations": [
+        "HBL.Kinematic.kinematicRecovery_originalEnvironment_closed"
+      ],
+      "audit_passed": true,
+      "audit_exit": 0,
+      "complete_type_output_bytes": 17866,
+      "complete_type_output_sha256": "c98e9917f9240afec7fe31414a1e9008657034e820ba188de853eb39d031c64b",
+      "axioms": {
+        "HBL.Kinematic.kinematicRecovery_originalEnvironment_closed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    }
+  },
+  "compiler_version": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "mathlib_commit": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "baseline_Lean_sources_preserved": 332,
+  "only_baseline_Lean_changes": "Two existing helper proofs made public; proof terms unchanged.",
+  "new_target_cached_files_removed": [],
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "retained_component_roots": 44,
+  "strict_named_declarations": 26,
+  "trust_zero": true,
+  "warning_as_error": true
+}
