@@ -21,6 +21,19 @@ def main():
   simp only [Pi.sub_apply] at hsub
   rw [hsub, integral_sub (hFi t) (hFi 0), integral_const_mul, integral_const_mul,
     integral_finsetSum _ (fun (j : Fin 8) _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint''',
+        '''        simpa only [sampleField, Complex.ofReal_zero, zero_mul, add_zero] using
+          (show hartreeNonlinearity κ (fun y => (w y : ℂ) + (t : ℂ) * h y) x -
+            hartreeNonlinearity κ (fun y => (w y : ℂ)) x - (t : ℂ) * linearTerm κ w h x =
+            remainder κ w (fun y => (t : ℂ) * h y) x from by rw [hex]; ring)''':
+            '''        have hs0 : sampleField w h 0 = (fun y : Space => (w y : ℂ)) := by
+          funext y
+          simp [sampleField]
+        rw [hs0]
+        change hartreeNonlinearity κ (fun y => (w y : ℂ) + (t : ℂ) * h y) x -
+          hartreeNonlinearity κ (fun y => (w y : ℂ)) x - (t : ℂ) * linearTerm κ w h x =
+          remainder κ w (fun y => (t : ℂ) * h y) x
+        rw [hex]
+        ring''',
     }
     for old, new in replacements.items():
         assert src.count(old) == 1, (old, src.count(old))
