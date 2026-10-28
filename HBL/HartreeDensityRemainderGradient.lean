@@ -17,6 +17,7 @@ not yet the full seventh-order remainder difference or a constrained flow.
 
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 open MeasureTheory
 open scoped Topology
@@ -61,9 +62,10 @@ theorem densityRemainder_contDiff (w : Space → ℝ) (h : Space → ℂ)
     ContDiff ℝ 1 (densityRemainder w h) := by
   have hn := hh.norm_sq ℂ
   have hre := Complex.reCLM.contDiff.comp hh
+  have ha : ContDiff ℝ 1 (fun y => 2 * (w y) ^ 2) := contDiff_const.mul (hw.pow 2)
+  have hb : ContDiff ℝ 1 (fun y => 2 * w y) := contDiff_const.mul hw
   exact Complex.ofRealCLM.contDiff.comp
-    ((((hw.pow 2).const_mul 2).mul hn).add
-      ((((hw.const_mul 2).mul hre).add hn).pow 2))
+    ((ha.mul hn).add (((hb.mul hre).add hn).pow 2))
 
 /-- Exact differential: every term still contains two perturbation factors
 when Dh is counted as one perturbation factor. -/
@@ -81,8 +83,8 @@ theorem densityRemainder_fderiv_apply (w : Space → ℝ) (h : Space → ℂ)
   have hs := ((hw.hasFDerivAt.const_mul 2).mul hre).add hn
   have hq := (((hw.hasFDerivAt.pow 2).const_mul 2).mul hn).add (hs.pow 2)
   have hd := Complex.ofRealCLM.hasFDerivAt.comp x hq
-  change (fderiv ℝ (fun y => Complex.ofRealCLM
-    (2 * (w y) ^ 2 * ‖h y‖ ^ 2 + (2 * w y * (h y).re + ‖h y‖ ^ 2) ^ 2)) x) v = _
+  simp only [Function.comp_def, Pi.mul_apply, Pi.add_apply, Complex.reCLM_apply] at hd
+  change HasFDerivAt (densityRemainder w h) _ x at hd
   rw [hd.fderiv]
   simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, smul_eq_mul, nsmul_eq_mul,
