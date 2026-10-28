@@ -1,17 +1,196 @@
 {
-  "source_commit": "4537704bfdaaf5fc69ca17780f71f636ee72de06",
-  "run_id": "40613024706",
+  "source_commit": "d9f3095de1285dad9d1f6497500bf1e7affccd57",
+  "run_id": "40613458409",
   "baseline": "db6be8c0f0a47cfca9dc629d5b96177cd280a6c1",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
   "boundary": "The compact-core approximation premise is removed from the two new terminal derivative theorems by internally constructed cutoffs and local uniform convergence. The field remains C1 with L4 mass, L2 differential, and uniform field/differential bounds. Higher Sobolev realization, full differentiated remainder estimates and the actual constrained evolution are not concluded.",
-  "strict_targets": {},
+  "strict_targets": {
+    "HartreeSpatialCore": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "6e15d564abb9b2d346141d98cbbf4afb367141cd405da2a19c703450997445a4",
+      "declarations": [
+        "HBL.RegularRadiation.SpatialCore.complexKernel",
+        "HBL.RegularRadiation.SpatialCore.complexKernel_locallyIntegrable",
+        "HBL.RegularRadiation.SpatialCore.potential_eq_convolution",
+        "HBL.RegularRadiation.SpatialCore.potential_contDiff",
+        "HBL.RegularRadiation.SpatialCore.potential_hasFDerivAt",
+        "HBL.RegularRadiation.SpatialCore.potential_fderiv_apply",
+        "HBL.RegularRadiation.SpatialCore.potential_fderiv_bound",
+        "HBL.RegularRadiation.SpatialCore.hartree_contDiff_core",
+        "HBL.RegularRadiation.SpatialCore.hartree_fderiv_core"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.SpatialCore.complexKernel": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.complexKernel_locallyIntegrable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.potential_eq_convolution": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.potential_contDiff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.potential_hasFDerivAt": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.potential_fderiv_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.potential_fderiv_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.hartree_contDiff_core": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCore.hartree_fderiv_core": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeSpatialCompletion": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "3c4ddc77c2a43a52963186c249fa15a26d15d51d0b94ea50081f561b5cbe7a84",
+      "declarations": [
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential",
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_bound",
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_apply",
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_difference_bound",
+        "HBL.RegularRadiation.SpatialCompletion.potential_core_gradient",
+        "HBL.RegularRadiation.SpatialCompletion.potential_hasFDerivAt_of_core_approximation"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCompletion.gradientPotential_difference_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCompletion.potential_core_gradient": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.SpatialCompletion.potential_hasFDerivAt_of_core_approximation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeQuarticGradient": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "c30ba5c1ca8b7a389ec1a391bce07ddebb65ecd6544b844a1cdeac0cf4cf4112",
+      "declarations": [
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_contDiff",
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_fderiv_apply",
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_fderiv_norm_le",
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_gradient_source",
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_gradient_potential_bound",
+        "HBL.RegularRadiation.QuarticGradient.quarticPotential_derivative_of_core_approximation"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_contDiff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_fderiv_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_fderiv_norm_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_gradient_source": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.QuarticGradient.quarticDensity_gradient_potential_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.QuarticGradient.quarticPotential_derivative_of_core_approximation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeLocalCutoff": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "de633069363a137c743ca3cc686ed1a247820c5c506bd0cd86218f263c3ed7a7",
+      "declarations": [
+        "HBL.RegularRadiation.LocalCutoff.potential_hasFDerivAt_noncompact",
+        "HBL.RegularRadiation.LocalCutoff.quarticPotential_hasFDerivAt_noncompact"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.LocalCutoff.potential_hasFDerivAt_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.LocalCutoff.quarticPotential_hasFDerivAt_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    }
+  },
   "baseline_Lean_sources_byte_identical": 323,
   "new_target_cached_files_removed": [
     ".lake/build/ir/HBL/HartreeLocalCutoff.setup.json"
   ],
-  "new_source_sha256": "05f405877806e6f2d2b6f8b7d0757505781b910668ec82e1263d18fc0ad05138",
-  "build_exit": 1
+  "new_source_sha256": "de633069363a137c743ca3cc686ed1a247820c5c506bd0cd86218f263c3ed7a7",
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "strict_named_declarations": 23,
+  "new_public_theorems": 2,
+  "approximation_sequence_input_in_new_terminals": false
 }

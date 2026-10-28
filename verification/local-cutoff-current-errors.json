@@ -1,3 +1,1 @@
-{
-  "cutoff-build.log": "error: HBL/HartreeLocalCutoff.lean:79:4: 'change' tactic failed, pattern\n  ‖c n • x‖ ≤ 1\nis not definitionally equal to target\n  c n • x ∈ closedBall 0 b.rIn"
-}
+{}
