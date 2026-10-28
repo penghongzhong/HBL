@@ -48,6 +48,8 @@ def main():
             '              (4 * (w y : ℂ) ^ 3 * ((h y).re : ℂ)) * (w x : ℂ) ^ 3)) := by\n        push_cast\n        ring',
         '        rw [h, Finset.mul_sum, Finset.mul_sum]':
             '        push_cast\n        rw [hpoly, Finset.mul_sum, Finset.mul_sum]',
+        '  have hint := integral_congr_ae (Filter.Eventually.of_forall hz)':
+            '  have hint := integral_congr_ae (μ := (volume : Measure Space))\n    (Filter.Eventually.of_forall hz)',
     }
     for old, new in replacements.items():
         assert src.count(old) == 1, (old, src.count(old))
