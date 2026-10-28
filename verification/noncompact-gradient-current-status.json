@@ -1,0 +1,57 @@
+{
+  "source_commit": "074a765c97eb695ca3c7e1cb2c3f27d37aa5ac48",
+  "run_id": "40607137843",
+  "baseline": "027bb49f5ccbbefbf466b7c54dc31ea390f602fa",
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "validation_passed": true,
+  "boundary": "The limiting density and gradient need not have compact support. L1 and essential-supremum approximation by compact C1 densities remains an explicit source-class obligation. No actual constrained Hartree propagator or nonlinear Sobolev-flow theorem is asserted.",
+  "source_sha256": "3c4ddc77c2a43a52963186c249fa15a26d15d51d0b94ea50081f561b5cbe7a84",
+  "baseline_Lean_sources_byte_identical": 321,
+  "target_cached_files_removed": [],
+  "build_exit": 0,
+  "core_strict_exit": 0,
+  "completion_strict_exit": 0,
+  "axioms": {
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_difference_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCompletion.potential_core_gradient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCompletion.potential_hasFDerivAt_of_core_approximation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "audited_declarations": [
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential",
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_bound",
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_apply",
+    "HBL.RegularRadiation.SpatialCompletion.gradientPotential_difference_bound",
+    "HBL.RegularRadiation.SpatialCompletion.potential_core_gradient",
+    "HBL.RegularRadiation.SpatialCompletion.potential_hasFDerivAt_of_core_approximation"
+  ],
+  "audit_passed": true
+}
