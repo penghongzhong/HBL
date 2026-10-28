@@ -50,7 +50,6 @@ theorem weightedSourceGreen_cokernel_pairing
     change weightedSourceGreenKernel sigma p.1 p.2 *
         (tensor weightedScaleResonanceL2 g : ℝ × ℝ → ℝ) p = _
     rw [ht]
-  rw [← integral_const_mul]
   have hkernel :
       (fun p : ℝ × ℝ =>
         inner ℝ ((weightedSourceGreenKernelL2 sigma hsigma) p)
@@ -64,6 +63,7 @@ theorem weightedSourceGreen_cokernel_pairing
     rw [hK, ht, Real.inner_apply]
     rfl
   rw [integral_congr_ae hkernel]
+  rw [← integral_const_mul]
   have hprod15 : Integrable (fun p : ℝ × ℝ =>
       15 * (weightedSourceGreenKernel sigma p.1 p.2 *
         (weightedScaleResonanceL2 p.1 * g p.2)))

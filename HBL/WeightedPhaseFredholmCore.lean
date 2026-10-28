@@ -64,8 +64,11 @@ theorem weightedPhaseFredholm_kernel_eq_sine_span :
             (1 / 3 : ℝ) • ((3 : ℝ) • weightedFreeGreenOperator x) := by
               module
         _ = (1 / 3 : ℝ) • x := by rw [hthree]
+    have hcoeff :
+        (1 / (4 * ((1 : ℕ) : ℝ) ^ 2 - 1) : ℝ) = (1 / 3 : ℝ) := by
+      norm_num
     exact (weightedFreeGreen_sine_eigen_iff 1 (by omega) x).1
-      (by simpa only [show (4 - 1 : ℝ) = 3 by norm_num] using hg)
+      (by rw [hcoeff]; exact hg)
   · intro hx
     have hg := (weightedFreeGreen_sine_eigen_iff 1 (by omega) x).2 hx
     change x - (3 : ℝ) • weightedFreeGreenOperator x = 0
@@ -87,8 +90,12 @@ theorem weightedPhaseFredholm_adjoint_eq :
     change inner ℝ (x - weightedPhaseBirman x) y =
       inner ℝ x (y - weightedPhaseBirman y)
     rw [inner_sub_left, inner_sub_right]
-    rw [(ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
-      weightedPhaseBirman_selfAdjoint) x y]
+    have hsym :
+        inner ℝ (weightedPhaseBirman x) y =
+          inner ℝ x (weightedPhaseBirman y) :=
+      (ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+        weightedPhaseBirman_selfAdjoint) x y
+    exact congrArg (fun v : ℝ => inner ℝ x y - v) hsym
   exact hself
 
 theorem weightedPhaseFredholm_adjointKernel_eq_sine_span :
