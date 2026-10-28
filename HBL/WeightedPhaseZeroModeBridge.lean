@@ -34,7 +34,6 @@ theorem firstSineMode_eq_twice_weightedPhaseResonance (r : ℝ) :
   simp only [Nat.cast_one, mul_one]
   rw [Real.sin_two_mul, Real.sin_arctan, Real.cos_arctan]
   unfold bubble
-  rw [Real.sq_sqrt hq.le]
   field_simp [hs]
   rw [Real.sq_sqrt hq.le]
   ring
