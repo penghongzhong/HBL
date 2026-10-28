@@ -15,6 +15,7 @@ estimates, or assert a newly accepted original manuscript environment.
 -/
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 open MeasureTheory
 open scoped BigOperators Topology
 
@@ -28,17 +29,20 @@ private theorem fourth_sum (a b : ℝ) :
   have h2 := pow_le_pow_left₀ (sq_nonneg (a + b)) h1 2
   nlinarith only [h2, sq_nonneg (a ^ 2 - b ^ 2)]
 
+private theorem four_square (a b c d : ℝ) :
+    (a + b + c + d) ^ 2 ≤ 4 * (a ^ 2 + b ^ 2 + c ^ 2 + d ^ 2) := by
+  have h1 : (a + b) ^ 2 ≤ 2 * (a ^ 2 + b ^ 2) := by
+    nlinarith only [sq_nonneg (a-b)]
+  have h2 : (c + d) ^ 2 ≤ 2 * (c ^ 2 + d ^ 2) := by
+    nlinarith only [sq_nonneg (c-d)]
+  nlinarith only [h1, h2, sq_nonneg ((a+b)-(c+d))]
+
 private theorem eight_square (a b c d e f g h : ℝ) :
     (a + b + c + d + e + f + g + h) ^ 2 ≤
       8 * (a ^ 2 + b ^ 2 + c ^ 2 + d ^ 2 + e ^ 2 + f ^ 2 + g ^ 2 + h ^ 2) := by
-  nlinarith only [sq_nonneg (a-b), sq_nonneg (a-c), sq_nonneg (a-d),
-    sq_nonneg (a-e), sq_nonneg (a-f), sq_nonneg (a-g), sq_nonneg (a-h),
-    sq_nonneg (b-c), sq_nonneg (b-d), sq_nonneg (b-e), sq_nonneg (b-f),
-    sq_nonneg (b-g), sq_nonneg (b-h), sq_nonneg (c-d), sq_nonneg (c-e),
-    sq_nonneg (c-f), sq_nonneg (c-g), sq_nonneg (c-h), sq_nonneg (d-e),
-    sq_nonneg (d-f), sq_nonneg (d-g), sq_nonneg (d-h), sq_nonneg (e-f),
-    sq_nonneg (e-g), sq_nonneg (e-h), sq_nonneg (f-g), sq_nonneg (f-h),
-    sq_nonneg (g-h)]
+  have h1 := four_square a b c d
+  have h2 := four_square e f g h
+  nlinarith only [h1, h2, sq_nonneg ((a+b+c+d)-(e+f+g+h))]
 
 private theorem eight_norm_square {E : Type*} [NormedAddCommGroup E]
     (v : Fin 8 → E) : ‖∑ i, v i‖ ^ 2 ≤ 8 * ∑ i, ‖v i‖ ^ 2 := by
@@ -52,7 +56,7 @@ private theorem eight_norm_square {E : Type*} [NormedAddCommGroup E]
 private theorem eight_L2_combination {E : Type*}
     [NormedAddCommGroup E] [NormedSpace ℂ E]
     (F : Fin 8 → Space → E) (c : Fin 8 → ℂ)
-    (hF : ∀ i, MemLp (F i) 2) {B S : ℝ} (hB : 0 ≤ B)
+    (hF : ∀ i, MemLp (F i) 2) {B S : ℝ} (_hB : 0 ≤ B)
     (hc : ∀ i, ‖c i‖ ≤ B)
     (hS : ∀ i, (∫ x : Space, ‖F i x‖ ^ 2) ≤ S) :
     MemLp (fun x => ∑ i, c i • F i x) 2 ∧
@@ -63,14 +67,18 @@ private theorem eight_L2_combination {E : Type*}
         (((hF 5).const_smul (c 5)).add (((hF 6).const_smul (c 6)).add
           ((hF 7).const_smul (c 7))))))))
   have hmem : MemLp (fun x => ∑ i, c i • F i x) 2 := by
-    simpa [Fin.sum_univ_succ, Pi.smul_apply, Pi.add_apply] using hm
+    convert hm using 1
+    funext x
+    simp [Fin.sum_univ_succ]
   have hi := (hF 0).norm.integrable_sq.add
     ((hF 1).norm.integrable_sq.add ((hF 2).norm.integrable_sq.add
       ((hF 3).norm.integrable_sq.add ((hF 4).norm.integrable_sq.add
         ((hF 5).norm.integrable_sq.add ((hF 6).norm.integrable_sq.add
           (hF 7).norm.integrable_sq))))))
   have hsum : Integrable (fun x : Space => ∑ i : Fin 8, ‖F i x‖ ^ 2) := by
-    simpa [Fin.sum_univ_succ, Pi.add_apply] using hi
+    convert hi using 1
+    funext x
+    simp [Fin.sum_univ_succ]
   have hb (x : Space) : ‖∑ i, c i • F i x‖ ^ 2 ≤
       (8 * B ^ 2) * ∑ i : Fin 8, ‖F i x‖ ^ 2 := by
     calc
@@ -127,7 +135,7 @@ private theorem affine_sample_data
   have hv (x : Space) : ‖f x‖ ≤ |w x| + 7 * ‖h x‖ := by
     apply (norm_add_le (w x : ℂ) ((s : ℂ) * h x)).trans
     simpa only [Complex.norm_real, Real.norm_eq_abs, norm_mul] using
-      add_le_add le_rfl (mul_le_mul_of_nonneg_right hs (norm_nonneg (h x)))
+      add_le_add (le_refl |w x|) (mul_le_mul_of_nonneg_right hs (norm_nonneg (h x)))
   have hd (x : Space) : fderiv ℝ f x =
       Complex.ofRealCLM.comp (fderiv ℝ w x) + (s : ℂ) • fderiv ℝ h x :=
     ((Complex.ofRealCLM.hasFDerivAt.comp x (hw.differentiable (by norm_num) x).hasFDerivAt).add
@@ -166,7 +174,8 @@ private theorem affine_sample_data
     apply (pow_le_pow_left₀ (norm_nonneg _) (hdv x) 2).trans
     nlinarith only [sq_nonneg (‖fderiv ℝ w x‖ - 7 * ‖fderiv ℝ h x‖)]
   have hdmajor := (hDw.norm.integrable_sq.add (hDh.norm.integrable_sq.const_mul 49)).const_mul 2
-  have hDmeas := (hfc.continuous_fderiv (by norm_num)).aestronglyMeasurable
+  have hDmeas : AEStronglyMeasurable (fderiv ℝ f) (volume : Measure Space) :=
+    (hfc.continuous_fderiv (by norm_num)).aestronglyMeasurable
   have hdi : Integrable (fun x : Space => ‖fderiv ℝ f x‖ ^ 2) :=
     hdmajor.mono' (hDmeas.norm.pow 2) (Filter.Eventually.of_forall fun x => by
       simpa only [Pi.add_apply, Real.norm_of_nonneg (sq_nonneg _)] using hd2 x)
@@ -260,6 +269,7 @@ theorem physical_remainder_first_order_quadratic
     unfold interpolationBound; positivity
   have hR : R = fun x => ∑ i : Fin 8, c i • N i x := by
     funext x
+    change remainder κ w (fun y => (t : ℂ) * h y) x = ∑ i : Fin 8, c i • N i x
     rw [physical_remainder_interpolation κ t w h hw.continuous.aestronglyMeasurable
       hw4 hh2 hM (show (0 : ℝ) ≤ 1 by norm_num) hwb hhb x, Finset.mul_sum]
     apply Finset.sum_congr rfl
@@ -280,7 +290,9 @@ theorem physical_remainder_first_order_quadratic
   have hRv : MemLp R 2 := by rw [hR]; exact hv.1
   have hRD : MemLp (fderiv ℝ R) 2 := by rw [hDR]; exact hd.1
   refine ⟨fun x => (hRd x).differentiableAt, hRv, hRD, ?_, ?_⟩
-  · rw [hR, hDR]
+  · change (∫ x : Space, ‖R x‖ ^ 2) + (∫ x : Space, ‖fderiv ℝ R x‖ ^ 2) ≤
+      remainderFirstOrderConstant κ M L J E * t ^ 4
+    rw [hDR, hR]
     exact (add_le_add hv.2 hd.2).trans_eq (by
       dsimp [remainderFirstOrderConstant, S0, S1, A, B, m, l, j, e]
       ring)
