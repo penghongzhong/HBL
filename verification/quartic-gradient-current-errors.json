@@ -1,3 +1,1 @@
-{
-  "quartic-build.log": "error: HBL/HartreeQuarticGradient.lean:53:53: Unknown identifier `innerSL_apply`\n\nerror: HBL/HartreeQuarticGradient.lean:42:68: unsolved goals\nf : Space → ℂ\nx : Space\nhf : DifferentiableAt ℝ f x\nv : Space\nhe : quarticDensity f = fun y => Complex.ofRealCLM ((‖f y‖ ^ 2) ^ 2)\nhd :\n  HasFDerivAt (⇑Complex.ofRealCLM ∘ fun x => (‖f x‖ ^ 2) ^ 2)\n    (Complex.ofRealCLM ∘SL ((2 • (‖f x‖ ^ 2) ^ (2 - 1)) • 2 • (innerSL ℝ) (f x) ∘SL fderiv ℝ f x)) x\n⊢ ‖f x‖ ^ 2 * ((innerSL ℝ) (f x)) ((fderiv ℝ f x) v) * 4 = ‖f x‖ ^ 2 * inner ℝ (f x) ((fderiv ℝ f x) v) * 4\nSome required targets logged failures:\n- HBL.HartreeQuarticGradient"
-}
+{}
