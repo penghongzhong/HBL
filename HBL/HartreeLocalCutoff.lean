@@ -76,6 +76,7 @@ private theorem cutoff_family :
     exact hx hz
   have hχone (n : ℕ) (x : Space) (hx : ‖x‖ < 2 * radius n) : χ n x = 1 := by
     apply b.one_of_mem_closedBall
+    rw [mem_closedBall_zero_iff]
     change ‖c n • x‖ ≤ 1
     rw [norm_smul, Real.norm_of_nonneg (hcpos n).le]
     exact (mul_le_mul_of_nonneg_left hx.le (hcpos n).le).trans_eq (hceq n)
