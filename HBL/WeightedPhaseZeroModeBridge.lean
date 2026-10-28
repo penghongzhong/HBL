@@ -36,7 +36,6 @@ theorem firstSineMode_eq_twice_weightedPhaseResonance (r : ℝ) :
   unfold bubble
   field_simp [hs]
   rw [Real.sq_sqrt hq.le]
-  ring
 
 /-- The weighted phase generator, as an actual element of half-line L2. -/
 def weightedPhaseResonanceL2 : RealL2 halfLineMeasure :=
