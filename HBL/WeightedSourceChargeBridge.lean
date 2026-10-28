@@ -17,18 +17,26 @@ open scoped RealInnerProductSpace
 
 namespace HBL.Modulation.Monopole
 
+open HBL.L2Kernel
 open HBL.Modulation.AffineTail
+
+theorem weightedSourceData_memLp_two
+    (sigma : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 sigma F) :
+    MemLp (fun r => affineJapaneseWeight sigma r * F r) 2
+      halfLineMeasure := by
+  simpa only [InWeightedL2, halfLineMeasure] using hF
 
 def weightedSourceDataL2
     (sigma : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 sigma F) :
     RealL2 halfLineMeasure :=
-  hF.toLp (fun r => affineJapaneseWeight sigma r * F r)
+  (weightedSourceData_memLp_two sigma F hF).toLp
+    (fun r => affineJapaneseWeight sigma r * F r)
 
 theorem weightedSourceDataL2_ae
     (sigma : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 sigma F) :
     (weightedSourceDataL2 sigma F hF : ℝ → ℝ) =ᵐ[halfLineMeasure]
       fun r => affineJapaneseWeight sigma r * F r :=
-  hF.coeFn_toLp
+  (weightedSourceData_memLp_two sigma F hF).coeFn_toLp
 
 def weightedSourceResonance (sigma : ℝ) (r : ℝ) : ℝ :=
   resonancePlus r * affineJapaneseDecay sigma r
@@ -36,7 +44,7 @@ def weightedSourceResonance (sigma : ℝ) (r : ℝ) : ℝ :=
 theorem weightedSourceResonance_memLp_two
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
     MemLp (weightedSourceResonance sigma) 2 halfLineMeasure := by
-  simpa only [weightedSourceResonance, channelResonance] using
+  simpa only [weightedSourceResonance, channelResonance, halfLineMeasure] using
     channelResonance_decay_memLp_two HartreeChannel.plus sigma hsigma
 
 def weightedSourceResonanceL2
