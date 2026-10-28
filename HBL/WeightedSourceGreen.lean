@@ -52,7 +52,7 @@ theorem weightedSourceMajorant_continuous (sigma : ℝ) :
   unfold weightedSourceMajorant
   exact continuous_abs.mul
     ((continuous_const.add (continuous_id.pow 2)).rpow_const
-      (fun r => Or.inl (by positivity)))
+      (fun r => Or.inl (ne_of_gt (by positivity : 0 < 1 + r ^ 2))))
 
 theorem weightedSourceMajorant_integrable
     (sigma : ℝ) (hsigma : 1 < sigma) :
@@ -91,7 +91,6 @@ theorem weightedSourceMajorant_integrable
       rw [Real.sqrt_eq_rpow]
       rw [← Real.rpow_add (by positivity : 0 < 1 + rho ^ 2)]
       congr 1
-      ring
 
 theorem weightedSourceGreenKernel_sq_le
     (sigma : ℝ) {r rho : ℝ} (hr : 0 < r) (hrho : 0 < rho) :
