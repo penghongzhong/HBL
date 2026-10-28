@@ -78,12 +78,11 @@ theorem weightedSourceGreen_cokernel_pairing
           15 * (weightedSourceGreenKernel sigma r rho *
             (weightedScaleResonanceL2 r * g rho))
           ∂halfLineMeasure ∂halfLineMeasure := by
-      simpa only using
-        (MeasureTheory.integral_prod_swap
-          (μ := halfLineMeasure) (ν := halfLineMeasure)
-          (fun p : ℝ × ℝ =>
-            15 * (weightedSourceGreenKernel sigma p.1 p.2 *
-              (weightedScaleResonanceL2 p.1 * g p.2))))
+      exact MeasureTheory.integral_prod_symm
+        (μ := halfLineMeasure) (ν := halfLineMeasure)
+        (fun p : ℝ × ℝ =>
+          15 * (weightedSourceGreenKernel sigma p.1 p.2 *
+            (weightedScaleResonanceL2 p.1 * g p.2))) hprod15
     _ = ∫ rho : ℝ,
         weightedSourceResonance sigma rho * g rho
         ∂halfLineMeasure := by
@@ -97,7 +96,6 @@ theorem weightedSourceGreen_cokernel_pairing
             affineJapaneseDecay sigma rho * g rho *
               (∫ r in Ioi (0 : ℝ),
                 min rho r * weightedScaleGreenSource r) := by
-          rw [halfLineMeasure]
           rw [← integral_const_mul]
           apply integral_congr_ae
           filter_upwards [weightedScaleResonanceL2_ae] with r hx0
