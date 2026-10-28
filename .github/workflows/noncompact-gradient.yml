@@ -43,32 +43,32 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean Mathlib/Analysis/Normed/Group/Bounded.lean Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile actual quartic sources and audit complete declarations
+      - name: Compile native cutoffs and audit full derivative statements
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/quartic_gradient_validation.py
-          python3 verification/quartic_gradient_validation.py
+          python3 -m py_compile verification/local_cutoff_validation.py
+          python3 verification/local_cutoff_validation.py
       - name: Preserve diagnostics without editing proof sources
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/quartic-gradient-current-status.json; then
-            git add verification/quartic-gradient-current-status.json verification/quartic-gradient-current-errors.json
+          if test -f verification/local-cutoff-current-status.json; then
+            git add verification/local-cutoff-current-status.json verification/local-cutoff-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record actual quartic-gradient compilation and audit [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record native cutoff compiler and complete axiom audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 33df9598b2aa394426038b8b228076d848aa88aa HEAD > evidence/quartic-gradient.patch
+          git diff db6be8c0f0a47cfca9dc629d5b96177cd280a6c1 HEAD > evidence/local-cutoff.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-quartic-gradient-${{ github.sha }}
+          name: hbl-local-cutoff-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -80,7 +80,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/quartic-gradient-current-status.json'))
+          r=json.load(open('verification/local-cutoff-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
