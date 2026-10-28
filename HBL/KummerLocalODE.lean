@@ -114,6 +114,91 @@ theorem exists_local_normalized_frozenKummer_pair
 
 #print axioms exists_local_normalized_frozenKummer_pair
 
+
+/-- The Wronskian of two actual augmented first-order IVP trajectories. -/
+def localPairWronskian
+    (X Y : ℝ → KummerODEState) (t : ℝ) : ℂ :=
+  (X t).2.1 * (Y t).2.2 - (X t).2.2 * (Y t).2.1
+
+theorem localPairWronskian_continuousAt
+    (X Y : ℝ → KummerODEState)
+    (hX : ContinuousAt X 0) (hY : ContinuousAt Y 0) :
+    ContinuousAt (localPairWronskian X Y) 0 := by
+  unfold localPairWronskian
+  exact (hX.snd.fst.mul hY.snd.snd).sub
+    (hX.snd.snd.mul hY.snd.fst)
+
+theorem localPairWronskian_nonzero_near_zero
+    (X Y : ℝ → KummerODEState)
+    (hX : ContinuousAt X 0) (hY : ContinuousAt Y 0)
+    (hW0 : localPairWronskian X Y 0 = 1) :
+    ∃ eps : ℝ, 0 < eps ∧
+      ∀ t ∈ Set.Ioo (-eps) eps, localPairWronskian X Y t ≠ 0 := by
+  have hne : localPairWronskian X Y 0 ≠ 0 := by
+    rw [hW0]
+    norm_num
+  have hnear :=
+    (localPairWronskian_continuousAt X Y hX hY).eventually_ne hne
+  rw [Filter.eventually_iff_exists_mem] at hnear
+  obtain ⟨U, hU, hUS⟩ := hnear
+  obtain ⟨eps, heps, hball⟩ := Metric.mem_nhds_iff.mp hU
+  refine ⟨eps, heps, ?_⟩
+  intro t ht
+  apply hUS
+  apply hball
+  have habs : |t| < eps := abs_lt.mpr ht
+  simpa only [Metric.mem_ball, dist_zero_right, Real.norm_eq_abs] using habs
+
+/-- The two normalized frozen Kummer IVPs are actually nondegenerate on a
+common positive-length interval. Neither their existence nor the
+Wronskian nonvanishing is a supplied hypothesis. -/
+theorem exists_local_nondegenerate_frozenKummer_pair
+    (mu theta z : ℝ) (hz : 0 < z) :
+    ∃ X Y : ℝ → KummerODEState,
+      ∃ eps : ℝ, 0 < eps ∧
+        X 0 = (z, ((1 : ℂ), 0)) ∧
+        Y 0 = (z, (0, (1 : ℂ))) ∧
+        (∀ t ∈ Set.Ioo (-eps) eps,
+          HasDerivAt X (frozenKummerAugmentedField mu theta (X t)) t) ∧
+        (∀ t ∈ Set.Ioo (-eps) eps,
+          HasDerivAt Y (frozenKummerAugmentedField mu theta (Y t)) t) ∧
+        (∀ t ∈ Set.Ioo (-eps) eps, localPairWronskian X Y t ≠ 0) := by
+  obtain ⟨X, Y, e, he, hX, hY, hDX, hDY, hW⟩ :=
+    exists_local_normalized_frozenKummer_pair mu theta z hz
+  have hzero : (0 : ℝ) ∈ Set.Ioo (-e) e := by
+    constructor <;> linarith
+  have hcX : ContinuousAt X 0 := (hDX 0 hzero).continuousAt
+  have hcY : ContinuousAt Y 0 := (hDY 0 hzero).continuousAt
+  have hW0 : localPairWronskian X Y 0 = 1 := by
+    simpa only [localPairWronskian] using hW
+  obtain ⟨d, hd, hWD⟩ :=
+    localPairWronskian_nonzero_near_zero X Y hcX hcY hW0
+  refine ⟨X, Y, min e d, lt_min he hd, hX, hY, ?_, ?_, ?_⟩
+  · intro t ht
+    apply hDX
+    constructor
+    · have hmin := min_le_left e d
+      linarith [ht.1]
+    · have hmin := min_le_left e d
+      linarith [ht.2]
+  · intro t ht
+    apply hDY
+    constructor
+    · have hmin := min_le_left e d
+      linarith [ht.1]
+    · have hmin := min_le_left e d
+      linarith [ht.2]
+  · intro t ht
+    apply hWD
+    constructor
+    · have hmin := min_le_right e d
+      linarith [ht.1]
+    · have hmin := min_le_right e d
+      linarith [ht.2]
+
+#print axioms localPairWronskian_nonzero_near_zero
+#print axioms exists_local_nondegenerate_frozenKummer_pair
+
 #print axioms frozenFirstCoeff_contDiffAt
 #print axioms frozenKummerAugmentedField_contDiffAt
 #print axioms exists_local_frozenKummer_augmented_solution
