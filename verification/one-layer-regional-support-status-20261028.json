@@ -2,7 +2,7 @@
   "audit_date": "2026-10-28",
   "project": "HBL 3D critical Hartree radial type-II blowup",
   "branch": "hbl-noncompact-gradient-20261028",
-  "latest_verified_source_commit": "5a980dca974ed2945445d93933930a8c59ef5d29",
+  "latest_verified_source_commit": "ba828799d733165d3bf279a46e27a2320e4889ae",
   "fixed_toolchain": {
     "lean": "4.35.0-rc3",
     "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — no exact original environment terminal has been approved",
+  "target_status": "OPEN — localized Kummer pair and both inner Hilbert Fredholm solvers verified; exact manuscript one-layer nonlinear residual not yet formalized.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -81,16 +81,63 @@
     {
       "name": "Normalized phase-channel Fredholm inverse",
       "run_id": 40713974771
+    },
+    {
+      "name": "Non-circular actual Kummer normalized pair and local IVP",
+      "run_id": 40720127332
+    },
+    {
+      "name": "Kummer physical coordinate and second order local equation",
+      "run_id": 40728412883
+    },
+    {
+      "name": "Kummer actual physical nondegenerate positive local pair",
+      "run_id": 40728911218
+    },
+    {
+      "name": "Kummer actual frozen residual on compact annulus conditional on localized pair",
+      "run_id": 40728265604
+    },
+    {
+      "name": "Phase physical zero-mode equality",
+      "run_id": 40719501502
+    },
+    {
+      "name": "Phase charge formula for any sigma>1/2",
+      "run_id": 40720844588
+    },
+    {
+      "name": "Phase weighted Green primitive formula",
+      "run_id": 40724699068
+    },
+    {
+      "name": "Phase physical weighted source Fredholm bridge",
+      "run_id": 40724699076
+    },
+    {
+      "name": "Phase affine cutoff source stays in weighted L2, sigma≤2",
+      "run_id": 40726264500
+    },
+    {
+      "name": "Phase unique physical affine charge and normalized Fredholm solution",
+      "run_id": 40726875900
+    },
+    {
+      "name": "Two actual inner Hilbert Fredholm solves and two affine threshold charges",
+      "run_id": 40728875390
     }
   ],
   "remaining_bearing_obligations": [
-    "Construct actual normalized C2 Kummer fundamental pair on compact positive annulus; current candidate-pair theorem propagates nonvanishing but does not itself establish existence of solutions for the physical coefficient.",
-    "Upgrade weighted H-plus Fredholm solution to the manuscript L^{2,-sigma} output and the correct classical H_plus equation with affine tail for every L^{2,sigma} source.",
-    "Identify actual H-minus physical phase weighted source, its zero-mode pairing, and the corresponding normalized correction in manuscript source/output spaces.",
-    "Instantiate the remote free operator and perturbation on the actual finite power-log atom class with the needed uniform mapping bounds and normalization.",
-    "Prove actual dynamic atom source decomposition, exact Pi_rho Hartree residual after all regional corrections, unique two real charges and the five quantitative gains, without an abstract solver package.",
-    "Only then claim the exact original prop:one-layer-stage3 terminal and proceed to finite-profile/global matching and main PDE theorem."
+    "Extend the actual local Kummer nondegenerate IVP basis to the whole compact positive annulus, or construct an auxiliary global fundamental pair for the continuous regularized coefficients. Local existence and Wronskian nonvanishing are compiled; global extension is not.",
+    "Lift the existing weighted H_plus and H_minus Hilbert Fredholm solutions to exact classical H_± equations with affine tails and the manuscript L^{2,-sigma} range; H_plus affine-corrected source membership in L^{2,sigma} still requires proof.",
+    "Instantiate the exact remote generic/log/exceptional free blocks and small Neumann perturbation on the actual power-log atom classes with quantitative operator norms and canonical normalization.",
+    "Identify the true current-weight Hartree nonlinear source F_rho by region, prove all parameter-tangent coefficients and cutoff overlap matching, and show the full frozen corrections cancel Pi_rho F(V_<rho+Delta V_rho).",
+    "Classify ALL new terms from the actual seven-fold Hartree expansion into five mechanisms with the stated uniform positive kappa_prof gain, not an assumed GeneratedTerm classification.",
+    "Only after these actual dependencies are proved can prop:one-layer-stage3, finite profile, global matching and the main PDE theorem be strictly accepted."
   ],
   "axiom_policy": "No sorry/admit, no new axiom; only standard foundational axioms permitted in inspected supporting certificates.",
-  "root_original_acceptance_changed": false
+  "root_original_acceptance_changed": false,
+  "last_updated_utc_date": "2026-10-28",
+  "physical_kummer_localized_warning": "Global IsFrozenHartreePair on all z>0 with singular a=2/z+i z/2 is not compatible with global regularity and normalized W. Only the localized positive-annulus interface is mathematically valid.",
+  "recorded_at_head": "ba828799d733165d3bf279a46e27a2320e4889ae"
 }
