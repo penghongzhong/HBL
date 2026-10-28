@@ -238,10 +238,15 @@ theorem physical_remainder_interpolation
           (t : ℂ) * ((κ : ℂ) * ∫ y, G y) := by ring
       _ = _ := by
         rw [hfval t, hfval 0, hgval]
-        simpa only [sampleField, Complex.ofReal_zero, zero_mul, add_zero] using
-          (show hartreeNonlinearity κ (fun y => (w y : ℂ) + (t : ℂ) * h y) x -
-            hartreeNonlinearity κ (fun y => (w y : ℂ)) x - (t : ℂ) * linearTerm κ w h x =
-            remainder κ w (fun y => (t : ℂ) * h y) x from by rw [hex]; ring)
+        have hs0 : sampleField w h 0 = (fun y : Space => (w y : ℂ)) := by
+          funext y
+          simp [sampleField]
+        rw [hs0]
+        change hartreeNonlinearity κ (fun y => (w y : ℂ) + (t : ℂ) * h y) x -
+          hartreeNonlinearity κ (fun y => (w y : ℂ)) x - (t : ℂ) * linearTerm κ w h x =
+          remainder κ w (fun y => (t : ℂ) * h y) x
+        rw [hex]
+        ring
   rw [hleft] at hmul
   rw [hmul]
   calc
