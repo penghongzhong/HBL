@@ -1,4 +1,4 @@
-name: HBL differentiated quadratic density remainder
+name: HBL differentiated density difference
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
@@ -44,30 +44,30 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile actual quadratic density derivative and audit full declarations
+      - name: Compile actual differentiated difference and audit full declarations
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/density_remainder_gradient_validation.py
-          python3 verification/density_remainder_gradient_validation.py
+          python3 -m py_compile verification/density_gradient_difference_validation.py
+          python3 verification/density_gradient_difference_validation.py
       - name: Preserve compiler and audit evidence
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/density-remainder-gradient-current-status.json; then
-            git add verification/density-remainder-gradient-current-status.json verification/density-remainder-gradient-current-errors.json
+          if test -f verification/density-gradient-difference-current-status.json; then
+            git add verification/density-gradient-difference-current-status.json verification/density-gradient-difference-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record differentiated density-remainder compiler and axiom audit [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record density-gradient difference compiler and axiom audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff c7e0e3458f8adffd764e5793b591f2f32c6afd16 HEAD > evidence/density-remainder-gradient.patch
+          git diff 5a636e39b6667fdb6cadd60430e71073f97d4172 HEAD > evidence/density-gradient-difference.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-density-remainder-gradient-${{ github.sha }}
+          name: hbl-density-gradient-difference-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -79,7 +79,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/density-remainder-gradient-current-status.json'))
+          r=json.load(open('verification/density-gradient-difference-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
