@@ -21,7 +21,6 @@ open MeasureTheory
 
 namespace HBL.Profile.Kummer
 
-local instance : NormedAddCommGroup ℂ := Complex.instNormedAddCommGroup
 
 /-- A C2 fundamental pair for a scalar complex second-order equation on the
 real radial variable. The coefficient functions may themselves be complex. -/
