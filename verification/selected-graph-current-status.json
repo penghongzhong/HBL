@@ -1,0 +1,32 @@
+{
+  "source_commit": "cf4ae7fae69a28dfaa32ac68483bf2a9bfeeef1e",
+  "run_id": "40625209706",
+  "baseline": "6137fcc06efe539f70f4a2992d3c4cd665d718f7",
+  "validation_passed": false,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "strict_targets": {},
+  "reuse": [
+    "ParametricFixedPointC1: existing implicit-function proof and invertibility",
+    "MainRateSelection: physical rate and its C1 dependence",
+    "existing selected solution family: no second fixed-point construction"
+  ],
+  "discharged_calculus_inputs": [
+    "continuity and C1 of the selected solution are conclusions",
+    "I-D state-partial formula is derived",
+    "state derivative norm less than one follows from local contraction",
+    "implicit graph is identified with the previously selected fixed point by uniqueness"
+  ],
+  "remaining_physical_obligations": [
+    "construct the actual constrained Hartree evolution in compatible source and domain spaces",
+    "prove local C1 of the untruncated physical joint map, including high-regularity remainder estimates",
+    "construct the actual fixed-point family and its interior neighborhood uniformly in parameters",
+    "prove the physical reconstruction and inverse-coordinate chart hypotheses",
+    "assemble every original main-theorem quantifier, orbit, rate and nonextension conclusion"
+  ],
+  "counting_rule": "Current module/type checks and historical registered environments are NOT an unconditional 21/21 paper certificate.",
+  "baseline_Lean_sources_byte_identical": 327,
+  "target_cached_files_removed": [],
+  "build_exit": 1
+}
