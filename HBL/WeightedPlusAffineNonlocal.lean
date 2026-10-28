@@ -102,7 +102,7 @@ theorem nonlocalAffine_inWeightedL2
     InWeightedL2 sigma (nonlocalApply model) := by
   let f : RealL2 halfLineMeasure := affineConjugatedModelL2
   have hy : MemLp (weightedHartreePointwise f) 2 halfLineMeasure :=
-    (Lp.memLp (weightedHartreeOperator f)).congr
+    (Lp.memLp (weightedHartreeOperator f)).ae_eq
       (weightedHartreeOperator_ae_pointwise f)
   have hc : Continuous
       (fun r : ℝ =>
@@ -110,7 +110,7 @@ theorem nonlocalAffine_inWeightedL2
     (affineJapaneseWeight_continuous sigma).mul
       nonlocalAffine_continuous
   unfold InWeightedL2
-  refine hy.mono' hc.aestronglyMeasurable.restrict ?_
+  refine hy.mono hc.aestronglyMeasurable.restrict ?_
   filter_upwards with r
   have hden : 1 + r ^ 2 ≠ 0 := by positivity
   have hw : 0 ≤ affineJapaneseWeight sigma r := by
@@ -140,7 +140,6 @@ theorem nonlocalAffine_inWeightedL2
           weightedHartreePointwise f r := by
     rw [hpoint]
     field_simp [hden]
-    ring
   calc
     ‖affineJapaneseWeight sigma r * nonlocalApply model r‖ =
         (affineJapaneseWeight sigma r * (1 + r ^ 2)⁻¹) *
