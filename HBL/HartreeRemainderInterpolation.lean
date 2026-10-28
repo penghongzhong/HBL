@@ -209,7 +209,8 @@ theorem physical_remainder_interpolation
         apply Finset.sum_congr rfl
         intro j _
         ring
-  have hint := integral_congr_ae (Filter.Eventually.of_forall hz)
+  have hint := integral_congr_ae (μ := (volume : Measure Space))
+    (Filter.Eventually.of_forall hz)
   rw [integral_sub ((hFi t).sub (hFi 0)) (hGi.const_mul (t : ℂ)),
     integral_sub (hFi t) (hFi 0), integral_const_mul, integral_const_mul,
     integral_finsetSum _ (fun j _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint
