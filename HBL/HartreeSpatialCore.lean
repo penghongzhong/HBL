@@ -6,14 +6,16 @@ import Mathlib.Analysis.InnerProductSpace.Calculus
 # Spatial derivatives of the actual inverse-square Hartree potential
 
 This is a dense-core analytic bridge, not a new numbered manuscript result.
-The kernel is exactly `RegularRadiation.kernel` and the potential is exactly
-`RegularRadiation.potential`. We transfer derivatives to the density, rather
-than differentiating the singular kernel. The first-derivative operator-norm
-bound is independent of the compact support's radius.
+The kernel and potential are the original RegularRadiation definitions.
+Derivatives transfer to the density, not to the singular kernel. The first
+potential-derivative bound is independent of the compact support's radius.
+The actual seventh-order nonlinearity is smooth on this spatial core and
+its spatial product rule retains both nonlocal and local contributions.
 
-Scope: C1 compactly supported complex densities. Extension to noncompact
-Sobolev densities, the full differentiated nonlinear remainder, and the
-physical constrained evolution are NOT asserted by this file.
+Scope: compactly supported densities/fields. Extension to noncompact Sobolev
+classes, differentiated remainder estimates and the physical constrained
+evolution are NOT asserted here. Spatial smoothness is not a theorem about
+Frechet smoothness of the nonlinear map between Sobolev spaces.
 -/
 
 noncomputable section
@@ -23,10 +25,9 @@ open scoped Topology
 
 namespace HBL.RegularRadiation.SpatialCore
 
-/-- The physical inverse-square kernel with the complex codomain of the density. -/
+/-- The physical kernel with the complex codomain of the density. -/
 def complexKernel (x : Space) : ℂ := (kernel x : ℂ)
 
-/-- Local integrability is proved for the actual three-dimensional kernel. -/
 theorem complexKernel_locallyIntegrable : LocallyIntegrable complexKernel := by
   apply locallyIntegrable_of_norm_le_rpow
     (C := 1) (α := 2) (by norm_num [Space]) (by norm_num [Space])
@@ -46,7 +47,7 @@ theorem potential_eq_convolution (ρ : Space → ℂ) :
   rw [convolution_eq_swap]
   rfl
 
-/-- All finite differentiability orders transfer to the actual potential on the core. -/
+/-- Finite and smooth differentiability orders transfer to the physical potential. -/
 theorem potential_contDiff {n : ℕ∞} (ρ : Space → ℂ)
     (hc : HasCompactSupport ρ) (hρ : ContDiff ℝ n ρ) :
     ContDiff ℝ n (potential ρ) := by
@@ -54,7 +55,7 @@ theorem potential_contDiff {n : ℕ∞} (ρ : Space → ℂ)
   exact hc.contDiff_convolution_right
     (ContinuousLinearMap.mul ℝ ℂ) complexKernel_locallyIntegrable hρ
 
-/-- The full real Frechet derivative; no derivative of the singular kernel occurs. -/
+/-- The full real Frechet derivative, without differentiating the singular kernel. -/
 theorem potential_hasFDerivAt (ρ : Space → ℂ)
     (hc : HasCompactSupport ρ) (hρ : ContDiff ℝ 1 ρ) (x : Space) :
     HasFDerivAt (potential ρ)
@@ -64,7 +65,7 @@ theorem potential_hasFDerivAt (ρ : Space → ℂ)
   exact hc.hasFDerivAt_convolution_right
     (ContinuousLinearMap.mul ℝ ℂ) complexKernel_locallyIntegrable hρ x
 
-/-- Every directional derivative is the same physical potential of the density derivative. -/
+/-- Directional derivatives are the actual potential of the differentiated density. -/
 theorem potential_fderiv_apply (ρ : Space → ℂ)
     (hc : HasCompactSupport ρ) (hρ : ContDiff ℝ 1 ρ) (x v : Space) :
     fderiv ℝ (potential ρ) x v = potential (fun y => fderiv ℝ ρ y v) x := by
@@ -74,9 +75,8 @@ theorem potential_fderiv_apply (ρ : Space → ℂ)
     (hρ.continuous_fderiv (by norm_num)) x v]
   rw [potential_eq_convolution]
 
-/-- A support-independent first spatial derivative bound for the physical kernel.
-Both derivative integrability and the actual derivative identity are derived.
-Only an L-infinity bound of the input density derivative is supplied. -/
+/-- Support-independent first spatial derivative bound. Density-derivative
+integrability and the derivative identity are derived, not assumed. -/
 theorem potential_fderiv_bound (ρ : Space → ℂ)
     (hc : HasCompactSupport ρ) (hρ : ContDiff ℝ 1 ρ)
     (M : ℝ) (hM : 0 ≤ M)
@@ -117,8 +117,62 @@ theorem potential_fderiv_bound (ρ : Space → ℂ)
       (potential_bound (fun y => fderiv ℝ ρ y v) hdir
         (M * ‖v‖) (mul_nonneg hM (norm_nonneg v)) hbdir x).2
     _ ≤ nearMass * (M * ‖v‖) + (∫ y : Space, ‖fderiv ℝ ρ y‖) * ‖v‖ :=
-      add_le_add_left hI _
+      add_le_add le_rfl hI
     _ = (nearMass * M + ∫ y : Space, ‖fderiv ℝ ρ y‖) * ‖v‖ := by ring
+
+private theorem density_contDiff {n : ℕ∞} (f : Space → ℂ)
+    (hf : ContDiff ℝ n f) : ContDiff ℝ n (quarticDensity f) := by
+  have he : quarticDensity f = fun y => (((‖f y‖ ^ 2) ^ 2 : ℝ) : ℂ) := by
+    funext y
+    unfold quarticDensity
+    congr 1
+    ring
+  rw [he]
+  exact Complex.ofRealCLM.contDiff.comp ((hf.norm_sq ℂ).pow 2)
+
+private theorem density_compact (f : Space → ℂ) (hc : HasCompactSupport f) :
+    HasCompactSupport (quarticDensity f) := by
+  apply HasCompactSupport.of_support_subset_isCompact hc.isCompact
+  intro x hx
+  by_contra hn
+  exact hx (by simp [quarticDensity, image_eq_zero_of_notMem_tsupport hn])
+
+private theorem cubic_contDiff {n : ℕ∞} (f : Space → ℂ) (hf : ContDiff ℝ n f) :
+    ContDiff ℝ n (fun y => (((‖f y‖ ^ 2 : ℝ) : ℂ) * f y)) :=
+  (Complex.ofRealCLM.contDiff.comp (hf.norm_sq ℂ)).mul hf
+
+/-- Spatial regularity of the original seventh-order Hartree expression on its core. -/
+theorem hartree_contDiff_core {n : ℕ∞} (κ : ℝ) (f : Space → ℂ)
+    (hc : HasCompactSupport f) (hf : ContDiff ℝ n f) :
+    ContDiff ℝ n (hartreeNonlinearity κ f) := by
+  have hP := potential_contDiff (quarticDensity f) (density_compact f hc) (density_contDiff f hf)
+  exact (contDiff_const.mul hP).mul (cubic_contDiff f hf)
+
+/-- Exact spatial product rule for the actual Hartree nonlinearity. The nonlocal
+term is the original convolution of the actual quartic density derivative. -/
+theorem hartree_fderiv_core (κ : ℝ) (f : Space → ℂ)
+    (hc : HasCompactSupport f) (hf : ContDiff ℝ 1 f) (x v : Space) :
+    fderiv ℝ (hartreeNonlinearity κ f) x v =
+      (κ : ℂ) *
+        (potential (fun y => fderiv ℝ (quarticDensity f) y v) x *
+            (((‖f x‖ ^ 2 : ℝ) : ℂ) * f x) +
+          potential (quarticDensity f) x *
+            fderiv ℝ (fun y => (((‖f y‖ ^ 2 : ℝ) : ℂ) * f y)) x v) := by
+  let C : Space → ℂ := fun y => (((‖f y‖ ^ 2 : ℝ) : ℂ) * f y)
+  have hC : ContDiff ℝ 1 C := cubic_contDiff f hf
+  have hρ : ContDiff ℝ 1 (quarticDensity f) := density_contDiff f hf
+  have hcρ := density_compact f hc
+  have hP := potential_contDiff (quarticDensity f) hcρ hρ
+  have hd := ((hP.differentiable (by norm_num) x).hasFDerivAt.const_mul (κ : ℂ)).mul
+    ((hC.differentiable (by norm_num) x).hasFDerivAt)
+  have he : fderiv ℝ (hartreeNonlinearity κ f) x =
+      ((κ : ℂ) * potential (quarticDensity f) x) • fderiv ℝ C x +
+        C x • ((κ : ℂ) • fderiv ℝ (potential (quarticDensity f)) x) := hd.fderiv
+  rw [he]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
+  rw [potential_fderiv_apply (quarticDensity f) hcρ hρ x v]
+  dsimp [C]
+  ring
 
 #print axioms complexKernel_locallyIntegrable
 #print axioms potential_eq_convolution
@@ -126,5 +180,7 @@ theorem potential_fderiv_bound (ρ : Space → ℂ)
 #print axioms potential_hasFDerivAt
 #print axioms potential_fderiv_apply
 #print axioms potential_fderiv_bound
+#print axioms hartree_contDiff_core
+#print axioms hartree_fderiv_core
 
 end HBL.RegularRadiation.SpatialCore
