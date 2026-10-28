@@ -42,10 +42,11 @@ theorem weightedPhaseGreenPrimitive_ae :
   rw [heig] at hpoint
   filter_upwards [hpoint,
     Lp.coeFn_smul (1 / 3 : ℝ) (weightedHartreeSineModeL2 1),
-    weightedHartreeSineModeL2_ae 1] with rho hp _hsmul hmode
+    weightedHartreeSineModeL2_ae 1] with rho hp hsmul hmode
+  rw [hsmul] at hp
   simp only [Pi.smul_apply, smul_eq_mul] at hp
   rw [hmode, firstSineMode_eq_twice_weightedPhaseResonance] at hp
-  unfold weightedPhaseResonance at hp
+  unfold weightedFreeGreenPointwise weightedGreenDecay weightedPhaseResonance at hp
   rw [affineJapaneseDecay_two] at hp
   symm at hp
   change (1 + rho ^ 2)⁻¹ *
