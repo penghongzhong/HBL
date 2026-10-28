@@ -33,7 +33,9 @@ theorem perturbationBlock_isInvertible
     dsimp [K]
     linarith
   have hneg : ‖-K‖ < 1 := by simpa using hK
-  have hu : IsUnit (1 - (-K)) := isUnit_one_sub_of_norm_lt_one hneg
+  have hu : IsUnit ((1 : E →L[ℝ] E) - (-K)) := by
+    apply isUnit_one_sub_of_norm_lt_one
+    simpa using hneg
   have heq : (1 - (-K) : E →L[ℝ] E) = perturbationBlock G H := by
     dsimp [K, perturbationBlock]
     abel
@@ -57,7 +59,7 @@ theorem free_factorization_right
     ContinuousLinearMap.comp_apply, map_add]
   have h := congrArg (fun T : E →L[ℝ] E => T (H x)) hLG
   simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply] using
-    congrArg (fun y : E => x + y) h
+    congrArg (fun y : E => L x + y) h
 
 theorem free_factorization_left
     (L G H : E →L[ℝ] E)
