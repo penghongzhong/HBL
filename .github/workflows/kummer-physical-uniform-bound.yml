@@ -1,0 +1,72 @@
+name: HBL actual local Kummer uniform bound
+on:
+  push:
+    branches: [hbl-noncompact-gradient-20261028]
+    paths:
+      - 'HBL/KummerVariationOfParameters.lean'
+      - 'HBL/KummerFrozenAnnulus.lean'
+      - 'HBL/KummerLocalODE.lean'
+      - 'HBL/KummerPhysicalLocal.lean'
+      - 'HBL/KummerPhysicalPairLocal.lean'
+      - 'HBL/KummerPhysicalPairUniformBound.lean'
+      - 'HBL/KummerPhysicalPairUniformBoundAudit.lean'
+      - '.github/workflows/kummer-physical-uniform-bound.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-kummer-physical-uniform-bound-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-noncompact-gradient-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Resolve exact dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Strict compile and audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build HBL.KummerPhysicalPairUniformBound | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerPhysicalPairUniformBoundAudit.lean | tee evidence/types-and-axioms.txt
+          ! grep -q sorryAx evidence/types-and-axioms.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-kummer-physical-uniform-bound-${{ github.sha }}
+          path: evidence
+          retention-days: 30
