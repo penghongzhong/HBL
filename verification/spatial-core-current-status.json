@@ -1,15 +1,15 @@
 {
-  "source_commit": "86fea07f149c4f1bd2be658c9d70522fb793ab38",
-  "run_id": "40606209063",
+  "source_commit": "027bb49f5ccbbefbf466b7c54dc31ea390f602fa",
+  "run_id": "40606520146",
   "module": "HartreeSpatialCore",
   "baseline": "4999b1fc43c02841f7eb9b39b5c7f003f0b23655",
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
-  "validation_passed": false,
-  "strict_exit": 1,
-  "audit_passed": false,
-  "retained_roots_build_exit": null,
+  "validation_passed": true,
+  "strict_exit": 0,
+  "audit_passed": true,
+  "retained_roots_build_exit": 0,
   "boundary": "C1 compactly supported densities; no noncompact Sobolev extension, full remainder gradient bound, or constrained Hartree evolution is claimed.",
   "unchanged_existing_lean_sources": 320,
   "audited_declarations": [
@@ -23,9 +23,64 @@
     "HBL.RegularRadiation.SpatialCore.hartree_contDiff_core",
     "HBL.RegularRadiation.SpatialCore.hartree_fderiv_core"
   ],
-  "source_sha256": "3bfe091873da774e9c58d523e9320482828c3a54a8901f49248967aab671e0e8",
+  "source_sha256": "6e15d564abb9b2d346141d98cbbf4afb367141cd405da2a19c703450997445a4",
   "removed_new_target_cached_files": [
-    ".lake/build/ir/HBL/HartreeSpatialCore.setup.json"
+    ".lake/build/lib/lean/HBL/HartreeSpatialCore.ilean.hash",
+    ".lake/build/lib/lean/HBL/HartreeSpatialCore.trace",
+    ".lake/build/lib/lean/HBL/HartreeSpatialCore.ilean",
+    ".lake/build/lib/lean/HBL/HartreeSpatialCore.olean",
+    ".lake/build/lib/lean/HBL/HartreeSpatialCore.olean.hash",
+    ".lake/build/ir/HBL/HartreeSpatialCore.setup.json",
+    ".lake/build/ir/HBL/HartreeSpatialCore.c",
+    ".lake/build/ir/HBL/HartreeSpatialCore.c.hash"
   ],
-  "build_exit": 0
+  "build_exit": 0,
+  "audit_exit": 0,
+  "axioms": {
+    "HBL.RegularRadiation.SpatialCore.complexKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.complexKernel_locallyIntegrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.potential_eq_convolution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.potential_contDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.potential_hasFDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.potential_fderiv_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.potential_fderiv_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.hartree_contDiff_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.RegularRadiation.SpatialCore.hartree_fderiv_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
 }
