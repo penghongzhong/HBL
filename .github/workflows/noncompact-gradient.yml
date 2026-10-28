@@ -45,30 +45,30 @@ jobs:
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean Mathlib/Analysis/Calculus/FDeriv/Measurable.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Compile first-order differences and audit complete statements
+      - name: Compile full nonlinear differences and audit complete terminals
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/gradient_difference_validation.py
-          python3 verification/gradient_difference_validation.py
+          python3 -m py_compile verification/full_difference_validation.py
+          python3 verification/full_difference_validation.py
       - name: Preserve diagnostics without editing proof sources
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/gradient-difference-current-status.json; then
-            git add verification/gradient-difference-current-status.json verification/gradient-difference-current-errors.json
+          if test -f verification/full-difference-current-status.json; then
+            git add verification/full-difference-current-status.json verification/full-difference-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record first-order difference proof and complete audit outcome [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record full first-order difference compiler and audit outcome [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff dfd259d57d5b3008d719f8617b3dd46bd08b2137 HEAD > evidence/gradient-difference.patch
+          git diff 30c9b88b84d01af7008ad2e9bf09a918cbc83bc6 HEAD > evidence/full-difference.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-gradient-difference-${{ github.sha }}
+          name: hbl-full-difference-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -80,7 +80,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/gradient-difference-current-status.json'))
+          r=json.load(open('verification/full-difference-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
