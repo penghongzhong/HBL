@@ -1,12 +1,223 @@
 {
-  "source_commit": "b87290a9d1b982a457de7dcdf1e98787acf25cb5",
-  "run_id": "40625794597",
+  "source_commit": "4c0a2fe9fcb1783921c7844c32770d7f5fcf4765",
+  "run_id": "40626268799",
   "baseline": "6137fcc06efe539f70f4a2992d3c4cd665d718f7",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
-  "strict_targets": {},
+  "strict_targets": {
+    "ParametricFixedPointC1": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "0ba124d93aa79120e94375c4980ab2c1bc01acdcc06f42de51c0b595cad1faea",
+      "declarations": [
+        "HBL.MainBackward.id_sub_isInvertible_of_norm_lt_one",
+        "HBL.MainBackward.contracting_fixed_point_has_C1_local_graph"
+      ],
+      "axioms": {
+        "HBL.MainBackward.id_sub_isInvertible_of_norm_lt_one": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.contracting_fixed_point_has_C1_local_graph": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "MainRateSelection": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "3c43fab8ae234e7bb78f7d95ae863bd7d2a4bce075628454e9312b1b8804240c",
+      "declarations": [
+        "HBL.MainBackward.selectedPhysicalRate",
+        "HBL.MainBackward.selectedPhysicalRate_contDiff",
+        "HBL.MainBackward.selectedPhysicalRate_eq_two_iff"
+      ],
+      "axioms": {
+        "HBL.MainBackward.selectedPhysicalRate": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.selectedPhysicalRate_contDiff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.selectedPhysicalRate_eq_two_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "SelectedFixedPointC1": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "33e1ffb6070f0b48826c772ef3780ef0099eeb38f3833f9dca862abcb29a2487",
+      "declarations": [
+        "HBL.MainBackward.selected_local_fixedPoint_contDiffAt",
+        "HBL.MainBackward.selected_fixedPoint_shooting_data_rate_C1",
+        "HBL.MainBackward.construct_local_fixedPoint_C1_family"
+      ],
+      "axioms": {
+        "HBL.MainBackward.selected_local_fixedPoint_contDiffAt": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.selected_fixedPoint_shooting_data_rate_C1": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.construct_local_fixedPoint_C1_family": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "LocalizedCenterNonlinearMap": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "99d8dc50a75f063cd70f726db617e32c17a5cffcbedfb0a6ce20973d4eaa148d",
+      "declarations": [
+        "HBL.MainBackward.Localized.radialClip",
+        "HBL.MainBackward.Localized.radialClip_eq_of_norm_le",
+        "HBL.MainBackward.Localized.radialClip_norm_le",
+        "HBL.MainBackward.Localized.radialClip_difference_le",
+        "HBL.MainBackward.Localized.radialClip_continuous",
+        "HBL.MainBackward.Localized.lateRadius",
+        "HBL.MainBackward.Localized.lateRadius_pos",
+        "HBL.MainBackward.Localized.lateRadius_continuous",
+        "HBL.MainBackward.Localized.localizedCenterNonlinearity",
+        "HBL.MainBackward.Localized.LocalCenterLipschitz",
+        "HBL.MainBackward.Localized.localizedCenter_continuous",
+        "HBL.MainBackward.Localized.localizedCenter_zero",
+        "HBL.MainBackward.Localized.localizedCenter_global_bound",
+        "HBL.MainBackward.Localized.localizedCenter_agrees_on_path",
+        "HBL.MainBackward.Localized.localizedCenter_tail_eq",
+        "HBL.MainBackward.Localized.localizedCenterMap",
+        "HBL.MainBackward.Localized.localizedCenterMap_norm_le",
+        "HBL.MainBackward.Localized.localizedCenterMap_difference_norm",
+        "HBL.MainBackward.Localized.localizedCenterMap_apply",
+        "HBL.MainBackward.Localized.affine_fixedPoint_ball",
+        "HBL.MainBackward.Localized.localizedCenter_solution"
+      ],
+      "axioms": {
+        "HBL.MainBackward.Localized.radialClip": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.radialClip_eq_of_norm_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.radialClip_norm_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.radialClip_difference_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.radialClip_continuous": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.lateRadius": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.lateRadius_pos": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.lateRadius_continuous": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenterNonlinearity": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.LocalCenterLipschitz": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_continuous": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_zero": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_global_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_agrees_on_path": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_tail_eq": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenterMap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenterMap_norm_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenterMap_difference_norm": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenterMap_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.affine_fixedPoint_ball": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.MainBackward.Localized.localizedCenter_solution": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    }
+  },
   "reuse": [
     "ParametricFixedPointC1: existing implicit-function proof and invertibility",
     "MainRateSelection: physical rate and its C1 dependence",
@@ -30,5 +241,278 @@
   "target_cached_files_removed": [
     ".lake/build/ir/HBL/SelectedFixedPointC1.setup.json"
   ],
-  "build_exit": 1
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "retained_component_roots": 44,
+  "registered_environment_terminal_audit_exit": 0,
+  "registered_environment_terminal_count": 20,
+  "registered_environment_groups_checked": 19,
+  "registered_environment_scope_preserved_NOT_promoted": [
+    {
+      "id": "old-2.1",
+      "label": "prop:modulation",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.firstManuscriptModulationEnvironment_closed"
+      ],
+      "scope": "Existing energy-coordinate modulation theorem; retain the separately open full physical Sobolev identification."
+    },
+    {
+      "id": "old-2.2",
+      "label": "lem:affine-charge",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed"
+      ]
+    },
+    {
+      "id": "old-2.5",
+      "label": "thm:Xi-mon-tail",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.monopole_first_correction_certified"
+      ]
+    },
+    {
+      "id": "old-2.6",
+      "label": "prop:profile-cancel-stage2",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed"
+      ]
+    },
+    {
+      "id": "old-2.7",
+      "label": "prop:kinematic-recovery-v2",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Kinematic.synchronized_initial_slice_certified"
+      ]
+    },
+    {
+      "id": "old-5.1",
+      "label": "prop:shooting-stage4",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed"
+      ],
+      "scope": "Actual scalar coefficient and source problem; physical Hamilton coordinates remain unconstructed."
+    },
+    {
+      "id": "old-A.2",
+      "label": "thm:transversality",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Transversality.manuscript_transversality_environment_closed"
+      ]
+    },
+    {
+      "id": "old-C.1",
+      "label": "lem:kernel-short",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed"
+      ]
+    },
+    {
+      "id": "R1",
+      "label": "prop:repair-observations",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.TriangularRepair.phaseThresholdCoupling_certified",
+        "HBL.Modulation.TriangularRepair.realThresholdCoupling_certified"
+      ]
+    },
+    {
+      "id": "R2",
+      "label": "prop:repair-domain-triangular",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified"
+      ],
+      "scope": "Common-domain structural theorem; physical domain and evolution are not inferred."
+    },
+    {
+      "id": "R3",
+      "label": "prop:repair-residual-tangent",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.TriangularRepair.residualTangentDerivative_certified"
+      ],
+      "scope": "Derivative identity; actual residual decay is not inferred."
+    },
+    {
+      "id": "R4",
+      "label": "prop:repair-threshold-terminal",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified"
+      ]
+    },
+    {
+      "id": "R5",
+      "label": "prop:repair-stable-initial",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Shooting.stableInitialPropagation_certified"
+      ]
+    },
+    {
+      "id": "R6",
+      "label": "prop:repair-feedback-tail",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.TriangularRepair.retainedFeedbackTail_certified"
+      ],
+      "scope": "Feedback decay is an explicit hypothesis, not an established property of the actual Hartree background."
+    },
+    {
+      "id": "R7",
+      "label": "prop:repair-compact-phase-gap",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.actualCompactPhaseSlice_certified"
+      ]
+    },
+    {
+      "id": "R8",
+      "label": "prop:repair-compact-phase-inverse",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.actualCompactPhaseInverse_certified"
+      ]
+    },
+    {
+      "id": "R9",
+      "label": "prop:repair-real-energy-inverse",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.realEnergyInverse_certified"
+      ]
+    },
+    {
+      "id": "R10",
+      "label": "prop:repair-physical-scale",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.physicalScaleNormalization_certified"
+      ]
+    },
+    {
+      "id": "R11",
+      "label": "prop:repair-compact-two-channel",
+      "status": "registered_accepted",
+      "terminals": [
+        "HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified"
+      ],
+      "scope": "Static actual energy forms; no constraint-preserving Hamilton evolution is claimed."
+    }
+  ],
+  "registered_environment_axioms": {
+    "HBL.Modulation.firstManuscriptModulationEnvironment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.monopole_first_correction_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Kinematic.synchronized_initial_slice_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Transversality.manuscript_transversality_environment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.phaseThresholdCoupling_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.realThresholdCoupling_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.domainTriangularDynamics_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.residualTangentDerivative_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.retainedThresholdBackward_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Shooting.stableInitialPropagation_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.TriangularRepair.retainedFeedbackTail_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.actualCompactPhaseSlice_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.actualCompactPhaseInverse_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.realEnergyInverse_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.physicalScaleNormalization_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "HBL.Modulation.Monopole.actualCompactTwoChannelCoercivity_certified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "historical_ledger_not_a_current_21_environment_certificate": true,
+  "strict_current_declarations": 29,
+  "new_public_calculus_terminals": 3,
+  "trust_zero": true,
+  "warning_as_error": true
 }
