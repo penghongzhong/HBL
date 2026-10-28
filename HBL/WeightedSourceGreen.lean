@@ -160,6 +160,14 @@ def weightedSourceGreenOperator
     RealL2 halfLineMeasure →L[ℝ] RealL2 halfLineMeasure :=
   operator (weightedSourceGreenKernelL2 sigma hsigma)
 
+theorem weightedSourceGreenKernelL2_ae
+    (sigma : ℝ) (hsigma : 1 < sigma) :
+    (weightedSourceGreenKernelL2 sigma hsigma : ℝ × ℝ → ℝ) =ᵐ[
+      halfLineMeasure.prod halfLineMeasure]
+      Function.uncurry (weightedSourceGreenKernel sigma) :=
+  (weightedSourceGreenKernel_memLp_two sigma hsigma).coeFn_toLp
+
+
 theorem weightedSourceGreenOperator_kernel_certificate
     (sigma : ℝ) (hsigma : 1 < sigma) :
     IsHilbertSchmidtKernelOperator
