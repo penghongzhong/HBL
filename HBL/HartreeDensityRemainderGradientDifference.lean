@@ -87,7 +87,7 @@ private theorem inner_difference (z v H K : ℂ) {e q t : ℝ}
     _ = _ := by ring
 
 private theorem incD_bound (a b : ℝ) (v K : ℂ) {M L r q t : ℝ}
-    (hM : 0 ≤ M) (hL : 0 ≤ L) (hq : 0 ≤ q) (ht : 0 ≤ t)
+    (hM : 0 ≤ M) (hL : 0 ≤ L) (_hq : 0 ≤ q) (ht : 0 ≤ t)
     (ha : |a| ≤ M) (hb : |b| ≤ L * t) (hv : ‖v‖ ≤ r) (hK : ‖K‖ ≤ q * t) :
     |incD a b v K| ≤ (L * ‖v‖ + (M + r) * q) * t := by
   have hi : |inner ℝ v K| ≤ ‖v‖ * ‖K‖ := by
@@ -192,7 +192,7 @@ private theorem scalar_gradient_difference (a b : ℝ) (z v H K : ℂ)
         4 * (M ^ 2 + (2 * M + r) * (M + r)) * ‖z‖ * e +
         4 * (M ^ 2 + (2 * M + 2 * r) * (M + r)) * q * ‖z - v‖ +
         4 * (2 * M + r) * r * q * ‖z - v‖) * t := by
-      gcongr <;> linarith
+      gcongr; linarith
     _ = _ := by ring
 
 /-- Pointwise operator-norm difference, preserving integrable product factors. -/
@@ -243,7 +243,8 @@ private theorem product_mass {E F : Type*} [NormedAddCommGroup E] [NormedAddComm
   have hi : Integrable (fun x : Space => ‖f x‖ * ‖g x‖) := by
     apply hd.mono' (hf.aestronglyMeasurable.norm.mul hg.aestronglyMeasurable.norm)
     filter_upwards with x
-    simpa only [Pi.add_apply, Real.norm_of_nonneg (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))] using hp x
+    simpa only [Pi.add_apply, Pi.mul_apply,
+      Real.norm_of_nonneg (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))] using hp x
   refine ⟨hi, ?_⟩
   have hI := integral_mono_ae hi hd (Filter.Eventually.of_forall hp)
   simp only [Pi.add_apply] at hI
@@ -312,11 +313,11 @@ theorem densityRemainder_gradient_difference_source
           B * (‖h x‖ * ‖fderiv ℝ h x - fderiv ℝ k x‖)) +
           C * (‖fderiv ℝ k x‖ * ‖h x - k x‖)
       exact hx.trans_eq (by ring))
-    simp only [Pi.add_apply, Pi.sub_apply] at hI
-    rw [integral_add (((p1.1.add p2.1).const_mul A).add (p3.1.const_mul B)) (p4.1.const_mul C),
-      integral_add ((p1.1.add p2.1).const_mul A) (p3.1.const_mul B),
-      integral_const_mul, integral_const_mul, integral_const_mul,
-      integral_add p1.1 p2.1] at hI
+    have hi12 := integral_add p1.1 p2.1
+    have hiAB := integral_add ((p1.1.add p2.1).const_mul A) (p3.1.const_mul B)
+    have hiABC := integral_add (((p1.1.add p2.1).const_mul A).add (p3.1.const_mul B)) (p4.1.const_mul C)
+    simp only [Pi.add_apply, Pi.sub_apply] at hI hi12 hiAB hiABC
+    rw [hiABC, hiAB, integral_const_mul, integral_const_mul, integral_const_mul, hi12] at hI
     calc
       _ ≤ A * ((∫ x : Space, ‖h x‖ * ‖h x - k x‖) + ∫ x : Space, ‖k x‖ * ‖h x - k x‖) +
           B * (∫ x : Space, ‖h x‖ * ‖fderiv ℝ h x - fderiv ℝ k x‖) +
