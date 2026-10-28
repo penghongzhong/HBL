@@ -35,9 +35,9 @@ theorem frozenKummer_augmented_derivatives
   have hu := hODE.snd.fst
   have hp := hODE.snd.snd
   refine ⟨?_, ?_, ?_⟩
-  · simpa only [frozenKummerAugmentedField] using hz
-  · simpa only [frozenKummerAugmentedField] using hu
-  · simpa only [frozenKummerAugmentedField] using hp
+  · simpa [frozenKummerAugmentedField] using hz.hasDerivAt
+  · simpa [frozenKummerAugmentedField] using hu.hasDerivAt
+  · simpa [frozenKummerAugmentedField] using hp.hasDerivAt
 
 /-- First coordinate of every actual augmented solution: z(t) = z0+t.
 This is proved from the differential equation, not assumed as a
@@ -57,7 +57,8 @@ theorem frozenKummer_trajectory_time_coordinate
     have h := (frozenKummer_augmented_derivatives mu theta X (hODE t ht)).1
     exact h
   have hgd (t : ℝ) : HasDerivAt g 1 t := by
-    convert (hasDerivAt_const t z0).add (hasDerivAt_id t) using 1 <;> ring
+    simpa only [g, Pi.add_apply, id_eq, zero_add] using
+      (hasDerivAt_const t z0).add (hasDerivAt_id t)
   have hdiff_f : DifferentiableOn ℝ f (Ioo (-eps) eps) :=
     fun t ht => (hfd t ht).differentiableAt.differentiableWithinAt
   have hdiff_g : DifferentiableOn ℝ g (Ioo (-eps) eps) :=
