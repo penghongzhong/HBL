@@ -67,11 +67,11 @@ theorem exceptionalInverse_hasDerivAt
   have hp :
       HasDerivAt (fun x : ℝ => (x : ℂ) ^ (-a))
         ((-a) * (r : ℂ) ^ (-a - 1)) r := by
-    exact Complex.hasDerivAt_ofReal_cpow_const hr.ne'
+    exact hasDerivAt_ofReal_cpow_const hr.ne'
       (neg_ne_zero.mpr ha0)
   have hI := exceptionalPrimitive_hasDerivAt a F ha hF r
-  simpa [exceptionalInverse, exceptionalInverseDeriv, exceptionalIntegrand,
-    mul_assoc] using hp.mul hI
+  convert hp.mul hI using 1 <;>
+    simp [exceptionalInverse, exceptionalInverseDeriv] <;> ring
 
 theorem exceptionalInverse_solves
     (a : ℂ) (F : ℝ → ℂ) (ha : 1 < a.re) (hF : Continuous F)
@@ -93,8 +93,14 @@ theorem exceptionalInverse_solves
       rw [← Complex.cpow_add _ _ hx]
       congr 1
       ring
-    rw [mul_assoc, hp, Complex.cpow_neg_one]
-    field_simp [hx]
+    calc
+      (r : ℂ) * ((r : ℂ) ^ (-a) * ((r : ℂ) ^ (a - 1) * F r)) =
+          ((r : ℂ) ^ (-a) * (r : ℂ) ^ (a - 1)) * (r : ℂ) * F r := by
+            ring
+      _ = (r : ℂ) ^ (-1 : ℂ) * (r : ℂ) * F r := by rw [hp]
+      _ = F r := by
+        rw [Complex.cpow_neg_one]
+        field_simp [hx]
   unfold exceptionalInverseDeriv exceptionalInverse exceptionalIntegrand
   rw [mul_add]
   rw [hsource]
