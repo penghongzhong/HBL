@@ -57,70 +57,41 @@ theorem weightedSourceMajorant_continuous (sigma : ℝ) :
 theorem weightedSourceMajorant_integrable
     (sigma : ℝ) (hsigma : 1 < sigma) :
     Integrable (weightedSourceMajorant sigma) := by
-  have hpow : IntegrableOn
-      (fun rho : ℝ => rho * (1 + rho ^ 2) ^ (-sigma)) (Ioi 0) := by
-    have hderiv : ∀ rho : ℝ, 0 < rho →
-        HasDerivAt
-          (fun x : ℝ => -(1 / (2 * (sigma - 1))) *
-            (1 + x ^ 2) ^ (1 - sigma))
-          (rho * (1 + rho ^ 2) ^ (-sigma)) rho := by
-      intro rho hr
-      have hbase :
-          HasDerivAt (fun x : ℝ => 1 + x ^ 2) (2 * rho) rho := by
-        convert (hasDerivAt_const rho (1 : ℝ)).add ((hasDerivAt_id rho).pow 2) using 1 <;> ring
-      have hp := hbase.rpow_const (by positivity : 0 < 1 + rho ^ 2) (1 - sigma)
-      convert hp.const_mul (-(1 / (2 * (sigma - 1)))) using 1
-      · ring
-      · have hs : sigma - 1 ≠ 0 := ne_of_gt (sub_pos.mpr hsigma)
-        have hb : 1 + rho ^ 2 ≠ 0 := by positivity
-        rw [Real.rpow_sub_one (by positivity : 0 < 1 + rho ^ 2)]
-        field_simp [hs, hb]
-        ring
-    have htail :
-        Tendsto
-          (fun x : ℝ => -(1 / (2 * (sigma - 1))) *
-            (1 + x ^ 2) ^ (1 - sigma))
-          atTop (𝓝 0) := by
-      have hexp : 1 - sigma < 0 := sub_neg.mpr hsigma
-      have hbase : Tendsto (fun x : ℝ => 1 + x ^ 2) atTop atTop := by
-        exact tendsto_atTop_add_const_right _ 1
-          (tendsto_pow_atTop_atTop_of_one_lt 2 (by norm_num))
-      have hp := Real.tendsto_rpow_neg_atTop hexp
-      have hcomp := hp.comp hbase
-      simpa only [mul_zero] using
-        (tendsto_const_nhds.mul hcomp)
-    have hloc :
-        IntegrableOn
-          (fun rho : ℝ => rho * (1 + rho ^ 2) ^ (-sigma)) (Ioc 0 1) :=
-      ((continuous_id.mul
-        ((continuous_const.add (continuous_id.pow 2)).rpow_const
-          (fun r => Or.inl (by positivity)))).integrableOn_Icc).mono_set
-        Ioc_subset_Icc_self
-    have htailInt :
-        IntegrableOn
-          (fun rho : ℝ => rho * (1 + rho ^ 2) ^ (-sigma)) (Ioi 1) := by
-      have hprim :=
-        integral_Ioi_of_hasDerivAt_of_tendsto
-          ((hderiv 1 (by norm_num)).continuousAt.continuousWithinAt)
-          (fun x hx => hderiv x (by linarith [hx]))
-          ?_ htail
-      · exact hprim.1
-      · exact
-          ((continuous_id.mul
-            ((continuous_const.add (continuous_id.pow 2)).rpow_const
-              (fun r => Or.inl (by positivity)))).continuousOn.integrableOn_Icc).mono_set
-            (by intro x hx; exact ⟨by linarith [hx.1], le_rfl⟩)
-    rw [← Ioc_union_Ioi_eq_Ioi (show (0 : ℝ) ≤ 1 by norm_num)]
-    exact hloc.union htailInt
-  have hneg : IntegrableOn (weightedSourceMajorant sigma) (Iio 0) := by
-    have href := hpow.comp_neg
-    simpa [weightedSourceMajorant, abs_of_neg] using href
-  have hpos : IntegrableOn (weightedSourceMajorant sigma) (Ioi 0) := by
-    refine hpow.congr_fun ?_ measurableSet_Ioi
-    intro rho hr
-    rw [weightedSourceMajorant, abs_of_pos hr]
-  rw [← integrableOn_Iio_union_Ioi]
-  exact hneg.union hpos
+  have hdim : (Module.finrank ℝ ℝ : ℝ) < 2 * sigma - 1 := by
+    rw [Module.finrank_self]
+    norm_num
+    linarith
+  have hbase :
+      Integrable (fun rho : ℝ =>
+        (1 + rho ^ 2) ^ (1 / 2 - sigma)) := by
+    have h := integrable_rpow_neg_one_add_norm_sq
+      (E := ℝ) (μ := volume) hdim
+    simp only [Real.norm_eq_abs, sq_abs] at h
+    convert h using 1
+    funext rho
+    congr 2
+    ring
+  refine hbase.mono'
+    (weightedSourceMajorant_continuous sigma).aestronglyMeasurable
+    (Filter.Eventually.of_forall fun rho => ?_)
+  rw [Real.norm_eq_abs,
+    abs_of_nonneg (weightedSourceMajorant_nonneg sigma rho)]
+  have hsqrt : |rho| ≤ Real.sqrt (1 + rho ^ 2) := by
+    rw [Real.le_sqrt (abs_nonneg rho) (by positivity)]
+    nlinarith [sq_abs rho]
+  have hpow0 : 0 ≤ (1 + rho ^ 2) ^ (-sigma) :=
+    Real.rpow_nonneg (by positivity) _
+  calc
+    weightedSourceMajorant sigma rho =
+        |rho| * (1 + rho ^ 2) ^ (-sigma) := rfl
+    _ ≤ Real.sqrt (1 + rho ^ 2) *
+        (1 + rho ^ 2) ^ (-sigma) :=
+      mul_le_mul_of_nonneg_right hsqrt hpow0
+    _ = (1 + rho ^ 2) ^ (1 / 2 - sigma) := by
+      rw [Real.sqrt_eq_rpow]
+      rw [← Real.rpow_add (by positivity : 0 < 1 + rho ^ 2)]
+      congr 1
+      ring
 
 theorem weightedSourceGreenKernel_sq_le
     (sigma : ℝ) {r rho : ℝ} (hr : 0 < r) (hrho : 0 < rho) :
