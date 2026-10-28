@@ -86,8 +86,8 @@ theorem densityRemainder_fderiv_apply (w : Space → ℝ) (h : Space → ℂ)
   simp only [Function.comp_def, Pi.mul_apply, Pi.add_apply, Complex.reCLM_apply] at hd
   change HasFDerivAt (densityRemainder w h) _ x at hd
   rw [hd.fderiv]
-  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.add_apply,
-    ContinuousLinearMap.smul_apply, smul_eq_mul, nsmul_eq_mul,
+  simp only [ContinuousLinearMap.comp_apply, add_apply,
+    smul_apply, smul_eq_mul, nsmul_eq_mul,
     Nat.reduceSub, pow_one, Complex.ofRealCLM_apply, Complex.reCLM_apply,
     innerSL_apply_apply]
   congr 1
