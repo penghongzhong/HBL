@@ -15,14 +15,28 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install pinned compiler
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install verified pinned compiler without elan bootstrap
+        timeout-minutes: 10
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p evidence
-          curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          "$HOME/.elan/bin/lean" --version > evidence/compiler.txt
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 --connect-timeout 20 --max-time 180 --retry 2 --retry-delay 3 -fL \
+              https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c - | tee evidence/compiler-archive-check.txt
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          compiler="$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin"
+          "$compiler/lean" --version | tee evidence/compiler.txt
+          grep -F '4.35.0-rc3' evidence/compiler.txt
+          grep -F 'v4.35.0-rc3' lean-toolchain
+          echo "$compiler" >> "$GITHUB_PATH"
       - uses: actions/cache/restore@v4
         id: cache
         with:
