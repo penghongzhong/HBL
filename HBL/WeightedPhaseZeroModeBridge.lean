@@ -31,7 +31,7 @@ theorem firstSineMode_eq_twice_weightedPhaseResonance (r : ℝ) :
   have hs : Real.sqrt (1 + r ^ 2) ≠ 0 := by positivity
   unfold weightedHartreeSineMode weightedPhaseResonance
   rw [resonanceMinus_def, affineJapaneseDecay_two]
-  simp only [Nat.cast_one, one_mul]
+  simp only [Nat.cast_one, mul_one]
   rw [Real.sin_two_mul, Real.sin_arctan, Real.cos_arctan]
   unfold bubble
   rw [Real.sq_sqrt hq.le]
@@ -49,6 +49,7 @@ theorem weightedPhaseResonanceL2_ae :
   filter_upwards [
     Lp.coeFn_smul (1 / 2 : ℝ) (weightedHartreeSineModeL2 1),
     weightedHartreeSineModeL2_ae 1] with r hsmul hmode
+  unfold weightedPhaseResonanceL2
   rw [hsmul]
   simp only [Pi.smul_apply, smul_eq_mul]
   rw [hmode, firstSineMode_eq_twice_weightedPhaseResonance]
