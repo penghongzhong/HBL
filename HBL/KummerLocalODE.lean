@@ -29,12 +29,19 @@ def frozenKummerAugmentedField (mu theta : ℝ) :
     (x.2.2, -(frozenFirstCoeff x.1 * x.2.2 +
       frozenZeroCoeff mu theta * x.2.1)))
 
+@[fun_prop]
 theorem frozenFirstCoeff_contDiffAt
     (z : ℝ) (hz : z ≠ 0) :
     ContDiffAt ℝ 1 frozenFirstCoeff z := by
   have hcz : (z : ℂ) ≠ 0 := by exact_mod_cast hz
-  unfold frozenFirstCoeff
-  fun_prop (disch := exact hcz)
+  have hcomplex :
+      ContDiffAt ℂ 1 (fun w : ℂ =>
+        (2 : ℂ) / w + Complex.I * w / 2) (z : ℂ) := by
+    fun_prop (disch := exact hcz)
+  have hcast : ContDiffAt ℝ 1 (fun x : ℝ => (x : ℂ)) z :=
+    Complex.ofRealCLM.contDiff.contDiffAt
+  have hr := (hcomplex.restrict_scalars ℝ).comp (z : ℂ) hcast
+  simpa only [Function.comp_def, frozenFirstCoeff] using hr
 
 theorem frozenZeroCoeff_contDiff
     (mu theta : ℝ) :
@@ -58,7 +65,7 @@ theorem exists_local_frozenKummer_augmented_solution
           HasDerivAt X (frozenKummerAugmentedField mu theta (X t)) t := by
   have hreg := frozenKummerAugmentedField_contDiffAt
     mu theta z u p hz.ne'
-  simpa only [sub_zero, zero_add] using
+  simpa only [zero_sub, zero_add] using
     (ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀
       hreg 0)
 
