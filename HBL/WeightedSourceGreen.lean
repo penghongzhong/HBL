@@ -106,7 +106,7 @@ theorem weightedSourceGreenKernel_sq_le
       0 ≤ (1 + r ^ 2)⁻¹ ^ 2 *
         affineJapaneseDecay sigma rho ^ 2 := by positivity
   unfold weightedSourceGreenKernel freeGreenMajorant weightedSourceMajorant
-  rw [abs_of_pos hr, abs_of_pos hrho, hdec]
+  rw [abs_of_pos hr, abs_of_pos hrho]
   calc
     (min r rho * (1 + r ^ 2)⁻¹ * affineJapaneseDecay sigma rho) ^ 2 =
         min r rho ^ 2 *
