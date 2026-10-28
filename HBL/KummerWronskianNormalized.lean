@@ -46,7 +46,7 @@ theorem abelFactor_hasDerivAt
     HasDerivAt (abelFactor K z0)
       (abelFactor K z0 z * K.a z) z := by
   have h := (abelPrimitive_hasDerivAt K ha z0 z).cexp
-  simpa only [abelFactor] using h
+  simpa only [abelFactor] using! h
 
 theorem abelInvariant_hasDerivAt_zero
     (K : FundamentalPair) (ha : Continuous K.a)
@@ -57,8 +57,7 @@ theorem abelInvariant_hasDerivAt_zero
       (wronskian_hasDerivAt K z)
   convert h using 1
   · rfl
-  · unfold abelInvariant
-    ring
+  · ring
 
 theorem abelInvariant_eq
     (K : FundamentalPair) (ha : Continuous K.a)
@@ -69,7 +68,7 @@ theorem abelInvariant_eq
         abelInvariant K z0 y - abelInvariant K z0 x := by
     exact intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun z _hz => abelInvariant_hasDerivAt_zero K ha z0 z)
-      intervalIntegrable_zero
+      (continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y
   simpa using (sub_eq_zero.mp (by simpa using hftc.symm))
 
 theorem abelFactor_ne_zero

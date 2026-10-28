@@ -92,7 +92,7 @@ theorem candidateAbelFactor_hasDerivAt
     HasDerivAt (candidateAbelFactor K z0)
       (candidateAbelFactor K z0 z * K.a z) z := by
   have h := (candidateAbelPrimitive_hasDerivAt K z0 z).cexp
-  simpa only [candidateAbelFactor] using h
+  simpa only [candidateAbelFactor] using! h
 
 theorem candidateAbelInvariant_hasDerivAt_zero
     (K : CandidatePair) (z0 z : ℝ) :
@@ -102,8 +102,8 @@ theorem candidateAbelInvariant_hasDerivAt_zero
       (candidateWronskian_hasDerivAt K z)
   convert h using 1
   · rfl
-  · unfold candidateAbelInvariant
-    ring
+  · rfl
+  · ring
 
 theorem candidateAbelInvariant_eq
     (K : CandidatePair) (z0 x y : ℝ) :
@@ -115,7 +115,7 @@ theorem candidateAbelInvariant_eq
           candidateAbelInvariant K z0 x := by
     exact intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun z _hz => candidateAbelInvariant_hasDerivAt_zero K z0 z)
-      intervalIntegrable_zero
+      (continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y
   exact sub_eq_zero.mp (by simpa using hftc.symm)
 
 theorem candidateAbelFactor_ne_zero
