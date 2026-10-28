@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — localized Kummer pair and both inner Hilbert Fredholm solvers verified; exact manuscript one-layer nonlinear residual not yet formalized.",
+  "target_status": "OPEN — actual classical affine H-plus/H-minus inner solutions and weighted output verified; exact manuscript one-layer nonlinear residual not yet formalized.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -152,10 +152,18 @@
       "verification": "verification/actual-inner-affine-estimates-status.json",
       "base_commit": "23ae4a7ff11bdfd8d8326b0d807a0383fc41b0e3",
       "new_supporting_theorems": 9
+    },
+    {
+      "name": "Actual classical affine H-plus/H-minus reconstruction, origin boundary values, weighted output and finite affine tails",
+      "mode": "local pinned strict compilation; one new theorem per file",
+      "verification": "verification/inner-reconstruction-status.json",
+      "base_commit": "219e1ea35412331745b00dd02897ca6a3bd07e36",
+      "new_supporting_theorems": 34,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
-    "Upgrade the verified actual physical H-plus/H-minus weighted Hilbert Fredholm solutions to the original classical H_± equations with affine tails and the required L^{2,-sigma} output. H-plus affine-corrected input membership in L^{2,sigma} is now strictly proved.",
+    "The actual normalized H-plus/H-minus Hilbert solves now reconstruct to continuous bounded remainders with finite constant tails. For continuous L^{2,sigma} sources, 3/2 < sigma < 2, affine restoration solves the original classical equations, vanishes at the origin, has the forced affine slopes, and lies in L^{2,-sigma}. Still derive the quantitative weighted inverse/derivative norms, uniform parameter bounds and jets, and derivative/tail rates required for the one-layer construction.",
     "The physical local Kummer basis, positive Wronskian and compact-interval uniform bounds are now strictly proved. Derive the actual C→C1 annulus right-inverse bound, uniformity and parameter jets on the compact parameter graph, and extend or select the prescribed matching annulus rigorously.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
@@ -164,7 +172,7 @@
   ],
   "axiom_policy": "No sorry/admit, no new axiom; only standard foundational axioms permitted in inspected supporting certificates.",
   "root_original_acceptance_changed": false,
-  "last_updated_utc_date": "2026-10-29",
+  "last_updated_utc_date": "2026-10-28",
   "physical_kummer_localized_warning": "Global IsFrozenHartreePair on all z>0 with singular a=2/z+i z/2 is not compatible with global regularity and normalized W. Only the localized positive-annulus interface is mathematically valid.",
   "recorded_at_head": "ba828799d733165d3bf279a46e27a2320e4889ae",
   "last_audited_source_commit": "aa6fd006ae740ba01a02cd97800ba7b8a9413308",
@@ -173,10 +181,10 @@
   "current_latest_accepted_run": 40732109454,
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
-    "date": "2026-10-29",
-    "verification": "verification/actual-inner-affine-estimates-status.json",
-    "complete_types_and_axioms": "verification/actual-inner-affine-estimates-types-and-axioms.txt",
-    "new_supporting_theorems": 9,
+    "date": "2026-10-28",
+    "verification": "verification/inner-reconstruction-status.json",
+    "complete_types_and_axioms": "verification/inner-reconstruction-types-and-axioms.txt.gz",
+    "new_supporting_theorems": 34,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }

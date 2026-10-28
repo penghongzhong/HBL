@@ -1,0 +1,277 @@
+{
+  "validation_passed": true,
+  "one_theorem_per_file": true,
+  "new_supporting_theorems": 34,
+  "supporting_certificate_only": true,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "219e1ea35412331745b00dd02897ca6a3bd07e36",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "strict_source_exit_codes": {
+    "HBL/InnerReconstruction/ActualClassicalAffineSolution.lean": 0,
+    "HBL/InnerReconstruction/ActualTwoChannelReconstruction.lean": 0,
+    "HBL/InnerReconstruction/AffineModelWeightedOutput.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationDefinitions.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationNonlocal.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationPhaseEquation.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationPlusEquation.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationProperties.lean": 0,
+    "HBL/InnerReconstruction/AffineRestorationSecondDerivative.lean": 0,
+    "HBL/InnerReconstruction/BoundedWeightedOutput.lean": 0,
+    "HBL/InnerReconstruction/CorrectedPhaseContinuous.lean": 0,
+    "HBL/InnerReconstruction/CorrectedPlusContinuous.lean": 0,
+    "HBL/InnerReconstruction/Definitions.lean": 0,
+    "HBL/InnerReconstruction/FirstMoment.lean": 0,
+    "HBL/InnerReconstruction/GreenBound.lean": 0,
+    "HBL/InnerReconstruction/GreenKernelIntegrable.lean": 0,
+    "HBL/InnerReconstruction/GreenLimit.lean": 0,
+    "HBL/InnerReconstruction/GreenLipschitz.lean": 0,
+    "HBL/InnerReconstruction/MomentWeight.lean": 0,
+    "HBL/InnerReconstruction/OperatorRepresentative.lean": 0,
+    "HBL/InnerReconstruction/PhaseClassicalEquation.lean": 0,
+    "HBL/InnerReconstruction/PhaseRepresentative.lean": 0,
+    "HBL/InnerReconstruction/PhaseSourceIdentification.lean": 0,
+    "HBL/InnerReconstruction/PlusAffineSourceContinuous.lean": 0,
+    "HBL/InnerReconstruction/PlusClassicalEquation.lean": 0,
+    "HBL/InnerReconstruction/PlusRepresentative.lean": 0,
+    "HBL/InnerReconstruction/PlusSourceIdentification.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeBound.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeContinuous.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeIntegralEquation.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeLimit.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeProperties.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeWeightedOutput.lean": 0,
+    "HBL/InnerReconstruction/RepresentativeZero.lean": 0,
+    "HBL/InnerReconstruction/SourceIntegrable.lean": 0,
+    "HBL/InnerReconstruction/SourceOperatorRepresentative.lean": 0
+  },
+  "axioms": {
+    "HBL.Modulation.Monopole.exists_actualInner_classical_affine": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.exists_actualInner_reconstructed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineModel_inWeightedL2_neg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_nonlocal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_hMinus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_hPlus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_second_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.bounded_continuous_inWeightedL2_neg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.correctedMinusSource_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.correctedPlusSource_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.weightedSource_firstMoment_integrable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.halfLineMinGreen_abs_le_firstMoment": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.halfLineMinGreen_kernel_integrable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.halfLineMinGreen_tendsto_firstMoment": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.halfLineMinGreen_lipschitz": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.weightedSource_momentWeight_memLp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_ae_of_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.phase_innerGreenRepresentative_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.phase_innerGreenRepresentative_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.phase_reconstructed_source_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.hPlusAffineSource_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.plus_innerGreenRepresentative_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.plus_innerGreenRepresentative_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.plus_reconstructed_source_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_abs_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_eq_totalGreen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_tendsto": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_inWeightedL2_neg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenRepresentative_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.weightedSource_integrable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.weightedSourceGreenOperator_ae_primitive": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/inner-reconstruction-types-and-axioms.txt.gz",
+  "compressed_output_bytes": 537268,
+  "compressed_output_sha256": "b60d438297805952f3790b3631ef3e45a7dfef12f0823884d7d59eab66b9b0a8",
+  "complete_type_output_bytes": 24957242,
+  "complete_type_output_sha256": "6a4f512f7c0b76e6ee89d5b33d8b606d6c693235adf54b9f2ad3bf608b76c1c9",
+  "source_sha256": {
+    "HBL/InnerReconstruction/ActualClassicalAffineSolution.lean": "60d04719e3bcd91fe0ac32822e0fdfaf8fbf9a6725a71fd2ef212ac516b9f51b",
+    "HBL/InnerReconstruction/ActualTwoChannelReconstruction.lean": "fb9d6a6ff4e614a8d836818a7fe3eaabec583223e3016b3ad9eb010bac387af1",
+    "HBL/InnerReconstruction/AffineModelWeightedOutput.lean": "8e89420ec74246c2a6a6e058a0dbf9e943a8ea8261a7f0759135d3577b51500c",
+    "HBL/InnerReconstruction/AffineRestorationDefinitions.lean": "5cdbe0c4b804023e4b3f640599bcc36d4e688aaffb18a28b8c435a9c4ccfa8a5",
+    "HBL/InnerReconstruction/AffineRestorationNonlocal.lean": "9ae93862c06d8c64e9bcd853cd698cc4fbd9669af3a40b38841aa57c7b0f2c14",
+    "HBL/InnerReconstruction/AffineRestorationPhaseEquation.lean": "24a43b97c4472b14611f48518bdf2da77395741c623e8a2fb72d25f8a37569d0",
+    "HBL/InnerReconstruction/AffineRestorationPlusEquation.lean": "a3db948745a0a14b2dec5d40a115111d9ead19fe3cff3ad95f76ae192f4f0c9f",
+    "HBL/InnerReconstruction/AffineRestorationProperties.lean": "677f9857f3e8d28f0e8329e707e4c740ee226e4f7172535096ae385a8657d45c",
+    "HBL/InnerReconstruction/AffineRestorationSecondDerivative.lean": "3d3e5e436df158fc1d30c270dd61578b4b448257dfc5019d4ea105b7c6f2dd5f",
+    "HBL/InnerReconstruction/BoundedWeightedOutput.lean": "916473c38eca7d8914e0a8240018305f7cce6b9e1c6a33a8b2db2c9e3f6d3077",
+    "HBL/InnerReconstruction/CorrectedPhaseContinuous.lean": "2a356edff32b094ed745d125b9e4a5b6fbfd50e122c0267a867078740e020c50",
+    "HBL/InnerReconstruction/CorrectedPlusContinuous.lean": "6d94983ca894e1b63846f4f2ac41ef58b51f14c9bd171a3064681ae849098944",
+    "HBL/InnerReconstruction/Definitions.lean": "3071b04aaf9c74557361038895705d183b4334d35268509adf645fc05a294b51",
+    "HBL/InnerReconstruction/FirstMoment.lean": "91aea8698653f84d13023a6248eb0bd2cf582cf6283f9e6a16d61520fbd355a6",
+    "HBL/InnerReconstruction/GreenBound.lean": "3ee9eb4308491f0c67fe459be6d7f9df4dee11e9f965427956b89205e1b9c23f",
+    "HBL/InnerReconstruction/GreenKernelIntegrable.lean": "92db280bec40c5204dc16e4014999ec77073d0720751f670d22cd84f535185d0",
+    "HBL/InnerReconstruction/GreenLimit.lean": "1cbfe5cfebb546290dec15bb67395c329e27bf20c8481a7779c2023647939c1a",
+    "HBL/InnerReconstruction/GreenLipschitz.lean": "be70374b8d481637b7c96e7947882e1c716148f0804f345c68ba8067f839e95e",
+    "HBL/InnerReconstruction/MomentWeight.lean": "89a763934363058c127a64934ad1f9a9da5c2aaedce74aff8243cbfd988d82e1",
+    "HBL/InnerReconstruction/OperatorRepresentative.lean": "bf6b930c38807486cc58f1f4d5131552906e3f6deccf801b5239f69c2875f46b",
+    "HBL/InnerReconstruction/PhaseClassicalEquation.lean": "0313ea1037a675891e91ad1ae6f411c1f2c596229ad7783de65a7ea560fb0f96",
+    "HBL/InnerReconstruction/PhaseRepresentative.lean": "79400081d6afc89aa6853733ee2c1d6eff3a1a170843f8998a0addf6b95c48f2",
+    "HBL/InnerReconstruction/PhaseSourceIdentification.lean": "da3f19225a882ed42db8d13d95bf6feda76ec0c47ea984a00d28be0523adf6fa",
+    "HBL/InnerReconstruction/PlusAffineSourceContinuous.lean": "c1799d451ee8404e78853774b07a4379172e07a4230e8d34819dbd964b210b41",
+    "HBL/InnerReconstruction/PlusClassicalEquation.lean": "4bf5c6e4d29c0d828a1d644934c10272ad1a2e24835440ff1901c87e149fc204",
+    "HBL/InnerReconstruction/PlusRepresentative.lean": "0bcd5ccfda768dde808bbd420119ab23e80dc5fc46c06bf440e7b4f0675a20f0",
+    "HBL/InnerReconstruction/PlusSourceIdentification.lean": "fae6817a1dd962177cb38c58cfa7c1bf71e90ef21fdd1fe2663cd02aa52750f9",
+    "HBL/InnerReconstruction/RepresentativeBound.lean": "fad4df8473a99733d3f781e14e3e2cc65c3574d25d13254a3661aefa5c178209",
+    "HBL/InnerReconstruction/RepresentativeContinuous.lean": "073eccb616ee224b59d428ad42f43ecd7505994dde10cc82998546b0b0732292",
+    "HBL/InnerReconstruction/RepresentativeIntegralEquation.lean": "eabc1e718c4f97c3dbe6bd8640fe6fba5869ccc7065e974cf9b9dcaf13367394",
+    "HBL/InnerReconstruction/RepresentativeLimit.lean": "0553b5e5f829acb6869feff13a7a8f7d7daee781948a812e36223baa45939b7f",
+    "HBL/InnerReconstruction/RepresentativeProperties.lean": "831c4116a08677096d97b774912a77de020953a051ab44a7c0ae11d5abb15631",
+    "HBL/InnerReconstruction/RepresentativeWeightedOutput.lean": "e7384710a792b370c201c6f09ce8716717603d612fde5d56341a22e1436cc283",
+    "HBL/InnerReconstruction/RepresentativeZero.lean": "422a19fb0007f2eaba568c968eb23472409d19e255bda60659768a149ab879f6",
+    "HBL/InnerReconstruction/SourceIntegrable.lean": "01db0499303b551c9719cec1d50df33d76ff3198244b9259c9417ae14cdc7e36",
+    "HBL/InnerReconstruction/SourceOperatorRepresentative.lean": "52ba2bfd3b707c6821bfd4be51b3f0487b64ea2c607970ce1b668d17ee955564",
+    "HBL/InnerReconstruction/ReconstructionAudit.lean": "fae9b3207cb2a3ea9740cd61d79d38e239bab57c9852d832528d42dd4071cf09"
+  }
+}
