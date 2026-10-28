@@ -1,6 +1,6 @@
 {
-  "source_commit": "0bbe9028705832213998bc7f044911933b895a91",
-  "run_id": "40639540968",
+  "source_commit": "2744169ad0b507f6c92ab961be8b24187bece39e",
+  "run_id": "40639981176",
   "baseline": "5e1ef8f6075cacc54ef4aae0bc1dc83ea2a1cde8",
   "validation_passed": false,
   "main_theorem_closed": false,
@@ -9,6 +9,8 @@
   "boundary": "The complete physical seventh-order remainder and its actual weak spatial differential have a uniform quadratic bound on the normalized mixed first-order perturbation ball. Every affine sample hypothesis is derived from original field data. No background L2, compact support, source-sample bound or approximation sequence is assumed. This does not close the differentiated two-perturbation remainder, higher Sobolev estimates, constrained propagator, or original main theorem.",
   "strict_targets": {},
   "baseline_Lean_sources_byte_identical": 331,
-  "target_cached_files_removed": [],
+  "target_cached_files_removed": [
+    ".lake/build/ir/HBL/HartreeRemainderFirstOrderQuadratic.setup.json"
+  ],
   "build_exit": 1
 }
