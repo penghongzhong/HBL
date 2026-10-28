@@ -1,14 +1,90 @@
 {
-  "source_commit": "f319b433b1bc7ef50005a6ceb335af36dcf48d2a",
-  "run_id": "40629768649",
+  "source_commit": "30411e67546d0f699fe2c089a43b40c3ce242b73",
+  "run_id": "40630079789",
   "baseline": "c7e0e3458f8adffd764e5793b591f2f32c6afd16",
   "validation_passed": false,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
   "boundary": "Native spatial differentiation of the actual quadratic quartic-density remainder. Its gradient mass and supremum, and the actual noncompact gradient potential, are O(r^2) on the mixed first-order perturbation ball. Real background C1/bounded/bounded derivative; no background L2 or L4. This is not the full seventh-order remainder difference, high Sobolev closure, actual constrained evolution or main blow-up theorem.",
-  "strict_targets": {},
+  "strict_targets": {
+    "HartreeDensitySourceBounds": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "8aff64020b0f2eafc589d6899361d2d14e063420cf98b760dbe4a1ae032a4c01",
+      "declarations": [
+        "HBL.RegularRadiation.PhysicalExpansion.densityQuadraticConstant",
+        "HBL.RegularRadiation.PhysicalExpansion.densityLinear_source_integrable",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_source_bound",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_small_ball_bound",
+        "HBL.RegularRadiation.PhysicalExpansion.physical_hartree_expansion_from_function_bounds"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.PhysicalExpansion.densityQuadraticConstant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityLinear_source_integrable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_source_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_small_ball_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.physical_hartree_expansion_from_function_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeLocalCutoff": {
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "de633069363a137c743ca3cc686ed1a247820c5c506bd0cd86218f263c3ed7a7",
+      "declarations": [
+        "HBL.RegularRadiation.LocalCutoff.potential_hasFDerivAt_noncompact",
+        "HBL.RegularRadiation.LocalCutoff.quarticPotential_hasFDerivAt_noncompact"
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.LocalCutoff.potential_hasFDerivAt_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.LocalCutoff.quarticPotential_hasFDerivAt_noncompact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "HartreeDensityRemainderGradient": {
+      "strict_exit": 1,
+      "audit_passed": false,
+      "source_sha256": "7a4261e93f3326d32d06ab0bb1f70bc366595a03f9996135a7014d90b66903e9",
+      "declarations": [
+        "HBL.RegularRadiation.PhysicalExpansion.densityGradientQuadraticConstant",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_contDiff",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_fderiv_apply",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_fderiv_norm_le",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_gradient_quadratic",
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_potential_gradient_quadratic"
+      ]
+    }
+  },
   "baseline_Lean_sources_byte_identical": 328,
-  "target_cached_files_removed": [],
-  "build_exit": 1
+  "target_cached_files_removed": [
+    ".lake/build/ir/HBL/HartreeDensityRemainderGradient.setup.json"
+  ],
+  "build_exit": 0
 }
