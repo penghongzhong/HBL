@@ -102,7 +102,6 @@ theorem candidateAbelInvariant_hasDerivAt_zero
       (candidateWronskian_hasDerivAt K z)
   convert h using 1
   · rfl
-  · rfl
   · ring
 
 theorem candidateAbelInvariant_eq
@@ -115,7 +114,7 @@ theorem candidateAbelInvariant_eq
           candidateAbelInvariant K z0 x := by
     exact intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun z _hz => candidateAbelInvariant_hasDerivAt_zero K z0 z)
-      (continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y
+      ((continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y)
   exact sub_eq_zero.mp (by simpa using hftc.symm)
 
 theorem candidateAbelFactor_ne_zero

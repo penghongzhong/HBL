@@ -68,7 +68,7 @@ theorem abelInvariant_eq
         abelInvariant K z0 y - abelInvariant K z0 x := by
     exact intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun z _hz => abelInvariant_hasDerivAt_zero K ha z0 z)
-      (continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y
+      ((continuous_const : Continuous (fun _ : ℝ => (0 : ℂ))).intervalIntegrable x y)
   simpa using (sub_eq_zero.mp (by simpa using hftc.symm))
 
 theorem abelFactor_ne_zero
