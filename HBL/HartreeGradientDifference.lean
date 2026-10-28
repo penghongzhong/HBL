@@ -72,8 +72,8 @@ theorem quarticDensity_fderiv_difference (f g : Space → ℂ) {x : Space}
       (‖f x‖ + ‖g x‖) * ‖f x - g x‖ * ‖g x‖ * ‖fderiv ℝ g x‖ * ‖v‖ := by
     rw [abs_mul]
     have ht := mul_le_mul (norm_square_difference (f x) (g x))
-      ((hip _ _).trans (mul_le_mul_of_nonneg_left
-        ((fderiv ℝ g x).le_opNorm v) (norm_nonneg _))) (abs_nonneg _) (by positivity)
+      ((hip (g x) (fderiv ℝ g x v)).trans (mul_le_mul_of_nonneg_left
+        ((fderiv ℝ g x).le_opNorm v) (norm_nonneg (g x)))) (abs_nonneg _) (by positivity)
     exact ht.trans_eq (by ring)
   have hcoeff : ‖f x‖ ^ 2 + (‖f x‖ + ‖g x‖) * ‖g x‖ ≤
       2 * (‖f x‖ ^ 2 + ‖g x‖ ^ 2) := by
@@ -102,7 +102,7 @@ private theorem quartic_difference_refined (a b : ℂ) {M : ℝ}
     |‖a‖ ^ 4 - ‖b‖ ^ 4| ≤ 2 * M * (‖a‖ ^ 2 + ‖b‖ ^ 2) * ‖a - b‖ := by
   rw [show ‖a‖ ^ 4 - ‖b‖ ^ 4 = (‖a‖ ^ 2 - ‖b‖ ^ 2) *
     (‖a‖ ^ 2 + ‖b‖ ^ 2) by ring, abs_mul,
-    abs_of_nonneg (add_nonneg (sq_nonneg _) (sq_nonneg _))]
+    abs_of_nonneg (show 0 ≤ ‖a‖ ^ 2 + ‖b‖ ^ 2 by positivity)]
   calc
     _ ≤ ((‖a‖ + ‖b‖) * ‖a - b‖) * (‖a‖ ^ 2 + ‖b‖ ^ 2) :=
       mul_le_mul_of_nonneg_right (norm_square_difference a b) (by positivity)
@@ -126,13 +126,14 @@ private theorem mixed_product_bound {E F : Type*}
     rw [he]
     apply (le_div_iff₀ (mul_pos ha hb)).2
     nlinarith only [sq_nonneg (b * ‖f x‖ - a * ‖g x‖),
-      mul_nonneg (mul_nonneg ha.le hb.le) (mul_nonneg (norm_nonneg _) (norm_nonneg _))]
+      mul_nonneg (mul_nonneg ha.le hb.le) (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))]
   have hmaj := (hf.norm.integrable_sq.const_mul (b / a)).add
     (hg.norm.integrable_sq.const_mul (a / b))
   have hi : Integrable (fun x : Space => ‖f x‖ * ‖g x‖) := by
     apply hmaj.mono' (hf.aestronglyMeasurable.norm.mul hg.aestronglyMeasurable.norm)
     filter_upwards with x
-    simpa only [Pi.add_apply, Real.norm_of_nonneg (mul_nonneg (norm_nonneg _) (norm_nonneg _))] using hp x
+    simpa only [Pi.add_apply, Pi.mul_apply,
+      Real.norm_of_nonneg (mul_nonneg (norm_nonneg (f x)) (norm_nonneg (g x)))] using hp x
   refine ⟨hi, ?_⟩
   have ht := integral_mono_ae hi hmaj (Filter.Eventually.of_forall hp)
   simp only [Pi.add_apply] at ht
@@ -170,11 +171,11 @@ private theorem field_powers (f : Space → ℂ) (hf : Continuous f)
   have h6 : Integrable (fun x : Space => ‖f x‖ ^ 6) := by
     apply (h4.const_mul (M ^ 2)).mono' (hf.aestronglyMeasurable.norm.pow 6)
     filter_upwards [hdom] with x hx
-    simpa only [Real.norm_of_nonneg (pow_nonneg (norm_nonneg _) 6)] using hx
+    simpa only [Pi.pow_apply, Real.norm_of_nonneg (pow_nonneg (norm_nonneg _) 6)] using hx
   refine ⟨(memLp_two_iff_integrable_sq_norm (hf.aestronglyMeasurable.norm.pow 2)).2
-    (by rw [he4]; exact h4), by rw [he4]; exact hJ,
+    (by simp only [Pi.pow_apply]; rw [he4]; exact h4), by rw [he4]; exact hJ,
     (memLp_two_iff_integrable_sq_norm (hf.aestronglyMeasurable.norm.pow 3)).2
-    (by rw [he6]; exact h6), ?_⟩
+    (by simp only [Pi.pow_apply]; rw [he6]; exact h6), ?_⟩
   rw [he6]
   have ht := integral_mono_ae h6 (h4.const_mul (M ^ 2)) hdom
   rw [integral_const_mul] at ht
@@ -231,8 +232,9 @@ theorem quartic_potential_first_order_difference
       2 * M * (‖f x‖ ^ 2 * ‖f x - g x‖ + ‖g x‖ ^ 2 * ‖f x - g x‖) := by
     filter_upwards [hfb, hgb] with x hfx hgx
     have ht := quartic_difference_refined (f x) (g x) hfx hgx
-    simpa only [quarticDensity, ← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs,
-      mul_add, mul_assoc] using ht
+    change ‖((‖f x‖ ^ 4 : ℝ) : ℂ) - ((‖g x‖ ^ 4 : ℝ) : ℂ)‖ ≤ _
+    rw [← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs]
+    exact ht.trans_eq (by ring)
   have hIv : (∫ x : Space, ‖quarticDensity f x - quarticDensity g x‖) ≤ 8 * M * j * d := by
     have ht := integral_mono_ae (hiF.sub hiG).norm ((pf.1.add pg.1).const_mul (2 * M)) hv
     simp only [Pi.add_apply] at ht
@@ -259,9 +261,10 @@ theorem quartic_potential_first_order_difference
       (8 * (M + 1) * j + 32 * j * Q) * d := by
     have ht := integral_mono_ae (hiDF.sub hiDG).norm
       ((pd.1.const_mul 4).add ((qf.1.add qg.1).const_mul (8 * d))) hdpt
-    simp only [Pi.add_apply] at ht
-    rw [integral_add (pd.1.const_mul 4) ((qf.1.add qg.1).const_mul (8 * d)),
-      integral_const_mul, integral_const_mul, integral_add qf.1 qg.1] at ht
+    have ha := integral_add (pd.1.const_mul 4) ((qf.1.add qg.1).const_mul (8 * d))
+    have hb := integral_add qf.1 qg.1
+    simp only [Pi.add_apply] at ht ha hb
+    rw [ha, integral_const_mul, integral_const_mul, hb] at ht
     calc
       _ ≤ 4 * (∫ x : Space, ‖f x‖ ^ 3 * ‖fderiv ℝ f x - fderiv ℝ g x‖) +
           8 * d * ((∫ x : Space, ‖f x‖ ^ 2 * ‖fderiv ℝ g x‖) +
