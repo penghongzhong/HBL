@@ -95,9 +95,11 @@ theorem sample_kernel_integrable
     Integrable (fun y : Space =>
       (kernel (x - y) : ℂ) * quarticDensity (sampleField w h s) y) := by
   have hs2 : MemLp (fun y => (s : ℂ) * h y) 2 := by
-    apply (hh.const_smul (s : ℂ)).congr
-    filter_upwards with y
-    rfl
+    have heq : (fun y => (s : ℂ) * h y) = (s : ℂ) • h := by
+      funext y
+      rfl
+    rw [heq]
+    exact hh.const_smul (s : ℂ)
   have hsb : ∀ᵐ y, ‖(s : ℂ) * h y‖ ≤ |s| * R := by
     filter_upwards [hhb] with y hy
     rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
@@ -187,7 +189,7 @@ theorem physical_remainder_interpolation
         congrArg (fun z : ℝ => (z : ℂ)) heven
     have hc0 := cubic_base (w x)
     dsimp [F, G, C, sampleField, quarticDensity]
-    simp only [Complex.ofReal_zero, zero_mul, add_zero]
+    simp only [zero_mul, add_zero]
     rw [h0, hc0]
     simp only [densityLinear, cubicZero, cubicLinear] at hpoly ⊢
     push_cast at hpoly ⊢
@@ -198,8 +200,11 @@ theorem physical_remainder_interpolation
             (((‖(w x : ℂ) + (t : ℂ) * h x‖ ^ 2 : ℝ) : ℂ) * ((w x : ℂ) + (t : ℂ) * h x)) -
             (w y : ℂ) ^ 4 * (w x : ℂ) ^ 3 - (t : ℂ) *
             ((w y : ℂ) ^ 4 * ((w x : ℂ) ^ 2 * (2 * ((h x).re : ℂ) + h x)) +
-              (4 * (w y : ℂ) ^ 3 * ((h y).re : ℂ)) * (w x : ℂ) ^ 3)) := by ring
+              (4 * (w y : ℂ) ^ 3 * ((h y).re : ℂ)) * (w x : ℂ) ^ 3)) := by
+        push_cast
+        ring
       _ = _ := by
+        push_cast
         rw [hpoly, Finset.mul_sum, Finset.mul_sum]
         apply Finset.sum_congr rfl
         intro j _
@@ -210,9 +215,11 @@ theorem physical_remainder_interpolation
     integral_finsetSum _ (fun j _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint
   simp_rw [integral_const_mul] at hint
   have hscaled : MemLp (fun y => (t : ℂ) * h y) 2 := by
-    apply (hh.const_smul (t : ℂ)).congr
-    filter_upwards with y
-    rfl
+    have heq : (fun y => (t : ℂ) * h y) = (t : ℂ) • h := by
+      funext y
+      rfl
+    rw [heq]
+    exact hh.const_smul (t : ℂ)
   have hscaledb : ∀ᵐ y, ‖(t : ℂ) * h y‖ ≤ |t| * R := by
     filter_upwards [hhb] with y hy
     rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
