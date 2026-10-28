@@ -106,6 +106,7 @@ theorem potential_fderiv_bound (ρ : Space → ℂ)
   have hI : (∫ y : Space, ‖fderiv ℝ ρ y v‖) ≤
       (∫ y : Space, ‖fderiv ℝ ρ y‖) * ‖v‖ := by
     calc
+      _ ≤ ∫ y : Space, ‖fderiv ℝ ρ y v‖ := le_rfl
       _ ≤ ∫ y : Space, ‖fderiv ℝ ρ y‖ * ‖v‖ := by
         apply integral_mono_ae hdir.norm (hDi.norm.mul_const ‖v‖)
         filter_upwards with y
@@ -169,7 +170,8 @@ theorem hartree_fderiv_core (κ : ℝ) (f : Space → ℂ)
       ((κ : ℂ) * potential (quarticDensity f) x) • fderiv ℝ C x +
         C x • ((κ : ℂ) • fderiv ℝ (potential (quarticDensity f)) x) := hd.fderiv
   rw [he]
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
+  change ((κ : ℂ) * potential (quarticDensity f) x) * (fderiv ℝ C x v) +
+    C x * ((κ : ℂ) * (fderiv ℝ (potential (quarticDensity f)) x v)) = _
   rw [potential_fderiv_apply (quarticDensity f) hcρ hρ x v]
   dsimp [C]
   ring
