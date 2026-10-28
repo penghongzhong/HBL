@@ -80,7 +80,6 @@ private theorem polynomial_remainder_identity (a c : ℝ) (b d : ℂ) (t : ℝ) 
         integrandPolynomial a c b d (j : ℕ) := by
   norm_num [integrandPolynomial, remainderWeight, interpolationCoefficients,
     Fin.sum_univ_succ]
-  push_cast
   ring
 
 /-- The actual affine physical field used for the eight source samples. -/
@@ -96,7 +95,9 @@ theorem sample_kernel_integrable
     Integrable (fun y : Space =>
       (kernel (x - y) : ℂ) * quarticDensity (sampleField w h s) y) := by
   have hs2 : MemLp (fun y => (s : ℂ) * h y) 2 := by
-    simpa only [Pi.smul_apply, smul_eq_mul] using hh.const_smul (s : ℂ)
+    apply (hh.const_smul (s : ℂ)).congr
+    filter_upwards with y
+    rfl
   have hsb : ∀ᵐ y, ‖(s : ℂ) * h y‖ ≤ |s| * R := by
     filter_upwards [hhb] with y hy
     rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
@@ -165,7 +166,8 @@ theorem physical_remainder_interpolation
       hartreeNonlinearity κ (sampleField w h s) x := by
     dsimp [F]
     rw [integral_mul_const]
-    rfl
+    dsimp [hartreeNonlinearity, potential, C]
+    ring
   have hgval : (κ : ℂ) * (∫ y, G y) = linearTerm κ w h x := by
     dsimp [G]
     rw [integral_add (he.1.mul_const _) (he.2.1.mul_const _),
@@ -173,16 +175,22 @@ theorem physical_remainder_interpolation
     rfl
   have hz (y : Space) : F t y - F 0 y - (t : ℂ) * G y =
       (t : ℂ) ^ 2 * ∑ j : Fin 8, (remainderWeight t j : ℂ) * F (j : ℕ) y := by
-    have h := polynomial_remainder_identity (w y) (w x) (h y) (h x) t
-    simp_rw [polynomial_is_actual] at h
+    have hpoly := polynomial_remainder_identity (w y) (w x) (h y) (h x) t
+    simp_rw [polynomial_is_actual] at hpoly
     have h0 : ((‖(w y : ℂ)‖ ^ 4 : ℝ) : ℂ) = (w y : ℂ) ^ 4 := by
-      norm_num [Complex.norm_real, Real.norm_eq_abs, ← Complex.ofReal_pow]
+      have heven : |w y| ^ 4 = (w y) ^ 4 := by
+        calc
+          _ = (|w y| ^ 2) ^ 2 := by ring
+          _ = ((w y) ^ 2) ^ 2 := by rw [sq_abs]
+          _ = _ := by ring
+      simpa only [Complex.norm_real, Real.norm_eq_abs, Complex.ofReal_pow] using
+        congrArg (fun z : ℝ => (z : ℂ)) heven
     have hc0 := cubic_base (w x)
     dsimp [F, G, C, sampleField, quarticDensity]
     simp only [Complex.ofReal_zero, zero_mul, add_zero]
     rw [h0, hc0]
-    simp only [densityLinear, cubicZero, cubicLinear] at *
-    push_cast at h ⊢
+    simp only [densityLinear, cubicZero, cubicLinear] at hpoly ⊢
+    push_cast at hpoly ⊢
     rw [Finset.mul_sum]
     calc
       _ = (kernel (x - y) : ℂ) *
@@ -192,7 +200,7 @@ theorem physical_remainder_interpolation
             ((w y : ℂ) ^ 4 * ((w x : ℂ) ^ 2 * (2 * ((h x).re : ℂ) + h x)) +
               (4 * (w y : ℂ) ^ 3 * ((h y).re : ℂ)) * (w x : ℂ) ^ 3)) := by ring
       _ = _ := by
-        rw [h, Finset.mul_sum, Finset.mul_sum]
+        rw [hpoly, Finset.mul_sum, Finset.mul_sum]
         apply Finset.sum_congr rfl
         intro j _
         ring
@@ -202,7 +210,9 @@ theorem physical_remainder_interpolation
     integral_finsetSum _ (fun j _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint
   simp_rw [integral_const_mul] at hint
   have hscaled : MemLp (fun y => (t : ℂ) * h y) 2 := by
-    simpa only [Pi.smul_apply, smul_eq_mul] using hh.const_smul (t : ℂ)
+    apply (hh.const_smul (t : ℂ)).congr
+    filter_upwards with y
+    rfl
   have hscaledb : ∀ᵐ y, ‖(t : ℂ) * h y‖ ≤ |t| * R := by
     filter_upwards [hhb] with y hy
     rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
