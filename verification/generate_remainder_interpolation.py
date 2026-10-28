@@ -20,7 +20,7 @@ def main():
             '''  have hsub := integral_sub ((hFi t).sub (hFi 0)) (hGi.const_mul (t : ℂ))
   simp only [Pi.sub_apply] at hsub
   rw [hsub, integral_sub (hFi t) (hFi 0), integral_const_mul, integral_const_mul,
-    integral_finsetSum _ (fun j _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint''',
+    integral_finsetSum _ (fun (j : Fin 8) _ => (hFi (j : ℕ)).const_mul (remainderWeight t j : ℂ))] at hint''',
     }
     for old, new in replacements.items():
         assert src.count(old) == 1, (old, src.count(old))
