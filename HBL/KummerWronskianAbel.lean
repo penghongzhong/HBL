@@ -32,8 +32,16 @@ theorem wronskian_hasDerivAt
   · unfold wronskian
     have hphi := K.phi_homogeneous z
     have hpsi := K.psi_homogeneous z
-    linear_combination
-      (K.phi z) * hpsi - (K.psi z) * hphi
+    have hddphi :
+        K.ddphi z =
+          -(K.a z * K.dphi z + K.b z * K.phi z) := by
+      linear_combination hphi
+    have hddpsi :
+        K.ddpsi z =
+          -(K.a z * K.dpsi z + K.b z * K.psi z) := by
+      linear_combination hpsi
+    rw [hddphi, hddpsi]
+    ring
 
 theorem wronskian_deriv
     (K : FundamentalPair) (z : ℝ) :
