@@ -43,6 +43,7 @@ theorem weightedPhaseBirman_sine_one_fixed :
   unfold weightedPhaseBirman
   rw [ContinuousLinearMap.smul_apply,
     weightedFreeGreenOperator_sineMode 1 (by omega)]
+  rw [smul_smul]
   norm_num
 
 theorem weightedPhaseFredholm_kernel_eq_sine_span :
@@ -64,7 +65,7 @@ theorem weightedPhaseFredholm_kernel_eq_sine_span :
               module
         _ = (1 / 3 : ℝ) • x := by rw [hthree]
     exact (weightedFreeGreen_sine_eigen_iff 1 (by omega) x).1
-      (by simpa using hg)
+      (by simpa only [show (4 - 1 : ℝ) = 3 by norm_num] using hg)
   · intro hx
     have hg := (weightedFreeGreen_sine_eigen_iff 1 (by omega) x).2 hx
     change x - (3 : ℝ) • weightedFreeGreenOperator x = 0
@@ -79,10 +80,16 @@ theorem weightedPhaseFredholm_kernel_finrank :
 theorem weightedPhaseFredholm_adjoint_eq :
     ContinuousLinearMap.adjoint (1 - weightedPhaseBirman) =
       1 - weightedPhaseBirman := by
-  rw [ContinuousLinearMap.adjoint_sub]
-  simp only [ContinuousLinearMap.adjoint_id]
-  rw [show ContinuousLinearMap.adjoint weightedPhaseBirman =
-      weightedPhaseBirman from weightedPhaseBirman_selfAdjoint]
+  have hself : IsSelfAdjoint
+      (1 - weightedPhaseBirman : RealL2 halfLineMeasure →L[ℝ] RealL2 halfLineMeasure) := by
+    apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
+    intro x y
+    change inner ℝ (x - weightedPhaseBirman x) y =
+      inner ℝ x (y - weightedPhaseBirman y)
+    rw [inner_sub_left, inner_sub_right]
+    rw [(ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
+      weightedPhaseBirman_selfAdjoint) x y]
+  exact hself
 
 theorem weightedPhaseFredholm_adjointKernel_eq_sine_span :
     (ContinuousLinearMap.adjoint (1 - weightedPhaseBirman)).ker =

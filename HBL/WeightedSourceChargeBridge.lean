@@ -44,8 +44,10 @@ def weightedSourceResonance (sigma : ℝ) (r : ℝ) : ℝ :=
 theorem weightedSourceResonance_memLp_two
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
     MemLp (weightedSourceResonance sigma) 2 halfLineMeasure := by
-  simpa only [weightedSourceResonance, channelResonance] using
-    channelResonance_decay_memLp_two HartreeChannel.plus sigma hsigma
+  change MemLp
+    (fun r : ℝ => resonancePlus r * affineJapaneseDecay sigma r)
+    2 halfLineMeasure
+  exact channelResonance_decay_memLp_two HartreeChannel.plus sigma hsigma
 
 def weightedSourceResonanceL2
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
