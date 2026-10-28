@@ -79,7 +79,7 @@ private theorem c_difference (a b : ℂ) {M : ℝ} (hM : 0 ≤ M)
         (mul_le_mul (square_difference a b ha hb) hb (norm_nonneg _) (by positivity))
     _ = _ := by ring
 
-private theorem dc_difference (a b h k : ℂ) {M : ℝ} (hM : 0 ≤ M)
+private theorem dc_difference (a b h k : ℂ) {M : ℝ} (_hM : 0 ≤ M)
     (ha : ‖a‖ ≤ M) (hb : ‖b‖ ≤ M) :
     ‖dc a h - dc b k‖ ≤ 3 * M ^ 2 * ‖h - k‖ + 6 * M * ‖a - b‖ * ‖k‖ := by
   have he : dc a h - dc b k =
@@ -322,7 +322,8 @@ theorem hartree_first_order_difference_noncompact
         e * d * ‖fderiv ℝ g x‖ + CG * d * ‖f x‖ ^ 3) ^ 2 ≤
         4 * (a ^ 2 * ‖fderiv ℝ f x - fderiv ℝ g x‖ ^ 2 + b ^ 2 * ‖f x - g x‖ ^ 2 +
           e ^ 2 * d ^ 2 * ‖fderiv ℝ g x‖ ^ 2 + CG ^ 2 * d ^ 2 * ‖f x‖ ^ 6) := by
-      convert hp using 1 <;> ring
+      convert hp using 1
+      ring
     exact (ht.trans (mul_le_mul_of_nonneg_left hp' (sq_nonneg κ))).trans_eq (by ring)
   have hiδ := hfg.norm.integrable_sq
   have hiDδ := (hDf.sub hDg).norm.integrable_sq
