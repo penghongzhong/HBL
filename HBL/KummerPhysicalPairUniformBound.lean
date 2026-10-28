@@ -26,9 +26,9 @@ namespace HBL.Profile.Kummer
 def localKummerBoundVector
     (X Y : ℝ → KummerODEState) (t : ℝ) :
     ((ℂ × ℂ) × (ℂ × ℂ)) × ℂ :=
-  (((X t).2.1, (X t).2.2),
-    ((Y t).2.1, (Y t).2.2)),
-      (localPairWronskian X Y t)⁻¹
+  ⟨⟨⟨(X t).2.1, (X t).2.2⟩,
+      ⟨(Y t).2.1, (Y t).2.2⟩⟩,
+    (localPairWronskian X Y t)⁻¹⟩
 
 theorem exists_uniformlyBounded_localPhysicalKummerPair
     (mu theta z : ℝ) (hz : 0 < z) :
