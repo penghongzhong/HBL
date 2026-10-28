@@ -1,15 +1,16 @@
 import HBL.HartreeLocalCutoff
 import Mathlib.Analysis.Calculus.FDeriv.Measurable
+import Mathlib.Analysis.Calculus.LineDeriv.IntegrationByParts
 
 /-!
 # Complete first-order sources for the physical seventh-order Hartree expression
 
-The noncompact derivative formula and the L2 bounds for the entire nonlinearity
-and its entire real differential are proved together. Both differentiated
-factors are retained. The input field needs L4, not L2, and no support or
-approximation premise is introduced. This file does not identify the resulting
-classical differential with the manuscript's higher Bessel-potential scale,
-prove differentiated Taylor-remainder Lipschitz bounds, or construct a flow.
+Prove the noncompact derivative formula, L2 bounds for the entire nonlinearity
+and its entire differential, and the weak-derivative integration identity.
+Both differentiated factors are retained. The input field needs L4, not L2;
+no support or approximation premise is introduced. Identification with the
+higher Bessel-potential scale, differentiated Taylor-remainder difference
+bounds, and the constrained evolution remain separate tasks.
 -/
 
 noncomputable section
@@ -179,8 +180,7 @@ private theorem norm_source_bounds
       _ = |κ| * (B * ‖f x‖ ^ 3 + 3 * A * ‖f x‖ ^ 2 * ‖fderiv ℝ f x‖) := by ring
 
 /-- Entire nonlinearity and entire differential in L2, with explicit squared-norm
-bounds. This closes the first-order source estimate, not the higher-order flow.
-Neither compact support nor L2 membership of f is assumed. -/
+bounds. Neither compact support nor L2 membership of the input field is assumed. -/
 theorem hartree_first_order_source_noncompact
     (κ : ℝ) (f : Space → ℂ) (hf : ContDiff ℝ 1 f)
     (h4 : Integrable (fun y : Space => ‖f y‖ ^ 4))
@@ -256,10 +256,10 @@ theorem hartree_first_order_source_noncompact
     (hgd.const_mul (9 * A ^ 2 * M ^ 4))).const_mul (2 * κ ^ 2)
   have hvi : Integrable (fun y : Space => ‖hartreeNonlinearity κ f y‖ ^ 2) :=
     hvmajor.mono' (hm.norm.pow 2) (hv.mono fun y hy => by
-      simpa only [Real.norm_of_nonneg (sq_nonneg _)] using hy)
+      simpa only [Real.norm_of_nonneg (sq_nonneg _), Pi.add_apply] using hy)
   have hgi : Integrable (fun y : Space => ‖fderiv ℝ (hartreeNonlinearity κ f) y‖ ^ 2) :=
     hgmajor.mono' (hDm.norm.pow 2) (hg.mono fun y hy => by
-      simpa only [Real.norm_of_nonneg (sq_nonneg _)] using hy)
+      simpa only [Real.norm_of_nonneg (sq_nonneg _), Pi.add_apply] using hy)
   refine ⟨(memLp_two_iff_integrable_sq_norm hm).2 hvi,
     (memLp_two_iff_integrable_sq_norm hDm).2 hgi, ?_, ?_⟩
   · have ht := integral_mono_ae hvi hvmajor hv
@@ -271,7 +271,42 @@ theorem hartree_first_order_source_noncompact
       (hgd.const_mul (9 * A ^ 2 * M ^ 4)), integral_const_mul, integral_const_mul] at ht
     exact ht
 
+/-- The derived L2 differential is genuinely the weak derivative. Every test
+product is proved integrable before integration by parts is used. -/
+theorem hartree_weak_first_order_source
+    (κ : ℝ) (f : Space → ℂ) (hf : ContDiff ℝ 1 f)
+    (h4 : Integrable (fun y : Space => ‖f y‖ ^ 4))
+    (hd : MemLp (fderiv ℝ f) 2)
+    (M L : ℝ) (hM : 0 ≤ M) (hL : 0 ≤ L)
+    (hfb : ∀ᵐ y : Space, ‖f y‖ ≤ M)
+    (hdb : ∀ᵐ y : Space, ‖fderiv ℝ f y‖ ≤ L) :
+    MemLp (hartreeNonlinearity κ f) 2 ∧
+    MemLp (fderiv ℝ (hartreeNonlinearity κ f)) 2 ∧
+    ∀ φ : Space → ℂ, HasCompactSupport φ → ContDiff ℝ 1 φ → ∀ v : Space,
+      Integrable (fun x : Space => hartreeNonlinearity κ f x * fderiv ℝ φ x v) ∧
+      Integrable (fun x : Space => fderiv ℝ (hartreeNonlinearity κ f) x v * φ x) ∧
+      (∫ x : Space, hartreeNonlinearity κ f x * fderiv ℝ φ x v) =
+        -(∫ x : Space, fderiv ℝ (hartreeNonlinearity κ f) x v * φ x) := by
+  have hsrc := hartree_first_order_source_noncompact κ f hf h4 hd M L hM hL hfb hdb
+  have hdiff := (hartree_differential_noncompact κ f hf h4 hd M L hM hL hfb hdb).1
+  refine ⟨hsrc.1, hsrc.2.1, ?_⟩
+  intro φ hcφ hφ v
+  have ht : MemLp φ 2 := hφ.continuous.memLp_of_hasCompactSupport hcφ
+  have hDt : MemLp (fderiv ℝ φ) 2 :=
+    (hφ.continuous_fderiv (by norm_num)).memLp_of_hasCompactSupport (hcφ.fderiv ℝ)
+  have hNv : MemLp (fun x => fderiv ℝ (hartreeNonlinearity κ f) x v) 2 :=
+    hsrc.2.1.continuousLinearMap_comp (ContinuousLinearMap.apply ℝ ℂ v)
+  have htv : MemLp (fun x => fderiv ℝ φ x v) 2 :=
+    hDt.continuousLinearMap_comp (ContinuousLinearMap.apply ℝ ℂ v)
+  have hright := hNv.integrable_mul ht
+  have hleft := hsrc.1.integrable_mul htv
+  have hbase := hsrc.1.integrable_mul ht
+  exact ⟨hleft, hright,
+    integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable hright hleft hbase
+      (fun x _ => hdiff x) (fun x _ => hφ.differentiable (by norm_num) x)⟩
+
 #print axioms hartree_differential_noncompact
 #print axioms hartree_first_order_source_noncompact
+#print axioms hartree_weak_first_order_source
 
 end HBL.RegularRadiation.FirstOrderSource

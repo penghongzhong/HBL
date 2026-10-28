@@ -4,14 +4,14 @@ from pathlib import Path
 import hashlib, json, os, re, subprocess, sys
 BASE = '53274ac98628f02ee0a69d36223c7677f663802c'
 TARGET = 'HartreeFirstOrderSource'
-NAMES = ['hartree_differential_noncompact', 'hartree_first_order_source_noncompact']
+NAMES = ['hartree_differential_noncompact', 'hartree_first_order_source_noncompact', 'hartree_weak_first_order_source']
 
 def main():
     Path('evidence').mkdir(exist_ok=True)
     report = {'source_commit': os.environ['GITHUB_SHA'], 'run_id': os.environ['GITHUB_RUN_ID'],
         'baseline': BASE, 'validation_passed': False, 'main_theorem_closed': False,
         'new_original_environments_verified': 0, 'full_paper_percentage_recertified': False,
-        'boundary': 'The complete nonlinearity and its classical first differential are proved L2 for a C1 field in L4 and bounded, with L2 and bounded differential. No field L2, support or approximation hypothesis is introduced. Weak-gradient/Bessel Sobolev identification, high-order and Taylor-remainder difference estimates, and the actual constrained evolution remain separate obligations.',
+        'boundary': 'The complete nonlinearity and its first differential are proved L2, and the weak-derivative test identity is derived with all product integrability conditions discharged. The input is a C1 field in L4 and bounded, with L2 and bounded differential. No field L2, support or approximation hypothesis is introduced. Identification with higher Bessel Sobolev spaces, higher-order and Taylor-remainder difference estimates, and the actual constrained evolution remain separate obligations.',
         'strict_targets': {}}
     errors = {}
     def run(cmd, log):
