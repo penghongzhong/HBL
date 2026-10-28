@@ -4,6 +4,7 @@ on:
     branches: [hbl-noncompact-gradient-20261028]
     paths:
       - 'HBL/WeightedPhaseFredholmCore.lean'
+      - 'HBL/WeightedPhaseZeroModeBridge.lean'
       - 'HBL/WeightedPhaseZeroModeBridgeAudit.lean'
       - '.github/workflows/weighted-phase-zero-mode.yml'
   workflow_dispatch:
