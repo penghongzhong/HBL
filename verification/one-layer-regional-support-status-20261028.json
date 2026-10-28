@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — actual classical affine inverses, fixed-weight norm/stability bounds, first and second derivative bounds, and quantitative affine slope tails verified; exact manuscript one-layer nonlinear residual not yet formalized.",
+  "target_status": "OPEN — actual classical affine inverses, weighted norm/stability and derivative bounds, affine slope tails, and an actual bounded linear Kummer right inverse with classical second derivatives on a constructed positive local annulus are verified; the exact manuscript one-layer nonlinear residual is not yet formalized.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -176,11 +176,19 @@
       "base_commit": "85cc40a2953f7e35fba1d90b9cd493c3ce30549a",
       "new_supporting_theorems": 35,
       "new_original_environments": 0
+    },
+    {
+      "name": "Actual source-independent local Kummer bounded linear right inverse with genuine first/second radial derivatives, two endpoint normalizations, operator norm and source stability",
+      "mode": "local pinned strict compilation into isolated fresh artifacts; one new theorem per file",
+      "verification": "verification/kummer-local-inverse-status.json",
+      "base_commit": "decc85677264c93ca5ea520c85abb6ada788d471",
+      "new_supporting_theorems": 25,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
     "For fixed 3/2 < sigma < 2, actual affine outputs already have source-independent weighted norm/stability bounds. For continuous sources, normalized first derivatives now have inverse-linear pointwise bounds and L^{2,beta} norm/stability bounds for every beta < 1/2; normalized second derivatives have L^{2,sigma} norm/stability bounds, and actual affine outputs have L^{2,sigma} second derivative norm bounds. Actual first derivatives tend to their forced affine slopes with an O((1+r)^(-1)) bound. Still establish the exact stronger weights or tail asymptotics required by the one-layer source classes, uniformity over varying weight/parameter families, and parameter jets.",
-    "The physical local Kummer basis, positive Wronskian and compact-interval uniform bounds are now strictly proved. Derive the actual C→C1 annulus right-inverse bound, uniformity and parameter jets on the compact parameter graph, and extend or select the prescribed matching annulus rigorously.",
+    "For each fixed mu, theta and positive radius, the actual normalized IVPs now yield a source-independent bounded linear C-to-C1 Kummer right inverse on a constructed closed positive local annulus. The genuine second-derivative equation, two endpoint normalizations, operator norm and source stability are strictly verified. Still extend or select the prescribed matching annulus rigorously, establish common annuli and uniform constants over compact parameter families, and prove parameter jets.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
     "Prove every generated source term in the actual Hartree expansion gains at least kappa_prof, without assuming the GeneratedTerm classification.",
@@ -198,9 +206,10 @@
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
     "date": "2026-10-29",
-    "verification": "verification/inner-derivative-estimates-status.json",
-    "complete_types_and_axioms": "verification/inner-derivative-estimates-types-and-axioms.txt.gz",
-    "new_supporting_theorems": 35,
+    "verification": "verification/kummer-local-inverse-status.json",
+    "complete_types_and_axioms": "verification/kummer-local-inverse-types-and-axioms.txt.gz",
+    "base_commit": "decc85677264c93ca5ea520c85abb6ada788d471",
+    "new_supporting_theorems": 25,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }

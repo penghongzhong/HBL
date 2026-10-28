@@ -1,0 +1,257 @@
+{
+  "validation_passed": true,
+  "one_theorem_per_file": true,
+  "new_supporting_theorems": 25,
+  "supporting_certificate_only": true,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "decc85677264c93ca5ea520c85abb6ada788d471",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "strict_source_exit_codes": {
+    "HBL/KummerLocalInverse/ActualPair.lean": 0,
+    "HBL/KummerLocalInverse/ActualRightInverse.lean": 0,
+    "HBL/KummerLocalInverse/C1Bound.lean": 0,
+    "HBL/KummerLocalInverse/CertificateDefinitions.lean": 0,
+    "HBL/KummerLocalInverse/CoefficientBounds.lean": 0,
+    "HBL/KummerLocalInverse/CoefficientDerivatives.lean": 0,
+    "HBL/KummerLocalInverse/Definitions.lean": 0,
+    "HBL/KummerLocalInverse/EndpointNormalization.lean": 0,
+    "HBL/KummerLocalInverse/Equation.lean": 0,
+    "HBL/KummerLocalInverse/JetBound.lean": 0,
+    "HBL/KummerLocalInverse/JetDefinitions.lean": 0,
+    "HBL/KummerLocalInverse/JetLinearity.lean": 0,
+    "HBL/KummerLocalInverse/OperatorBound.lean": 0,
+    "HBL/KummerLocalInverse/OperatorCertificate.lean": 0,
+    "HBL/KummerLocalInverse/OperatorDefinitions.lean": 0,
+    "HBL/KummerLocalInverse/OperatorStability.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalBounds.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalClassical.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalDefinitions.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalDerivatives.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalEndpoints.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalEquation.lean": 0,
+    "HBL/KummerLocalInverse/PhysicalLinearity.lean": 0,
+    "HBL/KummerLocalInverse/SecondDerivative.lean": 0,
+    "HBL/KummerLocalInverse/SourceBounds.lean": 0,
+    "HBL/KummerLocalInverse/SourceExtension.lean": 0,
+    "HBL/KummerLocalInverse/SourceExtensionDefinitions.lean": 0,
+    "HBL/KummerLocalInverse/SourceLinearity.lean": 0,
+    "HBL/KummerLocalInverse/SourceRegularity.lean": 0,
+    "HBL/KummerLocalInverse/ValueDerivative.lean": 0,
+    "HBL/KummerLocalInverse/ValueLinearity.lean": 0
+  },
+  "isolated_fresh_compilation": true,
+  "compiled_source_sha256": {
+    "HBL/KummerLocalInverse/ActualPair.lean": "b72ae5d4409d65d9d1db92448d774fc6a25bb86cff5809b45e5f04b282f8995a",
+    "HBL/KummerLocalInverse/ActualRightInverse.lean": "8cfc8c957fc5e37b844c25632123720d0706a88ee94d83590a379e11d230d363",
+    "HBL/KummerLocalInverse/C1Bound.lean": "6bf4698e1fc34fc6cb4741e223ae8a77769d6ca44b4de44f4b8a248878ab1ce0",
+    "HBL/KummerLocalInverse/CertificateDefinitions.lean": "1232ebda5f19431e0401c268f07e419053c1959f53cae718cbd1aad2d85896aa",
+    "HBL/KummerLocalInverse/CoefficientBounds.lean": "6cd7d6bbd044f4a134203192a64baf7af1d3cba2e7190e6efb3fbe7d780d42b3",
+    "HBL/KummerLocalInverse/CoefficientDerivatives.lean": "c4a0c54b11ba17f5b217d5f099c6fb49075e4e790f6e87477fbd1c32b3639509",
+    "HBL/KummerLocalInverse/Definitions.lean": "db9db09cf8d95b646bc824450c017d7a1d1cbe37977ad8bdd4c8976f5be26387",
+    "HBL/KummerLocalInverse/EndpointNormalization.lean": "b886eb093d05ba8fd65d5560da26148f6cb6c16c9ee155f2784dcc893900f2d2",
+    "HBL/KummerLocalInverse/Equation.lean": "cd60966a1e3ba31a118a788e411c4b7d234fdf9a96666a57867d8f8d0ff18284",
+    "HBL/KummerLocalInverse/JetBound.lean": "7d649a6404bd830ad708bf4d3c30e3214d39c5b260f090a3a311802a6c3f6859",
+    "HBL/KummerLocalInverse/JetDefinitions.lean": "a83876e8b4db0c3b1d631d4cc7742a6bf0b285cda8a498025abbdc20bf098991",
+    "HBL/KummerLocalInverse/JetLinearity.lean": "141f558a48a622e43996ce08b6c5f0e49b0160deeead5e21e46550c684fd9a08",
+    "HBL/KummerLocalInverse/OperatorBound.lean": "8e846a3fabdd0ba6eb50685b85d537176c36780fd6933535d2027cee26b8fca9",
+    "HBL/KummerLocalInverse/OperatorCertificate.lean": "78798c353ae8603ad3206fcad48634fa25c0d1dc7fa6192f53c49d5dad4a8503",
+    "HBL/KummerLocalInverse/OperatorDefinitions.lean": "bb6d5caf510d54dbbc55faec482e30b4e1cb3f40102d1bb1984fb9c0c528ae63",
+    "HBL/KummerLocalInverse/OperatorStability.lean": "c5363ab9a4fc2dcd4b54cf163aedcf9fc5124e59daabae960b4fc4cc5d2940bd",
+    "HBL/KummerLocalInverse/PhysicalBounds.lean": "c8e14069d4d63dabf2469a7b097a4e7bcf04cce898fd0c625a1cbde75d787a04",
+    "HBL/KummerLocalInverse/PhysicalClassical.lean": "fa45090de57568cc784c78722ed2af0261d2dcdfbef541d986b9580dfd58941b",
+    "HBL/KummerLocalInverse/PhysicalDefinitions.lean": "02650d4068d38999d9e4e96f83f75b48267b682adfcb0802f60be2d64a64cf97",
+    "HBL/KummerLocalInverse/PhysicalDerivatives.lean": "d0c7cc63cdc0f7dedd2708e033ad8c995245627574c9cb2d3a3ad875a129453a",
+    "HBL/KummerLocalInverse/PhysicalEndpoints.lean": "ec642b4b11e0a162dc76cee0e1f4017ac5458a0ab6c7ea2f563a35ccc7ad083e",
+    "HBL/KummerLocalInverse/PhysicalEquation.lean": "b5894a1c9204022e09a7b66682be9d1d7f3f74eec652369f265cb17e8f86c978",
+    "HBL/KummerLocalInverse/PhysicalLinearity.lean": "15d0e3f95a02c1a1f47b69535026b9beeaba55a14e1dcd5d96c69e3385211056",
+    "HBL/KummerLocalInverse/SecondDerivative.lean": "fe501200a868baeea4fc2f56f0e3c17cc01c70a2f5def5dfadcee17789176260",
+    "HBL/KummerLocalInverse/SourceBounds.lean": "b419fd71ecdb69aa87a53f282ef487e716ccc51da0a5fda3bd1bd6bf6b601699",
+    "HBL/KummerLocalInverse/SourceExtension.lean": "a5b74c8072dc04a3edae7006dd95268875daca0c65030950cd81c4a2408826d2",
+    "HBL/KummerLocalInverse/SourceExtensionDefinitions.lean": "fb5a1dbf89be9a3687c104c2295c87e233b5d68633fd0de244eee642e214c006",
+    "HBL/KummerLocalInverse/SourceLinearity.lean": "acfafb4ad85e7265ccc5fe6954f1003c1de9db49c2f39854da27b1ca2e1354ea",
+    "HBL/KummerLocalInverse/SourceRegularity.lean": "af6aeafa21e2214521454a3e319e7f97a0c5b674b96e8ced602521f8f5c06778",
+    "HBL/KummerLocalInverse/ValueDerivative.lean": "888509f81d91b201c151d6559adf1dbf5290a3e8f8a85d7dd109a162cb77ff61",
+    "HBL/KummerLocalInverse/ValueLinearity.lean": "49b3372964e7e77af4a3da8ac0a320c382e09468de7093f43595a98a38a116a1"
+  },
+  "axioms": {
+    "HBL.Profile.Kummer.exists_actual_bounded_localKummerPair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_actual_localKummer_bounded_rightInverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_value_deriv_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_coefficients_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_coefficients_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_endpoint_normalization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localKummerJet_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localKummerJet_add_smul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localKummerJetOperator_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localKummerJetOperator_rightInverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localKummerJetOperator_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_endpoint_normalization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.physicalLocalKummer_linear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulusDeriv_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_source_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.annulusSourceExtension_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_coefficients_linear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_sources_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulusValue_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.localAnnulus_value_deriv_linear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/kummer-local-inverse-types-and-axioms.txt.gz",
+  "compressed_output_bytes": 23400,
+  "compressed_output_sha256": "6dfe5bcb94d7601df44cf5ff40c4c9c88a9dd795d83b2004c79e6933d49e27ff",
+  "complete_type_output_bytes": 1002805,
+  "complete_type_output_sha256": "7a5dc7ce61932faf295934b6b543ad1286ee3a437c2b34cfdc10cb0ab65f981e",
+  "source_sha256": {
+    "HBL/KummerLocalInverse/ActualPair.lean": "b0b54acd40dfbf2033bb78ba91732ac9a6c46bc0ddcf056d8bc7f8e12d6509ba",
+    "HBL/KummerLocalInverse/ActualRightInverse.lean": "f2b18e97bcbef41bbbf7ac9c2346b66f5c2ed966d538de3412c8a50d9dd9175c",
+    "HBL/KummerLocalInverse/C1Bound.lean": "ca781312c7b2f900b7201fca4a1e6ac90a729be5e79100d4936029fdabb183c0",
+    "HBL/KummerLocalInverse/CertificateDefinitions.lean": "3c08381478af1cdb51dd330f6b6796f4d3d934490b709a058b8e8b6d72ef92a7",
+    "HBL/KummerLocalInverse/CoefficientBounds.lean": "a63be9f004c9da40bc5fcea6ff58a6830b4780cd1a215e480a020f2b500420b5",
+    "HBL/KummerLocalInverse/CoefficientDerivatives.lean": "646304f3208ade949489b1a0258ebebc7cce9ee71dd24026bed57154c0a90b08",
+    "HBL/KummerLocalInverse/Definitions.lean": "bb68cda6a1f23152f63ab9b2cad95df0cbae24a44460957f790d07f8de111b96",
+    "HBL/KummerLocalInverse/EndpointNormalization.lean": "d0483d2c5c7ffe5024014d09927915ec6fe2a21e81cf4a192abd10e2a0c3809f",
+    "HBL/KummerLocalInverse/Equation.lean": "0e21941e15f07e9e823d55ebe4260fe0db67e4fb1aa0dc98c32c72d5b856a4ec",
+    "HBL/KummerLocalInverse/JetBound.lean": "f690c055a1aebfa3588eaffbd556d46b88e08554a637d87fc3779a03ce42e421",
+    "HBL/KummerLocalInverse/JetDefinitions.lean": "909975d4f988a751c4f9d936e409f1dc71f1dcfb0308df0b39409ffdea160001",
+    "HBL/KummerLocalInverse/JetLinearity.lean": "6f2bb0a985a777d8d472d22092a2542044711b2c52f16474df2f12bba4632d06",
+    "HBL/KummerLocalInverse/OperatorBound.lean": "f139e213894f6b45a7c5dc7d052f5e415765d009831fa0cb78559142c017abe1",
+    "HBL/KummerLocalInverse/OperatorCertificate.lean": "f6ac0e35c9e1221cf094c64091178f7c66ceaf3ff17606146870296b25999144",
+    "HBL/KummerLocalInverse/OperatorDefinitions.lean": "f80e33b8b135ef630f188d437330506c0c49dfd9a55584c7eb72f4ef031dc299",
+    "HBL/KummerLocalInverse/OperatorStability.lean": "ec60caa5d9b1b2d958abac26bccebf7033ecfbc486eb451fb4f69e8f5ff4725e",
+    "HBL/KummerLocalInverse/PhysicalBounds.lean": "a4a96ae8c4be1491c3c37804cd4d3be57ff1f4197cd003c90297c68ac982ba1e",
+    "HBL/KummerLocalInverse/PhysicalClassical.lean": "3eca05e2f67521b2c98b4ed73f6d61aef8c8c0f30ac1cfe145f99495a27e7fe2",
+    "HBL/KummerLocalInverse/PhysicalDefinitions.lean": "5961e7eaa97349c7ab0e8bc472a585a80595dc7375f037c88e3212bba7a3cced",
+    "HBL/KummerLocalInverse/PhysicalDerivatives.lean": "bef27aab3fa367c1a1dc09a45088602c477d3386e5f60bab4fcf2e4d7b8065ae",
+    "HBL/KummerLocalInverse/PhysicalEndpoints.lean": "3983d8377f0f0ff96b00558f5fae3cb1745f003059fe268dd2f944bbe2181061",
+    "HBL/KummerLocalInverse/PhysicalEquation.lean": "135771f047a6a4577a593643fc6407c726eaed0dd9eb74ed6b0f4c783ace1729",
+    "HBL/KummerLocalInverse/PhysicalLinearity.lean": "d0e6d55105252c4ab174ca9521395c5eac4947a3e1de02fe544d73f272b01cb6",
+    "HBL/KummerLocalInverse/SecondDerivative.lean": "236d61debb1eac6fda41f54cfc24c8f383fd4eb7f0ed7d744f9a9cf880fd2aaf",
+    "HBL/KummerLocalInverse/SourceBounds.lean": "bdb7c24fcd386b01af34f125dcde6d9f083463f0ff5a42e23459ba4b29137687",
+    "HBL/KummerLocalInverse/SourceExtension.lean": "742ac38cd4e7f11ce216847f144c483860aa40db2851b752f002fb62387fb55d",
+    "HBL/KummerLocalInverse/SourceExtensionDefinitions.lean": "ae9c1eba89bf6424bfa3d03c4e30c8502918625b459539abcfc7b78e39817bea",
+    "HBL/KummerLocalInverse/SourceLinearity.lean": "db10763b80b63400e62c0f6abcda00b21e107261db54f9d21fe43f391841b12a",
+    "HBL/KummerLocalInverse/SourceRegularity.lean": "4ec90fd8d6a72bb5a9f8a51eb957c495687850e320b854277d0b0fcb96c410f1",
+    "HBL/KummerLocalInverse/ValueDerivative.lean": "42fc7ec0030582ee602658f914392ad33063715ebf1989fb2029df70aa736882",
+    "HBL/KummerLocalInverse/ValueLinearity.lean": "3c12a26d71624237b2005f8213939c08e359f67e93d878c3aa472711eaba0db1",
+    "HBL/KummerLocalInverse/LocalInverseAudit.lean": "a305efb4a86f90625b8b76ebef5f8313a3a8052c61aed48ed0f22a2f7ef79ea5"
+  },
+  "all_new_sources_on_terminal_import_chain": true
+}
