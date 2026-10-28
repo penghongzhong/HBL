@@ -1,0 +1,77 @@
+import HBL.InnerDerivatives.ActualDerivativeSolvers
+
+set_option pp.all true
+set_option pp.maxSteps 10000000
+set_option maxRecDepth 1000000
+
+#check @HBL.Modulation.Monopole.exists_actualInner_derivative_estimates
+#check @HBL.Modulation.Monopole.affineRestore_deriv_far
+#check @HBL.Modulation.Monopole.affineRestore_derivative_limit
+#check @HBL.Modulation.Monopole.affineRestore_second_weighted_bound
+#check @HBL.Modulation.Monopole.innerGreenDerivative_bound
+#check @HBL.Modulation.Monopole.innerGreenDerivative_difference_le
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_difference_le
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_hasDerivAt
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted_difference
+#check @HBL.Modulation.Monopole.normalizedMinusOutput_derivative_tail
+#check @HBL.Modulation.Monopole.normalizedMinusOutput_second_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_difference
+#check @HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_ae
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_difference_le
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_hasDerivAt
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted_difference
+#check @HBL.Modulation.Monopole.normalizedPlusOutput_derivative_tail
+#check @HBL.Modulation.Monopole.normalizedPlusOutput_second_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_bound
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_difference
+#check @HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_ae
+#check @HBL.Modulation.Monopole.normalizedRemainder_zero
+#check @HBL.Modulation.Monopole.inner_second_source_bound
+#check @HBL.Modulation.Monopole.inner_second_source_difference_le
+#check @HBL.Modulation.Monopole.inner_source_integral_norm_le
+#check @HBL.Modulation.Monopole.halfLineGreenTail_moment_bound
+#check @HBL.Modulation.Monopole.inner_totalSource_integral_norm_le
+#check @HBL.Modulation.Monopole.innerWeighted_ae_transfer
+#check @HBL.Modulation.Monopole.innerWeightedNorm_le_of_inverse_linear_bound
+#check @HBL.Modulation.Monopole.inner_weighted_potential_norm_le
+
+#print axioms HBL.Modulation.Monopole.exists_actualInner_derivative_estimates
+#print axioms HBL.Modulation.Monopole.affineRestore_deriv_far
+#print axioms HBL.Modulation.Monopole.affineRestore_derivative_limit
+#print axioms HBL.Modulation.Monopole.affineRestore_second_weighted_bound
+#print axioms HBL.Modulation.Monopole.innerGreenDerivative_bound
+#print axioms HBL.Modulation.Monopole.innerGreenDerivative_difference_le
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_difference_le
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_hasDerivAt
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted_difference
+#print axioms HBL.Modulation.Monopole.normalizedMinusOutput_derivative_tail
+#print axioms HBL.Modulation.Monopole.normalizedMinusOutput_second_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_difference
+#print axioms HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_ae
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_difference_le
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_hasDerivAt
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted_difference
+#print axioms HBL.Modulation.Monopole.normalizedPlusOutput_derivative_tail
+#print axioms HBL.Modulation.Monopole.normalizedPlusOutput_second_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_bound
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_difference
+#print axioms HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_ae
+#print axioms HBL.Modulation.Monopole.normalizedRemainder_zero
+#print axioms HBL.Modulation.Monopole.inner_second_source_bound
+#print axioms HBL.Modulation.Monopole.inner_second_source_difference_le
+#print axioms HBL.Modulation.Monopole.inner_source_integral_norm_le
+#print axioms HBL.Modulation.Monopole.halfLineGreenTail_moment_bound
+#print axioms HBL.Modulation.Monopole.inner_totalSource_integral_norm_le
+#print axioms HBL.Modulation.Monopole.innerWeighted_ae_transfer
+#print axioms HBL.Modulation.Monopole.innerWeightedNorm_le_of_inverse_linear_bound
+#print axioms HBL.Modulation.Monopole.inner_weighted_potential_norm_le

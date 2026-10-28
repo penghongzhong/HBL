@@ -1,0 +1,285 @@
+{
+  "validation_passed": true,
+  "one_theorem_per_file": true,
+  "new_supporting_theorems": 35,
+  "supporting_certificate_only": true,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "85cc40a2953f7e35fba1d90b9cd493c3ce30549a",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "strict_source_exit_codes": {
+    "HBL/InnerDerivatives/ActualDerivativeSolvers.lean": 0,
+    "HBL/InnerDerivatives/AffineDerivativeFar.lean": 0,
+    "HBL/InnerDerivatives/AffineDerivativeLimit.lean": 0,
+    "HBL/InnerDerivatives/AffineSecondWeighted.lean": 0,
+    "HBL/InnerDerivatives/Definitions.lean": 0,
+    "HBL/InnerDerivatives/GreenDerivativeBound.lean": 0,
+    "HBL/InnerDerivatives/GreenDerivativeDifference.lean": 0,
+    "HBL/InnerDerivatives/MinusDerivativeBound.lean": 0,
+    "HBL/InnerDerivatives/MinusDerivativeDifference.lean": 0,
+    "HBL/InnerDerivatives/MinusDerivativeIdentity.lean": 0,
+    "HBL/InnerDerivatives/MinusDerivativeWeighted.lean": 0,
+    "HBL/InnerDerivatives/MinusDerivativeWeightedDifference.lean": 0,
+    "HBL/InnerDerivatives/MinusOutputDerivativeTail.lean": 0,
+    "HBL/InnerDerivatives/MinusOutputSecondBound.lean": 0,
+    "HBL/InnerDerivatives/MinusSecondBound.lean": 0,
+    "HBL/InnerDerivatives/MinusSecondDifference.lean": 0,
+    "HBL/InnerDerivatives/MinusSecondIdentity.lean": 0,
+    "HBL/InnerDerivatives/PlusDerivativeBound.lean": 0,
+    "HBL/InnerDerivatives/PlusDerivativeDifference.lean": 0,
+    "HBL/InnerDerivatives/PlusDerivativeIdentity.lean": 0,
+    "HBL/InnerDerivatives/PlusDerivativeWeighted.lean": 0,
+    "HBL/InnerDerivatives/PlusDerivativeWeightedDifference.lean": 0,
+    "HBL/InnerDerivatives/PlusOutputDerivativeTail.lean": 0,
+    "HBL/InnerDerivatives/PlusOutputSecondBound.lean": 0,
+    "HBL/InnerDerivatives/PlusSecondBound.lean": 0,
+    "HBL/InnerDerivatives/PlusSecondDifference.lean": 0,
+    "HBL/InnerDerivatives/PlusSecondIdentity.lean": 0,
+    "HBL/InnerDerivatives/RemainderZero.lean": 0,
+    "HBL/InnerDerivatives/SecondDefinitions.lean": 0,
+    "HBL/InnerDerivatives/SecondSourceBound.lean": 0,
+    "HBL/InnerDerivatives/SecondSourceDifference.lean": 0,
+    "HBL/InnerDerivatives/SourceNorm.lean": 0,
+    "HBL/InnerDerivatives/TailMomentBound.lean": 0,
+    "HBL/InnerDerivatives/TotalSourceNorm.lean": 0,
+    "HBL/InnerDerivatives/WeightedAETransfer.lean": 0,
+    "HBL/InnerDerivatives/WeightedDecayBound.lean": 0,
+    "HBL/InnerDerivatives/WeightedPotentialNorm.lean": 0
+  },
+  "axioms": {
+    "HBL.Modulation.Monopole.exists_actualInner_derivative_estimates": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_deriv_far": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_derivative_limit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.affineRestore_second_weighted_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenDerivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerGreenDerivative_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_derivative_weighted_difference": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_derivative_tail": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_second_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_difference": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusRemainder_second_derivative_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_hasDerivAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_derivative_weighted_difference": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_derivative_tail": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_second_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_difference": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusRemainder_second_derivative_ae": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedRemainder_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_second_source_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_second_source_difference_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_source_integral_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.halfLineGreenTail_moment_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_totalSource_integral_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeighted_ae_transfer": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeightedNorm_le_of_inverse_linear_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.inner_weighted_potential_norm_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/inner-derivative-estimates-types-and-axioms.txt.gz",
+  "compressed_output_bytes": 221958,
+  "compressed_output_sha256": "c44411466c987395a17c6cca50268dc78a6bbdc78f3878828b662752c5ab5475",
+  "complete_type_output_bytes": 9284192,
+  "complete_type_output_sha256": "b4ae86899bc338616f8492ec845cb54caf990487c6bcfeac6a831c1500922894",
+  "source_sha256": {
+    "HBL/InnerDerivatives/ActualDerivativeSolvers.lean": "c899d416640519b710ce1629e0a9fa16b13f378f3d61378a579e811e987e2021",
+    "HBL/InnerDerivatives/AffineDerivativeFar.lean": "ea8fb87f960d9446a274d9922762f8abb2be2deea80a92f35a28e8e48ceb2c82",
+    "HBL/InnerDerivatives/AffineDerivativeLimit.lean": "254be0ed4fa188af03b8de6d970f065e89ffbca37d21a852a027cf82b3e97668",
+    "HBL/InnerDerivatives/AffineSecondWeighted.lean": "fd18590fa11588dc911ad8765ef91ab8802ab53c529788efbdfb3a70d96ce34c",
+    "HBL/InnerDerivatives/Definitions.lean": "a0c2b06ca184eb6624601877fa0f476c9f5b8806edb54c84c193d02a856c56ab",
+    "HBL/InnerDerivatives/GreenDerivativeBound.lean": "b4d57eedc09f746c4a739dee8be50d934efafe852421ec50ed726053209c782d",
+    "HBL/InnerDerivatives/GreenDerivativeDifference.lean": "dde3d95873790192bf6f067ab8d6d4a5d087550bf97bf2931b4de21368ae954a",
+    "HBL/InnerDerivatives/MinusDerivativeBound.lean": "8eb4e860810b83157bbb5c8f40a05dae2b051dbd7ed23fd20203b1008a148f96",
+    "HBL/InnerDerivatives/MinusDerivativeDifference.lean": "6b37f5166b45b079f1c95a6e1b957d12a3daeda32c305cd0316b8f0e76af2031",
+    "HBL/InnerDerivatives/MinusDerivativeIdentity.lean": "2f53c9918dffa19b7ab54e447c5cead77b04b684597e5c8de369d4562f1248e4",
+    "HBL/InnerDerivatives/MinusDerivativeWeighted.lean": "572250d1ccb4f9e0ce9b104af3ac39451a8a4152f9b44f7ff5784d3722d5bce2",
+    "HBL/InnerDerivatives/MinusDerivativeWeightedDifference.lean": "6b41a500f1e3b3fa4ded126ff9ea8ef9f2b3f72bb64b38f05b357eef1afd6ec4",
+    "HBL/InnerDerivatives/MinusOutputDerivativeTail.lean": "84c7a989eba5823bab90e10900dbfbfe4138c0916faf82e80c9f5dfbb8995b7d",
+    "HBL/InnerDerivatives/MinusOutputSecondBound.lean": "8ab625890b0f185d698ddbdf8001931562d8de893aeb1d43b6a9f845e48b7407",
+    "HBL/InnerDerivatives/MinusSecondBound.lean": "8023b68c10113aa4a32d2aa83822235e0953e6cd69c2758aeafe5947fb1b3711",
+    "HBL/InnerDerivatives/MinusSecondDifference.lean": "a13c97523b18ca7f20fe14aeca650efa0905081880b339e24404ccf08c1d7208",
+    "HBL/InnerDerivatives/MinusSecondIdentity.lean": "431464538b11393865a101ea3dee3e18d680f60884823259d4159858475d3061",
+    "HBL/InnerDerivatives/PlusDerivativeBound.lean": "68e9660163874e3cde92f5a8b73317dde0b2a0d6eb338573a45555f6bdf3fde3",
+    "HBL/InnerDerivatives/PlusDerivativeDifference.lean": "5609ade5cffe13e403574dc4d9e6882dc05df88f5c456d5dd2beb0b9dbf59864",
+    "HBL/InnerDerivatives/PlusDerivativeIdentity.lean": "caa6cf941d38b9bdf51cd9b89a5fda6ea05dd22ef4b35e6188efad4a474f94c4",
+    "HBL/InnerDerivatives/PlusDerivativeWeighted.lean": "2b5f238a1b8407c342dc4b8af060867751a86f8738e825c3c7795103d22d4196",
+    "HBL/InnerDerivatives/PlusDerivativeWeightedDifference.lean": "b4f6492041c88fae60c135d932e1403974d45d8107142a2537f154ab82bdca74",
+    "HBL/InnerDerivatives/PlusOutputDerivativeTail.lean": "91e0851ea0e0353056d25a692adae0319f9974e0000fbd7256af378e757fcf24",
+    "HBL/InnerDerivatives/PlusOutputSecondBound.lean": "f29bf277c0e6d671ad7d3a7373172703e8c9239cab88356545b2191b24f5e845",
+    "HBL/InnerDerivatives/PlusSecondBound.lean": "b5e9c9c0ab695e50695504972d735d6c7ee5fc98d2366a771cb2820369540197",
+    "HBL/InnerDerivatives/PlusSecondDifference.lean": "1d6e1df76f37a526e1cc9c006e03d8d707bc47d62aea60bf7e9192c541c8e831",
+    "HBL/InnerDerivatives/PlusSecondIdentity.lean": "faf5310926410e0ae86c29ef365a583b4bfce4fb90b54f6717fde871f0833886",
+    "HBL/InnerDerivatives/RemainderZero.lean": "38951ae33566961b2d423adc8644373155d7ddd8bb9276c4b5cebde259f1952b",
+    "HBL/InnerDerivatives/SecondDefinitions.lean": "2d044ee76a72cb62cdef993ac2d9b56dadd7107cc2219d8ea66dd373fd8ea94c",
+    "HBL/InnerDerivatives/SecondSourceBound.lean": "0534abfabd8f03cd257481e58b97b98ed9b09b41e7914039e52f52a68c7d04dc",
+    "HBL/InnerDerivatives/SecondSourceDifference.lean": "12a4008ef276127f6abfa5ea88e1be33f7daec633564f847f213ace2474b6e1b",
+    "HBL/InnerDerivatives/SourceNorm.lean": "12362a171775815caba2a8fb82eec9e306219c1721a9147190dde112649791ae",
+    "HBL/InnerDerivatives/TailMomentBound.lean": "e3d627317918b899cd2953d449a68c34b47788424e4163810bfd7455057261ee",
+    "HBL/InnerDerivatives/TotalSourceNorm.lean": "5171c9f4d6df0d38951a7c242ee0220fbc072e74826019523ac78e5974586739",
+    "HBL/InnerDerivatives/WeightedAETransfer.lean": "8e352d9b9716cbfc86f8cc3c4ae01e8a08b02f8c5e6d6a316843620329d4fea0",
+    "HBL/InnerDerivatives/WeightedDecayBound.lean": "1d7b57688db30ed546aa4319066acb9d3f99993aa01ff91df2802e3a090b6c9a",
+    "HBL/InnerDerivatives/WeightedPotentialNorm.lean": "e247ac07dcdbe92da8b03366ecac205850a30d5d8d356e971f326dd4e2eaa14a",
+    "HBL/InnerDerivatives/DerivativesAudit.lean": "f1fbaa39296854d5bcaaf3a8a9f593d19c5254fbec796e0f0d8bc3a679016e25"
+  },
+  "audit_parser_note": "Universe suffixes in the complete pp.all axiom output are normalized to declaration names; the raw output is retained unchanged. Strict compilation already passed before this parser correction; source timestamps and empty strict logs were checked before parsing the saved successful audit output."
+}

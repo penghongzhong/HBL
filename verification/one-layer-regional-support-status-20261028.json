@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — actual classical affine inner solutions and fixed-weight norm/Lipschitz bounds verified; exact manuscript one-layer nonlinear residual not yet formalized.",
+  "target_status": "OPEN — actual classical affine inverses, fixed-weight norm/stability bounds, first and second derivative bounds, and quantitative affine slope tails verified; exact manuscript one-layer nonlinear residual not yet formalized.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -168,10 +168,18 @@
       "base_commit": "7aa1cb0e95eafe018c9e1e36f1a8ff938f8e9b1a",
       "new_supporting_theorems": 37,
       "new_original_environments": 0
+    },
+    {
+      "name": "Actual two-channel weighted first/second derivative estimates, remainder derivative stability, and quantitative affine slope limits",
+      "mode": "local pinned strict compilation; one new theorem per file",
+      "verification": "verification/inner-derivative-estimates-status.json",
+      "base_commit": "85cc40a2953f7e35fba1d90b9cd493c3ce30549a",
+      "new_supporting_theorems": 35,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
-    "For fixed 3/2 < sigma < 2 and tau > 3/2, both actual normalized affine inverses now satisfy L^{2,sigma} to L^{2,-tau} norm and Lipschitz bounds with source-independent constants. Remainders also satisfy a uniform positive-radius pointwise difference bound and weighted difference bounds for every tau > 1/2. Original classical equations hold for continuous sources. Still prove weighted derivative bounds, uniformity over varying weight/parameter families, parameter jets, and quantitative derivative/tail rates required by the one-layer construction.",
+    "For fixed 3/2 < sigma < 2, actual affine outputs already have source-independent weighted norm/stability bounds. For continuous sources, normalized first derivatives now have inverse-linear pointwise bounds and L^{2,beta} norm/stability bounds for every beta < 1/2; normalized second derivatives have L^{2,sigma} norm/stability bounds, and actual affine outputs have L^{2,sigma} second derivative norm bounds. Actual first derivatives tend to their forced affine slopes with an O((1+r)^(-1)) bound. Still establish the exact stronger weights or tail asymptotics required by the one-layer source classes, uniformity over varying weight/parameter families, and parameter jets.",
     "The physical local Kummer basis, positive Wronskian and compact-interval uniform bounds are now strictly proved. Derive the actual C→C1 annulus right-inverse bound, uniformity and parameter jets on the compact parameter graph, and extend or select the prescribed matching annulus rigorously.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
@@ -190,9 +198,9 @@
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
     "date": "2026-10-29",
-    "verification": "verification/inner-weighted-estimates-status.json",
-    "complete_types_and_axioms": "verification/inner-weighted-estimates-types-and-axioms.txt.gz",
-    "new_supporting_theorems": 37,
+    "verification": "verification/inner-derivative-estimates-status.json",
+    "complete_types_and_axioms": "verification/inner-derivative-estimates-types-and-axioms.txt.gz",
+    "new_supporting_theorems": 35,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }
