@@ -1,8 +1,8 @@
 {
-  "source_commit": "30411e67546d0f699fe2c089a43b40c3ce242b73",
-  "run_id": "40630079789",
+  "source_commit": "f912c92cdf72b690ae0fdc33dc0e83c6abaa7521",
+  "run_id": "40630414329",
   "baseline": "c7e0e3458f8adffd764e5793b591f2f32c6afd16",
-  "validation_passed": false,
+  "validation_passed": true,
   "main_theorem_closed": false,
   "new_original_environments_verified": 0,
   "full_paper_percentage_recertified": false,
@@ -69,9 +69,9 @@
       }
     },
     "HartreeDensityRemainderGradient": {
-      "strict_exit": 1,
-      "audit_passed": false,
-      "source_sha256": "7a4261e93f3326d32d06ab0bb1f70bc366595a03f9996135a7014d90b66903e9",
+      "strict_exit": 0,
+      "audit_passed": true,
+      "source_sha256": "62e8d6307bda41f283aed0b8023e19432d43b8dc81eae5093d7404ac2a5f9998",
       "declarations": [
         "HBL.RegularRadiation.PhysicalExpansion.densityGradientQuadraticConstant",
         "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_contDiff",
@@ -79,12 +79,57 @@
         "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_fderiv_norm_le",
         "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_gradient_quadratic",
         "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_potential_gradient_quadratic"
-      ]
+      ],
+      "axioms": {
+        "HBL.RegularRadiation.PhysicalExpansion.densityGradientQuadraticConstant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_contDiff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_fderiv_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_fderiv_norm_le": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_gradient_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "HBL.RegularRadiation.PhysicalExpansion.densityRemainder_potential_gradient_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
     }
   },
   "baseline_Lean_sources_byte_identical": 328,
   "target_cached_files_removed": [
+    ".lake/build/lib/lean/HBL/HartreeDensityRemainderGradient.ilean",
+    ".lake/build/lib/lean/HBL/HartreeDensityRemainderGradient.olean.hash",
+    ".lake/build/lib/lean/HBL/HartreeDensityRemainderGradient.ilean.hash",
+    ".lake/build/lib/lean/HBL/HartreeDensityRemainderGradient.olean",
+    ".lake/build/lib/lean/HBL/HartreeDensityRemainderGradient.trace",
+    ".lake/build/ir/HBL/HartreeDensityRemainderGradient.c.hash",
+    ".lake/build/ir/HBL/HartreeDensityRemainderGradient.c",
     ".lake/build/ir/HBL/HartreeDensityRemainderGradient.setup.json"
   ],
-  "build_exit": 0
+  "build_exit": 0,
+  "retained_roots_build_exit": 0,
+  "retained_component_roots": 44,
+  "strict_named_declarations": 13,
+  "new_public_theorems": 5,
+  "trust_zero": true,
+  "warning_as_error": true
 }
