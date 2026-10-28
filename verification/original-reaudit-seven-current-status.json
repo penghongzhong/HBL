@@ -1,0 +1,30 @@
+{
+  "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+  "run_id": "40665280322",
+  "validation_passed": true,
+  "strictly_revalidated_original_environments_this_batch": 7,
+  "labels": [
+    "prop:modulation",
+    "lem:affine-charge",
+    "thm:Xi-mon-tail",
+    "prop:profile-cancel-stage2",
+    "prop:shooting-stage4",
+    "thm:transversality",
+    "lem:kernel-short"
+  ],
+  "main_theorem_closed": false,
+  "full_paper_21_of_21_certified": false,
+  "trust_zero": true,
+  "warning_as_error": true,
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "mathlib_commit": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "build_exit": 0,
+  "audit_exit": 0,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "complete_type_output_bytes": 1971208,
+  "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6"
+}

@@ -1,20 +1,20 @@
 {
   "audit_date": "2026-10-28",
-  "source_commit": "3614e05c4525ac5b8d5fefea063eae16882dbed3",
-  "latest_strict_source_commit_reported": "036cc3fff18ca9faeecb4d33134d1c1b57334ae0",
-  "inspection_kind": "source and manuscript statement comparison; not an independent new compiler certificate",
+  "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+  "latest_strict_source_commit_reported": "17984ba15f706703ab4513eed227712883f5aaa5",
+  "inspection_kind": "source/manuscript statement comparison plus independent Lean trust=0 complete-type/axiom re-audit",
   "paper_source": {
     "filename": "HBL_Synchronized_Repair_FiniteProfileClosed_20261027.tex",
-    "size_bytes": 222545,
-    "total_lines": 5628,
-    "modified_at": "2026-10-27T01:00:40.100029Z",
-    "access": "Original manuscript version inspected before the synchronized 2026-10-28 update; stored line windows refer to that inspected version. Private file identifiers are not included in the source repository."
+    "size_bytes": 226948,
+    "total_lines": 5727,
+    "modified_at": "2026-10-28T06:38:25.175041Z",
+    "access": "Synchronized manuscript inspected on 2026-10-28; stored line windows refer to this current Library version. Private file identifiers are not included in the source repository."
   },
   "historical_ledger": "verification/current-environments-20261026.json",
   "original_environment_count": 21,
   "current_status_counts": {
-    "historically_accepted_not_reaudited": 7,
-    "revalidated_complete_original_environment": 1,
+    "historically_accepted_not_reaudited": 0,
+    "revalidated_complete_original_environment": 8,
     "open": 5,
     "withdrawn_not_proved": 8
   },
@@ -23,16 +23,16 @@
   "main_PDE_theorem_closed": false,
   "counting_rule": "Compiler success for a conditional Lean implication does not establish an uninstantiated hypothesis. Repair statements, source estimates and structural helpers are not extra original environments. Withdrawn original environments are not proved or deleted from this ledger. No current percentage is certified.",
   "scope_findings": [
-    "The inspected manuscript claims historical 19/21 in its introduction, but its conditional Lean terminals do not prove several full displayed physical statements. This source comparison does not validate that count or the later reported 20/21.",
-    "The 44 retained-root build proves buildability of that selected root closure, not exact original-statement coverage.",
-    "The synchronized-slice original environment has been strictly recompiled, checked with a complete elaborated type and allowed-axiom audit, and compared with the actual manuscript definitions and statement. All other statuses remain provisional; no whole-paper percentage is certified.",
-    "The new complete remainder theorem uses C1 representatives with finite value/differential L2 and Linfty norms. The manuscript graph space is homogeneous H1 intersect H25/16 and does not embed into this mixed space. Two new inverse-square kernel bounds remove the density L1 / gradient Linfty restriction at the convolution-estimate level only; graph embeddings, non-L1 density differentiation and the actual constrained source are still open."
+    "Eight historical original manuscript environments have now been independently recompiled under Lean 4.35.0-rc3 / Mathlib a98628e16 with trust=0, full elaborated types, warning-as-error, and only propext/Classical.choice/Quot.sound in their transitive axiom sets.",
+    "Actions 40665280322 strictly re-audited prop:modulation, lem:affine-charge, thm:Xi-mon-tail, prop:profile-cancel-stage2, prop:shooting-stage4, thm:transversality, and lem:kernel-short; prop:kinematic-recovery-v2 was already independently revalidated.",
+    "This re-audit cleans the historical ledger but does not close a previously open original environment and therefore does not certify a new whole-paper percentage.",
+    "The complete physical seventh-order Hartree remainder is strictly verified in a mixed first-order input space and the inverse-square kernel has weaker Lp convolution bounds. The exact manuscript homogeneous graph-space realization/source map, actual constrained propagator, regular radiation flow, finite profile/global H1 reconstruction and main PDE theorem remain open."
   ],
   "environments": [
     {
       "historical_id": "old-2.1",
       "original_environment": "prop:modulation",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.firstManuscriptModulationEnvironment_closed"
       ],
@@ -49,16 +49,36 @@
         "The actual scale and phase constraints on the renormalized physical field vanish.",
         "The Jacobian in log-scale and phase at the standard bubble is -I2."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "The existing terminal is stated on ComplexRadialDotH1, an energy-coordinate model. Full alignment of the actual physical rescaling residual on the complete Sobolev space must be checked using the physical energy realization, not inferred from the terminal name."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          448,
+          464
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-2.2",
       "original_environment": "lem:affine-charge",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed"
       ],
@@ -75,16 +95,36 @@
         "There is exactly one alpha making the actual affine-tail source orthogonal to psi.",
         "alpha = -<psi,F0>/c."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "The Lean terminal explicitly assumes 3/2 < sigma < 2; confirm the global manuscript weighted-space convention before treating its locally unstated sigma range as matched."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          476,
+          490
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-2.5",
       "original_environment": "thm:Xi-mon-tail",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.Monopole.monopole_first_correction_certified"
       ],
@@ -101,16 +141,36 @@
         "xi_mon is continuous at zero, twice classically differentiable on the positive half-line, vanishes at zero and solves H_plus xi_mon = r W^3.",
         "xi_mon = log r -(pi/8)r + d_mon + O(1/r), Xi_mon = -pi/8 +(log r+d_mon)/r + O(1/r^2)."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "Source inspection finds the fixed actual object, equation, regularity and both quantitative tails in the terminal. This audit did not independently rebuild and inspect its entire dependency closure."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          1072,
+          1101
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-2.6",
       "original_environment": "prop:profile-cancel-stage2",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed"
       ],
@@ -128,11 +188,31 @@
         "Exact effective residual identity and absolute spatial integrability of the normalized threshold coordinates.",
         "Both actual threshold coordinates belong to L1((s0,infinity))."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "This is the revised core/cutoff environment, not a global noncompact profile residual estimate. Current complete compiler/type/axiom re-audit is still required."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          1162,
+          1200
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-2.7",
@@ -190,7 +270,7 @@
     {
       "historical_id": "old-5.1",
       "original_environment": "prop:shooting-stage4",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed"
       ],
@@ -207,16 +287,36 @@
         "The exponential integral kernel and backward tail are absolutely convergent; the tail is continuous, solves u_s=a*u+f, has the stated power bound and tends to zero.",
         "Uniqueness among bounded scalar solutions and the exact two-background comparison bound."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "The statement is a genuine scalar ODE theorem. It does not construct the physical Hamilton unstable coordinate or identify its actual coefficient/source."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          3915,
+          3952
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-A.2",
       "original_environment": "thm:transversality",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.Transversality.manuscript_transversality_environment_closed"
       ],
@@ -232,16 +332,36 @@
       "original_conclusions": [
         "Theta^(0)(mu,theta)=(mu,theta), its derivative is I2 and the leading parameter is uniquely recoverable."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "The leading indicial jet is covered. This does not prove the high-order matched Jacobian I2+o(1) or a physical initial-data chart."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          4383,
+          4394
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-C.1",
       "original_environment": "lem:kernel-short",
-      "status": "historically_accepted_not_reaudited",
+      "status": "revalidated_complete_original_environment",
       "lean_terminal": [
         "HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed"
       ],
@@ -259,11 +379,31 @@
         "The represented L2 operator is self-adjoint, Hilbert-Schmidt and compact.",
         "Separated-radius M^(-4)*m*<m>^(-3) and comparable-radius logarithmic bounds."
       ],
-      "uninstantiated_or_unreaudited_boundaries": [
-        "Source inspection finds the actual kernel, weak representation, compactness, self-adjointness and both estimates in one terminal. Complete current strict rebuilding and type/axiom audit are still required."
-      ],
+      "uninstantiated_or_unreaudited_boundaries": [],
       "supporting_declarations": [],
-      "current_strict_compilation_and_complete_type_axiom_audit": false
+      "current_strict_compilation_and_complete_type_axiom_audit": true,
+      "verification": {
+        "status_file": "verification/original-reaudit-seven-current-status.json",
+        "source_commit": "17984ba15f706703ab4513eed227712883f5aaa5",
+        "run_id": "40665280322",
+        "build_exit": 0,
+        "audit_exit": 0,
+        "trust_zero": true,
+        "warning_as_error": true,
+        "complete_type_output_bytes": 1971208,
+        "complete_type_output_sha256": "172ba76b17e2bd7b71c34c8f66a553030305c985b1dc5f8563761da9748424b6",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "reviewed_original_context": [
+          4888,
+          4902
+        ],
+        "complete_original_environment_revalidated": true,
+        "historical_environment_not_new_count": true
+      }
     },
     {
       "historical_id": "old-1.1",
@@ -540,11 +680,11 @@
     }
   ],
   "next_exact_original_environment_candidate": {
-    "label": "prop:kinematic-recovery-v2",
-    "reason": "All mathematical clauses appear in existing concrete scalar-clock theorems; combine their exact quantifiers in a single terminal, then compile and audit.",
-    "planned_terminal_file": "HBL/KinematicOriginalEnvironment.lean",
-    "status": "revalidated_complete_original_environment",
-    "verification_status_file": "verification/kinematic-original-current-status.json"
+    "label": "prop:regular-flow-stage3",
+    "reason": "It is the next indispensable open original environment feeding the physical finite-profile and backward construction. The current Lean terminal is only a specialization of an uninstantiated GeneralizedHartreeRegularLocalTheory and therefore is not yet accepted.",
+    "planned_terminal_file": "HBL/RegularRadiationFlow.lean",
+    "status": "open",
+    "verification_status_file": null
   },
   "spectral_shortcut_assessment": {
     "physical_static_bridges_present": [
@@ -563,5 +703,5 @@
     ],
     "conclusion": "Do not register a withdrawn spectral/dynamical original environment merely by combining the available static physical form bridges."
   },
-  "strictly_revalidated_original_environments": 1
+  "strictly_revalidated_original_environments": 8
 }
