@@ -35,9 +35,9 @@ theorem frozenKummer_augmented_derivatives
   have hu := hODE.snd.fst
   have hp := hODE.snd.snd
   refine ⟨?_, ?_, ?_⟩
-  · simpa [frozenKummerAugmentedField] using hz.hasDerivAtFilter
-  · simpa [frozenKummerAugmentedField] using hu.hasDerivAtFilter
-  · simpa [frozenKummerAugmentedField] using hp.hasDerivAtFilter
+  · simpa [HasDerivAt, Filter.prod_pure, frozenKummerAugmentedField] using hz.hasDerivAtFilter
+  · simpa [HasDerivAt, Filter.prod_pure, frozenKummerAugmentedField] using hu.hasDerivAtFilter
+  · simpa [HasDerivAt, Filter.prod_pure, frozenKummerAugmentedField] using hp.hasDerivAtFilter
 
 /-- First coordinate of every actual augmented solution: z(t) = z0+t.
 This is proved from the differential equation, not assumed as a
