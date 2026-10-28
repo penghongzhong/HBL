@@ -34,20 +34,20 @@ theorem weightedPhaseGreenPrimitive_ae :
   have heig :
       weightedFreeGreenOperator (weightedHartreeSineModeL2 1) =
         (1 / 3 : ℝ) • weightedHartreeSineModeL2 1 := by
-    simpa only [Nat.cast_one, one_pow, mul_one] using
-      (weightedFreeGreenOperator_sineMode 1 (by omega))
+    rw [weightedFreeGreenOperator_sineMode 1 (by omega)]
+    norm_num
   have hpoint :=
     weightedFreeGreenOperator_ae_pointwise
       (weightedHartreeSineModeL2 1)
   rw [heig] at hpoint
   filter_upwards [hpoint,
     Lp.coeFn_smul (1 / 3 : ℝ) (weightedHartreeSineModeL2 1),
-    weightedHartreeSineModeL2_ae 1] with rho hp hsmul hmode
-  rw [hsmul, hmode] at hp
+    weightedHartreeSineModeL2_ae 1] with rho hp _hsmul hmode
   simp only [Pi.smul_apply, smul_eq_mul] at hp
-  rw [firstSineMode_eq_twice_weightedPhaseResonance] at hp
+  rw [hmode, firstSineMode_eq_twice_weightedPhaseResonance] at hp
   unfold weightedPhaseResonance at hp
   rw [affineJapaneseDecay_two] at hp
+  symm at hp
   change (1 + rho ^ 2)⁻¹ *
       weightedGreenPrimitive (weightedHartreeSineModeL2 1) rho =
         (1 / 3 : ℝ) *
