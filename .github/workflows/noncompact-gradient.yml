@@ -1,4 +1,4 @@
-name: HBL reused main-graph verification
+name: HBL differentiated quadratic density remainder
 on:
   push:
     branches: [hbl-noncompact-gradient-20261028]
@@ -31,7 +31,6 @@ jobs:
           restore-keys: |
             hbl-noncompact-gradient-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
             hbl-retained-repair-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
-            hbl-final-bridge-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
       - name: Resolve exact dependencies
         shell: bash
         run: |
@@ -43,32 +42,32 @@ jobs:
           pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
-          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/ImplicitContDiff.lean Mathlib/Analysis/Calculus/FDeriv/Basic.lean) >> evidence/dependencies.log 2>&1
+          (cd .lake/packages/mathlib && lake exe cache get Mathlib/Tactic.lean Mathlib/Analysis/Calculus/UniformLimitsDeriv.lean Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Mathlib/Analysis/InnerProductSpace/Calculus.lean) >> evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-      - name: Verify selected graph and reuse existing environment terminals
+      - name: Compile actual quadratic density derivative and audit full declarations
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile verification/selected_graph_validation.py
-          python3 verification/selected_graph_validation.py
-      - name: Preserve diagnostics without editing proof sources
+          python3 -m py_compile verification/density_remainder_gradient_validation.py
+          python3 verification/density_remainder_gradient_validation.py
+      - name: Preserve compiler and audit evidence
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -f verification/selected-graph-current-status.json; then
-            git add verification/selected-graph-current-status.json verification/selected-graph-current-errors.json
+          if test -f verification/density-remainder-gradient-current-status.json; then
+            git add verification/density-remainder-gradient-current-status.json verification/density-remainder-gradient-current-errors.json
             if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record reused selected-graph and existing-environment audit [skip ci]'
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record differentiated density-remainder compiler and axiom audit [skip ci]'
               git push origin HEAD:hbl-noncompact-gradient-20261028
             fi
           fi
           git archive --format=tar.gz HEAD > evidence/repository-source.tar.gz
-          git diff 6137fcc06efe539f70f4a2992d3c4cd665d718f7 HEAD > evidence/selected-graph.patch
+          git diff c7e0e3458f8adffd764e5793b591f2f32c6afd16 HEAD > evidence/density-remainder-gradient.patch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hbl-selected-graph-${{ github.sha }}
+          name: hbl-density-remainder-gradient-${{ github.sha }}
           path: evidence
           retention-days: 30
       - uses: actions/cache/save@v4
@@ -76,11 +75,11 @@ jobs:
         with:
           path: .lake
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Require strict proofs, complete types and retained regression
+      - name: Require strict success and retained chain regression
         run: |
           python3 - <<'PY'
           import json,os
-          r=json.load(open('verification/selected-graph-current-status.json'))
+          r=json.load(open('verification/density-remainder-gradient-current-status.json'))
           assert r['source_commit']==os.environ['GITHUB_SHA']
           assert r['validation_passed'],r
           PY
