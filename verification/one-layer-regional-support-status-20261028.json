@@ -1,0 +1,96 @@
+{
+  "audit_date": "2026-10-28",
+  "project": "HBL 3D critical Hartree radial type-II blowup",
+  "branch": "hbl-noncompact-gradient-20261028",
+  "latest_verified_source_commit": "5a980dca974ed2945445d93933930a8c59ef5d29",
+  "fixed_toolchain": {
+    "lean": "4.35.0-rc3",
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "trust_zero": true,
+    "warning_as_error": true
+  },
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_status": "OPEN — no exact original environment terminal has been approved",
+  "original_environment_total": 21,
+  "strict_original_environment_audit": {
+    "revalidated_historical": 8,
+    "newly_closed": 1,
+    "open": 4,
+    "withdrawn_pending_valid_replacements": 8,
+    "whole_paper_certified": false,
+    "main_PDE_theorem_closed": false
+  },
+  "historical_20_of_21": "Previous conversational progress only; not independently re-certified under this strict audit. Do not report 20/21 as newly compiled terminal count.",
+  "compiled_supporting_nodes": [
+    {
+      "name": "Kummer variation of parameters",
+      "run_id": 40677580422
+    },
+    {
+      "name": "Exact two-endpoint Kummer annulus inverse",
+      "run_id": 40677728320
+    },
+    {
+      "name": "Actual frozen Kummer annulus equation",
+      "run_id": 40678519270
+    },
+    {
+      "name": "Non-circular Kummer pair Wronskian from normalization",
+      "run_id": 40695721312
+    },
+    {
+      "name": "Normalized Wronskian Abel invariant",
+      "run_id": 40695721381
+    },
+    {
+      "name": "Remote generic and finite-log free blocks",
+      "run_id": 40675185227
+    },
+    {
+      "name": "Remote exceptional first-order block",
+      "run_id": 40677107162
+    },
+    {
+      "name": "Remote Neumann perturbation inverse",
+      "run_id": 40675185207
+    },
+    {
+      "name": "Arbitrary compatible H-plus weighted Fredholm inverse",
+      "run_id": 40673589227
+    },
+    {
+      "name": "L2-sigma input Green kernel",
+      "run_id": 40698143252
+    },
+    {
+      "name": "L2-sigma source/affine charge pairing",
+      "run_id": 40712343680
+    },
+    {
+      "name": "Source Green / Fredholm cokernel compatibility",
+      "run_id": 40714499489
+    },
+    {
+      "name": "Normalized H-plus source Fredholm solution",
+      "run_id": 40715024916
+    },
+    {
+      "name": "Phase-channel one-dimensional Fredholm kernel",
+      "run_id": 40712946092
+    },
+    {
+      "name": "Normalized phase-channel Fredholm inverse",
+      "run_id": 40713974771
+    }
+  ],
+  "remaining_bearing_obligations": [
+    "Construct actual normalized C2 Kummer fundamental pair on compact positive annulus; current candidate-pair theorem propagates nonvanishing but does not itself establish existence of solutions for the physical coefficient.",
+    "Upgrade weighted H-plus Fredholm solution to the manuscript L^{2,-sigma} output and the correct classical H_plus equation with affine tail for every L^{2,sigma} source.",
+    "Identify actual H-minus physical phase weighted source, its zero-mode pairing, and the corresponding normalized correction in manuscript source/output spaces.",
+    "Instantiate the remote free operator and perturbation on the actual finite power-log atom class with the needed uniform mapping bounds and normalization.",
+    "Prove actual dynamic atom source decomposition, exact Pi_rho Hartree residual after all regional corrections, unique two real charges and the five quantitative gains, without an abstract solver package.",
+    "Only then claim the exact original prop:one-layer-stage3 terminal and proceed to finite-profile/global matching and main PDE theorem."
+  ],
+  "axiom_policy": "No sorry/admit, no new axiom; only standard foundational axioms permitted in inspected supporting certificates.",
+  "root_original_acceptance_changed": false
+}
