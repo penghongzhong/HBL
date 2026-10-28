@@ -1,0 +1,15 @@
+{
+  "source_commit": "ee52740cbd69fede0e9f42e04333c121480f7407",
+  "run_id": "40615185039",
+  "baseline": "53274ac98628f02ee0a69d36223c7677f663802c",
+  "validation_passed": false,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "boundary": "The complete nonlinearity and its classical first differential are proved L2 for a C1 field in L4 and bounded, with L2 and bounded differential. No field L2, support or approximation hypothesis is introduced. Weak-gradient/Bessel Sobolev identification, high-order and Taylor-remainder difference estimates, and the actual constrained evolution remain separate obligations.",
+  "strict_targets": {},
+  "baseline_Lean_sources_byte_identical": 324,
+  "new_target_cached_files_removed": [],
+  "new_source_sha256": "1ce82ca65ad89955ccd2513be1f146905bd498b84f5ff0532da45e9facea1a79",
+  "build_exit": 1
+}
