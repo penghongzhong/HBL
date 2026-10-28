@@ -1,0 +1,15 @@
+{
+  "source_commit": "9756f30499b7252435939260e6ff270397a2ad48",
+  "run_id": "40609414680",
+  "baseline": "33df9598b2aa394426038b8b228076d848aa88aa",
+  "validation_passed": false,
+  "main_theorem_closed": false,
+  "new_original_environments_verified": 0,
+  "full_paper_percentage_recertified": false,
+  "boundary": "Actual quartic density L1 and gradient L1/L-infinity bounds are derived from C1 field, L4 mass, gradient L2, and field/gradient uniform bounds. No compact support or field L2 is assumed. Existence of compact-core approximants in the final derivative theorem, differentiated full remainder estimates, and the physical constrained evolution remain open.",
+  "strict_targets": {},
+  "baseline_Lean_sources_byte_identical": 322,
+  "new_target_cached_files_removed": [],
+  "new_source_sha256": "7c07a547015aed93afd50ccb45ef90ff071d4cfaafbfddfb6eb69dd602b4658d",
+  "build_exit": 1
+}
