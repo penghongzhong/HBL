@@ -124,13 +124,15 @@ theorem innerClusterCorrection_unique
   have ha : a = innerCharge C F :=
     innerCharge_unique C F a h.1
   subst a
+  refine ⟨rfl, ?_⟩
   let f0 : {f : E // C.ell f = 0} :=
     ⟨compatibleInnerSource C F,
       compatibleInnerSource_pairing_zero C F⟩
   have hsolve :
       C.H ((-d) - innerCharge C F • C.affineModel) = f0.1 := by
     dsimp only [f0]
-    rw [map_sub, map_neg, h.2.1]
+    rw [map_sub, map_neg, h.2.1, map_smul]
+    simp only [neg_neg]
     rfl
   have hy := C.solveCompatible_unique f0
     ((-d) - innerCharge C F • C.affineModel)
