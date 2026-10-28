@@ -32,10 +32,13 @@ private theorem local_fixed_point_unique
     (hT : LipschitzOnWith k T U)
     {x y : X} (hx : x ∈ U) (hy : y ∈ U)
     (hfx : T x = x) (hfy : T y = y) : x = y := by
-  have hb := hT.dist_le_mul hx hy
+  have hb := hT.dist_le_mul x hx y hy
   rw [hfx, hfy] at hb
-  apply dist_eq_zero.mp
-  nlinarith [dist_nonneg x y]
+  by_contra hxy
+  have hd : 0 < dist x y := dist_pos.mpr hxy
+  have hlt := mul_lt_mul_of_pos_right hk hd
+  rw [one_mul] at hlt
+  exact (not_lt_of_ge hb) hlt
 
 /-- The existing selected fixed point is C1. Neither its regularity, the
 partial-derivative formula, nor a derivative-norm bound is assumed. -/
@@ -62,8 +65,11 @@ theorem selected_local_fixedPoint_contDiffAt
       apply ContinuousLinearMap.ext
       intro x
       rfl
-    simpa only [he] using
+    have hh : HasFDerivAt (fun x : X => (p, x))
+        ((0 : X →L[ℝ] P).prod (ContinuousLinearMap.id ℝ X)) (q p) :=
       (hasFDerivAt_const p (q p)).prodMk (hasFDerivAt_id (q p))
+    rw [he] at hh
+    exact hh
   have hDx : fderiv ℝ (fun x => T (p, x)) (q p) = D :=
     (hTd.comp (q p) hin).fderiv
   have hDb : ‖D‖ ≤ (k : ℝ) := by
@@ -187,15 +193,15 @@ theorem construct_local_fixedPoint_C1_family
   choose q hq using hex
   have hqmem : ∀ p ∈ V, q p ∈ Metric.ball (0 : X) R := by
     intro p hp
-    simpa only [Metric.mem_ball_zero_iff] using (hq p hp).1
+    simpa only [mem_ball_zero_iff] using (hq p hp).1
   have hqfixed : ∀ p ∈ V, T (p, q p) = q p := fun p hp => (hq p hp).2
   have hlocal : ∀ p ∈ V,
       LipschitzOnWith k (fun x => T (p, x)) (Metric.ball (0 : X) R) := by
     intro p hp
     apply LipschitzOnWith.of_dist_le_mul
     intro x hx y hy
-    rw [← hagrees p hp x (Metric.mem_ball_zero_iff.mp hx).le,
-      ← hagrees p hp y (Metric.mem_ball_zero_iff.mp hy).le]
+    rw [← hagrees p hp x (mem_ball_zero_iff.mp hx).le,
+      ← hagrees p hp y (mem_ball_zero_iff.mp hy).le]
     exact (hA p hp).dist_le_mul x y
   refine ⟨q, ?_, ?_⟩
   · intro p hp
