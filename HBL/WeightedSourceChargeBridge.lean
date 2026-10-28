@@ -24,7 +24,8 @@ theorem weightedSourceData_memLp_two
     (sigma : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 sigma F) :
     MemLp (fun r => affineJapaneseWeight sigma r * F r) 2
       halfLineMeasure := by
-  simpa only [InWeightedL2, halfLineMeasure] using hF
+  with_reducible_and_instances
+    exact hF
 
 def weightedSourceDataL2
     (sigma : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 sigma F) :
@@ -44,8 +45,9 @@ def weightedSourceResonance (sigma : ℝ) (r : ℝ) : ℝ :=
 theorem weightedSourceResonance_memLp_two
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
     MemLp (weightedSourceResonance sigma) 2 halfLineMeasure := by
-  simpa only [weightedSourceResonance, channelResonance, halfLineMeasure] using
-    channelResonance_decay_memLp_two HartreeChannel.plus sigma hsigma
+  with_reducible_and_instances
+    simpa only [weightedSourceResonance, channelResonance] using
+      channelResonance_decay_memLp_two HartreeChannel.plus sigma hsigma
 
 def weightedSourceResonanceL2
     (sigma : ℝ) (hsigma : 1 / 2 < sigma) :
@@ -65,22 +67,22 @@ theorem weightedSourceResonance_inner_data_eq_pairing
     inner ℝ (weightedSourceResonanceL2 sigma hsigma)
         (weightedSourceDataL2 sigma F hF) =
       channelPairing HartreeChannel.plus F := by
-  rw [L2.inner_def]
-  unfold channelPairing
-  rw [halfLineMeasure]
-  apply integral_congr_ae
-  filter_upwards [
-    weightedSourceResonanceL2_ae sigma hsigma,
-    weightedSourceDataL2_ae sigma F hF] with r hpsi hdata
-  rw [hpsi, hdata, Real.inner_apply]
-  unfold weightedSourceResonance channelResonance
-  rw [show
-    (resonancePlus r * affineJapaneseDecay sigma r) *
-        (affineJapaneseWeight sigma r * F r) =
-      resonancePlus r *
-        (affineJapaneseDecay sigma r *
-          affineJapaneseWeight sigma r) * F r by ring,
-    affineJapaneseDecay_mul_weight, mul_one]
+  with_reducible_and_instances
+    rw [L2.inner_def]
+    unfold channelPairing
+    apply integral_congr_ae
+    filter_upwards [
+      weightedSourceResonanceL2_ae sigma hsigma,
+      weightedSourceDataL2_ae sigma F hF] with r hpsi hdata
+    rw [hpsi, hdata, Real.inner_apply]
+    unfold weightedSourceResonance channelResonance
+    rw [show
+      (resonancePlus r * affineJapaneseDecay sigma r) *
+          (affineJapaneseWeight sigma r * F r) =
+        resonancePlus r *
+          (affineJapaneseDecay sigma r *
+            affineJapaneseWeight sigma r) * F r by ring,
+      affineJapaneseDecay_mul_weight, mul_one]
 
 theorem weightedSourceResonance_inner_data_zero_iff
     (sigma : ℝ) (hsigma : 1 / 2 < sigma)
