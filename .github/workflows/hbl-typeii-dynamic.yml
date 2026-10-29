@@ -88,8 +88,8 @@ jobs:
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
           lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit 2>&1 | tee evidence/build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/TerminalCriterion.lean 2>&1 | tee evidence/strict-source.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/TerminalCriterionAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
