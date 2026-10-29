@@ -78,6 +78,9 @@ theorem actual_physical_radiation_slow_coefficient_hasDerivAt
         (fun t => hartreeKappa * (ell t *
           radialPhysicalQuarticMoment (z (time t)))) := by
     filter_upwards [hne] with t ht
+    change actualRadiationCenter
+      (rescalePhysicalRadiation (ell t) (z (time t))) =
+        hartreeKappa * (ell t * radialPhysicalQuarticMoment (z (time t)))
     simpa only [mul_assoc] using
       (actualRadiationCenter_equals_physical_slow_coefficient
         (ell t) ht (z (time t)))
