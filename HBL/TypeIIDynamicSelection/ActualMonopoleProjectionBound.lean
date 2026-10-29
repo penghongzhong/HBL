@@ -7,7 +7,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 
-open HBL.Modulation.Monopole
+open HBL.Modulation HBL.Modulation.Monopole
 
 /-- A genuine PHYSICAL first-monopole Hartree threshold source bound.
 The radial Hartree nonlinearity and its moving cutoff enter through the
