@@ -1,0 +1,11 @@
+import HBL.TypeIIDynamicSelection.RemoteDensityInteraction
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.radialRemoteQuarticDifference_vanishes_in_core
+#check @HBL.TypeIIDynamicSelection.actual_radialHartree_remote_quartic_source_exact
+#check @HBL.TypeIIDynamicSelection.actual_radialHartree_remote_center_error_le
+
+#print axioms HBL.TypeIIDynamicSelection.radialRemoteQuarticDifference_vanishes_in_core
+#print axioms HBL.TypeIIDynamicSelection.actual_radialHartree_remote_quartic_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_radialHartree_remote_center_error_le
