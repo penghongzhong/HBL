@@ -1,9 +1,10 @@
-% 2026-10-29 proposed REPLACEMENT of only the original targettheorem.
-% NOT YET PROVED. Do not replace targettheorem by theorem until full Lean/PDE audit.
-% The older stronger target remains archived in the Library manuscript.
-% Keep historical acceptance 9/21 separate from any new shorter-chain percentage.
+% 2026-10-29 corrected main target: DYNAMICAL RATE SELECTION, not prescribed-rate existence.
+% The former fixed nu=sqrt(2) proposal was rejected as changing the research question.
+% NOT YET PROVED; retain targettheorem rather than theorem.
+% Historical original acceptance 9/21 and all old strict Lean results remain unchanged.
 
-\begin{targettheorem}[固定无理速率下的径向单泡 II 型爆破]\label{thm:main}
+\begin{targettheorem}[Hartree 动力学选速的径向单泡 II 型爆破]
+\label{thm:main}
 考虑三维聚焦能量临界 Hartree 方程
 \[
  i\partial_tu+\Delta u+
@@ -11,46 +12,63 @@
  \qquad
  W(x)=(1+|x|^2)^{-1/2},
 \]
-其中常数 $\kappa_{\rm H}$ 取使 $W$ 满足相应定态方程的规范化。
-固定一个无理速度
-\[
- \nu_*=\sqrt2,\qquad
- \mu_*=\frac{\sqrt2}{2}>\frac9{16},\qquad
- \vartheta_*=0.
-\]
-则存在 $T>0$、一个径向强解
-$u\in C([0,T);\dot H^1_{\rm rad}(\mathbb R^3))$、
-正连续尺度 $\lambda(t)$、实相位 $\gamma(t)$、
-$\eta_T\in\dot H^1_{\rm rad}(\mathbb R^3)$ 和
-$\eta\in C([0,T);\dot H^1_{\rm rad}(\mathbb R^3))$，
-使 $u$ 在 $[0,T)$ 上满足上述真实 Hartree 方程，并且
+其中 $\kappa_{\rm H}>0$ 使 $-\Delta W=\mathcal N(W)$。
+则存在有限时间 $T>t_0$、一个真实径向强解
+$u\in C([t_0,T);\dot H^1_{\rm rad}(\mathbb R^3))$、
+由该解的两通道调制正交条件确定的 $C^1$ 尺度与相位
+$\lambda:[t_0,T)\to(0,\infty)$、
+$\gamma:[t_0,T)\to\mathbb R$，
+以及 $\eta_T\in\dot H^1_{\rm rad}(\mathbb R^3)$，使
 \[
  u(t,x)=e^{i\gamma(t)}\lambda(t)^{1/2}W(\lambda(t)x)
-          +\eta(t,x),
+   +\eta(t,x),
  \qquad
  \eta(t)\longrightarrow\eta_T
- \quad\text{于 }\dot H^1\quad (t\uparrow T),
+ \quad\text{于 }\dot H^1\quad (t\uparrow T).
 \]
+定义实际重整化时钟、缩放与调制坐标
 \[
- \lambda(t)^{-1}
-   =C_\lambda(T-t)^{\frac12+\sqrt2}(1+o(1)),
- \qquad C_\lambda>0.
-\]
-解具有有限时 II 型爆破性质：
-\[
- \sup_{0\le t<T}\|u(t)\|_{\dot H^1}<\infty,
+ \frac{\mathrm ds}{\mathrm dt}=\lambda(t)^2,
+ \quad s(t)\longrightarrow+\infty,\qquad
+ b(s)=\frac{\lambda_s}{\lambda},\qquad
+ \mathfrak q(s)=(T-t(s))\lambda(t(s))^2,
  \qquad
- T<\infty,
+ \mu(s)=\frac{2b(s)\mathfrak q(s)-1}{4}.
 \]
-且 $T$ 是该强解最大前向定义区间的右端点，即
-$u(t)$ 在 $t\uparrow T$ 时不存在 $\dot H^1$ 强极限。
+则存在 $\delta\in(0,1)$、$C>0$ 及一个由此真实动力学产生的极限
+$\mu_\infty>9/16$，使
+\[
+ \lim_{s\to\infty}\mu(s)=\mu_\infty,
+ \qquad
+ |\mu(s)-\mu_\infty|\le Cs^{-\delta}
+ \quad(s\gg1).
+\]
+因此有一个由实际解确定、而非预先指定的集中指数
+\[
+ a_\infty(u_0):=\frac12+2\mu_\infty>\frac12,
+ \qquad
+ \lambda(t)^{-1}
+ =C_\lambda(u_0)(T-t)^{a_\infty(u_0)}(1+o(1)),
+ \qquad C_\lambda(u_0)>0.
+\]
+该解具有真正的有限时径向 II 型爆破：
+\[
+ T<\infty,\qquad
+ \sup_{t_0\le t<T}\|u(t)\|_{\dot H^1}<\infty,
+\]
+并且不能在 $\dot H^1$ 中强延拓穿过 $T$；
+等价地，在该解的最大前向强解区间中，$T$ 是右端点。
 \end{targettheorem}
 
-% Comments for the proof audit, not part of theorem:
-% (1) No full C1 initial-data graph, arbitrary radiation, arbitrary parameter
-%     compact set, rate selection function, or energy proximity is claimed.
-% (2) The scale-separated family W_lambda must be shown noncompact in Hdot1.
-% (3) Actual radial Hartree orbit existence, residual-to-solution construction,
-%     and dynamical time/scale reconstruction remain OPEN.
-% (4) The first auxiliary Lean target proves terminal implications only; it
-%     must not be counted as a proof of the targettheorem.
+% SCOPE:
+% 1. This is EXISTENCE of at least ONE nontrivial true Hartree Type II orbit.
+%    It does not assert a C1 graph, every terminal radiation, or every rate.
+% 2. The limit mu_infty is OUTPUT of the constructed actual modulation ODE;
+%    it is NOT a hypothesis, external parameter, prescribed speed or axiom.
+% 3. Proving mu_infty exists with a quantitative tail requires actual PDE
+%    residual estimates and a properly selected physical orbit; its presence
+%    in the target conclusion is NOT a verification of that analytic task.
+% 4. q_s=4mu, dlog(lambda)/dlog(T-t)=-(1/2+2mu) are identities.
+%    They alone DO NOT prove convergence/positivity of mu or PDE existence.
+% 5. The historical fixed-speed source remains an auxiliary calculation only.
+%    Never use it to claim closure of this dynamical main theorem.
