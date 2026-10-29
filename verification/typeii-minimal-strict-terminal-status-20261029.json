@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "status": "REVISED TYPE II MAIN THEOREM OPEN; SIX TERMINAL SUPPORTING THEOREMS STRICTLY PROVED",
+  "status": "PREVIOUS FIXED-SPEED AUXILIARY AUDIT VALID, BUT FIXED-SPEED MAIN THEOREM PROPOSAL SUPERSEDED",
   "repo": "penghongzhong/HBL",
   "branch": "hbl-typeii-minimal-main-20261029",
   "exact_lean_source_commit": "2d34a7f63cfcf83f504fb709f900d67ef5303c3d",
@@ -40,5 +40,10 @@
     "prove exact nonlinear contraction and reconstruct physical radial Hartree solution",
     "prove full physical time-scale asymptotics and maximal lifespan"
   ],
-  "warning": "Do not count a conditional terminal criterion as unconditional PDE existence, and do not convert the historical 9/21 count to 20/21 or 21/21 after theorem revision."
+  "warning": "Do not count a conditional terminal criterion as unconditional PDE existence, and do not convert the historical 9/21 count to 20/21 or 21/21 after theorem revision.",
+  "superseded_as_main_target": true,
+  "superseded_reason": "The main objective is to derive the rate from the actual Hartree projected modulation dynamics; selecting nu=sqrt2, mu_infty=sqrt2/2 before constructing the PDE solution would change the problem.",
+  "current_corrected_main_target": "verification/typeii-minimal-main-replacement.tex",
+  "current_corrected_proof_plan": "verification/typeii-minimal-revised-main-20261029.md",
+  "fixed_speed_lean_sources_not_on_revised_main_dependency_chain": true
 }
