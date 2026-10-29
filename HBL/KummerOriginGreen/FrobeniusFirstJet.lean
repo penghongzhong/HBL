@@ -48,7 +48,6 @@ theorem originFirstSingularResidual_exact (mu theta : ℝ)
   unfold frozenRadialJetResidual originFirstSingularValue
     originFirstSingularSlope originFirstSingularSecond
     originSingularFirstCoefficient originZeroCoeff frozenZeroCoeff
-  push_cast
   field_simp [hz]
   ring_nf
 
