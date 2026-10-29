@@ -1,0 +1,13 @@
+import HBL.TypeIIDynamicSelection.ActualRadiationScaling
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.rescalePhysicalRadiation
+#check @HBL.TypeIIDynamicSelection.radialPhysicalQuarticMoment
+#check @HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_quartic
+#check @HBL.TypeIIDynamicSelection.actualRadiationCenter_rescaling
+#check @HBL.TypeIIDynamicSelection.actualRadiationCenter_equals_physical_slow_coefficient
+
+#print axioms HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_quartic
+#print axioms HBL.TypeIIDynamicSelection.actualRadiationCenter_rescaling
+#print axioms HBL.TypeIIDynamicSelection.actualRadiationCenter_equals_physical_slow_coefficient
