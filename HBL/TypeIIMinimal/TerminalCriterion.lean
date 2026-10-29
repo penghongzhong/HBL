@@ -1,6 +1,7 @@
 import HBL.BlowupNonextension
 import HBL.MainRateSelection
 import Mathlib.Tactic
+import Mathlib.NumberTheory.Real.Irrational
 
 /-!
 # Genuine Type II: the terminal consequences
@@ -29,6 +30,10 @@ theorem chosen_mu_above_sobolev_threshold :
     Real.sq_sqrt (by norm_num)
   have hnonneg : 0 ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
   nlinarith
+
+/-- The fixed rate is genuinely nonresonant, not merely greater than one. -/
+theorem chosen_nu_irrational : Irrational (Real.sqrt 2) := by
+  exact irrational_sqrt_two
 
 theorem chosen_nu_above_one :
     (1 : ℝ) < Real.sqrt 2 := by
