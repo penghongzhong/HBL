@@ -1,0 +1,6 @@
+import HBL.KummerOriginGreen.GreenTerminal
+
+set_option autoImplicit false
+
+#check @HBL.Profile.Kummer.exists_compact_originGreen_outgoing_and_uniform
+#print axioms HBL.Profile.Kummer.exists_compact_originGreen_outgoing_and_uniform
