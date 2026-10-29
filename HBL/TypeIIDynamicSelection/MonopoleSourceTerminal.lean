@@ -67,19 +67,19 @@ theorem actual_monopole_source_selects_terminal_coordinates
     rfl, rfl, ?_, ?_⟩
   · have ht := intervalIntegral_tendsto_integral_Ioi s0 hplus
       (tendsto_id : Tendsto (fun s : ℝ => s) atTop atTop)
-    simpa only [monopoleSourceDrivenMu] using
-      (tendsto_const_nhds.add ht : Tendsto
-        (fun s : ℝ => mu0 +
-          ∫ t in s0..s, monopoleThresholdCoordinatePlus c b omega t)
-        atTop (𝓝 (mu0 +
-          ∫ t in Ioi s0, monopoleThresholdCoordinatePlus c b omega t)))
+    change Tendsto
+      (fun s : ℝ => mu0 +
+        ∫ t in s0..s, monopoleThresholdCoordinatePlus c b omega t)
+      atTop (𝓝 (mu0 +
+        ∫ t in Ioi s0, monopoleThresholdCoordinatePlus c b omega t))
+    exact tendsto_const_nhds.add ht
   · have ht := intervalIntegral_tendsto_integral_Ioi s0 hminus
       (tendsto_id : Tendsto (fun s : ℝ => s) atTop atTop)
-    simpa only [monopoleSourceDrivenTheta] using
-      (tendsto_const_nhds.add ht : Tendsto
-        (fun s : ℝ => theta0 +
-          ∫ t in s0..s, monopoleThresholdCoordinateMinus c b omega t)
-        atTop (𝓝 (theta0 +
-          ∫ t in Ioi s0, monopoleThresholdCoordinateMinus c b omega t)))
+    change Tendsto
+      (fun s : ℝ => theta0 +
+        ∫ t in s0..s, monopoleThresholdCoordinateMinus c b omega t)
+      atTop (𝓝 (theta0 +
+        ∫ t in Ioi s0, monopoleThresholdCoordinateMinus c b omega t))
+    exact tendsto_const_nhds.add ht
 
 end HBL.TypeIIDynamicSelection
