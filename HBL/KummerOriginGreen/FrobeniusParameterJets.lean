@@ -39,9 +39,12 @@ theorem originFrobeniusCoefficientVector_contDiff :
       (fun q : ℂ => (-(q) / 2,
         (q * (q + Complex.I) / 24, -(q + Complex.I / 2) / 6))) := by
     fun_prop
-  simpa only [Function.comp_def, originFrobeniusCoefficientVector,
-    originSingularFirstCoefficient, originSingularThirdCoefficient,
-    originRegularSecondCoefficient] using hpoly.comp hq
+  change ContDiff ℝ ω (fun p : ℝ × ℝ =>
+    (-(originZeroCoeff p.1 p.2) / 2,
+      (originZeroCoeff p.1 p.2 *
+          (originZeroCoeff p.1 p.2 + Complex.I) / 24,
+        -(originZeroCoeff p.1 p.2 + Complex.I / 2) / 6)))
+  exact hpoly.comp hq
 
 /-- For every parameter-jet order, the complete vector of actual finite
 Frobenius coefficients has a uniform bound on ANY compact parameter set.
