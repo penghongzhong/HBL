@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSource
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_moving_remote_full_Hartree_source_exact
+#check @HBL.TypeIIDynamicSelection.actual_moving_remote_mass_mismatch_bound
+
+#print axioms HBL.TypeIIDynamicSelection.actual_moving_remote_full_Hartree_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_moving_remote_mass_mismatch_bound
