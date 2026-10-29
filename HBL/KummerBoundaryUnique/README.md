@@ -99,6 +99,10 @@ The complete types and transitive axioms are audited and retained in
 artifact hashes in `verification/kummer-boundary-unique-status.json`.
 Only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
 
+The subsequent [source tangent block](../KummerSourceTangents/README.md)
+identifies both physical parameter derivatives for varying sources as unique
+classical tangent solutions and proves a coupled primal/tangent residual bound.
+
 The annulus is constructed and may shrink with the parameter set. A prescribed
 matching annulus, the manuscript's spatially weighted overlap estimates, and
 its actual nonlinear Hartree residual are still separate open obligations.
