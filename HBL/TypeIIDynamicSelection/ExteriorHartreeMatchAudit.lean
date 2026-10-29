@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ExteriorHartreeMatch
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.monopoleEffective_minus_actualExterior_exact
+#check @HBL.TypeIIDynamicSelection.monopoleEffective_actualExterior_match_norm_le
+#check @HBL.TypeIIDynamicSelection.monopoleEffective_actualExterior_residual_diff_norm_le
+
+#print axioms HBL.TypeIIDynamicSelection.monopoleEffective_minus_actualExterior_exact
+#print axioms HBL.TypeIIDynamicSelection.monopoleEffective_actualExterior_match_norm_le
+#print axioms HBL.TypeIIDynamicSelection.monopoleEffective_actualExterior_residual_diff_norm_le
