@@ -80,3 +80,39 @@ a Hartree blowup orbit.
 5. Apply clock identities and actual energy-critical bubble separation to obtain finite-time type II blowup and a dynamically selected rate.
 
 Until the full actual PDE forcing has been identified and estimated, do not claim any original-environment numerator improvement (9/21), an unconditional rate theorem, or a fixed asymptotic exponent.
+
+
+## Nonlocal source warning: the effective cubic is NOT in the PDE
+
+Inspection of the verified source HBL/MonopoleComplexResidual.lean shows the exact identity
+
+\[
+ {\cal R}_{\rm eff}(s,r)
+ =
+ {\cal R}_{\rm radial}[V_c](s,r)
+ -{\cal R}_{\rm radial}[W](s,r)
+ +c(s)V_c(s,r)^3 .
+\]
+
+Thus the already proved time integrability of the compactly tested
+\({\cal R}_{\rm eff}\) is NOT time integrability of the bare physical Hartree
+residual difference. The extra local cubic is a bookkeeping correction.
+For slow \(c(s)\sim s^{-\beta}\), \(1/2<\beta\le1\), its projection may be
+nonintegrable. A subsequent actual **radiation/remote Hartree coupling**
+must generate the cancelling \(-c(s)V_c^3\) contribution with the correct
+sign. A general abstract Fredholm package or by-hand source subtraction is
+not enough.
+
+The file HBL/MonopoleProfileCancellation.lean proves algebraic
+first-order cancellation for a linearized correction assuming the
+stationary equation for \(W\) and \(L_+X=W^3\); and
+HBL/MonopoleProfileEquation.lean proves the actual radial half-line
+monopole correction equation. The next analysis task is to identify these
+terms with the **same nonlocal source and physical cutoff** in the full
+three-region parametrix.
+
+If taking terminal radiation \(g=0\) forces \(c\equiv0\), this
+nonintegrable channel disappears but the resulting model also yields no
+nontrivial monopole-driven selection. That shortcut is acceptable for
+a first existence proof **only if** the emergent rate is still obtained
+from the exact physical modulation flow and never prescribed at infinity.
