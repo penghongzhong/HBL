@@ -23,6 +23,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole
+open HBL.Modulation HBL.Modulation.AffineTail
 
 /-- The original radial Hartree residual including a *genuine* exterior
 Riesz-potential contribution in the inner region. The extra term is
