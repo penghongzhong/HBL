@@ -30,6 +30,9 @@ theorem firstMonopoleDrivenMu_tendsto
   have ht := intervalIntegral_tendsto_integral_Ioi s0 hint
     (tendsto_id : Tendsto (fun s : ℝ => s) atTop atTop)
   have ha := (tendsto_const_nhds (x := mu0)).add ht
-  simpa only [firstMonopoleDrivenMu, firstMonopoleDrivenMuInfinity] using ha
+  change Tendsto (fun s : ℝ => mu0 + ∫ t in s0..s,
+      firstMonopoleRealProjectedSource c b omega t) atTop
+    (𝓝 (mu0 + ∫ t in Ioi s0, firstMonopoleRealProjectedSource c b omega t))
+  simpa only [id_eq] using ha
 
 end HBL.TypeIIDynamicSelection
