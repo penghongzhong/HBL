@@ -1,4 +1,4 @@
-# Exact Frobenius residual tactic repair; all original statements unchanged.
+# Fixed the actual real-to-complex parameter regularity proof; original statements unchanged.
 name: HBL origin-gauge Kummer Green bridge
 on:
   push:
