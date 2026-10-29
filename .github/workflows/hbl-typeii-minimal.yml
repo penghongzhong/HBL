@@ -94,7 +94,7 @@ jobs:
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
-          names=['chosen_mu_above_sobolev_threshold','chosen_nu_above_one',
+          names=['chosen_mu_above_sobolev_threshold','chosen_nu_irrational','chosen_nu_above_one',
              'chosen_physical_concentration_rate','positive_mu_is_super_self_similar',
              'critical_norm_bounded_and_no_strong_terminal_limit']
           for name in names:
@@ -105,7 +105,7 @@ jobs:
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: five auxiliary Type II terminal statements. No physical solution existence is claimed. Original acceptance remains 9/21.')
+          print('PASS: six auxiliary Type II terminal statements. No physical solution existence is claimed. Original acceptance remains 9/21.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
