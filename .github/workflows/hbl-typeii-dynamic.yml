@@ -91,7 +91,7 @@ jobs:
             src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
-          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain HBL.TypeIIDynamicSelection.ActualSlowMonopoleGainAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain HBL.TypeIIDynamicSelection.ActualSlowMonopoleGainAudit HBL.TypeIIDynamicSelection.ActualRegionalBridge HBL.TypeIIDynamicSelection.ActualRegionalBridgeAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceTerminal.lean 2>&1 | tee evidence/strict-hartree-source.log
@@ -116,6 +116,8 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualSlowMonopoleGain.lean 2>&1 | tee evidence/strict-slow-monopole-gain.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualSlowMonopoleGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRegionalBridge.lean 2>&1 | tee evidence/strict-actual-regional-bridge.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRegionalBridgeAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
@@ -149,11 +151,14 @@ jobs:
             fullname='HBL.TypeIIDynamicSelection.'+name
             assert fullname in s, 'Missing checked type: '+fullname
             assert ("'"+fullname+"' depends on axioms:") in s, 'Missing transitive axioms: '+fullname
+          fullname='HBL.Profile.OneLayerPhysical.actual_Hartree_inner_Kummer_regional_bridge'
+          assert fullname in s, 'Missing actual one-layer regional type'
+          assert ("'"+fullname+"' depends on axioms:") in s, 'Missing actual regional bridge axiom audit'
           extras=set()
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: actual Hartree exterior moving cutoff yields physical positive slow-monopole gain 2β−1; full one-layer 2.12 remains OPEN.')
+          print('PASS: actual Hartree inner-plus/minus and origin Kummer joint solver, plus genuine slow-monopole gain 2beta-1; entire original layer 2.12 remains OPEN.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
