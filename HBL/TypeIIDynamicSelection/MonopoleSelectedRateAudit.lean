@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.MonopoleSelectedRate
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_monopole_source_selects_instantaneous_rate
+#print axioms HBL.TypeIIDynamicSelection.actual_monopole_source_selects_instantaneous_rate
