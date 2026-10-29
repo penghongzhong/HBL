@@ -1,4 +1,4 @@
-import HBL.KummerOriginGreen.GreenTerminal
+import HBL.KummerOriginGreen.GreenBridge
 import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.Analysis.Calculus.Deriv.Inv
 
