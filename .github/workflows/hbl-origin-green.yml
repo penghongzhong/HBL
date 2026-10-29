@@ -1,3 +1,4 @@
+# Exact Frobenius residual tactic repair; all original statements unchanged.
 name: HBL origin-gauge Kummer Green bridge
 on:
   push:
