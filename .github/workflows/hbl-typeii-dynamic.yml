@@ -88,7 +88,7 @@ jobs:
             src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
-          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceTerminal.lean 2>&1 | tee evidence/strict-hartree-source.log
@@ -99,6 +99,8 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockDriftAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorHartreeMatch.lean 2>&1 | tee evidence/strict-exterior-hartree-match.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorHartreeMatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteDensityInteraction.lean 2>&1 | tee evidence/strict-remote-density.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteDensityInteractionAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
@@ -111,6 +113,9 @@ jobs:
              'monopoleEffective_minus_actualExterior_exact',
              'monopoleEffective_actualExterior_match_norm_le',
              'monopoleEffective_actualExterior_residual_diff_norm_le',
+             'radialRemoteQuarticDifference_vanishes_in_core',
+             'actual_radialHartree_remote_quartic_source_exact',
+             'actual_radialHartree_remote_center_error_le',
              'dynamically_selected_rate_super_self_similar']
           for name in names:
             fullname='HBL.TypeIIDynamicSelection.'+name
@@ -120,7 +125,7 @@ jobs:
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: clock/drift + actual monopole + genuine exterior Riesz-matched source; full physical Hartree modulation and PDE blowup remain OPEN.')
+          print('PASS: clock/drift + genuine physical remote quartic density and exterior Riesz cubic matching; actual PDE orbit and blowup remain OPEN.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
