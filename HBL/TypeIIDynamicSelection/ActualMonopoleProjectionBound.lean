@@ -50,9 +50,10 @@ theorem actual_firstMonopole_core_projection_quantitative
         monopoleComplexEffectiveIncrement c (b s) (omega s) s r‖ ≤
         |Z| * E := by
     rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    have hrZ0 : |r * normalizedZetaPlus r| ≤ Z := by
+      simpa only [Real.norm_eq_abs] using hZ r ⟨hr.1.le, hr.2.le⟩
     have hrZ : |r * normalizedZetaPlus r| ≤ |Z| :=
-      (by simpa only [Real.norm_eq_abs] using hZ r ⟨hr.1.le, hr.2.le⟩).trans
-        (le_abs_self Z)
+      hrZ0.trans (le_abs_self Z)
     exact mul_le_mul hrZ
       (hDbound c (deriv c s) s r (b s) (omega s) (hc s).hasDerivAt
         (hsmall s hs) hr.1 (hcore r hr))
