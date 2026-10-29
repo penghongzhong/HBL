@@ -39,7 +39,7 @@ theorem dynamicalClock_hasDerivAt
   have h := htau.mul (hlambda.pow 2)
   convert h using 1
   · rfl
-  · unfold dynamicalClock dynamicalMu
+  · dsimp [dynamicalMu, dynamicalClock]
     field_simp [hln]
     ring
 
@@ -48,7 +48,7 @@ actual modulation coordinate and never from a prescribed final power. -/
 theorem dynamical_rate_identity (tau lambda b : ℝ → ℝ) (s : ℝ) :
     b s * dynamicalClock tau lambda s =
       HBL.MainBackward.selectedPhysicalRate (dynamicalMu tau lambda b s) := by
-  unfold dynamicalClock dynamicalMu HBL.MainBackward.selectedPhysicalRate
+  dsimp [dynamicalClock, dynamicalMu, HBL.MainBackward.selectedPhysicalRate]
   ring
 
 /-- The limit of the instantaneous exponent is the image of an observed
