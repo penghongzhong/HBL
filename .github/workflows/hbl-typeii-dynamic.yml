@@ -1,5 +1,6 @@
 # Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
 # Fixed pointwise function-multiplication rewrite in exact mu_s drift identity.
+# Exact core complex remote field beta-reduction corrected in nonlocal source match.
 name: HBL dynamical Type II clock identity audit
 on:
   push:
