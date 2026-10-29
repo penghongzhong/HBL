@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-29",
+  "branch": "hbl-typeii-minimal-main-20261029",
+  "main_target": "DYNAMICALLY SELECTED radial type II Hartree blowup, NOT a fixed/prescribed speed",
+  "main_target_statement": "verification/typeii-minimal-main-replacement.tex",
+  "proof_strategy": "verification/typeii-minimal-revised-main-20261029.md",
+  "fixed_sqrt2_main_theorem_superseded": true,
+  "verified_source_commit": "c4f0cd2ba02a5ea884786399bc3db9f9394c0d15",
+  "strict_workflow_run": 40872112221,
+  "strict_workflow_result": "success",
+  "lean": "4.35.0-rc3",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "trust_zero": true,
+  "warning_as_error": true,
+  "new_verified_auxiliary_theorems": 4,
+  "verified": [
+    "HBL.TypeIIDynamicSelection.dynamicalClock_hasDerivAt",
+    "HBL.TypeIIDynamicSelection.dynamical_rate_identity",
+    "HBL.TypeIIDynamicSelection.selected_rate_of_dynamical_mu_limit",
+    "HBL.TypeIIDynamicSelection.dynamically_selected_rate_super_self_similar"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "precise_math_scope": {
+    "q": "q=(T-t) lambda^2",
+    "mu": "mu=(2 b q-1)/4",
+    "identity": "q_s=4mu, b q=1/2+2mu",
+    "limit_transfer": "if actual mu(s) tends to output mu_infty, the instantaneous logarithmic rate tends to 1/2+2mu_infty",
+    "no_numerical_rate_input": true
+  },
+  "open_physical_obligations": [
+    "construct actual Hartree radial Type II orbit with a canonically extracted modulation scale",
+    "derive integrable mu_s bounds from actual two-channel Hartree projected residual and prove emergent mu_infty>9/16",
+    "prove physical time-scale asymptotic for the exact selected trajectory with rate output",
+    "show bubble scale separation, bounded critical norm and genuine finite-time nonextension"
+  ],
+  "original_paper_strictly_accepted": "9/21",
+  "new_original_manuscript_environments": 0,
+  "unconditional_typeII_PDE_main_theorem_proved": false,
+  "warning": "Exact kinematic consequences plus a conditional limit transfer are not the nonlinear dynamical selection theorem and do not certify a new Hartree blowup solution."
+}
