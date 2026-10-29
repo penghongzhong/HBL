@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualWholeRadiationSelfCubic
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualWholeRadiationSelfCubicIncrement
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_exact
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_core_bound
+
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_core_bound
