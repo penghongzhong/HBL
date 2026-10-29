@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.MonopoleSourceTerminal
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.monopoleSourceDrivenMu
+#check @HBL.TypeIIDynamicSelection.monopoleSourceDrivenTheta
+#check @HBL.TypeIIDynamicSelection.actual_monopole_source_selects_terminal_coordinates
+
+#print HBL.TypeIIDynamicSelection.monopoleSourceDrivenMu
+#print HBL.TypeIIDynamicSelection.monopoleSourceDrivenTheta
+#print axioms HBL.TypeIIDynamicSelection.actual_monopole_source_selects_terminal_coordinates
