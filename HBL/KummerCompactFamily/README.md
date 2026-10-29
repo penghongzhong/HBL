@@ -84,6 +84,10 @@ fresh directory, using the pinned Lean/mathlib versions and
 import closure, and unchanged source and compiled-artifact hashes. The full
 audit is stored in reproducible compressed form with hashes.
 
+The subsequent [boundary uniqueness block](../KummerBoundaryUnique/README.md)
+proves that these fixed endpoint problems have unique classical jets, and
+controls the error of any classical boundary jet by its equation residual.
+
 This closes compact-parameter uniformity and all finite parameter jets for a
 constructed local annulus at any fixed `z > 0`. Its width depends on the compact
 parameter set. A prescribed larger matching annulus, the required spatially
