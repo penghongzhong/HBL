@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-29",
+  "status": "REVISED TYPE II MAIN THEOREM OPEN; SIX TERMINAL SUPPORTING THEOREMS STRICTLY PROVED",
+  "repo": "penghongzhong/HBL",
+  "branch": "hbl-typeii-minimal-main-20261029",
+  "exact_lean_source_commit": "2d34a7f63cfcf83f504fb709f900d67ef5303c3d",
+  "success_run": 40866180583,
+  "source": "HBL/TypeIIMinimal/TerminalCriterion.lean",
+  "audit": "HBL/TypeIIMinimal/TerminalCriterionAudit.lean",
+  "success": true,
+  "verified_declarations": 6,
+  "toolchain": "Lean 4.35.0-rc3",
+  "mathlib_commit": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "strict_trust_zero": true,
+  "warning_as_error": true,
+  "transitive_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "new_original_manuscript_environments": 0,
+  "historical_strict_original_count": "9/21",
+  "revision": {
+    "fixed_nu": "sqrt(2), irrational, >1",
+    "fixed_mu_infty": "sqrt(2)/2 > 9/16",
+    "fixed_theta_infty": 0,
+    "terminal_radiation": "g=0",
+    "stable_coordinate": "one selected value (rather than every value)",
+    "rate": "lambda(t)^(-1)~C (T-t)^(1/2+sqrt(2))",
+    "conclusion": "exact radial energy-critical inverse-square Hartree PDE orbit, bounded Hdot1, finite maximal time, nontrivial W concentration, no strong Hdot1 extension",
+    "removed_first_stage_claims": "all terminal radiation parameters; open compact range of rates; arbitrary energy closeness; C1 center-stable graph; uniqueness for all parameter values"
+  },
+  "theorem_statement": "verification/typeii-minimal-main-replacement.tex",
+  "proof_outline": "verification/typeii-minimal-revised-main-20261029.md",
+  "strictly_unproved_obligations": [
+    "actual normalized scaled Hartree bubble family is uniformly bounded and scale-separated in physical Hdot1",
+    "construct physical three-region finite parametrix at fixed nonresonant speed with exact Hartree residual and source bounds",
+    "construct actual constrained Hartree propagator and backward solver without withdrawn exact zero-centre decomposition",
+    "prove exact nonlinear contraction and reconstruct physical radial Hartree solution",
+    "prove full physical time-scale asymptotics and maximal lifespan"
+  ],
+  "warning": "Do not count a conditional terminal criterion as unconditional PDE existence, and do not convert the historical 9/21 count to 20/21 or 21/21 after theorem revision."
+}
