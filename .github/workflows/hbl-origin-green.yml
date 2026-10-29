@@ -58,6 +58,14 @@ jobs:
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Restore verified base project cache when available
+        id: hbl_project_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
       - name: Strict build and full type and axiom audit
         shell: bash
         run: |
@@ -68,16 +76,19 @@ jobs:
           clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',clean)
           PY
-          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.UniformBound HBL.KummerOriginGreen.GreenAudit HBL.KummerOriginGreen.UniformAudit 2>&1 | tee evidence/build.log
+          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.UniformBound HBL.KummerOriginGreen.GreenTerminal HBL.KummerOriginGreen.GreenAudit HBL.KummerOriginGreen.UniformAudit HBL.KummerOriginGreen.TerminalAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenBridge.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformBound.lean 2>&1 | tee evidence/strict-uniform.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenTerminal.lean 2>&1 | tee evidence/strict-terminal.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/TerminalAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
-          names=('originGreen_source_norm_le','originGreen_coefficients_norm_le',
+          names=('exists_compact_originGreen_outgoing_and_uniform',
+            'originGreen_source_norm_le','originGreen_coefficients_norm_le',
             'originGreen_value_slope_norm_le','exists_compact_originGreen_value_slope_bound',
             'originGreenWronskian_exact','originGreenWronskian_ne',
             'originGreen_sources_continuous','originGreen_coefficients_hasDerivAt',
@@ -101,6 +112,12 @@ jobs:
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
           sha256sum HBL/KummerOriginGreen/*.lean > evidence/origin-green-source-hashes.txt
+      - name: Save source-indexed project build cache
+        if: always() && steps.hbl_project_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-origin-green-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL/KummerOriginGreen/*.lean') }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
