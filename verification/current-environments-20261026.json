@@ -53,5 +53,13 @@
     "Weighted coupled backward solver and nonlinear joint construction",
     "Physical PDE reconstruction, nonextendibility and C1 parameter-to-initial-data map"
   ],
-  "counting_rule": "Do not add repair statements to the historical numerator. Do not treat retired obligations as proved or deleted. The 19/24 named-environment figure excludes open packages and is not a main-theorem completion percentage."
+  "counting_rule": "Do not add repair statements to the historical numerator. Do not treat retired obligations as proved or deleted. The 19/24 named-environment figure excludes open packages and is not a main-theorem completion percentage.",
+  "withdrawn_recovery_review_20261029": {
+    "source": "verification/withdrawn-environment-recovery-20261029.json",
+    "recovered_historical_statements": 8,
+    "restored_original_environments": 0,
+    "strict_original_environment_count_from_latest_audit": "9/21",
+    "formal_diagnostic_status": "verification/zero-center-obstruction-status.json",
+    "scope": "Static form coercivity alone does not establish an invariant zero-centre splitting. The actual Hartree left-graph equation and subsequent slow-frame construction remain open; the diagnostic is not a counterexample to the Hartree PDE."
+  }
 }

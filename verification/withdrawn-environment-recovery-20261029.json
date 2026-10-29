@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-29",
+  "source_commit": "f911703888f397f7904570dcf5b2528a7d2c0240",
+  "source": {
+    "filename": "HBL_v32_WeightedFredholmCompact_20261017.tex",
+    "version_id": "35",
+    "modified_at": "2026-10-20T01:06:59.116229Z",
+    "role": "Recovered historical statement witness, not the current repaired manuscript",
+    "access": "Historical Library version read on 2026-10-29; private file identifiers omitted from the repository."
+  },
+  "strict_original_environment_count": "9/21",
+  "newly_accepted_original_environments": 0,
+  "historical_withdrawn_statements_recovered": 8,
+  "environments": [
+    {
+      "historical_id": "old-3.1",
+      "label": "thm:form-splitting-stage5",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 3655,
+      "source_end_line": 3685,
+      "statement_tex": "\\begin{proposition}[线性化算子的谱分解]\\label{thm:form-splitting-stage5}\n存在 $e_0,c_0,C_0>0$、有界投影 $P_h,P_0,P_c$ 与固定有限秩可逆变换\n$\\mathbb T_0$，使\n\\begin{equation*}\n \\mathcal X_1=E_h\\dotplus E_0\\dotplus E_c,\n \\qquad\n E_h=\\operatorname{span}\\{\\mathcal Y_+,\\mathcal Y_-\\},\n \\qquad\n E_0=\\operatorname{span}\\left\\{\n \\binom{\\Lambda W}{0},\\binom0W\\right\\},\n\\end{equation*}\n并满足：\n\\begin{enumerate}[label=\\textup{(S\\arabic*)}]\n \\item $\\mathbb A_0\\mathcal Y_\\pm=\\pm e_0\\mathcal Y_\\pm$，且这是唯一非零径向实特征对；\n \\item 在 $E_c$ 上\n \\begin{equation}\\label{eq:coercive-Ec-stage2}\n c_0\\|Z\\|_{\\mathcal X_1}^2\n \\le\\langle\\mathbb L_0Z,Z\\rangle\n \\le C_0\\|Z\\|_{\\mathcal X_1}^2;\n \\end{equation}\n \\item $\\mathbb T_0^{-1}\\mathbb A_0\\mathbb T_0$ 相对于\n $E_h\\dotplus E_0\\dotplus E_c$ 精确约化；并且\n \\begin{equation*}\n \\|P_h\\|_{\\mathfrak B_{\\rm f}}\n +\\|P_0\\|_{\\mathfrak B_{\\rm f}}\n +\\|P_c\\|_{\\mathfrak B_{\\rm f}}\n +\\|\\mathbb T_0^{\\pm1}\\|_{\\mathfrak B_{\\rm f}}\n \\le C_0.\n \\end{equation*}\n\\end{enumerate}\n\\end{proposition}",
+      "explicit_statement_references": [],
+      "restoration_obligation": "Recover the actual physical Hamilton domain, hyperbolic pair and reference centre. Prove the zero-centre graph equation with a bounded solution in both physical spaces, or replace exact splitting by retained triangular coupling.",
+      "statement_sha256": "81a03f75619137376b311e2a2cbefbcc0ca18ad3ae8d3cc3b0db3fff5cf9013f"
+    },
+    {
+      "historical_id": "old-3.2",
+      "label": "thm:slow-Feshbach-stage3",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 4069,
+      "source_end_line": 4096,
+      "statement_tex": "\\begin{proposition}[参数依赖的线性化分解]\\label{thm:slow-Feshbach-stage3}\n存在 $\\varepsilon_{\\rm sl}>0$，使当\n$\\sup_s\\|\\mathbb K_{\\rm sl}(s)\\|_{\\mathfrak B_{\\rm f}}\\le\\varepsilon_{\\rm sl}$ 时，存在 $C^1$ 可逆族\n\\begin{equation*}\n \\mathbb T_{\\rm sl}(s)=\\mathbb T_0\\mathbb S_{\\rm sl}(s)\n\\end{equation*}\n满足\n\\begin{align}\n \\|\\mathbb S_{\\rm sl}^{\\pm1}-I\\|_{\\mathfrak B_{\\rm f}}\n &\\le C\\|\\mathbb K_{\\rm sl}\\|_{\\mathfrak B_{\\rm f}},\\notag \\\\\n \\|\\partial_s\\mathbb S_{\\rm sl}^{\\pm1}\\|_{\\mathfrak B_{\\rm f}}\n &\\le C\\|\\partial_s\\mathbb K_{\\rm sl}\\|_{\\mathfrak B_{\\rm f}},\n \\label{eq:Ssl-der-stage3}\n\\end{align}\n并精确块对角化静态慢生成元：\n\\begin{equation}\\label{eq:slow-block-stage3}\n \\mathbb T_{\\rm sl}^{-1}\\mathbb A_{\\rm sl}\\mathbb T_{\\rm sl}\n =\\mathbb H_h^{\\rm sl}\\oplus\\mathbb M_0^{\\rm sl}\\oplus\\mathbb A_c^{\\rm sl}.\n\\end{equation}\n双曲块保持指数隙，补空间保持一致 coercivity；完整移动生成元中新增的非对角项满足\n\\begin{equation}\\label{eq:Esl-L1-stage3}\n \\int_{s_0}^\\infty\\|\\mathbb E_{\\rm sl}(s)\\|_{\\mathfrak B_{\\rm f}}\\,\\dd s\n \\le C\\int_{s_0}^\\infty\n \\bigl(\\|\\partial_s\\mathbb K_{\\rm sl}\\|\n +s^{-1}\\|\\mathbb K_{\\rm sl}\\|\n +\\|\\mathbb R_{\\rm int}\\|\\bigr)\\,\\dd s<\\infty.\n\\end{equation}\n\\end{proposition}",
+      "explicit_statement_references": [],
+      "restoration_obligation": "The claimed zero-centre Sylvester inverse is not implied by form coercivity. Requires a valid actual graph/Sylvester construction or a different coordinate theorem retaining feedback.",
+      "statement_sha256": "6332afb448f283c890f5e976c0dd983c093bbb9529b46cf6881cfdb1c6518e88"
+    },
+    {
+      "historical_id": "old-3.3",
+      "label": "lem:Esl-pointwise-v2",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 4193,
+      "source_end_line": 4202,
+      "statement_tex": "\\begin{lemma}[慢标架连接的点态可积裕量]\\label{lem:Esl-pointwise-v2}\n对命题~\\ref{thm:finite-profile-stage3} 的有限背景，存在\n$\\kappa_{\\rm sl}>0$，使充分大的 $s_0$ 上\n\\begin{equation*}\n \\|\\mathbb E_{\\rm sl}(s)\\|_{\\mathfrak B_{\\rm f}}\n \\le C s^{-1-\\kappa_{\\rm sl}}.\n\\end{equation*}\n同样的估计对固定 $g$ 的两条 $h$ 路径之差成立，并多乘其\n$\\mathcal P_\\delta$ 距离。\n\\end{lemma}",
+      "explicit_statement_references": [
+        "thm:finite-profile-stage3"
+      ],
+      "restoration_obligation": "The existing generic movingConnection_positive_margin proves an implication only. Actual finite background, a valid frame and all primitive/two-path estimates are still required.",
+      "statement_sha256": "4261b05b891d24ffbdb2b4e7b0e3bc477dee5673fc65b5f64ed4762d077f2dda"
+    },
+    {
+      "historical_id": "old-3.4",
+      "label": "thm:full-slow-modulation-v2",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 4278,
+      "source_end_line": 4307,
+      "statement_tex": "\\begin{proposition}[一般终端辐射下的调制方程]\\label{thm:full-slow-modulation-v2}\n令 $V_N[h;g]$ 为命题~\\ref{thm:finite-profile-stage3} 的动态剖面，\n$\\mathbb T_{\\rm sl}$ 为命题~\\ref{thm:slow-Feshbach-stage3} 的完整慢变换，并写\n\\[\n \\widehat Z:=\\mathbb T_{\\rm sl}^{-1}\\operatorname{vec}(v-V_N[h;g]).\n\\]\n施加动态阈值正交 $P_0\\widehat Z=0$。则在紧参数图和小终端辐射球上一致存在\n$2\\times2$ 矩阵 $\\widehat{\\mathcal M}_N(s)$，满足\n\\begin{equation}\\label{eq:Mhat-v2}\n \\|\\widehat{\\mathcal M}_N-I_2\\|\\le\\frac14,\n \\qquad\n \\|\\widehat{\\mathcal M}_N^{-1}\\|\\le\\frac43,\n\\end{equation}\n且物理 Kummer 参数满足\n\\begin{equation*}\n \\widehat{\\mathcal M}_N(s)\\,\\zeta_s=\\mathcal F_N^{\\rm mod}(s),\n\\end{equation*}\n其中\n\\begin{equation}\\label{eq:full-mod-bound-v2}\n |\\mathcal F_N^{\\rm mod}(s)|\n \\le C\\left[\n s^{-N}+s^{-1-\\kappa_{\\rm sl}}\n +s^{-1}\\|\\widehat Z(s)\\|_{\\mathcal X_1}\n +s^{-1-\\kappa_{\\rm sl}}\\|\\widehat Z(s)\\|_{\\mathcal X_{\\rm f}}\n +\\|\\widehat Z(s)\\|_{\\mathcal X_{\\rm f}}^2\n \\right].\n\\end{equation}\n特别地，一般 $g\\ne0$ 的所有不可积 $A_g,A_g^2,A_g^3,A_gc_g,\\ldots$\n慢 Hessian 项均只进入精确块对角主部，不在调制右端留下裸的长程线性漂移。\n\\end{proposition}",
+      "explicit_statement_references": [
+        "thm:finite-profile-stage3",
+        "thm:slow-Feshbach-stage3"
+      ],
+      "restoration_obligation": "Requires actual physical coordinate maps and modulation/feedback identification; the older frame premise is not restored.",
+      "statement_sha256": "f03e37256ef20e67a9ca5f9cebcda471144ab4ee6a1ed2c877e9ce3215d951f1"
+    },
+    {
+      "historical_id": "old-4.1",
+      "label": "prop:single-green-stage4",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 4430,
+      "source_end_line": 4440,
+      "statement_tex": "\\begin{lemma}[单条轨道的后向线性估计]\\label{prop:single-green-stage4}\n取 $M>\\mu_*+3$，并令 $s_0$ 足够大。对方程~\\eqref{eq:exact-error-stage4} 的任意源项 $F$，存在唯一终端规范化后向解算子 $\\mathbb G_{h,g}$；稳定双曲方向还存在齐次传播 $\\mathbb S_{h,g}[\\alpha_-]$。它们满足\n\\begin{align}\n \\|\\mathbb G_{h,g}F\\|_{\\mathcal X_M}\n &\\le C_M\\|F\\|_{\\mathcal Y_{M+1}},\n \\label{eq:single-Green-stage4}\\\\\n \\|\\mathbb G_{h,g}F\\|_{\\mathcal X_{M+\\ell}}\n &\\le C_{M,\\ell}\\|F\\|_{\\mathcal Y_{M+1+\\ell}},\\notag \\\\\n \\|\\mathbb S_{h,g}[\\alpha_-]\\|_{\\mathcal X_M}\n &\\le C_Ms_0^M|\\alpha_-|.\\notag \\end{align}\n\\end{lemma}",
+      "explicit_statement_references": [
+        "eq:exact-error-stage4"
+      ],
+      "restoration_obligation": "Requires actual constrained evolution, identity/cocycle/generator laws, source/domain bounds and stable homogeneous propagation.",
+      "statement_sha256": "298b1909738c227f45e3acf3adcf3dc8241c21582e0c5de09b62f57df0241422"
+    },
+    {
+      "historical_id": "old-4.2",
+      "label": "prop:lossy-green-stage4",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 5176,
+      "source_end_line": 5198,
+      "statement_tex": "\\begin{proposition}[两条轨道的后向比较]\\label{prop:lossy-green-stage4}\n设 $F,\\widetilde F$ 分别位于两条路径的源纤维，且\n$\\widetilde F\\in\\mathcal Y_{M+1+\\ell_{\\rm lr}}$。则\n\\begin{align}\n &\\left\\|\\mathbb G_{h,g}F\n -\\mathbf C^Z_{h\\leftarrow\\widetilde h}\n \\mathbb G_{\\widetilde h,\\widetilde g}\\widetilde F\\right\\|_{\\mathcal X_M}\n \\notag\\\\\n &\\quad\\le C_M\n \\left\\|F-\\mathbf C^F_{h\\leftarrow\\widetilde h}\\widetilde F\\right\\|_{\\mathcal Z_M}\n +C_Ms_0^{-\\eta}(d_h+d_g)\n \\|\\widetilde F\\|_{\\mathcal Y_{M+1+\\ell_{\\rm lr}}}.\n \\label{eq:lossy-Green-stage4}\n\\end{align}\n特别地，若 $F=\\mathbf C^F_{h\\leftarrow\\widetilde h}\\widetilde F$，则\n\\begin{equation}\\label{eq:lossy-Green-simple-stage4}\n \\left\\|\\mathbb G_{h,g}F\n -\\mathbf C^Z_{h\\leftarrow\\widetilde h}\n \\mathbb G_{\\widetilde h,\\widetilde g}\\widetilde F\\right\\|_{\\mathcal X_M}\n \\le C_Ms_0^{-\\eta}(d_h+d_g)\n \\|\\widetilde F\\|_{\\mathcal Y_{M+1+\\ell_{\\rm lr}}}.\n\\end{equation}\n\\end{proposition}",
+      "explicit_statement_references": [],
+      "restoration_obligation": "Requires the actual two-background propagator comparison in the physical source and state fibres, including derivative loss.",
+      "statement_sha256": "fdd4534b966a27cfe4b8bf197fa1e9fda180724f64cdefcdbaa243bea955db02"
+    },
+    {
+      "historical_id": "old-5.2",
+      "label": "thm:joint-contraction-stage4",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 5681,
+      "source_end_line": 5705,
+      "statement_tex": "\\begin{proposition}[参数与余项的联合构造]\\label{thm:joint-contraction-stage4}\n按 \\eqref{eq:rho-lr-v4}、\\eqref{eq:delta-choice-stage4} 选择\n$\\delta,\\ell_{\\rm lr},M,N$。存在 $\\varepsilon_*>0$ 与 $s_*>0$，使只要\n\\begin{equation*}\n \\|g\\|_{\\mathcal R_N}\\le\\varepsilon_*,\n \\qquad |\\alpha_-|\\le s_0^{1-N},\n \\qquad s_0\\ge s_*,\n\\end{equation*}\n则\n$\\widehat{\\mathcal T}=(\\widehat{\\mathcal T}_\\zeta,\n\\widehat{\\mathcal T}_Q)$ 把\n$\\widehat{\\mathbb B}_{s_0}$ 映入自身，并在普通和范数下严格压缩。因此存在唯一固定点\n\\begin{equation}\\label{eq:fixed-point-stage4}\n (h_*,\\widehat Q_*)\n =\\widehat{\\mathcal T}(h_*,\\widehat Q_*).\n\\end{equation}\n恢复原路径纤维误差\n\\begin{equation}\\label{eq:recover-Q-v4}\n Q_*:=(\\mathbf U_{h_*}^Z)^{-1}\\widehat Q_*.\n\\end{equation}\n增长双曲起始坐标由引理~\\ref{prop:shooting-stage4} 唯一给出\n\\begin{equation*}\n \\alpha_+=\\Gamma_{s_0}(\\zeta_\\infty,g,\\alpha_-).\n\\end{equation*}\n\\end{proposition}",
+      "explicit_statement_references": [
+        "eq:rho-lr-v4",
+        "eq:delta-choice-stage4",
+        "prop:shooting-stage4"
+      ],
+      "restoration_obligation": "Requires the instantiated physical coupled nonlinear map, propagation, smallness and retained feedback; abstract contraction is insufficient.",
+      "statement_sha256": "92c22de30f0a5b203d3d0dd55795dd09f31be253da62c316bd1d4f60aac58c1b"
+    },
+    {
+      "historical_id": "old-5.3",
+      "label": "prop:center-stable-C1-v52",
+      "status": "withdrawn_not_proved",
+      "source_start_line": 5801,
+      "source_end_line": 5827,
+      "statement_tex": "\\begin{proposition}[初值图与速率函数的 $C^1$ 性]\\label{prop:center-stable-C1-v52}\n对每个固定 $s_0\\ge s_*$，射击坐标满足\n\\begin{equation*}\n \\alpha_+=\\Gamma_{s_0}(\\zeta_\\infty,g,\\alpha_-),\n \\qquad \\Gamma_{s_0}\\in C^1,\n\\end{equation*}\n并在\n\\begin{equation*}\n (\\zeta_\\infty,g,\\alpha_-,\\alpha_+)\n \\in\\mathbb R^2\\times\\mathcal R_N\\times\\mathbb R^2,\n \\qquad |\\alpha_-|\\le s_0^{1-N},\n\\end{equation*}\n中定义余维一局部 $C^1$ 图。端点映射\n\\begin{equation*}\n \\mathfrak E_{s_0}(\\zeta_\\infty,g,\\alpha_-)\n :=\\zeta(s_0)=\\zeta_\\infty+h_*(s_0)\n\\end{equation*}\n满足\n\\begin{equation*}\n D_{\\zeta_\\infty}\\mathfrak E_{s_0}=I_2+O(s_0^{-\\delta}),\n\\end{equation*}\n故充分大的 $s_0$ 上关于 $\\zeta_\\infty$ 局部可逆，并且\n\\begin{equation}\\label{eq:rate-map-stage4}\n a_\\infty(u_0):=2\\mu_\\infty(u_0)+\\frac12\n\\end{equation}\n是在该图上的局部 $C^1$ 函数。\n\\end{proposition}",
+      "explicit_statement_references": [],
+      "restoration_obligation": "Requires the actual fixed-point family, physical initial-data chart and C1 shooting/endpoint map.",
+      "statement_sha256": "adb3fd1f5fb9ac87c2c1e59594f1d3c5e1a8fb6219d5bf69db64b96b4dc437c0"
+    }
+  ],
+  "proof_step_recovered": {
+    "source_start_line": 4117,
+    "source_end_line": 4137,
+    "excerpt_tex": "对 $E_0\\leftrightarrow E_c$ 分量，左乘 $-\\mathbb J$ 后得到二次型方程\n\\[\n a(u,\\phi):=\\langle\\mathbb L_0u,\\phi\\rangle=\\ell(\\phi),\n \\qquad \\phi\\in E_c,\n\\]\n并由~\\eqref{eq:coercive-Ec-stage2}\n\\[\n a(u,u)\\ge c_0\\|u\\|_{\\mathcal X_1}^2,\n \\qquad\n |\\ell(\\phi)|\\le C\\|\\mathbb B\\|\\|\\phi\\|_{\\mathcal X_1}.\n\\]\nLax--Milgram 因而给出\n\\[\n \\|u\\|_{\\mathcal X_1}\\le c_0^{-1}C\\|\\mathbb B\\|,\n \\qquad\n \\|\\mathfrak L_{0c}^{-1}\\|+\\|\\mathfrak L_{c0}^{-1}\\|\\le C_0.\n\\]\n综上\n\\begin{equation}\\label{eq:Lric-inverse-v52}\n \\|\\mathfrak L^{-1}Y\\|\\le C_0\\|Y\\|.\n\\end{equation}",
+    "warning": "The finite-dimensional certificate refutes the general implication from centre form coercivity to a zero-centre Sylvester inverse. It does not disprove the concrete Hartree splitting or the main PDE theorem.",
+    "excerpt_sha256": "c950cfce817c6f0a361d841294b621071d51bf1840b78d34e57b13d595d29193"
+  },
+  "decision": "No withdrawn original environment is restored. Keep the valid static form results; require a separately justified actual graph equation, or retain the zero-centre coupling in the physical coordinate construction.",
+  "fixed_graph_proof_recovered": {
+    "source_start_line": 3939,
+    "source_end_line": 3973,
+    "excerpt_tex": "\\medskip\\noindent\\textit{零能方向的固定分解.}\\phantomsection\\label{lem:zero-left-graph-stage5}\\quad \n存在唯一秩至多二的有界映射\n\\begin{equation*}\n \\ell_0:C_{\\rm ref}\\longrightarrow E_0\n\\end{equation*}\n满足\n\\begin{equation}\\label{eq:ell0-invariance-stage5}\n P_f^{\\rm ref}\\mathbb A_0(I+\\ell_0)z\n =\\ell_0P_c^{\\rm ref}\\mathbb A_0(I+\\ell_0)z,\n \\qquad z\\in C_{\\rm ref}.\n\\end{equation}\n而且 $\\ell_0$ 在 $\\mathcal X_1$ 与 $\\mathcal X_{\\rm f}$ 上均有界。\n\n\n\n在 $E_0\\dotplus C_{\\rm ref}$ 上写\n\\[\n (I-P_h)\\mathbb A_0(I-P_h)=\n \\begin{pmatrix}0&B_0\\\\0&D_c\\end{pmatrix}.\n\\]\n若 $\\ell_0z=\\lambda_+(z)e_{\\rm sc}+\\lambda_-(z)e_{\\rm ph}$，则图不变性等价于\n\\begin{equation*}\n D_c^*\\lambda_\\pm=b_\\pm.\n\\end{equation*}\n半直线共轭把这两个对偶方程分别化为 $H_\\pm$ 的零能方程；其仿射荷分母\n$\\langle\\psi_\\pm,H_\\pm(\\chi_{\\rm aff}r)\\rangle=-c_\\pm$ 非零，故固定规范下存在唯一解，并有\n\\begin{equation}\\label{eq:left-graph-bound-stage5}\n |\\lambda_\\pm(z)|\\le C\\|z\\|_{\\mathcal X_1}.\n\\end{equation}\n对同一方程作用 $D^{\\alpha_{\\rm f}}$，利用式~\\eqref{eq:compact-form-vanish-stage5} 的强空间低阶算子界得到\n\\begin{equation}\\label{eq:left-graph-strong-bound-stage5}\n |\\lambda_\\pm(z)|+|\\lambda_\\pm(D^{\\alpha_{\\rm f}}z)|\n \\le C\\|z\\|_{\\mathcal X_{\\rm f}}.\n\\end{equation}\n故 $\\ell_0$ 在两个状态空间上均有界，且唯一。",
+    "review": "The claimed physical half-line reduction, admissible source class, domain and simultaneous energy/strong-space bounds remain to be proved. The finite-dimensional obstruction does not refute this concrete claim.",
+    "excerpt_sha256": "a588d1161069e5745260a68e7f5d3945c1de87e4294078850b0111471fdec595"
+  },
+  "formal_diagnostic": {
+    "lean_terminal": "HBL.ZeroCenterObstruction.static_data_do_not_force_zero_center_splitting",
+    "validation_status_file": "verification/zero-center-obstruction-status.json",
+    "validation_status_sha256": "7d996d42791d51d5d3659ea354aeb69124e2ab83e8c973dd9325a401ef9dc837",
+    "validation_passed": true,
+    "newly_accepted_original_environments": 0,
+    "review": "HBL/ZeroCenterObstruction/README.md"
+  },
+  "exact_historical_excerpt_comparison": {
+    "matched_excerpts": 10,
+    "scope": "Eight complete historical statements and two proof passages compared byte-for-byte with the retrieved version-35 line windows."
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "validation_passed": true,
+  "diagnostic_counterexample_only": true,
+  "new_supporting_theorems": 1,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "not_a_counterexample_to_the_Hartree_PDE": true,
+  "base_commit": "f911703888f397f7904570dcf5b2528a7d2c0240",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "one_theorem_per_file": true,
+  "strict_source_exit_codes": {
+    "HBL/ZeroCenterObstruction/Definitions.lean": 0,
+    "HBL/ZeroCenterObstruction/StaticDataCounterexample.lean": 0
+  },
+  "isolated_fresh_compilation": true,
+  "audit_exit_code": 0,
+  "source_sha256": {
+    "HBL/ZeroCenterObstruction/Definitions.lean": "503b93d30e2781f7749475d1fcfed06405a16fffbdcce589b4e38f351bad1bb5",
+    "HBL/ZeroCenterObstruction/StaticDataCounterexample.lean": "579a59413bf76ecfa053270195d9e0b18a09c0d8c5ba9554258fbb590e5346c4",
+    "HBL/ZeroCenterObstruction/ObstructionAudit.lean": "31fc5b6d9faedd2085ba62ddcb9fab8f9afb220470eb7208d187bc27441e41b1"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/ZeroCenterObstruction/Definitions.lean": "87dfbd1204fca4c9bd085c35b42861c1a05e0c088588b71844189c791a52251d",
+    "HBL/ZeroCenterObstruction/StaticDataCounterexample.lean": "15834b70d830b362511218931a20bbb65348b89e6589f53227bc9cccc7a7753a"
+  },
+  "audited_definition_bodies": [
+    "HBL.ZeroCenterObstruction.Plane",
+    "HBL.ZeroCenterObstruction.State",
+    "HBL.ZeroCenterObstruction.dot",
+    "HBL.ZeroCenterObstruction.symplecticLinear",
+    "HBL.ZeroCenterObstruction.hessianLinear",
+    "HBL.ZeroCenterObstruction.J",
+    "HBL.ZeroCenterObstruction.L",
+    "HBL.ZeroCenterObstruction.A",
+    "HBL.ZeroCenterObstruction.zeroMode",
+    "HBL.ZeroCenterObstruction.centerMode",
+    "HBL.ZeroCenterObstruction.plusMode",
+    "HBL.ZeroCenterObstruction.minusMode",
+    "HBL.ZeroCenterObstruction.graphMode",
+    "HBL.ZeroCenterObstruction.HasInvariantZeroProjection"
+  ],
+  "axioms": {
+    "HBL.ZeroCenterObstruction.static_data_do_not_force_zero_center_splitting": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/zero-center-obstruction-types-and-axioms.txt.gz",
+  "compressed_output_sha256": "f765678a0cc24d1c3f66021bdf82cf91ae41574760671e6d3c9efc11568943bc",
+  "complete_type_output_sha256": "935bd2285661e32b5842944a6b9686ed4f6a2b89695fa67244754ad48c4b4674",
+  "complete_type_output_bytes": 795772,
+  "compressed_output_bytes": 12105,
+  "scope": "Explicit six-dimensional Hamilton model: skew J with J^2=-I, symmetric L, an explicit quadratic form with one negative square, real eigenvectors with eigenvalues +1 and -1, an exactly identified two-dimensional kernel, and coercivity on the reference centre, but no invariant zero-centre graph and no commuting bounded retraction onto the kernel. This refutes the general static-coercivity-to-splitting inference only; actual Hartree graph/domain/spectral obligations remain open."
+}
