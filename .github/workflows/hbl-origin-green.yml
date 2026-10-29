@@ -68,14 +68,18 @@ jobs:
           clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',clean)
           PY
-          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.GreenAudit 2>&1 | tee evidence/build.log
+          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.UniformBound HBL.KummerOriginGreen.GreenAudit HBL.KummerOriginGreen.UniformAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenBridge.lean 2>&1 | tee evidence/strict-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformBound.lean 2>&1 | tee evidence/strict-uniform.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
-          names=('originGreenWronskian_exact','originGreenWronskian_ne',
+          names=('originGreen_source_norm_le','originGreen_coefficients_norm_le',
+            'originGreen_value_slope_norm_le','exists_compact_originGreen_value_slope_bound',
+            'originGreenWronskian_exact','originGreenWronskian_ne',
             'originGreen_sources_continuous','originGreen_coefficients_hasDerivAt',
             'originGreenValue_hasDerivAt','originGreenSlope_hasDerivAt',
             'originGreen_equation','originGreen_endpoint_normalization',
