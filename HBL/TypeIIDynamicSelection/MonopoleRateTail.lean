@@ -17,7 +17,7 @@ physical radial cutoff projection, but the full PDE must still be matched. -/
 theorem firstMonopoleDrivenMu_tail
     {c b omega : ℝ → ℝ} {s0 beta A delta C : ℝ} (mu0 : ℝ)
     (hs0 : 0 < s0) (hbeta : 1 / 2 < beta) (hA : 0 ≤ A)
-    (hdelta : 0 < delta) (hC : 0 ≤ C)
+    (hdelta : 0 < delta)
     (hc : Differentiable ℝ c) (hb : Measurable b) (homega : Measurable omega)
     (hsmall : ∀ s : ℝ, s0 < s → |c s| ≤ 1)
     (hdecay : ∀ s : ℝ, s0 < s →
