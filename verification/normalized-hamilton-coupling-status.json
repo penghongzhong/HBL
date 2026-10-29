@@ -1,0 +1,72 @@
+{
+  "validation_passed": true,
+  "actual_tested_Hamilton_observation_only": true,
+  "new_supporting_theorems": 3,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "896d1eec92fd1a0aaa325f737ef1b5a866619ca0",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "one_theorem_per_file": true,
+  "foundation_build_exit_code": 0,
+  "foundation_build_is_full_strict_reaudit": false,
+  "strict_source_exit_codes": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": 0,
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": 0
+  },
+  "isolated_fresh_compilation": true,
+  "audit_exit_code": 0,
+  "source_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "8e994a7bdca3b760e0be12e37cfaeb6a1503d2ff5b023757eeffab2a2c2159ba",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "fdb974d2d152036d224b40795bd4a6d5bdbabdefd8cc9cadb76f0cec0ad2e70c",
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": "ac7a0b22f86a7f4a3402a9d9d0319b603534e5d3b089f9cbecc1bd9dfe35026c",
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": "f4e2772e9f7c9baeaa4d6b0df80f8df20fdca292b82329096e1a76524dde5cc8",
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": "afd6bc84677f376e4e79a664c1d8eb50c47c9e6a7ec1940e2e00dba62e28c015",
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": "df3695be38d590939a63f41a591988b9ee4ed44bb93bbde15303cb239c3f7084",
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": "21d041c95dba4debb56622acf05a2b1079fee72e6aa7bfedd086d62f2e9bbd21",
+    "HBL/TestedHamiltonCoupling/NormalizedAudit.lean": "6601342b11e1a11aa4b707c383b5174d9de80f51b68437e8fcef05d800ccaade"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "a5ea8d9dac5b9e57486fd8a52d5e5be66ec8b58f32ac1caf0b04140dd95eb226",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "6253d2c043f540834f8d7df3759fef2cf4ea836ceac6ac689f6bf602566026a6",
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": "fa779c674b8fcf11b1730aee3cb99e01c8e73520941989ba4c2d3c597d1245e5",
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": "94cbd9ee1b08a350eb3de726bf560bc1f23641701f9d77634e0a16b1f976c50c",
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": "fca7278919dbe18a4b574528c147b05a68d010ca1aa4f5ca53c9d15fbfa42ddc",
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": "584b9b82d450884aacbeb958d6289b52fa906af6c312b14ec1ab9daa2c10de9c",
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": "1c2bb80dc36db8a6c206f6c1cd15c0899c90b5d2395805cfedc352bc68912838"
+  },
+  "audited_definition_bodies": [
+    "HBL.MainBackward.normalizedPhaseTestProfile",
+    "HBL.MainBackward.normalizedHamiltonCoupling",
+    "HBL.MainBackward.normalizedConstrainedHamiltonCoupling"
+  ],
+  "axioms": {
+    "HBL.MainBackward.normalizedHamiltonCoupling_coordinate_action": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/normalized-hamilton-coupling-types-and-axioms.txt.gz",
+  "compressed_output_sha256": "f52addc354c42326537680805acaa4868d3cb1989246c5b9a6dfcedefd7eda9f",
+  "complete_type_output_sha256": "293287958022aa98ed3d2d748445a7e7a4edc6c77336448c84140e91009844d5",
+  "complete_type_output_bytes": 7527920,
+  "compressed_output_bytes": 98323,
+  "scope": "Constructs the actual bounded two-channel tested Hamilton observation (Hminus imaginary, -Hplus real), proves its precise differential/integral identity on smooth finite-energy inputs including the nonlocal real term, and restricts it to the closed constrained centre. The tests are exactly the fixed normalized scale/phase tests, with no test regularity or boundary hypotheses remaining. The exact fixed-coordinate action is identified on smooth finite-energy inputs/outputs satisfying the explicit Hamilton graph equations. No closed/dense common-domain construction, moving-coordinate identification, invariant splitting or propagator existence is claimed."
+}

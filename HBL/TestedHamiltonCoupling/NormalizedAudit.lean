@@ -1,0 +1,11 @@
+import HBL.TestedHamiltonCoupling.CoordinateAction
+set_option pp.all true
+set_option pp.maxSteps 10000000
+set_option maxRecDepth 1000000
+#print HBL.MainBackward.normalizedPhaseTestProfile
+#print HBL.MainBackward.normalizedHamiltonCoupling
+#print HBL.MainBackward.normalizedConstrainedHamiltonCoupling
+#check HBL.MainBackward.normalizedHamiltonTest_profiles
+#check HBL.MainBackward.normalizedHamiltonCoupling_actual_identity
+#check @HBL.MainBackward.normalizedHamiltonCoupling_coordinate_action
+#print axioms HBL.MainBackward.normalizedHamiltonCoupling_coordinate_action
