@@ -51,8 +51,6 @@ theorem originFirstSingularResidual_exact (mu theta : ℝ)
   push_cast
   field_simp [hz]
   ring_nf
-  rw [Complex.I_sq]
-  ring
 
 /-- Parameter differences of the required first overlap coefficient are
 exactly linear, with no assumptions about an abstract parameter family. -/
