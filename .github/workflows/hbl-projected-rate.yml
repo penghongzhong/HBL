@@ -88,16 +88,19 @@ jobs:
             src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
-          lake build HBL.TypeIIDynamicSelection.MonopoleRateAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.MonopoleRateAudit HBL.TypeIIDynamicSelection.ActualMonopoleProjectionAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateLimit.lean 2>&1 | tee evidence/strict-limit.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateTail.lean 2>&1 | tee evidence/strict-tail.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateTrapping.lean 2>&1 | tee evidence/strict-trapping.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMonopoleProjectionBound.lean 2>&1 | tee evidence/strict-actual-source-bound.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMonopoleProjectionAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
-          names=['firstMonopoleDrivenMu_tendsto',
+          names=['actual_firstMonopole_core_projection_quantitative',
+             'firstMonopoleDrivenMu_tendsto',
              'firstMonopoleDrivenMu_tail',
              'firstMonopoleDrivenMu_trapped']
           for name in names:
@@ -108,7 +111,7 @@ jobs:
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: 3 physical FIRST-MONOPOLE source-rate statements; full Hartree PDE projection/evolution remains OPEN. Original 9/21.')
+          print('PASS: actual physical first-monopole projection bound and 3 rate implications; full PDE original count remains 9/21.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
