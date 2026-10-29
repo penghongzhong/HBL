@@ -91,7 +91,7 @@ jobs:
             src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
-          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain HBL.TypeIIDynamicSelection.ActualSlowMonopoleGainAudit HBL.TypeIIDynamicSelection.ActualRegionalBridge HBL.TypeIIDynamicSelection.ActualRegionalBridgeAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteResidual HBL.TypeIIDynamicSelection.ActualMovingRemoteResidualAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSource HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSourceAudit HBL.TypeIIDynamicSelection.ActualHartreeCoreSource HBL.TypeIIDynamicSelection.ActualHartreeCoreSourceAudit HBL.TypeIIDynamicSelection.ActualRadiationCenter HBL.TypeIIDynamicSelection.ActualRadiationCenterAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain HBL.TypeIIDynamicSelection.ActualSlowMonopoleGainAudit HBL.TypeIIDynamicSelection.ActualRegionalBridge HBL.TypeIIDynamicSelection.ActualRegionalBridgeAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteResidual HBL.TypeIIDynamicSelection.ActualMovingRemoteResidualAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSource HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSourceAudit HBL.TypeIIDynamicSelection.ActualHartreeCoreSource HBL.TypeIIDynamicSelection.ActualHartreeCoreSourceAudit HBL.TypeIIDynamicSelection.ActualRadiationCenter HBL.TypeIIDynamicSelection.ActualRadiationCenterAudit HBL.TypeIIDynamicSelection.ActualRadiationScaling HBL.TypeIIDynamicSelection.ActualRadiationScalingAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceTerminal.lean 2>&1 | tee evidence/strict-hartree-source.log
@@ -126,6 +126,8 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeCoreSourceAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationCenter.lean 2>&1 | tee evidence/strict-actual-whole-radiation-center.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationCenterAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationScaling.lean 2>&1 | tee evidence/strict-radiation-scaling.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationScalingAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
@@ -162,6 +164,9 @@ jobs:
              'actualRadiationCenter_nonneg',
              'actual_radiation_center_quadratic_bound',
              'actual_radiation_center_bubble_cubic_error',
+             'rescalePhysicalRadiation_quartic',
+             'actualRadiationCenter_rescaling',
+             'actualRadiationCenter_equals_physical_slow_coefficient',
              'dynamically_selected_rate_super_self_similar']
           for name in names:
             fullname='HBL.TypeIIDynamicSelection.'+name
@@ -174,7 +179,7 @@ jobs:
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: true whole-radiation Hartree slow source center and physical first-layer source bounds; original three-region 2.12 and blowup remain OPEN.')
+          print('PASS: actual full-radiation Hartree coefficient c_g from exact physical scaling and its O(r²) core source; original one-layer 2.12 remains OPEN.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
