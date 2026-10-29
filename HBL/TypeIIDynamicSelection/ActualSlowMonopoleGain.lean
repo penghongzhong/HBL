@@ -64,7 +64,7 @@ theorem actual_exteriorHartree_slow_monopole_gain
     _ ≤ (Real.pi * hartreeKappa / 4 * c ^ 2 * r ^ 2) *
         ∫ rho in Ioi (monopoleQuadraticRadius c), |F rho| := hge
     _ ≤ (Real.pi * hartreeKappa / 4 * (s ^ (-beta)) ^ 2 * 1) * M := by
-      gcongr
+      gcongr <;> assumption
     _ = (Real.pi * hartreeKappa / 4 * M) * s ^ (-2 * beta) := by
       rw [hrpow]
       ring
