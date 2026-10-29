@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-29",
+  "branch": "hbl-typeii-minimal-main-20261029",
+  "strict_source_commit": "19c68cdc19c57a89463b382e0e711130d7d1d5b5",
+  "strict_workflow_run": 40887306051,
+  "conclusion": "success",
+  "lean": "4.35.0-rc3",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "flags": [
+    "trust=0",
+    "warningAsError=true"
+  ],
+  "checked_new_auxiliary_theorems_total": 21,
+  "proofs": [
+    "dynamicalClock_hasDerivAt",
+    "dynamical_rate_identity",
+    "selected_rate_of_dynamical_mu_limit",
+    "dynamically_selected_rate_super_self_similar",
+    "actual_monopole_source_selects_terminal_coordinates",
+    "actual_monopole_source_selects_instantaneous_rate",
+    "dynamicalMu_hasDerivAt",
+    "monopoleEffective_minus_actualExterior_exact",
+    "monopoleEffective_actualExterior_match_norm_le",
+    "monopoleEffective_actualExterior_residual_diff_norm_le",
+    "radialRemoteQuarticDifference_vanishes_in_core",
+    "actual_radialHartree_remote_quartic_source_exact",
+    "actual_radialHartree_remote_center_error_le",
+    "remoteComplexQuarticDifference_measurable",
+    "remoteComplexQuarticDifference_vanishes_in_core",
+    "actual_complexHartree_remote_quartic_source_exact",
+    "actual_complexHartree_remote_center_error_le",
+    "actual_full_radial_residual_remote_eq_nonlin",
+    "actual_full_radial_residual_remote_eq_exterior_increment",
+    "actual_full_radial_residual_remote_match_norm_le",
+    "actual_exteriorHartree_center_gap_L1_le"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "exact_math_scope": [
+    "actual physical inverse-square Hartree exterior density from real and complex remote radiation",
+    "real and complex radial quartic cross-density identity and true nonlocal potential source at inner radii",
+    "complete rescaled radial Hartree residual local derivative cancellation for exterior radiation supported outside a fixed positive core",
+    "under actual exterior mass = slow amplitude, physical effective cubic agrees with true PDE residual up to O(r²) from true radial Riesz potential",
+    "actual (r/R)² separation gain from L¹ exterior density",
+    "no preselected asymptotic blowup speed"
+  ],
+  "open_physical_matching_conditions": [
+    "The remote field satisfying exterior support and source integrability has not yet been constructed from an exact Hartree orbit.",
+    "The nonlinear scalar self-consistency equation c(s)=4πκ ∫_R∞ (|V+Z|⁴-|V|⁴) dρ has not been solved.",
+    "The physical moving cutoff radius and its zero crossings require local-time support and uniform derivative estimates.",
+    "Full center modulation, constrained evolution, nonlinear fixed point, and dynamically selected blowup rate for exact PDE orbit remain open."
+  ],
+  "original_paper_strict_status": "9/21",
+  "new_original_environments": 0,
+  "unconditional_type_II_blowup_proved": false,
+  "new_unverified_candidates_at_time_of_record": [
+    "HBL/TypeIIDynamicSelection/PhysicalSourceMismatch.lean",
+    "HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGain.lean"
+  ],
+  "warning": "21 helper theorem declarations are not the original 21 paper environments; never report these as 21/21 manuscript certification."
+}
