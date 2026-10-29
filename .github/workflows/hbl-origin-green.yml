@@ -72,22 +72,27 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           import re,pathlib
-          p=pathlib.Path('HBL/KummerOriginGreen/GreenBridge.lean').read_text()
-          clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
-          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',clean)
+          for path in pathlib.Path('HBL/KummerOriginGreen').glob('*.lean'):
+            p=path.read_text()
+            clean=re.sub(r'/\-.*?\-/','',p,flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',clean),str(path)
           PY
-          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.UniformBound HBL.KummerOriginGreen.GreenTerminal HBL.KummerOriginGreen.GreenAudit HBL.KummerOriginGreen.UniformAudit HBL.KummerOriginGreen.TerminalAudit 2>&1 | tee evidence/build.log
+          lake build HBL.KummerOriginGreen.GreenBridge HBL.KummerOriginGreen.UniformBound HBL.KummerOriginGreen.GreenTerminal HBL.KummerOriginGreen.GreenUnique HBL.KummerOriginGreen.GreenAudit HBL.KummerOriginGreen.UniformAudit HBL.KummerOriginGreen.TerminalAudit HBL.KummerOriginGreen.UniqueAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenBridge.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformBound.lean 2>&1 | tee evidence/strict-uniform.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniformAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenTerminal.lean 2>&1 | tee evidence/strict-terminal.log
           lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/TerminalAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/GreenUnique.lean 2>&1 | tee evidence/strict-unique.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/KummerOriginGreen/UniqueAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
-          names=('exists_compact_originGreen_outgoing_and_uniform',
+          names=('originGreen_homogeneous_coordinates_derivative',
+            'originGreen_homogeneous_boundary_zero',
+            'exists_compact_originGreen_outgoing_and_uniform',
             'originGreen_source_norm_le','originGreen_coefficients_norm_le',
             'originGreen_value_slope_norm_le','exists_compact_originGreen_value_slope_bound',
             'originGreenWronskian_exact','originGreenWronskian_ne',
