@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualRadiationMomentDynamics
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualPhysicalRadiationMonopole
+#check @HBL.TypeIIDynamicSelection.actual_physical_radiation_slow_coefficient_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_physical_radiation_slow_coefficient_hasDerivAt
