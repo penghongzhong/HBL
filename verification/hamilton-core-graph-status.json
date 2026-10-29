@@ -1,0 +1,85 @@
+{
+  "validation_passed": true,
+  "actual_tested_Hamilton_observation_only": true,
+  "new_supporting_theorems": 4,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "cc2919043ba23fbead833c8508212740e4e58610",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "one_theorem_per_file": true,
+  "foundation_build_exit_code": 0,
+  "foundation_build_is_full_strict_reaudit": false,
+  "strict_source_exit_codes": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": 0,
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": 0,
+    "HBL/HamiltonCoreGraph/EnergyProfileInjective.lean": 0,
+    "HBL/HamiltonCoreGraph/CoordinateCongruence.lean": 0,
+    "HBL/HamiltonCoreGraph/OperatorCongruence.lean": 0,
+    "HBL/HamiltonCoreGraph/Definitions.lean": 0,
+    "HBL/HamiltonCoreGraph/SingleValued.lean": 0
+  },
+  "isolated_fresh_compilation": true,
+  "audit_exit_code": 0,
+  "source_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "8e994a7bdca3b760e0be12e37cfaeb6a1503d2ff5b023757eeffab2a2c2159ba",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "fdb974d2d152036d224b40795bd4a6d5bdbabdefd8cc9cadb76f0cec0ad2e70c",
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": "ac7a0b22f86a7f4a3402a9d9d0319b603534e5d3b089f9cbecc1bd9dfe35026c",
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": "f4e2772e9f7c9baeaa4d6b0df80f8df20fdca292b82329096e1a76524dde5cc8",
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": "afd6bc84677f376e4e79a664c1d8eb50c47c9e6a7ec1940e2e00dba62e28c015",
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": "df3695be38d590939a63f41a591988b9ee4ed44bb93bbde15303cb239c3f7084",
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": "21d041c95dba4debb56622acf05a2b1079fee72e6aa7bfedd086d62f2e9bbd21",
+    "HBL/HamiltonCoreGraph/EnergyProfileInjective.lean": "2c9e58a440e3e2da16cf192adee4cbb0e5eef37f7c245efcf6df4feeac693a86",
+    "HBL/HamiltonCoreGraph/CoordinateCongruence.lean": "7f805ced4292a24e9b0a3d41d7f8f7f65a8fd9ce4536a3b3873f65809973bd53",
+    "HBL/HamiltonCoreGraph/OperatorCongruence.lean": "e0904a217eee78c3761eaf988ed50f974e2c64f3dd291a2a872aa845d85ce82a",
+    "HBL/HamiltonCoreGraph/Definitions.lean": "1e00147c97713b81a95f7c292ca7d90b765a478c605ddfea11c7091875102b30",
+    "HBL/HamiltonCoreGraph/SingleValued.lean": "882a97dea726de88ebe9ecd7df3ce24fcaf2ed69ba14bb81c5445ec9a43a5bd9",
+    "HBL/HamiltonCoreGraph/GraphAudit.lean": "2d08a6a244d7982fac4dab2cb0873e06ca59a038f62729e4f92e6a1a872b94a4"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "a5ea8d9dac5b9e57486fd8a52d5e5be66ec8b58f32ac1caf0b04140dd95eb226",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "6253d2c043f540834f8d7df3759fef2cf4ea836ceac6ac689f6bf602566026a6",
+    "HBL/TestedHamiltonCoupling/NormalizedProfileDefinitions.lean": "fa779c674b8fcf11b1730aee3cb99e01c8e73520941989ba4c2d3c597d1245e5",
+    "HBL/TestedHamiltonCoupling/NormalizedProfiles.lean": "94cbd9ee1b08a350eb3de726bf560bc1f23641701f9d77634e0a16b1f976c50c",
+    "HBL/TestedHamiltonCoupling/NormalizedDefinitions.lean": "fca7278919dbe18a4b574528c147b05a68d010ca1aa4f5ca53c9d15fbfa42ddc",
+    "HBL/TestedHamiltonCoupling/NormalizedIdentity.lean": "584b9b82d450884aacbeb958d6289b52fa906af6c312b14ec1ab9daa2c10de9c",
+    "HBL/TestedHamiltonCoupling/CoordinateAction.lean": "1c2bb80dc36db8a6c206f6c1cd15c0899c90b5d2395805cfedc352bc68912838",
+    "HBL/HamiltonCoreGraph/EnergyProfileInjective.lean": "ca185bd1c947151d7519bd0196969b8cbd5e51c2facb1a985ae9a3b21460fa9c",
+    "HBL/HamiltonCoreGraph/CoordinateCongruence.lean": "df017421469f76cb60b33a80b89f5af1b284df081b16d85c2c535afc65aa5cc4",
+    "HBL/HamiltonCoreGraph/OperatorCongruence.lean": "a18e6aabc581016e10a21d08b739a76e685efdf7fac6c8bb5b4cafb4020e19ae",
+    "HBL/HamiltonCoreGraph/Definitions.lean": "47cc4e0d742dd094e07771008d05e77e0cf7210de3bf7785fc9604af8be72150",
+    "HBL/HamiltonCoreGraph/SingleValued.lean": "f0858910e02e8324fa010d03beab8470dbea92bdd80868d06ced11c258ed567d"
+  },
+  "audited_definition_bodies": [
+    "HBL.MainBackward.SmoothHamiltonGraph"
+  ],
+  "axioms": {
+    "HBL.MainBackward.smoothHamiltonGraph_singleValued": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/hamilton-core-graph-types-and-axioms.txt.gz",
+  "compressed_output_sha256": "d93a38217c638f8cc065af039b4ce20c5f4d2e17c25664af60ef884e4bde111d",
+  "complete_type_output_sha256": "b2e5bc3aabff87e70b626bcc7d21efc67543603b91af857811ab8e65667303b6",
+  "complete_type_output_bytes": 50498,
+  "compressed_output_bytes": 2605,
+  "scope": "The actual smooth finite-energy Hamilton graph, with the differential and nonlocal equations imposed on the positive half-line, is single-valued on L2 radial energy coordinates. Energy coordinate equality determines C1 profiles on the positive half-line. Both actual half-line operators respect this equivalence, including the nonlocal integral. No closed graph, dense domain, linearity, graph closability or evolution generation is proved."
+}
