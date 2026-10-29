@@ -45,8 +45,8 @@ theorem originThirdSingularResidual_exact (mu theta : ℝ)
   push_cast
   field_simp [hz]
   ring_nf
-  simp only [Complex.I_sq]
-  ring
+  all_goals simp only [Complex.I_sq]
+  all_goals ring
 
 /-- The regular origin basis begins with the exact second-order coefficient. -/
 def originRegularSecondCoefficient (mu theta : ℝ) : ℂ :=
@@ -83,7 +83,7 @@ theorem originSecondRegularResidual_exact (mu theta : ℝ)
   push_cast
   field_simp [hz]
   ring_nf
-  simp only [Complex.I_sq]
-  ring
+  all_goals simp only [Complex.I_sq]
+  all_goals ring
 
 end HBL.Profile.Kummer
