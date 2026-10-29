@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-29",
+  "branch": "hbl-origin-green-20261029",
+  "source_commit": "655af96fa6a501722f846a9f6ddbab1944a7e4c9",
+  "actions_run_id": 40853755059,
+  "actions_conclusion": "success",
+  "toolchain": {
+    "lean": "4.35.0-rc3",
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "trust_zero": true,
+    "warning_as_error": true
+  },
+  "added_compiled_auxiliary_theorems": 4,
+  "earlier_origin_green_auxiliary_theorems": 16,
+  "cumulative_new_origin_green_auxiliary_theorems": 20,
+  "newly_accepted_original_manuscript_environments": 0,
+  "original_manuscript_accepted": 9,
+  "original_manuscript_total": 21,
+  "next_original_target": "prop:one-layer-stage3",
+  "new_source": "HBL/KummerOriginGreen/SourceStability.lean",
+  "new_audit": "HBL/KummerOriginGreen/SourceStabilityAudit.lean",
+  "declarations": [
+    "HBL.Profile.Kummer.originGreen_coefficients_add_smul",
+    "HBL.Profile.Kummer.originGreen_value_slope_add_smul",
+    "HBL.Profile.Kummer.originGreen_source_difference_bound",
+    "HBL.Profile.Kummer.exists_compact_originGreen_source_stability"
+  ],
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "scope": "Actual origin-normalized Kummer Green source complex linearity, prescribed positive annulus C1 source Lipschitz estimate, and compact-real-parameter-uniform source stability.",
+  "limitations": "Finite-jet Frobenius source files committed later remain uncompiled at this point. The full Hartree residual matching and positive time-order gain needed for original prop:one-layer-stage3 remain open. This is a targeted module build, not whole-paper root audit."
+}
