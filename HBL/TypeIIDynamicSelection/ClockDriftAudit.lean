@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ClockDrift
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.dynamicalMu_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.dynamicalMu_hasDerivAt
