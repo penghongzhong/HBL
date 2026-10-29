@@ -35,6 +35,8 @@ theorem dynamicalMu_hasDerivAt
   convert ((hp.const_mul (2 : ℝ)).sub_const 1).div_const 4 using 1
   · funext t
     simp only [Pi.mul_apply]
+    unfold dynamicalMu
+    ring
   · ring
 
 end HBL.TypeIIDynamicSelection
