@@ -90,7 +90,7 @@ jobs:
             src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
           PY
-          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceTerminal.lean 2>&1 | tee evidence/strict-hartree-source.log
@@ -109,6 +109,10 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalResidualMatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorSpatialGain.lean 2>&1 | tee evidence/strict-exterior-L1-spatial-gain.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorSpatialGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalSourceMismatch.lean 2>&1 | tee evidence/strict-physical-mismatch.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalSourceMismatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGain.lean 2>&1 | tee evidence/strict-cutoff-csquare.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           ! grep -q sorryAx evidence/types-and-axioms.txt
           python3 - <<'PY'
           import pathlib,re
@@ -132,6 +136,10 @@ jobs:
              'actual_full_radial_residual_remote_eq_exterior_increment',
              'actual_full_radial_residual_remote_match_norm_le',
              'actual_exteriorHartree_center_gap_L1_le',
+             'actual_fullHartree_effective_mismatch_norm_le',
+             'actual_monopole_radius_inverse_square',
+             'actual_exteriorHartree_gap_quadratic_in_c',
+             'actual_exteriorHartree_gap_quadratic_fixed_core',
              'dynamically_selected_rate_super_self_similar']
           for name in names:
             fullname='HBL.TypeIIDynamicSelection.'+name
@@ -141,7 +149,7 @@ jobs:
           for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
             extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
           assert extras <= {'propext','Classical.choice','Quot.sound'},extras
-          print('PASS: actual time/spatial full radial Hartree remote residual and exterior Riesz cubic matching; PDE orbit and rate selection still OPEN.')
+          print('PASS: physical Hartree residual mismatch separated into scalar mass and moving-cutoff c² error; PDE orbit and rate selection still OPEN.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
