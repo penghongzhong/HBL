@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualMonopoleProjectionBound
+
+set_option autoImplicit false
+set_option pp.all true
+#check @HBL.TypeIIDynamicSelection.actual_firstMonopole_core_projection_quantitative
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_firstMonopole_core_projection_quantitative
