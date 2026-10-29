@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ExteriorSpatialGain
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_exteriorHartree_center_gap_L1_le
+#print axioms HBL.TypeIIDynamicSelection.actual_exteriorHartree_center_gap_L1_le
