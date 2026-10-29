@@ -117,7 +117,9 @@ theorem actual_complexHartree_remote_quartic_source_exact
           simp only [Pi.add_apply]
           ring
         rw [heq]
-        simp only [Pi.add_apply]
+        change (2 * Real.pi * hartreeKappa / r) *
+          (∫ rho in Ioi (0 : ℝ), rho * hartreeRadialLog r rho * ‖(V rho : ℂ)‖ ^ 4 +
+            rho * hartreeRadialLog r rho * F rho) = _
         rw [integral_add hVrow hFrow]
         ring
       _ = _ := by rw [hPotF]
