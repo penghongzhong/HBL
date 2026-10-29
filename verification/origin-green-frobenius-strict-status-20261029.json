@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-29",
+  "branch": "hbl-origin-green-20261029",
+  "strict_verified_source_commit": "30d64a5b20b13460d2fd2cc5a6cf1f0735b174b6",
+  "strict_run_id": 40857582165,
+  "strict_run_conclusion": "success",
+  "prior_verified_green_run": 40849544799,
+  "prior_verified_green_source_stability_run": 40853755059,
+  "toolchain": {
+    "lean": "4.35.0-rc3",
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "trust_zero": true,
+    "warning_as_error": true
+  },
+  "auxiliary_chain_compiled": {
+    "physical_origin_green_and_uniqueness": 16,
+    "physical_green_source_stability": 4,
+    "actual_frobenius_first_third_regular_and_parameter_jets": 13,
+    "total": 33
+  },
+  "frobenius_new_theorems": [
+    "HBL.Profile.Kummer.originSingularFirstCoefficient_formula",
+    "HBL.Profile.Kummer.originSingularFirstCoefficient_indicial",
+    "HBL.Profile.Kummer.originFirstSingularResidual_exact",
+    "HBL.Profile.Kummer.originSingularFirstCoefficient_difference",
+    "HBL.Profile.Kummer.originSingularThirdCoefficient_indicial",
+    "HBL.Profile.Kummer.originThirdSingularResidual_exact",
+    "HBL.Profile.Kummer.originRegularSecondCoefficient_indicial",
+    "HBL.Profile.Kummer.originSecondRegularResidual_exact",
+    "HBL.Profile.Kummer.originThirdSingularResidual_norm",
+    "HBL.Profile.Kummer.originSecondRegularResidual_norm",
+    "HBL.Profile.Kummer.exists_compact_originFrobenius_residual_bound",
+    "HBL.Profile.Kummer.originFrobeniusCoefficientVector_contDiff",
+    "HBL.Profile.Kummer.compact_originFrobenius_all_parameter_jets_bounded"
+  ],
+  "new_frobenius_sources": [
+    "HBL/KummerOriginGreen/FrobeniusFirstJet.lean",
+    "HBL/KummerOriginGreen/FrobeniusThirdJet.lean",
+    "HBL/KummerOriginGreen/FrobeniusUniform.lean",
+    "HBL/KummerOriginGreen/FrobeniusParameterJets.lean"
+  ],
+  "new_audits": [
+    "HBL/KummerOriginGreen/FrobeniusFirstJetAudit.lean",
+    "HBL/KummerOriginGreen/FrobeniusThirdJetAudit.lean",
+    "HBL/KummerOriginGreen/FrobeniusUniformAudit.lean",
+    "HBL/KummerOriginGreen/FrobeniusParameterJetsAudit.lean"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "exact_frozen_residuals": {
+    "notation": "q=theta-i(mu+1/4), c1=-q/2, c3=q(q+i)/24, b2=-(q+i/2)/6",
+    "singular": "L_mu,theta(z^-1 + c1 z + c3 z^3) = c3 (q+2i) z^3",
+    "regular": "L_mu,theta(1+b2 z^2) = b2 (q+3i/2) z^2"
+  },
+  "original_manuscript": {
+    "verified": 9,
+    "total": 21,
+    "new_this_round": 0,
+    "next_target": "prop:one-layer-stage3",
+    "main_PDE_theorem_closed": false,
+    "whole_paper_certified": false
+  },
+  "limitations": [
+    "The compact-uniform all-order parameter derivative theorem applies to the finite coefficient vector, not to the full infinite origin-normalized Kummer basis or Green operator.",
+    "The residual order estimates hold for explicit finite Frobenius polynomial jets; the true exact basis remainder estimate has not been constructed.",
+    "No real Hartree source and three-region matching certificate or temporal positive-gain classification is established by these auxiliary theorems.",
+    "Strict run audits only the imported targeted modules and complete listed types/axioms, not all original manuscript environments."
+  ]
+}
