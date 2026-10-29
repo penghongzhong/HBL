@@ -3,6 +3,7 @@
 # Exact core complex remote field beta-reduction corrected in nonlocal source match.
 # Prove complete core residual cancellation of time, spatial and scaling operators.
 # Physical mass-mismatch add-le orientation and cutoff linter repaired.
+# Correct exact real-norm scaling of full-radiation Hartree slow monopole coefficient.
 name: HBL dynamical Type II clock identity audit
 on:
   push:
