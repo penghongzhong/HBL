@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-29",
+  "project": "HBL radial energy-critical Hartree Type II blowup with dynamically selected rate",
+  "branch": "hbl-typeii-minimal-main-20261029",
+  "strict_source_commit": "a9c7f862f064cc8cc84d7586a7e18e82fc5337c1",
+  "exact_compiled_clock_drift_blob_sha": "9d2cd3a900b452dca3fc55f950f1f69a39b8db46",
+  "workflow_run": 40881441946,
+  "workflow_conclusion": "success",
+  "compiler": "Lean 4.35.0-rc3",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "trust_zero": true,
+  "warning_as_error": true,
+  "checked_auxiliary_declarations": 7,
+  "declarations": [
+    "HBL.TypeIIDynamicSelection.dynamicalClock_hasDerivAt",
+    "HBL.TypeIIDynamicSelection.dynamical_rate_identity",
+    "HBL.TypeIIDynamicSelection.selected_rate_of_dynamical_mu_limit",
+    "HBL.TypeIIDynamicSelection.dynamically_selected_rate_super_self_similar",
+    "HBL.TypeIIDynamicSelection.actual_monopole_source_selects_terminal_coordinates",
+    "HBL.TypeIIDynamicSelection.actual_monopole_source_selects_instantaneous_rate",
+    "HBL.TypeIIDynamicSelection.dynamicalMu_hasDerivAt"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "physical_content": {
+    "exact_clock": "q=(T-t) lambda^2; q_s=4mu; mu=(2bq-1)/4",
+    "exact_drift": "2mu_s=q b_s+4 b mu",
+    "actual_monopole_source": "two time-integrable normalized projections of the finite-cutoff Hartree-monopole EFFECTIVE increment under the previously audited primitive-path decay bounds",
+    "source_driven_mu_limit": "mu_infty=mu_0+integral_(s0,infinity) F_monopole,plus(s) ds",
+    "approximate_instantaneous_rate": "a(s)=1/2+2mu_source(s) tends to 1/2+2mu_source,infty, with no preassigned terminal value"
+  },
+  "important_limitations": [
+    "The source-driven mu_source(s) is defined by the effective monopole projected integral; equality to the actual physical modulation mu(s) is NOT established.",
+    "The effective residual contains an extra +c(s) V_c(s)^3 relative to the bare radial Hartree residual difference. This is bookkeeping and must be cancelled by actual physical radiation/remote Hartree terms.",
+    "The physical two-channel modulation equation, true q b_s+4 b mu source identity, full feedback and pointwise integrable drift for the EXACT PDE solution have not been proved.",
+    "No exact Hartree PDE orbit or genuine new Type II solution was constructed by these auxiliary theorems.",
+    "Actual blowup main theorem and original 2.12 remain unproved. Original manuscript strict count remains 9/21."
+  ],
+  "next_load_bearing_requirement": "Prove from the actual full three-region Hartree residual and constrained moving-frame equations that q b_s+4b mu equals twice a physically identified integrable forcing, preserving the complete nonlinear and remote radiation terms, then reconstruct the actual solution."
+}
