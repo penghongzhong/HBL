@@ -127,6 +127,13 @@ theorem actual_complexHartree_remote_quartic_source_exact
   have hNormSq : ‖(V r : ℂ)‖ ^ 2 = V r ^ 2 := by
     simp only [Complex.norm_real, Real.norm_eq_abs, sq_abs]
   unfold complexRadialHartreeNonlinearity
+  change ((radialHartreePotential
+    (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) r : ℝ) : ℂ) *
+    ((‖(V r : ℂ) + Z r‖ ^ 2 : ℝ) : ℂ) *
+      ((V r : ℂ) + Z r) -
+    ((radialHartreePotential
+      (fun rho => ‖(V rho : ℂ)‖ ^ 4) r : ℝ) : ℂ) *
+      ((‖(V r : ℂ)‖ ^ 2 : ℝ) : ℂ) * (V r : ℂ) = _
   rw [hZr, add_zero, hPotentialSum, hNormSq]
   push_cast
   ring
