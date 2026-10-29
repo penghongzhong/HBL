@@ -1,4 +1,5 @@
 # Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
+# Explicitly unfold the physically defined first-monopole integral path before strict final audit.
 name: HBL actual first-monopole Hartree projected-rate audit
 on:
   push:
