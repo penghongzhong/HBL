@@ -1,0 +1,130 @@
+# Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
+name: HBL actual first-monopole Hartree projected-rate audit
+on:
+  push:
+    branches: [hbl-projected-rate-20261029]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/**'
+      - '.github/workflows/hbl-projected-rate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hbl-projected-rate-20261029
+  cancel-in-progress: true
+
+jobs:
+  strict-origin-green:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact Lean compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-projected-rate-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve exact pinned dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Prefer full pinned Mathlib precompiled cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if lake exe cache get > evidence/full-mathlib-cache.log 2>&1; then
+            echo "Full Mathlib cache restored"
+          else
+            echo "Full Mathlib cache unavailable; Lake will compile exact pinned source"
+          fi
+      - name: Restore verified base project cache when available
+        id: hbl_project_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-projected-rate-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Strict build and complete exported type/axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,re
+          for file in pathlib.Path('HBL/TypeIIDynamicSelection').glob('*.lean'):
+            src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
+          PY
+          lake build HBL.TypeIIDynamicSelection.MonopoleRateAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateLimit.lean 2>&1 | tee evidence/strict-limit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateTail.lean 2>&1 | tee evidence/strict-tail.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateTrapping.lean 2>&1 | tee evidence/strict-trapping.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleRateAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          ! grep -q sorryAx evidence/types-and-axioms.txt
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          names=['firstMonopoleDrivenMu_tendsto',
+             'firstMonopoleDrivenMu_tail',
+             'firstMonopoleDrivenMu_trapped']
+          for name in names:
+            fullname='HBL.TypeIIDynamicSelection.'+name
+            assert fullname in s, 'Missing checked type: '+fullname
+            assert ("'"+fullname+"' depends on axioms:") in s, 'Missing transitive axioms: '+fullname
+          extras=set()
+          for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
+            extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
+          assert extras <= {'propext','Classical.choice','Quot.sound'},extras
+          print('PASS: 3 physical FIRST-MONOPOLE source-rate statements; full Hartree PDE projection/evolution remains OPEN. Original 9/21.')
+          PY
+      - name: Preserve source hashes and full diagnostics
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/*.lean > evidence/dynamical-source-hashes.txt
+      - name: Save source-indexed project build cache
+        if: always() && steps.hbl_project_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-projected-rate-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/*.lean') }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-projected-rate-evidence
+          path: evidence
+          retention-days: 14
