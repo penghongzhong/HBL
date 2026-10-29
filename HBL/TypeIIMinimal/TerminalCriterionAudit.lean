@@ -2,12 +2,14 @@ import HBL.TypeIIMinimal.TerminalCriterion
 set_option autoImplicit false
 
 #check @HBL.TypeIIMinimal.chosen_mu_above_sobolev_threshold
+#check @HBL.TypeIIMinimal.chosen_nu_irrational
 #check @HBL.TypeIIMinimal.chosen_nu_above_one
 #check @HBL.TypeIIMinimal.chosen_physical_concentration_rate
 #check @HBL.TypeIIMinimal.positive_mu_is_super_self_similar
 #check @HBL.TypeIIMinimal.critical_norm_bounded_and_no_strong_terminal_limit
 
 #print axioms HBL.TypeIIMinimal.chosen_mu_above_sobolev_threshold
+#print axioms HBL.TypeIIMinimal.chosen_nu_irrational
 #print axioms HBL.TypeIIMinimal.chosen_nu_above_one
 #print axioms HBL.TypeIIMinimal.chosen_physical_concentration_rate
 #print axioms HBL.TypeIIMinimal.positive_mu_is_super_self_similar
