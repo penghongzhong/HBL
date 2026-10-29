@@ -24,4 +24,6 @@
 
 2026-10-29 后续批次已构造任意输入 `0<d<z` 上的实际 Kummer 逆，环带不再由证明缩小；包括双侧端点导数、Wronskian 非零、指定中心基底端点规范下的唯一性及源/残差界。详见 `HBL/KummerPrescribedAnnulus/README.md` 和 `verification/kummer-prescribed-annulus-status.json`。
 
-仍待证明规定环带上的紧参数一致性/参数导数，并把中心初值基底与稿件出射基底及带权重叠匹配对应；实际非线性源、残差符号和增阶分类仍须从 PDE 推导。当前不增加原文验收数。
+后续批次已证明任意输入环带、任意紧实参数集上的统一基本解/逆 Wronskian 界、逆算子范数与源/残差估计；使用双向 Grönwall 与逆 Wronskian 的实际微分方程，常数在整个紧集共用。审计见 `verification/kummer-compact-prescribed-status.json`。
+
+仍待证明规定环带上的实际参数导数及其高阶统一界，并把中心初值基底与稿件出射基底及带权重叠匹配对应；实际非线性源、残差符号和增阶分类仍须从 PDE 推导。当前不增加原文验收数。

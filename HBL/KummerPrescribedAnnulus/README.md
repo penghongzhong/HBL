@@ -50,9 +50,43 @@ u(z+d)\psi'(d)-u'(z+d)\psi(d)=0,\qquad
 
 `verification/kummer_prescribed_annulus_validation.py` 在全新目录中严格编译七个新源文件，并审计完整类型、定义体与传递公理。固定 Lean 4.35.0-rc3 和 mathlib a98628e16；使用 `--trust=0 -DwarningAsError=true`。既有 71 个严格编译文件只在源码与编译产物哈希全部一致时复用，否则重建其证书。历史依赖的普通构建不冒充全文严格重验。
 
+上面六个定理完成固定参数构造。后续四个定理已补上规定环带上的紧参数统一界：给定任意紧集 `A` 以及输入 `0<d<z`，存在同一 `eps,C,B`，使
+
+\[
+d<\varepsilon<z,\qquad C>0,\quad B=4dC^3>0,
+\]
+
+对每个 `p=(mu,theta) in A`，实际中心归一化基本解都满足 `LocalKummerBound K C`，相应实际逆满足
+
+\[
+\|T_p\|\le B,\qquad
+\|T_pF-T_pG\|\le B\|F-G\|,\qquad
+\|U-T_pF\|\le B\|H-F\|.
+\]
+
+最后一个估计中 `U` 解实际方程 `L_p U=H`，并满足该参数的中心基底端点规范。`C,B` 对参数和源一致；环带没有缩小。
+
+证明不对每个参数分别选取常数。先用紧性统一控制实际系数，记
+
+\[
+\sup_{p\in A,\ |t|\le\varepsilon}
+\left(\left|\frac2{z+t}+\frac{i(z+t)}2\right|
++\left|\theta+i\left(\frac14-\mu\right)\right|\right)\le D.
+\]
+
+由中心初值及双向 Grönwall，四个基本解分量均被 `exp((D+1)eps)` 控制。Abel 恒等式还给出
+
+\[
+W'=-aW,\qquad (W^{-1})'=aW^{-1},\qquad W(0)=1,
+\]
+
+故同一常数也控制逆 Wronskian。终端为 `exists_compact_prescribed_kummer_inverse`。
+
+`verification/kummer_compact_prescribed_validation.py` 在新目录严格编译这四个定理，复用经过源码和产物哈希核对的既有 78 个严格编译文件，审计完整类型、实际系数、解的定义、基本解结构构造子的全部字段及传递公理。恢复依赖时的普通构建不计作全文严格复验。
+
 这仍不是原文 2.12 的闭合：
 
-- 此处 `C` 可以依赖 `mu, theta`；尚未证明规定环带上的紧参数统一界及全部参数导数。
+- 紧参数统一的零阶算子界已证明；规定环带上的实际参数导数及其统一高阶界仍待证明。
 - 本批使用中心初值归一化基底，尚未识别成稿件指定的奇异/正则出射基底及匹配规范。
 - 带权重叠、三个区域的实际 Hartree 源、残差展开及增阶分类仍未接通。
 

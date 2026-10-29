@@ -1,0 +1,85 @@
+{
+  "validation_passed": true,
+  "new_supporting_theorems": 4,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "74519deba049c9b91d1b57f6ffa6d7edf1aab1d8",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "axioms": {
+    "HBL.Profile.Kummer.centered_ode_norm_le_exp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.prescribed_kummer_pair_exp_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_compact_prescribed_kummer_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_compact_prescribed_kummer_inverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "one_theorem_per_file": true,
+  "isolated_fresh_new_source_compilation": true,
+  "audit_exit_code": 0,
+  "reused_strict_certificates": [
+    "verification/kummer-source-tangents-status.json",
+    "verification/kummer-prescribed-annulus-status.json"
+  ],
+  "reused_strict_artifact_count": 78,
+  "reused_source_and_artifact_hashes_verified": true,
+  "strict_source_exit_codes": {
+    "HBL/KummerPrescribedAnnulus/CenteredGrowth.lean": 0,
+    "HBL/KummerPrescribedAnnulus/UniformPair.lean": 0,
+    "HBL/KummerPrescribedAnnulus/CompactPair.lean": 0,
+    "HBL/KummerPrescribedAnnulus/CompactInverse.lean": 0
+  },
+  "source_sha256": {
+    "HBL/KummerPrescribedAnnulus/CenteredGrowth.lean": "23be6d9de90cbcf3f13146353db944db58c89ad9961c46bb3659ef7fb0beaf2f",
+    "HBL/KummerPrescribedAnnulus/UniformPair.lean": "b608cd9e8d7410f9a189bfea05f6000d91b9bfa7e18a73e23a242d15c1a54eec",
+    "HBL/KummerPrescribedAnnulus/CompactPair.lean": "d57e218001280a94fee5166a522c1bc3ee8805c6c21bc74ad58650ccc0086825",
+    "HBL/KummerPrescribedAnnulus/CompactInverse.lean": "3aada5a456f3a38701d660d48c6bdabcc2803fc1e4119a827bd342d30eb8ac1d",
+    "HBL/KummerPrescribedAnnulus/CompactPrescribedAudit.lean": "5b99466ce65d45fb831d403f55cec8d3993d70c2474108eadde663e5b7a758d8"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/KummerPrescribedAnnulus/CenteredGrowth.lean": "74cd96c15370612956c4f8612939b659819a507fb669c78fb788042829c43b47",
+    "HBL/KummerPrescribedAnnulus/UniformPair.lean": "37fb22fc3c7bdd71e17f3888c6feeb7284ad1d7fda8a0c172bbe3994f55afb9e",
+    "HBL/KummerPrescribedAnnulus/CompactPair.lean": "3707457803045f7c41196c74754c5b238ec24125d39a49c7094a046390b02aa5",
+    "HBL/KummerPrescribedAnnulus/CompactInverse.lean": "f165a1d3b9df628a43e61ba5313876936f51299484b5ffc29d0dbcfe1f98156d"
+  },
+  "audited_definition_bodies": [
+    "HBL.Profile.Kummer.LocalKummerBound",
+    "HBL.Profile.Kummer.IsLocalKummerRightInverse",
+    "HBL.Profile.Kummer.IsKummerBoundarySolution",
+    "HBL.Profile.Kummer.frozenFirstCoeff",
+    "HBL.Profile.Kummer.frozenZeroCoeff"
+  ],
+  "audited_structure_constructor": "HBL.Profile.Kummer.LocalKummerPair.mk",
+  "complete_type_output_artifact": "verification/kummer-compact-prescribed-types-and-axioms.txt.gz",
+  "complete_type_output_bytes": 1080394,
+  "complete_type_output_sha256": "cf3ea858e99b2035ffea1abe3dd2f9ab68c7921d5028bf6e1774c10c03949fbe",
+  "compressed_output_sha256": "479b546f40c9d5a1b94172ea7db68829b8b5792c4475115c425f86e3918b0034",
+  "scope": "Input annulus and input compact real parameter set: one uniform basis bound, inverse operator bound, source stability and equation-residual estimate. Endpoint normalization is the center-normalized actual basis at each parameter. Parameter derivatives, manuscript outgoing-basis matching and actual nonlinear Hartree residual cancellation remain open."
+}
