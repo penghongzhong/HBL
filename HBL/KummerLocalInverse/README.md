@@ -59,8 +59,10 @@ against those fresh artifacts. It checks import closure and verifies that source
 and compiled artifacts stay unchanged during validation. Full output is retained
 in reproducible gzip with hashes.
 
-Scope: the annulus is a constructed neighborhood of one positive radius at
-fixed parameters. A prescribed larger matching annulus, common annuli and
-uniform constants over compact parameter families, and parameter derivatives
-remain open. Original manuscript acceptance stays **9/21**;
-`prop:one-layer-stage3` and the main PDE theorem remain **OPEN**.
+Scope of this block: a constructed neighborhood of one positive radius at
+fixed parameters. The subsequent [compact family block](../KummerCompactFamily/README.md)
+constructs one annulus for any compact real parameter set and proves uniform
+bounds for every finite parameter jet. A prescribed larger matching annulus
+and the one-layer weighted residual/matching estimates remain open. Original
+manuscript acceptance stays **9/21**; `prop:one-layer-stage3` and the main PDE
+theorem remain **OPEN**.

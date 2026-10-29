@@ -61,8 +61,10 @@ directory, with `--trust=0 -DwarningAsError=true`. It audits the full types and
 transitive axioms, verifies unchanged source and artifact hashes, and retains
 the full audit in reproducible compressed form.
 
-Scope: a common constructed local annulus and a neighborhood of each fixed
-base parameter. A prescribed larger matching annulus, uniform constructions
-over an entire compact parameter graph, and higher or mixed parameter jets
-remain open. Original manuscript acceptance remains **9/21**;
-`prop:one-layer-stage3` and the main PDE theorem remain **OPEN**.
+Scope of this block: a common constructed local annulus and a neighborhood
+of each fixed base parameter. The subsequent [compact family block](../KummerCompactFamily/README.md)
+extends this to arbitrary compact real parameter sets and every finite
+parameter jet on one common constructed annulus. A prescribed larger matching
+annulus and the one-layer weighted residual/matching estimates remain open.
+Original manuscript acceptance remains **9/21**; `prop:one-layer-stage3` and the
+main PDE theorem remain **OPEN**.

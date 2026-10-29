@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — actual inner affine estimates and a classical Kummer inverse family on a common positive local annulus are verified, including local parameter-uniform operator bounds, source/parameter stability, and genuine first parameter derivatives; the exact manuscript one-layer nonlinear residual is not yet formalized.",
+  "target_status": "OPEN — actual inner affine estimates and a classical Kummer inverse family uniform on any compact real (mu, theta) parameter set are verified on one constructed positive local annulus, with fixed endpoint normalization, norm/source/parameter bounds, real analyticity and uniform operator bounds for every finite parameter jet; the prescribed matching annulus and exact manuscript one-layer nonlinear residual remain open.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -192,11 +192,19 @@
       "base_commit": "ac4724cf877f0790162304fa6a1138d7fb44a0ce",
       "new_supporting_theorems": 17,
       "new_original_environments": 0
+    },
+    {
+      "name": "One actual Kummer inverse family on an annulus common to an arbitrary compact real parameter set, with analyticity and uniform bounds for every finite parameter jet",
+      "mode": "local pinned strict compilation into isolated fresh artifacts; one new theorem per file",
+      "verification": "verification/kummer-compact-family-status.json",
+      "base_commit": "fbe42b35c9e569f386e08b7c5bee64d5e105499a",
+      "new_supporting_theorems": 8,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
     "For fixed 3/2 < sigma < 2, actual affine outputs already have source-independent weighted norm/stability bounds. For continuous sources, normalized first derivatives now have inverse-linear pointwise bounds and L^{2,beta} norm/stability bounds for every beta < 1/2; normalized second derivatives have L^{2,sigma} norm/stability bounds, and actual affine outputs have L^{2,sigma} second derivative norm bounds. Actual first derivatives tend to their forced affine slopes with an O((1+r)^(-1)) bound. Still establish the exact stronger weights or tail asymptotics required by the one-layer source classes, uniformity over varying weight/parameter families, and parameter jets.",
-    "At every fixed real base (mu, theta) and positive radius, an actual inverse family now exists on one common constructed closed positive local annulus and a parameter neighborhood. The genuine radial second-derivative equation, fixed endpoint normalization, uniform operator norm, source/parameter Lipschitz bounds, complex parameter derivative and both real physical parameter derivatives are strictly verified. Still extend or select the prescribed matching annulus, establish uniform constructions over the entire compact parameter graph, and prove the higher or mixed parameter jets required by the manuscript.",
+    "For any fixed z>0 and any compact A in the real (mu, theta) parameter plane, a single constructed closed positive local annulus now carries an actual inverse family with fixed endpoint normalization, genuine radial second-derivative equations, uniform operator/source/parameter estimates, and real analyticity at every point of A. Every finite pure or mixed (mu, theta) parameter jet has a source-independent uniform operator-norm bound on A, with the same annulus and family for all orders. Still extend to the prescribed matching annulus or justify the constructed interval in the manuscript regional decomposition, and prove the required spatially weighted parameter/overlap estimates and exact Hartree residual matching.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
     "Prove every generated source term in the actual Hartree expansion gains at least kappa_prof, without assuming the GeneratedTerm classification.",
@@ -214,10 +222,10 @@
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
     "date": "2026-10-29",
-    "verification": "verification/kummer-parameter-inverse-status.json",
-    "complete_types_and_axioms": "verification/kummer-parameter-inverse-types-and-axioms.txt.gz",
-    "base_commit": "ac4724cf877f0790162304fa6a1138d7fb44a0ce",
-    "new_supporting_theorems": 17,
+    "verification": "verification/kummer-compact-family-status.json",
+    "complete_types_and_axioms": "verification/kummer-compact-family-types-and-axioms.txt.gz",
+    "base_commit": "fbe42b35c9e569f386e08b7c5bee64d5e105499a",
+    "new_supporting_theorems": 8,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }
