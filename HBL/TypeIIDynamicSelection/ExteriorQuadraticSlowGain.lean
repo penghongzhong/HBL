@@ -26,11 +26,11 @@ open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 /-- A true geometric identity for the manuscript's moving monopole cutoff.
 No numerical speed exponent is used. -/
 theorem actual_monopole_radius_inverse_square
-    {c : ℝ} (hc : 0 < |c|) :
+    {c : ℝ} (_hc : 0 < |c|) :
     1 / (monopoleQuadraticRadius c) ^ 2 = c ^ 2 / 16 := by
   unfold monopoleQuadraticRadius
   have hsq : |c| ^ 2 = c ^ 2 := sq_abs c
-  field_simp [hc.ne']
+  field_simp [_hc.ne']
   nlinarith [hsq]
 
 /-- Actual exterior inverse-square Hartree coefficient gains c^2 at the
