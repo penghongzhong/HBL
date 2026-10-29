@@ -106,7 +106,9 @@ theorem actual_radialHartree_remote_quartic_source_exact
           funext rho
           simp only [Pi.add_apply]
           ring
-        rw [heq, integral_add hVrow hFrow]
+        rw [heq]
+        simp only [Pi.add_apply]
+        rw [integral_add hVrow hFrow]
         ring
       _ = _ := by rw [hPotF]
   have hZr : Z r = 0 := hZ r (by linarith)
