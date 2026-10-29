@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualRegionalBridge
+
+set_option autoImplicit false
+#check @HBL.Profile.OneLayerPhysical.actual_Hartree_inner_Kummer_regional_bridge
+#print axioms HBL.Profile.OneLayerPhysical.actual_Hartree_inner_Kummer_regional_bridge
