@@ -53,7 +53,8 @@ theorem actual_whole_radiation_self_cubic_exact
         (monopoleQuadraticRadius (c s)) (c s) r : ℂ) ^ 3 := by
   unfold monopoleComplexEffectiveIncrement
     actualWholeRadiationSelfCubicIncrement
-  push_cast <;> ring
+  push_cast
+  ring
 
 /-- For the ACTUAL slow coefficient c_g supplied by whole radiation,
 the physical source correction is O(r^2) in the bubble core. It holds
