@@ -10,7 +10,7 @@
     "warning_as_error": true
   },
   "target_original_environment": "prop:one-layer-stage3",
-  "target_status": "OPEN — the actual compact-parameter Kummer inverse family now has genuine source-dependent mu/theta tangent jets, unique classical linearized boundary equations, pointwise parameter derivatives, and a uniform coupled primal/tangent residual bound on one constructed local annulus. The prescribed matching annulus and actual nonlinear Hartree source/overlap remain open.",
+  "target_status": "OPEN — actual normalized Kummer inversion now exists on every prescribed positive finite annulus for each fixed parameter, including classical endpoints, uniqueness and source/residual bounds. Compact-parameter uniformity on that interval, manuscript outgoing-basis identification, weighted overlap and actual Hartree residual matching remain open.",
   "original_environment_total": 21,
   "strict_original_environment_audit": {
     "revalidated_historical": 8,
@@ -216,6 +216,14 @@
       "base_commit": "6f8cd6af04536c408b77df8057d5507c67d24d68",
       "new_supporting_theorems": 7,
       "new_original_environments": 0
+    },
+    {
+      "name": "Actual normalized Kummer inverse on any prescribed positive finite annulus with classical endpoint derivatives, boundary uniqueness and source/residual stability",
+      "mode": "local pinned strict incremental compilation; prior strict source and artifact hashes verified",
+      "verification": "verification/kummer-prescribed-annulus-status.json",
+      "base_commit": "c2388d55b5681350ea7c96b74f64ade2f7fae39e",
+      "new_supporting_theorems": 6,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
@@ -238,10 +246,10 @@
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
     "date": "2026-10-29",
-    "verification": "verification/kummer-source-tangents-status.json",
-    "complete_types_and_axioms": "verification/kummer-source-tangents-types-and-axioms.txt.gz",
-    "base_commit": "6f8cd6af04536c408b77df8057d5507c67d24d68",
-    "new_supporting_theorems": 7,
+    "verification": "verification/kummer-prescribed-annulus-status.json",
+    "complete_types_and_axioms": "verification/kummer-prescribed-annulus-types-and-axioms.txt.gz",
+    "base_commit": "c2388d55b5681350ea7c96b74f64ade2f7fae39e",
+    "new_supporting_theorems": 6,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }

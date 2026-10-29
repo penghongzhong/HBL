@@ -1,0 +1,107 @@
+{
+  "validation_passed": true,
+  "new_supporting_theorems": 6,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "c2388d55b5681350ea7c96b74f64ade2f7fae39e",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "reused_strict_certificate": "verification/kummer-source-tangents-status.json",
+  "reused_strict_artifact_count": 71,
+  "reused_source_and_artifact_hashes_verified": true,
+  "audited_definition_bodies": [
+    "HBL.Profile.Kummer.clipRealVector",
+    "HBL.Profile.Kummer.RealKummerJet",
+    "HBL.Profile.Kummer.realJetEntry",
+    "HBL.Profile.Kummer.realKummerOperator",
+    "HBL.Profile.Kummer.realJetValue",
+    "HBL.Profile.Kummer.realJetSlope",
+    "HBL.Profile.Kummer.encodeKummerJet",
+    "HBL.Profile.Kummer.IsLocalKummerRightInverse",
+    "HBL.Profile.Kummer.IsKummerBoundarySolution",
+    "HBL.Profile.Kummer.frozenFirstCoeff",
+    "HBL.Profile.Kummer.frozenZeroCoeff"
+  ],
+  "audited_structure_constructor": "HBL.Profile.Kummer.LocalKummerPair.mk",
+  "axioms": {
+    "HBL.Profile.Kummer.clipRealVector_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_linear_ivp_on_prescribed_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_actual_kummer_prescribed_ivp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.kummer_wronskian_ne_on_prescribed_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_prescribed_bounded_kummer_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_actual_kummer_prescribed_annulus_inverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "one_theorem_per_file": true,
+  "isolated_fresh_new_source_compilation": true,
+  "audit_exit_code": 0,
+  "strict_source_exit_codes": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": 0,
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": 0,
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": 0,
+    "HBL/KummerPrescribedAnnulus/ActualIVP.lean": 0,
+    "HBL/KummerPrescribedAnnulus/Wronskian.lean": 0,
+    "HBL/KummerPrescribedAnnulus/ActualPair.lean": 0,
+    "HBL/KummerPrescribedAnnulus/ActualInverse.lean": 0
+  },
+  "source_sha256": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": "2661d81aeb4588e6a0697c3b05fd5ad18642467adbea633a27d01957e8a7b9b1",
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": "9d4915becde7a4ea31164722d8dba8253ee18c74a81256f83ed4dd16b465fae4",
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": "3a1f9b36a7b748c9a3a752f5b90e81db34b57ff7fefce12728241d96cd0d620a",
+    "HBL/KummerPrescribedAnnulus/ActualIVP.lean": "a69fa5c1cd7f052f22bea277374400b9dfa6c5a8feca026f9ff00029148f0d06",
+    "HBL/KummerPrescribedAnnulus/Wronskian.lean": "f684422a7b64b11782d64da842fd3d0e53820171dc7190d25d7a3e646a0adee3",
+    "HBL/KummerPrescribedAnnulus/ActualPair.lean": "caeda1c9c1ec095983408dea815457d93589823d7d145950efa967e84eee9805",
+    "HBL/KummerPrescribedAnnulus/ActualInverse.lean": "38be3516df7f3093c44961df3698d5ffa07b8d082233f8413b2d8da757420aa1",
+    "HBL/KummerPrescribedAnnulus/PrescribedAudit.lean": "486768b046fc318ab6f6a246e6a0da1221870e1d73c9455a290e2baf9249b59b"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": "b4f61bc6738dd68a4d449544e7eee107ce6c555c86f6d68da3ccc16171989c50",
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": "eb002efc954b715980788305603c033d8535b95b78d65707e3d371e785adbca0",
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": "d00b9d50553a21f97157c4939d3de28bbdc316872667cec5331591d83a515b3c",
+    "HBL/KummerPrescribedAnnulus/ActualIVP.lean": "332cc99850d8198d18c8d9ce1f07b07acb6f597ebdbf5a0369e3eb3168fc11dc",
+    "HBL/KummerPrescribedAnnulus/Wronskian.lean": "1e5757a1d16d8cd59a89600d71fc8de29c132a5ad51565847e3d223ad6c61033",
+    "HBL/KummerPrescribedAnnulus/ActualPair.lean": "0c7d6e3814c772575256e702edc2a930af1fb553b05cd7f815c9a192761921b3",
+    "HBL/KummerPrescribedAnnulus/ActualInverse.lean": "d2a5ffc6462405474cc190cea5b20d136f75fe11b63ad35e238460ca8cb7d7d6"
+  },
+  "complete_type_output_artifact": "verification/kummer-prescribed-annulus-types-and-axioms.txt.gz",
+  "complete_type_output_bytes": 1250951,
+  "complete_type_output_sha256": "037b5cf19eb801fa8ad308cfecf91154cc1c246b06f1bf695471e856880f0f69",
+  "compressed_output_sha256": "bbb1c69dc390eabd62787756e10b0506a3ff2cefd310c14f2d9e57bdd402e33a",
+  "scope": "For each fixed real mu/theta and every input 0<d<z, constructs the actual normalized Kummer C2 right inverse on [z-d,z+d], proves boundary uniqueness and stability/residual bounds. The bound may depend on parameters and interval. No compact-parameter uniformity on this prescribed interval, manuscript outgoing-basis identification, weighted overlap, or nonlinear Hartree residual matching is claimed."
+}
