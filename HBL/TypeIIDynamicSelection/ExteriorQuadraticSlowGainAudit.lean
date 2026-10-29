@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_monopole_radius_inverse_square
+#check @HBL.TypeIIDynamicSelection.actual_exteriorHartree_gap_quadratic_in_c
+#check @HBL.TypeIIDynamicSelection.actual_exteriorHartree_gap_quadratic_fixed_core
+
+#print axioms HBL.TypeIIDynamicSelection.actual_monopole_radius_inverse_square
+#print axioms HBL.TypeIIDynamicSelection.actual_exteriorHartree_gap_quadratic_in_c
+#print axioms HBL.TypeIIDynamicSelection.actual_exteriorHartree_gap_quadratic_fixed_core
