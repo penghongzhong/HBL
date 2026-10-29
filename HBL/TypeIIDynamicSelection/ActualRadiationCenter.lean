@@ -25,7 +25,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Modulation
 
 /-- The physical slow monopole coefficient at a fixed rescaled time,
 obtained from the entire complex radial radiation density. -/
