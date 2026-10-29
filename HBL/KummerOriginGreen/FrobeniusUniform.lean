@@ -65,13 +65,13 @@ theorem exists_compact_originFrobenius_residual_bound
   have hsing : ‖originSingularThirdCoefficient p.1 p.2 *
       (frozenZeroCoeff p.1 p.2 + 3 * Complex.I / 2)‖ ≤ max M 1 := by
     calc
-      _ ≤ f p := by dsimp [f]; positivity
+      _ ≤ f p := by dsimp [f]; exact le_add_of_nonneg_right (norm_nonneg _)
       _ ≤ M := hfp
       _ ≤ max M 1 := le_max_left _ _
   have hreg : ‖originRegularSecondCoefficient p.1 p.2 *
       (frozenZeroCoeff p.1 p.2 + Complex.I)‖ ≤ max M 1 := by
     calc
-      _ ≤ f p := by dsimp [f]; positivity
+      _ ≤ f p := by dsimp [f]; exact le_add_of_nonneg_left (norm_nonneg _)
       _ ≤ M := hfp
       _ ≤ max M 1 := le_max_left _ _
   constructor
