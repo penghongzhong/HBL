@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualRadiation3DMoment
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualPhysicalInverseSquareMoment
+#check @HBL.TypeIIDynamicSelection.actual_physical_inverse_square_radial_reduction
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_center_eq_physical_threeD_moment
+
+#print axioms HBL.TypeIIDynamicSelection.actual_physical_inverse_square_radial_reduction
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_center_eq_physical_threeD_moment
