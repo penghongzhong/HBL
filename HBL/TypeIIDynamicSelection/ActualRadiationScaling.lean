@@ -48,7 +48,8 @@ theorem rescalePhysicalRadiation_quartic
     ‖rescalePhysicalRadiation ell z r‖ ^ 4 =
       ell ^ 2 * ‖z (ell * r)‖ ^ 4 := by
   unfold rescalePhysicalRadiation
-  rw [norm_mul, Complex.norm_real, abs_of_nonneg (Real.sqrt_nonneg ell), mul_pow]
+  rw [norm_mul, Complex.norm_real, Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg ell), mul_pow]
   have hs : (Real.sqrt ell) ^ 4 = ell ^ 2 := by
     calc
       (Real.sqrt ell) ^ 4 = ((Real.sqrt ell) ^ 2) ^ 2 := by ring
@@ -75,7 +76,6 @@ theorem actualRadiationCenter_rescaling
   unfold actualRadiationCenter radialHartreeCenter
   rw [hint, hchange]
   field_simp [hEll.ne']
-  ring
 
 /-- Exact radial version of the manuscript coefficient
 c_g(s)=kappa_H lambda(s)^{-1} m_0[z_g(t(s))], with the actual
