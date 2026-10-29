@@ -1,5 +1,5 @@
 # Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
-# Fix physical test namespace for actual Hartree monopole projection estimate.
+# Fix explicitly typed bound on the actual physical projected Hartree test integral.
 name: HBL actual first-monopole Hartree projected-rate audit
 on:
   push:
