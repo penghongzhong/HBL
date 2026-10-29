@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-29",
+  "branch": "hbl-typeii-minimal-main-20261029",
+  "strict_success_run": 40910767968,
+  "strict_source_commit": "338017be73154ceb4d3b2068cc90a1ac9c496af4",
+  "compiler": "Lean 4.35.0-rc3",
+  "mathlib_commit": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "trust_zero": true,
+  "warning_as_error": true,
+  "exactly_audited_new_declarations": 4,
+  "declarations": [
+    "HBL.TypeIIDynamicSelection.actual_exteriorHartree_slow_monopole_gain",
+    "HBL.Profile.OneLayerPhysical.actual_Hartree_inner_Kummer_regional_bridge",
+    "HBL.TypeIIDynamicSelection.moving_remote_cutoff_eventually_zero",
+    "HBL.TypeIIDynamicSelection.actual_full_radial_residual_moving_remote_eq_nonlin"
+  ],
+  "transitive_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "no_new_axioms": true,
+  "no_sorry_or_admit": true,
+  "physical_mathematics": [
+    "The nonlocal physical Hartree exterior Riesz potential at the actual monopole cutoff R=4/|c| gains order 2beta over baseline one from explicit amplitude and L1 source bounds: 2beta-1>0 for beta>1/2.",
+    "The exact Hartree H+ and H− affine resonance charge solves and unique weighted Birman-Schwinger corrections, and the physical origin-normalized Kummer outgoing Green solution on a prescribed annulus, have a joint strict terminal.",
+    "For remote radiation Z(t,rho)=0 wherever rho<=R(t) and continuous positive moving R near time s, there is a time neighborhood where Z(t,r)=0 at any r<R(s); the complete renormalized radial Hartree residual difference then equals only the actual nonlocal Hartree potential difference."
+  ],
+  "historical_original_manuscript_environment_acceptance": "9/21",
+  "current_library_manuscript_principal_environment_coverage": "9/12",
+  "current_library_manuscript_principal_environment_count": 12,
+  "current_library_manuscript_auxiliary_verifiedlemma_count": 13,
+  "current_library_manuscript_unproved_principal_labels": [
+    "thm:main",
+    "prop:one-layer-stage3",
+    "thm:finite-profile-stage3"
+  ],
+  "current_manuscript_recount_report": "verification/hbl-current-manuscript-principal-recount-20261029.md",
+  "original_environment_numerator_increased_this_round": 0,
+  "important_unproved_obligations": [
+    "The entire original one-layer proposition 2.12, including actual full Hartree finite-atom source classification, all regional solutions for the same weight, four-way matching, and every generated positive-gain mechanism, is not proved by the new bridging statements.",
+    "The full original finite profile proposition 2.13 and the actual blowup main theorem are open.",
+    "Full physical radial reconstruction and homogeneous H1 matching still matter even where no longer listed as separate named theorem environments.",
+    "The prescribed source norms, remote radiation support and time decay are stated primitive hypotheses of new supporting results, not conclusions derived from an exact Type II Hartree orbit.",
+    "Dynamically selected blowup rate from the actual nonlinear modulation equation remains unproved; no rate is prescribed as an external condition."
+  ],
+  "counting_warning": "9/12 is a recount of only the principal environments present in one 2026-10-27 Library TeX snapshot; NOT a new 10/21 certification, not a whole-paper complete-chain proportion, and NOT the 13 auxiliary verifiedlemmas count."
+}
