@@ -7,6 +7,7 @@
 # Whole-radiation slow coefficient derivative: corrected product algebra and event order.
 # Correct moment-product function reassociation in exact physical c_g derivative.
 # Align complex coercions in exact whole-radiation source cubic difference.
+# Strict linter correction for actual whole radiation Hartree cubic matching.
 name: HBL dynamical Type II clock identity audit
 on:
   push:
