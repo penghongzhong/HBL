@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-29",
+  "project": "HBL 3D critical Hartree radial type-II blowup",
+  "branch": "hbl-origin-green-20261029",
+  "verified_source_commit": "116e309585a406cf724fb9bddeb6a13a0125603d",
+  "run_id": 40849544799,
+  "run_conclusion": "success",
+  "compiler": "Lean 4.35.0-rc3",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "trust_zero": true,
+  "warning_as_error": true,
+  "checked_new_auxiliary_theorems": 16,
+  "new_original_manuscript_environments": 0,
+  "accepted_original_manuscript_environments": 9,
+  "original_manuscript_total": 21,
+  "next_original_target": "prop:one-layer-stage3",
+  "full_paper_certified": false,
+  "main_PDE_blowup_theorem_closed": false,
+  "theorem_audits": [
+    "HBL/KummerOriginGreen/GreenAudit.lean",
+    "HBL/KummerOriginGreen/UniformAudit.lean",
+    "HBL/KummerOriginGreen/TerminalAudit.lean",
+    "HBL/KummerOriginGreen/UniqueAudit.lean"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "sorryAx": false,
+  "scope": [
+    "Physical origin-normalized actual Green kernel and nonzero Wronskian",
+    "Actual frozen Kummer ODE, derivatives, and outgoing endpoint conditions",
+    "Compact-parameter uniform zeroth-order Green C1 bounds",
+    "Origin-basis homogeneous boundary uniqueness under classical closed-interval hypotheses",
+    "One combined compact-uniform Green terminal"
+  ],
+  "open": [
+    "All finite required parameter derivatives with origin-dependent endpoint conditions",
+    "Actual Hartree source classification and weighted Frobenius overlap",
+    "Physical inner/Kummer/remote region matching and threshold charge specialization",
+    "Genuine positive-gain classification for actual PDE residual",
+    "Full original prop:one-layer-stage3 terminal"
+  ],
+  "note": "16 auxiliary statements were compiled in the targeted strict workflow. They are not 16 complete original manuscript environments; original count stays 9/21. No full paper root re-certification is claimed."
+}
