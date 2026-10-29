@@ -1,77 +1,73 @@
-# HBL revised minimal main theorem — radial finite-time type II blowup
+# HBL: revised main theorem with dynamically selected Type II blowup rate
 
-Date: 2026-10-29. This is a proposed, **NOT YET PROVED**, **NOT YET LEAN-ACCEPTED** replacement of the October 27 wide-range dynamical-rate main theorem. Do not overwrite the old source. Every new claim must eventually match a real Hartree PDE solution, not an abstract formal flow.
+**Correction dated 2026-10-29.** The prior fixed-speed proposal, which imposed ν=√2 and μ∞=√2/2, is **withdrawn as the main research target**. It improperly replaced selection by the Hartree dynamics with construction at a prescribed exponent. The new, unproved main target is saved in verification/typeii-minimal-main-replacement.tex.
 
-## Actual equation and criticality
-
-\[
-i\partial_tu+\Delta u+\kappa_{\rm H}\bigl(|x|^{-2}*|u|^4\bigr)|u|^2u=0
-\quad\text{on }\mathbb R^3.
-\]
-
-Normalize \(\kappa_{\rm H}\) so \(W(x)=(1+|x|^2)^{-1/2}\) solves the elliptic ground-state equation. Write \(W_\lambda(x)=\lambda^{1/2}W(\lambda x)\); the critical norm \(\|\nabla W_\lambda\|_2=\|\nabla W\|_2>0\) is scale-independent.
-
-## Proposed reduced unconditional main target
-
-**Theorem (single radial type II blowup at one fixed nonresonant rate; OPEN).**
-
-There exist \(0<t_0<T<\infty\), a radial strong solution
-\[
-u\in C([t_0,T);\dot H^1_{\rm rad}(\mathbb R^3))
-\]
-of the *actual* equation, a scale \(\lambda(t)>0\), phase \(\gamma(t)\), a terminal remainder \(\eta_T\in\dot H^1_{\rm rad}\), and
-\(\eta\in C([t_0,T);\dot H^1_{\rm rad})\) such that
+## Actual Hartree equation
 
 \[
-u(t,x)=e^{i\gamma(t)}W_{\lambda(t)}(x)+\eta(t,x),\qquad
-\eta(t)\to\eta_T\quad\text{in }\dot H^1
+ i\partial_tu+\Delta u+\kappa_{\rm H}(|x|^{-2}*|u|^4)|u|^2u=0,\quad
+ W(x)=(1+|x|^2)^{-1/2}.
 \]
-as \(t\uparrow T\), with
+
+The revised target still **concludes existence of a true strong radial Hartree solution** with a finite maximal time, one concentrating ground-state bubble, bounded critical homogeneous H1 norm, convergent homogeneous H1 radiation and no strong H1 extension. None of these may be made a hypothesis or a new axiom.
+
+## Dynamical selection — not a prescribed terminal exponent
+
+The modulation scale and phase must be canonically extracted from the actual solution using its two threshold orthogonality conditions. With
 
 \[
-\lambda(t)^{-1}=C_\lambda(T-t)^{\frac12+\sqrt2}(1+o(1)),
-\qquad C_\lambda>0,
-\quad \gamma(t)=\gamma_T+o(1)
+ \frac{ds}{dt}=\lambda^2,\quad
+ \tau=T-t,\quad
+ b=\lambda_s/\lambda,\quad
+ \omega=-\gamma_s,\quad
+ q=\tau\lambda^2,\quad
+ \mu=(2bq-1)/4,\quad
+ \vartheta=q\omega,
 \]
 
-and
+the chain rule yields exact kinematic identities
 
 \[
-\sup_{t_0\le t<T}\|u(t)\|_{\dot H^1}<\infty,\qquad
-\text{the maximal forward time interval ends at }T,\qquad
-u(t)\text{ has no strong }\dot H^1\text{ limit at }T.
+ \tau_s=-\lambda^{-2},\quad
+ q_s=-1+2bq=4\mu,\quad
+ (\log\tau)_s=-q^{-1},\quad
+ (\log\lambda)_s=b=\frac{1+4\mu}{2q},
 \]
 
-This is **genuine energy-critical type II blowup**: finite time, finite critical norm, and noncompact concentration. The scale is faster than self-similar since \(1/2+\sqrt2>1/2\). In the original dynamical coordinates it corresponds to the one fixed parameter
-\(\mu_\infty=\sqrt2/2>9/16\), \(\vartheta_\infty=0\), with terminal prescribed radiation \(g=0\), and a selected rather than arbitrary unstable coordinate. No \(C^1\) initial-data graph or universal parameter family is claimed.
+and hence
 
-The bubble energy density concentrates at the origin; **the exact measure limit** may be retained only after verifying bubble-radiation cross-term decoupling, not inferred from merely writing a decomposition.
+\[
+ \boxed{\frac{d\log\lambda^{-1}}{d\log(T-t)}
+       =bq=\frac12+2\mu(s).}
+\]
 
-For publication the eventual theorem must NOT list as hypotheses the existence of the exact orbit, its Type II behavior, or its final decomposition. Those are conclusions.
+**The essential nonlinear task** is to prove from the actual Hartree modulation equations that the selected solution has \(|\mu_s(s)|\le C s^{-1-\delta}\), an emergent limit \(\mu_\infty=\lim_{s\to\infty}\mu(s)>9/16\), and that its source conditions are genuinely satisfied. No value of \(\mu_\infty\), \(\nu\), or the limiting exponent is imposed at the beginning.
 
-## Scope reduction from original target
+Given those true PDE conclusions (not merely assumed input), integration gives
 
-- Fix just one irrational nonresonant speed, not every parameter in a compact set; phase target \(\vartheta_\infty=0\).
-- Take terminal radiation \(g=0\) and one selected stable parameter (e.g. \(\alpha_-=0\)), rather than a ball of radiation and a complete \(C^1\) center-stable initial-data graph.
-- Require energy-strong convergence of the remainder in \(\dot H^1\), not the previous extra \(\dot H^{1+9/16}\) limiting regularity for a whole family.
-- Do not assert arbitrary energy proximity to \(E(W)\), exact measure decomposition, uniqueness of all shooting parameters, or full-rate-map regularity in the first main theorem.
-- Retain the real physical PDE, \(T_+=T<\infty\), bounded \(\dot H^1\), a nontrivial concentrating \(W_\lambda\), and failure of strong continuation.
+\[
+ q(s)=4\mu_\infty s+O(s^{1-\delta}),\quad
+ \lambda(t)^{-1}
+ =C_\lambda(u_0)(T-t)^{a_\infty(u_0)}(1+o(1)),\quad
+ a_\infty(u_0)=\tfrac12+2\mu_\infty(u_0).
+\]
 
-If one fixed irrational speed still proves overly costly, the next intellectually meaningful fallback is an existence theorem for **some** rate \(a>1/2\), without prescribing \(a\); however the actual radial Hartree solution must still be constructed.
+Positivity of the output \(\mu_\infty\) can follow from a chosen **initial** modulation window above 9/16 together with a proved small total dynamical drift, never from prescribing the limit. For finite-order profile nonresonance, one may choose an initial-data interval disjoint from the finitely many resonances relevant to that order and prove the drift stays inside; alternatively include logarithmic resonant terms. This is an analytic obligation, not yet an accomplished result.
 
-## Analytic proof chain: every unverified premise is a TASK, not a new axiom
+## Shortest useful proof dependency chain
 
-1. Fix the parameter in the already validated Kummer/Green regime. Use the strict 33-theorem origin Green/Frobenius block: Actions 40857582165.
-2. Construct a finite three-region approximate profile \(V_N\) for the actual \(\mathcal N\) and its explicit residual in a physical source norm. Prove smallness, the weighted overlaps, and both threshold charges. No claim based on generic \`LayerPacket\` data.
-3. Build the actual constrained Hartree evolution with the retained upper-triangular threshold coupling. **Do not** assume exact zero-centre block diagonalization or infer a Sylvester inverse merely from static coercivity.
-4. Prove a genuine physical backward solver \(G\) and weighted source bounds (including parameter feedback), then the full nonlinear map is a contraction on a closed ball. Reuse existing abstract Banach fixed point sources only after the actual operator/source has been instantiated.
-5. Reconstruct an exact strong radial PDE orbit (not just a function satisfying a formal integral identity) and select its unstable initial coordinate.
-6. Prove scale asymptotics by the existing physical-clock Lean chain, bubble critical-energy invariance, energy-bound of the remainder and scale separation. The verified generic lemma \`HBL.MainBackward.no_strong_limit_of_separated_profile\` is useful, but actual \(W_\lambda\) separation still needs a proof.
+1. Construct a finite physical Hartree three-region parametrix and prove its actual residual/threshold charges. Reuse the already audited origin-normalized Kummer/Green and Frobenius components.
+2. Derive the **true** two-channel modulation ODE from the physical Hartree equation; prove the integrable bound on \(\mu_s\) and positivity of its emergent limit without prescribed asymptotic data.
+3. Build the genuine common-domain constrained Hamiltonian evolution with retained triangular threshold coupling, not the withdrawn exact zero-centre splitting.
+4. Construct and contract the actual weighted nonlinear backward map. Select the unstable mode by a physical shooting equation and reconstruct an exact radial Hartree solution.
+5. Apply the proven kinematic relations and bubble scale noncompactness to conclude a dynamically selected power-law exponent, bounded critical norm and finite-time Type II blowup.
 
-## Audit policy
+## Reduced scope that does NOT alter the research question
 
-The new main conclusion is unconditional and remains **OPEN**. If an intermediate theorem states a conditional result from a parametrix/resolvent certificate, it must be labelled *conditional* and NOT counted as the original or revised main theorem. A proof of bounded energy plus an abstract nonextension criterion does not establish existence of the physical solution.
+We may drop the earlier theorem's full compact range of arbitrarily specified terminal parameters, every small radiation datum, global uniqueness across all fibres, and the codimension-one C1 initial-data graph. The first theorem need only assert **existence of at least one dynamically selected Type II orbit**. A subsequent strengthening may prove two different initial data yield different output exponents or continuity of the rate map. Neither is required for the first milestone.
 
-Historical original-manuscript acceptance: **9/21**. This is a changed theorem target, not a dishonest attempt to restore the historical 20/21 count by reducing denominators.
+## Strict verification boundary
 
-Lean pin: 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5. New theorem source must be strict \`--trust=0 -DwarningAsError=true\`, and transitive axioms restricted to \`propext\`, \`Classical.choice\`, \`Quot.sound\`.
+The previously successful six fixed-speed Lean terminal lemmas (Actions 40866180583) remain true auxiliary statements, but **do not establish dynamic selection**. Historical full original-environment acceptance stays **9/21**. The new PDE existence and emergent-\(\mu_\infty\) theorem is **OPEN**. The next Lean task is to certify the unprescribed clock identity, then connect its assumptions to actual physical Hartree modulation; a formal algebraic clock theorem does not by itself prove any nonlinear orbit exists.
+
+Pinned compiler Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5; strict trust-zero, warning-as-error and complete transitive axiom audit. No sorry, admit or novel axiom.
