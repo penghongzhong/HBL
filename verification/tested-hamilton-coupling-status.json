@@ -1,0 +1,56 @@
+{
+  "validation_passed": true,
+  "actual_tested_Hamilton_observation_only": true,
+  "new_supporting_theorems": 1,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "e9160a93b300e6b8c9ce17f9a48330ea3a14705f",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "one_theorem_per_file": true,
+  "foundation_build_exit_code": 0,
+  "foundation_build_is_full_strict_reaudit": false,
+  "strict_source_exit_codes": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": 0,
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": 0
+  },
+  "isolated_fresh_compilation": true,
+  "audit_exit_code": 0,
+  "source_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "8e994a7bdca3b760e0be12e37cfaeb6a1503d2ff5b023757eeffab2a2c2159ba",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "fdb974d2d152036d224b40795bd4a6d5bdbabdefd8cc9cadb76f0cec0ad2e70c",
+    "HBL/TestedHamiltonCoupling/ActualAudit.lean": "f370fafd027a1684e64bbd5088b175350405c237382da9db4825deff21eb2d3d"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/TestedHamiltonCoupling/Definitions.lean": "a5ea8d9dac5b9e57486fd8a52d5e5be66ec8b58f32ac1caf0b04140dd95eb226",
+    "HBL/TestedHamiltonCoupling/ActualIdentity.lean": "6253d2c043f540834f8d7df3759fef2cf4ea836ceac6ac689f6bf602566026a6"
+  },
+  "audited_definition_bodies": [
+    "HBL.MainBackward.testedHamiltonCoupling",
+    "HBL.MainBackward.constrainedTestedHamiltonCoupling"
+  ],
+  "axioms": {
+    "HBL.MainBackward.testedHamiltonCoupling_actual_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "complete_type_output_artifact": "verification/tested-hamilton-coupling-types-and-axioms.txt.gz",
+  "compressed_output_sha256": "86fd70c94b89b54fe802eb9019002d5c90c3fdc8e7020ebde47a667cbef25b19",
+  "complete_type_output_sha256": "08474321031afe3c120fb9b40f7a90e143f53d90d384940aa17fa6bd1afdb837",
+  "complete_type_output_bytes": 4316459,
+  "compressed_output_bytes": 58753,
+  "scope": "Constructs the actual bounded two-channel tested Hamilton observation (Hminus imaginary, -Hplus real), proves its precise differential/integral identity on smooth finite-energy inputs including the nonlocal real term, and restricts it to the closed constrained centre. Tests are explicit arguments; no normalized physical coordinate identification, generator domain, invariant splitting or propagator existence is claimed."
+}

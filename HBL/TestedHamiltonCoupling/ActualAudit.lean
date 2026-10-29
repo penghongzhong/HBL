@@ -1,0 +1,8 @@
+import HBL.TestedHamiltonCoupling.ActualIdentity
+set_option pp.all true
+set_option pp.maxSteps 10000000
+set_option maxRecDepth 1000000
+#print HBL.MainBackward.testedHamiltonCoupling
+#print HBL.MainBackward.constrainedTestedHamiltonCoupling
+#check @HBL.MainBackward.testedHamiltonCoupling_actual_identity
+#print axioms HBL.MainBackward.testedHamiltonCoupling_actual_identity
