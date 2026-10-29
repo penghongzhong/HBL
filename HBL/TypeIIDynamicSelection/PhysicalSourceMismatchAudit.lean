@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.PhysicalSourceMismatch
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_fullHartree_effective_mismatch_norm_le
+#print axioms HBL.TypeIIDynamicSelection.actual_fullHartree_effective_mismatch_norm_le
