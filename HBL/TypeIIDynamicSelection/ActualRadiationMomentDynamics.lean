@@ -75,11 +75,12 @@ theorem actual_physical_radiation_slow_coefficient_hasDerivAt
     hEll.continuousAt.tendsto.eventually (Ioi_mem_nhds hEllPos)
   have heq :
       (actualPhysicalRadiationMonopole ell z time) =ᶠ[𝓝 s]
-        (fun t => hartreeKappa * ell t *
-          radialPhysicalQuarticMoment (z (time t))) := by
+        (fun t => hartreeKappa * (ell t *
+          radialPhysicalQuarticMoment (z (time t)))) := by
     filter_upwards [hne] with t ht
-    exact actualRadiationCenter_equals_physical_slow_coefficient
-      (ell t) ht (z (time t))
+    simpa only [mul_assoc] using
+      (actualRadiationCenter_equals_physical_slow_coefficient
+        (ell t) ht (z (time t)))
   exact hmodel'.congr_of_eventuallyEq heq
 
 end HBL.TypeIIDynamicSelection
