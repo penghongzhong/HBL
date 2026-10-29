@@ -1,0 +1,9 @@
+import HBL.KummerOriginGreen.FrobeniusParameterJets
+
+set_option autoImplicit false
+
+#check @HBL.Profile.Kummer.originFrobeniusCoefficientVector_contDiff
+#check @HBL.Profile.Kummer.compact_originFrobenius_all_parameter_jets_bounded
+
+#print axioms HBL.Profile.Kummer.originFrobeniusCoefficientVector_contDiff
+#print axioms HBL.Profile.Kummer.compact_originFrobenius_all_parameter_jets_bounded
