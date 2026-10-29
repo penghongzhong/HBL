@@ -87,7 +87,6 @@ theorem originGreen_sources_continuous {mu theta R : ℝ}
       ContinuousAt (originGreenSourceB K F) r := by
     rcases hK r hr with ⟨hphi, hdphi, hpsi, hdpsi, _, hW, _, _, _, _, _⟩
     have hw : ContinuousAt (originGreenWronskian K) r := by
-      dsimp [originGreenWronskian]
       exact (hphi.continuousAt.mul hdpsi.continuousAt).sub
         (hdphi.continuousAt.mul hpsi.continuousAt)
     exact ⟨(hpsi.continuousAt.mul hF.continuousAt).div hw hW,
