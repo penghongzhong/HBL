@@ -77,7 +77,8 @@ theorem monopoleEffective_actualExterior_match_norm_le
       ∫ rho in Ioi R, |F rho| / rho ^ 2 := by
     rw [hcenter, abs_sub_comm]
     exact hpot
-  have hv := monopolePerturbedRadialProfile_abs_le hr hc
+  have hv := monopolePerturbedRadialProfile_abs_le
+    (R := monopoleQuadraticRadius c) hr hc
   have hpow : |monopolePerturbedRadialProfile
       (monopoleQuadraticRadius c) c r| ^ 3 ≤
       (1 + monopoleRadialBoundConstant) ^ 3 :=
