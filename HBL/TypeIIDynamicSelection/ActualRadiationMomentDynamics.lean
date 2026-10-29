@@ -63,8 +63,7 @@ theorem actual_physical_radiation_slow_coefficient_hasDerivAt
           radialPhysicalQuarticMoment (z (time s)))) +
         hartreeKappa * (ell s) ^ 3 * dm) s := by
     convert hprod using 1
-    · rfl
-    · ring
+    ring
   have hmodel' : HasDerivAt
       (fun t => hartreeKappa *
         (ell t * radialPhysicalQuarticMoment (z (time t))))
@@ -81,6 +80,6 @@ theorem actual_physical_radiation_slow_coefficient_hasDerivAt
     filter_upwards [hne] with t ht
     exact actualRadiationCenter_equals_physical_slow_coefficient
       (ell t) ht (z (time t))
-  exact hmodel'.congr_of_eventuallyEq heq.symm
+  exact hmodel'.congr_of_eventuallyEq heq
 
 end HBL.TypeIIDynamicSelection
