@@ -1,0 +1,12 @@
+import HBL.TypeIIDynamicSelection.RemoteComplexInteraction
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.remoteComplexQuarticDifference_measurable
+#check @HBL.TypeIIDynamicSelection.remoteComplexQuarticDifference_vanishes_in_core
+#check @HBL.TypeIIDynamicSelection.actual_complexHartree_remote_quartic_source_exact
+#check @HBL.TypeIIDynamicSelection.actual_complexHartree_remote_center_error_le
+
+#print axioms HBL.TypeIIDynamicSelection.remoteComplexQuarticDifference_measurable
+#print axioms HBL.TypeIIDynamicSelection.remoteComplexQuarticDifference_vanishes_in_core
+#print axioms HBL.TypeIIDynamicSelection.actual_complexHartree_remote_quartic_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_complexHartree_remote_center_error_le
