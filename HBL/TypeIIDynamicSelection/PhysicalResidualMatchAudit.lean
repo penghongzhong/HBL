@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.PhysicalResidualMatch
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_eq_nonlin
+#check @HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_eq_exterior_increment
+#check @HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_match_norm_le
+
+#print axioms HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_eq_nonlin
+#print axioms HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_eq_exterior_increment
+#print axioms HBL.TypeIIDynamicSelection.actual_full_radial_residual_remote_match_norm_le
