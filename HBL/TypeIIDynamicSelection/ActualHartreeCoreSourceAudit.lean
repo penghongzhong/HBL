@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeCoreSource
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_physical_Hartree_first_layer_core_source_bound
+#print axioms HBL.TypeIIDynamicSelection.actual_physical_Hartree_first_layer_core_source_bound
