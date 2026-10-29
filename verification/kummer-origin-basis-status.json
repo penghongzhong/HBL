@@ -1,0 +1,170 @@
+{
+  "validation_passed": true,
+  "new_supporting_theorems": 11,
+  "target_original_environment": "prop:one-layer-stage3",
+  "target_original_environment_closed": false,
+  "newly_accepted_original_environments": 0,
+  "strict_original_environment_count": "9/21",
+  "main_PDE_theorem_closed": false,
+  "base_commit": "98017ca0f0c015e84538bbb9f4178673748e6c3f",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "dependency_revisions": {
+    "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+    "plausible": "fb13df72ecefd8ddbf9291021d7f33a8673eb57b",
+    "LeanSearchClient": "29ff470276c725ae01505d55b17148c18fc7dfd3",
+    "importGraph": "10a2cfff285e1c7c2ebc49c0ba22cab0f3c58ee5",
+    "proofwidgets": "c643bbb3c24f8a25f9c14e3a6b1ceb13d01f3de1",
+    "aesop": "a90fbf7b02ff06a0deebf74088dff9e5fe02c9ea",
+    "Qq": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+    "batteries": "33131f4fb10067cb3009bf4db615d9680c1ccd6b",
+    "Cli": "843844fa601dd56767b1eb22b7ada5b64d5e567a"
+  },
+  "axioms": {
+    "HBL.Profile.Kummer.clipRealVector_properties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_linear_ivp_on_prescribed_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_origin_kummer_prescribed_ivp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_origin_kummer_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_wronskian_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_physical_jets": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_normalization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_pair_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_physical_wronskian_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_annulus_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_pair_unique": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_asymptotic_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.exists_compact_origin_kummer_basis": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "one_theorem_per_file": true,
+  "isolated_fresh_source_compilation": true,
+  "audit_exit_code": 0,
+  "rebuilt_prior_strict_sources": [
+    "HBL/KummerPrescribedAnnulus/Clip.lean",
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean",
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean"
+  ],
+  "prior_source_hashes_verified": true,
+  "strict_source_exit_codes": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": 0,
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": 0,
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": 0,
+    "HBL/KummerOriginBasis/Definitions.lean": 0,
+    "HBL/KummerOriginBasis/RegularIVP.lean": 0,
+    "HBL/KummerOriginBasis/Existence.lean": 0,
+    "HBL/KummerOriginBasis/Wronskian.lean": 0,
+    "HBL/KummerOriginBasis/PhysicalJets.lean": 0,
+    "HBL/KummerOriginBasis/Normalization.lean": 0,
+    "HBL/KummerOriginBasis/UniformBound.lean": 0,
+    "HBL/KummerOriginBasis/PhysicalWronskian.lean": 0,
+    "HBL/KummerOriginBasis/CertificateDefinitions.lean": 0,
+    "HBL/KummerOriginBasis/AnnulusBound.lean": 0,
+    "HBL/KummerOriginBasis/Uniqueness.lean": 0,
+    "HBL/KummerOriginBasis/AsymptoticBound.lean": 0,
+    "HBL/KummerOriginBasis/CompactBasis.lean": 0
+  },
+  "source_sha256": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": "2661d81aeb4588e6a0697c3b05fd5ad18642467adbea633a27d01957e8a7b9b1",
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": "9d4915becde7a4ea31164722d8dba8253ee18c74a81256f83ed4dd16b465fae4",
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": "3a1f9b36a7b748c9a3a752f5b90e81db34b57ff7fefce12728241d96cd0d620a",
+    "HBL/KummerOriginBasis/Definitions.lean": "cb98363821750b4c51b630c72baaf046d16dda223ef5b37683c48801b30dd43e",
+    "HBL/KummerOriginBasis/RegularIVP.lean": "848fa596b927a688935972e5a3609255ed46197c7dc04a2b131861fb27ce8a7e",
+    "HBL/KummerOriginBasis/Existence.lean": "59995983829cf330b11f6c219a6137b15a01cbb9c1148b0c6a7d37425d097f3b",
+    "HBL/KummerOriginBasis/Wronskian.lean": "a549c2e9992b9b2e3e4baf36f689c75df13521c9f13819b7a0ad49a43cc46473",
+    "HBL/KummerOriginBasis/PhysicalJets.lean": "6d0a687d5e81aaf7ac4067c367feecb615bcf0bcb60382807ed9d05c6d4142e6",
+    "HBL/KummerOriginBasis/Normalization.lean": "a60927d1fb80975ea26f7a3eb707faabd77f5aa4ad7509782bb77c39d6232816",
+    "HBL/KummerOriginBasis/UniformBound.lean": "a2f3c09914d03824784eb3f44a1c73c4af75581460efb379a82933efcf37b40f",
+    "HBL/KummerOriginBasis/PhysicalWronskian.lean": "9d4ee0d9e7c3e9a44fa95fec9a9cf2a12ecc09caa300ddc2a9596a4e1aff1f91",
+    "HBL/KummerOriginBasis/CertificateDefinitions.lean": "bf08c78205c3473cdd70fe9f592343e110717f4df7a310ab1209c95413774750",
+    "HBL/KummerOriginBasis/AnnulusBound.lean": "86c8acd950310ebbf2db5a88b17e6c52ff6e2eec36f149f82afd6cb2fb2710e8",
+    "HBL/KummerOriginBasis/Uniqueness.lean": "b2305858bf16c627806cb13036c35c0c124c371924017d5db8cc6ed0072b4095",
+    "HBL/KummerOriginBasis/AsymptoticBound.lean": "6fb47b9adac4284f50b9902d6c79dabf2461f021c4f18750025512a2df338900",
+    "HBL/KummerOriginBasis/CompactBasis.lean": "bfb7e24b4f082d0f1a7ea660fc312949cc4a4303bc40e1c793922179bfb5eeff",
+    "HBL/KummerOriginBasis/OriginBasisAudit.lean": "09f3822cc1bc5c53ad96a07b9fcda9c902c847cf694a42d0bdc3b34dd0e517ab"
+  },
+  "compiled_artifact_sha256": {
+    "HBL/KummerPrescribedAnnulus/Clip.lean": "b4f61bc6738dd68a4d449544e7eee107ce6c555c86f6d68da3ccc16171989c50",
+    "HBL/KummerPrescribedAnnulus/LinearIVP.lean": "eb002efc954b715980788305603c033d8535b95b78d65707e3d371e785adbca0",
+    "HBL/KummerPrescribedAnnulus/PhysicalDefinitions.lean": "d00b9d50553a21f97157c4939d3de28bbdc316872667cec5331591d83a515b3c",
+    "HBL/KummerOriginBasis/Definitions.lean": "7361b8863eebdc30d8e00f65af45b495a4737806836787682bbd4ea3d5f3c7d3",
+    "HBL/KummerOriginBasis/RegularIVP.lean": "f7c41e79443411f50570c64df733d7437a2c0f33da671c28af1384bcdfdedd39",
+    "HBL/KummerOriginBasis/Existence.lean": "abbdfa14881860da3ed4fbb57ea68e427364a9cb2c742626c24220faf6a1f151",
+    "HBL/KummerOriginBasis/Wronskian.lean": "155f6481c1240e6a7634097c2777c50ba0921b80183da5f242447f1e7ebfa4dc",
+    "HBL/KummerOriginBasis/PhysicalJets.lean": "3e5e5693d606732b37c6840878bf361ac354666a8db695e036c39ef5b33cf0c6",
+    "HBL/KummerOriginBasis/Normalization.lean": "4f9343b48611e5284691ef02c4bbe6c408cf5081de73fdae7920fbd2f8d63ad0",
+    "HBL/KummerOriginBasis/UniformBound.lean": "9b98a8615384ade12fbd9d4635f99f67fdaecd08dcac05a69d3a014f74cc9727",
+    "HBL/KummerOriginBasis/PhysicalWronskian.lean": "dab3053bbc8703539960f1f944b9c73c2a893752d72715864a7852a09a5c3d88",
+    "HBL/KummerOriginBasis/CertificateDefinitions.lean": "e3af1d04d0abb83dcf8491c1a2cf3b76e733766491acfcc1ce8e347044e65c7b",
+    "HBL/KummerOriginBasis/AnnulusBound.lean": "5289a2cdfaa2d641e0603d936cb9f5ad7f3ec794b2f295225a6b45c088ef7c7f",
+    "HBL/KummerOriginBasis/Uniqueness.lean": "61c73f75fa399f1a0a7816929b700666fabf2a0a1b7da8817fdf1acd031fea30",
+    "HBL/KummerOriginBasis/AsymptoticBound.lean": "a0e0389361f77d8fc442aef29d66e2b7112bafc1d9ef9bc5249c223fa22d7c47",
+    "HBL/KummerOriginBasis/CompactBasis.lean": "e170fea4deb458fe98e4a29d9e7e10d7f5b8b4f97775bc9a2b672e70fb2fb232"
+  },
+  "audited_definition_bodies": [
+    "HBL.Profile.Kummer.originFirstCoeff",
+    "HBL.Profile.Kummer.originZeroCoeff",
+    "HBL.Profile.Kummer.realOriginOperator",
+    "HBL.Profile.Kummer.originPhysicalValue",
+    "HBL.Profile.Kummer.originPhysicalSlope",
+    "HBL.Profile.Kummer.OriginBasisNormalization",
+    "HBL.Profile.Kummer.OriginBasisOn",
+    "HBL.Profile.Kummer.frozenFirstCoeff",
+    "HBL.Profile.Kummer.frozenZeroCoeff"
+  ],
+  "audited_structure_constructor": "HBL.Profile.Kummer.OriginKummerPair.mk",
+  "complete_type_output_artifact": "verification/kummer-origin-basis-types-and-axioms.txt.gz",
+  "complete_type_output_bytes": 244029,
+  "complete_type_output_sha256": "ed69f4e989c4eff0ea03af8d71c49e4a34c381dee50602a906ae74f77ac7248e",
+  "compressed_output_sha256": "b3e60aac5b149747a79e4539daa7da0850f068bad15cd58bbc155f960173665e",
+  "scope": "Actual origin-normalized singular/regular Kummer basis on any input positive annulus, for every parameter in an input compact real set: physical C2 equations, exact manuscript Wronskian with constant one, origin limits, unique regularized IVPs, common C1/inverse-Wronskian bounds and quantitative Phi=1/r+O(r), Psi=1+O(r^2) bounds. No derivatives in parameters, outgoing Green operator in this basis, weighted overlap, full Frobenius expansion or actual nonlinear Hartree residual cancellation is claimed."
+}

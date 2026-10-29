@@ -232,11 +232,19 @@
       "base_commit": "74519deba049c9b91d1b57f6ffa6d7edf1aab1d8",
       "new_supporting_theorems": 4,
       "new_original_environments": 0
+    },
+    {
+      "name": "Actual origin-normalized singular/regular Kummer basis with exact Wronskian, unique regularized IVPs, compact-parameter prescribed-annulus bounds and quantitative origin asymptotics",
+      "mode": "local pinned fresh strict compilation of thirteen new sources and three unchanged finite-IVP foundations; full types, definition bodies and transitive axioms audited",
+      "verification": "verification/kummer-origin-basis-status.json",
+      "base_commit": "98017ca0f0c015e84538bbb9f4178673748e6c3f",
+      "new_supporting_theorems": 11,
+      "new_original_environments": 0
     }
   ],
   "remaining_bearing_obligations": [
     "For fixed 3/2 < sigma < 2, actual affine outputs already have source-independent weighted norm/stability bounds. For continuous sources, normalized first derivatives now have inverse-linear pointwise bounds and L^{2,beta} norm/stability bounds for every beta < 1/2; normalized second derivatives have L^{2,sigma} norm/stability bounds, and actual affine outputs have L^{2,sigma} second derivative norm bounds. Actual first derivatives tend to their forced affine slopes with an O((1+r)^(-1)) bound. Still establish the exact stronger weights or tail asymptotics required by the one-layer source classes, uniformity over varying weight/parameter families, and parameter jets.",
-    "Actual center-normalized Kummer inversion now exists on every input positive finite annulus, uniformly over any input compact real parameter set, with one common basis/inverse-Wronskian bound, inverse norm, source stability and residual estimate. Actual source-dependent parameter tangents and all finite parameter jets are verified only on the previously constructed small annulus. Still establish the actual parameter derivatives and all-order uniform estimates on the input matching annulus, identify the manuscript outgoing basis/normalization, and prove weighted overlap and actual nonlinear source matching.",
+    "Actual center-normalized inversion already exists uniformly on any input positive annulus and compact real parameter set. An actual origin-normalized singular/regular basis is now constructed as well, with exact W=r^(-2) exp(-i r^2/4), uniqueness for its regularized initial data, uniform C1/inverse-Wronskian bounds and Phi=1/r+O(r), Psi=1+O(r^2) value estimates. The Green operator and endpoint conditions in this origin-normalized basis still need actual construction or proved conversion. Actual parameter derivatives and all-order estimates remain verified only for the prior small-annulus, fixed-boundary family. Full Frobenius coefficients/remainders, weighted overlap and actual nonlinear source matching remain open.",
     "Instantiate the verified remote generic/log/exceptional free inverses and small Neumann perturbation on the actual finite power-log atom classes with quantitative operator norms and canonical normalization.",
     "Identify the true current-weight Hartree nonlinear source by region and prove the projected exact residual cancellation, parameter-tangent source, and cutoff overlap matching.",
     "Prove every generated source term in the actual Hartree expansion gains at least kappa_prof, without assuming the GeneratedTerm classification.",
@@ -254,10 +262,10 @@
   "full_original_one_layer_accepted": false,
   "latest_local_verified_extension": {
     "date": "2026-10-29",
-    "verification": "verification/kummer-compact-prescribed-status.json",
-    "complete_types_and_axioms": "verification/kummer-compact-prescribed-types-and-axioms.txt.gz",
-    "base_commit": "74519deba049c9b91d1b57f6ffa6d7edf1aab1d8",
-    "new_supporting_theorems": 4,
+    "verification": "verification/kummer-origin-basis-status.json",
+    "complete_types_and_axioms": "verification/kummer-origin-basis-types-and-axioms.txt.gz",
+    "base_commit": "98017ca0f0c015e84538bbb9f4178673748e6c3f",
+    "new_supporting_theorems": 11,
     "new_original_environments": 0,
     "root_original_acceptance_changed": false
   }
