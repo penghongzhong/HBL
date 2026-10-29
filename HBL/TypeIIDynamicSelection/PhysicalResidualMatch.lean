@@ -75,7 +75,7 @@ theorem actual_full_radial_residual_remote_eq_nonlin
     unfold complexRadialDilation
     rw [hlocal.eq_of_nhds, hlocal.deriv_eq]
   unfold complexRadialRenormalizedResidual
-  rw [ht, hL, hD]
+  rw [ht, hL, hD, hlocal.eq_of_nhds]
   ring
 
 /-- The exact full Hartree residual with remote complex radiation is
@@ -111,7 +111,7 @@ theorem actual_full_radial_residual_remote_eq_exterior_increment
     monopolePerturbedRadialProfile (monopoleQuadraticRadius (c s)) (c s)
   let F : ℝ → ℝ := remoteComplexQuarticDifference V (Z s)
   have hres := actual_full_radial_residual_remote_eq_nonlin
-    c b omega Z hr hsep hZ
+    (s := s) c b omega Z hr hsep hZ
   have hn := actual_complexHartree_remote_quartic_source_exact
     V (Z s) hR hr hsep (hZ s) hVmeas hZmeas hF hVrow
   have hNonlin :
