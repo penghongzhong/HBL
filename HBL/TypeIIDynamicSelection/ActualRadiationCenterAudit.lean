@@ -1,0 +1,12 @@
+import HBL.TypeIIDynamicSelection.ActualRadiationCenter
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actualRadiationCenter
+#check @HBL.TypeIIDynamicSelection.actualRadiationCenter_nonneg
+#check @HBL.TypeIIDynamicSelection.actual_radiation_center_quadratic_bound
+#check @HBL.TypeIIDynamicSelection.actual_radiation_center_bubble_cubic_error
+
+#print axioms HBL.TypeIIDynamicSelection.actualRadiationCenter_nonneg
+#print axioms HBL.TypeIIDynamicSelection.actual_radiation_center_quadratic_bound
+#print axioms HBL.TypeIIDynamicSelection.actual_radiation_center_bubble_cubic_error
