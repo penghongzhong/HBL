@@ -1,0 +1,13 @@
+import HBL.TypeIIDynamicSelection.ClockIdentities
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.dynamicalClock_hasDerivAt
+#check @HBL.TypeIIDynamicSelection.dynamical_rate_identity
+#check @HBL.TypeIIDynamicSelection.selected_rate_of_dynamical_mu_limit
+#check @HBL.TypeIIDynamicSelection.dynamically_selected_rate_super_self_similar
+
+#print axioms HBL.TypeIIDynamicSelection.dynamicalClock_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.dynamical_rate_identity
+#print axioms HBL.TypeIIDynamicSelection.selected_rate_of_dynamical_mu_limit
+#print axioms HBL.TypeIIDynamicSelection.dynamically_selected_rate_super_self_similar
