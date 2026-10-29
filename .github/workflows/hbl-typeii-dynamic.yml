@@ -1,3 +1,4 @@
+# Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
 name: HBL dynamical Type II clock identity audit
 on:
   push:
