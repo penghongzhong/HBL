@@ -84,7 +84,7 @@ theorem actual_fullHartree_effective_mismatch_norm_le
       |c s - radialHartreeExteriorCenter F R| +
       (4 * Real.pi * hartreeKappa * r ^ 2 * (1 / R ^ 2)) *
         ∫ rho in Ioi R, |F rho| := by
-    exact htri.trans (add_le_add_left (by simpa only [abs_sub_comm] using hpot) _)
+    exact htri.trans (add_le_add_right (by simpa only [abs_sub_comm] using hpot) _)
   have hv := monopolePerturbedRadialProfile_abs_le
     (R := monopoleQuadraticRadius (c s)) hr hc
   have hpow : |V r| ^ 3 ≤ (1 + monopoleRadialBoundConstant) ^ 3 :=
