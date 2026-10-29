@@ -1,4 +1,4 @@
-# All verified Frobenius proofs now pass the strict unused-tactic linter.
+# Final smooth Frobenius coefficient vector definitional-equality repair.
 name: HBL origin-gauge Kummer Green bridge
 on:
   push:
