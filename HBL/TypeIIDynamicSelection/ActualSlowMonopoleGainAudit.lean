@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_exteriorHartree_slow_monopole_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_exteriorHartree_slow_monopole_gain
