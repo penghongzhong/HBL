@@ -42,11 +42,8 @@ theorem originThirdSingularResidual_exact (mu theta : ℝ)
     originThirdSingularSlope originThirdSingularSecond
     originSingularThirdCoefficient originSingularFirstCoefficient
     originZeroCoeff frozenZeroCoeff
-  push_cast
   field_simp [hz]
   ring_nf
-  all_goals simp only [Complex.I_sq]
-  all_goals ring
 
 /-- The regular origin basis begins with the exact second-order coefficient. -/
 def originRegularSecondCoefficient (mu theta : ℝ) : ℂ :=
@@ -80,10 +77,7 @@ theorem originSecondRegularResidual_exact (mu theta : ℝ)
   unfold frozenRadialJetResidual originSecondRegularValue
     originSecondRegularSlope originSecondRegularSecond
     originRegularSecondCoefficient originZeroCoeff frozenZeroCoeff
-  push_cast
   field_simp [hz]
   ring_nf
-  all_goals simp only [Complex.I_sq]
-  all_goals ring
 
 end HBL.Profile.Kummer
