@@ -38,7 +38,7 @@ and
 
 \[
 \sup_{t_0\le t<T}\|u(t)\|_{\dot H^1}<\infty,\qquad
-T_+(u(t_0))=T,\qquad
+\text{the maximal forward time interval ends at }T,\qquad
 u(t)\text{ has no strong }\dot H^1\text{ limit at }T.
 \]
 
