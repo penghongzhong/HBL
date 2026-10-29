@@ -12,18 +12,14 @@ open HBL.Modulation.Monopole
 /-- A genuine PHYSICAL first-monopole Hartree threshold source bound.
 The radial Hartree nonlinearity and its moving cutoff enter through the
 already proved exact effective residual, and the compact test is the
-actual normalized plus-channel source. The velocity and modulation paths
-are constrained only by their primitive decay assumptions.
+actual normalized plus-channel source. Only the actual amplitude differentiability and the small-amplitude window
+are required for this pointwise projection inequality.
 
 This is not the full nonlinear residual of a constructed Type II orbit. -/
 theorem actual_firstMonopole_core_projection_quantitative
-    {c b omega : ℝ → ℝ} {s0 beta A : ℝ}
-    (hs0 : 0 < s0) (hbeta : 1 / 2 < beta) (hA : 0 ≤ A)
-    (hc : Differentiable ℝ c) (hb : Measurable b) (homega : Measurable omega)
-    (hsmall : ∀ s : ℝ, s0 < s → |c s| ≤ 1)
-    (hdecay : ∀ s : ℝ, s0 < s →
-      |c s| ≤ A * s ^ (-beta) ∧ |deriv c s| ≤ A * s ^ (-1 - beta) ∧
-      |b s| ≤ A * s ^ (-1 : ℝ) ∧ |omega s| ≤ A * s ^ (-1 : ℝ)) :
+    {c b omega : ℝ → ℝ} {s0 : ℝ}
+    (hc : Differentiable ℝ c)
+    (hsmall : ∀ s : ℝ, s0 < s → |c s| ≤ 1) :
     ∃ C D : ℝ, 0 < D ∧
       ∀ s : ℝ, s0 < s →
         ‖monopoleComplexCoreProjection normalizedZetaPlus c b omega s‖ ≤
