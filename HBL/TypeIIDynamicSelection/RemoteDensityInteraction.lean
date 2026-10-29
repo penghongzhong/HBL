@@ -22,6 +22,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole
+open HBL.Modulation.AffineTail
 
 /-- The *actual* quartic density difference caused by an exterior real
 radiation profile. It retains every quartic cross term with the inner field. -/
@@ -110,6 +111,8 @@ theorem actual_radialHartree_remote_quartic_source_exact
       _ = _ := by rw [hPotF]
   have hZr : Z r = 0 := hZ r (by linarith)
   unfold radialHartreeNonlinearity
+  change radialHartreePotential (fun rho => (V rho + Z rho) ^ 4) r *
+    (V r + Z r) ^ 3 - radialHartreePotential (fun rho => V rho ^ 4) r * V r ^ 3 = _
   rw [hZr, add_zero, hPotentialSum]
   ring
 
