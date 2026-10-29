@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualMovingRemoteResidual
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.moving_remote_cutoff_eventually_zero
+#check @HBL.TypeIIDynamicSelection.actual_full_radial_residual_moving_remote_eq_nonlin
+
+#print axioms HBL.TypeIIDynamicSelection.moving_remote_cutoff_eventually_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_full_radial_residual_moving_remote_eq_nonlin
