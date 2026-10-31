@@ -1,3 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerPDEResidual
+import HBL.KummerSourceTangents.TangentDerivative
 import HBL.KummerParameterInverse.OperatorDerivative
 import HBL.KummerParameterInverse.PhysicalParameterDerivatives
 import Mathlib.Analysis.Complex.RealDeriv
@@ -101,5 +103,79 @@ theorem actual_Kummer_inverse_two_parameter_speed
   simpa only [Function.comp_def] using!
     hInv.scomp (𝕜 := ℝ) (𝕜' := ℂ)
       (F := AnnulusSource z d →L[ℂ] AnnulusJet z d) s hcoef
+
+
+/-- The ACTUAL one-layer PDE error, restricted to a Kummer annulus.
+Continuity of this physical source on the annulus is a classical
+regularity input, not a claim of Hartree error cancellation. -/
+def actualHartreePDEResidualAnnulusSource
+    {z d : ℝ}
+    (V : ℝ → ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
+    (b omega : ℝ → ℝ) (s : ℝ)
+    (hcontinuous : Continuous (fun r : PhysicalAnnulus z d =>
+      complexRadialRenormalizedResidual
+        (fun t x => (V t x : ℂ) + Z t x) (b s) (omega s) s r.val -
+      complexRadialRenormalizedResidual
+        (fun t x => (V t x : ℂ)) (b s) (omega s) s r.val)) :
+    AnnulusSource z d :=
+  ⟨_, hcontinuous⟩
+
+/-- Genuine coupled physical Hartree-source / two-speed Kummer tangent.
+The source is the EXACT residual of the full Hartree equation, rather
+than a freely specified layer source. Its Banach-valued time derivative
+is explicitly retained as a regularity assumption. The formula is
+  U_s = G_s (F_s - (theta_s - i*mu_s) P U).
+No asymptotic speed, regional matching, or source cancellation is assumed.
+This is an ingredient, not the full original one-layer stage 3. -/
+theorem actual_Kummer_inverse_physical_Hartree_source_two_speed
+    {z d : ℝ}
+    (T : AnnulusSource z d →L[ℂ] AnnulusJet z d)
+    (mu theta : ℝ → ℝ) (mu0 theta0 : ℝ)
+    (V : ℝ → ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
+    (b omega : ℝ → ℝ)
+    (hcontinuous : ∀ t : ℝ,
+      Continuous (fun r : PhysicalAnnulus z d =>
+        complexRadialRenormalizedResidual
+          (fun τ x => (V τ x : ℂ) + Z τ x)
+          (b t) (omega t) t r.val -
+        complexRadialRenormalizedResidual
+          (fun τ x => (V τ x : ℂ))
+          (b t) (omega t) t r.val))
+    {s mus ths : ℝ} (G : AnnulusSource z d)
+    (hmu : HasDerivAt mu mus s)
+    (htheta : HasDerivAt theta ths s)
+    (hF : HasDerivAt
+      (fun t => actualHartreePDEResidualAnnulusSource V Z b omega t
+        (hcontinuous t)) G s)
+    (hsmall :
+      ‖frozenZeroCoeff (mu s) (theta s) -
+        frozenZeroCoeff mu0 theta0‖ * ‖T‖ ≤ (1 / 2 : ℝ)) :
+    HasDerivAt
+      (fun t =>
+        annulusParameterInverse T
+          (frozenZeroCoeff (mu t) (theta t) -
+            frozenZeroCoeff mu0 theta0)
+          (actualHartreePDEResidualAnnulusSource V Z b omega t
+            (hcontinuous t)))
+      (annulusSourceTangent
+        (annulusParameterInverse T
+          (frozenZeroCoeff (mu s) (theta s) -
+            frozenZeroCoeff mu0 theta0))
+        (-((ths : ℂ) - Complex.I * (mus : ℂ)))
+        (actualHartreePDEResidualAnnulusSource V Z b omega s
+          (hcontinuous s)) G) s := by
+  have hS := actual_Kummer_inverse_two_parameter_speed
+    T mu theta mu0 theta0 hmu htheta hsmall
+  rw [smul_neg, ← neg_smul] at hS
+  exact annulusSourceTangent_hasDerivAt
+    (fun t =>
+      annulusParameterInverse T
+        (frozenZeroCoeff (mu t) (theta t) -
+          frozenZeroCoeff mu0 theta0))
+    (fun t =>
+      actualHartreePDEResidualAnnulusSource V Z b omega t
+        (hcontinuous t))
+    s (-((ths : ℂ) - Complex.I * (mus : ℂ))) G hS hF
+
 
 end HBL.TypeIIDynamicSelection
