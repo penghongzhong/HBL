@@ -90,7 +90,7 @@ theorem actual_phased_moving_monopole_two_parameter_tangent
 synchronized physical phase its coefficient is the PREVIOUSLY PROVED
 kinematic quotient -(theta+g)/q, with no selected terminal rate. -/
 theorem actual_synchronized_phase_monopole_tangent
-    (c : ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
+    (c gamma : ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
     {A s₀ κ δ H J θ γ s r cs : ℝ} {dz : ℂ}
     (h g : ℝ → ℝ)
     (hA : 0 < A) (hs₀ : 0 < s₀)
@@ -101,12 +101,12 @@ theorem actual_synchronized_phase_monopole_tangent
     (gbound : ∀ t : ℝ, s₀ ≤ t → |g t| ≤ J * t ^ (-δ))
     (hsmall : (4 * H / (1 - δ)) * s₀ ^ (-δ) ≤ A / 4)
     (hκ : |κ| ≤ A * s₀ / 4) (hs : s₀ < s)
+    (hgamma : gamma = sliceGamma A s₀ κ θ γ h g)
     (hc : HasDerivAt c cs s)
     (hZ : HasDerivAt (fun t : ℝ => Z t r) dz s) :
     HasDerivAt
-      (fun t => actualPhasedMovingMonopoleWithRadiation c
-        (sliceGamma A s₀ κ θ γ h g) Z t r)
-      (Complex.exp (Complex.I * (sliceGamma A s₀ κ θ γ h g s : ℂ)) *
+      (fun t => actualPhasedMovingMonopoleWithRadiation c gamma Z t r)
+      (Complex.exp (Complex.I * (gamma s : ℂ)) *
         ((Complex.I *
           ((-(θ + g s) / sliceClock A s₀ κ h s) : ℂ)) *
            ((monopolePerturbedRadialProfile
@@ -115,12 +115,13 @@ theorem actual_synchronized_phase_monopole_tangent
            (1 - cutoff (|c s| * r / 4) -
              (|c s| * r / 4) * deriv cutoff (|c s| * r / 4)) : ℝ) : ℂ) +
          dz)) s := by
+  have hphase : HasDerivAt gamma
+      (-(θ + g s) / sliceClock A s₀ κ h s) s := by
+    rw [hgamma]
+    exact sliceGamma_hasDerivAt_of_path h g hA hs₀ hδ hδ1
+      hH hh hg hbound gbound hsmall hκ hs
   exact actual_phased_moving_monopole_two_parameter_tangent
-    c (sliceGamma A s₀ κ θ γ h g) Z
-    hc
-    (sliceGamma_hasDerivAt_of_path h g hA hs₀ hδ hδ1
-      hH hh hg hbound gbound hsmall hκ hs)
-    hZ
+    c gamma Z hc hphase hZ
 
 /-- The actual Hartree PDE residual contains precisely the identified
 two phase/amplitude speed directions. The spatial Laplacian, full
