@@ -268,3 +268,55 @@ The original manuscript \`prop:one-layer-stage3\` remains OPEN.
 Strict original paper ledger is **9/21**, main genuine dynamically
 selected Type II blowup PDE theorem remains OPEN. These four
 newly audited declarations must NOT be added to 9/21.
+
+## 2026-10-31 further strict close of the PHYSICAL mixed source Riesz row
+
+Validated *actual* Lean source (fixed Lean 4.35.0-rc3 / pinned Mathlib, trust=0,
+full statement and transitive axiom audit, no sorry/admit/new axioms):
+
+- \`326b52756f3783e4eee09a03220cfb0adc314c18\`,
+  [Actions \`41196676674\`](https://github.com/penghongzhong/HBL/actions/runs/41196676674):
+  **success**. The proved \`physicalRadiation_quadratic_Riesz_row_integrable_of_profile\`
+  uses pinned Mathlib positive-scaling integrability to eliminate the
+  ad hoc scaled-radiation-row hypothesis. The three physical mixed
+  declarations \`physical_bubble_mixed_envelope_uniform_row\`,
+  \`physical_mixed_higher_Riesz_linear_length\`, and
+  \`physical_bubble_mixed_Riesz_linear_length\` pass the same audit.
+  These invoke the genuine radial 3D inverse-square Hartree operator,
+  not a local cubic surrogate.
+
+- \`2ea5b14a519a1e464206003e131ef34d0508876d\`,
+  [Actions \`41197200210\`](https://github.com/penghongzhong/HBL/actions/runs/41197200210):
+  **success**. New theorem
+  \`physical_bubble_mixed_Riesz_linear_length_from_weighted_decay\`
+  eliminates the separate L-infinity hypothesis on the original
+  regular radiation by deriving it from the same weighted condition.
+  Its only regular-radiation analytic input beyond measurability is
+  \[
+    \|z(u)\|^2\le C W(u)^2,\quad u>0,\quad C\ge0.
+  \]
+  For any \(\ell>0\), \(r>0\), \(Z_\ell(u)=\sqrt\ell\,z(\ell u)\),
+  the mixed *quadratic/higher* density
+  \(R_{\rm mix}^{(\ge2)}=|W+Z_\ell|^4-|W|^4-|Z_\ell|^4
+                   -4W^3\operatorname{Re}Z_\ell\)
+  has a convergent actual Riesz row, and
+  \[
+    \left|\mathcal I\bigl(R_{\rm mix}^{(\ge2)}\bigr)(r)\right|
+    \le 2\pi\kappa_H\,C\,B_W(8+2C)\,\ell,
+  \]
+  with the already proved \`radialHartreeBubbleBoundConstant\` \(B_W\).
+  No scale exponent \(\ell(s)=s^{-a}\) is assumed, and the estimate
+  does not force nonzero radiation radial L2 mass to decay.
+
+Original manuscript environment \`prop:one-layer-stage3\` **is still OPEN**.
+The completed \(\mathcal I(R_{\rm mix}^{(\ge2)})\) source estimate is
+not yet the **full** current-weight residual cancellation for the
+actual moving monopole profile \`V_c\`, parameter tangents, matching
+commutators and three-region inverse. The linear mixed charge
+\(4W^3\operatorname{Re}Z_\ell\) remains to be eliminated via the actual
+normalized inner \(\pm\) Fredholm/Kummer matching; its weight cannot be
+misclassified as quadratic.
+
+Formal original manuscript acceptance: **9/21**, unchanged. The
+genuine PDE Type II orbit with dynamically selected blowup exponent
+remains unproved. This new theorem must not increase 9/21.
