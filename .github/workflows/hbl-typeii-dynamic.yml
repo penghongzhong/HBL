@@ -181,6 +181,11 @@ jobs:
              'actual_physical_radiation_slow_coefficient_hasDerivAt',
              'actual_whole_radiation_self_cubic_exact',
              'actual_whole_radiation_self_cubic_core_bound',
+             'actual_whole_radiation_mixed_center_exact',
+             'actual_whole_radiation_mixed_potential_exact',
+             'actual_whole_radiation_complete_Hartree_nonlinearity_difference',
+             'actual_physical_threeD_radiation_slow_coefficient_hasDerivAt',
+             'actual_physical_threeD_whole_radiation_self_cubic_core_bound',
              'actual_physical_inverse_square_radial_reduction',
              'actual_whole_radiation_center_eq_physical_threeD_moment',
              'dynamically_selected_rate_super_self_similar']

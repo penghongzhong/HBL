@@ -217,4 +217,52 @@ theorem actual_whole_radiation_mixed_potential_exact
   rw [hsum1, hsum2]
   ring
 
+/-- The local complex cubic multiplier appearing in the ORIGINAL
+energy-critical Hartree equation. This is not an invented local
+nonlinearity: the full term is the genuine Riesz potential times it. -/
+def actualWholeRadiationLocalCubic (u : ℝ → ℂ) (r : ℝ) : ℂ :=
+  (‖u r‖ ^ 2 : ℝ) * u r
+
+/-- Exact SAME-EQUATION Hartree nonlinear source difference for arbitrary
+complex whole radiation Z, with no remote support or preselected
+modulation speed. The first term contains the pure-radiation Riesz
+potential AND the entire mixed quartic Riesz potential; the second
+contains the change of the local cubic multiplier. All three source
+rows are genuinely integrable, rather than formal symbolic kernels.
+Obtaining positive time-order estimates for these terms and actual
+three-region residual cancellation is still required by manuscript 2.12. -/
+theorem actual_whole_radiation_complete_Hartree_nonlinearity_difference
+    (V : ℝ → ℝ) (Z : ℝ → ℂ) (r : ℝ)
+    (hFull : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ) + Z rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hV : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ)‖ ^ 4) (Ioi (0 : ℝ)))
+    (hZ : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖Z rho‖ ^ 4) (Ioi (0 : ℝ))) :
+    complexRadialHartreeNonlinearity
+        (fun rho => (V rho : ℂ) + Z rho) r -
+      complexRadialHartreeNonlinearity
+        (fun rho => (V rho : ℂ)) r =
+      ((radialHartreePotential
+          (fun rho => ‖Z rho‖ ^ 4) r +
+        radialHartreePotential
+          (actualWholeRadiationMixedQuartic V Z) r : ℝ) : ℂ) *
+        actualWholeRadiationLocalCubic
+          (fun rho => (V rho : ℂ) + Z rho) r +
+      (radialHartreePotential
+          (fun rho => ‖(V rho : ℂ)‖ ^ 4) r : ℂ) *
+        (actualWholeRadiationLocalCubic
+            (fun rho => (V rho : ℂ) + Z rho) r -
+          actualWholeRadiationLocalCubic
+            (fun rho => (V rho : ℂ)) r) := by
+  have hPotential :=
+    actual_whole_radiation_mixed_potential_exact V Z r hFull hV hZ
+  unfold complexRadialHartreeNonlinearity actualWholeRadiationLocalCubic
+  rw [hPotential]
+  push_cast
+  ring
+
 end HBL.TypeIIDynamicSelection
