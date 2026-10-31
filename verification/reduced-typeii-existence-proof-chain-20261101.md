@@ -198,3 +198,72 @@ charge \`4 V^3 Re Z\` with the **same** inner plus/minus Fredholm,
 origin Kummer and remote boundary matching, and derive each generated
 source's positive time order. This work does not, by itself, close an
 additional original manuscript environment. Historical 9/21 unchanged.
+
+
+## 2026-11-01 — True 3D-moment Hartree monopole plus radiation self-Riesz source
+
+**Strict source commit** \`524be4e66b5e63459d094f6909325feb92dd87c4\`;
+GitHub Actions [\`41252171482\`](https://github.com/penghongzhong/HBL/actions/runs/41252171482):
+**completed/success**. Complete 4165-job Lake build and strict
+\`--trust=0 -DwarningAsError=true\` full declaration-type and
+transitive axiom audits. Two new kernel-checked declarations:
+
+- \`HBL.TypeIIDynamicSelection.actual_threeD_moment_monopole_core_effective_residual_quadratic\`;
+- \`HBL.TypeIIDynamicSelection.actual_threeD_moment_monopole_self_Hartree_source_quadratic\`.
+
+For the **same physical** \(c(s)=\kappa_H\ell(s)m_0[z_g(t(s))]\),
+original \`monopolePerturbedRadialProfile\`, \(Z_s=\sqrt{\ell}z_g(t,\ell r)\),
+and genuine complex Hartree renormalized residual, prove together:
+
+1. The exact original radial Hartree core quartic Riesz row is integrable,
+under the already displayed and physically meaningful smallness/core
+conditions; no abstract PDE source is injected.
+2. The genuine original monopole static/effective PDE source has
+quadratic residual after subtracting the **true** physical time/scale/
+phase first-order source, with the amplitude derivative derived from
+the original *three-dimensional* Hartree radiation moment.
+3. Replacing the effective scalar cubic with the **actual full-radiation
+self-density Riesz potential** introduces only its rigorously derived
+radial \(O(r^2)\) center error. In precise terms,
+\[
+\|\mathcal R_{\rm self}(V_c,Z)-\mathcal L_{\rm first}
+       (c,-bc+\kappa_H\ell^3m'_0,b,\omega)\|
+\le C_{\rm mon}c(s)^2+
+ \left(C_{\rm rad}(Z_s,M,D)r^2\right)
+ (1+C_{\rm mon,profile})^3.
+\]
+
+Here \(\mathcal R_{\rm self}\) means the original core residual
+plus **the pure radiation self-Riesz potential times \(V_c^3\)**.
+It does NOT represent the full \(\mathcal R(V_c+Z)\): the actual
+mixed quartic potential, the changed local cubic at \(V_c+Z\),
+and the radiation's own time/spatial derivatives remain separate.
+No false claim of full nonlinear cancellation is made.
+
+Both theorem statements use only \`propext\`, \`Classical.choice\`,
+\`Quot.sound\`; no sorry/admit/new axioms. The local radiation source
+bounds remain conditional on the genuine measurable/weighted L2 and
+origin-flatness hypotheses for the physical rescaled radiation and
+on differentiability of the genuine 3D moment; none prescribes
+the blowup rate.
+
+**HISTORICAL ORIGINAL NUMBERED ACCEPTANCE: 9/21 — UNCHANGED.**
+The revised existence-only candidate 9/20 results solely from
+legitimately removing the unneeded old C1 centre-stable graph theorem,
+not a new proof acceptance.
+
+**Next shortest original-2.12 path:** Derive
+\(m'_0=4\operatorname{Re}\int |z|^2\overline z\,z_t/|x|^2\,dx\)
+from the actual Hartree high-regularity local flow. The cubic Hartree
+nonlinearity is real-potential times \(z\), so its contribution to
+the real derivative vanishes. By Hardy's inequality:
+\[
+|m'_0(t)|\le16\|z(t)\|_\infty^2\|\nabla z(t)\|_2
+                      \|\nabla z_t(t)\|_2.
+\]
+Then connect the actual linear mixed density
+\(4V_c^3\operatorname{Re}Z\) with the verified normalized inner
+plus/minus Fredholm charges, origin Kummer and remote matching,
+and prove actual positive time-weight gain for all regenerated terms.
+The full PDE blowup orbit and dynamically selected limiting rate
+remain open.
