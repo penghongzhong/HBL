@@ -22,6 +22,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- The genuinely quadratic and cubic part of the whole-radiation
 Hartree density after removing the true real-linear source. -/
