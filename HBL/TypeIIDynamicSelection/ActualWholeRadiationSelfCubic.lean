@@ -146,7 +146,10 @@ theorem actual_whole_radiation_mixed_center_exact
       (∫ rho in Ioi (0 : ℝ),
         (‖(V rho : ℂ)‖ ^ 4 + ‖Z rho‖ ^ 4) +
           actualWholeRadiationMixedQuartic V Z rho) = _
-  rw [integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  have hsum1 := integral_add (hV.add hZ) hMix
+  have hsum2 := integral_add hV hZ
+  simp only [Pi.add_apply] at hsum1 hsum2
+  rw [hsum1, hsum2]
   ring
 
 /-- Exact nonlocal potential decomposition for the SAME physical Hartree
@@ -208,7 +211,10 @@ theorem actual_whole_radiation_mixed_potential_exact
           rho * hartreeRadialLog r rho * ‖Z rho‖ ^ 4) +
         rho * hartreeRadialLog r rho *
           actualWholeRadiationMixedQuartic V Z rho) = _
-  rw [integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  have hsum1 := integral_add (hV.add hZ) hMix
+  have hsum2 := integral_add hV hZ
+  simp only [Pi.add_apply] at hsum1 hsum2
+  rw [hsum1, hsum2]
   ring
 
 end HBL.TypeIIDynamicSelection
