@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualMomentCutoffTransport
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualMomentInnerCutoff
+#check @HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_space_hasDerivAt
+#check @HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_time_hasDerivAt
+#check @HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_material_derivative
+#print axioms HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_space_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_time_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_material_derivative
