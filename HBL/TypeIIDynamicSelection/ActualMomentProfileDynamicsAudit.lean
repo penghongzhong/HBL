@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualMomentProfileDynamics
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualMomentMonopoleProfile
+#check @HBL.TypeIIDynamicSelection.actual_moment_monopole_profile_threeD_hasDerivAt
+#check @HBL.TypeIIDynamicSelection.actual_moment_monopole_core_threeD_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_moment_monopole_profile_threeD_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_moment_monopole_core_threeD_hasDerivAt
