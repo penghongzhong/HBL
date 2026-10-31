@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualMixedQuarticGain
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualWholeRadiationMixedHigher
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_linear_higher_exact
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_abs_le
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_twoBeta_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_linear_higher_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_abs_le
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_twoBeta_gain
