@@ -320,3 +320,59 @@ misclassified as quadratic.
 Formal original manuscript acceptance: **9/21**, unchanged. The
 genuine PDE Type II orbit with dynamically selected blowup exponent
 remains unproved. This new theorem must not increase 9/21.
+
+## Original manuscript 2.12: first PHYSICAL PDE-residual obligation certified
+
+**Direct original-chain source commit:** \`b50c17bb5d0de6c53efe1e0391da0bd321a02976\`.
+**GitHub Actions:** \`41197724826\`, completed/**success**, including
+pinned Lean 4.35.0-rc3, Mathlib a98628e16, trust=0,
+warning-as-error, exact declared type and transitive axiom audit.
+New code: \`HBL/TypeIIDynamicSelection/ActualOneLayerPDEResidual.lean\`
+and the matching audit module.
+
+The verified theorem
+\`actual_one_layer_full_renormalized_Hartree_PDE_source\`
+states the COMPLETE actual time-dependent complex radial residual
+difference, for a true real core V(s,r) and a full complex radiation Z(s,r).
+With genuine temporal/spatial twice-differentiability and actual
+quartic Riesz row integrability (NOT a desired residual conclusion),
+the identity is
+\[
+\begin{aligned}
+ {\mathcal F}(V+Z)-{\mathcal F}(V)
+ ={}&i Z_s + \Delta_r Z + i b\Lambda Z + \omega Z\\
+ &+ \bigl[\mathcal I(|Z|^4)
+       +\mathcal I(|V+Z|^4-|V|^4-|Z|^4)\bigr] |V+Z|^2(V+Z)\\
+ &+\mathcal I(|V|^4)
+       \bigl(|V+Z|^2(V+Z)-|V|^2V\bigr).
+\end{aligned}
+\]
+This is a genuine exact PDE source identification: unlike the historical
+structural terminal \`oneMinimalWeightCluster_eliminated\`, its conclusion
+does not contain a vacuous \`tangent=tangent\`. It does NOT assume a
+remote support condition, prescribe ell(s), or add an abstract
+source inverse.
+
+**Original 2.12 not yet accepted; exact remaining obligations:**
+1. Construct and verify the actual finite-atom current-weight projection
+   \`Pi_rho\` of the FULL identity above, identifying explicitly the
+   two parameter-speed tangents \`P_rho(zeta) zeta_s\`; no abstract
+   \`LayerSource\` supplied independently from the physical PDE.
+2. Feed the SAME physical projected source into BOTH actual normalized
+   plus/minus Fredholm channels, the actual Kummer annular Green
+   inverse, and the actual remote phase/log inverse; glue them with
+   a moving cutoff and PROVE the threshold charges/overlap identities.
+   The already compiled individual solver modules do not prove this
+   simultaneous nonlinear PDE source matching.
+3. For EVERY generated true PDE term, derive the *actual physical*
+   time exponent and show gain at least
+   \`kappa_prof = min(delta,epsFlat,2*betaMinus-1,1/2,rhoStar)>0\`.
+   The existing abstract \`GeneratedTerm.order\` definition is not
+   an acceptable substitute for source classification.
+4. Then and only then may \`prop:one-layer-stage3\` be accepted as
+   one additional original manuscript environment.
+
+Strict original acceptance remains **9/21**. In particular, neither
+the present precise physical source identity nor the historical
+conditional regional-solvers theorem counts as 10/21. Dynamical
+Type II Hartree rate selection remains an OPEN main-PDE obligation.
