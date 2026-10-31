@@ -88,4 +88,36 @@ theorem actualRadiationCenter_equals_physical_slow_coefficient
   unfold actualRadiationCenter radialHartreeCenter radialPhysicalQuarticMoment
   ring
 
+/-- The physical three-dimensional critical rescaling preserves the
+HALF-LINE radial L2(dr) mass. Consequently a nonzero regular terminal
+radiation cannot in general be required to have this mass decay to zero.
+This guards the mixed Hartree source estimates against a false shortcut. -/
+theorem rescalePhysicalRadiation_radialL2_invariant
+    (ell : ℝ) (hEll : 0 < ell) (z : ℝ → ℂ) :
+    (∫ r in Ioi (0 : ℝ), ‖rescalePhysicalRadiation ell z r‖ ^ 2) =
+      ∫ r in Ioi (0 : ℝ), ‖z r‖ ^ 2 := by
+  have hp (r : ℝ) :
+      ‖rescalePhysicalRadiation ell z r‖ ^ 2 =
+        ell * ‖z (ell * r)‖ ^ 2 := by
+    unfold rescalePhysicalRadiation
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_nonneg (Real.sqrt_nonneg ell), mul_pow,
+      Real.sq_sqrt hEll.le]
+  have hint :
+      (∫ r in Ioi (0 : ℝ), ‖rescalePhysicalRadiation ell z r‖ ^ 2) =
+        ell * ∫ r in Ioi (0 : ℝ), ‖z (ell * r)‖ ^ 2 := by
+    calc
+      _ = ∫ r in Ioi (0 : ℝ), ell * ‖z (ell * r)‖ ^ 2 := by
+        apply integral_congr_ae
+        filter_upwards with r
+        exact hp r
+      _ = _ := by rw [integral_const_mul]
+  have hchange :
+      (∫ r in Ioi (0 : ℝ), ‖z (ell * r)‖ ^ 2) =
+        ell⁻¹ * ∫ r in Ioi (0 : ℝ), ‖z r‖ ^ 2 := by
+    simpa only [mul_zero, smul_eq_mul] using
+      (integral_comp_mul_left_Ioi (fun r : ℝ => ‖z r‖ ^ 2) 0 hEll)
+  rw [hint, hchange]
+  field_simp [hEll.ne']
+
 end HBL.TypeIIDynamicSelection

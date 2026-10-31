@@ -1,5 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualMixedQuarticCenterGain
 
 set_option autoImplicit false
-#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_twoBeta_gain
-#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_twoBeta_gain
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain

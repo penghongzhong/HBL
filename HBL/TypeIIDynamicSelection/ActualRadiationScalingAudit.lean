@@ -11,3 +11,5 @@ set_option autoImplicit false
 #print axioms HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_quartic
 #print axioms HBL.TypeIIDynamicSelection.actualRadiationCenter_rescaling
 #print axioms HBL.TypeIIDynamicSelection.actualRadiationCenter_equals_physical_slow_coefficient
+#check @HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_radialL2_invariant
+#print axioms HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_radialL2_invariant
