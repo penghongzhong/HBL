@@ -77,9 +77,9 @@ theorem actual_weighted_joint_ball_contraction
       B CE E G hs0 hp hnu hL hEcont hE hdelta hCnl hGcont
       hGzero hGlip q0 a0 q 0
     change ‖Phi q - Phi 0‖ ≤ k * ‖q - 0‖ at ht
-    have hzero : q - (0 : CenterWeightedPath s0 p) = q := by
-      ext t
-      simp
+    have hzero : ‖q - (0 : CenterWeightedPath s0 p)‖ = ‖q‖ := by
+      rw [← centerWeightedPath_dist_eq_norm_sub s0 p q 0]
+      exact dist_zero_right q
     rw [hzero] at ht
     exact ht
   have hbound (q : CenterWeightedPath s0 p) :
