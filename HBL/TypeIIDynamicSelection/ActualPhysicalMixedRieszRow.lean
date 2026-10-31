@@ -22,7 +22,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Modulation
 
 /-- The actual mixed source envelope for the stationary bubble and
 energy-critical regular radiation has a uniformly r-normalized
@@ -115,8 +115,9 @@ theorem physical_mixed_higher_Riesz_linear_length
       (2 * Real.pi * hartreeKappa * A ^ 2 * J) * ell := by
   let Z := rescalePhysicalRadiation ell z
   have hZmeas : Measurable Z := by
-    dsimp [Z, rescalePhysicalRadiation]
-    fun_prop
+    dsimp [Z]
+    unfold rescalePhysicalRadiation
+    exact measurable_const.mul (hz.comp (measurable_const.mul measurable_id))
   have hFmeas : Measurable (actualWholeRadiationMixedHigher V Z) := by
     unfold actualWholeRadiationMixedHigher
     fun_prop
@@ -221,7 +222,6 @@ theorem physical_mixed_higher_Riesz_linear_length
       mul_le_mul_of_nonneg_left hInt hCoeff
     _ = (2 * Real.pi * hartreeKappa * A ^ 2 * J) * ell := by
       field_simp [hr.ne']
-      ring
 
 /-- A completely identified STATIONARY BUBBLE + rescaled regular
 radiation consequence. A genuine regular-radiation row-integrability
