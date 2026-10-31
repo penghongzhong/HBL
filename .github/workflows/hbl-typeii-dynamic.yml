@@ -72,10 +72,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if lake exe cache get > evidence/full-mathlib-cache.log 2>&1; then
+          if timeout 120s lake exe cache get > evidence/full-mathlib-cache.log 2>&1; then
             echo "Full Mathlib cache restored"
           else
-            echo "Full Mathlib cache unavailable; Lake will compile exact pinned source"
+            echo "Full Mathlib cache unavailable or timed out; use exact pinned source plus restored project cache"
           fi
       - name: Restore verified base project cache when available
         id: hbl_project_cache
