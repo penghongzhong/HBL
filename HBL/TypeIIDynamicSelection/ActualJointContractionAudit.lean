@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualJointContraction
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_weighted_joint_ball_contraction
+#print axioms HBL.TypeIIDynamicSelection.actual_weighted_joint_ball_contraction
