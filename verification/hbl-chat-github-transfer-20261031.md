@@ -465,3 +465,42 @@ residual, true current-weight projection, inner +/- Fredholm and remote
 weight matching, moving-cutoff overlap/commutators, physical derivative
 bounds for the specific source, and positive order of all generated terms.
 The dynamically selected Type II Hartree blowup main PDE theorem remains OPEN.
+
+## 2026-10-31: Actual moving-overlap radial commutator (strict success)
+
+**Strict source commit:** \`d101662bc6ed553a33565d594079c94644185b26\`.
+**Actions:** \`41214391782\` completed/success. The strict workflow completed
+4135 Lake jobs and exported full declaration types plus transitive axioms,
+with Lean 4.35.0-rc3, Mathlib a98628e16, \`--trust=0\`,
+\`-DwarningAsError=true\`. Axioms remain only \`propext\`,
+\`Classical.choice\`, \`Quot.sound\` (no \`sorry\` or novel axiom).
+
+Two actual-chain statements now coexist in
+\`HBL/TypeIIDynamicSelection/ActualOneLayerPDEResidual.lean\`:
+- \`actual_one_layer_radial_Laplacian_cutoff_commutator\`:
+  \(\Delta_r(\eta f)-\eta\Delta_r f
+   =2\eta' f'+(\eta''+2r^{-1}\eta')f\), for C² complex radial
+  functions (complete physical radial \(2/r\) correction included).
+- \`actual_one_layer_physical_cutoff_radial_commutator\`, using the
+  **manuscript's actual** \(\eta_R(r)=1-\chi(r/R)\) and two independently
+  audited actual derivatives:
+  \[
+  [\Delta_r,\eta_R]f
+    =-\frac{2}{R}\chi'(r/R)f'
+      -\Big(\frac{\chi''(r/R)}{R^2}
+          +\frac{2\chi'(r/R)}{rR}\Big)f .
+  \]
+
+This proves the exact local spatial differential commutator, including
+its inverse-radius factors, without prescribing the physical blowup
+rate or replacing \(R(c)\) by \(R_*(s)\). It does **not** yet prove a
+uniform-in-annulus \(O(R^{-1})\) norm bound for the actual source, a
+moving-time-cutoff bound, or the Hartree nonlocal \([H,\eta_R]\)
+cross-region contribution. To obtain the original paper's positive
+temporal order, one still needs derivative bounds for the fixed smooth
+cutoff and the actual profile in the overlap and the physical
+identification \(R=R_*(s)\), plus nonlocal tail matching.
+
+The manuscript original environment \`prop:one-layer-stage3\` (2.12)
+remains OPEN; historical strict original acceptance stays **9/21**.
+The actual dynamically selected Type II Hartree PDE theorem remains OPEN.
