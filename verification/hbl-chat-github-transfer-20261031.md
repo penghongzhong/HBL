@@ -425,3 +425,43 @@ statements; do NOT duplicate these as new auxiliary proof branches.
 No original manuscript environment was newly closed in this update.
 Strict manuscript ledger is **9/21**, actual \`prop:one-layer-stage3\`
 is still OPEN. The dynamical Type II PDE main theorem remains OPEN.
+
+## 2026-10-31: Hartree radiation-residual increment to Kummer tangent (strict success)
+
+**Strict audited commit:** \`bdb352e74e02c0b5e539efd1dad740b85e28dc20\`.
+**GitHub Actions:** \`41211597361\`, completed/success; full \`lake build\` (4135 jobs),
+\`lean --trust=0 -DwarningAsError=true\`, exact exported terminal type and
+transitive axiom audit.
+
+Retained and audited:
+- \`HBL/TypeIIDynamicSelection/ActualOneLayerKummerModulation.lean\`;
+- \`HBL/TypeIIDynamicSelection/ActualOneLayerKummerModulationAudit.lean\`.
+
+The new theorem \`actual_Kummer_inverse_physical_Hartree_source_two_speed\` uses
+the **actual full-Hartree residual increment**
+\[
+F_s(r)=\mathcal R_{b(s),\omega(s)}(V+Z)(s,r)
+      -\mathcal R_{b(s),\omega(s)}(V)(s,r)
+\]
+restricted to the Kummer annulus, and the previously verified
+\`annulusParameterInverse\` plus
+\`KummerSourceTangents.annulusSourceTangent_hasDerivAt\` (no new inverse).
+For \(U_s=\mathfrak G_s F_s\), it proves the **exact** source/parameter derivative
+\[
+\partial_s U_s=\mathfrak G_s
+ [\partial_s F_s-(\theta_s-i\mu_s) P U_s],
+\]
+provided the explicit annular source continuity and Banach-valued \`HasDerivAt\`
+of \`F_s\`, actual \`HasDerivAt\` for \(\mu,\theta\), and the Neumann bound
+\(\|\delta_s\|\|T\|\le \tfrac12\). The theorem does **not** assume a prescribed
+rate or insert a fictitious \`LayerSource\`. Its exported terminal's only
+transitive axioms are \`propext\`, \`Classical.choice\`, \`Quot.sound\`.
+No \`sorry\`, \`admit\`, or novel axiom.
+
+**Strict acceptance remains historical 9/21**. This result is the physical
+radiation **increment**, not the full one-layer profile residual. The
+unproved paper \`prop:one-layer-stage3\` (2.12) still needs background-core
+residual, true current-weight projection, inner +/- Fredholm and remote
+weight matching, moving-cutoff overlap/commutators, physical derivative
+bounds for the specific source, and positive order of all generated terms.
+The dynamically selected Type II Hartree blowup main PDE theorem remains OPEN.
