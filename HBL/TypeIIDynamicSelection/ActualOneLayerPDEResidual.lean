@@ -143,6 +143,8 @@ theorem actual_one_layer_full_renormalized_Hartree_PDE_source
             complexRadialHartreeNonlinearity v r) := by
         dsimp [z]
         ring
-    _ = _ := by rw [hNL']
+    _ = _ := by
+      rw [hNL']
+      ring
 
 end HBL.TypeIIDynamicSelection
