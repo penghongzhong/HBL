@@ -98,4 +98,103 @@ theorem actual_whole_radiation_self_cubic_core_bound
     norm_pow, Complex.norm_real, Real.norm_eq_abs]
   exact mul_le_mul hpe hpow (by positivity) hC
 
+/-- The genuine quartic Hartree interaction density involving both
+the concentrating real profile and the entire complex radiation.
+No support separation or approximation is imposed. -/
+def actualWholeRadiationMixedQuartic
+    (V : ℝ → ℝ) (Z : ℝ → ℂ) (rho : ℝ) : ℝ :=
+  ‖(V rho : ℂ) + Z rho‖ ^ 4 -
+    ‖(V rho : ℂ)‖ ^ 4 - ‖Z rho‖ ^ 4
+
+/-- Exact decomposition of the ORIGINAL whole-radiation Hartree center
+into bubble, pure radiation and the full mixed quartic interaction.
+Integrability of the mixed density is DERIVED from the three physical
+quartic integrability inputs, not an extra postulated source estimate. -/
+theorem actual_whole_radiation_mixed_center_exact
+    (V : ℝ → ℝ) (Z : ℝ → ℂ)
+    (hFull : IntegrableOn
+      (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hV : IntegrableOn
+      (fun rho => ‖(V rho : ℂ)‖ ^ 4) (Ioi (0 : ℝ)))
+    (hZ : IntegrableOn
+      (fun rho => ‖Z rho‖ ^ 4) (Ioi (0 : ℝ))) :
+    radialHartreeCenter (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) =
+      radialHartreeCenter (fun rho => ‖(V rho : ℂ)‖ ^ 4) +
+        actualRadiationCenter Z +
+          radialHartreeCenter (actualWholeRadiationMixedQuartic V Z) := by
+  have hMixEq :
+      actualWholeRadiationMixedQuartic V Z =
+        (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) -
+          (fun rho => ‖(V rho : ℂ)‖ ^ 4) -
+            (fun rho => ‖Z rho‖ ^ 4) := rfl
+  have hMix : IntegrableOn
+      (actualWholeRadiationMixedQuartic V Z) (Ioi (0 : ℝ)) := by
+    rw [hMixEq]
+    exact (hFull.sub hV).sub hZ
+  have hDensity :
+      (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) =
+        (fun rho => ‖(V rho : ℂ)‖ ^ 4) +
+          (fun rho => ‖Z rho‖ ^ 4) +
+            actualWholeRadiationMixedQuartic V Z := by
+    funext rho
+    simp only [Pi.add_apply, actualWholeRadiationMixedQuartic]
+    ring
+  unfold actualRadiationCenter radialHartreeCenter
+  rw [hDensity, integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  ring
+
+/-- Exact nonlocal potential decomposition for the SAME physical Hartree
+field V+Z at every observation radius r. The full mixed source is
+retained; unlike a remote-only construction this needs NO artificial
+exterior-support separation. All row integrabilities are genuine
+Lebesgue hypotheses on the physical quartic densities. -/
+theorem actual_whole_radiation_mixed_potential_exact
+    (V : ℝ → ℝ) (Z : ℝ → ℂ) (r : ℝ)
+    (hFull : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ) + Z rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hV : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ)‖ ^ 4) (Ioi (0 : ℝ)))
+    (hZ : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖Z rho‖ ^ 4) (Ioi (0 : ℝ))) :
+    radialHartreePotential
+        (fun rho => ‖(V rho : ℂ) + Z rho‖ ^ 4) r =
+      radialHartreePotential (fun rho => ‖(V rho : ℂ)‖ ^ 4) r +
+        radialHartreePotential (fun rho => ‖Z rho‖ ^ 4) r +
+          radialHartreePotential (actualWholeRadiationMixedQuartic V Z) r := by
+  have hMixedRow :
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedQuartic V Z rho) =
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ) + Z rho‖ ^ 4) -
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ)‖ ^ 4) -
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖Z rho‖ ^ 4) := by
+    funext rho
+    simp only [Pi.sub_apply, actualWholeRadiationMixedQuartic]
+    ring
+  have hMix : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedQuartic V Z rho) (Ioi (0 : ℝ)) := by
+    rw [hMixedRow]
+    exact (hFull.sub hV).sub hZ
+  have hDensityRow :
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ) + Z rho‖ ^ 4) =
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ)‖ ^ 4) +
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖Z rho‖ ^ 4) +
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedQuartic V Z rho) := by
+    funext rho
+    simp only [Pi.add_apply, actualWholeRadiationMixedQuartic]
+    ring
+  unfold radialHartreePotential
+  rw [hDensityRow, integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  ring
+
 end HBL.TypeIIDynamicSelection

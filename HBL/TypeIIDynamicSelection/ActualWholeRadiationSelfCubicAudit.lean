@@ -7,3 +7,8 @@ set_option autoImplicit false
 
 #print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_exact
 #print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_self_cubic_core_bound
+#check @HBL.TypeIIDynamicSelection.actualWholeRadiationMixedQuartic
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_exact
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_potential_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_potential_exact
