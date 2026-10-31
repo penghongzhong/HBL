@@ -77,7 +77,10 @@ theorem actual_weighted_joint_ball_contraction
       B CE E G hs0 hp hnu hL hEcont hE hdelta hCnl hGcont
       hGzero hGlip q0 a0 q 0
     change ‖Phi q - Phi 0‖ ≤ k * ‖q - 0‖ at ht
-    rw [sub_zero] at ht
+    have hzero : q - (0 : CenterWeightedPath s0 p) = q := by
+      ext t
+      simp
+    rw [hzero] at ht
     exact ht
   have hbound (q : CenterWeightedPath s0 p) :
       ‖Phi q‖ ≤ k * ‖q‖ + ‖Phi 0‖ := by
@@ -85,7 +88,8 @@ theorem actual_weighted_joint_ball_contraction
       ‖Phi q‖ = ‖(Phi q - Phi 0) + Phi 0‖ := by
         congr 1
         abel
-      _ ≤ ‖Phi q - Phi 0‖ + ‖Phi 0‖ := norm_add_le _ _
+      _ ≤ ‖Phi q - Phi 0‖ + ‖Phi 0‖ :=
+        norm_add_le (Phi q - Phi 0) (Phi 0)
       _ ≤ k * ‖q‖ + ‖Phi 0‖ := add_le_add (hdiff q) le_rfl
   have hball (q : CenterWeightedPath s0 p) (hq : ‖q‖ ≤ r) :
       ‖Phi q‖ ≤ r := by
