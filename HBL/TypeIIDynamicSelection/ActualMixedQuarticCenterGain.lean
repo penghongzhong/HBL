@@ -82,10 +82,8 @@ theorem actual_whole_radiation_mixed_center_twoBeta_gain
       IntegrableOn (actualWholeRadiationMixedHigher V Z) (Ioi (0 : ℝ)) := by
     apply (hZL2.const_mul K).mono' hHigherMeas.aestronglyMeasurable.restrict
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with rho hrho
-    rw [Real.norm_eq_abs]
     have hz : 0 ≤ K * ‖Z rho‖ ^ 2 := by positivity
-    rw [Real.norm_of_nonneg hz]
-    exact hbound rho hrho
+    simpa only [Real.norm_eq_abs, abs_of_nonneg hz] using hbound rho hrho
   have hIntegral :
       |∫ rho in Ioi (0 : ℝ), actualWholeRadiationMixedHigher V Z rho| ≤
         K * B * s ^ (-2 * beta) := by
