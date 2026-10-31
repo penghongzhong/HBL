@@ -376,3 +376,52 @@ Strict original acceptance remains **9/21**. In particular, neither
 the present precise physical source identity nor the historical
 conditional regional-solvers theorem counts as 10/21. Dynamical
 Type II Hartree rate selection remains an OPEN main-PDE obligation.
+
+## 2026-10-31: Kummer inverse two-speed strict terminal (direct 2.12 tangent)
+
+**Strict certified HEAD:** \`187d6b946a303d8111d7e0fdb7b86afdc8454425\`.
+**GitHub Actions:** \`41202227872\`, completed/success, including actual
+trust=0 Lean compilation, warning-as-error, full type and transitive
+axiom audit. Pinned Lean 4.35.0-rc3, Mathlib a98628e16.
+The exact checked declarations are:
+- \`HBL.TypeIIDynamicSelection.actual_Kummer_frozen_coefficient_two_speed\`;
+- \`HBL.TypeIIDynamicSelection.actual_Kummer_inverse_two_parameter_speed\`.
+
+In the manuscript's *genuine* two-dimensional physical Kummer coefficient,
+\[
+  c(\mu,\theta)=\theta+i(1/4-\mu),\qquad
+  \partial_s c=\theta_s-i\mu_s.
+\]
+For the previously constructed annulus parameter inverse
+\(\mathfrak G_s=\operatorname{annulusParameterInverse}
+(T,c(\mu(s),\theta(s))-c(\mu_0,\theta_0))\), provided the
+actual Neumann smallness \(\|\delta_s\|\|T\|\le 1/2\), the proof gives
+\[
+  \partial_s\mathfrak G_s
+  =-(\theta_s-i\mu_s)\,
+       \mathfrak G_s\circ P\circ\mathfrak G_s,
+\]
+where \(P=\operatorname{annulusValueOperator}\).
+This **proves the actual \(\mu_s,\theta_s\) Kummer inverse tangent**,
+not a formal tangent=tangent assertion, and does not impose a rate.
+
+The older already-verified
+\`HBL/KummerSourceTangents/ActualCompactTangentFamily.lean\`
+also contains the actual physical Kummer source-tangent residual bound.
+Reuse its verified uniqueness, compact-parameter and derivative
+statements; do NOT duplicate these as new auxiliary proof branches.
+
+**Remaining original 2.12 burden is not merely this derivative:**
+1. Extract the actual minimum-weight atom of the full Hartree PDE
+   residual (\`ActualOneLayerPDEResidual\`) and identify its *same*
+   physical amplitude/phase and Kummer parameter tangent;
+2. Prove that source falls into the SAME inner plus/minus Fredholm,
+   Kummer annulus and remote phase/log weighted source classes,
+   with actual moving-cutoff overlap and matching affine charges;
+3. Derive all generated nonlinear/commutator terms' *physical*
+   positive time-order gains. The old structural
+   \`GeneratedTerm.order\` label is not an accepted substitute.
+
+No original manuscript environment was newly closed in this update.
+Strict manuscript ledger is **9/21**, actual \`prop:one-layer-stage3\`
+is still OPEN. The dynamical Type II PDE main theorem remains OPEN.
