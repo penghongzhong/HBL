@@ -19,7 +19,7 @@ two-dimensional physical coefficient path.
 
 This identifies a Kummer-region parameter-tangent operator entering
 original manuscript prop:one-layer-stage3. The full physical source
-projection, matching with the +/- Fredholm and remote solvers, and
+projection, matching with the plus/minus Fredholm and remote solvers, and
 positive-order remainder remain open.
 -/
 
