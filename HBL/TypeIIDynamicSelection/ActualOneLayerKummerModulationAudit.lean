@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerKummerModulation
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_frozen_coefficient_two_speed
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_inverse_two_parameter_speed
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_frozen_coefficient_two_speed
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_inverse_two_parameter_speed
