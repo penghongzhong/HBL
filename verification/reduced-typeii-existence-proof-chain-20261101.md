@@ -130,3 +130,29 @@ modulation/clock, not a prescribed asymptotic rate.
 Still open: true HBL current-weight source projection and simultaneous
 physical Hartree/Fredholm/Kummer/remote matching, plus all other
 generated-source gains. Historical original count remains 9/21.
+
+
+## 2026-11-01 — Strict validation of the existing weighted joint-ball fixed point
+
+At source commit \`75bac3e9fe5f44e87c9b07f51e9636c4aec8e1b2\`,
+Lean built the complete \`actual_weighted_joint_ball_contraction\`
+declaration and printed its full type plus only
+\`propext, Classical.choice, Quot.sound\`. A focused workflow's
+Python verifier initially failed on a false-negative check requiring
+\`@HBL.TypeIIDynamicSelection....\` while \`#check\` prints the same
+full type without \`@\`.
+
+The source was **not altered** to work around the audit. The script
+was corrected in \`1b8c319dbca1e0daf527d762489eb32ea572a33b\`
+to accept the genuine Lean output syntax, and **Actions
+\`41250357826\` completed SUCCESS**, with
+\`lake build\`, \`--trust=0 -DwarningAsError=true\`, full
+type and transitive axiom check.
+
+This verifies the original HBL **weighted Banach centre/threshold
+contraction mechanism**, including source-at-zero closed-ball invariance
+and uniqueness. It remains **conditional** on input
+\`StandardConstrainedCenterPropagator\` and weighted physical-source
+estimates for \`E,G\`; it does NOT establish the original manuscript
+5.2 synchronized full \`(h,Q)\` physical Hartree map or the whole
+Type II PDE construction. Historical original acceptance stays 9/21.
