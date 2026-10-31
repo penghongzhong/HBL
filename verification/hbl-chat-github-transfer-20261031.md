@@ -205,3 +205,66 @@ Riesz potential/weighted source norms, control the moving cutoff,
 and match the parameter-tangent and threshold projections.
 Original numbered acceptance remains **9/21**, and the
 dynamically selected finite-time Type II blowup main theorem is OPEN.
+
+## 2026-10-31 continued: actual mixed Riesz operator and cubic source gain
+
+Pinned compiler and trust-zero **strict success**:
+- \`5d3928a33bcb281c648425e0a4147ad0aaa7dbad\`, workflow
+  \`41191599945\`, completed/success;
+- \`211b9f6e7dad2eeb7f7197fdc942e16e1e653a62\`, workflow
+  \`41192212249\`, completed/success.
+
+Four newly added source-bearing theorems in
+\`HBL/TypeIIDynamicSelection/ActualMixedQuarticRieszGain.lean\`
+and its separately compiled audit, under Lean 4.35.0-rc3 and pinned
+Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5:
+
+1. \`actual_whole_radiation_mixed_higher_weighted_gain\`;
+2. \`actual_whole_radiation_mixed_Riesz_twoBeta_gain\`;
+3. \`actual_whole_radiation_mixed_Riesz_inner_uniform_gain\`;
+4. \`actual_whole_radiation_mixed_Riesz_cubic_source_gain\`.
+
+These are genuine same-equation inverse-square Hartree estimates, with the
+physical positive radial kernel \`rho*hartreeRadialLog r rho\`. Set
+\[
+  F_{\rm mix}^{(\ge2)}
+   =|V+Z|^4-|V|^4-|Z|^4-4V^3\operatorname{Re}Z,\qquad
+  E=8|V|^2+2|Z|^2.
+\]
+Assuming \(\|Z\|_\infty\le A s^{-\beta}\), \(\beta>1/2\), and true weighted
+row integrability plus
+\[
+  \int_0^\infty \rho L(r,\rho)E(\rho)\,d\rho\le rJ,
+  \quad r>0,
+\]
+the strict Lean proof gives, with the original physical normalization,
+\[
+  |\mathcal I(F_{\rm mix}^{(\ge2)})(r)|
+     \le 2\pi\kappa_H A^2J\,s^{-2\beta}.
+\]
+If \(|V(r)|\le M\) and \(A\ge0\), the genuine nonlinear source component
+also satisfies
+\[
+ \left|\mathcal I(F_{\rm mix}^{(\ge2)})(r)
+                  |V(r)+Z(r)|^2(V(r)+Z(r))\right|
+ \le 2\pi\kappa_H A^2J(M+A)^3s^{-2\beta}.
+\]
+Thus the inner \(1/r\) loss disappears from the **conclusion**, but ONLY
+under the explicitly stated \(r\)-normalized weighted spatial row
+hypothesis. The bound on this row has **not** yet been derived from
+the actual Hartree regular-radiation profile and cannot be hidden in a
+tautological source-order definition.
+
+Next high-priority genuine original-2.12 obligations:
+(a) establish the uniform \(r\)-normalized row from the real radiation
+regularity and core/annulus/remote splitting (near-diagonal logarithmic
+kernel and far-region L2 estimates);
+(b) recover its correct moving-cutoff and parameter-tangent derivatives;
+(c) identify every physical weight-\(\rho\) residue and instantiate the
+already certified inner Hartree, Kummer and remote solvers with the
+**same** residual, proving its cancellation and new-term weight gain.
+
+The original manuscript \`prop:one-layer-stage3\` remains OPEN.
+Strict original paper ledger is **9/21**, main genuine dynamically
+selected Type II blowup PDE theorem remains OPEN. These four
+newly audited declarations must NOT be added to 9/21.
