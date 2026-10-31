@@ -225,7 +225,7 @@ theorem actual_one_layer_overlap_cutoff_deriv_hasDerivAt
     · funext x
       simp only [Pi.neg_apply, Function.comp_def]
       ring
-    · field_simp [hR] <;> ring
+    · field_simp [hR]
   exact hreal.ofReal_comp
 
 /-- Physical moving-cutoff radial Laplacian commutator, with both
