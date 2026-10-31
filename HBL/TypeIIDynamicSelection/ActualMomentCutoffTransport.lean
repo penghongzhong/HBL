@@ -56,7 +56,7 @@ theorem actualMomentInnerCutoff_original_monopole_profile
       (monopoleQuadraticRadius
         (actualPhysicalRadiationMonopole ell z time s))
       (actualPhysicalRadiationMonopole ell z time s) r =
-    bubble r +
+    HBL.Modulation.bubble r +
       actualPhysicalRadiationMonopole ell z time s *
       actualMomentInnerCutoff ell z time s r *
       monopoleRadialProfile r := by
