@@ -28,7 +28,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Modulation
 
 /-- Physical energy-critical radiation produces exactly one power of the
 length ell in the quadratic amplitude, without imposing a rate. -/
