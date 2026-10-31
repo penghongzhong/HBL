@@ -255,9 +255,11 @@ theorem physical_bubble_mixed_Riesz_linear_length
             (rescalePhysicalRadiation ell z) rho) ≤
         r * (radialHartreeBubbleBoundConstant * (8 + 2 * C)) := by
     convert hE.2 using 1 <;> ring
-  exact physical_mixed_higher_Riesz_linear_length
+  have hResult := physical_mixed_higher_Riesz_linear_length
     bubble ell r hell hr z hBubbleMeas hz
     (J := radialHartreeBubbleBoundConstant * (8 + 2 * C))
     hzBound hE.1 hBound
+  refine ⟨hResult.1, ?_⟩
+  convert hResult.2 using 1 <;> ring
 
 end HBL.TypeIIDynamicSelection
