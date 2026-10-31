@@ -33,6 +33,36 @@ def actualMomentInnerCutoff
     (s r : ℝ) : ℝ :=
   1 - cutoff (actualPhysicalRadiationMonopole ell z time s * r / 4)
 
+/-- The actual whole-radiation Hartree moment is nonnegative.
+Therefore this smooth cutoff agrees with the manuscript's
+absolute-amplitude cutoff, INCLUDING the zero-amplitude case. -/
+theorem actualMomentInnerCutoff_eq_original_absolute
+    (ell : ℝ → ℝ) (z : ℝ → ℝ → ℂ) (time : ℝ → ℝ)
+    (s r : ℝ) :
+    actualMomentInnerCutoff ell z time s r =
+      1 - cutoff
+        (|actualPhysicalRadiationMonopole ell z time s| * r / 4) := by
+  have hnonneg : 0 ≤ actualPhysicalRadiationMonopole ell z time s :=
+    actualRadiationCenter_nonneg _
+  simp [actualMomentInnerCutoff, abs_of_nonneg hnonneg]
+
+/-- The exact original moving Hartree monopole profile is the bubble
+plus its genuine radiation-moment cutoff tail, not an independent model.
+The original c=0 definition is kept without division by c. -/
+theorem actualMomentInnerCutoff_original_monopole_profile
+    (ell : ℝ → ℝ) (z : ℝ → ℝ → ℂ) (time : ℝ → ℝ)
+    (s r : ℝ) :
+    monopolePerturbedRadialProfile
+      (monopoleQuadraticRadius
+        (actualPhysicalRadiationMonopole ell z time s))
+      (actualPhysicalRadiationMonopole ell z time s) r =
+    bubble r +
+      actualPhysicalRadiationMonopole ell z time s *
+      actualMomentInnerCutoff ell z time s r *
+      monopoleRadialProfile r := by
+  rw [monopoleMovingCutoffProfile_eq]
+  rw [← actualMomentInnerCutoff_eq_original_absolute]
+
 /-- Exact radial derivative of the true radiation-moment cutoff. -/
 theorem actualMomentInnerCutoff_space_hasDerivAt
     (ell : ℝ → ℝ) (z : ℝ → ℝ → ℂ) (time : ℝ → ℝ)
