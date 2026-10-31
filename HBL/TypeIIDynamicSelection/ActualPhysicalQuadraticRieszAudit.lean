@@ -1,0 +1,13 @@
+import HBL.TypeIIDynamicSelection.ActualPhysicalQuadraticRiesz
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.physicalRadiation_rescale_quadratic
+#check @HBL.TypeIIDynamicSelection.physicalRadiation_hartree_log_scale
+#check @HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_row_scale
+#check @HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_scale
+#check @HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_uniform_of_profile
+#print axioms HBL.TypeIIDynamicSelection.physicalRadiation_rescale_quadratic
+#print axioms HBL.TypeIIDynamicSelection.physicalRadiation_hartree_log_scale
+#print axioms HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_row_scale
+#print axioms HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_scale
+#print axioms HBL.TypeIIDynamicSelection.physicalRadiation_quadratic_Riesz_uniform_of_profile
