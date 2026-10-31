@@ -223,9 +223,9 @@ theorem actual_one_layer_overlap_cutoff_deriv_hasDerivAt
       (-deriv (deriv cutoff) (r / R) / R ^ 2) r := by
     convert ((hcut.comp r hscale).div_const R).neg using 1
     · funext x
+      simp only [Pi.neg_apply, Function.comp_def]
       ring
-    · field_simp [hR]
-      ring
+    · field_simp [hR] <;> ring
   exact hreal.ofReal_comp
 
 /-- Physical moving-cutoff radial Laplacian commutator, with both
