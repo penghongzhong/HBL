@@ -147,4 +147,40 @@ theorem actual_one_layer_full_renormalized_Hartree_PDE_source
       rw [hNL']
       ring
 
+
+/-- The exact radial Laplacian commutator generated when a spatial cutoff
+is applied to a complex Hartree radiation profile. Both first-order
+cross terms and the radial 2/r correction are retained. This is the
+actual differential operator of the renormalized Hartree PDE; the
+nonlocal Hartree interaction must be estimated separately. -/
+theorem actual_one_layer_radial_Laplacian_cutoff_commutator
+    (chi f : ℝ → ℂ) (r : ℝ)
+    (hchi : ∀ x : ℝ, DifferentiableAt ℝ chi x)
+    (hf : ∀ x : ℝ, DifferentiableAt ℝ f x)
+    (hchi2 : DifferentiableAt ℝ (deriv chi) r)
+    (hf2 : DifferentiableAt ℝ (deriv f) r) :
+    complexRadialLaplacian (fun x => chi x * f x) r -
+        chi r * complexRadialLaplacian f r =
+      2 * deriv chi r * deriv f r +
+        (deriv (deriv chi) r + (2 / (r : ℂ)) * deriv chi r) * f r := by
+  have hfirst (x : ℝ) :
+      deriv (fun y : ℝ => chi y * f y) x =
+        deriv chi x * f x + chi x * deriv f x :=
+    ((hchi x).hasDerivAt.mul (hf x).hasDerivAt).deriv
+  have hfirstFun :
+      deriv (fun y : ℝ => chi y * f y) =
+        fun x => deriv chi x * f x + chi x * deriv f x :=
+    funext hfirst
+  have hsecond :
+      deriv (deriv (fun y : ℝ => chi y * f y)) r =
+        (deriv (deriv chi) r * f r + deriv chi r * deriv f r) +
+        (deriv chi r * deriv f r + chi r * deriv (deriv f) r) := by
+    rw [hfirstFun]
+    exact ((hchi2.hasDerivAt.mul (hf r).hasDerivAt).add
+      ((hchi r).hasDerivAt.mul hf2.hasDerivAt)).deriv
+  unfold complexRadialLaplacian
+  rw [hsecond, hfirst r]
+  ring
+
+
 end HBL.TypeIIDynamicSelection
