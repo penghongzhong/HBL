@@ -1,6 +1,7 @@
 import HBL.PhysicalRadial3LocalPotential
 import HBL.TypeIIDynamicSelection.ActualRadiationScaling
 import HBL.TypeIIDynamicSelection.ActualRadiationMomentDynamics
+import HBL.TypeIIDynamicSelection.ActualWholeRadiationSelfCubic
 import Mathlib.Tactic
 
 /-!
@@ -84,5 +85,43 @@ theorem actual_physical_threeD_radiation_slow_coefficient_hasDerivAt
     simpa only [actual_physical_inverse_square_radial_reduction] using hMoment3D
   exact actual_physical_radiation_slow_coefficient_hasDerivAt
     ell b z time hEll hEllPos hTime hMomentRadial
+
+/-- Concrete physical one-layer source match for the ENTIRE 3D
+inverse-square Hartree radiation SELF-POTENTIAL. The coefficient c(s)
+is its actual quartic moment on the physical clock; no separate
+abstract center-matching input or prescribed exponent is needed.
+This does not estimate mixed bubble-radiation terms or the full
+three-region residual, which remain obligations of manuscript 2.12. -/
+theorem actual_physical_threeD_whole_radiation_self_cubic_core_bound
+    (c b omega ell time : ℝ → ℝ) (z Z : ℝ → ℝ → ℂ)
+    {s r M D : ℝ}
+    (hEll : 0 < ell s)
+    (hZphysical : Z s = rescalePhysicalRadiation (ell s) (z (time s)))
+    (hCphysical : c s = hartreeKappa * ell s *
+      actualPhysicalInverseSquareMoment (z (time s)))
+    (hZ : Measurable (Z s)) (hM : 0 ≤ M) (hD : 0 ≤ D)
+    (hbound : ∀ rho, 0 ≤ rho → ‖Z s rho‖ ≤ M)
+    (hmass : IntegrableOn
+      (fun rho => rho ^ 2 * ‖Z s rho‖ ^ 2) (Ioi 0))
+    (hflat : ∀ rho, 0 < rho → rho ≤ 2 →
+      ‖Z s rho - Z s 0‖ ≤ D * rho ^ 2)
+    (hc : |c s| ≤ 1) (hr : 0 < r) (hr1 : r ≤ 1) :
+    ‖monopoleComplexEffectiveIncrement c (b s) (omega s) s r -
+      actualWholeRadiationSelfCubicIncrement c b omega Z s r‖ ≤
+    (radialHartreeCenterBoundConstant
+      (fun rho => ‖Z s rho‖ ^ 4) (4 * M ^ 3 * D) * r ^ 2) *
+      (1 + monopoleRadialBoundConstant) ^ 3 := by
+  have hcenter3 :
+      actualRadiationCenter (Z s) =
+        hartreeKappa * ell s *
+          actualPhysicalInverseSquareMoment (z (time s)) := by
+    rw [hZphysical]
+    exact actual_whole_radiation_center_eq_physical_threeD_moment
+      (ell s) hEll (z (time s))
+  have hcenter : c s = actualRadiationCenter (Z s) := by
+    rw [hcenter3]
+    exact hCphysical
+  exact actual_whole_radiation_self_cubic_core_bound
+    c b omega Z hZ hM hD hbound hmass hflat hcenter hc hr hr1
 
 end HBL.TypeIIDynamicSelection
