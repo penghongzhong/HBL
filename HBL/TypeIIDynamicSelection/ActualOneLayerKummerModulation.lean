@@ -181,9 +181,7 @@ theorem actual_Kummer_inverse_physical_Hartree_source_two_speed
               (frozenZeroCoeff (mu s) (theta s) -
                 frozenZeroCoeff mu0 theta0))))) s := by
     convert hS using 1
-    ext F
-    simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.neg_apply, neg_smul, smul_neg]
+    ext F x <;> simp [ContinuousLinearMap.comp_apply, smul_neg, neg_smul]
   exact annulusSourceTangent_hasDerivAt
     (fun t =>
       annulusParameterInverse T
