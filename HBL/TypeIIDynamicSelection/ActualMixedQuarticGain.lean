@@ -18,7 +18,7 @@ prop:one-layer-stage3 can be counted as closed.
 
 noncomputable section
 set_option autoImplicit false
-open Set
+open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
