@@ -72,7 +72,6 @@ theorem physical_bubble_mixed_envelope_uniform_row
   rw [hRowEq]
   have hadd := integral_add
     (hW.1.const_mul (8 : ℝ)) (hZrow.const_mul (2 : ℝ))
-  simp only [Pi.add_apply] at hadd
   rw [hadd, integral_const_mul, integral_const_mul]
   calc
     (8 : ℝ) * (∫ rho in Ioi (0 : ℝ),
@@ -249,7 +248,16 @@ theorem physical_bubble_mixed_Riesz_linear_length
     ell r hell hr z hz hC hzdecay hZrow
   have hBubbleMeas : Measurable bubble :=
     bubble_contDiff_infty.continuous.measurable
+  have hBound :
+      (∫ rho in Ioi (0 : ℝ),
+        rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedEnvelope bubble
+            (rescalePhysicalRadiation ell z) rho) ≤
+        r * (radialHartreeBubbleBoundConstant * (8 + 2 * C)) := by
+    convert hE.2 using 1 <;> ring
   exact physical_mixed_higher_Riesz_linear_length
-    bubble ell r hell hr z hBubbleMeas hz hzBound hE.1 hE.2
+    bubble ell r hell hr z hBubbleMeas hz
+    (J := radialHartreeBubbleBoundConstant * (8 + 2 * C))
+    hzBound hE.1 hBound
 
 end HBL.TypeIIDynamicSelection
