@@ -1,3 +1,5 @@
+import HBL.TypeIIDynamicSelection.RemoteComplexInteraction
+import HBL.TypeIIDynamicSelection.ExteriorSpatialGain
 import HBL.TypeIIDynamicSelection.ActualMixedQuarticGain
 import HBL.MonopoleComplexResidual
 import Mathlib.Tactic
@@ -357,6 +359,144 @@ theorem actual_one_layer_moving_cutoff_radial_Hartree_residual
     _ = _ := by
       rw [hLaplacian, hDilation]
       ring
+
+
+
+/-- The **actual** radiation removed by the manuscript's inner overlap
+cutoff. This is not an arbitrary exterior forcing: its physical value is
+χ_inner(R,r) V(r) - V(r). -/
+def actualOneLayerCutoffRemovedRadiation
+    (V : ℝ → ℝ) (R r : ℝ) : ℂ :=
+  actualOneLayerInnerOverlapCutoff R r * (V r : ℂ) - (V r : ℂ)
+
+/-- The removed radiation is genuinely exterior to R: the actual smooth
+cutoff is identically one throughout the positive core r ≤ R. -/
+theorem actual_one_layer_cutoff_removed_radiation_zero
+    (V : ℝ → ℝ) {R : ℝ} (hR : 0 < R) :
+    ∀ r : ℝ, r ≤ R → actualOneLayerCutoffRemovedRadiation V R r = 0 := by
+  intro r hr
+  have hquot : r / R ≤ 1 := (div_le_one hR).2 hr
+  have hc : cutoff (r / R) = 0 :=
+    cutoff_zero_of_le_one (r / R) hquot
+  simp [actualOneLayerCutoffRemovedRadiation,
+    actualOneLayerInnerOverlapCutoff, hc]
+
+private theorem actualOneLayerInnerOverlapCutoff_continuous
+    (R : ℝ) : Continuous (actualOneLayerInnerOverlapCutoff R) := by
+  have hcut : Continuous (fun x : ℝ => cutoff (x / R)) :=
+    cutoff_contDiff_infty.continuous.comp (continuous_id.div_const R)
+  unfold actualOneLayerInnerOverlapCutoff
+  exact Complex.continuous_ofReal.comp (continuous_const.sub hcut)
+
+private theorem actualOneLayerCutoffRemovedRadiation_measurable
+    (V : ℝ → ℝ) (R : ℝ) (hV : Continuous V) :
+    Measurable (actualOneLayerCutoffRemovedRadiation V R) := by
+  have hv : Continuous (fun x : ℝ => (V x : ℂ)) :=
+    Complex.continuous_ofReal.comp hV
+  have hc : Continuous (actualOneLayerCutoffRemovedRadiation V R) := by
+    unfold actualOneLayerCutoffRemovedRadiation
+    exact ((actualOneLayerInnerOverlapCutoff_continuous R).mul hv).sub hv
+  exact hc.measurable
+
+/-- The actual Hartree nonlocal cutoff commutator in the core is EXACTLY
+an exterior Riesz density, rather than a local polynomial error.
+The density is the full quartic difference for χ_inner V and V,
+including the smooth transition annulus and far-field cutoff. -/
+theorem actual_one_layer_core_cutoff_Hartree_Riesz_exact
+    (V : ℝ → ℝ) (hV : Continuous V)
+    {R r : ℝ} (hR : 0 < R) (hr : 0 < r) (hsep : 2 * r ≤ R)
+    (hF : IntegrableOn
+      (remoteComplexQuarticDifference V
+        (actualOneLayerCutoffRemovedRadiation V R)) (Ioi R))
+    (hVrow : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho * ‖(V rho : ℂ)‖ ^ 4)
+      (Ioi (0 : ℝ))) :
+    complexRadialHartreeNonlinearity
+        (fun rho =>
+          actualOneLayerInnerOverlapCutoff R rho * (V rho : ℂ)) r -
+      actualOneLayerInnerOverlapCutoff R r *
+        complexRadialHartreeNonlinearity
+          (fun rho => (V rho : ℂ)) r =
+      (radialHartreeExteriorPotential
+        (remoteComplexQuarticDifference V
+          (actualOneLayerCutoffRemovedRadiation V R)) R r : ℂ) *
+        (V r : ℂ) ^ 3 := by
+  let Z := actualOneLayerCutoffRemovedRadiation V R
+  have hz : ∀ rho : ℝ, rho ≤ R → Z rho = 0 :=
+    actual_one_layer_cutoff_removed_radiation_zero V hR
+  have hzm : Measurable Z :=
+    actualOneLayerCutoffRemovedRadiation_measurable V R hV
+  have hfields :
+      (fun rho : ℝ => (V rho : ℂ) + Z rho) =
+        (fun rho => actualOneLayerInnerOverlapCutoff R rho * (V rho : ℂ)) := by
+    funext rho
+    dsimp only [Z, actualOneLayerCutoffRemovedRadiation]
+    ring
+  have hcore : actualOneLayerInnerOverlapCutoff R r = 1 := by
+    have hrR : r ≤ R := by linarith
+    have hquot : r / R ≤ 1 := (div_le_one hR).2 hrR
+    simp [actualOneLayerInnerOverlapCutoff,
+      cutoff_zero_of_le_one (r / R) hquot]
+  have hexact := actual_complexHartree_remote_quartic_source_exact
+    V Z hR hr hsep hz hV.measurable hzm hF hVrow
+  rw [hfields] at hexact
+  simpa only [hcore, one_mul] using hexact
+
+/-- Quantitative core nonlocal cutoff source. The exact exterior
+quartic density carries the full transition-shell Hartree interaction;
+the first (constant in r) term is the physically forced slow monopole
+charge. After removing that charge, the remainder is controlled by
+(r/R)^2 times the TRUE exterior L¹ mass. -/
+theorem actual_one_layer_core_cutoff_Hartree_Riesz_L1_gain
+    (V : ℝ → ℝ) (hV : Continuous V)
+    {R r : ℝ} (hR : 0 < R) (hr : 0 < r) (hsep : 2 * r ≤ R)
+    (hF : IntegrableOn
+      (remoteComplexQuarticDifference V
+        (actualOneLayerCutoffRemovedRadiation V R)) (Ioi R))
+    (hVrow : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho * ‖(V rho : ℂ)‖ ^ 4)
+      (Ioi (0 : ℝ))) :
+    ‖complexRadialHartreeNonlinearity
+        (fun rho =>
+          actualOneLayerInnerOverlapCutoff R rho * (V rho : ℂ)) r -
+      actualOneLayerInnerOverlapCutoff R r *
+        complexRadialHartreeNonlinearity
+          (fun rho => (V rho : ℂ)) r -
+      (radialHartreeExteriorCenter
+        (remoteComplexQuarticDifference V
+          (actualOneLayerCutoffRemovedRadiation V R)) R : ℂ) *
+        (V r : ℂ) ^ 3‖ ≤
+      ((4 * Real.pi * hartreeKappa * r ^ 2 / R ^ 2) *
+        ∫ rho in Ioi R,
+          |remoteComplexQuarticDifference V
+            (actualOneLayerCutoffRemovedRadiation V R) rho|) *
+        |V r| ^ 3 := by
+  let F := remoteComplexQuarticDifference V
+    (actualOneLayerCutoffRemovedRadiation V R)
+  have hFmeas : Measurable F :=
+    remoteComplexQuarticDifference_measurable V
+      (actualOneLayerCutoffRemovedRadiation V R)
+      hV.measurable (actualOneLayerCutoffRemovedRadiation_measurable V R hV)
+  have hgap := actual_exteriorHartree_center_gap_L1_le
+    F hFmeas hF hR hr hsep
+  rw [actual_one_layer_core_cutoff_Hartree_Riesz_exact
+    V hV hR hr hsep hF hVrow]
+  have hfactor :
+      (radialHartreeExteriorPotential F R r : ℂ) * (V r : ℂ) ^ 3 -
+        (radialHartreeExteriorCenter F R : ℂ) * (V r : ℂ) ^ 3 =
+        ((radialHartreeExteriorPotential F R r -
+          radialHartreeExteriorCenter F R : ℝ) : ℂ) * (V r : ℂ) ^ 3 := by
+    push_cast
+    ring
+  rw [hfactor, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+    norm_pow, Complex.norm_real, Real.norm_eq_abs]
+  have hb : |radialHartreeExteriorPotential F R r -
+      radialHartreeExteriorCenter F R| * |V r| ^ 3 ≤
+        ((4 * Real.pi * hartreeKappa * r ^ 2 * (1 / R ^ 2)) *
+          ∫ rho in Ioi R, |F rho|) * |V r| ^ 3 :=
+    mul_le_mul_of_nonneg_right hgap (by positivity)
+  convert hb using 1
+  ring
 
 
 end HBL.TypeIIDynamicSelection
