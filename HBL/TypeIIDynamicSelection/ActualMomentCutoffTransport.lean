@@ -45,7 +45,7 @@ theorem actualMomentInnerCutoff_space_hasDerivAt
   have harg : HasDerivAt (fun x : ℝ => c * x / 4) (c / 4) r := by
     convert ((hasDerivAt_id r).const_mul c).div_const 4 using 1
     · funext x
-      ring
+      rfl
     · ring
   have hcut : HasDerivAt cutoff
       (deriv cutoff (c * r / 4)) (c * r / 4) :=
@@ -78,8 +78,6 @@ theorem actualMomentInnerCutoff_time_hasDerivAt
   have harg : HasDerivAt (fun t => c t * r / 4)
       ((-(b s * c s) + hartreeKappa * (ell s) ^ 3 * dm) * r / 4) s := by
     convert (hc.mul_const r).div_const 4 using 1
-    · rfl
-    · ring
   have hcut : HasDerivAt cutoff
       (deriv cutoff (c s * r / 4)) (c s * r / 4) :=
     ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1
