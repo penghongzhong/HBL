@@ -79,7 +79,7 @@ by this dependency audit.
 ## 2026-11-01 — Physical radiation moment versus moving-cutoff drift (new candidate)
 
 Source: \`HBL/TypeIIDynamicSelection/ActualMomentCutoffTransport.lean\`.
-**Verification status at writing: submitted for strict compilation, not yet counted.**
+**Verification update:** source commit `5d394864472790544c4bf1517b47dee916a87058`, GitHub Actions `41250746509` **completed/success**. Strict pinned Lean 4.35.0-rc3 / Mathlib a98628e16 build: **4161 tasks**; exported full theorem types and transitive axiom audit checked `actualMomentInnerCutoff_space_hasDerivAt`, `actualMomentInnerCutoff_time_hasDerivAt`, and `actualMomentInnerCutoff_material_derivative`. Their only transitive axioms are `propext`, `Classical.choice`, `Quot.sound`. No sorry, admit, or new axiom. These are 3 auxiliary original-chain proofs, NOT an accepted complete manuscript environment.
 
 The previously strictly certified whole-radiation mass law reads, for
 \(\ell=\lambda^{-1}\), \(c_g=\kappa_H\ell\,m_0[z_g(t)]\),
