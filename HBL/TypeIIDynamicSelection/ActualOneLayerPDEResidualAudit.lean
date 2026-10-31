@@ -3,3 +3,6 @@ import HBL.TypeIIDynamicSelection.ActualOneLayerPDEResidual
 set_option autoImplicit false
 #check @HBL.TypeIIDynamicSelection.actual_one_layer_full_renormalized_Hartree_PDE_source
 #print axioms HBL.TypeIIDynamicSelection.actual_one_layer_full_renormalized_Hartree_PDE_source
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_radial_Laplacian_cutoff_commutator
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_radial_Laplacian_cutoff_commutator
