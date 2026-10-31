@@ -1,5 +1,6 @@
 import HBL.PhysicalRadial3LocalPotential
 import HBL.TypeIIDynamicSelection.ActualRadiationScaling
+import HBL.TypeIIDynamicSelection.ActualRadiationMomentDynamics
 import Mathlib.Tactic
 
 /-!
@@ -61,5 +62,27 @@ theorem actual_whole_radiation_center_eq_physical_threeD_moment
       hartreeKappa * ell * actualPhysicalInverseSquareMoment z := by
   rw [actualRadiationCenter_equals_physical_slow_coefficient ell hEll z,
     actual_physical_inverse_square_radial_reduction]
+
+/-- The original manuscript slow-radiation coefficient obeys the exact
+physical-clock evolution law with the source written as the genuine
+THREE-DIMENSIONAL inverse-square Hartree integral. No prescribed speed
+or terminal exponent is introduced. Differentiability of the true
+regular-radiation moment remains an explicit analytic PDE input. -/
+theorem actual_physical_threeD_radiation_slow_coefficient_hasDerivAt
+    (ell b : ℝ → ℝ) (z : ℝ → ℝ → ℂ) (time : ℝ → ℝ)
+    {s dm : ℝ}
+    (hEll : HasDerivAt ell (-(b s * ell s)) s)
+    (hEllPos : 0 < ell s)
+    (hTime : HasDerivAt time ((ell s) ^ 2) s)
+    (hMoment3D : HasDerivAt
+      (fun t => actualPhysicalInverseSquareMoment (z t)) dm (time s)) :
+    HasDerivAt (actualPhysicalRadiationMonopole ell z time)
+      (-(b s * actualPhysicalRadiationMonopole ell z time s) +
+        hartreeKappa * (ell s) ^ 3 * dm) s := by
+  have hMomentRadial : HasDerivAt
+      (fun t => radialPhysicalQuarticMoment (z t)) dm (time s) := by
+    simpa only [actual_physical_inverse_square_radial_reduction] using hMoment3D
+  exact actual_physical_radiation_slow_coefficient_hasDerivAt
+    ell b z time hEll hEllPos hTime hMomentRadial
 
 end HBL.TypeIIDynamicSelection

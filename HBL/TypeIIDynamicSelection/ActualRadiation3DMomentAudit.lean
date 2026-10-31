@@ -7,3 +7,5 @@ set_option autoImplicit false
 
 #print axioms HBL.TypeIIDynamicSelection.actual_physical_inverse_square_radial_reduction
 #print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_center_eq_physical_threeD_moment
+#check @HBL.TypeIIDynamicSelection.actual_physical_threeD_radiation_slow_coefficient_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_physical_threeD_radiation_slow_coefficient_hasDerivAt
