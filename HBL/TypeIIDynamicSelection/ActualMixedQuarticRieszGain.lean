@@ -232,7 +232,6 @@ theorem actual_whole_radiation_mixed_Riesz_inner_uniform_gain
     _ = (2 * Real.pi * hartreeKappa * A ^ 2 * J) *
         s ^ (-2 * beta) := by
       field_simp [ne_of_gt hr]
-      ring
 
 /-- Genuine contribution of the nonlinear mixed-density Riesz source to
 the local complex Hartree PDE term. This is the *actual physical cubic
@@ -242,7 +241,7 @@ theorem actual_whole_radiation_mixed_Riesz_cubic_source_gain
     (V : ℝ → ℝ) (Z : ℝ → ℂ)
     {s beta A M r J : ℝ}
     (hs : 1 ≤ s) (hbeta : (1 / 2 : ℝ) < beta)
-    (hr : 0 < r) (hA : 0 ≤ A) (hM : 0 ≤ M)
+    (hr : 0 < r) (hA : 0 ≤ A)
     (hVmeas : Measurable V) (hZmeas : Measurable Z)
     (hVr : |V r| ≤ M)
     (hZ : ∀ rho : ℝ, 0 < rho →
