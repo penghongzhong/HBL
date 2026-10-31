@@ -151,9 +151,13 @@ theorem actual_whole_radiation_mixed_Riesz_twoBeta_gain
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with rho hrho
     have hnonneg : 0 ≤ K * (rho * hartreeRadialLog r rho *
         actualWholeRadiationMixedEnvelope V Z rho) := by
-      have hlog0 := hartreeRadialLog_nonneg r rho hr hrho
-      dsimp [actualWholeRadiationMixedEnvelope]
-      positivity
+      have hlog0 : 0 ≤ hartreeRadialLog r rho :=
+        hartreeRadialLog_nonneg r rho hr hrho
+      have henv : 0 ≤ actualWholeRadiationMixedEnvelope V Z rho := by
+        dsimp [actualWholeRadiationMixedEnvelope]
+        positivity
+      exact mul_nonneg hK
+        (mul_nonneg (mul_nonneg hrho.le hlog0) henv)
     simpa only [Real.norm_eq_abs, abs_of_nonneg hnonneg] using
       hg.2 rho hrho
   have hInt :
