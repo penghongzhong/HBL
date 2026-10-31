@@ -53,13 +53,15 @@ theorem actual_Kummer_frozen_coefficient_two_speed
     htheta.ofReal_comp
   have hmuDiff : HasDerivAt
       (fun t : ℝ => (1 / 4 : ℂ) - (mu t : ℂ))
-      (-(mus : ℂ)) s :=
-    (hasDerivAt_const s (1 / 4 : ℂ)).sub hm
+      (-(mus : ℂ)) s := by
+    simpa only [Pi.sub_apply, zero_sub] using
+      ((hasDerivAt_const s (1 / 4 : ℂ)).sub hm)
   have hcoeff := (ht.add (hmuDiff.const_mul Complex.I)).sub_const
     (frozenZeroCoeff mu0 theta0)
   convert hcoeff using 1
   · funext t
     unfold frozenZeroCoeff
+    simp only [Pi.add_apply]
     ring
   · ring
 
