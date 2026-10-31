@@ -36,7 +36,7 @@ theorem actual_whole_radiation_mixed_center_twoBeta_gain
     (V : ℝ → ℝ) (Z : ℝ → ℂ)
     {s beta M A B : ℝ}
     (hs : 1 ≤ s) (hbeta : (1 / 2 : ℝ) < beta)
-    (hM : 0 ≤ M) (hA : 0 ≤ A) (hB : 0 ≤ B)
+    (hM : 0 ≤ M) (hA : 0 ≤ A)
     (hVmeas : Measurable V) (hZmeas : Measurable Z)
     (hV : ∀ rho : ℝ, 0 < rho → |V rho| ≤ M)
     (hZ : ∀ rho : ℝ, 0 < rho → ‖Z rho‖ ≤ A * s ^ (-beta))
