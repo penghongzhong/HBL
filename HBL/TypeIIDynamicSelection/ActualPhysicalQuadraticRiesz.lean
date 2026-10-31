@@ -194,4 +194,54 @@ theorem physicalRadiation_quadratic_Riesz_row_uniform_of_profile
     _ = r * radialHartreeBubbleBoundConstant * M := by
       field_simp [hell.ne']
 
+/-- Genuine Lebesgue integrability of the energy-critical rescaled
+regular-radiation inverse-square Hartree kernel row.  The original
+physical profile has a directly checkable bubble-squared majorant;
+integrability of the scaled row is DERIVED, not imposed, via the
+pinned Mathlib theorem integrableOn_Ioi_comp_mul_left_iff. -/
+theorem physicalRadiation_quadratic_Riesz_row_integrable_of_profile
+    (ell : ℝ) (hell : 0 < ell) (r : ℝ) (hr : 0 < r)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    {M : ℝ} (hM : 0 ≤ M)
+    (hdecay : ∀ rho : ℝ, 0 < rho →
+      ‖z rho‖ ^ 2 ≤ M * bubble rho ^ 2) :
+    IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖rescalePhysicalRadiation ell z rho‖ ^ 2)
+      (Ioi (0 : ℝ)) := by
+  have hSource : Measurable (fun u => ‖z u‖ ^ 2) :=
+    hz.norm.pow_const 2
+  have hSourceBound : ∀ u : ℝ, 0 < u →
+      |‖z u‖ ^ 2| ≤ M * bubble u ^ 2 := by
+    intro u hu
+    rw [abs_of_nonneg (sq_nonneg (‖z u‖))]
+    exact hdecay u hu
+  have hPhysical : IntegrableOn
+      (fun u => u * hartreeRadialLog (ell * r) u * ‖z u‖ ^ 2)
+      (Ioi (0 : ℝ)) :=
+    (radialHartreePotential_bubble_sq_domination
+      (fun u => ‖z u‖ ^ 2) hSource hM hSourceBound
+        (mul_pos hell hr)).1
+  have hScaled : IntegrableOn
+      (fun rho => (ell * rho) *
+        hartreeRadialLog (ell * r) (ell * rho) *
+          ‖z (ell * rho)‖ ^ 2) (Ioi (0 : ℝ)) := by
+    have h := (integrableOn_Ioi_comp_mul_left_iff
+      (fun u : ℝ =>
+        u * hartreeRadialLog (ell * r) u * ‖z u‖ ^ 2)
+      0 hell).2 (by simpa only [mul_zero] using hPhysical)
+    simpa only [mul_zero] using h
+  have hPoint : (fun rho =>
+        rho * hartreeRadialLog r rho *
+          ‖rescalePhysicalRadiation ell z rho‖ ^ 2) =
+      (fun rho =>
+        (ell * rho) * hartreeRadialLog (ell * r) (ell * rho) *
+          ‖z (ell * rho)‖ ^ 2) := by
+    funext rho
+    rw [physicalRadiation_rescale_quadratic ell hell z rho,
+        physicalRadiation_hartree_log_scale ell r rho hell]
+    ring
+  rw [hPoint]
+  exact hScaled
+
 end HBL.TypeIIDynamicSelection

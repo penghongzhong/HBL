@@ -9,10 +9,8 @@ No blowup exponent or terminal modulation speed is prescribed.  The exact
 physical radiation is Z_ell(y) = sqrt(ell) * z(ell*y), ell>0.
 
 The actual logarithmic Hartree row is bounded for the bubble plus genuine
-regular radiation by two previously proved physical kernels.  A genuine
-row-integrability input for the transformed radiation is displayed
-separately; it will be discharged when the full regular-radiation
-function class is built. This does not close original manuscript 2.12.
+regular radiation by two previously proved physical kernels.  Its transformed radiation row-integrability is derived from the
+original physical weighted decay via Mathlib positive scaling. This does not close original manuscript 2.12.
 -/
 
 noncomputable section
@@ -34,9 +32,7 @@ theorem physical_bubble_mixed_envelope_uniform_row
     (z : ℝ → ℂ) (hz : Measurable z)
     {C : ℝ} (hC : 0 ≤ C)
     (hzdecay : ∀ u : ℝ, 0 < u → ‖z u‖ ^ 2 ≤ C * bubble u ^ 2)
-    (hZrow : IntegrableOn
-      (fun rho => rho * hartreeRadialLog r rho *
-        ‖rescalePhysicalRadiation ell z rho‖ ^ 2) (Ioi (0 : ℝ))) :
+    :
     IntegrableOn
       (fun rho => rho * hartreeRadialLog r rho *
         actualWholeRadiationMixedEnvelope
@@ -48,6 +44,8 @@ theorem physical_bubble_mixed_envelope_uniform_row
           bubble (rescalePhysicalRadiation ell z) rho) ≤
       r * radialHartreeBubbleBoundConstant * (8 + 2 * C) := by
   have hW := radialHartreeBubble_integrable_bound hr
+  have hZrow := physicalRadiation_quadratic_Riesz_row_integrable_of_profile
+    ell hell r hr z hz hC hzdecay
   have hZR := physicalRadiation_quadratic_Riesz_row_uniform_of_profile
     ell hell r hr z hz hC hzdecay
   have hRowEq :
@@ -232,9 +230,7 @@ theorem physical_bubble_mixed_Riesz_linear_length
     {C A : ℝ} (hC : 0 ≤ C)
     (hzdecay : ∀ u : ℝ, 0 < u → ‖z u‖ ^ 2 ≤ C * bubble u ^ 2)
     (hzBound : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ A)
-    (hZrow : IntegrableOn
-      (fun rho => rho * hartreeRadialLog r rho *
-        ‖rescalePhysicalRadiation ell z rho‖ ^ 2) (Ioi (0 : ℝ))) :
+    :
     IntegrableOn
       (fun rho => rho * hartreeRadialLog r rho *
         actualWholeRadiationMixedHigher bubble
@@ -245,7 +241,7 @@ theorem physical_bubble_mixed_Riesz_linear_length
         (2 * Real.pi * hartreeKappa * A ^ 2 *
           radialHartreeBubbleBoundConstant * (8 + 2 * C)) * ell := by
   have hE := physical_bubble_mixed_envelope_uniform_row
-    ell r hell hr z hz hC hzdecay hZrow
+    ell r hell hr z hz hC hzdecay
   have hBubbleMeas : Measurable bubble :=
     bubble_contDiff_infty.continuous.measurable
   have hBound :
