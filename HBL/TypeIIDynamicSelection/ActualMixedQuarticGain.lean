@@ -151,4 +151,128 @@ theorem actual_whole_radiation_mixed_higher_twoBeta_gain
     _ = (6 * M ^ 2 * A ^ 2 + 4 * M * A ^ 3) *
           s ^ (-2 * beta) := by ring
 
+/-- Integrable whole-radiation mixed Hartree CENTER source splits
+exactly into the real-linearized charge and a quadratic/higher charge.
+The actual fourth-power density is used; both integrability assumptions
+are on directly identifiable physical source terms. -/
+theorem actual_whole_radiation_mixed_center_by_degree
+    (V : ℝ → ℝ) (Z : ℝ → ℂ)
+    (hLinear : IntegrableOn
+      (fun rho => 4 * V rho ^ 3 * (Z rho).re) (Ioi (0 : ℝ)))
+    (hHigher : IntegrableOn
+      (actualWholeRadiationMixedHigher V Z) (Ioi (0 : ℝ))) :
+    radialHartreeCenter (actualWholeRadiationMixedQuartic V Z) =
+      radialHartreeCenter
+        (fun rho => 4 * V rho ^ 3 * (Z rho).re) +
+      radialHartreeCenter (actualWholeRadiationMixedHigher V Z) := by
+  have hsum :
+      (∫ rho in Ioi (0 : ℝ),
+          actualWholeRadiationMixedQuartic V Z rho) =
+        (∫ rho in Ioi (0 : ℝ),
+          4 * V rho ^ 3 * (Z rho).re) +
+        (∫ rho in Ioi (0 : ℝ),
+          actualWholeRadiationMixedHigher V Z rho) := by
+    calc
+      _ = ∫ rho in Ioi (0 : ℝ),
+          4 * V rho ^ 3 * (Z rho).re +
+            actualWholeRadiationMixedHigher V Z rho := by
+        apply integral_congr_ae
+        filter_upwards with rho
+        exact actual_whole_radiation_mixed_linear_higher_exact V Z rho
+      _ = _ := by
+        have hadd := integral_add hLinear hHigher
+        simpa only [Pi.add_apply] using hadd
+  unfold radialHartreeCenter
+  rw [hsum]
+  ring
+
+/-- Exact source split of the nonlocal inverse-square radial Hartree
+POTENTIAL. This is the operator actually entering manuscript 2.12, not
+an abstract symbolic Taylor series. -/
+theorem actual_whole_radiation_mixed_potential_by_degree
+    (V : ℝ → ℝ) (Z : ℝ → ℂ) (r : ℝ)
+    (hLinear : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        (4 * V rho ^ 3 * (Z rho).re)) (Ioi (0 : ℝ)))
+    (hHigher : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedHigher V Z rho) (Ioi (0 : ℝ))) :
+    radialHartreePotential (actualWholeRadiationMixedQuartic V Z) r =
+      radialHartreePotential
+        (fun rho => 4 * V rho ^ 3 * (Z rho).re) r +
+      radialHartreePotential (actualWholeRadiationMixedHigher V Z) r := by
+  have hsum :
+      (∫ rho in Ioi (0 : ℝ),
+        rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedQuartic V Z rho) =
+        (∫ rho in Ioi (0 : ℝ),
+          rho * hartreeRadialLog r rho *
+            (4 * V rho ^ 3 * (Z rho).re)) +
+        (∫ rho in Ioi (0 : ℝ),
+          rho * hartreeRadialLog r rho *
+            actualWholeRadiationMixedHigher V Z rho) := by
+    calc
+      _ = ∫ rho in Ioi (0 : ℝ),
+          (rho * hartreeRadialLog r rho *
+            (4 * V rho ^ 3 * (Z rho).re)) +
+            rho * hartreeRadialLog r rho *
+              actualWholeRadiationMixedHigher V Z rho := by
+        apply integral_congr_ae
+        filter_upwards with rho
+        rw [actual_whole_radiation_mixed_linear_higher_exact V Z rho]
+        ring
+      _ = _ := by
+        have hadd := integral_add hLinear hHigher
+        simpa only [Pi.add_apply] using hadd
+  unfold radialHartreePotential
+  rw [hsum]
+  ring
+
+/-- Assemble the actual whole-radiation Hartree nonlinear difference
+by density degree: pure radiation, linear bubble-radiation interaction,
+quadratic/higher mixed interaction, and the local multiplier change.
+Every nonlocal term is an actual convergent physical Riesz row. This
+does not assert time-weight estimates for the complete PDE profile. -/
+theorem actual_whole_radiation_nonlinearity_source_by_degree
+    (V : ℝ → ℝ) (Z : ℝ → ℂ) (r : ℝ)
+    (hFull : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ) + Z rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hV : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(V rho : ℂ)‖ ^ 4) (Ioi (0 : ℝ)))
+    (hZ : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖Z rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hLinear : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        (4 * V rho ^ 3 * (Z rho).re)) (Ioi (0 : ℝ)))
+    (hHigher : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedHigher V Z rho) (Ioi (0 : ℝ))) :
+    complexRadialHartreeNonlinearity
+        (fun rho => (V rho : ℂ) + Z rho) r -
+      complexRadialHartreeNonlinearity
+        (fun rho => (V rho : ℂ)) r =
+      ((radialHartreePotential
+          (fun rho => ‖Z rho‖ ^ 4) r +
+        radialHartreePotential
+          (fun rho => 4 * V rho ^ 3 * (Z rho).re) r +
+        radialHartreePotential
+          (actualWholeRadiationMixedHigher V Z) r : ℝ) : ℂ) *
+        actualWholeRadiationLocalCubic
+          (fun rho => (V rho : ℂ) + Z rho) r +
+      (radialHartreePotential
+          (fun rho => ‖(V rho : ℂ)‖ ^ 4) r : ℂ) *
+        (actualWholeRadiationLocalCubic
+            (fun rho => (V rho : ℂ) + Z rho) r -
+          actualWholeRadiationLocalCubic
+            (fun rho => (V rho : ℂ)) r) := by
+  rw [actual_whole_radiation_complete_Hartree_nonlinearity_difference
+    V Z r hFull hV hZ]
+  rw [actual_whole_radiation_mixed_potential_by_degree
+    V Z r hLinear hHigher]
+  push_cast
+  ring
+
 end HBL.TypeIIDynamicSelection
