@@ -156,3 +156,45 @@ and uniqueness. It remains **conditional** on input
 estimates for \`E,G\`; it does NOT establish the original manuscript
 5.2 synchronized full \`(h,Q)\` physical Hartree map or the whole
 Type II PDE construction. Historical original acceptance stays 9/21.
+
+
+## 2026-11-01 — original monopole profile source actually uses 3D Hartree moment
+
+Strict source commit \`75228ecfe6ed11311845883f44da581b4f8cbda4\`,
+GitHub Actions [\`41251672249\`](https://github.com/penghongzhong/HBL/actions/runs/41251672249):
+**completed/success**, 4163 Lake tasks, full exported type audit and
+\`--trust=0 -DwarningAsError=true\` checks; only axioms
+\`propext\`, \`Classical.choice\`, \`Quot.sound\`.
+
+The four new strict terminal declarations are
+
+- \`actualMomentInnerCutoff_eq_original_absolute\`;
+- \`actualMomentInnerCutoff_original_monopole_profile\`;
+- \`actual_moment_monopole_profile_threeD_hasDerivAt\`;
+- \`actual_moment_monopole_core_threeD_hasDerivAt\`.
+
+All use the **same** actually constructed original paper profile
+\`monopolePerturbedRadialProfile\`. They prove its amplitude is the
+physical nonnegative whole-radiation inverse-square **3D** Hartree moment,
+the cutoff equals the original \`1-cutoff(|c|r/4)\` including at
+\`c=0\`, and the exact time tangent
+\[
+\partial_sV_c=(-bc+\kappa_H\ell^3 m'_0)\Xi_{\rm mon}(r)
+[1-\chi(cr/4)-(cr/4)\chi'(cr/4)].
+\]
+On the true spatial core \`c*r/4 < 1\`, the square-bracket term
+equals one, with no zero-crossing exception. No prescribed \(\mu_\infty\).
+
+The **next** strict source candidate is
+\`HBL/TypeIIDynamicSelection/ActualMomentCoreResidual.lean\`,
+which substitutes this physical amplitude in the previously certified
+quadratic real monopole residual and true radiation self-Riesz potential
+bound. Its strict CI verdict must be checked before counting it.
+
+**Remaining HBL original-2.12 analytic load:** prove the actual
+Hartree regular-radiation moment \`HasDerivAt\` and norm estimates from
+the selected strong flow, then treat the physical *linear* mixed quartic
+charge \`4 V^3 Re Z\` with the **same** inner plus/minus Fredholm,
+origin Kummer and remote boundary matching, and derive each generated
+source's positive time order. This work does not, by itself, close an
+additional original manuscript environment. Historical 9/21 unchanged.
