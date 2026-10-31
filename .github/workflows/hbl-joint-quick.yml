@@ -1,0 +1,104 @@
+name: HBL focused strict joint contraction audit
+on:
+  push:
+    branches: [hbl-typeii-minimal-main-20261029]
+    paths:
+      - '.github/workflows/hbl-joint-quick.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualJointContraction*.lean'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-joint-focused-20261101
+  cancel-in-progress: true
+jobs:
+  strict-joint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-typeii-dynamic-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve pinned mathlib dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Restore last successful compiled project
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-focused-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/ActualJointContraction*.lean') }}
+          restore-keys: |
+            hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Strict build type and axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('HBL/TypeIIDynamicSelection/ActualJointContraction.lean').read_text()
+          s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
+          PY
+          lake build HBL.TypeIIDynamicSelection.ActualJointContraction HBL.TypeIIDynamicSelection.ActualJointContractionAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualJointContraction.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualJointContractionAudit.lean 2>&1 | tee evidence/audit.log
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('evidence/audit.log').read_text()
+          n='HBL.TypeIIDynamicSelection.actual_weighted_joint_ball_contraction'
+          assert ('@'+n+' :') in s
+          m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
+          assert m
+          actual={t.strip() for t in m.group(1).split(',') if t.strip()}
+          assert actual <= {'propext','Classical.choice','Quot.sound'},actual
+          assert 'sorryAx' not in s
+          print('STRICT PASS conditional weighted joint map; full PDE source alignment still open')
+          PY
+      - name: Store audit evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualJointContraction*.lean > evidence/source-hashes.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-joint-focused-audit
+          path: evidence
+          retention-days: 14
