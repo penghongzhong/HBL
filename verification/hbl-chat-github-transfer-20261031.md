@@ -154,3 +154,54 @@ source declarations as an original paper environment.
 
 Strict original manuscript acceptance remains **9/21**. Dynamical
 rate-selection Type II Hartree blowup PDE main theorem is still OPEN.
+
+## 2026-10-31: physical uniform radial-mass gain (corrected shortest chain)
+
+**Strict certified source commit:** \`0a7d6c87c43694ebe0001801885986608bea7448\`.
+**GitHub Actions:** \`41190298480\`, completed/success with pinned
+Lean 4.35.0-rc3 and Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5.
+The workflow checked the new complete exported types and transitive axiom
+sets. No sorry/admit/novel axioms were introduced.
+
+1. \`HBL.TypeIIDynamicSelection.rescalePhysicalRadiation_radialL2_invariant\`
+   is proved from the TRUE physical rescaling
+   \`Z_ell(r) = sqrt(ell) z(ell*r)\`, \`ell>0\`:
+   \[
+   \int_0^\infty |Z_\ell(r)|^2 dr
+     =\int_0^\infty |z(r)|^2 dr.
+   \]
+   Hence shrinking this half-line mass is **not a valid default
+   assumption** for nonzero regular radiation.
+
+2. \`HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain\`
+   replaces the earlier overstrong shrinking-mass condition.
+   Let \`R_mix = |V+Z|^4-|V|^4-|Z|^4-4V^3 Re Z\`.
+   For measurable V and Z, assuming only
+   \[
+   \int_{0}^{\infty}|V|^2dr\le C_V,\quad
+   \int_{0}^{\infty}|Z|^2dr\le C_Z,\quad
+   \|Z\|_{L^\infty(0,\infty)}\le A s^{-\beta},
+   \quad s\ge1,\quad \beta>\frac12,
+   \]
+   the actual mixed density is Lebesgue integrable, and
+   \[
+   |4\pi\kappa_H\int_0^\infty R_\mathrm{mix}(r)\,dr|
+   \le 4\pi\kappa_H A^2(8C_V+2C_Z)s^{-2\beta}.
+   \]
+   The proof uses
+   \[
+   |R_\mathrm{mix}|\le
+      (8|V|^2+2|Z|^2)|Z|^2
+   \]
+   so the spatial majorant is integrable without any decaying
+   half-line L2 mass hypothesis.
+
+Both statements are **physical source implications**, not construction
+of a selected nonlinear orbit. Original manuscript environment
+\`prop:one-layer-stage3\` (2.12) is still OPEN. In particular, we
+still must derive the pointwise Z-decay and uniform radial mass from
+the *same actual PDE profile*, transfer the gain to the complete
+Riesz potential/weighted source norms, control the moving cutoff,
+and match the parameter-tangent and threshold projections.
+Original numbered acceptance remains **9/21**, and the
+dynamically selected finite-time Type II blowup main theorem is OPEN.
