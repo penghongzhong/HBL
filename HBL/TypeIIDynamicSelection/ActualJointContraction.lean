@@ -77,7 +77,8 @@ theorem actual_weighted_joint_ball_contraction
       B CE E G hs0 hp hnu hL hEcont hE hdelta hCnl hGcont
       hGzero hGlip q0 a0 q 0
     change ‖Phi q - Phi 0‖ ≤ k * ‖q - 0‖ at ht
-    simpa only [sub_zero] using ht
+    rw [sub_zero] at ht
+    exact ht
   have hbound (q : CenterWeightedPath s0 p) :
       ‖Phi q‖ ≤ k * ‖q‖ + ‖Phi 0‖ := by
     calc
@@ -85,7 +86,7 @@ theorem actual_weighted_joint_ball_contraction
         congr 1
         abel
       _ ≤ ‖Phi q - Phi 0‖ + ‖Phi 0‖ := norm_add_le _ _
-      _ ≤ k * ‖q‖ + ‖Phi 0‖ := add_le_add_right (hdiff q) _
+      _ ≤ k * ‖q‖ + ‖Phi 0‖ := add_le_add (hdiff q) le_rfl
   have hball (q : CenterWeightedPath s0 p) (hq : ‖q‖ ≤ r) :
       ‖Phi q‖ ≤ r := by
     calc
@@ -103,11 +104,16 @@ theorem actual_weighted_joint_ball_contraction
     calc
       ‖z.1‖ = ‖Phi z.1‖ := congrArg norm hcentre
       _ ≤ k * ‖z.1‖ + ‖Phi 0‖ := hbound z.1
-      _ ≤ k * ‖z.1‖ + (1-k)*r := add_le_add_left hz _
+      _ ≤ k * ‖z.1‖ + (1-k)*r := add_le_add le_rfl hz
   have hgap : 0 < 1-k := by linarith
   have hineq' : (1-k) * ‖z.1‖ ≤ (1-k)*r := by
     nlinarith only [hineq]
-  have hnorm : ‖z.1‖ ≤ r := (mul_le_mul_left hgap).mp hineq'
+  have hnorm : ‖z.1‖ ≤ r := by
+    by_contra hnot
+    have hgt : r < ‖z.1‖ := lt_of_not_ge hnot
+    have hpos : 0 < (1-k) * (‖z.1‖ - r) :=
+      mul_pos hgap (sub_pos.mpr hgt)
+    nlinarith only [hineq', hpos]
   refine ⟨z, ⟨hnorm, hfix.1, hfix.2⟩, ?_⟩
   intro y hy
   exact hunique y ⟨hy.2.1, hy.2.2⟩
