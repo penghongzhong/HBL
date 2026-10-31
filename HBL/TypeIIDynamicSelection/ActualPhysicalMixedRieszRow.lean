@@ -258,4 +258,44 @@ theorem physical_bubble_mixed_Riesz_linear_length
   refine ⟨hResult.1, ?_⟩
   convert hResult.2 using 1; ring
 
+/-- A single directly checkable weighted-decay hypothesis on the
+physical regular radiation supplies the pointwise amplitude bound as
+well. Thus the actual nonlinear Hartree mixed Riesz potential is
+O(ell) without assuming a separate L-infinity profile bound,
+rescaled-row integrability or any terminal blowup-rate exponent. -/
+theorem physical_bubble_mixed_Riesz_linear_length_from_weighted_decay
+    (ell r : ℝ) (hell : 0 < ell) (hr : 0 < r)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    {C : ℝ} (hC : 0 ≤ C)
+    (hzdecay : ∀ u : ℝ, 0 < u →
+      ‖z u‖ ^ 2 ≤ C * bubble u ^ 2) :
+    IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedHigher bubble
+          (rescalePhysicalRadiation ell z) rho) (Ioi (0 : ℝ)) ∧
+    |radialHartreePotential
+      (actualWholeRadiationMixedHigher bubble
+        (rescalePhysicalRadiation ell z)) r| ≤
+      (2 * Real.pi * hartreeKappa * C *
+        radialHartreeBubbleBoundConstant * (8 + 2 * C)) * ell := by
+  have hBound : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ Real.sqrt C := by
+    intro u hu
+    have hb0 : 0 ≤ bubble u := by
+      unfold bubble
+      positivity
+    have hb1 : bubble u ≤ 1 :=
+      (le_abs_self _).trans (bubble_abs_le_one u)
+    have hb2 : bubble u ^ 2 ≤ 1 := by
+      simpa only [one_pow] using (pow_le_pow_left₀ hb0 hb1 2)
+    have hsq : ‖z u‖ ^ 2 ≤ C := by
+      calc
+        _ ≤ C * bubble u ^ 2 := hzdecay u hu
+        _ ≤ C * 1 := mul_le_mul_of_nonneg_left hb2 hC
+        _ = C := by ring
+    nlinarith [Real.sq_sqrt hC, Real.sqrt_nonneg C, norm_nonneg (z u)]
+  have hResult := physical_bubble_mixed_Riesz_linear_length
+    ell r hell hr z hz hC hzdecay hBound
+  refine ⟨hResult.1, ?_⟩
+  simpa only [Real.sq_sqrt hC] using hResult.2
+
 end HBL.TypeIIDynamicSelection

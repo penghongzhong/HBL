@@ -213,6 +213,7 @@ jobs:
              'physical_bubble_mixed_envelope_uniform_row',
              'physical_mixed_higher_Riesz_linear_length',
              'physical_bubble_mixed_Riesz_linear_length',
+             'physical_bubble_mixed_Riesz_linear_length_from_weighted_decay',
              'actual_whole_radiation_mixed_center_by_degree',
              'actual_whole_radiation_mixed_potential_by_degree',
              'actual_whole_radiation_nonlinearity_source_by_degree',
