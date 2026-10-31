@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualPhysicalMixedRieszRow
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.physical_bubble_mixed_envelope_uniform_row
+#check @HBL.TypeIIDynamicSelection.physical_mixed_higher_Riesz_linear_length
+#check @HBL.TypeIIDynamicSelection.physical_bubble_mixed_Riesz_linear_length
+#print axioms HBL.TypeIIDynamicSelection.physical_bubble_mixed_envelope_uniform_row
+#print axioms HBL.TypeIIDynamicSelection.physical_mixed_higher_Riesz_linear_length
+#print axioms HBL.TypeIIDynamicSelection.physical_bubble_mixed_Riesz_linear_length
