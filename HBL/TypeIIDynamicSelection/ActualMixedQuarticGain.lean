@@ -94,7 +94,7 @@ theorem actual_whole_radiation_mixed_higher_abs_le
     _ ≤ 2 * a ^ 2 * z ^ 2 + 4 * a ^ 2 * x ^ 2 +
         |4 * a * x * z ^ 2| := htri
     _ ≤ 2 * a ^ 2 * z ^ 2 + 4 * a ^ 2 * x ^ 2 +
-        4 * |a| * z ^ 3 := add_le_add_left hcross _
+        4 * |a| * z ^ 3 := by linarith only [hcross]
     _ ≤ (6 * |a| ^ 2 + 4 * |a| * z) * z ^ 2 := by
       rw [sq_abs]
       nlinarith only [hquad]
