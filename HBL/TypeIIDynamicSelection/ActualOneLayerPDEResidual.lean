@@ -254,4 +254,109 @@ theorem actual_one_layer_physical_cutoff_radial_commutator
     (actual_one_layer_overlap_cutoff_deriv_hasDerivAt R r hR).deriv]
 
 
+
+/-- The actual moving overlap cutoff carries the physical geometric
+speed r R_s / R^2. It is derived from the given radius trajectory
+rather than assigned a time weight. -/
+theorem actual_one_layer_moving_overlap_cutoff_hasDerivAt
+    (R : ℝ → ℝ) {s r Rs : ℝ}
+    (hR : HasDerivAt R Rs s) (hRne : R s ≠ 0) :
+    HasDerivAt
+      (fun t : ℝ => actualOneLayerInnerOverlapCutoff (R t) r)
+      ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) s := by
+  have hquot : HasDerivAt (fun t : ℝ => r / R t)
+      (-(r * Rs / (R s) ^ 2)) s := by
+    simpa only [zero_mul, zero_sub, neg_div] using
+      (hasDerivAt_const s r).div hR hRne
+  have hcut : HasDerivAt cutoff (deriv cutoff (r / R s)) (r / R s) :=
+    ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1
+      (r / R s)).hasDerivAt
+  have hreal := (hasDerivAt_const s (1 : ℝ)).sub (hcut.comp s hquot)
+  convert hreal.ofReal_comp using 1
+  · rfl
+  · ring
+
+/-- The unabridged Hartree residual of a field multiplied by its
+actual moving overlap cutoff. It keeps the nonlinear nonlocal
+Hartree commutator as an explicit term, without claiming a gain
+for it, while the time, Laplacian and scaling commutators are
+expanded with their actual R_s/R^2, R^-1 and R^-2 coefficients. -/
+theorem actual_one_layer_moving_cutoff_radial_Hartree_residual
+    (R : ℝ → ℝ) (f : ℝ → ℝ → ℂ) (b omega : ℝ)
+    {s r Rs : ℝ}
+    (hR : HasDerivAt R Rs s) (hRne : R s ≠ 0)
+    (hfTime : DifferentiableAt ℝ (fun t => f t r) s)
+    (hfSpace : ∀ x : ℝ, DifferentiableAt ℝ (f s) x)
+    (hf2 : DifferentiableAt ℝ (deriv (f s)) r) :
+    complexRadialRenormalizedResidual
+        (fun t x => actualOneLayerInnerOverlapCutoff (R t) x * f t x)
+        b omega s r -
+      actualOneLayerInnerOverlapCutoff (R s) r *
+        complexRadialRenormalizedResidual f b omega s r =
+      Complex.I *
+          ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) * f s r +
+        2 * ((-deriv cutoff (r / R s) / R s : ℝ) : ℂ) * deriv (f s) r +
+        (((-deriv (deriv cutoff) (r / R s) / (R s) ^ 2 : ℝ) : ℂ) +
+          (2 / (r : ℂ)) *
+            ((-deriv cutoff (r / R s) / R s : ℝ) : ℂ)) * f s r +
+        Complex.I * (b : ℂ) * (r : ℂ) *
+          ((-deriv cutoff (r / R s) / R s : ℝ) : ℂ) * f s r +
+        (complexRadialHartreeNonlinearity
+          (fun x => actualOneLayerInnerOverlapCutoff (R s) x * f s x) r -
+          actualOneLayerInnerOverlapCutoff (R s) r *
+            complexRadialHartreeNonlinearity (f s) r) := by
+  let χ : ℝ → ℂ := actualOneLayerInnerOverlapCutoff (R s)
+  have hχTime := actual_one_layer_moving_overlap_cutoff_hasDerivAt
+    R hR hRne (r := r)
+  have hTime :
+      deriv (fun t => actualOneLayerInnerOverlapCutoff (R t) r * f t r) s =
+        ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) * f s r +
+          χ r * deriv (fun t => f t r) s := by
+    exact (hχTime.mul hfTime.hasDerivAt).deriv
+  have hProduct (x : ℝ) :
+      deriv (fun y => χ y * f s y) x =
+        ((-deriv cutoff (x / R s) / R s : ℝ) : ℂ) * f s x +
+          χ x * deriv (f s) x :=
+    ((actual_one_layer_overlap_cutoff_hasDerivAt (R s) x).mul
+       (hfSpace x).hasDerivAt).deriv
+  have hDilation :
+      complexRadialDilation (fun x => χ x * f s x) r -
+        χ r * complexRadialDilation (f s) r =
+      (r : ℂ) * ((-deriv cutoff (r / R s) / R s : ℝ) : ℂ) * f s r := by
+    unfold complexRadialDilation
+    rw [hProduct r]
+    ring
+  have hLaplacian :=
+    actual_one_layer_physical_cutoff_radial_commutator
+      (R s) r hRne (f s) hfSpace hf2
+  unfold complexRadialRenormalizedResidual
+  rw [hTime]
+  change
+    Complex.I *
+        (((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) *
+          f s r + χ r * deriv (fun t => f t r) s) +
+      complexRadialLaplacian (fun x => χ x * f s x) r +
+      complexRadialHartreeNonlinearity (fun x => χ x * f s x) r +
+      Complex.I * (b : ℂ) * complexRadialDilation (fun x => χ x * f s x) r +
+      (omega : ℂ) * (χ r * f s r) -
+      χ r * (Complex.I * deriv (fun t => f t r) s +
+        complexRadialLaplacian (f s) r +
+        complexRadialHartreeNonlinearity (f s) r +
+        Complex.I * (b : ℂ) * complexRadialDilation (f s) r +
+        (omega : ℂ) * f s r) = _
+  calc
+    _ = Complex.I *
+            ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) * f s r +
+          (complexRadialLaplacian (fun x => χ x * f s x) r -
+            χ r * complexRadialLaplacian (f s) r) +
+          Complex.I * (b : ℂ) *
+            (complexRadialDilation (fun x => χ x * f s x) r -
+              χ r * complexRadialDilation (f s) r) +
+          (complexRadialHartreeNonlinearity (fun x => χ x * f s x) r -
+            χ r * complexRadialHartreeNonlinearity (f s) r) := by ring
+    _ = _ := by
+      rw [hLaplacian, hDilation]
+      ring
+
+
 end HBL.TypeIIDynamicSelection
