@@ -33,6 +33,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.Kummer
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Exact coefficient velocity of the *physical* frozen Kummer ODE,
 with real parameters mu and theta. No bound or terminal exponent is
@@ -105,7 +106,7 @@ theorem actual_Kummer_inverse_two_parameter_speed
       (F := AnnulusSource z d →L[ℂ] AnnulusJet z d) s hcoef
 
 
-/-- The ACTUAL one-layer PDE error, restricted to a Kummer annulus.
+/-- The ACTUAL whole-radiation Hartree PDE residual increment, restricted to a Kummer annulus.
 Continuity of this physical source on the annulus is a classical
 regularity input, not a claim of Hartree error cancellation. -/
 def actualHartreePDEResidualAnnulusSource
@@ -121,7 +122,7 @@ def actualHartreePDEResidualAnnulusSource
   ⟨_, hcontinuous⟩
 
 /-- Genuine coupled physical Hartree-source / two-speed Kummer tangent.
-The source is the EXACT residual of the full Hartree equation, rather
+The source is the EXACT whole-radiation increment of the full Hartree residual, rather
 than a freely specified layer source. Its Banach-valued time derivative
 is explicitly retained as a regularity assumption. The formula is
   U_s = G_s (F_s - (theta_s - i*mu_s) P U).
@@ -166,7 +167,23 @@ theorem actual_Kummer_inverse_physical_Hartree_source_two_speed
           (hcontinuous s)) G) s := by
   have hS := actual_Kummer_inverse_two_parameter_speed
     T mu theta mu0 theta0 hmu htheta hsmall
-  rw [smul_neg, ← neg_smul] at hS
+  have hS' : HasDerivAt
+      (fun t =>
+        annulusParameterInverse T
+          (frozenZeroCoeff (mu t) (theta t) -
+            frozenZeroCoeff mu0 theta0))
+      ((-((ths : ℂ) - Complex.I * (mus : ℂ))) •
+        ((annulusParameterInverse T
+          (frozenZeroCoeff (mu s) (theta s) -
+            frozenZeroCoeff mu0 theta0)).comp
+          (annulusValueOperator
+            (annulusParameterInverse T
+              (frozenZeroCoeff (mu s) (theta s) -
+                frozenZeroCoeff mu0 theta0))))) s := by
+    convert hS using 1
+    ext F
+    simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.neg_apply, neg_smul, smul_neg]
   exact annulusSourceTangent_hasDerivAt
     (fun t =>
       annulusParameterInverse T
@@ -175,7 +192,7 @@ theorem actual_Kummer_inverse_physical_Hartree_source_two_speed
     (fun t =>
       actualHartreePDEResidualAnnulusSource V Z b omega t
         (hcontinuous t))
-    s (-((ths : ℂ) - Complex.I * (mus : ℂ))) G hS hF
+    s (-((ths : ℂ) - Complex.I * (mus : ℂ))) G hS' hF
 
 
 end HBL.TypeIIDynamicSelection
