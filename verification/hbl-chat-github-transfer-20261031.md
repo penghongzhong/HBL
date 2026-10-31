@@ -504,3 +504,54 @@ identification \(R=R_*(s)\), plus nonlocal tail matching.
 The manuscript original environment \`prop:one-layer-stage3\` (2.12)
 remains OPEN; historical strict original acceptance stays **9/21**.
 The actual dynamically selected Type II Hartree PDE theorem remains OPEN.
+
+
+## 2026-10-31: Actual moving-cutoff full radial Hartree PDE commutator — strict success
+
+**Strict audited commit:** \`4a0ed3d51c427684b2fdc532fa6168f6198ee91a\`.
+**GitHub Actions:** \`41216170983\`, completed/success, \`lake build\` 4135 jobs,
+full \`lean --trust=0 -DwarningAsError=true\` and complete type/
+transitive-axiom audit. The 2 new checked declarations are:
+
+- \`HBL.TypeIIDynamicSelection.actual_one_layer_moving_overlap_cutoff_hasDerivAt\`;
+- \`HBL.TypeIIDynamicSelection.actual_one_layer_moving_cutoff_radial_Hartree_residual\`.
+
+For the *actual* manuscript smooth cutoff \(\chi_R(s,r)=1-\chi(r/R(s))\), the
+moving derivative is derived rather than postulated:
+\[
+\partial_s\chi_R(s,r)=\frac{rR_s}{R^2}\chi'(r/R).
+\]
+Writing \(\mathscr R_{b,\omega}\) for the same renormalized radial Hartree
+PDE operator in \`MonopoleComplexResidual\`, the strict theorem gives the
+complete pointwise source, with true nonlinear nonlocal commutator:
+\[
+\begin{aligned}
+\mathscr R_{b,\omega}(\chi_R f)-\chi_R\mathscr R_{b,\omega}(f)
+={}&i\frac{rR_s}{R^2}\chi'(r/R)f
+-\frac2R\chi'(r/R)\partial_rf\\
+&-\left(\frac1{R^2}\chi''(r/R)
++\frac2{rR}\chi'(r/R)\right)f
+-ib\frac rR\chi'(r/R)f\\
+&+\mathcal N(\chi_Rf)-\chi_R\mathcal N(f).
+\end{aligned}
+\]
+In particular, the time-and-dilation terms algebraically combine to
+\(i(r/R^2)\chi'(r/R)(R_s-bR)f\). The Lean terminal retains these two
+terms separately, while their basic real/complex algebraic combination is
+mathematically immediate. The theorem assumes only true regularity of
+\(R,f\) and \(R(s)\neq 0\), no imposed terminal blowup exponent.
+
+Both new declarations' exact transitive axioms are only
+\`propext\`, \`Classical.choice\`, and \`Quot.sound\` (no new axiom/sorry).
+
+**Original manuscript numbered status remains 9/21.**
+The theorem explicitly does NOT estimate
+\(\mathcal N(\chi_Rf)-\chi_R\mathcal N(f)\) nor derive a temporal gain from
+\(R_s-bR\). Next original 2.12 burden: specialize the cut-off field to the
+*same* physical first-layer Hartree residual; identify its resulting
+exterior quartic density and apply the existing strict
+\`actual_exteriorHartree_center_gap_L1_le\` with *derived* integrability,
+followed by plus/minus Fredholm, Kummer and remote matched charges and
+positive generated-source order.
+The existence of a genuine Type II Hartree blowup orbit with
+dynamically selected rate is still OPEN.
