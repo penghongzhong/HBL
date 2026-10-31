@@ -216,7 +216,6 @@ jobs:
              'physicalRadiation_quadratic_Riesz_row_integrable_of_profile',
              'actual_one_layer_full_renormalized_Hartree_PDE_source',
              'actual_phased_moving_monopole_two_parameter_tangent',
-             'actual_synchronized_phase_monopole_tangent',
              'actual_phased_moving_monopole_Hartree_PDE_tangent',
              'physical_bubble_mixed_envelope_uniform_row',
              'physical_mixed_higher_Riesz_linear_length',
