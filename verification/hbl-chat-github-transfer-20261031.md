@@ -555,3 +555,57 @@ followed by plus/minus Fredholm, Kummer and remote matched charges and
 positive generated-source order.
 The existence of a genuine Type II Hartree blowup orbit with
 dynamically selected rate is still OPEN.
+
+
+## 2026-10-31: Physical cutoff nonlocal Hartree source — strict success
+
+**Audited source:** commit \`8597ed81f1fcf97c00461f8b4d18b095c698817b\`;
+type/axiom audit commit \`a538756916510e1d6794cba53ff2eb9a5d105cd9\`.
+**GitHub Actions:** \`41217783551\`, completed/success,
+strict pinned Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
+full 4135-job build plus \`--trust=0 -DwarningAsError=true\` and exact
+transitive axiom checks. All 3 new theorem statements have only
+\`propext\`, \`Classical.choice\` and \`Quot.sound\`;
+no sorry, admit, or new axiom.
+
+**Exact checked declarations in the existing original-2.12 module**
+\`HBL/TypeIIDynamicSelection/ActualOneLayerPDEResidual.lean\`:
+
+- \`actual_one_layer_cutoff_removed_radiation_zero\`;
+- \`actual_one_layer_core_cutoff_Hartree_Riesz_exact\`;
+- \`actual_one_layer_core_cutoff_Hartree_Riesz_L1_gain\`.
+
+Let \(\eta_R(r)=1-\chi(r/R)\), \(Z_R=(\eta_R-1)V\), and
+\(F_R=|V+Z_R|^4-|V|^4=|\eta_RV|^4-|V|^4\), where \(V\) is a genuine
+real radial core. The source \(Z_R\) vanishes for \(r\le R\), by the
+**actual smooth cutoff**, and its continuity/measurability is proved,
+not postulated. On \(0<2r\le R\), under the real core's radial Riesz-row
+integrability and the *actual* exterior quartic-density L1 condition,
+\[
+\mathcal N(\eta_R V)(r)-\eta_R(r)\mathcal N(V)(r)
+ =\mathcal I_{\rm ext}(F_R;R,r)\,V(r)^3.
+\]
+Consequently, the exact nonlocal cutoff commutator after removing its
+**actual physical center moment** is bounded by
+\[
+\left|
+\mathcal N(\eta_R V)-\eta_R\mathcal N(V)
+-C_R V(r)^3
+\right|
+\le \frac{4\pi\kappa_H r^2}{R^2}
+\left(\int_R^\infty|F_R(\rho)|\,d\rho\right)|V(r)|^3,
+\quad C_R=\mathcal I_{\rm ext}(F_R;R,0).
+\]
+Both are proved by specializing the previously audited
+\`actual_complexHartree_remote_quartic_source_exact\` and
+\`actual_exteriorHartree_center_gap_L1_le\`, without building any new
+abstract inverse or invented layer source.
+
+**Original 2.12 is still OPEN, strict historical acceptance remains 9/21.**
+The specific \(V=V_c\) integrability and nonlinear source time bounds
+must now be derived from the actual core/radiation flow. Crucially,
+the center moment \(C_R\) must be matched to the same amplitude \(c(s)\);
+two *physical* Fredholm charges, the Kummer annulus, remote source and
+moving-overlap generated terms must share a common weight-\(\rho\)
+projection. The new theorem does NOT assert these obligations and is
+not to be counted as one of the original 21 environments.
