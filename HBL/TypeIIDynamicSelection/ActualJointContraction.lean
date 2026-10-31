@@ -18,6 +18,8 @@ original manuscript 5.2 or as proof of Type II blowup.
 
 noncomputable section
 set_option autoImplicit false
+set_option maxHeartbeats 2000000
+set_option backward.isDefEq.respectTransparency false
 open Set
 open scoped Topology
 
@@ -74,11 +76,14 @@ theorem actual_weighted_joint_ball_contraction
     have ht := fullWeightedCenterSelfMap_difference_norm
       B CE E G hs0 hp hnu hL hEcont hE hdelta hCnl hGcont
       hGzero hGlip q0 a0 q 0
+    change ‖Phi q - Phi 0‖ ≤ k * ‖q - 0‖ at ht
     simpa only [sub_zero] using ht
   have hbound (q : CenterWeightedPath s0 p) :
       ‖Phi q‖ ≤ k * ‖q‖ + ‖Phi 0‖ := by
     calc
-      ‖Phi q‖ = ‖(Phi q - Phi 0) + Phi 0‖ := by rw [sub_add_cancel]
+      ‖Phi q‖ = ‖(Phi q - Phi 0) + Phi 0‖ := by
+        congr 1
+        abel
       _ ≤ ‖Phi q - Phi 0‖ + ‖Phi 0‖ := norm_add_le _ _
       _ ≤ k * ‖q‖ + ‖Phi 0‖ := add_le_add_right (hdiff q) _
   have hball (q : CenterWeightedPath s0 p) (hq : ‖q‖ ≤ r) :
