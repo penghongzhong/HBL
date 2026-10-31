@@ -35,7 +35,6 @@ theorem actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain
     (V : ℝ → ℝ) (Z : ℝ → ℂ)
     {s beta A CV CZ : ℝ}
     (hs : 1 ≤ s) (hbeta : (1 / 2 : ℝ) < beta)
-    (hA : 0 ≤ A)
     (hVmeas : Measurable V) (hZmeas : Measurable Z)
     (hV2 : IntegrableOn (fun rho => |V rho| ^ 2) (Ioi (0 : ℝ)))
     (hZ2 : IntegrableOn (fun rho => ‖Z rho‖ ^ 2) (Ioi (0 : ℝ)))
