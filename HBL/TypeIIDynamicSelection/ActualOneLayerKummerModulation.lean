@@ -54,15 +54,14 @@ theorem actual_Kummer_frozen_coefficient_two_speed
   have hmuDiff : HasDerivAt
       (fun t : ℝ => (1 / 4 : ℂ) - (mu t : ℂ))
       (-(mus : ℂ)) s := by
-    simpa only [Pi.sub_apply, zero_sub] using
-      ((hasDerivAt_const s (1 / 4 : ℂ)).sub hm)
+    convert ((hasDerivAt_const s (1 / 4 : ℂ)).sub hm) using 1 <;>
+      simp only [Pi.sub_apply, zero_sub]
   have hcoeff := (ht.add (hmuDiff.const_mul Complex.I)).sub_const
     (frozenZeroCoeff mu0 theta0)
   convert hcoeff using 1
   · funext t
     unfold frozenZeroCoeff
-    simp only [Pi.add_apply]
-    ring
+    simp only [Pi.add_apply, Pi.sub_apply]
   · ring
 
 /-- The true Kummer inverse has an EXACT two-parameter time tangent.
