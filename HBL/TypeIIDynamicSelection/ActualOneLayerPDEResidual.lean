@@ -266,10 +266,7 @@ theorem actual_one_layer_moving_overlap_cutoff_hasDerivAt
       ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) s := by
   have hquot : HasDerivAt (fun t : ℝ => r / R t)
       (-(r * Rs / (R s) ^ 2)) s := by
-    convert ((hasDerivAt_const s r).div hR hRne) using 1
-    · funext t
-      rfl
-    · ring
+    convert ((hasDerivAt_const s r).div hR hRne) using 1 <;> ring
   have hcut : HasDerivAt cutoff (deriv cutoff (r / R s)) (r / R s) :=
     ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1
       (r / R s)).hasDerivAt
