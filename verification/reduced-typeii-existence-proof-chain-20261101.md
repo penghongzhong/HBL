@@ -60,7 +60,7 @@ solely because a conditional weighted fixed point compiles.
 ## Short dependency spine
 
 1. Real Hartree minimum-weight PDE source with one set of actual matched
-   inner \u00b1 / Kummer / remote charges and positive new-term gains (old 2.12).
+   inner ± / Kummer / remote charges and positive new-term gains (old 2.12).
 2. Physical finite profile, weighted source norm, Hessian and modulation
    Jacobian (old 2.13); global H1 algebraic branch extraction (old 2.14).
 3. Actual retained zero-centre Hamilton generator and true slow perturbation
