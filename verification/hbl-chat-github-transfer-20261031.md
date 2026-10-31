@@ -99,3 +99,58 @@ The dynamical rate must still be proved to **emerge** from a real Type II
 Hartree orbit; it may not be fixed as an initial theorem parameter.
 
 Strict historical original-paper ledger: **9/21**, main PDE theorem open.
+
+## Continued 2026-10-31: exact physical mixed-density gain and source assembly
+
+Strict compiler: Lean 4.35.0-rc3; pinned Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5.
+No sorry/admit/added axioms; workflow enforces trust=0, warning-as-error,
+complete exported type and transitive-axiom checks.
+
+- Commit \`5d389a273cb4759f20aa31f68cc457363a9f652b\`,
+  Actions run \`41185593858\`: **success**. Three new audited
+  declarations in \`HBL/TypeIIDynamicSelection/ActualMixedQuarticGain.lean\`:
+  \`actual_whole_radiation_mixed_linear_higher_exact\`,
+  \`actual_whole_radiation_mixed_higher_abs_le\`,
+  \`actual_whole_radiation_mixed_higher_twoBeta_gain\`.
+
+  For the actual radial complex Hartree density and real bubble V:
+  \[
+  |V+Z|^4-|V|^4-|Z|^4
+   =4V^3\operatorname{Re}Z+R_{\rm mix},
+  \quad
+  |R_{\rm mix}|\le(6|V|^2+4|V||Z|)|Z|^2.
+  \]
+  Under the **explicit physical-source input**
+  \(|V|\le M\), \(|Z|\le A s^{-\beta}\), \(s\ge1\),
+  \(\beta>1/2\), the quadratic remainder is
+  \[
+  |R_{\rm mix}|\le (6M^2A^2+4MA^3)s^{-2\beta},
+  \qquad 2\beta-1>0.
+  \]
+  These are *derived mathematical bounds*, not tautological
+  \`GeneratedTerm.order\` labels; however, the asserted radiation
+  pointwise decay has not yet been verified for the exact selected
+  Hartree PDE trajectory.
+
+- Commit \`8ac193070179de235d45d30fd89166568b85cea1\`,
+  Actions run \`41186195998\`: **success**. Three additional audited
+  declarations:
+  \`actual_whole_radiation_mixed_center_by_degree\`,
+  \`actual_whole_radiation_mixed_potential_by_degree\`,
+  \`actual_whole_radiation_nonlinearity_source_by_degree\`.
+  These link the exact mixed source to the actual *Lebesgue-integrated*
+  Hartree center, radial inverse-square convolution and complete
+  nonlinear PDE source, conditional on explicit row integrability.
+  They separate the real-linear bubble-radiation potential from the
+  quadratic/higher remainder without imposing remote-support cutoffs
+  or preset terminal rates.
+
+Original manuscript \`prop:one-layer-stage3\` (2.12): **OPEN**. Its
+full three-region parametrix, moving-cutoff commutator bounds, physical
+source time orders, noncompact threshold charge matching, and genuine
+parameter-tangent cancellation remain unproved. Future Lean work must
+derive these on the *same physical profile*, not count the six new
+source declarations as an original paper environment.
+
+Strict original manuscript acceptance remains **9/21**. Dynamical
+rate-selection Type II Hartree blowup PDE main theorem is still OPEN.
