@@ -81,7 +81,7 @@ jobs:
           import pathlib,re
           s=pathlib.Path('evidence/audit.log').read_text()
           n='HBL.TypeIIDynamicSelection.actual_weighted_joint_ball_contraction'
-          assert ('@'+n+' :') in s
+          assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s), 'Missing exported theorem type'
           m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
           assert m
           actual={t.strip() for t in m.group(1).split(',') if t.strip()}
