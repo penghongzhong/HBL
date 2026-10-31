@@ -49,7 +49,9 @@ theorem actual_physical_inverse_square_radial_reduction
   apply setIntegral_congr_fun measurableSet_Ioi
   intro r hr
   change r ^ 2 * ((r ^ 2)⁻¹ * ‖z r‖ ^ 4) = ‖z r‖ ^ 4
-  field_simp [hr.ne']
+  have hrpos : (0 : ℝ) < r := hr
+  have hrne : r ≠ 0 := ne_of_gt hrpos
+  field_simp [hrne]
 
 /-- The actual 3D source moment is precisely the coefficient selected
 by the whole rescaled radiation Hartree center on the physical clock. -/
