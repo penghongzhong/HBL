@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerParameterTangents
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualPhasedMovingMonopoleWithRadiation
+#check @HBL.TypeIIDynamicSelection.actual_phased_moving_monopole_two_parameter_tangent
+#check @HBL.TypeIIDynamicSelection.actual_synchronized_phase_monopole_tangent
+#check @HBL.TypeIIDynamicSelection.actual_phased_moving_monopole_Hartree_PDE_tangent
+#print axioms HBL.TypeIIDynamicSelection.actual_phased_moving_monopole_two_parameter_tangent
+#print axioms HBL.TypeIIDynamicSelection.actual_synchronized_phase_monopole_tangent
+#print axioms HBL.TypeIIDynamicSelection.actual_phased_moving_monopole_Hartree_PDE_tangent
