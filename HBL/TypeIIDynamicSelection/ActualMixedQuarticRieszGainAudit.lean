@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualMixedQuarticRieszGain
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualWholeRadiationMixedEnvelope
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_weighted_gain
+#check @HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_Riesz_twoBeta_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_higher_weighted_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_whole_radiation_mixed_Riesz_twoBeta_gain
