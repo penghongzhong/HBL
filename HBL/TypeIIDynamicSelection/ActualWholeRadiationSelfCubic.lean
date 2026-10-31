@@ -140,7 +140,13 @@ theorem actual_whole_radiation_mixed_center_exact
     simp only [Pi.add_apply, actualWholeRadiationMixedQuartic]
     ring
   unfold actualRadiationCenter radialHartreeCenter
-  rw [hDensity, integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  rw [hDensity]
+  change
+    (4 * Real.pi * hartreeKappa) *
+      (∫ rho in Ioi (0 : ℝ),
+        (‖(V rho : ℂ)‖ ^ 4 + ‖Z rho‖ ^ 4) +
+          actualWholeRadiationMixedQuartic V Z rho) = _
+  rw [integral_add (hV.add hZ) hMix, integral_add hV hZ]
   ring
 
 /-- Exact nonlocal potential decomposition for the SAME physical Hartree
@@ -194,7 +200,15 @@ theorem actual_whole_radiation_mixed_potential_exact
     simp only [Pi.add_apply, actualWholeRadiationMixedQuartic]
     ring
   unfold radialHartreePotential
-  rw [hDensityRow, integral_add (hV.add hZ) hMix, integral_add hV hZ]
+  rw [hDensityRow]
+  change
+    (2 * Real.pi * hartreeKappa / r) *
+      (∫ rho in Ioi (0 : ℝ),
+        (rho * hartreeRadialLog r rho * ‖(V rho : ℂ)‖ ^ 4 +
+          rho * hartreeRadialLog r rho * ‖Z rho‖ ^ 4) +
+        rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedQuartic V Z rho) = _
+  rw [integral_add (hV.add hZ) hMix, integral_add hV hZ]
   ring
 
 end HBL.TypeIIDynamicSelection
