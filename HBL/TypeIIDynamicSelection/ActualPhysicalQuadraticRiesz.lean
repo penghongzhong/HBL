@@ -120,7 +120,8 @@ theorem physicalRadiation_quadratic_Riesz_uniform_of_profile
   have hpoint : ∀ rho : ℝ, 0 < rho →
       |‖z rho‖ ^ 2| ≤ M * bubble rho ^ 2 := by
     intro rho hpos
-    simpa only [abs_of_nonneg (sq_nonneg _)] using hdecay rho hpos
+    rw [abs_of_nonneg (sq_nonneg (‖z rho‖))]
+    exact hdecay rho hpos
   exact (radialHartreePotential_bubble_sq_domination
     (fun rho => ‖z rho‖ ^ 2) hsource hM hpoint
     (mul_pos hell hr)).2
