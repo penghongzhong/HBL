@@ -46,7 +46,7 @@ theorem actual_weighted_joint_ball_contraction
       ‖G t z - G t w‖ ≤ Cnl * t ^ (-1 - delta) * ‖z - w‖)
     (q0 : CenterWeightedPath s0 p)
     (a0 : ThresholdWeightedPath s0 p)
-    (r : ℝ) (hr : 0 ≤ r)
+    (r : ℝ) (_hr : 0 ≤ r)
     (hsmall : weightedJointLipschitzConstant B CE p nu L delta Cnl < 1)
     (hforcing :
       ‖fullWeightedCenterSelfMap B CE E G
