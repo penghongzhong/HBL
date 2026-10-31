@@ -126,4 +126,72 @@ theorem physicalRadiation_quadratic_Riesz_uniform_of_profile
     (fun rho => ‖z rho‖ ^ 2) hsource hM hpoint
     (mul_pos hell hr)).2
 
+/-- Directly discharge the r-normalized PHYSICAL Riesz-row
+bound for the rescaled regular radiation, using the ALREADY PROVED
+bubble-squared logarithmic row. This is a concrete spatial control,
+not a hypothesis that the target radial Hartree potential is bounded.
+
+The radial profile z satisfies the visible (Schwartz-compatible)
+pointwise weighted condition. The length ell>0 is arbitrary and is
+not tied to a prespecified blowup speed. -/
+theorem physicalRadiation_quadratic_Riesz_row_uniform_of_profile
+    (ell : ℝ) (hell : 0 < ell) (r : ℝ) (hr : 0 < r)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    {M : ℝ} (hM : 0 ≤ M)
+    (hdecay : ∀ rho : ℝ, 0 < rho →
+      ‖z rho‖ ^ 2 ≤ M * bubble rho ^ 2) :
+    (∫ rho in Ioi (0 : ℝ),
+      rho * hartreeRadialLog r rho *
+        ‖rescalePhysicalRadiation ell z rho‖ ^ 2) ≤
+      r * radialHartreeBubbleBoundConstant * M := by
+  have hpos : 0 < ell * r := mul_pos hell hr
+  have hSource : Measurable (fun u => ‖z u‖ ^ 2) :=
+    hz.norm.pow_const 2
+  have hSourceBound : ∀ u : ℝ, 0 < u →
+      |‖z u‖ ^ 2| ≤ M * bubble u ^ 2 := by
+    intro u hu
+    rw [abs_of_nonneg (sq_nonneg (‖z u‖))]
+    exact hdecay u hu
+  have hSourceRow :=
+    radialHartreePotential_bubble_sq_domination
+      (fun u => ‖z u‖ ^ 2) hSource hM hSourceBound hpos
+  have hBubbleRow := radialHartreeBubble_integrable_bound hpos
+  have hPoint (u : ℝ) (hu : 0 < u) :
+      u * hartreeRadialLog (ell * r) u * ‖z u‖ ^ 2 ≤
+        M * (u * hartreeRadialLog (ell * r) u * bubble u ^ 2) := by
+    have hlog : 0 ≤ hartreeRadialLog (ell * r) u :=
+      hartreeRadialLog_nonneg (ell * r) u hpos hu
+    calc
+      _ ≤ (u * hartreeRadialLog (ell * r) u) *
+          (M * bubble u ^ 2) :=
+        mul_le_mul_of_nonneg_left (hdecay u hu)
+          (mul_nonneg hu.le hlog)
+      _ = _ := by ring
+  have hPhysicalRow :
+      (∫ u in Ioi (0 : ℝ),
+        u * hartreeRadialLog (ell * r) u * ‖z u‖ ^ 2) ≤
+          (ell * r) * radialHartreeBubbleBoundConstant * M := by
+    calc
+      _ ≤ ∫ u in Ioi (0 : ℝ),
+          M * (u * hartreeRadialLog (ell * r) u *
+            bubble u ^ 2) := by
+        apply integral_mono_ae hSourceRow.1 (hBubbleRow.1.const_mul M)
+        filter_upwards [ae_restrict_mem measurableSet_Ioi] with u hu
+        exact hPoint u hu
+      _ = M * (∫ u in Ioi (0 : ℝ),
+          u * hartreeRadialLog (ell * r) u * bubble u ^ 2) := by
+        rw [integral_const_mul]
+      _ ≤ M * ((ell * r) * radialHartreeBubbleBoundConstant) :=
+        mul_le_mul_of_nonneg_left hBubbleRow.2 hM
+      _ = (ell * r) * radialHartreeBubbleBoundConstant * M := by
+        ring
+  rw [physicalRadiation_quadratic_Riesz_row_scale ell hell r z]
+  calc
+    ell⁻¹ * (∫ u in Ioi (0 : ℝ),
+        u * hartreeRadialLog (ell * r) u * ‖z u‖ ^ 2) ≤
+      ell⁻¹ * ((ell * r) * radialHartreeBubbleBoundConstant * M) :=
+        mul_le_mul_of_nonneg_left hPhysicalRow (inv_nonneg.mpr hell.le)
+    _ = r * radialHartreeBubbleBoundConstant * M := by
+      field_simp [hell.ne']
+
 end HBL.TypeIIDynamicSelection
