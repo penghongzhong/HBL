@@ -74,3 +74,59 @@ solely because a conditional weighted fixed point compiles.
 
 No new axiom, placeholder, or claimed main PDE existence is created
 by this dependency audit.
+
+
+## 2026-11-01 — Physical radiation moment versus moving-cutoff drift (new candidate)
+
+Source: \`HBL/TypeIIDynamicSelection/ActualMomentCutoffTransport.lean\`.
+**Verification status at writing: submitted for strict compilation, not yet counted.**
+
+The previously strictly certified whole-radiation mass law reads, for
+\(\ell=\lambda^{-1}\), \(c_g=\kappa_H\ell\,m_0[z_g(t)]\),
+\[
+\ell_s=-b\ell,\quad t_s=\ell^2,\quad
+(c_g)_s=-bc_g+\kappa_H\ell^3\,\partial_t m_0[z_g(t)].
+\]
+The coefficient \`actualPhysicalRadiationMonopole\` is a genuine 3D
+inverse-square quartic Hartree moment (not a freely prescribed rate)
+and is NONNEGATIVE by the previously verified
+\`actualRadiationCenter_nonneg\`, including its zero set.
+
+Therefore the **actual original** monopole cutoff
+\[
+\eta(s,r)=1-\chi(|c_g(s)|r/4)
+\]
+coincides pointwise with \(1-\chi(c_g(s)r/4)\), avoiding
+division by \(c_g\) or differentiating \(|c_g|\) at zero.
+Ordinary chain rule gives the *source-identified* exact material
+derivative
+\[
+(\partial_s+br\partial_r)\eta
+=-\frac{r}{4}\,\kappa_H\ell^3\,
+  (\partial_t m_0[z_g(t)])\,\chi'(c_g r/4).
+\]
+Thus the bare \(bc_g\) drift cancels algebraically; only the true
+physical radiation moment derivative survives. This is a load-bearing
+Hartree source simplification for old 2.12, but **not** an asserted
+spatial/source norm bound.
+
+On the transition support \(\chi'(c_gr/4)\neq0\), the already proved
+smooth cutoff is supported where \(1\le c_gr/4\le 2\).
+If \(c_g=\kappa_H\ell m_0>0\) and \(\partial_t m_0\) exists, then
+\[
+|(\partial_s+br\partial_r)\eta|
+\le 2\ell^2\frac{|\partial_t m_0|}{m_0}
+\|\chi'\|_\infty.
+\]
+Hence a **derived** positive source gain follows once the actual
+regular radiation flow is shown to have \(m_0\ge m_*>0\) and a bounded
+time derivative on a terminal window. One must not merely assume
+\(m_0\ge m_*>0\) for all data: choose a single nonzero terminal
+radiation \(g\), prove \(m_0[g]>0\), and use continuity of the exact
+Hartree local flow. Converting the resulting \(\ell^2\) gain to a
+specific \(s^{-\rho}\) gain must use the **dynamically derived**
+modulation/clock, not a prescribed asymptotic rate.
+
+Still open: true HBL current-weight source projection and simultaneous
+physical Hartree/Fredholm/Kummer/remote matching, plus all other
+generated-source gains. Historical original count remains 9/21.
