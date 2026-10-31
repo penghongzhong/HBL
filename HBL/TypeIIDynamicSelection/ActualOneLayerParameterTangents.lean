@@ -23,6 +23,7 @@ weighted residual cancellation in the full manuscript 2.12.
 
 noncomputable section
 set_option autoImplicit false
+set_option maxHeartbeats 1000000
 open Set
 open scoped Topology
 
@@ -82,7 +83,8 @@ theorem actual_phased_moving_monopole_two_parameter_tangent
   have hproduct := he.mul hsum
   convert hproduct using 1
   · rfl
-  · ring
+  · simp only [Pi.add_apply]
+    ring
 
 /-- The phase tangent above is not a free gamma_s input: for the actual
 synchronized physical phase its coefficient is the PREVIOUSLY PROVED
