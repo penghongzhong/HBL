@@ -21,7 +21,7 @@ the FULL original 2.12. This theorem does not prove that final claim.
 noncomputable section
 set_option autoImplicit false
 open Set MeasureTheory
-open scoped Topology
+open scoped Topology ContDiff
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole HBL.Modulation.AffineTail
