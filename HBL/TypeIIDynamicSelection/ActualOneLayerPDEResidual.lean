@@ -183,4 +183,75 @@ theorem actual_one_layer_radial_Laplacian_cutoff_commutator
   ring
 
 
+
+/-- The manuscript's inner-to-Kummer overlap cutoff, using its actual
+smooth transition and the physical radius R. -/
+def actualOneLayerInnerOverlapCutoff (R r : ℝ) : ℂ :=
+  ((1 - cutoff (r / R) : ℝ) : ℂ)
+
+/-- Exact first spatial derivative of the actual moving overlap cutoff. -/
+theorem actual_one_layer_overlap_cutoff_hasDerivAt (R r : ℝ) :
+    HasDerivAt (actualOneLayerInnerOverlapCutoff R)
+      ((-deriv cutoff (r / R) / R : ℝ) : ℂ) r := by
+  have hscale : HasDerivAt (fun x : ℝ => x / R) (1 / R) r :=
+    (hasDerivAt_id r).div_const R
+  have hcut : HasDerivAt cutoff (deriv cutoff (r / R)) (r / R) :=
+    ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1 (r / R)).hasDerivAt
+  have hreal := (hasDerivAt_const r (1 : ℝ)).sub (hcut.comp r hscale)
+  convert hreal.ofReal_comp using 1
+  · rfl
+  · ring
+
+/-- The exact second derivative produces R^(-2), rather than an
+unjustified assigned weight for the cutoff commutator. -/
+theorem actual_one_layer_overlap_cutoff_deriv_hasDerivAt
+    (R r : ℝ) (hR : R ≠ 0) :
+    HasDerivAt (deriv (actualOneLayerInnerOverlapCutoff R))
+      ((-deriv (deriv cutoff) (r / R) / R ^ 2 : ℝ) : ℂ) r := by
+  have hfirst : deriv (actualOneLayerInnerOverlapCutoff R) =
+      fun x => ((-deriv cutoff (x / R) / R : ℝ) : ℂ) :=
+    funext (fun x => (actual_one_layer_overlap_cutoff_hasDerivAt R x).deriv)
+  rw [hfirst]
+  have hscale : HasDerivAt (fun x : ℝ => x / R) (1 / R) r :=
+    (hasDerivAt_id r).div_const R
+  have hcut1 : ContDiff ℝ ∞ (deriv cutoff) :=
+    (contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).2
+  have hcut : HasDerivAt (deriv cutoff)
+      (deriv (deriv cutoff) (r / R)) (r / R) :=
+    (hcut1.differentiable (by norm_num) (r / R)).hasDerivAt
+  have hreal : HasDerivAt (fun x : ℝ => -deriv cutoff (x / R) / R)
+      (-deriv (deriv cutoff) (r / R) / R ^ 2) r := by
+    convert ((hcut.comp r hscale).div_const R).neg using 1
+    · funext x
+      ring
+    · field_simp [hR]
+      ring
+  exact hreal.ofReal_comp
+
+/-- Physical moving-cutoff radial Laplacian commutator, with both
+inverse powers R^(-1) and R^(-2) obtained by differentiating the
+actual cutoff. No fictitious time weight or source is assumed. -/
+theorem actual_one_layer_physical_cutoff_radial_commutator
+    (R r : ℝ) (hR : R ≠ 0) (f : ℝ → ℂ)
+    (hf : ∀ x : ℝ, DifferentiableAt ℝ f x)
+    (hf2 : DifferentiableAt ℝ (deriv f) r) :
+    complexRadialLaplacian
+        (fun x => actualOneLayerInnerOverlapCutoff R x * f x) r -
+      actualOneLayerInnerOverlapCutoff R r * complexRadialLaplacian f r =
+        2 * ((-deriv cutoff (r / R) / R : ℝ) : ℂ) * deriv f r +
+          (((-deriv (deriv cutoff) (r / R) / R ^ 2 : ℝ) : ℂ) +
+            (2 / (r : ℂ)) *
+              ((-deriv cutoff (r / R) / R : ℝ) : ℂ)) * f r := by
+  have hchi : ∀ x : ℝ,
+      DifferentiableAt ℝ (actualOneLayerInnerOverlapCutoff R) x :=
+    fun x => (actual_one_layer_overlap_cutoff_hasDerivAt R x).differentiableAt
+  have hchi2 : DifferentiableAt ℝ
+      (deriv (actualOneLayerInnerOverlapCutoff R)) r :=
+    (actual_one_layer_overlap_cutoff_deriv_hasDerivAt R r hR).differentiableAt
+  rw [actual_one_layer_radial_Laplacian_cutoff_commutator
+    (actualOneLayerInnerOverlapCutoff R) f r hchi hf hchi2 hf2,
+    (actual_one_layer_overlap_cutoff_hasDerivAt R r).deriv,
+    (actual_one_layer_overlap_cutoff_deriv_hasDerivAt R r hR).deriv]
+
+
 end HBL.TypeIIDynamicSelection
