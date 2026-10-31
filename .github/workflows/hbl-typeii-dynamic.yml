@@ -240,7 +240,9 @@ jobs:
              'actual_weighted_joint_ball_contraction',
              'actualMomentInnerCutoff_space_hasDerivAt',
              'actualMomentInnerCutoff_time_hasDerivAt',
-             'actualMomentInnerCutoff_material_derivative']
+             'actualMomentInnerCutoff_material_derivative',
+             'actualMomentInnerCutoff_eq_original_absolute',
+             'actualMomentInnerCutoff_original_monopole_profile']
           for name in names:
             fullname='HBL.TypeIIDynamicSelection.'+name
             assert fullname in s, 'Missing checked type: '+fullname
