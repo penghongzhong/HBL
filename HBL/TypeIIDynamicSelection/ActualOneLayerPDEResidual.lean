@@ -266,7 +266,7 @@ theorem actual_one_layer_moving_overlap_cutoff_hasDerivAt
       ((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) s := by
   have hquot : HasDerivAt (fun t : ℝ => r / R t)
       (-(r * Rs / (R s) ^ 2)) s := by
-    simpa only [zero_mul, zero_sub, neg_div] using
+    simpa only [Pi.div_apply, zero_mul, zero_sub, neg_div] using
       (hasDerivAt_const s r).div hR hRne
   have hcut : HasDerivAt cutoff (deriv cutoff (r / R s)) (r / R s) :=
     ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1
