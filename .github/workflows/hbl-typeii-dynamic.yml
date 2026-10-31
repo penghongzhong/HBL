@@ -197,6 +197,8 @@ jobs:
              'actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain',
              'actual_whole_radiation_mixed_higher_weighted_gain',
              'actual_whole_radiation_mixed_Riesz_twoBeta_gain',
+             'actual_whole_radiation_mixed_Riesz_inner_uniform_gain',
+             'actual_whole_radiation_mixed_Riesz_cubic_source_gain',
              'actual_whole_radiation_mixed_center_by_degree',
              'actual_whole_radiation_mixed_potential_by_degree',
              'actual_whole_radiation_nonlinearity_source_by_degree',

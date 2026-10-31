@@ -195,4 +195,112 @@ theorem actual_whole_radiation_mixed_Riesz_twoBeta_gain
       dsimp [K]
       ring
 
+/-- An observation-radius UNIFORM version of the genuine Hartree
+Riesz estimate. The physical radial kernel row is controlled by
+r times one constant J, exactly the form needed at the inner/Kummer
+overlap. Establishing this row bound for the selected full profile
+remains an open analytic input of original manuscript 2.12. -/
+theorem actual_whole_radiation_mixed_Riesz_inner_uniform_gain
+    (V : ℝ → ℝ) (Z : ℝ → ℂ)
+    {s beta A r J : ℝ}
+    (hs : 1 ≤ s) (hbeta : (1 / 2 : ℝ) < beta)
+    (hr : 0 < r)
+    (hVmeas : Measurable V) (hZmeas : Measurable Z)
+    (hZ : ∀ rho : ℝ, 0 < rho →
+      ‖Z rho‖ ≤ A * s ^ (-beta))
+    (hEnvelope : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedEnvelope V Z rho) (Ioi (0 : ℝ)))
+    (hEnvelopeBound :
+      (∫ rho in Ioi (0 : ℝ),
+        rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedEnvelope V Z rho) ≤ r * J) :
+    0 < 2 * beta - 1 ∧
+      IntegrableOn
+        (fun rho => rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedHigher V Z rho) (Ioi (0 : ℝ)) ∧
+      |radialHartreePotential
+        (actualWholeRadiationMixedHigher V Z) r| ≤
+          (2 * Real.pi * hartreeKappa * A ^ 2 * J) *
+            s ^ (-2 * beta) := by
+  have hres := actual_whole_radiation_mixed_Riesz_twoBeta_gain
+    V Z hs hbeta hr hVmeas hZmeas hZ hEnvelope hEnvelopeBound
+  refine ⟨hres.1, hres.2.1, ?_⟩
+  calc
+    _ ≤ (2 * Real.pi * hartreeKappa / r * A ^ 2 * (r * J)) *
+        s ^ (-2 * beta) := hres.2.2
+    _ = (2 * Real.pi * hartreeKappa * A ^ 2 * J) *
+        s ^ (-2 * beta) := by
+      field_simp [ne_of_gt hr]
+      ring
+
+/-- Genuine contribution of the nonlinear mixed-density Riesz source to
+the local complex Hartree PDE term. This is the *actual physical cubic
+multiplier*, and the resulting bound is uniform in the inner radius
+under the displayed r-normalized weighted envelope hypothesis. -/
+theorem actual_whole_radiation_mixed_Riesz_cubic_source_gain
+    (V : ℝ → ℝ) (Z : ℝ → ℂ)
+    {s beta A M r J : ℝ}
+    (hs : 1 ≤ s) (hbeta : (1 / 2 : ℝ) < beta)
+    (hr : 0 < r) (hA : 0 ≤ A) (hM : 0 ≤ M)
+    (hVmeas : Measurable V) (hZmeas : Measurable Z)
+    (hVr : |V r| ≤ M)
+    (hZ : ∀ rho : ℝ, 0 < rho →
+      ‖Z rho‖ ≤ A * s ^ (-beta))
+    (hEnvelope : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualWholeRadiationMixedEnvelope V Z rho) (Ioi (0 : ℝ)))
+    (hEnvelopeBound :
+      (∫ rho in Ioi (0 : ℝ),
+        rho * hartreeRadialLog r rho *
+          actualWholeRadiationMixedEnvelope V Z rho) ≤ r * J) :
+    ‖(radialHartreePotential
+        (actualWholeRadiationMixedHigher V Z) r : ℂ) *
+        actualWholeRadiationLocalCubic
+          (fun rho => (V rho : ℂ) + Z rho) r‖ ≤
+      (2 * Real.pi * hartreeKappa * A ^ 2 * J *
+        (M + A) ^ 3) * s ^ (-2 * beta) := by
+  have hRiesz := actual_whole_radiation_mixed_Riesz_inner_uniform_gain
+    V Z hs hbeta hr hVmeas hZmeas hZ hEnvelope hEnvelopeBound
+  have hpot := hRiesz.2.2
+  have hpow : s ^ (-beta) ≤ (1 : ℝ) := by
+    have hle : -beta ≤ (0 : ℝ) := by linarith
+    simpa using Real.rpow_le_rpow_of_exponent_le hs hle
+  have hZr : ‖Z r‖ ≤ A := by
+    calc
+      ‖Z r‖ ≤ A * s ^ (-beta) := hZ r hr
+      _ ≤ A * 1 := mul_le_mul_of_nonneg_left hpow hA
+      _ = A := by ring
+  have hVrNorm : ‖(V r : ℂ)‖ ≤ M := by
+    simpa only [Complex.norm_real, Real.norm_eq_abs] using hVr
+  have hsum : ‖(V r : ℂ) + Z r‖ ≤ M + A :=
+    (norm_add_le _ _).trans (add_le_add hVrNorm hZr)
+  have hloc : ‖actualWholeRadiationLocalCubic
+        (fun rho => (V rho : ℂ) + Z rho) r‖ ≤
+      (M + A) ^ 3 := by
+    have hident : ‖actualWholeRadiationLocalCubic
+        (fun rho => (V rho : ℂ) + Z rho) r‖ =
+        ‖(V r : ℂ) + Z r‖ ^ 3 := by
+      unfold actualWholeRadiationLocalCubic
+      rw [norm_mul, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_nonneg (sq_nonneg _)]
+      ring
+    rw [hident]
+    exact pow_le_pow_left₀ (norm_nonneg _) hsum 3
+  have hpr : 0 ≤ (2 * Real.pi * hartreeKappa * A ^ 2 * J) *
+      s ^ (-2 * beta) :=
+    (abs_nonneg _).trans hpot
+  calc
+    _ = |radialHartreePotential
+          (actualWholeRadiationMixedHigher V Z) r| *
+        ‖actualWholeRadiationLocalCubic
+            (fun rho => (V rho : ℂ) + Z rho) r‖ := by
+        rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    _ ≤ ((2 * Real.pi * hartreeKappa * A ^ 2 * J) *
+          s ^ (-2 * beta)) * (M + A) ^ 3 :=
+      mul_le_mul hpot hloc (norm_nonneg _) hpr
+    _ = (2 * Real.pi * hartreeKappa * A ^ 2 * J *
+          (M + A) ^ 3) * s ^ (-2 * beta) := by
+      ring
+
 end HBL.TypeIIDynamicSelection
