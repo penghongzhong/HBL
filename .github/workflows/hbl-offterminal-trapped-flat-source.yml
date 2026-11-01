@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-offterminal-trapped-flat-source.yml'
       - 'HBL/TypeIIDynamicSelection/ActualTrappedFlatSourceGain*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualRadialSpatialFlatness*.lean'
   workflow_dispatch:
 permissions:
   contents: read
