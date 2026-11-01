@@ -1,0 +1,15 @@
+import HBL.TypeIIDynamicSelection.ActualMovingRadiationPartition
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_true_radiation_partition_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_true_radiation_partition_exact
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_true_remote_radiation_zero_on_moving_core
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_true_remote_radiation_zero_on_moving_core
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_whole_inner_eventually_eq
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_whole_inner_eventually_eq
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_true_moving_remote_residual_is_nonlinear
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_true_moving_remote_residual_is_nonlinear
