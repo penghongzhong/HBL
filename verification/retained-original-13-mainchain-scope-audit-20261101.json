@@ -191,5 +191,46 @@
     "The separate unnumbered and R-numbered auxiliary environments do not change the 9/13 core numerator or denominator.",
     "The older 2026-10-27 manuscript previously contained incorrect prose declaring 2.12 and 2.13 closed; private reconciled revision explicitly corrects those claims.",
     "Revised manuscript is kept private and is NOT uploaded to public HBL GitHub; the public file records only scope and hashes."
-  ]
+  ],
+  "latest_strict_bearing_advance": {
+    "source_commit": "7c5bd35d67604499b54f6b7e9b4ddd80a10731c1",
+    "run_id": 41270832876,
+    "build_jobs": 4177,
+    "build_status": "completed_success",
+    "trust_zero": true,
+    "warning_as_error": true,
+    "transitive_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "new_declarations": [
+      "actual_real_smooth_radial_Hartree_moment_flux_zero",
+      "actual_one_orbit_terminal_Hartree_moment_flux_zero",
+      "actual_one_orbit_terminal_Hartree_core_velocity_zero",
+      "actual_one_orbit_terminal_Hartree_core_time_derivative_zero",
+      "actual_one_orbit_terminal_Hartree_physical_moment_deriv_zero"
+    ],
+    "prerequisite_strict_run": {
+      "run_id": 41270182458,
+      "build_jobs": 4175,
+      "status": "completed_success",
+      "strict_declarations": 6
+    },
+    "mathematical_results": [
+      "Concrete real C-infinity annular terminal radiation is zero for r<=1/4 and r>=4, equals 1 on 1/2<=r<=2, has strictly positive physical 3D inverse-square quartic Hartree moment.",
+      "For a genuine regular radial Hartree flow with explicit strong PDE/dominated-differentiation hypotheses, its moment is positive on a sufficiently short terminal interval.",
+      "The physical quartic moment FIRST TIME DERIVATIVE is zero at this real terminal datum, from the actual radial Hartree PDE.",
+      "The true radiation first time jet vanishes for all fixed positive 0<r<1/4 at terminal time."
+    ],
+    "remaining": [
+      "Realize the concrete terminal datum in small H^L via physical radial Sobolev lift and scalar amplitude scaling.",
+      "Upgrade pointwise zero first time jet to uniform moving-core high-order radiation flatness.",
+      "Match 4*V_c^3*Re Z mixed genuine Hartree nonlocal density through same physical H-plus/minus Fredholm, origin Kummer and exterior inverses.",
+      "Prove all generated PDE source weights positive; then construct genuine finite profile, energy matching and dynamically selected Type II solution."
+    ],
+    "newly_accepted_original_manuscript_environments": 0,
+    "retained_scope": "9/13",
+    "historical_scope": "9/21"
+  }
 }

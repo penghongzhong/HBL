@@ -370,3 +370,14 @@ every other regenerated source-order gain remain open.
 unchanged.** The optional revised 9/20 count is only deletion of the
 unneeded old C¹ initial-data graph environment. Main existence and
 dynamically selected Type II blowup theorem remain OPEN.
+
+
+## 2026-11-01 — Explicit one-orbit radiation, positive moment, and zero Hartree PDE first jets
+
+Strict physical-datum check: GitHub Actions #41270182458, 4175/4175 Lake jobs success, six audited declarations. The explicitly constructed real C-infinity annular terminal radiation g(r)=chi(4r)(1-chi(r/2)) has positive finite genuine 3D inverse-square Hartree quartic moment and vanishes for r<=1/4; under explicit genuine radial Hartree PDE/dominated time differentiation conditions the moment stays >m0[g]/2 near terminal T.
+
+Strict physical source check: GitHub Actions #41270832876, source 7c5bd35d67604499b54f6b7e9b4ddd80a10731c1, 4177/4177 Lake jobs success. Five new kernel/type/axiom-audited original-2.12 bearing declarations prove the genuine real radial Hartree moment flux at g is exactly zero, the first moment time derivative m0'[z_g](T)=0, and the actual PDE first radiation time jet z_t(T,r)=0 for every 0<r<1/4. All transitive axioms only propext, Classical.choice, Quot.sound; no sorry or new axioms.
+
+Analytic caveats: These source-level theorems do not construct a small-H^L radial Sobolev realization or automatically derive all PDE/dominated source hypotheses from the cited local theory. First-time jet flatness is pointwise, NOT yet a uniform moving-annulus higher-jet norm estimate. The linear mixed Hartree Riesz source 4*V_c^3*Re(Z) still lacks simultaneous source-faithful H+/- Fredholm, Kummer, and remote matching.
+
+Current retained original 13-environment main chain: 9/13 (69.23%). Historical 21-item ledger: 9/21 (42.86%). Earlier planning 9/20 scope is superseded by the reconciled 13-environment manuscript. Newly accepted complete original environments this round: ZERO. Main Hartree Type II blowup and its emergent speed remain OPEN.
