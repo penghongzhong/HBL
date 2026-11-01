@@ -68,3 +68,24 @@ The still missing mathematical proof (not a syntax / build issue) must:
 No `sorry`, `admit`, added `axiom`, or replacement of a
 target PDE source by an arbitrary abstract `RegionalSolver`.
 Exact Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5.
+
+
+## 2026-11-01 strict successes, unified branch, and next original 2.12 duties
+
+Strict SUCCESS (pinned Lean 4.35.0-rc3, Mathlib a98628e16; full types and transitive axioms checked):
+- Full physical Hartree interaction centre: https://github.com/penghongzhong/HBL/actions/runs/41299260432
+- True terminal PDE monopole drift and full moving-cutoff profile time jet: https://github.com/penghongzhong/HBL/actions/runs/41299604958
+- Genuine complete mixed-density L2 + weighted Fredholm quantitative source: https://github.com/penghongzhong/HBL/actions/runs/41296974363
+- Actual H+/- affine-charge and half-order compatible data: https://github.com/penghongzhong/HBL/actions/runs/41287847421 and https://github.com/penghongzhong/HBL/actions/runs/41288081743
+
+The first two SUCCESS source/audit pairs were merged verbatim into hbl-oneorbit-physical-source-joined-20261101. The closed PDE identity c_s=-b*c is valid on the chosen terminal time slice, not on an entire interval.
+
+New pending strict physical source drafts (do NOT count without successful CI):
+- hbl-oneorbit-full-potential-core-20261101: full actual self+mixed Hartree Riesz potential and positive core defect; https://github.com/penghongzhong/HBL/actions/runs/41301152580
+- hbl-oneorbit-second-time-jet-20261101: genuine radial Hartree core second time jet under visible potential-time and mixed-derivative regularity; https://github.com/penghongzhong/HBL/actions/runs/41301548781
+
+Formal PDE strategy: a smooth annular terminal datum has vanishing time jets on the strict inner core by induction: the Laplacian acts on a previously zero jet, while each time-differentiated nonlocal Hartree term retains a local cubic factor or its derivatives. Turning this into uniform moving-core smallness still requires real high-regularity estimates, uniform Taylor remainder and the derived physical clock. No off-terminal compact-support hypothesis is valid.
+
+The existing generalized-Hartree scattering code pool in penghongzhong/open-HE gives useful exact Duhamel source coherence, fixed-point, and interval-gluing patterns, but not an automatic proof of HBL high-regularity weighted persistence or Type II dynamical modulation. Model and exponent matching must be proved.
+
+ORIGINAL ACCEPTANCE REMAINS 9/13 (69.23%), historical 9/21. No additional original manuscript environment is accepted by auxiliary source progress. Old 2.12 still needs one physical off-terminal residual, both H+/- projections, Kummer/remote overlap, moving cutoff commutators, and each true positive generated-order gain without preset rate.
