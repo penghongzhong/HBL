@@ -37,10 +37,10 @@ open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 /-- A strictly positive original flat-source gain arising from the
 moving spatial radius and the actual modulation trapping window. -/
 theorem actual_Hartree_flat_gain_pos_of_trap
-    (beta rho : ℝ) (hbeta : 1 / 2 < beta)
-    (hrho : 0 < rho) (hroom : rho < (5 * beta - 2) / 4) :
+    (beta rho : ℝ) (_hbeta : 1 / 2 < beta)
+    (_hrho : 0 < rho) (hroom : rho < (5 * beta - 2) / 4) :
     0 < 5 * beta / 2 - 2 * rho - 1 := by
-  linarith
+  linarith only [hroom]
 
 /-- The exact scalar power comparison needed when a genuine spatial
 O(ell^(5/2) R²) source is inserted into a trapped (not selected)
@@ -58,7 +58,7 @@ theorem actual_Hartree_flat_spacetime_power_from_trap
     calc
       ell ^ 2 * Real.sqrt ell =
           ell ^ (2 : ℝ) * ell ^ (1 / (2 : ℝ)) := by
-            rw [Real.sqrt_eq_rpow, Real.rpow_natCast]
+            simpa only [Real.sqrt_eq_rpow]
       _ = ell ^ ((5 : ℝ) / 2) := by
         rw [← Real.rpow_add hell]
         congr 1
