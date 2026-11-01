@@ -1,0 +1,316 @@
+# Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
+# Fixed pointwise function-multiplication rewrite in exact mu_s drift identity.
+# Exact core complex remote field beta-reduction corrected in nonlocal source match.
+# Prove complete core residual cancellation of time, spatial and scaling operators.
+# Physical mass-mismatch add-le orientation and cutoff linter repaired.
+# Correct exact real-norm scaling of full-radiation Hartree slow monopole coefficient.
+# Whole-radiation slow coefficient derivative: corrected product algebra and event order.
+# Correct moment-product function reassociation in exact physical c_g derivative.
+# Align complex coercions in exact whole-radiation source cubic difference.
+# Strict linter correction for actual whole radiation Hartree cubic matching.
+name: HBL one-orbit linear mixed Hartree charge strict audit
+on:
+  push:
+    branches: [hbl-oneorbit-linear-mixed-20261101]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/**'
+      - '.github/workflows/hbl-oneorbit-linear-mixed.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hbl-oneorbit-linear-mixed-20261101
+  cancel-in-progress: true
+
+jobs:
+  strict-origin-green:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact Lean compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-typeii-dynamic-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve exact pinned dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Prefer full pinned Mathlib precompiled cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if timeout 120s lake exe cache get > evidence/full-mathlib-cache.log 2>&1; then
+            echo "Full Mathlib cache restored"
+          else
+            echo "Full Mathlib cache unavailable or timed out; use exact pinned source plus restored project cache"
+          fi
+      - name: Restore verified base project cache when available
+        id: hbl_project_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Strict build and complete exported type/axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,re
+          for file in pathlib.Path('HBL/TypeIIDynamicSelection').glob('*.lean'):
+            src=re.sub(r'/\-.*?\-/','',file.read_text(),flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),file
+          PY
+          lake build HBL.TypeIIDynamicSelection.ClockIdentities HBL.TypeIIDynamicSelection.ClockAudit HBL.TypeIIDynamicSelection.MonopoleSourceTerminal HBL.TypeIIDynamicSelection.MonopoleSourceAudit HBL.TypeIIDynamicSelection.MonopoleSelectedRate HBL.TypeIIDynamicSelection.MonopoleSelectedRateAudit HBL.TypeIIDynamicSelection.ClockDrift HBL.TypeIIDynamicSelection.ClockDriftAudit HBL.TypeIIDynamicSelection.ExteriorHartreeMatch HBL.TypeIIDynamicSelection.ExteriorHartreeMatchAudit HBL.TypeIIDynamicSelection.RemoteDensityInteraction HBL.TypeIIDynamicSelection.RemoteDensityInteractionAudit HBL.TypeIIDynamicSelection.RemoteComplexInteraction HBL.TypeIIDynamicSelection.RemoteComplexInteractionAudit HBL.TypeIIDynamicSelection.PhysicalResidualMatch HBL.TypeIIDynamicSelection.PhysicalResidualMatchAudit HBL.TypeIIDynamicSelection.ExteriorSpatialGain HBL.TypeIIDynamicSelection.ExteriorSpatialGainAudit HBL.TypeIIDynamicSelection.PhysicalSourceMismatch HBL.TypeIIDynamicSelection.PhysicalSourceMismatchAudit HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGain HBL.TypeIIDynamicSelection.ExteriorQuadraticSlowGainAudit HBL.TypeIIDynamicSelection.ActualSlowMonopoleGain HBL.TypeIIDynamicSelection.ActualSlowMonopoleGainAudit HBL.TypeIIDynamicSelection.ActualRegionalBridge HBL.TypeIIDynamicSelection.ActualRegionalBridgeAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteResidual HBL.TypeIIDynamicSelection.ActualMovingRemoteResidualAudit HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSource HBL.TypeIIDynamicSelection.ActualMovingRemoteFullSourceAudit HBL.TypeIIDynamicSelection.ActualHartreeCoreSource HBL.TypeIIDynamicSelection.ActualHartreeCoreSourceAudit HBL.TypeIIDynamicSelection.ActualRadiationCenter HBL.TypeIIDynamicSelection.ActualRadiationCenterAudit HBL.TypeIIDynamicSelection.ActualRadiationScaling HBL.TypeIIDynamicSelection.ActualRadiationScalingAudit HBL.TypeIIDynamicSelection.ActualRadiationMomentDynamics HBL.TypeIIDynamicSelection.ActualRadiationMomentDynamicsAudit HBL.TypeIIDynamicSelection.ActualWholeRadiationSelfCubic HBL.TypeIIDynamicSelection.ActualWholeRadiationSelfCubicAudit HBL.TypeIIDynamicSelection.ActualMixedQuarticGain HBL.TypeIIDynamicSelection.ActualMixedQuarticGainAudit HBL.TypeIIDynamicSelection.ActualMixedQuarticCenterGain HBL.TypeIIDynamicSelection.ActualMixedQuarticCenterGainAudit HBL.TypeIIDynamicSelection.ActualMixedQuarticRieszGain HBL.TypeIIDynamicSelection.ActualMixedQuarticRieszGainAudit HBL.TypeIIDynamicSelection.ActualPhysicalQuadraticRiesz HBL.TypeIIDynamicSelection.ActualPhysicalQuadraticRieszAudit HBL.TypeIIDynamicSelection.ActualOneLayerPDEResidual HBL.TypeIIDynamicSelection.ActualOneLayerPDEResidualAudit HBL.TypeIIDynamicSelection.ActualOneLayerParameterTangents HBL.TypeIIDynamicSelection.ActualOneLayerParameterTangentsAudit HBL.TypeIIDynamicSelection.ActualOneLayerKummerModulation HBL.TypeIIDynamicSelection.ActualOneLayerKummerModulationAudit HBL.TypeIIDynamicSelection.ActualPhysicalMixedRieszRow HBL.TypeIIDynamicSelection.ActualPhysicalMixedRieszRowAudit HBL.TypeIIDynamicSelection.ActualRadiation3DMoment HBL.TypeIIDynamicSelection.ActualRadiation3DMomentAudit HBL.TypeIIDynamicSelection.ActualJointContraction HBL.TypeIIDynamicSelection.ActualJointContractionAudit HBL.TypeIIDynamicSelection.ActualMomentCutoffTransport HBL.TypeIIDynamicSelection.ActualMomentCutoffTransportAudit HBL.TypeIIDynamicSelection.ActualMomentProfileDynamics HBL.TypeIIDynamicSelection.ActualMomentProfileDynamicsAudit HBL.TypeIIDynamicSelection.ActualMomentCoreResidual HBL.TypeIIDynamicSelection.ActualMomentCoreResidualAudit HBL.TypeIIDynamicSelection.ActualMomentDerivativeFromFlow HBL.TypeIIDynamicSelection.ActualMomentDerivativeFromFlowAudit HBL.TypeIIDynamicSelection.ActualMomentPDEFlux HBL.TypeIIDynamicSelection.ActualMomentPDEFluxAudit HBL.TypeIIDynamicSelection.ActualMomentTransportGain HBL.TypeIIDynamicSelection.ActualMomentTransportGainAudit HBL.TypeIIDynamicSelection.ActualCutoffUniformTransport HBL.TypeIIDynamicSelection.ActualCutoffUniformTransportAudit HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRadiation HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRadiationAudit HBL.TypeIIDynamicSelection.ActualOneOrbitLinearMixedGain HBL.TypeIIDynamicSelection.ActualOneOrbitLinearMixedGainAudit HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalPDEJets HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalPDEJetsAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockIdentities.lean 2>&1 | tee evidence/strict-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceTerminal.lean 2>&1 | tee evidence/strict-hartree-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSourceAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSelectedRate.lean 2>&1 | tee evidence/strict-monopole-rate.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/MonopoleSelectedRateAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockDrift.lean 2>&1 | tee evidence/strict-clock-drift.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ClockDriftAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorHartreeMatch.lean 2>&1 | tee evidence/strict-exterior-hartree-match.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorHartreeMatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteDensityInteraction.lean 2>&1 | tee evidence/strict-remote-density.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteDensityInteractionAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteComplexInteraction.lean 2>&1 | tee evidence/strict-remote-complex.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/RemoteComplexInteractionAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalResidualMatch.lean 2>&1 | tee evidence/strict-full-physical-residual.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalResidualMatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorSpatialGain.lean 2>&1 | tee evidence/strict-exterior-L1-spatial-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorSpatialGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalSourceMismatch.lean 2>&1 | tee evidence/strict-physical-mismatch.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/PhysicalSourceMismatchAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGain.lean 2>&1 | tee evidence/strict-cutoff-csquare.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ExteriorQuadraticSlowGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualSlowMonopoleGain.lean 2>&1 | tee evidence/strict-slow-monopole-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualSlowMonopoleGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRegionalBridge.lean 2>&1 | tee evidence/strict-actual-regional-bridge.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRegionalBridgeAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMovingRemoteResidual.lean 2>&1 | tee evidence/strict-moving-remote-residual.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMovingRemoteResidualAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMovingRemoteFullSource.lean 2>&1 | tee evidence/strict-full-moving-Hartree-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMovingRemoteFullSourceAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeCoreSource.lean 2>&1 | tee evidence/strict-physical-core-source.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeCoreSourceAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationCenter.lean 2>&1 | tee evidence/strict-actual-whole-radiation-center.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationCenterAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationScaling.lean 2>&1 | tee evidence/strict-radiation-scaling.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationScalingAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationMomentDynamics.lean 2>&1 | tee evidence/strict-physical-moment-dynamics.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiationMomentDynamicsAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualWholeRadiationSelfCubic.lean 2>&1 | tee evidence/strict-whole-radiation-self-cubic.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualWholeRadiationSelfCubicAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticGain.lean 2>&1 | tee evidence/strict-mixed-quartic-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticCenterGain.lean 2>&1 | tee evidence/strict-mixed-center-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticCenterGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticRieszGain.lean 2>&1 | tee evidence/strict-mixed-Riesz-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMixedQuarticRieszGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualPhysicalQuadraticRiesz.lean 2>&1 | tee evidence/strict-physical-quadratic-Riesz.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualPhysicalQuadraticRieszAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerPDEResidual.lean 2>&1 | tee evidence/strict-original-one-layer-physical-residual.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerPDEResidualAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerParameterTangents.lean 2>&1 | tee evidence/strict-original-one-layer-parameter-tangents.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerParameterTangentsAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerKummerModulation.lean 2>&1 | tee evidence/strict-original-one-layer-Kummer-parameter-velocity.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneLayerKummerModulationAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualJointContraction.lean 2>&1 | tee evidence/strict-revised-joint-contraction.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualJointContractionAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentCutoffTransport.lean 2>&1 | tee evidence/strict-actual-moment-cutoff.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentCutoffTransportAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentProfileDynamics.lean 2>&1 | tee evidence/strict-actual-moment-profile.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentProfileDynamicsAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentCoreResidual.lean 2>&1 | tee evidence/strict-actual-moment-core-residual.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentCoreResidualAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentDerivativeFromFlow.lean 2>&1 | tee evidence/strict-radiation-moment-derivative.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentDerivativeFromFlowAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentPDEFlux.lean 2>&1 | tee evidence/strict-Hartree-threeD-moment-PDE-flux.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentPDEFluxAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentTransportGain.lean 2>&1 | tee evidence/strict-original-Hartree-moment-transport-gain.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualMomentTransportGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualCutoffUniformTransport.lean 2>&1 | tee evidence/strict-actual-uniform-cutoff-transport.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualCutoffUniformTransportAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalRadiation.lean 2>&1 | tee evidence/strict-original-one-orbit-flat-radiation.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalRadiationAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalPDEJets.lean 2>&1 | tee evidence/strict-one-orbit-terminal-PDE-jets.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalPDEJetsAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualPhysicalMixedRieszRow.lean 2>&1 | tee evidence/strict-actual-physical-mixed-Riesz-row.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualPhysicalMixedRieszRowAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiation3DMoment.lean 2>&1 | tee evidence/strict-actual-threeD-moment.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualRadiation3DMomentAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          ! grep -q sorryAx evidence/types-and-axioms.txt
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          names=['dynamicalClock_hasDerivAt','dynamical_rate_identity',
+             'selected_rate_of_dynamical_mu_limit',
+             'actual_monopole_source_selects_terminal_coordinates',
+             'actual_monopole_source_selects_instantaneous_rate',
+             'dynamicalMu_hasDerivAt',
+             'monopoleEffective_minus_actualExterior_exact',
+             'monopoleEffective_actualExterior_match_norm_le',
+             'monopoleEffective_actualExterior_residual_diff_norm_le',
+             'radialRemoteQuarticDifference_vanishes_in_core',
+             'actual_radialHartree_remote_quartic_source_exact',
+             'actual_radialHartree_remote_center_error_le',
+             'remoteComplexQuarticDifference_measurable',
+             'remoteComplexQuarticDifference_vanishes_in_core',
+             'actual_complexHartree_remote_quartic_source_exact',
+             'actual_complexHartree_remote_center_error_le',
+             'actual_full_radial_residual_remote_eq_nonlin',
+             'actual_full_radial_residual_remote_eq_exterior_increment',
+             'actual_full_radial_residual_remote_match_norm_le',
+             'actual_exteriorHartree_center_gap_L1_le',
+             'actual_fullHartree_effective_mismatch_norm_le',
+             'actual_monopole_radius_inverse_square',
+             'actual_exteriorHartree_gap_quadratic_in_c',
+             'actual_exteriorHartree_gap_quadratic_fixed_core',
+             'actual_exteriorHartree_slow_monopole_gain',
+             'moving_remote_cutoff_eventually_zero',
+             'actual_full_radial_residual_moving_remote_eq_nonlin',
+             'actual_moving_remote_full_Hartree_source_exact',
+             'actual_moving_remote_mass_mismatch_bound',
+             'actual_physical_Hartree_first_layer_core_source_bound',
+             'actualRadiationCenter_nonneg',
+             'actual_radiation_center_quadratic_bound',
+             'actual_radiation_center_bubble_cubic_error',
+             'rescalePhysicalRadiation_quartic',
+             'actualRadiationCenter_rescaling',
+             'rescalePhysicalRadiation_radialL2_invariant',
+             'actualRadiationCenter_equals_physical_slow_coefficient',
+             'actual_physical_radiation_slow_coefficient_hasDerivAt',
+             'actual_whole_radiation_self_cubic_exact',
+             'actual_whole_radiation_self_cubic_core_bound',
+             'actual_whole_radiation_mixed_center_exact',
+             'actual_whole_radiation_mixed_potential_exact',
+             'actual_whole_radiation_complete_Hartree_nonlinearity_difference',
+             'actual_whole_radiation_mixed_linear_higher_exact',
+             'actual_whole_radiation_mixed_higher_abs_le',
+             'actual_whole_radiation_mixed_higher_twoBeta_gain',
+             'actual_whole_radiation_mixed_center_uniformMass_twoBeta_gain',
+             'actual_whole_radiation_mixed_higher_weighted_gain',
+             'actual_whole_radiation_mixed_Riesz_twoBeta_gain',
+             'actual_whole_radiation_mixed_Riesz_inner_uniform_gain',
+             'actual_whole_radiation_mixed_Riesz_cubic_source_gain',
+             'physicalRadiation_rescale_quadratic',
+             'physicalRadiation_hartree_log_scale',
+             'physicalRadiation_quadratic_Riesz_row_scale',
+             'physicalRadiation_quadratic_Riesz_scale',
+             'physicalRadiation_quadratic_Riesz_uniform_of_profile',
+             'physicalRadiation_quadratic_Riesz_row_uniform_of_profile',
+             'physicalRadiation_quadratic_Riesz_row_integrable_of_profile',
+             'actual_one_layer_full_renormalized_Hartree_PDE_source',
+             'actual_phased_moving_monopole_two_parameter_tangent',
+             'actual_phased_moving_monopole_Hartree_PDE_tangent',
+             'actual_Kummer_frozen_coefficient_two_speed',
+             'actual_Kummer_inverse_two_parameter_speed',
+             'physical_bubble_mixed_envelope_uniform_row',
+             'physical_mixed_higher_Riesz_linear_length',
+             'physical_bubble_mixed_Riesz_linear_length',
+             'physical_bubble_mixed_Riesz_linear_length_from_weighted_decay',
+             'actual_whole_radiation_mixed_center_by_degree',
+             'actual_whole_radiation_mixed_potential_by_degree',
+             'actual_whole_radiation_nonlinearity_source_by_degree',
+             'actual_physical_threeD_radiation_slow_coefficient_hasDerivAt',
+             'actual_physical_threeD_whole_radiation_self_cubic_core_bound',
+             'actual_physical_inverse_square_radial_reduction',
+             'actual_whole_radiation_center_eq_physical_threeD_moment',
+             'dynamically_selected_rate_super_self_similar',
+             'actual_weighted_joint_ball_contraction',
+             'actualMomentInnerCutoff_space_hasDerivAt',
+             'actualMomentInnerCutoff_time_hasDerivAt',
+             'actualMomentInnerCutoff_material_derivative',
+             'actualMomentInnerCutoff_eq_original_absolute',
+             'actualMomentInnerCutoff_original_monopole_profile',
+             'actual_moment_monopole_profile_threeD_hasDerivAt',
+             'actual_moment_monopole_core_threeD_hasDerivAt',
+             'actual_threeD_moment_monopole_core_effective_residual_quadratic',
+             'actual_threeD_moment_monopole_self_Hartree_source_quadratic',
+             'actual_radial_quartic_hasDerivAt',
+             'actual_physical_threeD_moment_hasDerivAt_of_dominated_radiation',
+             'actual_Hartree_real_potential_quartic_phase_cancellation',
+             'actual_radial_Hartree_nonlinearity_phase_cancel',
+             'actual_radial_Hartree_PDE_quartic_velocity_flux',
+             'actual_physical_threeD_Hartree_radiation_moment_PDE_flux',
+             'actualMomentInnerCutoff_transport_length_gain',
+             'actual_Hartree_PDE_cutoff_transport_length_gain',
+             'exists_actual_fixed_cutoff_uniform_deriv_bound',
+             'actual_moment_cutoff_uniform_all_r_transport_gain',
+             'actual_Hartree_PDE_cutoff_uniform_all_r_length_gain',
+             'actual_one_orbit_terminal_bump_smooth',
+             'actual_one_orbit_terminal_radiation_positive_moment',
+             'actual_one_orbit_Hartree_terminal_positive_moment_window',
+             'actual_one_orbit_terminal_mixed_linear_density_seven_halves_gain',
+             'actual_one_orbit_terminal_Hartree_moment_flux_zero',
+             'actual_one_orbit_terminal_Hartree_core_velocity_zero',
+             'actual_one_orbit_terminal_Hartree_core_time_derivative_zero',
+             'actual_one_orbit_terminal_Hartree_physical_moment_deriv_zero']
+          for name in names:
+            fullname='HBL.TypeIIDynamicSelection.'+name
+            assert fullname in s, 'Missing checked type: '+fullname
+            assert ("'"+fullname+"' depends on axioms:") in s, 'Missing transitive axioms: '+fullname
+          fullname='HBL.Profile.OneLayerPhysical.actual_Hartree_inner_Kummer_regional_bridge'
+          assert fullname in s, 'Missing actual one-layer regional type'
+          assert ("'"+fullname+"' depends on axioms:") in s, 'Missing actual regional bridge axiom audit'
+          extras=set()
+          for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
+            extras.update(x.strip() for x in m.group(1).split(',') if x.strip())
+          assert extras <= {'propext','Classical.choice','Quot.sound'},extras
+          print('PASS: physical 3D inverse-square source equals 4pi radial moment, exact c_g and true radiation dynamics; original one-layer 2.12 remains OPEN.')
+          PY
+      - name: Preserve source hashes and full diagnostics
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/*.lean > evidence/dynamical-source-hashes.txt
+      - name: Save source-indexed project build cache
+        if: always() && steps.hbl_project_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/*.lean') }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-typeii-dynamic-evidence
+          path: evidence
+          retention-days: 14
