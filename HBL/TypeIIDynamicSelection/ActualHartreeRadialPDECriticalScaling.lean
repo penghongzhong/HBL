@@ -74,8 +74,8 @@ theorem actual_Hartree_radial_potential_scale_quartic_density
         dsimp [G]
         rw [actual_Hartree_radial_log_scale_invariant ell r rho hell]
         ring
-      _ = ell * (∫ rho in Ioi (0 : ℝ), G (ell * rho)) :=
-        integral_const_mul
+      _ = ell * (∫ rho in Ioi (0 : ℝ), G (ell * rho)) := by
+        rw [integral_const_mul]
       _ = ell * (ell⁻¹ * ∫ rho in Ioi (0 : ℝ), G rho) := by rw [hchange]
       _ = ∫ rho in Ioi (0 : ℝ), G rho := by
         field_simp [hell.ne']
@@ -90,7 +90,6 @@ theorem actual_Hartree_radial_potential_scale_quartic_density
       ell * ((2 * Real.pi * hartreeKappa / (ell * r)) *
         (∫ rho in Ioi (0 : ℝ), G rho))
     field_simp [hell.ne', hr, her]
-    ring
 
 /-- The true complex energy-critical pullback, with its actual
 quartic Riesz density and original normalizing constant, satisfies
