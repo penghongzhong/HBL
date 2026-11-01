@@ -49,7 +49,7 @@ theorem physical_terminal_two_jet_quadratic_time_gain
   have hfirst (x : ℝ) (hx : x ∈ Icc t T) :
       ‖f₁ x‖ ≤ M * (T - t) := by
     have hmean :=
-      (convex_Icc : Convex ℝ (Icc t T)).norm_image_sub_le_of_norm_hasDerivWithin_le
+      (convex_Icc t T).norm_image_sub_le_of_norm_hasDerivWithin_le
         (f := f₁) (f' := f₂)
         (fun y hy => (hf₁ y hy).hasDerivWithinAt) hf₂ hx hT
     have hTx : 0 ≤ T - x := sub_nonneg.mpr hx.2
@@ -60,7 +60,7 @@ theorem physical_terminal_two_jet_quadratic_time_gain
       _ ≤ M * (T - t) :=
         mul_le_mul_of_nonneg_left (sub_le_sub_left hx.1 T) hM
   have hmain :=
-    (convex_Icc : Convex ℝ (Icc t T)).norm_image_sub_le_of_norm_hasDerivWithin_le
+    (convex_Icc t T).norm_image_sub_le_of_norm_hasDerivWithin_le
       (f := f) (f' := f₁) (C := M * (T - t))
       (fun y hy => (hf y hy).hasDerivWithinAt) hfirst ht' hT
   calc
@@ -108,7 +108,7 @@ where ell*r stays in the actual spatial core. No ell(s) decay or
 modulation exponent is imposed. -/
 theorem actual_one_orbit_Hartree_rescaled_core_quadratic_time_gain
     (z zt ztt : ℝ → ℝ → ℂ) (ell t T R M : ℝ)
-    (hell : 0 < ell) (ht : t ≤ T) (hM : 0 ≤ M)
+    (_hell : 0 < ell) (ht : t ≤ T) (hM : 0 ≤ M)
     (hTerminal : z T = actualOneOrbitTerminalRadiation)
     (hPDE : ∀ rho : ℝ, 0 < rho →
       zt T rho = Complex.I *
