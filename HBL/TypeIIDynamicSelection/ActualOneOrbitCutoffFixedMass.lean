@@ -22,6 +22,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Genuine PDE cutoff transport, uniformly normalized by the concrete
 nonzero terminal source g; the current-time moment lower bound is
