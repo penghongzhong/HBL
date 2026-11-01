@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitMovingMonopoleCenter
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_source_support
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_source_support
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_source_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_source_measurable
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_Hartree_center_L1_five_halves_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_mixed_Hartree_center_L1_five_halves_gain
