@@ -102,3 +102,14 @@ ORIGINAL ACCEPTANCE REMAINS 9/13 (69.23%), historical 9/21. No additional origin
 - The actual true-flow high Sobolev-to-radial C2 embedding and strong regularity input, k=1,2 derivatives of phased flat radiation and every a-th time jet, the full PDE H+/- forcing, Kummer/remote gluing and all generated positive weight gains remain open.
 
 **Core original theorem acceptance count STILL 9/13, not 10/13.** Prior strict CI successes count as supporting physical theorems only. Selected blowup exponent remains a derived output and is never imposed.
+
+
+## 2026-11-01 newly STRICT-accepted physical Hartree source batch
+
+- `ActualOneOrbitTrueFlowTimeFlatQuadratic.lean`: actual chosen terminal radial Hartree PDE first jet plus visible C²-in-time bound implies pointwise `‖z(t,r)‖ <= M (T-t)²`, and actual critical rescaling `sqrt(ell)`; strict CI SUCCESS https://github.com/penghongzhong/HBL/actions/runs/41320320599. Exact accepted source + Audit merged.
+- `ActualRadiationSpatialFlatness.lean`: **arbitrary nonterminal time** radial Hartree C² representative with regular origin derivative zero implies `‖z(t,r)-z(t,0)‖<=M r²` and actual rescaled source `‖Z_flat(ell,R)‖ <= M ell² sqrt(ell) R²`, from two real Banach-valued MVT applications. Strict CI SUCCESS https://github.com/penghongzhong/HBL/actions/runs/41320369793. Exact source + Audit merged.
+- `ActualPhasedSpatialFlatness.lean`: replaces the centered difference with the **actual** Hartree regular-radiation center cutoff `z(t,0) χ(r)` and complex `e^{-i gamma}` phase; strict CI SUCCESS https://github.com/penghongzhong/HBL/actions/runs/41320434660. Exact source + Audit merged.
+- The actual original PDE-driven terminal second time jet `z_tt(T,r)=0` on 0<r<1/4 was separately strictly accepted and merged: https://github.com/penghongzhong/HBL/actions/runs/41309108489.
+- The algebraic physical moving-core `epsilon_flat=5 beta_minus/2 -2 rho_star -1>0` and actual source time weight `s^(-1-epsilon_flat)` are in a STRICT CI RECHECK (not yet accepted): https://github.com/penghongzhong/HBL/actions/runs/41322045235 and https://github.com/penghongzhong/HBL/actions/runs/41321988733.
+
+**ORIGINAL numerator and denominator remain 9/13.** The three new physical proofs do not establish uniform C² bounds for every time jet from the Sobolev local-flow interface, do not jointly identify the two true PDE-projected H+/H- sources, and do not carry the same physical residual through Kummer/remote matching with all generated positive gains. It would be invalid to count original 2.12 as accepted.
