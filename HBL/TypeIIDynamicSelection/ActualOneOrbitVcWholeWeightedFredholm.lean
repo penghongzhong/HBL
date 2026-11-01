@@ -1,4 +1,5 @@
-import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuartic
+import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedCenter
+import HBL.WeightedPhaseAffineSource
 import HBL.MonopoleCoreIntegrability
 import HBL.AffineTailLemmaClosed
 import Mathlib.MeasureTheory.Function.LpSpace.Indicator
@@ -48,22 +49,8 @@ theorem actual_one_orbit_Vc_whole_mixed_in_real_weighted_Fredholm
     dsimp [M]
     have hb := actual_one_orbit_moving_envelope_pos
     positivity
-  have hFmeas : Measurable F := by
-    have hv : Measurable (actualOneOrbitMovingMonopole ell) := by
-      unfold actualOneOrbitMovingMonopole
-      exact monopoleMovingCutoffProfile_measurable.comp
-        (measurable_const.prodMk measurable_id)
-    have hg : Measurable actualOneOrbitTerminalRadiation :=
-      (Complex.continuous_ofReal.comp
-        actual_one_orbit_terminal_bump_smooth.continuous).measurable
-    have hz : Measurable
-        (rescalePhysicalRadiation ell actualOneOrbitTerminalRadiation) := by
-      unfold rescalePhysicalRadiation
-      exact measurable_const.mul
-        (hg.comp (measurable_const.mul measurable_id))
-    dsimp [F, actualOneOrbitVcWholeMixedQuartic,
-      actualWholeRadiationMixedQuartic]
-    fun_prop
+  have hFmeas : Measurable F :=
+    actual_one_orbit_Vc_whole_mixed_measurable ell
   have hsupp : Function.support F ⊆ Icc a b := by
     simpa only [F, a, b] using
       actual_one_orbit_Vc_whole_mixed_support ell hell
