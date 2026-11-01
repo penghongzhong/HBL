@@ -1,0 +1,14 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRadiation
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualOneOrbitTerminalBump
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_smooth
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_zero_core
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_one_annulus
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_zero_far
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_radiation_positive_moment
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_smooth
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_zero_core
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_one_annulus
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_bump_zero_far
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_radiation_positive_moment
