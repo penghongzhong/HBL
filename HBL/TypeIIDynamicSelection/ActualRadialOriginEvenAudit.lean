@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualRadialOriginEven
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_even_complex_radial_deriv_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_even_complex_radial_deriv_zero
+#check @HBL.TypeIIDynamicSelection.actual_even_Hartree_offterminal_rescaled_flat_part
+#print axioms HBL.TypeIIDynamicSelection.actual_even_Hartree_offterminal_rescaled_flat_part
