@@ -39,10 +39,10 @@ open HBL.Modulation.Monopole
 /-- The actual pointwise quartic moment velocity of a complex
 physical radial radiation and its true time derivative. -/
 def actualRadialQuarticMomentVelocity (z dz : ℂ) : ℝ :=
-  4 * ‖z‖ ^ 2 * (Complex.conj z * dz).re
+  4 * ‖z‖ ^ 2 * (z.re * dz.re + z.im * dz.im)
 
-/-- The whole complex source is reduced to real/imaginary variables;
-this identity is exact, including at a zero of z. -/
+/-- The full complex quartic velocity is exactly the real-coordinate
+polarization 4 |z|² Re(conj(z) dz), including when z=0. -/
 theorem actual_radial_quartic_velocity_coordinates
     (z dz : ℂ) :
     actualRadialQuarticMomentVelocity z dz =
@@ -50,8 +50,7 @@ theorem actual_radial_quartic_velocity_coordinates
         (z.re * dz.re + z.im * dz.im) := by
   unfold actualRadialQuarticMomentVelocity
   rw [← Complex.normSq_eq_norm_sq z]
-  simp only [Complex.normSq_apply, Complex.mul_re,
-    Complex.conj_re, Complex.conj_im]
+  simp only [Complex.normSq_apply]
   ring
 
 /-- The true pointwise derivative of |z(t,r)|^4.
@@ -76,9 +75,9 @@ theorem actual_radial_quartic_hasDerivAt
         ring
   rw [heq]
   convert hpoly using 1
-  · rfl
-  · rw [actual_radial_quartic_velocity_coordinates]
-    ring
+  rw [actual_radial_quartic_velocity_coordinates]
+  simp only [Pi.add_apply, Pi.pow_apply]
+  ring
 
 /-- The physical 3D Hartree quartic moment derivative is reconstructed
 from the original complex radiation and a uniformly integrable flux
