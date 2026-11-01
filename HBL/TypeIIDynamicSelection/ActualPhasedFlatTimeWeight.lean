@@ -58,7 +58,7 @@ theorem actual_Hartree_flat_spacetime_power_from_trap
     calc
       ell ^ 2 * Real.sqrt ell =
           ell ^ (2 : ℝ) * ell ^ (1 / (2 : ℝ)) := by
-            simpa only [Real.sqrt_eq_rpow]
+            rw [Real.sqrt_eq_rpow]
       _ = ell ^ ((5 : ℝ) / 2) := by
         rw [← Real.rpow_add hell]
         congr 1
