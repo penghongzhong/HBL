@@ -32,13 +32,31 @@
         "Quot.sound"
       ],
       "run_url": "https://github.com/penghongzhong/HBL/actions/runs/41275588884"
+    },
+    "linear_mixed_Riesz_core": {
+      "commit": "835265c551bf7af6404640b55cc13dad8cbba1d3",
+      "run": 41277544285,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "declarations": [
+        "actual_one_orbit_linear_mixed_center_eq_exterior",
+        "actual_one_orbit_linear_mixed_Riesz_eq_exterior",
+        "actual_one_orbit_linear_mixed_Riesz_core_center_error"
+      ],
+      "source_sha": "7fc9b41cd04cdf3abbcb6d899964a6812c4a3c39"
     }
   },
-  "combined_branch_strict_build": "not independently executed; original source nodes retained unchanged",
+  "combined_branch_strict_build": "not yet independently executed for joined sources; exact imported source individually strict-certified",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
-    "prop:one-layer-stage3 genuine complete same-residual two-channel Fredholm/Kummer/remote matching and positive source orders",
+    "Complete original 2.12 requires actual-time three-region Hartree source projection, two threshold charges, Kummer/remote common matching, and all positive generated-order estimates",
     "thm:finite-profile-stage3",
     "prop:global-H1-profile-v3",
     "thm:main dynamically selected PDE Type II orbit"
