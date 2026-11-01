@@ -79,7 +79,7 @@ theorem actual_real_terminal_full_mixed_quartic_first_jet_zero
       0 T := by
   have hReFull : HasDerivAt
       (fun t => ((V : ℂ) + z t).re) dz.re T := by
-    convert ((hasDerivAt_const T V).add hRe) using 1 <;> simp
+    convert ((hasDerivAt_const T V).add hRe) using 1; simp
   have hImFull : HasDerivAt
       (fun t => ((V : ℂ) + z t).im) dz.im T := by
     simpa only [Complex.add_im, Complex.ofReal_im, zero_add] using hIm
