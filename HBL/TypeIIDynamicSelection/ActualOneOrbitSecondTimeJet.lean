@@ -52,8 +52,15 @@ theorem actual_complex_local_cubic_time_derivative_zero
   have hSq : HasDerivAt (fun t => ‖u t‖ ^ 2) 0 T := by
     simpa only [hZero, Complex.zero_re, Complex.zero_im,
       zero_mul, mul_zero, add_zero] using hSqReal
-  have hc := hSq.ofReal_comp.mul hU
-  simpa [Pi.mul_apply, hZero] using hc
+  have hSqComplex :
+      HasDerivAt (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ))
+        (0 : ℂ) T :=
+    hSq.ofReal_comp
+  have hc : HasDerivAt
+      (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ) * u t)
+      ((0 : ℂ) * u T + ((‖u T‖ ^ 2 : ℝ) : ℂ) * du) T := by
+    simpa only [Pi.mul_apply] using hSqComplex.mul hU
+  simpa [hZero] using hc
 
 /-- The genuine radial nonlocal Hartree term, not a local-cubic
 surrogate, has zero first time derivative at any spatial point
