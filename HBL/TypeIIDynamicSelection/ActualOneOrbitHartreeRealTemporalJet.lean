@@ -97,7 +97,11 @@ theorem actual_real_terminal_full_mixed_quartic_first_jet_zero
     hasDerivAt_const T _
   have hMixed := (hFull.sub hConst).sub hZ
   rw [hVFull, hVZ] at hMixed
-  simpa only [Pi.sub_apply] using hMixed
+  change HasDerivAt
+    (fun t => ‖(V : ℂ) + z t‖ ^ 4 -
+      ‖(V : ℂ)‖ ^ 4 - ‖z t‖ ^ 4)
+    (0 - 0 - 0) T at hMixed
+  simpa only [sub_zero] using hMixed
 
 /-- The complete real-linear/quadratic/cubic Hartree mixed density
 has zero FIRST TIME JET at the selected terminal datum along the
