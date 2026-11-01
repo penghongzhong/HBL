@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitLinearMixedCenter
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualOneOrbitTerminalLinearMixedDensity
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_linear_mixed_Hartree_center_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_linear_mixed_Hartree_center_gain
