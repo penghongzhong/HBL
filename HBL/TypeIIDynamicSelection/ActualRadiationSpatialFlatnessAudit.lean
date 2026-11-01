@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualRadiationSpatialFlatness
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_radial_spatial_quadratic_flatness
+#print axioms HBL.TypeIIDynamicSelection.actual_radial_spatial_quadratic_flatness
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flow_spatial_quadratic_flatness
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flow_spatial_quadratic_flatness
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_rescaled_radial_spatial_flatness
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_rescaled_radial_spatial_flatness
