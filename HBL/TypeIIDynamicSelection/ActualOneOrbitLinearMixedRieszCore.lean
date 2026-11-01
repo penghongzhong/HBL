@@ -42,8 +42,7 @@ private theorem integral_Ioi_zero_if_vanishes_below
         apply setIntegral_congr_fun measurableSet_Ioi
         intro x hx
         by_cases hax : a < x
-        · change f x = (Ioi a).indicator f x
-          simp [Set.indicator, hax]
+        · simp [Set.indicator, hax]
         · have hz : f x = 0 := hzero x hx (le_of_not_gt hax)
           simp [Set.indicator_of_notMem (show x ∉ Ioi a by exact hax), hz]
     _ = ∫ x in Ioi (0 : ℝ) ∩ Ioi a, f x :=
