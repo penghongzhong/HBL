@@ -105,6 +105,7 @@ theorem actual_one_layer_PDE_radiation_evolution_cancelled
         actualOneLayerFullHartreeForcing V Z b omega s r := hFull
     _ = actualOneLayerInteractionOnly V Z s r := by
       unfold actualOneLayerFullHartreeForcing actualOneLayerInteractionOnly
+      push_cast
       linear_combination hZ
 
 /-- TRUE real and phase Hartree interactions result from applying the
