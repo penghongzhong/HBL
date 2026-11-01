@@ -84,6 +84,20 @@
         "actual_one_orbit_Vc_mixed_Hartree_center_L1_five_halves_gain"
       ],
       "value": "physical moment-selected Vc real-linear Hartree mixed density: L1 mass ≤15 B^3 length^(5/2), centre ≤60πκ_H B^3 length^(5/2)"
+    },
+    "actual_Vc_whole_mixed_pointwise": {
+      "commit": "80fae125a385eb95b5b3ad02898f98b248e2e6f8",
+      "run": 41279649742,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "fb471b6f408569baaee11f77ae020da849182b45",
+      "declarations": [
+        "actual_one_orbit_terminal_rescaled_norm_le_sqrt",
+        "actual_one_orbit_Vc_whole_mixed_support",
+        "actual_one_orbit_Vc_whole_mixed_pointwise_gain"
+      ],
+      "physics": "Exact full quartic mixed density on actual moment-selected Vc; pointwise 4B^3 ell^3 sqrt ell+6B^2 ell^3+4B ell^2 sqrt ell; leading integral gain 1/2 pending integrated strict audit."
     }
   },
   "combined_branch_strict_build": "individual source declarations strict-passed, newly joined snapshot not independently rebuilt",
