@@ -89,3 +89,16 @@ Formal PDE strategy: a smooth annular terminal datum has vanishing time jets on 
 The existing generalized-Hartree scattering code pool in penghongzhong/open-HE gives useful exact Duhamel source coherence, fixed-point, and interval-gluing patterns, but not an automatic proof of HBL high-regularity weighted persistence or Type II dynamical modulation. Model and exponent matching must be proved.
 
 ORIGINAL ACCEPTANCE REMAINS 9/13 (69.23%), historical 9/21. No additional original manuscript environment is accepted by auxiliary source progress. Old 2.12 still needs one physical off-terminal residual, both H+/- projections, Kummer/remote overlap, moving cutoff commutators, and each true positive generated-order gain without preset rate.
+
+
+## 2026-11-01 second-time-jet success and exact original spatial source transition
+
+- Verified original physical full nonlinear Hartree Riesz potential and positive inner core defect: strict CI SUCCESS 41304837438, merged as exact `.lean`/Audit source blobs.
+- Verified the selected true radial Hartree flow's terminal second time jet at every fixed 0<r<1/4, under explicit classical PDE mixed-derivative and nonlocal-potential differentiability obligations: strict CI SUCCESS 41309108489; exact source + Audit merged into main branch at 54c80c6d57c3.
+- This extra terminal time jet is **not** a replacement for the original lemma's spatial quadratic regular-radiation flatness. The manuscript requires the physical radial C2 bound for all relevant time-jet orders a<=N+1 and k<=2.
+- Derived spatial MVT estimates `|z(t,r)-z(t,0)|<=M r²`, `|z_r(t,r)|<=M r`, and the true rescaling `|Zflat(s,R)|<=M ell(s)^(5/2) R²`, with fixed physical unit ball C2 regularity as explicit strong-flow input. Strict CI PENDING: https://github.com/penghongzhong/HBL/actions/runs/41309946657.
+- Derived independent terminal-time quadratic bound `|z(t,r)|<=M(T-t)²` from two Banach MVT applications and the actually PDE-verified zero first terminal velocity. Strict CI PENDING: https://github.com/penghongzhong/HBL/actions/runs/41309840473.
+- Original exact `j_g(t) chi(r)` center cutoff plus complex phase and physical energy-critical scaling have been connected to the spatial MVT source. Strict CI PENDING: https://github.com/penghongzhong/HBL/actions/runs/41310712743.
+- The actual true-flow high Sobolev-to-radial C2 embedding and strong regularity input, k=1,2 derivatives of phased flat radiation and every a-th time jet, the full PDE H+/- forcing, Kummer/remote gluing and all generated positive weight gains remain open.
+
+**Core original theorem acceptance count STILL 9/13, not 10/13.** Prior strict CI successes count as supporting physical theorems only. Selected blowup exponent remains a derived output and is never imposed.
