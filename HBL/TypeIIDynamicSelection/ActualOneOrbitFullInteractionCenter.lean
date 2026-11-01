@@ -116,9 +116,9 @@ theorem actual_one_orbit_full_interaction_center_eq_selected_plus_mixed
       actualOneOrbitFullInteractionCenter ell =
         actualRadiationCenter Z + radialHartreeCenter F := by
     change radialHartreeCenter (actualOneOrbitFullInteractionDensity ell) =
-      actualRadiationCenter Z + radialHartreeCenter F
+      radialHartreeCenter G + radialHartreeCenter F
     rw [hEq]
-    unfold radialHartreeCenter actualRadiationCenter
+    unfold radialHartreeCenter
     rw [integral_add hG hF]
     ring
   rw [hSplit]
