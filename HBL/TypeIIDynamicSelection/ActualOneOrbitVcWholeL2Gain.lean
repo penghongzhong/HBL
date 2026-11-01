@@ -169,8 +169,13 @@ theorem actual_one_orbit_Vc_whole_mixed_L2_square_fourth_order
       mul_le_mul_of_nonneg_left hE (by positivity)
     _ = (actualOneOrbitVcWholeMixedL2Coefficient *
           actualOneOrbitVcWholeMixedHalfOrderCoefficient) * ell ^ 4 := by
-      rw [← mul_assoc]
-      rw [Real.sq_sqrt hell.le]
-      ring
+      calc
+        _ = (actualOneOrbitVcWholeMixedL2Coefficient *
+              actualOneOrbitVcWholeMixedHalfOrderCoefficient) *
+              ell ^ 3 * (Real.sqrt ell) ^ 2 := by ring
+        _ = (actualOneOrbitVcWholeMixedL2Coefficient *
+              actualOneOrbitVcWholeMixedHalfOrderCoefficient) * ell ^ 4 := by
+          rw [Real.sq_sqrt hell.le]
+          ring
 
 end HBL.TypeIIDynamicSelection
