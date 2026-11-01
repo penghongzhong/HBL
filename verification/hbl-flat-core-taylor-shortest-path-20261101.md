@@ -94,3 +94,17 @@ complete generated-term gain and moving cutoffs still require proof.
 **Acceptance ledger unchanged: 9/13 retained original environments,
 9/21 historical. No sorry, admit, axiom, or fake direct PDE source
 is introduced by this note.**
+
+
+### Origin-inclusive core (essential physical regularity check)
+
+The radial Lean jets currently apply to $0<r<1/4$ only. For
+**uniform estimates down to $r=0$**, one must apply the above induction
+to the genuine smooth $\mathbb R^3$ Hartree PDE on the open ball
+$B(0,1/4)$ and the compact ball $\overline B(0,r_0)$, $r_0<1/4$.
+In full space $\Delta$ is nonsingular, and the Hartree nonlinearity
+still has the same pointwise cubic factor. The full 3D radial lift,
+smoothness at the origin, and its agreement with the existing radial
+representative are analytic/Lean obligations. Do not extrapolate
+the current positive-radius radial theorem uniformly to $r=0$
+without them.
