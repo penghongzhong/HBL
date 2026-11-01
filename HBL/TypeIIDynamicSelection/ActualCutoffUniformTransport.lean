@@ -47,9 +47,8 @@ theorem exists_actual_fixed_cutoff_uniform_deriv_bound :
     ∃ Cχ : ℝ, 0 < Cχ ∧ ∀ x : ℝ, |deriv cutoff x| ≤ Cχ := by
   have hcont : Continuous (deriv cutoff) :=
     ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).2).continuous
-  obtain ⟨C, hC⟩ :=
-    (isCompact_Icc : IsCompact (Icc (1 : ℝ) 2)).
-      exists_bound_of_continuousOn hcont.continuousOn
+  obtain ⟨C, hC⟩ := IsCompact.exists_bound_of_continuousOn
+    (isCompact_Icc : IsCompact (Icc (1 : ℝ) 2)) hcont.continuousOn
   have hCnonneg : 0 ≤ C := by
     have hOne := hC 1 (show (1 : ℝ) ∈ Icc 1 2 by norm_num)
     exact (norm_nonneg (deriv cutoff 1)).trans hOne
