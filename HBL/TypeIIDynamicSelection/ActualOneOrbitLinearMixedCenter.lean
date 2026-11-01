@@ -99,9 +99,9 @@ theorem actual_one_orbit_linear_mixed_Hartree_center_five_halves_gain
       actual_one_orbit_linear_mixed_density_support ell hell
   have hcomp : HasCompactSupport F :=
     HasCompactSupport.of_support_subset_isCompact isCompact_Icc hsupp
+  have hFcont := actual_one_orbit_linear_mixed_density_continuous ell
   have hint : Integrable F :=
-    (actual_one_orbit_linear_mixed_density_continuous ell)
-      .integrable_of_hasCompactSupport hcomp
+    hFcont.integrable_of_hasCompactSupport hcomp
   have hsuppPos : Function.support F ⊆ Ioi (0 : ℝ) := by
     intro r hr
     exact ha.trans_le (hsupp hr).1
