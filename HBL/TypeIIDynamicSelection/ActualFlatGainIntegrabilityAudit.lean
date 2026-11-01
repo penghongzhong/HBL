@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualFlatGainIntegrability
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_gain_strict_pos
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_gain_strict_pos
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_exact
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_integrable_with_tail
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_integrable_with_tail
