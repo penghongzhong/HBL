@@ -87,7 +87,7 @@ jobs:
           for base in ActualOneLayerCertifiedKummerSource ActualMovingRadiationPartition ActualOneLayerInnerRemoteSource ActualOneLayerSingleComplexWeightedSource ActualPhasedFlatTimeWeight ActualPhasedFlatTimeTail ActualFlatGainIntegrability; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${base}.lean" >> evidence/source-strict.log 2>&1
           done
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHBL212PhysicalBridgeAuditAudit.lean 2>&1 | tee evidence/audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHBL212PhysicalBridgeAudit.lean 2>&1 | tee evidence/audit.log
           python3 - <<'PY'
           import pathlib,re
           s=pathlib.Path('evidence/audit.log').read_text()
