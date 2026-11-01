@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualPhasedFlatTimeWeight
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_gain_pos_of_trap
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_gain_pos_of_trap
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_spacetime_power_from_trap
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_spacetime_power_from_trap
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_flat_source_time_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_flat_source_time_gain
