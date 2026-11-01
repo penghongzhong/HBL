@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeWeightedFredholm
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_in_real_weighted_Fredholm
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_in_real_weighted_Fredholm
