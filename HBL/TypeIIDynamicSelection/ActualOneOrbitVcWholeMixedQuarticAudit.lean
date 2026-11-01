@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuartic
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_rescaled_norm_le_sqrt
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_rescaled_norm_le_sqrt
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_support
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_support
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_pointwise_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_pointwise_gain
