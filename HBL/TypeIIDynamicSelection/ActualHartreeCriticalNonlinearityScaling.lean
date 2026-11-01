@@ -63,13 +63,17 @@ theorem actual_Hartree_critical_scaled_nonlinearity
   have hP := actual_Hartree_critical_radiation_Riesz_scaling ell r hell z
   have hC := actual_Hartree_critical_rescaled_local_cubic ell r hell z
   unfold complexRadialHartreeNonlinearity
-  change (radialHartreePotential
-      (fun rho => ‖rescalePhysicalRadiation ell z rho‖ ^ 4) r : ℂ) *
-      actualWholeRadiationLocalCubic (rescalePhysicalRadiation ell z) r = _
-  rw [hP, hC]
-  unfold actualWholeRadiationLocalCubic complexRadialHartreeNonlinearity
-  push_cast
-  ring
+  calc
+    _ = (radialHartreePotential
+        (fun rho => ‖rescalePhysicalRadiation ell z rho‖ ^ 4) r : ℂ) *
+        actualWholeRadiationLocalCubic (rescalePhysicalRadiation ell z) r := by
+          unfold actualWholeRadiationLocalCubic
+          ring
+    _ = _ := by
+      rw [hP, hC]
+      unfold actualWholeRadiationLocalCubic
+      push_cast
+      ring
 
 /-- The physical complex phase used in the manuscript, without
 imposing an arbitrary time-dependent modulation speed. -/
