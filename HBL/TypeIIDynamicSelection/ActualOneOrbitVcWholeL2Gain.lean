@@ -85,7 +85,8 @@ theorem actual_one_orbit_Vc_whole_mixed_L2_square_from_L1
     calc
       _ ≤ ∫ r in Ioi (0 : ℝ), C * |F r| :=
         integral_mono_ae hAbsSq (hAbs.const_mul C) hBound
-      _ = C * (∫ r in Ioi (0 : ℝ), |F r|) := integral_const_mul
+      _ = C * (∫ r in Ioi (0 : ℝ), |F r|) := by
+        rw [integral_const_mul]
   exact hMain.trans (mul_le_mul_of_nonneg_left hSource.2.1 hC)
 
 /-- Pointwise source size O(ell^(5/2)) for 0<ell<=1,
