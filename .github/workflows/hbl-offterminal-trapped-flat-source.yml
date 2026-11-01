@@ -1,7 +1,7 @@
 name: HBL Hartree trapped offterminal positive flat source strict audit
 on:
   push:
-    branches: [hbl-offterminal-trapped-flat-source-20261101]
+    branches: [hbl-offterminal-even-origin-20261101]
     paths:
       - '.github/workflows/hbl-offterminal-trapped-flat-source.yml'
       - 'HBL/TypeIIDynamicSelection/ActualTrappedFlatSourceGain*.lean'
