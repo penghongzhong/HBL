@@ -238,7 +238,10 @@ theorem actual_one_orbit_full_interaction_potential_split
     simp only [Pi.add_apply]
     ring
   unfold radialHartreePotential
-  rw [hDensity, hRow, integral_add hGRow hFRow]
+  rw [hDensity, hRow]
+  simp only [Pi.add_apply]
+  rw [integral_add hGRow hFRow]
+  dsimp [G, F]
   ring
 
 /-- A complete core bound on the ACTUAL nonlinear Hartree interaction
@@ -289,7 +292,10 @@ theorem actual_one_orbit_full_Hartree_core_residual_gain
         congr 1
         ring
     _ ≤ (|P - C| + |Q - D|) + |D| := by
-      exact (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
+      calc
+        _ ≤ |(P - C) + (Q - D)| + |D| := abs_add_le _ _
+        _ ≤ (|P - C| + |Q - D|) + |D| :=
+          add_le_add_right (abs_add_le _ _) _
     _ ≤ 16 * r ^ 2 * ell ^ 2 * C +
       (64 * Real.pi * hartreeKappa *
         actualOneOrbitVcWholeMixedHalfOrderCoefficient) *
