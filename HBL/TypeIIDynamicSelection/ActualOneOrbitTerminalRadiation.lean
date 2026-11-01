@@ -29,7 +29,7 @@ open Set MeasureTheory
 open scoped Topology ContDiff
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.AffineTail
+open HBL.Modulation.AffineTail HBL.Modulation.Monopole
 
 /-- Explicit bounded smooth annular radial terminal source, with no
 near-origin radiation. -/
@@ -197,6 +197,8 @@ theorem actual_one_orbit_Hartree_terminal_positive_moment_window
     change dist t T < ε
     simpa only [Real.dist_eq] using ht
   have hpositive := hsubset hball
+  change actualPhysicalInverseSquareMoment (z T) / 2 <
+    actualPhysicalInverseSquareMoment (z t) at hpositive
   simpa only [hTerminal] using hpositive
 
 end HBL.TypeIIDynamicSelection
