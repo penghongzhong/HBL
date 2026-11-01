@@ -239,7 +239,10 @@ theorem actual_one_orbit_full_interaction_potential_split
     ring
   unfold radialHartreePotential
   rw [hDensity, hRow]
-  simp only [Pi.add_apply]
+  change (2 * Real.pi * hartreeKappa / r) *
+      (∫ rho in Ioi (0 : ℝ),
+        rho * hartreeRadialLog r rho * G rho +
+          rho * hartreeRadialLog r rho * F rho) = _
   rw [integral_add hGRow hFRow]
   dsimp [G, F]
   ring
@@ -295,7 +298,7 @@ theorem actual_one_orbit_full_Hartree_core_residual_gain
       calc
         _ ≤ |(P - C) + (Q - D)| + |D| := abs_add_le _ _
         _ ≤ (|P - C| + |Q - D|) + |D| :=
-          add_le_add_right (abs_add_le _ _) _
+          add_le_add (abs_add_le (P - C) (Q - D)) (le_refl |D|)
     _ ≤ 16 * r ^ 2 * ell ^ 2 * C +
       (64 * Real.pi * hartreeKappa *
         actualOneOrbitVcWholeMixedHalfOrderCoefficient) *
