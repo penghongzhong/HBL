@@ -1,0 +1,11 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerKummerSharedSource
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_and_inner_channels_same_PDE
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_and_inner_channels_same_PDE
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_uses_exact_PDE_interaction
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_uses_exact_PDE_interaction
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_inverse_source_coherent
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_inverse_source_coherent
