@@ -34,13 +34,12 @@ def actualHartreeFlatGain (beta rho : ℝ) : ℝ :=
 positive epsilon_flat, not merely a formal gain label. -/
 theorem actual_Hartree_flat_gain_strict_pos
     (beta rho : ℝ)
-    (hbeta : 1 / 2 < beta)
-    (hrho : 0 < rho)
+    (_hbeta : 1 / 2 < beta)
+    (_hrho : 0 < rho)
     (hscale : rho < (5 * beta - 2) / 4) :
     0 < actualHartreeFlatGain beta rho := by
-  have hpossible : 0 < 5 * beta - 2 := by linarith [hbeta]
   dsimp [actualHartreeFlatGain]
-  linarith
+  linarith only [hscale]
 
 /-- The original spatial source power is EXACTLY one full integrable
 time power plus its PDE-relevant positive flat gain. -/
