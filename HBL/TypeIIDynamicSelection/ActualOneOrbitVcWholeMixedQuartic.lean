@@ -100,7 +100,6 @@ theorem actual_one_orbit_Vc_whole_mixed_pointwise_gain
       simp [actualOneOrbitVcWholeMixedQuartic,
         actualWholeRadiationMixedQuartic, Z, hz]
     rw [hzero, abs_zero]
-    dsimp [B]
     positivity
   · have hremote : 1 / 4 < ell * r := lt_of_not_ge hcore
     have hV : |V r| ≤ B * ell :=
@@ -116,10 +115,16 @@ theorem actual_one_orbit_Vc_whole_mixed_pointwise_gain
       mul_le_mul hV hZ (norm_nonneg _) (by positivity)
     have hCoeff :
         6 * |V r| ^ 2 + 4 * |V r| * ‖Z r‖ ≤
-          6 * (B * ell) ^ 2 + 4 * (B * ell) * Real.sqrt ell :=
-      add_le_add
-        (mul_le_mul_of_nonneg_left hV2 (by norm_num))
-        (mul_le_mul_of_nonneg_left hVZ (by norm_num))
+          6 * (B * ell) ^ 2 + 4 * (B * ell) * Real.sqrt ell := by
+      have hQ :
+          6 * |V r| ^ 2 ≤ 6 * (B * ell) ^ 2 :=
+        mul_le_mul_of_nonneg_left hV2 (by norm_num)
+      have hC :
+          4 * |V r| * ‖Z r‖ ≤
+            4 * (B * ell) * Real.sqrt ell := by
+        simpa only [mul_assoc] using
+          (mul_le_mul_of_nonneg_left hVZ (by norm_num : (0 : ℝ) ≤ 4))
+      exact add_le_add hQ hC
     have hHigher :
         |actualWholeRadiationMixedHigher V Z r| ≤
           6 * B ^ 2 * ell ^ 3 +
