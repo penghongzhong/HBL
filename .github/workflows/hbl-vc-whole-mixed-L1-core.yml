@@ -99,15 +99,17 @@ jobs:
             'ActualOneOrbitVcWholeMixedL1.lean',
             'ActualOneOrbitVcWholeMixedL1Audit.lean',
             'ActualOneOrbitVcWholeMixedRieszCore.lean',
-            'ActualOneOrbitVcWholeMixedRieszCoreAudit.lean'
+            'ActualOneOrbitVcWholeMixedRieszCoreAudit.lean',
+            'ActualOneOrbitVcWholeMixedPositiveHalf.lean',
+            'ActualOneOrbitVcWholeMixedPositiveHalfAudit.lean'
           ]
           for filename in files:
             p=pathlib.Path('HBL/TypeIIDynamicSelection')/filename
             src=re.sub(r'/\-.*?\-/','',p.read_text(),flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',src),filename
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuartic HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuarticAudit HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedL1 HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedL1Audit HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedRieszCore HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedRieszCoreAudit 2>&1 | tee evidence/build.log
-          for module in ActualOneOrbitVcWholeMixedQuartic ActualOneOrbitVcWholeMixedL1 ActualOneOrbitVcWholeMixedRieszCore; do
+          lake build HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuartic HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedQuarticAudit HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedL1 HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedL1Audit HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedRieszCore HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedRieszCoreAudit HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedPositiveHalf HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedPositiveHalfAudit 2>&1 | tee evidence/build.log
+          for module in ActualOneOrbitVcWholeMixedQuartic ActualOneOrbitVcWholeMixedL1 ActualOneOrbitVcWholeMixedRieszCore ActualOneOrbitVcWholeMixedPositiveHalf; do
             lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/$module.lean 2>&1 | tee evidence/strict-$module.log
             lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/"$module"Audit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           done
@@ -123,7 +125,10 @@ jobs:
             'actual_one_orbit_Vc_whole_mixed_exterior_indicator',
             'actual_one_orbit_Vc_whole_mixed_center_eq_exterior',
             'actual_one_orbit_Vc_whole_mixed_Riesz_eq_exterior',
-            'actual_one_orbit_Vc_whole_mixed_Riesz_core_gain'
+            'actual_one_orbit_Vc_whole_mixed_Riesz_core_gain',
+            'actual_one_orbit_Vc_whole_mixed_half_order_coefficient_pos',
+            'actual_one_orbit_Vc_whole_mixed_envelope_half_order',
+            'actual_one_orbit_Vc_whole_mixed_positive_half_order_source'
           ]
           for n in names:
             full='HBL.TypeIIDynamicSelection.'+n
@@ -134,7 +139,7 @@ jobs:
             axioms.update(v.strip() for v in m.group(1).split(',') if v.strip())
           assert axioms <= {'propext','Classical.choice','Quot.sound'},axioms
           assert 'sorryAx' not in s
-          print('STRICT PASS genuine full physical Vc Hartree mixed source: exact quartic, L1 centre positive 1/2 gain, Riesz inner core; original 2.12 OPEN.')
+          print('STRICT PASS actual full mixed Hartree Vc quartic, exact L1 and Riesz kernel, positive half-order source and core; original 2.12 OPEN.')
           PY
       - name: Preserve source hashes and full diagnostics
         if: always()
