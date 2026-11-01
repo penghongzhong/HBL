@@ -48,11 +48,13 @@ theorem actual_one_orbit_Vc_whole_mixed_exterior_indicator
       (actualOneOrbitVcWholeMixedQuartic ell) =
       actualOneOrbitVcWholeMixedQuartic ell := by
   funext rho
-  by_cases h : 1 / (4 * ell) < rho
-  · simp [Set.indicator, h]
-  · have hz := actual_one_orbit_Vc_whole_mixed_zero_below
-      ell hell (r := rho) (le_of_not_gt h)
-    simp [Set.indicator, h, hz]
+  by_cases h : rho ∈ Ioi (1 / (4 * ell))
+  · simp only [Set.indicator_of_mem h]
+  · have hbelow : rho ≤ 1 / (4 * ell) :=
+      le_of_not_gt (by simpa only [mem_Ioi] using h)
+    have hz := actual_one_orbit_Vc_whole_mixed_zero_below
+      ell hell (r := rho) hbelow
+    simp only [Set.indicator_of_notMem h, hz]
 
 /-- Total mixed Hartree monopole charge is identically the exterior
 charge of the exact same nonlinear quartic-density source. -/
@@ -139,11 +141,13 @@ theorem actual_one_orbit_Vc_whole_mixed_Riesz_core_gain
       (Ioi a).indicator (fun rho => |F rho|) =
         (fun rho => |F rho|) := by
     funext rho
-    by_cases h : a < rho
-    · simp [Set.indicator, h]
-    · have hz := actual_one_orbit_Vc_whole_mixed_zero_below
-        ell hell (r := rho) (le_of_not_gt h)
-      simp [Set.indicator, h, F, hz]
+    by_cases h : rho ∈ Ioi a
+    · simp only [Set.indicator_of_mem h]
+    · have hbelow : rho ≤ a :=
+        le_of_not_gt (by simpa only [mem_Ioi] using h)
+      have hz := actual_one_orbit_Vc_whole_mixed_zero_below
+        ell hell (r := rho) hbelow
+      simp only [Set.indicator_of_notMem h, abs_zero, hz]
   have hAbsEq :
       (∫ rho in Ioi a, |F rho|) =
         ∫ rho in Ioi (0 : ℝ), |F rho| := by
