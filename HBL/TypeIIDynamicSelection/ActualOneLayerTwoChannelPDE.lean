@@ -32,6 +32,8 @@ namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.AffineTail
 open HBL.Profile.ActualInner
 open HBL.Modulation.Monopole
+open HBL.L2Kernel
+open scoped RealInnerProductSpace
 
 /-- The single physical renormalized Hartree source after inserting
 the real core and the entire complex radiation. -/
