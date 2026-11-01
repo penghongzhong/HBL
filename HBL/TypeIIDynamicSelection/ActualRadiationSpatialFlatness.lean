@@ -57,7 +57,7 @@ theorem actual_radial_spatial_quadratic_flatness
   have hfirst (x : ℝ) (hx : x ∈ Icc (0 : ℝ) r) :
       ‖f₁ x‖ ≤ M * r := by
     have hmean :=
-      (convex_Icc : Convex ℝ (Icc (0 : ℝ) r)).
+      (convex_Icc (0 : ℝ) r).
         norm_image_sub_le_of_norm_hasDerivWithin_le
         (f := f₁) (f' := f₂)
         (fun y hy => (hf₁ y hy).hasDerivWithinAt)
@@ -69,7 +69,7 @@ theorem actual_radial_spatial_quadratic_flatness
       _ = M * x := by rw [sub_zero, Real.norm_eq_abs, abs_of_nonneg hxpos]
       _ ≤ M * r := mul_le_mul_of_nonneg_left hx.2 hM
   have hmean :=
-    (convex_Icc : Convex ℝ (Icc (0 : ℝ) r)).
+    (convex_Icc (0 : ℝ) r).
       norm_image_sub_le_of_norm_hasDerivWithin_le
       (f := f) (f' := f₁) (C := M * r)
       (fun x hx => (hf x hx).hasDerivWithinAt)
@@ -111,21 +111,28 @@ theorem actual_Hartree_rescaled_radial_spatial_flatness
     (z zr zrr : ℝ → ℝ → ℂ) (time ell R M : ℝ)
     (hell : 0 < ell) (hR : 0 ≤ R) (hM : 0 ≤ M)
     (hCore : ell * R ≤ 1)
-    (hFlow : ∀ x ∈ Icc (0 : ℝ) (ell * R),
+    (hFlow : ∀ x ∈ Icc (0 : ℝ) 1,
       HasDerivAt (z time) (zr time x) x)
-    (hFlowR : ∀ x ∈ Icc (0 : ℝ) (ell * R),
+    (hFlowR : ∀ x ∈ Icc (0 : ℝ) 1,
       HasDerivAt (zr time) (zrr time x) x)
-    (hRegBound : ∀ x ∈ Icc (0 : ℝ) (ell * R),
+    (hRegBound : ∀ x ∈ Icc (0 : ℝ) 1,
       ‖zrr time x‖ ≤ M)
     (hRegularOrigin : zr time 0 = 0) :
     ‖rescalePhysicalRadiation ell
       (fun r => z time r - z time 0) R‖ ≤
       (M * ell ^ 2 * Real.sqrt ell) * R ^ 2 := by
   have hEllR : 0 ≤ ell * R := mul_nonneg hell.le hR
+  have hSub : Icc (0 : ℝ) (ell * R) ⊆ Icc (0 : ℝ) 1 := by
+    intro x hx
+    exact ⟨hx.1, hx.2.trans hCore⟩
   have hGain :=
     (actual_Hartree_flow_spatial_quadratic_flatness
       z zr zrr time (ell * R) M
-      hEllR hM hFlow hFlowR hRegBound hRegularOrigin).1
+      hEllR hM
+      (fun x hx => hFlow x (hSub hx))
+      (fun x hx => hFlowR x (hSub hx))
+      (fun x hx => hRegBound x (hSub hx))
+      hRegularOrigin).1
   calc
     ‖rescalePhysicalRadiation ell
         (fun r => z time r - z time 0) R‖ =
