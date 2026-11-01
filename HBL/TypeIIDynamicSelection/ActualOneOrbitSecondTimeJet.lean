@@ -47,14 +47,13 @@ theorem actual_complex_local_cubic_time_derivative_zero
           rw [Complex.normSq_eq_norm_sq]
         _ = (u t).re ^ 2 + (u t).im ^ 2 := by
           rw [Complex.normSq_apply]
+          ring
     · ring
   have hSq : HasDerivAt (fun t => ‖u t‖ ^ 2) 0 T := by
     simpa only [hZero, Complex.zero_re, Complex.zero_im,
       zero_mul, mul_zero, add_zero] using hSqReal
   have hc := hSq.ofReal_comp.mul hU
-  convert hc using 1
-  · rfl
-  · simp [hZero]
+  simpa [Pi.mul_apply, hZero] using hc
 
 /-- The genuine radial nonlocal Hartree term, not a local-cubic
 surrogate, has zero first time derivative at any spatial point
@@ -75,11 +74,17 @@ theorem actual_Hartree_nonlocal_time_derivative_zero_at_core
   have hCubic := actual_complex_local_cubic_time_derivative_zero
     (fun t => z t r) T dz hU hRe hIm hZero
   have hProduct := hPotential.ofReal_comp.mul hCubic
-  convert hProduct using 1
-  · funext t
+  have hEq :
+      (fun t => complexRadialHartreeNonlinearity (z t) r) =
+        (fun t => ((radialHartreePotential
+          (fun rho => ‖z t rho‖ ^ 4) r : ℝ) : ℂ)) *
+          (fun t => ((‖z t r‖ ^ 2 : ℝ) : ℂ) * z t r) := by
+    funext t
+    simp only [Pi.mul_apply]
     unfold complexRadialHartreeNonlinearity
     ring
-  · simp [hZero]
+  rw [hEq]
+  simpa [Pi.mul_apply, hZero] using hProduct
 
 /-- The FIRST new PDE jet beyond the previously established physical
 terminal velocity: real Hartree evolution forces z_tt(T,r)=0 for each
@@ -150,6 +155,6 @@ theorem actual_one_orbit_terminal_Hartree_core_second_time_jet_zero
         (fun t => zt t r) := by
     filter_upwards [hPDEnear] with t ht
     exact ht.symm
-  exact hRHS.congr_of_eventuallyEq heq
+  exact hRHS.congr_of_eventuallyEq heq.symm
 
 end HBL.TypeIIDynamicSelection
