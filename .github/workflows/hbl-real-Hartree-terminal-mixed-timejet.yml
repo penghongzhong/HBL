@@ -1,0 +1,135 @@
+# Exact physical clock q_s=4mu and selected logarithmic rate, corrected unfolding.
+# Fixed pointwise function-multiplication rewrite in exact mu_s drift identity.
+# Exact core complex remote field beta-reduction corrected in nonlocal source match.
+# Prove complete core residual cancellation of time, spatial and scaling operators.
+# Physical mass-mismatch add-le orientation and cutoff linter repaired.
+# Correct exact real-norm scaling of full-radiation Hartree slow monopole coefficient.
+# Whole-radiation slow coefficient derivative: corrected product algebra and event order.
+# Correct moment-product function reassociation in exact physical c_g derivative.
+# Align complex coercions in exact whole-radiation source cubic difference.
+# Strict linter correction for actual whole radiation Hartree cubic matching.
+name: HBL original radial Hartree terminal full mixed time jet strict audit
+on:
+  push:
+    branches: [hbl-oneorbit-Hartree-real-temporal-jet-20261101]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/**'
+      - '.github/workflows/hbl-real-Hartree-terminal-mixed-timejet.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hbl-oneorbit-Hartree-real-temporal-jet-20261101
+  cancel-in-progress: true
+
+jobs:
+  strict-origin-green:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact Lean compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-typeii-dynamic-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve exact pinned dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Prefer full pinned Mathlib precompiled cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if timeout 120s lake exe cache get > evidence/full-mathlib-cache.log 2>&1; then
+            echo "Full Mathlib cache restored"
+          else
+            echo "Full Mathlib cache unavailable or timed out; use exact pinned source plus restored project cache"
+          fi
+      - name: Restore verified base project cache when available
+        id: hbl_project_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL.lean', 'HBL/**/*.lean') }}
+          restore-keys: |
+            hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+      - name: Strict original Hartree real terminal time jet audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,re
+          for filename in ('ActualOneOrbitHartreeRealTemporalJet.lean','ActualOneOrbitHartreeRealTemporalJetAudit.lean'):
+            p=pathlib.Path('HBL/TypeIIDynamicSelection')/filename
+            s=re.sub(r'/\-.*?\-/','',p.read_text(),flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|unsafe|native_decide)\b',s),p
+          PY
+          lake build HBL.TypeIIDynamicSelection.ActualOneOrbitHartreeRealTemporalJet HBL.TypeIIDynamicSelection.ActualOneOrbitHartreeRealTemporalJetAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitHartreeRealTemporalJet.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitHartreeRealTemporalJetAudit.lean 2>&1 | tee evidence/types-and-axioms.txt
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('evidence/types-and-axioms.txt').read_text()
+          for name in ['actual_real_smooth_radial_Hartree_rhs_real_zero','actual_one_orbit_Hartree_terminal_real_velocity_zero','actual_real_terminal_full_mixed_quartic_first_jet_zero','actual_one_orbit_Hartree_terminal_full_mixed_quartic_time_jet_zero']:
+            full='HBL.TypeIIDynamicSelection.'+name
+            assert full in s,'Missing complete type: '+full
+            assert ("'"+full+"' depends on axioms:") in s,'Missing axiom report: '+full
+          axioms=set()
+          for m in re.finditer(r"'[^']+' depends on axioms: \[([^\]]*)\]",s):
+            axioms.update(x.strip() for x in m.group(1).split(',') if x.strip())
+          assert axioms <= {'propext','Classical.choice','Quot.sound'},axioms
+          assert 'sorryAx' not in s
+          print('Strict actual Hartree PDE full mixed quartic TERMINAL first time jet zero; off-terminal profile and manuscript 2.12 OPEN.')
+          PY
+      - name: Preserve source hashes and full diagnostics
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/*.lean > evidence/dynamical-source-hashes.txt
+      - name: Save source-indexed project build cache
+        if: always() && steps.hbl_project_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/*.lean') }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-real-Hartree-terminal-mixed-timejet-evidence
+          path: evidence
+          retention-days: 14
