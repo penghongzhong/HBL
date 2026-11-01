@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerCertifiedKummerSource
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_common_PDE_has_constructed_Kummer_certificate
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_common_PDE_has_constructed_Kummer_certificate
