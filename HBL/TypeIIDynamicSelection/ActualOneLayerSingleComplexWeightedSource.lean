@@ -51,32 +51,28 @@ theorem actual_Hartree_one_complex_weighted_source_two_channels
   have hReAES : AEStronglyMeasurable
       (fun r : ℝ => affineJapaneseWeight sigma r * (F r).re)
       halfLineMeasure :=
-    (((affineJapaneseWeight_continuous sigma).measurable.mul hReMeas)
-      .aestronglyMeasurable.restrict)
+    (((affineJapaneseWeight_continuous sigma).measurable.mul hReMeas).aestronglyMeasurable.restrict)
   have hImAES : AEStronglyMeasurable
       (fun r : ℝ => affineJapaneseWeight sigma r * (F r).im)
       halfLineMeasure :=
-    (((affineJapaneseWeight_continuous sigma).measurable.mul hImMeas)
-      .aestronglyMeasurable.restrict)
+    (((affineJapaneseWeight_continuous sigma).measurable.mul hImMeas).aestronglyMeasurable.restrict)
   constructor
   · change MemLp (fun r : ℝ => affineJapaneseWeight sigma r * (F r).re)
       2 halfLineMeasure
     apply hF.mono' hReAES
     filter_upwards with r
-    rw [Real.norm_eq_abs, Real.norm_eq_abs,
-      abs_mul, abs_mul, abs_of_nonneg (hWeight r),
-      abs_of_nonneg (norm_nonneg (F r))]
-    exact mul_le_mul_of_nonneg_left (Complex.abs_re_le_norm (F r))
-      (hWeight r)
+    simpa only [Real.norm_eq_abs, abs_mul,
+      abs_of_nonneg (hWeight r), abs_of_nonneg (norm_nonneg (F r))] using
+      (mul_le_mul_of_nonneg_left (Complex.abs_re_le_norm (F r))
+        (hWeight r))
   · change MemLp (fun r : ℝ => affineJapaneseWeight sigma r * (F r).im)
       2 halfLineMeasure
     apply hF.mono' hImAES
     filter_upwards with r
-    rw [Real.norm_eq_abs, Real.norm_eq_abs,
-      abs_mul, abs_mul, abs_of_nonneg (hWeight r),
-      abs_of_nonneg (norm_nonneg (F r))]
-    exact mul_le_mul_of_nonneg_left (Complex.abs_im_le_norm (F r))
-      (hWeight r)
+    simpa only [Real.norm_eq_abs, abs_mul,
+      abs_of_nonneg (hWeight r), abs_of_nonneg (norm_nonneg (F r))] using
+      (mul_le_mul_of_nonneg_left (Complex.abs_im_le_norm (F r))
+        (hWeight r))
 
 /-- From one SINGLE actual physical Hartree PDE residual weighted
 norm, recover both unique actual affine threshold charges. -/
