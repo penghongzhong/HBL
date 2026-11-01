@@ -113,3 +113,29 @@ ORIGINAL ACCEPTANCE REMAINS 9/13 (69.23%), historical 9/21. No additional origin
 - The algebraic physical moving-core `epsilon_flat=5 beta_minus/2 -2 rho_star -1>0` and actual source time weight `s^(-1-epsilon_flat)` are in a STRICT CI RECHECK (not yet accepted): https://github.com/penghongzhong/HBL/actions/runs/41322045235 and https://github.com/penghongzhong/HBL/actions/runs/41321988733.
 
 **ORIGINAL numerator and denominator remain 9/13.** The three new physical proofs do not establish uniform C² bounds for every time jet from the Sobolev local-flow interface, do not jointly identify the two true PDE-projected H+/H- sources, and do not carry the same physical residual through Kummer/remote matching with all generated positive gains. It would be invalid to count original 2.12 as accepted.
+
+
+## 2026-11-01 — Strict original-2.12 bridge audit (real numerator unchanged)
+
+Retained original manuscript environment acceptance: **9/13**; historical original **9/21**. The original `prop:one-layer-stage3` remains OPEN. No source-only or conditional theorem is counted as an accepted original environment.
+
+Strict native Lean 4.35.0-rc3 / pinned Mathlib successes:
+- 41356512711: actual complex-phase and center-cutoff offterminal spatial-flat source has the *derived entire future-time integrable tail*, relative to visible radial C2 and modulation trapping inputs.
+- 41357149079: genuinely constructed local parameter-dependent Kummer Green right inverse acts on the **same full Hartree PDE residual**, with both classical annulus Wronskian boundary conditions and norm bound.
+- 41357587148: one nonterminal Hartree radiation is split by the actual smooth moving cutoff; its complete renormalized PDE source separates exactly into inner-cutoff residual and true nonlocal remote term, with the real/imaginary channel identities.
+- 41358200123: **one** physically common complex weighted L2 residual source bound implies *both* H+ and H− weighted Fredholm data, unique actual real affine threshold charges and unique pair of normalized physical Fredholm solutions. Crucially the single weighted residual norm remains a hypothesis until derived from the real trajectory.
+- 41356531877: common full Hartree source also gives both H± and the Kummer annulus, with exact nonlinear radiation-interaction equality under the visible actual radiation PDE condition.
+- 41331077838 and 41330963439: full physical radiation PDE cancellation and actual moving-support remote core identity, each separately strictly accepted.
+
+All source and audit files from the first four passes and the earlier strictly accepted flat positive-exponent proof are combined, without changing their theorem statements, in branch `hbl-212-physical-source-integration-20261101`. Its own joint trust-zero build and audit is Actions 41359532078; do not claim it passed before this run succeeds.
+
+The remaining mathematical obligations for *actual manuscript 2.12* are exactly:
+1. Specialize the standard high-regularity 3D Hartree local theory to the **same chosen complex, radial, offterminal orbit**, including full physical radial lift, real time/space chain rule and uniform weighted (L^{2,\sigma}) bound for the full renormalized interaction residual. Unjustified terminal support propagation is forbidden.
+2. Match the **actual** corrected inner H± Fredholm solutions to the constructed normalized parameter-dependent Kummer Green solution and then the remote inverse on the prescribed moving overlap, with all boundary traces and moving commutators.
+3. Classify every physically produced new Hartree/Frobenius/Riesz/moving-cutoff/parameter-source term and prove its real positive weight improvement `rho+kappa_prof` from the actual source and modulation PDE. The existing `GeneratedTerm` and `RegionalSolver` abstract packages do NOT satisfy this requirement.
+4. Retain blowup-rate selection as an output from the full modulation dynamics; no assumed value of `mu_infty`, `lambda(t)`, or a terminal blowup exponent.
+
+Other strict CI source candidates at this writing: 41358656004 (true complex-background moving-remote exterior Riesz matching), 41358694812 (physical radial Riesz critical scaling), 41358975199 (full nonlocal critical phase covariance), 41359233737 (critical radial derivative/dilation). Confirm their terminal Actions results before recording acceptance.
+
+Next shortest physical step: after the verified Riesz/critical scaling and time/space chain rule, eliminate the visible `hRadiationPDE` conditional input by specializing the *same actual cited regular Hartree flow*. Then use its weighted source estimate to instantiate the already strictly verified single-common-complex-source H± Fredholm solve. Finally match Kummer and exterior boundary jets, not just source restrictions.
+
