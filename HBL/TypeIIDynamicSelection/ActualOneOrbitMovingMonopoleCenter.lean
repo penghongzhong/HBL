@@ -159,7 +159,7 @@ theorem actual_one_orbit_Vc_mixed_Hartree_center_L1_five_halves_gain
     have hNorm := norm_setIntegral_le_of_norm_le_const_ae'
       (μ := volume) (s := Icc a b) (f := fun r => |F r|)
       (C := C) hfinite hpointAbs
-    have hNorm' : |∫ r in Icc a b, |F r|| ≤ C * (b - a) := by
+    have hNorm' : abs (∫ r in Icc a b, |F r|) ≤ C * (b - a) := by
       simpa only [Real.norm_eq_abs, Real.volume_real_Icc_of_le hab] using hNorm
     exact (le_abs_self _).trans hNorm'
   have hlength :
