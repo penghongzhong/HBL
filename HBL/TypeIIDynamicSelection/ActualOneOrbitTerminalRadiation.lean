@@ -129,4 +129,74 @@ theorem actual_one_orbit_terminal_radiation_positive_moment :
   change 0 < 4 * Real.pi * ∫ r in Ioi (0 : ℝ), F r
   exact mul_pos (by positivity) hintpos
 
+
+
+/-- For the EXPLICIT smooth, flat-at-origin nonzero annular terminal
+radiation constructed above, continuity of the physical Hartree quartic
+moment on the genuine terminal solution is DERIVED from the original
+PDE plus Mathlib's dominated differentiation theorem.
+
+Consequently the genuine physical 3D inverse-square moment stays
+bounded away from zero on a terminal time neighborhood. There is no
+assumption HasDerivAt(m0), no prescribed blowup rate, and no
+assumption of a uniform positive moment for every small datum.
+The remaining high-regularity PDE/dominated source hypotheses are
+spelled out explicitly and must be instantiated by the local theory. -/
+theorem actual_one_orbit_Hartree_terminal_positive_moment_window
+    (z zt : ℝ → ℝ → ℂ) (T : ℝ)
+    (hTerminal : z T = actualOneOrbitTerminalRadiation)
+    (I : Set ℝ)
+    (hI : I ∈ 𝓝 T)
+    (hZmeas : ∀ᶠ t in 𝓝 T,
+      AEStronglyMeasurable (fun rho => ‖z t rho‖ ^ 4)
+        (volume.restrict (Ioi (0 : ℝ))))
+    (hZint : IntegrableOn
+      (fun rho => ‖z T rho‖ ^ 4) (Ioi (0 : ℝ)))
+    (hVelMeas : AEStronglyMeasurable
+      (fun rho => actualRadialQuarticMomentVelocity (z T rho) (zt T rho))
+      (volume.restrict (Ioi (0 : ℝ))))
+    (B : ℝ → ℝ)
+    (hB : IntegrableOn B (Ioi (0 : ℝ)))
+    (hBound : ∀ (rho : ℝ), 0 < rho → ∀ t ∈ I,
+      |actualRadialQuarticMomentVelocity (z t rho) (zt t rho)| ≤ B rho)
+    (hRe : ∀ (rho : ℝ), 0 < rho → ∀ t ∈ I,
+      HasDerivAt (fun x : ℝ => (z x rho).re) (zt t rho).re t)
+    (hIm : ∀ (rho : ℝ), 0 < rho → ∀ t ∈ I,
+      HasDerivAt (fun x : ℝ => (z x rho).im) (zt t rho).im t)
+    (hPDE : ∀ rho : ℝ, 0 < rho →
+      zt T rho = Complex.I *
+        (complexRadialLaplacian (z T) rho +
+          complexRadialHartreeNonlinearity (z T) rho)) :
+    ∃ ε : ℝ, 0 < ε ∧ ∀ t : ℝ, |t - T| < ε →
+      actualPhysicalInverseSquareMoment
+        actualOneOrbitTerminalRadiation / 2 <
+        actualPhysicalInverseSquareMoment (z t) := by
+  have hpos : 0 < actualPhysicalInverseSquareMoment (z T) := by
+    rw [hTerminal]
+    exact actual_one_orbit_terminal_radiation_positive_moment
+  have hderiv : HasDerivAt
+      (fun t => actualPhysicalInverseSquareMoment (z t))
+      (actualMomentLaplacianFlux (z T)) T :=
+    actual_physical_threeD_Hartree_radiation_moment_PDE_flux
+      z zt T I hI hZmeas hZint hVelMeas B hB hBound hRe hIm hPDE
+  have hcontinuous : ContinuousAt
+      (fun t => actualPhysicalInverseSquareMoment (z t)) T :=
+    hderiv.continuousAt
+  have hhalf :
+      actualPhysicalInverseSquareMoment (z T) / 2 <
+        actualPhysicalInverseSquareMoment (z T) := by
+    linarith
+  have hev : ∀ᶠ t in 𝓝 T,
+      actualPhysicalInverseSquareMoment (z T) / 2 <
+        actualPhysicalInverseSquareMoment (z t) :=
+    hcontinuous.eventually (Ioi_mem_nhds hhalf)
+  obtain ⟨ε, hε, hsubset⟩ := Metric.mem_nhds_iff.mp hev
+  refine ⟨ε, hε, ?_⟩
+  intro t ht
+  have hball : t ∈ Metric.ball T ε := by
+    change dist t T < ε
+    simpa only [Real.dist_eq] using ht
+  have hpositive := hsubset hball
+  simpa only [hTerminal] using hpositive
+
 end HBL.TypeIIDynamicSelection

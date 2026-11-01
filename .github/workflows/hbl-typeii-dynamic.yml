@@ -273,7 +273,8 @@ jobs:
              'actual_moment_cutoff_uniform_all_r_transport_gain',
              'actual_Hartree_PDE_cutoff_uniform_all_r_length_gain',
              'actual_one_orbit_terminal_bump_smooth',
-             'actual_one_orbit_terminal_radiation_positive_moment']
+             'actual_one_orbit_terminal_radiation_positive_moment',
+             'actual_one_orbit_Hartree_terminal_positive_moment_window']
           for name in names:
             fullname='HBL.TypeIIDynamicSelection.'+name
             assert fullname in s, 'Missing checked type: '+fullname
