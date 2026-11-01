@@ -54,11 +54,11 @@ theorem actual_radial_spatial_quadratic_flatness
   have hZero : (0 : ℝ) ∈ Icc (0 : ℝ) r :=
     ⟨le_rfl, hr⟩
   have hR : r ∈ Icc (0 : ℝ) r := ⟨hr, le_rfl⟩
+  have hConv : Convex ℝ (Icc (0 : ℝ) r) := convex_Icc (0 : ℝ) r
   have hfirst (x : ℝ) (hx : x ∈ Icc (0 : ℝ) r) :
       ‖f₁ x‖ ≤ M * r := by
     have hmean :=
-      (convex_Icc (0 : ℝ) r).
-        norm_image_sub_le_of_norm_hasDerivWithin_le
+      hConv.norm_image_sub_le_of_norm_hasDerivWithin_le
         (f := f₁) (f' := f₂)
         (fun y hy => (hf₁ y hy).hasDerivWithinAt)
         hf₂ hZero hx
@@ -69,8 +69,7 @@ theorem actual_radial_spatial_quadratic_flatness
       _ = M * x := by rw [sub_zero, Real.norm_eq_abs, abs_of_nonneg hxpos]
       _ ≤ M * r := mul_le_mul_of_nonneg_left hx.2 hM
   have hmean :=
-    (convex_Icc (0 : ℝ) r).
-      norm_image_sub_le_of_norm_hasDerivWithin_le
+    hConv.norm_image_sub_le_of_norm_hasDerivWithin_le
       (f := f) (f' := f₁) (C := M * r)
       (fun x hx => (hf x hx).hasDerivWithinAt)
       hfirst hZero hR
@@ -137,7 +136,7 @@ theorem actual_Hartree_rescaled_radial_spatial_flatness
     ‖rescalePhysicalRadiation ell
         (fun r => z time r - z time 0) R‖ =
       Real.sqrt ell * ‖z time (ell * R) - z time 0‖ := by
-        simp [rescalePhysicalRadiation, norm_mul, Complex.norm_real,
+        simp [rescalePhysicalRadiation, Complex.norm_real,
           Real.norm_eq_abs, abs_of_nonneg (Real.sqrt_nonneg ell)]
     _ ≤ Real.sqrt ell * (M * (ell * R) ^ 2) :=
       mul_le_mul_of_nonneg_left hGain (Real.sqrt_nonneg ell)
