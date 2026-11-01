@@ -113,16 +113,50 @@
         "actual_one_orbit_Vc_mixed_Riesz_inner_length_gain"
       ],
       "mathematical_result": "Actual Vc (not W) real-linear Riesz row integrable and core centre error ≤960πκ_H B³ r² ell^(9/2)."
+    },
+    "actual_Vc_whole_mixed_L1_center_Riesz": {
+      "commit": "5cb6b062147535e6cff257850f39dd1ca2429295",
+      "run": 41279870124,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "8cafb9251ffe89f7cfdb8dd4cec83883c0f49e91",
+      "Riesz_source_sha": "7d3fae6d2a947d2e6c61c04f2969aa940ce5ccb1",
+      "theorem_count": 9,
+      "declarations": [
+        "actual_one_orbit_Vc_whole_mixed_measurable",
+        "actual_one_orbit_Vc_whole_mixed_Hartree_L1_center_gain",
+        "actual_one_orbit_Vc_whole_mixed_exterior_indicator",
+        "actual_one_orbit_Vc_whole_mixed_center_eq_exterior",
+        "actual_one_orbit_Vc_whole_mixed_Riesz_eq_exterior",
+        "actual_one_orbit_Vc_whole_mixed_Riesz_core_gain"
+      ],
+      "physical_bound": "All quartic mixed terms: E(ell)=15B^3 ell^(5/2)+22.5B^2 ell²+15B ell^(3/2), L1 ≤ E; physical centre ≤ 4πκ_H E; core difference ≤64πκ_H r²ell²E."
+    },
+    "actual_Vc_whole_mixed_positive_half": {
+      "commit": "9cd077d1beab3de9395cdd83a17b33dd78a6e560",
+      "run": 41280525287,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "93681714381c7aa21fca8ea86ca178ce15b9ac01",
+      "declarations": [
+        "actual_one_orbit_Vc_whole_mixed_half_order_coefficient_pos",
+        "actual_one_orbit_Vc_whole_mixed_envelope_half_order",
+        "actual_one_orbit_Vc_whole_mixed_positive_half_order_source"
+      ],
+      "physical_bound": "K=15B³+(45/2)B²+15B>0, for 0<ell≤1: whole mixed L1≤K ell^(3/2), centre≤4πκ_H K ell^(3/2), core defect≤64πκ_H K r² ell^(7/2)."
     }
   },
-  "combined_branch_strict_build": "Each newest physical source strict-audited individually, including full quartic pointwise; joined tree not separately rebuilt.",
+  "combined_branch_strict_build": "Exact checked source file blobs from strict independent successful runs 41279870124 and 41280525287 merged; merged branch not separately compiled.",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
-    "Complete original 2.12 requires actual-time three-region Hartree source projection, two threshold charges, Kummer/remote common matching, and all positive generated-order estimates",
-    "thm:finite-profile-stage3",
-    "prop:global-H1-profile-v3",
-    "thm:main dynamically selected PDE Type II orbit"
+    "Off-terminal Hartree regular flow: derive uniform moving-core spatial flatness and weighted physical radiation tails; terminal compact support is not propagated by Schrödinger flow",
+    "Original 2.12 same physical residual projected to both H± Fredholm, genuine origin Kummer, remote inverse; moving cutoffs and quantitative positive order all generated terms",
+    "Original 2.13 true finite-profile recursion",
+    "Original 2.14 global H1 profile",
+    "Main PDE Type II orbit with dynamically selected rate"
   ],
   "caveat": "The linear mixed source estimate applies to the selected terminal datum; off-terminal true Hartree flow and simultaneous spatial matching still require proof; no new original manuscript environment accepted.",
   "newly_accepted_original_manuscript_environments": 0
