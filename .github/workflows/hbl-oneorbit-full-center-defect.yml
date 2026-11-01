@@ -14,7 +14,7 @@ concurrency:
 jobs:
   strict-joint:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     env:
       MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
@@ -93,6 +93,12 @@ jobs:
           assert 'sorryAx' not in s
           print('STRICT PASS: actual Hartree full nonlinear interaction centre cancellation strict; original 2.12 remains OPEN')
           PY
+      - name: Save dependency build cache for later focused Lean checks
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-full-center-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ github.sha }}
       - name: Store audit evidence
         if: always()
         shell: bash
