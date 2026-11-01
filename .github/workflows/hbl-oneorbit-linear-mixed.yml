@@ -171,6 +171,8 @@ jobs:
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalRadiationAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitLinearMixedGain.lean 2>&1 | tee evidence/strict-ActualOneOrbitLinearMixedGain.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitLinearMixedGainAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitLinearMixedCenter.lean 2>&1 | tee evidence/strict-ActualOneOrbitLinearMixedCenter.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitLinearMixedCenterAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalPDEJets.lean 2>&1 | tee evidence/strict-one-orbit-terminal-PDE-jets.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalPDEJetsAudit.lean 2>&1 | tee -a evidence/types-and-axioms.txt
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualPhysicalMixedRieszRow.lean 2>&1 | tee evidence/strict-actual-physical-mixed-Riesz-row.log
