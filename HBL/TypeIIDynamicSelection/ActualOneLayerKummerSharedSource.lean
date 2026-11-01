@@ -28,7 +28,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 
-open HBL.Profile.Kummer HBL.Modulation.Monopole
+open HBL.Profile.Kummer HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Source coherence BEFORE any regional solve: the Kummer source's
 two real coordinates are exactly the previously defined H+/H-
