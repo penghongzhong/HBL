@@ -114,7 +114,8 @@ theorem actual_one_orbit_moving_monopole_size_on_radiation_support
         _ ≤ 1 * |monopoleRadialProfile r| :=
           mul_le_mul_of_nonneg_right hCut (abs_nonneg _)
         _ ≤ monopoleRadialBoundConstant := by simpa using hM
-    exact mul_le_mul_of_nonneg_left hcm (abs_nonneg c)
+    simpa only [mul_assoc] using
+      (mul_le_mul_of_nonneg_left hcm (abs_nonneg c))
   have hprofile :
       |actualOneOrbitMovingMonopole ell r| ≤
         bubble r + |c| * monopoleRadialBoundConstant := by
@@ -127,7 +128,7 @@ theorem actual_one_orbit_moving_monopole_size_on_radiation_support
     _ ≤ bubble r + |c| * monopoleRadialBoundConstant := hprofile
     _ ≤ 4 * ell + c * monopoleRadialBoundConstant := by
       rw [abs_of_nonneg hcpos]
-      exact add_le_add_right hW _
+      exact add_le_add_left hW _
     _ = actualOneOrbitMovingEnvelope * ell := by
       dsimp [actualOneOrbitMovingEnvelope, c, actualOneOrbitMonopoleCoefficient]
       ring
@@ -136,7 +137,7 @@ theorem actual_one_orbit_moving_monopole_size_on_radiation_support
 This reuses the fixed nonnegative cutoff rather than postulating
 a radiation decay rate in renormalized time. -/
 theorem actual_one_orbit_rescaled_terminal_real_bound
-    (ell r : ℝ) (hell : 0 < ell) :
+    (ell r : ℝ) :
     |(rescalePhysicalRadiation ell actualOneOrbitTerminalRadiation r).re|
       ≤ Real.sqrt ell := by
   have hreal :
@@ -175,13 +176,11 @@ theorem actual_one_orbit_moving_monopole_mixed_linear_seven_halves_gain
   · have hremote : 1 / 4 < ell * r := lt_of_not_ge hcore
     have hV := actual_one_orbit_moving_monopole_size_on_radiation_support
       ell r hell hr hremote
-    have hC : 0 ≤ actualOneOrbitMovingEnvelope * ell :=
-      mul_nonneg actual_one_orbit_moving_envelope_pos.le hell.le
     have hVcube :
         |actualOneOrbitMovingMonopole ell r| ^ 3 ≤
           (actualOneOrbitMovingEnvelope * ell) ^ 3 :=
       pow_le_pow_left₀ (abs_nonneg _) hV 3
-    have hZ := actual_one_orbit_rescaled_terminal_real_bound ell r hell
+    have hZ := actual_one_orbit_rescaled_terminal_real_bound ell r
     have habs :
         |actualOneOrbitMovingMixedLinear ell r| =
           4 * |actualOneOrbitMovingMonopole ell r| ^ 3 *
