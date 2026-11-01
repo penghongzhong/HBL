@@ -59,7 +59,7 @@ theorem actual_radial_C2_flatness_three_derivative_bounds
     intro x hx
     have hMv :
         ‖deriv f x - deriv f 0‖ ≤ M * ‖x - 0‖ :=
-      (convex_Icc : Convex ℝ (Icc (0 : ℝ) R)).
+      (convex_Icc (0 : ℝ) R).
         norm_image_sub_le_of_norm_deriv_le
         hDiffSecond hSecond h0 hx
     simpa only [hFirst, sub_zero, Real.norm_eq_abs,
@@ -79,7 +79,7 @@ theorem actual_radial_C2_flatness_three_derivative_bounds
   have hrr : r ∈ Icc (0 : ℝ) r := ⟨hr.1, le_rfl⟩
   have hMv :
       ‖f r - f 0‖ ≤ (M * r) * ‖r - 0‖ :=
-    (convex_Icc : Convex ℝ (Icc (0 : ℝ) r)).
+    (convex_Icc (0 : ℝ) r).
       norm_image_sub_le_of_norm_deriv_le
       hLocalDiff hLocalFirst h0r hrr
   have hValue : ‖f r - f 0‖ ≤ M * r ^ 2 := by
