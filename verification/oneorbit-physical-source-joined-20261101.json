@@ -98,9 +98,24 @@
         "actual_one_orbit_Vc_whole_mixed_pointwise_gain"
       ],
       "physics": "Exact full quartic mixed density on actual moment-selected Vc; pointwise 4B^3 ell^3 sqrt ell+6B^2 ell^3+4B ell^2 sqrt ell; leading integral gain 1/2 pending integrated strict audit."
+    },
+    "actual_Vc_mixed_Riesz_core": {
+      "commit": "939024e27116a79914e02cc41abea4e0afcad6e0",
+      "run": 41279787823,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "7dc0bac23d4cdc7622bb90b90b5104c337cdfe23",
+      "declarations": [
+        "actual_one_orbit_Vc_mixed_exterior_indicator",
+        "actual_one_orbit_Vc_mixed_center_eq_exterior",
+        "actual_one_orbit_Vc_mixed_Riesz_eq_exterior",
+        "actual_one_orbit_Vc_mixed_Riesz_inner_length_gain"
+      ],
+      "mathematical_result": "Actual Vc (not W) real-linear Riesz row integrable and core centre error ≤960πκ_H B³ r² ell^(9/2)."
     }
   },
-  "combined_branch_strict_build": "individual source declarations strict-passed, newly joined snapshot not independently rebuilt",
+  "combined_branch_strict_build": "Each newest physical source strict-audited individually, including full quartic pointwise; joined tree not separately rebuilt.",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
