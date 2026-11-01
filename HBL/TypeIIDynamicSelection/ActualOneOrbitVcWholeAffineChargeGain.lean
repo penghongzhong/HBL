@@ -80,7 +80,8 @@ theorem actual_one_orbit_Vc_whole_mixed_plus_affine_charge_gain
       actualPlusCharge (actualOneOrbitVcWholeMixedQuartic ell) =
         2 * channelPairing HartreeChannel.plus
           (actualOneOrbitVcWholeMixedQuartic ell) := by
-    simp [actualPlusCharge, channelLimit] <;> ring
+    simp [actualPlusCharge, channelLimit]
+    ring
   rw [hformula, abs_mul, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
   exact mul_le_mul_of_nonneg_left hpair (by norm_num)
 
