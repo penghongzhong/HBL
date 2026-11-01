@@ -1,0 +1,12 @@
+import HBL.TypeIIDynamicSelection.ActualPhasedSpatialFlatness
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_center_cutoff_one
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_center_cutoff_one
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_unit_complex_phase
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_unit_complex_phase
+#check @HBL.TypeIIDynamicSelection.actual_phased_Hartree_flat_radiation_core_eq
+#print axioms HBL.TypeIIDynamicSelection.actual_phased_Hartree_flat_radiation_core_eq
+#check @HBL.TypeIIDynamicSelection.actual_phased_Hartree_radial_spatial_flatness
+#print axioms HBL.TypeIIDynamicSelection.actual_phased_Hartree_radial_spatial_flatness
