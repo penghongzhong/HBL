@@ -165,6 +165,9 @@ theorem actual_one_orbit_terminal_Hartree_physical_moment_deriv_zero
   have hFlux : actualMomentLaplacianFlux (z T) = 0 := by
     rw [hTerminal]
     exact actual_one_orbit_terminal_Hartree_moment_flux_zero
-  simpa only [actualMomentLaplacianFlux, hFlux] using hPDEFlux
+  change HasDerivAt (fun t => actualPhysicalInverseSquareMoment (z t))
+    (actualMomentLaplacianFlux (z T)) T at hPDEFlux
+  rw [hFlux] at hPDEFlux
+  exact hPDEFlux
 
 end HBL.TypeIIDynamicSelection
