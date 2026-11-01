@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitCutoffFixedMass
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_PDE_cutoff_uniform_fixed_terminal_mass
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_PDE_cutoff_uniform_fixed_terminal_mass

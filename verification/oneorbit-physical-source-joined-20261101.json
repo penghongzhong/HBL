@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-01",
+  "repo": "penghongzhong/HBL",
+  "branch": "hbl-oneorbit-physical-source-joined-20261101",
+  "goal": "one genuine radial 3D critical Hartree Type II blowup orbit with dynamically selected rate, not a preset exponent",
+  "pinned_lean": "4.35.0-rc3",
+  "pinned_mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "strict_verified_independent": {
+    "cutoff": {
+      "commit": "778e90add2b165cff4cbc8183ed105213723c80f",
+      "run": 41271707621,
+      "conclusion": "success",
+      "theorem": "actual_one_orbit_Hartree_PDE_cutoff_uniform_fixed_terminal_mass",
+      "source_sha": "17fdb8ee85a4c6a8de3752c89aa1ee3b7b72b703"
+    },
+    "linear_mixed_pointwise": {
+      "commit": "a80dfd6d29ed3f878a335eb66e2660e65a06f3c3",
+      "run": 41274332606,
+      "conclusion": "success",
+      "theorem": "actual_one_orbit_terminal_mixed_linear_density_seven_halves_gain"
+    },
+    "linear_mixed_center": {
+      "commit": "2a88bbf388b3d48cd9ab01490219ef4dbfabfaa1",
+      "run": 41275588884,
+      "conclusion": "pending_at_ledger_creation",
+      "theorem": "actual_one_orbit_linear_mixed_Hartree_center_five_halves_gain"
+    }
+  },
+  "combined_branch_strict_build": "not independently executed; original source nodes retained unchanged",
+  "historical_acceptance": "9/21",
+  "retained_manuscript_acceptance": "9/13",
+  "open_paper_obligations": [
+    "prop:one-layer-stage3 genuine complete same-residual two-channel Fredholm/Kummer/remote matching and positive source orders",
+    "thm:finite-profile-stage3",
+    "prop:global-H1-profile-v3",
+    "thm:main dynamically selected PDE Type II orbit"
+  ],
+  "caveat": "The linear mixed source estimate applies to the selected terminal datum; off-terminal true Hartree flow and simultaneous spatial matching still require proof; no new original manuscript environment accepted."
+}
