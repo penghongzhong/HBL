@@ -22,8 +22,16 @@
     "linear_mixed_center": {
       "commit": "2a88bbf388b3d48cd9ab01490219ef4dbfabfaa1",
       "run": 41275588884,
-      "conclusion": "pending_at_ledger_creation",
-      "theorem": "actual_one_orbit_linear_mixed_Hartree_center_five_halves_gain"
+      "conclusion": "success",
+      "theorem": "actual_one_orbit_linear_mixed_Hartree_center_five_halves_gain",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "run_url": "https://github.com/penghongzhong/HBL/actions/runs/41275588884"
     }
   },
   "combined_branch_strict_build": "not independently executed; original source nodes retained unchanged",
