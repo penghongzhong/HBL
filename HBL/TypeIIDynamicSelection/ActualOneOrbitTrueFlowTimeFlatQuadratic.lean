@@ -129,7 +129,7 @@ theorem actual_one_orbit_Hartree_rescaled_core_quadratic_time_gain
   calc
     ‖rescalePhysicalRadiation ell (z t) R‖ =
         Real.sqrt ell * ‖z t (ell * R)‖ := by
-      simp [rescalePhysicalRadiation, norm_mul, Complex.norm_real,
+      simp [rescalePhysicalRadiation, Complex.norm_real,
         Real.norm_eq_abs, abs_of_nonneg (Real.sqrt_nonneg ell)]
     _ ≤ Real.sqrt ell * (M * (T - t) ^ 2) :=
       mul_le_mul_of_nonneg_left hGain (Real.sqrt_nonneg ell)
