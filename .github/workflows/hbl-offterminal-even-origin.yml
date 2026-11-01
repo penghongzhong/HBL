@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-offterminal-even-origin.yml'
       - 'HBL/TypeIIDynamicSelection/ActualRadialOriginEven*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualRadialSpatialFlatness*.lean'
   workflow_dispatch:
 permissions:
   contents: read
