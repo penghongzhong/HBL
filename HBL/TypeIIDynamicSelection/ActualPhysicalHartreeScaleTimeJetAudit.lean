@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualPhysicalHartreeScaleTimeJet
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_joint_time_jet
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_joint_time_jet
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_explicit_time_jet
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_explicit_time_jet
