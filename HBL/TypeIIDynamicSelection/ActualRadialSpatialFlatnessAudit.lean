@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualRadialSpatialFlatness
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_radial_C2_flatness_three_derivative_bounds
+#print axioms HBL.TypeIIDynamicSelection.actual_radial_C2_flatness_three_derivative_bounds
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_offterminal_radial_flat_part
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_offterminal_radial_flat_part
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_offterminal_rescaled_flat_part
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_offterminal_rescaled_flat_part
