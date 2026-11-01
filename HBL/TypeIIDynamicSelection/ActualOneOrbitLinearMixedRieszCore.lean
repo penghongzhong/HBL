@@ -42,7 +42,8 @@ private theorem integral_Ioi_zero_if_vanishes_below
         apply setIntegral_congr_fun measurableSet_Ioi
         intro x hx
         by_cases hax : a < x
-        · simp [Set.indicator_of_mem hax]
+        · change f x = (Ioi a).indicator f x
+          simp [Set.indicator, hax]
         · have hz : f x = 0 := hzero x hx (le_of_not_gt hax)
           simp [Set.indicator_of_notMem (show x ∉ Ioi a by exact hax), hz]
     _ = ∫ x in Ioi (0 : ℝ) ∩ Ioi a, f x :=
@@ -127,7 +128,6 @@ theorem actual_one_orbit_linear_mixed_Riesz_core_center_error
   have hnear : IntegrableOn G (Ioc (0 : ℝ) a) := by
     apply integrableOn_zero.congr_fun ?_ measurableSet_Ioc
     intro rho hρ
-    change G rho = 0
     have hz := actual_one_orbit_linear_density_zero_below ell hell
       rho hρ.2
     simp [G, F, hz]
