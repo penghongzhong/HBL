@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualMomentTransportGain
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualMomentLaplacianFlux
+#check @HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_transport_length_gain
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_PDE_cutoff_transport_length_gain
+#print axioms HBL.TypeIIDynamicSelection.actualMomentInnerCutoff_transport_length_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_PDE_cutoff_transport_length_gain
