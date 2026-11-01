@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRadiation
+import HBL.TypeIIDynamicSelection.ActualOneOrbitCutoffFixedMass
 
 set_option autoImplicit false
 #check @HBL.TypeIIDynamicSelection.actualOneOrbitTerminalBump
@@ -14,3 +14,5 @@ set_option autoImplicit false
 #print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_radiation_positive_moment
 #check @HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_terminal_positive_moment_window
 #print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_terminal_positive_moment_window
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_PDE_cutoff_uniform_fixed_terminal_mass
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_PDE_cutoff_uniform_fixed_terminal_mass
