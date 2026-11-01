@@ -2,7 +2,79 @@
 Date: 2026-11-01. Status: mathematical proof plan, **NOT a Lean-accepted
 original manuscript environment**.
 
-## Actual PDE and local jet induction
+## PRIMARY shorter route: off-terminal *spatial* flatness (manuscript 2.12)
+
+The manuscript's actual high-regularity bounds in
+\`eq:flat-bound-stage3\`, \`eq:flat-core-stage3\`, and
+\`eq:flat-integrable-stage3\` require no terminal-time jet induction.
+They follow **uniformly for every real physical time** from radial
+$C^2$ regularity and the regular-flow Sobolev bound.
+
+For $0\le r\le1$, a genuine $C^2$ radial scalar representative of the
+physical $\mathbb R^3$ Hartree solution satisfies
+\[
+\partial_r z(t,0)=0,\qquad
+\sup_{0\le r\le1}|\partial_r^2 z(t,r)|\le M
+\]
+for each admissible time $t$ and, under uniform high-regularity
+Sobolev embedding, with the **same** $M$ on the regular-flow interval.
+Two applications of the real-to-complex mean value theorem give
+\[
+|\partial_r z(t,r)|\le Mr,\qquad
+|z(t,r)-z(t,0)|\le Mr^2,\qquad
+|\partial_r^2z(t,r)|\le M.
+\]
+This is exactly the spatial quadratic remainder from the center value
+$j_g(t)=z(t,0)$; the center is not assumed zero off-terminal.
+
+Under the genuine critical pullback, with
+$\ell(s)=\lambda(s)^{-1}>0$ and $t_s=\ell^2$, for
+$0\le \ell(s)R\le1$,
+\[
+Z^{\flat}(s,R)
+ =e^{-i\gamma(s)}\ell(s)^{1/2}
+  [z(t(s),\ell(s)R)-z(t(s),0)],\qquad
+|Z^\flat(s,R)|\le M\ell(s)^{5/2}R^2.
+\]
+The phase has modulus one. The original trap
+$\lambda(s)\ge C^{-1}s^{\beta_-}$ yields
+$\ell(s)\le Cs^{-\beta_-}$. For
+$R\le s^{\rho_*}$ with
+\[
+\tfrac12<\beta_-<1,\qquad
+0<\rho_*<\min\{\tfrac12,(5\beta_- -2)/4\},
+\]
+derive, without prescribing the terminal concentration exponent,
+\[
+|Z^\flat(s,R)|\le
+ M C^{5/2}s^{-5\beta_-/2+2\rho_*}
+ =MC^{5/2}s^{-1-\epsilon_{\rm flat}},
+\quad
+\epsilon_{\rm flat}=5\beta_-/2-2\rho_*-1>0.
+\]
+
+**Lean status:** \`ActualRadialSpatialFlatness.lean\` on branch
+\`hbl-offterminal-spatial-flatness-20261101\` implements both MVT
+steps and the *literal* rescaling identity, without assuming the
+quadratic conclusion. Its strict CI is
+https://github.com/penghongzhong/HBL/actions/runs/41308041077;
+the result is pending until that CI succeeds.
+
+**Critical still-unproved realization:** specialize Mathlib's
+$H^L(\mathbb R^3)\hookrightarrow C_b^2$ (for $L>7/2$) to the
+*cited external regular Hartree local theory's actual flow*, prove
+that its radial representative is even and $C^2$ at the origin,
+and supply a uniform $M$ across the chosen time interval and
+finite time jets. Then formally combine with the already accepted
+kinematic trap and source estimates. This is an ordinary spatial
+Sobolev/regularity interface; it is far shorter than independently
+proving arbitrarily high terminal time jets.
+
+The independent higher time-jet proof route below is supplementary
+for stronger terminal vanishing, **not a prerequisite for the
+quadratic off-terminal flatness needed by original 2.12**.
+
+## Supplementary: actual PDE and local terminal time-jet induction
 
 Let $z(t,r)$ be a classical radial solution of the *genuine* 3D
 energy-critical Hartree PDE on a terminal time interval, with
