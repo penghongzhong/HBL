@@ -164,11 +164,11 @@ theorem actual_one_orbit_Vc_mixed_Riesz_inner_length_gain
     positivity
   have hGeom : |radialHartreePotential F r - radialHartreeCenter F| ≤
       (4 * Real.pi * hartreeKappa * r ^ 2 * (1 / a ^ 2)) *
-        (∫ rho in Ioi a, |F rho|) :=
-    actual_exteriorHartree_center_gap_L1_le
-      F hmeas hFext ha hr hsep' |>.trans_eq (by
-        rw [← actual_one_orbit_Vc_mixed_Riesz_eq_exterior ell r hell,
-          ← actual_one_orbit_Vc_mixed_center_eq_exterior ell hell])
+        (∫ rho in Ioi a, |F rho|) := by
+    rw [actual_one_orbit_Vc_mixed_Riesz_eq_exterior ell r hell,
+      actual_one_orbit_Vc_mixed_center_eq_exterior ell hell]
+    exact actual_exteriorHartree_center_gap_L1_le
+      F hmeas hFext ha hr hsep'
   have hRinv : 1 / a ^ 2 = 16 * ell ^ 2 := by
     dsimp [a]
     field_simp [hell.ne']
