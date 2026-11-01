@@ -5,11 +5,14 @@
     "original_sha256": "1db8c03fbbf7c6c8e4f194470291c3b52b3cbe18467319edbe341162878cac52",
     "original_size_bytes": 226948,
     "reconciled_private_filename": "HBL_DynamicTypeII_13_MainChain_20261101.tex",
-    "reconciled_private_sha256": "3eabefe53ee0b14493074d80700be54ed69e23b90de2b3a4d0b03a25dd63a629",
+    "reconciled_private_sha256": "db27c28acb08bcaa939869a53b911e0c55e4ba3dc93a5723bd70192e7207a81c",
     "reconciled_tex_uploaded_to_public_repo": false,
     "main_target": "single genuine 3D energy-critical radial Hartree Type II orbit with rate selected from actual modulation PDE; no imposed rate",
     "main_theorem_status": "target_not_proved",
-    "tex_compilation": "not performed; source theorem-environment counts checked independently"
+    "tex_compilation": "not performed; source theorem-environment counts checked independently",
+    "reconciled_private_size_bytes": 227206,
+    "edit_scope": "Corrected single-orbit dynamical-rate target, false 2.12/2.13 closure claims, conditional main-proof prose, original-vs-retained count descriptions. All retained 13 labels preserved. Private TeX not pushed to GitHub.",
+    "source_tex_compiler_verified": false
   },
   "counting_rules": {
     "count_eligible_manuscript_environments": [
