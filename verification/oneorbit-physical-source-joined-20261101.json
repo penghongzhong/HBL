@@ -146,9 +146,20 @@
         "actual_one_orbit_Vc_whole_mixed_positive_half_order_source"
       ],
       "physical_bound": "K=15B³+(45/2)B²+15B>0, for 0<ell≤1: whole mixed L1≤K ell^(3/2), centre≤4πκ_H K ell^(3/2), core defect≤64πκ_H K r² ell^(7/2)."
+    },
+    "actual_Vc_whole_weighted_Fredholm_input": {
+      "commit": "a2036c704379bf97f13feb99211c4f9a305badbd",
+      "run": 41285870262,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "699c87776dacf8feccdde89c4839a5f0751075b9",
+      "terminal": "actual_one_orbit_Vc_whole_mixed_in_real_weighted_Fredholm",
+      "mathematical_scope": "Physical complete terminal quartic mixed source lies in genuine H± L2sigma weighted data spaces for every fixed ell>0 and real sigma; not yet the projected full PDE channel source or uniform L2sigma norm gain",
+      "dependencies": "Reuses original strictly accepted ActualOneOrbitVcWholeMixedL1.lean, no redundant centre source"
     }
   },
-  "combined_branch_strict_build": "Exact checked source file blobs from strict independent successful runs 41279870124 and 41280525287 merged; merged branch not separately compiled.",
+  "combined_branch_strict_build": "Individually strictly accepted exact blobs merged; merged branch joint trust-zero build not performed.",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
