@@ -89,8 +89,9 @@ theorem actual_one_orbit_bubble_le_inverse_radius
   have hrootpos : 0 < Real.sqrt (1 + r ^ 2) :=
     Real.sqrt_pos.2 (by positivity)
   unfold bubble
-  change 1 / Real.sqrt (1 + r ^ 2) ≤ 1 / r
-  exact (div_le_div_iff₀ hrootpos hr).2 (by simpa using hroot)
+  have hinv : 1 / Real.sqrt (1 + r ^ 2) ≤ 1 / r :=
+    (div_le_div_iff₀ hrootpos hr).2 (by simpa using hroot)
+  simpa only [one_div] using hinv
 
 /-- The REAL-LINEAR component 4 W³ Re Z of the exact quartic Hartree
 density vanishes in the inner core and is uniformly O(ell^(7/2))
