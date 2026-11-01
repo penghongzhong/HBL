@@ -1,0 +1,12 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerTwoChannelPDE
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_both_channels_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_both_channels_exact
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_unique_affine_charges
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_unique_affine_charges
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_unique_inner_solutions
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_common_PDE_unique_inner_solutions
