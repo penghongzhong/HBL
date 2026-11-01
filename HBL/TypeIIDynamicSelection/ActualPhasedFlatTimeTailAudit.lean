@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualPhasedFlatTimeTail
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_flat_physical_time_integrable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_flat_physical_time_integrable
