@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualTrappedFlatSourceGain
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_offterminal_flat_gain_margin_pos
+#print axioms HBL.TypeIIDynamicSelection.actual_offterminal_flat_gain_margin_pos
+#check @HBL.TypeIIDynamicSelection.actual_offterminal_choose_positive_flat_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_offterminal_choose_positive_flat_gain
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_trapped_offterminal_flat_source
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_trapped_offterminal_flat_source
