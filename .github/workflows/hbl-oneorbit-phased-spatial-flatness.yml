@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-oneorbit-phased-spatial-flatness.yml'
       - 'HBL/TypeIIDynamicSelection/ActualPhasedSpatialFlatness*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualRadiationSpatialFlatness.lean'
   workflow_dispatch:
 permissions:
   contents: read
