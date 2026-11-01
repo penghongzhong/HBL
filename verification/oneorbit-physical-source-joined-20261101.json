@@ -70,9 +70,23 @@
         "actual_one_orbit_rescaled_terminal_real_bound",
         "actual_one_orbit_moving_monopole_mixed_linear_seven_halves_gain"
       ]
+    },
+    "actual_Vc_mixed_center": {
+      "commit": "e90f0da8e7616f7d2f4cff655bc9346f2f9f0012",
+      "run": 41279016383,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "source_sha": "e71371b757982a570eda07f0528e91366e416941",
+      "declarations": [
+        "actual_one_orbit_Vc_mixed_source_support",
+        "actual_one_orbit_Vc_mixed_source_measurable",
+        "actual_one_orbit_Vc_mixed_Hartree_center_L1_five_halves_gain"
+      ],
+      "value": "physical moment-selected Vc real-linear Hartree mixed density: L1 mass ≤15 B^3 length^(5/2), centre ≤60πκ_H B^3 length^(5/2)"
     }
   },
-  "combined_branch_strict_build": "joined sources individually passed pinned strict Lean workflows, no shared-import strict run yet",
+  "combined_branch_strict_build": "individual source declarations strict-passed, newly joined snapshot not independently rebuilt",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
