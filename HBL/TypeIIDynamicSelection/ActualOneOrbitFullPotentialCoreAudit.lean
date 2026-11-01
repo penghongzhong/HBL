@@ -1,0 +1,12 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitFullPotentialCore
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_self_density_support
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_self_density_support
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_self_Riesz_core_center_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_self_Riesz_core_center_gain
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_full_interaction_potential_split
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_full_interaction_potential_split
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_full_Hartree_core_residual_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_full_Hartree_core_residual_gain
