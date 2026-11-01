@@ -134,7 +134,7 @@ theorem actual_complex_inner_remote_Hartree_source_exact
       _ = _ := by rw [hPotF]
   have hQr : Q r = 0 := hQ r (by linarith)
   unfold complexRadialHartreeNonlinearity actualWholeRadiationLocalCubic
-  simp only [Pi.add_apply]
+  simp only
   rw [hQr, add_zero, hPotentialSum]
   push_cast
   ring
