@@ -267,3 +267,106 @@ plus/minus Fredholm charges, origin Kummer and remote matching,
 and prove actual positive time-weight gain for all regenerated terms.
 The full PDE blowup orbit and dynamically selected limiting rate
 remain open.
+
+
+## 2026-11-01: Exact differentiated Hartree 3D moment and physical cutoff length gain
+
+**Three real strict kernel-checked successes (all on the SAME original chain):**
+
+1. Source \`2815a024e5fe451498afbf6de4d3d97bc6362c83\`,
+   [Actions 41264408262](https://github.com/penghongzhong/HBL/actions/runs/41264408262),
+   **success, 4167 build jobs**. Actual
+   \`actual_physical_threeD_moment_hasDerivAt_of_dominated_radiation\`
+   derives \(m'_0\) from the physical complex radial radiation components,
+   by Mathlib's authentic
+   \`hasDerivAt_integral_of_dominated_loc_of_deriv_le\`; it does **not**
+   assume any derivative of the scalar moment. The same file proves
+   pointwise quartic C¹ calculus and the pure imaginary real-Hartree-phase
+   cancellation.
+
+2. Source \`b6ad66d9fa9b8bc05ec3e3a623f710eb674e0733\`,
+   [Actions 41264939810](https://github.com/penghongzhong/HBL/actions/runs/41264939810),
+   **success, 4169 build jobs**. The final theorem
+   \`actual_physical_threeD_Hartree_radiation_moment_PDE_flux\`
+   uses the **exact** original radial Hartree PDE,
+   \[
+   z_t=i\{\Delta_r z+\mathcal I(|z|^4)|z|^2z\},
+   \quad \Delta_r=\partial_{rr}+2r^{-1}\partial_r,
+   \]
+   and proves
+   \[
+   \frac{d}{dt}m_0[z(t)]
+     =-16\pi\int_0^\infty|z(t,r)|^2
+         \operatorname{Im}(\overline{z(t,r)}\,\Delta_r z(t,r))\,dr .
+   \]
+   The Riesz Hartree nonlinear term cancels EXACTLY in the real
+   quartic velocity, not by neglecting its size.
+   The genuine local C¹ spatial/time regularity and uniformly integrable
+   pointwise derivative majorant are explicit analytic hypotheses,
+   as required by Mathlib's dominated differentiation theorem.
+   They must still be derived for the selected regular Hartree flow.
+
+3. **Atomic** source/audit/workflow commit
+   \`ebb1f27fdf0bc07a2d1da97acae351af734e9f62\`,
+   [Actions 41265534610](https://github.com/penghongzhong/HBL/actions/runs/41265534610),
+   **success, 4171 build jobs**. Two further audited terminals
+   \`actualMomentInnerCutoff_transport_length_gain\` and
+   \`actual_Hartree_PDE_cutoff_transport_length_gain\` combine the actual
+   moment PDE flux with the original cutoff
+   \(\eta_c(s,r)=1-\chi(c(s)r/4)\),
+   \(c(s)=\kappa_H\ell(s)m_0[z_g(t(s))]\).
+   On its transition annulus \(0\le r\), \(cr/4\le2\), for
+   \(m_0[z_g(t)]>0\) and an actual fixed-cutoff derivative bound
+   \(|\chi'(cr/4)|\le C_\chi\),
+   \[
+   \boxed{
+   |(\partial_s+br\partial_r)\eta_c|
+     \le2\ell(s)^2\,\frac{|m_0'[z_g(t(s))]|}{m_0[z_g(t(s))]}\,C_\chi.
+   }
+   \]
+   The derivative in this **final terminal** is *itself derived from the
+   physical Hartree PDE*, not supplied as \`HasDerivAt(moment)\`.
+   No terminal blowup exponent, positive time power, new axiom,
+   abstract current-weight source, or selected orbit is inserted.
+
+For all 3 strict successes, transitive axioms for all new declarations
+were exactly \`propext\`, \`Classical.choice\`, \`Quot.sound\`.
+All source files compiled with pinned Lean 4.35.0-rc3, Mathlib
+\`a98628e16c11f5167f16124105ddce53efa9bfe5\`,
+\`--trust=0\` and \`-DwarningAsError=true\`; no
+\`sorry\`, \`admit\` or novel axiom.
+
+### Next original 2.12 mathematical bottleneck (NOT yet proved)
+
+The revised **one-orbit** Type II target allows choosing one specific
+nonzero, smooth, radial terminal radiation \(g\) rather than demanding
+a uniform proof over every small \(g\). A nonzero physical \(g\) has
+\(m_0[g]>0\), and continuity of its actual regular Hartree flow should
+give \(m_0[z_g(t)]\ge\frac12m_0[g]>0\) on a sufficiently small
+terminal time window. For a smooth \(z\), 3D Hardy plus the exact
+PDE moment flux gives the classical estimate
+\[
+  |m_0'[z(t)]|
+  \le16\|z(t)\|_{L^\infty}^2
+        \|\nabla z(t)\|_{L^2}
+        \|\nabla\Delta z(t)\|_{L^2}.
+\]
+**This final Hardy--Sobolev uniform bound and local-theory realization
+have NOT yet been strictly formalized**; do not call them Lean-certified.
+
+Provided the true nonlinear modulation system later yields an initial
+trapping window giving \(\ell(s)\lesssim s^{-\beta}\), \(\beta>1/2\),
+the strictly verified transport estimate above would then have true
+order \(O(s^{-2\beta})\), a gain \(2\beta-1>0\) over baseline order one.
+The trapping window MUST be derived from the actual Hartree modulation
+equations; it cannot be assumed as a prescribed blowup exponent.
+
+The linear physical mixed quartic charge
+\(4V_c^3\mathrm{Re}\,Z\), the same true threshold projections and
+Fredholm +/- charges, origin-normalized Kummer, remote matching and
+every other regenerated source-order gain remain open.
+
+**Historical accepted original numbered paper environments: 9/21 (42.86%) —
+unchanged.** The optional revised 9/20 count is only deletion of the
+unneeded old C¹ initial-data graph environment. Main existence and
+dynamically selected Type II blowup theorem remain OPEN.
