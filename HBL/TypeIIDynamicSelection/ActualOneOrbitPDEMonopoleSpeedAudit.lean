@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitPDEMonopoleSpeed
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_Hartree_monopole_speed_from_PDE
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_Hartree_monopole_speed_from_PDE
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_Hartree_monopole_profile_jet_from_PDE
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_Hartree_monopole_profile_jet_from_PDE
