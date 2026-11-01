@@ -69,9 +69,9 @@ theorem actual_one_layer_Kummer_uses_exact_PDE_interaction
       DifferentiableAt ℝ (fun t : ℝ => (V t r.val : ℂ)) s)
     (hZTime : ∀ r : PhysicalAnnulus z d,
       DifferentiableAt ℝ (fun t : ℝ => Z t r.val) s)
-    (hVSpace : ∀ r : PhysicalAnnulus z d, ∀ x : ℝ,
+    (hVSpace : ∀ x : ℝ,
       DifferentiableAt ℝ (fun y : ℝ => (V s y : ℂ)) x)
-    (hZSpace : ∀ r : PhysicalAnnulus z d, ∀ x : ℝ,
+    (hZSpace : ∀ x : ℝ,
       DifferentiableAt ℝ (Z s) x)
     (hVSecond : ∀ r : PhysicalAnnulus z d,
       DifferentiableAt ℝ
@@ -104,7 +104,7 @@ theorem actual_one_layer_Kummer_uses_exact_PDE_interaction
         actualOneLayerInteractionOnly V Z s r.val :=
     actual_one_layer_PDE_radiation_evolution_cancelled
       V Z (b s) (omega s) s r.val
-      (hVTime r) (hZTime r) (hVSpace r) (hZSpace r)
+      (hVTime r) (hZTime r) hVSpace hZSpace
       (hVSecond r) (hZSecond r)
       (hFullRow r) (hCoreRow r) (hRadiationRow r)
       (hRadiationPDE r)
@@ -146,9 +146,9 @@ theorem actual_one_layer_Kummer_inverse_source_coherent
       DifferentiableAt ℝ (fun t : ℝ => (V t r.val : ℂ)) s)
     (hZTime : ∀ r : PhysicalAnnulus z d,
       DifferentiableAt ℝ (fun t : ℝ => Z t r.val) s)
-    (hVSpace : ∀ r : PhysicalAnnulus z d, ∀ x : ℝ,
+    (hVSpace : ∀ x : ℝ,
       DifferentiableAt ℝ (fun y : ℝ => (V s y : ℂ)) x)
-    (hZSpace : ∀ r : PhysicalAnnulus z d, ∀ x : ℝ,
+    (hZSpace : ∀ x : ℝ,
       DifferentiableAt ℝ (Z s) x)
     (hVSecond : ∀ r : PhysicalAnnulus z d,
       DifferentiableAt ℝ
