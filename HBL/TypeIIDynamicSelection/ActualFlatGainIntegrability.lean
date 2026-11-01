@@ -7,7 +7,7 @@ import Mathlib.Tactic
 The original one-layer proof has beta_- > 1/2 and a moving core exponent
   0 < rho_* < min(1/2, (5 beta_- - 2)/4).
 Its actual spatially flat Hartree radiation has power
-  s^(-5 beta_-/2 + 2 rho_*).
+  s^(-5*betaMinus/2 + 2*rhoStar).
 The strictly positive flat gain and complete time-tail integrability are
 here derived, not supplied as external a priori decay assumptions.
 
@@ -38,7 +38,7 @@ theorem actual_Hartree_flat_gain_strict_pos
     (hrho : 0 < rho)
     (hscale : rho < (5 * beta - 2) / 4) :
     0 < actualHartreeFlatGain beta rho := by
-  have hpossible : 0 < 5 * beta - 2 := by linarith
+  have hpossible : 0 < 5 * beta - 2 := by linarith [hbeta]
   dsimp [actualHartreeFlatGain]
   linarith
 
