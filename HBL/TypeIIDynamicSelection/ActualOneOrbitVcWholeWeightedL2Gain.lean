@@ -121,8 +121,8 @@ theorem actual_one_orbit_Vc_whole_mixed_weighted_L2_square_le
         integral_mono_ae hWsq
           (hFsq.const_mul _) hPoint
       _ = (affineJapaneseWeight sigma b) ^ 2 *
-          (∫ r in Ioi (0 : ℝ), |F r| ^ 2) :=
-        integral_const_mul
+          (∫ r in Ioi (0 : ℝ), |F r| ^ 2) := by
+        rw [integral_const_mul]
   exact hBound
 
 /-- A proved weighted source squared-norm upper bound in terms of
