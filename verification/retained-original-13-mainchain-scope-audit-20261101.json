@@ -1,0 +1,192 @@
+{
+  "audit_date": "2026-11-01",
+  "manuscript_provenance": {
+    "private_original_filename": "HBL_Synchronized_Repair_FiniteProfileClosed_20261027.tex",
+    "original_sha256": "1db8c03fbbf7c6c8e4f194470291c3b52b3cbe18467319edbe341162878cac52",
+    "original_size_bytes": 226948,
+    "reconciled_private_filename": "HBL_DynamicTypeII_13_MainChain_20261101.tex",
+    "reconciled_private_sha256": "3eabefe53ee0b14493074d80700be54ed69e23b90de2b3a4d0b03a25dd63a629",
+    "reconciled_tex_uploaded_to_public_repo": false,
+    "main_target": "single genuine 3D energy-critical radial Hartree Type II orbit with rate selected from actual modulation PDE; no imposed rate",
+    "main_theorem_status": "target_not_proved",
+    "tex_compilation": "not performed; source theorem-environment counts checked independently"
+  },
+  "counting_rules": {
+    "count_eligible_manuscript_environments": [
+      "targettheorem",
+      "lemma",
+      "proposition",
+      "pendinglemma"
+    ],
+    "do_not_count": [
+      "verifiedlemma (13 unnumbered auxiliary lemmas)",
+      "repairprop (6 separate R-numbered verification propositions)",
+      "historical original environments no longer present in retained proof chain"
+    ]
+  },
+  "retained_core": {
+    "total": 13,
+    "accepted": 9,
+    "open": 4,
+    "percentage": 69.23,
+    "labels": [
+      {
+        "label": "thm:main",
+        "position": 1,
+        "historical_id": "old-1.1",
+        "status": "open",
+        "acceptance_basis": "open",
+        "lean_terminal": []
+      },
+      {
+        "label": "prop:modulation",
+        "position": 2,
+        "historical_id": "old-2.1",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.firstManuscriptModulationEnvironment_closed"
+        ]
+      },
+      {
+        "label": "lem:affine-charge",
+        "position": 3,
+        "historical_id": "old-2.2",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.AffineTail.secondManuscriptAffineTailEnvironment_closed"
+        ]
+      },
+      {
+        "label": "thm:Xi-mon-tail",
+        "position": 4,
+        "historical_id": "old-2.5",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.Monopole.monopole_first_correction_certified"
+        ]
+      },
+      {
+        "label": "prop:profile-cancel-stage2",
+        "position": 5,
+        "historical_id": "old-2.6",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.Monopole.revisedMonopoleCoreManuscriptEnvironment_closed"
+        ]
+      },
+      {
+        "label": "prop:kinematic-recovery-v2",
+        "position": 6,
+        "historical_id": "old-2.7",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Kinematic.kinematicRecovery_originalEnvironment_closed"
+        ]
+      },
+      {
+        "label": "prop:regular-flow-stage3",
+        "position": 7,
+        "historical_id": "old-2.10",
+        "status": "accepted",
+        "acceptance_basis": "closed_via_explicit_external_analysis_interface",
+        "lean_terminal": [
+          "HBL.RegularRadiation.regularRadiationFlow_originalEnvironment_closed"
+        ],
+        "physical_scope_warning": "Standard Hartree high-regularity local theory is an explicit cited external input, not an axiomatic Lean proof of PDE LWP"
+      },
+      {
+        "label": "prop:one-layer-stage3",
+        "position": 8,
+        "historical_id": "old-2.12",
+        "status": "open",
+        "acceptance_basis": "open",
+        "lean_terminal": [
+          "HBL.Profile.OneLayer.oneMinimalWeightCluster_eliminated"
+        ]
+      },
+      {
+        "label": "thm:finite-profile-stage3",
+        "position": 9,
+        "historical_id": "old-2.13",
+        "status": "open",
+        "acceptance_basis": "open",
+        "lean_terminal": [
+          "HBL.Profile.FiniteProfile.finiteProfile_recursion_certified"
+        ]
+      },
+      {
+        "label": "prop:global-H1-profile-v3",
+        "position": 10,
+        "historical_id": "old-2.14",
+        "status": "open",
+        "acceptance_basis": "open",
+        "lean_terminal": [
+          "HBL.Profile.GlobalH1.globalH1Matching_certified"
+        ]
+      },
+      {
+        "label": "prop:shooting-stage4",
+        "position": 11,
+        "historical_id": "old-5.1",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Shooting.revisedUnstableShootingManuscriptEnvironment_closed"
+        ]
+      },
+      {
+        "label": "thm:transversality",
+        "position": 12,
+        "historical_id": "old-A.2",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.Transversality.manuscript_transversality_environment_closed"
+        ]
+      },
+      {
+        "label": "lem:kernel-short",
+        "position": 13,
+        "historical_id": "old-C.1",
+        "status": "accepted",
+        "acceptance_basis": "revalidated_complete_original_environment",
+        "lean_terminal": [
+          "HBL.Modulation.AffineTail.kernelShortManuscriptEnvironment_closed"
+        ]
+      }
+    ]
+  },
+  "historical_original_ledger": {
+    "total": 21,
+    "accepted": 9,
+    "open": 4,
+    "withdrawn_unproved": 8,
+    "percentage": 42.86,
+    "withdrawn_labels": [
+      "thm:form-splitting-stage5",
+      "thm:slow-Feshbach-stage3",
+      "lem:Esl-pointwise-v2",
+      "thm:full-slow-modulation-v2",
+      "prop:single-green-stage4",
+      "prop:lossy-green-stage4",
+      "thm:joint-contraction-stage4",
+      "prop:center-stable-C1-v52"
+    ]
+  },
+  "scope_caveats": [
+    "This reconciles the denominator against the physically retained source manuscript; it proves ZERO additional original environments.",
+    "Original historical strict ledger 9/21 continues to be reported for longitudinal comparison.",
+    "Old 2.12 genuine physical three-region cancellation and positive source gain still OPEN.",
+    "Old 2.13 genuine finite-profile PDE residual/Hessian/Jacobian still OPEN.",
+    "Old 2.14 genuine full-profile H1 + terminal algebraic Kummer correction still OPEN.",
+    "Main PDE existence and dynamically selected Type II rate still OPEN.",
+    "The separate unnumbered and R-numbered auxiliary environments do not change the 9/13 core numerator or denominator.",
+    "The older 2026-10-27 manuscript previously contained incorrect prose declaring 2.12 and 2.13 closed; private reconciled revision explicitly corrects those claims.",
+    "Revised manuscript is kept private and is NOT uploaded to public HBL GitHub; the public file records only scope and hashes."
+  ]
+}
