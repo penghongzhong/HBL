@@ -67,7 +67,7 @@ theorem actual_one_orbit_Vc_whole_mixed_center_eq_exterior
   let a : ℝ := 1 / (4 * ell)
   have ha : 0 ≤ a := by dsimp [a]; positivity
   have hs : Ioi a ⊆ Ioi (0 : ℝ) :=
-    fun r hr => ha.trans_lt hr
+    fun r hr => lt_of_le_of_lt ha hr
   have hMask : (Ioi a).indicator F = F := by
     simpa only [F, a] using
       actual_one_orbit_Vc_whole_mixed_exterior_indicator ell hell
@@ -136,7 +136,7 @@ theorem actual_one_orbit_Vc_whole_mixed_Riesz_core_gain
     rw [← Ioc_union_Ioi_eq_Ioi ha.le]
     exact hNear.union hRow
   have hs : Ioi a ⊆ Ioi (0 : ℝ) :=
-    fun x hx => ha.trans_lt hx
+    fun x hx => ha.trans hx
   have hAbsMask :
       (Ioi a).indicator (fun rho => |F rho|) =
         (fun rho => |F rho|) := by
@@ -147,7 +147,9 @@ theorem actual_one_orbit_Vc_whole_mixed_Riesz_core_gain
         le_of_not_gt (by simpa only [mem_Ioi] using h)
       have hz := actual_one_orbit_Vc_whole_mixed_zero_below
         ell hell (r := rho) hbelow
-      simp only [Set.indicator_of_notMem h, abs_zero, hz]
+      rw [Set.indicator_of_notMem h]
+      have hfzero : F rho = 0 := hz
+      rw [hfzero, abs_zero]
   have hAbsEq :
       (∫ rho in Ioi a, |F rho|) =
         ∫ rho in Ioi (0 : ℝ), |F rho| := by
