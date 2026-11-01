@@ -9,3 +9,8 @@ set_option autoImplicit false
 
 #check @HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_inverse_source_coherent
 #print axioms HBL.TypeIIDynamicSelection.actual_one_layer_Kummer_inverse_source_coherent
+
+-- Verify upstream same-PDE Hartree radiation elimination as imported
+-- by the genuine Kummer source-coherence theorem.
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_PDE_radiation_evolution_cancelled
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_PDE_radiation_evolution_cancelled
