@@ -1,4 +1,52 @@
 # HBL off-terminal flat radiation: non-prescribed-rate shortest proof path
+
+
+## 2026-11-01 priority correction: the manuscript's epsilon_flat is SPATIAL
+
+The private original 2.12 derives epsilon_flat from eqs.
+flat-bound-stage3 / flat-core-stage3, not from vanishing high-order
+terminal time jets. Its actual regular radiation decomposes as
+\[
+j_g(t)=z_g(t,0),\qquad
+z_g^\flat(t,r)=z_g(t,r)-j_g(t)\chi(r),
+\]
+and the needed on-core estimate, including time-jet versions, is
+\[
+|\partial_t^a\partial_r^k z_g^\flat(t,r)|
+ \le C_{N}\|g\|_{\mathcal R_N}r^{2-k},
+\quad 0\le k\le2,\quad 0\le a\le N+1.
+\]
+The underlying analytic input is smooth 3D radial regularity,
+so \(\partial_r\partial_t^a z_g(t,0)=0\), plus uniform bounded
+second radial derivatives for each physical time jet. Two
+Banach-valued mean-value inequalities then DERIVE the spatial
+quadratic bound. On the physical core \(\ell(s) R\le1\),
+\[
+\|Z_g^\flat(s,R)\|
+ \le C\,\ell(s)^{5/2}R^2
+ = C\,\lambda(s)^{-5/2}R^2,
+\]
+which is exactly the original flat-core-stage3 power. A trapping
+window derived from actual modulation gives
+\(\lambda(s)\ge c s^{\beta_-}\) with \(\beta_->1/2\);
+choose \(0<\rho_*<(5\beta_- -2)/4\) to obtain
+\(\epsilon_{\rm flat}=5\beta_-/2-2\rho_*-1>0\)
+and \(\sup_{R\le s^{\rho_*}}\|Z_g^\flat\|
+ \le Cs^{-1-\epsilon_{\rm flat}}\).
+
+PENDING native Lean validation:
+- actual spatial mean-value proof and actual critical rescaling:
+  https://github.com/penghongzhong/HBL/actions/runs/41308904236
+- optional terminal second-jet route:
+  https://github.com/penghongzhong/HBL/actions/runs/41308310681
+- independent quadratic time bound from bounded second time jet:
+  https://github.com/penghongzhong/HBL/actions/runs/41308705664
+
+The radial-origin regularity / Sobolev-to-C² embedding must still
+be provided from the true high-regularity Hartree flow, and the
+time-jet and path Lipschitz variants still need proof. The current
+analytic interface is not sufficient to declare original 2.12 accepted.
+
 Date: 2026-11-01. Status: mathematical proof plan, **NOT a Lean-accepted
 original manuscript environment**.
 
