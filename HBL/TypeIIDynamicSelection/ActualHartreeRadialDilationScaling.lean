@@ -34,8 +34,8 @@ theorem actual_Hartree_critical_rescaled_radial_deriv
     deriv (rescalePhysicalRadiation ell z) r =
       ((Real.sqrt ell : ℂ) * ((ell : ℂ) * deriv z (ell * r))) := by
   have hscale : HasDerivAt (fun x : ℝ => ell * x) ell r :=
-    (hasDerivAt_id r).const_mul ell
-  have hc := hz.hasDerivAt.comp r hscale
+    hasDerivAt_const_mul ell
+  have hc := hz.hasDerivAt.scomp r hscale
   have h := hc.const_mul (Real.sqrt ell : ℂ)
   change deriv (fun x : ℝ => (Real.sqrt ell : ℂ) * z (ell * x)) r = _
   convert h.deriv using 1
