@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitCoreCubicSource
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_full_Hartree_core_cubic_source_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_full_Hartree_core_cubic_source_gain
