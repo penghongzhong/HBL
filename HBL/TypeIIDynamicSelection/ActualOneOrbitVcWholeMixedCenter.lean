@@ -71,7 +71,9 @@ theorem actual_one_orbit_Vc_whole_mixed_pointwise_two_five_gain
       _ ≤ (4 * B ^ 3) * (ell ^ 2 * Real.sqrt ell) :=
         mul_le_mul_of_nonneg_left
           (mul_le_mul_of_nonneg_right hp (Real.sqrt_nonneg ell))
-          (by dsimp [B]; positivity)
+          (by
+            have hB : 0 < B := actual_one_orbit_moving_envelope_pos
+            positivity)
       _ = _ := by ring
   have hquad :
       6 * B ^ 2 * ell ^ 3 ≤
