@@ -60,7 +60,7 @@ theorem actual_complex_local_cubic_time_derivative_zero
       (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ) * u t) =
         ((fun t : ℝ => ‖u t‖ ^ 2) • u) := by
     funext t
-    simp only [Pi.smul_apply, Complex.real_smul]
+    rfl
   rw [he]
   simpa [hZero] using hc
 
