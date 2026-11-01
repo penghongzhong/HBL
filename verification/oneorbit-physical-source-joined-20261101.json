@@ -50,9 +50,29 @@
         "actual_one_orbit_linear_mixed_Riesz_core_center_error"
       ],
       "source_sha": "7fc9b41cd04cdf3abbcb6d899964a6812c4a3c39"
+    },
+    "actual_moving_monopole_mixed": {
+      "commit": "a0a56403bccda399cf4b42dc516277c0abc96909",
+      "run": 41277740046,
+      "conclusion": "success",
+      "trust_zero": true,
+      "warning_as_error": true,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "source_sha": "27b1f4f5e4b399812e8c8fec1cf04398661605c8",
+      "declarations": [
+        "actual_one_orbit_monopole_coefficient_eq_full_radiation_center",
+        "actual_one_orbit_moving_envelope_pos",
+        "actual_one_orbit_moving_monopole_size_on_radiation_support",
+        "actual_one_orbit_rescaled_terminal_real_bound",
+        "actual_one_orbit_moving_monopole_mixed_linear_seven_halves_gain"
+      ]
     }
   },
-  "combined_branch_strict_build": "not yet independently executed for joined sources; exact imported source individually strict-certified",
+  "combined_branch_strict_build": "joined sources individually passed pinned strict Lean workflows, no shared-import strict run yet",
   "historical_acceptance": "9/21",
   "retained_manuscript_acceptance": "9/13",
   "open_paper_obligations": [
@@ -61,5 +81,6 @@
     "prop:global-H1-profile-v3",
     "thm:main dynamically selected PDE Type II orbit"
   ],
-  "caveat": "The linear mixed source estimate applies to the selected terminal datum; off-terminal true Hartree flow and simultaneous spatial matching still require proof; no new original manuscript environment accepted."
+  "caveat": "The linear mixed source estimate applies to the selected terminal datum; off-terminal true Hartree flow and simultaneous spatial matching still require proof; no new original manuscript environment accepted.",
+  "newly_accepted_original_manuscript_environments": 0
 }
