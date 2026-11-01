@@ -52,14 +52,16 @@ theorem actual_complex_local_cubic_time_derivative_zero
   have hSq : HasDerivAt (fun t => ‖u t‖ ^ 2) 0 T := by
     simpa only [hZero, Complex.zero_re, Complex.zero_im,
       zero_mul, mul_zero, add_zero] using hSqReal
-  have hSqComplex :
-      HasDerivAt (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ))
-        (0 : ℂ) T :=
-    hSq.ofReal_comp
-  have hc : HasDerivAt
-      (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ) * u t)
-      ((0 : ℂ) * u T + ((‖u T‖ ^ 2 : ℝ) : ℂ) * du) T := by
-    simpa only [Pi.mul_apply] using hSqComplex.mul hU
+  -- Use the native real scalar action on the complex Hilbert space.
+  -- The complex-algebra multiplication theorem uses a *different* inferred
+  -- normed-module instance and is not definitionally interchangeable here.
+  have hc := hSq.smul hU
+  have he :
+      (fun t : ℝ => ((‖u t‖ ^ 2 : ℝ) : ℂ) * u t) =
+        (fun t : ℝ => (‖u t‖ ^ 2 : ℝ) • u t) := by
+    funext t
+    simp only [Complex.real_smul]
+  rw [he]
   simpa [hZero] using hc
 
 /-- The genuine radial nonlocal Hartree term, not a local-cubic
