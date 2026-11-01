@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeWeightedL2Gain
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_weighted_L2_square_le
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_weighted_L2_square_le
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_weighted_L2_fourth_order
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_weighted_L2_fourth_order
