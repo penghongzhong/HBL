@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitVcWholeMixedL1
+
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualOneOrbitVcWholeMixedL1Envelope
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_measurable
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_Hartree_L1_center_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Vc_whole_mixed_Hartree_L1_center_gain
