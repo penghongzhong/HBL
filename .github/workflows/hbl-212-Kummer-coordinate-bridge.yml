@@ -1,0 +1,119 @@
+name: HBL genuine physical-to-Kummer sqrt(q) cutoff geometry strict audit
+on:
+  push:
+    branches: [hbl-212-physical-spatial-commutator-gain-20261102]
+    paths:
+      - '.github/workflows/hbl-212-Kummer-coordinate-bridge.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoreSeparation*.lean'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-212-Kummer-coordinate-bridge-20261102
+  cancel-in-progress: true
+jobs:
+  strict-joint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-typeii-dynamic-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve pinned mathlib dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Restore last successful compiled project
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-physical-C2-overlap-cutoff-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/ActualHartreePhysicalSpatialCutoffSourceGain*.lean') }}
+          restore-keys: |
+            hbl-212-joined-physical-flow-and-inner-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-212-physical-source-integration-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-212-physical-spatial-commutator-gain-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Strict build source and kernel axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          source=Path('HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge.lean').read_text()
+          s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
+          PY
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeKummerCoordinateBridge HBL.TypeIIDynamicSelection.ActualHartreeKummerCoordinateBridgeAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridgeAudit.lean 2>&1 | tee evidence/audit.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('evidence/audit.log').read_text()
+          for name in ['actual_Hartree_cutoff_coordinate_rescale',
+                       'actual_Hartree_physical_Kummer_cutoff_coordinate_exact',
+                       'actual_Hartree_Kummer_coordinate_moment_annulus_covered',
+                       'actual_Hartree_Kummer_coordinate_original_source_exact']:
+            n='HBL.TypeIIDynamicSelection.'+name
+            assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
+            m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
+            assert m,'missing axiom audit: '+n
+            actual={t.strip() for t in m.group(1).split(',') if t.strip()}
+            assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
+          assert 'sorryAx' not in s
+          print('STRICT PASS: true physical bubble-to-Kummer sqrt(q) coordinate change and moment-selected local exact Kummer Green equation; 2.12 global region matching still OPEN')
+          PY
+      - name: Save incremental HBL Lean build cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-212-Kummer-coordinate-bridge-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+      - name: Store audit evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean > evidence/source-hashes.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-212-Kummer-coordinate-bridge-audit
+          path: evidence
+          retention-days: 14
