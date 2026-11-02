@@ -109,8 +109,6 @@ theorem actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain
       HasDerivAt
         (fun t => actualPhysicalInverseSquareMoment (z t))
         (actualMomentLaplacianFlux (z (time s))) (time s))
-    (hMomentPos : ∀ s, s0 ≤ s →
-      0 < actualPhysicalInverseSquareMoment (z (time s)))
     (hTrap : ∀ s, s0 ≤ s →
       ell s ≤ C * s ^ (-beta))
     (hm : ContinuousAt (fun t => radialPhysicalQuarticMoment (z t)) T)
@@ -124,15 +122,16 @@ theorem actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain
           |deriv (fun t => actualMomentInnerCutoff ell z time t r) s +
             b s * r * deriv (actualMomentInnerCutoff ell z time s) r| ≤
             K * s ^ (-1 - actualPDEMomentCutoffGain beta) := by
-  let S : Set ℝ := Ici s0
+  let S : Set ℝ := {s : ℝ |
+    s0 ≤ s ∧ 0 < actualPhysicalInverseSquareMoment (z (time s))}
   obtain ⟨Cchi,hCchi,hCut⟩ :=
     actual_Hartree_one_orbit_uniform_moment_cutoff_transport
       ell b z time S
-      (by intro s hs; exact hEll s hs)
-      (by intro s hs; exact hEllPos s hs)
-      (by intro s hs; exact hClock s hs)
-      (by intro s hs; exact hPDEMoment s hs)
-      (by intro s hs; exact hMomentPos s hs)
+      (by intro s hs; exact hEll s hs.1)
+      (by intro s hs; exact hEllPos s hs.1)
+      (by intro s hs; exact hClock s hs.1)
+      (by intro s hs; exact hPDEMoment s hs.1)
+      (by intro s hs; exact hs.2)
   obtain ⟨J,hJ,hNear⟩ :=
     actual_Hartree_terminal_flux_bounded_on_physical_clock
       z time T hm hFlux hmT hPhysicalClock
@@ -142,8 +141,6 @@ theorem actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain
       have hs : s0 ≤ s0 := le_rfl
       have he := hEllPos s0 hs
       have htr := hTrap s0 hs
-      have hpow : 0 ≤ s0 ^ (-beta) :=
-        Real.rpow_nonneg (by linarith) _
       by_contra h
       have hzero : C = 0 := le_antisymm (le_of_not_gt h) hC
       rw [hzero, zero_mul] at htr
@@ -158,6 +155,9 @@ theorem actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain
   have htime : 1 ≤ s := hs0.trans hs
   have hM : 0 < radialPhysicalQuarticMoment (z (time s)) :=
     hFluxS.1
+  have h3DMoment : 0 <
+      actualPhysicalInverseSquareMoment (z (time s)) := by
+    simpa only [actual_physical_inverse_square_radial_reduction] using hM
   have hR :
       |actualMomentLaplacianFlux (z (time s))| /
         radialPhysicalQuarticMoment (z (time s)) ≤ J :=
@@ -173,7 +173,7 @@ theorem actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain
         (2 * (ell s) ^ 2 *
           (|actualMomentLaplacianFlux (z (time s))| /
             radialPhysicalQuarticMoment (z (time s)))) * Cchi :=
-      hCut s hs r hr
+      hCut s ⟨hs,h3DMoment⟩ r hr
     _ ≤ (2 * (ell s) ^ 2 * J) * Cchi := by
       exact mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hR (by positivity)) hCchi.le
