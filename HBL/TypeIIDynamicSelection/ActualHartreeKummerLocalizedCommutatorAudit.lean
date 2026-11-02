@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeKummerLocalizedCommutator
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actualHartreeFrozenKummerRadialApply
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_frozen_Kummer_actual_cutoff_commutator
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_frozen_Kummer_actual_cutoff_commutator
