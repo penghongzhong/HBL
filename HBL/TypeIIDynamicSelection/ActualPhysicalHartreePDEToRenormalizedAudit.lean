@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualPhysicalHartreePDEToRenormalized
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_time_plus_dilation_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_time_plus_dilation_exact
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_implies_renormalized_PDE
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_implies_renormalized_PDE
