@@ -149,7 +149,7 @@ theorem actual_Hartree_one_orbit_full_shell_from_PDE_moment_and_Strauss
             2 * radialHartreeRowBoundConstant *
               (2 * (B ^ 4 + A ^ 4)) * B ^ 3) *
             (ell s) ^ 2 * Real.sqrt (ell s) :=
-        add_le_add_right hTimeBound _
+        add_le_add_left hTimeBound _
     _ = ((2 * Cchi * J * B) +
           ((2 * C1 * (hartreeKappa * M / 4) * B +
              (C2 + 2 * C1) * (hartreeKappa * M / 4) ^ 2 * B) +
