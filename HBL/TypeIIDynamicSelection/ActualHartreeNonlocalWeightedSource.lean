@@ -95,8 +95,8 @@ theorem actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
       _ = A := rfl
   have hDom : ∀ r : ℝ,
       ‖(Ioi (0 : ℝ)).indicator F r‖ ≤
-        ‖(Ioc (0 : ℝ) (2 * R)).indicator
-          (fun _ : ℝ => A) r‖ := by
+        (Ioc (0 : ℝ) (2 * R)).indicator
+          (fun _ : ℝ => A) r := by
     intro r
     by_cases hpos : 0 < r
     · have hposmem : r ∈ Ioi (0 : ℝ) := hpos
@@ -104,8 +104,7 @@ theorem actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
       · have hinside : r ∈ Ioc (0 : ℝ) (2 * R) :=
           ⟨hpos, hcap⟩
         rw [indicator_of_mem hposmem, indicator_of_mem hinside,
-          Real.norm_eq_abs, abs_of_nonneg (hFnonneg r),
-          Real.norm_eq_abs, abs_of_nonneg hA]
+          Real.norm_eq_abs, abs_of_nonneg (hFnonneg r)]
         exact hBound r hpos hcap
       · have hfar : 2 * R ≤ r := le_of_not_ge hcap
         have hzero : actualHartreeNonlocalCutoffError R ell z r = 0 :=
@@ -117,13 +116,12 @@ theorem actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
         have hout : r ∉ Ioc (0 : ℝ) (2 * R) := by
           intro hmem
           exact hcap hmem.2
-        rw [indicator_of_mem hposmem, indicator_of_notMem hout, hFzero]
-        simp
+        simp [hposmem, hout, hFzero]
     · have hnotpos : r ∉ Ioi (0 : ℝ) := hpos
       have hout : r ∉ Ioc (0 : ℝ) (2 * R) := by
         intro hmem
         exact hpos hmem.1
-      rw [indicator_of_notMem hnotpos, indicator_of_notMem hout]
+      simp [hnotpos, hout]
   have hMajor :
       MemLp ((Ioc (0 : ℝ) (2 * R)).indicator
           (fun _ : ℝ => A)) 2 (volume : Measure ℝ) :=
