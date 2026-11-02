@@ -72,7 +72,8 @@ private theorem radial_complex_commutator_norm_bound
         ‖(2 : ℂ) * u * g‖ + ‖(v + w * u) * f‖ :=
           norm_add_le _ _
     _ = 2 * (‖u‖ * ‖g‖) + ‖v + w * u‖ * ‖f‖ := by
-      simp only [norm_mul, norm_ofNat]
+      have hnormTwo : ‖(2 : ℂ)‖ = (2 : ℝ) := by norm_num
+      simp only [norm_mul, hnormTwo]
       ring
     _ ≤ 2 * ((C1 * A * ell) * (B * ell)) +
         (C2 * A ^ 2 * ell ^ 2 +
@@ -184,7 +185,8 @@ theorem actual_Hartree_full_spatial_cutoff_source_strict_gain
       _ = C2 * A ^ 2 * ell ^ 2 := by ring
   have hrCoef : ‖(2 : ℂ) / (r : ℂ)‖ ≤ 2 * A * ell := by
     have hEq : ‖(2 : ℂ) / (r : ℂ)‖ = (2 : ℝ) / r := by
-      simp only [norm_div, norm_ofNat, Complex.norm_real,
+      have hnormTwo : ‖(2 : ℂ)‖ = (2 : ℝ) := by norm_num
+      simp only [norm_div, hnormTwo, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos hr]
     calc
       ‖(2 : ℂ) / (r : ℂ)‖ = (2 : ℝ) / r := hEq
