@@ -90,14 +90,10 @@ theorem actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
     actual_Hartree_physical_scale_clock_explicit_time_jet
       ell time b z s r L zt zr hEll hell hClock hJoint hJac
   have hZTime : DifferentiableAt ℝ (fun tau : ℝ => Z tau r) s := by
-    have h := actual_Hartree_dynamic_phase_radiation_time_hasDerivAt
-      gamma (fun tau x => rescalePhysicalRadiation
-          (ell tau) (z (time tau)) x)
-      s r gs
-      (deriv (fun tau => rescalePhysicalRadiation
-        (ell tau) (z (time tau)) r) s)
-      hGamma hUnphasedTime.differentiableAt.hasDerivAt
-    exact h.differentiableAt
+    have hPhase := actual_Hartree_dynamic_unit_phase_hasDerivAt
+      gamma s gs hGamma
+    have hp := hPhase.mul hUnphasedTime
+    exact hp.differentiableAt
   have hScaledSpace : ∀ x : ℝ,
       DifferentiableAt ℝ
         (rescalePhysicalRadiation (ell s) (z (time s))) x := by
