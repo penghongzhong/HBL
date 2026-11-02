@@ -7,6 +7,9 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitTerminalRieszEnvelope*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalNonlocalSharpGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeFullCutoffSupport*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeNonlocalWeightedSource*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeRieszMeasurability*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentRadiusWindow*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneLayerMovingParametrixTransport*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualCutoffUniformTransport.lean'
   workflow_dispatch:
