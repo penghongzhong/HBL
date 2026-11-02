@@ -133,7 +133,15 @@ theorem actual_Kummer_Cauchy_corrected_classical_equation
     have hQ : HasDerivAt (fun y => K.psi (y - z)) (K.dpsi (x - z)) x := by
       simpa only [one_smul, Function.comp_def] using hPsi
     have h := (hB.add (hP.const_mul a)).add (hQ.const_mul c)
-    simpa only [actualKummerCauchyValue, actualKummerCauchyDeriv] using h
+    have hfun :
+        ((physicalLocalKummerValue K d F +
+          fun y => a * K.phi (y-z)) +
+          fun y => c * K.psi (y-z)) =
+          actualKummerCauchyValue K d F a c := by
+      funext y
+      rfl
+    rw [hfun] at h
+    exact h
   have hFirst := hFirstOpen r hOpen
   have hBase := physicalLocalKummer_hasDerivAt K d hd hde F hF hr
   have ht : r - z ∈ Icc (-eps) eps := by
@@ -145,15 +153,25 @@ theorem actual_Kummer_Cauchy_corrected_classical_equation
   have hP2 : HasDerivAt (fun y => K.dphi (y - z))
       (-(frozenFirstCoeff r * K.dphi (r - z) +
         frozenZeroCoeff mu theta * K.phi (r - z))) r := by
-    simpa only [one_smul, Function.comp_def, add_sub_cancel_left] using hPhi2
+    rw [show z + (r-z) = r by ring] at hPhi2
+    simpa only [one_smul, Function.comp_def] using hPhi2
   have hQ2 : HasDerivAt (fun y => K.dpsi (y - z))
       (-(frozenFirstCoeff r * K.dpsi (r - z) +
         frozenZeroCoeff mu theta * K.psi (r - z))) r := by
-    simpa only [one_smul, Function.comp_def, add_sub_cancel_left] using hPsi2
+    rw [show z + (r-z) = r by ring] at hPsi2
+    simpa only [one_smul, Function.comp_def] using hPsi2
   have hv : HasDerivAt (actualKummerCauchyDeriv K d F a c)
       (actualKummerCauchySecond K d F a c r) r := by
     have h := (hBase.2.add (hP2.const_mul a)).add (hQ2.const_mul c)
-    simpa only [actualKummerCauchyDeriv, actualKummerCauchySecond] using h
+    have hfun :
+        ((physicalLocalKummerDeriv K d F +
+          fun y => a * K.dphi (y-z)) +
+          fun y => c * K.dpsi (y-z)) =
+          actualKummerCauchyDeriv K d F a c := by
+      funext y
+      rfl
+    rw [hfun] at h
+    exact h
   have heq : (deriv (actualKummerCauchyValue K d F a c)) =ᶠ[𝓝 r]
       actualKummerCauchyDeriv K d F a c := by
     filter_upwards [Ioo_mem_nhds hOpen.1 hOpen.2] with x hx
@@ -161,7 +179,7 @@ theorem actual_Kummer_Cauchy_corrected_classical_equation
   have hSecond :
       HasDerivAt (deriv (actualKummerCauchyValue K d F a c))
         (actualKummerCauchySecond K d F a c r) r :=
-    hv.congr_of_eventuallyEq heq.symm
+    hv.congr_of_eventuallyEq heq
   refine ⟨hFirst, hSecond, ?_⟩
   rw [hSecond.deriv, hFirst.deriv]
   have hSource := physicalLocalKummer_equation K d F r
