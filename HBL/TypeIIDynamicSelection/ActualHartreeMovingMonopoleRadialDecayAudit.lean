@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleRadialDecay
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_global_radial_decay
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_abs_le_inverse_radius
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_global_radial_decay
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_abs_le_inverse_radius
