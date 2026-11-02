@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOneOrbitOffterminalWeightedRiesz
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_full_nonlocal_weighted_Riesz_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_full_nonlocal_weighted_Riesz_gain
