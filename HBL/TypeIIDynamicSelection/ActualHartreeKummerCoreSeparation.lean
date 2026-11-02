@@ -91,8 +91,11 @@ theorem actual_Hartree_moment_cutoff_covers_Kummer_annulus
     positivity
   have hden0 : 0 < hartreeKappa * M * (z + d) := by positivity
   have hsmallProduct :
-      (hartreeKappa * M * (z + d)) * ell ≤ 4 :=
-    (le_div_iff₀ hden0).mp hellSmall
+      (hartreeKappa * M * (z + d)) * ell ≤ 4 := by
+    calc
+      (hartreeKappa * M * (z + d)) * ell =
+          ell * (hartreeKappa * M * (z + d)) := by ring
+      _ ≤ 4 := (le_div_iff₀ hden0).mp hellSmall
   have hProduct :
       (hartreeKappa * ell * m) * (z + d) ≤ 4 := by
     calc
