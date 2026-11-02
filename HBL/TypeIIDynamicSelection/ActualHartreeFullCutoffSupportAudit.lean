@@ -1,0 +1,14 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFullCutoffSupport
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_inner_overlap_cutoff_far_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_inner_overlap_cutoff_far_zero
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_far_source_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_far_source_zero
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_Laplacian_cutoff_far_source_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_Laplacian_cutoff_far_source_zero
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_sharp_and_compact_support
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_sharp_and_compact_support
