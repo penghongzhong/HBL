@@ -31,7 +31,7 @@ theorem actual_Hartree_inner_overlap_cutoff_far_zero
     (R r : ℝ) (hR : 0 < R) (hfar : 2 * R ≤ r) :
     actualOneLayerInnerOverlapCutoff R r = 0 := by
   have hr : (2 : ℝ) ≤ r / R :=
-    (le_div_iff₀ hR).2 (by simpa only [mul_comm] using hfar)
+    (le_div_iff₀ hR).2 hfar
   unfold actualOneLayerInnerOverlapCutoff
   rw [cutoff_one_of_two_le (r / R) hr]
   norm_num
@@ -48,9 +48,7 @@ theorem actual_Hartree_nonlocal_cutoff_far_source_zero
         complexRadialHartreeNonlinearity f r = 0 := by
   have hz : actualOneLayerInnerOverlapCutoff R r = 0 :=
     actual_Hartree_inner_overlap_cutoff_far_zero R r hR hfar
-  unfold complexRadialHartreeNonlinearity
-  simp only [hz, zero_mul, norm_zero, zero_pow (by norm_num : (2 : ℕ) ≠ 0),
-    Complex.ofReal_zero, mul_zero, sub_zero]
+  simp [complexRadialHartreeNonlinearity, hz]
 
 /-- Both radial derivative costs R^(-1) and R^(-2) vanish
 identically in the far field of the TRUE 3D radial Laplacian. -/
@@ -64,7 +62,7 @@ theorem actual_Hartree_radial_Laplacian_cutoff_far_source_zero
       actualOneLayerInnerOverlapCutoff R r *
         complexRadialLaplacian f r = 0 := by
   have hr : (2 : ℝ) < r / R :=
-    (lt_div_iff₀ hR).2 (by simpa only [mul_comm] using hfar)
+    (lt_div_iff₀ hR).2 hfar
   have hd1 : deriv cutoff (r / R) = 0 :=
     actual_fixed_cutoff_deriv_zero_of_gt_two hr
   have hd2 : deriv (deriv cutoff) (r / R) = 0 :=
