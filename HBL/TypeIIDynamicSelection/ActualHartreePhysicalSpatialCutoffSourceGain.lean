@@ -41,7 +41,7 @@ open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 private theorem radial_complex_commutator_norm_bound
     (u v w f g : ℂ) (C1 C2 A B ell : ℝ)
     (hC1 : 0 ≤ C1) (hC2 : 0 ≤ C2)
-    (hA : 0 ≤ A) (hB : 0 ≤ B) (hell : 0 ≤ ell)
+    (hA : 0 ≤ A) (_hB : 0 ≤ B) (hell : 0 ≤ ell)
     (hu : ‖u‖ ≤ C1 * A * ell)
     (hv : ‖v‖ ≤ C2 * A ^ 2 * ell ^ 2)
     (hw : ‖w‖ ≤ 2 * A * ell)
