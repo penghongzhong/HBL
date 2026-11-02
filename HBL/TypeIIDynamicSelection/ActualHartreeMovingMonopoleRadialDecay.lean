@@ -27,7 +27,7 @@ open Set
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- The exact physical moving-cutoff monopole satisfies a uniform
 radial 1/r envelope, for ANY real moment-selected amplitude c.
