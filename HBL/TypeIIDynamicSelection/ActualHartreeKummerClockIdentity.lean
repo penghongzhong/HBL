@@ -58,7 +58,11 @@ theorem actual_Hartree_Kummer_cutoff_true_physical_clock
     ell tau hell htau
   unfold actualHartreeKummerCoordinateCutoffRadius
     actualHartreeMomentCutoffRadius
-  rw [← mul_assoc, hScale]
-  ring
+  have hDen :
+      hartreeKappa * (ell * Real.sqrt (tau / ell ^ 2)) * m =
+        hartreeKappa * m * Real.sqrt tau := by
+    rw [hScale]
+    ring
+  rw [hDen]
 
 end HBL.TypeIIDynamicSelection
