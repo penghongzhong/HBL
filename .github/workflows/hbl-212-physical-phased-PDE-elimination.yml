@@ -6,6 +6,7 @@ on:
       - '.github/workflows/hbl-212-physical-phased-PDE-elimination.yml'
       - 'HBL/TypeIIDynamicSelection/ActualPhysicalHartreePhasedPDEElimination*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualPhysicalHartreePDEToRenormalized*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeRadialLaplacianScaling*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualRadiationSpatialFlatness.lean'
   workflow_dispatch:
 permissions:
