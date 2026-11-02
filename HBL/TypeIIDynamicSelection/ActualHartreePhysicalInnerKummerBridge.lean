@@ -74,10 +74,16 @@ theorem actual_Hartree_two_channel_inner_Kummer_chain_rule
     hasDerivAt_const_mul k
   have hp : HasDerivAt (fun x : ℝ => (up (k * x) : ℂ))
       ((k * deriv up (k * r) : ℝ) : ℂ) r := by
-    convert (hup.hasDerivAt.scomp r hk).ofReal_comp using 1 <;> ring
+    convert (hup.hasDerivAt.scomp r hk).ofReal_comp using 1
+    · funext x
+      rfl
+    · ring
   have hm : HasDerivAt (fun x : ℝ => (um (k * x) : ℂ))
       ((k * deriv um (k * r) : ℝ) : ℂ) r := by
-    convert (hum.hasDerivAt.scomp r hk).ofReal_comp using 1 <;> ring
+    convert (hum.hasDerivAt.scomp r hk).ofReal_comp using 1
+    · funext x
+      rfl
+    · ring
   change HasDerivAt
     (fun x : ℝ => (up (k * x) : ℂ) + Complex.I * (um (k * x) : ℂ))
     (((k * deriv up (k * r) : ℝ) : ℂ) +
