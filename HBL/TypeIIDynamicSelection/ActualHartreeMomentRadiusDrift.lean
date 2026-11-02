@@ -70,7 +70,6 @@ theorem actual_Hartree_physical_moment_radius_drift_exact
     · funext t
       simp only [Pi.mul_apply, Function.comp_apply]
     · dsimp [m]
-      ring
   let d : ℝ :=
     hartreeKappa * (-(b s * ell s)) * m +
       (hartreeKappa * ell s) * (dm * (ell s)^2)
