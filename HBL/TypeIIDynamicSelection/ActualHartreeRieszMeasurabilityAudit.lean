@@ -1,0 +1,11 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeRieszMeasurability
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_radialHartreePotential_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_radialHartreePotential_measurable
+
+#check @HBL.TypeIIDynamicSelection.actual_complexRadialHartreeNonlinearity_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_complexRadialHartreeNonlinearity_measurable
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_error_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_cutoff_error_measurable
