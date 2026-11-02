@@ -270,7 +270,7 @@ theorem actual_Hartree_normalized_Kummer_true_shell_cutoff_bound
         add_le_add le_rfl hMul
       _ = C1 + (C2 + 2 * C1) / R ^ 2 := by
         field_simp [hR.ne']
-        <;> ring
+        ring
   exact hOld.trans (add_le_add le_rfl
     (mul_le_mul_of_nonneg_right hCoeffGain (norm_nonneg (u r))))
 
