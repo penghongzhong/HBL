@@ -159,7 +159,6 @@ theorem revised_one_layer_physical_local_source_certified
   have hq : 0 < q s := by
     rw [hClockS]
     exact div_pos htau (sq_pos_of_pos hEllS)
-  have hsqrt : 0 < Real.sqrt (q s) := Real.sqrt_pos.2 hq
   have hmPos :
       0 < radialPhysicalQuarticMoment (z (time s)) := hMomentS.1
   have hR :

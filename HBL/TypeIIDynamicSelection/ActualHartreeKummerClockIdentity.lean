@@ -50,7 +50,7 @@ by the remaining physical time and genuine Hartree quartic moment,
 not by the unknown rate lambda(t) of the Type-II blowup. -/
 theorem actual_Hartree_Kummer_cutoff_true_physical_clock
     (ell tau m : ℝ)
-    (hell : 0 < ell) (htau : 0 < tau) (hm : 0 < m) :
+    (hell : 0 < ell) (htau : 0 < tau) (_hm : 0 < m) :
     actualHartreeKummerCoordinateCutoffRadius ell
         (tau / ell ^ 2) m =
       4 / (hartreeKappa * m * Real.sqrt tau) := by
