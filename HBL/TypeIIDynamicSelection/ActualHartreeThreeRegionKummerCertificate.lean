@@ -69,7 +69,7 @@ theorem actual_Hartree_2_12_true_remote_Kummer_solution_certificate
           (∀ x : PhysicalAnnulus z (eps / 2),
              T mu theta (actualHartreePDEResidualAnnulusSource
                V Z b omega s hcontinuous) x = (u x, v x)) ∧
-          (∀ (r : ℝ) (hr : r ∈ PhysicalAnnulus z (eps / 2)),
+          (∀ (r : ℝ) (_hr : r ∈ PhysicalAnnulus z (eps / 2)),
              HasDerivAt u (v r) r ∧
              HasDerivAt (deriv u) (w r) r ∧
              deriv (deriv u) r +
