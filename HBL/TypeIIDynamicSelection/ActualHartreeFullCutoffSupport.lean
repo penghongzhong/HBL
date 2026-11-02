@@ -71,4 +71,50 @@ theorem actual_Hartree_radial_Laplacian_cutoff_far_source_zero
   simp only [hd1, hd2, neg_zero, zero_div, Complex.ofReal_zero,
     zero_mul, add_zero, zero_add]
 
+
+/-- The actual scale-dependent quartic Hartree commutator,
+including both full Riesz potentials. -/
+def actualHartreeNonlocalCutoffError
+    (R ell : ℝ) (z : ℝ → ℂ) (r : ℝ) : ℂ :=
+  complexRadialHartreeNonlinearity
+      (fun x => actualOneLayerInnerOverlapCutoff R x *
+        rescalePhysicalRadiation ell z x) r -
+    actualOneLayerInnerOverlapCutoff R r *
+      complexRadialHartreeNonlinearity
+        (rescalePhysicalRadiation ell z) r
+
+/-- The sharp physical nonlocal source estimate and the ACTUAL
+compact observation support hold simultaneously. This is exactly the
+pair needed before converting the true source into a weighted L2
+estimate, not a free abstract source-order label. -/
+theorem actual_Hartree_nonlocal_cutoff_sharp_and_compact_support
+    (ell R B D : ℝ) (hell : 0 < ell) (hR : 0 < R)
+    (hD : 0 ≤ D) (hB : 0 ≤ B)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    (hzAmp : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
+    (hzQuartic : ∀ u : ℝ, 0 < u →
+      ‖z u‖ ^ 4 ≤ D * bubble u ^ 2) :
+    ∀ r : ℝ, 0 < r →
+      (‖actualHartreeNonlocalCutoffError R ell z r‖ ≤
+        (2 * radialHartreeRowBoundConstant * D * B ^ 3) *
+          ell ^ 2 * Real.sqrt ell) ∧
+      (2 * R ≤ r → actualHartreeNonlocalCutoffError R ell z r = 0) := by
+  intro r hr
+  constructor
+  · change ‖complexRadialHartreeNonlinearity
+      (fun x => actualOneLayerInnerOverlapCutoff R x *
+        rescalePhysicalRadiation ell z x) r -
+      actualOneLayerInnerOverlapCutoff R r *
+        complexRadialHartreeNonlinearity (rescalePhysicalRadiation ell z) r‖ ≤ _
+    exact actual_Hartree_physical_nonlocal_cutoff_sharp_length_gain
+      ell R r B D hell hR hr hD hB z hz hzAmp hzQuartic
+  · intro hfar
+    change complexRadialHartreeNonlinearity
+      (fun x => actualOneLayerInnerOverlapCutoff R x *
+        rescalePhysicalRadiation ell z x) r -
+      actualOneLayerInnerOverlapCutoff R r *
+        complexRadialHartreeNonlinearity (rescalePhysicalRadiation ell z) r = 0
+    exact actual_Hartree_nonlocal_cutoff_far_source_zero R r hR hfar
+      (rescalePhysicalRadiation ell z)
+
 end HBL.TypeIIDynamicSelection
