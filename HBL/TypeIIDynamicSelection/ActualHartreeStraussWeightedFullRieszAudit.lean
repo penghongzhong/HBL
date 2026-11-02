@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeStraussWeightedFullRiesz
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_true_radiation_weighted_Riesz_from_Strauss
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_radiation_weighted_Riesz_from_Strauss
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_orbit_moving_weighted_Riesz_from_Strauss
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_orbit_moving_weighted_Riesz_from_Strauss
+
+/-! Actual genuine nonlocal weighted Fredholm source; not original 2.12 acceptance. -/
