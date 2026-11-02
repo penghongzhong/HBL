@@ -67,7 +67,7 @@ theorem actual_Hartree_radial_quartic_envelope_from_Strauss
     have hr2 : 1 ≤ r ^ 2 := by
       nlinarith [mul_nonneg (sub_nonneg.mpr hbig) (by positivity : 0 ≤ r + 1)]
     have hr4 : r ^ 2 ≤ r ^ 4 := by
-      nlinarith [mul_nonneg (sub_nonneg.mpr (sub_nonneg.mpr hr2))
+      nlinarith [mul_nonneg (sub_nonneg.mpr hr2)
         (sq_nonneg r)]
     have hgeom : 1 + r ^ 2 ≤ 2 * r ^ 4 := by nlinarith
     calc
