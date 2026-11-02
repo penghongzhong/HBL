@@ -3,7 +3,7 @@ on:
   push:
     branches: [hbl-213-offterminal-full-riesz-20261102]
     paths:
-      - '.github/workflows/hbl-213-one-orbit-offterminal-mixed-gain.yml'
+      - '.github/workflows/hbl-213-offterminal-full-riesz.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitOffterminalWeightedRiesz*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeWeightedPositiveOrder*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope*.lean'
