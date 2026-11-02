@@ -88,7 +88,7 @@ theorem actual_Hartree_physical_time_plus_dilation_exact
             (2 * Real.sqrt (ell s)) := by
         rw [Real.sq_sqrt hEllPos.le]
       _ = -(b s * Real.sqrt (ell s)) / 2 := by
-        field_simp [hSqrt] <;> ring
+        field_simp [hSqrt]
   change
     Complex.I * deriv (fun τ =>
        rescalePhysicalRadiation (ell τ) (z (time τ)) r) s +
@@ -148,6 +148,7 @@ theorem actual_Hartree_physical_flow_implies_renormalized_PDE
         complexRadialHartreeNonlinearity
           (actualPhysicalHartreeRescaledFlow ell time z s) r := by
     unfold complexRadialRenormalizedResidual
+    simp only [Complex.ofReal_zero, zero_mul, add_zero]
     ring
   rw [hres, hTD]
   change
