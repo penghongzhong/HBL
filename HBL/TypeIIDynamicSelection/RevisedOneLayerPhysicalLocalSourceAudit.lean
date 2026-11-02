@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.RevisedOneLayerPhysicalLocalSource
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.revised_one_layer_physical_local_source_certified
+#print axioms HBL.TypeIIDynamicSelection.revised_one_layer_physical_local_source_certified
