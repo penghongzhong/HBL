@@ -92,10 +92,12 @@ theorem actual_Hartree_one_physical_orbit_uniform_positive_weighted_Riesz
   let m0 : ℝ :=
     radialPhysicalQuarticMoment actualOneOrbitTerminalRadiation / 2
   have hm0 : 0 < m0 := by
+    have hPos : 0 < radialPhysicalQuarticMoment
+        actualOneOrbitTerminalRadiation := by
+      simpa only [actual_physical_inverse_square_radial_reduction] using
+        actual_one_orbit_terminal_radiation_positive_moment
     dsimp [m0]
-    have hPos := actual_one_orbit_terminal_radiation_positive_moment
-    rw [actual_physical_inverse_square_radial_reduction] at hPos
-    positivity
+    exact half_pos hPos
   let Q : ℝ := 4 / (hartreeKappa * m0)
   let C : ℝ :=
     (2 * radialHartreeRowBoundConstant *
