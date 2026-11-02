@@ -73,6 +73,6 @@ theorem actual_Hartree_moving_overlap_rescaled_radius_le
         mul_le_mul_of_nonneg_left hR (by norm_num)
       exact mul_le_mul_of_nonneg_left htwice hell.le
     _ = 8 / (hartreeKappa * m0) := by
-      field_simp [hell.ne', hk.ne', hm0.ne']
+      field_simp [hell.ne', hk.ne', hm0.ne'] <;> norm_num
 
 end HBL.TypeIIDynamicSelection
