@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOneFlowTwoChannelSource
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
