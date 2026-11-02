@@ -1,7 +1,7 @@
 name: HBL original true Kummer normalized endpoints no homogeneous freedom strict audit
 on:
   push:
-    branches: [hbl-212-original-kummer-normalization-obstruction-20261102-20261101]
+    branches: [hbl-212-original-kummer-normalization-obstruction-20261102]
     paths:
       - '.github/workflows/hbl-212-original-kummer-normalization-obstruction-20261102.yml'
       - 'HBL/TypeIIDynamicSelection/ActualKummerNormalizedNoHomogeneousFreedom*.lean'
@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: hbl-212-original-kummer-normalization-obstruction-20261102-20261101
+  group: hbl-212-original-kummer-normalization-obstruction-20261102
   cancel-in-progress: true
 jobs:
   strict-joint:
