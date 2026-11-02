@@ -19,8 +19,9 @@ cutoff R_z(s)=4/(kappa_H ell(s)*sqrt(q(s))*m(t(s))) contains any
 given FIXED prescribed normalized Kummer annulus. The physical
 coordinate is R_bubble=sqrt(q)*z, never identified with z.
 
-The same complex actual full-Hartree-minus-core PDE source, whose
-real and imaginary parts feed the actual H+/H- Fredholm channels,
+The same complex actual full-Hartree-minus-core PDE source is PULLED
+BACK from the bubble radius R=sqrt(q)*z to the Kummer radius z.
+Its real and imaginary parts feed the actual H+/H- Fredholm channels,
 is solved EXACTLY on this fixed annulus by the already constructed
 two-Wronskian-normalized Kummer Green solution, even after applying
 the original moving cutoff. The cutoff is identically one there,
@@ -89,12 +90,17 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
             fun τ x => actualHartreeUnitPhase (gamma τ) *
               rescalePhysicalRadiation (ell τ) (z (time τ)) x
           let F : ℝ → ℂ :=
-            actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
+            fun u => actualOneLayerCommonPDEResidual V Z
+              (b s) (omega s) s (Real.sqrt (q s) * u)
           let Rz := actualHartreeKummerCoordinateCutoffRadius (ell s) (q s)
             (radialPhysicalQuarticMoment (z (time s)))
           actualHartreeFrozenKummerRadialApply mu theta
             (fun x => actualOneLayerInnerOverlapCutoff Rz x *
-              actualKummerCauchyValue K d F 0 0 x) r = F r := by
+              actualKummerCauchyValue K d F 0 0 x) r = F r ∧
+          actualOneLayerPlusPDE V Z (b s) (omega s) s
+              (Real.sqrt (q s) * r) = (F r).re ∧
+          actualOneLayerMinusPDE V Z (b s) (omega s) s
+              (Real.sqrt (q s) * r) = (F r).im := by
   obtain ⟨deltaT,hDeltaT,hWindow⟩ :=
     actual_one_orbit_Hartree_terminal_two_sided_moment_window
       z zt T hTerminal I hI hZmeas hZint hVelMeas
@@ -132,9 +138,13 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
     fun τ x => actualHartreeUnitPhase (gamma τ) *
       rescalePhysicalRadiation (ell τ) (z (time τ)) x
   let F : ℝ → ℂ :=
-    actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
-  have hFc : Continuous F := hFcont s
+    fun u => actualOneLayerCommonPDEResidual V Z
+      (b s) (omega s) s (Real.sqrt (q s) * u)
+  have hFc : Continuous F := by
+    dsimp [F]
+    exact (hFcont s).comp (continuous_const.mul continuous_id)
   dsimp only
+  refine ⟨?_, rfl, rfl⟩
   exact actual_Hartree_Kummer_coordinate_original_source_exact
     K d hd hde F hFc (ell s) (q s)
     (radialPhysicalQuarticMoment (z (time s))) (2 * mT)
