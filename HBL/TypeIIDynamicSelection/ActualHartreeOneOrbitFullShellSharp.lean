@@ -49,7 +49,7 @@ theorem actual_Hartree_one_orbit_full_shell_from_PDE_moment_and_Strauss
     (hPDEMoment : HasDerivAt
        (fun t => radialPhysicalQuarticMoment (z t))
        (actualMomentLaplacianFlux (z (time s))) (time s))
-    (hJ : 0 ≤ J)
+    (_hJ : 0 ≤ J)
     (hFlux : |actualMomentLaplacianFlux (z (time s))| ≤
        J * radialPhysicalQuarticMoment (z (time s)))
     (hfTime : DifferentiableAt ℝ (fun t => f t r) s)
