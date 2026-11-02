@@ -1,6 +1,7 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeKummerCoreSeparation
 import HBL.TypeIIDynamicSelection.ActualOneOrbitTwoSidedMomentWindow
 import HBL.TypeIIDynamicSelection.ActualOneLayerTwoChannelPDE
+import HBL.TypeIIDynamicSelection.ActualHartreeDynamicPhaseCovariance
 import Mathlib.Tactic
 
 /-!
