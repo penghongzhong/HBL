@@ -45,7 +45,9 @@ theorem actual_Hartree_eventual_fixed_Kummer_annulus_covered
     dsimp [delta]
     positivity
   have hTau : Tendsto (fun s : ℝ => T - time s) atTop (𝓝 (0 : ℝ)) := by
-    simpa only [sub_self] using (tendsto_const_nhds.sub hTime)
+    have hConst : Tendsto (fun _ : ℝ => T) atTop (𝓝 T) :=
+      tendsto_const_nhds
+    simpa only [sub_self] using hConst.sub hTime
   have hClose : ∀ᶠ s in atTop, T - time s < delta ^ 2 :=
     hTau.eventually (Iio_mem_nhds (sq_pos_of_pos hDelta))
   filter_upwards [hClose, hBefore, hMoment] with s hs hpre hm
