@@ -123,8 +123,10 @@ theorem actual_one_Hartree_orbit_offterminal_mixed_higher_uniform_gain
     hellMax.trans (min_le_left _ _)
   have hEllM : ell ≤ 1 / (hartreeKappa * M) :=
     hellMax.trans (min_le_right _ _)
-  have hCM : hartreeKappa * M * ell ≤ 1 :=
-    (le_div_iff₀ (mul_pos hk hM)).mp hEllM
+  have hCM : hartreeKappa * M * ell ≤ 1 := by
+    calc
+      hartreeKappa * M * ell = ell * (hartreeKappa * M) := by ring
+      _ ≤ 1 := (le_div_iff₀ (mul_pos hk hM)).mp hEllM
   have hCprod :
       hartreeKappa * ell * radialPhysicalQuarticMoment (z t) ≤
         1 := by
