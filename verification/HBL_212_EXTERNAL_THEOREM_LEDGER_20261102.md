@@ -50,3 +50,31 @@ The first original `9/13 -> 10/13` gain requires a Lean terminal that matches th
 - CI: `.github/workflows/hbl-literature-hartree-critical.yml`, pinned Lean 4.35.0-rc3 and Mathlib a98628e16, `--trust=0`, `-DwarningAsError=true`, no `sorry`, `admit`, `axiom`, or `unsafe`.
 
 **Scope guarantee:** the published critical local theory is admissible as an EXTERNAL mathematical premise, but `CitedHighRegularityHartreeLocalTheory` also has higher Sobolev persistence, uniform finite jets, and `C^1` dependence fields. A valid Lean object of that type must still be supplied from separately justified analysis. Neither the paper citation nor this Lean interface constructs such an object. There is no unconditional proof of original HBL 2.12 or a predetermined Type-II rate.
+
+## Strauss 1977 radial Sobolev input (additional noncircular foundation)
+
+W. A. Strauss, **Existence of solitary waves in higher dimensions**,
+*Communications in Mathematical Physics* **55** (1977), 149–162,
+DOI **10.1007/BF01626517**.
+
+For radial `u ∈ H¹(R³)`, the classical radial lemma provides a continuous
+representative on `r>0` with a bound
+`r * |u(r)| ≤ C_Str * ||u||_{H¹}`.
+The usual `H^L -> L∞` Sobolev embedding (`L≥2`) supplies a separate
+uniform bound `|u(r)|≤B`. In the actual Hartree full-radial model these imply
+
+```math
+ |u(r)|^4 \le 2(B^4+A^4)(1+r^2)^{-1}
+             =2(B^4+A^4)W(r)^2,
+ \quad A=C_{\rm Str}\|u\|_{H^1}.
+```
+
+This implication has been encoded in
+`HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope.lean`,
+along with its genuine full nonlocal inverse-square Hartree source consequence.
+**The numeric implication is Lean-proved only if strict CI succeeds.**
+The passage from the *distributional 3D local flow* to its *radial pointwise
+continuous representative* and uniform time-dependent `A,B` has to be
+instantiated via the cited Sobolev/radial embeddings and `LT` bounds.
+The radial lemma does not give Kummer/Frobenius matching or the Type-II
+dynamical rate; those are never externalized.
