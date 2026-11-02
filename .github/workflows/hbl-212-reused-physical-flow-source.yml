@@ -13,7 +13,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: hbl-212-physical-spatial-commutator-gain-20261102
+  group: hbl-212-reused-physical-flow-source-20261102
   cancel-in-progress: true
 jobs:
   strict-joint:
