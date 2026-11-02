@@ -120,7 +120,8 @@ theorem actual_one_layer_moving_parametrix_true_Hartree_source
           (b : ℂ) * (r : ℂ) *
             ((-deriv cutoff (r / R s) / R s : ℝ) : ℂ) =
           (actualOneLayerMaterialCutoffCoefficient (R s) Rs b r : ℂ) := by
-      simpa only [Complex.ofReal_mul] using hMaterial
+      exact_mod_cast (actual_one_layer_material_coefficient_exact
+        (R s) Rs b r hRne)
     calc
       _ = Complex.I *
             (((deriv cutoff (r / R s) * (r * Rs / (R s) ^ 2) : ℝ) : ℂ) +
@@ -185,7 +186,6 @@ theorem actual_one_layer_material_transport_shell_bound
   refine ⟨Cχ,hCχ,?_⟩
   rw [hrEq]
   have hP : 0 ≤ |radiusSpeed / radius - b| := abs_nonneg _
-  have hC : 0 ≤ Cχ := hCχ.le
   have hBound : (r / radius) * |radiusSpeed / radius - b| *
       |deriv cutoff (r / radius)| ≤
       (2 * |radiusSpeed / radius - b|) * Cχ := by
