@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreePhysicalFlowRenormalizedPDE
 import HBL.TypeIIDynamicSelection.ActualHartreeDynamicPhaseCovariance
+import HBL.TypeIIDynamicSelection.ActualPhysicalHartreePhasedPDEElimination
 import Mathlib.Tactic
 
 /-!
@@ -56,56 +57,12 @@ theorem actual_Hartree_phased_physical_flow_true_renormalized_PDE
       (fun τ x => actualHartreeUnitPhase (gamma τ) *
         rescalePhysicalRadiation (ell τ) (z (time τ)) x)
       (b s) (-gs) s r = 0 := by
-  let Z : ℝ → ℝ → ℂ :=
-    fun τ x => rescalePhysicalRadiation (ell τ) (z (time τ)) x
-  have hUnphased :=
-    actual_Hartree_physical_flow_true_renormalized_PDE
-      ell time b z s r hell hr hEll hClock
-      L zt zr hJoint hJac hzSpace hzSecond hzDeriv hPhysicalPDE
-  have hTime :=
-    actual_Hartree_physical_scale_clock_explicit_time_jet
-      ell time b z s r L zt zr hEll hell hClock hJoint hJac
-  have hZTime : DifferentiableAt ℝ (fun τ : ℝ => Z τ r) s := by
-    exact hTime.differentiableAt
-  have hZSpace : ∀ x : ℝ, DifferentiableAt ℝ (Z s) x := by
-    intro x
-    have hscale : HasDerivAt (fun y : ℝ => ell s * y) (ell s) x :=
-      hasDerivAt_const_mul (ell s)
-    have hfield := ((hzSpace x).hasDerivAt.scomp x hscale).const_mul
-      (Real.sqrt (ell s) : ℂ)
-    exact hfield.differentiableAt
-  have hZFirstEq :
-      deriv (Z s) =
-        fun x => (Real.sqrt (ell s) : ℂ) *
-          ((ell s : ℝ) : ℂ) *
-            deriv (z (time s)) (ell s * x) := by
-    funext x
-    dsimp [Z]
-    simpa only [mul_assoc] using
-      (actual_Hartree_critical_rescaled_radial_deriv
-        (ell s) x (z (time s)) (hzSpace x))
-  have hZSecond : DifferentiableAt ℝ (deriv (Z s)) r := by
-    rw [hZFirstEq]
-    have hscale : HasDerivAt (fun y : ℝ => ell s * y) (ell s) r :=
-      hasDerivAt_const_mul (ell s)
-    simpa only [mul_assoc] using
-      (((hzSecond.hasDerivAt.scomp r hscale).const_mul
-        ((ell s : ℝ) : ℂ)).const_mul
-          (Real.sqrt (ell s) : ℂ)).differentiableAt
-  have hCov := actual_Hartree_dynamic_phase_full_PDE_residual_covariant
-    gamma Z (b s) 0 s r gs hGamma hZTime hZSpace hZSecond
-  calc
-    complexRadialRenormalizedResidual
-        (fun τ x => actualHartreeUnitPhase (gamma τ) *
-          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
-        (b s) (-gs) s r =
-      actualHartreeUnitPhase (gamma s) *
-        complexRadialRenormalizedResidual Z (b s) 0 s r := by
-          simpa only [Z, zero_sub] using hCov
-    _ = 0 := by
-      have hz : complexRadialRenormalizedResidual Z (b s) 0 s r = 0 :=
-        hUnphased
-      rw [hz]
-      ring
+  have hPhysical :=
+    actual_Hartree_same_physical_flow_forces_phased_renormalized_PDE
+      ell time b gamma z s r gs L zt zr
+      hEll hell hClock hGamma hJoint hJac hzDeriv.symm
+      hr hzSpace hzSecond hPhysicalPDE
+  simpa only [actualPhysicalHartreePhasedFlow,
+    actualPhysicalHartreeRescaledFlow] using hPhysical
 
 end HBL.TypeIIDynamicSelection
