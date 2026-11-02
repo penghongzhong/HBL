@@ -41,7 +41,7 @@ theorem actual_Hartree_dynamic_unit_phase_hasDerivAt
   have hReal :
       HasDerivAt (fun t : ℝ => ((-(gamma t) : ℝ) : ℂ))
         (-(gs : ℂ)) s := by
-    simpa only [Complex.ofReal_neg] using hgamma.neg.ofReal_comp
+    simpa only [Pi.neg_apply, Complex.ofReal_neg] using hgamma.neg.ofReal_comp
   have hArg :
       HasDerivAt
         (fun t : ℝ => Complex.I * ((-(gamma t) : ℝ) : ℂ))
@@ -68,9 +68,7 @@ theorem actual_Hartree_dynamic_phase_radiation_time_hasDerivAt
   have hp := actual_Hartree_dynamic_unit_phase_hasDerivAt
     gamma s gs hgamma
   have h := hp.mul hZ
-  convert h using 1
-  · rfl
-  · ring
+  convert h using 1 <;> ring
 
 /-- Original HBL radial Laplacian is complex linear under the
 time-frozen physical phase; all two derivatives are justified. -/
