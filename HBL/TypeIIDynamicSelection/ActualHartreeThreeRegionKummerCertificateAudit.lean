@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeThreeRegionKummerCertificate
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_2_12_true_remote_Kummer_solution_certificate
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_2_12_true_remote_Kummer_solution_certificate
