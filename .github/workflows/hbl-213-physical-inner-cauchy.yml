@@ -1,4 +1,4 @@
-name: HBL revised 2.13 physical inner Kummer Cauchy prerequisite: strict type and axiom audit
+name: "HBL revised 2.13 physical-inner-Kummer strict audit"
 on:
   push:
     branches: [hbl-213-physical-inner-cauchy-20261102]
@@ -16,6 +16,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  issues: write
 concurrency:
   group: hbl-213-physical-inner-cauchy-primary-20261102
   cancel-in-progress: true
@@ -102,6 +103,41 @@ jobs:
             assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
           print('STRICT PASS: physical Hartree two-channel inner Kummer jet prerequisite; outer C1 compatibility and full revised 2.13 remain OPEN')
+          PY
+      - name: Publish CI evidence to draft PR 10
+        if: always()
+        continue-on-error: true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AUDIT_STATUS: ${{ job.status }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, os, urllib.request
+          status = os.environ.get('AUDIT_STATUS','unknown')
+          run_id = os.environ.get('GITHUB_RUN_ID','unknown')
+          sha = os.environ.get('GITHUB_SHA','unknown')
+          snippets = []
+          for name in ['build.log','source-strict.log','audit.log']:
+              p = Path('evidence')/name
+              if p.is_file():
+                  lines=p.read_text(errors='replace').splitlines()
+                  snippets.append(name+':\\n'+'\\n'.join(lines[-35:]))
+          body = ('HBL revised 2.13 **supporting inner-PDE/Kummer jet** CI: **'
+                  +status+'**. This is NOT manuscript 2.13 acceptance.\\n'
+                  +'Run: https://github.com/penghongzhong/HBL/actions/runs/'+run_id
+                  +'\\nSHA: '+sha+'\\n'
+                  +'\\n```text\\n'+('\\n\\n'.join(snippets))[-8000:]+'\\n```')
+          req=urllib.request.Request(
+            'https://api.github.com/repos/penghongzhong/HBL/issues/10/comments',
+            data=json.dumps({'body':body}).encode(),
+            headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],
+                     'Accept':'application/vnd.github+json',
+                     'Content-Type':'application/json'},
+            method='POST')
+          with urllib.request.urlopen(req, timeout=30) as response:
+              print('Audit evidence comment status:',response.status)
           PY
       - name: Save incremental HBL Lean build cache
         if: always()
