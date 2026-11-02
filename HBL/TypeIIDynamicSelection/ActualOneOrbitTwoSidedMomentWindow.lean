@@ -92,6 +92,11 @@ theorem actual_one_orbit_Hartree_terminal_two_sided_moment_window
     change dist t T < eps
     simpa only [Real.dist_eq] using ht
   have hBounds := hball htBall
+  change
+    actualPhysicalInverseSquareMoment (z T) / 2 <
+      actualPhysicalInverseSquareMoment (z t) ∧
+    actualPhysicalInverseSquareMoment (z t) <
+      2 * actualPhysicalInverseSquareMoment (z T) at hBounds
   simpa only [hTerminal] using hBounds
 
 end HBL.TypeIIDynamicSelection
