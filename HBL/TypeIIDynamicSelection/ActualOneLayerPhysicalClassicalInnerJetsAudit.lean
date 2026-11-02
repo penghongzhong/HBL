@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerPhysicalClassicalInnerJets
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_PDE_source_has_classical_Hplus_Hminus_jets
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_PDE_source_has_classical_Hplus_Hminus_jets
