@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeRadialPDECriticalScaling
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_log_scale_invariant
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_log_scale_invariant
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_potential_scale_quartic_density
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_potential_scale_quartic_density
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_radiation_Riesz_scaling
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_radiation_Riesz_scaling
