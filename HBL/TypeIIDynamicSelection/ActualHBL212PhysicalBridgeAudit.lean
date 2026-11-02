@@ -1,8 +1,13 @@
+
 import HBL.TypeIIDynamicSelection.ActualOneLayerCertifiedKummerSource
 import HBL.TypeIIDynamicSelection.ActualOneLayerInnerRemoteSource
 import HBL.TypeIIDynamicSelection.ActualOneLayerSingleComplexWeightedSource
 import HBL.TypeIIDynamicSelection.ActualPhasedFlatTimeTail
 import HBL.TypeIIDynamicSelection.ActualFlatGainIntegrability
+
+import HBL.TypeIIDynamicSelection.ActualComplexMovingRemoteMatch
+import HBL.TypeIIDynamicSelection.ActualHartreeRadialPDECriticalScaling
+import HBL.TypeIIDynamicSelection.ActualHartreeCriticalNonlinearityScaling
 
 /-!
 # Integration audit for the retained original Hartree profile 2.12
@@ -40,3 +45,30 @@ set_option autoImplicit false
 
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_integrable_with_tail
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_flat_power_integrable_with_tail
+
+
+-- The same actual Hartree offterminal complex inner profile and
+-- moving remote radiation have a rigorous exterior Riesz matching.
+#check @HBL.TypeIIDynamicSelection.actual_complex_inner_remote_Hartree_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_complex_inner_remote_Hartree_source_exact
+#check @HBL.TypeIIDynamicSelection.actual_moving_physical_complex_remote_Riesz_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_moving_physical_complex_remote_Riesz_exact
+#check @HBL.TypeIIDynamicSelection.actual_moving_physical_complex_remote_center_error_le
+#print axioms HBL.TypeIIDynamicSelection.actual_moving_physical_complex_remote_center_error_le
+
+-- The original radial inverse-square Riesz log kernel and full
+-- nonlinearity transform EXACTLY under energy-critical scaling.
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_log_scale_invariant
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_log_scale_invariant
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_potential_scale_quartic_density
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_potential_scale_quartic_density
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_radiation_Riesz_scaling
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_radiation_Riesz_scaling
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_local_cubic
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_local_cubic
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_scaled_nonlinearity
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_scaled_nonlinearity
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_nonlinearity_phase_covariant
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlinearity_phase_covariant
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_critical_scaled_nonlinearity
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_critical_scaled_nonlinearity
