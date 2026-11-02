@@ -80,7 +80,6 @@ theorem actual_Hartree_physical_moment_radius_drift_exact
   refine ⟨Rs,hR,?_⟩
   dsimp [Rs,d,m,actualPhysicalHartreeMomentRadius,
     actualHartreeMomentCutoffRadius]
-  field_simp [hell.ne', hk.ne', hm.ne']
-  ring
+  field_simp [hell.ne', hk.ne', hm.ne'] <;> ring
 
 end HBL.TypeIIDynamicSelection
