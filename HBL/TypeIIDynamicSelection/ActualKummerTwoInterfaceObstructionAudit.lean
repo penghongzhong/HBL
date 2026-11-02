@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualKummerTwoInterfaceObstruction
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_Wronskian_Cauchy_coefficients_unique
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_Wronskian_Cauchy_coefficients_unique
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_two_boundary_Cauchy_match_iff_transfer
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_two_boundary_Cauchy_match_iff_transfer
