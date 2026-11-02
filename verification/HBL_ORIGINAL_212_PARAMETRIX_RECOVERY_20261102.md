@@ -72,3 +72,68 @@ The other two local transition-shell costs are explicitly `R^{-1} f_r` and `R^{-
 - Reuse already verified exact source commits and `.lake/build` caches; compile **one new load-bearing source plus its #check/#print axioms audit** per CI, not the whole project as an acceptance proxy.
 - Only claim success when `lake env lean --trust=0 -DwarningAsError=true`, declaration type and transitive axiom list all pass; no `sorry`, `admit`, added `axiom` or previously unsupported analytic assumptions.
 - **Never report 10/13 solely because a module succeeded.** The manuscript original, mathematical hypothesis equality, Lean theorem type and provenance must be audited together.
+
+
+## Crucial reverse-dependency reduction: one orbit, not uniform terminal-data theory
+
+The private reconciled main target `thm:main` is **existential**:
+one actual radial strong Hartree Type-II solution with the terminal
+radiation and the dynamical concentration rate *selected from its own
+modulation PDE*. It does **not** assert Type-II blowup for every datum
+in an open Sobolev ball, nor a codimension-one C1 data manifold.
+
+Therefore choose ONCE a nonzero real radial
+`g in C_c^infty({1/4<|x|<4})` with positive genuine quartic Hartree
+moment, scale its amplitude into the cited high-regularity LWP ball,
+and construct only the physical trajectory `z_g(t)`. All physical
+offterminal weighted estimates and moments need be proved for this
+single concrete `g`; uniform `(h,g)` source estimates and local
+Lipschitz dependence across a small data ball can be deleted from
+the core 2.12--2.14 chain if they are not used by the existence
+and modulation selection proof. Keep exactly the `D_zeta Theta`
+parameter derivatives needed for the finite-dimensional
+shooting/invertibility of the *real rate-selecting* dynamics.
+
+This is a mathematical shortening of the PAPER's original 2.13,
+not a deletion of a proof obligation or a numerical denominator
+manipulation. Do not count the original environment until the
+revised entire statement and exact Lean theorem type are accepted.
+The final Type-II exponent remains a PDE output, NEVER a hypothesis.
+
+## Prefer physical moment cutoff over an arbitrary moving radius
+
+The original Hartree radial monopole cutoff is
+`eta_c(s,r)=1-cutoff(c(s)r/4)`, where
+`c(s)=kappa_H ell(s) m_0[z_g(t(s))]` is the **actual whole-radiation
+quartic Hartree moment**. For positive c, this is precisely the
+parametrix cutoff with `R(s)=4/c(s)`; c=0 is handled by the original
+form without dividing by c. The strictly accepted PDE moment identity
+gives
+
+```math
+c_s=-b c+\kappa_{\rm H}\ell^3 m_0'(t),\qquad
+\frac{R_s}{R}-b=-\ell^2\frac{m_0'(t)}{m_0(t)}.
+```
+
+Thus the exact local material-cutoff commutator has a true physical
+`ell^2` factor, rather than an independent `|R_s|/R+|b|` bound.
+It is already strictly supported by
+`ActualMomentCutoffTransport.lean` plus
+`ActualCutoffUniformTransport.lean` (the moment derivative is derived
+from the actual radial Hartree PDE under visible dominated-flow inputs).
+
+The SHORT route for the next weight lemma is: reuse this exact
+transport bound; derive `r/R in [1,2]` only on the true shell;
+bound the first/second spatial cutoff commutators by actual
+`R^{-1}` and `R^{-2}`; absorb the nonlocal exterior center into the
+forced monopole charge; control the rest with the already proved
+actual complex moving-remote Riesz `O(r^2/R^2)` remainder and a
+genuine physical moment/source estimate. DO NOT treat the whole
+cutoff nonlinear commutator as local or vanishing.
+
+If `ell(s) <= C s^{-beta_-}`, `beta_->1/2`, and the actual
+relative moment flux is bounded (both from the selected Hartree
+trajectory), then `ell^2` gives **derived** time exponent
+`2beta_->1`, i.e. the original positive `2beta_--1` gain.
+This `beta_-` is a trap-window lower bound, not the selected
+asymptotic Type-II exponent.
