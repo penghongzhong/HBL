@@ -7,6 +7,11 @@ import Mathlib.Tactic
 /-!
 # Revised HBL manuscript 2.12: actual physical source in correct Kummer coordinates
 
+Only local positive-annulus continuity of the original physical source
+is used. Its global totalized 2/r radial Laplacian need NOT be continuous
+at the origin: a concrete continuous extension is constructed using
+the standard clamp to the fixed positive Kummer annulus.
+
 The actual 3D energy-critical inverse-square Hartree orbit has a strictly
 positive continuous terminal quartic moment. In the TRUE Kummer coordinate
 r=R_bubble/sqrt(q), a physical source F_phys(R_bubble) becomes the
@@ -74,31 +79,38 @@ theorem revised_one_layer_physical_local_source_certified
     (hClock : ∀ᶠ s in atTop,
       q s = (T - time s) / (ell s) ^ 2)
     (V : ℝ → ℝ → ℝ)
-    (hFcont : ∀ s : ℝ,
-      Continuous (actualOneLayerCommonPDEResidual V
-        (fun τ x => actualHartreeUnitPhase (gamma τ) *
-          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
-        (b s) (omega s) s))
     {mu theta center eps : ℝ}
     (K : LocalKummerPair mu theta center eps)
     (d : ℝ) (hd : 0 < d) (hde : d < eps)
-    (hcenter : 0 < center + d) :
+    (hcenter : 0 < center + d)
+    (hFcontOn : ∀ s : ℝ, 0 < q s →
+      ContinuousOn
+        (fun r : ℝ =>
+          actualOneLayerCommonPDEResidual V
+            (fun τ x => actualHartreeUnitPhase (gamma τ) *
+              rescalePhysicalRadiation (ell τ) (z (time τ)) x)
+            (b s) (omega s) s (Real.sqrt (q s) * r))
+        (Icc (center - d) (center + d))) :
     ∀ᶠ s in atTop, ∀ r ∈ Ioo (center - d) (center + d),
       let Z : ℝ → ℝ → ℂ :=
         fun τ x => actualHartreeUnitPhase (gamma τ) *
           rescalePhysicalRadiation (ell τ) (z (time τ)) x
       let Fphys : ℝ → ℂ :=
         actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
-      let FK : ℝ → ℂ := fun x => Fphys (Real.sqrt (q s) * x)
+      let FK : ℝ → ℂ := fun x =>
+        Fphys (Real.sqrt (q s) *
+          min (max x (center - d)) (center + d))
       let Rz : ℝ := actualHartreeKummerCoordinateCutoffRadius
         (ell s) (q s) (radialPhysicalQuarticMoment (z (time s)))
       let U : ℝ → ℂ := actualKummerCauchyValue K d FK 0 0
       actualHartreeFrozenKummerRadialApply mu theta
         (fun x => actualOneLayerInnerOverlapCutoff Rz x * U x) r = FK r ∧
       actualOneLayerPlusPDE V Z (b s) (omega s) s
-        (Real.sqrt (q s) * r) = (FK r).re ∧
+        (Real.sqrt (q s) * r) =
+          (Fphys (Real.sqrt (q s) * r)).re ∧
       actualOneLayerMinusPDE V Z (b s) (omega s) s
-        (Real.sqrt (q s) * r) = (FK r).im := by
+        (Real.sqrt (q s) * r) =
+          (Fphys (Real.sqrt (q s) * r)).im := by
   obtain ⟨deltaT, hDelta, hWindow⟩ :=
     actual_one_orbit_Hartree_terminal_two_sided_moment_window
       z zt T hTerminal I hI hZmeas hZint hVelMeas
@@ -157,9 +169,25 @@ theorem revised_one_layer_physical_local_source_certified
       rescalePhysicalRadiation (ell τ) (z (time τ)) x
   let Fphys : ℝ → ℂ :=
     actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
-  let FK : ℝ → ℂ := fun x => Fphys (Real.sqrt (q s) * x)
-  have hFK : Continuous FK :=
-    (hFcont s).comp (continuous_const.mul continuous_id)
+  let clamp : ℝ → ℝ :=
+    fun x => min (max x (center - d)) (center + d)
+  let FK : ℝ → ℂ :=
+    fun x => Fphys (Real.sqrt (q s) * clamp x)
+  have hInterval : center - d ≤ center + d := by linarith [hd]
+  have hClampContinuous : Continuous clamp := by
+    exact (continuous_id.max continuous_const).min continuous_const
+  have hClampMem (x : ℝ) :
+      clamp x ∈ Icc (center - d) (center + d) := by
+    dsimp [clamp]
+    exact ⟨le_min (le_max_right _ _) hInterval, min_le_right _ _⟩
+  have hFK : Continuous FK := by
+    have hc := (hFcontOn s hq).comp_continuous
+      hClampContinuous hClampMem
+    simpa only [FK, clamp, Function.comp_def, Fphys, Z] using hc
+  have hFK_id (r : ℝ) (hr : r ∈ Ioo (center - d) (center + d)) :
+      FK r = Fphys (Real.sqrt (q s) * r) := by
+    dsimp [FK, clamp]
+    rw [max_eq_left hr.1.le, min_eq_left hr.2.le]
   have hExact (r : ℝ) (hr : r ∈ Ioo (center - d) (center + d)) :
       actualHartreeFrozenKummerRadialApply mu theta
         (fun x =>
@@ -177,6 +205,7 @@ theorem revised_one_layer_physical_local_source_certified
   intro r hr
   dsimp only
   have hSource := hExact r hr
+  rw [hFK_id r hr] at hSource
   refine ⟨hSource, ?_, ?_⟩
   · rfl
   · rfl
