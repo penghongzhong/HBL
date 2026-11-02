@@ -7,6 +7,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeighted*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleRadialDecay*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszEnvelope*.lean'
   workflow_dispatch:
 permissions:
   contents: read
