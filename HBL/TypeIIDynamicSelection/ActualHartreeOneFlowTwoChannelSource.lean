@@ -124,7 +124,7 @@ theorem actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
         ((ell s : ℝ) : ℂ)).const_mul
           (Real.sqrt (ell s) : ℂ)).differentiableAt
   have hZSecond : DifferentiableAt ℝ (deriv (Z s)) r := by
-    have hPhase : ℂ := actualHartreeUnitPhase (gamma s)
+    let hPhase : ℂ := actualHartreeUnitPhase (gamma s)
     have hDerivEq :
         deriv (Z s) = fun x =>
           hPhase * deriv
