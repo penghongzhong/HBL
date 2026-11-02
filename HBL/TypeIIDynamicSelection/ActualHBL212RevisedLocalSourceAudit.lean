@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHBL212RevisedLocalSource
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
+#print axioms HBL.TypeIIDynamicSelection.revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
