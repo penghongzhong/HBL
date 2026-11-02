@@ -1,7 +1,7 @@
-name: HBL actual same complex Hartree PDE classical H+ H- C2 boundary jets strict audit
+name: HBL true inhomogeneous Kummer inner boundary value + derivative matching strict audit
 on:
   push:
-    branches: [hbl-212-kummer-inner-cauchy-match-20261101]
+    branches: [hbl-212-kummer-inner-cauchy-match-20261102]
     paths:
       - '.github/workflows/hbl-212-kummer-inner-cauchy-match.yml'
       - 'HBL/TypeIIDynamicSelection/ActualKummerInnerCauchyMatch*.lean'
@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: hbl-212-kummer-inner-cauchy-match-20261101
+  group: hbl-212-kummer-inner-cauchy-match-20261102
   cancel-in-progress: true
 jobs:
   strict-joint:
