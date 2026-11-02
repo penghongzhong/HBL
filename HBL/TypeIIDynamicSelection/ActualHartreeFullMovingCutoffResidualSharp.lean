@@ -84,7 +84,7 @@ theorem actual_Hartree_full_moving_cutoff_residual_triangle
     ring
   rw [hEq]
   exact (norm_add_le _ _).trans
-    (add_le_add_right (norm_add_le _ _) _)
+    (add_le_add_left (norm_add_le _ _) _)
 
 /-- The full SAME-PDE profile-cutoff residual on the genuine
 Hartree moment-moving shell. All local/nonlocal interactions are
