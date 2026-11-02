@@ -3,6 +3,7 @@ import HBL.TypeIIDynamicSelection.ActualMixedQuarticGain
 import HBL.TypeIIDynamicSelection.ActualRadiationScaling
 import HBL.TypeIIDynamicSelection.ActualHartreeStraussRieszEnvelope
 import HBL.RadialHartreeDomination
+import HBL.MonopoleCoreIntegrability
 import Mathlib.Tactic
 
 /-!
@@ -192,12 +193,17 @@ theorem actual_Hartree_mixed_quartic_bubble_squared_from_radial_envelopes
       _ ≤ (E * s) * (E ^ 2 * ell) :=
         mul_le_mul hby hy2 (by positivity) (by positivity)
   have hay3 : a * y ^ 3 ≤ E ^ 3 * s := by
-    apply (mul_le_mul_left hell).mp
-    calc
-      ell * (a * y ^ 3) = (ell * a) * y ^ 3 := by ring
-      _ ≤ b * y ^ 3 := mul_le_mul_of_nonneg_right hElla (by positivity)
-      _ ≤ (E * s) * (E ^ 2 * ell) := hby3
-      _ = ell * (E ^ 3 * s) := by ring
+    have hMul : ell * (a * y ^ 3) ≤ ell * (E ^ 3 * s) := by
+      calc
+        ell * (a * y ^ 3) = (ell * a) * y ^ 3 := by ring
+        _ ≤ b * y ^ 3 := mul_le_mul_of_nonneg_right hElla (by positivity)
+        _ ≤ (E * s) * (E ^ 2 * ell) := hby3
+        _ = ell * (E ^ 3 * s) := by ring
+    by_contra hn
+    have hgt : E ^ 3 * s < a * y ^ 3 := lt_of_not_ge hn
+    have hPos : 0 < ell * (a * y ^ 3 - E ^ 3 * s) :=
+      mul_pos hell (sub_pos.mpr hgt)
+    nlinarith only [hMul, hPos]
   have h3 : (1 + r ^ 2) * x * y ^ 3 ≤ D * E ^ 3 * s := by
     calc
       _ ≤ a ^ 2 * x * y ^ 3 := by
