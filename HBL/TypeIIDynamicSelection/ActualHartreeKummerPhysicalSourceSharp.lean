@@ -1,4 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeStraussRieszEnvelope
+import HBL.TypeIIDynamicSelection.ActualHartreeFullCutoffSupport
 import HBL.KummerParameterInverse.ActualPhysicalFamily
 import Mathlib.Tactic
 
