@@ -1,0 +1,4 @@
+import HBL.ComplexGlobalH1PhysicalAssembly
+set_option autoImplicit false
+#check @HBL.Profile.GlobalH1.physical_complex_three_region_H1_gluing_and_convergence
+#print axioms HBL.Profile.GlobalH1.physical_complex_three_region_H1_gluing_and_convergence
