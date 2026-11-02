@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeKummerClockIdentity
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_clock_sqrt_scale_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_clock_sqrt_scale_exact
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_cutoff_true_physical_clock
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_cutoff_true_physical_clock
