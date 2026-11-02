@@ -86,17 +86,18 @@ theorem actual_Hartree_true_moving_cutoff_core_residual_eq_Riesz
           complexRadialHartreeNonlinearity (f s) r := by
   have hFull := actual_one_layer_moving_parametrix_true_Hartree_source
     R f b omega hR hRpos.ne' hfTime hfSpace hf2 (r := r)
-  have hLap := actual_one_layer_physical_cutoff_radial_commutator
-    (R s) r hRpos.ne' (f s) hfSpace hf2
   have hm : actualOneLayerMaterialCutoffCoefficient
       (R s) Rs b r = 0 :=
     actual_Hartree_material_overlap_core_zero
       (R s) Rs b r hRpos hr
-  have hlap := actual_Hartree_radial_Laplacian_cutoff_core_source_zero
-    (R s) r hRpos hr (f s) hfSpace hf2
-  rw [hFull, hLap]
-  rw [hm, hlap]
-  ring
+  have harg : r / R s < 1 :=
+    (div_lt_iff₀ hRpos).2 (by simpa using hr)
+  have hd1 : deriv cutoff (r / R s) = 0 :=
+    cutoff_deriv_zero_of_lt_one harg
+  have hd2 : deriv (deriv cutoff) (r / R s) = 0 :=
+    actual_fixed_Hartree_overlap_cutoff_second_deriv_zero_left harg
+  rw [hFull]
+  simp [hm, hd1, hd2]
 
 /-- The entire exact PDE commutator vanishes in the remote r>2R
 outer region, without incorrectly asserting the Riesz potential
@@ -116,18 +117,19 @@ theorem actual_Hartree_true_moving_cutoff_far_residual_zero
         complexRadialRenormalizedResidual f b omega s r = 0 := by
   have hFull := actual_one_layer_moving_parametrix_true_Hartree_source
     R f b omega hR hRpos.ne' hfTime hfSpace hf2 (r := r)
-  have hLap := actual_one_layer_physical_cutoff_radial_commutator
-    (R s) r hRpos.ne' (f s) hfSpace hf2
   have hm : actualOneLayerMaterialCutoffCoefficient
       (R s) Rs b r = 0 :=
     actual_Hartree_material_overlap_far_zero
       (R s) Rs b r hRpos hr
-  have hlap := actual_Hartree_radial_Laplacian_cutoff_far_source_zero
-    (R s) r hRpos hr (f s) hfSpace hf2
+  have harg : 2 < r / R s :=
+    (lt_div_iff₀ hRpos).2 (by simpa using hr)
+  have hd1 : deriv cutoff (r / R s) = 0 :=
+    actual_fixed_cutoff_deriv_zero_of_gt_two harg
+  have hd2 : deriv (deriv cutoff) (r / R s) = 0 :=
+    actual_fixed_Hartree_overlap_cutoff_second_deriv_zero_right harg
   have hnl := actual_Hartree_nonlocal_cutoff_far_source_zero
     (R s) r hRpos hr.le (f s)
-  rw [hFull, hLap]
-  rw [hm, hlap, hnl]
-  ring
+  rw [hFull]
+  simp [hm, hd1, hd2, hnl]
 
 end HBL.TypeIIDynamicSelection
