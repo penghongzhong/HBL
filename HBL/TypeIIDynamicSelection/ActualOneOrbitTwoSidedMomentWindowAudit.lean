@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitTwoSidedMomentWindow
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_terminal_two_sided_moment_window
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_terminal_two_sided_moment_window
