@@ -31,7 +31,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Modulation
 
 /-- A single actual Hartree nonlinear term is controlled by its
 NONLOCAL Riesz potential, local square density and local amplitude. -/
@@ -47,8 +47,8 @@ private theorem radial_Hartree_nonlinearity_norm_from_real_potential
         |radialHartreePotential (fun rho => ‖v rho‖ ^ 4) r| *
           ‖v r‖ ^ 2 * ‖v r‖ := by
     unfold complexRadialHartreeNonlinearity
-    simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs,
-      abs_of_nonneg (sq_nonneg _)]
+    simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    rw [abs_of_nonneg (sq_nonneg (‖v r‖))]
   calc
     _ = _ := hEq
     _ ≤ (P * Q) * B := by
