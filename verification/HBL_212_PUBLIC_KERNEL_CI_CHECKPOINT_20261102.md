@@ -68,3 +68,30 @@ their newest GitHub Actions runs report `success`.
 source-to-jet estimates, remote matching, physical parameter tangents and
 positive gain of all true residual classes. Do not impose the final blowup
 rate as a theorem hypothesis.**
+
+## 2026-11-02 — verified positive Fredholm source order
+
+**Strict CI success: GitHub Actions 41422910263**, commit 113a235f5ccadc535805ee1cb3e93561c4de04e4.
+
+Verified source: HBL/TypeIIDynamicSelection/ActualHartreeWeightedPositiveOrder.lean.
+
+With 0 < ell <= 1, 3/2 < sigma < 2, a positive lower bound on the actual Hartree physical moment, and the explicit amplitude/quartic Riesz envelope conditions, the TRUE inverse-square nonlocal cutoff commutator satisfies the quantitative original weighted Fredholm norm estimate:
+
+    || <r>^sigma [N(chi_R f_ell) - chi_R N(f_ell)] ||_L2(0,infinity)
+      <= C(m_*,B,D,sigma) * ell^(2-sigma),     2-sigma > 0,
+    R = 4 / (kappa_H * ell * m(t)),    m(t) >= m_* > 0.
+
+The critical sqrt(ell) radiation amplitude, physical moving support and full nonlocal quartic Riesz kernel are retained; no arbitrary positive source order is postulated.
+
+New submitted CI gates (do not treat as passed without latest completed/success):
+
+- 41422916938: full same-Hartree-PDE shell O(ell^(5/2)) with moment drift and Strauss.
+- 41422926588: full three-region Hartree source supplied to constructed normalized Kummer Green inverse.
+- 41424071542: exact physical 3D radial Laplacian critical rescaling.
+- 41424080804: genuine physical Hartree strong solution -> renormalized radiation PDE.
+- 41424509446: same physical flow with dynamical phase -> renormalized radiation PDE.
+- 41424723931: Strauss+moment directly imply true positive weighted Fredholm source order.
+
+UNPROVED original 2.12 obligations: whole mixed Vc+Z source uniform offterminal gain, physical moving Kummer/Frobenius/inner/remote jet matching, forced monopole charge, all parameter tangents and positive gains for every generated source class. Original main theorem derives Type-II rate, rather than assuming it.
+
+Retained ORIGINAL manuscript environment count: 9/13; 2.12 NOT yet accepted.
