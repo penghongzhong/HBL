@@ -65,8 +65,12 @@ theorem actual_Hartree_physical_moment_radius_drift_exact
         radialPhysicalQuarticMoment (z (time t)))
       (hartreeKappa * (-(b s * ell s)) * m +
         (hartreeKappa * ell s) * (dm * (ell s)^2)) s := by
-    simpa only [m] using
-      ((hEll.const_mul hartreeKappa).mul (hMoment.comp s hTime))
+    convert ((hEll.const_mul hartreeKappa).mul
+      (hMoment.comp s hTime)) using 1
+    · funext t
+      simp only [Pi.mul_apply, Function.comp_apply]
+    · dsimp [m]
+      ring
   let d : ℝ :=
     hartreeKappa * (-(b s * ell s)) * m +
       (hartreeKappa * ell s) * (dm * (ell s)^2)
@@ -75,8 +79,11 @@ theorem actual_Hartree_physical_moment_radius_drift_exact
     (hasDerivAt_const s (4 : ℝ)).div hD hdpos.ne'
   have hR :
       HasDerivAt (actualPhysicalHartreeMomentRadius ell z time) Rs s := by
-    simpa [actualPhysicalHartreeMomentRadius,
-      actualHartreeMomentCutoffRadius, Rs, d, m] using hRbase
+    convert hRbase using 1
+    · funext t
+      rfl
+    · dsimp [Rs, d, m]
+      ring
   refine ⟨Rs,hR,?_⟩
   dsimp [Rs,d,m,actualPhysicalHartreeMomentRadius,
     actualHartreeMomentCutoffRadius]
