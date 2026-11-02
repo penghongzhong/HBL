@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualHartreeFullCutoffSupport
+import HBL.TypeIIDynamicSelection.ActualHartreeRieszMeasurability
 import HBL.AffineTailLemmaClosed
 import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 import Mathlib.Tactic
@@ -11,11 +11,10 @@ inverse-square quartic Hartree Riesz cutoff commutator from its
 strictly proved sharp physical gain AND proved exact observation
 support r<=2R.
 
-Only measurability of this specific physical source is supplied as a
-visible analytic input; the bound and compact support are proved,
-not new assumptions. The actual single-orbit local Hartree PDE
-should eventually supply source measurability by dominated
-differentiation and the real weighted norm needed to close 2.12.
+Measurability of the SAME full inverse-square Hartree Riesz source
+now follows from the proved joint-kernel integral theorem and is not
+an independent analytic input. Remaining full one-orbit offterminal
+weighted residual/Kummer corrections are tracked separately.
 
 This is not the full one-layer stage 2.12 acceptance.
 -/
@@ -40,8 +39,7 @@ theorem actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
     (z : ℝ → ℂ) (hz : Measurable z)
     (hzAmp : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
     (hzQuartic : ∀ u : ℝ, 0 < u →
-      ‖z u‖ ^ 4 ≤ D * bubble u ^ 2)
-    (hSourceMeas : Measurable (actualHartreeNonlocalCutoffError R ell z)) :
+      ‖z u‖ ^ 4 ≤ D * bubble u ^ 2) :
     MemLp
       (fun r : ℝ => affineJapaneseWeight sigma r *
         ‖actualHartreeNonlocalCutoffError R ell z r‖)
@@ -64,6 +62,8 @@ theorem actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
     unfold affineJapaneseWeight
     have hb : Continuous (fun r : ℝ => 1 + r ^ 2) := by fun_prop
     exact hb.rpow_const (fun r => Or.inl (by positivity))
+  have hSourceMeas : Measurable (actualHartreeNonlocalCutoffError R ell z) :=
+    actual_Hartree_nonlocal_cutoff_error_measurable R ell z hz
   have hFmeas : Measurable F :=
     hWeightCont.measurable.mul hSourceMeas.norm
   have hFnonneg (r : ℝ) : 0 ≤ F r := by
