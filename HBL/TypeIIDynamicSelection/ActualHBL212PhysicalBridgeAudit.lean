@@ -8,6 +8,8 @@ import HBL.TypeIIDynamicSelection.ActualFlatGainIntegrability
 import HBL.TypeIIDynamicSelection.ActualComplexMovingRemoteMatch
 import HBL.TypeIIDynamicSelection.ActualHartreeRadialPDECriticalScaling
 import HBL.TypeIIDynamicSelection.ActualHartreeCriticalNonlinearityScaling
+import HBL.TypeIIDynamicSelection.ActualHartreeRadialDilationScaling
+import HBL.TypeIIDynamicSelection.ActualHBL212ThreeRegionSamePDESource
 
 /-!
 # Integration audit for the retained original Hartree profile 2.12
@@ -72,3 +74,15 @@ set_option autoImplicit false
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlinearity_phase_covariant
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_critical_scaled_nonlinearity
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_critical_scaled_nonlinearity
+
+-- Actual physical 3D radial derivative and dynamical dilation of the
+-- same critically rescaled complex radiation.
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_radial_deriv
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_radial_deriv
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_dilation
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_dilation
+
+-- The literal full H+/H-/Kummer/remote source equality on one
+-- physically moving Hartree annulus (SOURCE-level, not yet jet gluing).
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_three_region_common_PDE_Kummer_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_three_region_common_PDE_Kummer_source_exact
