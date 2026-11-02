@@ -153,7 +153,8 @@ theorem actual_Hartree_physical_nonlocal_cutoff_commutator_length_squared
         (cutoff_contDiff_infty.continuous.comp
           (continuous_id.div_const R))
     change Measurable (fun x : ℝ => ((1 - cutoff (x / R) : ℝ) : ℂ))
-    fun_prop
+    simpa only [Function.comp_def] using
+      (Complex.measurable_ofReal.comp hc.measurable)
   have hgMeas : Measurable g := by
     dsimp [g]
     exact (hChiMeas.comp (measurable_id.div_const ell)).mul hz
