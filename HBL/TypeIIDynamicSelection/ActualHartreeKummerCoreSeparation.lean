@@ -72,7 +72,7 @@ theorem actual_Hartree_normalized_Kummer_inside_physical_cutoff_exact
       K d hd hde F hF R hR.ne' r hr
   dsimp only at hODE
   rw [hChi, hdChi, hddChi] at hODE
-  simp only [zero_mul, mul_zero, zero_add, add_zero, one_mul, sub_eq_zero] at hODE
+  simp only [zero_mul, mul_zero, add_zero, one_mul, sub_eq_zero] at hODE
   exact ⟨hChi, hdChi, hddChi, hODE⟩
 
 /-- The true radial inverse-square Hartree quartic moment, if bounded

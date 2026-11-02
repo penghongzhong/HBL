@@ -49,7 +49,6 @@ theorem actual_Hartree_cutoff_coordinate_rescale
       actualOneLayerInnerOverlapCutoff (a / k) r := by
   have hRatio : (k * r) / a = r / (a / k) := by
     field_simp [ha.ne', hk.ne']
-    ring
   unfold actualOneLayerInnerOverlapCutoff
   rw [hRatio]
 
@@ -75,7 +74,6 @@ theorem actual_Hartree_physical_Kummer_cutoff_coordinate_exact
     dsimp [actualHartreeKummerCoordinateCutoffRadius,
       actualHartreeMomentCutoffRadius]
     field_simp [hk.ne', hell.ne', hm.ne', hs.ne']
-    ring
   rw [hCoord]
   exact actual_Hartree_cutoff_coordinate_rescale
     (actualHartreeMomentCutoffRadius ell m) (Real.sqrt q) r hR hs

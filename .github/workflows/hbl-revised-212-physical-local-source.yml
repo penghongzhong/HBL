@@ -7,6 +7,10 @@ on:
       - 'HBL/TypeIIDynamicSelection/RevisedOneLayerPhysicalLocalSource*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoreSeparation*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualOneOrbitTwoSidedMomentWindow*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerTerminalCoverage*.lean'
   workflow_dispatch:
 permissions:
   contents: read
