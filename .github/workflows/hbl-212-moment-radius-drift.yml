@@ -6,6 +6,7 @@ on:
       - '.github/workflows/hbl-212-moment-radius-drift.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentRadiusDrift*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalNonlocalSharpGain*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentRadiusWindow*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneLayerMovingParametrixTransport*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualCutoffUniformTransport.lean'
   workflow_dispatch:
