@@ -137,3 +137,28 @@ trajectory), then `ell^2` gives **derived** time exponent
 `2beta_->1`, i.e. the original positive `2beta_--1` gain.
 This `beta_-` is a trap-window lower bound, not the selected
 asymptotic Type-II exponent.
+
+
+## Minimal *mathematically meaningful* revision of original 2.12, if necessary
+
+The original lemma claims the complete regional correction is
+`unique` while simultaneously presupposing independently normalized
+Kummer and remote inverses and two-sided interface matching. That
+combination is not automatic; the accepted Wronskian obstruction shows
+why arbitrary Cauchy gluing fails.
+
+For the EXISTENTIAL `thm:main`, full uniqueness among all global
+profiles is unnecessary. Keep uniqueness of the two real threshold
+charges and uniqueness **within a fixed prescribed regional inverse,
+canonical cutoff and normalization**, but otherwise state existence of
+one canonical localized parametrix correction. Replace an unjustified
+exact global matching assertion by the proved PDE identity plus
+quantitatively higher-order cutoff/whole-Hartree source residuals.
+This does NOT weaken the essential one-layer conclusion:
+`Pi_rho R(V+Delta)=P_rho(zeta) zeta_s`
+and all new actual source atoms have strictly positive
+`kappa_prof` weight gain. Those two remain HARD proof obligations.
+
+Do not modify the private manuscript theorem label or count this as
+accepted until the exact source-level parametrix and all positive
+gain estimates are strictly compiled and compared line by line.
