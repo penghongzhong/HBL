@@ -144,18 +144,28 @@ theorem actual_Kummer_two_boundary_Cauchy_match_iff_transfer
       unfold actualKummerCauchyValue
       rw [hshift]
       have hp : a * K.phi (-d) + c * K.psi (-d) = p := hPair.1
-      rw [← add_assoc, hp]
-      dsimp [p]
-      ring
+      calc
+        physicalLocalKummerValue K d F (z-d) +
+            a * K.phi (-d) + c * K.psi (-d) =
+          physicalLocalKummerValue K d F (z-d) +
+            (a * K.phi (-d) + c * K.psi (-d)) := by ring
+        _ = physicalLocalKummerValue K d F (z-d) + p := by rw [hp]
+        _ = U := by dsimp [p]; ring
     have hDer : actualKummerCauchyDeriv K d F a c (z-d) = DU := by
       unfold actualKummerCauchyDeriv
       rw [hshift]
       have hq : a * K.dphi (-d) + c * K.dpsi (-d) = q := hPair.2
-      rw [← add_assoc, hq]
-      dsimp [q]
-      ring
+      calc
+        physicalLocalKummerDeriv K d F (z-d) +
+            a * K.dphi (-d) + c * K.dpsi (-d) =
+          physicalLocalKummerDeriv K d F (z-d) +
+            (a * K.dphi (-d) + c * K.dpsi (-d)) := by ring
+        _ = physicalLocalKummerDeriv K d F (z-d) + q := by rw [hq]
+        _ = DU := by dsimp [q]; ring
     refine ⟨a,c,hVal,hDer,?_,?_⟩
-    · exact congrArg Prod.fst hTransfer
-    · exact congrArg Prod.snd hTransfer
+    · simpa only [actualKummerPhysicalRightTransfer, Prod.fst] using
+        congrArg Prod.fst hTransfer
+    · simpa only [actualKummerPhysicalRightTransfer, Prod.snd] using
+        congrArg Prod.snd hTransfer
 
 end HBL.TypeIIDynamicSelection
