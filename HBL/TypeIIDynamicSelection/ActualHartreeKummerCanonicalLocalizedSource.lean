@@ -267,12 +267,11 @@ theorem actual_Hartree_normalized_Kummer_true_shell_cutoff_bound
       mul_le_mul_of_nonneg_right hCoeff hOne
     calc
       _ ≤ C2 / R ^ 2 + (2 / R + R) * (C1 / R) :=
-        add_le_add_left hMul _
+        add_le_add le_rfl hMul
       _ = C1 + (C2 + 2 * C1) / R ^ 2 := by
         field_simp [hR.ne']
         <;> ring
-  exact hOld.trans (add_le_add_left
-    (mul_le_mul_of_nonneg_right hCoeffGain (norm_nonneg (u r)))
-    ((2 * (C1 / R)) * ‖deriv u r‖))
+  exact hOld.trans (add_le_add le_rfl
+    (mul_le_mul_of_nonneg_right hCoeffGain (norm_nonneg (u r))))
 
 end HBL.TypeIIDynamicSelection
