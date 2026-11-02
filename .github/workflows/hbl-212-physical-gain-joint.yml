@@ -82,8 +82,8 @@ jobs:
           import re
           for base in ["ActualOneLayerMovingParametrixTransport","ActualHartreeMomentFluxFromContinuity","ActualPDEMomentCutoffStrictGain","ActualOneOrbitUniformMomentCutoffGain","ActualOneLayerSpatialOverlapGain"]:
             s=Path('HBL/TypeIIDynamicSelection/'+base+'.lean').read_text()
-            s=re.sub(r'/\\-.*?\\-/','',s,flags=re.S)
-            assert not re.search(r'\\b(sorry|admit|axiom|native_decide|unsafe)\\b',s),base
+            s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),base
           PY
           lake build HBL.TypeIIDynamicSelection.ActualHBL212PhysicalGainAudit 2>&1 | tee evidence/build.log
           for base in ActualOneLayerMovingParametrixTransport ActualHartreeMomentFluxFromContinuity ActualPDEMomentCutoffStrictGain ActualOneOrbitUniformMomentCutoffGain ActualOneLayerSpatialOverlapGain; do
@@ -95,8 +95,8 @@ jobs:
           s=pathlib.Path('evidence/audit.log').read_text()
           for n in ["actual_one_layer_material_coefficient_exact","actual_one_layer_material_cutoff_derivative_exact","actual_one_layer_moving_parametrix_true_Hartree_source","actual_one_layer_material_transport_shell_bound","actual_Hartree_positive_terminal_moment_bounds_relative_PDE_flux","actual_Hartree_terminal_flux_bounded_on_physical_clock","actual_PDE_moment_cutoff_gain_positive","actual_PDE_trapped_length_squared_positive_gain","actual_Hartree_PDE_moving_moment_cutoff_positive_order","actual_Hartree_one_orbit_uniform_moment_cutoff_transport","actual_Hartree_one_orbit_eventual_strict_moving_cutoff_gain","actual_fixed_Hartree_overlap_cutoff_second_deriv_zero_left","actual_fixed_Hartree_overlap_cutoff_second_deriv_zero_right","exists_actual_fixed_Hartree_cutoff_uniform_second_deriv_bound","actual_Hartree_overlap_cutoff_uniform_C2_spatial_scaling","actual_Hartree_radial_shell_two_over_r_le_two_over_R"]:
             n='HBL.TypeIIDynamicSelection.'+n
-            assert re.search(r'(?:@)?'+re.escape(n)+r'\\s*:',s), 'Missing theorem type: '+n
-            m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \\[([^\\]]*)\\]",s)
+            assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s), 'Missing theorem type: '+n
+            m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
             assert m, 'Missing transitive axiom audit: '+n
             actual={t.strip() for t in m.group(1).split(',') if t.strip()}
             assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
