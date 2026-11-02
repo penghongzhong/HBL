@@ -1,0 +1,9 @@
+import HBL.Literature.AroraRoudenko2020Parameters
+set_option autoImplicit false
+
+#check @HBL.Literature.AroraRoudenko2020.criticalSobolevIndex_eq_one
+#print axioms HBL.Literature.AroraRoudenko2020.criticalSobolevIndex_eq_one
+#check @HBL.Literature.AroraRoudenko2020.exponent_parameters_are_admissible
+#print axioms HBL.Literature.AroraRoudenko2020.exponent_parameters_are_admissible
+#check @HBL.Literature.AroraRoudenko2020.local_power_reduction
+#print axioms HBL.Literature.AroraRoudenko2020.local_power_reduction
