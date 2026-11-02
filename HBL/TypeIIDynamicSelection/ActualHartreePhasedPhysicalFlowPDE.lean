@@ -88,9 +88,10 @@ theorem actual_Hartree_phased_physical_flow_true_renormalized_PDE
     rw [hZFirstEq]
     have hscale : HasDerivAt (fun y : ℝ => ell s * y) (ell s) r :=
       hasDerivAt_const_mul (ell s)
-    exact (((hzSecond.hasDerivAt.scomp r hscale).const_mul
-      ((ell s : ℝ) : ℂ)).const_mul
-        (Real.sqrt (ell s) : ℂ)).differentiableAt
+    simpa only [mul_assoc] using
+      (((hzSecond.hasDerivAt.scomp r hscale).const_mul
+        ((ell s : ℝ) : ℂ)).const_mul
+          (Real.sqrt (ell s) : ℂ)).differentiableAt
   have hCov := actual_Hartree_dynamic_phase_full_PDE_residual_covariant
     gamma Z (b s) 0 s r gs hGamma hZTime hZSpace hZSecond
   calc
