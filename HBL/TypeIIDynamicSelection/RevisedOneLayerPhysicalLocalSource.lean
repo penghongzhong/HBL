@@ -129,7 +129,7 @@ theorem revised_one_layer_physical_local_source_certified
   let M : ℝ := 2 * mT
   have hM : 0 < M := by dsimp [M]; positivity
   have hNear : ∀ᶠ s in atTop, |time s - T| < deltaT := by
-    filter_upwards [hTime.eventually (Metric.ball_mem_nhds hDelta)]
+    filter_upwards [hTime.eventually (Metric.ball_mem_nhds T hDelta)]
       with s hs
     simpa [Metric.mem_ball, Real.dist_eq] using hs
   have hMoment : ∀ᶠ s in atTop,
@@ -192,10 +192,6 @@ theorem revised_one_layer_physical_local_source_certified
       Fphys (Real.sqrt (q s) * r)) ∘ clamp)
     exact (hFcontOn s hq).comp_continuous
       hClampContinuous hClampMem
-  have hFK_id (r : ℝ) (hr : r ∈ Ioo (center - d) (center + d)) :
-      FK r = Fphys (Real.sqrt (q s) * r) := by
-    dsimp [FK, clamp]
-    rw [max_eq_left hr.1.le, min_eq_left hr.2.le]
   have hExact (r : ℝ) (hr : r ∈ Ioo (center - d) (center + d)) :
       actualHartreeFrozenKummerRadialApply mu theta
         (fun x =>
@@ -212,9 +208,7 @@ theorem revised_one_layer_physical_local_source_certified
       hR hCovered r hr).2.2.2
   intro r hr
   dsimp only
-  have hSource := hExact r hr
-  rw [hFK_id r hr] at hSource
-  refine ⟨hSource, ?_, ?_⟩
+  refine ⟨hExact r hr, ?_, ?_⟩
   · rfl
   · rfl
 
