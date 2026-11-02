@@ -109,31 +109,13 @@ theorem actual_Hartree_physical_flow_true_renormalized_PDE
   unfold complexRadialDilation
   rw [hzDeriv]
   push_cast
-  have hScaled :
-      Complex.I *
-        (((-(b s * Real.sqrt (ell s))) / 2 : ℝ) : ℂ) *
-            z (time s) (ell s * r) +
-        Complex.I * (Real.sqrt (ell s) : ℂ) *
-          (((ell s) ^ 2 : ℝ) * zt +
-            ((-(b s * ell s)) * r : ℝ) * zr) +
-        (((ell s) ^ 2 * Real.sqrt (ell s) : ℝ) : ℂ) *
-          complexRadialLaplacian (z (time s)) (ell s * r) +
-        (((ell s) ^ 2 * Real.sqrt (ell s) : ℝ) : ℂ) *
-          complexRadialHartreeNonlinearity (z (time s)) (ell s * r) +
-        Complex.I * (b s : ℂ) * (Real.sqrt (ell s) : ℂ) *
-          (z (time s) (ell s * r) / 2 +
-            ((ell s * r : ℝ) : ℂ) * zr) =
-      (((ell s) ^ 2 * Real.sqrt (ell s) : ℝ) : ℂ) *
-        (Complex.I * zt +
-          complexRadialLaplacian (z (time s)) (ell s * r) +
-          complexRadialHartreeNonlinearity (z (time s)) (ell s * r)) := by
-    push_cast
-    ring
   calc
     _ = (((ell s) ^ 2 * Real.sqrt (ell s) : ℝ) : ℂ) *
         (Complex.I * zt +
           complexRadialLaplacian (z (time s)) (ell s * r) +
-          complexRadialHartreeNonlinearity (z (time s)) (ell s * r)) := hScaled
+          complexRadialHartreeNonlinearity (z (time s)) (ell s * r)) := by
+          push_cast
+          ring
     _ = 0 := by rw [hPhysicalPDE]; ring
 
 end HBL.TypeIIDynamicSelection
