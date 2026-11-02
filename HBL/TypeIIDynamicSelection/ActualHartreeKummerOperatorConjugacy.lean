@@ -72,7 +72,7 @@ theorem actual_Hartree_Kummer_frozen_operator_physical_conjugacy
         (a : ℂ) * deriv f (a * x) := by
     have h := (hf x).hasDerivAt.scomp x (hScale x)
     change deriv (fun y : ℝ => f (a * y)) x = _
-    convert h.deriv using 1
+    simpa only [Function.comp_def, Complex.real_smul] using h.deriv
   have hFirstFun :
       deriv (actualHartreeKummerSpatialPullback q f) =
         (fun x : ℝ => (a : ℂ) * deriv f (a * x)) :=
@@ -83,7 +83,7 @@ theorem actual_Hartree_Kummer_frozen_operator_physical_conjugacy
     rw [hFirstFun]
     have h := ((hf2.hasDerivAt.scomp z (hScale z)).const_mul
       (a : ℂ)).deriv
-    simpa only [mul_assoc] using h
+    simpa only [Function.comp_def, Complex.real_smul, mul_assoc] using h
   have hAsq : (a : ℂ) ^ 2 = (q : ℂ) := by
     exact_mod_cast Real.sq_sqrt hq.le
   have haC : (a : ℂ) ≠ 0 :=
