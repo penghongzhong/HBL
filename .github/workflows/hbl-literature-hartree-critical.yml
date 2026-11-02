@@ -1,0 +1,123 @@
+name: HBL Arora Roudenko 2020 critical Hartree literature foundation trust-zero
+on:
+  push:
+    branches: [hbl-212-physical-spatial-commutator-gain-20261102]
+    paths:
+      - '.github/workflows/hbl-literature-hartree-critical.yml'
+      - 'HBL/Literature/AroraRoudenko2020*.lean'
+      - '.github/workflows/hbl-literature-hartree-critical.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-literature-hartree-critical-20261102
+  cancel-in-progress: true
+jobs:
+  strict-joint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake
+          key: hbl-typeii-dynamic-new-20261029
+          restore-keys: |
+            hbl-noncompact-gradient-
+      - name: Resolve pinned mathlib dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+      - name: Restore last successful compiled project
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-physical-C2-overlap-cutoff-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/ActualHartreePhysicalSpatialCutoffSourceGain*.lean') }}
+          restore-keys: |
+            hbl-212-joined-physical-flow-and-inner-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-212-physical-source-integration-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-212-physical-spatial-commutator-gain-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            hbl-typeii-dynamic-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-project-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Strict build library literature foundation and source/axiom audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          for f in Path('HBL/Literature').glob('AroraRoudenko2020*.lean'):
+            s=re.sub(r'/\-.*?\-/','',f.read_text(),flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),str(f)
+          PY
+          lake build HBL.Literature.AroraRoudenko2020Parameters HBL.Literature.AroraRoudenko2020ParametersAudit HBL.Literature.AroraRoudenko2020Interface HBL.Literature.AroraRoudenko2020InterfaceAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/Literature/AroraRoudenko2020Parameters.lean 2>&1 | tee evidence/parameters-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/Literature/AroraRoudenko2020ParametersAudit.lean 2>&1 | tee evidence/parameters-audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/Literature/AroraRoudenko2020Interface.lean 2>&1 | tee evidence/interface-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/Literature/AroraRoudenko2020InterfaceAudit.lean 2>&1 | tee evidence/interface-audit.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=(Path('evidence/parameters-audit.log').read_text()+'\n'+
+             Path('evidence/interface-audit.log').read_text())
+          ns='HBL.Literature.AroraRoudenko2020.'
+          names=['criticalSobolevIndex_eq_one',
+                 'exponent_parameters_are_admissible',
+                 'local_power_reduction',
+                 'certified_cited_flow_is_physical_strong_solution',
+                 'certified_cited_flow_satisfies_actual_Hartree',
+                 'certified_cited_flow_physical_Riesz_integrable',
+                 'certified_cited_flow_unique','certified_cited_flow_radial']
+          for name in names:
+            q=ns+name
+            assert re.search(r'(?:@)?'+re.escape(q)+r'\s*:',s),'missing exact type: '+q
+            m=re.search(r"'"+re.escape(q)+r"' depends on axioms: \[([^\]]*)\]",s)
+            if m:
+              axioms={x.strip() for x in m.group(1).split(',') if x.strip()}
+              assert axioms <= {'propext','Classical.choice','Quot.sound'},(q,axioms)
+            else:
+              assert re.search(r"'"+re.escape(q)+r"' does not depend on any axioms",s),q
+          assert 'sorryAx' not in s
+          print('PASS: published 3D critical Hartree LWP specialization and explicit high-regularity interface; NO new axiom. HBL 2.12 OPEN')
+          PY
+      - name: Store library foundation evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          sha256sum HBL/Literature/AroraRoudenko2020*.lean > evidence/source-hashes.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-literature-hartree-critical-axiom-audit
+          path: evidence
+          retention-days: 14
