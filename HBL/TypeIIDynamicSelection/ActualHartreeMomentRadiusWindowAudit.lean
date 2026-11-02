@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentRadiusWindow
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_positive_moment_upper_cutoff_radius
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_positive_moment_upper_cutoff_radius
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_overlap_rescaled_radius_le
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_overlap_rescaled_radius_le
