@@ -3,7 +3,7 @@ on:
   push:
     branches: [hbl-212-original-kummer-normalization-obstruction-20261102]
     paths:
-      - '.github/workflows/hbl-212-original-kummer-normalization-obstruction-20261102.yml'
+      - '.github/workflows/hbl-212-original-kummer-normalization-obstruction.yml'
       - 'HBL/TypeIIDynamicSelection/ActualKummerNormalizedNoHomogeneousFreedom*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualRadiationSpatialFlatness.lean'
   workflow_dispatch:
