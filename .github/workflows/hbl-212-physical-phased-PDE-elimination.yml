@@ -1,7 +1,7 @@
-name: HBL physical Hartree PDE to exact rate-free renormalized residual strict audit
+name: HBL genuine dynamically phased physical Hartree PDE to renormalized equation strict audit
 on:
   push:
-    branches: [hbl-212-physical-phased-PDE-elimination-20261101]
+    branches: [hbl-212-physical-phased-PDE-elimination-20261102]
     paths:
       - '.github/workflows/hbl-212-physical-phased-PDE-elimination.yml'
       - 'HBL/TypeIIDynamicSelection/ActualPhysicalHartreePhasedPDEElimination*.lean'
@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: hbl-212-physical-phased-PDE-elimination-20261101
+  group: hbl-212-physical-phased-PDE-elimination-20261102
   cancel-in-progress: true
 jobs:
   strict-joint:
