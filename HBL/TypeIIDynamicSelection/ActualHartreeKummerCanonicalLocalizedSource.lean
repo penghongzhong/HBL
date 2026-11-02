@@ -128,4 +128,78 @@ theorem actual_Hartree_original_normalized_Kummer_localized_source_exact
           frozenFirstCoeff r *
             deriv (actualOneLayerInnerOverlapCutoff R) r) * u r := hComm
 
+/-- Quantitative error of the original homogeneous-free normalized Kummer
+Green solution under the true moving cutoff. The constants are the already
+constructed global smooth-cutoff C1/C2 bounds, not externally assumed source
+orders. A moving-shell Green jet estimate is still needed for original 2.12. -/
+theorem actual_Hartree_original_Kummer_green_cutoff_C2_bound
+    {mu theta z eps : ℝ}
+    (K : LocalKummerPair mu theta z eps)
+    (d : ℝ) (hd : 0 < d) (hde : d < eps)
+    (F : ℝ → ℂ) (hF : Continuous F)
+    (R : ℝ) (hR : 0 < R)
+    (r : ℝ) (hr : r ∈ Ioo (z - d) (z + d)) :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+      let u : ℝ → ℂ := actualKummerCauchyValue K d F 0 0
+      ‖actualHartreeFrozenKummerRadialApply mu theta
+          (fun x => actualOneLayerInnerOverlapCutoff R x * u x) r -
+        actualOneLayerInnerOverlapCutoff R r * F r‖ ≤
+        (2 * (C1 / R)) * ‖deriv u r‖ +
+        (C2 / R ^ 2 + ‖frozenFirstCoeff r‖ * (C1 / R)) *
+          ‖u r‖ := by
+  obtain ⟨C1, C2, hC1, hC2, hGlobal⟩ :=
+    actual_Hartree_overlap_cutoff_uniform_C2_spatial_scaling
+  refine ⟨C1, C2, hC1, hC2, ?_⟩
+  dsimp only
+  let u : ℝ → ℂ := actualKummerCauchyValue K d F 0 0
+  let chi : ℝ → ℂ := actualOneLayerInnerOverlapCutoff R
+  have hChi1 : ‖deriv chi r‖ ≤ C1 / R := (hGlobal R r hR).1
+  have hChi2 : ‖deriv (deriv chi) r‖ ≤ C2 / R ^ 2 :=
+    (hGlobal R r hR).2
+  have hFirst :
+      ‖(2 : ℂ) * deriv chi r * deriv u r‖ ≤
+        (2 * (C1 / R)) * ‖deriv u r‖ := by
+    calc
+      _ = (2 * ‖deriv chi r‖) * ‖deriv u r‖ := by
+        norm_num [norm_mul]
+      _ ≤ (2 * (C1 / R)) * ‖deriv u r‖ :=
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_left hChi1 (by norm_num))
+          (norm_nonneg _)
+  have hCoeff :
+      ‖deriv (deriv chi) r + frozenFirstCoeff r * deriv chi r‖ ≤
+        C2 / R ^ 2 + ‖frozenFirstCoeff r‖ * (C1 / R) := by
+    calc
+      _ ≤ ‖deriv (deriv chi) r‖ +
+          ‖frozenFirstCoeff r * deriv chi r‖ :=
+        norm_add_le _ _
+      _ = ‖deriv (deriv chi) r‖ +
+          ‖frozenFirstCoeff r‖ * ‖deriv chi r‖ := by
+        rw [norm_mul]
+      _ ≤ C2 / R ^ 2 + ‖frozenFirstCoeff r‖ * (C1 / R) :=
+        add_le_add hChi2
+          (mul_le_mul_of_nonneg_left hChi1 (norm_nonneg _))
+  have hSecond :
+      ‖(deriv (deriv chi) r +
+          frozenFirstCoeff r * deriv chi r) * u r‖ ≤
+        (C2 / R ^ 2 +
+          ‖frozenFirstCoeff r‖ * (C1 / R)) * ‖u r‖ := by
+    rw [norm_mul]
+    exact mul_le_mul_of_nonneg_right hCoeff (norm_nonneg _)
+  have hExact :
+      actualHartreeFrozenKummerRadialApply mu theta
+          (fun x => chi x * u x) r - chi r * F r =
+        2 * deriv chi r * deriv u r +
+          (deriv (deriv chi) r +
+            frozenFirstCoeff r * deriv chi r) * u r :=
+    actual_Hartree_original_normalized_Kummer_localized_source_exact
+      K d hd hde F hF R hR.ne' r hr
+  change ‖actualHartreeFrozenKummerRadialApply mu theta
+      (fun x => chi x * u x) r - chi r * F r‖ ≤
+    (2 * (C1 / R)) * ‖deriv u r‖ +
+      (C2 / R ^ 2 + ‖frozenFirstCoeff r‖ * (C1 / R)) *
+        ‖u r‖
+  rw [hExact]
+  exact (norm_add_le _ _).trans (add_le_add hFirst hSecond)
+
 end HBL.TypeIIDynamicSelection
