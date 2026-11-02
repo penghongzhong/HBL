@@ -131,7 +131,5 @@ theorem actual_one_orbit_terminal_nonlocal_source_weightedL2
     hSigmaLo hSigmaHi actualOneOrbitTerminalRadiation hz
     (fun u _ => actual_one_orbit_terminal_radiation_norm_le_one u)
     (fun u hu => actual_one_orbit_terminal_quartic_bubble_envelope u hu)
-    (actual_Hartree_nonlocal_cutoff_error_measurable
-      R ell actualOneOrbitTerminalRadiation hz)
 
 end HBL.TypeIIDynamicSelection
