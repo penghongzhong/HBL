@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitPhysicalTerminalRadiusWindow
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_physical_Hartree_terminal_radius_upper
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_physical_Hartree_terminal_radius_upper
