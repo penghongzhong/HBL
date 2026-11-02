@@ -68,7 +68,7 @@ theorem actual_Hartree_dynamic_phase_radiation_time_hasDerivAt
   have hp := actual_Hartree_dynamic_unit_phase_hasDerivAt
     gamma s gs hgamma
   have h := hp.mul hZ
-  convert h using 1 <;> ring
+  convert h using 1; ring
 
 /-- Original HBL radial Laplacian is complex linear under the
 time-frozen physical phase; all two derivatives are justified. -/
