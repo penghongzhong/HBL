@@ -71,7 +71,10 @@ theorem actual_supported_halfLine_L2_norm_le
     eLpNorm_mono_ae
       ((hF.indicator measurableSet_Ioi).aestronglyMeasurable)
       (Filter.Eventually.of_forall hDom)
-  have hNorm := ENNReal.toReal_mono hGmem.eLpNorm_lt_top hLp
+  have hNorm :
+      (eLpNorm E 2 (volume : Measure ℝ)).toReal ≤
+        (eLpNorm G 2 (volume : Measure ℝ)).toReal :=
+    ENNReal.toReal_mono hGmem.eLpNorm_lt_top.ne hLp
   have hEqLeft :
       (eLpNorm E 2 (volume : Measure ℝ)).toReal =
       (eLpNorm F 2 halfLineMeasure).toReal := by
@@ -87,8 +90,7 @@ theorem actual_supported_halfLine_L2_norm_le
     change (eLpNorm ((Ioc (0 : ℝ) (2*R)).indicator
       (fun _ : ℝ => A)) 2 (volume : Measure ℝ)).toReal = _
     rw [eLpNorm_indicator_const measurableSet_Ioc.nullMeasurableSet
-      (by norm_num : (2 : ℝ≥0∞) ≠ 0)
-      (by norm_num : (2 : ℝ≥0∞) ≠ ⊤)]
+      (by norm_num) (by norm_num)]
     rw [ENNReal.toReal_mul, toReal_enorm,
       Real.volume_Ioc, sub_zero, ENNReal.toReal_rpow]
     rw [ENNReal.toReal_ofReal (by positivity : 0 ≤ 2*R)]
@@ -127,7 +129,8 @@ theorem actual_Hartree_nonlocal_physical_weighted_L2_quantitative
     have hk := radialHartreeRowBoundConstant_pos
     positivity
   have hA : 0 ≤ A := by
-    dsimp [A,affineJapaneseWeight]
+    have hk := radialHartreeRowBoundConstant_pos
+    dsimp [A, K, affineJapaneseWeight]
     positivity
   have hWNonneg (r : ℝ) :
       0 ≤ affineJapaneseWeight sigma r := by
@@ -138,8 +141,8 @@ theorem actual_Hartree_nonlocal_physical_weighted_L2_quantitative
   have hFMeas : Measurable F := by
     have hw : Continuous (affineJapaneseWeight sigma) := by
       unfold affineJapaneseWeight
-      exact (continuous_const.add (continuous_id.pow 2)).rpow_const
-        (fun r => Or.inl (by positivity))
+      have hb : Continuous (fun r : ℝ => 1 + r ^ 2) := by fun_prop
+      exact hb.rpow_const (fun r => Or.inl (by positivity))
     exact hw.measurable.mul
       (actual_Hartree_nonlocal_cutoff_error_measurable R ell z hz).norm
   have hPoint := actual_Hartree_nonlocal_cutoff_sharp_and_compact_support
