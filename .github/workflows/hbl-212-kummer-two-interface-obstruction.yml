@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-212-kummer-two-interface-obstruction.yml'
       - 'HBL/TypeIIDynamicSelection/ActualKummerTwoInterfaceObstruction*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerInnerCauchyMatch*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualRadiationSpatialFlatness.lean'
   workflow_dispatch:
 permissions:
