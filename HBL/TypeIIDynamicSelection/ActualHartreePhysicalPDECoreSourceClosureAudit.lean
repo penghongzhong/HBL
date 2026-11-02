@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalPDECoreSourceClosure
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_forces_one_layer_interaction_only
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_forces_one_layer_interaction_only
