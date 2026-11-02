@@ -92,7 +92,7 @@ theorem actual_supported_halfLine_L2_norm_le
     rw [eLpNorm_indicator_const measurableSet_Ioc.nullMeasurableSet
       (by norm_num) (by norm_num)]
     rw [ENNReal.toReal_mul, toReal_enorm,
-      Real.volume_Ioc, sub_zero, ENNReal.toReal_rpow]
+      Real.volume_Ioc, sub_zero, ← ENNReal.toReal_rpow]
     rw [ENNReal.toReal_ofReal (by positivity : 0 ≤ 2*R)]
     simp only [Real.norm_eq_abs, abs_of_nonneg hA]
     norm_num [Real.sqrt_eq_rpow]
