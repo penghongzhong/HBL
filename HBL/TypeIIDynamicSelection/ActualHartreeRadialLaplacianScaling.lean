@@ -53,7 +53,7 @@ theorem actual_Hartree_critical_rescaled_second_radial_deriv
   have hSecond : HasDerivAt
       (fun x : ℝ => deriv z (ell * x))
       ((ell : ℂ) * deriv (deriv z) (ell * r)) r := by
-    simpa only [Function.comp_def, smul_eq_mul] using
+    simpa only [Function.comp_def, Complex.real_smul] using
       hz2.hasDerivAt.scomp r hScale
   have hProduct :=
     ((hSecond.const_mul (ell : ℂ)).const_mul (Real.sqrt ell : ℂ)).deriv
@@ -84,6 +84,6 @@ theorem actual_Hartree_critical_rescaled_radial_Laplacian
   have he : (ell : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hell.ne'
   have hrc : (r : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hr.ne'
   push_cast
-  field_simp [he, hrc] <;> ring
+  field_simp [he, hrc]
 
 end HBL.TypeIIDynamicSelection
