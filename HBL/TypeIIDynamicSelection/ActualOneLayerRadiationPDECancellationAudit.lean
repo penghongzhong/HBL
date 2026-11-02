@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualOneLayerRadiationPDECancellation
+
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_PDE_radiation_evolution_cancelled
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_PDE_radiation_evolution_cancelled
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_PDE_both_channels_interaction_only
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_PDE_both_channels_interaction_only
