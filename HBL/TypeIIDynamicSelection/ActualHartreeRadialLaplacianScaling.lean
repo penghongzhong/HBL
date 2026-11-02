@@ -64,7 +64,7 @@ theorem actual_Hartree_critical_rescaled_second_radial_deriv
       rw [hFirstEq]
     _ = (Real.sqrt ell : ℂ) *
         ((ell : ℂ) ^ 2 * deriv (deriv z) (ell * r)) := by
-      convert hProduct using 1 <;> ring
+      convert hProduct using 1; ring
 
 /-- The ACTUAL three-dimensional radial Laplacian, including the
 2/r first-derivative term, scales exactly like the full Hartree
