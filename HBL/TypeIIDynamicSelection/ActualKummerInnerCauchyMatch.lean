@@ -200,14 +200,22 @@ theorem actual_Kummer_inner_interface_Cauchy_match
   refine ⟨a,c,?_,?_,?_⟩
   · unfold actualKummerCauchyValue
     have hx : z - d - z = -d := by ring
-    rw [hx, ← hp]
-    dsimp [p]
-    ring
+    rw [hx]
+    calc
+      physicalLocalKummerValue K d F (z - d) +
+          a * K.phi (-d) + c * K.psi (-d) =
+          physicalLocalKummerValue K d F (z - d) + p := by
+            linear_combination hp
+      _ = U := by dsimp [p]; ring
   · unfold actualKummerCauchyDeriv
     have hx : z - d - z = -d := by ring
-    rw [hx, ← hq]
-    dsimp [q]
-    ring
+    rw [hx]
+    calc
+      physicalLocalKummerDeriv K d F (z - d) +
+          a * K.dphi (-d) + c * K.dpsi (-d) =
+          physicalLocalKummerDeriv K d F (z - d) + q := by
+            linear_combination hq
+      _ = DU := by dsimp [q]; ring
   · intro r hr
     exact actual_Kummer_Cauchy_corrected_classical_equation K d hd hde F hF a c r hr
 
