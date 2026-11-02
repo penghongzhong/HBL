@@ -5,7 +5,8 @@ on:
     paths:
       - '.github/workflows/hbl-literature-hartree-critical.yml'
       - 'HBL/Literature/AroraRoudenko2020*.lean'
-      - '.github/workflows/hbl-literature-hartree-critical.yml'
+      - 'HBL/RegularRadiationFlow.lean'
+      - 'HBL/RegularRadiationOriginalEnvironment.lean'
   workflow_dispatch:
 permissions:
   contents: read
