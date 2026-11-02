@@ -15,6 +15,8 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualComplexMovingRemoteMatch*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeRadialPDECriticalScaling*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeCriticalNonlinearityScaling*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeRadialDilationScaling*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHBL212ThreeRegionSamePDESource*.lean'
   workflow_dispatch:
 permissions:
   contents: read
@@ -81,13 +83,13 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          for base in ['ActualOneLayerCertifiedKummerSource','ActualMovingRadiationPartition','ActualOneLayerInnerRemoteSource','ActualOneLayerSingleComplexWeightedSource','ActualPhasedFlatTimeWeight','ActualPhasedFlatTimeTail','ActualFlatGainIntegrability','ActualComplexMovingRemoteMatch','ActualHartreeRadialPDECriticalScaling','ActualHartreeCriticalNonlinearityScaling']:
+          for base in ['ActualOneLayerCertifiedKummerSource','ActualMovingRadiationPartition','ActualOneLayerInnerRemoteSource','ActualOneLayerSingleComplexWeightedSource','ActualPhasedFlatTimeWeight','ActualPhasedFlatTimeTail','ActualFlatGainIntegrability','ActualComplexMovingRemoteMatch','ActualHartreeRadialPDECriticalScaling','ActualHartreeCriticalNonlinearityScaling','ActualHartreeRadialDilationScaling','ActualHBL212ThreeRegionSamePDESource']:
             s=Path('HBL/TypeIIDynamicSelection/'+base+'.lean').read_text()
             s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),base
           PY
           lake build HBL.TypeIIDynamicSelection.ActualHBL212PhysicalBridgeAudit 2>&1 | tee evidence/build.log
-          for base in ActualOneLayerCertifiedKummerSource ActualMovingRadiationPartition ActualOneLayerInnerRemoteSource ActualOneLayerSingleComplexWeightedSource ActualPhasedFlatTimeWeight ActualPhasedFlatTimeTail ActualFlatGainIntegrability ActualComplexMovingRemoteMatch ActualHartreeRadialPDECriticalScaling ActualHartreeCriticalNonlinearityScaling; do
+          for base in ActualOneLayerCertifiedKummerSource ActualMovingRadiationPartition ActualOneLayerInnerRemoteSource ActualOneLayerSingleComplexWeightedSource ActualPhasedFlatTimeWeight ActualPhasedFlatTimeTail ActualFlatGainIntegrability ActualComplexMovingRemoteMatch ActualHartreeRadialPDECriticalScaling ActualHartreeCriticalNonlinearityScaling ActualHartreeRadialDilationScaling ActualHBL212ThreeRegionSamePDESource; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${base}.lean" >> evidence/source-strict.log 2>&1
           done
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHBL212PhysicalBridgeAudit.lean 2>&1 | tee evidence/audit.log
@@ -110,7 +112,10 @@ jobs:
                     'actual_Hartree_critical_rescaled_local_cubic',
                     'actual_Hartree_critical_scaled_nonlinearity',
                     'actual_Hartree_nonlinearity_phase_covariant',
-                    'actual_Hartree_phased_critical_scaled_nonlinearity']:
+                    'actual_Hartree_phased_critical_scaled_nonlinearity',
+                    'actual_Hartree_critical_rescaled_radial_deriv',
+                    'actual_Hartree_critical_rescaled_dilation',
+                    'actual_Hartree_three_region_common_PDE_Kummer_source_exact']:
             n='HBL.TypeIIDynamicSelection.'+n
             assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s), 'Missing exported theorem type: '+n
             m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
@@ -133,7 +138,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHBL212PhysicalBridgeAudit.lean HBL/TypeIIDynamicSelection/ActualOneLayerCertifiedKummerSource*.lean HBL/TypeIIDynamicSelection/ActualMovingRadiationPartition*.lean HBL/TypeIIDynamicSelection/ActualOneLayerInnerRemoteSource*.lean HBL/TypeIIDynamicSelection/ActualOneLayerSingleComplexWeightedSource*.lean HBL/TypeIIDynamicSelection/ActualPhasedFlatTimeWeight*.lean HBL/TypeIIDynamicSelection/ActualPhasedFlatTimeTail*.lean HBL/TypeIIDynamicSelection/ActualFlatGainIntegrability*.lean HBL/TypeIIDynamicSelection/ActualComplexMovingRemoteMatch*.lean HBL/TypeIIDynamicSelection/ActualHartreeRadialPDECriticalScaling*.lean HBL/TypeIIDynamicSelection/ActualHartreeCriticalNonlinearityScaling*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHBL212PhysicalBridgeAudit.lean HBL/TypeIIDynamicSelection/ActualOneLayerCertifiedKummerSource*.lean HBL/TypeIIDynamicSelection/ActualMovingRadiationPartition*.lean HBL/TypeIIDynamicSelection/ActualOneLayerInnerRemoteSource*.lean HBL/TypeIIDynamicSelection/ActualOneLayerSingleComplexWeightedSource*.lean HBL/TypeIIDynamicSelection/ActualPhasedFlatTimeWeight*.lean HBL/TypeIIDynamicSelection/ActualPhasedFlatTimeTail*.lean HBL/TypeIIDynamicSelection/ActualFlatGainIntegrability*.lean HBL/TypeIIDynamicSelection/ActualComplexMovingRemoteMatch*.lean HBL/TypeIIDynamicSelection/ActualHartreeRadialPDECriticalScaling*.lean HBL/TypeIIDynamicSelection/ActualHartreeCriticalNonlinearityScaling*.lean HBL/TypeIIDynamicSelection/ActualHartreeRadialDilationScaling*.lean HBL/TypeIIDynamicSelection/ActualHBL212ThreeRegionSamePDESource*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
