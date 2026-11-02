@@ -154,6 +154,8 @@ theorem revised_one_layer_physical_local_source_certified
     rw [hClockS]
     exact div_pos htau (sq_pos_of_pos hEllS)
   have hsqrt : 0 < Real.sqrt (q s) := Real.sqrt_pos.2 hq
+  have hmPos :
+      0 < radialPhysicalQuarticMoment (z (time s)) := hMomentS.1
   have hR :
       0 < actualHartreeKummerCoordinateCutoffRadius
         (ell s) (q s)
@@ -181,9 +183,10 @@ theorem revised_one_layer_physical_local_source_certified
     dsimp [clamp]
     exact ⟨le_min (le_max_right _ _) hInterval, min_le_right _ _⟩
   have hFK : Continuous FK := by
-    have hc := (hFcontOn s hq).comp_continuous
+    change Continuous ((fun r : ℝ =>
+      Fphys (Real.sqrt (q s) * r)) ∘ clamp)
+    exact (hFcontOn s hq).comp_continuous
       hClampContinuous hClampMem
-    simpa only [FK, clamp, Function.comp_def, Fphys, Z] using hc
   have hFK_id (r : ℝ) (hr : r ∈ Ioo (center - d) (center + d)) :
       FK r = Fphys (Real.sqrt (q s) * r) := by
     dsimp [FK, clamp]
