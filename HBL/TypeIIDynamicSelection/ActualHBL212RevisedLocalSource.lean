@@ -18,7 +18,8 @@ and dominated quartic moment, the true physical clock time(s) -> T
 from below and the EXACT q(s)=(T-time(s))/ell(s)^2 show that
 the original Kummer-coordinate moving cutoff radius eventually
 covers the prescribed positive local annulus. The same full complex
-Hartree PDE residual is pulled back through R=sqrt(q)*z and used as
+Hartree PDE residual is pulled back through R=sqrt(q)*z and extended
+globally by clipping to the two positive annulus endpoints and used as
 the normalized Kummer Green forcing; its real/imaginary projections
 equal the actual Hplus/Hminus source. No abstract regional solver.
 
@@ -73,15 +74,17 @@ theorem revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
     (hEll : ∀ᶠ s in atTop, 0 < ell s)
     (hClock : ∀ᶠ s in atTop,
       q s = (T - time s) / (ell s) ^ 2)
-    (hFcont : ∀ s : ℝ,
-      Continuous (actualOneLayerCommonPDEResidual V
-        (fun τ x => actualHartreeUnitPhase (gamma τ) *
-          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
-        (b s) (omega s) s))
     {mu theta center eps : ℝ}
     (K : LocalKummerPair mu theta center eps)
     (d : ℝ) (hd : 0 < d) (hde : d < eps)
-    (hcenter : 0 < center + d) :
+    (hcenter : 0 < center + d)
+    (hFcont : ∀ s : ℝ,
+      ContinuousOn (actualOneLayerCommonPDEResidual V
+        (fun τ x => actualHartreeUnitPhase (gamma τ) *
+          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
+        (b s) (omega s) s)
+        (Icc (Real.sqrt (q s) * (center - d))
+          (Real.sqrt (q s) * (center + d)))) :
     ∀ᶠ s in atTop,
       ∀ r ∈ Ioo (center - d) (center + d),
         let Z : ℝ → ℝ → ℂ :=
@@ -89,9 +92,12 @@ theorem revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
             rescalePhysicalRadiation (ell τ) (z (time τ)) x
         let F : ℝ → ℂ :=
           fun u => actualOneLayerCommonPDEResidual V Z
-            (b s) (omega s) s (Real.sqrt (q s) * u)
+            (b s) (omega s) s
+            (Real.sqrt (q s) * min (max u (center - d)) (center + d))
         let Rz := actualHartreeKummerCoordinateCutoffRadius (ell s) (q s)
           (radialPhysicalQuarticMoment (z (time s)))
+        F r = actualOneLayerCommonPDEResidual V Z
+            (b s) (omega s) s (Real.sqrt (q s) * r) ∧
         actualHartreeFrozenKummerRadialApply mu theta
           (fun x => actualOneLayerInnerOverlapCutoff Rz x *
             actualKummerCauchyValue K d F 0 0 x) r = F r ∧
@@ -109,7 +115,7 @@ theorem revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
     actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
       z zt T hTerminal I hI hZmeas hZint hVelMeas
       B hB hBound hRe hIm hPDE ell q time gamma b omega V
-      hFcont K d hd hde hcenter
+      K d hd hde hcenter hFcont
   have hCloseTime : ∀ᶠ s in atTop, |time s - T| < deltaT := by
     have hBall : ∀ᶠ s in atTop, time s ∈ Metric.ball T deltaT :=
       hTime.eventually (Metric.ball_mem_nhds hDeltaT)
