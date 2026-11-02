@@ -27,8 +27,10 @@ two-Wronskian-normalized Kummer Green solution, even after applying
 the original moving cutoff. The cutoff is identically one there,
 so the *differential* Kummer commutator vanishes.
 
-The physical source's continuity is a visible high-regularity
-input, not a postulated positive-order remainder. This is NOT a
+Only source continuity on the corresponding CLOSED POSITIVE annulus
+is a visible high-regularity input. Endpoint clipping gives the
+canonical global continuous extension, with no origin regularity.
+The source's local continuity is an analytic not a postulated positive-order remainder. This is NOT a
 proof of large-radius Kummer/Frobenius asymptotics or remote
 boundary-jet compatibility, the mixed whole-radiation weighted
 source hierarchy, or the full original 2.12.
@@ -43,6 +45,31 @@ open scoped Topology
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 open HBL.Profile.Kummer
+
+
+/-- Exact endpoint-clipped extension of a complex physical Hartree source
+continuous only on a prescribed CLOSED positive annulus. -/
+private theorem actual_Hartree_scaled_clamped_source_continuous
+    (G : ℝ → ℂ) (k a b : ℝ) (hk : 0 ≤ k) (hab : a ≤ b)
+    (hG : ContinuousOn G (Icc (k * a) (k * b))) :
+    Continuous (fun x : ℝ => G (k * min (max x a) b)) ∧
+    (∀ x ∈ Icc a b, G (k * min (max x a) b) = G (k * x)) := by
+  have hClip : Continuous (fun x : ℝ => min (max x a) b) :=
+    (continuous_id.max continuous_const).min continuous_const
+  have hArg : Continuous (fun x : ℝ => k * min (max x a) b) :=
+    continuous_const.mul hClip
+  have hRange (x : ℝ) :
+      k * min (max x a) b ∈ Icc (k * a) (k * b) := by
+    have hlo : a ≤ min (max x a) b :=
+      le_min (le_max_right _ _) hab
+    have hhi : min (max x a) b ≤ b := min_le_right _ _
+    exact ⟨mul_le_mul_of_nonneg_left hlo hk,
+      mul_le_mul_of_nonneg_left hhi hk⟩
+  refine ⟨hG.comp_continuous hArg hRange, ?_⟩
+  intro x hx
+  have hClipEq : min (max x a) b = x := by
+    rw [max_eq_left hx.1, min_eq_left hx.2]
+  rw [hClipEq]
 
 /-- Same physical PDE orbit supplies the moment-selected cutoff radius
 and the genuine complex Hartree source in the normalized Kummer equation.
@@ -72,15 +99,17 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
           complexRadialHartreeNonlinearity (z T) rho))
     (ell q time gamma b omega : ℝ → ℝ)
     (V : ℝ → ℝ → ℝ)
-    (hFcont : ∀ s : ℝ,
-      Continuous (actualOneLayerCommonPDEResidual V
-        (fun τ x => actualHartreeUnitPhase (gamma τ) *
-          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
-        (b s) (omega s) s))
     {mu theta center eps : ℝ}
     (K : LocalKummerPair mu theta center eps)
     (d : ℝ) (hd : 0 < d) (hde : d < eps)
-    (hcenter : 0 < center + d) :
+    (hcenter : 0 < center + d)
+    (hFcont : ∀ s : ℝ,
+      ContinuousOn (actualOneLayerCommonPDEResidual V
+        (fun τ x => actualHartreeUnitPhase (gamma τ) *
+          rescalePhysicalRadiation (ell τ) (z (time τ)) x)
+        (b s) (omega s) s)
+        (Icc (Real.sqrt (q s) * (center - d))
+          (Real.sqrt (q s) * (center + d)))) :
     ∃ deltaT ellMax : ℝ, 0 < deltaT ∧ 0 < ellMax ∧
       ∀ s : ℝ, |time s - T| < deltaT →
         0 < ell s → 0 < q s →
@@ -91,9 +120,12 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
               rescalePhysicalRadiation (ell τ) (z (time τ)) x
           let F : ℝ → ℂ :=
             fun u => actualOneLayerCommonPDEResidual V Z
-              (b s) (omega s) s (Real.sqrt (q s) * u)
+              (b s) (omega s) s
+              (Real.sqrt (q s) * min (max u (center - d)) (center + d))
           let Rz := actualHartreeKummerCoordinateCutoffRadius (ell s) (q s)
             (radialPhysicalQuarticMoment (z (time s)))
+          F r = actualOneLayerCommonPDEResidual V Z
+              (b s) (omega s) s (Real.sqrt (q s) * r) ∧
           actualHartreeFrozenKummerRadialApply mu theta
             (fun x => actualOneLayerInnerOverlapCutoff Rz x *
               actualKummerCauchyValue K d F 0 0 x) r = F r ∧
@@ -139,15 +171,25 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
       rescalePhysicalRadiation (ell τ) (z (time τ)) x
   let F : ℝ → ℂ :=
     fun u => actualOneLayerCommonPDEResidual V Z
-      (b s) (omega s) s (Real.sqrt (q s) * u)
-  have hFc : Continuous F := by
-    dsimp [F]
-    exact (hFcont s).comp (continuous_const.mul continuous_id)
+      (b s) (omega s) s
+      (Real.sqrt (q s) * min (max u (center - d)) (center + d))
+  have hClosed : center - d ≤ center + d := by linarith [hd]
+  obtain ⟨hFc, hFinside⟩ :=
+    actual_Hartree_scaled_clamped_source_continuous
+      (actualOneLayerCommonPDEResidual V Z (b s) (omega s) s)
+      (Real.sqrt (q s)) (center - d) (center + d)
+      (Real.sqrt_nonneg _) hClosed (hFcont s)
+  have hPoint : F r =
+      actualOneLayerCommonPDEResidual V Z
+        (b s) (omega s) s (Real.sqrt (q s) * r) :=
+    hFinside r (Ioo_subset_Icc_self hr)
   dsimp only
-  refine ⟨?_, rfl, rfl⟩
-  exact actual_Hartree_Kummer_coordinate_original_source_exact
-    K d hd hde F hFc (ell s) (q s)
-    (radialPhysicalQuarticMoment (z (time s))) (2 * mT)
-    hEllPos hqPos hmPos hmHi hcenter hLength r hr
+  refine ⟨hPoint, ?_, ?_, ?_⟩
+  · exact actual_Hartree_Kummer_coordinate_original_source_exact
+      K d hd hde F hFc (ell s) (q s)
+      (radialPhysicalQuarticMoment (z (time s))) (2 * mT)
+      hEllPos hqPos hmPos hmHi hcenter hLength r hr
+  · exact congrArg Complex.re hPoint.symm
+  · exact congrArg Complex.im hPoint.symm
 
 end HBL.TypeIIDynamicSelection
