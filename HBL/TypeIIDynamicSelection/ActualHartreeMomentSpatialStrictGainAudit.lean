@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentSpatialStrictGain
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_real_moment_radius_inverse_le
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_real_moment_radius_inverse_le
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_C2_cutoff_second_deriv_strict_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_C2_cutoff_second_deriv_strict_gain
