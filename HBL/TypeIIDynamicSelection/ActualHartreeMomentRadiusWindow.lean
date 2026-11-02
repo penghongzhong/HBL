@@ -49,7 +49,7 @@ theorem actual_Hartree_positive_moment_upper_cutoff_radius
     4 / (hartreeKappa * ell * m) ≤
         4 / (hartreeKappa * ell * m0) := hfrac
     _ = (4 / (hartreeKappa * m0)) / ell := by
-      field_simp [hell.ne', hk.ne', hm0.ne'] <;> ring
+      field_simp [hell.ne', hk.ne', hm0.ne']
 
 /-- The ACTUAL moving Hartree overlap r<=2R is contained
 in a fixed physical radius after critical rescaling. -/
@@ -73,6 +73,6 @@ theorem actual_Hartree_moving_overlap_rescaled_radius_le
         mul_le_mul_of_nonneg_left hR (by norm_num)
       exact mul_le_mul_of_nonneg_left htwice hell.le
     _ = 8 / (hartreeKappa * m0) := by
-      field_simp [hell.ne', hk.ne', hm0.ne'] <;> ring
+      field_simp [hell.ne', hk.ne', hm0.ne']; ring <;> ring
 
 end HBL.TypeIIDynamicSelection
