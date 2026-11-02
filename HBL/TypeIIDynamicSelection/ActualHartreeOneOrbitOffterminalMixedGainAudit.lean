@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOneOrbitOffterminalMixedGain
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_mixed_higher_uniform_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_mixed_higher_uniform_gain
