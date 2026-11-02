@@ -139,3 +139,32 @@ Other strict CI source candidates at this writing: 41358656004 (true complex-bac
 
 Next shortest physical step: after the verified Riesz/critical scaling and time/space chain rule, eliminate the visible `hRadiationPDE` conditional input by specializing the *same actual cited regular Hartree flow*. Then use its weighted source estimate to instantiate the already strictly verified single-common-complex-source H± Fredholm solve. Finally match Kummer and exterior boundary jets, not just source restrictions.
 
+
+## 2026-11-02 00:05 UTC — True multi-domain source and physical-flow verification update
+
+**Original retained environment count remains 9/13. Original 2.12 OPEN.**
+Do not count a conditional exact-source identity, abstract solver, or independent
+auxiliary declaration as an accepted original manuscript environment.
+
+Additional strict trust-zero/native Lean 4.35.0-rc3 successes:
+- [Actions 41363592399](https://github.com/penghongzhong/HBL/actions/runs/41363592399): all three complex-background moving-exterior Riesz statements accepted, including the *actual* O(r^2) remote-center defect with full complex inner radiation.
+- [Actions 41363707916](https://github.com/penghongzhong/HBL/actions/runs/41363707916): all four full Hartree nonlinearity critical rescaling and complex unit phase covariance statements accepted; original radial Riesz integral has no local-cubic surrogate.
+- [Actions 41363595082](https://github.com/penghongzhong/HBL/actions/runs/41363595082): 4079 jobs successful, all seven primary source/Kummer/Hplus/Hminus/physical-time declarations jointly checked in one dependency environment; no sorry/admit or additional axioms.
+
+All six new source/audit files from the first two successes have been copied *verbatim* into this joint integration branch, and the joint audit expanded from seven to 17 native theorem declarations. The expanded strict verification is [Actions 41365096785](https://github.com/penghongzhong/HBL/actions/runs/41365096785), **not yet accepted**.
+
+Further substantive candidates undergoing strict verification, NOT YET ACCEPTED:
+- [41364947490](https://github.com/penghongzhong/HBL/actions/runs/41364947490): physical radial derivative + dilation under actual critical scaling; corrected a mixed real-to-complex chain rule and unreachable tactic.
+- [41364157993](https://github.com/penghongzhong/HBL/actions/runs/41364157993): genuine time-dependent complex phase derivative and complete nonlocal Hartree PDE residual gauge covariance.
+- [41364472602](https://github.com/penghongzhong/HBL/actions/runs/41364472602): physical joint C1 spacetime flow + actual ell_s=-b ell and time_s=ell^2 yield the exact rescaled time jet.
+- [41364662279](https://github.com/penghongzhong/HBL/actions/runs/41364662279): the actual whole-radiation slow monopole minus its moving exterior center equals a concrete quartic density mismatch integral, with a sharp triangle-integral upper bound; the smallness of this mismatch remains to be derived from the selected orbit.
+- [41364890422](https://github.com/penghongzhong/HBL/actions/runs/41364890422): exact source-level Kummer/inner/outer identity on one annulus inside the moving core, using the same actual Hartree PDE and complex remote Riesz density.
+
+Remaining TRUE original 2.12 obligations (none can be replaced by a source-only identity):
+A. Prove the physical selected *offterminal* Hartree regular flow is represented by the radial chain/phase scaling fields above and derives the renormalized radiation PDE, not merely assuming it.
+B. Derive the uniform `InWeightedL2 sigma` source estimate for the one physical complex residual, and a quantitative small power for the true whole-to-exterior monopole mismatch, from the same orbit and time-dependent cutoff.
+C. Prove genuine inner H+ and H- corrected boundary-jet matching to normalized Kummer annulus solution and moving remote inverse, including cutoff commutators and the same modulation tangent.
+D. Prove every newly generated Hartree/Frobenius/parameter/slow-monopole/moving-cutoff atom has **strict** positive physical weight gain `kappa_prof`, not just a GainCause enumeration.
+E. Derive the eventual Type II blowup rate from the constructed PDE and modulation system, never put an exponent or limiting speed among the premises.
+
+No new manuscript counter or new axiom. Keep 9/13 pending exact 2.12 acceptance.
