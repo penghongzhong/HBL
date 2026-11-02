@@ -40,3 +40,13 @@ The integer even exponent `p=4` satisfies their differentiability restriction. H
 The first original `9/13 -> 10/13` gain requires a Lean terminal that matches the **complete** manuscript 2.12 conclusion (canonical physical normalized correction, same-PDE source cancellation, every generated term of positive order); all non-cited analytical imports must be proven from the actual field. CI for isolated source estimates or conditional source membership is auxiliary only.
 
 **Original accepted environments: 9/13; historical 9/21. This ledger changes neither count.**
+
+## Lean foundational integration (2026-11-02)
+
+- `HBL/Literature/AroraRoudenko2020Parameters.lean`: formal verification of the exact `N=3,b=2,p=4,s_c=1` specialization. This contains proved arithmetic, not an external axiom.
+- `HBL/Literature/AroraRoudenko2020Interface.lean`: reusable conditional theorems over `LT : CitedHighRegularityHartreeLocalTheory κ`, including the actual physical Hartree equation, genuine Riesz kernel integrability, strong uniqueness and radiality.
+- `HBL/RegularRadiationOriginalEnvironment.lean` now imports the parameter module, and `HBL.lean` exports the full literature interface for downstream use.
+- `HBL/Literature/AroraRoudenko2020ParametersAudit.lean` and `AroraRoudenko2020InterfaceAudit.lean`: explicit exported type and transitive axiom audits.
+- CI: `.github/workflows/hbl-literature-hartree-critical.yml`, pinned Lean 4.35.0-rc3 and Mathlib a98628e16, `--trust=0`, `-DwarningAsError=true`, no `sorry`, `admit`, `axiom`, or `unsafe`.
+
+**Scope guarantee:** the published critical local theory is admissible as an EXTERNAL mathematical premise, but `CitedHighRegularityHartreeLocalTheory` also has higher Sobolev persistence, uniform finite jets, and `C^1` dependence fields. A valid Lean object of that type must still be supplied from separately justified analysis. Neither the paper citation nor this Lean interface constructs such an object. There is no unconditional proof of original HBL 2.12 or a predetermined Type-II rate.
