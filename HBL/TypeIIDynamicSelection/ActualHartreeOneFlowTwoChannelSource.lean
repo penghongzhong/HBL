@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualHartreePhasedPhysicalFlowPDE
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalPDECoreSourceClosure
 import HBL.TypeIIDynamicSelection.ActualOneLayerRadiationPDECancellation
 import Mathlib.Tactic
 
@@ -133,16 +133,14 @@ theorem actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
       exact ((hScaledSpace x).hasDerivAt.const_mul hPhase).deriv
     rw [hDerivEq]
     exact (hScaledSecond.hasDerivAt.const_mul hPhase).differentiableAt
-  have hZero : complexRadialRenormalizedResidual
-      Z (b s) (-gs) s r = 0 := by
-    exact actual_Hartree_phased_physical_flow_true_renormalized_PDE
-      ell time b gamma z s r gs hell hr
-      hEll hClock hGamma L zt zr hJoint hJac hzSpace hzSecond
-      hzDeriv hPhysicalPDE
-  have hChannels := actual_one_layer_PDE_both_channels_interaction_only
-    V Z (b s) (-gs) s r
-    hVTime hZTime hVSpace hZSpace hVSecond hZSecond
-    hFullRow hCoreRow hRadiationRow hZero
-  exact hChannels
+  have hCommon :=
+    actual_Hartree_physical_flow_forces_one_layer_interaction_only
+      V ell time b gamma z s r gs L zt zr
+      hEll hell hClock hGamma hJoint hJac hzDeriv.symm
+      hr hzSpace hzSecond hPhysicalPDE
+      hVTime hZTime hVSpace hZSpace hVSecond hZSecond
+      hFullRow hCoreRow hRadiationRow
+  exact ⟨congrArg Complex.re hCommon,
+    congrArg Complex.im hCommon⟩
 
 end HBL.TypeIIDynamicSelection
