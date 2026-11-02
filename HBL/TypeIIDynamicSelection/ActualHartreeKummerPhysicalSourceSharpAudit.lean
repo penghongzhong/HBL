@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeKummerPhysicalSourceSharp
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_Riesz_source_to_normalized_Kummer_jet
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_nonlocal_Riesz_source_to_normalized_Kummer_jet
