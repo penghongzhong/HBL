@@ -202,4 +202,77 @@ theorem actual_Hartree_original_Kummer_green_cutoff_C2_bound
   rw [hExact]
   exact (norm_add_le _ _).trans (add_le_add hFirst hSecond)
 
+/-- On the ACTUAL moving shell the large imaginary Kummer radial drift
+is precisely compensated by one derivative of the physical cutoff.
+This is elementary but prevents a false loss of one negative power
+of the physical concentration scale. -/
+theorem actual_Hartree_frozen_Kummer_shell_firstCoeff_bound
+    {R r : ℝ} (hR : 0 < R) (hr : R ≤ r) (hr2 : r ≤ 2 * R) :
+    ‖frozenFirstCoeff r‖ ≤ 2 / R + R := by
+  have hrpos : 0 < r := hR.trans_le hr
+  have hA : ‖(2 : ℂ) / (r : ℂ)‖ = 2 / r := by
+    rw [norm_div]
+    norm_num [Complex.norm_real, Real.norm_eq_abs, abs_of_pos hrpos]
+  have hB : ‖Complex.I * (r : ℂ) / 2‖ = r / 2 := by
+    rw [norm_div, norm_mul]
+    norm_num [Complex.norm_real, Complex.norm_I,
+      Real.norm_eq_abs, abs_of_pos hrpos]
+  have hLeft : (2 : ℝ) / r ≤ 2 / R :=
+    actual_Hartree_radial_shell_two_over_r_le_two_over_R hR hr
+  have hRight : r / 2 ≤ R := by linarith
+  calc
+    ‖frozenFirstCoeff r‖ ≤
+        ‖(2 : ℂ) / (r : ℂ)‖ + ‖Complex.I * (r : ℂ) / 2‖ := by
+      unfold frozenFirstCoeff
+      exact norm_add_le _ _
+    _ = 2 / r + r / 2 := by rw [hA, hB]
+    _ ≤ 2 / R + R := add_le_add hLeft hRight
+
+/-- Genuine localized normalized Kummer Green residual on the
+physical moving shell. The size of the imaginary radial drift
+is harmless: its R growth cancels the derivative's R inverse.
+The ONLY remaining mathematical input for positive gain is a
+uniform moving-shell estimate for the actual Green value and slope;
+none is inserted into this theorem. -/
+theorem actual_Hartree_normalized_Kummer_true_shell_cutoff_bound
+    {mu theta z eps : ℝ}
+    (K : LocalKummerPair mu theta z eps)
+    (d : ℝ) (hd : 0 < d) (hde : d < eps)
+    (F : ℝ → ℂ) (hF : Continuous F)
+    (R r : ℝ) (hR : 0 < R)
+    (hr : r ∈ Ioo (z - d) (z + d))
+    (hrlo : R ≤ r) (hrhi : r ≤ 2 * R) :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+      let u : ℝ → ℂ := actualKummerCauchyValue K d F 0 0
+      ‖actualHartreeFrozenKummerRadialApply mu theta
+          (fun x => actualOneLayerInnerOverlapCutoff R x * u x) r -
+        actualOneLayerInnerOverlapCutoff R r * F r‖ ≤
+        (2 * (C1 / R)) * ‖deriv u r‖ +
+        (C1 + (C2 + 2 * C1) / R ^ 2) * ‖u r‖ := by
+  obtain ⟨C1, C2, hC1, hC2, hOld⟩ :=
+    actual_Hartree_original_Kummer_green_cutoff_C2_bound
+      K d hd hde F hF R hR r hr
+  refine ⟨C1, C2, hC1, hC2, ?_⟩
+  dsimp only at hOld ⊢
+  let u : ℝ → ℂ := actualKummerCauchyValue K d F 0 0
+  have hOne : 0 ≤ C1 / R := div_nonneg hC1.le hR.le
+  have hCoeff := actual_Hartree_frozen_Kummer_shell_firstCoeff_bound
+    hR hrlo hrhi
+  have hCoeffGain :
+      C2 / R ^ 2 + ‖frozenFirstCoeff r‖ * (C1 / R) ≤
+        C1 + (C2 + 2 * C1) / R ^ 2 := by
+    have hMul :
+        ‖frozenFirstCoeff r‖ * (C1 / R) ≤
+          (2 / R + R) * (C1 / R) :=
+      mul_le_mul_of_nonneg_right hCoeff hOne
+    calc
+      _ ≤ C2 / R ^ 2 + (2 / R + R) * (C1 / R) :=
+        add_le_add_left hMul _
+      _ = C1 + (C2 + 2 * C1) / R ^ 2 := by
+        field_simp [hR.ne']
+        <;> ring
+  exact hOld.trans (add_le_add_left
+    (mul_le_mul_of_nonneg_right hCoeffGain (norm_nonneg (u r)))
+    ((2 * (C1 / R)) * ‖deriv u r‖))
+
 end HBL.TypeIIDynamicSelection
