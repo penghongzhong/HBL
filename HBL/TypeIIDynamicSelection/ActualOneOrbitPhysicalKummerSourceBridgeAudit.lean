@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitPhysicalKummerSourceBridge
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
