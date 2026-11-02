@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeRadialLaplacianScaling
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_second_radial_deriv
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_second_radial_deriv
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_radial_Laplacian
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_critical_rescaled_radial_Laplacian
