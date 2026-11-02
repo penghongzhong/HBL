@@ -59,7 +59,7 @@ theorem actual_Hartree_radial_quartic_envelope_from_Strauss
         mul_le_mul_of_nonneg_right hfour hd.le
       _ ≤ B ^ 4 * 2 :=
         mul_le_mul_of_nonneg_left hgeom (by positivity)
-      _ ≤ 2 * (B ^ 4 + A ^ 4) := by nlinarith [pow_nonneg A 4]
+      _ ≤ 2 * (B ^ 4 + A ^ 4) := by nlinarith [pow_nonneg hA 4]
   · have hbig : 1 ≤ r := le_of_not_ge hsmall
     have hrad : r * ‖z r‖ ≤ A := hStrauss r hbig
     have hfour : (r * ‖z r‖) ^ 4 ≤ A ^ 4 :=
@@ -75,7 +75,7 @@ theorem actual_Hartree_radial_quartic_envelope_from_Strauss
         mul_le_mul_of_nonneg_left hgeom (by positivity)
       _ = 2 * (r * ‖z r‖) ^ 4 := by ring
       _ ≤ 2 * A ^ 4 := mul_le_mul_of_nonneg_left hfour (by norm_num)
-      _ ≤ 2 * (B ^ 4 + A ^ 4) := by nlinarith [pow_nonneg B 4]
+      _ ≤ 2 * (B ^ 4 + A ^ 4) := by nlinarith [pow_nonneg hB 4]
 
 /-- The TRUE nonlocal inverse-square quartic Hartree cutoff source
 gains all 5/2 critical powers from ordinary radial H1/Strichartz
