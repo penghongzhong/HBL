@@ -1,0 +1,56 @@
+import HBL.TypeIIDynamicSelection.ActualHBL212PhysicalBridgeAudit
+import HBL.TypeIIDynamicSelection.ActualPhysicalHartreeScaleTimeJet
+import HBL.TypeIIDynamicSelection.ActualRemoteCenterMismatchIdentity
+import HBL.TypeIIDynamicSelection.ActualOneLayerPhysicalClassicalInnerJets
+import HBL.TypeIIDynamicSelection.ActualHartreeDynamicPhaseCovariance
+
+/-!
+# Real physical HBL original 2.12 ONE dependence environment
+
+Combine the 20 already strict accepted Hartree original-source,
+Fredholm H+/H-, actual moving exterior Riesz, Kummer and full
+inverse-square critical-scaling declarations with the actual
+differentiable physical clock, quartic full/remote monopole mismatch,
+the strictly classical C2 real/imag inner Fredholm jets, and the
+genuine dynamic complex phase covariance. This stage is an
+integration audit, not an accepted original prop:one-layer-stage3.
+
+The still-open source-weight bound, physical Sobolev lift, genuine
+Kummer-to-remote boundary transfer and full generated positive-order
+ledger must be proved from the same chosen Hartree radiation orbit.
+Never infer a Type II blowup rate or all-region gluing from this audit.
+-/
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_joint_time_jet
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_joint_time_jet
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_explicit_time_jet
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_scale_clock_explicit_time_jet
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_minus_exterior_center_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_minus_exterior_center_exact
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_minus_exterior_center_abs_le
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_minus_exterior_center_abs_le
+
+#check @HBL.TypeIIDynamicSelection.actual_one_layer_physical_monopole_remote_center_mismatch
+#print axioms HBL.TypeIIDynamicSelection.actual_one_layer_physical_monopole_remote_center_mismatch
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_PDE_source_has_classical_Hplus_Hminus_jets
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_PDE_source_has_classical_Hplus_Hminus_jets
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_unit_phase_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_unit_phase_hasDerivAt
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_phase_radiation_time_hasDerivAt
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_phase_radiation_time_hasDerivAt
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_constant_phase_radial_Laplacian
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_constant_phase_radial_Laplacian
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_constant_phase_radial_dilation
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_constant_phase_radial_dilation
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_phase_full_PDE_residual_covariant
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_phase_full_PDE_residual_covariant
