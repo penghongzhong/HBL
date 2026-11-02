@@ -1,0 +1,14 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRieszEnvelope
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_radiation_norm_le_one
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_radiation_norm_le_one
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_quartic_bubble_envelope
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_quartic_bubble_envelope
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_physical_nonlocal_sharp
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_physical_nonlocal_sharp
+
+#check @HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_nonlocal_source_weightedL2
+#print axioms HBL.TypeIIDynamicSelection.actual_one_orbit_terminal_nonlocal_source_weightedL2
