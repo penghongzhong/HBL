@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualPDEMomentCutoffStrictGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_PDE_moment_cutoff_gain_positive
+#print axioms HBL.TypeIIDynamicSelection.actual_PDE_moment_cutoff_gain_positive
+#check @HBL.TypeIIDynamicSelection.actual_PDE_trapped_length_squared_positive_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_PDE_trapped_length_squared_positive_gain
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_PDE_moving_moment_cutoff_positive_order
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_PDE_moving_moment_cutoff_positive_order
