@@ -67,7 +67,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .lake/build
-          key: hbl-physical-C2-overlap-cutoff-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/ActualHartreePhysicalSpatialCutoffSourceGain*.lean') }}
+          key: hbl-213-physical-inner-cauchy-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-force-latest-source-cache
           restore-keys: |
             hbl-213-physical-inner-cauchy-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-212-joined-physical-flow-and-inner-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
