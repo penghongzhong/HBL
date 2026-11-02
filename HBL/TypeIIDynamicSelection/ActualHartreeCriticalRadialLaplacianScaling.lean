@@ -67,6 +67,6 @@ theorem actual_Hartree_critical_rescaled_radial_Laplacian
     actual_Hartree_critical_rescaled_radial_deriv
       ell r z (hzSpace r)]
   push_cast
-  field_simp [hEllC, hrC, hScaleC] <;> ring
+  field_simp [hEllC, hrC, hScaleC]; ring
 
 end HBL.TypeIIDynamicSelection
