@@ -58,7 +58,10 @@ theorem actual_Hartree_physical_scale_clock_joint_time_jet
   have hCoord :
       HasDerivAt (fun τ : ℝ => (time τ, ell τ * r))
         ((ell s) ^ 2, (-(b s * ell s)) * r) s :=
-    (hClock.hasFDerivAt.prodMk hr.hasFDerivAt).hasDerivAt
+    by
+      simpa only [ContinuousLinearMap.prod_apply,
+        ContinuousLinearMap.toSpanSingleton_apply, one_smul] using
+        (hClock.hasFDerivAt.prodMk hr.hasFDerivAt).hasDerivAt
   have hAlong :
       HasDerivAt (fun τ : ℝ => z (time τ) (ell τ * r))
         (L ((ell s) ^ 2, (-(b s * ell s)) * r)) s := by
@@ -77,8 +80,6 @@ theorem actual_Hartree_physical_scale_clock_joint_time_jet
       (fun τ : ℝ => (Real.sqrt (ell τ) : ℂ) *
         z (time τ) (ell τ * r)) _ s
   convert hProd using 1
-  · rfl
-  · ring
 
 /-- Explicit C1 Jacobian components of the same physical Hartree
 flow yield the true time/radial derivative without adding a
