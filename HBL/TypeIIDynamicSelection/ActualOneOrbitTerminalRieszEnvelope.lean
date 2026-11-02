@@ -1,6 +1,8 @@
 import HBL.TypeIIDynamicSelection.ActualOneOrbitTerminalRadiation
 import HBL.TypeIIDynamicSelection.ActualHartreePhysicalNonlocalSharpGain
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentRadiusWindow
+import HBL.TypeIIDynamicSelection.ActualHartreeNonlocalWeightedSource
+import HBL.TypeIIDynamicSelection.ActualHartreeRieszMeasurability
 import Mathlib.Tactic
 
 /-!
@@ -107,5 +109,29 @@ theorem actual_one_orbit_terminal_physical_nonlocal_sharp
         ell ^ 2 * Real.sqrt ell := h
     _ = (34 * radialHartreeRowBoundConstant) *
         ell ^ 2 * Real.sqrt ell := by ring
+
+/-- The *same* nonzero physical terminal radiation produces an
+original L^(2,sigma) source, with no postulated Riesz envelope,
+pointwise amplitude constant, or source measurability premise. -/
+theorem actual_one_orbit_terminal_nonlocal_source_weightedL2
+    (ell R sigma : ℝ)
+    (hell : 0 < ell) (hR : 0 < R)
+    (hSigmaLo : 3 / 2 < sigma) (hSigmaHi : sigma < 2) :
+    MemLp
+      (fun r : ℝ => affineJapaneseWeight sigma r *
+        ‖actualHartreeNonlocalCutoffError
+          R ell actualOneOrbitTerminalRadiation r‖)
+      2 halfLineMeasure := by
+  have hz : Measurable actualOneOrbitTerminalRadiation :=
+    (Complex.continuous_ofReal.comp
+      actual_one_orbit_terminal_bump_smooth.continuous).measurable
+  exact actual_Hartree_nonlocal_cutoff_source_mem_manuscript_weightedL2
+    ell R 1 17 sigma hell hR
+    (by norm_num) (by norm_num)
+    hSigmaLo hSigmaHi actualOneOrbitTerminalRadiation hz
+    (fun u _ => actual_one_orbit_terminal_radiation_norm_le_one u)
+    (fun u hu => actual_one_orbit_terminal_quartic_bubble_envelope u hu)
+    (actual_Hartree_nonlocal_cutoff_error_measurable
+      R ell actualOneOrbitTerminalRadiation hz)
 
 end HBL.TypeIIDynamicSelection
