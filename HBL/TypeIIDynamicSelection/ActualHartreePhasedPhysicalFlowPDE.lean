@@ -62,7 +62,9 @@ theorem actual_Hartree_phased_physical_flow_true_renormalized_PDE
       ell time b gamma z s r gs L zt zr
       hEll hell hClock hGamma hJoint hJac hzDeriv.symm
       hr hzSpace hzSecond hPhysicalPDE
-  simpa only [actualPhysicalHartreePhasedFlow,
-    actualPhysicalHartreeRescaledFlow] using hPhysical
+  change complexRadialRenormalizedResidual
+    (actualPhysicalHartreePhasedFlow ell time gamma z)
+    (b s) (-gs) s r = 0
+  exact hPhysical
 
 end HBL.TypeIIDynamicSelection
