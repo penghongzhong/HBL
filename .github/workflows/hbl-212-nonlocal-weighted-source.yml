@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-212-nonlocal-weighted-source.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeNonlocalWeightedSource*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalNonlocalSharpGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneLayerMovingParametrixTransport*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualCutoffUniformTransport.lean'
   workflow_dispatch:
