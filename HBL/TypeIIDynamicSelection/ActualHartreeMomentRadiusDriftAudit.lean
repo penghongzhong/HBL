@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentRadiusDrift
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_radius_drift_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_radius_drift_exact
