@@ -6,6 +6,7 @@ on:
       - '.github/workflows/hbl-212-physical-flow-actual-source-cancel.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalPDECoreSourceClosure*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualPhysicalHartreePDEToRenormalized*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeRadialLaplacianScaling*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualRadiationSpatialFlatness.lean'
   workflow_dispatch:
 permissions:
