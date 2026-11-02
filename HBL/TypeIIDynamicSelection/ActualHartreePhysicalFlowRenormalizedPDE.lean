@@ -81,7 +81,8 @@ theorem actual_Hartree_physical_flow_true_renormalized_PDE
   have hsqrtCoeff :
       (-(b s * ell s)) / (2 * Real.sqrt (ell s)) =
         -(b s * Real.sqrt (ell s)) / 2 := by
-    have hsqrtNe : 2 * Real.sqrt (ell s) ≠ 0 := by positivity
+    have hsqrtNe : 2 * Real.sqrt (ell s) ≠ 0 :=
+      mul_ne_zero (by norm_num) hsqrtpos.ne'
     apply (div_eq_iff hsqrtNe).2
     calc
       -(b s * ell s) = -(b s * (Real.sqrt (ell s)) ^ 2) := by
