@@ -62,17 +62,21 @@ theorem actual_Hartree_physical_nonlocal_cutoff_sharp_length_gain
         ell ^ 2 * Real.sqrt ell := by
   let g : ℝ → ℂ :=
     fun u => actualOneLayerInnerOverlapCutoff (ell * R) u * z u
+  have hUnitRescale : rescalePhysicalRadiation 1 z = z := by
+    funext u
+    simp [rescalePhysicalRadiation]
   have hAtOne :
       ‖complexRadialHartreeNonlinearity g (ell * r) -
         actualOneLayerInnerOverlapCutoff (ell * R) (ell * r) *
           complexRadialHartreeNonlinearity z (ell * r)‖ ≤
         2 * radialHartreeRowBoundConstant * D * B ^ 3 := by
-    simpa only [g, rescalePhysicalRadiation, Real.sqrt_one,
-      Complex.ofReal_one, one_mul, mul_one, one_pow] using
-      (actual_Hartree_physical_nonlocal_cutoff_commutator_length_squared
+    have hRaw :=
+      actual_Hartree_physical_nonlocal_cutoff_commutator_length_squared
         1 (ell * R) (ell * r) B D
         (by norm_num) (by norm_num) (mul_pos hell hr)
-        hD hB z hz hzAmp hzQuartic)
+        hD hB z hz hzAmp hzQuartic
+    rw [hUnitRescale] at hRaw
+    simpa only [g, one_pow, mul_one] using hRaw
   have hScaledField :
       (fun x => actualOneLayerInnerOverlapCutoff R x *
         rescalePhysicalRadiation ell z x) =
