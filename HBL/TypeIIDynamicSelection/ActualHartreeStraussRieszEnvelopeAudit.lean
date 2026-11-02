@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeStraussRieszEnvelope
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_quartic_envelope_from_Strauss
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_quartic_envelope_from_Strauss
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_nonlocal_sharp_from_Strauss
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_nonlocal_sharp_from_Strauss
