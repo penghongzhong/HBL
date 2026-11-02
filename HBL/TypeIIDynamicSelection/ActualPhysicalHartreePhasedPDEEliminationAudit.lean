@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualPhysicalHartreePhasedPDEElimination
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_same_physical_flow_forces_phased_renormalized_PDE
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_same_physical_flow_forces_phased_renormalized_PDE
