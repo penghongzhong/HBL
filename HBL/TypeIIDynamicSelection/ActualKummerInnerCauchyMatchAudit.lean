@@ -1,0 +1,11 @@
+import HBL.TypeIIDynamicSelection.ActualKummerInnerCauchyMatch
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_Wronskian_two_Cauchy_jets_match
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_Wronskian_two_Cauchy_jets_match
+
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_Cauchy_corrected_classical_equation
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_Cauchy_corrected_classical_equation
+
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_inner_interface_Cauchy_match
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_inner_interface_Cauchy_match
