@@ -72,7 +72,8 @@ theorem actual_Hartree_weighted_cutoff_volume_ell_positive_order
     calc
       (ell ^ 2) ^ (sigma / 2) =
           (ell ^ (2 : ℝ)) ^ (sigma / 2) := by
-            rfl
+            exact congrArg (fun x : ℝ => x ^ (sigma / 2))
+              (Real.rpow_natCast ell 2).symm
       _ = ell ^ ((2 : ℝ) * (sigma / 2)) :=
         (Real.rpow_mul hell.le 2 (sigma / 2)).symm
       _ = ell ^ sigma := by congr 1; ring
