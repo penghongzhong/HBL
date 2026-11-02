@@ -1,0 +1,4 @@
+import HBL.GlobalH1PhysicalProfileAssembly
+set_option autoImplicit false
+#check @HBL.Profile.GlobalH1.actual_physical_three_region_H1_gluing_and_limit
+#print axioms HBL.Profile.GlobalH1.actual_physical_three_region_H1_gluing_and_limit
