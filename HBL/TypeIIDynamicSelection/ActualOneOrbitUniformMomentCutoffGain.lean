@@ -87,6 +87,9 @@ theorem actual_Hartree_one_orbit_uniform_moment_cutoff_transport
     change |deriv (fun t => actualMomentInnerCutoff ell z time t r) s +
       b s * r * deriv (actualMomentInnerCutoff ell z time s) r| ≤ _
     rw [htransport, hcut, mul_zero, abs_zero]
+    have hm : 0 < radialPhysicalQuarticMoment (z (time s)) := by
+      simpa only [actual_physical_inverse_square_radial_reduction] using
+        hMomentPos s hs
     positivity
 
 /-- The manuscript's ACTUAL one-orbit moving overlap transport is
