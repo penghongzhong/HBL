@@ -40,8 +40,6 @@ theorem actual_Hartree_critical_rescaled_radial_deriv
   change deriv (fun x : ℝ => (Real.sqrt ell : ℂ) * z (ell * x)) r = _
   convert h.deriv using 1
   · rfl
-  · simp only [smul_eq_mul]
-    ring
 
 /-- The ORIGINAL radial dilation operator, including its 1/2
 zero-order term, is exactly covariant under critical rescaling. -/
