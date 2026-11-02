@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeStraussPositiveFredholm
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_Strauss_true_Fredholm_positive_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_Strauss_true_Fredholm_positive_gain
