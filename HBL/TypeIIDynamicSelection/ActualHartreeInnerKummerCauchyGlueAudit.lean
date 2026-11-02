@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeInnerKummerCauchyGlue
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_same_PDE_inner_Kummer_Cauchy_glued
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_same_PDE_inner_Kummer_Cauchy_glued
