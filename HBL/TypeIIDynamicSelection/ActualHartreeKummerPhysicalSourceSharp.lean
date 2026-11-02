@@ -93,7 +93,8 @@ theorem actual_Hartree_nonlocal_Riesz_source_to_normalized_Kummer_jet
     have hPoint := actual_Hartree_physical_nonlocal_sharp_from_Strauss
       ell R x.val B A hell hR hx hB hA
       zPhys hz hSup hStrauss
-    simpa only [F,C,D] using hPoint
+    change ‖actualHartreeNonlocalCutoffError R ell zPhys x.val‖ ≤ C
+    simpa only [actualHartreeNonlocalCutoffError, C, D] using hPoint
   have hF : ‖F‖ ≤ C :=
     (ContinuousMap.norm_le F hC).2 hFC
   have hOp : ‖T mu theta F‖ ≤
