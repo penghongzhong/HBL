@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualHartreeKummerCoreSeparation
+import HBL.TypeIIDynamicSelection.ActualHartreeKummerCoordinateBridge
 import HBL.TypeIIDynamicSelection.ActualOneOrbitTwoSidedMomentWindow
 import HBL.TypeIIDynamicSelection.ActualOneLayerTwoChannelPDE
 import HBL.TypeIIDynamicSelection.ActualHartreeDynamicPhaseCovariance
@@ -14,9 +14,10 @@ critically rescaled radiation Z(s,r).
 
 From the actual Hartree PDE/dominated quartic moment, the moment lies
 between m(T)/2 and 2*m(T) on one terminal neighborhood.
-Consequently, for sufficiently small positive ell(s), the
-PHYSICAL moment-selected cutoff R(s)=4/(kappa_H ell(s)m(t(s)))
-contains any given FIXED prescribed normalized Kummer annulus.
+Consequently, when ell(s)*sqrt(q(s)) is small, the KUMMER-COORDINATE
+cutoff R_z(s)=4/(kappa_H ell(s)*sqrt(q(s))*m(t(s))) contains any
+given FIXED prescribed normalized Kummer annulus. The physical
+coordinate is R_bubble=sqrt(q)*z, never identified with z.
 
 The same complex actual full-Hartree-minus-core PDE source, whose
 real and imaginary parts feed the actual H+/H- Fredholm channels,
@@ -68,7 +69,7 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
       zt T rho = Complex.I *
         (complexRadialLaplacian (z T) rho +
           complexRadialHartreeNonlinearity (z T) rho))
-    (ell time gamma b omega : ℝ → ℝ)
+    (ell q time gamma b omega : ℝ → ℝ)
     (V : ℝ → ℝ → ℝ)
     (hFcont : ∀ s : ℝ,
       Continuous (actualOneLayerCommonPDEResidual V
@@ -81,17 +82,18 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
     (hcenter : 0 < center + d) :
     ∃ deltaT ellMax : ℝ, 0 < deltaT ∧ 0 < ellMax ∧
       ∀ s : ℝ, |time s - T| < deltaT →
-        0 < ell s → ell s ≤ ellMax →
+        0 < ell s → 0 < q s →
+        ell s * Real.sqrt (q s) ≤ ellMax →
         ∀ r ∈ Ioo (center - d) (center + d),
           let Z : ℝ → ℝ → ℂ :=
             fun τ x => actualHartreeUnitPhase (gamma τ) *
               rescalePhysicalRadiation (ell τ) (z (time τ)) x
           let F : ℝ → ℂ :=
             actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
-          let R := actualHartreeMomentCutoffRadius (ell s)
+          let Rz := actualHartreeKummerCoordinateCutoffRadius (ell s) (q s)
             (radialPhysicalQuarticMoment (z (time s)))
           actualHartreeFrozenKummerRadialApply mu theta
-            (fun x => actualOneLayerInnerOverlapCutoff R x *
+            (fun x => actualOneLayerInnerOverlapCutoff Rz x *
               actualKummerCauchyValue K d F 0 0 x) r = F r := by
   obtain ⟨deltaT,hDeltaT,hWindow⟩ :=
     actual_one_orbit_Hartree_terminal_two_sided_moment_window
@@ -110,7 +112,7 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
     dsimp [ellMax]
     positivity
   refine ⟨deltaT,ellMax,hDeltaT,hEllMax,?_⟩
-  intro s hTimeSmall hEllPos hEllSmall r hr
+  intro s hTimeSmall hEllPos hqPos hEllSmall r hr
   obtain ⟨hMomentLo,hMomentHi⟩ := hWindow (time s) hTimeSmall
   have hmLo :
       mT / 2 < radialPhysicalQuarticMoment (z (time s)) := by
@@ -123,7 +125,8 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
     have h := hMomentHi.le
     simpa only [mT, actual_physical_inverse_square_radial_reduction]
       using h
-  have hLength : ell s ≤ 4 / (hartreeKappa * (2 * mT) * (center + d)) := by
+  have hLength : ell s * Real.sqrt (q s) ≤
+      4 / (hartreeKappa * (2 * mT) * (center + d)) := by
     simpa only [ellMax] using hEllSmall
   let Z : ℝ → ℝ → ℂ :=
     fun τ x => actualHartreeUnitPhase (gamma τ) *
@@ -132,9 +135,9 @@ theorem actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
     actualOneLayerCommonPDEResidual V Z (b s) (omega s) s
   have hFc : Continuous F := hFcont s
   dsimp only
-  exact actual_Hartree_moment_selected_Kummer_annulus_source_exact
-    K d hd hde F hFc (ell s)
+  exact actual_Hartree_Kummer_coordinate_original_source_exact
+    K d hd hde F hFc (ell s) (q s)
     (radialPhysicalQuarticMoment (z (time s))) (2 * mT)
-    hEllPos hmPos hmHi hcenter hLength r hr
+    hEllPos hqPos hmPos hmHi hcenter hLength r hr
 
 end HBL.TypeIIDynamicSelection
