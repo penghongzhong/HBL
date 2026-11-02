@@ -162,3 +162,81 @@ and all new actual source atoms have strictly positive
 Do not modify the private manuscript theorem label or count this as
 accepted until the exact source-level parametrix and all positive
 gain estimates are strictly compiled and compared line by line.
+
+
+## 2026-11-02 — Exact norm-improvement replacement target for original 2.12
+
+The shortest *meaningful* potential replacement for the existing
+`Pi_rho`/all-atoms statement is the STRONGER actual Hartree PDE
+weighted **residual inequality**, with the parameter tangent
+retained:
+
+```math
+\|\mathcal F(V_{<\rho}+\Delta V_{\rho})
+     -\mathcal P_{\rho}(\zeta)\zeta_s\|_{X_f^{\rm sc}}
+  \le C_\rho s^{-\rho-\kappa_{\rm prof}},
+\qquad \kappa_{\rm prof}>0 .
+```
+
+This avoids introducing source-order labels by hand, and implies
+the absence of residual terms at order rho once the actual
+finite dynamic-atom expansion is shown to exist. It requires
+constructing ONE canonical localized correction (not arbitrarily
+altering both normalized Kummer Wronskian boundary conditions),
+plus verifying the original source and cutoff commutator estimates
+on the actual full one-orbit physical flow. The norm must be the
+ACTUAL manuscript space X_f^sc (or an explicitly proved embedding
+from a stronger norm), never a scalar surrogate.
+
+**Two sharply distinguished physical cutoffs:**
+- Actual SLOW MONOPOLE `1-cutoff(c(s)r/4)`:
+  `c(s)=kappa_H*ell(s)*m_0(t(s))`.
+  Its material transport has the exact derived
+  `ell(s)^2 * |m_0'(t(s))|/m_0(t(s))` coefficient, giving
+  `s^{-1-(2beta_--1)}` after the true scale trap.
+- Actual THREE-REGION OVERLAP `1-cutoff(r/R(s))`: its
+  spatial derivative costs `R^-1,R^-2` and its material
+  derivative contains `R_s/R-b`. The source/derivative
+  asymptotics of the actual normalized H+/H-, Kummer, remote
+  corrections on the MOVING overlap must be proved before
+  asserting any `rho_*>0` gain. Local Kummer inversion on a
+  fixed annulus, even if strict Lean checked, does not by itself
+  imply the required moving-overlap uniform estimates.
+
+**New precisely scoped physical attempts** (count NOTHING before terminal strict CI):
+- 41381828235: genuine physical Hartree PDE cutoff exponent
+  `2beta_--1` in
+  `ActualPDEMomentCutoffStrictGain.lean`; compilation and
+  all three kernel declaration checks succeeded but
+  `-DwarningAsError` found one *unused binder* `hC`.
+  Corrected strict rerun 41383533549.
+- 41382215159: bounded actual terminal relative moment
+  `|m_0'|/m_0` derived from positivity and continuity
+  (rather than a separate bounded-flux assumption) in
+  `ActualHartreeMomentFluxFromContinuity.lean`.
+- 41382868776 (replaced by 41383538450):
+  uniform ALL-R / EVENTUAL ALL-S actual physical orbit
+  cutoff `s^{-1-(2beta_--1)}`, formed by combining the
+  actual Hartree PDE-moment identity and terminal continuity.
+- 41383441468: the second, independent smooth radial
+  overlap cutoff's true global C2 bound and `R^-1,R^-2`
+  geometric factors, in `ActualOneLayerSpatialOverlapGain.lean`.
+
+All four attempts include independent source, theorem `#check`,
+`#print axioms`, pinned Lean 4.35.0-rc3/Mathlib
+a98628e16c11f5167f16124105ddce53efa9bfe5.
+They do not claim to prove the original complete 2.12.
+
+**Remaining acceptance-blocking PDE estimates, regardless of build count:**
+(A) one actual offterminal radiation's complete weighted
+  Hartree residual at the current minimal weight in X_f^sc;
+(B) uniform actual normalized Kummer source-to-jet bounds
+  on MOVING physical overlaps plus remote-block analytic
+  coefficient/derivative estimates, not just fixed compact annuli;
+(C) the entire nonlinear Riesz whole/inner/remote
+  commutator under the same partition, with a genuine higher-order
+  norm bound after the forced monopole moment is removed;
+(D) multi-source parameter and Frobenius terms, proving the same
+  positive `kappa_prof` uniformly and preserving a canonical
+  normalization. Only then is the new full original theorem eligible
+  for 10/13.
