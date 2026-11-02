@@ -35,7 +35,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Both the bounded core and the actual compactly cut-off monopole
 are controlled by ONE uniform Japanese 1/(1+r) envelope. -/
