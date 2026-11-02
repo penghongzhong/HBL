@@ -63,6 +63,7 @@ jobs:
           path: .lake/build
           key: hbl-physical-C2-overlap-cutoff-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ hashFiles('HBL/TypeIIDynamicSelection/ActualHartreePhysicalSpatialCutoffSourceGain*.lean') }}
           restore-keys: |
+            hbl-212-one-orbit-full-shell-sharp-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-212-joined-physical-flow-and-inner-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-212-physical-source-integration-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-212-physical-spatial-commutator-gain-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
