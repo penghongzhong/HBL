@@ -116,11 +116,9 @@ theorem actual_Hartree_full_mixed_Riesz_monopole_cubic_mem_weighted_L2
         hSigma z hz hSup hStrauss
     simpa only [S, C, D, F, V, Z, mul_assoc] using h
   have hDom : ∀ᵐ r : ℝ ∂halfLineMeasure,
-      ‖S r‖ ≤ ‖C * bubble r‖ := by
+      ‖S r‖ ≤ C * bubble r := by
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with r hr
-    have hR : 0 ≤ C * bubble r := mul_nonneg hC (hB0 r)
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (hS0 r),
-      abs_of_nonneg hR] using hPoint r hr
+    simpa only [Real.norm_eq_abs, abs_of_nonneg (hS0 r)] using hPoint r hr
   change MemLp S 2 halfLineMeasure
   exact hMajor.mono' hS.aestronglyMeasurable.restrict hDom
 
