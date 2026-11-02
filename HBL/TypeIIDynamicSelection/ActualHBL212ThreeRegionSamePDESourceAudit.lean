@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHBL212ThreeRegionSamePDESource
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_three_region_common_PDE_Kummer_source_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_three_region_common_PDE_Kummer_source_exact
