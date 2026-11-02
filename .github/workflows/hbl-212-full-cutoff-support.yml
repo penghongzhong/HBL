@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-212-full-cutoff-support.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeFullCutoffSupport*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalNonlocalSharpGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneLayerMovingParametrixTransport*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualCutoffUniformTransport.lean'
   workflow_dispatch:
