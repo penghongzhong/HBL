@@ -24,7 +24,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Modulation
 
 /-- The actual inner overlap cutoff is exactly zero outside 2R. -/
 theorem actual_Hartree_inner_overlap_cutoff_far_zero
@@ -68,8 +68,7 @@ theorem actual_Hartree_radial_Laplacian_cutoff_far_source_zero
   have hd2 : deriv (deriv cutoff) (r / R) = 0 :=
     actual_fixed_Hartree_overlap_cutoff_second_deriv_zero_right hr
   rw [actual_one_layer_physical_cutoff_radial_commutator R r hR.ne' f hf hf2]
-  simp only [hd1, hd2, neg_zero, zero_div, Complex.ofReal_zero,
-    zero_mul, add_zero, zero_add]
+  simp [hd1, hd2]
 
 
 /-- The actual scale-dependent quartic Hartree commutator,
