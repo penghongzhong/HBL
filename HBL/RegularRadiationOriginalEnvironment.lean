@@ -1,3 +1,4 @@
+import HBL.Literature.AroraRoudenko2020Parameters
 import HBL.RegularRadiationFlow
 import Mathlib.Topology.ContinuousMap.Bounded.Normed
 
@@ -14,9 +15,12 @@ dependence into a genuine normed path space.
 
 For the basic local well-posedness input see Arora--Roudenko, JHDE 17 (2020),
 Theorem 1.1 / Theorem 3.1 (arXiv:1910.01085), specialized to N=3, b=2,
-p=4. The standard persistence-of-regularity upgrade, finite jets and C1
-parameter statement are intentionally visible as fields of the literature
-interface rather than hidden in the Lean proof.
+p=4. The numerically exact critical specialization is now imported from
+`HBL/Literature/AroraRoudenko2020Parameters.lean`. Its source is the
+critical local-theory paper, NOT a free proof of all higher-order claims.
+The separate persistence-of-regularity upgrade, finite jets and C1
+parameter statement remain explicit inputs in the literature interface.
+No new Lean axiom, coercivity, moving-Kummer, or blowup-rate assertion is added.
 -/
 
 noncomputable section
