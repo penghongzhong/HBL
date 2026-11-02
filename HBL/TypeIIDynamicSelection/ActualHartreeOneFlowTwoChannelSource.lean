@@ -119,7 +119,7 @@ theorem actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
     rw [hScaledFirst]
     have hscale : HasDerivAt (fun y : ℝ => ell s * y) (ell s) r :=
       hasDerivAt_const_mul (ell s)
-    simpa only [mul_assoc] using
+    simpa only [Function.comp_def, mul_assoc] using
       (((hzSecond.hasDerivAt.scomp r hscale).const_mul
         ((ell s : ℝ) : ℂ)).const_mul
           (Real.sqrt (ell s) : ℂ)).differentiableAt
@@ -130,6 +130,11 @@ theorem actual_one_layer_Hplus_Hminus_from_one_physical_Hartree_flow
           hPhase * deriv
             (rescalePhysicalRadiation (ell s) (z (time s))) x := by
       funext x
+      change
+        deriv (fun y => hPhase *
+          rescalePhysicalRadiation (ell s) (z (time s)) y) x =
+          hPhase * deriv
+            (rescalePhysicalRadiation (ell s) (z (time s))) x
       exact ((hScaledSpace x).hasDerivAt.const_mul hPhase).deriv
     rw [hDerivEq]
     exact (hScaledSecond.hasDerivAt.const_mul hPhase).differentiableAt
