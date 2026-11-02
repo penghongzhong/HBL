@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeKummerOperatorConjugacy
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_frozen_operator_physical_conjugacy
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_frozen_operator_physical_conjugacy
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_frozen_source_equation_iff_physical
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_frozen_source_equation_iff_physical
