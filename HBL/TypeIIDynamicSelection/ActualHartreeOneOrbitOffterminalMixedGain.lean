@@ -62,10 +62,10 @@ theorem actual_one_Hartree_orbit_offterminal_mixed_higher_uniform_gain
       HasDerivAt (fun x => (z x rho).re) (zt t rho).re t)
     (hIm : ∀ rho : ℝ, 0 < rho → ∀ t ∈ I,
       HasDerivAt (fun x => (z x rho).im) (zt t rho).im t)
-    (hPDE : ∀ rho : ℝ, 0 < rho →
-      zt T rho = Complex.I *
-        (complexRadialLaplacian (z T) rho +
-          complexRadialHartreeNonlinearity (z T) rho))
+    (hPDEall : ∀ t ∈ I, ∀ rho : ℝ, 0 < rho →
+      zt t rho = Complex.I *
+        (complexRadialLaplacian (z t) rho +
+          complexRadialHartreeNonlinearity (z t) rho))
     (B : ℝ) (hB : 0 ≤ B)
     (hSup : ∀ t ∈ I, ∀ u : ℝ, 0 < u → ‖z t u‖ ≤ B) :
     ∃ delta ellMax : ℝ, 0 < delta ∧ 0 < ellMax ∧
@@ -82,6 +82,12 @@ theorem actual_one_Hartree_orbit_offterminal_mixed_higher_uniform_gain
                 (rescalePhysicalRadiation ell (z t)) r| ≤
               (6 * (1 + monopoleRadialBoundConstant) ^ 2 * B ^ 2 +
                 4 * (1 + monopoleRadialBoundConstant) * B ^ 3) * ell := by
+  have hTmem : T ∈ I := mem_of_mem_nhds hI
+  have hPDE : ∀ rho : ℝ, 0 < rho →
+      zt T rho = Complex.I *
+        (complexRadialLaplacian (z T) rho +
+          complexRadialHartreeNonlinearity (z T) rho) :=
+    hPDEall T hTmem
   obtain ⟨delta,hDelta,hWindow⟩ :=
     actual_one_orbit_Hartree_terminal_two_sided_moment_window
       z zt T hTerminal I hI hZmeas hZint hVelMeas
