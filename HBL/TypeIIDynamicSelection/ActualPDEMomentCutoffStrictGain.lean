@@ -51,7 +51,7 @@ theorem actual_PDE_moment_cutoff_gain_positive
 one power of renormalized time, without an assumed rate limit. -/
 theorem actual_PDE_trapped_length_squared_positive_gain
     (s ell C beta : ℝ) (hs : 1 ≤ s) (hell : 0 ≤ ell)
-    (hC : 0 ≤ C) (htrap : ell ≤ C * s ^ (-beta)) :
+    (_hC : 0 ≤ C) (htrap : ell ≤ C * s ^ (-beta)) :
     ell ^ 2 ≤ C ^ 2 * s ^ (-1 - actualPDEMomentCutoffGain beta) := by
   have hpow : ell ^ 2 ≤ (C * s ^ (-beta)) ^ 2 :=
     pow_le_pow_left₀ hell htrap 2
