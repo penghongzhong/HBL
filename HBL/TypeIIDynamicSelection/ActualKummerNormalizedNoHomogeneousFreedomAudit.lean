@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualKummerNormalizedNoHomogeneousFreedom
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_both_normalized_endpoints_force_zero_homogeneous
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_both_normalized_endpoints_force_zero_homogeneous
