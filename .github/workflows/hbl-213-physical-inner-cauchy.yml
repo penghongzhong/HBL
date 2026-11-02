@@ -11,6 +11,8 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoreSeparation*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitTwoSidedMomentWindow*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerTerminalCoverage*.lean'
+  pull_request:
+    branches: [hbl-212-physical-spatial-commutator-gain-20261102]
   workflow_dispatch:
 permissions:
   contents: read
