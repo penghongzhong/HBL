@@ -63,7 +63,7 @@ theorem actual_Hartree_full_minus_exterior_center_exact
         rw [setIntegral_indicator measurableSet_Ioi,
           inter_eq_right.mpr
             (show Ioi R ⊆ Ioi (0 : ℝ) from
-              fun rho hrho => hR.trans_lt hrho)]
+              fun rho hrho => hR.le.trans_lt hrho)]
   unfold actualRadiationCenter radialHartreeCenter
     radialHartreeExteriorCenter
   rw [← hwhole, integral_sub hZint hFint0]
