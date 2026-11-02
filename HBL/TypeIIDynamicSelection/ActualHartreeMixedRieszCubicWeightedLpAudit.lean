@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMixedRieszCubicWeightedLp
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_monopole_cubic_mem_weighted_L2
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_monopole_cubic_mem_weighted_L2
