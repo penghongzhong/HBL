@@ -62,10 +62,10 @@ theorem revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
       HasDerivAt (fun x => (z x rho).re) (zt t rho).re t)
     (hIm : ∀ rho : ℝ, 0 < rho → ∀ t ∈ I,
       HasDerivAt (fun x => (z x rho).im) (zt t rho).im t)
-    (hPDE : ∀ rho : ℝ, 0 < rho →
-      zt T rho = Complex.I *
-        (complexRadialLaplacian (z T) rho +
-          complexRadialHartreeNonlinearity (z T) rho))
+    (hPDEall : ∀ t ∈ I, ∀ rho : ℝ, 0 < rho →
+      zt t rho = Complex.I *
+        (complexRadialLaplacian (z t) rho +
+          complexRadialHartreeNonlinearity (z t) rho))
     (ell q time gamma b omega : ℝ → ℝ)
     (V : ℝ → ℝ → ℝ)
     (hTime : Tendsto time atTop (𝓝 T))
@@ -99,6 +99,12 @@ theorem revised_2_12_same_Hartree_orbit_normalized_Kummer_source_closed
           (Real.sqrt (q s) * r) = (F r).re ∧
         actualOneLayerMinusPDE V Z (b s) (omega s) s
           (Real.sqrt (q s) * r) = (F r).im := by
+  have hTmem : T ∈ I := mem_of_mem_nhds hI
+  have hPDE : ∀ rho : ℝ, 0 < rho →
+      zt T rho = Complex.I *
+        (complexRadialLaplacian (z T) rho +
+          complexRadialHartreeNonlinearity (z T) rho) :=
+    hPDEall T hTmem
   obtain ⟨deltaT, ellMax, hDeltaT, hEllMax, hLocal⟩ :=
     actual_one_orbit_Hartree_same_PDE_normalized_Kummer_core
       z zt T hTerminal I hI hZmeas hZint hVelMeas
