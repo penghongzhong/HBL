@@ -18,7 +18,7 @@ source gains.
 noncomputable section
 set_option autoImplicit false
 open Set Filter
-open scoped Topology
+open scoped Topology ContDiff
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole HBL.Modulation.AffineTail
