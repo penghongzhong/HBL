@@ -1,5 +1,4 @@
 import HBL.TypeIIDynamicSelection.ActualMomentTransportGain
-import Mathlib.Topology.Instances.Real.Lemmas
 import Mathlib.Tactic
 
 /-!
