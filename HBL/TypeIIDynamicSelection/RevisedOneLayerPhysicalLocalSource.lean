@@ -12,7 +12,7 @@ is used. Its global totalized 2/r radial Laplacian need NOT be continuous
 at the origin: a concrete continuous extension is constructed using
 the standard clamp to the fixed positive Kummer annulus.
 
-The actual 3D energy-critical inverse-square Hartree orbit has a strictly
+The physical Hartree PDE is an explicit assumption for all real physical times in the local regularity interval, NOT merely at T. The actual 3D energy-critical inverse-square Hartree orbit has a strictly
 positive continuous terminal quartic moment. In the TRUE Kummer coordinate
 r=R_bubble/sqrt(q), a physical source F_phys(R_bubble) becomes the
 genuine coordinate-pullback F_K(z)=F_phys(sqrt(q)*z).
@@ -68,10 +68,10 @@ theorem revised_one_layer_physical_local_source_certified
       HasDerivAt (fun x => (z x rho).re) (zt t rho).re t)
     (hIm : ∀ rho : ℝ, 0 < rho → ∀ t ∈ I,
       HasDerivAt (fun x => (z x rho).im) (zt t rho).im t)
-    (hPDE : ∀ rho : ℝ, 0 < rho →
-      zt T rho = Complex.I *
-        (complexRadialLaplacian (z T) rho +
-          complexRadialHartreeNonlinearity (z T) rho))
+    (hPDEall : ∀ t ∈ I, ∀ rho : ℝ, 0 < rho →
+      zt t rho = Complex.I *
+        (complexRadialLaplacian (z t) rho +
+          complexRadialHartreeNonlinearity (z t) rho))
     (ell q time gamma b omega : ℝ → ℝ)
     (hTime : Tendsto time atTop (𝓝 T))
     (hBefore : ∀ᶠ s in atTop, time s < T)
@@ -111,6 +111,12 @@ theorem revised_one_layer_physical_local_source_certified
       actualOneLayerMinusPDE V Z (b s) (omega s) s
         (Real.sqrt (q s) * r) =
           (Fphys (Real.sqrt (q s) * r)).im := by
+  have hTmem : T ∈ I := mem_of_mem_nhds hI
+  have hPDE : ∀ rho : ℝ, 0 < rho →
+      zt T rho = Complex.I *
+        (complexRadialLaplacian (z T) rho +
+          complexRadialHartreeNonlinearity (z T) rho) :=
+    hPDEall T hTmem
   obtain ⟨deltaT, hDelta, hWindow⟩ :=
     actual_one_orbit_Hartree_terminal_two_sided_moment_window
       z zt T hTerminal I hI hZmeas hZint hVelMeas
