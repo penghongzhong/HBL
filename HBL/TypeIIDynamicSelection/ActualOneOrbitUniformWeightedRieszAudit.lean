@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualOneOrbitUniformWeightedRiesz
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_orbit_uniform_positive_weighted_Riesz
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_orbit_uniform_positive_weighted_Riesz
