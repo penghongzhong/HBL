@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalInteractionMeasurable
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_complete_interaction_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_complete_interaction_measurable
