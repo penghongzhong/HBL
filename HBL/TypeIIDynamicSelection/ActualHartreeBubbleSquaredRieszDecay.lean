@@ -211,10 +211,15 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
       have hB : bubble rho ^ 2 ≤ rho ^ (-2 : ℝ) := by
         have hSq : rho ^ (-2 : ℝ) = (rho ^ 2)⁻¹ := by
           rw [show (-2 : ℝ) = -(2 : ℝ) by norm_num,
-            Real.rpow_neg hρpos.le, Real.rpow_natCast]
+            Real.rpow_neg hρpos.le]
         rw [physical_bubble_sq_eq_inv, hSq]
-        apply one_div_le_one_div_of_le (by positivity : 0 < rho ^ 2)
-        nlinarith [sq_nonneg rho]
+        have hBase : rho ^ 2 ≤ 1 + rho ^ 2 := by
+          nlinarith [sq_nonneg rho]
+        have hInverse : (1 : ℝ) / (1 + rho ^ 2) ≤
+            1 / (rho ^ 2) :=
+          one_div_le_one_div_of_le
+            (by positivity : 0 < rho ^ 2) hBase
+        simpa only [one_div] using hInverse
       have hb0 : 0 ≤ bubble rho ^ 2 := sq_nonneg _
       dsimp [f]
       calc
