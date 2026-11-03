@@ -2,8 +2,9 @@
 % Mathematical manuscript replacement candidate; NOT an accepted proof of
 % the entire finite-profile 2.13 or the dynamically selected Type-II rate.
 % Source-level Lean CI 41648388123 is strict SUCCESS for the inner part.
-% The quantitative exterior L2 and conjugated affine charge components
-% are under strict CI as of this candidate.
+% The exterior L2 and conjugated affine charge components have each
+% separately passed dedicated strict CI 41666542636 and 41666667907.
+% Their single-source integrated theorem is now under strict CI 41668554240.
 %
 % Keep this in the auxiliary preliminary section. Avoid introducing
 % any rate assumption, artificial source-order labels or free boundary data.
@@ -111,9 +112,10 @@ uniqueness theorem then supplies the inner solution.
 % 2. correct conjugated inner weighted L2 and Fredholm solve:
 %    CI 41648388123;
 % 3. three real nonlocal radial potential bounds and 10-term exact source.
-% Pending: exact exterior L2 and correct conjugated-source charge statements,
-% whose strict CI must be checked before calling the entire displayed lemma
-% Lean accepted.
+% 4. exterior L2 and exact partition: CI 41666542636 SUCCESS;
+% 5. correct conjugated-source two affine charges: CI 41666667907 SUCCESS.
+% Entire replacement is a candidate for SINGLE-DECLARATION acceptance
+% pending CI 41668554240 and formal transitive axiom audit.
 %
 % THE FOLLOWING IS NOT PROVED BY THIS LEMMA:
 % - genuine physical full PDE residual including all transport/phase terms;
