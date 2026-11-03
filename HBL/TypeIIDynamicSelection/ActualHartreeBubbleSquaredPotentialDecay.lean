@@ -73,7 +73,7 @@ theorem actual_Hartree_bubble_squared_Riesz_spatial_decay
           (2 * Real.pi * hartreeKappa) * (J / r + J) := by
       unfold radialHartreePotential
       dsimp only [J]
-      field_simp [hr.ne'] <;> ring
+      field_simp [hr.ne']
     rw [hId]
     calc
       (2 * Real.pi * hartreeKappa) * (J / r + J) ≤
