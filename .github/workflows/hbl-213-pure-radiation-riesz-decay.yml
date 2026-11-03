@@ -21,7 +21,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: hbl-213-full-mixed-riesz-spatial-decay-primary-20261102
+  group: hbl-213-pure-radiation-riesz-decay-primary-20261103
   cancel-in-progress: true
 jobs:
   strict-joint:
