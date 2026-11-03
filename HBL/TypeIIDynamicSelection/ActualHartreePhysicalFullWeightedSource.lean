@@ -156,8 +156,9 @@ theorem actual_Hartree_physical_full_interaction_Japanese_pointwise
   have hRight : ((1 + r) ^ 2) ^ (7 / 8 : ℝ) =
       (1 + r) ^ (7 / 4 : ℝ) := by
     calc
-      _ = ((1 + r) ^ (2 : ℝ)) ^ (7 / 8 : ℝ) := by
-        rw [Real.rpow_natCast]
+      _ = ((1 + r) ^ (2 : ℝ)) ^ (7 / 8 : ℝ) :=
+        congrArg (fun x : ℝ => x ^ (7 / 8 : ℝ))
+          (Real.rpow_natCast (1 + r) 2).symm
       _ = (1 + r) ^ ((2 : ℝ) * (7 / 8 : ℝ)) :=
         (Real.rpow_mul hd.le 2 (7 / 8)).symm
       _ = _ := by norm_num
