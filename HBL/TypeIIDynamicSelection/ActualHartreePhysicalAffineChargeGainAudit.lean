@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalAffineChargeGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_source_unweighted_pointwise
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_source_unweighted_pointwise
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_affine_charges_one_eighth_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_affine_charges_one_eighth_gain
