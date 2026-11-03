@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentSelectedCoreRieszGain
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_selected_core_Riesz_length_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_selected_core_Riesz_length_gain
