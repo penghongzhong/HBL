@@ -1,7 +1,7 @@
 name: "HBL revised 2.13 physical two-channel Kummer second-jet strict audit"
 on:
   push:
-    branches: [hbl-213-physical-secondjet-20261102]
+    branches: [hbl-213-physical-inner-cauchy-20261102]
     paths:
       - '.github/workflows/hbl-213-physical-secondjet.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalKummerSecondJet*.lean'
