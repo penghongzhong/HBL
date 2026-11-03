@@ -71,8 +71,7 @@ private theorem physical_quotient_trace
     (r : ℝ) (hr : 0 < r) :
     HasDerivAt (fun t : ℝ => q t / t)
       ((r * deriv q r - q r) / r ^ 2) r := by
-  convert (hq r).hasDerivAt.div (hasDerivAt_id r) hr.ne' using 1
-  ring
+  simpa [mul_comm] using! ((hq r).hasDerivAt.div (hasDerivAt_id r) hr.ne')
 
 /-- Canonical, affine-normalized C1 inner representatives of the SAME
 correctly conjugated physical source, and their physical radial traces.
@@ -137,8 +136,14 @@ theorem actual_Hartree_conjugated_inner_C1_physical_traces
     affineRestore qm (actualMinusCharge gm), ?_, ?_,
     affineRestore_properties qp _ hpp,
     affineRestore_properties qm _ hmp, hpRest, hmRest, ?_⟩
-  · simpa only [affineRestore, add_sub_cancel_right] using hxp
-  · simpa only [affineRestore, add_sub_cancel_right] using hxm
+  · change (((x.1 : RealL2 halfLineMeasure) : ℝ → ℝ) =ᵐ[halfLineMeasure]
+      (fun r => weightedGreenDecay r *
+        (affineRestore qp (actualPlusCharge gp) r - actualPlusCharge gp * model r)))
+    simpa only [affineRestore, add_sub_cancel_right] using hxp
+  · change (((x.2 : RealL2 halfLineMeasure) : ℝ → ℝ) =ᵐ[halfLineMeasure]
+      (fun r => weightedGreenDecay r *
+        (affineRestore qm (actualMinusCharge gm) r - actualMinusCharge gm * model r)))
+    simpa only [affineRestore, add_sub_cancel_right] using hxm
   · intro r hr
     exact ⟨physical_quotient_trace _ hpRest.1 r hr,
       physical_quotient_trace _ hmRest.1 r hr⟩
