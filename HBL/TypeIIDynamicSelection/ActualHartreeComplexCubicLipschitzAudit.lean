@@ -1,0 +1,14 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeComplexCubicLipschitz
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_cubic_Lipschitz
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_cubic_Lipschitz
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_cubic_full_minus_core_bound
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_cubic_full_minus_core_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_cubic_full_minus_radiation_bound
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_cubic_full_minus_radiation_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_cubic_is_same_PDE_factor
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_cubic_is_same_PDE_factor
