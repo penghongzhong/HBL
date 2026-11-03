@@ -1,0 +1,17 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeConjugatedInnerMomentTrace
+set_option autoImplicit false
+set_option pp.universes true
+set_option pp.explicit true
+
+#check @HBL.Modulation.Monopole.halfLineMinGreen_sub_radius_slope_eq_firstMoment
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_sub_radius_slope_eq_firstMoment
+#check @HBL.Modulation.Monopole.halfLineMinGreen_firstMoment_bounds
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_firstMoment_bounds
+#check @HBL.Modulation.Monopole.halfLineMinGreen_affine_physical_trace_firstMoment
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_affine_physical_trace_firstMoment
+#check @HBL.Modulation.Monopole.innerGreenRepresentative_total_source_firstMoment
+#print axioms HBL.Modulation.Monopole.innerGreenRepresentative_total_source_firstMoment
+#check @HBL.Modulation.Monopole.innerGreenRepresentative_affine_physical_trace_bounds
+#print axioms HBL.Modulation.Monopole.innerGreenRepresentative_affine_physical_trace_bounds
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_canonical_moment_traces
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_canonical_moment_traces
