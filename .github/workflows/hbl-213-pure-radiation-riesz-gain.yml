@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-213-pure-radiation-riesz-gain.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePureRadiationChangedCubicSource*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
@@ -82,19 +83,21 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          for filename in ['ActualHartreePureRadiationRieszLengthGain.lean']:
+          for filename in ['ActualHartreePureRadiationRieszLengthGain.lean','ActualHartreePureRadiationChangedCubicSource.lean']:
             source=Path('HBL/TypeIIDynamicSelection/'+filename).read_text()
             s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszLengthGain HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszLengthGainAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszLengthGain HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszLengthGainAudit HBL.TypeIIDynamicSelection.ActualHartreePureRadiationChangedCubicSource HBL.TypeIIDynamicSelection.ActualHartreePureRadiationChangedCubicSourceAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain.lean 2>&1 | tee evidence/source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGainAudit.lean 2>&1 | tee evidence/audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationChangedCubicSource.lean 2>&1 | tee evidence/full-cubic-source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationChangedCubicSourceAudit.lean 2>&1 | tee -a evidence/audit.log
           python3 - <<'PY'
           from pathlib import Path
           import re
           s=Path('evidence/audit.log').read_text()
-          for name in ['actual_Hartree_pure_radiation_Riesz_uniform_length_gain']:
+          for name in ['actual_Hartree_pure_radiation_Riesz_uniform_length_gain','actual_Hartree_pure_radiation_changed_cubic_source_gain']:
             n='HBL.TypeIIDynamicSelection.'+name
             assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
             m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
@@ -102,7 +105,7 @@ jobs:
             actual={t.strip() for t in m.group(1).split(',') if t.strip()}
             assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT PASS: actual critically scaled Hartree pure-radiation logarithmic Riesz potential gains O(ell) by true physical radial Strauss envelope; full 2.13 and Type II blowup remain OPEN')
+          print('STRICT PASS: original Hartree pure-radiation inverse-square quartic Riesz potential and same-field changed complex cubic O(ell) source, no prescribed rate; complete revised 2.13 still OPEN')
           PY
       - name: Save incremental HBL Lean build cache
         if: always()
@@ -116,7 +119,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain*.lean HBL/TypeIIDynamicSelection/ActualHartreePureRadiationChangedCubicSource*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
