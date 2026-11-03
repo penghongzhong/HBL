@@ -128,7 +128,9 @@ theorem actual_Hartree_all_ten_monomials_weighted_one_eighth_gain
     rw [Real.sqrt_eq_rpow]
     calc
       (ell ^ (1 / 2 : ℝ)) ^ 3 =
-          ell ^ ((1 / 2 : ℝ) * (3 : ℝ)) :=
+          (ell ^ (1 / 2 : ℝ)) ^ (3 : ℝ) :=
+        (Real.rpow_natCast _ 3).symm
+      _ = ell ^ ((1 / 2 : ℝ) * (3 : ℝ)) :=
         (Real.rpow_mul hell.le (1 / 2 : ℝ) 3).symm
       _ = ell ^ (3 / 2 : ℝ) := by norm_num
   have hA3 : A3 ≤ T := by
@@ -173,7 +175,6 @@ theorem actual_Hartree_all_ten_monomials_weighted_one_eighth_gain
     calc
       _ = (d ^ (7 / 4 : ℝ) / d ^ 3) / d := by
         field_simp [hd.ne']
-        ring
       _ = d ^ (-(5 / 4 : ℝ)) / d := by rw [hPow3]
   have hExpand :
       pmB * (vB ^ 3 + (2 * vB + zB) ^ 2 * zB) +
