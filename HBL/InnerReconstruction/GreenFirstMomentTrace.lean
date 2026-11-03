@@ -29,7 +29,8 @@ theorem halfLineMinGreen_sub_radius_slope_eq_firstMoment
     halfLineMinGreen H r - r * halfLineL1GreenSlope H r =
       ∫ rho, (Iic r).indicator (fun t : ℝ => t * H t) rho
         ∂halfLineMeasure := by
-  have hTail := hH.indicator measurableSet_Ioi
+  have hTail : Integrable ((Ioi r).indicator H) halfLineMeasure :=
+    hH.indicator measurableSet_Ioi
   change (∫ rho, min r rho * H rho ∂halfLineMeasure) -
     r * (∫ rho, (Ioi r).indicator H rho ∂halfLineMeasure) = _
   rw [← integral_const_mul,
