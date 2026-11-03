@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOriginKummerEndpointTransfer
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_origin_Kummer_physical_Wronskian_ne_zero
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_Kummer_physical_Wronskian_ne_zero
+
+#check @HBL.TypeIIDynamicSelection.actual_origin_Kummer_two_endpoint_center_Green_transfer
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_Kummer_two_endpoint_center_Green_transfer
