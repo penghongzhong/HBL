@@ -1,10 +1,11 @@
-name: HBL 2.13 actual physical inner correction and forced affine charge gain
+name: HBL 2.13 correctly conjugated localized radial source and inner Fredholm solve
 on:
   push:
     branches: [hbl-213-ten-term-weighted-pointwise-20261103]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalAffineChargeGain*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeLocalizedConjugatedSource*.lean'
       - '.github/workflows/hbl-213-physical-inner-fredholm.yml'
   workflow_dispatch:
 permissions:
@@ -73,13 +74,14 @@ jobs:
           python3 - <<'PY'
           import re
           from pathlib import Path
-          for name in ['ActualHartreePhysicalInnerFredholm','ActualHartreePhysicalAffineChargeGain']:
+          for name in ['ActualHartreePhysicalInnerFredholm','ActualHartreePhysicalAffineChargeGain','ActualHartreeLocalizedConjugatedSource']:
               s=Path('HBL/TypeIIDynamicSelection/'+name+'.lean').read_text()
               s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
               assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),name
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholmAudit HBL.TypeIIDynamicSelection.ActualHartreePhysicalAffineChargeGainAudit 2>&1 | tee evidence/build.log
-          for n in ActualHartreePhysicalInnerFredholm ActualHartreePhysicalAffineChargeGain; do
+          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholmAudit HBL.TypeIIDynamicSelection.ActualHartreePhysicalAffineChargeGainAudit HBL.TypeIIDynamicSelection.ActualHartreeLocalizedConjugatedSourceAudit 2>&1 | tee evidence/build.log
+          : > evidence/audit.log
+          for n in ActualHartreePhysicalInnerFredholm ActualHartreePhysicalAffineChargeGain ActualHartreeLocalizedConjugatedSource; do
             lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${n}.lean" 2>&1 | tee "evidence/${n}-strict.log"
             lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${n}Audit.lean" 2>&1 | tee -a evidence/audit.log
           done
@@ -87,15 +89,20 @@ jobs:
           import re
           from pathlib import Path
           s=Path('evidence/audit.log').read_text()
-          for name in ['actual_Hartree_physical_slice_source_measurable','actual_Hartree_physical_source_two_weighted_channels','actual_Hartree_physical_source_unique_affine_inner_correction','actual_Hartree_physical_source_unweighted_pointwise','actual_Hartree_physical_affine_charges_one_eighth_gain']:
-              n='HBL.TypeIIDynamicSelection.'+name
+          names=[]
+          for module in ['ActualHartreePhysicalInnerFredholm','ActualHartreePhysicalAffineChargeGain','ActualHartreeLocalizedConjugatedSource']:
+              names += re.findall(r'^#print axioms\s+(\S+)',Path('HBL/TypeIIDynamicSelection/'+module+'Audit.lean').read_text(),re.M)
+          assert 'HBL.TypeIIDynamicSelection.actual_Hartree_localized_conjugated_source_weighted_L2' in names
+          assert 'HBL.TypeIIDynamicSelection.actual_Hartree_localized_conjugated_source_unique_inner' in names
+          assert len(names)==13,(len(names),names)
+          for n in names:
               assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
               m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
               assert m,'Missing transitive axiom audit: '+n
               actual={v.strip() for v in m.group(1).split(',') if v.strip()}
               assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT PASS: actual full Hartree physical source produces unique normalized H+/H- Hilbert corrections and uniquely forced affine charges with derived O(ell^(1/8)) size. C1 matching, correction norm gain, finite recursion and Type-II theorem remain OPEN. Manuscript count unchanged.')
+          print('STRICT PASS: localized r*chi*F forcing has derived one-sixteenth weighted length gain and unique normalized inner correction. Raw F inverse is auxiliary only. Reconstruction, new cutoff commutators, complement matching, finite recursion and Type-II rate remain OPEN. Manuscript count unchanged.')
           PY
       - name: Save incremental project cache
         if: always()
@@ -110,7 +117,7 @@ jobs:
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean HBL/TypeIIDynamicSelection/ActualHartreePhysicalAffineChargeGain*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean HBL/TypeIIDynamicSelection/ActualHartreePhysicalAffineChargeGain*.lean HBL/TypeIIDynamicSelection/ActualHartreeLocalizedConjugatedSource*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
