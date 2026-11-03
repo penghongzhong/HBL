@@ -29,7 +29,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- True physical cutoff Hartree core potential is an explicit
 fixed bubble potential plus a fully controlled genuine Riesz
@@ -77,13 +77,14 @@ theorem actual_Hartree_moving_monopole_core_Riesz_first_order
       rw [hExpansion, hBubble]
       dsimp [P, E]
       ring
+    change |P| ≤ radialHartreeRowBoundConstant *
+      monopoleRadialBoundConstant at hLinear
     rw [hExact]
     calc
       |4 * c * P + E| ≤ |4 * c * P| + |E| :=
         abs_add_le _ _
       _ = 4 * |c| * |P| + |E| := by
         simp only [abs_mul, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 4)]
-        ring
       _ ≤ 4 * |c| * (radialHartreeRowBoundConstant *
           monopoleRadialBoundConstant) +
           monopoleHartreePotentialBoundConstant * c ^ 2 := by
