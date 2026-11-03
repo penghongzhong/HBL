@@ -31,6 +31,9 @@ theorem halfLineMinGreen_C1_of_integrable
     (∀ r : ℝ, HasDerivAt (halfLineMinGreen F)
       (halfLineL1GreenSlope F r) r) ∧
     Continuous (halfLineL1GreenSlope F) := by
+  have hNe (r : ℝ) : ∀ᵐ rho : ℝ ∂halfLineMeasure, rho ≠ r := by
+    apply ae_iff.mpr
+    simp
   have hMeas (x : ℝ) :
       AEStronglyMeasurable ((Ioi x).indicator F) halfLineMeasure :=
     hF.aestronglyMeasurable.indicator measurableSet_Ioi
@@ -53,7 +56,7 @@ theorem halfLineMinGreen_C1_of_integrable
     have hDiff : ∀ᵐ rho : ℝ ∂halfLineMeasure,
         HasDerivAt (fun x : ℝ => min x rho * F rho)
           ((Ioi r).indicator F rho) r := by
-      filter_upwards [ae_neq r] with rho hne
+      filter_upwards [hNe r] with rho hne
       rcases lt_or_gt_of_ne hne with hlt | hgt
       · have heq : (fun x : ℝ => min x rho * F rho) =ᶠ[𝓝 r]
             (fun _ : ℝ => rho * F rho) := by
@@ -67,7 +70,7 @@ theorem halfLineMinGreen_C1_of_integrable
           rw [min_eq_left hx.le]
         rw [indicator_of_mem (show rho ∈ Ioi r from hgt)]
         have hid : HasDerivAt (fun x : ℝ => x * F rho) (F rho) r := by
-          simpa only [one_mul] using (hasDerivAt_id r).mul_const (F rho)
+          simpa using! (hasDerivAt_id r).mul_const (F rho)
         exact hid.congr_of_eventuallyEq heq
     have h := hasDerivAt_integral_of_dominated_loc_of_lip
       (F := fun x rho : ℝ => min x rho * F rho)
@@ -95,7 +98,7 @@ theorem halfLineMinGreen_C1_of_integrable
   have hLim : ∀ᵐ rho : ℝ ∂halfLineMeasure,
       Tendsto (fun x : ℝ => (Ioi x).indicator F rho)
         (𝓝 r) (𝓝 ((Ioi r).indicator F rho)) := by
-    filter_upwards [ae_neq r] with rho hne
+    filter_upwards [hNe r] with rho hne
     have heq : (fun x : ℝ => (Ioi x).indicator F rho) =ᶠ[𝓝 r]
         (fun _ : ℝ => (Ioi r).indicator F rho) := by
       rcases lt_or_gt_of_ne hne with hlt | hgt
