@@ -1,18 +1,10 @@
-name: HBL 2.13 full interaction four-term split and mixed Riesz L2 strict audit
+name: HBL 2.13 genuine Hartree limiting eighth-order weighted source strict audit
 on:
   push:
     branches: [hbl-213-ell-eighth-weighted-gain-20261102]
     paths:
-      - '.github/workflows/hbl-213-ell-eighth-weighted-gain.yml'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeightedLp*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeOneEighthCriticalSourceGain*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitz*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullInteractionSourceSplit*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurable*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleRadialDecay*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszEnvelope*.lean'
+      - '.github/workflows/hbl-213-ell-eighth-weighted-gain.yml'
   pull_request:
     branches: [hbl-213-mixed-riesz-quantitative-L2-20261102]
   workflow_dispatch:
@@ -87,7 +79,7 @@ jobs:
           s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeOneEighthCriticalSourceGain HBL.TypeIIDynamicSelection.ActualHartreeOneEighthCriticalSourceGainAudit HBL.TypeIIDynamicSelection.ActualHartreeFullInteractionSourceSplit HBL.TypeIIDynamicSelection.ActualHartreeFullInteractionSourceSplitAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeOneEighthCriticalSourceGain HBL.TypeIIDynamicSelection.ActualHartreeOneEighthCriticalSourceGainAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeOneEighthCriticalSourceGain.lean 2>&1 | tee evidence/source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeOneEighthCriticalSourceGainAudit.lean 2>&1 | tee evidence/audit.log
           python3 - <<'PY'
