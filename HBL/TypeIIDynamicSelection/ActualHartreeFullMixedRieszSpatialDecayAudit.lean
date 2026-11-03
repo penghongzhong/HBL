@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszSpatialDecay
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_spatial_decay
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_spatial_decay
