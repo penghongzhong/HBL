@@ -1,4 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleRadialDecay
+import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleMeasurable
 import HBL.TypeIIDynamicSelection.ActualMixedQuarticGain
 import HBL.TypeIIDynamicSelection.ActualRadiationScaling
 import HBL.TypeIIDynamicSelection.ActualHartreeStraussRieszEnvelope
@@ -354,8 +355,7 @@ theorem actual_Hartree_full_mixed_nonlinear_Riesz_from_Strauss
     positivity
   have hV : Measurable V := by
     dsimp [V]
-    exact monopoleMovingCutoffProfile_measurable.comp
-      (measurable_const.prodMk measurable_id)
+    exact actual_Hartree_moving_monopole_measurable c
   have hZ : Measurable Z := by
     dsimp [Z]
     unfold rescalePhysicalRadiation
