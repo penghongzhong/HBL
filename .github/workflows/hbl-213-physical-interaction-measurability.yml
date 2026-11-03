@@ -75,13 +75,13 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          source=Path('HBL/TypeIIDynamicSelection/ActualHartreeThreeFredholmEnvelopes.lean').read_text()
+          source=Path('HBL/TypeIIDynamicSelection/ActualHartreePhysicalInteractionMeasurable.lean').read_text()
           s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeThreeFredholmEnvelopes HBL.TypeIIDynamicSelection.ActualHartreeThreeFredholmEnvelopesAudit 2>&1 | tee evidence/build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeThreeFredholmEnvelopes.lean 2>&1 | tee evidence/source-strict.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeThreeFredholmEnvelopesAudit.lean 2>&1 | tee evidence/audit.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInteractionMeasurable HBL.TypeIIDynamicSelection.ActualHartreePhysicalInteractionMeasurableAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInteractionMeasurable.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInteractionMeasurableAudit.lean 2>&1 | tee evidence/audit.log
           python3 - <<'PY'
           from pathlib import Path
           import re
@@ -108,7 +108,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeThreeFredholmEnvelopes*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInteractionMeasurable*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
