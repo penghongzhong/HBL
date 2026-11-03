@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeBubbleSquaredRieszDecay
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_bubble_squared_log_row_uniform
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_bubble_squared_log_row_uniform
