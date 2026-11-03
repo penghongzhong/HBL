@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeThreeFredholmEnvelopes
 import HBL.AffineTailRationalIntegrability
+import HBL.ClassicalWeightedL2
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.Tactic
 
