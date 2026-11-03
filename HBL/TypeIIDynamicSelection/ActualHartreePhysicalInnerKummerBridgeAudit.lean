@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerKummerBridge
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_chain_rule
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_chain_rule
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_PDE_inner_Kummer_jet_and_outer_obstruction
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_PDE_inner_Kummer_jet_and_outer_obstruction

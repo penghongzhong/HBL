@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOneOrbitCoreRieszGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_core_Riesz_length_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_one_Hartree_orbit_offterminal_core_Riesz_length_gain

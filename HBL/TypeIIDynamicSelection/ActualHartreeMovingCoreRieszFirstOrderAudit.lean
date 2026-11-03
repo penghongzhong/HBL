@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMovingCoreRieszFirstOrder
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_core_Riesz_first_order
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_core_Riesz_first_order
