@@ -23,7 +23,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation HBL.Modulation.AffineTail
+open HBL.L2Kernel HBL.Modulation HBL.Modulation.AffineTail
 
 /-- The real square of the radial profile has integrable decay on
 the original positive half-line; no unsupported formal integration. -/
@@ -42,6 +42,7 @@ theorem actual_Hartree_eighth_weighted_envelope_square_integrable :
         volume.restrict (Ioi (0 : ℝ))]
         (fun r : ℝ => (r + 1) ^ (-(5 / 4 : ℝ))) := by
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with r hr
+    have hr0 : 0 < r := hr
     have hd : 0 ≤ (1 : ℝ) + r := by linarith
     calc
       ((1 + r) ^ (-(5 / 8 : ℝ))) ^ 2 =
