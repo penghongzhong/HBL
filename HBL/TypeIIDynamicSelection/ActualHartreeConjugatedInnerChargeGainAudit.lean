@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeConjugatedInnerChargeGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_forced_charges_one_sixteenth
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_forced_charges_one_sixteenth
