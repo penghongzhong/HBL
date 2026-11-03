@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePhysicalInteractionTenTermNorm
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actualHartreePhysicalInteractionTenTermEnvelope
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_interaction_complete_ten_term_norm_le
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_interaction_complete_ten_term_norm_le
