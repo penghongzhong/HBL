@@ -3,13 +3,18 @@ import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.Tactic
 
 /-!
-# Physical affine charges retain the actual one-eighth length gain
+# Affine pairings of the raw physical source retain one-eighth length gain
 
-The two affine slopes in the real inner inverse are not free parameters.
-Their exact resonance integrals are bounded using the already proved
+The exact resonance integrals are bounded using the already proved
 complete Hartree source. We derive an integrable (1+r)^(-19/8) envelope,
-then bound the two actual resonance pairings. No source order, charge
-size, time law or boundary matching datum is assumed.
+then bound the two pairings. No source order, charge size, time law or
+boundary matching datum is assumed.
+
+SCOPE: these pairings use the RAW radial source F. For the physical
+radial unknown u, the half-line unknown is q=r*u and its forcing is
+r*F. Hence the raw-source charges below do not by themselves give the
+charges of a PDE-cancelling radial correction. That conjugation and
+regional localization are a separate obligation.
 -/
 
 noncomputable section
@@ -25,8 +30,7 @@ open HBL.Profile.ActualInner HBL.L2Kernel
 def actualHartreePhysicalChargeTailIntegral : ℝ :=
   ∫ r in Ioi (0 : ℝ), (1 + r) ^ (-(19 / 8 : ℝ))
 
-/-- The full source, not a single component, has an integrable radial
-majorant after removing the original positive Fredholm weight. -/
+/-- The full raw source has an integrable radial majorant. -/
 theorem actual_Hartree_physical_source_unweighted_pointwise
     (B A ell c r : ℝ)
     (hB : 0 ≤ B) (hA : 0 ≤ A)
@@ -46,13 +50,15 @@ theorem actual_Hartree_physical_source_unweighted_pointwise
     norm_num
   apply (mul_le_mul_iff_left₀ hw).mp
   calc
+    ‖actualHartreePhysicalSliceInteraction ell c z r‖ * (1 + r) ^ (7 / 4 : ℝ) =
+        (1 + r) ^ (7 / 4 : ℝ) * ‖actualHartreePhysicalSliceInteraction ell c z r‖ := by ring
     _ ≤ actualHartreePhysicalWeightedSourceConstant B A *
         ell ^ (1 / 8 : ℝ) * (1 + r) ^ (-(5 / 8 : ℝ)) :=
       actual_Hartree_physical_full_interaction_weighted_pointwise
         ell c r B A hell hellOne hc hr hB hA z hz hSup hStrauss
-    _ = (1 + r) ^ (7 / 4 : ℝ) *
-        (actualHartreePhysicalWeightedSourceConstant B A *
-          ell ^ (1 / 8 : ℝ) * (1 + r) ^ (-(19 / 8 : ℝ))) := by
+    _ = (actualHartreePhysicalWeightedSourceConstant B A *
+          ell ^ (1 / 8 : ℝ) * (1 + r) ^ (-(19 / 8 : ℝ))) *
+        (1 + r) ^ (7 / 4 : ℝ) := by
       rw [← hPowers]
       ring
 
@@ -97,9 +103,9 @@ private theorem channel_pairing_le_physical_integrable_tail
       rw [integral_const_mul]
       rfl
 
-/-- The uniquely forced H+/H- affine slopes have genuine O(ell^(1/8))
-size. The plus factor two is the reciprocal of its actual resonance
-limit -1/2; the minus limit is one. Neither slope is assumed small. -/
+/-- The forced slopes for the RAW source have O(ell^(1/8)) size.
+The plus factor two is the reciprocal of its resonance limit -1/2;
+the minus limit is one. No radial PDE cancellation is asserted. -/
 theorem actual_Hartree_physical_affine_charges_one_eighth_gain
     (B A ell c : ℝ)
     (hB : 0 ≤ B) (hA : 0 ≤ A)
@@ -141,11 +147,11 @@ theorem actual_Hartree_physical_affine_charges_one_eighth_gain
       2 * |channelPairing HartreeChannel.plus Fp| := by
     calc
       _ = |channelPairing HartreeChannel.plus Fp| / (1 / 2 : ℝ) := by
-        simp [actualPlusCharge, channelLimit, abs_div]
+        simp [actualPlusCharge, channelLimit]
       _ = 2 * |channelPairing HartreeChannel.plus Fp| := by ring
   have hMinusAbs : |actualMinusCharge Fm| =
       |channelPairing HartreeChannel.minus Fm| := by
-    simp [actualMinusCharge, channelLimit, abs_div]
+    simp [actualMinusCharge, channelLimit]
   change |actualPlusCharge Fp| ≤ 2 * (M * actualHartreePhysicalChargeTailIntegral) ∧
     |actualMinusCharge Fm| ≤ M * actualHartreePhysicalChargeTailIntegral
   constructor
