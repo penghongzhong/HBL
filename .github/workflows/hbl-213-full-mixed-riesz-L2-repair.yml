@@ -9,6 +9,8 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleRadialDecay*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszEnvelope*.lean'
+  pull_request:
+    branches: [hbl-213-mixed-riesz-cubic-weight-20261102]
   workflow_dispatch:
 permissions:
   contents: read
