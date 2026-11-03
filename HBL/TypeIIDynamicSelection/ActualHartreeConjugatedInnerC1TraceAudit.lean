@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeConjugatedInnerC1Trace
+set_option autoImplicit false
+
+#check @HBL.Modulation.Monopole.halfLineMinGreen_C1_of_integrable
+#print axioms HBL.Modulation.Monopole.halfLineMinGreen_C1_of_integrable
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_C1_physical_traces
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_conjugated_inner_C1_physical_traces
