@@ -1,16 +1,17 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleRadialDecay
-import HBL.MonopoleProfileEquation
+import HBL.RadialHartreeDomination
 import Mathlib.Tactic
 
 /-!
-# Actual moving monopole measurability on the whole real radius
+# Short exact measurability proof for the physical moving Hartree monopole
 
-The physical monopole radius R(c)=4/|c| is totalized at c=0.
-Use its exact cutoff identity instead of an unproved guessed
-'monopoleMovingCutoffProfile_measurable.comp' syntax.
-The normalized profile is the continuous bubble plus a measurable
-radial Fredholm profile divided by the (totalized) real radius.
-No new analytic Hartree assumption or axiom is required.
+The original physical source has exactly
+  V_c(r) = bubble(r) + c * monopoleInnerRadialProfile(R(c),r).
+The continuous bubble and the already proved measurable truncated
+Fredholm profile imply measurability immediately. No new source
+regularity assumption, alternative cutoff, axiom, or blowup rate
+is introduced. This replaces an unnecessary long proof via the
+amplitude-dependent cutoff identity.
 -/
 
 noncomputable section
@@ -21,34 +22,14 @@ open scoped Topology
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
-/-- True amplitude-dependent Hartree monopole profile is measurable,
-including the physical origin and the c=0 transition. -/
+/-- True amplitude-dependent Hartree monopole is measurable, including
+the origin and the c=0 case, by the already-certified decomposition. -/
 theorem actual_Hartree_moving_monopole_measurable (c : ℝ) :
     Measurable
       (monopolePerturbedRadialProfile (monopoleQuadraticRadius c) c) := by
-  have hRadial : Measurable monopoleRadialProfile := by
-    unfold monopoleRadialProfile
-    exact monopoleProfile_continuous.measurable.div measurable_id
-  have hCut : Measurable (fun r : ℝ =>
-      cutoff (|c| * r / 4)) := by
-    have hArg : Continuous (fun r : ℝ => |c| * r / 4) :=
-      (continuous_const.mul continuous_id).div_const 4
-    exact (cutoff_contDiff_infty.continuous.comp hArg).measurable
-  have hBubble : Measurable bubble :=
-    bubble_contDiff_infty.continuous.measurable
-  have hFull : Measurable (fun r : ℝ =>
-      bubble r + c * (1 - cutoff (|c| * r / 4)) *
-        monopoleRadialProfile r) := by
-    exact hBubble.add
-      ((measurable_const.mul (measurable_const.sub hCut)).mul hRadial)
-  have hEq :
-      monopolePerturbedRadialProfile (monopoleQuadraticRadius c) c =
-        (fun r : ℝ =>
-          bubble r + c * (1 - cutoff (|c| * r / 4)) *
-            monopoleRadialProfile r) := by
-    funext r
-    exact monopoleMovingCutoffProfile_eq c r
-  rw [hEq]
-  exact hFull
+  unfold monopolePerturbedRadialProfile
+  exact bubble_contDiff_infty.continuous.measurable.add
+    (measurable_const.mul
+      (monopoleInnerRadialProfile_measurable (monopoleQuadraticRadius c)))
 
 end HBL.TypeIIDynamicSelection
