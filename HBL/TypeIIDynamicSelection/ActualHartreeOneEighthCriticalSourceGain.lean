@@ -54,7 +54,8 @@ theorem actual_Hartree_fredholm_seven_quarters_weight_radial
     calc
       (d ^ 2) ^ (7 / 8 : ℝ) =
           (d ^ (2 : ℝ)) ^ (7 / 8 : ℝ) := by
-            rw [Real.rpow_natCast]
+            exact congrArg (fun x : ℝ => x ^ (7 / 8 : ℝ))
+              (Real.rpow_natCast d 2).symm
       _ = d ^ ((2 : ℝ) * (7 / 8 : ℝ)) :=
         (Real.rpow_mul hd.le 2 (7 / 8)).symm
       _ = d ^ (7 / 4 : ℝ) := by norm_num
@@ -94,7 +95,7 @@ theorem actual_Hartree_true_source_worst_cubic_one_eighth_gain
       _ ≤ q ^ 3 := by
         have hStep := Real.rpow_le_rpow_of_exponent_le hqOne
           (show (19 / 8 : ℝ) ≤ 3 by norm_num)
-        simpa only [Real.rpow_natCast] using hStep
+        exact hStep.trans_eq (Real.rpow_natCast q 3)
   have hEllPow :
       ell ^ (5 / 2 : ℝ) =
         ell ^ (1 / 8 : ℝ) * ell ^ (19 / 8 : ℝ) := by
