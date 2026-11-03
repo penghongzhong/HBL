@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeCoreRieszSpatialDecay
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_core_Riesz_global_inverse_radius
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_core_Riesz_global_inverse_radius
