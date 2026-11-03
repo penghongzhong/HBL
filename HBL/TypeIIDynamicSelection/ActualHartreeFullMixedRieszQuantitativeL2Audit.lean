@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszQuantitativeL2
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_monopole_cubic_L2_square_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_monopole_cubic_L2_square_gain
