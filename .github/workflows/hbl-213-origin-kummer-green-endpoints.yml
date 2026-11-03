@@ -75,7 +75,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          source=Path('HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeightedLp.lean').read_text()
+          source=Path('HBL/TypeIIDynamicSelection/ActualHartreeOriginKummerEndpointTransfer.lean').read_text()
           s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
