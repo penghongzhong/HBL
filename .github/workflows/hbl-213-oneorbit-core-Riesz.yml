@@ -5,7 +5,6 @@ on:
     paths:
       - '.github/workflows/hbl-213-oneorbit-core-Riesz.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitCoreRieszGain*.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitCoreRieszGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
@@ -117,7 +116,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitCoreRieszGain*.lean HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitCoreRieszGain*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitCoreRieszGain*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
