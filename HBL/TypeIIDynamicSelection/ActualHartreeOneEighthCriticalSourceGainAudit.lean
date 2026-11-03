@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOneEighthCriticalSourceGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_fredholm_seven_quarters_weight_radial
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_true_source_worst_cubic_one_eighth_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_fredholm_seven_quarters_weight_radial
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_source_worst_cubic_one_eighth_gain
