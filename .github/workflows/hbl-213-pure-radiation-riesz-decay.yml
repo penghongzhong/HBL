@@ -9,6 +9,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszRelativeBubbleSq*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszSpatialDecay*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszSpatialDecay*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
@@ -86,13 +87,14 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          for filename in ['ActualHartreeBubbleSquaredRieszDecay.lean','ActualHartreeBubbleSquaredPotentialDecay.lean','ActualHartreeMixedRieszRelativeBubbleSq.lean','ActualHartreeFullMixedRieszSpatialDecay.lean','ActualHartreePureRadiationRieszSpatialDecay.lean']:
+          for filename in ['ActualHartreeBubbleSquaredRieszDecay.lean','ActualHartreeBubbleSquaredPotentialDecay.lean','ActualHartreeMixedRieszRelativeBubbleSq.lean','ActualHartreeFullMixedRieszSpatialDecay.lean','ActualHartreePureRadiationRieszSpatialDecay.lean','ActualHartreePureRadiationRieszLengthGain.lean']:
             source=Path('HBL/TypeIIDynamicSelection/'+filename).read_text()
             s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
             assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
           lake build HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszSpatialDecay HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszSpatialDecayAudit HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszSpatialDecay HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszSpatialDecayAudit HBL.TypeIIDynamicSelection.ActualHartreeBubbleSquaredPotentialDecayAudit HBL.TypeIIDynamicSelection.ActualHartreeMixedRieszRelativeBubbleSqAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszSpatialDecay.lean 2>&1 | tee evidence/pure-source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePureRadiationRieszLengthGain.lean 2>&1 | tee evidence/pure-scaling-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszSpatialDecay.lean 2>&1 | tee evidence/source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeBubbleSquaredPotentialDecay.lean 2>&1 | tee evidence/scalar-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszRelativeBubbleSq.lean 2>&1 | tee evidence/positive-kernel-strict.log
