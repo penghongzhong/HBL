@@ -1,0 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeTenMonomialWeightedGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actualHartreeTenTermSourceConstant
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_all_ten_monomials_weighted_one_eighth_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_all_ten_monomials_weighted_one_eighth_gain
