@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/hbl-213-moving-core-Riesz.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentSelectedCoreRieszGain*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerCoordinateBridge*.lean'
@@ -82,18 +83,21 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          source=Path('HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder.lean').read_text()
-          s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
-          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
+          for filename in ['ActualHartreeMovingCoreRieszFirstOrder.lean','ActualHartreeMomentSelectedCoreRieszGain.lean']:
+            source=Path('HBL/TypeIIDynamicSelection/'+filename).read_text()
+            s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
+            assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeMovingCoreRieszFirstOrder HBL.TypeIIDynamicSelection.ActualHartreeMovingCoreRieszFirstOrderAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeMovingCoreRieszFirstOrder HBL.TypeIIDynamicSelection.ActualHartreeMovingCoreRieszFirstOrderAudit HBL.TypeIIDynamicSelection.ActualHartreeMomentSelectedCoreRieszGain HBL.TypeIIDynamicSelection.ActualHartreeMomentSelectedCoreRieszGainAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMomentSelectedCoreRieszGain.lean 2>&1 | tee evidence/moment-source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrderAudit.lean 2>&1 | tee evidence/audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMomentSelectedCoreRieszGainAudit.lean 2>&1 | tee -a evidence/audit.log
           python3 - <<'PY'
           from pathlib import Path
           import re
           s=Path('evidence/audit.log').read_text()
-          for name in ['actual_Hartree_moving_monopole_core_Riesz_first_order']:
+          for name in ['actual_Hartree_moving_monopole_core_Riesz_first_order','actual_Hartree_moment_selected_core_Riesz_length_gain']:
             n='HBL.TypeIIDynamicSelection.'+name
             assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
             m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
@@ -101,7 +105,7 @@ jobs:
             actual={t.strip() for t in m.group(1).split(',') if t.strip()}
             assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT PASS: actual physical monopole Riesz potential equals bubble-four exact plus explicitly bounded first-order physical Taylor remainder; full 2.13 still OPEN')
+          print('STRICT PASS: actual physical monopole Riesz equals bubble-four plus Taylor error AND has O(ell) gain from genuine bounded radiation quartic moment; full 2.13 OPEN')
           PY
       - name: Save incremental HBL Lean build cache
         if: always()
@@ -115,7 +119,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentSelectedCoreRieszGain*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
