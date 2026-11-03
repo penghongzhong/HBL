@@ -71,21 +71,23 @@ theorem actual_Hartree_physical_interaction_inner_solve_from_radiation
       fun r => (actualHartreePhysicalSliceInteraction ell c z r).im
     ∃ (hp : InWeightedL2 (7 / 4 : ℝ) gp)
       (hm : InWeightedL2 (7 / 4 : ℝ) gm),
-      AffineTailOrthogonal scaleMode gp (actualPlusCharge gp) ∧
-      AffineTailOrthogonal phaseMode gm (actualMinusCharge gm) ∧
-      channelPairing scaleMode (correctedPlusSource gp) = 0 ∧
-      channelPairing phaseMode (correctedMinusSource gm) = 0 ∧
+      AffineTailOrthogonal HartreeChannel.plus gp (actualPlusCharge gp) ∧
+      AffineTailOrthogonal HartreeChannel.minus gm (actualMinusCharge gm) ∧
+      channelPairing HartreeChannel.plus (correctedPlusSource gp) = 0 ∧
+      channelPairing HartreeChannel.minus (correctedMinusSource gm) = 0 ∧
       ∃! x : InnerCorrections,
-        weightedHartreeFredholmDomain (7 / 4 : ℝ) x.1 =
-          weightedSourceFredholmRightHandSide (7 / 4 : ℝ)
-            (correctedPlusSource gp)
-            (correctedPlusSource_memWeightedL2 (7 / 4 : ℝ)
-              (by norm_num) (by norm_num) gp hp) ∧
-        weightedPhaseFredholmDomain (7 / 4 : ℝ) x.2 =
-          weightedPhaseSourceFredholmRightHandSide (7 / 4 : ℝ)
-            (correctedMinusSource gm)
-            (correctedMinusSource_memWeightedL2 (7 / 4 : ℝ)
-              (by norm_num) (by norm_num) gm hm) := by
+        (1 - weightedBirmanSchwingerOperator)
+            (x.1 : RealL2 halfLineMeasure) =
+          weightedSourceGreenOperator (7 / 4 : ℝ) (by norm_num)
+            (weightedSourceDataL2 (7 / 4 : ℝ) (correctedPlusSource gp)
+              (correctedPlusSource_memWeightedL2 (7 / 4 : ℝ)
+                (by norm_num) gp hp)) ∧
+        (1 - weightedPhaseBirman)
+            (x.2 : RealL2 halfLineMeasure) =
+          weightedSourceGreenOperator (7 / 4 : ℝ) (by norm_num)
+            (weightedSourceDataL2 (7 / 4 : ℝ) (correctedMinusSource gm)
+              (correctedMinusSource_memWeightedL2 (7 / 4 : ℝ)
+                (by norm_num) gm hm)) := by
   let gp : ℝ → ℝ :=
     fun r => (actualHartreePhysicalSliceInteraction ell c z r).re
   let gm : ℝ → ℝ :=
@@ -94,13 +96,14 @@ theorem actual_Hartree_physical_interaction_inner_solve_from_radiation
     ell c B A hell hellOne hc hB hA z hz hSup hStrauss
   have hp : InWeightedL2 (7 / 4 : ℝ) gp := hPair.1
   have hm : InWeightedL2 (7 / 4 : ℝ) gm := hPair.2
-  have hLower : (3 / 2 : ℝ) < 7 / 4 := by norm_num
-  have hUpper : (7 / 4 : ℝ) < 2 := by norm_num
+  have hPairing : (1 / 2 : ℝ) < 7 / 4 := by norm_num
   have hCompatible := actualAffine_corrected_sources_compatible
-    (7 / 4 : ℝ) hLower hUpper gp gm hp hm
-  refine ⟨hp, hm, actualPlusCharge_orthogonal gp,
-    actualMinusCharge_orthogonal gm, hCompatible.1, hCompatible.2, ?_⟩
+    (7 / 4 : ℝ) hPairing gp gm hp hm
+  refine ⟨hp, hm,
+    actualPlusCharge_orthogonal (7 / 4 : ℝ) hPairing gp hp,
+    actualMinusCharge_orthogonal (7 / 4 : ℝ) hPairing gm hm,
+    hCompatible.1, hCompatible.2, ?_⟩
   exact existsUnique_actualInner_affinelyCorrected
-    (7 / 4 : ℝ) hLower hUpper gp gm hp hm
+    (7 / 4 : ℝ) (by norm_num) (by norm_num) gp gm hp hm
 
 end HBL.TypeIIDynamicSelection
