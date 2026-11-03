@@ -1,6 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeConjugatedInnerMomentTrace
 set_option autoImplicit false
-set_option pp.universes true
+set_option pp.universes false
 set_option pp.explicit true
 
 #check @HBL.Modulation.Monopole.halfLineMinGreen_sub_radius_slope_eq_firstMoment
