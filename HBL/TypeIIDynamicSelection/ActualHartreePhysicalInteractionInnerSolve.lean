@@ -51,7 +51,7 @@ theorem actual_Hartree_physical_interaction_inner_channels
     actual_Hartree_physical_complete_interaction_measurable V Z hV hZ
   have hWeighted :=
     (actual_Hartree_physical_full_interaction_weighted_L2
-      ell c B A hell hellOne hc hB hA z hz hSup hStrauss).1
+      B A ell c hB hA hell hellOne hc z hz hSup hStrauss).1
   exact actual_Hartree_one_complex_weighted_source_two_channels
     (7 / 4 : ℝ) (actualHartreePhysicalSliceInteraction ell c z) hF hWeighted
 
