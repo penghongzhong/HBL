@@ -1,0 +1,7 @@
+import HBL.InnerReconstruction.UniformMomentOperatorBound
+set_option autoImplicit false
+set_option pp.explicit true
+#check @HBL.Modulation.Monopole.actual_innerGreenBound_le_fixed_weight_norms
+#check @HBL.Modulation.Monopole.actual_inner_fixed_Fredholm_moment_constants
+#print axioms HBL.Modulation.Monopole.actual_innerGreenBound_le_fixed_weight_norms
+#print axioms HBL.Modulation.Monopole.actual_inner_fixed_Fredholm_moment_constants
