@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeTenTermEnvelopeMonotone
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complete_ten_term_polynomial_mono
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complete_ten_term_polynomial_mono
