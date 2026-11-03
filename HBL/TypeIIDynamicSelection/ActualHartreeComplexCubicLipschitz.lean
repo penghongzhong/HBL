@@ -69,8 +69,8 @@ theorem actual_Hartree_complex_cubic_Lipschitz
         abs_of_nonneg (sq_nonneg (‖v‖))]
     _ ≤ ((‖u‖ + ‖v‖) * ‖u - v‖) * ‖u‖ +
         ‖v‖ ^ 2 * ‖u - v‖ := by
-      exact add_le_add_right
-        (mul_le_mul_of_nonneg_right hNorm (norm_nonneg _)) _
+      exact add_le_add
+        (mul_le_mul_of_nonneg_right hNorm (norm_nonneg u)) le_rfl
     _ ≤ (‖u‖ + ‖v‖) ^ 2 * ‖u - v‖ := by
       have hUV : 0 ≤ ‖u‖ * ‖v‖ :=
         mul_nonneg (norm_nonneg _) (norm_nonneg _)
