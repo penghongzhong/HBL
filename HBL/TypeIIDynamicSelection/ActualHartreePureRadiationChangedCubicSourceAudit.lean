@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePureRadiationChangedCubicSource
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_changed_cubic_source_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_changed_cubic_source_gain
