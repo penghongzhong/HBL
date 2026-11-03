@@ -142,7 +142,7 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
             exact hPoint rho hρ.1 hρ.2
       _ = 2 := by
         rw [intervalIntegral.integral_const]
-        field_simp [hr.ne'] <;> simp [hr.ne'] <;> ring
+        field_simp [hr.ne']; simp [hr.ne']
   have hKnearNonneg :
       0 ≤ ∫ rho in (0 : ℝ)..(r / 2), k rho := by
     apply intervalIntegral.integral_nonneg hrHalf.le
@@ -191,7 +191,7 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
       _ ≤ (2 / r) * (r * radialHartreeUnitLogMass) :=
         mul_le_mul_of_nonneg_left hKMidBound (by positivity)
       _ = 2 * radialHartreeUnitLogMass := by
-        field_simp [hr.ne'] <;> ring
+        field_simp [hr.ne']
       _ ≤ 2 * |radialHartreeUnitLogMass| := by
         exact mul_le_mul_of_nonneg_left (le_abs_self _) (by norm_num)
   have hFarMajor :
@@ -229,7 +229,7 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
           mul_le_mul_of_nonneg_right
             (mul_le_mul_of_nonneg_left hK hρpos.le) hb0
         _ = (4 * r) * bubble rho ^ 2 := by
-          field_simp [hρpos.ne'] <;> ring
+          field_simp [hρpos.ne']
         _ ≤ (4 * r) * rho ^ (-2 : ℝ) :=
           mul_le_mul_of_nonneg_left hB (by positivity)
     calc
