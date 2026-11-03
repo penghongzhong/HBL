@@ -75,12 +75,15 @@ theorem actual_Hartree_bubble_squared_Riesz_spatial_decay
       dsimp only [J]
       field_simp [hr.ne'] <;> ring
     rw [hId]
-    change (2 * Real.pi * hartreeKappa) * (J / r + J) ≤
-      (2 * Real.pi * hartreeKappa) *
-        (radialHartreeBubbleBoundConstant +
-          (4 + 2 * |radialHartreeUnitLogMass|))
-    apply mul_le_mul_of_nonneg_left _ hCoeff
-    exact add_le_add hDiv hFar
+    calc
+      (2 * Real.pi * hartreeKappa) * (J / r + J) ≤
+        (2 * Real.pi * hartreeKappa) *
+          (radialHartreeBubbleBoundConstant +
+            (4 + 2 * |radialHartreeUnitLogMass|)) :=
+        mul_le_mul_of_nonneg_left (add_le_add hDiv hFar) hCoeff
+      _ = actualHartreeBubbleSquaredRieszDecayConstant := by
+        unfold actualHartreeBubbleSquaredRieszDecayConstant
+        ring
   exact (le_div_iff₀ (by linarith : 0 < 1 + r)).2
     (by simpa only [mul_comm] using hProduct)
 
