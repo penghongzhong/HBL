@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszLengthGain
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_Riesz_uniform_length_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_Riesz_uniform_length_gain
