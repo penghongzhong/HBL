@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMixedRieszRelativeBubbleSq
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_Riesz_relative_bubble_sq_domination
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Riesz_relative_bubble_sq_domination
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_relative_bubble_sq
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_mixed_Riesz_relative_bubble_sq
