@@ -1,0 +1,122 @@
+% Revised HBL 2.13: two-weight source split for the true radial Hartree equation.
+% Mathematical manuscript replacement candidate; NOT an accepted proof of
+% the entire finite-profile 2.13 or the dynamically selected Type-II rate.
+% Source-level Lean CI 41648388123 is strict SUCCESS for the inner part.
+% The quantitative exterior L2 and conjugated affine charge components
+% are under strict CI as of this candidate.
+%
+% Keep this in the auxiliary preliminary section. Avoid introducing
+% any rate assumption, artificial source-order labels or free boundary data.
+
+\begin{lemma}[Two-weight decomposition of the physical Hartree interaction]
+\label{lem:hbl-physical-two-weight-source}
+Let $\mathcal{N}(u)=(|x|^{-2}*|u|^4)|u|^2u$ be the original
+three-dimensional critical Hartree nonlinearity and put
+\[
+  V_c(r)=\mathrm{monopolePerturbedRadialProfile}
+       (\mathrm{monopoleQuadraticRadius}(c),c,r),
+  \qquad Z_\ell(r)=\sqrt{\ell}\,z(\ell r).
+\]
+Here $0<\ell\le1$, $|c|\le1$, $z$ is measurable, and
+\[
+ \sup_{u>0}|z(u)|\le B,\qquad
+ \sup_{u\ge1}u|z(u)|\le A,\qquad B,A\ge0.
+\]
+Let $F_{\ell,c}$ denote the exact core--radiation interaction
+\[
+ F_{\ell,c}=\mathcal{N}(V_c+Z_\ell)
+          -\mathcal{N}(V_c)-\mathcal{N}(Z_\ell).
+\]
+Define $R_\ell=\ell^{-1/16}$ and, with the fixed smooth cutoff
+$\vartheta(x)=0$ for $x\le1$ and $\vartheta(x)=1$ for $x\ge2$,
+\[
+ \chi_{\rm in}(r)=1-\vartheta(r/R_\ell),\qquad
+ \chi_{\rm out}(r)=\vartheta(r/R_\ell),
+\]
+\[
+ G_{\rm in}(r)=r\chi_{\rm in}(r)F_{\ell,c}(r),\qquad
+ G_{\rm out}(r)=r\chi_{\rm out}(r)F_{\ell,c}(r).
+\]
+Then
+\[
+             rF_{\ell,c}=G_{\rm in}+G_{\rm out}
+\]
+as an exact identity of the original nonlocal sources. Moreover,
+with the original half-line measure $dr$ and Japanese weight
+$\langle r\rangle=(1+r^2)^{1/2}$,
+\[
+ \|\langle r\rangle^{7/4}G_{\rm in}\|_{L^2(0,\infty)}
+ \le C(B,A)\ell^{1/16},
+ \qquad
+ \|G_{\rm out}\|_{L^2(0,\infty)}
+ \le C(B,A)\ell^{1/8}.
+\]
+For the actual plus/minus Fredholm resonance charges,
+\[
+ |a_+(G_{\rm in})|+|a_-(G_{\rm in})|
+ \le C(B,A)\ell^{1/16}.
+\]
+The affine-corrected $H_+$ and $H_-$ inner Hilbert solution for
+$G_{\rm in}$ is uniquely determined by these source-dependent
+charges, with no imposed Fredholm compatibility hypothesis.
+\end{lemma}
+
+\begin{proof}
+The original full quartic inverse-square Riesz interaction satisfies
+\[
+ \langle r\rangle^{7/4}|F_{\ell,c}(r)|
+ \le K(B,A)\ell^{1/8}(1+r)^{-5/8}.
+\]
+This bound is obtained from the full ten-term physical interaction,
+the actual three core/mixed/pure Riesz potentials, and the already
+strictly verified three radial scale inequalities. The right side
+belongs to $L^2(0,\infty)$ since
+\[
+ \int_0^\infty(1+r)^{-5/4}\,dr<\infty.
+\]
+On the support of $\chi_{\rm in}$, $r\le2R_\ell$; thus
+\[
+ \|\langle r\rangle^{7/4}G_{\rm in}\|_2
+ \le2R_\ell\|\langle r\rangle^{7/4}F_{\ell,c}\|_2
+ \le2K(B,A)\ell^{1/16}
+       \|(1+r)^{-5/8}\|_2.
+\]
+For the exterior complement, $0\le\chi_{\rm out}\le1$,
+$r\le 1+r$ and
+\[
+ r(1+r)^{-19/8}\le (1+r)^{-11/8}
+                            \le (1+r)^{-5/8}.
+\]
+Therefore
+\[
+ |G_{\rm out}(r)|
+ \le K(B,A)\ell^{1/8}(1+r)^{-5/8},
+\]
+which gives the claimed unweighted exterior norm. The exact
+partition follows without moving the cutoff into the original
+nonlocal Riesz convolution.
+
+The source-dependent charges follow from
+the integrable unweighted majorant
+$|G_{\rm in}(r)|\lesssim_{B,A}
+\ell^{1/16}(1+r)^{-19/8}$, the original bounded
+channel resonance functions and the genuine pairing formula;
+the original two-channel affine Fredholm existence and
+uniqueness theorem then supplies the inner solution.
+\end{proof}
+
+% VERIFICATION BOUNDARY.
+% Accepted:
+% 1. raw physical source weighted L2: CI 41635003260;
+% 2. correct conjugated inner weighted L2 and Fredholm solve:
+%    CI 41648388123;
+% 3. three real nonlocal radial potential bounds and 10-term exact source.
+% Pending: exact exterior L2 and correct conjugated-source charge statements,
+% whose strict CI must be checked before calling the entire displayed lemma
+% Lean accepted.
+%
+% THE FOLLOWING IS NOT PROVED BY THIS LEMMA:
+% - genuine physical full PDE residual including all transport/phase terms;
+% - continuous actual inner C1 traces and their Kummer/remote compatibility;
+% - full generated nonlinear finite profile and positive time order;
+% - existence of Type-II orbit or its dynamically selected blowup exponent.
