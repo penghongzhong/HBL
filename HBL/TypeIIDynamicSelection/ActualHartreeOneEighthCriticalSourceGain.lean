@@ -53,11 +53,9 @@ theorem actual_Hartree_fredholm_seven_quarters_weight_radial
       (d ^ 2) ^ (7 / 8 : ℝ) = d ^ (7 / 4 : ℝ) := by
     calc
       (d ^ 2) ^ (7 / 8 : ℝ) =
-          (d ^ (2 : ℝ)) ^ (7 / 8 : ℝ) := by
-            exact congrArg (fun x : ℝ => x ^ (7 / 8 : ℝ))
-              (Real.rpow_natCast d 2).symm
-      _ = d ^ ((2 : ℝ) * (7 / 8 : ℝ)) :=
-        (Real.rpow_mul hd.le 2 (7 / 8)).symm
+          d ^ ((2 : ℝ) * (7 / 8 : ℝ)) := by
+            simpa only [Real.rpow_natCast] using
+              (Real.rpow_mul hd.le (2 : ℝ) (7 / 8 : ℝ)).symm
       _ = d ^ (7 / 4 : ℝ) := by norm_num
   change (1 + r ^ 2) ^ ((7 / 4 : ℝ) / 2) ≤
     (1 + r) ^ (7 / 4 : ℝ)
