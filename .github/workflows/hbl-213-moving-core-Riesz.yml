@@ -1,9 +1,9 @@
 name: "HBL revised 2.13 exact moving core Riesz Taylor shortcut strict audit"
 on:
   push:
-    branches: [hbl-213-moving-core-Riesz-20261102]
+    branches: [hbl-213-true-flow-interaction-20261102]
     paths:
-      - '.github/workflows/hbl-213-true-flow-interaction.yml'
+      - '.github/workflows/hbl-213-moving-core-Riesz.yml'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingCoreRieszFirstOrder*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualOneOrbitPhysicalKummerSourceBridge*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerClockIdentity*.lean'
