@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeEighthEnvelopeL2Integral
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_eighth_weighted_envelope_square_integrable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_eighth_weighted_envelope_square_integrable
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_eighth_weighted_source_L2_of_pointwise
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_eighth_weighted_source_L2_of_pointwise
