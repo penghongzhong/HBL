@@ -205,7 +205,7 @@ theorem actual_Hartree_one_radiation_full_nonlinear_source_gain
         (fun rho : ℝ => ‖(V rho : ℂ)‖ ^ 4) =
           (fun rho : ℝ => V rho ^ 4) := by
       funext rho
-      rw [Complex.norm_real]
+      rw [Complex.norm_real, Real.norm_eq_abs]
       calc
         |V rho| ^ 4 = (|V rho| ^ 2) ^ 2 := by ring
         _ = (V rho ^ 2) ^ 2 := by rw [sq_abs]
