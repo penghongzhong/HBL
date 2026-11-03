@@ -201,7 +201,22 @@ theorem actual_Hartree_one_radiation_full_nonlinear_source_gain
             (fun rho => (V rho : ℂ) + Z rho) r -
             actualWholeRadiationLocalCubic
               (fun rho => (V rho : ℂ)) r) := by
-    simpa only [Pmix,Ppure,Pcore] using
+    have hRealQuartic :
+        (fun rho : ℝ => ‖(V rho : ℂ)‖ ^ 4) =
+          (fun rho : ℝ => V rho ^ 4) := by
+      funext rho
+      rw [Complex.norm_real]
+      calc
+        |V rho| ^ 4 = (|V rho| ^ 2) ^ 2 := by ring
+        _ = (V rho ^ 2) ^ 2 := by rw [sq_abs]
+        _ = V rho ^ 4 := by ring
+    have hCorePotential :
+        radialHartreePotential (fun rho : ℝ => ‖(V rho : ℂ)‖ ^ 4) r =
+          Pcore := by
+      change radialHartreePotential (fun rho : ℝ => ‖(V rho : ℂ)‖ ^ 4) r =
+        radialHartreePotential (fun rho : ℝ => V rho ^ 4) r
+      rw [hRealQuartic]
+    simpa only [Pmix,Ppure,Pcore,hRealQuartic] using
       (actual_Hartree_complete_nonlinear_interaction_four_term_split
         (fun _ : ℝ => V) (fun _ : ℝ => Z) 0 r)
   exact ⟨hCore, hPure, hMixed, hPureCubic, hSplit⟩
