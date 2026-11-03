@@ -19,7 +19,7 @@ open Set
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- True amplitude-dependent Hartree monopole profile is measurable,
 including the physical origin and the c=0 transition. -/
@@ -31,7 +31,9 @@ theorem actual_Hartree_moving_monopole_measurable (c : ℝ) :
     exact monopoleProfile_continuous.measurable.div measurable_id
   have hCut : Measurable (fun r : ℝ =>
       cutoff (|c| * r / 4)) := by
-    fun_prop
+    have hArg : Continuous (fun r : ℝ => |c| * r / 4) :=
+      (continuous_const.mul continuous_id).div_const 4
+    exact (cutoff_contDiff_infty.continuous.comp hArg).measurable
   have hBubble : Measurable bubble :=
     bubble_contDiff_infty.continuous.measurable
   have hFull : Measurable (fun r : ℝ =>
