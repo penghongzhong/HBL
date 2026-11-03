@@ -68,7 +68,7 @@ theorem actual_Hartree_inner_minus_normalized_Kummer_green_defect_equation
     {mu theta center eps : ℝ}
     (K : LocalKummerPair mu theta center eps)
     (d : ℝ) (hd : 0 < d) (hde : d < eps)
-    (k : ℝ) (hk : 0 < k) (hLeftPositive : 0 < center - d)
+    (k : ℝ) (hLeftPositive : 0 < center - d)
     (F : ℝ → ℂ) (hF : Continuous F)
     (up um : ℝ → ℝ)
     (hup : ∀ x : ℝ, 0 < x → DifferentiableAt ℝ up (k * x))
@@ -196,6 +196,6 @@ theorem actual_Hartree_PDE_inner_minus_normalized_Kummer_defect
     (hClassical (k * x)
       (mul_pos hk (lt_trans hLeftPositive hx.1))).2.2.2.1
   exact actual_Hartree_inner_minus_normalized_Kummer_green_defect_equation
-    K d hd hde k hk hLeftPositive F hF up um hup hum hup2 hum2
+    K d hd hde k hLeftPositive F hF up um hup hum hup2 hum2
 
 end HBL.TypeIIDynamicSelection
