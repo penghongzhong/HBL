@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFlowInteractionSource
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_forces_common_interaction_source
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_forces_common_interaction_source
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_both_channels_are_interactions
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_flow_both_channels_are_interactions
