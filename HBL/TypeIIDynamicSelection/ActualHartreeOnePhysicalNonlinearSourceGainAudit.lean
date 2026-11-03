@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOnePhysicalNonlinearSourceGain
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_radiation_full_nonlinear_source_gain
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_radiation_full_nonlinear_source_gain
