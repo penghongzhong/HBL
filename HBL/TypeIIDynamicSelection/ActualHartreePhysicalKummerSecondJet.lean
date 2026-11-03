@@ -51,12 +51,20 @@ theorem actual_Hartree_two_channel_Kummer_C2_chain_rule
       (fun x : ℝ => ((k * deriv up (k * x) : ℝ) : ℂ))
       (((k ^ 2 * deriv (deriv up) (k * r) : ℝ) : ℂ)) r := by
     have h := ((hup2.hasDerivAt.scomp r hk).const_mul k).ofReal_comp
-    convert h using 1 <;> first | (funext x; rfl) | (push_cast; ring)
+    convert h using 1
+    · funext x
+      rfl
+    · exact_mod_cast (show k ^ 2 * deriv (deriv up) (k * r) =
+          k * (k * deriv (deriv up) (k * r)) by ring)
   have hm : HasDerivAt
       (fun x : ℝ => ((k * deriv um (k * x) : ℝ) : ℂ))
       (((k ^ 2 * deriv (deriv um) (k * r) : ℝ) : ℂ)) r := by
     have h := ((hum2.hasDerivAt.scomp r hk).const_mul k).ofReal_comp
-    convert h using 1 <;> first | (funext x; rfl) | (push_cast; ring)
+    convert h using 1
+    · funext x
+      rfl
+    · exact_mod_cast (show k ^ 2 * deriv (deriv um) (k * r) =
+          k * (k * deriv (deriv um) (k * r)) by ring)
   have hSlope : HasDerivAt
       (actualHartreeInnerKummerSlope up um k)
       (actualHartreeInnerKummerSecond up um k r) r := by
