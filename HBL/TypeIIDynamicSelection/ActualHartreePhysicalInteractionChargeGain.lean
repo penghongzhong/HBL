@@ -59,23 +59,28 @@ theorem actual_Hartree_physical_interaction_forced_charges_one_eighth
     have hd : 0 < 1 + r := by linarith
     have hWeight : 0 < (1 + r) ^ (7 / 4 : ℝ) :=
       Real.rpow_pos_of_pos hd _
-    apply (mul_le_mul_left hWeight).mp
-    calc
-      (1 + r) ^ (7 / 4 : ℝ) * ‖F r‖ ≤
-          M * (1 + r) ^ (-(5 / 8 : ℝ)) := by
-        exact actual_Hartree_physical_full_interaction_weighted_pointwise
-          ell c r B A hell hellOne hc hr hB hA z hz hSup hStrauss
-      _ = (1 + r) ^ (7 / 4 : ℝ) *
+    have hWeighted : (1 + r) ^ (7 / 4 : ℝ) * ‖F r‖ ≤
+        (1 + r) ^ (7 / 4 : ℝ) *
           (M * (1 + r) ^ (-(19 / 8 : ℝ))) := by
-        have he : (1 + r) ^ (7 / 4 : ℝ) *
-            (1 + r) ^ (-(19 / 8 : ℝ)) =
-            (1 + r) ^ (-(5 / 8 : ℝ)) := by
-          rw [← Real.rpow_add hd]
-          norm_num
-        calc
-          _ = M * ((1 + r) ^ (7 / 4 : ℝ) *
-              (1 + r) ^ (-(19 / 8 : ℝ))) := by rw [he]
-          _ = _ := by ring
+      calc
+        (1 + r) ^ (7 / 4 : ℝ) * ‖F r‖ ≤
+            M * (1 + r) ^ (-(5 / 8 : ℝ)) := by
+          exact actual_Hartree_physical_full_interaction_weighted_pointwise
+            ell c r B A hell hellOne hc hr hB hA z hz hSup hStrauss
+        _ = (1 + r) ^ (7 / 4 : ℝ) *
+            (M * (1 + r) ^ (-(19 / 8 : ℝ))) := by
+          have he : (1 + r) ^ (7 / 4 : ℝ) *
+              (1 + r) ^ (-(19 / 8 : ℝ)) =
+              (1 + r) ^ (-(5 / 8 : ℝ)) := by
+            rw [← Real.rpow_add hd]
+            norm_num
+          calc
+            _ = M * ((1 + r) ^ (7 / 4 : ℝ) *
+                (1 + r) ^ (-(19 / 8 : ℝ))) := by rw [he]
+            _ = _ := by ring
+    by_contra hn
+    have hPositive := mul_pos hWeight (sub_pos.mpr (lt_of_not_ge hn))
+    nlinarith only [hWeighted, hPositive]
   have hMajor : IntegrableOn
       (fun r : ℝ => M * (1 + r) ^ (-(19 / 8 : ℝ)))
       (Ioi (0 : ℝ)) :=
@@ -109,6 +114,7 @@ theorem actual_Hartree_physical_interaction_forced_charges_one_eighth
           _ ≤ M * (1 + r) ^ (-(19 / 8 : ℝ)) := hNormF r hr0
       _ = M * actualHartreePhysicalChargeTailConstant := by
         rw [integral_const_mul]
+        rfl
   have hChannels := actual_Hartree_physical_interaction_inner_channels
     ell c B A hell hellOne hc hB hA z hz hSup hStrauss
   have hp := hPairBound HartreeChannel.plus (fun r => (F r).re)
