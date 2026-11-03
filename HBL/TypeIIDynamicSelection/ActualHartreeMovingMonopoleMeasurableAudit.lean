@@ -1,0 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleMeasurable
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moving_monopole_measurable
