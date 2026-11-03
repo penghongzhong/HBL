@@ -1,4 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMixedRieszCubicWeighted
+import HBL.TypeIIDynamicSelection.ActualHartreeMovingMonopoleMeasurable
 import HBL.TypeIIDynamicSelection.ActualHartreeRieszMeasurability
 import HBL.AffineTailRationalIntegrability
 import Mathlib.Tactic
@@ -87,8 +88,7 @@ theorem actual_Hartree_full_mixed_Riesz_monopole_cubic_mem_weighted_L2
       2 halfLineMeasure := hBubbleMem.const_mul C
   have hV : Measurable V := by
     dsimp [V]
-    exact monopoleMovingCutoffProfile_measurable.comp
-      (measurable_const.prodMk measurable_id)
+    exact actual_Hartree_moving_monopole_measurable c
   have hZ : Measurable Z := by
     dsimp [Z, rescalePhysicalRadiation]
     exact measurable_const.mul
