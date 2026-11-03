@@ -63,6 +63,7 @@ theorem innerGreenRepresentative_total_source_firstMoment
     _ ≤ ∫ rho, (‖rho * A rho‖ + ‖rho * F rho‖) ∂halfLineMeasure := by
       apply integral_mono_ae hTot1.norm (hA1.norm.add hF1.norm)
       filter_upwards with rho
+      change ‖rho * (A rho + F rho)‖ ≤ ‖rho * A rho‖ + ‖rho * F rho‖
       rw [mul_add]
       exact norm_add_le _ _
     _ = (∫ rho, ‖rho * A rho‖ ∂halfLineMeasure) +
