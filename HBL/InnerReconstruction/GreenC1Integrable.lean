@@ -103,10 +103,17 @@ theorem halfLineMinGreen_C1_of_integrable
         (fun _ : ℝ => (Ioi r).indicator F rho) := by
       rcases lt_or_gt_of_ne hne with hlt | hgt
       · filter_upwards [Ioi_mem_nhds hlt] with x hx
-        rw [indicator_of_notMem (show rho ∉ Ioi x from not_lt.mpr hx.le),
-          indicator_of_notMem (show rho ∉ Ioi r from not_lt.mpr hlt.le)]
+        have hxr : rho < x := hx
+        have hnotx : rho ∉ Ioi x := by
+          change ¬ x < rho
+          exact not_lt.mpr hxr.le
+        have hnotr : rho ∉ Ioi r := by
+          change ¬ r < rho
+          exact not_lt.mpr hlt.le
+        rw [indicator_of_notMem hnotx, indicator_of_notMem hnotr]
       · filter_upwards [Iio_mem_nhds hgt] with x hx
-        rw [indicator_of_mem (show rho ∈ Ioi x from hx),
+        have hxrho : x < rho := hx
+        rw [indicator_of_mem (show rho ∈ Ioi x from hxrho),
           indicator_of_mem (show rho ∈ Ioi r from hgt)]
     exact tendsto_const_nhds.congr' heq.symm
   exact tendsto_integral_filter_of_dominated_convergence
