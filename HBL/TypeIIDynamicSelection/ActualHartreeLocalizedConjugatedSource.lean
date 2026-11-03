@@ -113,8 +113,9 @@ theorem actual_Hartree_localized_conjugated_source_weighted_pointwise
   obtain ⟨hm,hmd⟩ := actualHartreeConjugationCutoff_scaled_radius ell r hell hr.le
   have hNorm : ‖actualHartreeLocalizedConjugatedSource ell c z r‖ =
       m * ‖actualHartreePhysicalSliceInteraction ell c z r‖ := by
-    simp only [actualHartreeLocalizedConjugatedSource, norm_mul,
-      Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hm, m]
+    change ‖(m : ℂ) * actualHartreePhysicalSliceInteraction ell c z r‖ =
+      m * ‖actualHartreePhysicalSliceInteraction ell c z r‖
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hm]
   have hSquare : d * d = ell ^ (1 / 8 : ℝ) := by
     dsimp [d]
     rw [← Real.rpow_add hell]
