@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeThreeFredholmEnvelopes
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_three_Fredholm_scalar_envelopes
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_three_Fredholm_scalar_envelopes
