@@ -142,8 +142,9 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
             exact hPoint rho hρ.1 hρ.2
       _ = 2 := by
         rw [intervalIntegral.integral_const]
-        simp only [zero_mul, sub_zero, smul_eq_mul]
+        simp only [sub_zero, smul_eq_mul]
         field_simp [hr.ne']
+        norm_num
   have hKnearNonneg :
       0 ≤ ∫ rho in (0 : ℝ)..(r / 2), k rho := by
     apply intervalIntegral.integral_nonneg hrHalf.le
