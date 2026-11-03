@@ -87,7 +87,6 @@ theorem actual_Hartree_conjugated_inner_forced_charges_one_sixteenth
           (1 + r) ^ (-(19 / 8 : ℝ)) := by ring
       _ = M * (1 + r) ^ (-(19 / 8 : ℝ)) := by
         rw [hPower]
-        rfl
   have hG := actual_Hartree_conjugated_slow_inner_one_sixteenth
     ell c B A hell hellOne hc hB hA z hz hSup hStrauss
   have hChannels :=
