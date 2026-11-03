@@ -62,7 +62,7 @@ genuine positive half-line. The integral constant is finite and
 determined by the original Lebesgue measure, not assumed. -/
 theorem actual_Hartree_eighth_weighted_source_L2_of_pointwise
     (S : ℝ → ℝ) (ell C : ℝ)
-    (hell : 0 < ell) (hC : 0 ≤ C)
+    (_hell : 0 < ell) (_hC : 0 ≤ C)
     (hSmeas : Measurable S)
     (hSnonneg : ∀ r : ℝ, 0 < r → 0 ≤ S r)
     (hPoint : ∀ r : ℝ, 0 < r →
