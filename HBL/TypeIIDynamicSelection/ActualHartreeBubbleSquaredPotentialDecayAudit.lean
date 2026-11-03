@@ -1,0 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeBubbleSquaredPotentialDecay
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actualHartreeBubbleSquaredRieszDecayConstant
+#check @HBL.TypeIIDynamicSelection.actualHartreeBubbleSquaredRieszDecayConstant_pos
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_bubble_squared_Riesz_spatial_decay
+#print axioms HBL.TypeIIDynamicSelection.actualHartreeBubbleSquaredRieszDecayConstant_pos
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_bubble_squared_Riesz_spatial_decay
