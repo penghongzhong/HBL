@@ -61,7 +61,7 @@ theorem actual_Hartree_fredholm_seven_quarters_weight_radial
       _ = d ^ (7 / 4 : ℝ) := by norm_num
   change (1 + r ^ 2) ^ ((7 / 4 : ℝ) / 2) ≤
     (1 + r) ^ (7 / 4 : ℝ)
-  convert hPow.trans_eq hRight using 1 <;> norm_num
+  convert hPow.trans_eq hRight using 1; norm_num
 
 /-- The limiting original Hartree source weight (one ell-length
 core-potential error times three genuinely critically scaled complex
