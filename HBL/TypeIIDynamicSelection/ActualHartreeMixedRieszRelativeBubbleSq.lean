@@ -36,7 +36,7 @@ The singular diagonal is already handled by the strict absolutely
 integrable bubble-squared radial kernel row. -/
 theorem actual_Hartree_Riesz_relative_bubble_sq_domination
     (F : ℝ → ℝ) (hF : Measurable F)
-    (M : ℝ) (hM : 0 ≤ M)
+    (M : ℝ)
     (hBound : ∀ rho : ℝ, 0 < rho →
       |F rho| ≤ M * bubble rho ^ 2)
     (r : ℝ) (hr : 0 < r) :
@@ -165,7 +165,6 @@ theorem actual_Hartree_full_mixed_Riesz_relative_bubble_sq
         z hSup hStrauss
   have h := actual_Hartree_Riesz_relative_bubble_sq_domination
     F hF (D * Real.sqrt ell)
-    (mul_nonneg hD (Real.sqrt_nonneg ell))
     hEnvelope r hr
   simpa only [F,V,Z,D,mul_assoc] using h
 
