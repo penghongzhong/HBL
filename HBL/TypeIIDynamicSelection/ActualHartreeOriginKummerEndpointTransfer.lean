@@ -107,11 +107,11 @@ theorem actual_origin_Kummer_two_endpoint_center_Green_transfer
   have hPsi : (∫ s in r..b, originPhysicalValue K.x s * g s) =
       (∫ s in r..m, originPhysicalValue K.x s * g s) +
       (∫ s in m..b, originPhysicalValue K.x s * g s) :=
-    intervalIntegral.integral_add_adjacent_intervals hPsiRM hPsiMB
+    (intervalIntegral.integral_add_adjacent_intervals hPsiRM hPsiMB).symm
   have hPhi : (∫ s in a..r, originPhysicalValue K.y s * g s) =
       (∫ s in a..m, originPhysicalValue K.y s * g s) +
       (∫ s in m..r, originPhysicalValue K.y s * g s) :=
-    intervalIntegral.integral_add_adjacent_intervals hPhiAM hPhiMR
+    (intervalIntegral.integral_add_adjacent_intervals hPhiAM hPhiMR).symm
   unfold actualOriginKummerTwoEndpointGreen actualOriginKummerCenterGreen
   rw [hPsi, hPhi]
   ring
