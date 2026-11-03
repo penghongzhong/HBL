@@ -1,0 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFullInteractionSourceSplit
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_real_core_cubic_is_cube
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_real_core_cubic_is_cube
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complete_nonlinear_interaction_four_term_split
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complete_nonlinear_interaction_four_term_split
