@@ -38,7 +38,7 @@ theorem actual_Hartree_real_core_cubic_is_cube
     actualWholeRadiationLocalCubic (fun x => (V x : ℂ)) r =
       (V r : ℂ) ^ 3 := by
   unfold actualWholeRadiationLocalCubic
-  simp only [Complex.norm_real, sq_abs]
+  simp only [Complex.norm_real, Real.norm_eq_abs, sq_abs]
   push_cast
   ring
 
