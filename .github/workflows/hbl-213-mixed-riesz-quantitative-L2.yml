@@ -1,4 +1,4 @@
-name: HBL 2.13 mixed Riesz L2 and full complex cubic Lipschitz strict audit
+name: HBL 2.13 full interaction four-term split and mixed Riesz L2 strict audit
 on:
   push:
     branches: [hbl-213-mixed-riesz-quantitative-L2-20261102]
@@ -7,6 +7,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeightedLp*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitz*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullInteractionSourceSplit*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurable*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleRadialDecay*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeStraussRieszEnvelope*.lean'
@@ -85,18 +86,20 @@ jobs:
           s=re.sub(r'/\-.*?\-/','',source,flags=re.S)
           assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszQuantitativeL2 HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszQuantitativeL2Audit HBL.TypeIIDynamicSelection.ActualHartreeComplexCubicLipschitz HBL.TypeIIDynamicSelection.ActualHartreeComplexCubicLipschitzAudit 2>&1 | tee evidence/build.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszQuantitativeL2 HBL.TypeIIDynamicSelection.ActualHartreeFullMixedRieszQuantitativeL2Audit HBL.TypeIIDynamicSelection.ActualHartreeComplexCubicLipschitz HBL.TypeIIDynamicSelection.ActualHartreeComplexCubicLipschitzAudit HBL.TypeIIDynamicSelection.ActualHartreeFullInteractionSourceSplit HBL.TypeIIDynamicSelection.ActualHartreeFullInteractionSourceSplitAudit 2>&1 | tee evidence/build.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2.lean 2>&1 | tee evidence/source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2Audit.lean 2>&1 | tee evidence/audit.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitz.lean 2>&1 | tee evidence/cubic-source-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitzAudit.lean 2>&1 | tee -a evidence/audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeFullInteractionSourceSplit.lean 2>&1 | tee evidence/full-interaction-source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeFullInteractionSourceSplitAudit.lean 2>&1 | tee -a evidence/audit.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurable.lean 2>&1 | tee evidence/measurable-strict.log
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurableAudit.lean 2>&1 | tee -a evidence/audit.log
           python3 - <<'PY'
           from pathlib import Path
           import re
           s=Path('evidence/audit.log').read_text()
-          for name in ['actual_Hartree_full_mixed_Riesz_monopole_cubic_L2_square_gain','actual_Hartree_complex_cubic_Lipschitz','actual_Hartree_cubic_full_minus_core_bound','actual_Hartree_cubic_full_minus_radiation_bound','actual_Hartree_complex_cubic_is_same_PDE_factor']:
+          for name in ['actual_Hartree_full_mixed_Riesz_monopole_cubic_L2_square_gain','actual_Hartree_complex_cubic_Lipschitz','actual_Hartree_cubic_full_minus_core_bound','actual_Hartree_cubic_full_minus_radiation_bound','actual_Hartree_complex_cubic_is_same_PDE_factor','actual_Hartree_real_core_cubic_is_cube','actual_Hartree_complete_nonlinear_interaction_four_term_split']:
             n='HBL.TypeIIDynamicSelection.'+name
             assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
             m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
@@ -104,7 +107,7 @@ jobs:
             actual={t.strip() for t in m.group(1).split(',') if t.strip()}
             assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT PASS: actual mixed Riesz positive weighted L2 gain plus exact full complex Hartree cubic Lipschitz and both interaction-channel projections; complete 2.13 OPEN')
+          print('STRICT PASS: exact whole nonlinear Hartree PDE four-term interaction split, quantitative mixed Riesz L2 positive gain and universal complex cubic difference; complete 2.13 remains OPEN')
           PY
       - name: Save incremental HBL Lean build cache
         if: always()
@@ -118,7 +121,7 @@ jobs:
         run: |
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2*.lean HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitz*.lean HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeightedLp*.lean HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurable*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeFullMixedRieszQuantitativeL2*.lean HBL/TypeIIDynamicSelection/ActualHartreeFullInteractionSourceSplit*.lean HBL/TypeIIDynamicSelection/ActualHartreeComplexCubicLipschitz*.lean HBL/TypeIIDynamicSelection/ActualHartreeMixedRieszCubicWeightedLp*.lean HBL/TypeIIDynamicSelection/ActualHartreeMovingMonopoleMeasurable*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
