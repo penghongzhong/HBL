@@ -216,9 +216,11 @@ theorem actual_Hartree_one_radiation_full_nonlinear_source_gain
       change radialHartreePotential (fun rho : ℝ => ‖(V rho : ℂ)‖ ^ 4) r =
         radialHartreePotential (fun rho : ℝ => V rho ^ 4) r
       rw [hRealQuartic]
-    simpa only [Pmix,Ppure,Pcore,hRealQuartic] using
-      (actual_Hartree_complete_nonlinear_interaction_four_term_split
-        (fun _ : ℝ => V) (fun _ : ℝ => Z) 0 r)
+    have hSplitRaw :=
+      actual_Hartree_complete_nonlinear_interaction_four_term_split
+        (fun _ : ℝ => V) (fun _ : ℝ => Z) 0 r
+    rw [hCorePotential] at hSplitRaw
+    simpa only [Pmix, Ppure, Pcore] using hSplitRaw
   exact ⟨hCore, hPure, hMixed, hPureCubic, hSplit⟩
 
 end HBL.TypeIIDynamicSelection
