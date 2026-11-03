@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeTwoWeightPhysicalSourceClosure
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_one_source_two_weight_conjugation_certificate
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_source_two_weight_conjugation_certificate
