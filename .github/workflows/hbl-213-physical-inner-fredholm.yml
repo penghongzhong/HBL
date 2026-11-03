@@ -1,9 +1,10 @@
-name: HBL 2.13 actual physical source to unique normalized inner Fredholm correction
+name: HBL 2.13 actual physical inner correction and forced affine charge gain
 on:
   push:
     branches: [hbl-213-ten-term-weighted-pointwise-20261103]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalAffineChargeGain*.lean'
       - '.github/workflows/hbl-213-physical-inner-fredholm.yml'
   workflow_dispatch:
 permissions:
@@ -72,18 +73,21 @@ jobs:
           python3 - <<'PY'
           import re
           from pathlib import Path
-          s=Path('HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm.lean').read_text()
-          s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
-          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
+          for name in ['ActualHartreePhysicalInnerFredholm','ActualHartreePhysicalAffineChargeGain']:
+              s=Path('HBL/TypeIIDynamicSelection/'+name+'.lean').read_text()
+              s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+              assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),name
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholm HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholmAudit 2>&1 | tee evidence/build.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm.lean 2>&1 | tee evidence/source-strict.log
-          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholmAudit.lean 2>&1 | tee evidence/audit.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholmAudit HBL.TypeIIDynamicSelection.ActualHartreePhysicalAffineChargeGainAudit 2>&1 | tee evidence/build.log
+          for n in ActualHartreePhysicalInnerFredholm ActualHartreePhysicalAffineChargeGain; do
+            lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${n}.lean" 2>&1 | tee "evidence/${n}-strict.log"
+            lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${n}Audit.lean" 2>&1 | tee -a evidence/audit.log
+          done
           python3 - <<'PY'
           import re
           from pathlib import Path
           s=Path('evidence/audit.log').read_text()
-          for name in ['actual_Hartree_physical_slice_source_measurable','actual_Hartree_physical_source_two_weighted_channels','actual_Hartree_physical_source_unique_affine_inner_correction']:
+          for name in ['actual_Hartree_physical_slice_source_measurable','actual_Hartree_physical_source_two_weighted_channels','actual_Hartree_physical_source_unique_affine_inner_correction','actual_Hartree_physical_source_unweighted_pointwise','actual_Hartree_physical_affine_charges_one_eighth_gain']:
               n='HBL.TypeIIDynamicSelection.'+name
               assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
               m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
@@ -91,7 +95,7 @@ jobs:
               actual={v.strip() for v in m.group(1).split(',') if v.strip()}
               assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT PASS: actual full Hartree physical source produces uniquely forced affine charges, exact compatibility and unique original normalized H+/H- Hilbert corrections. Source membership is derived. C1 matching, quantitative time gain, finite recursion and Type-II theorem remain OPEN. Manuscript count unchanged.')
+          print('STRICT PASS: actual full Hartree physical source produces unique normalized H+/H- Hilbert corrections and uniquely forced affine charges with derived O(ell^(1/8)) size. C1 matching, correction norm gain, finite recursion and Type-II theorem remain OPEN. Manuscript count unchanged.')
           PY
       - name: Save incremental project cache
         if: always()
@@ -106,7 +110,7 @@ jobs:
           mkdir -p evidence
           git rev-parse HEAD > evidence/commit.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean > evidence/source-hashes.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean HBL/TypeIIDynamicSelection/ActualHartreePhysicalAffineChargeGain*.lean > evidence/source-hashes.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
