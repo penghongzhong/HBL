@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreePureRadiationRieszSpatialDecay
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_Riesz_global_scaled_decay
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_pure_radiation_Riesz_global_scaled_decay
