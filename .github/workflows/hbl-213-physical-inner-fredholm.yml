@@ -1,0 +1,115 @@
+name: HBL 2.13 actual physical source to unique normalized inner Fredholm correction
+on:
+  push:
+    branches: [hbl-213-ten-term-weighted-pointwise-20261103]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean'
+      - '.github/workflows/hbl-213-physical-inner-fredholm.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hbl-213-physical-inner-fredholm-20261103
+  cancel-in-progress: true
+jobs:
+  strict-inner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          if ! test -f "$archive"; then
+            curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          fi
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache@v4
+        with:
+          path: .lake/packages
+          key: hbl-pinned-mathlib-tactics-${{ runner.os }}-a98628e16c11f5167f16124105ddce53efa9bfe5-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+          if ! lake exe cache get Mathlib.Tactic Mathlib.Analysis.SpecialFunctions.ImproperIntegrals > evidence/tactic-cache.log 2>&1; then
+            echo 'Optional source-matched cache unavailable; ordinary compilation remains required.'
+          fi
+          lean --version > evidence/compiler-version.txt
+      - name: Restore actual source chain cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-213-physical-inner-fredholm-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-213-physical-inner-fredholm-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-213-physical-full-weighted-L2-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Strict actual inner solve and transitive axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          s=Path('HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm.lean').read_text()
+          s=re.sub(r'/\-.*?\-/','',s,flags=re.S)
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s)
+          PY
+          lake build HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholm HBL.TypeIIDynamicSelection.ActualHartreePhysicalInnerFredholmAudit 2>&1 | tee evidence/build.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm.lean 2>&1 | tee evidence/source-strict.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholmAudit.lean 2>&1 | tee evidence/audit.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          s=Path('evidence/audit.log').read_text()
+          for name in ['actual_Hartree_physical_slice_source_measurable','actual_Hartree_physical_source_two_weighted_channels','actual_Hartree_physical_source_unique_affine_inner_correction']:
+              n='HBL.TypeIIDynamicSelection.'+name
+              assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
+              m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
+              assert m,'Missing transitive axiom audit: '+n
+              actual={v.strip() for v in m.group(1).split(',') if v.strip()}
+              assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
+          assert 'sorryAx' not in s
+          print('STRICT PASS: actual full Hartree physical source produces uniquely forced affine charges, exact compatibility and unique original normalized H+/H- Hilbert corrections. Source membership is derived. C1 matching, quantitative time gain, finite recursion and Type-II theorem remain OPEN. Manuscript count unchanged.')
+          PY
+      - name: Save incremental project cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-213-physical-inner-fredholm-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+      - name: Save immutable evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreePhysicalInnerFredholm*.lean > evidence/source-hashes.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-213-physical-inner-fredholm-audit
+          path: evidence
+          retention-days: 14
