@@ -176,8 +176,14 @@ theorem actual_Hartree_full_mixed_Riesz_times_monopole_cubic_weighted_pointwise
   calc
     affineJapaneseWeight sigma r * (|P| * |V r| ^ 3) =
       |P| * (affineJapaneseWeight sigma r * |V r| ^ 3) := by ring
-    _ ≤ (C * Real.sqrt ell) * (D ^ 3 * bubble r) :=
-      mul_le_mul hPotential hWeight (by positivity) (by positivity)
+    _ ≤ (C * Real.sqrt ell) * (D ^ 3 * bubble r) := by
+      have hWeightedNonneg :
+          0 ≤ affineJapaneseWeight sigma r * |V r| ^ 3 := by
+        unfold affineJapaneseWeight
+        positivity
+      have hScaledNonneg : 0 ≤ C * Real.sqrt ell :=
+        mul_nonneg hC (Real.sqrt_nonneg ell)
+      exact mul_le_mul hPotential hWeight hWeightedNonneg hScaledNonneg
     _ = (C * D ^ 3) * Real.sqrt ell * bubble r := by ring
 
 end HBL.TypeIIDynamicSelection
