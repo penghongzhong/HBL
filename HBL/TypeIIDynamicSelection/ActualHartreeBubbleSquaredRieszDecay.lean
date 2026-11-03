@@ -212,7 +212,7 @@ theorem actual_Hartree_bubble_squared_log_row_uniform
         have hSq : rho ^ (-2 : ℝ) = (rho ^ 2)⁻¹ := by
           rw [show (-2 : ℝ) = -(2 : ℝ) by norm_num,
             Real.rpow_neg hρpos.le]
-          simp only [Real.rpow_natCast]
+          exact congrArg Inv.inv (Real.rpow_natCast rho 2)
         rw [physical_bubble_sq_eq_inv, hSq]
         have hBase : rho ^ 2 ≤ 1 + rho ^ 2 := by
           nlinarith [sq_nonneg rho]
