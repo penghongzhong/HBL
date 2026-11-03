@@ -12,9 +12,12 @@ L1 source integration, rather than an extra continuity hypothesis on F,
 gives C1 representatives.  Physical Kummer traces belong to u=q/r:
 u'(r)=(r*q'(r)-q(r))/r^2, not q'(r).
 
-This theorem constructs the correct traces.  It does not claim small
-trace norms, simultaneous two-interface matching, a classical second
-derivative for measurable forcing, or the nonlinear Type-II theorem.
+The exported statement retains EXACT Green reconstruction identities,
+not only existential smooth functions with the desired affine slopes.
+Together with the weighted a.e. identities these are the original
+normalized Fredholm fixed-point equations in representative form.
+This theorem does not claim small trace norms, simultaneous two-interface
+matching, C2 regularity for measurable forcing, or Type-II blowup.
 -/
 
 noncomputable section
@@ -73,10 +76,9 @@ private theorem physical_quotient_trace
       ((r * deriv q r - q r) / r ^ 2) r := by
   simpa [mul_comm] using! ((hq r).hasDerivAt.div (hasDerivAt_id r) hr.ne')
 
-/-- Canonical, affine-normalized C1 inner representatives of the SAME
-correctly conjugated physical source, and their physical radial traces.
-Source continuity is not assumed.  The weighted a.e. identities retain
-the connection to the original normalized Hilbert-space solutions. -/
+/-- Canonical C1 representatives for the SAME conjugated physical source.
+Exact Green identities, normalized Hilbert representatives and forced
+affine charges are all present in the exported conclusion. -/
 theorem actual_Hartree_conjugated_inner_C1_physical_traces
     (ell c B A : ℝ)
     (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
@@ -89,6 +91,13 @@ theorem actual_Hartree_conjugated_inner_C1_physical_traces
     let gp : ℝ → ℝ := fun r => (G r).re
     let gm : ℝ → ℝ := fun r => (G r).im
     ∃ x : InnerCorrections, ∃ qp qm : ℝ → ℝ,
+      (qp = affineRestore
+        (innerGreenRepresentative
+          (weightedPotentialOperator (x.1 : RealL2 halfLineMeasure))
+          (correctedPlusSource gp)) (actualPlusCharge gp)) ∧
+      (qm = affineRestore
+        (innerGreenRepresentative ((3 : ℝ) • (x.2 : RealL2 halfLineMeasure))
+          (correctedMinusSource gm)) (actualMinusCharge gm)) ∧
       (((x.1 : RealL2 halfLineMeasure) : ℝ → ℝ) =ᵐ[halfLineMeasure]
         (fun r => weightedGreenDecay r *
           (qp r - actualPlusCharge gp * model r))) ∧
@@ -133,7 +142,7 @@ theorem actual_Hartree_conjugated_inner_C1_physical_traces
   have hpRest := restore_c1 qp (actualPlusCharge gp) hpC1.1 hpC1.2
   have hmRest := restore_c1 qm (actualMinusCharge gm) hmC1.1 hmC1.2
   refine ⟨x, affineRestore qp (actualPlusCharge gp),
-    affineRestore qm (actualMinusCharge gm), ?_, ?_,
+    affineRestore qm (actualMinusCharge gm), rfl, rfl, ?_, ?_,
     affineRestore_properties qp _ hpp,
     affineRestore_properties qm _ hmp, hpRest, hmRest, ?_⟩
   · change (((x.1 : RealL2 halfLineMeasure) : ℝ → ℝ) =ᵐ[halfLineMeasure]
