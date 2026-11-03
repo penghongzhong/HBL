@@ -1,0 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeFourComponentCubicControl
+set_option autoImplicit false
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_four_product_complete_cubic_norm_le
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_four_product_complete_cubic_norm_le
