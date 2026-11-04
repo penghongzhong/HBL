@@ -1,0 +1,41 @@
+{
+  "commit": "520fc62810cd6bf63c93e54223c307aac6f0a069",
+  "run_id": 41924227732,
+  "job_id": 126904285401,
+  "artifact_id": 13368108160,
+  "zip_sha256": "bfc34fcaa7bc621ec219963d9b550b97336b93d04ce97e4b08d9d8db32c5f7ff",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "new_public_declarations": [
+    "HBL.TypeIIDynamicSelection.actual_Hartree_full_interval_Green_coefficient_bound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_canonical_baseline_outgoing_trace_bound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_obstruction_bound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_same_source_compatible_correction_region"
+  ],
+  "axioms_for_each_declaration": ["propext", "Classical.choice", "Quot.sound"],
+  "strict_log_bytes": {
+    "ActualHartreeCompleteObstructionBound-strict.log": 0,
+    "ActualHartreeObstructionSourceClosure-strict.log": 0
+  },
+  "source_integrity": {
+    "HBL/TypeIIDynamicSelection/ActualHartreeCompleteObstructionBound.lean": {
+      "sha256": "26ca1eea68e8ddb46c0e7d22a0c4b69cbc857315e071f0cabe9d2f3f2e4aa76c",
+      "git_blob": "48e0e1fb87543d9bf85901493ef2b30d3cad0f81",
+      "bytes": 14423
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeObstructionSourceClosure.lean": {
+      "sha256": "9d337f9c1b5e21b96f0c328158f42017b43f1337c1fce766402fdd84830c2dba",
+      "git_blob": "4e139d467d6419595648b11d2fb0afd105fbcf22",
+      "bytes": 8039
+    }
+  },
+  "audit_bytes": 262971,
+  "downloaded_zip_hash_checked": true,
+  "archived_source_hashes_checked": true,
+  "both_immutable_git_blob_identifiers_checked": true,
+  "all_four_transitive_axiom_lists_checked": true,
+  "both_strict_logs_empty": true,
+  "no_truncation_or_sorryAx_in_audit": true,
+  "scope": "Four new declarations and two new target sources. Not a replay of all previous 110 declarations or a certification of manuscript 2.13.",
+  "paper_environments": {"accepted": 11, "total": 13}
+}
