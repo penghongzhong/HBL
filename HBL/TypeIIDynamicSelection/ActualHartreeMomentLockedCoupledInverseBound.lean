@@ -169,7 +169,7 @@ theorem actual_Hartree_moment_locked_coupled_inverse_bound_region
         L0 ≤ L → L ^ 3 ≤ a → |c| ≤ 1 → a * |c| ≤ epsilon →
         ∀ (Fp Fm : ℝ → ℝ) (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
           (hm : InWeightedL2 (7 / 4 : ℝ) Fm)
-          (F : ℝ → ℂ) (hF : IntervalIntegrable F volume (L / a) B) (db dw : ℝ),
+          (F : ℝ → ℂ) (_hF : IntervalIntegrable F volume (L / a) B) (db dw : ℝ),
           actualMomentLockedCoupledCompatibility K L c hLp a (L / a) B
             Fp Fm hp hm F db dw = 0 →
           let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)

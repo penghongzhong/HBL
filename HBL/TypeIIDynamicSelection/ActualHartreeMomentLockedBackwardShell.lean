@@ -107,7 +107,6 @@ theorem actual_Hartree_moment_locked_backward_shell_weighted_gain :
   have hcp : Continuous Fp := hcp0.add (continuous_const.mul hSpeedCont.2)
   have hcm : Continuous Fm := hcm0.add (continuous_const.mul hSpeedCont.1)
   refine ⟨hp, hm, ?_⟩
-  dsimp only
   let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
   let w := actualOriginMatchedKummerValue K (L / a) B Fo J.1 J.2
   let v := actualOriginMatchedKummerPullback K a (L / a) B Fo J.1 J.2
