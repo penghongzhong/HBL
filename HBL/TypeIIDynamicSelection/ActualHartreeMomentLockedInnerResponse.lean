@@ -13,7 +13,7 @@ Two actual inner responses to the moment-locked scale and phase speeds.
 The inputs are r*eta_R*Q_c and r*eta_R*V_c, with the same genuine radial
 conjugation and partition used in the physical inner correction. Weighted
 membership is proved from the physical profiles and finite support. The
-responses reuse the fixed, normalized H-/H+ Fredholm inverses; their affine
+responses reuse the fixed, normalized H-minus and H-plus inverses; their affine
 charges are forced by the original resonance pairings. Physical traces
 are those of q/r. No nonzero matching determinant or relative PDE residual
 gain is asserted here.
@@ -212,7 +212,7 @@ theorem actual_Hartree_moment_locked_inner_sources_weighted
       rw [cutoff_one_of_two_le (r / R) hFar]
       ring
     simp only [actualMomentLockedInnerScaleSource,
-      actualMomentLockedInnerPhaseSource, hCut, mul_zero, zero_mul]
+      actualMomentLockedInnerPhaseSource, hCut, mul_zero, zero_mul, and_self]
   have hMeas := actual_inner_speed_measurable R c
   exact ⟨positive_compact_weighted_source R _ hR _ hMeas.1
       (fun r hr hc => (hInputs r hr hc).1) (fun r hr => (hZero r hr).1),
@@ -363,7 +363,9 @@ theorem actual_Hartree_moment_locked_inner_physical_traces
       HasDerivAt (fun t : ℝ => q (a * t) / (a * t))
         (a * ((a * r) * deriv q (a * r) - q (a * r)) / (a * r) ^ 2) r := by
     have hqDer := ((hq (a * r)).hasDerivAt.comp r hArg).div hArg (mul_pos ha hr).ne'
-    convert hqDer using 1 <;> ring
+    change HasDerivAt (fun t : ℝ => q (a * t) / (a * t))
+      ((deriv q (a * r) * a * (a * r) - q (a * r) * a) / (a * r) ^ 2) r at hqDer
+    convert hqDer using 1; ring
   exact ⟨hOne _ hC1.2.2.1.1, hOne _ hC1.2.2.2.1⟩
 
 end HBL.TypeIIDynamicSelection
