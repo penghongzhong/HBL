@@ -16,6 +16,8 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean'
       - 'HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean'
       - '.github/workflows/hbl-213-moment-locked-projection.yml'
   workflow_dispatch:
 permissions:
@@ -95,6 +97,12 @@ jobs:
               ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean'),
               ('HBL.Profile.Kummer','HBL/KummerOriginBasis/RegularDerivativeBound.lean'),
               ('HBL.Profile.Kummer','HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean'),
           ]
           names=[]
           for ns,p in sources:
@@ -112,8 +120,8 @@ jobs:
           assert set(re.findall(r'^#print axioms\s+(\S+)',audit,flags=re.M))==set(names)
           Path('evidence/new-public-declarations.txt').write_text('\n'.join(names)+'\n')
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit HBL.InnerEstimates.OutputLinearity HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerResponse HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility HBL.TypeIIDynamicSelection.ComplexTwoColumnDeterminantBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound HBL.KummerOriginBasis.RegularDerivativeBound HBL.KummerOriginBasis.ReferenceIntegralLowerBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibilityAudit 2>&1 | tee evidence/build.log
-          for p in HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean; do
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit HBL.InnerEstimates.OutputLinearity HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerResponse HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility HBL.TypeIIDynamicSelection.ComplexTwoColumnDeterminantBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound HBL.KummerOriginBasis.RegularDerivativeBound HBL.KummerOriginBasis.ReferenceIntegralLowerBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseMomentGrowth HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAsymptotics HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledTraceEstimate HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledDeterminantBound HBL.TypeIIDynamicSelection.CoupledSmallParameterRegion HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedNondegenerateRegion HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibilityAudit 2>&1 | tee evidence/build.log
+          for p in HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean; do
             n="${p##*/}"
             lake env lean --trust=0 -DwarningAsError=true "$p" 2>&1 | tee "evidence/${n%.lean}-strict.log"
           done
@@ -132,7 +140,7 @@ jobs:
               actual={v.strip() for v in m.group(1).split(',') if v.strip()}
               assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
-          print('STRICT ACTUAL SPEED PROJECTION PASS: true moment-locked scale and phase source directions, derived annular integrability, exact real-speed compatibility response and O(c) convergence to explicit bubble columns. Reference determinant nondegeneracy, coupled trajectory and manuscript 2.13 remain OPEN.')
+          print('STRICT ACTUAL SPEED PROJECTION PASS: true moment-locked scale and phase source directions, derived annular integrability, exact real-speed compatibility response and O(c) convergence to explicit bubble columns. Source-only scope; the complete matrix is audited separately. Coupled trajectory and manuscript 2.13 remain OPEN.')
           s=Path('evidence/coupled-response-audit.log').read_text()
           names=Path('evidence/new-public-declarations.txt').read_text().splitlines()
           for n in names:
@@ -143,7 +151,7 @@ jobs:
               assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
           assert not re.search(r'\.\.\.|⋯|…',s),'Truncated declaration output'
-          print('STRICT COUPLED INNER RESPONSE PASS:',len(names),'public declarations; actual normalized Fredholm linearity, physical source responses, physical traces, and full fixed-configuration compatibility columns. Determinant nondegeneracy, relative residual gain and manuscript 2.13 remain OPEN.')
+          print('STRICT COUPLED INNER RESPONSE PASS:',len(names),'public declarations; actual normalized Fredholm responses, derived moment growth, actual origin reference integral, full compatibility columns, and their explicit nondegenerate frozen parameter region. Moving-configuration Jacobian, nonlinear trajectory, relative residual gain and manuscript 2.13 remain OPEN.')
           PY
       - name: Save accumulated proof pool
         if: always()
@@ -158,8 +166,8 @@ jobs:
           mkdir -p evidence/sources
           git rev-parse HEAD > evidence/commit.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean > evidence/source-hashes.txt
-          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean evidence/sources/
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean > evidence/source-hashes.txt
+          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean evidence/sources/
       - uses: actions/upload-artifact@v4
         if: always()
         with:

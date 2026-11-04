@@ -102,7 +102,7 @@ theorem origin_kummer_regular_physical_bound {mu theta R B : ℝ}
     rw [sub_add_cancel, norm_one] at ht
     calc
       _ ≤ ‖originPhysicalValue K.x r - 1‖ + 1 := ht
-      _ ≤ (D + 1) * G * r ^ 2 + 1 := add_le_add_right hv 1
+      _ ≤ (D + 1) * G * r ^ 2 + 1 := by linarith only [hv]
       _ ≤ 1 + (D + 1) * G * B ^ 2 := by
         have hsq : r ^ 2 ≤ B ^ 2 := pow_le_pow_left₀ hr.1.le hr.2 2
         have hh := mul_le_mul_of_nonneg_left hsq

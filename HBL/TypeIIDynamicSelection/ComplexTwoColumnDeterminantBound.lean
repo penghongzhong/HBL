@@ -34,7 +34,7 @@ theorem complex_two_column_determinant_lower_bound
     dsimp [v]
     norm_num [norm_div, norm_mul]
   have hvpair : v = ⟨A.im / 2, -A.re / 2⟩ := by
-    apply Complex.ext <;> simp [v, Complex.div_re, Complex.div_im] <;> ring
+    apply Complex.ext <;> simp [v] <;> ring
   have hbase : realColumnDet v A = ‖A‖ ^ 2 / 2 := by
     rw [hvpair]
     simp only [realColumnDet, Complex.sq_norm, Complex.normSq_apply]
@@ -43,7 +43,6 @@ theorem complex_two_column_determinant_lower_bound
       realColumnDet v A + realColumnDet v f + realColumnDet e A +
         realColumnDet e f := by
     dsimp [realColumnDet, e, f]
-    simp only [Complex.sub_re, Complex.sub_im]
     ring
   have h1 : |realColumnDet v f| ≤ (‖A‖ / 2) * E := by
     calc
