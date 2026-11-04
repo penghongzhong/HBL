@@ -103,7 +103,6 @@ theorem actual_Hartree_canonical_inner_to_Kummer_transfer
   refine ⟨hp, hm, x, hxp, hxm, ?_⟩
   dsimp only
   intro mu theta center eps K d hd hde hr
-  dsimp only
   let G := actualHartreeRadiallyConjugatedInnerSource
     (actualHartreeSlowInnerRadius ell) ell c z
   let gp : ℝ → ℝ := fun r => (G r).re
