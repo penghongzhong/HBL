@@ -1,3 +1,8 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeComplexCorrectionResidual
+import HBL.TypeIIDynamicSelection.ActualHartreeComplexTaylorBubbleBound
+import HBL.TypeIIDynamicSelection.ActualHartreeComplexTaylor
+import HBL.TypeIIDynamicSelection.ActualHartreeInnerCutoffRelativeGain
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerClassical
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseMomentGrowth
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAsymptotics
@@ -153,3 +158,51 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_continuous
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_continuous
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_classical
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_classical
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_equations
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_equations
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_cutoff_relative_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_cutoff_relative_gain
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_real_pair_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_real_pair_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_identity
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_identity
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_bounds
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_bounds
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_bubble_four_potential_domination
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_bubble_four_potential_domination
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_nonlocal_identity
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_nonlocal_identity
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_bubble_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_bubble_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_exact
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_exact
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic
