@@ -22,7 +22,7 @@ private theorem complex_pair_norm_le (a b : ℝ) :
     ‖(a : ℂ) + Complex.I * (b : ℂ)‖ ≤ |a| + |b| := by
   calc
     _ ≤ ‖(a : ℂ)‖ + ‖Complex.I * (b : ℂ)‖ := norm_add_le _ _
-    _ = _ := by simp [norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    _ = _ := by simp [Complex.norm_real, Real.norm_eq_abs]
 
 private theorem canonical_physical_differentiableAt
     (g : RealL2 halfLineMeasure) (F : ℝ → ℝ)
@@ -80,7 +80,8 @@ theorem actual_Hartree_canonical_inner_to_Kummer_transfer
          (d : ℝ), 0 < d → d < eps → 2 < center - d →
          let r := center - d
          let U : ℂ := (up r : ℂ) + Complex.I * (um r : ℂ)
-         let DU : ℂ := (deriv up r : ℂ) + Complex.I * (deriv um r : ℂ)
+         let DU : ℂ := ((deriv up r : ℝ) : ℂ) +
+           Complex.I * ((deriv um r : ℝ) : ℂ)
          let F := actualHartreePhysicalSliceInteraction ell c z
          HasDerivAt up (deriv up r) r ∧
          HasDerivAt um (deriv um r) r ∧
@@ -115,7 +116,7 @@ theorem actual_Hartree_canonical_inner_to_Kummer_transfer
     (correctedMinusSource gm)) (actualMinusCharge gm) r / r
   let r : ℝ := center - d
   let U : ℂ := (up r : ℂ) + Complex.I * (um r : ℂ)
-  let DU : ℂ := (deriv up r : ℂ) + Complex.I * (deriv um r : ℂ)
+  let DU : ℂ := ((deriv up r : ℝ) : ℂ) + Complex.I * ((deriv um r : ℝ) : ℂ)
   let alpha : ℂ := (actualPlusCharge gp : ℂ) + Complex.I * (actualMinusCharge gm : ℂ)
   have hr0 : 0 < r := by dsimp [r]; linarith
   have hpCorr := correctedPlusSource_memWeightedL2 (7 / 4 : ℝ) (by norm_num) gp hp
