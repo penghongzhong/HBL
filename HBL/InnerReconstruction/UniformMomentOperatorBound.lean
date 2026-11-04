@@ -28,13 +28,13 @@ private theorem actual_l2_integral_norm_product_le
       ‖fn‖ = (eLpNorm (fn : ℝ → ℝ) 2 halfLineMeasure).toReal := rfl
       _ = (eLpNorm (fun r => ‖f r‖) 2 halfLineMeasure).toReal :=
         congrArg ENNReal.toReal (eLpNorm_congr_ae ((Lp.memLp f).norm).coeFn_toLp)
-      _ = ‖f‖ := by rw [eLpNorm_norm]; rfl
+      _ = ‖f‖ := congrArg ENNReal.toReal (eLpNorm_norm (Lp.aestronglyMeasurable f))
   have hgn : ‖gn‖ = ‖g‖ := by
     calc
       ‖gn‖ = (eLpNorm (gn : ℝ → ℝ) 2 halfLineMeasure).toReal := rfl
       _ = (eLpNorm (fun r => ‖g r‖) 2 halfLineMeasure).toReal :=
         congrArg ENNReal.toReal (eLpNorm_congr_ae ((Lp.memLp g).norm).coeFn_toLp)
-      _ = ‖g‖ := by rw [eLpNorm_norm]; rfl
+      _ = ‖g‖ := congrArg ENNReal.toReal (eLpNorm_norm (Lp.aestronglyMeasurable g))
   have heq : (∫ r, ‖f r * g r‖ ∂halfLineMeasure) =
       inner ℝ fn gn := by
     rw [L2.inner_def]
