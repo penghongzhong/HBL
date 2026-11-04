@@ -16,42 +16,45 @@ open Set
 open scoped Topology
 namespace HBL.TypeIIDynamicSelection
 
- def actualKummerShearCoefficient (b : ℂ) : ℂ := 2 * Complex.I * b
- def actualKummerShearPhase (r : ℝ) : ℂ :=
+def actualKummerShearCoefficient (b : ℂ) : ℂ := 2 * Complex.I * b
+def actualKummerShearPhase (r : ℝ) : ℂ :=
   Complex.exp (Complex.I * (r : ℂ) ^ 2 / 4)
- def actualKummerShearedState (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) : ℂ × ℂ :=
+def actualKummerShearedState (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) : ℂ × ℂ :=
   (h r, actualKummerShearPhase r *
     ((r : ℂ) * dh r - actualKummerShearCoefficient b * h r))
- def actualKummerShearedDerivative (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) : ℂ × ℂ :=
+def actualKummerShearedDerivative (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) : ℂ × ℂ :=
   (dh r, (-(1 + actualKummerShearCoefficient b) *
       (actualKummerShearedState b h dh r).2 -
     actualKummerShearCoefficient b * (1 + actualKummerShearCoefficient b) *
       actualKummerShearPhase r * h r) / (r : ℂ))
- def actualKummerScaledJet (h dh : ℝ → ℂ) (r : ℝ) : ℝ :=
+def actualKummerScaledJet (h dh : ℝ → ℂ) (r : ℝ) : ℝ :=
   max ‖h r‖ (r * ‖dh r‖)
- def actualKummerUniformTransferConstant (b : ℂ) : ℝ :=
+def actualKummerUniformTransferConstant (b : ℂ) : ℝ :=
   (1 + ‖actualKummerShearCoefficient b‖) ^ 2 *
     Real.exp ((1 + ‖actualKummerShearCoefficient b‖) ^ 2)
 
- theorem actual_Kummer_shear_phase_norm (r : ℝ) :
+theorem actual_Kummer_shear_phase_norm (r : ℝ) :
     ‖actualKummerShearPhase r‖ = 1 := by
-  rw [actualKummerShearPhase, Complex.norm_exp]
-  have he : (Complex.I * (r : ℂ) ^ 2 / 4).re = 0 := by
-    simp [Complex.div_re, Complex.mul_re]
-  rw [he, Real.exp_zero]
+  have hArg : Complex.I * (r : ℂ) ^ 2 / 4 =
+      (((r ^ 2 / 4 : ℝ) : ℂ) * Complex.I) := by
+    push_cast
+    ring
+  rw [actualKummerShearPhase, hArg, Complex.norm_exp]
+  simp
 
- theorem actual_Kummer_shear_phase_hasDerivAt (r : ℝ) :
+theorem actual_Kummer_shear_phase_hasDerivAt (r : ℝ) :
     HasDerivAt actualKummerShearPhase
       (Complex.I * (r : ℂ) / 2 * actualKummerShearPhase r) r := by
   have hi : HasDerivAt (fun x : ℝ => (x : ℂ)) 1 r := by
-    simpa only [Complex.ofReal_one] using (hasDerivAt_id r).ofReal_comp
+    simpa only [Complex.ofReal_one, id_eq] using! (hasDerivAt_id r).ofReal_comp
   have he := (((hi.pow 2).const_mul Complex.I).div_const 4).cexp
+  change HasDerivAt actualKummerShearPhase
+    (actualKummerShearPhase r * (Complex.I * (2 * (r : ℂ) ^ 1 * 1) / 4)) r at he
   convert he using 1
-  dsimp [actualKummerShearPhase]
   ring
 
 /-- Exact differentiation: the O(r) imaginary coefficient cancels. -/
- theorem actual_Kummer_sheared_system_hasDerivAt
+theorem actual_Kummer_sheared_system_hasDerivAt
     (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) (hr : 0 < r)
     (hh : HasDerivAt h (dh r) r)
     (hdh : HasDerivAt dh
@@ -59,7 +62,7 @@ namespace HBL.TypeIIDynamicSelection
     HasDerivAt (actualKummerShearedState b h dh)
       (actualKummerShearedDerivative b h dh r) r := by
   have hi : HasDerivAt (fun x : ℝ => (x : ℂ)) 1 r := by
-    simpa only [Complex.ofReal_one] using (hasDerivAt_id r).ofReal_comp
+    simpa only [Complex.ofReal_one, id_eq] using! (hasDerivAt_id r).ofReal_comp
   have hw := (hi.mul hdh).sub (hh.const_mul (actualKummerShearCoefficient b))
   have hv := (actual_Kummer_shear_phase_hasDerivAt r).mul hw
   have heq :
@@ -121,7 +124,7 @@ private theorem shear_norm_comparison
   simpa only [Prod.norm_def, hw, H, N, w] using And.intro hHN hNH
 
 /-- The sheared system has O(1/r) norm, with no hidden annulus constant. -/
- theorem actual_Kummer_sheared_derivative_norm_le
+theorem actual_Kummer_sheared_derivative_norm_le
     (b : ℂ) (h dh : ℝ → ℂ) (r : ℝ) (hr : 0 < r) :
     ‖actualKummerShearedDerivative b h dh r‖ ≤
       ((1 + ‖actualKummerShearCoefficient b‖) ^ 2 / r) *
@@ -178,7 +181,7 @@ private theorem shear_norm_comparison
 /-- Radius-uniform propagation of the actual homogeneous Kummer equation
 on a dyadic positive annulus. The coefficient is explicit and independent
 of r0,r1. No uniform fundamental-pair bound is assumed. -/
- theorem actual_Kummer_homogeneous_dyadic_uniform_bound
+theorem actual_Kummer_homogeneous_dyadic_uniform_bound
     (b : ℂ) (h dh : ℝ → ℂ) (r0 r1 : ℝ)
     (hr0 : 0 < r0) (h01 : r0 ≤ r1) (hRatio : r1 ≤ 2 * r0)
     (hh : ∀ r ∈ Icc r0 r1, HasDerivAt h (dh r) r)
@@ -200,7 +203,9 @@ of r0,r1. No uniform fundamental-pair bound is assumed. -/
   have hBound (r : ℝ) (hr : r ∈ Ico r0 r1) :
       ‖DX r‖ ≤ (K / r0) * ‖X r‖ + 0 := by
     have hpos : 0 < r := hr0.trans_le hr.1
-    have hsmall : K / r ≤ K / r0 := by gcongr
+    have hsmall : K / r ≤ K / r0 := by
+      gcongr
+      exact hr.1
     have h := actual_Kummer_sheared_derivative_norm_le b h dh r hpos
     exact (h.trans (mul_le_mul_of_nonneg_right hsmall (norm_nonneg _))).trans_eq
       (by rw [add_zero])
