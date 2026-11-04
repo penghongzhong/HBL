@@ -224,4 +224,85 @@ theorem actual_Hartree_moment_locked_compatibility_speed_response
   unfold actualMomentLockedProjectionColumns
   ring
 
+/-- The actual speeds are integrable on the full positive transmission
+interval. The left endpoint may be the physical inner interface L/a;
+no intervening source region is omitted by fixing a dyadic annulus. -/
+theorem actual_Hartree_moment_locked_scaled_speed_integrable_on
+    (a c r0 r1 : ℝ) (ha : 0 < a) (hr0 : 0 < r0) (horder : r0 ≤ r1) :
+    IntervalIntegrable (actualMomentLockedScaledScaleSource a c) volume r0 r1 ∧
+    IntervalIntegrable (actualMomentLockedScaledPhaseSource a c) volume r0 r1 := by
+  obtain ⟨M,hM,hClose⟩ := actual_Hartree_moment_locked_speed_profiles_uniform_close
+  have hdW : Continuous (deriv bubble) :=
+    (contDiff_infty_iff_deriv.mp bubble_contDiff_infty).2.continuous
+  have hW : Continuous bubble := bubble_contDiff_infty.continuous
+  have hRef : Continuous (fun r : ℝ =>
+      |dilationGenerator bubble (a * r)| + |bubble (a * r)|) := by
+    unfold dilationGenerator
+    fun_prop
+  obtain ⟨B,hBound⟩ := isCompact_Icc.exists_bound_of_continuousOn
+    (s := Icc r0 r1) hRef.continuousOn
+  have hBounds (r : ℝ) (hr : r ∈ Icc r0 r1) :
+      ‖actualMomentLockedScaledScaleSource a c r‖ ≤ a ^ 2 * (M * |c| + B) ∧
+      ‖actualMomentLockedScaledPhaseSource a c r‖ ≤ a ^ 2 * (M * |c| + B) := by
+    have hr0 : 0 < a * r := mul_pos ha (hr0.trans_le hr.1)
+    have hB := hBound r hr
+    rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)] at hB
+    have hQ0 : |dilationGenerator bubble (a * r)| ≤ B := by
+      linarith [abs_nonneg (bubble (a * r))]
+    have hW0 : |bubble (a * r)| ≤ B := by
+      linarith [abs_nonneg (dilationGenerator bubble (a * r))]
+    have hQ : |actualMomentLockedScaleProfile c (a * r)| ≤ M * |c| + B := by
+      have ht := abs_add_le
+        (actualMomentLockedScaleProfile c (a * r) - dilationGenerator bubble (a * r))
+        (dilationGenerator bubble (a * r))
+      rw [sub_add_cancel] at ht
+      exact ht.trans (_root_.add_le_add (hClose c (a * r) hr0).1 hQ0)
+    have hV : |actualMomentLockedCore c (a * r)| ≤ M * |c| + B := by
+      have ht := abs_add_le (actualMomentLockedCore c (a * r) - bubble (a * r))
+        (bubble (a * r))
+      rw [sub_add_cancel] at ht
+      exact ht.trans (_root_.add_le_add (hClose c (a * r) hr0).2 hW0)
+    constructor
+    · simpa only [actualMomentLockedScaledScaleSource, actualMomentLockedScaleSource,
+        norm_mul, Complex.norm_I, one_mul, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_nonneg (sq_nonneg a)] using
+        mul_le_mul_of_nonneg_left hQ (sq_nonneg a)
+    · simpa only [actualMomentLockedScaledPhaseSource, actualMomentLockedPhaseSource,
+        norm_mul, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_nonneg (sq_nonneg a)] using
+        mul_le_mul_of_nonneg_left hV (sq_nonneg a)
+  have hConst : IntervalIntegrable
+      (fun _ : ℝ => a ^ 2 * (M * |c| + B)) volume r0 r1 := intervalIntegrable_const
+  have hm := actual_scaled_speed_measurable a c
+  constructor
+  · apply hConst.mono_fun' hm.1.aestronglyMeasurable.restrict
+    rw [uIoc_of_le horder]
+    filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
+    exact (hBounds r ⟨hr.1.le,hr.2⟩).1
+  · apply hConst.mono_fun' hm.2.aestronglyMeasurable.restrict
+    rw [uIoc_of_le horder]
+    filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
+    exact (hBounds r ⟨hr.1.le,hr.2⟩).2
+
+/-- Linearity of the original source coefficient on its complete actual
+interval, retaining the true Wronskian density and both endpoints. -/
+theorem actual_moment_locked_source_coefficient_add_mul_on
+    {mu theta scale r0 r1 C : ℝ} (K : OriginKummerPair mu theta scale)
+    (hK : OriginBasisOn K r0 r1 C) (horder : r0 ≤ r1)
+    (F G : ℝ → ℂ)
+    (hF : IntervalIntegrable F volume r0 r1)
+    (hG : IntervalIntegrable G volume r0 r1) (beta : ℂ) :
+    originGreenCoeffA K r1 (fun r => F r + beta * G r) r0 =
+      originGreenCoeffA K r1 F r0 + beta * originGreenCoeffA K r1 G r0 := by
+  have hFI := (actual_origin_Green_source_integrability K hK horder F hF).1
+  have hGI := (actual_origin_Green_source_integrability K hK horder G hG).1
+  have hDensity : originGreenSourceA K (fun r => F r + beta * G r) =
+      (fun r => originGreenSourceA K F r + beta * originGreenSourceA K G r) := by
+    funext r
+    unfold originGreenSourceA
+    ring
+  unfold originGreenCoeffA
+  rw [hDensity, intervalIntegral.integral_add hFI (hGI.const_mul beta),
+    intervalIntegral.integral_const_mul]
+
 end HBL.TypeIIDynamicSelection

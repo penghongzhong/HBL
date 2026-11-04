@@ -1,10 +1,13 @@
-name: HBL 2.13 genuine moment-locked physical speed projection
+name: HBL 2.13 moment-locked physical sources and coupled inner response
 on:
   push:
     branches: [hbl-213-conjugated-two-weight-integrated-20261103]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean'
+      - 'HBL/InnerEstimates/OutputLinearity.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse*.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean'
       - '.github/workflows/hbl-213-moment-locked-projection.yml'
   workflow_dispatch:
 permissions:
@@ -66,7 +69,7 @@ jobs:
             hbl-213-moment-locked-speed-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-213-finite-rank-transmission-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-213-canonical-projection-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
-      - name: Strict physical speed source projection and kernel audit
+      - name: Strict physical source and coupled inner response kernel audit
         shell: bash
         run: |
           set -euo pipefail
@@ -76,12 +79,34 @@ jobs:
           for n in ['ActualHartreeMomentLockedSpeed','ActualHartreeMomentLockedProjection']:
               s=re.sub(r'/\-.*?\-/','',Path('HBL/TypeIIDynamicSelection/'+n+'.lean').read_text(),flags=re.S)
               assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),n
+          sources=[
+              ('HBL.Modulation.Monopole','HBL/InnerEstimates/OutputLinearity.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean'),
+          ]
+          names=[]
+          for ns,p in sources:
+              s=re.sub(r'/\-.*?\-/','',Path(p).read_text(),flags=re.S)
+              assert not re.search(r'\b(sorry|admit|axiom|native_decide|unsafe)\b',s),p
+              names.extend(ns+'.'+n for n in re.findall(r"^theorem\s+([A-Za-z_][A-Za-z_0-9']*)",s,flags=re.M))
+          new_projection=['actual_Hartree_moment_locked_scaled_speed_integrable_on','actual_moment_locked_source_coefficient_add_mul_on']
+          projection=Path('HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean').read_text()
+          for n in new_projection:
+              assert re.search(r'^theorem\s+'+re.escape(n)+r'\b',projection,flags=re.M),n
+              names.append('HBL.TypeIIDynamicSelection.'+n)
+          assert names and len(names)==len(set(names))
+          audit=Path('HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibilityAudit.lean').read_text()
+          assert set(re.findall(r'^#check\s+@(\S+)',audit,flags=re.M))==set(names)
+          assert set(re.findall(r'^#print axioms\s+(\S+)',audit,flags=re.M))==set(names)
+          Path('evidence/new-public-declarations.txt').write_text('\n'.join(names)+'\n')
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit 2>&1 | tee evidence/build.log
-          for n in ActualHartreeMomentLockedSpeed ActualHartreeMomentLockedProjection; do
-            lake env lean --trust=0 -DwarningAsError=true "HBL/TypeIIDynamicSelection/${n}.lean" 2>&1 | tee "evidence/${n}-strict.log"
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit HBL.InnerEstimates.OutputLinearity HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerResponse HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibilityAudit 2>&1 | tee evidence/build.log
+          for p in HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean; do
+            n="${p##*/}"
+            lake env lean --trust=0 -DwarningAsError=true "$p" 2>&1 | tee "evidence/${n%.lean}-strict.log"
           done
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAudit.lean 2>&1 | tee evidence/audit.log
+          lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibilityAudit.lean 2>&1 | tee evidence/coupled-response-audit.log
           python3 - <<'PY'
           import re
           from pathlib import Path
@@ -96,6 +121,17 @@ jobs:
               assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
           assert 'sorryAx' not in s
           print('STRICT ACTUAL SPEED PROJECTION PASS: true moment-locked scale and phase source directions, derived annular integrability, exact real-speed compatibility response and O(c) convergence to explicit bubble columns. Reference determinant nondegeneracy, coupled trajectory and manuscript 2.13 remain OPEN.')
+          s=Path('evidence/coupled-response-audit.log').read_text()
+          names=Path('evidence/new-public-declarations.txt').read_text().splitlines()
+          for n in names:
+              assert re.search(r'(?:@)?'+re.escape(n)+r'\s*:',s),n
+              m=re.search(r"'"+re.escape(n)+r"' depends on axioms: \[([^\]]*)\]",s)
+              assert m,n
+              actual={v.strip() for v in m.group(1).split(',') if v.strip()}
+              assert actual <= {'propext','Classical.choice','Quot.sound'},(n,actual)
+          assert 'sorryAx' not in s
+          assert not re.search(r'\.\.\.|⋯|…',s),'Truncated declaration output'
+          print('STRICT COUPLED INNER RESPONSE PASS:',len(names),'public declarations; actual normalized Fredholm linearity, physical source responses, physical traces, and full fixed-configuration compatibility columns. Determinant nondegeneracy, relative residual gain and manuscript 2.13 remain OPEN.')
           PY
       - name: Save accumulated proof pool
         if: always()
@@ -110,8 +146,8 @@ jobs:
           mkdir -p evidence/sources
           git rev-parse HEAD > evidence/commit.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean > evidence/source-hashes.txt
-          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean evidence/sources/
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean > evidence/source-hashes.txt
+          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean evidence/sources/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
