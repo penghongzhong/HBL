@@ -39,9 +39,9 @@ theorem actual_Hartree_moment_locked_backward_shell_weighted_gain :
     ∃ C : ℝ, 0 < C ∧
       ∀ (mu theta scale B ell c a db dw : ℝ)
         (K : OriginKummerPair mu theta scale) (z : ℝ → ℂ)
-        (hp0 : InWeightedL2 (7 / 4 : ℝ)
+        (_hp0 : InWeightedL2 (7 / 4 : ℝ)
           (actualHartreeTransmissionPlusSource ell c z))
-        (hm0 : InWeightedL2 (7 / 4 : ℝ)
+        (_hm0 : InWeightedL2 (7 / 4 : ℝ)
           (actualHartreeTransmissionMinusSource ell c z)),
         Continuous (actualHartreeTransmissionPlusSource ell c z) →
         Continuous (actualHartreeTransmissionMinusSource ell c z) →

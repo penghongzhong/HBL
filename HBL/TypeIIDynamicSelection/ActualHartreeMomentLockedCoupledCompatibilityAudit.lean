@@ -354,3 +354,6 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell
+
+-- Expand the actual terminal conclusion as well as its public theorem type.
+#print HBL.TypeIIDynamicSelection.ActualMomentLockedPhysicalBackwardShellConclusion
