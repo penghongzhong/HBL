@@ -77,10 +77,10 @@ theorem actual_Hartree_moment_locked_adjusted_source_norm_bound
 already proved in the moment-growth source analysis. -/
 theorem actual_Hartree_moment_locked_adjusted_source_quartic_bound :
     ∃ C : ℝ, 0 ≤ C ∧
-      ∀ (L c : ℝ) (hL : 1 ≤ L), |c| ≤ 1 →
+      ∀ (L c : ℝ) (_hL : 1 ≤ L), |c| ≤ 1 →
       ∀ (Fp Fm : ℝ → ℝ)
-        (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
-        (hm : InWeightedL2 (7 / 4 : ℝ) Fm) (db dw : ℝ),
+        (_hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+        (_hm : InWeightedL2 (7 / 4 : ℝ) Fm) (db dw : ℝ),
         let Gp := actualMomentLockedInnerPhaseSource L c
         let Gm := actualMomentLockedInnerScaleSource L c
         innerWeightedNorm (7 / 4 : ℝ) (fun r => Fp r + dw * Gp r) +
@@ -123,10 +123,10 @@ compatibility matrix. This theorem does not silently replace the actual
 obstruction by an unproved original residual norm. -/
 theorem actual_Hartree_moment_locked_adjusted_source_obstruction_bound :
     ∃ C : ℝ, 0 ≤ C ∧
-      ∀ (L c a B : ℝ) (hL : 1 ≤ L), |c| ≤ 1 →
+      ∀ (L c a B : ℝ) (_hL : 1 ≤ L), |c| ≤ 1 →
       ∀ (Fp Fm : ℝ → ℝ)
-        (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
-        (hm : InWeightedL2 (7 / 4 : ℝ) Fm)
+        (_hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+        (_hm : InWeightedL2 (7 / 4 : ℝ) Fm)
         (db dw : ℝ) (Z : ℂ),
         |db| + |dw| ≤ 1024 / (a * B ^ 2) * ‖Z‖ →
         let Gp := actualMomentLockedInnerPhaseSource L c
@@ -152,7 +152,7 @@ theorem actual_Hartree_moment_locked_adjusted_source_obstruction_bound :
     _ ≤ innerWeightedNorm (7 / 4 : ℝ) Fp +
           innerWeightedNorm (7 / 4 : ℝ) Fm +
           C * L ^ 4 * (1024 / (a * B ^ 2) * ‖Z‖) :=
-            add_le_add_left (mul_le_mul_of_nonneg_left hSpeed hCoeff) _
+            by linarith only [mul_le_mul_of_nonneg_left hSpeed hCoeff]
     _ = _ := by ring
 
 end HBL.TypeIIDynamicSelection
