@@ -22,7 +22,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- The complete differential and first Hartree variation, including both
 speed increments acting on the background and on the correction. -/

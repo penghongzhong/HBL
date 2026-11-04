@@ -246,4 +246,149 @@ theorem actual_Hartree_normalized_inner_cutoff_relative_gain
         mul_le_mul_of_nonneg_left hgeom (by positivity)
       _ = _ := by ring
 
+/-- The genuine conjugated Hessian defect restricted to its separated core.
+The full annular defect is deliberately outside this local norm. -/
+def actualInnerCoreCutoffDefect
+    (R : ℝ) (F : ℝ → ℝ) (hF : InWeightedL2 (7 / 4 : ℝ) F) : ℝ → ℝ :=
+  (Ioc (0 : ℝ) (R / 2)).indicator (fun r =>
+    hPlusApply (actualInnerCutoffResponse R
+      (normalizedPlusOutput (7 / 4 : ℝ) (by norm_num) (by norm_num) F hF)) r - F r)
+
+def actualInnerCoreWeightedRelativeConstant : ℝ :=
+  actualInnerCutoffRelativeConstant * innerWeightedNorm (7 / 4 : ℝ) (fun r => bubble r ^ 3)
+
+private theorem actual_inner_bubble_cube_weighted :
+    InWeightedL2 (7 / 4 : ℝ) (fun r => bubble r ^ 3) := by
+  have he : (fun r => affineJapaneseWeight (7 / 4 : ℝ) r * bubble r ^ 3) =
+      affineJapaneseDecay (5 / 4 : ℝ) := by
+    funext r
+    have hx : 0 < 1 + r ^ 2 := by positivity
+    have hb : bubble r ^ 3 = (1 + r ^ 2) ^ (-(3 / 2 : ℝ)) := by
+      unfold bubble
+      rw [Real.sqrt_eq_rpow, ← Real.rpow_neg hx.le,
+        ← Real.rpow_mul_natCast hx.le (-(1 / 2 : ℝ)) 3]
+      norm_num
+    unfold affineJapaneseWeight affineJapaneseDecay
+    rw [hb, ← Real.rpow_add hx]
+    congr 1
+    norm_num
+  change MemLp (fun r => affineJapaneseWeight (7 / 4 : ℝ) r * bubble r ^ 3)
+    2 halfLineMeasure
+  rw [he]
+  exact affineJapaneseDecay_memLp_two (5 / 4 : ℝ) (by norm_num)
+
+/-- Relative gain in exactly the original half-line weighted source space.
+The error here is H+(eta_R q)-F, before division by r.  Its local core
+L^{2,7/4} norm gains R^(-1), with a fixed constant independent of F and R. -/
+theorem actual_Hartree_normalized_inner_core_weighted_relative_gain
+    (F : ℝ → ℝ) (hF : InWeightedL2 (7 / 4 : ℝ) F) (hcF : Continuous F)
+    (R : ℝ) (hR : 2 ≤ R) :
+    InWeightedL2 (7 / 4 : ℝ) (actualInnerCoreCutoffDefect R F hF) ∧
+      innerWeightedNorm (7 / 4 : ℝ) (actualInnerCoreCutoffDefect R F hF) ≤
+        (actualInnerCoreWeightedRelativeConstant / R) *
+          innerWeightedNorm (7 / 4 : ℝ) F := by
+  let q := normalizedPlusOutput (7 / 4 : ℝ) (by norm_num) (by norm_num) F hF
+  let qR := actualInnerCutoffResponse R q
+  let E := actualInnerCoreCutoffDefect R F hF
+  let N := innerWeightedNorm (7 / 4 : ℝ) F
+  let A := (actualInnerCutoffRelativeConstant / R) * N
+  have hRpos : 0 < R := by linarith
+  have hN : 0 ≤ N := innerWeightedNorm_nonneg _ _
+  have hC : 0 ≤ actualInnerCutoffRelativeConstant :=
+    actual_inner_cutoff_relative_constant_nonneg
+  have hA : 0 ≤ A := by dsimp [A]; positivity
+  have hp := normalizedPlusOutput_properties
+    (7 / 4 : ℝ) (by norm_num) (by norm_num) F hF
+  have hqCont : Continuous qR :=
+    (continuous_const.sub
+      (cutoff_contDiff_infty.continuous.comp (continuous_id.div_const R))).mul hp.1
+  have hqMem : MemLp (fun r => weightedGreenDecay r * q r) 2 halfLineMeasure := by
+    have hw : InWeightedL2 (-(2 : ℝ)) q := hp.2.2.1 2 (by norm_num)
+    simpa [InWeightedL2, affineJapaneseWeight, weightedGreenDecay, Real.rpow_neg_one] using hw
+  have hqRMem : MemLp (fun r => weightedGreenDecay r * qR r) 2 halfLineMeasure := by
+    apply hqMem.mono' (weightedGreenDecay_continuous.mul hqCont).aestronglyMeasurable
+    filter_upwards with r
+    have hcoef : |1 - cutoff (r / R)| ≤ 1 := by
+      have h0 : 0 ≤ cutoff (r / R) := Real.smoothTransition.nonneg _
+      have h1 : cutoff (r / R) ≤ 1 := Real.smoothTransition.le_one _
+      rw [abs_of_nonneg (sub_nonneg.mpr h1)]
+      linarith
+    calc
+      ‖weightedGreenDecay r * qR r‖ =
+          ‖(1 - cutoff (r / R)) * (weightedGreenDecay r * q r)‖ := by
+            congr 1
+            dsimp [qR, actualInnerCutoffResponse]
+            ring
+      _ = |1 - cutoff (r / R)| * ‖weightedGreenDecay r * q r‖ := by
+        rw [norm_mul, Real.norm_eq_abs]
+      _ ≤ 1 * ‖weightedGreenDecay r * q r‖ :=
+        mul_le_mul_of_nonneg_right hcoef (norm_nonneg _)
+      _ = _ := one_mul _
+  have hpotential : Measurable potential := by
+    unfold potential
+    fun_prop
+  have hNL : Measurable (nonlocalApply qR) :=
+    (nonlocalApply_continuous_of_weighted_memLp qR hqRMem).measurable
+  have hApp : Measurable (fun r => hPlusApply qR r - F r) :=
+    (((measurable_deriv (deriv qR)).neg.sub
+      ((measurable_const.mul hpotential).mul hqCont.measurable)).sub hNL).sub hcF.measurable
+  have hEmeas : Measurable E := hApp.indicator measurableSet_Ioc
+  have hpoint (r : ℝ) (hr : 0 < r) : |E r| ≤ A * bubble r ^ 3 := by
+    by_cases hsep : r ≤ R / 2
+    · change |(Ioc (0 : ℝ) (R / 2)).indicator
+          (fun x => hPlusApply qR x - F x) r| ≤ _
+      rw [indicator_of_mem (show r ∈ Ioc (0 : ℝ) (R / 2) from ⟨hr, hsep⟩)]
+      have hphysical := (actual_Hartree_normalized_inner_cutoff_relative_gain
+        F hF hcF R r hR hr hsep).2.2.2.1
+      rw [abs_div, abs_of_pos hr] at hphysical
+      have hraw : |hPlusApply qR r - F r| ≤
+          ((actualInnerCutoffRelativeConstant / R ^ 2) * N * bubble r ^ 3) * r :=
+        (div_le_iff₀ hr).mp hphysical
+      have hrR : r ≤ R := by linarith
+      calc
+        _ ≤ ((actualInnerCutoffRelativeConstant / R ^ 2) * N * bubble r ^ 3) * r := hraw
+        _ ≤ ((actualInnerCutoffRelativeConstant / R ^ 2) * N * bubble r ^ 3) * R :=
+          mul_le_mul_of_nonneg_left hrR (by
+            have hb := bubble_nonneg r
+            positivity)
+        _ = A * bubble r ^ 3 := by
+          dsimp [A]
+          field_simp [hRpos.ne']
+    · have hout : r ∉ Ioc (0 : ℝ) (R / 2) := fun h => hsep h.2
+      change |(Ioc (0 : ℝ) (R / 2)).indicator
+          (fun x => hPlusApply qR x - F x) r| ≤ _
+      rw [indicator_of_notMem hout, abs_zero]
+      exact mul_nonneg hA (pow_nonneg (bubble_nonneg r) 3)
+  have hWP (r : ℝ) (hr : 0 < r) :
+      ‖affineJapaneseWeight (7 / 4 : ℝ) r * E r‖ ≤
+        A * ‖affineJapaneseWeight (7 / 4 : ℝ) r * bubble r ^ 3‖ := by
+    have hw : 0 ≤ affineJapaneseWeight (7 / 4 : ℝ) r := by
+      unfold affineJapaneseWeight
+      positivity
+    have hb : 0 ≤ bubble r ^ 3 := pow_nonneg (bubble_nonneg r) 3
+    simp only [Real.norm_eq_abs, abs_mul, abs_of_nonneg hw, abs_of_nonneg hb]
+    exact (mul_le_mul_of_nonneg_left (hpoint r hr) hw).trans_eq (by ring)
+  have hW : InWeightedL2 (7 / 4 : ℝ) (fun r => bubble r ^ 3) :=
+    actual_inner_bubble_cube_weighted
+  have hE : InWeightedL2 (7 / 4 : ℝ) E := by
+    apply (hW.const_mul A).mono'
+      (((affineJapaneseWeight_continuous (7 / 4 : ℝ)).measurable.mul hEmeas).aestronglyMeasurable)
+    filter_upwards [ae_restrict_mem measurableSet_Ioi] with r hr
+    simpa only [norm_mul, Real.norm_eq_abs A, abs_of_nonneg hA] using hWP r hr
+  refine ⟨hE, ?_⟩
+  calc
+    innerWeightedNorm (7 / 4 : ℝ) E = ‖weightedSourceDataL2 (7 / 4 : ℝ) E hE‖ :=
+      innerWeightedNorm_eq _ _ _
+    _ ≤ A * ‖weightedSourceDataL2 (7 / 4 : ℝ) (fun r => bubble r ^ 3) hW‖ := by
+      apply Lp.norm_le_mul_norm_of_ae_le_mul
+      filter_upwards [weightedSourceDataL2_ae (7 / 4 : ℝ) E hE,
+        weightedSourceDataL2_ae (7 / 4 : ℝ) (fun r => bubble r ^ 3) hW,
+        ae_restrict_mem measurableSet_Ioi] with r he hw hr
+      rw [he, hw]
+      exact hWP r hr
+    _ = (actualInnerCoreWeightedRelativeConstant / R) * innerWeightedNorm (7 / 4 : ℝ) F := by
+      rw [← innerWeightedNorm_eq (7 / 4 : ℝ) (fun r => bubble r ^ 3) hW]
+      dsimp [A, N, actualInnerCoreWeightedRelativeConstant]
+      ring
+
 end HBL.TypeIIDynamicSelection

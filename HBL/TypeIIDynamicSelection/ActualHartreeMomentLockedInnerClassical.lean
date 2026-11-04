@@ -63,7 +63,7 @@ private theorem actual_phase_conjugated_source_eq (R c r : ℝ) :
   · unfold actualMomentLockedInnerPhaseSource actualMomentLockedCore
     rw [monopoleMovingCutoffProfile_eq]
     unfold monopoleRadialProfile
-    field_simp [hr] <;> ring
+    field_simp [hr]
 
 private theorem actual_scale_conjugated_source_eq (R c r : ℝ) :
     actualMomentLockedInnerScaleSource R c r =
@@ -77,7 +77,10 @@ private theorem actual_scale_conjugated_source_eq (R c r : ℝ) :
   · have hp := actual_monopole_profile_C1.1 r
     have hq : HasDerivAt (fun x : ℝ => monopoleProfile x / x)
         ((deriv monopoleProfile r * r - monopoleProfile r) / r ^ 2) r := by
-      simpa only [mul_one] using hp.hasDerivAt.div (hasDerivAt_id r) hr
+      convert hp.hasDerivAt.div (hasDerivAt_id r) hr using 1
+      · funext x
+        rfl
+      · simp only [id_eq, mul_one]
     have harg : HasDerivAt (fun x : ℝ => |c| * x / 4) (|c| / 4) r := by
       convert ((hasDerivAt_id r).const_mul |c|).div_const 4 using 1 <;> simp
     have hcut := ((contDiff_infty_iff_deriv.mp cutoff_contDiff_infty).1
@@ -171,7 +174,7 @@ private theorem actual_nonlocal_quotient_bridge
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with rho hrho
     change 0 < rho at hrho
     dsimp [C, f, hartreeKernel, hartreeRadialLog]
-    field_simp [hrho.ne'] <;> ring
+    field_simp [hrho.ne']
   have hint := nonlocalApply_integrable_of_weighted_memLp q hq hr.le
   have hf : Integrable f halfLineMeasure := by
     apply (hint.const_mul C⁻¹).congr
@@ -186,7 +189,8 @@ private theorem actual_nonlocal_quotient_bridge
   change (8 * Real.pi * hartreeKappa * bubble r ^ 3) *
       (∫ rho in Ioi (0 : ℝ), rho * hartreeRadialLog r rho *
         (bubble rho ^ 3 * (q rho / rho))) = _
-  field_simp [hr.ne'] <;> ring
+  field_simp [hr.ne']
+  ring
 
 /-- Physical positive-radius equations of the SAME actual inner responses.
 Both quotient derivatives are justified, the full real-channel Riesz row
@@ -243,7 +247,7 @@ theorem actual_Hartree_moment_locked_inner_physical_equations
       ring
     rw [hconj, (hclass r hr).2.2.2.2.1]
     unfold actualMomentLockedInnerScaleSource
-    field_simp [hr.ne'] <;> ring
+    field_simp [hr.ne']
   · have hconj : radialLaplacian (fun x => qw x / x) r +
         9 * bubble r ^ 4 * (qw r / r) +
         4 * bubble r ^ 3 * radialHartreePotential
@@ -252,9 +256,10 @@ theorem actual_Hartree_moment_locked_inner_physical_equations
       rw [radialLaplacian_div_radius qw hw hr hw2]
       unfold hPlusApply
       rw [hv, hnonlocal.2]
-      field_simp [hr.ne'] <;> ring
+      field_simp [hr.ne']
+      ring
     rw [hconj, (hclass r hr).2.2.2.2.2]
     unfold actualMomentLockedInnerPhaseSource
-    field_simp [hr.ne'] <;> ring
+    field_simp [hr.ne']
 
 end HBL.TypeIIDynamicSelection

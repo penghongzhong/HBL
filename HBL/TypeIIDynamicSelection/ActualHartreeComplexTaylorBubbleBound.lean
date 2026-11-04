@@ -14,7 +14,7 @@ set_option autoImplicit false
 open Set MeasureTheory
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualHartreeComplexLinearization (U h : ℝ → ℂ) (r : ℝ) : ℂ :=
   (radialHartreePotential (fun rho => ‖U rho‖ ^ 4) r : ℂ) *
@@ -33,7 +33,7 @@ def actualHartreeComplexTaylorRemainder (U h : ℝ → ℂ) (r : ℝ) : ℂ :=
 /-- Domination by W^4 uses the exact original Hartree row and retains
 its spatial factor W(r)^2. -/
 theorem actual_Hartree_bubble_four_potential_domination
-    (F : ℝ → ℝ) (hF : Measurable F) {A : ℝ} (hA : 0 ≤ A)
+    (F : ℝ → ℝ) (hF : Measurable F) {A : ℝ} (_hA : 0 ≤ A)
     (hbound : ∀ rho : ℝ, 0 < rho → |F rho| ≤ A * bubble rho ^ 4)
     {r : ℝ} (hr : 0 < r) :
     IntegrableOn (fun rho => rho * hartreeRadialLog r rho * F rho) (Ioi 0) ∧
@@ -139,7 +139,12 @@ theorem actual_Hartree_complex_Taylor_nonlocal_identity
           rw [(actual_Hartree_complex_Taylor_polynomial_identity (U rho) (h rho)).1]
           ring
         _ = _ := by
-          rw [integral_add (h0.add h1) hR, integral_add h0 h1]
+          simpa only [Pi.add_apply] using
+            (integral_add (h0.add h1) hR).trans
+              (congrArg (fun z : ℝ => z +
+                ∫ rho in Ioi (0 : ℝ), rho * hartreeRadialLog r rho *
+                  actualHartreeComplexDensityRemainder (U rho) (h rho))
+                (integral_add h0 h1))
     unfold radialHartreePotential
     rw [hi]
     ring

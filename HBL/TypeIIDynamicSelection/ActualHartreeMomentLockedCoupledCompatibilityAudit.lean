@@ -206,3 +206,7 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_core_weighted_relative_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_core_weighted_relative_gain
