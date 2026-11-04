@@ -17,14 +17,12 @@ open scoped Topology ContDiff
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Profile.Kummer
 
-/-- Normalized outgoing finite-annulus Wronskian trace. -/
 def actualOriginOutgoingTrace
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (r : ℝ) (U DU : ℂ) : ℂ :=
   (U * originPhysicalSlope K.x K.dx r -
     DU * originPhysicalValue K.x r) / originGreenWronskian K r
 
-/-- The actual compatibility quantity, including the complete source integral. -/
 def actualOriginTransmissionObstruction
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (R : ℝ) (F : ℝ → ℂ) (U DU : ℂ) : ℂ :=
@@ -41,6 +39,7 @@ theorem actual_origin_outgoing_flux_hasDerivAt
         (fun t => ddw t + frozenFirstCoeff t * dw t +
           frozenZeroCoeff mu theta * w t) r) r := by
   rcases hK r hr with ⟨hphi, hdphi, hpsi, hdpsi, _, hWne, _, _, _, _, _⟩
+  change originGreenWronskian K r ≠ 0 at hWne
   have hW : HasDerivAt (originGreenWronskian K)
       (-frozenFirstCoeff r * originGreenWronskian K r) r := by
     convert (hphi.mul hdpsi).sub (hdphi.mul hpsi) using 1
@@ -51,19 +50,24 @@ theorem actual_origin_outgoing_flux_hasDerivAt
   convert h using 1
   · rfl
   · unfold originGreenSourceA
+    simp only [Pi.sub_apply, Pi.mul_apply]
     field_simp [hWne]
     ring
 
-/-- The repair's full forcing is continuous on a positive annulus, hence
-its Wronskian densities are genuinely integrable. -/
+/-- The full repair forcing is continuous on a positive annulus. -/
 theorem actual_Kummer_interface_defect_continuousOn
     (mu theta R : ℝ) (hR : 0 < R) (p q : ℂ) :
     ContinuousOn (actualKummerInterfaceRepairResidual mu theta R p q)
       (Icc R (2*R)) := by
-  have hcut : ContDiff ℝ ∞ cutoff := cutoff_contDiff_infty
-  have hw : ContDiff ℝ ∞ (actualKummerInterfaceRepair R p q) := by
-    unfold actualKummerInterfaceRepair actualKummerRepairCutoff actualOneLayerInnerOverlapCutoff
-    fun_prop
+  have hcReal : ContDiff ℝ ∞ (fun r : ℝ => 1-cutoff ((r-R)/(R/3))) :=
+    contDiff_const.sub (cutoff_contDiff_infty.comp
+      ((contDiff_id.sub contDiff_const).div_const (R/3)))
+  have hc : ContDiff ℝ ∞ (actualKummerRepairCutoff R) :=
+    Complex.ofRealCLM.contDiff.comp hcReal
+  have hlin : ContDiff ℝ ∞ (fun r : ℝ => p+((r-R : ℝ) : ℂ)*q) :=
+    contDiff_const.add ((Complex.ofRealCLM.contDiff.comp
+      (contDiff_id.sub contDiff_const)).mul contDiff_const)
+  have hw : ContDiff ℝ ∞ (actualKummerInterfaceRepair R p q) := hc.mul hlin
   have hOne : deriv (actualKummerInterfaceRepair R p q) =
       actualKummerInterfaceRepairSlope R p q :=
     funext (fun r => (actual_Kummer_interface_repair_derivatives R r hR.ne' p q).1.deriv)
@@ -84,8 +88,7 @@ theorem actual_Kummer_interface_defect_continuousOn
     ((frozenFirstCoeff_contDiffAt r hr0.ne').continuousAt.mul hdw.continuousAt)).add
     (continuousAt_const.mul hw.continuous.continuousAt)).continuousWithinAt
 
-/-- Integrated projection of the actual repair. Its value depends on the
-endpoint mismatch, not on an artificially assigned source order. -/
+/-- The projection of the actual repair is its exact endpoint mismatch. -/
 theorem actual_Kummer_interface_defect_projection_exact
     {mu theta scale R C : ℝ} (K : OriginKummerPair mu theta scale)
     (hR : 0 < R) (hK : OriginBasisOn K R (2*R) C) (p q : ℂ) :
@@ -98,8 +101,10 @@ theorem actual_Kummer_interface_defect_projection_exact
   let w := actualKummerInterfaceRepair R p q
   let dw := actualKummerInterfaceRepairSlope R p q
   let E := actualKummerInterfaceRepairResidual mu theta R p q
-  have hEI : IntervalIntegrable E volume R (2*R) :=
-    (actual_Kummer_interface_defect_continuousOn mu theta R hR p q).intervalIntegrable
+  have hEC : ContinuousOn E (uIcc R (2*R)) := by
+    rw [uIcc_of_le (by linarith : R ≤ 2*R)]
+    exact actual_Kummer_interface_defect_continuousOn mu theta R hR p q
+  have hEI : IntervalIntegrable E volume R (2*R) := hEC.intervalIntegrable
   have hAI := (actual_origin_Green_source_integrability K hK (by linarith) E hEI).1
   have hFlux (r : ℝ) (hr : r ∈ Icc R (2*R)) :
       HasDerivAt (fun t => actualOriginOutgoingTrace K t (w t) (dw t))
@@ -140,11 +145,10 @@ theorem actual_origin_Green_outgoing_trace_coefficient
     ring
   unfold actualOriginOutgoingTrace
   rw [hNum]
-  field_simp
+  field_simp [hWne]
 
-/-- Same-source exact balance: the retained defect is precisely the missing
-finite-annulus compatibility projection. Full source and defect are both
-included, with their integral existence certified. -/
+/-- The retained defect is precisely the finite-annulus compatibility
+projection. The complete source F+E has the exact incoming flux. -/
 theorem actual_origin_transmission_defect_projection_balance
     {mu theta scale R C : ℝ} (K : OriginKummerPair mu theta scale)
     (hR : 0 < R) (hK : OriginBasisOn K R (2*R) C)
@@ -161,6 +165,9 @@ theorem actual_origin_transmission_defect_projection_balance
   let p := U - originGreenValue K R (2*R) F R
   let q := DU - originGreenSlope K R (2*R) F R
   obtain ⟨hEI, hP⟩ := actual_Kummer_interface_defect_projection_exact K hR hK p q
+  have hEI' : IntervalIntegrable
+      (originGreenSourceA K (actualOriginTransmissionDefect K R F U DU))
+      volume R (2*R) := hEI
   have hTrace := actual_origin_Green_outgoing_trace_coefficient K hK
     (show R ∈ Icc R (2*R) by constructor <;> linarith) F
   have hDiff : actualOriginOutgoingTrace K R p q =
@@ -173,7 +180,7 @@ theorem actual_origin_transmission_defect_projection_balance
       (actualOriginTransmissionDefect K R F U DU) r) =
       actualOriginTransmissionObstruction K R F U DU := hP.trans hDiff
   have hFI := (actual_origin_Green_source_integrability K hK (by linarith) F hF).1
-  refine ⟨hEI, hProjection, ?_⟩
+  refine ⟨hEI', hProjection, ?_⟩
   have hAdd : originGreenSourceA K
       (fun t => F t + actualOriginTransmissionDefect K R F U DU t) =
       (fun t => originGreenSourceA K F t +
@@ -181,7 +188,7 @@ theorem actual_origin_transmission_defect_projection_balance
     funext t
     unfold originGreenSourceA
     ring
-  rw [hAdd, intervalIntegral.integral_add hFI hEI, hProjection]
+  rw [hAdd, intervalIntegral.integral_add hFI hEI', hProjection]
   unfold actualOriginTransmissionObstruction originGreenCoeffA
   ring
 
