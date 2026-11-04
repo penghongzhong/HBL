@@ -31,7 +31,7 @@ def actualKummerImpulseSlope
 independent of the moving annulus and of the pair normalization. -/
 theorem actual_Kummer_impulse_scaled_uniform
     {mu theta z eps : ℝ} (K : LocalKummerPair mu theta z eps)
-    (d s : ℝ) (hd : 0 < d) (hde : d < eps)
+    (d s : ℝ) (_hd : 0 < d) (hde : d < eps)
     (hRatio : z + d ≤ 2 * (z - d)) (hs : s ∈ Icc (-d) d) :
     max ‖actualKummerImpulseValue K s d‖
       ((z + d) * ‖actualKummerImpulseSlope K s d‖) ≤
