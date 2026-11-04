@@ -42,13 +42,29 @@ private theorem actual_origin_basis_on_positive_annulus
 private theorem actual_origin_matched_Kummer_derivatives_in_larger_annulus
     {mu theta scale lo hi a b C r : ℝ} (K : OriginKummerPair mu theta scale)
     (hK : OriginBasisOn K lo hi C) (ha : a ∈ Icc lo hi) (hb : b ∈ Icc lo hi)
-    (F : ℝ → ℂ) (hF : Continuous F) (U DU : ℂ) (hr : r ∈ Ioo lo hi) :
+    (F : ℝ → ℂ) (hF : ∀ x ∈ Icc lo hi, ContinuousAt F x)
+    (U DU : ℂ) (hr : r ∈ Ioo lo hi) :
     HasDerivAt (actualOriginMatchedKummerValue K a b F U DU)
       (actualOriginMatchedKummerSlope K a b F U DU r) r ∧
     HasDerivAt (actualOriginMatchedKummerSlope K a b F U DU)
       (F r - frozenFirstCoeff r * actualOriginMatchedKummerSlope K a b F U DU r -
         frozenZeroCoeff mu theta * actualOriginMatchedKummerValue K a b F U DU r) r := by
-  have hc := originGreen_sources_continuous K hK F hF
+  have hDens (x : ℝ) (hx : x ∈ Icc lo hi) :
+      ContinuousAt (originGreenSourceA K F) x ∧
+      ContinuousAt (originGreenSourceB K F) x := by
+    rcases hK x hx with ⟨hphi, hdphi, hpsi, hdpsi, _, hW, _, _, _, _, _⟩
+    have hw : ContinuousAt (originGreenWronskian K) x :=
+      (hphi.continuousAt.mul hdpsi.continuousAt).sub
+        (hdphi.continuousAt.mul hpsi.continuousAt)
+    exact ⟨(hpsi.continuousAt.mul (hF x hx)).div hw hW,
+      (hphi.continuousAt.mul (hF x hx)).div hw hW⟩
+  have hc : (∀ x ∈ Icc lo hi,
+      ContinuousAt (originGreenSourceA K F) x ∧
+      ContinuousAt (originGreenSourceB K F) x) ∧
+      ContinuousOn (originGreenSourceA K F) (Icc lo hi) ∧
+      ContinuousOn (originGreenSourceB K F) (Icc lo hi) :=
+    ⟨hDens, fun x hx => (hDens x hx).1.continuousWithinAt,
+      fun x hx => (hDens x hx).2.continuousWithinAt⟩
   have hr' : r ∈ Icc lo hi := ⟨hr.1.le, hr.2.le⟩
   have hmA := hc.2.1.stronglyMeasurableAtFilter_nhdsWithin
     (μ := volume) measurableSet_Icc r
@@ -89,7 +105,7 @@ basis. In particular a and b are ordinary interior differentiation points. -/
 theorem actual_origin_matched_Kummer_classical_on_positive_interval
     {mu theta scale a b : ℝ} (K : OriginKummerPair mu theta scale)
     (ha : 0 < a) (hab : a ≤ b) (hb : b < scale)
-    (F : ℝ → ℂ) (hF : Continuous F) (U DU : ℂ) :
+    (F : ℝ → ℂ) (hF : ∀ r ∈ Ioo 0 scale, ContinuousAt F r) (U DU : ℂ) :
     ∀ r ∈ Ioo 0 scale,
       HasDerivAt (actualOriginMatchedKummerValue K a b F U DU)
         (actualOriginMatchedKummerSlope K a b F U DU r) r ∧
@@ -118,7 +134,8 @@ theorem actual_origin_matched_Kummer_classical_on_positive_interval
       linarith
     obtain ⟨C, hK⟩ := actual_origin_basis_on_positive_annulus K hlo (hlr.trans hrh).le hhi
     exact actual_origin_matched_Kummer_derivatives_in_larger_annulus K hK
-      ⟨hla.le, hab.trans hbh.le⟩ ⟨hla.le.trans hab, hbh.le⟩ F hF U DU ⟨hlr, hrh⟩
+      ⟨hla.le, hab.trans hbh.le⟩ ⟨hla.le.trans hab, hbh.le⟩ F
+      (fun x hx => hF x ⟨hlo.trans_le hx.1, hx.2.trans_lt hhi⟩) U DU ⟨hlr, hrh⟩
   intro r hr
   have h := hPair r hr
   have heq : deriv (actualOriginMatchedKummerValue K a b F U DU) =ᶠ[𝓝 r]
@@ -136,7 +153,7 @@ also has an ordinary two-sided derivative equal to the explicit slope. -/
 theorem actual_origin_matched_Kummer_actual_endpoint_jets
     {mu theta scale a b : ℝ} (K : OriginKummerPair mu theta scale)
     (ha : 0 < a) (hab : a ≤ b) (hb : b < scale)
-    (F : ℝ → ℂ) (hF : Continuous F) (U DU : ℂ) :
+    (F : ℝ → ℂ) (hF : ∀ r ∈ Ioo 0 scale, ContinuousAt F r) (U DU : ℂ) :
     actualOriginMatchedKummerValue K a b F U DU a = U ∧
     HasDerivAt (actualOriginMatchedKummerValue K a b F U DU) DU a ∧
     deriv (actualOriginMatchedKummerValue K a b F U DU) a = DU ∧
@@ -158,7 +175,7 @@ ACTUAL derivative of the continued profile, with the complete original source. -
 theorem actual_origin_matched_Kummer_actual_upper_trace
     {mu theta scale a b : ℝ} (K : OriginKummerPair mu theta scale)
     (ha : 0 < a) (hab : a ≤ b) (hb : b < scale)
-    (F : ℝ → ℂ) (hF : Continuous F) (U DU : ℂ) :
+    (F : ℝ → ℂ) (hF : ∀ r ∈ Ioo 0 scale, ContinuousAt F r) (U DU : ℂ) :
     actualOriginOutgoingTrace K b (actualOriginMatchedKummerValue K a b F U DU b)
       (deriv (actualOriginMatchedKummerValue K a b F U DU) b) =
       actualMomentLockedIntervalObstruction K a b F U DU := by

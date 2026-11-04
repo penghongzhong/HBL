@@ -49,7 +49,7 @@ theorem actual_radial_matched_shell_zero_jet_bounds
     unfold complexRadialLaplacian
     push_cast
     field_simp [hxC]
-    <;> ring
+    ring
   have hfluxBound (x : ℝ) (hx : x ∈ Icc R (2 * R)) :
       ‖(x : ℂ) ^ 2 * complexRadialLaplacian d x‖ ≤ 4 * R ^ 2 * A := by
     have hxpos : 0 < x := hR.trans_le hx.1
@@ -194,7 +194,7 @@ theorem actual_Hartree_matched_shell_cutoff_commutator :
         (mul_le_mul hcoeff hjet.1 (norm_nonneg _) (by positivity))
     _ = (16 * C1 + 4 * C2) * A := by
       field_simp [hR.ne']
-      <;> ring
+      ring
 
 /-- The weak first- and zero-order terms of an outer propagation can be
 absorbed on the actual overlap. The mismatch is bounded through its own

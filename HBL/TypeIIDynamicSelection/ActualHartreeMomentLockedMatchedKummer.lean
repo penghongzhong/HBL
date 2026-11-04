@@ -87,10 +87,12 @@ theorem actual_origin_matched_Kummer_left_jet_and_unique_coefficients
     constructor
     · unfold actualOriginMatchedSingularCoeff originGreenWronskian
       apply (eq_div_iff hW).2
+      unfold originGreenWronskian
       linear_combination originPhysicalSlope K.x K.dx a * hv -
         originPhysicalValue K.x a * hd
     · unfold actualOriginMatchedRegularCoeff originGreenWronskian
       apply (eq_div_iff hW).2
+      unfold originGreenWronskian
       linear_combination originPhysicalValue K.y a * hd -
         originPhysicalSlope K.y K.dy a * hv
 

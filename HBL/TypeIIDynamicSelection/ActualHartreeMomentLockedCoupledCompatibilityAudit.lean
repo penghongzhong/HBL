@@ -1,3 +1,6 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedPlateauSource
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedKummerPullback
+import HBL.TypeIIDynamicSelection.ActualHartreeMatchedShellWeightedGain
 import HBL.TypeIIDynamicSelection.ActualHartreeShellWeightedNorm
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedMatchedKummerClassical
 import HBL.TypeIIDynamicSelection.ActualHartreeTwoChannelMatchedShell
@@ -304,3 +307,24 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_matched_Kummer_shell_error_measurable
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_matched_Kummer_shell_error_measurable
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_weighted_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_weighted_gain
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_physical_source
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_physical_source
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source

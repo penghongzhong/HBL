@@ -155,6 +155,7 @@ private theorem actual_scale_jet_value (ell : ℝ → ℝ) (db s : ℝ) :
     actualMomentLockedScaleJetPerturbation ell db s s = ell s := by
   simp [actualMomentLockedScaleJetPerturbation]
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem actual_scale_jet_hasDerivAt
     (ell : ℝ → ℝ) (b db s : ℝ)
     (hEll : HasDerivAt ell (-(b * ell s)) s) :

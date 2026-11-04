@@ -43,7 +43,9 @@ theorem actual_conjugated_shell_weighted_norm
   have hweight (r : ℝ) : 0 ≤ affineJapaneseWeight (7 / 4 : ℝ) r := by
     unfold affineJapaneseWeight
     positivity
-  have hB : 0 ≤ B := by dsimp [B]; positivity
+  have hB : 0 ≤ B := by
+    exact mul_nonneg (hweight (2 * R))
+      (mul_nonneg (mul_nonneg (by norm_num) hR.le) hA)
   have hSmeas : Measurable S := (measurable_id.mul hE.norm).indicator measurableSet_Ioo
   have hWmeas : Measurable W :=
     (affineJapaneseWeight_continuous (7 / 4 : ℝ)).measurable.mul hSmeas
@@ -91,7 +93,7 @@ theorem actual_conjugated_shell_weighted_norm
         exact hr ⟨hR.trans hs.1, hs.2.le⟩
       simp [W, S, G, actualConjugatedShellMagnitude, hs, hr]
   have hmem : MemLp W 2 (volume : Measure ℝ) :=
-    hG.mono' hWmeas.aestronglyMeasurable (Filter.Eventually.of_forall hdom)
+    hG.norm.mono' hWmeas.aestronglyMeasurable (Filter.Eventually.of_forall hdom)
   refine ⟨hmem.mono_measure Measure.restrict_le_self, ?_⟩
   exact actual_supported_halfLine_L2_norm_le R B hR hB W hWmeas
     hWnonneg hWbound hWzero
@@ -122,8 +124,11 @@ private theorem actual_shell_geometric_norm_factor
         mul_le_mul_of_nonneg_right hfive (Real.rpow_nonneg hRpos.le _)
   have hsqrt : Real.sqrt (2 * R) ≤ 2 * R ^ (1 / 2 : ℝ) := by
     have hs : Real.sqrt (2 : ℝ) ≤ 2 := by norm_num
-    rw [Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 2), Real.sqrt_eq_rpow]
-    exact mul_le_mul_of_nonneg_right hs (Real.rpow_nonneg hRpos.le _)
+    calc
+      _ = Real.sqrt (2 : ℝ) * Real.sqrt R :=
+        Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 2) R
+      _ ≤ 2 * Real.sqrt R := mul_le_mul_of_nonneg_right hs (Real.sqrt_nonneg R)
+      _ = _ := by rw [Real.sqrt_eq_rpow]
   calc
     _ ≤ (5 * R ^ (7 / 4 : ℝ)) * (2 * R) * (2 * R ^ (1 / 2 : ℝ)) :=
       mul_le_mul (mul_le_mul_of_nonneg_right hweight (by positivity)) hsqrt

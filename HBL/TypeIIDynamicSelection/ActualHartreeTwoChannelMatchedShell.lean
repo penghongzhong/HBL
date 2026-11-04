@@ -273,6 +273,7 @@ theorem actual_Hartree_two_channel_matched_shell_gain :
     hV hSubV ha hR0 hA hsmall hr0 hd hdd hd0 hdd0 hdefect
   have hf := hfull mu theta a d V R (actualHartreeTwoChannelShellBudget mu theta a R Fp Fm) r0
     hV hSubV ha hR0 hA hsmall hr0 hd hdd hd0 hdd0 hdefect
+  dsimp only
   intro r hr
   refine ⟨(hg r hr).1, (hg r hr).2.1, (hg r hr).2.2.1, ?_, ?_⟩
   · exact (hg r hr).2.2.2.trans
