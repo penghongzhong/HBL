@@ -1,0 +1,9 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeUniformInnerMoment
+set_option autoImplicit false
+set_option pp.explicit true
+#check @HBL.Modulation.Monopole.actual_innerGreenBound_le_fixed_weight_norms
+#check @HBL.Modulation.Monopole.actual_inner_fixed_Fredholm_moment_constants
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_uniform_canonical_inner_moments_and_traces
+#print axioms HBL.Modulation.Monopole.actual_innerGreenBound_le_fixed_weight_norms
+#print axioms HBL.Modulation.Monopole.actual_inner_fixed_Fredholm_moment_constants
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_uniform_canonical_inner_moments_and_traces
