@@ -17,6 +17,7 @@ proved, not filled by a source-order parameter or a renamed identity map.
 -/
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 namespace HBL.Verification.FiniteProfileScope
 open HBL.Profile.OneLayer HBL.Profile.FiniteProfile
@@ -34,7 +35,7 @@ theorem radialProbe_original_residual :
     norm_num [actualOneLayerInnerOverlapCutoff,
       HBL.Modulation.AffineTail.cutoff_zero_of_le_one]
   have ht : HasDerivAt (fun s : ℝ => radialProbe s 1) (1 : ℂ) 0 := by
-    simpa only [radialProbe, hc, mul_one] using
+    simpa only [radialProbe, hc, mul_one, id_eq, Complex.ofReal_one] using!
       (hasDerivAt_id (0 : ℝ)).ofReal_comp
   have hz : radialProbe 0 = (fun _ : ℝ => (0 : ℂ)) := by
     funext r
