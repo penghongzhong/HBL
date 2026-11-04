@@ -196,6 +196,7 @@ theorem actual_Hartree_uniform_canonical_inner_moments_and_traces
       (correctedMinusSource gm) ≤ (Dm * Sm) * e :=
     (hMom.2.trans (mul_le_mul_of_nonneg_left hmNorm hDm)).trans_eq (by ring)
   refine ⟨hp, hm, x, hx.1, hx.2, hMp, hMm, ?_⟩
+  dsimp only
   intro r hr
   have hr0 : 0 ≤ r := by linarith
   have htp := innerGreenRepresentative_affine_physical_trace_bounds
