@@ -98,7 +98,8 @@ theorem actual_origin_compatibility_unique_cancellation
     ∃! beta : ℂ, actualOriginTransmissionObstruction K R
       (fun r => F r + beta * actualOriginCompatibilitySource K R r) U DU = 0 := by
   refine ⟨actualOriginTransmissionObstruction K R F U DU, ?_, ?_⟩
-  · rw [actual_origin_compatibility_amplitude_exact K hR hK F hF U DU, sub_self]
+  · dsimp only
+    rw [actual_origin_compatibility_amplitude_exact K hR hK F hF U DU, sub_self]
   · intro beta hBeta
     rw [actual_origin_compatibility_amplitude_exact K hR hK F hF U DU] at hBeta
     exact (sub_eq_zero.mp hBeta).symm
