@@ -17,6 +17,17 @@ The previously pending claim Mplus,Mminus=O(ell^(1/16)) is now proved for the SA
 
 The fixed-operator part also passed independent CI 41744443804 at commit `c0e36a064df2b29f7d1f7df89403d2314513086b`.
 
+## Readable full-statement re-audit
+
+- Subsequent CI: https://github.com/penghongzhong/HBL/actions/runs/41745426260 — completed/success.
+- Re-audited commit: `f89672d00f1cc3e8d6bd23a2be3d6473bf09c828`.
+- The only Lean change from the original acceptance is audit printing: instance-elaboration noise is no longer expanded, leaving all mathematical hypotheses and the uniform quantifier order readable. No mathematical source, theorem assumptions/conclusions, strict build flags or axiom whitelist changed.
+- Both mathematical source SHA256 values were compared with the first successful artifact and are IDENTICAL.
+- Both strict source logs remain empty; build again completed successfully with 4074 jobs.
+- Artifact ID 13282584032: `HBL_UNIFORM_PHYSICAL_MOMENT_STRICT_41745426260.zip`, 10606 bytes.
+- Independently computed SHA256: `c271731cd35dda586b56adea1ed5abcdaeac0862d653ad2113eeb8de6520bc62`.
+- The readable exported type was checked: B,A precede the existential Cplus,Cminus, which precede ell,c,z; all physical source assumptions, both actual Fredholm equations, both canonical representatives and all four trace inequalities are visible. All three transitive axiom lists remain standard only.
+
 ## Quantifiers and the actual source
 
 For every fixed B,A>=0, the theorem constructs finite constants Cplus,Cminus>=0 BEFORE quantifying over ell,c,z. The only subsequent assumptions are
