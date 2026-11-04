@@ -74,20 +74,21 @@ def actualMomentLockedCanonicalInnerJet (Fp Fm : ℝ → ℝ)
   let up := actualMomentLockedPhysicalPlus Fp hp
   let um := actualMomentLockedPhysicalMinus Fm hm
   ((up (a * r) : ℂ) + Complex.I * (um (a * r) : ℂ),
-    (a : ℂ) * ((deriv up (a * r) : ℂ) + Complex.I * (deriv um (a * r) : ℂ)))
+    (a : ℂ) * (((deriv up (a * r) : ℝ) : ℂ) +
+      Complex.I * ((deriv um (a * r) : ℝ) : ℂ)))
 
 def actualMomentLockedScaleResponseJet (L c : ℝ) (hL : 0 < L)
     (a r : ℝ) : ℂ × ℂ :=
   let u := actualMomentLockedPhysicalMinus (actualMomentLockedInnerScaleSource L c)
     (actual_Hartree_moment_locked_inner_scale_source_weighted L c hL)
   (Complex.I * (u (a * r) : ℂ),
-    (a : ℂ) * Complex.I * (deriv u (a * r) : ℂ))
+    (a : ℂ) * Complex.I * ((deriv u (a * r) : ℝ) : ℂ))
 
 def actualMomentLockedPhaseResponseJet (L c : ℝ) (hL : 0 < L)
     (a r : ℝ) : ℂ × ℂ :=
   let u := actualMomentLockedPhysicalPlus (actualMomentLockedInnerPhaseSource L c)
     (actual_Hartree_moment_locked_inner_phase_source_weighted L c hL)
-  ((u (a * r) : ℂ), (a : ℂ) * (deriv u (a * r) : ℂ))
+  ((u (a * r) : ℂ), (a : ℂ) * ((deriv u (a * r) : ℝ) : ℂ))
 
 /-- Actual Fredholm superposition, including the derivative of q/r. -/
 theorem actual_Hartree_moment_locked_inner_jet_affine
@@ -138,10 +139,10 @@ theorem actual_Hartree_moment_locked_inner_jet_affine
       actualMomentLockedPhaseResponseJet, Gp, Gm]
     push_cast
     ring
-  · change (a : ℂ) * ((deriv (actualMomentLockedPhysicalPlus
-        (fun t => Fp t + dw * Gp t) hpH) (a * r) : ℂ) +
-        Complex.I * (deriv (actualMomentLockedPhysicalMinus
-          (fun t => Fm t + db * Gm t) hmH) (a * r) : ℂ)) = _
+  · change (a : ℂ) * (((deriv (actualMomentLockedPhysicalPlus
+        (fun t => Fp t + dw * Gp t) hpH) (a * r) : ℝ) : ℂ) +
+        Complex.I * ((deriv (actualMomentLockedPhysicalMinus
+          (fun t => Fm t + db * Gm t) hmH) (a * r) : ℝ) : ℂ)) = _
     rw [hPder, hMder]
     dsimp [actualMomentLockedCanonicalInnerJet, actualMomentLockedScaleResponseJet,
       actualMomentLockedPhaseResponseJet, Gp, Gm]
