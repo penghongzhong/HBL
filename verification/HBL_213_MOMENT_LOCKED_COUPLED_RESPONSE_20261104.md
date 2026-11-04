@@ -2,7 +2,7 @@
 
 ## 验收范围
 
-本轮承接 `6b5144973abc49fd826bbb7be6beaf1ca466b8a5` 的目标驱动整改。正式修订版账本保持 **11/13（84.62%）**。本记录首次提交时，新增源码尚待真实 Lean CI；不得将源码生成、静态检查或辅助声明数计入论文环境。
+本轮承接 `6b5144973abc49fd826bbb7be6beaf1ca466b8a5` 的目标驱动整改。正式修订版账本保持 **11/13（84.62%）**。本轮已完成两个真实内区响应、C1 物理迹与完整冻结兼容矩阵的实现及严格复验；尚未完成真实耦合校正的全部可解性义务，不能据此验收 2.13。
 
 目标是推进整改清单第 1 项：从固定 Fredholm 逆导出两个实际速度响应和迹，组装同一对象的兼容矩阵。本轮没有预设逆雅可比、非零行列式、相对阶提升或 II 型速率。
 
@@ -62,6 +62,8 @@ C_\omega=T_{z_0}(J_\omega)+\Pi_{[z_0,z_1]}(a^2P_\omega(a\cdot)).
 
 这仍不是沿真实轨道变化的完整 Jacobian：基底、界面、尺度及剖面的参数变化必须另行控制。
 
+这里的物理特化是对合法瞬时参数的家族恒等式，并未构造一条满足矩锁定动力学的真实辐射轨道。内区终端目前提供原加权 Fredholm 方程及 C1 物理迹；新响应的逐点经典二阶物理方程还需接入径向共轭与正则性接口，不能由 C1 自动宣称。
+
 ## 仍未闭合
 
 1. 上述真实两列的非退化性及所需定量逆界，特别是 `z_0=L/a` 趋向原点时的精确 Wronskian 权与迹估计。
@@ -70,6 +72,8 @@ C_\omega=T_{z_0}(J_\omega)+\Pi_{[z_0,z_1]}(a^2P_\omega(a\cdot)).
 4. 原 2.13 所需 Hessian、参数差分、局部 Lipschitz 与最终 PDE 轨道/选速。
 
 没有通过增加辅助编号、假设可逆性、预设爆破速率或把绝对小量重复当作相对增阶改变 11/13。
+
+下一承重估计已在 [完整冻结矩阵的定量候选推导](HBL_213_COUPLED_DETERMINANT_NEXT_STEP_20261104.md) 中具体展开。它保留真实内区迹、强制荷和 Green 一阶矩，给出归一化两列的误差表达式，并指出移动半径下需要控制 `L^(13/4)/a^2` 与 `a*|c|`。该分析稿尚未 Lean 验收，不计为已证非退化；它也明确保留实际外端点选择、参数窗口、经典物理方程和完整非局部拼接残差的缺口。
 
 ## 源码和检验入口
 
@@ -80,4 +84,16 @@ C_\omega=T_{z_0}(J_\omega)+\Pi_{[z_0,z_1]}(a^2P_\omega(a\cdot)).
 - `HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibilityAudit.lean`
 - 沿用 `.github/workflows/hbl-213-moment-locked-projection.yml`，保留 Lean 4.35.0-rc3、Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5` 及原缓存、原五条审计。
 
-新审计覆盖 20 条公开声明的完整类型与公理依赖，目标源码执行 `--trust=0 -DwarningAsError=true`。真实结果将在 CI 完成后补入；此前不称已验收。
+## 实际严格复验
+
+- 通过验收的代码提交：[83711a2964cfb7d335d7c22b2d1e33369361c3d8](https://github.com/penghongzhong/HBL/commit/83711a2964cfb7d335d7c22b2d1e33369361c3d8)。本记录后续仅作说明文档更新，不将文档提交混同于新的 Lean 验收。
+- [CI 41809180683](https://github.com/penghongzhong/HBL/actions/runs/41809180683) 完成且结论为 `success`；job 为 `126503870555`。
+- [证据 artifact 13311716206](https://github.com/penghongzhong/HBL/actions/runs/41809180683/artifacts/13311716206)，ZIP SHA-256 为 `95f2ea42385a026cb2aa97d769ffd7f70d555ed322e907742b44abf9f5356620`。
+- Lean 固定为 `4.35.0-rc3`，compiler commit 为 `470d5ce1400764999581fd26d5d72b00d990b0f4`；Mathlib 固定为 `a98628e16c11f5167f16124105ddce53efa9bfe5`，未迁移工具链。
+- 五份实际证明源逐一执行 `lake env lean --trust=0 -DwarningAsError=true`，严格重放日志均为空；两份 Audit 也以相同严格选项重放。
+- 新的 20 条公开声明全部打印完整类型并逐条检查公理；原 5 条物理源审计同时保留。公理依赖均只有 `propext`、`Classical.choice`、`Quot.sound`，没有 `sorryAx` 或新增公理。
+- 新类型输出开启 `pp.all`，没有省略号截断；打印公理时仅局部恢复标准显示，以保持公理名称与既有白名单一致，未放宽白名单。
+- 已下载归档并独立核对 ZIP 摘要、内部 `commit.txt`、八份归档源码 SHA-256、精确提交的 Git blob 与本地源码字节，全部一致。这是对 CI 实际证据的复核，不声称在本地重新运行 Lean。
+- 本轮 Lake 的目标及依赖构建完成 `4167 jobs`。这是目标及依赖的构建规模，不是论文证明数量或全仓库零警告声明；历史依赖 linter 警告仍在既有证明池中。
+
+此前修复过程中的失败 run 均不作为验收证据。正式论文分子没有增加；这次通过只关闭响应、迹和冻结兼容关系的具体子步骤。
