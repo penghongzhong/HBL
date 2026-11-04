@@ -54,13 +54,13 @@ theorem actual_Hartree_moment_locked_core_time_jet_difference
       -(db * c0 s) * actualMomentLockedAmplitudeTangent (c0 s) r := by
   have hd0 : deriv (fun t => actualMomentLockedCore (c0 t) r) s =
       (-(b * c0 s) + m) * actualMomentLockedAmplitudeTangent (c0 s) r := by
-    convert (monopoleMovingCutoffTime_hasDerivAt hc0 r).deriv using 1 <;>
-      simp only [actualMomentLockedCore, actualMomentLockedAmplitudeTangent] <;> ring
+    simpa only [actualMomentLockedCore, actualMomentLockedAmplitudeTangent, mul_assoc]
+      using (monopoleMovingCutoffTime_hasDerivAt hc0 r).deriv
   have hd1 : deriv (fun t => actualMomentLockedCore (c1 t) r) s =
       (-((b + db) * c1 s) + m) *
         actualMomentLockedAmplitudeTangent (c1 s) r := by
-    convert (monopoleMovingCutoffTime_hasDerivAt hc1 r).deriv using 1 <;>
-      simp only [actualMomentLockedCore, actualMomentLockedAmplitudeTangent] <;> ring
+    simpa only [actualMomentLockedCore, actualMomentLockedAmplitudeTangent, mul_assoc]
+      using (monopoleMovingCutoffTime_hasDerivAt hc1 r).deriv
   rw [hd1, hd0, hsame]
   ring
 
@@ -96,7 +96,7 @@ theorem actual_Hartree_moment_locked_correction_residual_exact
     intro x hx
     exact (hRealSpace x hx).hasDerivAt.ofReal_comp.differentiableAt
   have hfirst : deriv (U s) =ᶠ[𝓝 r]
-      (fun x => (deriv (actualMomentLockedCore (c1 s)) x : ℂ)) := by
+      (fun x => ((deriv (actualMomentLockedCore (c1 s)) x : ℝ) : ℂ)) := by
     filter_upwards [Ioi_mem_nhds hr] with x hx
     exact (hRealSpace x hx).hasDerivAt.ofReal_comp.deriv
   have hRealSecond :
@@ -164,9 +164,13 @@ private theorem actual_scale_jet_hasDerivAt
     simpa using ((hasDerivAt_id s).sub_const s).const_mul (-db)
   have hexp : HasDerivAt (fun t : ℝ => Real.exp (-db * (t - s))) (-db) s := by
     simpa only [sub_self, mul_zero, Real.exp_zero, one_mul, mul_one] using hlin.exp
-  convert hEll.mul hexp using 1 <;>
-    simp only [actualMomentLockedScaleJetPerturbation, sub_self, mul_zero,
-      Real.exp_zero, mul_one] <;> ring
+  have hcoef : -((b + db) * actualMomentLockedScaleJetPerturbation ell db s s) =
+      -(b * ell s) + ell s * -db := by
+    rw [actual_scale_jet_value]
+    ring
+  rw [hcoef]
+  simpa only [actualMomentLockedScaleJetPerturbation, sub_self, mul_zero,
+    Real.exp_zero, mul_one] using hEll.mul hexp
 
 /-- Physical specialization: one scale path, one physical clock and one
 genuine 3D radiation moment construct both time jets. The second moment

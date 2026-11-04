@@ -21,6 +21,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.Kummer HBL.Profile.ActualInner HBL.L2Kernel
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Cramer's singular coefficient from the actual left mismatch. -/
 def actualOriginMatchedSingularCoeff
@@ -67,15 +68,20 @@ theorem actual_origin_matched_Kummer_left_jet_and_unique_coefficients
       alpha = actualOriginMatchedSingularCoeff K a b F U DU ∧
       beta = actualOriginMatchedRegularCoeff K a b F U DU := by
   have hW := originGreenWronskian_ne K hK (show a ∈ Icc a b from ⟨le_rfl, hab⟩)
-  unfold originGreenWronskian at hW
   refine ⟨?_, ?_, ?_⟩
   · unfold actualOriginMatchedKummerValue actualOriginMatchedSingularCoeff
-      actualOriginMatchedRegularCoeff originGreenWronskian
+      actualOriginMatchedRegularCoeff
+    generalize hWr : originGreenWronskian K a = w at hW ⊢
     field_simp [hW]
+    rw [← hWr]
+    unfold originGreenWronskian
     ring
   · unfold actualOriginMatchedKummerSlope actualOriginMatchedSingularCoeff
-      actualOriginMatchedRegularCoeff originGreenWronskian
+      actualOriginMatchedRegularCoeff
+    generalize hWr : originGreenWronskian K a = w at hW ⊢
     field_simp [hW]
+    rw [← hWr]
+    unfold originGreenWronskian
     ring
   · intro alpha beta hv hd
     constructor
@@ -138,9 +144,11 @@ theorem actual_origin_matched_Kummer_upper_trace
           (originGreenSlope K a b F b) +
         actualOriginMatchedSingularCoeff K a b F U DU := by
       unfold actualOriginOutgoingTrace actualOriginMatchedKummerValue
-        actualOriginMatchedKummerSlope originGreenWronskian
-      unfold originGreenWronskian at hW
+        actualOriginMatchedKummerSlope
+      generalize hWr : originGreenWronskian K b = w at hW ⊢
       field_simp [hW]
+      rw [← hWr]
+      unfold originGreenWronskian
       ring
     _ = actualOriginMatchedSingularCoeff K a b F U DU := by rw [hG, hA, zero_add]
     _ = _ := actual_origin_matched_Kummer_singular_eq_obstruction K hK hab F U DU

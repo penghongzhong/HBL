@@ -109,7 +109,8 @@ private theorem actual_inner_affine_physical_jet_bound
     have hp1' : |deriv p r| * r ≤ D * N := by
       nlinarith [abs_nonneg (deriv p r)]
     calc
-      |deriv p r * r - p r| ≤ |deriv p r * r| + |p r| := abs_sub_le _ _
+      |deriv p r * r - p r| ≤ |deriv p r * r| + |p r| := by
+        simpa only [Real.norm_eq_abs] using norm_sub_le (deriv p r * r) (p r)
       _ ≤ D * N + A * N := by
         rw [abs_mul, abs_of_pos hr0]
         exact add_le_add hp1' hp0
@@ -268,8 +269,7 @@ private theorem actual_inner_normalized_plus_nonlocal_bound
     simpa [InWeightedL2, affineJapaneseWeight, weightedGreenDecay, Real.rpow_neg_one] using hqw
   have hn : ‖hq.toLp (fun r => weightedGreenDecay r * q r)‖ =
       innerWeightedNorm (-(2 : ℝ)) q := by
-    simpa [innerWeightedNorm, affineJapaneseWeight, weightedGreenDecay,
-      Real.rpow_neg_one] using (Lp.norm_toLp _ hq)
+    simp [innerWeightedNorm, affineJapaneseWeight, weightedGreenDecay, Real.rpow_neg_one]
   have hnb := normalizedPlusOutput_weighted_norm_le
     (7 / 4 : ℝ) 2 (by norm_num) (by norm_num) (by norm_num) F hF
   have hnb' : ‖hq.toLp (fun r => weightedGreenDecay r * q r)‖ ≤
@@ -371,9 +371,9 @@ theorem actual_Hartree_normalized_inner_shell_equation_bound
       9 * bubble r ^ 4 * |qp r / r| ≤
           9 * bubble r ^ 4 * (actualInnerShellValueConstant * N) :=
         mul_le_mul_of_nonneg_left hv.1.1 (by positivity)
-      _ ≤ 9 * (1 / r ^ 4) * (actualInnerShellValueConstant * N) := by
-        gcongr
-        exact hb.1
+      _ ≤ 9 * (1 / r ^ 4) * (actualInnerShellValueConstant * N) :=
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_left hb.1 (by norm_num)) (mul_nonneg hV0 hN)
       _ = _ := by ring
   have hlocalm : |3 * bubble r ^ 4 * (qm r / r)| ≤
       9 * actualInnerShellValueConstant * N / r ^ 4 := by
@@ -383,9 +383,13 @@ theorem actual_Hartree_normalized_inner_shell_equation_bound
       3 * bubble r ^ 4 * |qm r / r| ≤
           3 * bubble r ^ 4 * (actualInnerShellValueConstant * N) :=
         mul_le_mul_of_nonneg_left hv.2.1 (by positivity)
-      _ ≤ 9 * (1 / r ^ 4) * (actualInnerShellValueConstant * N) := by
-        gcongr
-        exact hb.1
+      _ ≤ 3 * (1 / r ^ 4) * (actualInnerShellValueConstant * N) :=
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_left hb.1 (by norm_num)) (mul_nonneg hV0 hN)
+      _ ≤ 9 * (1 / r ^ 4) * (actualInnerShellValueConstant * N) :=
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_right (by norm_num : (3 : ℝ) ≤ 9) (by positivity))
+          (mul_nonneg hV0 hN)
       _ = _ := by ring
   have hrad : actualInnerShellEquationConstant * N / r ^ 4 ≤
       actualInnerShellEquationConstant * N / R ^ 4 := by

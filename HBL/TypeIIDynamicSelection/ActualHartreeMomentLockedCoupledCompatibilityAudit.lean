@@ -1,3 +1,7 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeShellWeightedNorm
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedMatchedKummerClassical
+import HBL.TypeIIDynamicSelection.ActualHartreeTwoChannelMatchedShell
+import HBL.TypeIIDynamicSelection.ActualHartreeMatchedKummerShellGain
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedShellCommutator
 import HBL.TypeIIDynamicSelection.ActualHartreeInnerShellEquation
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedMatchedKummer
@@ -269,3 +273,34 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_radial_matched_shell_weak_terms_absorption
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_radial_matched_shell_weak_terms_absorption
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_scaled_Kummer_shell_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_scaled_Kummer_shell_gain
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_full_Kummer_shell_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_full_Kummer_shell_gain
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_defect_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_defect_bound
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_gain
+
+#check @HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_on_positive_interval
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_on_positive_interval
+#check @HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_endpoint_jets
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_endpoint_jets
+#check @HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_upper_trace
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_upper_trace
+
+#check @HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_norm
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_norm
+#check @HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound
