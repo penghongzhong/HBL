@@ -1,0 +1,8 @@
+import HBL.Verification.FiniteProfileScopeRegression
+set_option autoImplicit false
+
+#print HBL.Verification.FiniteProfileScope.radialProbe
+#check @HBL.Verification.FiniteProfileScope.radialProbe_original_residual
+#check @HBL.Verification.FiniteProfileScope.structural_terminal_allows_empty_packets_and_nonzero_residual
+#print axioms HBL.Verification.FiniteProfileScope.radialProbe_original_residual
+#print axioms HBL.Verification.FiniteProfileScope.structural_terminal_allows_empty_packets_and_nonzero_residual
