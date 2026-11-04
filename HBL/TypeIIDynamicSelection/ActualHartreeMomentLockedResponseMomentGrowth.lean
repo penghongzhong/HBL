@@ -79,7 +79,7 @@ private theorem actual_compact_inner_weighted_norm_quartic
         _ ≤ 5 * L ^ 2 := by
           nlinarith [pow_le_pow_left₀ hr.le hrL 2, sq_nonneg (L - 1)]
     dsimp [S]
-    rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg hw0]
+    rw [abs_mul, abs_of_nonneg hw0]
     calc
       _ ≤ (5 * L ^ 2) * (2 * L * A) :=
         mul_le_mul hw (hBound r hr hrL) (abs_nonneg _) (by positivity)

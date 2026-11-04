@@ -1,4 +1,4 @@
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic
 
 /-!
@@ -169,7 +169,7 @@ theorem actual_coupled_explicit_small_parameter_region
     calc
       T * epsilon = (B ^ 2 / 32) * (T / (T + 1)) := by
         dsimp [epsilon]
-        field_simp [hTpos.ne'] <;> ring
+        field_simp [hTpos.ne']
       _ ≤ (B ^ 2 / 32) * 1 :=
         mul_le_mul_of_nonneg_left hRatio (by positivity)
       _ = B ^ 2 / 32 := by ring

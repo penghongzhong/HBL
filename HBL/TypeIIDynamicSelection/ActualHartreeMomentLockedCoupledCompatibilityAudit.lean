@@ -9,6 +9,7 @@ import HBL.TypeIIDynamicSelection.ComplexTwoColumnDeterminantBound
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound
 import HBL.KummerOriginBasis.RegularDerivativeBound
 import HBL.KummerOriginBasis.ReferenceIntegralLowerBound
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedConstructedNondegeneracy
 set_option autoImplicit false
 set_option pp.all true
 set_option pp.maxSteps 10000000
@@ -139,3 +140,7 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_nondegenerate_region
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_nondegenerate_region
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy

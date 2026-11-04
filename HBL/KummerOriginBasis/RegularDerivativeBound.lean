@@ -111,7 +111,7 @@ theorem origin_kummer_regular_physical_bound {mu theta R B : ℝ}
   · have heq : originPhysicalSlope K.x K.dx r =
         (K.dx r - 1) / (r : ℂ) - (K.x r - (r : ℂ)) / (r : ℂ) ^ 2 := by
       unfold originPhysicalSlope
-      field_simp [hrC] <;> ring
+      field_simp [hrC]; ring
     rw [heq]
     calc
       _ ≤ ‖(K.dx r - 1) / (r : ℂ)‖ +
@@ -124,6 +124,6 @@ theorem origin_kummer_regular_physical_bound {mu theta R B : ℝ}
         add_le_add (div_le_div_of_nonneg_right hj.2 hr.1.le)
           (div_le_div_of_nonneg_right hj.1 (sq_nonneg r))
       _ = 2 * ((D + 1) * G) * r := by
-        field_simp [hr.1.ne'] <;> ring
+        field_simp [hr.1.ne']; ring
 
 end HBL.Profile.Kummer

@@ -33,8 +33,10 @@ private theorem reference_phase_bounds (r : ℝ) :
   rw [heq]
   constructor
   · exact Complex.norm_exp_I_mul_ofReal _
-  · simpa only [Real.norm_eq_abs, abs_of_nonneg (by positivity : 0 ≤ r ^ 2 / 4)] using
-      (Real.norm_exp_I_mul_ofReal_sub_one_le (x := r ^ 2 / 4))
+  · have h := Real.norm_exp_I_mul_ofReal_sub_one_le (x := r ^ 2 / 4)
+    rw [Real.norm_eq_abs] at h
+    rw [abs_of_nonneg (by positivity : 0 ≤ r ^ 2 / 4)] at h
+    exact h
 
 /-- The actual reference density differs from r by a cubic integrable error. -/
 theorem origin_kummer_reference_density_error_bound {mu theta R : ℝ}
@@ -90,7 +92,7 @@ theorem origin_kummer_reference_integral_error_bound {mu theta R B : ℝ}
   have hidI : IntervalIntegrable (fun r : ℝ => (r : ℂ)) volume 0 B :=
     hidC.intervalIntegrable 0 B
   have hid : (∫ r in 0..B, (r : ℂ)) = ((B ^ 2 / 2 : ℝ) : ℂ) := by
-    rw [intervalIntegral.integral_ofReal, intervalIntegral.integral_id]
+    rw [intervalIntegral.integral_ofReal, _root_.integral_id]
     norm_num
   have hdiff : originKummerReferenceIntegral K B - ((B ^ 2 / 2 : ℝ) : ℂ) =
       ∫ r in 0..B,
@@ -109,8 +111,8 @@ theorem origin_kummer_reference_integral_error_bound {mu theta R B : ℝ}
       exact origin_kummer_reference_density_error_bound K D G hD hG hcoeff hbound
         r ⟨hr.1.le, hr.2.trans hBR⟩
     _ = ((D + 1) * G + 1 / 4) * B ^ 4 / 4 := by
-      rw [intervalIntegral.integral_const_mul, intervalIntegral.integral_pow]
-      norm_num <;> ring
+      rw [intervalIntegral.integral_const_mul, _root_.integral_pow]
+      norm_num [mul_div_assoc]
 
 /-- A nonzero reference projection is DERIVED from the actual origin IVP
 on the stated small interval. No nonzero determinant or projection is assumed. -/
