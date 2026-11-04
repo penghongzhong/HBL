@@ -159,12 +159,10 @@ theorem actual_Hartree_canonical_baseline_outgoing_trace_bound
     rfl
   have hpdRaw : L ^ 2 * |deriv up L| ≤ T * Np := by
     have h := hpj.2.1
-    dsimp only at h
     rw [hpFun] at h
     exact h
   have hmdRaw : L ^ 2 * |deriv um L| ≤ T * Nm := by
     have h := hmj.2.1
-    dsimp only at h
     rw [hmFun] at h
     exact h
   have hpd : |deriv up L| ≤ T * Np / L ^ 2 :=
