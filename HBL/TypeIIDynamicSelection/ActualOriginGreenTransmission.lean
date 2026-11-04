@@ -57,8 +57,9 @@ theorem actual_origin_Green_integrable_continuous_pair
     funext r
     exact intervalIntegral.integral_symm b r
   have hCB : ContinuousOn (originGreenCoeffB K a F) (Icc a b) := by
-    simpa only [uIcc_of_le hab, originGreenCoeffB] using
-      (intervalIntegral.continuousOn_primitive_interval' hIB left_mem_uIcc)
+    have h := intervalIntegral.continuousOn_primitive_interval' hIB left_mem_uIcc
+    rw [uIcc_of_le hab] at h
+    exact h
   have hp : ContinuousOn (originPhysicalValue K.y) (Icc a b) :=
     fun r hr => (hK r hr).1.continuousAt.continuousWithinAt
   have hdp : ContinuousOn (originPhysicalSlope K.y K.dy) (Icc a b) :=
