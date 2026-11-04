@@ -24,18 +24,34 @@ private theorem complex_columns_unique_real_cancellation (b w Z : ℂ)
     ((w.re * Z.im - w.im * Z.re) / d,
      (b.im * Z.re - b.re * Z.im) / d)
   have hd : d ≠ 0 := hdet
+  have hp1 : p.1 * d = w.re * Z.im - w.im * Z.re :=
+    div_mul_cancel₀ _ hd
+  have hp2 : p.2 * d = b.im * Z.re - b.re * Z.im :=
+    div_mul_cancel₀ _ hd
   refine ⟨p, ?_, ?_⟩
   · apply Complex.ext
     · simp only [Complex.add_re, Complex.mul_re, Complex.ofReal_re,
         Complex.ofReal_im, Complex.zero_re, zero_mul, sub_zero]
-      dsimp only [p, d]
-      field_simp [hdet]
-      ring
+      have hprod : (Z.re + p.1 * b.re + p.2 * w.re) * d = 0 := by
+        calc
+          (Z.re + p.1 * b.re + p.2 * w.re) * d =
+              Z.re * d + (p.1 * d) * b.re + (p.2 * d) * w.re := by ring
+          _ = 0 := by
+            rw [hp1, hp2]
+            dsimp only [d]
+            ring
+      exact (mul_eq_zero.mp hprod).resolve_right hd
     · simp only [Complex.add_im, Complex.mul_im, Complex.ofReal_re,
         Complex.ofReal_im, Complex.zero_im, zero_mul, add_zero]
-      dsimp only [p, d]
-      field_simp [hdet]
-      ring
+      have hprod : (Z.im + p.1 * b.im + p.2 * w.im) * d = 0 := by
+        calc
+          (Z.im + p.1 * b.im + p.2 * w.im) * d =
+              Z.im * d + (p.1 * d) * b.im + (p.2 * d) * w.im := by ring
+          _ = 0 := by
+            rw [hp1, hp2]
+            dsimp only [d]
+            ring
+      exact (mul_eq_zero.mp hprod).resolve_right hd
   · intro q hq
     have hr := congrArg Complex.re hq
     have hi := congrArg Complex.im hq

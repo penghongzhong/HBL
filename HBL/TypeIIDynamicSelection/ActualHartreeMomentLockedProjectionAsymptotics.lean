@@ -59,8 +59,7 @@ private theorem bubble_two_speed_tail (L t : ℝ) (hL : 0 < L) (ht : L ≤ t) :
     nlinarith
   have hidentity : (t * w) ^ 2 + w ^ 2 = 1 := by
     rw [mul_pow, hw2]
-    field_simp [show 1 + t ^ 2 ≠ 0 by positivity]
-    <;> ring
+    field_simp [show 1 + t ^ 2 ≠ 0 by positivity]; ring
   have hmissing0 : 0 ≤ 1 - t * w := sub_nonneg.mpr htw
   have hmissing : 1 - t * w ≤ w ^ 2 := by
     nlinarith [mul_nonneg (sub_nonneg.mpr htw) htw0]
@@ -71,8 +70,7 @@ private theorem bubble_two_speed_tail (L t : ℝ) (hL : 0 < L) (ht : L ≤ t) :
   have hscale : dilationGenerator bubble t = -w / 2 + w ^ 3 := by
     rw [dilationGenerator_bubble_closed]
     dsimp [w, bubble]
-    field_simp [hs.ne']
-    <;> nlinarith only [hs2]
+    field_simp [hs.ne']; nlinarith only [hs2]
   have hscaleId : t * dilationGenerator bubble t + 1 / 2 =
       (1 - t * w) / 2 + (t * w) * w ^ 2 := by rw [hscale]; ring
   have hprod : (t * w) * w ^ 2 ≤ w ^ 2 := by
@@ -269,8 +267,7 @@ theorem actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_clos
       rw [origin_source_exact_reference_density K hK _ hr (hr0.trans_le hr.1)]
       unfold actualMomentLockedScaledScaleSource actualMomentLockedScaleSource
       push_cast
-      field_simp [haC]
-      <;> ring
+      field_simp [haC]; ring
     rw [hEq, norm_mul, norm_mul, Complex.norm_I, mul_one,
       Complex.norm_real, Real.norm_eq_abs]
     exact mul_le_mul (hq r hr) (hprofile r hr).1 (abs_nonneg _)
@@ -287,7 +284,6 @@ theorem actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_clos
       unfold actualMomentLockedScaledPhaseSource actualMomentLockedPhaseSource
       push_cast
       field_simp [haC]
-      <;> ring
     rw [hEq, norm_mul, Complex.norm_real, Real.norm_eq_abs]
     exact mul_le_mul (hq r hr) (hprofile r hr).2 (abs_nonneg _)
       (mul_nonneg hC0 hB.le)
@@ -305,7 +301,7 @@ theorem actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_clos
         C0 * M * B ^ 3 * (a * |c|) := by dsimp [e]; ring
   rw [hE] at hb hw
   constructor
-  · convert hb using 1 <;> congr 1 <;> ring
+  · convert hb using 1; congr 1; ring
   · simpa only [one_mul] using hw
 
 /-- The physical source constant is obtained before any Kummer parameters,

@@ -57,7 +57,6 @@ theorem actual_Hartree_moment_locked_constructed_nondegeneracy
   have hHB : (H + 1) * B = 1 / 4 := by
     dsimp [B]
     field_simp [show H + 1 ≠ 0 by positivity]
-    <;> ring
   have hHBSq : (H + 1) * B ^ 2 = B / 4 := by
     calc
       _ = ((H + 1) * B) * B := by ring

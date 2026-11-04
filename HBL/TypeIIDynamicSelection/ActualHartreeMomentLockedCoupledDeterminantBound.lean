@@ -95,7 +95,6 @@ private theorem real_column_det_rescale (a : ℝ) (ha : a ≠ 0) (b w : ℂ) :
         (w / (a : ℂ)).re * (b / (a : ℂ)).im) := by
   simp [Complex.div_re, Complex.div_im, Complex.normSq_apply]
   field_simp [ha]
-  <;> ring
 
 /-- A quantitative lower bound for the SAME complete physical matrix.
 The reference nonzero bound is derived from the actual origin ODE. The
