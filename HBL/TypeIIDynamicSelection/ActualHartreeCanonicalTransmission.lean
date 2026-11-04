@@ -137,11 +137,13 @@ theorem actual_Hartree_canonical_scaled_inner_jet_bound
     calc
       R*(a*‖V‖) = rho*‖V‖ := by dsimp [rho]; ring
       _ ≤ rho*((Cp+Cm)*e/rho^2) := mul_le_mul_of_nonneg_left hV hrho.le
-      _ = (Cp+Cm)*e/rho := by field_simp [hrho.ne']; ring
+      _ = (Cp+Cm)*e/rho := by field_simp [hrho.ne']
   have hTail : 2*((Cp+Cm)*e/rho) ≤ (Cp+Cm)*e := by
     have h2 : (2 : ℝ)/rho ≤ 1 := (div_le_one hrho).2 hAR.le
-    have h := mul_le_mul_of_nonneg_left h2 (mul_nonneg hCs he)
-    nlinarith
+    calc
+      2*((Cp+Cm)*e/rho) = (Cp+Cm)*e*(2/rho) := by ring
+      _ ≤ (Cp+Cm)*e*1 := mul_le_mul_of_nonneg_left h2 (mul_nonneg hCs he)
+      _ = (Cp+Cm)*e := mul_one _
   change ‖U‖+R*‖(a : ℂ)*V‖ ≤ (6*Q*T+Cp+Cm)*e
   have hSum := _root_.add_le_add hUabs hScaled
   nlinarith
