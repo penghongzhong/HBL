@@ -60,7 +60,7 @@ def actualHartreeTransmissionInnerJet (ell c : ℝ) (z : ℝ → ℂ)
   let up := actualHartreeTransmissionInnerPlus ell c z x
   let um := actualHartreeTransmissionInnerMinus ell c z x
   ((up (a*r) : ℂ) + Complex.I * (um (a*r) : ℂ),
-    (a : ℂ) * ((deriv up (a*r) : ℂ) + Complex.I * (deriv um (a*r) : ℂ)))
+    (a : ℂ) * (((deriv up (a*r) : ℝ) : ℂ) + Complex.I * ((deriv um (a*r) : ℝ) : ℂ)))
 
 private theorem pair_norm (u v : ℝ) :
     ‖(u : ℂ)+Complex.I*(v : ℂ)‖ ≤ |u|+|v| := by
@@ -103,7 +103,7 @@ theorem actual_Hartree_canonical_scaled_inner_jet_bound
   let gp := actualHartreeTransmissionPlusSource ell c z
   let gm := actualHartreeTransmissionMinusSource ell c z
   let U : ℂ := (up rho : ℂ)+Complex.I*(um rho : ℂ)
-  let V : ℂ := (deriv up rho : ℂ)+Complex.I*(deriv um rho : ℂ)
+  let V : ℂ := ((deriv up rho : ℝ) : ℂ)+Complex.I*((deriv um rho : ℝ) : ℂ)
   let alpha : ℂ := (actualPlusCharge gp : ℂ)+Complex.I*(actualMinusCharge gm : ℂ)
   have hrho : 0 < rho := mul_pos ha hR
   have he : 0 ≤ e := Real.rpow_nonneg hell.le _
