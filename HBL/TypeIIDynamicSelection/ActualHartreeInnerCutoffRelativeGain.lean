@@ -306,7 +306,7 @@ theorem actual_Hartree_normalized_inner_core_weighted_relative_gain
     have hw : InWeightedL2 (-(2 : ℝ)) q := hp.2.2.1 2 (by norm_num)
     simpa [InWeightedL2, affineJapaneseWeight, weightedGreenDecay, Real.rpow_neg_one] using hw
   have hqRMem : MemLp (fun r => weightedGreenDecay r * qR r) 2 halfLineMeasure := by
-    apply hqMem.mono' (weightedGreenDecay_continuous.mul hqCont).aestronglyMeasurable
+    apply hqMem.norm.mono' (weightedGreenDecay_continuous.mul hqCont).aestronglyMeasurable
     filter_upwards with r
     have hcoef : |1 - cutoff (r / R)| ≤ 1 := by
       have h0 : 0 ≤ cutoff (r / R) := Real.smoothTransition.nonneg _
@@ -371,10 +371,10 @@ theorem actual_Hartree_normalized_inner_core_weighted_relative_gain
   have hW : InWeightedL2 (7 / 4 : ℝ) (fun r => bubble r ^ 3) :=
     actual_inner_bubble_cube_weighted
   have hE : InWeightedL2 (7 / 4 : ℝ) E := by
-    apply (hW.const_mul A).mono'
+    apply (hW.norm.const_mul A).mono'
       (((affineJapaneseWeight_continuous (7 / 4 : ℝ)).measurable.mul hEmeas).aestronglyMeasurable)
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with r hr
-    simpa only [norm_mul, Real.norm_eq_abs A, abs_of_nonneg hA] using hWP r hr
+    simpa only [Pi.mul_apply] using hWP r hr
   refine ⟨hE, ?_⟩
   calc
     innerWeightedNorm (7 / 4 : ℝ) E = ‖weightedSourceDataL2 (7 / 4 : ℝ) E hE‖ :=

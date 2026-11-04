@@ -103,7 +103,8 @@ private theorem actual_scale_conjugated_source_eq (R c r : ℝ) :
       actualMomentLockedAmplitudeTangent dilationGenerator
     rw [hd, congrFun hcore r]
     unfold monopoleRadialProfile
-    field_simp [hr] <;> ring
+    field_simp [hr]
+    ring
 
 /-- Both actual radially conjugated speed sources are globally continuous.
 The origin is proved using the vanished monopole numerator, not supplied
