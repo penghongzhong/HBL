@@ -35,8 +35,8 @@ theorem actual_Kummer_zero_data_Duhamel_exact
     intro s hs
     exact ⟨by linarith [hs.1], by linarith [hs.2]⟩
   have hCoeffCont :
-      ContinuousOn (fun s => K.psi s / localAnnulusWronskian K s) [[-d,d]] ∧
-      ContinuousOn (fun s => K.phi s / localAnnulusWronskian K s) [[-d,d]] := by
+      ContinuousOn (fun s => K.psi s / localAnnulusWronskian K s) (uIcc (-d) d) ∧
+      ContinuousOn (fun s => K.phi s / localAnnulusWronskian K s) (uIcc (-d) d) := by
     rw [uIcc_of_le (by linarith : -d ≤ d)]
     constructor
     · intro s hs
@@ -151,8 +151,8 @@ theorem actual_Kummer_zero_data_scaled_source_bound
       mul_le_mul_of_nonneg_left (by linarith [hs.2]) hC
     constructor
     · exact ((le_max_left _ _).trans h).trans hUpper
-    · apply (mul_le_mul_left hr1).mp
-      exact (((le_max_right _ _).trans h).trans hUpper).trans_eq (by ring)
+    · have hSlope := ((le_max_right _ _).trans h).trans hUpper
+      nlinarith
   obtain ⟨hDV,hDD⟩ := actual_Kummer_zero_data_Duhamel_exact K d hd hde F hFI
   have hVal : ‖(actualKummerPhysicalRightTransfer K d F 0 0).1‖ ≤
       (C * (z+d) * M) * (2*d) := by
