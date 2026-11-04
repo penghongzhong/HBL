@@ -28,7 +28,9 @@ private theorem obstruction_inverse_wronskian_norm
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (r : ℝ) (hr : 0 < r) (hrs : r ≤ scale) :
     ‖(originGreenWronskian K r)⁻¹‖ = r ^ 2 := by
-  have hW := origin_physical_wronskian_exact K ⟨hr.le, hrs⟩ hr.ne'
+  have hW : originGreenWronskian K r =
+      (r : ℂ)⁻¹ ^ 2 * Complex.exp (-Complex.I * (r : ℂ) ^ 2 / 4) :=
+    origin_physical_wronskian_exact K ⟨hr.le, hrs⟩ hr.ne'
   have hExp : ‖Complex.exp (-Complex.I * (r : ℂ) ^ 2 / 4)‖ = 1 := by
     rw [Complex.norm_exp]
     simp [Complex.mul_re, Complex.mul_im, pow_two]
@@ -147,17 +149,19 @@ theorem actual_Hartree_canonical_baseline_outgoing_trace_bound
   have hmj := (actual_Hartree_normalized_inner_shell_equation_bound Fm hm hcm L L hL le_rfl).2
   have hpv : |up L| ≤ V * Np := hpj.1
   have hmv : |um L| ≤ V * Nm := hmj.1
-  have hpd : |deriv up L| ≤ T * Np / L ^ 2 :=
-    (le_div_iff₀ (pow_pos hLp 2)).2 (by simpa only [mul_comm] using hpj.2.1)
-  have hmd : |deriv um L| ≤ T * Nm / L ^ 2 :=
-    (le_div_iff₀ (pow_pos hLp 2)).2 (by simpa only [mul_comm] using hmj.2.1)
+  have hpd : |deriv up L| ≤ T * Np / L ^ 2 := by
+    apply (le_div_iff₀ (pow_pos hLp 2)).2
+    simpa only [up, actualMomentLockedPhysicalPlus, T, Np, mul_comm] using hpj.2.1
+  have hmd : |deriv um L| ≤ T * Nm / L ^ 2 := by
+    apply (le_div_iff₀ (pow_pos hLp 2)).2
+    simpa only [um, actualMomentLockedPhysicalMinus, T, Nm, mul_comm] using hmj.2.1
   have hU : ‖J.1‖ ≤ V * N := by
     change ‖(up (a * (L / a)) : ℂ) + Complex.I * (um (a * (L / a)) : ℂ)‖ ≤ _
     rw [hScale]
     exact ((obstruction_real_pair_norm _ _).trans (add_le_add hpv hmv)).trans_eq (by ring)
   have hDU : ‖J.2‖ ≤ a * T * N / L ^ 2 := by
-    change ‖(a : ℂ) * ((deriv up (a * (L / a)) : ℂ) +
-      Complex.I * (deriv um (a * (L / a)) : ℂ))‖ ≤ _
+    change ‖(a : ℂ) * (((deriv up (a * (L / a)) : ℝ) : ℂ) +
+      Complex.I * ((deriv um (a * (L / a)) : ℝ) : ℂ))‖ ≤ _
     rw [hScale, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ha]
     exact (mul_le_mul_of_nonneg_left
       ((obstruction_real_pair_norm _ _).trans (add_le_add hpd hmd)) ha.le).trans_eq (by ring)
@@ -183,14 +187,14 @@ theorem actual_Hartree_canonical_baseline_outgoing_trace_bound
   have hRatio : L ^ 3 / a ^ 3 ≤ 1 / a := by
     apply (div_le_div_iff₀ (pow_pos ha 3) ha).2
     nlinarith [mul_le_mul_of_nonneg_right hLa2 ha.le]
+  have hTraceCoeff : 0 ≤ 2 * H * V := by positivity
   calc
     _ ≤ ((V * N) * (2 * H * (L / a)) + (a * T * N / L ^ 2) * C0) * (L / a) ^ 2 := hRaw
     _ = (2 * H * V * (L ^ 3 / a ^ 3) + C0 * T / a) * N := by
       field_simp [ha.ne', hLp.ne']
-      ring
     _ ≤ (2 * H * V * (1 / a) + C0 * T / a) * N :=
       mul_le_mul_of_nonneg_right
-        (add_le_add_right (mul_le_mul_of_nonneg_left hRatio (by positivity)) _) hN
+        (_root_.add_le_add (mul_le_mul_of_nonneg_left hRatio hTraceCoeff) le_rfl) hN
     _ = _ := by dsimp [actualMomentLockedObstructionTraceConstant, H, C0, V, T, N, Np, Nm]; ring
 
 /-- Both parts of the full obstruction are bounded for one and the same
