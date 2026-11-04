@@ -149,12 +149,28 @@ theorem actual_Hartree_canonical_baseline_outgoing_trace_bound
   have hmj := (actual_Hartree_normalized_inner_shell_equation_bound Fm hm hcm L L hL le_rfl).2
   have hpv : |up L| ≤ V * Np := hpj.1
   have hmv : |um L| ≤ V * Nm := hmj.1
-  have hpd : |deriv up L| ≤ T * Np / L ^ 2 := by
-    apply (le_div_iff₀ (pow_pos hLp 2)).2
-    simpa only [up, actualMomentLockedPhysicalPlus, T, Np, mul_comm] using hpj.2.1
-  have hmd : |deriv um L| ≤ T * Nm / L ^ 2 := by
-    apply (le_div_iff₀ (pow_pos hLp 2)).2
-    simpa only [um, actualMomentLockedPhysicalMinus, T, Nm, mul_comm] using hmj.2.1
+  have hpFun : (fun x : ℝ =>
+      normalizedPlusOutput (7 / 4 : ℝ) (by norm_num) (by norm_num) Fp hp x / x) = up := by
+    funext x
+    rfl
+  have hmFun : (fun x : ℝ =>
+      normalizedMinusOutput (7 / 4 : ℝ) (by norm_num) (by norm_num) Fm hm x / x) = um := by
+    funext x
+    rfl
+  have hpdRaw : L ^ 2 * |deriv up L| ≤ T * Np := by
+    have h := hpj.2.1
+    dsimp only at h
+    rw [hpFun] at h
+    exact h
+  have hmdRaw : L ^ 2 * |deriv um L| ≤ T * Nm := by
+    have h := hmj.2.1
+    dsimp only at h
+    rw [hmFun] at h
+    exact h
+  have hpd : |deriv up L| ≤ T * Np / L ^ 2 :=
+    (le_div_iff₀ (pow_pos hLp 2)).2 ((mul_comm _ _).trans_le hpdRaw)
+  have hmd : |deriv um L| ≤ T * Nm / L ^ 2 :=
+    (le_div_iff₀ (pow_pos hLp 2)).2 ((mul_comm _ _).trans_le hmdRaw)
   have hU : ‖J.1‖ ≤ V * N := by
     change ‖(up (a * (L / a)) : ℂ) + Complex.I * (um (a * (L / a)) : ℂ)‖ ≤ _
     rw [hScale]
