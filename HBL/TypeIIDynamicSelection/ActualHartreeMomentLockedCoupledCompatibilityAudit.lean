@@ -1,4 +1,8 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility
+import HBL.TypeIIDynamicSelection.ComplexTwoColumnDeterminantBound
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound
+import HBL.KummerOriginBasis.RegularDerivativeBound
+import HBL.KummerOriginBasis.ReferenceIntegralLowerBound
 set_option autoImplicit false
 set_option pp.all true
 set_option pp.maxSteps 10000000
@@ -64,3 +68,40 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on
+
+#check @HBL.TypeIIDynamicSelection.complex_two_column_determinant_lower_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.complex_two_column_determinant_lower_bound
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_corrected_sources_weighted
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_corrected_sources_weighted
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moments_nonneg
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moments_nonneg
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_total_source_firstMoment
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_total_source_firstMoment
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_bounds
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_bounds
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_at_cutoff
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_at_cutoff
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_fixed_moment_constant
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_fixed_moment_constant
+#check @HBL.Profile.Kummer.origin_kummer_regular_jet_bound
+set_option pp.all false in
+#print axioms HBL.Profile.Kummer.origin_kummer_regular_jet_bound
+#check @HBL.Profile.Kummer.origin_kummer_regular_physical_bound
+set_option pp.all false in
+#print axioms HBL.Profile.Kummer.origin_kummer_regular_physical_bound
+#check @HBL.Profile.Kummer.origin_kummer_reference_density_error_bound
+set_option pp.all false in
+#print axioms HBL.Profile.Kummer.origin_kummer_reference_density_error_bound
+#check @HBL.Profile.Kummer.origin_kummer_reference_integral_error_bound
+set_option pp.all false in
+#print axioms HBL.Profile.Kummer.origin_kummer_reference_integral_error_bound
+#check @HBL.Profile.Kummer.origin_kummer_reference_integral_lower_bound
+set_option pp.all false in
+#print axioms HBL.Profile.Kummer.origin_kummer_reference_integral_lower_bound

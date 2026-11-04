@@ -8,6 +8,14 @@ on:
       - 'HBL/InnerEstimates/OutputLinearity.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse*.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean'
+      - 'HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean'
+      - 'HBL/KummerOriginBasis/RegularDerivativeBound.lean'
+      - 'HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean'
+      - 'HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean'
       - '.github/workflows/hbl-213-moment-locked-projection.yml'
   workflow_dispatch:
 permissions:
@@ -83,6 +91,10 @@ jobs:
               ('HBL.Modulation.Monopole','HBL/InnerEstimates/OutputLinearity.lean'),
               ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean'),
               ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean'),
+              ('HBL.TypeIIDynamicSelection','HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean'),
+              ('HBL.Profile.Kummer','HBL/KummerOriginBasis/RegularDerivativeBound.lean'),
+              ('HBL.Profile.Kummer','HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean'),
           ]
           names=[]
           for ns,p in sources:
@@ -100,8 +112,8 @@ jobs:
           assert set(re.findall(r'^#print axioms\s+(\S+)',audit,flags=re.M))==set(names)
           Path('evidence/new-public-declarations.txt').write_text('\n'.join(names)+'\n')
           PY
-          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit HBL.InnerEstimates.OutputLinearity HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerResponse HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibilityAudit 2>&1 | tee evidence/build.log
-          for p in HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean; do
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjection HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedProjectionAudit HBL.InnerEstimates.OutputLinearity HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedInnerResponse HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility HBL.TypeIIDynamicSelection.ComplexTwoColumnDeterminantBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound HBL.KummerOriginBasis.RegularDerivativeBound HBL.KummerOriginBasis.ReferenceIntegralLowerBound HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibilityAudit 2>&1 | tee evidence/build.log
+          for p in HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean; do
             n="${p##*/}"
             lake env lean --trust=0 -DwarningAsError=true "$p" 2>&1 | tee "evidence/${n%.lean}-strict.log"
           done
@@ -146,8 +158,8 @@ jobs:
           mkdir -p evidence/sources
           git rev-parse HEAD > evidence/commit.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
-          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean > evidence/source-hashes.txt
-          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean evidence/sources/
+          sha256sum HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean > evidence/source-hashes.txt
+          cp HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed*.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection*.lean HBL/InnerEstimates/OutputLinearity.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility*.lean HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean HBL/KummerOriginBasis/RegularDerivativeBound.lean HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean evidence/sources/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
