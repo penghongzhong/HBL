@@ -43,6 +43,7 @@ private theorem sourceData_norm_of_envelope
     unfold affineJapaneseWeight
     positivity
   have ht0 : 0 ≤ (1 + r) ^ (-(5 / 8 : ℝ)) := by positivity
+  change criticalTailL2 r = (1 + r) ^ (-(5 / 8 : ℝ)) at ht
   change ‖weightedSourceDataL2 (7 / 4 : ℝ) F hF r‖ ≤ C * ‖criticalTailL2 r‖
   rw [hd, ht, Real.norm_eq_abs, Real.norm_eq_abs, abs_mul,
     abs_of_nonneg hw, abs_of_nonneg ht0]
@@ -66,7 +67,8 @@ private theorem correctedData_norm_le
       weightedSourceDataL2_ae (7 / 4 : ℝ) F hF,
       weightedSourceDataL2_ae (7 / 4 : ℝ) P hP,
       Lp.coeFn_sub f (a • p), Lp.coeFn_smul a p] with r hc hf hp hsub hsmul
-    simp only [Pi.sub_apply, Pi.smul_apply, smul_eq_mul] at hsub hsmul
+    change (f - a • p) r = f r - (a • p) r at hsub
+    change (a • p) r = a * p r at hsmul
     rw [hc, hsub, hsmul, hf, hp]
     ring
   rw [heq]
@@ -176,12 +178,12 @@ theorem actual_Hartree_uniform_canonical_inner_moments_and_traces
   have hpNorm : ‖weightedSourceDataL2 (7 / 4 : ℝ) (correctedPlusSource gp) hpCorr‖ ≤ Sp * e := by
     have h := correctedData_norm_le gp (channelAffineSource HartreeChannel.plus)
       (actualPlusCharge gp) hp hpModel hpCorr
-    exact (h.trans (add_le_add hpData
+    exact (h.trans (_root_.add_le_add hpData
       (mul_le_mul_of_nonneg_right hpCharge hAp))).trans_eq (by dsimp [Sp]; ring)
   have hmNorm : ‖weightedSourceDataL2 (7 / 4 : ℝ) (correctedMinusSource gm) hmCorr‖ ≤ Sm * e := by
     have h := correctedData_norm_le gm (channelAffineSource HartreeChannel.minus)
       (actualMinusCharge gm) hm hmModel hmCorr
-    exact (h.trans (add_le_add hmData
+    exact (h.trans (_root_.add_le_add hmData
       (mul_le_mul_of_nonneg_right hmCharge hAm))).trans_eq (by dsimp [Sm]; ring)
   obtain ⟨x, hx, _hunique⟩ := existsUnique_actualInner_affinelyCorrected
     (7 / 4 : ℝ) (by norm_num) (by norm_num) gp gm hp hm
