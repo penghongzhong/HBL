@@ -140,7 +140,10 @@ theorem actual_Hartree_moment_locked_pullback_actual_inner_jet
     rw [hCoeff] at h
     exact h
   have hZero : HasDerivAt (fun y => u y - v y) 0 L := by
-    simpa only [sub_self, Pi.sub_apply] using hInner.differentiableAt.hasDerivAt.sub hV
+    have hs := hInner.differentiableAt.hasDerivAt.sub hV
+    have hf : u - v = (fun y => u y - v y) := rfl
+    rw [hf] at hs
+    simpa only [sub_self] using hs
   exact ⟨hValue, hV, hV.deriv, sub_eq_zero.mpr hValue.symm, hZero, hZero.deriv⟩
 
 end HBL.TypeIIDynamicSelection
