@@ -80,12 +80,18 @@ private theorem bubble_two_speed_tail (L t : ℝ) (hL : 0 < L) (ht : L ≤ t) :
   have hinv : 0 ≤ 1 / L ^ 2 := by positivity
   constructor
   · change |t * w - 1| ≤ _
-    nlinarith only [hphase, hinv]
+    exact hphase.trans
+      (div_le_div_of_nonneg_right (by norm_num) (sq_nonneg L))
   · rw [hscaleId, abs_of_nonneg (add_nonneg
       (div_nonneg hmissing0 (by norm_num)) (mul_nonneg htw0 (sq_nonneg w)))]
     have hm := hmissing.trans hw2bound
     have hp := hprod.trans hw2bound
-    nlinarith only [hm, hp, hinv]
+    have hhalf : (1 - t * w) / 2 ≤ 1 / L ^ 2 :=
+      (div_le_div_of_nonneg_right hm (by norm_num : (0 : ℝ) ≤ 2)).trans
+        (div_le_self hinv (by norm_num : (1 : ℝ) ≤ 2))
+    calc
+      _ ≤ 1 / L ^ 2 + 1 / L ^ 2 := _root_.add_le_add hhalf hp
+      _ = 2 / L ^ 2 := by rw [← add_div]; norm_num
 
 private theorem actual_two_speed_tail (L t c M : ℝ) (hL : 0 < L) (ht : L ≤ t)
     (hClose :
@@ -99,7 +105,7 @@ private theorem actual_two_speed_tail (L t c M : ℝ) (hL : 0 < L) (ht : L ≤ t
   constructor
   · calc
       _ = |t * (actualMomentLockedScaleProfile c t - dilationGenerator bubble t) +
-          (t * dilationGenerator bubble t + 1 / 2)| := by congr 1 <;> ring
+          (t * dilationGenerator bubble t + 1 / 2)| := by congr 1; ring
       _ ≤ |t * (actualMomentLockedScaleProfile c t - dilationGenerator bubble t)| +
           |t * dilationGenerator bubble t + 1 / 2| := abs_add_le _ _
       _ ≤ t * (M * |c|) + 2 / L ^ 2 := by
@@ -108,7 +114,7 @@ private theorem actual_two_speed_tail (L t c M : ℝ) (hL : 0 < L) (ht : L ≤ t
       _ = _ := by ring
   · calc
       _ = |t * (actualMomentLockedCore c t - bubble t) +
-          (t * bubble t - 1)| := by congr 1 <;> ring
+          (t * bubble t - 1)| := by congr 1; ring
       _ ≤ |t * (actualMomentLockedCore c t - bubble t)| +
           |t * bubble t - 1| := abs_add_le _ _
       _ ≤ t * (M * |c|) + 2 / L ^ 2 := by
@@ -127,7 +133,6 @@ private theorem origin_source_exact_reference_density
       -(Complex.I * (r : ℂ) ^ 2 / 4) by ring, Complex.exp_neg]
   dsimp [projectionReferenceDensity]
   field_simp [hrC, Complex.exp_ne_zero]
-  <;> ring
 
 private theorem normalized_projection_error_from_density
     {mu theta scale r0 B C C0 : ℝ} (K : OriginKummerPair mu theta scale)
@@ -244,7 +249,9 @@ theorem actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_clos
     have hh := actual_two_speed_tail L (a * r) c M hL ht
       (hClose c (a * r) (mul_pos ha hrpos))
     have hup : a * r * M * |c| + 2 / L ^ 2 ≤
-        a * B * M * |c| + 2 / L ^ 2 := by gcongr
+        a * B * M * |c| + 2 / L ^ 2 := by
+      gcongr
+      exact hr.2
     exact ⟨hh.1.trans hup, hh.2.trans hup⟩
   have hq (r : ℝ) (hr : r ∈ Icc (L / a) B) :
       ‖projectionReferenceDensity K r‖ ≤ C0 * B := by

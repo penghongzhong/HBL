@@ -10,6 +10,7 @@ import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedResponseTraceBound
 import HBL.KummerOriginBasis.RegularDerivativeBound
 import HBL.KummerOriginBasis.ReferenceIntegralLowerBound
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedConstructedNondegeneracy
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCancellation
 set_option autoImplicit false
 set_option pp.all true
 set_option pp.maxSteps 10000000
@@ -144,3 +145,11 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_unique_cancellation_region
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_unique_cancellation_region
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation
