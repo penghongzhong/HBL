@@ -39,8 +39,10 @@ theorem actual_Kummer_shear_phase_norm (r : ℝ) :
       (((r ^ 2 / 4 : ℝ) : ℂ) * Complex.I) := by
     push_cast
     ring
-  rw [actualKummerShearPhase, hArg, Complex.norm_exp]
-  simp
+  have hRe : ((((r ^ 2 / 4 : ℝ) : ℂ) * Complex.I)).re = 0 := by
+    change (r ^ 2 / 4) * 0 - 0 * 1 = 0
+    ring
+  rw [actualKummerShearPhase, hArg, Complex.norm_exp, hRe, Real.exp_zero]
 
 theorem actual_Kummer_shear_phase_hasDerivAt (r : ℝ) :
     HasDerivAt actualKummerShearPhase
