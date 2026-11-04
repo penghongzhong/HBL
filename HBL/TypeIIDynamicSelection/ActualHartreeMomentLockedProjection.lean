@@ -25,15 +25,14 @@ def actualMomentLockedScaledScaleSource (a c r : ℝ) : ℂ :=
 def actualMomentLockedScaledPhaseSource (a c r : ℝ) : ℂ :=
   (a ^ 2 : ℝ) * actualMomentLockedPhaseSource c (a * r)
 
-/-- The two columns are integrals of the actual physical directions,
-not the auxiliary unit-projection sources S_K and i*S_K. -/
+/-- Columns from actual physical directions, not auxiliary normalized sources. -/
 def actualMomentLockedProjectionColumns
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (R a c : ℝ) : ℂ × ℂ :=
   (originGreenCoeffA K (2 * R) (actualMomentLockedScaledScaleSource a c) R,
    originGreenCoeffA K (2 * R) (actualMomentLockedScaledPhaseSource a c) R)
 
-/-- The actual two-real-coordinate determinant that must be verified. -/
+/-- The actual two-real-coordinate determinant that still must be verified. -/
 def actualMomentLockedProjectionDeterminant
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (R a c : ℝ) : ℝ :=
@@ -62,8 +61,8 @@ private theorem actual_scaled_speed_measurable (a c : ℝ) :
   · exact measurable_const.mul ((Complex.measurable_ofReal.comp hCore).comp
       (measurable_const.mul measurable_id))
 
-/-- Actual scaled physical source directions are locally integrable on every
-positive annulus, without adding an assumed source regularity interface. -/
+/-- Integrability of both actual directions on every positive annulus is
+proved from their real profiles, not an additional analytical premise. -/
 theorem actual_Hartree_moment_locked_scaled_speed_integrable
     (a c R : ℝ) (ha : 0 < a) (hR : 0 < R) :
     IntervalIntegrable (actualMomentLockedScaledScaleSource a c) volume R (2 * R) ∧
@@ -137,11 +136,10 @@ private theorem actual_projection_difference_bound
   rw [← heq]
   have hB := (originGreen_coefficients_norm_le K R (2 * R) C M hC hM hK
     (fun r => F r - G r) hFG (show R ∈ Icc R (2 * R) by constructor <;> linarith)).1
-  convert hB using 1 <;> ring
+  convert hB using 1; ring
 
-/-- The true compatibility columns approach the explicit bubble columns.
-M is fixed BEFORE a,c. The original Wronskian and the spatial a^2 scaling
-are retained; the constant may depend on the prescribed basis and annulus. -/
+/-- The true columns approach the explicit bubble columns, with a fixed M
+chosen before a,c. The true Wronskian and Laplacian scaling a^2 are retained. -/
 theorem actual_Hartree_moment_locked_projection_columns_close
     {mu theta scale R C : ℝ} (K : OriginKummerPair mu theta scale)
     (hR : 0 < R) (hC : 0 ≤ C) (hK : OriginBasisOn K R (2 * R) C) :
@@ -176,7 +174,7 @@ theorem actual_Hartree_moment_locked_projection_columns_close
         push_cast
         ring
       rw [heq]
-      simpa only [norm_mul, Complex.norm_I, mul_one, Complex.norm_real,
+      simpa only [norm_mul, Complex.norm_I, mul_one, one_mul, Complex.norm_real,
         Real.norm_eq_abs, abs_of_nonneg (sq_nonneg a), mul_assoc] using
         mul_le_mul_of_nonneg_left (hClose c (a * r) hr0).1 (sq_nonneg a)
     · have heq : actualMomentLockedScaledPhaseSource a c r -
@@ -201,9 +199,8 @@ theorem actual_Hartree_moment_locked_projection_columns_close
       hI.2 hI0.2 (a ^ 2 * M * |c|) (by positivity) (fun r hr => (hDiff r hr).2)
     exact h.trans_eq (by ring)
 
-/-- Exact response of the original compatibility map to REAL physical speed
-increments at a fixed instantaneous configuration. The other coordinates
-and incoming jet remain frozen in this statement; a coupled path is not claimed. -/
+/-- Exact response to REAL physical speed increments at a fixed instantaneous
+configuration. This is not the full Jacobian of the coupled inner/Kummer map. -/
 theorem actual_Hartree_moment_locked_compatibility_speed_response
     {mu theta scale R C : ℝ} (K : OriginKummerPair mu theta scale)
     (hR : 0 < R) (hK : OriginBasisOn K R (2 * R) C)
