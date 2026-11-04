@@ -1,0 +1,10 @@
+import HBL.TypeIIDynamicSelection.ActualKummerFullSourceTransfer
+set_option autoImplicit false
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_impulse_scaled_uniform
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_zero_data_Duhamel_exact
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_zero_data_scaled_source_bound
+#check @HBL.TypeIIDynamicSelection.actual_Kummer_full_source_scaled_transfer_uniform
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_impulse_scaled_uniform
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_zero_data_Duhamel_exact
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_zero_data_scaled_source_bound
+#print axioms HBL.TypeIIDynamicSelection.actual_Kummer_full_source_scaled_transfer_uniform
