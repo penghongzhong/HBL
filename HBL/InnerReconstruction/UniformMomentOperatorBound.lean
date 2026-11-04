@@ -24,9 +24,17 @@ private theorem actual_l2_integral_norm_product_le
   let gn : RealL2 halfLineMeasure :=
     ((Lp.memLp g).norm).toLp (fun r => ‖g r‖)
   have hfn : ‖fn‖ = ‖f‖ := by
-    simp only [fn, Lp.norm_toLp, eLpNorm_norm, Lp.norm_def]
+    calc
+      ‖fn‖ = (eLpNorm (fn : ℝ → ℝ) 2 halfLineMeasure).toReal := rfl
+      _ = (eLpNorm (fun r => ‖f r‖) 2 halfLineMeasure).toReal :=
+        congrArg ENNReal.toReal (eLpNorm_congr_ae ((Lp.memLp f).norm).coeFn_toLp)
+      _ = ‖f‖ := by rw [eLpNorm_norm]; rfl
   have hgn : ‖gn‖ = ‖g‖ := by
-    simp only [gn, Lp.norm_toLp, eLpNorm_norm, Lp.norm_def]
+    calc
+      ‖gn‖ = (eLpNorm (gn : ℝ → ℝ) 2 halfLineMeasure).toReal := rfl
+      _ = (eLpNorm (fun r => ‖g r‖) 2 halfLineMeasure).toReal :=
+        congrArg ENNReal.toReal (eLpNorm_congr_ae ((Lp.memLp g).norm).coeFn_toLp)
+      _ = ‖g‖ := by rw [eLpNorm_norm]; rfl
   have heq : (∫ r, ‖f r * g r‖ ∂halfLineMeasure) =
       inner ℝ fn gn := by
     rw [L2.inner_def]
@@ -35,7 +43,6 @@ private theorem actual_l2_integral_norm_product_le
       ((Lp.memLp g).norm).coeFn_toLp] with r hf hg
     change ‖f r * g r‖ = inner ℝ (fn r) (gn r)
     rw [hf, hg, Real.inner_apply, norm_mul]
-    ring
   rw [heq]
   calc
     inner ℝ fn gn ≤ ‖fn‖ * ‖gn‖ := real_inner_le_norm _ _
@@ -64,6 +71,7 @@ theorem actual_innerGreenBound_le_fixed_weight_norms
       unfold weightedGreenPrimitiveBound
       apply integral_congr_ae
       filter_upwards [weightedGreenOutputMajorant_memLp_two.coeFn_toLp] with r hr
+      change actualInnerPotentialMomentWeightL2 r = weightedGreenOutputMajorant r at hr
       rw [hr]
     rw [heq]
     exact actual_l2_integral_norm_product_le _ _
@@ -77,6 +85,8 @@ theorem actual_innerGreenBound_le_fixed_weight_norms
       filter_upwards [
         (weightedSource_momentWeight_memLp (7 / 4 : ℝ) (by norm_num)).coeFn_toLp,
         weightedSourceDataL2_ae (7 / 4 : ℝ) F hF] with r hw hd
+      change actualInnerSourceMomentWeightL2 r =
+        r * affineJapaneseDecay (7 / 4 : ℝ) r at hw
       rw [hw, hd]
       congr 1
       calc
@@ -86,7 +96,7 @@ theorem actual_innerGreenBound_le_fixed_weight_norms
         _ = _ := by ring
     rw [heq]
     exact actual_l2_integral_norm_product_le _ _
-  exact add_le_add hPot hSrc
+  exact _root_.add_le_add hPot hSrc
 
 /-- Fixed, derived constants bound both actual normalized inner moments
 by the corresponding corrected-source weighted L2 norms. Neither the
@@ -124,13 +134,19 @@ theorem actual_inner_fixed_Fredholm_moment_constants :
   have hxp0 : ‖(x.1 : RealL2 halfLineMeasure)‖ ≤
       (Cp : ℝ) * ‖(1 - weightedBirmanSchwingerOperator)
         (x.1 : RealL2 halfLineMeasure)‖ := by
-    simpa [HBL.Fredholm.kernelComplementRestriction, dist_eq_norm] using
-      hCp.le_mul_dist x.1 0
+    have h := hCp.le_mul_dist x.1 0
+    change dist (x.1 : RealL2 halfLineMeasure) 0 ≤
+      (Cp : ℝ) * dist ((1 - weightedBirmanSchwingerOperator)
+        (x.1 : RealL2 halfLineMeasure)) ((1 - weightedBirmanSchwingerOperator) 0) at h
+    simpa only [map_zero, dist_zero_right] using h
   have hxm0 : ‖(x.2 : RealL2 halfLineMeasure)‖ ≤
       (Cm : ℝ) * ‖(1 - weightedPhaseBirman)
         (x.2 : RealL2 halfLineMeasure)‖ := by
-    simpa [HBL.Fredholm.kernelComplementRestriction, dist_eq_norm] using
-      hCm.le_mul_dist x.2 0
+    have h := hCm.le_mul_dist x.2 0
+    change dist (x.2 : RealL2 halfLineMeasure) 0 ≤
+      (Cm : ℝ) * dist ((1 - weightedPhaseBirman)
+        (x.2 : RealL2 halfLineMeasure)) ((1 - weightedPhaseBirman) 0) at h
+    simpa only [map_zero, dist_zero_right] using h
   have hxp1 : ‖(x.1 : RealL2 halfLineMeasure)‖ ≤
       ((Cp : ℝ) * ‖S‖) * ‖dp‖ := by
     rw [hxp] at hxp0
@@ -150,17 +166,19 @@ theorem actual_inner_fixed_Fredholm_moment_constants :
           Ns * ‖dp‖ := actual_innerGreenBound_le_fixed_weight_norms _ Fp hp
       _ ≤ Na * (‖weightedPotentialOperator‖ *
           (((Cp : ℝ) * ‖S‖) * ‖dp‖)) + Ns * ‖dp‖ :=
-        add_le_add_right (mul_le_mul_of_nonneg_left hV (norm_nonneg _)) _
+        _root_.add_le_add (mul_le_mul_of_nonneg_left hV
+          (show 0 ≤ Na from norm_nonneg _)) (le_refl _)
       _ = Dp * ‖dp‖ := by dsimp [Dp]; ring
   · have hV : ‖(3 : ℝ) • (x.2 : RealL2 halfLineMeasure)‖ ≤
         3 * (((Cm : ℝ) * ‖S‖) * ‖dm‖) := by
-      simpa only [norm_smul, Real.norm_eq_abs, abs_ofNat] using
-        mul_le_mul_of_nonneg_left hxm1 (by norm_num : (0 : ℝ) ≤ 3)
+      rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 3)]
+      exact mul_le_mul_of_nonneg_left hxm1 (by norm_num)
     calc
       _ ≤ Na * ‖(3 : ℝ) • (x.2 : RealL2 halfLineMeasure)‖ + Ns * ‖dm‖ :=
         actual_innerGreenBound_le_fixed_weight_norms _ Fm hm
       _ ≤ Na * (3 * (((Cm : ℝ) * ‖S‖) * ‖dm‖)) + Ns * ‖dm‖ :=
-        add_le_add_right (mul_le_mul_of_nonneg_left hV (norm_nonneg _)) _
+        _root_.add_le_add (mul_le_mul_of_nonneg_left hV
+          (show 0 ≤ Na from norm_nonneg _)) (le_refl _)
       _ = Dm * ‖dm‖ := by dsimp [Dm]; ring
 
 end HBL.Modulation.Monopole
