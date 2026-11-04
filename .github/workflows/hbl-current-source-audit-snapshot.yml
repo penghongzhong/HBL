@@ -1,0 +1,29 @@
+name: HBL current proof source audit snapshot
+on:
+  push:
+    branches: [hbl-213-conjugated-two-weight-integrated-20261103]
+    paths: ['.github/workflows/hbl-current-source-audit-snapshot.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export exact source and proof ledger without compiled claims
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source-audit
+          git rev-parse HEAD > source-audit/commit.txt
+          git ls-files > source-audit/tracked-paths.txt
+          git archive --format=tar HEAD | gzip > source-audit/hbl-current-source.tar.gz
+          sha256sum source-audit/hbl-current-source.tar.gz > source-audit/archive-sha256.txt
+          printf 'SOURCE SNAPSHOT ONLY: this run makes no Lean acceptance claim.\n' > source-audit/SCOPE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hbl-current-source-audit-snapshot
+          path: source-audit
+          retention-days: 14
