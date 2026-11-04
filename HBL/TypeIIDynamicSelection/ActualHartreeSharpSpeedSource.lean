@@ -89,7 +89,7 @@ private theorem actual_inner_constant_supported_source_five_halves
         _ ≤ 5 * L ^ 2 := by
           nlinarith [pow_le_pow_left₀ hr.le hrL 2, sq_nonneg (L - 1)]
     dsimp [W]
-    rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg hw0]
+    rw [abs_mul, abs_of_nonneg hw0]
     calc
       _ ≤ (5 * L ^ 2) * A :=
         mul_le_mul hw (hBound r hr hrL) (abs_nonneg _) (by positivity)
@@ -121,7 +121,7 @@ private theorem actual_inner_constant_supported_source_five_halves
 weighted growth in the actual small-monopole physical region. -/
 theorem actual_Hartree_moment_locked_speed_source_five_halves :
     ∃ C : ℝ, 0 < C ∧
-      ∀ (L c : ℝ) (hL : 1 ≤ L), L * |c| ≤ 1 →
+      ∀ (L c : ℝ) (_hL : 1 ≤ L), L * |c| ≤ 1 →
       innerWeightedNorm (7 / 4 : ℝ) (actualMomentLockedInnerScaleSource L c) ≤
         C * L ^ (5 / 2 : ℝ) ∧
       innerWeightedNorm (7 / 4 : ℝ) (actualMomentLockedInnerPhaseSource L c) ≤
@@ -198,7 +198,7 @@ Kummer obstruction Z is retained: no unproved residual estimate for Z is
 injected into the statement. -/
 theorem actual_Hartree_moment_locked_sharp_source_obstruction_gain :
     ∃ C : ℝ, 0 < C ∧
-      ∀ (L c a B : ℝ) (hL : 1 ≤ L),
+      ∀ (L c a B : ℝ) (_hL : 1 ≤ L),
         L * |c| ≤ 1 → L ^ 3 ≤ a → 0 < B →
       ∀ (Fp Fm : ℝ → ℝ)
         (_hp : InWeightedL2 (7 / 4 : ℝ) Fp)
