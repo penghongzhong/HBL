@@ -158,10 +158,10 @@ theorem actual_Kummer_interface_repair_uniform_bound :
   have hDer := repairCutoff_derivatives R r hR.ne'
   have hChi1 : ‖deriv (actualKummerRepairCutoff R) r‖ ≤ 3*C1/R := by
     rw [hDer.1.deriv]
-    exact ((hBounds (R/3) (r-R) (by positivity)).1).trans_eq (by field_simp; ring)
+    exact ((hBounds (R/3) (r-R) (by positivity)).1).trans_eq (by field_simp)
   have hChi2 : ‖deriv (deriv (actualKummerRepairCutoff R)) r‖ ≤ 9*C2/R^2 := by
     rw [hDer.2.deriv]
-    exact ((hBounds (R/3) (r-R) (by positivity)).2).trans_eq (by field_simp)
+    exact ((hBounds (R/3) (r-R) (by positivity)).2).trans_eq (by field_simp; norm_num)
   have hLift : ‖actualKummerInterfaceRepair R p q r‖ ≤ D := by
     unfold actualKummerInterfaceRepair
     rw [norm_mul]
@@ -200,7 +200,7 @@ theorem actual_Kummer_interface_repair_uniform_bound :
       _ ≤ ‖actualKummerInterfaceRepairSecond R p q r‖ +
           ‖frozenFirstCoeff r*actualKummerInterfaceRepairSlope R p q r‖ +
           ‖frozenZeroCoeff mu theta*actualKummerInterfaceRepair R p q r‖ :=
-        (norm_add_le _ _).trans (_root_.add_le_add_right (norm_add_le _ _) _)
+        (norm_add_le _ _).trans (_root_.add_le_add (norm_add_le _ _) (le_refl _))
       _ ≤ (9*C2+6*C1)*D/R^2 + (2/R+R)*((3*C1+1)*D/R) +
           ‖frozenZeroCoeff mu theta‖*D := by
         rw [norm_mul, norm_mul]
