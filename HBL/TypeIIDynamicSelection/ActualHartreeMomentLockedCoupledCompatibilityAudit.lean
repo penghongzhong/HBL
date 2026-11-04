@@ -1,3 +1,5 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeBackwardShellRegion
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedBackwardShell
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedPlateauSource
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedKummerPullback
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedShellWeightedGain
@@ -328,3 +330,14 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_backward_shell_weighted_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_backward_shell_weighted_gain
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_weak_budget
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_weak_budget
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_relative_factor
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_relative_factor

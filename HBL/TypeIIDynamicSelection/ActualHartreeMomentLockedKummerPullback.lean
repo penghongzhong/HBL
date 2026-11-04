@@ -51,7 +51,7 @@ theorem actual_Hartree_matched_Kummer_pullback_classical
     have hW : HasDerivAt w (deriv w (y / a)) (y / a) :=
       (hClass (y / a) (hmem y hy)).1.differentiableAt.hasDerivAt
     change HasDerivAt (fun t : ℝ => w (t / a)) _ y
-    simpa only [Function.comp_def, one_div, Complex.real_smul, Complex.ofReal_inv] using
+    simpa only [Function.comp_def, id_eq, one_div, Complex.real_smul, Complex.ofReal_inv] using
       hW.scomp y ((hasDerivAt_id y).div_const a)
   intro y hy
   have hnear : deriv v =ᶠ[𝓝 y] (fun t => (a : ℂ)⁻¹ * deriv w (t / a)) := by
@@ -61,7 +61,7 @@ theorem actual_Hartree_matched_Kummer_pullback_classical
     (hClass (y / a) (hmem y hy)).2.1.differentiableAt.hasDerivAt
   have hModel : HasDerivAt (fun t => (a : ℂ)⁻¹ * deriv w (t / a))
       ((a : ℂ)⁻¹ * ((a : ℂ)⁻¹ * deriv (deriv w) (y / a))) y := by
-    simpa only [Function.comp_def, one_div, Complex.real_smul, Complex.ofReal_inv] using
+    simpa only [Function.comp_def, id_eq, one_div, Complex.real_smul, Complex.ofReal_inv] using
       (hW2.scomp y ((hasDerivAt_id y).div_const a)).const_mul (a : ℂ)⁻¹
   have hSecond := hModel.congr_of_eventuallyEq hnear
   refine ⟨hFirst y hy, hSecond.differentiableAt, ?_⟩
@@ -140,7 +140,7 @@ theorem actual_Hartree_moment_locked_pullback_actual_inner_jet
     rw [hCoeff] at h
     exact h
   have hZero : HasDerivAt (fun y => u y - v y) 0 L := by
-    simpa only [sub_self] using hInner.differentiableAt.hasDerivAt.sub hV
+    simpa only [sub_self, Pi.sub_apply] using hInner.differentiableAt.hasDerivAt.sub hV
   exact ⟨hValue, hV, hV.deriv, sub_eq_zero.mpr hValue.symm, hZero, hZero.deriv⟩
 
 end HBL.TypeIIDynamicSelection

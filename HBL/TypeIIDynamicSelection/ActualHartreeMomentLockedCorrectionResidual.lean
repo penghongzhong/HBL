@@ -170,8 +170,13 @@ private theorem actual_scale_jet_hasDerivAt
     rw [actual_scale_jet_value]
     ring
   rw [hcoef]
-  simpa only [actualMomentLockedScaleJetPerturbation, sub_self, mul_zero,
-    Real.exp_zero, mul_one] using hEll.mul hexp
+  have hprod := hEll.mul hexp
+  have hfun : (ell * fun t : ℝ => Real.exp (-db * (t - s))) =
+      actualMomentLockedScaleJetPerturbation ell db s := by
+    funext t
+    rfl
+  rw [hfun] at hprod
+  simpa only [sub_self, mul_zero, Real.exp_zero, mul_one] using hprod
 
 /-- Physical specialization: one scale path, one physical clock and one
 genuine 3D radiation moment construct both time jets. The second moment
