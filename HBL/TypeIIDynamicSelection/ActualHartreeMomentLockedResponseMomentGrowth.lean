@@ -20,7 +20,7 @@ namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 open HBL.Profile.ActualInner HBL.L2Kernel
 
-private theorem actual_moment_bubble_dilation_abs_le_one (r : ℝ) :
+theorem actual_moment_bubble_dilation_abs_le_one (r : ℝ) :
     |dilationGenerator bubble r| ≤ 1 := by
   have hs : 1 ≤ Real.sqrt (1 + r ^ 2) := by
     have h := Real.sqrt_le_sqrt (show (1 : ℝ) ≤ 1 + r ^ 2 by nlinarith [sq_nonneg r])
@@ -36,7 +36,7 @@ private theorem actual_moment_bubble_dilation_abs_le_one (r : ℝ) :
   nlinarith [sq_nonneg (Real.sqrt (1 + r ^ 2)),
     mul_nonneg (sub_nonneg.mpr hs) (sq_nonneg (Real.sqrt (1 + r ^ 2)))]
 
-private theorem actual_moment_inner_sources_measurable (L c : ℝ) :
+theorem actual_moment_inner_sources_measurable (L c : ℝ) :
     Measurable (actualMomentLockedInnerScaleSource L c) ∧
     Measurable (actualMomentLockedInnerPhaseSource L c) := by
   have hCore : Measurable (actualMomentLockedCore c) :=

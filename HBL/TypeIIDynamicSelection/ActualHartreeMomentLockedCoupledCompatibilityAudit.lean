@@ -1,3 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeSharpSpeedSource
 import HBL.TypeIIDynamicSelection.ActualHartreeAdjustedSourceNorm
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedConstructedBackwardShell
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledInverseBound
@@ -375,6 +376,26 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_obstruction_bound
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_obstruction_bound
+
+#check @HBL.TypeIIDynamicSelection.bubble_two_speed_tail
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.bubble_two_speed_tail
+
+#check @HBL.TypeIIDynamicSelection.actual_moment_bubble_dilation_abs_le_one
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_moment_bubble_dilation_abs_le_one
+
+#check @HBL.TypeIIDynamicSelection.actual_moment_inner_sources_measurable
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_moment_inner_sources_measurable
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_speed_source_five_halves
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_speed_source_five_halves
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sharp_source_obstruction_gain
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sharp_source_obstruction_gain
 
 -- Expand the actual terminal conclusion as well as its public theorem type.
 #print HBL.TypeIIDynamicSelection.ActualMomentLockedPhysicalBackwardShellConclusion

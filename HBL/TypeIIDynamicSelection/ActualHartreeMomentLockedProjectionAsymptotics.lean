@@ -34,7 +34,7 @@ private theorem projectionReferenceDensity_norm {mu theta scale : ℝ}
   simp only [projectionReferenceDensity, norm_mul, he, mul_one]
 
 /-- Both actual bubble tails have a common explicit inverse-square bound. -/
-private theorem bubble_two_speed_tail (L t : ℝ) (hL : 0 < L) (ht : L ≤ t) :
+theorem bubble_two_speed_tail (L t : ℝ) (hL : 0 < L) (ht : L ≤ t) :
     |t * bubble t - 1| ≤ 2 / L ^ 2 ∧
       |t * dilationGenerator bubble t + 1 / 2| ≤ 2 / L ^ 2 := by
   have ht0 : 0 < t := hL.trans_le ht
