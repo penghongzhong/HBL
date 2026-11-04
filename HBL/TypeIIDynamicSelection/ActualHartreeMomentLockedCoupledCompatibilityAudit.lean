@@ -1,8 +1,8 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledCompatibility
 set_option autoImplicit false
-set_option pp.maxDepth 1000
-set_option pp.maxSteps 1000000
-set_option pp.width 160
+set_option pp.all true
+set_option pp.maxSteps 10000000
+set_option maxRecDepth 1000000
 
 #check @HBL.Modulation.Monopole.innerWeighted_add_smul_mem
 #print axioms HBL.Modulation.Monopole.innerWeighted_add_smul_mem
