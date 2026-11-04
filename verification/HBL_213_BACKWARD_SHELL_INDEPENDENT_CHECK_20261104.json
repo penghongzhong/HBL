@@ -1,0 +1,899 @@
+{
+  "commit": "8eb8daada29a861d025dd5b38a177d7b2a72c957",
+  "comparison_baseline_commit": "24c01447123be92f3bf9213b7e77c6cee7f0eaf1",
+  "changed_proof_files_checked": [
+    "HBL/TypeIIDynamicSelection/ActualHartreeBackwardShellRegion.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeInnerShellEquation.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedKummerShellGain.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedShellCommutator.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedShellWeightedGain.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedBackwardShell.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedConstructedBackwardShell.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCorrectionResidual.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledInverseBound.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedKummerPullback.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedMatchedKummer.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedMatchedKummerClassical.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedPlateauSource.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeShellWeightedNorm.lean",
+    "HBL/TypeIIDynamicSelection/ActualHartreeTwoChannelMatchedShell.lean"
+  ],
+  "zip_sha256": "e88f2bccaa7ab9519d7d45ca725675e58a8bd0b95d7175117af2c7fb12aa43da",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "compiler_archive_sha256": "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "build_jobs": 4243,
+  "build_warning_count_including_replayed_dependencies": 126,
+  "targeted_source_diagnostics": [],
+  "new_public_declarations": 95,
+  "baseline_declarations": 5,
+  "axiom_reports": {
+    "HBL.TypeIIDynamicSelection.actual_Hartree_threeD_moment_core_speed_split": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_speed_profiles_uniform_close": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_projection_columns_close": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_compatibility_speed_response": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.innerWeighted_add_smul_mem": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedPlusOutput_add_smul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Modulation.Monopole.normalizedMinusOutput_add_smul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_source_identification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sources_exact_partition": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_core": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_exterior": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_scale_source_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_phase_source_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_normalized_equations": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.normalizedPlusOutput_C1": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.normalizedMinusOutput_C1": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_C1": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_traces": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_jet_affine": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_coupled_response": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_coupled_response": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.complex_two_column_determinant_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_corrected_sources_weighted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moments_nonneg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_total_source_firstMoment": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_at_cutoff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_fixed_moment_constant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_regular_jet_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_regular_physical_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_reference_density_error_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_reference_integral_error_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.Profile.Kummer.origin_kummer_reference_integral_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moment_growth": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_close": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_projection_asymptotics": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_outgoing_trace_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_column_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_determinant_lower_bound_of_budget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_coupled_error_budget_le_inverse_square": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_coupled_explicit_small_parameter_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_nondegenerate_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_unique_cancellation_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_continuous": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_equations": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_cutoff_relative_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_core_weighted_relative_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_real_pair_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_bubble_four_potential_domination": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_nonlocal_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_bubble_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_core_time_jet_difference": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_correction_residual_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_correction_residual_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_left_jet_and_unique_coefficients": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_singular_eq_obstruction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_regular_coefficient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_upper_trace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_upper_regular_jet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_certificate_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_equation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_matched_Kummer_iff_compatibility": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_matched_Kummer": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_shell_equation_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_scaled_Kummer_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_radial_matched_shell_zero_jet_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_shell_cutoff_commutator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_radial_matched_shell_weak_terms_absorption": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_scaled_Kummer_shell_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_full_Kummer_shell_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_defect_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_on_positive_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_endpoint_jets": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_upper_trace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_norm": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_matched_Kummer_shell_error_measurable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_weighted_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_physical_source": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_backward_shell_weighted_gain": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_weak_budget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_relative_factor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_inverse_bound_of_budget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_inverse_bound_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable_on": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axiom_set_counts": {
+    "Classical.choice, Quot.sound, propext": 100
+  },
+  "complete_type_lengths": {
+    "HBL.TypeIIDynamicSelection.actual_Hartree_threeD_moment_core_speed_split": 3803,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_speed_profiles_uniform_close": 2715,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable": 2462,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_projection_columns_close": 2210,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_compatibility_speed_response": 1532,
+    "HBL.Modulation.Monopole.innerWeighted_add_smul_mem": 392,
+    "HBL.Modulation.Monopole.normalizedPlusOutput_add_smul": 2221,
+    "HBL.Modulation.Monopole.normalizedMinusOutput_add_smul": 2224,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_source_identification": 1057,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sources_exact_partition": 1877,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_core": 1059,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_exterior": 2384,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_weighted": 1883,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_scale_source_weighted": 980,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_phase_source_weighted": 980,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_normalized_equations": 4538949,
+    "HBL.TypeIIDynamicSelection.normalizedPlusOutput_C1": 56015,
+    "HBL.TypeIIDynamicSelection.normalizedMinusOutput_C1": 56017,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_C1": 5778,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_traces": 15176,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_jet_affine": 7974,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_coupled_response": 4048,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_coupled_response": 8432,
+    "HBL.TypeIIDynamicSelection.complex_two_column_determinant_lower_bound": 2575,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_corrected_sources_weighted": 1901,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moments_nonneg": 511,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_total_source_firstMoment": 4117,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_bounds": 6573,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_trace_at_cutoff": 9087,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_fixed_moment_constant": 868,
+    "HBL.Profile.Kummer.origin_kummer_regular_jet_bound": 3857,
+    "HBL.Profile.Kummer.origin_kummer_regular_physical_bound": 4125,
+    "HBL.Profile.Kummer.origin_kummer_reference_density_error_bound": 4663,
+    "HBL.Profile.Kummer.origin_kummer_reference_integral_error_bound": 4599,
+    "HBL.Profile.Kummer.origin_kummer_reference_integral_lower_bound": 4108,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_response_moment_growth": 8149,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_projection_asymptotics_of_uniform_close": 9868,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_projection_asymptotics": 11430,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_outgoing_trace_bounds": 7755,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_column_bounds": 9244,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_determinant_lower_bound_of_budget": 13956,
+    "HBL.TypeIIDynamicSelection.actual_coupled_error_budget_le_inverse_square": 9087,
+    "HBL.TypeIIDynamicSelection.actual_coupled_explicit_small_parameter_region": 15174,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_nondegenerate_region": 7137,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_nondegeneracy": 5112,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_unique_cancellation_region": 6310,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_unique_cancellation": 4263,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_continuous": 712,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_classical": 7618,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_equations": 14616,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_cutoff_relative_gain": 58819,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_core_weighted_relative_gain": 4422,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_real_pair_bound": 332,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_identity": 1580,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_polynomial_bounds": 6077,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_bubble_four_potential_domination": 2970,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_nonlocal_identity": 6094,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_Taylor_bubble_bound": 2750,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_exact": 17139,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_complex_correction_residual_quadratic": 19613,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_core_time_jet_difference": 12750,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_correction_residual_exact": 20250,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_correction_residual_exact": 25682,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_left_jet_and_unique_coefficients": 2536,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_singular_eq_obstruction": 447,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_regular_coefficient": 1044,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_upper_trace": 629,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_upper_regular_jet": 1698,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_certificate_iff": 1206,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_equation": 10179,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_matched_Kummer_iff_compatibility": 3323,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_matched_Kummer": 8172,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_shell_equation_bound": 59342,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_normalized_inner_scaled_Kummer_bound": 55778,
+    "HBL.TypeIIDynamicSelection.actual_radial_matched_shell_zero_jet_bounds": 14277,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_shell_cutoff_commutator": 15903,
+    "HBL.TypeIIDynamicSelection.actual_radial_matched_shell_weak_terms_absorption": 18232,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_scaled_Kummer_shell_gain": 25280,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_full_Kummer_shell_gain": 19039,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_inner_Kummer_defect_bound": 3168,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_gain": 33336,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_classical_on_positive_interval": 18542,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_endpoint_jets": 18496,
+    "HBL.TypeIIDynamicSelection.actual_origin_matched_Kummer_actual_upper_trace": 3132,
+    "HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_norm": 5330,
+    "HBL.TypeIIDynamicSelection.actual_conjugated_shell_weighted_power_bound": 4279,
+    "HBL.TypeIIDynamicSelection.actual_matched_Kummer_shell_error_measurable": 203,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_two_channel_matched_shell_weighted_gain": 43674,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical": 13544,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet": 19887,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_physical_source": 2083,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_plateau_scaled_source": 3917,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_backward_shell_weighted_gain": 31936,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_weak_budget": 4086,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_backward_shell_relative_factor": 5721,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_inverse_bound_of_budget": 16911,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_coupled_inverse_bound_region": 11313,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell": 26829,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable_on": 1755,
+    "HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on": 2224
+  },
+  "audit_bytes": {
+    "audit.log": 6212,
+    "coupled-response-audit.log": 5605287
+  },
+  "strict_log_bytes": {
+    "ActualHartreeMomentLockedSpeed-strict.log": 0,
+    "ActualHartreeMomentLockedProjection-strict.log": 0,
+    "OutputLinearity-strict.log": 0,
+    "ActualHartreeMomentLockedInnerResponse-strict.log": 0,
+    "ActualHartreeMomentLockedCoupledCompatibility-strict.log": 0,
+    "ComplexTwoColumnDeterminantBound-strict.log": 0,
+    "ActualHartreeMomentLockedResponseTraceBound-strict.log": 0,
+    "RegularDerivativeBound-strict.log": 0,
+    "ReferenceIntegralLowerBound-strict.log": 0,
+    "ActualHartreeMomentLockedResponseMomentGrowth-strict.log": 0,
+    "ActualHartreeMomentLockedProjectionAsymptotics-strict.log": 0,
+    "ActualHartreeMomentLockedCoupledTraceEstimate-strict.log": 0,
+    "ActualHartreeMomentLockedCoupledDeterminantBound-strict.log": 0,
+    "CoupledSmallParameterRegion-strict.log": 0,
+    "ActualHartreeMomentLockedNondegenerateRegion-strict.log": 0,
+    "ActualHartreeMomentLockedConstructedNondegeneracy-strict.log": 0,
+    "ActualHartreeMomentLockedCoupledCancellation-strict.log": 0,
+    "ActualHartreeMomentLockedInnerClassical-strict.log": 0,
+    "ActualHartreeInnerCutoffRelativeGain-strict.log": 0,
+    "ActualHartreeComplexTaylor-strict.log": 0,
+    "ActualHartreeComplexTaylorBubbleBound-strict.log": 0,
+    "ActualHartreeComplexCorrectionResidual-strict.log": 0,
+    "ActualHartreeMomentLockedCorrectionResidual-strict.log": 0,
+    "ActualHartreeMomentLockedMatchedKummer-strict.log": 0,
+    "ActualHartreeInnerShellEquation-strict.log": 0,
+    "ActualHartreeMatchedShellCommutator-strict.log": 0,
+    "ActualHartreeMatchedKummerShellGain-strict.log": 0,
+    "ActualHartreeTwoChannelMatchedShell-strict.log": 0,
+    "ActualHartreeMomentLockedMatchedKummerClassical-strict.log": 0,
+    "ActualHartreeShellWeightedNorm-strict.log": 0,
+    "ActualHartreeMatchedShellWeightedGain-strict.log": 0,
+    "ActualHartreeMomentLockedKummerPullback-strict.log": 0,
+    "ActualHartreeMomentLockedPlateauSource-strict.log": 0,
+    "ActualHartreeMomentLockedBackwardShell-strict.log": 0,
+    "ActualHartreeBackwardShellRegion-strict.log": 0,
+    "ActualHartreeMomentLockedCoupledInverseBound-strict.log": 0,
+    "ActualHartreeMomentLockedConstructedBackwardShell-strict.log": 0
+  },
+  "manifest_records": 41,
+  "manifest_duplicate_paths": [
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean"
+  ],
+  "unique_archived_sources": 40,
+  "source_integrity": {
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeed.lean": {
+      "sha256": "3ff8c1601cfb3255ee663c45d37fe78fb72413a62ac53ad82d5f4e44f90be764",
+      "git_blob": "8c0849e0025b5acb803b9a687003cfa212fd2e75",
+      "bytes": 8147
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedSpeedAudit.lean": {
+      "sha256": "1332a519e5947663105201e24cdecba4114050b28c4284dd520fdb5c97782e33",
+      "git_blob": "2c40ab3edfba97e819cf9a18793082cae18abd27",
+      "bytes": 1186
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjection.lean": {
+      "sha256": "30a0837ef6c796dfc8bba1320511de5948e16ca0e2828c254c48f7b492c088c8",
+      "git_blob": "0b162dd168339e4cd871d4f638d56e4949cba9c0",
+      "bytes": 16437
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAsymptotics.lean": {
+      "sha256": "f4f49e418cc30aeed8cca6e0a10f5c1f7822c1f4b169868ab5ada97fca486b4e",
+      "git_blob": "5c9a75c42b8ee1d67467a9a6d20e4691f087ddeb",
+      "bytes": 16617
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedProjectionAudit.lean": {
+      "sha256": "63d927e8d42cfa2007c8272b731c5f091a846c2263e003f079b2b9fff2f4ba1c",
+      "git_blob": "d3345209afa4b8dd2849e465843d013f790732cb",
+      "bytes": 1367
+    },
+    "HBL/InnerEstimates/OutputLinearity.lean": {
+      "sha256": "467b06b2ddee86f994044606e5dc67e6cd44e70853d9adb3ba71fe04a388afce",
+      "git_blob": "48f1cb43bad829f5fe78d61eb97631fd9a7dd190",
+      "bytes": 12155
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerResponse.lean": {
+      "sha256": "3b98c549fd76d1ccbbe2194e77b6f5f56bc67025dd48781e6cd809532ca078ab",
+      "git_blob": "e3b7ae97263c96d62cb3c767e4d3425941411862",
+      "bytes": 19777
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibility.lean": {
+      "sha256": "a6f0eb3de61b089c6894c3ddfd3bfdcccbba9102275e2c3e150f407d622946d2",
+      "git_blob": "a581d4a973cffc53d9e791ff80e27a181e3176e6",
+      "bytes": 15168
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCompatibilityAudit.lean": {
+      "sha256": "3c998475aa557b0a6fcc987eda7ef2d46a7d88252a500bc3071910ed7d2adac2",
+      "git_blob": "d4a78f44a38b6f3fd535084db7919647db72ad82",
+      "bytes": 21994
+    },
+    "HBL/TypeIIDynamicSelection/ComplexTwoColumnDeterminantBound.lean": {
+      "sha256": "d4f630901021f8b3ce550a6a75f3ec779f0c5484d0153173711c057260419ba0",
+      "git_blob": "0471215d9ec50cd3557716fd07498d45176be344",
+      "bytes": 2875
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseTraceBound.lean": {
+      "sha256": "5d421387d98c11125e1273c90868202183d6a6e7a2eb706a8eedd5595ac24a84",
+      "git_blob": "ae0d79eab9a41eb943967fccdb813065fc170071",
+      "bytes": 11205
+    },
+    "HBL/KummerOriginBasis/RegularDerivativeBound.lean": {
+      "sha256": "6c39f69ec3426682b283fc7c9a9f6b96203c8b31086668e7a6db70576ca11831",
+      "git_blob": "d53990e2989818009b7066d02a199ed3b8c818f0",
+      "bytes": 6255
+    },
+    "HBL/KummerOriginBasis/ReferenceIntegralLowerBound.lean": {
+      "sha256": "67bb5c79a1a55609f52877e5cb776ad598ef2ca67ff5be5ca6c10b5de1ade38a",
+      "git_blob": "7deca2c18734bc27440f04df7fb3f23e49f972c4",
+      "bytes": 6789
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedResponseMomentGrowth.lean": {
+      "sha256": "a1944057d1f8eff73ee3b61cb3bdc4f77df504765df7278c1321221d81be6f4d",
+      "git_blob": "f95202bdae7f26ff3b1c7b750b78fbcc1cd36f07",
+      "bytes": 14506
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledTraceEstimate.lean": {
+      "sha256": "a1a46219faa7814e86c7aa4ccab73dea5e7f016821dcff411b5fc70f77b2fbb8",
+      "git_blob": "34df666c2fdb6c8509163f10256a64ce5e5891a6",
+      "bytes": 8167
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledDeterminantBound.lean": {
+      "sha256": "1b7826384b0e43c0cdab5000939e180dc33a8b79cd95e81ebb1884d7257a8059",
+      "git_blob": "598809bcad4cee022237f9e0f77a37439215e3c8",
+      "bytes": 7616
+    },
+    "HBL/TypeIIDynamicSelection/CoupledSmallParameterRegion.lean": {
+      "sha256": "fb805c21596c3c965ae80d47145b6ca3166b3a7a70d3bc9d8e0e9246c39e8a57",
+      "git_blob": "329453cabe33f29d474734992f2d390aca45399f",
+      "bytes": 8141
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedNondegenerateRegion.lean": {
+      "sha256": "136837851ecf2a881800989d0c8e10fa8893c61a99f85dd13399c14e64461a56",
+      "git_blob": "266055a35c386e474ca5146db7636198b516e2d8",
+      "bytes": 4183
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedConstructedNondegeneracy.lean": {
+      "sha256": "ff443040713899d2315e1962c1f79b9794bb5258d39956880e676f7cdd2d9b19",
+      "git_blob": "f9020506a5e10387589d0a18b58c438eea340ed2",
+      "bytes": 3282
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledCancellation.lean": {
+      "sha256": "bd481e1a2da543f7ce47a0c1587e9586918156523e70a1d3c85ae69090d10178",
+      "git_blob": "cbfefa1b9ac56c1317e819a5917bfe67f51464e7",
+      "bytes": 5724
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedInnerClassical.lean": {
+      "sha256": "344666e0d838c5c4037222988f8e1279a1af593c3c356e3013a7d2f7f5b5fe58",
+      "git_blob": "5fbd154dd777da58817be62eddadb110ace47aed",
+      "bytes": 12938
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeInnerCutoffRelativeGain.lean": {
+      "sha256": "a0c3fc057976bb5793a053ef74788fb19ef467edf2abb2c1037eb433bf26ed14",
+      "git_blob": "8d2891e5aa41380f5552bfb09fa871a2b33ca702",
+      "bytes": 19636
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeComplexTaylor.lean": {
+      "sha256": "f0f27305e28629a5784c917520c22f097db40c718f7dc915c83d75d87eb9426f",
+      "git_blob": "dcbd02a993c3dc0423e7b82a7cb29a9a4b29e285",
+      "bytes": 7161
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeComplexTaylorBubbleBound.lean": {
+      "sha256": "2942280a92a995b0caa9cd9f807eaf4ae30e600e13a080bfe52ef2a87e223566",
+      "git_blob": "a943b9e10b7fff37984b3fab52be022687fd5b72",
+      "bytes": 13951
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeComplexCorrectionResidual.lean": {
+      "sha256": "62a49d8d59dac714051e18e10c602960d7ab6122fe649f40ff3ec3cf5a10fac0",
+      "git_blob": "d842ad90f99a424cfb68b968798db8d012993ca5",
+      "bytes": 5596
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCorrectionResidual.lean": {
+      "sha256": "b2fc45c3d0cd102a5cffda9987e22d113d38b8ee0424c5d069d0c71fd60a51ed",
+      "git_blob": "01f6fdd559761262a26507676c98b226798f9fec",
+      "bytes": 11415
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedMatchedKummer.lean": {
+      "sha256": "a11f2f7977a7904ff434e9a65bff26ab4b1fa1eae32dbb13982c0d17e4c071e5",
+      "git_blob": "f3c5c3867f60dd7a04b7745f1e1cd5796aa90dec",
+      "bytes": 19327
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeInnerShellEquation.lean": {
+      "sha256": "0b46c5a2b4eea884ae5d76a4ddc408b9071c270808e192a38436c9cd9a464167",
+      "git_blob": "0afc2ff0007ea8917c7f9a9924b09907bd16f25a",
+      "bytes": 26476
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedShellCommutator.lean": {
+      "sha256": "1a07269824f17b780c9d786ae1fdf5f8577a6fa8617c45ff98163f77aecbc44c",
+      "git_blob": "9c8dd75a3323f6e2984c90630e8726f30f31c257",
+      "bytes": 12487
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedKummerShellGain.lean": {
+      "sha256": "12b4c14c84896c6ad866d9a52fb4956c05c76e4b4bbacd74598edda6f1198104",
+      "git_blob": "980109c8b02585091a504c50a2f2972f8aa8ebd4",
+      "bytes": 11045
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeTwoChannelMatchedShell.lean": {
+      "sha256": "247657d0e992f1c10e31509559271b38d9ae9591779950986be5f3269b39b677",
+      "git_blob": "d0d98ee41fcf9aac685ba6fe7da65a7a001e12d7",
+      "bytes": 14348
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedMatchedKummerClassical.lean": {
+      "sha256": "10d496c97bb3a7b48ac6c916b6be16747679e3a8ccbb289bc29b318eaa1df72a",
+      "git_blob": "1ba44086c80ac7bcbefb19fd89ea1bfbf477f122",
+      "bytes": 10310
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeShellWeightedNorm.lean": {
+      "sha256": "6292fa2d28d6c2d1e60de4b556e32010cf1663a8f269b1e0f20095e47a424afe",
+      "git_blob": "3bf4daf1f6989a77ffa7366191dc45419522443b",
+      "bytes": 7990
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMatchedShellWeightedGain.lean": {
+      "sha256": "a98d278e28bafd0154fca5b5a7494dce84c7450026264e9cf5d246fb39b1953d",
+      "git_blob": "2d8e6a6e366797765468728d2d0a6f5c9ecbeb73",
+      "bytes": 6986
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedKummerPullback.lean": {
+      "sha256": "882c3607cd66121813f35210d9551deaea9f3baa6ccb27408b020739ed648183",
+      "git_blob": "e77e7910fd97c4c26e807121b9e0c97b893b84f5",
+      "bytes": 7833
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedPlateauSource.lean": {
+      "sha256": "00fab5e9aeb259f14edb2ccaf14b91672f951243b1faf049b6f0ec972c49cf86",
+      "git_blob": "8557c381b5604e91c0f80ee9de172482effa656e",
+      "bytes": 4746
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedBackwardShell.lean": {
+      "sha256": "e08a327239fcc2da918696ee99e7ff7a7935b329000b4979c8ba84019f992472",
+      "git_blob": "f14a044173482470515ffdc52eda41b71e0765fb",
+      "bytes": 8002
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeBackwardShellRegion.lean": {
+      "sha256": "ac0c851604d9ebaad77b9d15d38a427dea0c8e5d995e13c74602e9361770bc2a",
+      "git_blob": "dc477fc5a28ff5687ea0560590c770f5dbe3221a",
+      "bytes": 3707
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedCoupledInverseBound.lean": {
+      "sha256": "b261a3e6d2fdf3a4eb42fb1e5b4d52a45070ed2dd2d71760e6746b0969b505db",
+      "git_blob": "801d517f1626e7603f100c8a0f14b44f17845aa8",
+      "bytes": 11630
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedConstructedBackwardShell.lean": {
+      "sha256": "23dc420a26cc00f62ae4de11dfb1e5a32c7e97c07eda7b81eb9af7dcc2d5b3b6",
+      "git_blob": "9ecfb5408adf16df6d99a8f10ff0cecc978df3c5",
+      "bytes": 10415
+    }
+  },
+  "immutable_commit_blobs_checked": true,
+  "local_source_bytes_checked": true,
+  "fixed_workflow_strict_loop_checked": true,
+  "no_truncated_declarations_or_sorryAx": true,
+  "terminal_conclusion_definition_expanded": true,
+  "terminal_conclusion_definition_characters": 12567,
+  "new_this_round_public_declarations": 38,
+  "paper_environments": {
+    "accepted": 11,
+    "total": 13,
+    "percent": 84.62
+  }
+}
