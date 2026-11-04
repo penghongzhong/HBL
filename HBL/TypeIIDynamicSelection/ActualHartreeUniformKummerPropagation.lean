@@ -45,10 +45,10 @@ physical source. The affine-charge reference (alpha,0) is not discarded. -/
 theorem actual_Hartree_canonical_inner_to_uniform_Kummer_transfer
     (B A : ℝ) (hB : 0 ≤ B) (hA : 0 ≤ A) :
     ∃ Cp Cm : ℝ, 0 ≤ Cp ∧ 0 ≤ Cm ∧
-    ∀ (ell c : ℝ) (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
-      (z : ℝ → ℂ) (hz : Measurable z)
-      (hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
-      (hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ A),
+    ∀ (ell c : ℝ) (_hell : 0 < ell) (_hellOne : ell ≤ 1) (_hc : |c| ≤ 1)
+      (z : ℝ → ℂ) (_hz : Measurable z)
+      (_hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
+      (_hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ A),
     let G := actualHartreeRadiallyConjugatedInnerSource
       (actualHartreeSlowInnerRadius ell) ell c z
     let gp : ℝ → ℝ := fun r => (G r).re
