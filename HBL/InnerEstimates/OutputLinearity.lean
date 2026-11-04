@@ -26,7 +26,7 @@ theorem innerWeighted_add_smul_mem (sigma : ℝ) (F G : ℝ → ℝ)
   simp only [Pi.add_apply]
   ring
 
-private theorem weightedSourceDataL2_add_smul
+theorem weightedSourceDataL2_add_smul
     (sigma : ℝ) (F G : ℝ → ℝ)
     (hF : InWeightedL2 sigma F) (hG : InWeightedL2 sigma G) (a : ℝ)
     (hH : InWeightedL2 sigma (fun r => F r + a * G r)) :

@@ -1,3 +1,4 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeAdjustedSourceNorm
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedConstructedBackwardShell
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedCoupledInverseBound
 import HBL.TypeIIDynamicSelection.ActualHartreeBackwardShellRegion
@@ -354,6 +355,26 @@ set_option pp.all false in
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_constructed_backward_shell
+
+#check @HBL.Modulation.Monopole.weightedSourceDataL2_add_smul
+set_option pp.all false in
+#print axioms HBL.Modulation.Monopole.weightedSourceDataL2_add_smul
+
+#check @HBL.TypeIIDynamicSelection.actual_weighted_source_norm_add_smul_le
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_weighted_source_norm_add_smul_le
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_norm_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_norm_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_quartic_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_quartic_bound
+
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_obstruction_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_adjusted_source_obstruction_bound
 
 -- Expand the actual terminal conclusion as well as its public theorem type.
 #print HBL.TypeIIDynamicSelection.ActualMomentLockedPhysicalBackwardShellConclusion
