@@ -5,42 +5,62 @@ set_option pp.maxSteps 10000000
 set_option maxRecDepth 1000000
 
 #check @HBL.Modulation.Monopole.innerWeighted_add_smul_mem
+set_option pp.all false in
 #print axioms HBL.Modulation.Monopole.innerWeighted_add_smul_mem
 #check @HBL.Modulation.Monopole.normalizedPlusOutput_add_smul
+set_option pp.all false in
 #print axioms HBL.Modulation.Monopole.normalizedPlusOutput_add_smul
 #check @HBL.Modulation.Monopole.normalizedMinusOutput_add_smul
+set_option pp.all false in
 #print axioms HBL.Modulation.Monopole.normalizedMinusOutput_add_smul
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_source_identification
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_source_identification
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sources_exact_partition
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sources_exact_partition
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_core
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_core
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_exterior
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_exterior
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_weighted
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_sources_weighted
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_scale_source_weighted
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_scale_source_weighted
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_phase_source_weighted
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_phase_source_weighted
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_normalized_equations
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_normalized_equations
 #check @HBL.TypeIIDynamicSelection.normalizedPlusOutput_C1
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.normalizedPlusOutput_C1
 #check @HBL.TypeIIDynamicSelection.normalizedMinusOutput_C1
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.normalizedMinusOutput_C1
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_C1
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_responses_C1
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_traces
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_physical_traces
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_jet_affine
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_inner_jet_affine
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_coupled_response
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_full_coupled_response
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_coupled_response
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_moment_locked_coupled_response
 #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable_on
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_speed_integrable_on
 #check @HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on
+set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_moment_locked_source_coefficient_add_mul_on
