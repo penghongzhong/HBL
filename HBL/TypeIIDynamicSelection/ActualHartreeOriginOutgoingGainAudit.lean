@@ -1,0 +1,21 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeOriginOutgoingGain
+
+set_option pp.universes true
+set_option pp.explicit true
+set_option pp.fullNames true
+set_option pp.proofs false
+set_option pp.width 120
+
+#check @HBL.TypeIIDynamicSelection.actual_origin_Green_source_integrability
+#check @HBL.TypeIIDynamicSelection.actual_origin_Green_integrable_forcing_ae_equation
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_source_measurable
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_source_intervalIntegrable
+#check @HBL.TypeIIDynamicSelection.actual_Hartree_origin_outgoing_gain_on_annulus
+#check @HBL.TypeIIDynamicSelection.exists_actual_Hartree_original_outgoing_uniform_gain
+
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_Green_source_integrability
+#print axioms HBL.TypeIIDynamicSelection.actual_origin_Green_integrable_forcing_ae_equation
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_source_measurable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_source_intervalIntegrable
+#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_origin_outgoing_gain_on_annulus
+#print axioms HBL.TypeIIDynamicSelection.exists_actual_Hartree_original_outgoing_uniform_gain
