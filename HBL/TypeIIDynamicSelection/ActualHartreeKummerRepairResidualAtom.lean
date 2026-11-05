@@ -13,6 +13,7 @@ the already verified physical Kummer time gain places the repair source
 at order rho + actualHartreePhysicalKappa.
 
 No GainCause label or assigned source order is used.
+The physical pullback and its time-gain producer are strict replayed dependencies.
 -/
 
 noncomputable section
