@@ -72,10 +72,10 @@ no residual positive power of a. -/
 theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (D G L R a B A ell c : ℝ)
-    (hD : 0 ≤ D) (hG : 0 ≤ G)
+    (_hD : 0 ≤ D) (hG : 0 ≤ G)
     (hL : 1 ≤ L) (ha : 0 < a)
     (hOrder : L / a ≤ R) (hRscale : R < scale)
-    (hcoeff : ∀ r ∈ Icc 0 scale,
+    (_hcoeff : ∀ r ∈ Icc 0 scale,
       ‖originFirstCoeff r‖ + ‖originZeroCoeff mu theta‖ ≤ D)
     (hbound : ∀ r ∈ Icc 0 scale,
       ‖K.y r‖ ≤ G ∧ ‖K.dy r‖ ≤ G ∧ ‖K.x r‖ ≤ G ∧ ‖K.dx r‖ ≤ G)
