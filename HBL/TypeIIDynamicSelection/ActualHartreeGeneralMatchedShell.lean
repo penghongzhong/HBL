@@ -76,7 +76,7 @@ private theorem general_plateau_velocity_coherence
       actualHartreeTwoChannelPhysicalSource Fp Fm y +
         (db : ℂ) * actualMomentLockedScaleSource c y +
         (dw : ℂ) * actualMomentLockedPhaseSource c y := by
-    unfold actualHartreeTwoChannelPhysicalSource
+    unfold actualHartreeTwoChannelPhysicalSource at hNumerator ⊢
     apply (div_eq_iff hyC).2
     push_cast
     linear_combination hNumerator + (db : ℂ) * hSpeed.1 + (dw : ℂ) * hSpeed.2
