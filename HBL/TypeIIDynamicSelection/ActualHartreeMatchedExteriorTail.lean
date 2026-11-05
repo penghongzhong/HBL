@@ -13,7 +13,7 @@ field to zero past aB or assert an infinity radiation condition.
 -/
 noncomputable section
 set_option autoImplicit false
-set_option maxHeartbeats 1000000
+set_option maxHeartbeats 5000000
 set_option backward.isDefEq.respectTransparency false
 open Set MeasureTheory Filter
 open scoped Topology
@@ -127,9 +127,10 @@ private theorem exterior_finite_quadratic_tail
         field_simp [hyp.ne', hL.ne']
   have hKMeas : Measurable (fun y => hartreeKernel r y) :=
     hartreeKernel_uncurry_measurable.comp (measurable_const.prodMk measurable_id)
+  have hqI : IntervalIntegrable q volume L U := hq.intervalIntegrable_of_Icc hOrder
   have hqMeas : AEStronglyMeasurable q (volume.restrict (uIoc L U)) := by
     rw [uIoc_of_le hOrder]
-    exact (hq.mono Ioc_subset_Icc_self).aestronglyMeasurable measurableSet_Ioc
+    exact hqI.1.aestronglyMeasurable
   have hInt : IntervalIntegrable (fun y => hartreeKernel r y * q y) volume L U := by
     apply hMajor.mono_fun' (hKMeas.aestronglyMeasurable.restrict.mul hqMeas)
     rw [uIoc_of_le hOrder]
@@ -148,7 +149,8 @@ private theorem exterior_finite_quadratic_tail
     |∫ y in L..U, hartreeKernel r y * q y| ≤
         ∫ y in L..U, |hartreeKernel r y * q y| := by
       simpa only [Real.norm_eq_abs] using
-        intervalIntegral.norm_integral_le_integral_norm hOrder
+        (intervalIntegral.norm_integral_le_integral_norm
+          (f := fun y : ℝ => hartreeKernel r y * q y) hOrder)
     _ ≤ ∫ y in L..U, A * y⁻¹ ^ 2 :=
       intervalIntegral.integral_mono_on hOrder hInt.abs hMajor hPoint
     _ = A * (L⁻¹ - U⁻¹) := by rw [intervalIntegral.integral_const_mul, hIntegral]
@@ -207,10 +209,10 @@ theorem actual_Hartree_matched_exterior_core_feedback
     positivity
   have hC : 0 ≤ C := by
     dsimp [C, actualMatchedExteriorSourceConstant]
-    have : 0 ≤ 1 + actualInnerShellValueConstant + actualInnerShellDerivativeConstant := by
-      change 0 ≤ 1 + H0
+    have hx : 0 ≤ 1 + actualInnerShellValueConstant + actualInnerShellDerivativeConstant := by
+      dsimp [actualInnerShellValueConstant, actualInnerShellDerivativeConstant]
       positivity
-    exact mul_nonneg hCG this
+    exact mul_nonneg hCG hx
   have hM : 0 ≤ M := mul_nonneg hC (add_nonneg hN hQ)
   have hFI : IntervalIntegrable F volume (L / a) B :=
     (show ContinuousOn F (Icc (L / a) B) from fun x hx =>
@@ -226,8 +228,10 @@ theorem actual_Hartree_matched_exterior_core_feedback
   have hqCont : ContinuousOn q (Icc L (a * B)) := by
     intro y hy
     have hx := hArg y hy
-    have hc := ((hClass (y / a) ⟨hr0.trans_le hx.1, hx.2.trans_lt hBR⟩).1.continuousAt).comp
+    have hMap : ContinuousAt (fun t : ℝ => t / a) y :=
       (continuous_id.div_const a).continuousAt
+    have hc : ContinuousAt (fun t : ℝ => w (t / a)) y :=
+      ((hClass (y / a) ⟨hr0.trans_le hx.1, hx.2.trans_lt hBR⟩).1.continuousAt).comp hMap
     exact (continuousAt_id.mul (Complex.continuous_re.continuousAt.comp hc)).continuousWithinAt
   have hqBound (y : ℝ) (hy : y ∈ Icc L (a * B)) : |q y| ≤ M * y ^ 2 / L := by
     have hyp : 0 < y := hLp.trans_le hy.1
