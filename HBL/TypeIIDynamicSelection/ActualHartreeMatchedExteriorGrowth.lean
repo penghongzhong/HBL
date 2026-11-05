@@ -96,9 +96,10 @@ theorem actual_matched_Kummer_outward_growth
   have hH : 0 ≤ H := by dsimp [H]; positivity
   have hC0 : 0 ≤ C0 := by dsimp [C0]; positivity
   have hS : 0 ≤ S := by dsimp [S]; positivity
-  have hU : ‖U‖ ≤ S := by dsimp [S]; positivity
-  have hDU : r0 * ‖DU‖ ≤ S := by dsimp [S]; positivity
-  have hQS : Q ≤ S := by dsimp [S]; positivity
+  have hv0 : 0 ≤ r0 * ‖DU‖ := mul_nonneg hr0.le (norm_nonneg _)
+  have hU : ‖U‖ ≤ S := by dsimp [S]; linarith only [hv0, hQ]
+  have hDU : r0 * ‖DU‖ ≤ S := by dsimp [S]; linarith only [norm_nonneg U, hQ]
+  have hQS : Q ≤ S := by dsimp [S]; linarith only [norm_nonneg U, hv0]
   have hrp : 0 < r := hr0.trans_le hr.1
   have hr0One : r0 ≤ 1 := hOrder.trans hBOne
   have hRatio : 1 ≤ r / r0 := (le_div_iff₀ hr0).2 (by simpa using hr.1)
@@ -151,10 +152,11 @@ theorem actual_matched_Kummer_outward_growth
           (add_le_add (mul_le_mul_of_nonneg_right (hSingular r0 h0).1 (norm_nonneg _))
             (mul_le_mul_of_nonneg_right (hSingular r0 h0).2 (norm_nonneg _)))) (sq_nonneg r0)
     have heq : ((G / r0) * ‖DU‖ + (G / r0 + G / r0 ^ 2) * ‖U‖) * r0 ^ 2 =
-        G * (r0 * ‖DU‖) + G * (r0 + 1) * ‖U‖ := by field_simp [hr0.ne']; ring
+        G * (r0 * ‖DU‖) + G * (r0 + 1) * ‖U‖ := by field_simp [hr0.ne']
     rw [heq] at hRaw
-    exact hRaw.trans (add_le_add le_rfl (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left (by linarith : r0 + 1 ≤ 2) hG) (norm_nonneg _)))
+    have hcoef : G * (r0 + 1) ≤ 2 * G :=
+      (mul_le_mul_of_nonneg_left (by linarith : r0 + 1 ≤ 2) hG).trans_eq (by ring)
+    exact hRaw.trans (add_le_add le_rfl (mul_le_mul_of_nonneg_right hcoef (norm_nonneg _)))
   have hDensity (s : ℝ) (hs : s ∈ Icc r0 B) :
       ‖originGreenSourceA K F s‖ ≤ C0 * Q ∧
       ‖originGreenSourceB K F s‖ ≤ G * Q / r0 := by
