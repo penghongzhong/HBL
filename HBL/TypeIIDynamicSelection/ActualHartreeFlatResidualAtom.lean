@@ -69,6 +69,10 @@ theorem actual_Hartree_flat_radiation_realized_atom
             (hFlow s hs) (hFlowR s hs) (hRegBound s hs)
             (hRegularOrigin s hs)
         rw [actual_Hartree_flat_power_exact beta rho] at h
+        have hexp :
+            -1 - actualHartreeFlatGain beta rho =
+              -(1 + actualHartreeFlatGain beta rho) := by ring
+        rw [hexp] at h
         simpa only [actualHartreeFlatResidualValue] using h }
   exact ⟨atom, rfl, rfl, rfl⟩
 
