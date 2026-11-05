@@ -52,9 +52,11 @@ theorem actual_Hartree_moment_locked_core_bubble_envelope
     |actualMomentLockedCore c r| ≤
       (2 + 9 * monopoleRadialBoundConstant) * bubble r := by
   let C : ℝ := 2 + 9 * monopoleRadialBoundConstant
+  have hMono : 0 ≤ monopoleRadialBoundConstant :=
+    monopoleRadialBoundConstant_pos.le
   have hC : 0 ≤ C := by
     dsimp [C]
-    positivity
+    linarith
   have hdecay :=
     actual_Hartree_moving_monopole_one_plus_radius_decay c r hr hc
   have hden : 0 < 1 + r := by linarith
@@ -155,9 +157,10 @@ theorem actual_Hartree_moment_locked_correction_next_physical_layer
     dsimp [Mcore]
     positivity
   let e : ℝ := CH * s ^ (-rho)
+  have hsPow0 : 0 ≤ s ^ (-rho) := Real.rpow_nonneg hs0 _
   have he : 0 ≤ e := by
     dsimp [e]
-    positivity
+    exact mul_nonneg hCH hsPow0
   have hsPowOne : s ^ (-rho) ≤ 1 :=
     Real.rpow_le_one_of_one_le_of_nonpos hs (by linarith)
   have heCH : e ≤ CH := by
@@ -186,10 +189,12 @@ theorem actual_Hartree_moment_locked_correction_next_physical_layer
       (fun x => (actualMomentLockedCore (c0 s) x : ℂ))
       (H s) hCoreMeas hHmeas Mcore e hMcore he
       hCoreB hHB r hr
-  have hsum : Mcore + e ≤ Mcore + CH :=
-    add_le_add_left heCH Mcore
+  have hsum : Mcore + e ≤ Mcore + CH := by
+    linarith only [heCH]
   have hsumPow : (Mcore + e) ^ 5 ≤ (Mcore + CH) ^ 5 :=
     pow_le_pow_left₀ (add_nonneg hMcore he) hsum 5
+  have hbubble : 0 ≤ bubble r := bubble_nonneg r
+  have hsumCH : 0 ≤ Mcore + CH := add_nonneg hMcore hCH
   have he2 : e ^ 2 = CH ^ 2 * s ^ (-2 * rho) := by
     dsimp [e]
     rw [mul_pow]
@@ -210,14 +215,30 @@ theorem actual_Hartree_moment_locked_correction_next_physical_layer
     calc
       _ ≤ 63 * (Mcore + e) ^ 5 * e ^ 2 * bubble r ^ 5 := hTaylor0
       _ ≤ 63 * (Mcore + CH) ^ 5 * e ^ 2 * bubble r ^ 5 := by
-        gcongr
+        have hfactor : 0 ≤ 63 * e ^ 2 * bubble r ^ 5 := by
+          exact mul_nonneg
+            (mul_nonneg (by norm_num) (sq_nonneg e))
+            (pow_nonneg hbubble 5)
+        calc
+          63 * (Mcore + e) ^ 5 * e ^ 2 * bubble r ^ 5 =
+              (Mcore + e) ^ 5 * (63 * e ^ 2 * bubble r ^ 5) := by ring
+          _ ≤ (Mcore + CH) ^ 5 * (63 * e ^ 2 * bubble r ^ 5) :=
+            mul_le_mul_of_nonneg_right hsumPow hfactor
+          _ = _ := by ring
       _ = (63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5) *
           s ^ (-2 * rho) := by
         rw [he2]
         ring
       _ ≤ (63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5) *
           s ^ (-(rho + kappa)) := by
-        exact mul_le_mul_of_nonneg_left hExp (by positivity)
+        have hcoef : 0 ≤
+            63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5 := by
+          exact mul_nonneg
+            (mul_nonneg
+              (mul_nonneg (by norm_num) (pow_nonneg hsumCH 5))
+              (sq_nonneg CH))
+            (pow_nonneg hbubble 5)
+        exact mul_le_mul_of_nonneg_left hExp hcoef
   have hHpoint : ‖H s r‖ ≤ CH * s ^ (-rho) := by
     calc
       ‖H s r‖ ≤ CH * s ^ (-rho) * bubble r := hH r hr
