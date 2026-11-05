@@ -64,6 +64,66 @@ theorem actual_matched_Kummer_forward_formula
   unfold actualMomentLockedIntervalObstruction originGreenCoeffA
   linear_combination originPhysicalValue K.y r * hSplit
 
+/-- The forced regular Cramer coefficient is controlled by the actual left
+Cauchy jet with no inverse power loss at the moving endpoint.  This is the
+estimate already used internally by the outward-growth proof, exposed here
+for the Kummer-to-remote interface. -/
+theorem actual_matched_Kummer_regular_coefficient_bound
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (G B r0 : ℝ) (hG : 0 ≤ G) (hr0 : 0 < r0)
+    (hOrder : r0 ≤ B) (hBOne : B ≤ 1) (hBR : B < scale)
+    (hbound : ∀ r ∈ Icc 0 scale,
+      ‖K.y r‖ ≤ G ∧ ‖K.dy r‖ ≤ G ∧ ‖K.x r‖ ≤ G ∧ ‖K.dx r‖ ≤ G)
+    (F : ℝ → ℂ) (U DU : ℂ) :
+    ‖actualOriginMatchedRegularCoeff K r0 B F U DU‖ ≤
+      G * (r0 * ‖DU‖) + 2 * G * ‖U‖ := by
+  have h0 : r0 ∈ Icc r0 B := ⟨le_rfl, hOrder⟩
+  have hr0One : r0 ≤ 1 := hOrder.trans hBOne
+  have hSingular :
+      ‖originPhysicalValue K.y r0‖ ≤ G / r0 ∧
+      ‖originPhysicalSlope K.y K.dy r0‖ ≤ G / r0 + G / r0 ^ 2 := by
+    have hb := hbound r0 ⟨hr0.le, hOrder.trans hBR.le⟩
+    constructor
+    · rw [originPhysicalValue, norm_div, Complex.norm_real,
+        Real.norm_eq_abs, abs_of_pos hr0]
+      exact div_le_div_of_nonneg_right hb.1 hr0.le
+    · unfold originPhysicalSlope
+      calc
+        _ ≤ ‖K.dy r0 / (r0 : ℂ)‖ + ‖K.y r0 / (r0 : ℂ) ^ 2‖ :=
+          norm_sub_le _ _
+        _ = ‖K.dy r0‖ / r0 + ‖K.y r0‖ / r0 ^ 2 := by
+          simp only [norm_div, norm_pow, Complex.norm_real,
+            Real.norm_eq_abs, abs_of_pos hr0]
+        _ ≤ G / r0 + G / r0 ^ 2 := add_le_add
+          (div_le_div_of_nonneg_right hb.2.1 hr0.le)
+          (div_le_div_of_nonneg_right hb.1 (sq_nonneg r0))
+  have hInv :=
+    exterior_inverse_wronskian_norm K r0 hr0 (hOrder.trans hBR.le)
+  have hRaw :
+      ‖actualOriginMatchedRegularCoeff K r0 B F U DU‖ ≤
+        ((G / r0) * ‖DU‖ + (G / r0 + G / r0 ^ 2) * ‖U‖) *
+          r0 ^ 2 := by
+    rw [actual_origin_matched_Kummer_regular_coefficient,
+      div_eq_mul_inv, norm_mul, hInv]
+    exact mul_le_mul_of_nonneg_right
+      (((norm_sub_le _ _).trans_eq (by simp only [norm_mul])).trans
+        (add_le_add
+          (mul_le_mul_of_nonneg_right hSingular.1 (norm_nonneg _))
+          (mul_le_mul_of_nonneg_right hSingular.2 (norm_nonneg _))))
+      (sq_nonneg r0)
+  have heq :
+      ((G / r0) * ‖DU‖ + (G / r0 + G / r0 ^ 2) * ‖U‖) *
+          r0 ^ 2 =
+        G * (r0 * ‖DU‖) + G * (r0 + 1) * ‖U‖ := by
+    field_simp [hr0.ne']
+  rw [heq] at hRaw
+  have hcoef : G * (r0 + 1) ≤ 2 * G :=
+    (mul_le_mul_of_nonneg_left (by linarith : r0 + 1 ≤ 2) hG).trans_eq
+      (by ring)
+  exact hRaw.trans
+    (add_le_add le_rfl
+      (mul_le_mul_of_nonneg_right hcoef (norm_nonneg _)))
+
 /-- A source-independent constant for the forward actual origin gauge. -/
 def actualMatchedExteriorGrowthConstant (D G B : ℝ) : ℝ :=
   1 + 2 * G * ((D + 1) * G) + 6 * G * (1 + (D + 1) * G * B ^ 2)
