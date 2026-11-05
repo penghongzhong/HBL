@@ -141,7 +141,6 @@ theorem actual_Hartree_selected_speed_original_bound_region
     _ = (C / a) * E := by
       dsimp [C]
       field_simp [ha.ne', hB.ne']
-      ring
     _ = (C / a) * (N0 + Q) := rfl
 
 end HBL.TypeIIDynamicSelection
