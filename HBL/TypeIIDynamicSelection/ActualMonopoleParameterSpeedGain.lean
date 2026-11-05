@@ -150,7 +150,7 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
                     ring
             _ ≤ |r * normalizedZetaPlus r| * K :=
               mul_le_mul_of_nonneg_left hv (abs_nonneg _)
-            _ = K * |r * normalizedZetaPlus r| := by rw [abs_mul]; ring
+            _ = K * (|r| * |normalizedZetaPlus r|) := by ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaPlus_zero_of_one_le r hr1']
           simp
@@ -184,7 +184,7 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
                     ring
             _ ≤ |r * normalizedZetaMinus r| * K :=
               mul_le_mul_of_nonneg_left hv (abs_nonneg _)
-            _ = K * |r * normalizedZetaMinus r| := by rw [abs_mul]; ring
+            _ = K * (|r| * |normalizedZetaMinus r|) := by ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaMinus_zero_of_one_le r hr1']
           simp
