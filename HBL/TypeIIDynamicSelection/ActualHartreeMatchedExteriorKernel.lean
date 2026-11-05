@@ -32,7 +32,7 @@ private theorem exterior_inverse_square_integral
       intro y _
       simp [zpow_neg, inv_pow]
     _ = (U ^ ((-2 : ℤ) + 1) - L ^ ((-2 : ℤ) + 1)) / ((-2 : ℤ) + 1) := hIntegral
-    _ = -(U⁻¹ - L⁻¹) := by norm_num
+    _ = -(U⁻¹ - L⁻¹) := by norm_num; ring
     _ = L⁻¹ - U⁻¹ := by ring
 
 private theorem exterior_inverse_square_majorant
@@ -104,7 +104,7 @@ theorem actual_Hartree_quadratic_annulus_kernel_bound
   refine ⟨hBoth.1, hBoth.2.trans_eq ?_⟩
   dsimp [A]
   rw [abs_of_nonneg (show 0 ≤ 8 * Real.pi * hartreeKappa by unfold hartreeKappa; positivity)]
-  simp only [div_eq_mul_inv, inv_pow]
+  simp only [div_eq_mul_inv]
   ring
 
 end HBL.TypeIIDynamicSelection
