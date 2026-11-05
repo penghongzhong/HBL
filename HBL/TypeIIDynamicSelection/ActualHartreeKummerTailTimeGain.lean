@@ -101,9 +101,8 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_positive_time_gain
   dsimp only
   have hLone : 1 ≤ actualHartreeSlowInnerRadius ell := by
     unfold actualHartreeSlowInnerRadius
-    have hneg : (-(1 / 16 : ℝ)) ≤ 0 := by norm_num
-    simpa only [Real.one_rpow] using
-      Real.rpow_le_rpow_of_exponent_le hellOne hneg
+    exact Real.one_le_rpow_of_pos_of_le_one_of_nonpos
+      hell hellOne (by norm_num)
   have hraw :=
     actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       K D G (actualHartreeSlowInnerRadius ell) R a B A ell c
