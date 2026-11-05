@@ -20,6 +20,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.ResidualLedger
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualHartreeSlowCenterResidualValue
     (V : ℝ → ℝ → ℝ) (Z : ℝ → ℝ → ℂ) (s : ℝ) : ℝ :=
