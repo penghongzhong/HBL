@@ -247,7 +247,8 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
         mul_le_mul hbs hcs (abs_nonneg _) (by positivity)
       _ = A ^ 2 * (s ^ (-1 : ℝ) * s ^ (-beta)) := by ring
       _ = A ^ 2 * s ^ (-1 - beta) := by
-        rw [← Real.rpow_add hspos]
+        rw [← Real.rpow_add hspos,
+          show (-1 : ℝ) + (-beta) = -1 - beta by ring]
   have hoc : |omega s * c s| ≤ A ^ 2 * s ^ (-1 - beta) := by
     rw [abs_mul]
     calc
@@ -256,7 +257,8 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
         mul_le_mul hos hcs (abs_nonneg _) (by positivity)
       _ = A ^ 2 * (s ^ (-1 : ℝ) * s ^ (-beta)) := by ring
       _ = A ^ 2 * s ^ (-1 - beta) := by
-        rw [← Real.rpow_add hspos]
+        rw [← Real.rpow_add hspos,
+          show (-1 : ℝ) + (-beta) = -1 - beta by ring]
   let W := (A + A ^ 2) *
     s ^ (-1 - actualMonopoleParameterGain beta)
   have hW : 0 ≤ W := by dsimp [W]; positivity
