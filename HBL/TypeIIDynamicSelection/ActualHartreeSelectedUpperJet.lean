@@ -218,7 +218,6 @@ theorem actual_Hartree_selected_upper_regular_jet_region
       _ = Sconst * E := by
         dsimp [SG, Sconst]
         field_simp [ha.ne']
-        ring
   have hT :
       ‖originGreenCoeffB K (L / a) Fo B‖ ≤
         (Kreg + Sconst) * E := by
@@ -233,12 +232,25 @@ theorem actual_Hartree_selected_upper_regular_jet_region
           |p.1| * ‖originGreenCoeffB K (L / a) S B‖ +
           |p.2| * ‖originGreenCoeffB K (L / a) P B‖ := by
         simp only [norm_mul, norm_neg, Complex.norm_real, Real.norm_eq_abs]
+      _ = ‖originGreenCoeffB K (L / a) F B‖ +
+          (|p.1| * ‖originGreenCoeffB K (L / a) S B‖ +
+            |p.2| * ‖originGreenCoeffB K (L / a) P B‖) := by ring
       _ ≤ Kreg * E + Sconst * E := add_le_add hBase hSpeedContribution
       _ = (Kreg + Sconst) * E := by ring
   have hZero :
       actualMomentLockedIntervalObstruction K (L / a) B Fo J.1 J.2 = 0 := by
-    simpa only [actualMomentLockedCoupledCompatibility, Gp, Gm, hgp, hgm,
-      Fpa, Fma, hpa, hma, Fo, S, P, sub_eq_add_neg] using hCompat
+    have hc0 := hCompat
+    unfold actualMomentLockedCoupledCompatibility at hc0
+    dsimp only at hc0
+    change actualMomentLockedIntervalObstruction K (L / a) B
+      (fun r => F r - (p.1 : ℂ) * S r - (p.2 : ℂ) * P r) J.1 J.2 = 0 at hc0
+    have hFo :
+        Fo = (fun r => F r - (p.1 : ℂ) * S r - (p.2 : ℂ) * P r) := by
+      funext r
+      dsimp [Fo]
+      ring
+    rw [hFo]
+    exact hc0
   have hJ0 : 0 ≤ Jc * (Cc * E) := by positivity
   have hT0 : 0 ≤ (Kreg + Sconst) * E := by positivity
   have hUpper :=
@@ -261,7 +273,8 @@ theorem actual_Hartree_selected_upper_regular_jet_region
   dsimp only
   have hFinal := hUpper.trans
     (mul_le_mul_of_nonneg_left hInside hKbasis)
-  simpa only [Kbasis, J, Fo, Fpa, Fma, Gp, Gm, hpa, hma,
-    Jc, Sconst, E, N0] using hFinal
+  simpa only [Kbasis, actualHartreeSelectedUpperJetBasisConstant,
+    J, Fo, S, P, Fpa, Fma, Gp, Gm, hpa, hma,
+    Jc, Sconst, E, N0, mul_assoc] using hFinal
 
 end HBL.TypeIIDynamicSelection
