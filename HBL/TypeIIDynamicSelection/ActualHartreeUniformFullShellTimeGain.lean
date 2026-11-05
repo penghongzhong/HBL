@@ -165,7 +165,7 @@ theorem actual_Hartree_one_orbit_full_shell_uniform_positive_time_order :
             (C2 + 2 * C1) * (hartreeKappa * M / 4) ^ 2 * B) +
             2 * radialHartreeRowBoundConstant * D * B ^ 3) *
               (ell s) ^ 2 * Real.sqrt (ell s) :=
-        add_le_add_right hTimeBound _
+        add_le_add_left hTimeBound _
       _ = K * ((ell s) ^ 2 * Real.sqrt (ell s)) := by
         dsimp [K]
         ring
