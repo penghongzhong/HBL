@@ -140,7 +140,7 @@ theorem actual_Hartree_corrected_outer_envelope :
   calc
     _ ≤ (‖F r‖ + ‖(db : ℂ) * actualMomentLockedScaledScaleSource a c r‖) +
         ‖(dw : ℂ) * actualMomentLockedScaledPhaseSource a c r‖ :=
-      (norm_sub_le _ _).trans (add_le_add_right (norm_sub_le _ _) _)
+      (norm_sub_le _ _).trans (_root_.add_le_add (norm_sub_le _ _) le_rfl)
     _ = ‖F r‖ + |db| * ‖actualMomentLockedScaledScaleSource a c r‖ +
         |dw| * ‖actualMomentLockedScaledPhaseSource a c r‖ := by
       simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
