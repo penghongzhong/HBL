@@ -81,11 +81,11 @@ theorem actual_Kummer_physical_interface_repair_scaled_residual_exact
   have haC : (a : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr ha.ne'
   have hyC : (y : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hy0.ne'
   unfold actualMatchedScaledKummerApply complexRadialLaplacian
-    actualKummerPhysicalInterfaceRepair
+  rw [hd.2.deriv, hd.1.deriv]
+  unfold actualKummerPhysicalInterfaceRepair
     actualKummerPhysicalInterfaceRepairSlope
     actualKummerPhysicalInterfaceRepairSecond
-  rw [hd.2.deriv, hd.1.deriv]
-  unfold actualKummerInterfaceRepairResidual frozenFirstCoeff
+    actualKummerInterfaceRepairResidual frozenFirstCoeff
   simp only [Complex.real_smul, Complex.ofReal_inv, Complex.ofReal_pow,
     Complex.ofReal_div, Complex.ofReal_ofNat]
   field_simp [haC, hyC]
