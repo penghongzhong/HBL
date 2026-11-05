@@ -35,7 +35,7 @@ theorem actual_Hartree_slow_center_realized_atom
     (V : ℝ → ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
     (beta A CV CZ : ℝ)
     (hbeta : (1 / 2 : ℝ) < beta)
-    (hA : 0 ≤ A) (hCV : 0 ≤ CV) (hCZ : 0 ≤ CZ)
+    (_hA : 0 ≤ A) (hCV : 0 ≤ CV) (hCZ : 0 ≤ CZ)
     (hVmeas : ∀ s : ℝ, 1 ≤ s → Measurable (V s))
     (hZmeas : ∀ s : ℝ, 1 ≤ s → Measurable (Z s))
     (hV2 : ∀ s : ℝ, 1 ≤ s →
