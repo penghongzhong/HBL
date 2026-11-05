@@ -42,7 +42,7 @@ def actualHartreePhysicalGainParameters
 
 theorem actual_Hartree_cutoff_gain_dominates_structural_rho
     (beta rho : ℝ)
-    (hbeta : 1 / 2 < beta)
+    (_hbeta : 1 / 2 < beta)
     (hrho : 0 < rho)
     (hflat : rho < (5 * beta - 2) / 4) :
     rho < actualHartreeFullShellTimeGain beta := by
@@ -60,11 +60,11 @@ theorem actual_Hartree_physical_gain_profile_positive
       (actualHartreePhysicalGainParameters beta rho hbeta hrho hflat) :=
   kappaProfile_pos _
 
-/-- Every structural gain is bounded by the corresponding already-derived
-physical exponent (or equals the Frobenius half-order).  In particular the
-minimum gain used by finite recursion is a genuine PDE-derived positive
-quantity, not an assigned order label. -/
-theorem actual_Hartree_structural_gains_have_physical_producers
+/-- Four structural gains are bounded by corresponding already-derived
+physical exponents.  The Frobenius entry is recorded only as the structural
+half-order and is NOT claimed here to be physically realized by the current
+Kummer residual. -/
+theorem actual_Hartree_four_structural_gains_have_physical_producers
     (beta rho : ℝ)
     (hbeta : 1 / 2 < beta)
     (hrho : 0 < rho)
@@ -79,10 +79,10 @@ theorem actual_Hartree_structural_gains_have_physical_producers
   exact ⟨(actual_Hartree_cutoff_gain_dominates_structural_rho
       beta rho hbeta hrho hflat).le, rfl, rfl, rfl, rfl⟩
 
-/-- The actual profile gain is below all four quantitative physical gains
-and the fixed Frobenius half-order.  This is the precise exponent interface
-needed when actual residual atoms are attached to the structural recursion. -/
-theorem actual_Hartree_kappa_profile_below_physical_gains
+/-- The profile minimum lies below the four quantitative physical gains.
+The final half-order inequality is only the structural Frobenius ceiling;
+a separate same-source Frobenius residual bridge is still required. -/
+theorem actual_Hartree_kappa_profile_below_four_physical_gains
     (beta rho : ℝ)
     (hbeta : 1 / 2 < beta)
     (hrho : 0 < rho)
@@ -95,14 +95,17 @@ theorem actual_Hartree_kappa_profile_below_physical_gains
     kappaProfile P ≤ 1 / 2 := by
   dsimp only
   let P := actualHartreePhysicalGainParameters beta rho hbeta hrho hflat
-  have hprod := actual_Hartree_structural_gains_have_physical_producers
+  have hprod := actual_Hartree_four_structural_gains_have_physical_producers
     beta rho hbeta hrho hflat
-  dsimp only at hprod
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
   · exact (kappaProfile_le_gain P GainCause.cutoff).trans hprod.1
-  · simpa [hprod.2] using kappaProfile_le_gain P GainCause.parameter
-  · simpa [hprod.2.2.1] using kappaProfile_le_gain P GainCause.flatRadiation
-  · simpa [hprod.2.2.2.1] using kappaProfile_le_gain P GainCause.slowMonopole
-  · simpa [hprod.2.2.2.2] using kappaProfile_le_gain P GainCause.frobenius
+  · simpa [P, gain, actualHartreePhysicalGainParameters] using
+      (kappaProfile_le_gain P GainCause.parameter)
+  · simpa [P, gain, actualHartreePhysicalGainParameters] using
+      (kappaProfile_le_gain P GainCause.flatRadiation)
+  · simpa [P, gain, actualHartreePhysicalGainParameters] using
+      (kappaProfile_le_gain P GainCause.slowMonopole)
+  · simpa [P, gain, actualHartreePhysicalGainParameters] using
+      (kappaProfile_le_gain P GainCause.frobenius)
 
 end HBL.TypeIIDynamicSelection
