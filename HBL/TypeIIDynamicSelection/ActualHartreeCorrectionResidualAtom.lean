@@ -27,7 +27,7 @@ open HBL.Profile.ResidualLedger
 
 def actualHartreeCorrectionResidualAtomValue
     (c0 c1 : ℝ → ℝ) (H : ℝ → ℝ → ℂ)
-    (b omega db domega m : ℝ → ℝ) (r s : ℝ) : ℂ :=
+    (b omega db domega _m : ℝ → ℝ) (r s : ℝ) : ℂ :=
   complexRadialRenormalizedResidual
       (fun t x => (actualMomentLockedCore (c1 t) x : ℂ) + H t x)
       (b s + db s) (omega s + domega s) s r -
@@ -120,7 +120,7 @@ theorem actual_Hartree_correction_remainder_realized_atom
             Cspeed * (CHd + CH) +
                 63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5 ≤ C0 := by
           dsimp [C0]
-          exact add_le_add_left hTaylorCoef _
+          exact add_le_add_right hTaylorCoef _
         have hPow : 0 ≤ s ^ (-(rho + kappa)) :=
           Real.rpow_nonneg (by linarith : (0 : ℝ) ≤ s) _
         have hBound := hNext.trans
