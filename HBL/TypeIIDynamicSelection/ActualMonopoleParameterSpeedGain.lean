@@ -248,8 +248,6 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
       _ = A ^ 2 * (s ^ (-1 : ℝ) * s ^ (-beta)) := by ring
       _ = A ^ 2 * s ^ (-1 - beta) := by
         rw [← Real.rpow_add hspos]
-        congr 2
-        ring
   have hoc : |omega s * c s| ≤ A ^ 2 * s ^ (-1 - beta) := by
     rw [abs_mul]
     calc
@@ -259,8 +257,6 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
       _ = A ^ 2 * (s ^ (-1 : ℝ) * s ^ (-beta)) := by ring
       _ = A ^ 2 * s ^ (-1 - beta) := by
         rw [← Real.rpow_add hspos]
-        congr 2
-        ring
   let W := (A + A ^ 2) *
     s ^ (-1 - actualMonopoleParameterGain beta)
   have hW : 0 ≤ W := by dsimp [W]; positivity
