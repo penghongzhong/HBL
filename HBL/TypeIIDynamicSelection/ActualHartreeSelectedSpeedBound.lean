@@ -66,17 +66,12 @@ theorem actual_Hartree_selected_speed_original_bound_region
     positivity
   have hCK : 0 ≤ CK := by dsimp [CK]; positivity
   have hZC : 0 ≤ ZC := by dsimp [ZC]; positivity
+  have hZCpos : 0 < ZC := by
+    dsimp [ZC, CK]
+    positivity
   have hC : 0 < C := by
     dsimp [C]
-    have hz : 0 < ZC + 1 := by linarith
-    have hb2 : 0 < B ^ 2 := pow_pos hB 2
-    have hraw : 0 < 1024 * (ZC + 1) / B ^ 2 := by positivity
-    have hzero : 0 ≤ 1024 / B ^ 2 := by positivity
-    by_cases hzc : ZC = 0
-    · subst ZC
-      simp [C]
-    · have hzcpos : 0 < ZC := lt_of_le_of_ne hZC (Ne.symm hzc)
-      positivity
+    positivity
   let L0 := max Ls Li
   let epsilon := min es ei
   have hL0 : 6 ≤ L0 := hLs.trans (le_max_left _ _)
