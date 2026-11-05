@@ -153,9 +153,11 @@ theorem actual_Hartree_moment_locked_correction_next_physical_layer
       beta rhoStar hbeta hrhoStar hflat
   have hrho0 : 0 ≤ rho := le_trans hkpos.le hrho
   have hs0 : 0 ≤ s := le_trans (by norm_num : (0 : ℝ) ≤ 1) hs
+  have hMono : 0 ≤ monopoleRadialBoundConstant :=
+    monopoleRadialBoundConstant_pos.le
   have hMcore : 0 ≤ Mcore := by
     dsimp [Mcore]
-    positivity
+    linarith
   let e : ℝ := CH * s ^ (-rho)
   have hsPow0 : 0 ≤ s ^ (-rho) := Real.rpow_nonneg hs0 _
   have he : 0 ≤ e := by
