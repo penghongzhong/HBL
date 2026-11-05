@@ -6,10 +6,11 @@ isolates scalar integration from the full normalized Fredholm construction. -/
 noncomputable section
 set_option autoImplicit false
 set_option maxHeartbeats 1000000
+set_option backward.isDefEq.respectTransparency false
 open Set MeasureTheory Filter
 open scoped Topology
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.AffineTail
 
 private theorem exterior_inverse_square_integral
     (L U : ℝ) (hL : 0 < L) (hOrder : L ≤ U) :
