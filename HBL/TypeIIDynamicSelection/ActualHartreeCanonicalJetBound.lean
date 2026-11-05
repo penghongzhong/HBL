@@ -55,8 +55,12 @@ theorem actual_Hartree_canonical_inner_jet_source_norm_bound
   have hLone : 1 ≤ L := by linarith
   have hN : 0 ≤ N := add_nonneg
     (innerWeightedNorm_nonneg _ _) (innerWeightedNorm_nonneg _ _)
-  have hV : 0 ≤ V := actual_inner_shell_constants_nonneg.1
-  have hT : 0 ≤ T := actual_inner_shell_constants_nonneg.2.1
+  have hV : 0 ≤ V := by
+    dsimp [V, actualInnerShellValueConstant]
+    positivity
+  have hT : 0 ≤ T := by
+    dsimp [T, actualInnerShellDerivativeConstant]
+    positivity
   have hScale : a * (L / a) = L := by field_simp [ha.ne']
   have hpj :=
     (actual_Hartree_normalized_inner_shell_equation_bound
@@ -106,7 +110,7 @@ theorem actual_Hartree_canonical_inner_jet_source_norm_bound
     calc
       _ ≤ (L / a) * (a * T * N / L ^ 2) :=
         mul_le_mul_of_nonneg_left hDU (div_nonneg hLp.le ha.le)
-      _ = T * N / L := by field_simp [ha.ne', hLp.ne']; ring
+      _ = T * N / L := by field_simp [ha.ne', hLp.ne']
       _ ≤ T * N := div_le_self (mul_nonneg hT hN) hLone
   change ‖J.1‖ + (L / a) * ‖J.2‖ ≤ (V + T) * N
   calc
