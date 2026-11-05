@@ -120,8 +120,9 @@ theorem actual_Hartree_selected_corrected_source_bounds_region
   have hQaBound : Qa ≤ (1 + A) * E := by
     calc
       _ ≤ Q + M * a * B * (1024 / (a * B ^ 2) * (ZC * E)) :=
-        add_le_add_left (mul_le_mul_of_nonneg_left hSpeedOriginal (by positivity)) _
-      _ = Q + A * E := by dsimp [A]; field_simp [ha.ne', hB.ne']; ring
+        _root_.add_le_add le_rfl
+          (mul_le_mul_of_nonneg_left hSpeedOriginal (by positivity : 0 ≤ M * a * B))
+      _ = Q + A * E := by dsimp [A]; field_simp [ha.ne', hB.ne']
       _ ≤ (1 + A) * E := by dsimp [E]; nlinarith only [hN0]
   have hPow : L ^ (-(1 / 2 : ℝ)) ≤ 1 :=
     Real.rpow_le_one_of_one_le_of_nonpos hLone (by norm_num)
