@@ -1,0 +1,50 @@
+{
+  "commit": "9e953a33e44e5fdea1f8d3bb74cf17719bddbb87",
+  "run_id": 41939172176,
+  "artifact_id": 13376080330,
+  "zip_sha256": "7158bc187b7c476dc59d9ab39d956cc690b828fc6848c9d69c72d09149427a4b",
+  "compiler": "Lean (version 4.35.0-rc3, x86_64-unknown-linux-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)",
+  "mathlib": "a98628e16c11f5167f16124105ddce53efa9bfe5",
+  "declarations": [
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_radial_partition_coherent",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_matched_shell_region",
+    "HBL.TypeIIDynamicSelection.actual_general_source_Green_coefficient_bound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_correction_region"
+  ],
+  "axioms": {
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_radial_partition_coherent": "propext,\n Classical.choice,\n Quot.sound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_matched_shell_region": "propext,\n Classical.choice,\n Quot.sound",
+    "HBL.TypeIIDynamicSelection.actual_general_source_Green_coefficient_bound": "propext,\n Classical.choice,\n Quot.sound",
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_correction_region": "propext,\n Classical.choice,\n Quot.sound"
+  },
+  "sources": {
+    "HBL/TypeIIDynamicSelection/ActualHartreeGeneralMatchedShell.lean": {
+      "sha256": "12b499548d0bfba1ddf59549c5d3343e041125617e45138f82d1cea8b2a5771a",
+      "git_blob": "c41489f0cdb32fb589ca59779352a820ce1dcd88",
+      "bytes": 14882,
+      "strict_log_bytes": 0
+    },
+    "HBL/TypeIIDynamicSelection/ActualHartreeGeneralSourceCorrection.lean": {
+      "sha256": "8125cfab4718dc0f14ed4793617c5a806fcbfa0c375ce6d1eb852456f25895f1",
+      "git_blob": "0c735d198c38e99109774876dfe78256a015dc6f",
+      "bytes": 11352,
+      "strict_log_bytes": 0
+    }
+  },
+  "audit_bytes": 100919,
+  "complete_type_characters": {
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_radial_partition_coherent": 3431,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_matched_shell_region": 63608,
+    "HBL.TypeIIDynamicSelection.actual_general_source_Green_coefficient_bound": 5428,
+    "HBL.TypeIIDynamicSelection.actual_Hartree_general_source_correction_region": 27751
+  },
+  "paper_accepted": 11,
+  "paper_total": 13,
+  "local_source_bytes_match": true,
+  "full_project_replay_claimed": false,
+  "immutable_source_blobs_checked": true,
+  "checked_immutable_blobs": {
+    "ActualHartreeGeneralMatchedShell.lean": "c41489f0cdb32fb589ca59779352a820ce1dcd88",
+    "ActualHartreeGeneralSourceCorrection.lean": "0c735d198c38e99109774876dfe78256a015dc6f"
+  }
+}
