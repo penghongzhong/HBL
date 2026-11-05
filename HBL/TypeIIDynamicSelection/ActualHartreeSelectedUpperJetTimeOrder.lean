@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualHartreeSelectedUpperKummerJet
+import HBL.TypeIIDynamicSelection.ActualHartreeSelectedUpperJet
 import Mathlib.Tactic
 
 /-!
