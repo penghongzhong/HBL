@@ -79,7 +79,7 @@ theorem actual_Hartree_parameter_realized_atom
             (le_add_of_nonneg_left
               (abs_nonneg (monopoleThresholdCoordinatePlus c b omega s))).trans
               hcoord
-          rw [actualHartreeParameterResidualValue, if_pos h1, Prod.norm_mk,
+          rw [actualHartreeParameterResidualValue, h1, Prod.norm_mk,
             Real.norm_eq_abs, Real.norm_eq_abs]
           have hmax := max_le hp hm
           simpa only [show -(1 + actualMonopoleParameterGain beta) =
