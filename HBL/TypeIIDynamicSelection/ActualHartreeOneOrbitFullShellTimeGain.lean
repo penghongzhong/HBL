@@ -143,13 +143,19 @@ theorem actual_Hartree_one_orbit_full_shell_positive_time_order
         2 * radialHartreeRowBoundConstant *
           (2 * (B ^ 4 + A ^ 4)) * B ^ 3)
   have hM : 0 < M := hm.trans_le hmBound
+  have hkappa : 0 ≤ hartreeKappa := by
+    unfold hartreeKappa
+    positivity
+  have hrow : 0 ≤ radialHartreeRowBoundConstant :=
+    radialHartreeRowBoundConstant_pos.le
   have hK : 0 ≤ K := by
     dsimp [K]
     positivity
   refine ⟨Cchi, C1, C2, hCchi, hC1, hC2, hGain, ?_⟩
   calc
-    _ ≤ K * ((ell s) ^ 2 * Real.sqrt (ell s)) := by
+    _ ≤ K * (ell s) ^ 2 * Real.sqrt (ell s) := by
       simpa only [K] using hShellBound
+    _ = K * ((ell s) ^ 2 * Real.sqrt (ell s)) := by ring
     _ ≤ K * s ^ (-1 - actualHartreeFullShellTimeGain beta) :=
       mul_le_mul_of_nonneg_left hScale hK
 
