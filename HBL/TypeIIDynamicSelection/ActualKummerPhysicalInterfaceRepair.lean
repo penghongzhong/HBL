@@ -30,13 +30,14 @@ def actualKummerPhysicalInterfaceRepair
   actualKummerInterfaceRepair R p q (y / a)
 
 def actualKummerPhysicalInterfaceRepairSlope
-    (a R : ℝ) (p q : ℂ) (y : ℝ) : ℂ :=
-  (1 / a : ℝ) • actualKummerInterfaceRepairSlope R p q (y / a)
+    (a R : ℝ) (p q : ℂ) : ℝ → ℂ :=
+  (1 / a : ℝ) •
+    (fun y => actualKummerInterfaceRepairSlope R p q (y / a))
 
 def actualKummerPhysicalInterfaceRepairSecond
-    (a R : ℝ) (p q : ℂ) (y : ℝ) : ℂ :=
+    (a R : ℝ) (p q : ℂ) : ℝ → ℂ :=
   (1 / a : ℝ) • ((1 / a : ℝ) •
-    actualKummerInterfaceRepairSecond R p q (y / a))
+    (fun y => actualKummerInterfaceRepairSecond R p q (y / a)))
 
 theorem actual_Kummer_physical_interface_repair_derivatives
     (a R y : ℝ) (ha : a ≠ 0) (hR : R ≠ 0) (p q : ℂ) :
@@ -59,11 +60,11 @@ theorem actual_Kummer_physical_interface_repair_derivatives
     simpa only [Function.comp_def] using hfirst
   · have hsecond := hsecond0.const_smul (1 / a : ℝ)
     change HasDerivAt
-      (fun x : ℝ => (1 / a : ℝ) •
-        actualKummerInterfaceRepairSlope R p q (x / a))
+      ((1 / a : ℝ) •
+        (fun x : ℝ => actualKummerInterfaceRepairSlope R p q (x / a)))
       ((1 / a : ℝ) • ((1 / a : ℝ) •
         actualKummerInterfaceRepairSecond R p q (y / a))) y
-    simpa only [Function.comp_def, Pi.smul_apply] using hsecond
+    exact hsecond
 
 /-- Exact scaling identity: the complete frozen repair residual acquires
 the physical factor a^(-2). -/
@@ -96,10 +97,10 @@ theorem actual_Kummer_physical_interface_repair_scaled_residual_exact
     actualKummerPhysicalInterfaceRepairSlope
     actualKummerPhysicalInterfaceRepairSecond
     actualKummerInterfaceRepairResidual frozenFirstCoeff
-  simp only [Complex.real_smul, Complex.ofReal_inv, Complex.ofReal_pow,
-    Complex.ofReal_div, Complex.ofReal_ofNat]
+  simp only [Pi.smul_apply, Complex.real_smul, Complex.ofReal_inv,
+    Complex.ofReal_pow, Complex.ofReal_div]
   field_simp [haC, hyC]
-  ring
+  ring_nf
 
 /-- Physical endpoint jets: the Kummer value is preserved at aR, the
 physical slope is q/a there, and both vanish at 2aR. -/
