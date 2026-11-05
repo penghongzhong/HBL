@@ -96,6 +96,62 @@ def actualMatchedExteriorSourceConstant (D G B : ℝ) : ℝ :=
   actualMatchedExteriorGrowthConstant D G B *
     (1 + actualInnerShellValueConstant + actualInnerShellDerivativeConstant)
 
+private theorem exterior_inverse_square_integral
+    (L U : ℝ) (hL : 0 < L) (hOrder : L ≤ U) :
+    IntervalIntegrable (fun y : ℝ => y⁻¹ ^ 2) volume L U ∧
+      (∫ y : ℝ in L..U, y⁻¹ ^ 2) = L⁻¹ - U⁻¹ := by
+  have hP : ContinuousOn (fun y : ℝ => y⁻¹ ^ 2) (Icc L U) := by
+    intro y hy
+    exact (((hasDerivAt_id y).inv (hL.trans_le hy.1).ne').continuousAt.pow 2).continuousWithinAt
+  have hPI : IntervalIntegrable (fun y : ℝ => y⁻¹ ^ 2) volume L U :=
+    hP.intervalIntegrable_of_Icc hOrder
+  have hDeriv (y : ℝ) (hy : y ∈ uIcc L U) :
+      HasDerivAt (fun x : ℝ => -x⁻¹) (y⁻¹ ^ 2) y := by
+    rw [uIcc_of_le hOrder] at hy
+    convert ((hasDerivAt_id y).inv (hL.trans_le hy.1).ne').neg using 1 <;>
+      simp [one_div, inv_pow]
+  refine ⟨hPI, ?_⟩
+  simpa only [neg_sub_neg] using
+    intervalIntegral.integral_eq_sub_of_hasDerivAt hDeriv hPI
+
+private theorem exterior_inverse_square_majorant
+    (L U A : ℝ) (hL : 0 < L) (hOrder : L ≤ U) (hA : 0 ≤ A)
+    (f : ℝ → ℝ) (hf : AEStronglyMeasurable f (volume.restrict (uIoc L U)))
+    (hPoint : ∀ y ∈ Icc L U, |f y| ≤ A * y⁻¹ ^ 2) :
+    IntervalIntegrable f volume L U ∧ |∫ y in L..U, f y| ≤ A * L⁻¹ := by
+  obtain ⟨hPI, hIntegral⟩ := exterior_inverse_square_integral L U hL hOrder
+  have hMajor : IntervalIntegrable (fun y : ℝ => A * y⁻¹ ^ 2) volume L U := hPI.const_mul A
+  have hInt : IntervalIntegrable f volume L U := by
+    apply hMajor.mono_fun' hf
+    rw [uIoc_of_le hOrder]
+    filter_upwards [ae_restrict_mem measurableSet_Ioc] with y hy
+    simpa only [Real.norm_eq_abs] using hPoint y (Ioc_subset_Icc_self hy)
+  refine ⟨hInt, ?_⟩
+  calc
+    |∫ y in L..U, f y| ≤ ∫ y in L..U, |f y| := by
+      simpa only [Real.norm_eq_abs] using
+        (intervalIntegral.norm_integral_le_integral_norm (f := f) hOrder)
+    _ ≤ ∫ y in L..U, A * y⁻¹ ^ 2 :=
+      intervalIntegral.integral_mono_on hOrder hInt.abs hMajor hPoint
+    _ = A * (L⁻¹ - U⁻¹) := by rw [intervalIntegral.integral_const_mul, hIntegral]
+    _ ≤ A * L⁻¹ := mul_le_mul_of_nonneg_left
+      (sub_le_self _ (inv_nonneg.mpr (hL.le.trans hOrder))) hA
+
+private theorem exterior_quadratic_kernel_density
+    (L r M y : ℝ) (hL : 0 < L) (hr : 0 < r) (hy : L ≤ y)
+    (hsep : 2 * r ≤ L) (q : ℝ) (hq : |q| ≤ M * y ^ 2 / L) :
+    |hartreeKernel r y * q| ≤
+      (4 * |8 * Real.pi * hartreeKappa| * M * r * bubble r ^ 3 / L) * y⁻¹ ^ 2 := by
+  have hyp : 0 < y := hL.trans_le hy
+  have hk := hartreeKernel_separated_ordered y r hyp hr (hsep.trans hy)
+  rw [hartreeKernel_symm y r, ← bubble_pow_three_eq_bracket] at hk
+  rw [abs_mul]
+  calc
+    _ ≤ ((4 * |8 * Real.pi * hartreeKappa|) * y⁻¹ ^ 4 * r * bubble r ^ 3) *
+        (M * y ^ 2 / L) := mul_le_mul hk hq (abs_nonneg _)
+          (by unfold bubble; positivity)
+    _ = _ := by field_simp [hyp.ne', hL.ne']
+
 private theorem exterior_finite_quadratic_tail
     (L U r M : ℝ) (hL : 0 < L) (hOrder : L ≤ U) (hr : 0 < r)
     (hsep : 2 * r ≤ L) (hM : 0 ≤ M) (q : ℝ → ℝ)
@@ -106,61 +162,20 @@ private theorem exterior_finite_quadratic_tail
         32 * Real.pi * hartreeKappa * M * r * bubble r ^ 3 / L ^ 2 := by
   let A := 4 * |8 * Real.pi * hartreeKappa| * M * r * bubble r ^ 3 / L
   have hA : 0 ≤ A := by dsimp [A]; unfold bubble; positivity
-  have hP : ContinuousOn (fun y : ℝ => y⁻¹ ^ 2) (Icc L U) := by
-    intro y hy
-    exact (((hasDerivAt_id y).inv (hL.trans_le hy.1).ne').continuousAt.pow 2).continuousWithinAt
-  have hPI : IntervalIntegrable (fun y : ℝ => y⁻¹ ^ 2) volume L U :=
-    hP.intervalIntegrable_of_Icc hOrder
-  have hMajor : IntervalIntegrable (fun y : ℝ => A * y⁻¹ ^ 2) volume L U := hPI.const_mul A
-  have hPoint (y : ℝ) (hy : y ∈ Icc L U) :
-      |hartreeKernel r y * q y| ≤ A * y⁻¹ ^ 2 := by
-    have hyp : 0 < y := hL.trans_le hy.1
-    have hk := hartreeKernel_separated_ordered y r hyp hr (hsep.trans hy.1)
-    rw [hartreeKernel_symm y r, ← bubble_pow_three_eq_bracket] at hk
-    rw [abs_mul]
-    calc
-      _ ≤ ((4 * |8 * Real.pi * hartreeKappa|) * y⁻¹ ^ 4 * r * bubble r ^ 3) *
-          (M * y ^ 2 / L) := mul_le_mul hk (hBound y hy) (abs_nonneg _)
-            (by unfold bubble; positivity)
-      _ = A * y⁻¹ ^ 2 := by
-        dsimp [A]
-        field_simp [hyp.ne', hL.ne']
   have hKMeas : Measurable (fun y => hartreeKernel r y) :=
     hartreeKernel_uncurry_measurable.comp (measurable_const.prodMk measurable_id)
   have hqI : IntervalIntegrable q volume L U := hq.intervalIntegrable_of_Icc hOrder
   have hqMeas : AEStronglyMeasurable q (volume.restrict (uIoc L U)) := by
     rw [uIoc_of_le hOrder]
     exact hqI.1.aestronglyMeasurable
-  have hInt : IntervalIntegrable (fun y => hartreeKernel r y * q y) volume L U := by
-    apply hMajor.mono_fun' (hKMeas.aestronglyMeasurable.restrict.mul hqMeas)
-    rw [uIoc_of_le hOrder]
-    filter_upwards [ae_restrict_mem measurableSet_Ioc] with y hy
-    simpa only [Real.norm_eq_abs] using hPoint y (Ioc_subset_Icc_self hy)
-  have hDeriv (y : ℝ) (hy : y ∈ uIcc L U) :
-      HasDerivAt (fun x : ℝ => -x⁻¹) (y⁻¹ ^ 2) y := by
-    rw [uIcc_of_le hOrder] at hy
-    convert ((hasDerivAt_id y).inv (hL.trans_le hy.1).ne').neg using 1 <;>
-      simp [one_div, inv_pow]
-  have hIntegral : (∫ y : ℝ in L..U, y⁻¹ ^ 2) = L⁻¹ - U⁻¹ := by
-    simpa only [neg_sub_neg] using
-      intervalIntegral.integral_eq_sub_of_hasDerivAt hDeriv hPI
-  refine ⟨hInt, ?_⟩
-  calc
-    |∫ y in L..U, hartreeKernel r y * q y| ≤
-        ∫ y in L..U, |hartreeKernel r y * q y| := by
-      simpa only [Real.norm_eq_abs] using
-        (intervalIntegral.norm_integral_le_integral_norm
-          (f := fun y : ℝ => hartreeKernel r y * q y) hOrder)
-    _ ≤ ∫ y in L..U, A * y⁻¹ ^ 2 :=
-      intervalIntegral.integral_mono_on hOrder hInt.abs hMajor hPoint
-    _ = A * (L⁻¹ - U⁻¹) := by rw [intervalIntegral.integral_const_mul, hIntegral]
-    _ ≤ A * L⁻¹ := mul_le_mul_of_nonneg_left
-      (sub_le_self _ (inv_nonneg.mpr (hL.le.trans hOrder))) hA
-    _ = _ := by
-      dsimp [A]
-      rw [abs_of_nonneg (show 0 ≤ 8 * Real.pi * hartreeKappa by unfold hartreeKappa; positivity)]
-      simp only [div_eq_mul_inv, inv_pow]
-      ring
+  have hBoth := exterior_inverse_square_majorant L U A hL hOrder hA
+    (fun y => hartreeKernel r y * q y) (hKMeas.aestronglyMeasurable.restrict.mul hqMeas)
+    (fun y hy => exterior_quadratic_kernel_density L r M y hL hr hy.1 hsep (q y) (hBound y hy))
+  refine ⟨hBoth.1, hBoth.2.trans_eq ?_⟩
+  dsimp [A]
+  rw [abs_of_nonneg (show 0 ≤ 8 * Real.pi * hartreeKappa by unfold hartreeKappa; positivity)]
+  simp only [div_eq_mul_inv, inv_pow]
+  ring
 
 /-- The full finite matched-annulus tail acting on the separated core.
 The source norm, initial jet and exterior field all refer to the same
@@ -231,7 +246,8 @@ theorem actual_Hartree_matched_exterior_core_feedback
     have hMap : ContinuousAt (fun t : ℝ => t / a) y :=
       (continuous_id.div_const a).continuousAt
     have hc : ContinuousAt (fun t : ℝ => w (t / a)) y :=
-      ((hClass (y / a) ⟨hr0.trans_le hx.1, hx.2.trans_lt hBR⟩).1.continuousAt).comp hMap
+      ContinuousAt.comp (f := fun t : ℝ => t / a) (g := w) (x := y)
+        ((hClass (y / a) ⟨hr0.trans_le hx.1, hx.2.trans_lt hBR⟩).1.continuousAt) hMap
     exact (continuousAt_id.mul (Complex.continuous_re.continuousAt.comp hc)).continuousWithinAt
   have hqBound (y : ℝ) (hy : y ∈ Icc L (a * B)) : |q y| ≤ M * y ^ 2 / L := by
     have hyp : 0 < y := hLp.trans_le hy.1
