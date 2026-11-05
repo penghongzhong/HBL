@@ -104,7 +104,7 @@ theorem actual_fullHartree_effective_mismatch_time_split
     (c b omega : ℝ → ℝ) (Z : ℝ → ℝ → ℂ)
     {s r C beta : ℝ}
     (hRpos : 0 < monopoleQuadraticRadius (c s))
-    (hr : 0 < r) (hr1 : r ≤ 1)
+    (hr : 0 < r) (_hr1 : r ≤ 1)
     (hsep : 2 * r ≤ monopoleQuadraticRadius (c s))
     (hZ : ∀ t rho, rho ≤ monopoleQuadraticRadius (c s) → Z t rho = 0)
     (hVmeas : Measurable (monopolePerturbedRadialProfile
