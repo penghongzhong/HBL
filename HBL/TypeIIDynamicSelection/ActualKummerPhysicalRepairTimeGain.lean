@@ -57,11 +57,13 @@ theorem actual_Hartree_physical_interface_repair_scale_time_gain
     inv_anti₀ (pow_pos hLpos 6) hL6
   have hInvPow :
       (L ^ 6)⁻¹ = L ^ (-6 : ℝ) := by
+    have hnat : L ^ (6 : ℝ) = L ^ (6 : ℕ) :=
+      Real.rpow_natCast L 6
     calc
-      (L ^ 6)⁻¹ = (L ^ (6 : ℝ))⁻¹ := by
-        rw [Real.rpow_natCast]
+      (L ^ 6)⁻¹ = (L ^ (6 : ℝ))⁻¹ :=
+        congrArg Inv.inv hnat.symm
       _ = L ^ (-6 : ℝ) :=
-        (Real.rpow_neg hLpos.le).symm
+        (Real.rpow_neg hLpos.le (6 : ℝ)).symm
   have hExponent :
       L ^ (-6 : ℝ) ≤ L ^ (-(3 / 8 : ℝ)) :=
     Real.rpow_le_rpow_of_exponent_le hLone (by norm_num)
