@@ -23,7 +23,7 @@ open Set Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Profile.Kummer
+open HBL.Profile.Kummer HBL.Modulation.Monopole
 
 def actualKummerPhysicalInterfaceRepair
     (a R : ℝ) (p q : ℂ) (y : ℝ) : ℂ :=
@@ -56,14 +56,14 @@ theorem actual_Kummer_physical_interface_repair_derivatives
   · change HasDerivAt
       (fun x : ℝ => actualKummerInterfaceRepair R p q (x / a))
       ((a : ℂ)⁻¹ * actualKummerInterfaceRepairSlope R p q (y / a)) y
-    exact hfirst
+    simpa only [one_div, Complex.real_smul, Complex.ofReal_inv] using hfirst
   · have hsecond := hsecond0.const_mul (a : ℂ)⁻¹
     change HasDerivAt
       (fun x : ℝ => (a : ℂ)⁻¹ *
         actualKummerInterfaceRepairSlope R p q (x / a))
       ((a : ℂ)⁻¹ * ((a : ℂ)⁻¹ *
         actualKummerInterfaceRepairSecond R p q (y / a))) y
-    exact hsecond
+    simpa only [one_div, Complex.real_smul, Complex.ofReal_inv, mul_assoc] using hsecond
 
 /-- Exact scaling identity: the complete frozen repair residual acquires
 the physical factor a^(-2). -/
