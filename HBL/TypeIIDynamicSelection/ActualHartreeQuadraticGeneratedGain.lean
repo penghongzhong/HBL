@@ -60,7 +60,8 @@ theorem actual_Hartree_correction_Taylor_quadratic_time_order
     U H b omega db domega s r hr hUtime hHtime
       hUspace hHspace hUsecond hHsecond hUmeas hHmeas
       M e hM he hUB (by simpa only [e] using hHB)
-  have hsum : M + e ≤ M + CH := add_le_add_left heCH M |> by simpa [add_comm]
+  have hsum : M + e ≤ M + CH := by
+    simpa only [add_comm] using add_le_add_left heCH M
   have hsum0 : 0 ≤ M + e := add_nonneg hM he
   have hsumPow : (M + e) ^ 5 ≤ (M + CH) ^ 5 :=
     pow_le_pow_left₀ hsum0 hsum 5
