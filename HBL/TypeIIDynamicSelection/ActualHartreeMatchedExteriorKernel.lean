@@ -23,7 +23,7 @@ private theorem exterior_inverse_square_integral
   have hPI : IntervalIntegrable (fun y : ℝ => y⁻¹ ^ 2) volume L U :=
     hP.intervalIntegrable_of_Icc hOrder
   have hNo : (0 : ℝ) ∉ uIcc L U := notMem_uIcc_of_lt hL (hL.trans_le hOrder)
-  have hIntegral := intervalIntegral.integral_zpow (a := L) (b := U)
+  have hIntegral := integral_zpow (a := L) (b := U)
     (n := (-2 : ℤ)) (Or.inr ⟨by norm_num, hNo⟩)
   refine ⟨hPI, ?_⟩
   calc
@@ -85,27 +85,23 @@ theorem actual_Hartree_quadratic_annulus_kernel_bound
         32 * Real.pi * hartreeKappa * M * r * bubble r ^ 3 / L ^ 2 := by
   let A := 4 * |8 * Real.pi * hartreeKappa| * M * r * bubble r ^ 3 / L
   have hA : 0 ≤ A := by dsimp [A]; unfold bubble; positivity
-  trace_state
-  have hKMeas : Measurable (fun y => hartreeKernel r y) :=
-    hartreeKernel_uncurry_measurable.comp (measurable_const.prodMk measurable_id)
-  trace_state
+  have hKMeas : Measurable (fun y : ℝ => hartreeKernel r y) := by
+    have hPair : Measurable (fun y : ℝ => (r, y)) :=
+      measurable_const.prodMk measurable_id
+    have hh := hartreeKernel_uncurry_measurable.comp hPair
+    exact hh
   have hqI : IntervalIntegrable q volume L U := hq.intervalIntegrable_of_Icc hOrder
-  trace_state
   have hqMeas : AEStronglyMeasurable q (volume.restrict (uIoc L U)) := by
     rw [uIoc_of_le hOrder]
     exact hqI.1.aestronglyMeasurable
-  trace_state
   have hKm : AEStronglyMeasurable (fun y : ℝ => hartreeKernel r y)
       (volume.restrict (uIoc L U)) := hKMeas.aestronglyMeasurable
   have hProduct : AEStronglyMeasurable (fun y : ℝ => hartreeKernel r y * q y)
       (volume.restrict (uIoc L U)) := hKm.mul hqMeas
-  trace_state
   have hBoth := exterior_inverse_square_majorant L U A hL hOrder hA
     (fun y => hartreeKernel r y * q y) hProduct
     (fun y hy => exterior_quadratic_kernel_density L r M y hL hr hy.1 hsep (q y) (hBound y hy))
-  trace_state
   refine ⟨hBoth.1, hBoth.2.trans_eq ?_⟩
-  trace_state
   dsimp [A]
   rw [abs_of_nonneg (show 0 ≤ 8 * Real.pi * hartreeKappa by unfold hartreeKappa; positivity)]
   simp only [div_eq_mul_inv, inv_pow]
