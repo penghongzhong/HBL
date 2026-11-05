@@ -161,7 +161,6 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       _ = G * M * a * ((a * r) *
           (1 + a * r) ^ (-(19 / 8 : ℝ))) := by
         field_simp [hrp.ne']
-        ring
       _ ≤ G * M * a * (a * r) ^ (-(11 / 8 : ℝ)) :=
         mul_le_mul_of_nonneg_left hTail (by positivity)
   have hScale (r : ℝ) (hr : 0 < r) :
