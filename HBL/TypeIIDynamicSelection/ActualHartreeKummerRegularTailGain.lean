@@ -48,7 +48,7 @@ private theorem regular_tail_rpow_integral
     IntervalIntegrable (fun r : ℝ => r ^ (-(11 / 8 : ℝ))) volume x y ∧
     (∫ r in x..y, r ^ (-(11 / 8 : ℝ))) ≤
       (8 / 3 : ℝ) * x ^ (-(3 / 8 : ℝ)) := by
-  have hzero : (0 : ℝ) ∉ [[x,y]] := by
+  have hzero : (0 : ℝ) ∉ uIcc x y := by
     rw [uIcc_of_le hxy]
     intro h
     linarith [h.1]
@@ -125,7 +125,8 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       dsimp [F, M]
       rw [norm_neg, actualHartreeLaplacianScaledKummerSource, norm_mul,
         Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg a)]
-      exact mul_le_mul_of_nonneg_left hphys (sq_nonneg a)
+      simpa only [mul_assoc] using
+        (mul_le_mul_of_nonneg_left hphys (sq_nonneg a))
     have hy := hbound r ⟨hrp.le, hr.2.trans hRscale.le⟩
     have hyPhys : ‖originPhysicalValue K.y r‖ ≤ G / r := by
       rw [originPhysicalValue, norm_div, Complex.norm_real,
@@ -143,8 +144,12 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       calc
         _ ≤ (a * r) * (a * r) ^ (-(19 / 8 : ℝ)) :=
           mul_le_mul_of_nonneg_left hp har.le
+        _ = (a * r) ^ (1 : ℝ) * (a * r) ^ (-(19 / 8 : ℝ)) := by
+          rw [Real.rpow_one]
+        _ = (a * r) ^ ((1 : ℝ) + (-(19 / 8 : ℝ))) :=
+          (Real.rpow_add har (1 : ℝ) (-(19 / 8 : ℝ))).symm
         _ = (a * r) ^ (-(11 / 8 : ℝ)) := by
-          rw [← Real.rpow_one (a * r), ← Real.rpow_add har]
+          congr 1
           norm_num
     rw [originGreenSourceB, div_eq_mul_inv, norm_mul, norm_mul, hInv]
     calc
@@ -166,8 +171,13 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
     calc
       a * (a ^ (-(11 / 8 : ℝ)) * r ^ (-(11 / 8 : ℝ))) =
           (a * a ^ (-(11 / 8 : ℝ))) * r ^ (-(11 / 8 : ℝ)) := by ring
+      _ = (a ^ (1 : ℝ) * a ^ (-(11 / 8 : ℝ))) *
+          r ^ (-(11 / 8 : ℝ)) := by rw [Real.rpow_one]
+      _ = a ^ ((1 : ℝ) + (-(11 / 8 : ℝ))) *
+          r ^ (-(11 / 8 : ℝ)) := by
+            rw [Real.rpow_add ha]
       _ = a ^ (-(3 / 8 : ℝ)) * r ^ (-(11 / 8 : ℝ)) := by
-        rw [← Real.rpow_one a, ← Real.rpow_add ha]
+        congr 2
         norm_num
   let Ctail : ℝ := G * M * a ^ (-(3 / 8 : ℝ))
   have hCtail : 0 ≤ Ctail := by
@@ -186,8 +196,12 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       intro hrI
       have hrmem : r ∈ Icc r0 R := ⟨hrI.1.le, hrI.2⟩
       have hd := hDensity r hrmem
-      rw [hScale r (hr0.trans_le hrmem.1)] at hd
-      simpa only [Ctail, mul_assoc] using hd
+      have hd' :
+          ‖originGreenSourceB K F r‖ ≤
+            G * M * (a * (a * r) ^ (-(11 / 8 : ℝ))) := by
+        simpa only [mul_assoc] using hd
+      rw [hScale r (hr0.trans_le hrmem.1)] at hd'
+      simpa only [Ctail, mul_assoc] using hd'
     · exact hMajor
   have hInt :
       (∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ))) ≤
