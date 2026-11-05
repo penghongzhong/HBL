@@ -31,11 +31,11 @@ def actualKummerPhysicalInterfaceRepair
 
 def actualKummerPhysicalInterfaceRepairSlope
     (a R : ℝ) (p q : ℂ) (y : ℝ) : ℂ :=
-  (a : ℂ)⁻¹ * actualKummerInterfaceRepairSlope R p q (y / a)
+  (1 / a : ℝ) • actualKummerInterfaceRepairSlope R p q (y / a)
 
 def actualKummerPhysicalInterfaceRepairSecond
     (a R : ℝ) (p q : ℂ) (y : ℝ) : ℂ :=
-  (a : ℂ)⁻¹ * ((a : ℂ)⁻¹ *
+  (1 / a : ℝ) • ((1 / a : ℝ) •
     actualKummerInterfaceRepairSecond R p q (y / a))
 
 theorem actual_Kummer_physical_interface_repair_derivatives
@@ -55,15 +55,15 @@ theorem actual_Kummer_physical_interface_repair_derivatives
   constructor
   · change HasDerivAt
       (fun x : ℝ => actualKummerInterfaceRepair R p q (x / a))
-      ((a : ℂ)⁻¹ * actualKummerInterfaceRepairSlope R p q (y / a)) y
-    simpa only [one_div, Complex.real_smul, Complex.ofReal_inv] using hfirst
-  · have hsecond := hsecond0.const_mul (a : ℂ)⁻¹
+      ((1 / a : ℝ) • actualKummerInterfaceRepairSlope R p q (y / a)) y
+    simpa only [Function.comp_def] using hfirst
+  · have hsecond := hsecond0.const_smul (1 / a : ℝ)
     change HasDerivAt
-      (fun x : ℝ => (a : ℂ)⁻¹ *
+      (fun x : ℝ => (1 / a : ℝ) •
         actualKummerInterfaceRepairSlope R p q (x / a))
-      ((a : ℂ)⁻¹ * ((a : ℂ)⁻¹ *
+      ((1 / a : ℝ) • ((1 / a : ℝ) •
         actualKummerInterfaceRepairSecond R p q (y / a))) y
-    simpa only [one_div, Complex.real_smul, Complex.ofReal_inv, mul_assoc] using hsecond
+    simpa only [Function.comp_def] using hsecond
 
 /-- Exact scaling identity: the complete frozen repair residual acquires
 the physical factor a^(-2). -/
@@ -97,7 +97,7 @@ theorem actual_Kummer_physical_interface_repair_endpoint_jets
     (a R : ℝ) (ha : 0 < a) (hR : 0 < R) (p q : ℂ) :
     actualKummerPhysicalInterfaceRepair a R p q (a*R) = p ∧
     actualKummerPhysicalInterfaceRepairSlope a R p q (a*R) =
-      (a : ℂ)⁻¹ * q ∧
+      (1 / a : ℝ) • q ∧
     actualKummerPhysicalInterfaceRepair a R p q (2*a*R) = 0 ∧
     actualKummerPhysicalInterfaceRepairSlope a R p q (2*a*R) = 0 := by
   have hEnds := actual_Kummer_interface_repair_endpoint_jets R hR p q
