@@ -40,7 +40,7 @@ def actualKummerPhysicalInterfaceRepairSecond
     (fun y => actualKummerInterfaceRepairSecond R p q (y / a)))
 
 theorem actual_Kummer_physical_interface_repair_derivatives
-    (a R y : ℝ) (ha : a ≠ 0) (hR : R ≠ 0) (p q : ℂ) :
+    (a R y : ℝ) (_ha : a ≠ 0) (hR : R ≠ 0) (p q : ℂ) :
     HasDerivAt (actualKummerPhysicalInterfaceRepair a R p q)
       (actualKummerPhysicalInterfaceRepairSlope a R p q y) y ∧
     HasDerivAt (actualKummerPhysicalInterfaceRepairSlope a R p q)
@@ -100,7 +100,8 @@ theorem actual_Kummer_physical_interface_repair_scaled_residual_exact
   simp only [Pi.smul_apply, Complex.real_smul, Complex.ofReal_inv,
     Complex.ofReal_pow, Complex.ofReal_div]
   field_simp [haC, hyC]
-  ring_nf
+  norm_num
+  ring
 
 /-- Physical endpoint jets: the Kummer value is preserved at aR, the
 physical slope is q/a there, and both vanish at 2aR. -/
@@ -116,6 +117,7 @@ theorem actual_Kummer_physical_interface_repair_endpoint_jets
   have h2 : (2 * a * R) / a = 2 * R := by field_simp [ha.ne']
   unfold actualKummerPhysicalInterfaceRepair
     actualKummerPhysicalInterfaceRepairSlope
+  simp only [Pi.smul_apply]
   rw [h1, h2, hEnds.1, hEnds.2.1, hEnds.2.2.1, hEnds.2.2.2]
   exact ⟨rfl, rfl, rfl, by simp⟩
 
