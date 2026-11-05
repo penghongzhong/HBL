@@ -216,4 +216,109 @@ theorem actual_Kummer_interface_repair_uniform_bound :
   apply mul_le_mul_of_nonneg_right _ hD
   linarith
 
+
+/-- The same concrete repair bound with the small Kummer radius kept
+explicit. This is the form needed before the physical pullback: no R>=1
+assumption is used, and the possible R^(-2) loss is displayed rather than
+hidden in a constant. -/
+theorem actual_Kummer_interface_repair_positive_radius_bound :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+    ∀ (mu theta R r : ℝ), 0 < R → r ∈ Icc R (2*R) →
+    ∀ p q : ℂ,
+      let D := ‖p‖ + R * ‖q‖
+      ‖actualKummerInterfaceRepair R p q r‖ ≤ D ∧
+      ‖actualKummerInterfaceRepairSlope R p q r‖ ≤ (3*C1+1)*D/R ∧
+      ‖actualKummerInterfaceRepairSecond R p q r‖ ≤ (9*C2+6*C1)*D/R^2 ∧
+      ‖actualKummerInterfaceRepairResidual mu theta R p q r‖ ≤
+        ((9*C2+12*C1+2)/R^2 + 3*C1+1+‖frozenZeroCoeff mu theta‖)*D := by
+  obtain ⟨C1,C2,hC1,hC2,hBounds⟩ :=
+    actual_Hartree_overlap_cutoff_uniform_C2_spatial_scaling
+  refine ⟨C1,C2,hC1,hC2,?_⟩
+  intro mu theta R r hR hr p q
+  let D := ‖p‖ + R * ‖q‖
+  have hr0 : 0 < r := hR.trans_le hr.1
+  have hD : 0 ≤ D := by dsimp [D]; positivity
+  have hq : ‖q‖ ≤ D/R :=
+    (le_div_iff₀ hR).2 (by dsimp [D]; nlinarith [norm_nonneg p])
+  have hP : ‖p + ((r-R : ℝ) : ℂ)*q‖ ≤ D := by
+    calc
+      _ ≤ ‖p‖ + ‖((r-R : ℝ) : ℂ)*q‖ := norm_add_le _ _
+      _ = ‖p‖ + (r-R)*‖q‖ := by
+        rw [norm_mul, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_nonneg (sub_nonneg.mpr hr.1)]
+      _ ≤ D := by dsimp [D]; nlinarith [norm_nonneg q, hr.2]
+  have hChi : ‖actualKummerRepairCutoff R r‖ ≤ 1 :=
+    actual_Hartree_one_layer_overlap_cutoff_norm_le_one (R/3) (r-R)
+  have hDer := repairCutoff_derivatives R r hR.ne'
+  have hChi1 : ‖deriv (actualKummerRepairCutoff R) r‖ ≤ 3*C1/R := by
+    rw [hDer.1.deriv]
+    exact ((hBounds (R/3) (r-R) (by positivity)).1).trans_eq
+      (by field_simp)
+  have hChi2 : ‖deriv (deriv (actualKummerRepairCutoff R)) r‖ ≤
+      9*C2/R^2 := by
+    rw [hDer.2.deriv]
+    exact ((hBounds (R/3) (r-R) (by positivity)).2).trans_eq
+      (by field_simp; norm_num)
+  have hLift : ‖actualKummerInterfaceRepair R p q r‖ ≤ D := by
+    unfold actualKummerInterfaceRepair
+    rw [norm_mul]
+    exact (mul_le_mul hChi hP (norm_nonneg _) (by norm_num)).trans_eq
+      (one_mul D)
+  have hSlope : ‖actualKummerInterfaceRepairSlope R p q r‖ ≤
+      (3*C1+1)*D/R := by
+    unfold actualKummerInterfaceRepairSlope
+    calc
+      _ ≤ ‖deriv (actualKummerRepairCutoff R) r *
+          (p+((r-R : ℝ):ℂ)*q)‖ +
+          ‖actualKummerRepairCutoff R r*q‖ := norm_add_le _ _
+      _ ≤ (3*C1/R)*D + 1*(D/R) := by
+        rw [norm_mul, norm_mul]
+        exact _root_.add_le_add
+          (mul_le_mul hChi1 hP (norm_nonneg _) (by positivity))
+          (mul_le_mul hChi hq (norm_nonneg _) (by norm_num))
+      _ = _ := by ring
+  have hSecond : ‖actualKummerInterfaceRepairSecond R p q r‖ ≤
+      (9*C2+6*C1)*D/R^2 := by
+    unfold actualKummerInterfaceRepairSecond
+    calc
+      _ ≤ ‖deriv (deriv (actualKummerRepairCutoff R)) r *
+          (p+((r-R : ℝ):ℂ)*q)‖ +
+          ‖(2:ℂ)*deriv (actualKummerRepairCutoff R) r*q‖ := norm_add_le _ _
+      _ ≤ (9*C2/R^2)*D + (2*(3*C1/R))*(D/R) := by
+        norm_num only [norm_mul, Complex.norm_ofNat]
+        exact _root_.add_le_add
+          (mul_le_mul hChi2 hP (norm_nonneg _) (by positivity))
+          (mul_le_mul (mul_le_mul_of_nonneg_left hChi1 (by norm_num)) hq
+            (norm_nonneg _) (by positivity))
+      _ = _ := by field_simp; ring
+  have hFirst : ‖frozenFirstCoeff r‖ ≤ 2/R+R := by
+    unfold frozenFirstCoeff
+    calc
+      _ ≤ ‖(2:ℂ)/(r:ℂ)‖ + ‖Complex.I*(r:ℂ)/2‖ := norm_add_le _ _
+      _ = 2/r+r/2 := by
+        simp [Complex.norm_real, Real.norm_eq_abs, abs_of_pos hr0]
+      _ ≤ 2/R+R :=
+        _root_.add_le_add
+          (div_le_div_of_nonneg_left (by norm_num) hR hr.1)
+          (by linarith [hr.2])
+  have hRaw : ‖actualKummerInterfaceRepairResidual mu theta R p q r‖ ≤
+      ((9*C2+12*C1+2)/R^2 + 3*C1+1+‖frozenZeroCoeff mu theta‖)*D := by
+    unfold actualKummerInterfaceRepairResidual
+    calc
+      _ ≤ ‖actualKummerInterfaceRepairSecond R p q r‖ +
+          ‖frozenFirstCoeff r*actualKummerInterfaceRepairSlope R p q r‖ +
+          ‖frozenZeroCoeff mu theta*actualKummerInterfaceRepair R p q r‖ :=
+        (norm_add_le _ _).trans
+          (_root_.add_le_add (norm_add_le _ _) (le_refl _))
+      _ ≤ (9*C2+6*C1)*D/R^2 +
+          (2/R+R)*((3*C1+1)*D/R) +
+          ‖frozenZeroCoeff mu theta‖*D := by
+        rw [norm_mul, norm_mul]
+        exact _root_.add_le_add
+          (_root_.add_le_add hSecond
+            (mul_le_mul hFirst hSlope (norm_nonneg _) (by positivity)))
+          (mul_le_mul_of_nonneg_left hLift (norm_nonneg _))
+      _ = _ := by field_simp [hR.ne']; ring
+  exact ⟨hLift,hSlope,hSecond,hRaw⟩
+
 end HBL.TypeIIDynamicSelection
