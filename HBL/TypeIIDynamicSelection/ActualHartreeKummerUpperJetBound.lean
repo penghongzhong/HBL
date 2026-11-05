@@ -51,7 +51,7 @@ theorem actual_matched_Kummer_upper_regular_jet_bound
   have hB : 0 < B := hr0.trans_le hOrder
   have hC0 : 0 ≤ C0 := by dsimp [C0]; positivity
   have hH : 0 ≤ H := by dsimp [H]; positivity
-  have hK : OriginBasisOn K r0 B G :=
+  have hK :=
     origin_kummer_annulus_bound K r0 B G hr0 hBR hG hbound
   have hBeta0 :=
     actual_matched_Kummer_regular_coefficient_bound
@@ -76,7 +76,7 @@ theorem actual_matched_Kummer_upper_regular_jet_bound
     positivity
   have hReg :=
     origin_kummer_regular_physical_bound
-      K D G hD hG hBR.le hcoeff hbound B ⟨hB, hBR.le⟩
+      K D G hD hG hBR.le hcoeff hbound B ⟨hB, le_rfl⟩
   have hExact :=
     actual_origin_matched_Kummer_upper_regular_jet
       K hK hOrder F U DU hzero
