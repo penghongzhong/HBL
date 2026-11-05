@@ -1,4 +1,5 @@
 import HBL.HartreeTailLeakage
+import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 import Mathlib.Tactic
 
 /-! Finite annular action of the original Hartree kernel. This module
@@ -21,14 +22,18 @@ private theorem exterior_inverse_square_integral
     exact ((hasDerivAt_inv (hL.trans_le hy.1).ne').continuousAt.pow 2).continuousWithinAt
   have hPI : IntervalIntegrable (fun y : ℝ => y⁻¹ ^ 2) volume L U :=
     hP.intervalIntegrable_of_Icc hOrder
-  have hDeriv (y : ℝ) (hy : y ∈ uIcc L U) :
-      HasDerivAt (fun x : ℝ => -x⁻¹) (y⁻¹ ^ 2) y := by
-    rw [uIcc_of_le hOrder] at hy
-    simpa only [neg_neg, inv_pow] using
-      (hasDerivAt_inv (hL.trans_le hy.1).ne').neg
+  have hNo : (0 : ℝ) ∉ uIcc L U := notMem_uIcc_of_lt hL (hL.trans_le hOrder)
+  have hIntegral := intervalIntegral.integral_zpow (a := L) (b := U)
+    (n := (-2 : ℤ)) (Or.inr ⟨by norm_num, hNo⟩)
   refine ⟨hPI, ?_⟩
-  simpa only [neg_sub_neg] using
-    intervalIntegral.integral_eq_sub_of_hasDerivAt hDeriv hPI
+  calc
+    (∫ y : ℝ in L..U, y⁻¹ ^ 2) = ∫ y : ℝ in L..U, y ^ (-2 : ℤ) := by
+      apply intervalIntegral.integral_congr
+      intro y _
+      simp [zpow_neg, inv_pow]
+    _ = (U ^ ((-2 : ℤ) + 1) - L ^ ((-2 : ℤ) + 1)) / ((-2 : ℤ) + 1) := hIntegral
+    _ = -(U⁻¹ - L⁻¹) := by norm_num
+    _ = L⁻¹ - U⁻¹ := by ring
 
 private theorem exterior_inverse_square_majorant
     (L U A : ℝ) (hL : 0 < L) (hOrder : L ≤ U) (hA : 0 ≤ A)
@@ -80,20 +85,27 @@ theorem actual_Hartree_quadratic_annulus_kernel_bound
         32 * Real.pi * hartreeKappa * M * r * bubble r ^ 3 / L ^ 2 := by
   let A := 4 * |8 * Real.pi * hartreeKappa| * M * r * bubble r ^ 3 / L
   have hA : 0 ≤ A := by dsimp [A]; unfold bubble; positivity
+  trace_state
   have hKMeas : Measurable (fun y => hartreeKernel r y) :=
     hartreeKernel_uncurry_measurable.comp (measurable_const.prodMk measurable_id)
+  trace_state
   have hqI : IntervalIntegrable q volume L U := hq.intervalIntegrable_of_Icc hOrder
+  trace_state
   have hqMeas : AEStronglyMeasurable q (volume.restrict (uIoc L U)) := by
     rw [uIoc_of_le hOrder]
     exact hqI.1.aestronglyMeasurable
+  trace_state
   have hKm : AEStronglyMeasurable (fun y : ℝ => hartreeKernel r y)
       (volume.restrict (uIoc L U)) := hKMeas.aestronglyMeasurable
   have hProduct : AEStronglyMeasurable (fun y : ℝ => hartreeKernel r y * q y)
       (volume.restrict (uIoc L U)) := hKm.mul hqMeas
+  trace_state
   have hBoth := exterior_inverse_square_majorant L U A hL hOrder hA
     (fun y => hartreeKernel r y * q y) hProduct
     (fun y hy => exterior_quadratic_kernel_density L r M y hL hr hy.1 hsep (q y) (hBound y hy))
+  trace_state
   refine ⟨hBoth.1, hBoth.2.trans_eq ?_⟩
+  trace_state
   dsimp [A]
   rw [abs_of_nonneg (show 0 ≤ 8 * Real.pi * hartreeKappa by unfold hartreeKappa; positivity)]
   simp only [div_eq_mul_inv, inv_pow]
