@@ -27,8 +27,8 @@ open HBL.Modulation.Monopole
 theorem actual_Hartree_speed_cross_quadratic_time_order
     (H : ℝ → ℝ → ℂ)
     (db domega s r rho Cspeed CHd CH : ℝ)
-    (hs : 1 ≤ s) (hrho : 0 ≤ rho)
-    (hCs : 0 ≤ Cspeed) (hCHd : 0 ≤ CHd) (hCH : 0 ≤ CH)
+    (hs : 1 ≤ s) (_hrho : 0 ≤ rho)
+    (hCs : 0 ≤ Cspeed) (_hCHd : 0 ≤ CHd) (_hCH : 0 ≤ CH)
     (hSpeed : |db| + |domega| ≤ Cspeed * s ^ (-rho))
     (hDilation :
       ‖complexRadialDilation (H s) r‖ ≤ CHd * s ^ (-rho))
