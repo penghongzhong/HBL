@@ -35,7 +35,7 @@ private theorem threshold_plus_abs_weight_integrable :
     continuous_id.mul normalizedZetaPlus_contDiff_infty.continuous
   have hs : HasCompactSupport (fun r : ℝ => r * normalizedZetaPlus r) :=
     normalizedZetaPlus_hasCompactSupport.mul_left
-  have hi := hc.integrable_of_hasCompactSupport hs
+  have hi := hc.integrable_of_hasCompactSupport (μ := volume) hs
   simpa only [Real.norm_eq_abs] using hi.norm
 
 private theorem threshold_minus_abs_weight_integrable :
@@ -114,8 +114,9 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
     positivity
   have hPoint (r : ℝ) (hr : 0 < r) (hr1 : r ≤ 1) :
       ‖monopoleComplexEffectiveIncrement c (b s) (omega s) s r‖ ≤ K := by
-    have hcr : |c s| * r ≤ 1 :=
-      mul_le_mul (hsmall s hs) hr1 hr.le (abs_nonneg _)
+    have hcr : |c s| * r ≤ 1 := by
+      simpa only [one_mul] using
+        (mul_le_mul (hsmall s hs) hr1 hr.le (by norm_num : (0 : ℝ) ≤ 1))
     have h :=
       hResidual c (deriv c s) s r (b s) (omega s)
         (hc s).hasDerivAt (hsmall s hs) hr (by nlinarith [hcr])
@@ -149,7 +150,7 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
                     ring
             _ ≤ |r * normalizedZetaPlus r| * K :=
               mul_le_mul_of_nonneg_left hv (abs_nonneg _)
-            _ = K * |r * normalizedZetaPlus r| := by ring
+            _ = K * |r * normalizedZetaPlus r| := by rw [abs_mul]
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaPlus_zero_of_one_le r hr1']
           simp
@@ -183,7 +184,7 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
                     ring
             _ ≤ |r * normalizedZetaMinus r| * K :=
               mul_le_mul_of_nonneg_left hv (abs_nonneg _)
-            _ = K * |r * normalizedZetaMinus r| := by ring
+            _ = K * |r * normalizedZetaMinus r| := by rw [abs_mul]
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaMinus_zero_of_one_le r hr1']
           simp
