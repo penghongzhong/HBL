@@ -104,7 +104,7 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
               (C + Kreg) * Csrc
           ∀ y ∈ Icc (a * B) (2 * a * B),
             ‖actualMatchedScaledKummerApply mu theta a
-                (actualKummerPhysicalInterfaceRepair a B (-UB) (-DUB)) y‖ ≤
+                (actualKummerPhysicalInterfaceRepair a B UB DUB) y‖ ≤
               (Krep * CJ) *
                 s ^ (-(rho + actualHartreePhysicalKappa beta rhoStar)) := by
   obtain ⟨L0, epsilon, C, hL0, heps, hepsOne, hC, hJetOrder⟩ :=
@@ -166,7 +166,7 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
         have hLthree : 0 < L ^ 3 := pow_pos hLp 3
         exact hLthree.trans_le ha3)
       hB hy hs hell hellOne ha3 htrap hbeta hrhoStar hflat
-      (-UB) (-DUB)
+      UB DUB
   dsimp only at hRaw
   rw [norm_neg, norm_neg] at hRaw
   have hsp : 0 < s := lt_of_lt_of_le zero_lt_one hs
