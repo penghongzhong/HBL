@@ -9,7 +9,7 @@ import Mathlib.Tactic
 /-!
 # One-layer elimination with only physically produced Hartree gains
 
-The historical structural one-layer lemma used a fixed Frobenius half-order.
+The true Kummer tail-time producer is now a strict dependency.\n\nThe historical structural one-layer lemma used a fixed Frobenius half-order.
 For the current physical Hartree proof we use the strictly verified, weaker
 but genuine Kummer regular-tail gain 3*beta/128 instead.  Every entry of the
 minimum below is therefore tied to an actual PDE/Kummer producer.
