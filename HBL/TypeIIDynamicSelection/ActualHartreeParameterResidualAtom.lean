@@ -22,6 +22,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.ResidualLedger
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualHartreeParameterResidualValue
     (c b omega : ℝ → ℝ) (s : ℝ) : ℝ × ℝ :=
