@@ -62,9 +62,9 @@ def actualHartreeFiniteProfileCorrection
 
 def ActualHartreePacketCertified
     {beta rho base : ℝ}
-    (hbeta : 1 / 2 < beta)
-    (hrho : 0 < rho)
-    (hflat : rho < (5 * beta - 2) / 4)
+    (_hbeta : 1 / 2 < beta)
+    (_hrho : 0 < rho)
+    (_hflat : rho < (5 * beta - 2) / 4)
     (Q : ActualHartreeLayerPacket E beta rho base) : Prop :=
   0 < actualHartreePhysicalKappa beta rho ∧
   (let D := actualHartreePacketCorrection Q;
