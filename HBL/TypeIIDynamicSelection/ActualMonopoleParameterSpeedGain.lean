@@ -138,17 +138,25 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
         · have hv := (Complex.abs_re_le_norm
             (monopoleComplexEffectiveIncrement c (b s) (omega s) s r)).trans
               (hPoint r hr hr1)
-          simp only [radialU, abs_mul]
+          have hrE :
+              |r * (monopoleComplexEffectiveIncrement
+                c (b s) (omega s) s r).re| ≤ |r| * K := by
+            rw [abs_mul]
+            exact mul_le_mul_of_nonneg_left hv (abs_nonneg r)
           calc
-            |normalizedZetaPlus r| *
-                (|r| * |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).re|) =
-              (|r| * |normalizedZetaPlus r|) *
-                |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).re| := by ring
-            _ ≤ (|r| * |normalizedZetaPlus r|) * K :=
-              mul_le_mul_of_nonneg_left hv (by positivity)
-            _ = K * (|r| * |normalizedZetaPlus r|) := by ring
+            |normalizedZetaPlus r *
+                radialU (fun x =>
+                  (monopoleComplexEffectiveIncrement
+                    c (b s) (omega s) s x).re) r| =
+              |normalizedZetaPlus r| *
+                |r * (monopoleComplexEffectiveIncrement
+                  c (b s) (omega s) s r).re| := by
+                    rw [radialU, abs_mul]
+            _ ≤ |normalizedZetaPlus r| * (|r| * K) :=
+              mul_le_mul_of_nonneg_left hrE (abs_nonneg _)
+            _ = K * |r * normalizedZetaPlus r| := by
+              rw [abs_mul]
+              ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaPlus_zero_of_one_le r hr1']
           simp
@@ -170,23 +178,33 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
         · have hv := (Complex.abs_im_le_norm
             (monopoleComplexEffectiveIncrement c (b s) (omega s) s r)).trans
               (hPoint r hr hr1)
-          simp only [radialU, abs_mul]
+          have hrE :
+              |r * (monopoleComplexEffectiveIncrement
+                c (b s) (omega s) s r).im| ≤ |r| * K := by
+            rw [abs_mul]
+            exact mul_le_mul_of_nonneg_left hv (abs_nonneg r)
           calc
-            |normalizedZetaMinus r| *
-                (|r| * |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).im|) =
-              (|r| * |normalizedZetaMinus r|) *
-                |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).im| := by ring
-            _ ≤ (|r| * |normalizedZetaMinus r|) * K :=
-              mul_le_mul_of_nonneg_left hv (by positivity)
-            _ = K * (|r| * |normalizedZetaMinus r|) := by ring
+            |normalizedZetaMinus r *
+                radialU (fun x =>
+                  (monopoleComplexEffectiveIncrement
+                    c (b s) (omega s) s x).im) r| =
+              |normalizedZetaMinus r| *
+                |r * (monopoleComplexEffectiveIncrement
+                  c (b s) (omega s) s r).im| := by
+                    rw [radialU, abs_mul]
+            _ ≤ |normalizedZetaMinus r| * (|r| * K) :=
+              mul_le_mul_of_nonneg_left hrE (abs_nonneg _)
+            _ = K * |r * normalizedZetaMinus r| := by
+              rw [abs_mul]
+              ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaMinus_zero_of_one_le r hr1']
           simp
       _ = _ := by rw [integral_const_mul]
-  have hIp := threshold_plus_abs_weight_integrable.integrableOn
-  have hIm := threshold_minus_abs_weight_integrable.integrableOn
+  have hIp : IntegrableOn (fun r : ℝ => |r * normalizedZetaPlus r|)
+      (Ioi (0 : ℝ)) := threshold_plus_abs_weight_integrable.integrableOn
+  have hIm : IntegrableOn (fun r : ℝ => |r * normalizedZetaMinus r|)
+      (Ioi (0 : ℝ)) := threshold_minus_abs_weight_integrable.integrableOn
   have hMassEq :
       (∫ r in Ioi (0 : ℝ), |r * normalizedZetaPlus r|) +
         (∫ r in Ioi (0 : ℝ), |r * normalizedZetaMinus r|) = Mtest := by
