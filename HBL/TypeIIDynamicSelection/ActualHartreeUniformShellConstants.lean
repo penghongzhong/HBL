@@ -27,7 +27,7 @@ open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 /-- A fixed global first-derivative cutoff bound gives the material shell
 estimate for every radius and every modulation speed. -/
 theorem actual_one_layer_material_transport_shell_bound_with_fixed_cutoff
-    (Cchi : ℝ) (hCchi : 0 < Cchi)
+    (Cchi : ℝ) (_hCchi : 0 < Cchi)
     (hCut : ∀ x : ℝ, |deriv cutoff x| ≤ Cchi)
     (radius radiusSpeed b r : ℝ)
     (hRadius : 0 < radius) (hrLeft : radius ≤ r)
@@ -55,6 +55,53 @@ theorem actual_one_layer_material_transport_shell_bound_with_fixed_cutoff
           (mul_le_mul_of_nonneg_right hrTwo hP)
           (hCut (r / radius)) (abs_nonneg _) (by positivity)
     _ = 2 * Cchi * |radiusSpeed / radius - b| := by ring
+
+private theorem uniform_radial_complex_commutator_norm_bound_sharp
+    (u v w f g : ℂ) (C1 C2 A B ell : ℝ)
+    (hC1 : 0 ≤ C1) (hC2 : 0 ≤ C2)
+    (hA : 0 ≤ A) (_hB : 0 ≤ B) (hell : 0 ≤ ell)
+    (hu : ‖u‖ ≤ C1 * A * ell)
+    (hv : ‖v‖ ≤ C2 * A ^ 2 * ell ^ 2)
+    (hw : ‖w‖ ≤ 2 * A * ell)
+    (hf : ‖f‖ ≤ Real.sqrt ell * B)
+    (hg : ‖g‖ ≤ Real.sqrt ell * B * ell) :
+    ‖(2 : ℂ) * u * g + (v + w * u) * f‖ ≤
+      (2 * C1 * A * B + (C2 + 2 * C1) * A ^ 2 * B) *
+        ell ^ 2 * Real.sqrt ell := by
+  have hw_mul : ‖w * u‖ ≤
+      (2 * A * ell) * (C1 * A * ell) := by
+    rw [norm_mul]
+    exact mul_le_mul hw hu (norm_nonneg _) (by positivity)
+  have hcoeff : ‖v + w * u‖ ≤
+      C2 * A ^ 2 * ell ^ 2 +
+        (2 * A * ell) * (C1 * A * ell) := by
+    calc
+      ‖v + w * u‖ ≤ ‖v‖ + ‖w * u‖ := norm_add_le _ _
+      _ ≤ C2 * A ^ 2 * ell ^ 2 +
+          (2 * A * ell) * (C1 * A * ell) :=
+        add_le_add hv hw_mul
+  have hfirst : ‖u‖ * ‖g‖ ≤
+      (C1 * A * ell) * (Real.sqrt ell * B * ell) :=
+    mul_le_mul hu hg (norm_nonneg _) (by positivity)
+  have hsecond : ‖v + w * u‖ * ‖f‖ ≤
+      (C2 * A ^ 2 * ell ^ 2 +
+        (2 * A * ell) * (C1 * A * ell)) * (Real.sqrt ell * B) :=
+    mul_le_mul hcoeff hf (norm_nonneg _) (by positivity)
+  calc
+    ‖(2 : ℂ) * u * g + (v + w * u) * f‖ ≤
+        ‖(2 : ℂ) * u * g‖ + ‖(v + w * u) * f‖ :=
+      norm_add_le _ _
+    _ = 2 * (‖u‖ * ‖g‖) + ‖v + w * u‖ * ‖f‖ := by
+      have hnormTwo : ‖(2 : ℂ)‖ = (2 : ℝ) := by norm_num
+      simp only [norm_mul, hnormTwo]
+      ring
+    _ ≤ 2 * ((C1 * A * ell) * (Real.sqrt ell * B * ell)) +
+        (C2 * A ^ 2 * ell ^ 2 +
+          (2 * A * ell) * (C1 * A * ell)) * (Real.sqrt ell * B) :=
+      add_le_add
+        (mul_le_mul_of_nonneg_left hfirst (by norm_num)) hsecond
+    _ = (2 * C1 * A * B + (C2 + 2 * C1) * A ^ 2 * B) *
+          ell ^ 2 * Real.sqrt ell := by ring
 
 /-- Fixed global C1/C2 cutoff constants give the physical Laplacian shell
 estimate uniformly in all scale/moment/source parameters. -/
@@ -175,7 +222,7 @@ theorem actual_Hartree_full_spatial_cutoff_source_with_fixed_C2
   have hSource := actual_one_layer_radial_Laplacian_cutoff_commutator
     chi f r hchiSpace hFSpace hchiSecond hFSecond
   rw [hSource]
-  exact radial_complex_commutator_norm_bound_sharp
+  exact uniform_radial_complex_commutator_norm_bound_sharp
     (deriv chi r) (deriv (deriv chi) r) ((2 : ℂ) / (r : ℂ))
     (f r) (deriv f r)
     C1 C2 A B ell hC1.le hC2.le hA hB hell.le
@@ -237,6 +284,15 @@ theorem actual_Hartree_full_physical_cutoff_PDE_shell_with_fixed_constants
   have hNonlocal :=
     actual_Hartree_physical_nonlocal_cutoff_sharp_length_gain
       ell (R s) r B D hell hRpos hr hD hB z hz hzAmp hzQuartic
+  have hRiesz :
+      ‖complexRadialHartreeNonlinearity
+        (fun x => actualOneLayerInnerOverlapCutoff (R s) x * f s x) r -
+        actualOneLayerInnerOverlapCutoff (R s) r *
+          complexRadialHartreeNonlinearity (f s) r‖ ≤
+      (2 * radialHartreeRowBoundConstant * D * B ^ 3) *
+        ell ^ 2 * Real.sqrt ell := by
+    rw [hfProfile]
+    exact hNonlocal
   have hField : ‖f s r‖ ≤ Real.sqrt ell * B := by
     rw [hfProfile]
     unfold rescalePhysicalRadiation
@@ -279,7 +335,7 @@ theorem actual_Hartree_full_physical_cutoff_PDE_shell_with_fixed_constants
           ell ^ 2 * Real.sqrt ell) +
       ((2 * radialHartreeRowBoundConstant * D * B ^ 3) *
           ell ^ 2 * Real.sqrt ell) :=
-        add_le_add (add_le_add hTimeTerm hLoc) hNonlocal
+        add_le_add (add_le_add hTimeTerm hLoc) hRiesz
     _ = _ := by ring
 
 /-- The quantifier-strengthened complete shell theorem: one triple of cutoff
