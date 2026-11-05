@@ -218,11 +218,17 @@ theorem actual_Hartree_moment_locked_correction_next_physical_layer
       _ ≤ (63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5) *
           s ^ (-(rho + kappa)) := by
         exact mul_le_mul_of_nonneg_left hExp (by positivity)
+  have hHpoint : ‖H s r‖ ≤ CH * s ^ (-rho) := by
+    calc
+      ‖H s r‖ ≤ CH * s ^ (-rho) * bubble r := hH r hr
+      _ ≤ CH * s ^ (-rho) * 1 :=
+        mul_le_mul_of_nonneg_left (bubble_le_one r)
+          (mul_nonneg hCH (Real.rpow_nonneg hs0 _))
+      _ = CH * s ^ (-rho) := by ring
   have hSpeedNext :=
     actual_Hartree_speed_cross_next_physical_layer
       H db domega s r beta rhoStar rho Cspeed CHd CH
-      hbeta hrhoStar hflat hs hrho hCs hCHd hCH hSpeed hDilation
-      (by simpa only [mul_assoc] using hH r hr)
+      hbeta hrhoStar hflat hs hrho hCs hCHd hCH hSpeed hDilation hHpoint
   have hExact :=
     actual_Hartree_moment_locked_correction_generated_remainder_exact
       c0 c1 H b omega db domega m s r hr hsame hc0 hc1
