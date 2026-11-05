@@ -63,7 +63,7 @@ theorem actual_Kummer_physical_interface_repair_derivatives
         actualKummerInterfaceRepairSlope R p q (x / a))
       ((1 / a : ℝ) • ((1 / a : ℝ) •
         actualKummerInterfaceRepairSecond R p q (y / a))) y
-    simpa only [Function.comp_def] using hsecond
+    simpa only [Function.comp_def, Pi.smul_apply] using hsecond
 
 /-- Exact scaling identity: the complete frozen repair residual acquires
 the physical factor a^(-2). -/
@@ -80,8 +80,18 @@ theorem actual_Kummer_physical_interface_repair_scaled_residual_exact
       a R y ha.ne' hR.ne' p q
   have haC : (a : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr ha.ne'
   have hyC : (y : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hy0.ne'
+  have hnear :
+      deriv (actualKummerPhysicalInterfaceRepair a R p q) =ᶠ[𝓝 y]
+        actualKummerPhysicalInterfaceRepairSlope a R p q := by
+    filter_upwards with x
+    exact (actual_Kummer_physical_interface_repair_derivatives
+      a R x ha.ne' hR.ne' p q).1.deriv
+  have hsecondPhysical :
+      HasDerivAt (deriv (actualKummerPhysicalInterfaceRepair a R p q))
+        (actualKummerPhysicalInterfaceRepairSecond a R p q y) y :=
+    hd.2.congr_of_eventuallyEq hnear
   unfold actualMatchedScaledKummerApply complexRadialLaplacian
-  rw [hd.2.deriv, hd.1.deriv]
+  rw [hsecondPhysical.deriv, hd.1.deriv]
   unfold actualKummerPhysicalInterfaceRepair
     actualKummerPhysicalInterfaceRepairSlope
     actualKummerPhysicalInterfaceRepairSecond
