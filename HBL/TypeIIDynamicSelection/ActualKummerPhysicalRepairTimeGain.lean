@@ -6,7 +6,7 @@ import Mathlib.Tactic
 /-!
 # Physical Kummer interface repair has one genuine time gain
 
-The exact pullback contributes a^(-2). Under the same physical region
+The now strictly replayed exact physical pullback contributes a^(-2). Under the same physical region
 a >= L^3, L=ell^(-1/16), and ell(s)<=s^(-beta), this is stronger than
 the already accepted Kummer tail gain 3 beta / 128. Hence a same-order
 upper Kummer jet can be removed on the physical annulus [aR,2aR]
