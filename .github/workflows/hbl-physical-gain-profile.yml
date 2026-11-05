@@ -69,14 +69,14 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actualHartreePhysicalGainParameters
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_cutoff_gain_dominates_structural_rho
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_gain_profile_positive
-          #check @HBL.TypeIIDynamicSelection.actual_Hartree_structural_gains_have_physical_producers
-          #check @HBL.TypeIIDynamicSelection.actual_Hartree_kappa_profile_below_physical_gains
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_four_structural_gains_have_physical_producers
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_kappa_profile_below_four_physical_gains
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_gain_profile_positive
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_structural_gains_have_physical_producers
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_four_structural_gains_have_physical_producers
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_kappa_profile_below_physical_gains
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_kappa_profile_below_four_physical_gains
           EOF
           lake env lean --trust=0 -DwarningAsError=true PhysicalGainProfileAudit.lean > evidence/audit.log 2>&1
           grep -q sorryAx evidence/audit.log && exit 1 || true
