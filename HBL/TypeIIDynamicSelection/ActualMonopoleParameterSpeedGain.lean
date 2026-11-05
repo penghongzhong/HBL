@@ -44,7 +44,7 @@ private theorem threshold_minus_abs_weight_integrable :
     continuous_id.mul normalizedZetaMinus_contDiff_infty.continuous
   have hs : HasCompactSupport (fun r : ℝ => r * normalizedZetaMinus r) :=
     normalizedZetaMinus_hasCompactSupport.mul_left
-  have hi := hc.integrable_of_hasCompactSupport hs
+  have hi := hc.integrable_of_hasCompactSupport (μ := volume) hs
   simpa only [Real.norm_eq_abs] using hi.norm
 
 theorem actualMonopoleThresholdTestMass_nonneg :
@@ -143,13 +143,11 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
             |normalizedZetaPlus r| *
                 (|r| * |(monopoleComplexEffectiveIncrement
                   c (b s) (omega s) s r).re|) =
-              |r * normalizedZetaPlus r| *
+              (|r| * |normalizedZetaPlus r|) *
                 |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).re| := by
-                    rw [abs_mul]
-                    ring
-            _ ≤ |r * normalizedZetaPlus r| * K :=
-              mul_le_mul_of_nonneg_left hv (abs_nonneg _)
+                  c (b s) (omega s) s r).re| := by ring
+            _ ≤ (|r| * |normalizedZetaPlus r|) * K :=
+              mul_le_mul_of_nonneg_left hv (by positivity)
             _ = K * (|r| * |normalizedZetaPlus r|) := by ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaPlus_zero_of_one_le r hr1']
@@ -177,13 +175,11 @@ theorem actual_monopole_threshold_coordinate_speed_gain :
             |normalizedZetaMinus r| *
                 (|r| * |(monopoleComplexEffectiveIncrement
                   c (b s) (omega s) s r).im|) =
-              |r * normalizedZetaMinus r| *
+              (|r| * |normalizedZetaMinus r|) *
                 |(monopoleComplexEffectiveIncrement
-                  c (b s) (omega s) s r).im| := by
-                    rw [abs_mul]
-                    ring
-            _ ≤ |r * normalizedZetaMinus r| * K :=
-              mul_le_mul_of_nonneg_left hv (abs_nonneg _)
+                  c (b s) (omega s) s r).im| := by ring
+            _ ≤ (|r| * |normalizedZetaMinus r|) * K :=
+              mul_le_mul_of_nonneg_left hv (by positivity)
             _ = K * (|r| * |normalizedZetaMinus r|) := by ring
         · have hr1' : 1 ≤ r := le_of_lt (lt_of_not_ge hr1)
           rw [normalizedZetaMinus_zero_of_one_le r hr1']
