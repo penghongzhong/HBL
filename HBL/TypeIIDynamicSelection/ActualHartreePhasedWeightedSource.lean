@@ -132,4 +132,49 @@ theorem actual_Hartree_phased_physical_interaction_two_channels
     (actualHartreePhasedPhysicalSliceInteraction ell c gamma z)
     hSource hLp
 
+/-- The genuine phased physical Hartree interaction therefore feeds directly
+into the already certified two-channel affine Fredholm inverse.  The two
+weighted memberships and both forced affine charges come from the same
+complex physical interaction; no independent plus/minus source is inserted. -/
+theorem actual_Hartree_phased_physical_interaction_unique_inner
+    (B A ell c gamma : ℝ)
+    (hB : 0 ≤ B) (hA : 0 ≤ A)
+    (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    (hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
+    (hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ A) :
+    let Fplus : ℝ → ℝ := fun r =>
+      (actualHartreePhasedPhysicalSliceInteraction ell c gamma z r).re
+    let Fminus : ℝ → ℝ := fun r =>
+      (actualHartreePhasedPhysicalSliceInteraction ell c gamma z r).im
+    ∃ hp : InWeightedL2 (7 / 4 : ℝ) Fplus,
+    ∃ hm : InWeightedL2 (7 / 4 : ℝ) Fminus,
+    ∃! x : InnerCorrections,
+      (1 - weightedBirmanSchwingerOperator)
+          (x.1 : RealL2 halfLineMeasure) =
+        weightedSourceGreenOperator (7 / 4 : ℝ) (by norm_num)
+          (weightedSourceDataL2 (7 / 4 : ℝ)
+            (correctedPlusSource Fplus)
+            (correctedPlusSource_memWeightedL2
+              (7 / 4 : ℝ) (by norm_num) Fplus hp)) ∧
+      (1 - weightedPhaseBirman)
+          (x.2 : RealL2 halfLineMeasure) =
+        weightedSourceGreenOperator (7 / 4 : ℝ) (by norm_num)
+          (weightedSourceDataL2 (7 / 4 : ℝ)
+            (correctedMinusSource Fminus)
+            (correctedMinusSource_memWeightedL2
+              (7 / 4 : ℝ) (by norm_num) Fminus hm)) := by
+  dsimp only
+  obtain ⟨hp, hm⟩ :=
+    actual_Hartree_phased_physical_interaction_two_channels
+      B A ell c gamma hB hA hell hellOne hc z hz hSup hStrauss
+  refine ⟨hp, hm, ?_⟩
+  exact existsUnique_actualInner_affinelyCorrected
+    (7 / 4 : ℝ) (by norm_num) (by norm_num)
+    (fun r => (actualHartreePhasedPhysicalSliceInteraction
+      ell c gamma z r).re)
+    (fun r => (actualHartreePhasedPhysicalSliceInteraction
+      ell c gamma z r).im)
+    hp hm
+
 end HBL.TypeIIDynamicSelection

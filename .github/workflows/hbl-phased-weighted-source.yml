@@ -75,6 +75,7 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_slice_interaction_eq
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_full_interaction_weighted_L2
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_interaction_two_channels
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_interaction_unique_inner
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_rescale_eq
           set_option pp.all false in
@@ -83,6 +84,8 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_full_interaction_weighted_L2
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_interaction_two_channels
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_phased_physical_interaction_unique_inner
           EOF
           lake env lean --trust=0 -DwarningAsError=true PhasedSourceAudit.lean > evidence/audit.log 2>&1
           grep -q "sorryAx" evidence/audit.log && exit 1 || true
