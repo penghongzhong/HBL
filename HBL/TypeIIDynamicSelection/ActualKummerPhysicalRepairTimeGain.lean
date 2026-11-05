@@ -31,9 +31,9 @@ theorem actual_Hartree_physical_interface_repair_scale_time_gain
     (hs : 1 ≤ s) (hell : 0 < ell) (hellOne : ell ≤ 1)
     (ha3 : actualHartreeSlowInnerRadius ell ^ 3 ≤ a)
     (htrap : ell ≤ s ^ (-beta))
-    (hbeta : 1 / 2 < beta)
-    (hrhoStar : 0 < rhoStar)
-    (hflat : rhoStar < (5 * beta - 2) / 4) :
+    (_hbeta : 1 / 2 < beta)
+    (_hrhoStar : 0 < rhoStar)
+    (_hflat : rhoStar < (5 * beta - 2) / 4) :
     (a ^ 2)⁻¹ ≤
       s ^ (-actualHartreePhysicalKappa beta rhoStar) := by
   let L := actualHartreeSlowInnerRadius ell
