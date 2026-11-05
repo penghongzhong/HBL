@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualKummerInterfaceRepair
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedKummerShellGain
+import HBL.MonopoleComplexResidual
 import Mathlib.Tactic
 
 /-!
@@ -52,13 +53,17 @@ theorem actual_Kummer_physical_interface_repair_derivatives
   have hsecond0 :=
     hbase.2.scomp y hscale
   constructor
-  · simpa only [actualKummerPhysicalInterfaceRepair,
-      actualKummerPhysicalInterfaceRepairSlope, Function.comp_def,
-      one_div, Complex.real_smul, Complex.ofReal_inv] using hfirst
+  · change HasDerivAt
+      (fun x : ℝ => actualKummerInterfaceRepair R p q (x / a))
+      ((a : ℂ)⁻¹ * actualKummerInterfaceRepairSlope R p q (y / a)) y
+    exact hfirst
   · have hsecond := hsecond0.const_mul (a : ℂ)⁻¹
-    simpa only [actualKummerPhysicalInterfaceRepairSlope,
-      actualKummerPhysicalInterfaceRepairSecond, Function.comp_def,
-      one_div, Complex.real_smul, Complex.ofReal_inv, mul_assoc] using hsecond
+    change HasDerivAt
+      (fun x : ℝ => (a : ℂ)⁻¹ *
+        actualKummerInterfaceRepairSlope R p q (x / a))
+      ((a : ℂ)⁻¹ * ((a : ℂ)⁻¹ *
+        actualKummerInterfaceRepairSecond R p q (y / a))) y
+    exact hsecond
 
 /-- Exact scaling identity: the complete frozen repair residual acquires
 the physical factor a^(-2). -/
@@ -131,7 +136,8 @@ theorem actual_Kummer_physical_interface_repair_residual_bound :
     mu theta a R y ha hR hy p q,
     norm_smul, Real.norm_eq_abs,
     abs_of_nonneg (inv_nonneg.mpr (sq_nonneg a))]
-  exact mul_le_mul_of_nonneg_left hraw
+  have hh := mul_le_mul_of_nonneg_left hraw
     (inv_nonneg.mpr (sq_nonneg a))
+  simpa only [mul_assoc] using hh
 
 end HBL.TypeIIDynamicSelection
