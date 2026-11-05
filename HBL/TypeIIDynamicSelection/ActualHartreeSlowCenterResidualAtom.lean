@@ -89,6 +89,8 @@ theorem actual_Hartree_slow_center_realized_atom
             (hZpoint s hs)
             (hFull s hs) (hV4 s hs) (hZ4 s hs) (hLinear s hs)
         rw [Real.norm_eq_abs]
+        have hexp : -2 * beta = -(2 * beta) := by ring
+        rw [hexp] at h
         simpa only [actualHartreeSlowCenterResidualValue, C] using h.2 }
   refine ⟨atom, rfl, rfl, ?_⟩
   rfl
