@@ -281,6 +281,16 @@ theorem actual_Hartree_full_physical_cutoff_PDE_shell_with_fixed_constants
       C1 C2 hC1 hC2 hCut2 ell m M B r hell hm hmBound hB z
       hzSpace hzSecond (hzAmp (ell * r) (mul_pos hell hr))
       hzDerivBound hShell
+  have hLocal :
+      ‖complexRadialLaplacian
+        (fun x => actualOneLayerInnerOverlapCutoff (R s) x * f s x) r -
+        actualOneLayerInnerOverlapCutoff (R s) r *
+          complexRadialLaplacian (f s) r‖ ≤
+      (2 * C1 * (hartreeKappa * M / 4) * B +
+        (C2 + 2 * C1) * (hartreeKappa * M / 4) ^ 2 * B) *
+          ell ^ 2 * Real.sqrt ell := by
+    rw [hRadius, hfProfile]
+    exact hLoc
   have hNonlocal :=
     actual_Hartree_physical_nonlocal_cutoff_sharp_length_gain
       ell (R s) r B D hell hRpos hr hD hB z hz hzAmp hzQuartic
@@ -335,7 +345,7 @@ theorem actual_Hartree_full_physical_cutoff_PDE_shell_with_fixed_constants
           ell ^ 2 * Real.sqrt ell) +
       ((2 * radialHartreeRowBoundConstant * D * B ^ 3) *
           ell ^ 2 * Real.sqrt ell) :=
-        add_le_add (add_le_add hTimeTerm hLoc) hRiesz
+        add_le_add (add_le_add hTimeTerm hLocal) hRiesz
     _ = _ := by ring
 
 /-- The quantifier-strengthened complete shell theorem: one triple of cutoff
@@ -345,22 +355,22 @@ theorem actual_Hartree_full_physical_cutoff_PDE_shell_uniform_constants :
       0 < Cchi ∧ 0 < C1 ∧ 0 < C2 ∧
       ∀ (R : ℝ → ℝ) (f : ℝ → ℝ → ℂ)
         (b omega : ℝ) (s r Rs ell m M B D : ℝ),
-      ∀ (hR : HasDerivAt R Rs s),
-      ∀ (hRadius : R s = actualHartreeMomentCutoffRadius ell m),
-      ∀ (hfTime : DifferentiableAt ℝ (fun t => f t r) s),
-      ∀ (hfSpace : ∀ x : ℝ, DifferentiableAt ℝ (f s) x),
-      ∀ (hf2 : DifferentiableAt ℝ (deriv (f s)) r),
-      ∀ (hell : 0 < ell), ∀ (hm : 0 < m), ∀ (hmBound : m ≤ M),
-      ∀ (hB : 0 ≤ B), ∀ (hD : 0 ≤ D),
-      ∀ (z : ℝ → ℂ), ∀ (hz : Measurable z),
-      ∀ (hfProfile : f s = rescalePhysicalRadiation ell z),
-      ∀ (hzSpace : ∀ x : ℝ, DifferentiableAt ℝ z (ell * x)),
-      ∀ (hzSecond : DifferentiableAt ℝ (deriv z) (ell * r)),
-      ∀ (hzAmp : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B),
-      ∀ (hzDerivBound : ‖deriv z (ell * r)‖ ≤ B),
-      ∀ (hzQuartic : ∀ u : ℝ, 0 < u → ‖z u‖ ^ 4 ≤ D * bubble u ^ 2),
-      ∀ (hShell : actualHartreeMomentCutoffRadius ell m ≤ r),
-      ∀ (hShellRight : r ≤ 2 * actualHartreeMomentCutoffRadius ell m),
+      ∀ (_hR : HasDerivAt R Rs s),
+      ∀ (_hRadius : R s = actualHartreeMomentCutoffRadius ell m),
+      ∀ (_hfTime : DifferentiableAt ℝ (fun t => f t r) s),
+      ∀ (_hfSpace : ∀ x : ℝ, DifferentiableAt ℝ (f s) x),
+      ∀ (_hf2 : DifferentiableAt ℝ (deriv (f s)) r),
+      ∀ (_hell : 0 < ell), ∀ (_hm : 0 < m), ∀ (_hmBound : m ≤ M),
+      ∀ (_hB : 0 ≤ B), ∀ (_hD : 0 ≤ D),
+      ∀ (z : ℝ → ℂ), ∀ (_hz : Measurable z),
+      ∀ (_hfProfile : f s = rescalePhysicalRadiation ell z),
+      ∀ (_hzSpace : ∀ x : ℝ, DifferentiableAt ℝ z (ell * x)),
+      ∀ (_hzSecond : DifferentiableAt ℝ (deriv z) (ell * r)),
+      ∀ (_hzAmp : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B),
+      ∀ (_hzDerivBound : ‖deriv z (ell * r)‖ ≤ B),
+      ∀ (_hzQuartic : ∀ u : ℝ, 0 < u → ‖z u‖ ^ 4 ≤ D * bubble u ^ 2),
+      ∀ (_hShell : actualHartreeMomentCutoffRadius ell m ≤ r),
+      ∀ (_hShellRight : r ≤ 2 * actualHartreeMomentCutoffRadius ell m),
       ‖complexRadialRenormalizedResidual
           (fun t x => actualOneLayerInnerOverlapCutoff (R t) x * f t x)
           b omega s r -
