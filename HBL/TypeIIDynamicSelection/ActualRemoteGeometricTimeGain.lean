@@ -24,7 +24,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualRemoteQuadraticTimeGain (beta : ℝ) : ℝ :=
   2 * beta - 1
@@ -36,7 +36,7 @@ theorem actual_remote_quadratic_time_gain_positive
   linarith
 
 theorem actual_remote_trapped_amplitude_squared_gain
-    (s c C beta : ℝ) (hs : 1 ≤ s) (hC : 0 ≤ C)
+    (s c C beta : ℝ) (hs : 1 ≤ s) (_hC : 0 ≤ C)
     (htrap : |c| ≤ C * s ^ (-beta)) :
     c ^ 2 ≤ C ^ 2 * s ^ (-1 - actualRemoteQuadraticTimeGain beta) := by
   have hs0 : 0 ≤ s := le_trans (by norm_num : (0 : ℝ) ≤ 1) hs
@@ -144,8 +144,6 @@ theorem actual_fullHartree_effective_mismatch_time_split
     c b omega Z hRpos hr hsep hZ hVmeas hZmeas hF hVrow hc1
   have hFm : Measurable F :=
     remoteComplexQuarticDifference_measurable V (Z s) hVmeas hZmeas
-  have hgeo := actual_exteriorHartree_gap_quadratic_time_gain
-    F hFm hF hc hc1 hr hr1 hs hC htrap
   have hcenter :
       (4 * Real.pi * hartreeKappa * r ^ 2 *
         (1 / (monopoleQuadraticRadius (c s)) ^ 2)) *
@@ -153,9 +151,7 @@ theorem actual_fullHartree_effective_mismatch_time_split
       (Real.pi * hartreeKappa / 4 * C ^ 2 *
         s ^ (-1 - actualRemoteQuadraticTimeGain beta) * r ^ 2) *
         ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| := by
-    have hRadius :=
-      actual_monopole_radius_inverse_square hc
-    rw [hRadius]
+    have hRadius := actual_monopole_radius_inverse_square hc
     have htime := actual_remote_trapped_amplitude_squared_gain
       s (c s) C beta hs hC htrap
     have hcoef : 0 ≤ Real.pi * hartreeKappa / 4 := by
@@ -164,10 +160,32 @@ theorem actual_fullHartree_effective_mismatch_time_split
     have hr2 : 0 ≤ r ^ 2 := sq_nonneg r
     have hmass : 0 ≤ ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| :=
       integral_nonneg (fun _ => abs_nonneg _)
-    nlinarith only [mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left htime hcoef) hr2) hmass]
-  exact hraw.trans (mul_le_mul_of_nonneg_right
-    (add_le_add_left hcenter _) (by positivity))
+    rw [hRadius]
+    calc
+      (4 * Real.pi * hartreeKappa * r ^ 2 * (c s ^ 2 / 16)) *
+          ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| =
+        (Real.pi * hartreeKappa / 4 * c s ^ 2 * r ^ 2) *
+          ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| := by ring
+      _ ≤ (Real.pi * hartreeKappa / 4 *
+          (C ^ 2 * s ^ (-1 - actualRemoteQuadraticTimeGain beta)) * r ^ 2) *
+          ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| := by
+        exact mul_le_mul_of_nonneg_right
+          (mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left htime hcoef) hr2) hmass
+      _ = _ := by ring
+  have hsum :
+      |c s - radialHartreeExteriorCenter F (monopoleQuadraticRadius (c s))| +
+        (4 * Real.pi * hartreeKappa * r ^ 2 *
+          (1 / (monopoleQuadraticRadius (c s)) ^ 2)) *
+          ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| ≤
+      |c s - radialHartreeExteriorCenter F (monopoleQuadraticRadius (c s))| +
+        (Real.pi * hartreeKappa / 4 * C ^ 2 *
+          s ^ (-1 - actualRemoteQuadraticTimeGain beta) * r ^ 2) *
+          ∫ rho in Ioi (monopoleQuadraticRadius (c s)), |F rho| :=
+    add_le_add le_rfl hcenter
+  have hfactor : 0 ≤ (1 + monopoleRadialBoundConstant) ^ 3 := by
+    have hmc := monopoleRadialBoundConstant_pos.le
+    positivity
+  exact hraw.trans (mul_le_mul_of_nonneg_right hsum hfactor)
 
 end HBL.TypeIIDynamicSelection
