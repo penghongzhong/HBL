@@ -69,6 +69,6 @@ theorem actual_origin_Green_coeffB_moving_affine_source_hasDerivAt
       Continuous.intervalIntegrable hG _ _
     exact actual_moment_locked_regular_source_coefficient_add_mul_on
       K hKt ht.2.le F0 G hF0I hGI (alpha t : ℂ)
-  exact hsum.congr_of_eventuallyEq heq.symm
+  exact hsum.congr_of_eventuallyEq heq
 
 end HBL.TypeIIDynamicSelection
