@@ -77,14 +77,28 @@ theorem actual_real_Cramer_data_derivatives
   have hwi := complex_curve_im_hasDerivAt w s wdot hw
   have hZr := complex_curve_re_hasDerivAt Z s Zdot hZ
   have hZi := complex_curve_im_hasDerivAt Z s Zdot hZ
-  constructor
-  · simpa only [actualRealCramerDet, actualRealCramerDetDot] using
-      (hbr.mul hwi).sub (hwr.mul hbi)
-  constructor
-  · simpa only [actualRealCramerNum1, actualRealCramerNum1Dot] using
-      (hwr.mul hZi).sub (hwi.mul hZr)
-  · simpa only [actualRealCramerNum2, actualRealCramerNum2Dot] using
-      (hbi.mul hZr).sub (hbr.mul hZi)
+  have hd0 := (hbr.mul hwi).sub (hwr.mul hbi)
+  have hn10 := (hwr.mul hZi).sub (hwi.mul hZr)
+  have hn20 := (hbi.mul hZr).sub (hbr.mul hZi)
+  have hfd :
+      ((fun t => (b t).re) * (fun t => (w t).im) -
+        (fun t => (w t).re) * (fun t => (b t).im)) =
+      (fun t => actualRealCramerDet (b t) (w t)) := by
+    rfl
+  have hfn1 :
+      ((fun t => (w t).re) * (fun t => (Z t).im) -
+        (fun t => (w t).im) * (fun t => (Z t).re)) =
+      (fun t => actualRealCramerNum1 (w t) (Z t)) := by
+    rfl
+  have hfn2 :
+      ((fun t => (b t).im) * (fun t => (Z t).re) -
+        (fun t => (b t).re) * (fun t => (Z t).im)) =
+      (fun t => actualRealCramerNum2 (b t) (Z t)) := by
+    rfl
+  rw [hfd] at hd0
+  rw [hfn1] at hn10
+  rw [hfn2] at hn20
+  exact ⟨hd0, hn10, hn20⟩
 
 /-- Exact quotient-rule derivatives of both selected real Cramer coordinates. -/
 theorem actual_real_Cramer_correction_component_derivatives
@@ -115,20 +129,36 @@ theorem actual_real_Cramer_correction_component_derivatives
   let n1dot := actualRealCramerNum1Dot (w s) (Z s) wdot Zdot
   let n2 := actualRealCramerNum2 (b s) (Z s)
   let n2dot := actualRealCramerNum2Dot (b s) (Z s) bdot Zdot
-  have hp1 := hn1.div hd hdet
-  have hp2 := hn2.div hd hdet
+  have hp10 := hn1.div hd hdet
+  have hp20 := hn2.div hd hdet
+  have hf1 :
+      ((fun t => actualRealCramerNum1 (w t) (Z t)) /
+        (fun t => actualRealCramerDet (b t) (w t))) =
+      (fun t =>
+        actualRealCramerNum1 (w t) (Z t) /
+          actualRealCramerDet (b t) (w t)) := by
+    rfl
+  have hf2 :
+      ((fun t => actualRealCramerNum2 (b t) (Z t)) /
+        (fun t => actualRealCramerDet (b t) (w t))) =
+      (fun t =>
+        actualRealCramerNum2 (b t) (Z t) /
+          actualRealCramerDet (b t) (w t)) := by
+    rfl
+  rw [hf1] at hp10
+  rw [hf2] at hp20
   constructor
   · change HasDerivAt
       (fun t =>
         actualRealCramerNum1 (w t) (Z t) /
           actualRealCramerDet (b t) (w t))
       ((n1dot * d - n1 * ddot) / d ^ 2) s
-    simpa only [d, ddot, n1, n1dot] using hp1
+    simpa only [d, ddot, n1, n1dot] using hp10
   · change HasDerivAt
       (fun t =>
         actualRealCramerNum2 (b t) (Z t) /
           actualRealCramerDet (b t) (w t))
       ((n2dot * d - n2 * ddot) / d ^ 2) s
-    simpa only [d, ddot, n2, n2dot] using hp2
+    simpa only [d, ddot, n2, n2dot] using hp20
 
 end HBL.TypeIIDynamicSelection
