@@ -72,12 +72,17 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
       HasDerivAt (fun t => ((xfun t - R : ℝ) : ℂ)) (xs : ℂ) s :=
     hxr.ofReal_comp
   have hlin0 := hp.add (hxrC.mul hq)
+  change HasDerivAt
+    (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
+    (pdot + ((xs : ℂ) * q s +
+      ((xfun s - R : ℝ) : ℂ) * qdot)) s at hlin0
   have hlin :
       HasDerivAt
         (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
         (pdot + (xs : ℂ) * q s +
           ((xfun s - R : ℝ) : ℂ) * qdot) s := by
-    simpa only [Pi.add_apply, Pi.mul_apply, add_assoc] using hlin0
+    convert hlin0 using 1
+    ring
   have hprod := hcut.mul hlin
   change HasDerivAt
       (fun t =>
@@ -88,7 +93,7 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
     rfl
   · simp only [Function.comp_apply, Complex.real_smul]
     unfold actualKummerInterfaceRepairSlope
-    ring_nf
+    ring
 
 /-- A norm form of the exact identity.  It isolates the only quantities
 still needing time-order estimates: normalized-coordinate speed and upper-jet
