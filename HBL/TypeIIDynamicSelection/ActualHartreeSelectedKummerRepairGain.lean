@@ -126,7 +126,6 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
     hJetOrder L c a s rho Csrc hLp hLarge ha3 hSmall hs hCsrc
       Fp Fm hp hm hcp hcm F Q Kreg hQ hKreg hF hEnvelope hBase hSource
   refine ⟨p, hCompat, hUnique, ?_⟩
-  dsimp only
   let Gp := actualMomentLockedInnerPhaseSource L c
   let Gm := actualMomentLockedInnerScaleSource L c
   let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
