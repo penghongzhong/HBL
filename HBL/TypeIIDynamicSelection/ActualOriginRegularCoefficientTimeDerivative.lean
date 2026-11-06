@@ -88,30 +88,22 @@ theorem actual_origin_regular_coeff_from_moving_jet_hasDerivAt
         (r0dot • (-(frozenFirstCoeff r * originGreenWronskian K r))) s := by
     dsimp [Wfun]
     exact hWsp.scomp s hr0
-  let Nfun : ℝ → ℂ := fun t =>
-    originPhysicalValue K.y (r0 t) * DU t -
-      originPhysicalSlope K.y K.dy (r0 t) * U t
+  let Nfun : ℝ → ℂ :=
+    (originPhysicalValue K.y ∘ r0) * DU -
+      (originPhysicalSlope K.y K.dy ∘ r0) * U
   have hN :=
     (hY.mul hDU).sub (hYp.mul hU)
-  have hN' :
-      HasDerivAt Nfun
-        ((r0dot • originPhysicalSlope K.y K.dy r) * DU s +
-          originPhysicalValue K.y r * DUdot -
-          ((r0dot • (-(frozenFirstCoeff r *
-              originPhysicalSlope K.y K.dy r +
-            frozenZeroCoeff mu theta *
-              originPhysicalValue K.y r))) * U s +
-            originPhysicalSlope K.y K.dy r * Udot)) s := by
-    simpa only [Nfun, r] using hN
-  have hDiv := hN'.div hW hWne
-  change HasDerivAt
-    (fun t =>
-      (originPhysicalValue K.y (r0 t) * DU t -
-        originPhysicalSlope K.y K.dy (r0 t) * U t) /
-          originGreenWronskian K (r0 t))
-    _ s
-  simpa only [actualOriginRegularCoeffFromMovingJetDot, r,
-    Wfun, Nfun] using hDiv
+  have hDiv := hN.div hW hWne
+  have hFun :
+      actualOriginRegularCoeffFromMovingJet K r0 U DU =
+        Nfun / Wfun := by
+    funext t
+    rfl
+  rw [hFun]
+  convert hDiv using 1
+  · rfl
+  · dsimp [actualOriginRegularCoeffFromMovingJetDot, Nfun, Wfun, r]
+    ring
 
 /-- The source appearing in the matched Kummer formula is irrelevant for
 the regular coefficient derivative: the exact Green normalization removes
