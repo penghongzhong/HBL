@@ -26,6 +26,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualKummerPhysicalRepairOuterQuarticDensity
     (a R : ℝ) (p q : ℂ) (y : ℝ) : ℝ :=
@@ -135,14 +136,15 @@ theorem actual_Kummer_physical_repair_outer_quartic_L1
     (μ := volume) (s := Icc r0 r1) (f := fun y => |F y|)
     (C := D ^ 4) hfinite hAE
   have hNorm' :
-      |∫ y in Icc r0 r1, |F y|| ≤ D ^ 4 * r0 := by
+      ‖∫ y in Icc r0 r1, |F y|‖ ≤ D ^ 4 * r0 := by
     have hlen : r1 - r0 = r0 := by dsimp [r0, r1]; ring
-    simpa only [Real.norm_eq_abs, Real.volume_real_Icc_of_le hr01, hlen] using hNorm
+    simpa only [Real.volume_real_Icc_of_le hr01, hlen] using hNorm
   have hL1 :
       (∫ y in Ioi r0, |F y|) ≤ r0 * D ^ 4 := by
     rw [hEq]
     calc
-      _ ≤ |∫ y in Icc r0 r1, |F y|| := le_abs_self _
+      _ ≤ |(∫ y in Icc r0 r1, |F y|)| := le_abs_self _
+      _ = ‖∫ y in Icc r0 r1, |F y|‖ := (Real.norm_eq_abs _).symm
       _ ≤ D ^ 4 * r0 := hNorm'
       _ = r0 * D ^ 4 := by ring
   exact ⟨hInt, by simpa only [F, r0, D] using hL1⟩
@@ -180,6 +182,5 @@ theorem actual_Kummer_physical_repair_outer_quartic_core_gap
     _ = (4 * Real.pi * hartreeKappa * r ^ 2 * (1 / (a * R))) *
         D ^ 4 := by
       field_simp [ha.ne', hR.ne']
-      ring
 
 end HBL.TypeIIDynamicSelection
