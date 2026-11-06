@@ -78,6 +78,18 @@ private theorem actual_columns_cancellation_bound
       div_le_div_of_nonneg_left (by positivity) (by positivity) hdet
     _ = _ := by field_simp [ha.ne', hB.ne']; ring
 
+/-- Public reuse wrapper for the already proved two-real-coordinate
+inverse estimate.  This is the exact algebra needed after differentiating the
+explicit Cramer selector: the columns and determinant are unchanged, only the
+right-hand obstruction is replaced by its differentiated forcing. -/
+theorem actual_complex_columns_real_cancellation_bound
+    (a B : ℝ) (ha : 0 < a) (hB : 0 < B) (b w Z : ℂ) (p : ℝ × ℝ)
+    (hb : ‖b‖ ≤ a * B ^ 2) (hw : ‖w‖ ≤ a * B ^ 2)
+    (hdet : a ^ 2 * B ^ 4 / 256 ≤ b.re * w.im - w.re * b.im)
+    (hcancel : Z + (p.1 : ℂ) * b + (p.2 : ℂ) * w = 0) :
+    |p.1| + |p.2| ≤ 1024 / (a * B ^ 2) * ‖Z‖ :=
+  actual_columns_cancellation_bound a B ha hB b w Z p hb hw hdet hcancel
+
 /-- The actual coupled compatibility equation quantitatively controls its
 two real increments. The baseline obstruction contains the full outer source
 and the real fixed-inverse inner jet; its norm is not replaced by a proxy. -/
