@@ -136,4 +136,95 @@ theorem actual_Kummer_physical_interface_repair_time_derivative_norm
       rw [one_mul, norm_mul, Complex.norm_real, Real.norm_eq_abs]
     _ = _ := by ring
 
+/-- On the actual physical repair shell, the exact time derivative is controlled
+by the relative scale speed and the two upper-jet speeds.  The constants are
+the already verified fixed-cutoff constants; no new Kummer estimate enters. -/
+theorem actual_Kummer_physical_interface_repair_time_shell_bound :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+    ∀ (a : ℝ → ℝ) (p q : ℝ → ℂ)
+      (R y s adot : ℝ) (pdot qdot : ℂ),
+      HasDerivAt a adot s → 0 < a s →
+      HasDerivAt p pdot s → HasDerivAt q qdot s →
+      0 < R → y ∈ Icc (a s * R) (2 * a s * R) →
+      let D := ‖p s‖ + R * ‖q s‖
+      ‖deriv
+          (fun t => actualKummerPhysicalInterfaceRepair
+            (a t) R (p t) (q t) y) s‖ ≤
+        (2 * (3 * C1 + 1) * D) * (|adot| / a s) +
+          ‖pdot‖ + R * ‖qdot‖ := by
+  obtain ⟨C1,C2,hC1,hC2,hRepair⟩ :=
+    actual_Kummer_interface_repair_positive_radius_bound
+  refine ⟨C1,C2,hC1,hC2,?_⟩
+  intro a p q R y s adot pdot qdot ha haPos hp hq hR hy
+  dsimp only
+  let x : ℝ := y / a s
+  let D : ℝ := ‖p s‖ + R * ‖q s‖
+  have hx : x ∈ Icc R (2 * R) := by
+    constructor
+    · apply (le_div_iff₀ haPos).2
+      simpa only [x, mul_comm] using hy.1
+    · apply (div_le_iff₀ haPos).2
+      simpa only [x, mul_assoc, mul_comm, mul_left_comm] using hy.2
+  have hSlope :
+      ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ ≤
+        (3 * C1 + 1) * D / R := by
+    simpa only [D] using
+      (hRepair 0 0 R x hR hx (p s) (q s)).2.1
+  have hxSub : |x - R| ≤ R := by
+    rw [abs_of_nonneg (sub_nonneg.mpr hx.1)]
+    linarith [hx.2]
+  have hyPos : 0 < y := (mul_pos haPos hR).trans_le hy.1
+  have hRel : 0 ≤ |adot| / a s :=
+    div_nonneg (abs_nonneg adot) haPos.le
+  have hxsEq :
+      |-(y * adot / (a s) ^ 2)| =
+        x * (|adot| / a s) := by
+    dsimp [x]
+    rw [abs_neg, abs_div, abs_mul, abs_of_pos hyPos,
+      abs_of_pos (sq_pos_of_pos haPos)]
+    field_simp [haPos.ne']
+    ring
+  have hxs :
+      |-(y * adot / (a s) ^ 2)| ≤
+        (2 * R) * (|adot| / a s) := by
+    rw [hxsEq]
+    exact mul_le_mul_of_nonneg_right hx.2 hRel
+  have hD : 0 ≤ D := by
+    dsimp [D]
+    positivity
+  have hSlopeNonneg :
+      0 ≤ (3 * C1 + 1) * D / R := by
+    positivity
+  have hFirst :
+      |-(y * adot / (a s) ^ 2)| *
+          ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ ≤
+        (2 * (3 * C1 + 1) * D) * (|adot| / a s) := by
+    calc
+      _ ≤ ((2 * R) * (|adot| / a s)) *
+          ((3 * C1 + 1) * D / R) :=
+        mul_le_mul hxs hSlope (norm_nonneg _) (by positivity)
+      _ = _ := by
+        field_simp [hR.ne']
+        ring
+  have hQ :
+      |x - R| * ‖qdot‖ ≤ R * ‖qdot‖ :=
+    mul_le_mul_of_nonneg_right hxSub (norm_nonneg qdot)
+  have hBase :=
+    actual_Kummer_physical_interface_repair_time_derivative_norm
+      a p q R y s adot pdot qdot ha haPos.ne' hp hq hR.ne'
+  dsimp only at hBase
+  change ‖deriv
+      (fun t => actualKummerPhysicalInterfaceRepair
+        (a t) R (p t) (q t) y) s‖ ≤ _ at hBase ⊢
+  calc
+    _ ≤ |-(y * adot / (a s) ^ 2)| *
+          ‖actualKummerInterfaceRepairSlope
+            R (p s) (q s) x‖ +
+        ‖pdot‖ + |x - R| * ‖qdot‖ := by
+      simpa only [x] using hBase
+    _ ≤ (2 * (3 * C1 + 1) * D) * (|adot| / a s) +
+          ‖pdot‖ + R * ‖qdot‖ :=
+      add_le_add (add_le_add hFirst le_rfl) hQ
+
+
 end HBL.TypeIIDynamicSelection
