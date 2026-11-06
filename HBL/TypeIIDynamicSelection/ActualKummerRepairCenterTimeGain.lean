@@ -54,7 +54,7 @@ theorem actual_Kummer_repair_full_center_time_gain
     (hXup : X ≤ CX * s)
     (hM : 0 ≤ M) (hS : 0 ≤ S) (hD : 0 ≤ D)
     (hCX : 0 ≤ CX) (hCD : 0 ≤ CD)
-    (hs : 1 ≤ s) (hbeta : 1 / 2 < beta) (hrho : 1 ≤ rho)
+    (hs : 1 ≤ s) (_hbeta : 1 / 2 < beta) (hrho : 1 ≤ rho)
     (htrap : ell ≤ s ^ (-beta))
     (hDtime : D ≤ CD * s ^ (-rho)) :
     let A0 := actualKummerRepairAbstractShellEnvelope ell X M S
@@ -131,16 +131,16 @@ theorem actual_Kummer_repair_full_center_time_gain
     Real.rpow_le_rpow_of_exponent_le hs (by linarith)
   have hTarget2 :
       s ^ (-2 * rho) ≤ s ^ (-(rho + k)) :=
-    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hrho, hkHalf])
   have hTarget3 :
       s ^ (-3 * rho) ≤ s ^ (-(rho + k)) :=
-    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hrho, hkHalf])
   have hTarget3s :
       s ^ (1 - 3 * rho) ≤ s ^ (-(rho + k)) :=
-    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hrho, hkHalf])
   have hTarget4s :
       s ^ (1 - 4 * rho) ≤ s ^ (-(rho + k)) :=
-    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hrho, hkHalf])
 
   have hEllD :
       ell ^ (1 / 8 : ℝ) * D ≤
