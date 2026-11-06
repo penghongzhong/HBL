@@ -41,7 +41,7 @@ theorem actual_Hartree_slow_inner_radius_hasDerivAt
             rw [Real.rpow_one]
       _ = (ell s) ^ ((p - 1) + 1) := by
             rw [← Real.rpow_add hell]
-      _ = (ell s) ^ p := by congr 1 <;> ring
+      _ = (ell s) ^ p := by congr 1 <;> ring_nf
   have hcoef :
       (-(b * ell s)) * p * (ell s) ^ (p - 1) =
         (b / 16) * (ell s) ^ p := by

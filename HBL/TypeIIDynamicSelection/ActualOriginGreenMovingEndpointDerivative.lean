@@ -93,7 +93,7 @@ theorem actual_origin_Green_coeffB_moving_lower_hasDerivAt
   change HasDerivAt
       (fun t => originGreenCoeffB K (r0 t) F hi)
       (r0dot • (-originGreenSourceB K F (r0 s))) s
-  simpa only [originGreenCoeffB, Function.comp_apply] using hcomp
+  simpa only [originGreenCoeffB, Function.comp_def] using hcomp
 
 theorem actual_origin_Green_coeffB_moving_lower_deriv_norm
     {mu theta scale lo hi C : ℝ}
