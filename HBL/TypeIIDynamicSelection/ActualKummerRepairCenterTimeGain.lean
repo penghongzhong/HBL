@@ -82,8 +82,6 @@ theorem actual_Kummer_repair_full_center_time_gain
     unfold actualHartreeSlowInnerRadius
     exact Real.rpow_pos_of_pos hell _
   have hX0 : 0 ≤ X := (hLpos.trans_le hXlow).le
-  have hDtop : 0 ≤ CD * s ^ (-rho) :=
-    mul_nonneg hCD (Real.rpow_nonneg hs0 _)
 
   have hell18 :
       ell ^ (1 / 8 : ℝ) ≤ s ^ (-(beta / 8)) := by
