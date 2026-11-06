@@ -77,7 +77,7 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
         (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
         (pdot + (xs : ℂ) * q s +
           ((xfun s - R : ℝ) : ℂ) * qdot) s := by
-    simpa only [Pi.add_apply, Pi.mul_apply] using hlin0
+    simpa only [Pi.add_apply, Pi.mul_apply, add_assoc] using hlin0
   have hprod := hcut.mul hlin
   change HasDerivAt
       (fun t =>
@@ -132,9 +132,9 @@ theorem actual_Kummer_physical_interface_repair_time_derivative_norm
       rw [norm_smul, Real.norm_eq_abs, norm_mul]
     _ ≤ |xs| * ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ +
         1 * (‖pdot‖ + ‖(((x - R : ℝ) : ℂ) * qdot)‖) := by
-      apply add_le_add_left
-      exact mul_le_mul hcut (norm_add_le _ _)
-        (norm_nonneg _) (by norm_num)
+      exact add_le_add_right
+        (mul_le_mul hcut (norm_add_le _ _)
+          (norm_nonneg _) (by norm_num)) _
     _ = |xs| * ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ +
         (‖pdot‖ + |x - R| * ‖qdot‖) := by
       rw [one_mul, norm_mul, Complex.norm_real, Real.norm_eq_abs]
@@ -187,7 +187,6 @@ theorem actual_Kummer_physical_interface_repair_time_shell_bound :
     rw [abs_neg, abs_div, abs_mul, abs_of_pos hyPos,
       abs_of_pos (sq_pos_of_pos haPos)]
     field_simp [haPos.ne']
-    ring
   have hxs :
       |-(y * adot / (a s) ^ 2)| ≤
         (2 * R) * (|adot| / a s) := by
@@ -209,7 +208,6 @@ theorem actual_Kummer_physical_interface_repair_time_shell_bound :
         mul_le_mul hxs hSlope (norm_nonneg _) (by positivity)
       _ = _ := by
         field_simp [hR.ne']
-        ring
   have hQ :
       |x - R| * ‖qdot‖ ≤ R * ‖qdot‖ :=
     mul_le_mul_of_nonneg_right hxSub (norm_nonneg qdot)
