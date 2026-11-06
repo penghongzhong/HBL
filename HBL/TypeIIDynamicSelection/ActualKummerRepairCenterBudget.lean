@@ -57,12 +57,12 @@ private theorem actual_repair_shell_mono_square
   calc
     X * (M / (1 + X)) ^ 2 ≤ X * (M / X) ^ 2 :=
       mul_le_mul_of_nonneg_left hsq hXpos.le
-    _ = M ^ 2 / X := by field_simp [hXpos.ne']; ring
+    _ = M ^ 2 / X := by field_simp [hXpos.ne']
     _ ≤ M ^ 2 := div_le_self (sq_nonneg M) hXone
 
 private theorem actual_repair_shell_radiation_square
     (ell X S : ℝ)
-    (hell : 0 < ell) (hX : 0 ≤ X) (hS : 0 ≤ S) :
+    (hell : 0 < ell) (hX : 0 ≤ X) (_hS : 0 ≤ S) :
     X * ((S * Real.sqrt ell) / (1 + ell * X)) ^ 2 ≤ S ^ 2 := by
   let t : ℝ := ell * X
   have ht : 0 ≤ t := by dsimp [t]; positivity
@@ -158,7 +158,6 @@ private theorem actual_repair_shell_radiation_cube
     dsimp [t]
     rw [div_pow, mul_pow, hsqrt3]
     field_simp [hden.ne']
-    ring
   have hsqrt :
       Real.sqrt ell ≤ ell ^ (1 / 8 : ℝ) := by
     rw [Real.sqrt_eq_rpow]
