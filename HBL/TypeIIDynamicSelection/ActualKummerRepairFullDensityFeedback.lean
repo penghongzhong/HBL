@@ -138,11 +138,12 @@ theorem actual_Kummer_physical_repair_outer_density_difference_L1
             dsimp [P, actualKummerRepairDensityPolynomial]
             ring
       dsimp [F, actualKummerPhysicalRepairOuterDensityDifference]
-      rw [Set.indicator_of_mem hy, Real.norm_eq_abs]
+      rw [Set.indicator_of_mem hy]
+      change |‖U y + H y‖ ^ 4 - ‖U y‖ ^ 4| ≤ P
       exact hAbs
     · dsimp [F, actualKummerPhysicalRepairOuterDensityDifference]
-      rw [Set.indicator_of_notMem hy, norm_zero]
-      exact hP
+      rw [Set.indicator_of_notMem hy]
+      simpa only [abs_zero] using hP
   have hCompact : HasCompactSupport F := by
     apply HasCompactSupport.of_support_subset_isCompact isCompact_Icc
     intro y hy
