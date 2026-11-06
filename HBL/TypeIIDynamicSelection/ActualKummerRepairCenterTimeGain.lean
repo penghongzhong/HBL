@@ -17,6 +17,7 @@ For the last two terms we use only:
 The coarse X=O(s) is intentionally much weaker than the final selected
 Type-II rate and can be supplied from the linear q-clock trap.  No limiting
 mu or blowup exponent occurs here.
+The strict clock-to-radius producer is kept in ActualKummerRepairClockRadius and will be composed downstream.
 -/
 
 noncomputable section
