@@ -70,9 +70,6 @@ theorem actual_Kummer_repair_full_center_time_gain
   dsimp only
   let A0 := actualKummerRepairAbstractShellEnvelope ell X M S
   let k := actualKummerRepairCenterTimeGain beta
-  have hkpos : 0 < k := by
-    dsimp [k]
-    exact actual_Kummer_repair_center_time_gain_positive beta hbeta
   have hkBeta : k ≤ beta / 8 := by
     dsimp [k, actualKummerRepairCenterTimeGain]
     exact min_le_left _ _
