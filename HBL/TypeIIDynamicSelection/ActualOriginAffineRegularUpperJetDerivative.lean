@@ -66,7 +66,7 @@ theorem actual_origin_affine_regular_gamma_hasDerivAt
         K B r0 alpha F0 G U DU s r0dot alphadot Udot DUdot) s := by
   have hReg :=
     actual_origin_matched_regular_coeff_moving_hasDerivAt
-      K B hK r0 (fun t r => F0 r + (alpha t : ℂ) * G r) U DU
+      K C B hK r0 (fun t r => F0 r + (alpha t : ℂ) * G r) U DU
       s r0dot Udot DUdot hr hr0 hU hDU
   have hGreen :=
     actual_origin_Green_coeffB_moving_affine_source_hasDerivAt
