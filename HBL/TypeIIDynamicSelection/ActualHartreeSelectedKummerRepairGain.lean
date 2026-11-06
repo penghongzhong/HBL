@@ -40,7 +40,7 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
       6 ≤ L0 ∧ 0 < epsilon ∧ epsilon ≤ 1 ∧
       0 < C ∧ 0 < C1 ∧ 0 < C2 ∧
       ∀ (ell c a s beta rhoStar rho Csrc : ℝ),
-        0 < ell → ell ≤ 1 →
+        (hell : 0 < ell) → ell ≤ 1 →
         let L := actualHartreeSlowInnerRadius ell
         L0 ≤ L → L ^ 3 ≤ a → a * |c| ≤ epsilon →
         1 ≤ s → ell ≤ s ^ (-beta) →
@@ -67,7 +67,7 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
             (actualHartreeSlowInnerRadius ell) c
             (show 0 < actualHartreeSlowInnerRadius ell by
               unfold actualHartreeSlowInnerRadius
-              exact Real.rpow_pos_of_pos ‹0 < ell› _)
+              exact Real.rpow_pos_of_pos hell _)
             a (actualHartreeSlowInnerRadius ell / a) B
             Fp Fm hp hm F p.1 p.2 = 0 ∧
           (∀ q : ℝ × ℝ,
@@ -75,13 +75,13 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
               (actualHartreeSlowInnerRadius ell) c
               (show 0 < actualHartreeSlowInnerRadius ell by
                 unfold actualHartreeSlowInnerRadius
-                exact Real.rpow_pos_of_pos ‹0 < ell› _)
+                exact Real.rpow_pos_of_pos hell _)
               a (actualHartreeSlowInnerRadius ell / a) B
               Fp Fm hp hm F q.1 q.2 = 0 → q = p) ∧
           let L := actualHartreeSlowInnerRadius ell
           let hLp : 0 < L := by
             unfold L actualHartreeSlowInnerRadius
-            exact Real.rpow_pos_of_pos ‹0 < ell› _
+            exact Real.rpow_pos_of_pos hell _
           let Gp := actualMomentLockedInnerPhaseSource L c
           let Gm := actualMomentLockedInnerScaleSource L c
           let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
