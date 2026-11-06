@@ -43,10 +43,10 @@ theorem actual_origin_regular_upper_jet_hasDerivAt
     HasDerivAt (actualOriginRegularUpperSlope K B gamma)
       (originPhysicalSlope K.x K.dx B * gammaDot) s := by
   constructor
-  · simpa only [actualOriginRegularUpperValue] using
-      hgamma.const_mul (originPhysicalValue K.x B)
-  · simpa only [actualOriginRegularUpperSlope] using
-      hgamma.const_mul (originPhysicalSlope K.x K.dx B)
+  · simpa only [actualOriginRegularUpperValue, Pi.smul_apply, smul_eq_mul] using
+      hgamma.const_smul (originPhysicalValue K.x B)
+  · simpa only [actualOriginRegularUpperSlope, Pi.smul_apply, smul_eq_mul] using
+      hgamma.const_smul (originPhysicalSlope K.x K.dx B)
 
 theorem actual_origin_regular_upper_jet_derivative_norm_exact
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
@@ -63,7 +63,7 @@ theorem actual_origin_regular_upper_jet_derivative_norm_exact
 
 theorem actual_origin_regular_upper_jet_derivative_norm_le
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (B Cv Cs : ℝ) (hB : 0 ≤ B) (hCv : 0 ≤ Cv) (hCs : 0 ≤ Cs)
+    (B Cv Cs : ℝ) (hB : 0 ≤ B) (_hCv : 0 ≤ Cv) (_hCs : 0 ≤ Cs)
     (hValue : ‖originPhysicalValue K.x B‖ ≤ Cv)
     (hSlope : ‖originPhysicalSlope K.x K.dx B‖ ≤ Cs)
     (gamma : ℝ → ℂ) (s : ℝ) (gammaDot : ℂ)
