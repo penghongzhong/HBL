@@ -8,7 +8,7 @@ This is a thin quantitative consumer of the exact repair time derivative.
 It makes the remaining producer interface explicit: current jet size,
 relative physical-scale speed, and upper-jet speed.
 
-No decay for those three inputs is invented here.  Once supplied by the
+No decay for those three inputs is invented here. The exact repair time derivative dependency is now strict-replayed.  Once supplied by the
 selected source/clock construction, the actual time derivative has the
 same rho+kappa next-layer order.
 -/
