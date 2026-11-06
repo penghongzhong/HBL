@@ -42,10 +42,7 @@ theorem actual_complex_columns_differentiated_cancellation_bound
       (b s).re * (w s).im - (w s).re * (b s).im) :
     |p1dot| + |p2dot| ≤
       1024 / (a * B ^ 2) *
-        ‖Zdot + (p1dot : ℂ) * 0 +
-          (p1 s : ℂ) * bdot +
-          (p2dot : ℂ) * 0 +
-          (p2 s : ℂ) * wdot‖ := by
+        ‖Zdot + (p1 s : ℂ) * bdot + (p2 s : ℂ) * wdot‖ := by
   have hp1c :
       HasDerivAt (fun t => (p1 t : ℂ)) (p1dot : ℂ) s :=
     hp1.ofReal_comp
@@ -61,7 +58,10 @@ theorem actual_complex_columns_differentiated_cancellation_bound
         0 s := by
     have hc : HasDerivAt (fun _ : ℝ => (0 : ℂ)) 0 s :=
       hasDerivAt_const s 0
-    exact hc.congr_of_eventuallyEq hlocal.symm
+    have hsymm : ∀ᶠ t in 𝓝 s,
+        (0 : ℂ) = Z t + (p1 t : ℂ) * b t + (p2 t : ℂ) * w t :=
+      hlocal.mono (fun _ ht => ht.symm)
+    exact hc.congr_of_eventuallyEq hsymm
   have hder :
       Zdot +
           ((p1dot : ℂ) * b s + (p1 s : ℂ) * bdot) +
@@ -78,9 +78,9 @@ theorem actual_complex_columns_differentiated_cancellation_bound
     actual_complex_columns_real_cancellation_bound
       a B ha hB (b s) (w s) Y (p1dot,p2dot)
       hbNorm hwNorm hdet hcancel
-  simpa only [Y, zero_mul, add_zero, Prod.fst, Prod.snd] using hinv
+  simpa only [Y, Prod.fst, Prod.snd] using hinv
 
-/-- Cleaner form of the same estimate. -/
+/-- Alias retaining the explicit `clean` name used by downstream files. -/
 theorem actual_complex_columns_differentiated_cancellation_bound_clean
     (a B s : ℝ) (ha : 0 < a) (hB : 0 < B)
     (b w Z : ℝ → ℂ) (p1 p2 : ℝ → ℝ)
@@ -98,11 +98,9 @@ theorem actual_complex_columns_differentiated_cancellation_bound_clean
       (b s).re * (w s).im - (w s).re * (b s).im) :
     |p1dot| + |p2dot| ≤
       1024 / (a * B ^ 2) *
-        ‖Zdot + (p1 s : ℂ) * bdot + (p2 s : ℂ) * wdot‖ := by
-  have h :=
-    actual_complex_columns_differentiated_cancellation_bound
-      a B s ha hB b w Z p1 p2 bdot wdot Zdot p1dot p2dot
-      hb hw hZ hp1 hp2 hlocal hbNorm hwNorm hdet
-  simpa only [zero_mul, add_zero] using h
+        ‖Zdot + (p1 s : ℂ) * bdot + (p2 s : ℂ) * wdot‖ :=
+  actual_complex_columns_differentiated_cancellation_bound
+    a B s ha hB b w Z p1 p2 bdot wdot Zdot p1dot p2dot
+    hb hw hZ hp1 hp2 hlocal hbNorm hwNorm hdet
 
 end HBL.TypeIIDynamicSelection
