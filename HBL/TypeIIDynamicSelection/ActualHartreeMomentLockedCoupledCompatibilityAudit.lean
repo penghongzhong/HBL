@@ -397,5 +397,9 @@ set_option pp.all false in
 set_option pp.all false in
 #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_sharp_source_obstruction_gain
 
+#check @HBL.TypeIIDynamicSelection.actual_complex_columns_real_cancellation_bound
+set_option pp.all false in
+#print axioms HBL.TypeIIDynamicSelection.actual_complex_columns_real_cancellation_bound
+
 -- Expand the actual terminal conclusion as well as its public theorem type.
 #print HBL.TypeIIDynamicSelection.ActualMomentLockedPhysicalBackwardShellConclusion
