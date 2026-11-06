@@ -72,28 +72,48 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
       HasDerivAt (fun t => ((xfun t - R : ℝ) : ℂ)) (xs : ℂ) s :=
     hxr.ofReal_comp
   have hlin0 := hp.add (hxrC.mul hq)
-  change HasDerivAt
-    (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
-    (pdot + ((xs : ℂ) * q s +
-      ((xfun s - R : ℝ) : ℂ) * qdot)) s at hlin0
+  have hfun :
+      p + (fun t => ((xfun t - R : ℝ) : ℂ)) * q =
+        (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t) := by
+    rfl
+  rw [hfun] at hlin0
   have hlin :
       HasDerivAt
         (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
         (pdot + (xs : ℂ) * q s +
           ((xfun s - R : ℝ) : ℂ) * qdot) s := by
-    convert hlin0 using 1
-    ring
-  have hprod := hcut.mul hlin
-  change HasDerivAt
-      (fun t =>
-        actualKummerRepairCutoff R (xfun t) *
-          (p t + ((xfun t - R : ℝ) : ℂ) * q t)) _ s
-  convert hprod using 1
-  · funext t
+    have hcoef :
+        pdot + ((xs : ℂ) * q s +
+          ((xfun s - R : ℝ) : ℂ) * qdot) =
+        pdot + (xs : ℂ) * q s +
+          ((xfun s - R : ℝ) : ℂ) * qdot := by
+      ring
+    rw [← hcoef]
+    exact hlin0
+  have hprod0 := hcut.mul hlin
+  have hfunProd :
+      (actualKummerRepairCutoff R ∘ xfun) *
+          (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t) =
+        (fun t =>
+          actualKummerRepairCutoff R (xfun t) *
+            (p t + ((xfun t - R : ℝ) : ℂ) * q t)) := by
     rfl
-  · simp only [Function.comp_apply, Complex.real_smul]
+  rw [hfunProd] at hprod0
+  have hcoefProd :
+      (xs • deriv (actualKummerRepairCutoff R) (xfun s)) *
+          (p s + ((xfun s - R : ℝ) : ℂ) * q s) +
+        actualKummerRepairCutoff R (xfun s) *
+          (pdot + (xs : ℂ) * q s +
+            ((xfun s - R : ℝ) : ℂ) * qdot) =
+      (xs : ℝ) • actualKummerInterfaceRepairSlope
+          R (p s) (q s) (xfun s) +
+        actualKummerRepairCutoff R (xfun s) *
+          (pdot + (((xfun s - R : ℝ) : ℂ) * qdot)) := by
+    simp only [Complex.real_smul]
     unfold actualKummerInterfaceRepairSlope
     ring
+  rw [hcoefProd] at hprod0
+  exact hprod0
 
 /-- A norm form of the exact identity.  It isolates the only quantities
 still needing time-order estimates: normalized-coordinate speed and upper-jet
