@@ -73,9 +73,13 @@ theorem actual_origin_Green_coeffB_moving_lower_hasDerivAt
   have hCont :
       ContinuousOn (originGreenSourceB K F) (Icc (r0 s) hi) :=
     hSources.2.2.mono (Icc_subset_Icc hr0.1.le le_rfl)
+  have hContU :
+      ContinuousOn (originGreenSourceB K F) (uIcc (r0 s) hi) := by
+    rw [uIcc_of_le hr0.2.le]
+    exact hCont
   have hInt :
       IntervalIntegrable (originGreenSourceB K F) volume (r0 s) hi :=
-    hCont.intervalIntegrable
+    hContU.intervalIntegrable
   have hleft :=
     intervalIntegral.integral_hasDerivAt_left
       hInt hAt.stronglyMeasurableAtFilter hAt
