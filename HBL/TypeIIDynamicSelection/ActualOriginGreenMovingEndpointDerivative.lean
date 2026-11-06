@@ -23,7 +23,7 @@ open HBL.Profile.Kummer
 theorem actual_origin_Green_coeffA_moving_lower_hasDerivAt
     {mu theta scale lo hi C : ℝ}
     (K : OriginKummerPair mu theta scale)
-    (hK : OriginBasisOn K lo hi C) (hlohi : lo < hi)
+    (hK : OriginBasisOn K lo hi C) (_hlohi : lo < hi)
     (F : ℝ → ℂ) (hF : Continuous F)
     (r0 : ℝ → ℝ) (s r0dot : ℝ)
     (hr0 : r0 s ∈ Ioo lo hi)
