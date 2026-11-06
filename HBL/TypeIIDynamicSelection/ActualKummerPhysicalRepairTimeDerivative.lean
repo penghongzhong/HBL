@@ -61,7 +61,8 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
   have hx : HasDerivAt xfun xs s := by
     have hraw := (hasDerivAt_const s y).div ha ha0
     dsimp [xfun, xs]
-    convert hraw using 1 <;> ring
+    convert hraw using 1
+    ring
   have hcut0 :=
     actual_Kummer_repair_cutoff_hasDerivAt R (xfun s) hR
   have hcut :=
