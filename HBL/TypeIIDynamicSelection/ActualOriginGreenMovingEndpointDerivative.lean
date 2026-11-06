@@ -49,6 +49,6 @@ theorem actual_origin_Green_coeffA_moving_lower_deriv_norm
   have h :=
     actual_origin_Green_coeffA_moving_lower_hasDerivAt
       K hK hlohi F hF r0 s r0dot hr0 hr0dot
-  rw [h.deriv, norm_smul, Real.norm_eq_abs]
+  rw [h.deriv, norm_smul, Real.norm_eq_abs, norm_neg]
 
 end HBL.TypeIIDynamicSelection
