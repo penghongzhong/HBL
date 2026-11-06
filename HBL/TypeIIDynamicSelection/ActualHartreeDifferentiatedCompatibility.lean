@@ -58,10 +58,7 @@ theorem actual_complex_columns_differentiated_cancellation_bound
         0 s := by
     have hc : HasDerivAt (fun _ : ℝ => (0 : ℂ)) 0 s :=
       hasDerivAt_const s 0
-    have hsymm : ∀ᶠ t in 𝓝 s,
-        (0 : ℂ) = Z t + (p1 t : ℂ) * b t + (p2 t : ℂ) * w t :=
-      hlocal.mono (fun _ ht => ht.symm)
-    exact hc.congr_of_eventuallyEq hsymm
+    exact hc.congr_of_eventuallyEq hlocal
   have hder :
       Zdot +
           ((p1dot : ℂ) * b s + (p1 s : ℂ) * bdot) +
