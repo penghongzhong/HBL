@@ -43,16 +43,24 @@ theorem actual_origin_regular_upper_jet_hasDerivAt
     HasDerivAt (actualOriginRegularUpperSlope K B gamma)
       (originPhysicalSlope K.x K.dx B * gammaDot) s := by
   constructor
-  · change HasDerivAt
-      (fun t => originPhysicalValue K.x B * gamma t)
-      (originPhysicalValue K.x B * gammaDot) s
-    have h := hgamma.mul_const (originPhysicalValue K.x B)
-    convert h using 1 <;> simp [mul_comm]
-  · change HasDerivAt
-      (fun t => originPhysicalSlope K.x K.dx B * gamma t)
-      (originPhysicalSlope K.x K.dx B * gammaDot) s
-    have h := hgamma.mul_const (originPhysicalSlope K.x K.dx B)
-    convert h using 1 <;> simp [mul_comm]
+  · let c : ℂ := originPhysicalValue K.x B
+    have heq :
+        actualOriginRegularUpperValue K B gamma =
+          (fun t => gamma t * c) := by
+      funext t
+      dsimp [actualOriginRegularUpperValue, c]
+      rw [mul_comm]
+    rw [heq]
+    simpa only [c, mul_comm] using hgamma.mul_const c
+  · let c : ℂ := originPhysicalSlope K.x K.dx B
+    have heq :
+        actualOriginRegularUpperSlope K B gamma =
+          (fun t => gamma t * c) := by
+      funext t
+      dsimp [actualOriginRegularUpperSlope, c]
+      rw [mul_comm]
+    rw [heq]
+    simpa only [c, mul_comm] using hgamma.mul_const c
 
 theorem actual_origin_regular_upper_jet_derivative_norm_exact
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
