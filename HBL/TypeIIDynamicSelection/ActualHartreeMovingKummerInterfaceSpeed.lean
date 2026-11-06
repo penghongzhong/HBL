@@ -53,7 +53,7 @@ theorem actual_Hartree_slow_inner_radius_hasDerivAt
     dsimp [p]
     ring
   unfold actualHartreeSlowInnerRadius
-  simpa only [p, hcoef] using hcomp
+  simpa only [p, hcoef, Function.comp_apply] using hcomp
 
 theorem actual_Hartree_moving_Kummer_lower_interface_hasDerivAt
     (ell a : ℝ → ℝ) (b s adot : ℝ)
@@ -74,7 +74,6 @@ theorem actual_Hartree_moving_Kummer_lower_interface_hasDerivAt
       ((b / 16) * L s * a s - L s * adot) / (a s) ^ 2 =
         (L s / a s) * (b / 16 - adot / a s) := by
     field_simp [ha.ne']
-    ring
   change HasDerivAt (fun t => L t / a t)
     ((L s / a s) * (b / 16 - adot / a s)) s
   rw [← hEq]
@@ -83,7 +82,7 @@ theorem actual_Hartree_moving_Kummer_lower_interface_hasDerivAt
 theorem actual_Hartree_moving_Kummer_lower_interface_speed_bound
     (ell a : ℝ → ℝ) (b s adot Cb Ca : ℝ)
     (hell : 0 < ell s) (ha : 0 < a s)
-    (hs : 1 ≤ s) (hCb : 0 ≤ Cb) (hCa : 0 ≤ Ca)
+    (hs : 1 ≤ s) (_hCb : 0 ≤ Cb) (_hCa : 0 ≤ Ca)
     (hEll : HasDerivAt ell (-(b * ell s)) s)
     (hA : HasDerivAt a adot s)
     (hb : |b| ≤ Cb * s ^ (-1 : ℝ))
@@ -104,9 +103,13 @@ theorem actual_Hartree_moving_Kummer_lower_interface_speed_bound
     dsimp [r0, actualHartreeMovingKummerLowerInterface]
     exact div_pos (Real.rpow_pos_of_pos hell _) ha
   have hb16 : |b / 16| ≤ (Cb / 16) * s ^ (-1 : ℝ) := by
-    rw [abs_div]
-    norm_num
-    exact div_le_div_of_nonneg_right hb (by norm_num)
+    calc
+      |b / 16| = |b| / 16 := by
+        rw [abs_div]
+        norm_num
+      _ ≤ (Cb * s ^ (-1 : ℝ)) / 16 :=
+        div_le_div_of_nonneg_right hb (by norm_num)
+      _ = (Cb / 16) * s ^ (-1 : ℝ) := by ring
   have hrelAbs :
       |adot / a s| = |adot| / a s := by
     rw [abs_div, abs_of_pos ha]
@@ -122,6 +125,10 @@ theorem actual_Hartree_moving_Kummer_lower_interface_speed_bound
   refine ⟨r0dot, hDer, ?_⟩
   dsimp [r0dot]
   rw [abs_mul, abs_of_pos hr0pos]
-  exact mul_le_mul_of_nonneg_left hsum hr0pos.le
+  calc
+    r0 s * |b / 16 - adot / a s| ≤
+        r0 s * ((Cb / 16 + Ca) * s ^ (-1 : ℝ)) :=
+      mul_le_mul_of_nonneg_left hsum hr0pos.le
+    _ = r0 s * (Cb / 16 + Ca) * s ^ (-1 : ℝ) := by ring
 
 end HBL.TypeIIDynamicSelection
