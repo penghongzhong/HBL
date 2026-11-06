@@ -9,7 +9,7 @@ This is the direct source-to-outer-repair bridge.  The full compatibility
 matrix selects the speed correction and the same selected Kummer solution.
 If the ORIGINAL source size is O(s^(-rho)), the already proved source-to-jet
 theorem gives an O(s^(-rho)) upper value/slope.  Feeding exactly that jet
-(with opposite sign) into the physical interface repair gives an
+(with the same sign, as the C1 replacement tail) into the physical interface repair gives an
 O(s^(-(rho+kappa_phys))) scaled Kummer residual.
 
 No independent boundary-jet decay and no abstract remote solver are assumed.
@@ -167,7 +167,6 @@ theorem actual_Hartree_selected_Kummer_repair_next_source_layer
       hB hy hs hell hellOne ha3 htrap hbeta hrhoStar hflat
       UB DUB
   dsimp only at hRaw
-  rw [norm_neg, norm_neg] at hRaw
   have hsp : 0 < s := lt_of_lt_of_le zero_lt_one hs
   have hkpow :
       0 ≤ s ^ (-actualHartreePhysicalKappa beta rhoStar) :=
