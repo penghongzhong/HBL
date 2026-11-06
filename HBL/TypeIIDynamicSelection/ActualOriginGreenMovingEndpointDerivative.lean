@@ -80,14 +80,20 @@ theorem actual_origin_Green_coeffB_moving_lower_hasDerivAt
   have hInt :
       IntervalIntegrable (originGreenSourceB K F) volume (r0 s) hi :=
     hContU.intervalIntegrable
+  have hContOpen :
+      ContinuousOn (originGreenSourceB K F) (Ioo lo hi) :=
+    hSources.2.2.mono Ioo_subset_Icc_self
+  have hMeas :
+      StronglyMeasurableAtFilter
+        (originGreenSourceB K F) (𝓝 (r0 s)) :=
+    hContOpen.stronglyMeasurableAtFilter isOpen_Ioo (r0 s) hr0
   have hleft :=
-    intervalIntegral.integral_hasDerivAt_left
-      hInt hAt.stronglyMeasurableAtFilter hAt
+    intervalIntegral.integral_hasDerivAt_left hInt hMeas hAt
   have hcomp := hleft.scomp s hr0dot
   change HasDerivAt
       (fun t => originGreenCoeffB K (r0 t) F hi)
       (r0dot • (-originGreenSourceB K F (r0 s))) s
-  simpa only [originGreenCoeffB] using hcomp
+  simpa only [originGreenCoeffB, Function.comp_apply] using hcomp
 
 theorem actual_origin_Green_coeffB_moving_lower_deriv_norm
     {mu theta scale lo hi C : ℝ}
