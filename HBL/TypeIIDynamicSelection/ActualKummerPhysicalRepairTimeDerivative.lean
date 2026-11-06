@@ -26,14 +26,17 @@ namespace HBL.TypeIIDynamicSelection
 
 /-- Public derivative certificate for the concrete translated repair cutoff. -/
 theorem actual_Kummer_repair_cutoff_hasDerivAt
-    (R x : ℝ) (hR : R ≠ 0) :
+    (R x : ℝ) (_hR : R ≠ 0) :
     HasDerivAt (actualKummerRepairCutoff R)
       (deriv (actualKummerRepairCutoff R) x) x := by
-  have h :=
-    (actual_Kummer_interface_repair_derivatives
-      R x hR (1 : ℂ) (0 : ℂ)).1
-  simpa [actualKummerInterfaceRepair,
-    actualKummerInterfaceRepairSlope] using h
+  apply DifferentiableAt.hasDerivAt
+  unfold actualKummerRepairCutoff
+  have hinner :=
+    actual_one_layer_overlap_cutoff_hasDerivAt (R / 3) (x - R)
+  have hshift : HasDerivAt (fun t : ℝ => t - R) 1 x :=
+    (hasDerivAt_id x).sub_const R
+  simpa only [Function.comp_def, one_smul] using
+    (hinner.scomp x hshift).differentiableAt
 
 /-- Exact time derivative of the physical replacement repair.  The first
 term is coordinate transport; the second is the actual upper-jet motion. -/
@@ -68,12 +71,13 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
   have hxrC :
       HasDerivAt (fun t => ((xfun t - R : ℝ) : ℂ)) (xs : ℂ) s :=
     hxr.ofReal_comp
+  have hlin0 := hp.add (hxrC.mul hq)
   have hlin :
       HasDerivAt
         (fun t => p t + ((xfun t - R : ℝ) : ℂ) * q t)
         (pdot + (xs : ℂ) * q s +
-          ((xfun s - R : ℝ) : ℂ) * qdot) s :=
-    hp.add (hxrC.mul hq)
+          ((xfun s - R : ℝ) : ℂ) * qdot) s := by
+    simpa only [Pi.add_apply, Pi.mul_apply] using hlin0
   have hprod := hcut.mul hlin
   change HasDerivAt
       (fun t =>
@@ -82,9 +86,9 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
   convert hprod using 1
   · funext t
     rfl
-  · simp only [Complex.real_smul]
+  · simp only [Function.comp_apply, Complex.real_smul]
     unfold actualKummerInterfaceRepairSlope
-    ring
+    ring_nf
 
 /-- A norm form of the exact identity.  It isolates the only quantities
 still needing time-order estimates: normalized-coordinate speed and upper-jet
@@ -128,9 +132,9 @@ theorem actual_Kummer_physical_interface_repair_time_derivative_norm
       rw [norm_smul, Real.norm_eq_abs, norm_mul]
     _ ≤ |xs| * ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ +
         1 * (‖pdot‖ + ‖(((x - R : ℝ) : ℂ) * qdot)‖) := by
-      gcongr
-      · exact hcut
-      · exact norm_add_le _ _
+      apply add_le_add_left
+      exact mul_le_mul hcut (norm_add_le _ _)
+        (norm_nonneg _) (by norm_num)
     _ = |xs| * ‖actualKummerInterfaceRepairSlope R (p s) (q s) x‖ +
         (‖pdot‖ + |x - R| * ‖qdot‖) := by
       rw [one_mul, norm_mul, Complex.norm_real, Real.norm_eq_abs]
