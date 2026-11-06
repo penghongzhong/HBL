@@ -106,7 +106,6 @@ theorem actual_Kummer_repair_full_center_time_gain
       _ = CD ^ 2 * s ^ (-2 * rho) := by
         rw [actual_center_rpow_mul_nat s rho hs0 2]
         congr 2
-        ring
   have hD3 : D ^ 3 ≤ CD ^ 3 * s ^ (-3 * rho) := by
     have h := pow_le_pow_left₀ hD hDtime 3
     calc
@@ -115,7 +114,6 @@ theorem actual_Kummer_repair_full_center_time_gain
       _ = CD ^ 3 * s ^ (-3 * rho) := by
         rw [actual_center_rpow_mul_nat s rho hs0 3]
         congr 2
-        ring
   have hD4 : D ^ 4 ≤ CD ^ 4 * s ^ (-4 * rho) := by
     have h := pow_le_pow_left₀ hD hDtime 4
     calc
@@ -124,7 +122,6 @@ theorem actual_Kummer_repair_full_center_time_gain
       _ = CD ^ 4 * s ^ (-4 * rho) := by
         rw [actual_center_rpow_mul_nat s rho hs0 4]
         congr 2
-        ring
 
   have hTargetBeta :
       s ^ (-(rho + beta / 8)) ≤ s ^ (-(rho + k)) :=
@@ -148,12 +145,15 @@ theorem actual_Kummer_repair_full_center_time_gain
     have hprod :
         ell ^ (1 / 8 : ℝ) * D ≤
           s ^ (-(beta / 8)) * (CD * s ^ (-rho)) :=
-      mul_le_mul hell18 hDtime hD hDtop
+      mul_le_mul hell18 hDtime hD (Real.rpow_nonneg hs0 _)
     calc
       _ ≤ s ^ (-(beta / 8)) * (CD * s ^ (-rho)) := hprod
-      _ = CD * s ^ (-(rho + beta / 8)) := by
+      _ = CD * (s ^ (-(beta / 8)) * s ^ (-rho)) := by ring
+      _ = CD * s ^ (-(beta / 8) + (-rho)) := by
         rw [← Real.rpow_add hspos]
-        congr 1 <;> ring
+      _ = CD * s ^ (-(rho + beta / 8)) := by
+        congr 2
+        ring
       _ ≤ CD * s ^ (-(rho + k)) :=
         mul_le_mul_of_nonneg_left hTargetBeta hCD
 
@@ -217,7 +217,14 @@ theorem actual_Kummer_repair_full_center_time_gain
           12 * (M ^ 2 + S ^ 2) *
             (CD ^ 2 * s ^ (-(rho + k))) :=
         add_le_add
-          (mul_le_mul_of_nonneg_left hEllD hC3)
+          (by
+            calc
+              16 * (M ^ 3 + S ^ 3) * ell ^ (1 / 8 : ℝ) * D =
+                  (16 * (M ^ 3 + S ^ 3)) *
+                    (ell ^ (1 / 8 : ℝ) * D) := by ring
+              _ ≤ (16 * (M ^ 3 + S ^ 3)) *
+                    (CD * s ^ (-(rho + k))) :=
+                  mul_le_mul_of_nonneg_left hEllD hC3)
           (mul_le_mul_of_nonneg_left hD2t hC2)
       _ = _ := by ring
 
