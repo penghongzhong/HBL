@@ -31,10 +31,8 @@ theorem actual_Hartree_slow_inner_radius_hasDerivAt
       (fun t => actualHartreeSlowInnerRadius (ell t))
       ((b / 16) * actualHartreeSlowInnerRadius (ell s)) s := by
   let p : ℝ := -(1 / 16 : ℝ)
-  have hpow0 :=
-    Real.hasDerivAt_rpow_const (x := ell s) (p := p)
-      (Or.inl hell.ne')
-  have hcomp := hpow0.comp s hEll
+  have hcomp :=
+    hEll.rpow_const (p := p) (Or.inl hell.ne')
   have hpow :
       (ell s) ^ (p - 1) * ell s = (ell s) ^ p := by
     calc
@@ -45,15 +43,15 @@ theorem actual_Hartree_slow_inner_radius_hasDerivAt
             rw [← Real.rpow_add hell]
       _ = (ell s) ^ p := by congr 1 <;> ring
   have hcoef :
-      (p * (ell s) ^ (p - 1)) * (-(b * ell s)) =
+      (-(b * ell s)) * p * (ell s) ^ (p - 1) =
         (b / 16) * (ell s) ^ p := by
-    rw [show (p * (ell s) ^ (p - 1)) * (-(b * ell s)) =
+    rw [show (-(b * ell s)) * p * (ell s) ^ (p - 1) =
       (-p * b) * ((ell s) ^ (p - 1) * ell s) by ring]
     rw [hpow]
     dsimp [p]
     ring
   unfold actualHartreeSlowInnerRadius
-  simpa only [p, hcoef, Function.comp_apply] using hcomp
+  simpa only [p, hcoef] using hcomp
 
 theorem actual_Hartree_moving_Kummer_lower_interface_hasDerivAt
     (ell a : ℝ → ℝ) (b s adot : ℝ)
@@ -82,7 +80,7 @@ theorem actual_Hartree_moving_Kummer_lower_interface_hasDerivAt
 theorem actual_Hartree_moving_Kummer_lower_interface_speed_bound
     (ell a : ℝ → ℝ) (b s adot Cb Ca : ℝ)
     (hell : 0 < ell s) (ha : 0 < a s)
-    (hs : 1 ≤ s) (_hCb : 0 ≤ Cb) (_hCa : 0 ≤ Ca)
+    (_hs : 1 ≤ s) (_hCb : 0 ≤ Cb) (_hCa : 0 ≤ Ca)
     (hEll : HasDerivAt ell (-(b * ell s)) s)
     (hA : HasDerivAt a adot s)
     (hb : |b| ≤ Cb * s ^ (-1 : ℝ))
