@@ -128,7 +128,7 @@ theorem actual_Kummer_repair_full_center_time_gain
 
   have hTargetBeta :
       s ^ (-(rho + beta / 8)) ≤ s ^ (-(rho + k)) :=
-    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hkBeta])
   have hTarget2 :
       s ^ (-2 * rho) ≤ s ^ (-(rho + k)) :=
     Real.rpow_le_rpow_of_exponent_le hs (by linarith only [hrho, hkHalf])
