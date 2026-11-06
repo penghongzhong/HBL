@@ -99,6 +99,7 @@ theorem actual_Kummer_physical_interface_repair_time_derivative
             (p t + ((xfun t - R : ℝ) : ℂ) * q t)) := by
     rfl
   rw [hfunProd] at hprod0
+  simp only [Function.comp_apply] at hprod0
   have hcoefProd :
       (xs • deriv (actualKummerRepairCutoff R) (xfun s)) *
           (p s + ((xfun s - R : ℝ) : ℂ) * q s) +
