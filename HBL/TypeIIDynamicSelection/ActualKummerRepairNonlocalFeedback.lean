@@ -41,7 +41,7 @@ theorem actual_Kummer_physical_repair_outer_quartic_measurable
     intro y
     exact (actual_Kummer_physical_interface_repair_derivatives
       a R y ha hR p q).1.continuousAt
-  exact (hCont.norm.pow_const 4).measurable.indicator measurableSet_Ioc
+  exact (hCont.norm.measurable.pow_const 4).indicator measurableSet_Ioc
 
 /-- The localized pure repair density is globally integrable, with its
 actual annulus length retained. -/
@@ -78,9 +78,9 @@ theorem actual_Kummer_physical_repair_outer_quartic_L1
     · have hyPhys : y / a ∈ Icc R (2 * R) := by
         constructor
         · apply (le_div_iff₀ ha).2
-          simpa only [r0] using hy.1.le
+          simpa only [r0, mul_comm] using hy.1.le
         · apply (div_le_iff₀ ha).2
-          simpa only [r1] using hy.2
+          simpa only [r1, mul_assoc, mul_comm, mul_left_comm] using hy.2
       have hv := (hRepair 0 0 R (y / a) hR hyPhys p q).1
       have hpw : ‖actualKummerPhysicalInterfaceRepair a R p q y‖ ^ 4 ≤
           D ^ 4 := by
@@ -88,10 +88,10 @@ theorem actual_Kummer_physical_repair_outer_quartic_L1
         exact pow_le_pow_left₀ (norm_nonneg _) hv 4
       dsimp [F, actualKummerPhysicalRepairOuterQuarticDensity]
       rw [Set.indicator_of_mem hy]
-      rw [Real.norm_of_nonneg (pow_nonneg (norm_nonneg _) 4)]
+      rw [abs_of_nonneg (pow_nonneg (norm_nonneg _) 4)]
       exact hpw
     · dsimp [F, actualKummerPhysicalRepairOuterQuarticDensity]
-      rw [Set.indicator_of_notMem hy, norm_zero]
+      rw [Set.indicator_of_notMem hy, abs_zero]
       exact pow_nonneg hD 4
   have hCompact : HasCompactSupport F := by
     apply HasCompactSupport.of_support_subset_isCompact isCompact_Icc
