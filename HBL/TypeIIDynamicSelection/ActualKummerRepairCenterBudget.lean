@@ -1,4 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualKummerRepairBackgroundEnvelope
+import HBL.TypeIIDynamicSelection.ActualHartreeConjugatedLocalizedInner
 import Mathlib.Tactic
 
 /-!
@@ -78,7 +79,6 @@ private theorem actual_repair_shell_radiation_square
     dsimp [t]
     rw [div_pow, mul_pow, hsq]
     field_simp [hden.ne']
-    ring
   rw [hEq]
   have hS2 : 0 ≤ S ^ 2 := sq_nonneg S
   exact (mul_le_mul_of_nonneg_left hratio hS2).trans_eq (mul_one _)
@@ -108,7 +108,7 @@ private theorem actual_repair_shell_mono_cube
     calc
       _ ≤ X * (M / X) ^ 3 :=
         mul_le_mul_of_nonneg_left hcub hXpos.le
-      _ = M ^ 3 / X ^ 2 := by field_simp [hXpos.ne']; ring
+      _ = M ^ 3 / X ^ 2 := by field_simp [hXpos.ne']
   have hLsq : L ^ 2 ≤ X ^ 2 :=
     pow_le_pow_left₀ hLpos.le hX 2
   have hInv :
