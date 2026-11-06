@@ -66,24 +66,24 @@ theorem actual_origin_Green_coeffB_moving_lower_hasDerivAt
     HasDerivAt
       (fun t => originGreenCoeffB K (r0 t) F hi)
       (r0dot • (-originGreenSourceB K F (r0 s))) s := by
-  have hbase :
-      HasDerivAt
-        (fun t => originGreenCoeffB K hi F (r0 t))
-        (r0dot • originGreenSourceB K F (r0 s)) s := by
-    have hinner :=
-      (originGreen_coefficients_hasDerivAt
-        K hK hlohi F hF hr0).2
-    exact hinner.scomp s hr0dot
-  have hfun :
-      (fun t => originGreenCoeffB K (r0 t) F hi) =
-        (fun t => - originGreenCoeffB K hi F (r0 t)) := by
-    funext t
-    unfold originGreenCoeffB
-    exact intervalIntegral.integral_symm (r0 t) hi
-  rw [hfun]
-  convert hbase.neg using 1
-  simp only [smul_neg, neg_smul]
-  abel
+  have hSources := originGreen_sources_continuous K hK F hF
+  have hAt :
+      ContinuousAt (originGreenSourceB K F) (r0 s) :=
+    (hSources.1 (r0 s) ⟨hr0.1.le, hr0.2.le⟩).2
+  have hCont :
+      ContinuousOn (originGreenSourceB K F) (Icc (r0 s) hi) :=
+    hSources.2.2.mono (Icc_subset_Icc hr0.1.le le_rfl)
+  have hInt :
+      IntervalIntegrable (originGreenSourceB K F) volume (r0 s) hi :=
+    hCont.intervalIntegrable
+  have hleft :=
+    intervalIntegral.integral_hasDerivAt_left
+      hInt hAt.stronglyMeasurableAtFilter hAt
+  have hcomp := hleft.scomp s hr0dot
+  change HasDerivAt
+      (fun t => originGreenCoeffB K (r0 t) F hi)
+      (r0dot • (-originGreenSourceB K F (r0 s))) s
+  simpa only [originGreenCoeffB] using hcomp
 
 theorem actual_origin_Green_coeffB_moving_lower_deriv_norm
     {mu theta scale lo hi C : ℝ}
