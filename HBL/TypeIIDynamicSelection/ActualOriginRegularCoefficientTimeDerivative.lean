@@ -102,8 +102,6 @@ theorem actual_origin_regular_coeff_from_moving_jet_hasDerivAt
   rw [hFun]
   convert hDiv using 1
   · rfl
-  · dsimp [actualOriginRegularCoeffFromMovingJetDot, Nfun, Wfun, r]
-    ring
 
 /-- The source appearing in the matched Kummer formula is irrelevant for
 the regular coefficient derivative: the exact Green normalization removes
