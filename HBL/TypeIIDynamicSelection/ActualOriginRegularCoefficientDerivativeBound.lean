@@ -60,24 +60,6 @@ theorem actual_origin_regular_coeff_moving_dot_norm_le
     dsimp [B0, r]
     exact (le_add_of_nonneg_left (norm_nonneg (frozenFirstCoeff (r0 s)))).trans
       hcoeff
-  have hYpp : ‖Ypp‖ ≤ D * C := by
-    dsimp [Ypp]
-    rw [norm_neg]
-    calc
-      _ ≤ ‖A * Yp‖ + ‖B0 * Y‖ := norm_add_le _ _
-      _ = ‖A‖ * ‖Yp‖ + ‖B0‖ * ‖Y‖ := by rw [norm_mul, norm_mul]
-      _ ≤ D * C + D * C :=
-        add_le_add
-          (mul_le_mul hA hYp (norm_nonneg _) hD)
-          (mul_le_mul hB0 hY (norm_nonneg _) hD)
-      _ ≤ D * C := by
-        have hzero : D * C = 0 := by
-          by_cases hDC : D * C = 0
-          · exact hDC
-          · exfalso
-            have : 0 < D * C := lt_of_le_of_ne (mul_nonneg hD hC) (Ne.symm hDC)
-            linarith
-        linarith
   have hYppSafe : ‖Ypp‖ ≤ 2 * D * C := by
     calc
       _ ≤ ‖A * Yp‖ + ‖B0 * Y‖ := by
