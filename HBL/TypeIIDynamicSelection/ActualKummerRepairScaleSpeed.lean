@@ -57,7 +57,6 @@ theorem actual_Kummer_scale_relative_speed_from_slice_clock
     (hsmall : (4 * H / (1 - delta)) * s0 ^ (-delta) ≤ A / 4)
     (hkappa : |kappa| ≤ A * s0 / 4)
     (hs : s0 < s) :
-    let q := HBL.Kinematic.sliceClock A s0 kappa h s
     let a := actualKummerScaleFromSliceClock A s0 kappa h s
     let adot := (A + 4 * h s) / (2 * a)
     HasDerivAt
