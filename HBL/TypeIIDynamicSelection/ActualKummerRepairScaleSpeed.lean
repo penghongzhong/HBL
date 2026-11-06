@@ -39,7 +39,11 @@ theorem actual_Kummer_scale_from_slice_clock_hasDerivAt
     HBL.Kinematic.sliceClock_hasDerivAt
       (A := A) (s₀ := s0) (κ := kappa) h hh hs
   have hsqrt := hqDeriv.sqrt hq.ne'
-  simpa only [actualKummerScaleFromSliceClock] using hsqrt
+  change HasDerivAt
+    (fun y => Real.sqrt (HBL.Kinematic.sliceClock A s0 kappa h y))
+    ((A + 4 * h s) /
+      (2 * Real.sqrt (HBL.Kinematic.sliceClock A s0 kappa h s))) s
+  exact hsqrt
 
 /-- The true square-root clock scale has relative speed O(1/s).
 No limiting modulation exponent or final concentration law is used. -/
@@ -94,7 +98,7 @@ theorem actual_Kummer_scale_relative_speed_from_slice_clock
       _ = H := mul_one H
   have hnum : |A + 4 * h s| ≤ A + 4 * H := by
     calc
-      |A + 4 * h s| ≤ |A| + |4 * h s| := abs_add _ _
+      |A + 4 * h s| ≤ |A| + |4 * h s| := abs_add_le _ _
       _ = A + 4 * |h s| := by
         rw [abs_of_pos hA, abs_mul]
         norm_num
@@ -111,8 +115,8 @@ theorem actual_Kummer_scale_relative_speed_from_slice_clock
       |adot| / a = |A + 4 * h s| / (2 * q) := by
     dsimp [adot]
     rw [abs_div, abs_of_pos (mul_pos (by norm_num) haPos)]
-    field_simp [haPos.ne', hqpos.ne']
-    nlinarith only [hsqrtSq]
+    rw [← hsqrtSq]
+    field_simp [haPos.ne']
   have hfirst :
       |A + 4 * h s| / (2 * q) ≤
         (A + 4 * H) / (2 * q) := by
