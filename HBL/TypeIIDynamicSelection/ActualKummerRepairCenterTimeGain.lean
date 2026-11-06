@@ -93,7 +93,7 @@ theorem actual_Kummer_repair_full_center_time_gain
       calc
         _ = s ^ ((-beta) * (1 / 8 : ℝ)) :=
           (Real.rpow_mul hs0 (-beta) (1 / 8 : ℝ)).symm
-        _ = _ := by congr 1; ring
+        _ = _ := by congr 1; ring_nf
     exact h1.trans_eq h2
 
   have hD2 : D ^ 2 ≤ CD ^ 2 * s ^ (-2 * rho) := by
@@ -174,7 +174,7 @@ theorem actual_Kummer_repair_full_center_time_gain
         ring
       _ = CD ^ 3 * s ^ (1 - 3 * rho) := by
         rw [← Real.rpow_add hspos]
-        congr 1; ring
+        congr 1; ring_nf
   have hsD3t :
       s * D ^ 3 ≤ CD ^ 3 * s ^ (-(rho + k)) :=
     hsD3.trans
@@ -190,7 +190,7 @@ theorem actual_Kummer_repair_full_center_time_gain
         ring
       _ = CD ^ 4 * s ^ (1 - 4 * rho) := by
         rw [← Real.rpow_add hspos]
-        congr 1; ring
+        congr 1; ring_nf
   have hsD4t :
       s * D ^ 4 ≤ CD ^ 4 * s ^ (-(rho + k)) :=
     hsD4.trans

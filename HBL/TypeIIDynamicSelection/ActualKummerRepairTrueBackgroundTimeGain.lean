@@ -155,7 +155,7 @@ theorem actual_Hartree_Kummer_repair_true_background_full_potential_time_gain
       apply (div_le_iff₀ hXpos).2
       have : r ^ 2 ≤ X ^ 2 := hr2.trans hXsq
       simpa only [pow_two] using this
-    simpa only [div_eq_mul_inv] using hq
+    simpa only [div_eq_mul_inv, one_mul] using hq
   have hGapRaw :
       |radialHartreeExteriorPotential F X r -
           radialHartreeExteriorCenter F X| ≤
