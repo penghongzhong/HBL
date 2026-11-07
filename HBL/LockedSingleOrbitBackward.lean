@@ -67,7 +67,7 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
           exact (hFth t ht).trans
             (mul_le_mul_of_nonneg_left
               (locked_single_orbit_residual_implies_threshold_power
-                t (hs0.le.trans ht))
+                t (hs0.trans ht))
               hCth))
     let q0 : CenterWeightedPath s0 lockedSingleOrbitPathWeight :=
       weightedCenterForcingPath
