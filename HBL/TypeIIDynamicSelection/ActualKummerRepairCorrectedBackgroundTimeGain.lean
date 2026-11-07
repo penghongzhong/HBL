@@ -57,7 +57,7 @@ theorem actual_Hartree_bubble_corrected_Kummer_shell_bound
   have hDen : 0 < 1 + X := by linarith
   have hInv :
       y⁻¹ ≤ 2 / (1 + X) := by
-    change 1 / y ≤ 2 / (1 + X)
+    rw [← one_div]
     apply (div_le_div_iff₀ hypos hDen).2
     have hOne : 1 + X ≤ 2 * y := by
       have hLower : X ≤ y := hy.1.le
