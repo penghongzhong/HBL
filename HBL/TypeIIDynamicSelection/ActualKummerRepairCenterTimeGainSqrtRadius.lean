@@ -14,6 +14,7 @@ rather than requiring rho>=1. No cancellation or prescribed Type-II rate.
 
 noncomputable section
 set_option autoImplicit false
+set_option maxHeartbeats 2000000
 open Set MeasureTheory
 open scoped Topology
 
@@ -223,7 +224,8 @@ theorem actual_Kummer_repair_full_center_time_gain_sqrt_radius
   have hsqrtOne : Real.sqrt ell ≤ 1 := by
     simpa using Real.sqrt_le_sqrt hellOne
   have hdenRad : 1 ≤ 1 + ell * X := by
-    nlinarith [mul_nonneg hell.le hX0]
+    have hEllX : 0 ≤ ell * X := mul_nonneg hell.le hX0
+    linarith only [hEllX]
   have hRadFrac :
       (S * Real.sqrt ell) / (1 + ell * X) ≤ S := by
     have hnum : 0 ≤ S * Real.sqrt ell :=
