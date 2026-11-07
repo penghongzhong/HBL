@@ -10,6 +10,7 @@ This is the final-chain replacement for the older linear coefficient
 E(t) = -D_theta R(t).  The threshold-to-centre coupling is now the actual
 residual difference H(t,theta), with a direct weighted Lipschitz estimate.
 
+The direct threshold-residual feedback dependency is now strict-audited.
 Consequently the Banach construction no longer requires Frechet
 differentiability of the finite profile residual.  The decay threshold remains
 nu>2, exactly as in the previous linear formulation.
