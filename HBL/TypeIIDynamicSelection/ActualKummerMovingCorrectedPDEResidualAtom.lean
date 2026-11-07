@@ -97,7 +97,7 @@ theorem actual_Hartree_moving_corrected_Kummer_true_PDE_locked_realized_atom
     dsimp [M]
     positivity
   have hCt : 0 ≤ Ct := by
-    dsimp [Ct, actualKummerRepairTrueBackgroundTimeConstant]
+    dsimp [Ct, actualKummerRepairCorrectedTimeConstant]
     positivity
   have hC0 : 0 ≤ C0 := by
     dsimp [C0]
