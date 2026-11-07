@@ -54,7 +54,7 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
           ((hasDerivAt_id (0 : ℝ)).mul_const H)
       convert h using 1
       · funext a
-        simp only [Pi.add_apply, Pi.mul_apply, id_eq]
+        simp only [Pi.add_apply, id_eq]
       · ring
     have htarget :
         actualMomentLockedScaleProfileParameterTangent 0 r = H := by
@@ -69,7 +69,6 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
     rw [actual_Hartree_moment_locked_scale_cutoff_cancellation a r hr,
       cutoff_zero_of_le_one _ ha.le]
     dsimp [H]
-    ring
   · have habs : HasDerivAt (fun a : ℝ => |a|) (|c| / c) c := by
       rcases lt_or_gt_of_ne hc with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) c := by
