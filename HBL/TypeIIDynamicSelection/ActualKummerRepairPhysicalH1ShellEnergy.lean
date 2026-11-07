@@ -62,7 +62,7 @@ theorem actual_Kummer_physical_interface_repair_radial_shell_H1_energy :
   have hDerivCont : Continuous (fun y => deriv rep y) := by
     convert hSlopeCont using 1
     funext y
-    exact (hDeriv y).symm
+    exact hDeriv y
   let f : ℝ → ℝ := fun y => y ^ 2 * ‖deriv rep y‖ ^ 2
   have hFcont : Continuous f :=
     (continuous_id.pow 2).mul (hDerivCont.norm.pow 2)
@@ -92,17 +92,15 @@ theorem actual_Kummer_physical_interface_repair_radial_shell_H1_energy :
             (by simpa only [D] using hRaw) hPos.le
         _ = (3 * C1 + 1) * D / (a * R) := by
           field_simp [ha.ne',hR.ne']
-          ring
     have hYDeriv :
         y * ‖deriv rep y‖ ≤ 2 * (3 * C1 + 1) * D := by
       calc
         _ ≤ (2 * a * R) * ((3 * C1 + 1) * D / (a * R)) :=
           mul_le_mul
             (by simpa only [r1,mul_assoc,mul_comm,mul_left_comm] using hy.2)
-            hDerivBound (norm_nonneg _) hy0
+            hDerivBound (norm_nonneg _) (by positivity)
         _ = 2 * (3 * C1 + 1) * D := by
           field_simp [ha.ne',hR.ne']
-          ring
     have hY0 : 0 ≤ y * ‖deriv rep y‖ :=
       mul_nonneg hy0 (norm_nonneg _)
     calc
