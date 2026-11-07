@@ -56,7 +56,7 @@ theorem actual_origin_affine_regular_gamma_hasDerivAt
     (F0 G : ℝ → ℂ) (hF0 : Continuous F0) (hG : Continuous G)
     (r0 alpha : ℝ → ℝ) (U DU : ℝ → ℂ)
     (s r0dot alphadot : ℝ) (Udot DUdot : ℂ)
-    (hr : r0 s ∈ Ioo lo hi)
+    (hr : r0 s ∈ Ioo lo B)
     (hr0 : HasDerivAt r0 r0dot s)
     (halpha : HasDerivAt alpha alphadot s)
     (hU : HasDerivAt U Udot s)
@@ -65,18 +65,19 @@ theorem actual_origin_affine_regular_gamma_hasDerivAt
       (actualOriginAffineRegularGamma K B r0 alpha F0 G U DU)
       (actualOriginAffineRegularGammaDot
         K B r0 alpha F0 G U DU s r0dot alphadot Udot DUdot) s := by
+  have hrHi : r0 s ∈ Ioo lo hi :=
+    ⟨hr.1, hr.2.trans_le hBhi⟩
   have hReg :=
     actual_origin_matched_regular_coeff_moving_hasDerivAt
       K C B hK r0 (fun t r => F0 r + (alpha t : ℂ) * G r) U DU
-      s r0dot Udot DUdot hr hr0 hU hDU
+      s r0dot Udot DUdot hrHi hr0 hU hDU
   have hKB : OriginBasisOn K lo B C := by
     intro r hrB
     exact hK r ⟨hrB.1, hrB.2.trans hBhi⟩
-  have hrB : r0 s ∈ Ioo lo B := ⟨hr.1, hr.2.trans_le hBhi⟩
   have hGreen :=
     actual_origin_Green_coeffB_moving_affine_source_hasDerivAt
       (hi := B) K hKB hloB F0 G hF0 hG r0 alpha s r0dot alphadot
-      hrB hr0 halpha
+      hr hr0 halpha
   have hsum := hReg.add hGreen
   simpa only [actualOriginAffineRegularGamma,
     actualOriginAffineRegularGammaDot] using hsum
@@ -92,7 +93,7 @@ theorem actual_origin_affine_regular_upper_jet_hasDerivAt
     (F0 G : ℝ → ℂ) (hF0 : Continuous F0) (hG : Continuous G)
     (r0 alpha : ℝ → ℝ) (U DU : ℝ → ℂ)
     (s r0dot alphadot : ℝ) (Udot DUdot : ℂ)
-    (hr : r0 s ∈ Ioo lo hi)
+    (hr : r0 s ∈ Ioo lo B)
     (hr0 : HasDerivAt r0 r0dot s)
     (halpha : HasDerivAt alpha alphadot s)
     (hU : HasDerivAt U Udot s)
