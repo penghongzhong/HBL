@@ -53,7 +53,8 @@ theorem actual_Kummer_sqrt_clock_relative_speed_from_physical_derivative
       |qdot / (2 * a s)| / a s =
           (|qdot| / (2 * a s)) / a s := by
         rw [abs_div, abs_of_pos hden]
-      _ = |qdot| / ((2 * a s) * a s) := div_div_eq_div_mul
+      _ = |qdot| / ((2 * a s) * a s) := by
+        field_simp [ha.ne']
       _ = |qdot| / (2 * q s) := by
         congr 1
         calc
@@ -72,7 +73,7 @@ theorem actual_Kummer_sqrt_clock_relative_speed_from_physical_derivative
       C / (c * s) = (C / c) * s ^ (-1 : ℝ) := by
     rw [Real.rpow_neg_one]
     field_simp [hc.ne', hspos.ne']
-  exact ⟨hDer, ha, hEq.trans (hCompare.trans_eq hPower)⟩
+  exact ⟨hDer, ha, hEq.le.trans (hCompare.trans_eq hPower)⟩
 
 /-- The physical slice-clock concentration coordinate supplies the
 relative speed at order one directly from its own equation.
@@ -120,7 +121,10 @@ theorem actual_Kummer_slice_clock_relative_speed
       _ = A + 4 * |h s| := by
         rw [abs_of_pos hA, abs_mul, abs_of_pos (by norm_num : (0 : ℝ) < 4)]
       _ ≤ A + 4 * (H * s0 ^ (-delta)) :=
-        add_le_add_left (mul_le_mul_of_nonneg_left hPoint (by norm_num)) A
+        by
+          have hm := mul_le_mul_of_nonneg_left hPoint
+            (show (0 : ℝ) ≤ 4 by norm_num)
+          linarith only [hm]
       _ = C := by dsimp [C]; ring
   have hRaw :=
     actual_Kummer_sqrt_clock_relative_speed_from_physical_derivative
