@@ -83,6 +83,7 @@ jobs:
           #check @HBL.LockedMainChain.locked_main_chain_numerical_interface
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_repair_true_background_full_potential_time_gain
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_generated_remainder_next_locked_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
@@ -95,6 +96,8 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked_layer
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_repair_true_background_full_potential_time_gain
           set_option pp.all false in
