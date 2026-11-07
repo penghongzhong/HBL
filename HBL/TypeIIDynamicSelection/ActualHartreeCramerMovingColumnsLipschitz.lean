@@ -46,11 +46,13 @@ theorem actual_real_Cramer_two_matrix_difference_cancel
     ((((p1-p2).1 : ℝ) : ℂ)) * b1 +
     ((((p1-p2).2 : ℝ) : ℂ)) * w1 = 0
   have hSub1 : ((p1 - p2).1 : ℂ) = (p1.1 : ℂ) - (p2.1 : ℂ) := by
+    change ((p1.1 - p2.1 : ℝ) : ℂ) = _
     push_cast
-    rfl
+    ring
   have hSub2 : ((p1 - p2).2 : ℂ) = (p1.2 : ℂ) - (p2.2 : ℂ) := by
+    change ((p1.1 - p2.1 : ℝ) : ℂ) = _
     push_cast
-    rfl
+    ring
   rw [hSub1, hSub2]
   calc
     _ = (Z1 + (p1.1 : ℂ) * b1 + (p1.2 : ℂ) * w1) -
