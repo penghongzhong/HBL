@@ -26,7 +26,7 @@ open Set
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Exact complex-linear difference identity of the real smooth physical
 Kummer repair; its left value/slope remain the true actual input jets. -/
