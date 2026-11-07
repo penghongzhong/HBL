@@ -113,7 +113,6 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
       rfl
     · unfold actualMomentLockedCoreTotalTangent
         actualMomentLockedAmplitudeTangent actualMomentLockedCoreSpatialTangent
-      simp only [Pi.sub_apply, Function.comp_apply]
       field_simp [hc0]
       ring_nf
 
@@ -141,16 +140,18 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
     · funext t
       simp only [Pi.mul_apply, pow_two]
     · ring
-  have hReal :=
-    ha2Real.mul hCore
-  have h := hReal.ofReal_comp
-  convert h using 1
-  · funext t
-    simp only [actualMomentLockedScaledPhaseSource,
-      actualMomentLockedPhaseSource, actualMomentLockedCore]
-    push_cast
-    rfl
-  · push_cast
-    ring
+  have ha2C := ha2Real.ofReal_comp
+  have hCoreC := hCore.ofReal_comp
+  have hProd := ha2C.mul hCoreC
+  change HasDerivAt
+    (fun t =>
+      (((a t) ^ 2 : ℝ) : ℂ) *
+        ((actualMomentLockedCore (c t) (a t * r) : ℝ) : ℂ))
+    ((((2 * a s * adot : ℝ) : ℂ) *
+        ((actualMomentLockedCore (c s) (a s * r) : ℝ) : ℂ)) +
+      ((((a s) ^ 2 : ℝ) : ℂ)) *
+        ((actualMomentLockedCoreTotalTangent
+          (c s) (a s * r) cdot (adot * r) : ℝ) : ℂ))) s
+  convert hProd using 1 <;> push_cast <;> ring
 
 end HBL.TypeIIDynamicSelection
