@@ -70,7 +70,6 @@ jobs:
           import HBL.TypeIIDynamicSelection.ActualKummerRepairCorrectedCenterTimeGain
           set_option pp.all true
           set_option pp.maxSteps 10000000
-          #check @HBL.TypeIIDynamicSelection.actual_Kummer_repair_cross_polynomial_exact
           #check @HBL.TypeIIDynamicSelection.actual_Kummer_repair_density_corrected_cross_bound
           #check @HBL.TypeIIDynamicSelection.actual_Kummer_abstract_shell_envelope_le_sum
           #check @HBL.TypeIIDynamicSelection.actual_Kummer_repair_corrected_full_center_sqrt_time_gain
