@@ -155,8 +155,8 @@ theorem actual_Kummer_repair_full_center_time_gain_sqrt_radius
   have hsD3 :
       s ^ (1 / 2 : ℝ) * D ^ 3 ≤ CD ^ 3 * s ^ (1 / 2 - 3 * rho) := by
     calc
-      s ^ (1 / 2 : ℝ) * D ^ 3 ≤ s * (CD ^ 3 * s ^ (-3 * rho)) :=
-        mul_le_mul_of_nonneg_left hD3 hs0
+      s ^ (1 / 2 : ℝ) * D ^ 3 ≤ s ^ (1 / 2 : ℝ) * (CD ^ 3 * s ^ (-3 * rho)) :=
+        mul_le_mul_of_nonneg_left hD3 (Real.rpow_nonneg hs0 _)
       _ = CD ^ 3 * (s ^ (1 / 2 : ℝ) * s ^ (-3 * rho)) := by
         ring
       _ = CD ^ 3 * s ^ (1 / 2 - 3 * rho) := by
@@ -170,8 +170,8 @@ theorem actual_Kummer_repair_full_center_time_gain_sqrt_radius
   have hsD4 :
       s ^ (1 / 2 : ℝ) * D ^ 4 ≤ CD ^ 4 * s ^ (1 / 2 - 4 * rho) := by
     calc
-      s ^ (1 / 2 : ℝ) * D ^ 4 ≤ s * (CD ^ 4 * s ^ (-4 * rho)) :=
-        mul_le_mul_of_nonneg_left hD4 hs0
+      s ^ (1 / 2 : ℝ) * D ^ 4 ≤ s ^ (1 / 2 : ℝ) * (CD ^ 4 * s ^ (-4 * rho)) :=
+        mul_le_mul_of_nonneg_left hD4 (Real.rpow_nonneg hs0 _)
       _ = CD ^ 4 * (s ^ (1 / 2 : ℝ) * s ^ (-4 * rho)) := by
         ring
       _ = CD ^ 4 * s ^ (1 / 2 - 4 * rho) := by
