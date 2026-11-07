@@ -5,6 +5,9 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualKummerFinitePhysicalPDETelescoping.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerFinitePhysicalRepairsNextGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerRepairBubbleEnvelopeFromClock.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerRepairCorrectedBackgroundTimeGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerMovingCorrectedPDENextLockedGain.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerTwoActualRepairPDELayer.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerMovingCorrectedPDENextLockedGain.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairBubbleEnvelopeFromClock.lean'
