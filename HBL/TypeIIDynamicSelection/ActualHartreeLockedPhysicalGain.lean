@@ -26,6 +26,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualHartreeLockedKappa (beta rhoStar : ℝ) : ℝ :=
   min (actualHartreeFullShellTimeGain beta)
@@ -89,7 +90,7 @@ new locked minimum.  This proof does not pass through the discarded
 Frobenius-tail exponent. -/
 theorem actual_Hartree_locked_interface_repair_scale_time_gain
     (s ell a beta rhoStar : ℝ)
-    (hs : 1 ≤ s) (hell : 0 < ell) (hellOne : ell ≤ 1)
+    (hs : 1 ≤ s) (hell : 0 < ell) (_hellOne : ell ≤ 1)
     (ha3 : actualHartreeSlowInnerRadius ell ^ 3 ≤ a)
     (htrap : ell ≤ s ^ (-beta))
     (hbeta : 1 / 2 < beta) :
