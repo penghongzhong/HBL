@@ -72,12 +72,15 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_locked_kappa_positive
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_locked_interface_repair_scale_time_gain
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_generated_remainder_next_gain
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_generated_remainder_next_locked_layer
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_locked_kappa_positive
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_locked_interface_repair_scale_time_gain
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_generated_remainder_next_gain
           set_option pp.all false in
