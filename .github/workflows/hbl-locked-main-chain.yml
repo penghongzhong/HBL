@@ -81,6 +81,7 @@ jobs:
           set_option pp.all true
           set_option pp.maxSteps 10000000
           #check @HBL.LockedMainChain.locked_main_chain_numerical_interface
+          #check @HBL.LockedMainChain.locked_single_orbit_finite_order_nine_fourths_budget
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_locked_source_layer
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
@@ -93,6 +94,8 @@ jobs:
           #check @HBL.MainBackward.locked_single_orbit_order_nine_fourths_backward_fixed_point
           set_option pp.all false in
           #print axioms HBL.LockedMainChain.locked_main_chain_numerical_interface
+          set_option pp.all false in
+          #print axioms HBL.LockedMainChain.locked_single_orbit_finite_order_nine_fourths_budget
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
           set_option pp.all false in
