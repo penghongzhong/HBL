@@ -71,8 +71,11 @@ jobs:
           set_option pp.all true
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_locked_source_layer
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_source_layer
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_selected_Kummer_repair_next_locked_source_layer
           EOF
           lake env lean --trust=0 -DwarningAsError=true SelectedKummerRepairGainAudit.lean > evidence/audit.log 2>&1
           grep -q sorryAx evidence/audit.log && exit 1 || true
