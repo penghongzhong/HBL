@@ -73,8 +73,7 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
         actualMomentLockedAmplitudeTangent actualMomentLockedCoreSpatialTangent
       have hcut0 : cutoff 0 = 0 :=
         cutoff_zero_of_le_one 0 (by norm_num)
-      simp only [abs_zero, zero_mul, zero_div, hcut0, sub_zero,
-        zero_sub, zero_add, one_mul, mul_zero]
+      simp only [abs_zero, zero_mul, zero_div, hcut0, sub_zero, one_mul]
       ring
     rw [hTarget]
     apply hModel.congr_of_eventuallyEq
@@ -82,7 +81,8 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
     unfold actualMomentLockedCore
     rw [monopoleMovingCutoffProfile_eq,
       cutoff_zero_of_le_one _ ht.le]
-    ring
+    simp only [Pi.add_apply, Pi.mul_apply, Function.comp_apply, sub_zero,
+      one_mul]
   · have habs0 : HasDerivAt (fun a : ℝ => |a|) (|c s| / c s) (c s) := by
       rcases lt_or_gt_of_ne hc0 with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) (c s) := by
@@ -115,7 +115,7 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
         actualMomentLockedAmplitudeTangent actualMomentLockedCoreSpatialTangent
       simp only [Pi.sub_apply, Function.comp_apply]
       field_simp [hc0]
-      ring
+      ring_nf
 
 /-- Full time derivative of the genuine scaled PHASE direction, including
 a(s)^2, the amplitude motion c_s, and the moving argument a(s) r. -/
@@ -128,7 +128,7 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
       (fun t => actualMomentLockedScaledPhaseSource (a t) (c t) r)
       (((2 * a s * adot : ℝ) : ℂ) *
           actualMomentLockedPhaseSource (c s) (a s * r) +
-        ((a s) ^ 2 : ℂ) *
+        ((((a s) ^ 2 : ℝ) : ℂ)) *
           ((actualMomentLockedCoreTotalTangent
             (c s) (a s * r) cdot (adot * r) : ℝ) : ℂ)) s := by
   have hx : HasDerivAt (fun t => a t * r) (adot * r) s :=
@@ -140,7 +140,7 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
   have ha2Real : HasDerivAt (fun t => a t ^ 2) (2 * a s * adot) s := by
     convert ha.mul ha using 1
     · funext t
-      ring
+      simp only [Pi.mul_apply, pow_two]
     · ring
   have ha2 : HasDerivAt (fun t => ((a t ^ 2 : ℝ) : ℂ))
       (((2 * a s * adot : ℝ) : ℂ)) s :=
