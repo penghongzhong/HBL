@@ -150,6 +150,10 @@ theorem actual_Hartree_repair_full_nonlinear_PDE_source_sqrt_clock_gain
     have hm := monopoleRadialBoundConstant_pos.le
     positivity
   have hCtime : 0 ≤ Ctime := by
+    have hMono : 0 ≤ 2 + 9 * monopoleRadialBoundConstant := by
+      have hm := monopoleRadialBoundConstant_pos.le
+      positivity
+    have hRad : 0 ≤ 2 * (B + A) := by positivity
     dsimp [Ctime, actualKummerRepairTrueBackgroundTimeConstant]
     positivity
   have hCoef : 0 ≤ 2 * (4 * Real.pi * hartreeKappa) * Ctime := by
