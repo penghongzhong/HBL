@@ -49,15 +49,19 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
     have hev := harg.eventually (Iio_mem_nhds hz)
     have hmodel :
         HasDerivAt (fun a : ℝ => dilationGenerator bubble r + a * H) H 0 := by
-      simpa only [zero_add, one_mul] using
+      have h :=
         (hasDerivAt_const (0 : ℝ) (dilationGenerator bubble r)).add
           ((hasDerivAt_id (0 : ℝ)).mul_const H)
+      convert h using 1
+      · funext a
+        simp only [Pi.add_apply, Pi.mul_apply, id_eq]
+      · ring
     have htarget :
         actualMomentLockedScaleProfileParameterTangent 0 r = H := by
       dsimp [actualMomentLockedScaleProfileParameterTangent, H]
       have hcut0 : cutoff 0 = 0 :=
         cutoff_zero_of_le_one 0 (by norm_num)
-      rw [hcut0]
+      simp only [abs_zero, zero_mul, zero_div, hcut0, sub_zero, one_mul]
       ring
     rw [htarget]
     apply hmodel.congr_of_eventuallyEq
