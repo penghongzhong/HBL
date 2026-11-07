@@ -46,4 +46,27 @@ theorem locked_main_chain_numerical_interface
     locked_single_orbit_exponents_admissible.2.1,
     locked_single_orbit_exponents_admissible.2.2⟩
 
+/-- A strictly positive physical next-layer gain crosses the one required
+order 9/4 after finitely many correction steps. This is the finite
+order budget, not an assertion that every physical correction is produced. -/
+theorem locked_single_orbit_finite_order_nine_fourths_budget
+    (beta rhoStar : ℝ)
+    (hbeta : 1 / 2 < beta)
+    (hrhoStar : 0 < rhoStar)
+    (hflat : rhoStar < (5 * beta - 2) / 4) :
+    ∃ J : ℕ,
+      lockedSingleOrbitResidualOrder ≤
+        1 + (J : ℝ) * actualHartreeLockedKappa beta rhoStar := by
+  let k := actualHartreeLockedKappa beta rhoStar
+  have hk : 0 < k :=
+    actual_Hartree_locked_kappa_positive beta rhoStar hbeta hrhoStar hflat
+  obtain ⟨J, hJ⟩ :=
+    exists_nat_gt ((lockedSingleOrbitResidualOrder - 1) / k)
+  have hmul :
+      lockedSingleOrbitResidualOrder - 1 < (J : ℝ) * k :=
+    (div_lt_iff₀ hk).mp hJ
+  refine ⟨J, ?_⟩
+  dsimp [k] at hmul
+  linarith
+
 end HBL.LockedMainChain
