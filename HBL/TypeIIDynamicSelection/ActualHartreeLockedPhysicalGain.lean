@@ -218,7 +218,7 @@ theorem actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked
     (hbeta : 1 / 2 < beta)
     (hrhoStar : 0 < rhoStar)
     (hflat : rhoStar < (5 * beta - 2) / 4)
-    (hCJ : 0 ≤ CJ)
+    (_hCJ : 0 ≤ CJ)
     (p q : ℂ)
     (hJet : ‖p‖ + R * ‖q‖ ≤ CJ * s ^ (-rho)) :
     ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
