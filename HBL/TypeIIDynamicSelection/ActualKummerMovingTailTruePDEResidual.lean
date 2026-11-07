@@ -72,13 +72,18 @@ theorem actual_complex_moving_exterior_full_PDE_residual_exact
       complexRadialLaplacian (U s) r := by
     unfold complexRadialLaplacian
     rw [hsp.deriv.deriv_eq, hsp.deriv_eq]
+  have hPoint : Q s r = 0 := hQ s r hr.le
   have hD : complexRadialDilation
       (fun y => U s y + Q s y) r =
       complexRadialDilation (U s) r := by
     unfold complexRadialDilation
-    rw [hsp.eq_of_nhds, hsp.deriv_eq]
+    change (U s r + Q s r) / 2 +
+      (r : ℂ) * deriv (fun y => U s y + Q s y) r =
+      U s r / 2 + (r : ℂ) * deriv (U s) r
+    rw [hPoint, add_zero, hsp.deriv_eq]
   unfold complexRadialRenormalizedResidual
-  rw [ht, hL, hD, hsp.eq_of_nhds]
+  rw [ht, hL, hD]
+  simp only [hPoint, add_zero]
   ring
 
 /-- The full real quartic density of the concrete moving repair is
