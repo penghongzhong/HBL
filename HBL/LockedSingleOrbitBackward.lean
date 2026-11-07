@@ -80,11 +80,12 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
         CenterWeightedPath s0 lockedSingleOrbitPathWeight ×
           ThresholdWeightedPath s0 lockedSingleOrbitPathWeight,
       z.2 = affineWeightedThresholdMap
-        B s0 lockedSingleOrbitPathWeight hs0
+        B s0 lockedSingleOrbitPathWeight
+          (lt_of_lt_of_le zero_lt_one hs0)
           locked_single_orbit_exponents_admissible.1 a0 z.1 ∧
       z.1 =
         fullWeightedCenterResidualLipschitzSelfMap
-          B CE H G hs0
+          B CE H G (lt_of_lt_of_le zero_lt_one hs0)
             locked_single_orbit_exponents_admissible.1
             locked_single_orbit_exponents_admissible.2.2
             hL hHcont hHzero hHlip
