@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreePhysicalCorrectionNextLayer
 import HBL.TypeIIDynamicSelection.ActualKummerRepairCenterTimeGain
+import HBL.TypeIIDynamicSelection.ActualKummerPhysicalInterfaceRepair
 import Mathlib.Tactic
 
 /-!
@@ -152,6 +153,57 @@ theorem actual_Hartree_locked_interface_repair_scale_time_gain
     _ = ell ^ (3 / 8 : ℝ) := hLEll
     _ ≤ s ^ (-(3 * beta / 8)) := hEll
     _ ≤ s ^ (-actualHartreeLockedKappa beta rhoStar) := hTime
+
+/-- The complete frozen physical Kummer repair gains the new locked
+minimum directly from the exact a^{-2} pullback.  This removes the historical
+Frobenius-tail minimum from the selected single-orbit route. -/
+theorem actual_Hartree_Kummer_physical_interface_repair_next_locked_layer :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+    ∀ (mu theta a R y s ell beta rhoStar : ℝ),
+      0 < a → 0 < R → y ∈ Icc (a * R) (2 * a * R) →
+      1 ≤ s → 0 < ell → ell ≤ 1 →
+      actualHartreeSlowInnerRadius ell ^ 3 ≤ a →
+      ell ≤ s ^ (-beta) →
+      1 / 2 < beta →
+    ∀ p q : ℂ,
+      let D := ‖p‖ + R * ‖q‖
+      let Krep :=
+        (9 * C2 + 12 * C1 + 2) / R ^ 2 + 3 * C1 + 1 +
+          ‖frozenZeroCoeff mu theta‖
+      ‖actualMatchedScaledKummerApply mu theta a
+          (actualKummerPhysicalInterfaceRepair a R p q) y‖ ≤
+        (Krep * D) *
+          s ^ (-actualHartreeLockedKappa beta rhoStar) := by
+  obtain ⟨C1, C2, hC1, hC2, hRepair⟩ :=
+    actual_Kummer_physical_interface_repair_residual_bound
+  refine ⟨C1, C2, hC1, hC2, ?_⟩
+  intro mu theta a R y s ell beta rhoStar
+    ha hR hy hs hell hellOne ha3 htrap hbeta p q
+  dsimp only
+  let D : ℝ := ‖p‖ + R * ‖q‖
+  let Krep : ℝ :=
+    (9 * C2 + 12 * C1 + 2) / R ^ 2 + 3 * C1 + 1 +
+      ‖frozenZeroCoeff mu theta‖
+  have hRaw := hRepair mu theta a R y ha hR hy p q
+  have hScale :=
+    actual_Hartree_locked_interface_repair_scale_time_gain
+      s ell a beta rhoStar hs hell hellOne ha3 htrap hbeta
+  have hD : 0 ≤ D := by
+    dsimp [D]
+    positivity
+  have hKrep : 0 ≤ Krep := by
+    dsimp [Krep]
+    positivity
+  have hKD : 0 ≤ Krep * D := mul_nonneg hKrep hD
+  calc
+    _ ≤ (a ^ 2)⁻¹ * Krep * D := by
+      simpa only [D, Krep, mul_assoc] using hRaw
+    _ = (a ^ 2)⁻¹ * (Krep * D) := by ring
+    _ ≤ s ^ (-actualHartreeLockedKappa beta rhoStar) *
+        (Krep * D) :=
+      mul_le_mul_of_nonneg_right hScale hKD
+    _ = (Krep * D) *
+        s ^ (-actualHartreeLockedKappa beta rhoStar) := by ring
 
 /-- Generic speed-cross gain: no historical physical minimum is hard-coded. -/
 theorem actual_Hartree_speed_cross_next_gain
