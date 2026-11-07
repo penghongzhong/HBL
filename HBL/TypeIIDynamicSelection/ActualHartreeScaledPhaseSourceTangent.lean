@@ -143,15 +143,7 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
   have ha2C := ha2Real.ofReal_comp
   have hCoreC := hCore.ofReal_comp
   have hProd := ha2C.mul hCoreC
-  change HasDerivAt
-    (fun t =>
-      (((a t) ^ 2 : ℝ) : ℂ) *
-        ((actualMomentLockedCore (c t) (a t * r) : ℝ) : ℂ))
-    ((((2 * a s * adot : ℝ) : ℂ) *
-        ((actualMomentLockedCore (c s) (a s * r) : ℝ) : ℂ)) +
-      ((((a s) ^ 2 : ℝ) : ℂ)) *
-        ((actualMomentLockedCoreTotalTangent
-          (c s) (a s * r) cdot (adot * r) : ℝ) : ℂ))) s
-  convert hProd using 1 <;> push_cast <;> ring
+  simpa only [actualMomentLockedScaledPhaseSource,
+    actualMomentLockedPhaseSource] using hProd
 
 end HBL.TypeIIDynamicSelection
