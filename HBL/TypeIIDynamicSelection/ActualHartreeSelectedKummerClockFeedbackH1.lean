@@ -189,7 +189,7 @@ theorem actual_Hartree_selected_repair_full_true_Hartree_feedback_and_H1_from_cl
   have hkappa : 0 < actualHartreeLockedKappa beta rhoStar :=
     actual_Hartree_locked_kappa_positive
       beta rhoStar hbeta hrhoStar hflat
-  constructor
+  refine ⟨?_, ?_, ?_⟩
   · intro y hy
     have hRaw :=
       hRepair mu theta a B y s ell beta rhoStar
@@ -227,63 +227,62 @@ theorem actual_Hartree_selected_repair_full_true_Hartree_feedback_and_H1_from_cl
       _ = (Krep * CJ) *
           s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) := by
         rw [hProd]
-  · constructor
-    · have ha : 0 < a :=
-          (pow_pos hLp 3).trans_le ha3
-        let CX := Real.sqrt Cq
-        have hCX : 0 ≤ CX := Real.sqrt_nonneg Cq
-        have hXup : a * B ≤ CX * s ^ (1 / 2 : ℝ) := by
-          exact actual_Kummer_repair_radius_sqrt_from_clock
-            a B q s Cq ha.le hBOne hs hCq haq hq
-        have hRawFeedback :=
-          actual_Hartree_Kummer_repair_true_background_full_potential_time_gain_sqrt_radius
-            ell a B Bamp Aamp c s beta rho CX CJ r
-            hell hellOne ha hB hBamp hAamp hc hs hbeta hrho
-            htrap hXlow hCX hXup hCJ UB DUB hJet'
-            z hz hSup hStrauss hr hrOne hSep
-        dsimp only at hRawFeedback
-        have hCenterExp :
-            s ^ (-(rho + actualKummerRepairCenterTimeGain beta)) ≤
-              s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) :=
-          Real.rpow_le_rpow_of_exponent_le hs
-            (by
-              have hk := actual_Hartree_locked_kappa_le_repair beta rhoStar
-              linarith)
-        have hMono : 0 ≤ monopoleRadialBoundConstant :=
-          monopoleRadialBoundConstant_pos.le
-        have hTimeC :
-            0 ≤ actualKummerRepairTrueBackgroundTimeConstant
-              Bamp Aamp CX CJ := by
-          dsimp [actualKummerRepairTrueBackgroundTimeConstant]
-          positivity
-        have hCoef :
-            0 ≤ 2 * (4 * Real.pi * hartreeKappa) *
-              actualKummerRepairTrueBackgroundTimeConstant
-                Bamp Aamp CX CJ := by
-          unfold hartreeKappa
-          positivity
-        calc
-          _ ≤ (2 * (4 * Real.pi * hartreeKappa) *
-              actualKummerRepairTrueBackgroundTimeConstant
-                Bamp Aamp CX CJ) *
-                s ^ (-(rho + actualKummerRepairCenterTimeGain beta)) := by
-            simpa only [CX] using hRawFeedback
-          _ ≤ (2 * (4 * Real.pi * hartreeKappa) *
-              actualKummerRepairTrueBackgroundTimeConstant
-                Bamp Aamp CX CJ) *
-                s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) :=
-            mul_le_mul_of_nonneg_left hCenterExp hCoef
-  
-    · have ha : 0 < a :=
+  · have ha : 0 < a :=
         (pow_pos hLp 3).trans_le ha3
-      have hXup : a * B ≤ Real.sqrt Cq * s ^ (1 / 2 : ℝ) :=
-        actual_Kummer_repair_radius_sqrt_from_clock
+      let CX := Real.sqrt Cq
+      have hCX : 0 ≤ CX := Real.sqrt_nonneg Cq
+      have hXup : a * B ≤ CX * s ^ (1 / 2 : ℝ) := by
+        exact actual_Kummer_repair_radius_sqrt_from_clock
           a B q s Cq ha.le hBOne hs hCq haq hq
-      have hEnergySelected :=
-        hEnergy a B s beta rho (Real.sqrt Cq) CJ
-          ha hB hs hbeta hrho (Real.sqrt_nonneg _) hCJ
-          hXup UB DUB hJet'
-      dsimp only at hEnergySelected
-      exact hEnergySelected.2
+      have hRawFeedback :=
+        actual_Hartree_Kummer_repair_true_background_full_potential_time_gain_sqrt_radius
+          ell a B Bamp Aamp c s beta rho CX CJ r
+          hell hellOne ha hB hBamp hAamp hc hs hbeta hrho
+          htrap hXlow hCX hXup hCJ UB DUB hJet'
+          z hz hSup hStrauss hr hrOne hSep
+      dsimp only at hRawFeedback
+      have hCenterExp :
+          s ^ (-(rho + actualKummerRepairCenterTimeGain beta)) ≤
+            s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) :=
+        Real.rpow_le_rpow_of_exponent_le hs
+          (by
+            have hk := actual_Hartree_locked_kappa_le_repair beta rhoStar
+            linarith)
+      have hMono : 0 ≤ monopoleRadialBoundConstant :=
+        monopoleRadialBoundConstant_pos.le
+      have hTimeC :
+          0 ≤ actualKummerRepairTrueBackgroundTimeConstant
+            Bamp Aamp CX CJ := by
+        dsimp [actualKummerRepairTrueBackgroundTimeConstant]
+        positivity
+      have hCoef :
+          0 ≤ 2 * (4 * Real.pi * hartreeKappa) *
+            actualKummerRepairTrueBackgroundTimeConstant
+              Bamp Aamp CX CJ := by
+        unfold hartreeKappa
+        positivity
+      calc
+        _ ≤ (2 * (4 * Real.pi * hartreeKappa) *
+            actualKummerRepairTrueBackgroundTimeConstant
+              Bamp Aamp CX CJ) *
+              s ^ (-(rho + actualKummerRepairCenterTimeGain beta)) := by
+          simpa only [CX] using hRawFeedback
+        _ ≤ (2 * (4 * Real.pi * hartreeKappa) *
+            actualKummerRepairTrueBackgroundTimeConstant
+              Bamp Aamp CX CJ) *
+              s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) :=
+          mul_le_mul_of_nonneg_left hCenterExp hCoef
+
+  · have ha : 0 < a :=
+      (pow_pos hLp 3).trans_le ha3
+    have hXup : a * B ≤ Real.sqrt Cq * s ^ (1 / 2 : ℝ) :=
+      actual_Kummer_repair_radius_sqrt_from_clock
+        a B q s Cq ha.le hBOne hs hCq haq hq
+    have hEnergySelected :=
+      hEnergy a B s beta rho (Real.sqrt Cq) CJ
+        ha hB hs hbeta hrho (Real.sqrt_nonneg _) hCJ
+        hXup UB DUB hJet'
+    dsimp only at hEnergySelected
+    exact hEnergySelected.2
 
 end HBL.TypeIIDynamicSelection
