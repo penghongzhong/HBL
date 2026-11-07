@@ -4,6 +4,7 @@ on:
     branches: [hbl-213-conjugated-two-weight-integrated-20261103]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedKummerRepairGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeLockedPhysicalGain.lean'
       - '.github/workflows/hbl-selected-kummer-repair-gain.yml'
   workflow_dispatch:
 permissions:
