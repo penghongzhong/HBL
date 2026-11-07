@@ -78,7 +78,7 @@ theorem actual_Kummer_physical_repair_shell_H1_positive_time_gain :
         s ^ (1 / 2 - 2 * rho) := by
     rw [← Real.rpow_add hspos]
     congr 1
-    ring
+    ring_nf
   have hExp :
       s ^ (1 / 2 - 2 * rho) ≤ s ^ (-k) :=
     Real.rpow_le_rpow_of_exponent_le hs
