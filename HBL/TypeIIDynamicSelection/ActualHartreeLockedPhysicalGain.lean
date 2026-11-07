@@ -205,6 +205,70 @@ theorem actual_Hartree_Kummer_physical_interface_repair_next_locked_layer :
     _ = (Krep * D) *
         s ^ (-actualHartreeLockedKappa beta rhoStar) := by ring
 
+/-- A selected Kummer boundary jet of current order rho therefore produces
+an actual repair residual at order rho + locked kappa. -/
+theorem actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked_layer
+    (mu theta a R y s ell beta rhoStar rho CJ : ℝ)
+    (ha : 0 < a) (hR : 0 < R)
+    (hy : y ∈ Icc (a * R) (2 * a * R))
+    (hs : 1 ≤ s) (hell : 0 < ell) (hellOne : ell ≤ 1)
+    (ha3 : actualHartreeSlowInnerRadius ell ^ 3 ≤ a)
+    (htrap : ell ≤ s ^ (-beta))
+    (hbeta : 1 / 2 < beta) (hCJ : 0 ≤ CJ)
+    (p q : ℂ)
+    (hJet : ‖p‖ + R * ‖q‖ ≤ CJ * s ^ (-rho)) :
+    ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
+      let Krep :=
+        (9 * C2 + 12 * C1 + 2) / R ^ 2 + 3 * C1 + 1 +
+          ‖frozenZeroCoeff mu theta‖
+      ‖actualMatchedScaledKummerApply mu theta a
+          (actualKummerPhysicalInterfaceRepair a R p q) y‖ ≤
+        (Krep * CJ) *
+          s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) := by
+  obtain ⟨C1, C2, hC1, hC2, hRepair⟩ :=
+    actual_Hartree_Kummer_physical_interface_repair_next_locked_layer
+  refine ⟨C1, C2, hC1, hC2, ?_⟩
+  dsimp only
+  let D : ℝ := ‖p‖ + R * ‖q‖
+  let Krep : ℝ :=
+    (9 * C2 + 12 * C1 + 2) / R ^ 2 + 3 * C1 + 1 +
+      ‖frozenZeroCoeff mu theta‖
+  have hRaw :=
+    hRepair mu theta a R y s ell beta rhoStar
+      ha hR hy hs hell hellOne ha3 htrap hbeta p q
+  dsimp only at hRaw
+  have hKrep : 0 ≤ Krep := by
+    dsimp [Krep]
+    positivity
+  have hDtime : D ≤ CJ * s ^ (-rho) := by
+    simpa only [D] using hJet
+  have hKD :
+      Krep * D ≤ Krep * (CJ * s ^ (-rho)) :=
+    mul_le_mul_of_nonneg_left hDtime hKrep
+  have hkpow :
+      0 ≤ s ^ (-actualHartreeLockedKappa beta rhoStar) :=
+    Real.rpow_nonneg (le_trans (by norm_num : (0 : ℝ) ≤ 1) hs) _
+  have hspos : 0 < s := lt_of_lt_of_le zero_lt_one hs
+  have hPow :
+      s ^ (-rho) * s ^ (-actualHartreeLockedKappa beta rhoStar) =
+        s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) := by
+    rw [← Real.rpow_add hspos]
+    congr 1
+    ring
+  calc
+    _ ≤ (Krep * D) *
+        s ^ (-actualHartreeLockedKappa beta rhoStar) := by
+      simpa only [Krep, D] using hRaw
+    _ ≤ (Krep * (CJ * s ^ (-rho))) *
+        s ^ (-actualHartreeLockedKappa beta rhoStar) :=
+      mul_le_mul_of_nonneg_right hKD hkpow
+    _ = (Krep * CJ) *
+        (s ^ (-rho) * s ^ (-actualHartreeLockedKappa beta rhoStar)) := by
+      ring
+    _ = (Krep * CJ) *
+        s ^ (-(rho + actualHartreeLockedKappa beta rhoStar)) := by
+      rw [hPow]
+
 /-- Generic speed-cross gain: no historical physical minimum is hard-coded. -/
 theorem actual_Hartree_speed_cross_next_gain
     (H : ℝ → ℝ → ℂ)
