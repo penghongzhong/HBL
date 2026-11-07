@@ -62,13 +62,13 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
       have hcut0 : cutoff 0 = 0 :=
         cutoff_zero_of_le_one 0 (by norm_num)
       simp only [abs_zero, zero_mul, zero_div, hcut0, sub_zero, one_mul]
-      ring
     rw [htarget]
     apply hmodel.congr_of_eventuallyEq
     filter_upwards [hev] with a ha
     rw [actual_Hartree_moment_locked_scale_cutoff_cancellation a r hr,
       cutoff_zero_of_le_one _ ha.le]
     dsimp [H]
+    ring
   · have habs : HasDerivAt (fun a : ℝ => |a|) (|c| / c) c := by
       rcases lt_or_gt_of_ne hc with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) c := by
