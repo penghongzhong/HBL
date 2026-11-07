@@ -46,8 +46,12 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
   let P : ℝ → ℝ := monopoleRadialProfile
   have hBubble :=
     (bubble_differentiable (x s)).hasDerivAt.comp s hx
-  have hP :=
-    (monopoleRadialProfile_hasDerivAt hxpos).comp s hx
+  have hP : HasDerivAt
+      (monopoleRadialProfile ∘ x)
+      (deriv monopoleRadialProfile (x s) * xdot) s := by
+    exact
+      (monopoleRadialProfile_hasDerivAt hxpos).differentiableAt.hasDerivAt.comp
+        s hx
   by_cases hc0 : c s = 0
   · have hargCont :
         ContinuousAt (fun t => |c t| * x t / 4) s := by
@@ -67,7 +71,10 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
       rw [hc0]
       unfold actualMomentLockedCoreTotalTangent
         actualMomentLockedAmplitudeTangent actualMomentLockedCoreSpatialTangent
-      simp
+      have hcut0 : cutoff 0 = 0 :=
+        cutoff_zero_of_le_one 0 (by norm_num)
+      simp only [abs_zero, zero_mul, zero_div, hcut0, sub_zero,
+        zero_sub, zero_add, one_mul, mul_zero]
       ring
     rw [hTarget]
     apply hModel.congr_of_eventuallyEq
@@ -77,7 +84,7 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
       cutoff_zero_of_le_one _ ht.le]
     ring
   · have habs0 : HasDerivAt (fun a : ℝ => |a|) (|c s| / c s) (c s) := by
-      rcases hc0.lt_or_gt with hn | hp
+      rcases lt_or_gt_of_ne hc0 with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) (c s) := by
           apply (hasDerivAt_neg (c s)).congr_of_eventuallyEq
           filter_upwards [Iio_mem_nhds hn] with a ha
@@ -130,13 +137,14 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
     actual_Hartree_moment_locked_core_joint_hasDerivAt
       c (fun t => a t * r) hc hx har
   have hCoreC := hCore.ofReal_comp
-  have ha2 : HasDerivAt (fun t => (a t : ℂ) ^ 2)
-      (((2 * a s * adot : ℝ) : ℂ)) s := by
-    have haC := ha.ofReal_comp
-    convert haC.mul haC using 1
+  have ha2Real : HasDerivAt (fun t => a t ^ 2) (2 * a s * adot) s := by
+    convert ha.mul ha using 1
     · funext t
       ring
     · ring
+  have ha2 : HasDerivAt (fun t => ((a t ^ 2 : ℝ) : ℂ))
+      (((2 * a s * adot : ℝ) : ℂ)) s :=
+    ha2Real.ofReal_comp
   have h := ha2.mul hCoreC
   simpa only [actualMomentLockedScaledPhaseSource,
     actualMomentLockedPhaseSource, actualMomentLockedCore] using h
