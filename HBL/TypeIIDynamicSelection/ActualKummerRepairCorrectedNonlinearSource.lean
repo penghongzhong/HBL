@@ -94,7 +94,7 @@ theorem actual_Hartree_repair_corrected_background_core_cubic_bound
         norm_add_le _ _
       _ ≤ (‖(actualMomentLockedCore c r : ℂ)‖ +
           ‖rescalePhysicalRadiation ell z r‖) + ‖H r‖ :=
-        add_le_add_right (norm_add_le _ _) _
+        add_le_add (norm_add_le _ _) (le_refl _)
       _ = (|actualMomentLockedCore c r| +
           ‖rescalePhysicalRadiation ell z r‖) + ‖H r‖ := by
         rw [Complex.norm_real, Real.norm_eq_abs]
