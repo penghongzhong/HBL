@@ -38,7 +38,7 @@ theorem actual_Kummer_repair_radius_sqrt_from_clock
     _ ≤ Real.sqrt (Cq * s) := hRoot
     _ = Real.sqrt Cq * Real.sqrt s := Real.sqrt_mul hCq s
     _ = Real.sqrt Cq * s ^ (1 / 2 : ℝ) := by
-      rw [Real.sqrt_eq_rpow]
+      simp only [Real.sqrt_eq_rpow]
 
 theorem actual_Kummer_repair_radius_sqrt_from_slice_clock
     {A s0 kappa delta H s a B : ℝ} (h : ℝ → ℝ)
