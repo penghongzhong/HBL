@@ -70,7 +70,6 @@ theorem actual_Kummer_physical_outer_repair_bubble_from_clock
         s ^ (1 / 2 - rho) := by
     rw [← Real.rpow_add hspos]
     congr 1
-    ring
   have hExp : s ^ (1 / 2 - rho) ≤ 1 :=
     Real.rpow_le_one_of_one_le_of_nonpos hs (by linarith)
   have hXDone : X * D ≤ CX * CD := by
@@ -92,7 +91,7 @@ theorem actual_Kummer_physical_outer_repair_bubble_from_clock
     have hVal :
         ‖actualKummerPhysicalOuterRepair a R p q s y‖ ≤ D := by
       unfold actualKummerPhysicalOuterRepair
-      rw [Set.indicator_of_mem (by simpa only [X] using hyShell)]
+      rw [Set.indicator_of_mem (by simpa only [X, mul_assoc] using hyShell)]
       change ‖actualKummerInterfaceRepair R (p s) (q s) (y / a s)‖ ≤ D
       exact (hRepair 0 0 R (y / a s) hR hyPhys (p s) (q s)).1
     have hGeom : Real.sqrt (1 + y ^ 2) ≤ 1 + y := by
@@ -112,7 +111,7 @@ theorem actual_Kummer_physical_outer_repair_bubble_from_clock
     have hYD : (1 + y) * D ≤ CH := by
       calc
         (1 + y) * D = D + y * D := by ring
-        _ ≤ D + (2 * X) * D := add_le_add_left hYprod _
+        _ ≤ D + (2 * X) * D := add_le_add (le_refl D) hYprod
         _ = D + 2 * (X * D) := by ring
         _ ≤ CD + 2 * (CX * CD) :=
           add_le_add hDone (mul_le_mul_of_nonneg_left hXDone (by norm_num))
@@ -127,7 +126,10 @@ theorem actual_Kummer_physical_outer_repair_bubble_from_clock
       _ ≤ CH * bubble y := mul_le_mul_of_nonneg_left hInv hCH
   · have hQ :
         actualKummerPhysicalOuterRepair a R p q s y = 0 := by
-      simp [actualKummerPhysicalOuterRepair, hyShell, X]
+      have hnot : y ∉ Ioc (a s * R) (2 * a s * R) := by
+        simpa only [X, mul_assoc] using hyShell
+      unfold actualKummerPhysicalOuterRepair
+      rw [Set.indicator_of_notMem hnot]
     rw [hQ, norm_zero]
     exact mul_nonneg hCH (bubble_nonneg y)
 
