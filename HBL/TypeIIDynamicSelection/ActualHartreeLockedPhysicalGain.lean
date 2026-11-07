@@ -381,13 +381,27 @@ theorem actual_Hartree_moment_locked_generated_remainder_next_gain
     calc
       _ ≤ 63 * (Mcore + e) ^ 5 * e ^ 2 * bubble r ^ 5 := hTaylor0
       _ ≤ 63 * (Mcore + CH) ^ 5 * e ^ 2 * bubble r ^ 5 := by
-        gcongr
+        have hfactor : 0 ≤ 63 * e ^ 2 * bubble r ^ 5 :=
+          mul_nonneg
+            (mul_nonneg (by norm_num) (sq_nonneg e))
+            (pow_nonneg hBubble 5)
+        calc
+          63 * (Mcore + e) ^ 5 * e ^ 2 * bubble r ^ 5 =
+              (Mcore + e) ^ 5 * (63 * e ^ 2 * bubble r ^ 5) := by ring
+          _ ≤ (Mcore + CH) ^ 5 * (63 * e ^ 2 * bubble r ^ 5) :=
+            mul_le_mul_of_nonneg_right hsumPow hfactor
+          _ = _ := by ring
       _ = (63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5) *
           s ^ (-2 * rho) := by rw [he2]; ring
       _ ≤ (63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5) *
           s ^ (-(rho + kappa)) := by
         have hc : 0 ≤ 63 * (Mcore + CH) ^ 5 * CH ^ 2 * bubble r ^ 5 := by
-          positivity
+          have hsumCH : 0 ≤ Mcore + CH := add_nonneg hMcore hCH
+          exact mul_nonneg
+            (mul_nonneg
+              (mul_nonneg (by norm_num) (pow_nonneg hsumCH 5))
+              (sq_nonneg CH))
+            (pow_nonneg hBubble 5)
         exact mul_le_mul_of_nonneg_left hExp hc
   have hHpoint : ‖H s r‖ ≤ CH * s ^ (-rho) := by
     calc
