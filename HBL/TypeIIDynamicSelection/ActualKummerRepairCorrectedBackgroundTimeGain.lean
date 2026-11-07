@@ -31,7 +31,7 @@ on the moving outer Kummer shell. -/
 theorem actual_Hartree_bubble_corrected_Kummer_shell_bound
     (ell a R CH y : ℝ)
     (hell : 0 < ell) (hellOne : ell ≤ 1)
-    (ha : 0 < a) (hR : 0 < R) (hCH : 0 ≤ CH)
+    (_ha : 0 < a) (_hR : 0 < R) (hCH : 0 ≤ CH)
     (hXlow : actualHartreeSlowInnerRadius ell ≤ a * R)
     (hy : y ∈ Ioc (a * R) (2 * a * R))
     (H : ℝ → ℂ)
