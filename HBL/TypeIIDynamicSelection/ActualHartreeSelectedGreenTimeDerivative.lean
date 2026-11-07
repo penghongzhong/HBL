@@ -132,6 +132,14 @@ theorem actual_Cramer_selected_frozen_Green_time_derivative
     have hAdd2 :=
       actual_moment_locked_regular_source_coefficient_add_mul_on
         K hKt ht.2.le F1 P hIF1 hIP (-(p2 t : ℂ))
+    have hFrozenSource :
+        actualCramerSelectedFrozenOuterSource F0 S P b w Z t =
+          (fun u => F0 u + (-(p1 t : ℂ)) * S u +
+            (-(p2 t : ℂ)) * P u) := by
+      funext u
+      dsimp [actualCramerSelectedFrozenOuterSource, p1, p2]
+      ring
+    rw [hFrozenSource]
     change originGreenCoeffB K (r0 t)
       (fun u => F0 u + (-(p1 t : ℂ)) * S u +
         (-(p2 t : ℂ)) * P u) hi = _
