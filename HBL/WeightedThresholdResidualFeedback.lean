@@ -468,13 +468,21 @@ theorem weightedThresholdResidualFeedbackMap_difference_norm
         filter_upwards with t
         unfold weightedThresholdResidualFeedbackSource
         rw [map_sub]
+  have htailEq :
+      weightedThresholdResidualFeedbackTail CE H p a s -
+        weightedThresholdResidualFeedbackTail CE H p b s =
+      -((∫ t in Ioi (s : ℝ),
+          weightedThresholdResidualFeedbackSource CE H p a s t) -
+        (∫ t in Ioi (s : ℝ),
+          weightedThresholdResidualFeedbackSource CE H p b s t)) := by
+    unfold weightedThresholdResidualFeedbackTail
+    abel
   have htail :
       ‖weightedThresholdResidualFeedbackTail CE H p a s -
         weightedThresholdResidualFeedbackTail CE H p b s‖ ≤
       (CE.boundConst * L * ‖a-b‖) / (p+nu-2) *
         (s : ℝ) ^ (2-p-nu) := by
-    unfold weightedThresholdResidualFeedbackTail
-    rw [← neg_sub, norm_neg, hInt]
+    rw [htailEq, norm_neg, hInt]
     have hI :
         (∫ t in Ioi (s : ℝ), t ^ (1-p-nu)) =
           (s : ℝ) ^ (2-p-nu) / (p+nu-2) := by
@@ -497,8 +505,15 @@ theorem weightedThresholdResidualFeedbackMap_difference_norm
           ((s : ℝ) ^ (2-p-nu) / (p+nu-2)) := by
         rw [integral_const_mul,hI]
       _ = _ := by ring
-  unfold weightedThresholdResidualFeedbackValue
-  rw [← smul_sub, norm_smul, Real.norm_eq_abs,
+  have hvalEq :
+      weightedThresholdResidualFeedbackValue CE H p a s -
+        weightedThresholdResidualFeedbackValue CE H p b s =
+      ((s : ℝ) ^ p) •
+        (weightedThresholdResidualFeedbackTail CE H p a s -
+          weightedThresholdResidualFeedbackTail CE H p b s) := by
+    unfold weightedThresholdResidualFeedbackValue
+    exact (smul_sub _ _ _).symm
+  rw [hvalEq, norm_smul, Real.norm_eq_abs,
     abs_of_pos (Real.rpow_pos_of_pos hspos _)]
   have hpw :
       (s : ℝ)^p * (s : ℝ)^(2-p-nu) =
@@ -558,7 +573,17 @@ theorem weightedThresholdResidualFeedbackMap_lipschitz
     centerFeedbackLipschitzConstant_nonneg
       CE hs0 hp hnu hL
   rw [Real.coe_toNNReal _ hnon]
-  simp only [dist_eq_norm_sub]
+  have hout :=
+    centerWeightedPath_dist_eq_norm_sub s0 p
+      (weightedThresholdResidualFeedbackMap
+        CE H hs0 hp hnu hL hHcont hHzero hHlip a)
+      (weightedThresholdResidualFeedbackMap
+        CE H hs0 hp hnu hL hHcont hHzero hHlip b)
+  have hin : dist a b = ‖a-b‖ := by
+    rw [BoundedContinuousFunction.dist_eq_iSup,
+      BoundedContinuousFunction.norm_eq_iSup_norm]
+    simp only [BoundedContinuousFunction.sub_apply, dist_eq_norm_sub]
+  rw [hout, hin]
   exact weightedThresholdResidualFeedbackMap_difference_norm
     CE H hs0 hp hnu hL hHcont hHzero hHlip a b
 
