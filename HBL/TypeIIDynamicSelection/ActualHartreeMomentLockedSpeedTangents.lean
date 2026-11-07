@@ -55,15 +55,19 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
     have htarget :
         actualMomentLockedScaleProfileParameterTangent 0 r = H := by
       dsimp [actualMomentLockedScaleProfileParameterTangent, H]
-      simp
+      have hcut0 : cutoff 0 = 0 :=
+        cutoff_zero_of_le_one 0 (by norm_num)
+      rw [hcut0]
+      ring
     rw [htarget]
     apply hmodel.congr_of_eventuallyEq
     filter_upwards [hev] with a ha
     rw [actual_Hartree_moment_locked_scale_cutoff_cancellation a r hr,
       cutoff_zero_of_le_one _ ha.le]
     dsimp [H]
+    ring
   · have habs : HasDerivAt (fun a : ℝ => |a|) (|c| / c) c := by
-      rcases hc.lt_or_gt with hn | hp
+      rcases lt_or_gt_of_ne hc with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) c := by
           apply (hasDerivAt_neg c).congr_of_eventuallyEq
           filter_upwards [Iio_mem_nhds hn] with a ha
@@ -91,8 +95,7 @@ theorem actual_Hartree_moment_locked_scale_profile_parameter_hasDerivAt
       rw [actual_Hartree_moment_locked_scale_cutoff_cancellation a r hr]
       rfl
     · dsimp [actualMomentLockedScaleProfileParameterTangent, H]
-      simp only [id_eq, zero_add, one_mul, zero_sub, Pi.sub_apply,
-        Function.comp_apply]
+      simp only [zero_add, one_mul, zero_sub]
       field_simp [hc]
       ring
 
@@ -114,7 +117,7 @@ theorem actual_Hartree_moment_locked_phase_source_time_hasDerivAt
       (((cs * actualMomentLockedAmplitudeTangent (c s) r : ℝ) : ℂ)) s := by
   have h := (monopoleMovingCutoffTime_hasDerivAt hc r).ofReal_comp
   simpa only [actualMomentLockedPhaseSource, actualMomentLockedCore,
-    actualMomentLockedAmplitudeTangent] using h
+    actualMomentLockedAmplitudeTangent, mul_assoc] using h
 
 theorem actual_Hartree_moment_locked_scale_source_time_hasDerivAt
     {c : ℝ → ℝ} {s cs r : ℝ} (hc : HasDerivAt c cs s) (hr : 0 < r) :
@@ -130,26 +133,26 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_c_time_hasDerivAt
     (a : ℝ) {c : ℝ → ℝ} {s cs r : ℝ} (hc : HasDerivAt c cs s) :
     HasDerivAt
       (fun t => actualMomentLockedScaledPhaseSource a (c t) r)
-      ((a ^ 2 : ℂ) *
+      ((((a ^ 2 : ℝ) : ℂ)) *
         (((cs * actualMomentLockedAmplitudeTangent (c s) (a * r) : ℝ) : ℂ))) s := by
   have h :=
     actual_Hartree_moment_locked_phase_source_time_hasDerivAt
       (c := c) (s := s) (cs := cs) (r := a * r) hc
   simpa only [actualMomentLockedScaledPhaseSource] using
-    h.const_mul (a ^ 2 : ℂ)
+    h.const_mul (((a ^ 2 : ℝ) : ℂ))
 
 theorem actual_Hartree_moment_locked_scaled_scale_source_c_time_hasDerivAt
     (a : ℝ) {c : ℝ → ℝ} {s cs r : ℝ}
     (hc : HasDerivAt c cs s) (har : 0 < a * r) :
     HasDerivAt
       (fun t => actualMomentLockedScaledScaleSource a (c t) r)
-      ((a ^ 2 : ℂ) * Complex.I *
+      ((((a ^ 2 : ℝ) : ℂ)) * Complex.I *
         ((cs * actualMomentLockedScaleProfileParameterTangent
           (c s) (a * r) : ℝ) : ℂ)) s := by
   have h :=
     actual_Hartree_moment_locked_scale_source_time_hasDerivAt
       (c := c) (s := s) (cs := cs) (r := a * r) hc har
   simpa only [actualMomentLockedScaledScaleSource, mul_assoc] using
-    h.const_mul (a ^ 2 : ℂ)
+    h.const_mul (((a ^ 2 : ℝ) : ℂ))
 
 end HBL.TypeIIDynamicSelection
