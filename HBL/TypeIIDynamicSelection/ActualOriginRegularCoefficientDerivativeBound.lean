@@ -37,7 +37,7 @@ theorem actual_origin_regular_coeff_moving_dot_norm_le
         K r0 U DU s r0dot Udot DUdot‖ ≤
       C ^ 2 *
         (‖Udot‖ + ‖DUdot‖ +
-          |r0dot| * (1 + 2 * D) * (‖U s‖ + ‖DU s‖)) := by
+          |r0dot| * (1 + 3 * D) * (‖U s‖ + ‖DU s‖)) := by
   let r : ℝ := r0 s
   let Y : ℂ := originPhysicalValue K.y r
   let Yp : ℂ := originPhysicalSlope K.y K.dy r
@@ -130,13 +130,12 @@ theorem actual_origin_regular_coeff_moving_dot_norm_le
     dsimp [actualOriginRegularCoeffFromMovingJetDot, Ndot, N, W, Ypp,
       Y, Yp, A, B0, r]
     field_simp [hWne]
-    simp only [Complex.real_smul]
     ring
   rw [hWrewrite, norm_mul]
   have hSum :
       ‖Ndot + N * ((r0dot : ℂ) * A)‖ ≤
         C * (‖Udot‖ + ‖DUdot‖ +
-          |r0dot| * (1 + 2 * D) * (‖U s‖ + ‖DU s‖)) := by
+          |r0dot| * (1 + 3 * D) * (‖U s‖ + ‖DU s‖)) := by
     calc
       _ ≤ ‖Ndot‖ + ‖N * ((r0dot : ℂ) * A)‖ := norm_add_le _ _
       _ ≤ C * (‖Udot‖ + ‖DUdot‖ +
@@ -144,18 +143,22 @@ theorem actual_origin_regular_coeff_moving_dot_norm_le
           C * (‖DU s‖ + ‖U s‖) * (|r0dot| * D) :=
         add_le_add hNdot hAterm
       _ ≤ C * (‖Udot‖ + ‖DUdot‖ +
-          |r0dot| * (1 + 2 * D) * (‖U s‖ + ‖DU s‖)) := by
+          |r0dot| * (1 + 3 * D) * (‖U s‖ + ‖DU s‖)) := by
         have hnonU : 0 ≤ ‖U s‖ := norm_nonneg _
         have hnonDU : 0 ≤ ‖DU s‖ := norm_nonneg _
         have habs : 0 ≤ |r0dot| := abs_nonneg _
-        nlinarith [mul_nonneg hD hnonDU, mul_nonneg hD hnonU]
+        nlinarith [
+          mul_nonneg hD hnonDU,
+          mul_nonneg hD hnonU,
+          mul_nonneg habs hnonU,
+          mul_nonneg habs (mul_nonneg hD hnonDU)]
   calc
     ‖Ndot + N * ((r0dot : ℂ) * A)‖ * ‖W⁻¹‖
         ≤ (C * (‖Udot‖ + ‖DUdot‖ +
-          |r0dot| * (1 + 2 * D) * (‖U s‖ + ‖DU s‖))) * C :=
+          |r0dot| * (1 + 3 * D) * (‖U s‖ + ‖DU s‖))) * C :=
       mul_le_mul hSum hWinv (norm_nonneg _) (by positivity)
     _ = C ^ 2 *
         (‖Udot‖ + ‖DUdot‖ +
-          |r0dot| * (1 + 2 * D) * (‖U s‖ + ‖DU s‖)) := by ring
+          |r0dot| * (1 + 3 * D) * (‖U s‖ + ‖DU s‖)) := by ring
 
 end HBL.TypeIIDynamicSelection
