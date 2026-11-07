@@ -28,6 +28,7 @@ open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Profile.Kummer
 
 def actualHartreeLockedKappa (beta rhoStar : ℝ) : ℝ :=
   min (actualHartreeFullShellTimeGain beta)
