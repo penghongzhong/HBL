@@ -51,7 +51,8 @@ def actualOriginAffineRegularGammaDot
 theorem actual_origin_affine_regular_gamma_hasDerivAt
     {mu theta scale lo hi C : ℝ}
     (K : OriginKummerPair mu theta scale)
-    (B : ℝ) (hK : OriginBasisOn K lo hi C) (hlohi : lo < hi)
+    (B : ℝ) (hK : OriginBasisOn K lo hi C)
+    (hloB : lo < B) (hBhi : B ≤ hi)
     (F0 G : ℝ → ℂ) (hF0 : Continuous F0) (hG : Continuous G)
     (r0 alpha : ℝ → ℝ) (U DU : ℝ → ℂ)
     (s r0dot alphadot : ℝ) (Udot DUdot : ℂ)
@@ -68,10 +69,14 @@ theorem actual_origin_affine_regular_gamma_hasDerivAt
     actual_origin_matched_regular_coeff_moving_hasDerivAt
       K C B hK r0 (fun t r => F0 r + (alpha t : ℂ) * G r) U DU
       s r0dot Udot DUdot hr hr0 hU hDU
+  have hKB : OriginBasisOn K lo B C := by
+    intro r hrB
+    exact hK r ⟨hrB.1, hrB.2.trans hBhi⟩
+  have hrB : r0 s ∈ Ioo lo B := ⟨hr.1, hr.2.trans_le hBhi⟩
   have hGreen :=
     actual_origin_Green_coeffB_moving_affine_source_hasDerivAt
-      K hK hlohi F0 G hF0 hG r0 alpha s r0dot alphadot
-      hr hr0 halpha
+      (hi := B) K hKB hloB F0 G hF0 hG r0 alpha s r0dot alphadot
+      hrB hr0 halpha
   have hsum := hReg.add hGreen
   simpa only [actualOriginAffineRegularGamma,
     actualOriginAffineRegularGammaDot] using hsum
@@ -82,7 +87,8 @@ compatibility-cancelled regular channel. -/
 theorem actual_origin_affine_regular_upper_jet_hasDerivAt
     {mu theta scale lo hi C : ℝ}
     (K : OriginKummerPair mu theta scale)
-    (B : ℝ) (hK : OriginBasisOn K lo hi C) (hlohi : lo < hi)
+    (B : ℝ) (hK : OriginBasisOn K lo hi C)
+    (hloB : lo < B) (hBhi : B ≤ hi)
     (F0 G : ℝ → ℂ) (hF0 : Continuous F0) (hG : Continuous G)
     (r0 alpha : ℝ → ℝ) (U DU : ℝ → ℂ)
     (s r0dot alphadot : ℝ) (Udot DUdot : ℂ)
@@ -109,7 +115,7 @@ theorem actual_origin_affine_regular_upper_jet_hasDerivAt
   have hGamma : HasDerivAt gamma gammaDot s := by
     dsimp [gamma, gammaDot]
     exact actual_origin_affine_regular_gamma_hasDerivAt
-      K B hK hlohi F0 G hF0 hG r0 alpha U DU
+      K B hK hloB hBhi F0 G hF0 hG r0 alpha U DU
       s r0dot alphadot Udot DUdot hr hr0 halpha hU hDU
   exact actual_origin_regular_upper_jet_hasDerivAt
     K B gamma s gammaDot hGamma
