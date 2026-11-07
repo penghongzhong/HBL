@@ -59,11 +59,11 @@ theorem actual_Kummer_physical_repair_shell_H1_positive_time_gain :
     have hRaw := pow_le_pow_left₀ hD (by simpa only [D] using hJet) 2
     calc
       D ^ 2 ≤ (CD * s ^ (-rho)) ^ 2 := hRaw
-      _ = CD ^ 2 * (s ^ (-rho)) ^ 2 := by ring
+      _ = CD ^ 2 * (s ^ (-rho)) ^ 2 := by ring_nf
       _ = CD ^ 2 * s ^ (-2 * rho) := by
         rw [← Real.rpow_mul_natCast hs0 (-rho) 2]
         congr 1
-        ring
+        ring_nf
   have hX0 : 0 ≤ a * R := (mul_pos ha hR).le
   have hXco : 0 ≤ CX * s ^ (1 / 2 : ℝ) :=
     mul_nonneg hCX (Real.rpow_nonneg hs0 _)
@@ -91,7 +91,7 @@ theorem actual_Kummer_physical_repair_shell_H1_positive_time_gain :
       _ ≤ (CX * s ^ (1 / 2 : ℝ)) * (CD ^ 2 * s ^ (-2 * rho)) :=
         hProduct
       _ = (CX * CD ^ 2) * (s ^ (1 / 2 : ℝ) * s ^ (-2 * rho)) := by
-        ring
+        ring_nf
       _ = (CX * CD ^ 2) * s ^ (1 / 2 - 2 * rho) := by
         rw [hPow]
       _ ≤ (CX * CD ^ 2) * s ^ (-k) :=
@@ -107,6 +107,6 @@ theorem actual_Kummer_physical_repair_shell_H1_positive_time_gain :
       mul_le_mul_of_nonneg_left hProductTime hK
     _ = (4 * (3 * C1 + 1) ^ 2 * CX * CD ^ 2) * s ^ (-k) := by
       dsimp [K]
-      ring
+      ring_nf
 
 end HBL.TypeIIDynamicSelection
