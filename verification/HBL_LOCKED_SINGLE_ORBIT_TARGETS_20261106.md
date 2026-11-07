@@ -24,10 +24,10 @@ The old strongest formulation “for every large N, every admissible radiation a
 The locked replacement is a single-orbit fixed-order physical parametrix theorem. It will use one fixed legitimate terminal radiation and only the retained two threshold coordinates needed by the final shooting/backward construction.
 
 1. Exact physical source and compatibility. The same original Hartree source feeds the fixed Fredholm channels, the same complete compatibility matrix selects the unique real speed correction, and the selected Kummer/repair field is glued with the correct physical sign. No free monopole amplitude, abstract regional solver, or guessed remote trace is allowed.
-2. Fixed residual order 3. The actual center/profile residual and the actual threshold forcing are continuous and obey a uniform O(s^-3) bound in the norms consumed by the backward problem.
-3. Direct threshold Lipschitz order 3. For retained threshold coordinates theta, eta in R^2:
+2. Fixed residual order 9/4. The actual center/profile residual and the actual threshold forcing are continuous and obey a uniform O(s^(-9/4)) bound in the norms consumed by the backward problem.
+3. Direct threshold Lipschitz order 9/4. For retained threshold coordinates theta, eta in R^2:
 
-   ||R_cen(s,theta)-R_cen(s,eta)|| <= L s^-3 ||theta-eta||.
+   ||R_cen(s,theta)-R_cen(s,eta)|| <= L s^(-9/4) ||theta-eta||.
 
    This replaces the old requirement to build a full Frechet derivative D_theta R and then estimate it.
 4. Three-region energy control. Inner, Kummer/repair and remote pieces have strictly positive regional Hdot1 decay, sufficient for the already verified global complex-radial H1 gluing.
@@ -35,17 +35,17 @@ The locked replacement is a single-orbit fixed-order physical parametrix theorem
 
 ### Why order 3 is sufficient
 
-Fix p_* = 3/2 and N_* = nu_* = 3. Then
+Fix p_* = 9/8 and N_* = nu_* = 9/4. Then
 
-  1 < p_*,    p_* + 1 = 5/2 < 3,    2 < 3.
+  1 < p_*,    p_* + 1 = 17/8 < 9/4,    2 < 9/4.
 
-Hence the already verified weighted affine forcing machinery accepts an O(s^-3) fixed center residual and threshold source, while the direct threshold-Lipschitz Duhamel feedback needs only nu_* > 2. No arbitrary high-order profile is needed for the locked single-orbit final theorem.
+Hence the already verified weighted affine forcing machinery accepts an O(s^(-9/4)) fixed center residual and threshold source, while the direct threshold-Lipschitz Duhamel feedback needs only nu_* > 2. The locked exponents are strict-audited in HBL/LockedSingleOrbitExponents.lean. No arbitrary high-order profile is needed for the locked single-orbit final theorem.
 
 ## Main-chain replacement
 
 The preferred backward map now consumes H(t,theta)-H(t,eta) with
 
-  ||H(t,theta)-H(t,eta)|| <= C t^-3 ||theta-eta||,
+  ||H(t,theta)-H(t,eta)|| <= C t^(-9/4) ||theta-eta||,
 
 rather than a separately constructed linear coefficient E(t) = -D_theta R(t).
 
@@ -63,8 +63,8 @@ The nontrivial remaining §2.13 task is now sharply reduced to:
 
   actual current residual of order rho  ->  actual next residual of order rho + kappa_phys
 
-for the finite set of real Hartree mechanisms, iterated only until the residual crosses order 3. The already strict realized atoms, compatible speed selection, Kummer replacement tail, full moving-cutoff commutator and true-background nonlocal feedback are the proof pool for this step.
+for the finite set of real Hartree mechanisms, iterated only until the residual crosses order 9/4. The already strict realized atoms, compatible speed selection, Kummer replacement tail, full moving-cutoff commutator and true-background nonlocal feedback are the proof pool for this step.
 
-Once order 3 is reached, the arbitrary-N packet recursion is not used. The profile is passed directly to weighted affine forcing, direct threshold-Lipschitz feedback, the joint Banach fixed point, unstable shooting, global H1 gluing and dynamical rate selection.
+Once order 9/4 is reached, the arbitrary-N packet recursion is not used. The profile is passed directly to weighted affine forcing, direct threshold-Lipschitz feedback, the joint Banach fixed point, unstable shooting, global H1 gluing and dynamical rate selection.
 
 Counting: this target reduction changes no current manuscript numerator by itself. Revised acceptance remains 11/13 until the locked fixed-order physical parametrix theorem is proved and strictly audited.
