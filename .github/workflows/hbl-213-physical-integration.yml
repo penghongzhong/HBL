@@ -12,6 +12,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedKummerRepairTwoC1Jets.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeLockedCorrectionResidualAtom.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairPhysicalH1TimeGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerRepairPhysicalH1ShellEnergy.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairPhysicalH1TimeGain.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedKummerClockFeedback.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairTrueBackgroundTimeGainSqrtRadius.lean'
