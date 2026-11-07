@@ -369,6 +369,9 @@ theorem actual_Hartree_moment_locked_generated_remainder_next_gain
     rw [hp]
   have hExp : s ^ (-2 * rho) ≤ s ^ (-(rho + kappa)) :=
     Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+  have hBubble : 0 ≤ bubble r := by
+    unfold bubble
+    positivity
   have hTaylor :
       ‖actualHartreeComplexTaylorRemainder
         (fun x => (actualMomentLockedCore c x : ℂ)) (H s) r‖ ≤
