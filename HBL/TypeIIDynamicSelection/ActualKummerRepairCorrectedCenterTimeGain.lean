@@ -65,7 +65,7 @@ theorem actual_Kummer_repair_density_corrected_cross_bound
     dsimp [actualKummerRepairCorrectedCrossCoefficient]
     nlinarith only [hA2, he2, hD2, hAe, hAD, heD]
   rw [actual_Kummer_repair_cross_polynomial_exact]
-  exact add_le_add_left
+  exact add_le_add_right
     (mul_le_mul_of_nonneg_left hCoef (mul_nonneg he hD)) _
 
 theorem actual_Kummer_abstract_shell_envelope_le_sum
@@ -134,8 +134,14 @@ theorem actual_Kummer_repair_corrected_full_center_sqrt_time_gain
   have hspos : 0 < s := lt_of_lt_of_le zero_lt_one hs
   have hk : 0 < kc :=
     actual_Kummer_repair_center_time_gain_positive beta hbeta
-  have hrhopos : 0 < rho := by dsimp [kc] at hrho ⊢; linarith
-  have hrhoHpos : 0 < rhoH := by dsimp [kc] at hrhoH ⊢; linarith
+  have hrhopos : 0 < rho := by
+    have hEff : (1 / 2 + kc) / 2 ≤ rho := by
+      simpa only [kc] using hrho
+    linarith only [hEff, hk]
+  have hrhoHpos : 0 < rhoH := by
+    have hEff : 1 / 2 + kc ≤ rhoH := by
+      simpa only [kc] using hrhoH
+    linarith only [hEff, hk]
   have hX0 : 0 ≤ X := by
     have hL : 0 < actualHartreeSlowInnerRadius ell := by
       unfold actualHartreeSlowInnerRadius
@@ -184,7 +190,6 @@ theorem actual_Kummer_repair_corrected_full_center_sqrt_time_gain
         s ^ (1 / 2 - rhoH - rho) := by
     rw [← Real.rpow_add hspos, ← Real.rpow_add hspos]
     congr 1
-    ring
   have hExpo :
       s ^ (1 / 2 - rhoH - rho) ≤ s ^ (-(rho + kc)) :=
     Real.rpow_le_rpow_of_exponent_le hs (by dsimp [kc] at hrhoH ⊢; linarith)
