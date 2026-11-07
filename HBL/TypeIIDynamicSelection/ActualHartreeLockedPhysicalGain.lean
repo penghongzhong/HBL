@@ -164,7 +164,8 @@ theorem actual_Hartree_Kummer_physical_interface_repair_next_locked_layer :
       1 ≤ s → 0 < ell → ell ≤ 1 →
       actualHartreeSlowInnerRadius ell ^ 3 ≤ a →
       ell ≤ s ^ (-beta) →
-      1 / 2 < beta →
+      1 / 2 < beta → 0 < rhoStar →
+      rhoStar < (5 * beta - 2) / 4 →
     ∀ p q : ℂ,
       let D := ‖p‖ + R * ‖q‖
       let Krep :=
@@ -178,7 +179,7 @@ theorem actual_Hartree_Kummer_physical_interface_repair_next_locked_layer :
     actual_Kummer_physical_interface_repair_residual_bound
   refine ⟨C1, C2, hC1, hC2, ?_⟩
   intro mu theta a R y s ell beta rhoStar
-    ha hR hy hs hell hellOne ha3 htrap hbeta p q
+    ha hR hy hs hell hellOne ha3 htrap hbeta _hrhoStar _hflat p q
   dsimp only
   let D : ℝ := ‖p‖ + R * ‖q‖
   let Krep : ℝ :=
@@ -214,7 +215,10 @@ theorem actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked
     (hs : 1 ≤ s) (hell : 0 < ell) (hellOne : ell ≤ 1)
     (ha3 : actualHartreeSlowInnerRadius ell ^ 3 ≤ a)
     (htrap : ell ≤ s ^ (-beta))
-    (hbeta : 1 / 2 < beta) (hCJ : 0 ≤ CJ)
+    (hbeta : 1 / 2 < beta)
+    (hrhoStar : 0 < rhoStar)
+    (hflat : rhoStar < (5 * beta - 2) / 4)
+    (hCJ : 0 ≤ CJ)
     (p q : ℂ)
     (hJet : ‖p‖ + R * ‖q‖ ≤ CJ * s ^ (-rho)) :
     ∃ C1 C2 : ℝ, 0 < C1 ∧ 0 < C2 ∧
@@ -235,7 +239,7 @@ theorem actual_Hartree_Kummer_physical_interface_repair_selected_jet_next_locked
       ‖frozenZeroCoeff mu theta‖
   have hRaw :=
     hRepair mu theta a R y s ell beta rhoStar
-      ha hR hy hs hell hellOne ha3 htrap hbeta p q
+      ha hR hy hs hell hellOne ha3 htrap hbeta hrhoStar hflat p q
   dsimp only at hRaw
   have hKrep : 0 ≤ Krep := by
     dsimp [Krep]
