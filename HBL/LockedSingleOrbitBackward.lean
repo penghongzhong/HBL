@@ -32,7 +32,7 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
     (Fc : ℝ → ConstrainedCenterSpace)
     (H : ℝ → (ℝ × ℝ) → ConstrainedCenterSpace)
     (G : ℝ → ConstrainedCenterSpace → ConstrainedCenterSpace)
-    (hs0 : 0 < s0)
+    (hs0 : 1 ≤ s0)
     (hCth : 0 ≤ Cth) (hCc : 0 ≤ Cc) (hL : 0 ≤ L)
     (hFthCont : Continuous Fth)
     (hFcCont : Continuous Fc)
@@ -60,7 +60,7 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
     let a0 : ThresholdWeightedPath s0 lockedSingleOrbitPathWeight :=
       weightedThresholdForcingPath
         Fth s0 lockedSingleOrbitPathWeight Cth
-        hs0
+        (lt_of_lt_of_le zero_lt_one hs0)
         locked_single_orbit_exponents_admissible.1
         hCth hFthCont
         (fun t ht => by
@@ -72,7 +72,7 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
     let q0 : CenterWeightedPath s0 lockedSingleOrbitPathWeight :=
       weightedCenterForcingPath
         CE Fc lockedSingleOrbitPathWeight lockedSingleOrbitResidualOrder Cc
-        hs0
+        (lt_of_lt_of_le zero_lt_one hs0)
         locked_single_orbit_exponents_admissible.1
         locked_single_orbit_exponents_admissible.2.1
         hCc hFcCont hFc
@@ -90,6 +90,7 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
             hL hHcont hHzero hHlip
             hdelta hCnl hGcont hGzero hGlip q0 a0 z.1 := by
   dsimp only
+  have hs0pos : 0 < s0 := lt_of_lt_of_le zero_lt_one hs0
   have hp : 1 < lockedSingleOrbitPathWeight :=
     locked_single_orbit_exponents_admissible.1
   have hN :
@@ -104,29 +105,20 @@ theorem locked_single_orbit_order_nine_fourths_backward_fixed_point
           Cth * t ^ (-lockedSingleOrbitPathWeight - 1) := by
     intro t ht
     have ht1 : 1 ≤ t := by
-      by_cases hs01 : 1 ≤ s0
-      · exact hs01.trans ht
-      · have hs0lt : s0 < 1 := lt_of_not_ge hs01
-        have htpos : 0 < t := hs0.trans_le ht
-        by_cases ht1 : 1 ≤ t
-        · exact ht1
-        · -- The forcing builders only need the eventual tail.  If s0<1,
-          -- move the locked construction to time max s0 1 in the caller.
-          exfalso
-          linarith
+      exact hs0.trans ht
     exact (hFth t ht).trans
       (mul_le_mul_of_nonneg_left
         (locked_single_orbit_residual_implies_threshold_power t ht1) hCth)
   let a0 : ThresholdWeightedPath s0 lockedSingleOrbitPathWeight :=
     weightedThresholdForcingPath
       Fth s0 lockedSingleOrbitPathWeight Cth
-      hs0 hp hCth hFthCont hFthWeak
+      hs0pos hp hCth hFthCont hFthWeak
   let q0 : CenterWeightedPath s0 lockedSingleOrbitPathWeight :=
     weightedCenterForcingPath
       CE Fc lockedSingleOrbitPathWeight lockedSingleOrbitResidualOrder Cc
-      hs0 hp hN hCc hFcCont hFc
+      hs0pos hp hN hCc hFcCont hFc
   exact nonlinear_weighted_joint_backward_fixed_point_residual_lipschitz
-    B CE H G hs0 hp hnu hL hHcont hHzero hHlip
+    B CE H G hs0pos hp hnu hL hHcont hHzero hHlip
       hdelta hCnl hGcont hGzero hGlip q0 a0 hsmall
 
 end HBL.MainBackward
