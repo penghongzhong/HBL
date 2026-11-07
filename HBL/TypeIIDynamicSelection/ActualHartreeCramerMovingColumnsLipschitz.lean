@@ -50,7 +50,7 @@ theorem actual_real_Cramer_two_matrix_difference_cancel
     push_cast
     ring
   have hSub2 : ((p1 - p2).2 : ℂ) = (p1.2 : ℂ) - (p2.2 : ℂ) := by
-    change ((p1.1 - p2.1 : ℝ) : ℂ) = _
+    change ((p1.2 - p2.2 : ℝ) : ℂ) = _
     push_cast
     ring
   rw [hSub1, hSub2]
