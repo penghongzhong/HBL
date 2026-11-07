@@ -154,8 +154,8 @@ theorem actual_Hartree_true_background_quartic_row_integrable
       bubble y ^ 4 ≤ bubble y ^ 2 := by
     have hb0 := bubble_nonneg y
     have hb1 := bubble_le_one y
-    have hb2 : bubble y ^ 2 ≤ 1 :=
-      pow_le_pow_left₀ hb0 hb1 2
+    have hb2 : bubble y ^ 2 ≤ 1 := by
+      simpa only [one_pow] using pow_le_pow_left₀ hb0 hb1 2
     have hb20 : 0 ≤ bubble y ^ 2 := sq_nonneg _
     nlinarith [mul_nonneg hb20 (sub_nonneg.mpr hb2)]
   have hDom (y : ℝ) (hy : 0 < y) :
