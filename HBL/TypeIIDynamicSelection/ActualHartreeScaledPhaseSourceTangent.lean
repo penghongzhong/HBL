@@ -43,7 +43,6 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
     HasDerivAt
       (fun t => actualMomentLockedCore (c t) (x t))
       (actualMomentLockedCoreTotalTangent (c s) (x s) cdot xdot) s := by
-  let P : ℝ → ℝ := monopoleRadialProfile
   have hBubble :=
     (bubble_differentiable (x s)).hasDerivAt.comp s hx
   have hP : HasDerivAt
@@ -82,7 +81,7 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
     rw [monopoleMovingCutoffProfile_eq,
       cutoff_zero_of_le_one _ ht.le]
     simp only [Pi.add_apply, Pi.mul_apply, Function.comp_apply, sub_zero,
-      one_mul]
+      mul_one]
   · have habs0 : HasDerivAt (fun a : ℝ => |a|) (|c s| / c s) (c s) := by
       rcases lt_or_gt_of_ne hc0 with hn | hp
       · have hneg : HasDerivAt (fun a : ℝ => |a|) (-1) (c s) := by
@@ -106,6 +105,7 @@ theorem actual_Hartree_moment_locked_core_joint_hasDerivAt
     have heta := (hasDerivAt_const s (1 : ℝ)).sub hcut
     have hProd := (hc.mul heta).mul hP
     have hModel := hBubble.add hProd
+    simp only [Pi.mul_apply, Pi.sub_apply, Function.comp_apply] at hModel
     convert hModel using 1
     · funext t
       unfold actualMomentLockedCore
@@ -136,17 +136,21 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
   have hCore :=
     actual_Hartree_moment_locked_core_joint_hasDerivAt
       c (fun t => a t * r) hc hx har
-  have hCoreC := hCore.ofReal_comp
   have ha2Real : HasDerivAt (fun t => a t ^ 2) (2 * a s * adot) s := by
     convert ha.mul ha using 1
     · funext t
       simp only [Pi.mul_apply, pow_two]
     · ring
-  have ha2 : HasDerivAt (fun t => ((a t ^ 2 : ℝ) : ℂ))
-      (((2 * a s * adot : ℝ) : ℂ)) s :=
-    ha2Real.ofReal_comp
-  have h := ha2.mul hCoreC
-  simpa only [actualMomentLockedScaledPhaseSource,
-    actualMomentLockedPhaseSource, actualMomentLockedCore] using h
+  have hReal :=
+    ha2Real.mul hCore
+  have h := hReal.ofReal_comp
+  convert h using 1
+  · funext t
+    simp only [actualMomentLockedScaledPhaseSource,
+      actualMomentLockedPhaseSource, actualMomentLockedCore]
+    push_cast
+    rfl
+  · push_cast
+    ring
 
 end HBL.TypeIIDynamicSelection
