@@ -5,6 +5,7 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedKummerClockFeedbackH1.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairPhysicalH1TimeGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerRepairPhysicalH1ShellEnergy.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedKummerClockFeedback.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairTrueBackgroundTimeGainSqrtRadius.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairCenterTimeGainSqrtRadius.lean'
