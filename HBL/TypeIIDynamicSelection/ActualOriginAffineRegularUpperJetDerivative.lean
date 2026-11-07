@@ -79,8 +79,20 @@ theorem actual_origin_affine_regular_gamma_hasDerivAt
       (hi := B) K hKB hloB F0 G hF0 hG r0 alpha s r0dot alphadot
       hr hr0 halpha
   have hsum := hReg.add hGreen
-  simpa only [actualOriginAffineRegularGamma,
-    actualOriginAffineRegularGammaDot] using hsum
+  change HasDerivAt
+    ((fun t =>
+      actualOriginMatchedRegularCoeff K (r0 t) B
+        (fun r => F0 r + (alpha t : ℂ) * G r) (U t) (DU t)) +
+      (fun t =>
+        originGreenCoeffB K (r0 t)
+          (fun r => F0 r + (alpha t : ℂ) * G r) B))
+    (actualOriginRegularCoeffFromMovingJetDot
+      K r0 U DU s r0dot Udot DUdot +
+      (r0dot • (-originGreenSourceB K F0 (r0 s)) +
+        ((alphadot : ℂ) * originGreenCoeffB K (r0 s) G B +
+          (alpha s : ℂ) *
+            (r0dot • (-originGreenSourceB K G (r0 s)))))) s
+  exact hsum
 
 /-- The actual upper value and slope have the same scalar derivative.
 The singular mode is absent because this theorem is only for the
