@@ -67,7 +67,7 @@ jobs:
           module=HBL.TypeIIDynamicSelection.ActualKummerRepairPhysicalH1TimeGain
           lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
           lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
-          test ! -s evidence/strict.log
+          test ! -s evidence/strict.log || { echo 'Strict file emitted nonempty diagnostic output:'; cat evidence/strict.log; exit 1; }
           cat > KummerRepairH1TimeGainAudit.lean <<'EOF'
           import HBL.TypeIIDynamicSelection.ActualKummerRepairPhysicalH1TimeGain
           set_option pp.all true
