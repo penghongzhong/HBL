@@ -46,13 +46,17 @@ private theorem physicalTwoPiece_hasDerivAt_at_join
     · have hay : a < y := lt_of_le_of_ne hy (Ne.symm hya)
       simp [physicalTwoPiece, not_le.mpr hay]
   have hleft :
-      HasDerivWithinAt (physicalTwoPiece a f g) d (Iic a) a :=
-    hf.hasDerivWithinAt.congr_of_eventuallyEq_of_mem
-      (Filter.Eventually.of_forall (fun y => heqL)) (le_refl a)
+      HasDerivWithinAt (physicalTwoPiece a f g) d (Iic a) a := by
+    apply hf.hasDerivWithinAt.congr_of_eventuallyEq_of_mem
+    · filter_upwards [self_mem_nhdsWithin] with y hy
+      exact heqL hy
+    · exact le_refl a
   have hright :
-      HasDerivWithinAt (physicalTwoPiece a f g) d (Ici a) a :=
-    hg.hasDerivWithinAt.congr_of_eventuallyEq_of_mem
-      (Filter.Eventually.of_forall (fun y => heqR)) (le_refl a)
+      HasDerivWithinAt (physicalTwoPiece a f g) d (Ici a) a := by
+    apply hg.hasDerivWithinAt.congr_of_eventuallyEq_of_mem
+    · filter_upwards [self_mem_nhdsWithin] with y hy
+      exact heqR hy
+    · exact le_refl a
   have hjoin := hleft.union hright
   have hUnion : (Iic a ∪ Ici a) = (Set.univ : Set ℝ) := by
     ext y
