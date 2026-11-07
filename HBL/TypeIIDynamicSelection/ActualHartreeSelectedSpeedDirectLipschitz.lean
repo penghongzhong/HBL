@@ -87,8 +87,8 @@ The only remaining hypothesis is the separately visible physical source
 difference estimate; no rate, C1 field or tangent is hidden in a definition. -/
 theorem actual_real_Cramer_order_lipschitz_from_source
     (a B s nu L : ℝ)
-    (ha : 0 < a) (hB : 0 < B) (hs : 1 ≤ s)
-    (hL : 0 ≤ L)
+    (ha : 0 < a) (hB : 0 < B) (_hs : 1 ≤ s)
+    (_hL : 0 ≤ L)
     (b w : ℂ)
     (hb : ‖b‖ ≤ a * B ^ 2)
     (hw : ‖w‖ ≤ a * B ^ 2)
