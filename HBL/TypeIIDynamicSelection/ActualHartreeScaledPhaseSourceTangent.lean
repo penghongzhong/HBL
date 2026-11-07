@@ -140,10 +140,15 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
     · funext t
       simp only [Pi.mul_apply, pow_two]
     · ring
-  have ha2C := ha2Real.ofReal_comp
-  have hCoreC := hCore.ofReal_comp
-  have hProd := ha2C.mul hCoreC
-  simpa only [actualMomentLockedScaledPhaseSource,
-    actualMomentLockedPhaseSource] using hProd
+  have hReal := ha2Real.mul hCore
+  have h := hReal.ofReal_comp
+  convert h using 1
+  · funext t
+    simp only [actualMomentLockedScaledPhaseSource,
+      actualMomentLockedPhaseSource, Pi.mul_apply]
+    push_cast
+  · simp only [actualMomentLockedPhaseSource]
+    push_cast
+    ring
 
 end HBL.TypeIIDynamicSelection
