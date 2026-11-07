@@ -147,6 +147,7 @@ theorem actual_Hartree_moment_locked_scaled_phase_source_time_hasDerivAt
     simp only [actualMomentLockedScaledPhaseSource,
       actualMomentLockedPhaseSource, Pi.mul_apply]
     push_cast
+    rfl
   · simp only [actualMomentLockedPhaseSource]
     push_cast
     ring
