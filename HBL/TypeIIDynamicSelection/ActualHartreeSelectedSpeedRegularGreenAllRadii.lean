@@ -126,6 +126,5 @@ theorem actual_Hartree_true_source_selected_regular_Green_moment_all_radii
       mul_le_mul_of_nonneg_left hSpeed hCoefficientPos
     _ = (Csp * G * B * Csel) * (N + Q) := by
       field_simp [ha.ne']
-      ring
 
 end HBL.TypeIIDynamicSelection
