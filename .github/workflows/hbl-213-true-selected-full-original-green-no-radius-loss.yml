@@ -4,6 +4,10 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceSelectedFullOriginalGreenNoRadiusLoss.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedAdjustedRegularGreenAllRadii.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeAdjustedRegularGreenAllRadii.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTwoSpeedRegularGreenAllRadii.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSpeedRegularGreenAllRadii.lean'
       - '.github/workflows/hbl-213-true-selected-full-original-green-no-radius-loss.yml'
   workflow_dispatch:
 permissions:
