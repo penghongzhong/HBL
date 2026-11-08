@@ -199,3 +199,32 @@ it does not derive bounds for the remaining actual regular moment
 corrected* whole field, derive four-region source-norm relative time gain
 or perform the physical finite PDE recursion. The original §2.13 remains
 OPEN, **11/13**. No preassigned II-type rate or time-decay hypothesis.
+
+### Next source-faithful ingredient — BOTH regular speed Green moments at ALL radii
+
+The pre-existing `ActualHartreeSpeedRegularGreen.lean` theorem bounds each
+real-speed lower-origin Green moment `CoeffB` at **any permitted endpoint**:
+`‖CoeffB_(P_j)(B)‖ ≤ C_sp G a B`.
+New module `HBL/TypeIIDynamicSelection/ActualHartreeSpeedRegularGreenAllRadii.lean`,
+commit [c6064492](https://github.com/penghongzhong/HBL/commit/c6064492a17cc9d8a972374bfbf99fd3bc956b27),
+uses precisely **that theorem with upper endpoint B:=r** for every
+`r ∈ Icc (L/a) B`. The same constant works, since `r≤B≤1` and
+`r<scale`; monotonicity proves
+`∀r, ‖CoeffB_(P_scale)(r)‖, ‖CoeffB_(P_phase)(r)‖ ≤ C_sp G a B`,
+with no independent source bound and no spurious logarithm.
+New strict exact type / standard axiom workflow:
+[CI 42518450478](https://github.com/penghongzhong/HBL/actions/runs/42518450478)
+is **in progress**, not accepted at the checkpoint.
+The statement is synchronized in §2.13 TeX commit
+[654f7e1b](https://github.com/penghongzhong/HBL/commit/654f7e1bacc0eb28c9e1787074034d53ec3681a6).
+
+For the same selected p, the resulting selected speed contribution
+has the mathematically derived form
+`a(|p.1|+|p.2|) C_sp G B ≲ (N_F+Q_H)`, using the strict real Cramer
+bound `|p.1|+|p.2| ≤ C_sel (N_F+Q_H)/a`. A final theorem must apply
+the true original source `F0` to obtain the `CoeffB(F0)` part,
+then formalize Green integral linearity at **every** r and join all
+three physical terms to the exact weighted spectral formula.
+Do not count either candidate module or this argument as revised 2.13.
+
+Formal revised original environment count **11/13**.
