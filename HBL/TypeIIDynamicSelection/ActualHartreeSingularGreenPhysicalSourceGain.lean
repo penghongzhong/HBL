@@ -47,7 +47,7 @@ private theorem actual_hartree_rpow_shape_unit_bound
     simpa only [add_neg_cancel, Real.rpow_zero] using
       (Real.rpow_add hqpos (2 : ℝ) (-(2 : ℝ))).symm
   have hCast : q ^ (2 : ℝ) = q ^ (2 : ℕ) := by
-    norm_num [rpow_natCast]
+    norm_num [Real.rpow_natCast]
   have hCancel : q ^ 2 * q ^ (-(2 : ℝ)) = 1 := by
     rw [hCast] at hCancelR
     exact hCancelR
@@ -64,7 +64,7 @@ theorem actual_Hartree_singular_Green_local_moment_full_product_gain
     (D G L R a B A ell c : ℝ)
     (hD : 0 ≤ D) (hG : 0 ≤ G)
     (hL : 1 ≤ L) (ha : 0 < a)
-    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (_hOrder : L / a ≤ R) (hRscale : R < scale)
     (hcoeff : ∀ x ∈ Icc 0 scale,
       ‖originFirstCoeff x‖ + ‖originZeroCoeff mu theta‖ ≤ D)
     (hbound : ∀ x ∈ Icc 0 scale,
