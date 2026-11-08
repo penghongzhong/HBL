@@ -1363,4 +1363,52 @@ radius. The genuinely matched zero-left-Cauchy-jet correction
 and the regularized-origin weighted Volterra bounds must be
 linked before any time-positive full Hartree PDE claim.
 
+\medskip
+\noindent\textbf{A radius-uniform source-density estimate in the
+original regularized Kummer gauge.}
+The physical singular mode \(Y(r)=y(r)/r\) cannot be bounded uniformly
+as the moving left interface tends to zero. Its \emph{regularized}
+counterpart \(y(r)\), together with \(x(r)=rX(r)\), is bounded on
+the fixed origin interval by the original IVP estimate
+\(
+\|y(r)\|+\|x(r)\|\le2G
+\).
+For a source in the natural inverse-linear class,
+\[
+ 0<r\le B,\qquad \|F(r)\|\le M/r,
+\]
+the exact normalized Wronskian identity gives directly
+\[
+ \boxed{
+ \left\|\frac{X(r)F(r)}{W_K(r)}\right\|,
+ \left\|\frac{Y(r)F(r)}{W_K(r)}\right\|\le GM.
+ }
+\]
+Integration therefore yields
+\[
+ \|A_F(r)\|\le GM(B-r),\qquad
+ \|B_F(r)\|\le GM(r-r_0),
+ \quad r_0\le r\le B.
+\]
+The theorem is about the \emph{original} Wronskian densities and
+integral coefficients, with no \(r_0^{-1}\), \(r_0^{-2}\), or
+unweighted \(C_K\) premise.
+It was strictly verified as
+\texttt{originGreen\_inverse\_linear\_source\_regularized\_uniform}
+and
+\texttt{originGreen\_inverse\_linear\_coefficients\_regularized\_uniform}
+in
+\texttt{InverseLinearSourceRegularizedNoRadiusLoss.lean};
+CI \texttt{42502314380} completed successfully. The archived
+exact-axiom audit again contains only
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, no \texttt{sorryAx}.
+For a spectral correction \(F=\delta u\) this source class follows
+from a genuine weighted field estimate
+\(\sup_{r\in[r_0,B]}r\|u(r)\|<\infty\).
+That \emph{field estimate for the real selected Hartree orbit},
+and the corresponding zero-left-jet matched Volterra correction,
+remain to be proved uniformly; they are not assumptions on
+the main Type-II theorem.
+
 \end{document}
