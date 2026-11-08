@@ -1852,4 +1852,46 @@ the complete $C^1$ rematching and the four-region nonlinear Hartree
 time-positive residual are not yet established by
 \eqref{eq:original-hartree-two-speed-regular-moment}.
 
+
+\medskip
+\noindent\textbf{Same physical source selects the real speed and controls its
+full lower Green moment (new Lean composition, strict replay pending).}
+The already strictly accepted source-faithful real Fredholm--Cramer
+producer constructs the \emph{unique} speed
+$p=(p_1,p_2)\in\mathbb R^2$ from the unmodified quartic Hartree Riesz
+forcing $F_0$ and the two original transmission channels:
+\[
+ \mathfrak C_{\mathrm{real}}[F_0,F_+,F_-;p]=0,\qquad
+ |p_1|+|p_2|
+ \le \frac{C_{\rm sel}}a\bigl(N_{\rm F}+Q_{\rm H}\bigr).
+\]
+Inserting this \emph{constructed} speed---not a separately bounded
+modulation velocity---into the proven original-integral estimate
+\eqref{eq:original-hartree-two-speed-regular-moment} yields
+\begin{equation}
+ \boxed{\quad
+ \sup_{L/a\le r\le B}|B_{F_{\rm sp}}(r)|
+ \le C_{\rm sp}GBC_{\rm sel}
+       \bigl(N_{\rm F}+Q_{\rm H}\bigr).
+ \quad}
+ \label{eq:Hartree-selected-speed-regular-all-radii}
+\end{equation}
+The matching $a$ and $a^{-1}$ factors cancel algebraically; no
+independent Green-field envelope, speed bound, or time exponent has been
+inserted.  The Lean composition is
+\texttt{ActualHartreeSelectedSpeedRegularGreenAllRadii.lean}
+and the dedicated strict workflow is
+\texttt{hbl-213-selected-speed-regular-green-all-radii.yml}
+(pending, not yet accepted).
+
+The remaining fixed-time first-profile bridge consists of summing
+\eqref{eq:original-hartree-full-physical-green-no-radius-loss}
+and \eqref{eq:Hartree-selected-speed-regular-all-radii} with the
+previously verified outgoing singular-speed Green product, then adding
+the actual Fredholm--Cramer regular homogeneous coefficient.  That
+joint proof must use the \emph{same} selected $p$, not an unrelated
+synthetic forcing.  Full moving three-interface $C^1$, four-region
+nonlocal PDE time-order improvement and physical finite induction
+remain indispensable beyond the fixed-time source calculation.
+
 \end{document}
