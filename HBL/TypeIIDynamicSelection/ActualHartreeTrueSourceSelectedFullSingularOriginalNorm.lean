@@ -111,7 +111,6 @@ theorem actual_Hartree_true_source_selected_full_singular_original_norm_gain
   have hqp : q = p := hUnique q hCompatN
   subst q
   refine ⟨p, hCompat, hUnique, ?_⟩
-  dsimp only
   let F0 : ℝ → ℂ :=
     fun x => -actualHartreeLaplacianScaledKummerSource a ell c z x
   let Q : ℝ :=
@@ -150,7 +149,6 @@ theorem actual_Hartree_true_source_selected_full_singular_original_norm_gain
         mul_le_mul_of_nonneg_left hNadj hCoef
       _ = _ := by ring
   intro r hr
-  dsimp only
   let Fo : ℝ → ℂ := fun x =>
     F0 x + (-(p.1 : ℂ)) * actualMomentLockedScaledScaleSource a c x +
       (-(p.2 : ℂ)) * actualMomentLockedScaledPhaseSource a c x
