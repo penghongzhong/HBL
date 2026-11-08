@@ -31,7 +31,7 @@ namespace HBL.Profile.Kummer
 theorem originGreen_inverse_square_source_no_left_radius_loss
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     {a b C Q : ℝ}
-    (ha : 0 < a) (hC : 0 ≤ C) (hQ : 0 ≤ Q)
+    (ha : 0 < a) (hC : 0 ≤ C) (_hQ : 0 ≤ Q)
     (hK : OriginBasisOn K a b C)
     (F : ℝ → ℂ) {r : ℝ} (hr : r ∈ Icc a b)
     (hF : ‖F r‖ ≤ Q / r ^ 2) :
