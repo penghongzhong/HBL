@@ -403,7 +403,7 @@ theorem actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform
     (D G L R a B A ell c : ℝ)
     (hD : 0 ≤ D) (hG : 0 ≤ G)
     (hL : 1 ≤ L) (ha : 0 < a)
-    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (_hOrder : L / a ≤ R) (hRscale : R < scale)
     (hcoeff : ∀ x ∈ Icc 0 scale,
       ‖originFirstCoeff x‖ + ‖originZeroCoeff mu theta‖ ≤ D)
     (hbound : ∀ x ∈ Icc 0 scale,
