@@ -21,11 +21,11 @@ This is one physical Kummer component, not the full three-region profile.
 noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-open Set MeasureTheory
+open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Profile.Kummer
+open HBL.Profile.Kummer HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 theorem actual_Hartree_physical_matched_Kummer_C1_PDE_and_H1_certificate
     {mu theta scale r0 B : ℝ} (K : OriginKummerPair mu theta scale)
