@@ -91,7 +91,7 @@ theorem actual_Hartree_compatible_outgoing_Green_quantitative_from_true_source
       K r0 R G hK hOrder F hSource J.1 J.2 hzero y hy
   have hTraceRaw :=
     actual_Hartree_original_Fredholm_outgoing_trace_source_radius_gain
-      K D G R L a hD hG hR hROne hRscale hcoeff hbound
+      K D G R L a hD hG hR hROne hRscale.le hcoeff hbound
       hL ha hOrder Fp Fm hp hm hcp hcm
   have hTrace :
       ‖actualOriginOutgoingTrace K r0 J.1 J.2‖ ≤
