@@ -123,6 +123,5 @@ theorem actual_Hartree_full_nonlocal_interaction_time_derivative
       actualOneLayerInteractionOnly, core, total]
   · unfold actualHartreeFullInteractionTimeVelocity
     dsimp [core, total]
-    ring
 
 end HBL.TypeIIDynamicSelection
