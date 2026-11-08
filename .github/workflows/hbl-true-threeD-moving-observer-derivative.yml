@@ -5,6 +5,7 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeThreeDMovingObserverDerivative.lean'
       - 'HBL/HartreeSpatialCompletion.lean'
+      - 'HBL/HartreeQuarticGradient.lean'
       - 'HBL/TypeIIDynamicSelection/ActualMomentDerivativeFromFlow.lean'
       - 'HBL/RadialHartreePotential.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueMovingAdjustedSourceDerivative.lean'
@@ -90,9 +91,9 @@ jobs:
           import HBL.TypeIIDynamicSelection.ActualHartreeThreeDMovingObserverDerivative
           set_option pp.all true
           set_option pp.maxSteps 10000000
-          #check @HBL.TypeIIDynamicSelection.actual_Hartree_threeD_quartic_potential_moving_observer_hasDerivAt
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_threeD_quartic_moving_observer_from_field
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_threeD_quartic_potential_moving_observer_hasDerivAt
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_threeD_quartic_moving_observer_from_field
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeThreeDObserverTimeAudit.lean > evidence/audit.log 2>&1
           grep -q sorryAx evidence/audit.log && exit 1 || true
