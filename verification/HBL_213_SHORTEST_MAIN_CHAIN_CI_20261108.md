@@ -438,3 +438,17 @@ The actual nonlinear spectral four-piece finite PDE telescope initially failed b
 The exact pinned CI [42532639028](https://github.com/penghongzhong/HBL/actions/runs/42532639028) was triggered by workflow [74a2bc76](https://github.com/penghongzhong/HBL/commit/74a2bc7652280b4fe8c29db9e3dcf49e84d523f0). It enforces trust=0, warningAsError, full type and exact axioms allowlist; **pending strict completion at submission**. Manuscript synchronized in [3e4b9c2f](https://github.com/penghongzhong/HBL/commit/3e4b9c2fc1f9fd4ac43ac1d99d52e8f0206342ae). This is an auxiliary **physical derivative interface**, not the required positive-time full four-domain residual, so **11/13 unchanged**.
 
 Additional independent auxiliary strict CI Success confirmed: original Volterra weighted value-plus-slope 42531450638, true matched spectral weighted C1 derivative 42531500587, original inverse-linear regular Green density radius gain 42532197451, and one-radius Kummer moment gain 42532387774. Each individual target's archived transitive-axiom report must be audited separately before labelling it an exact-axiom certificate. No auxiliary success increments the original numerator.
+
+
+### Exact original ZIP evidence audit (2026-11-08): four recent auxiliary targets
+
+Each of the following **original Actions evidence archives was downloaded and opened**, not judged from job titles. All archives contain a zero-byte strict.log, Lean **4.35.0-rc3**, a matching commit hash, the full original source, exact declaration #check output, and individual #print axioms outputs. Every listed target has precisely the transitive standard axiom family **propext / Classical.choice / Quot.sound**, with possible Lean universe annotations and **no sorryAx**.
+
+| CI strictly successful | Original artifact ID | Source commit | Exact exported declarations |
+|---|---|---|---|
+| [42531450638](https://github.com/penghongzhong/HBL/actions/runs/42531450638) | 13638185198 | 666932dd51c6 | actual_Hartree_zero_left_Kummer_regularized_Volterra_slope_identity; actual_Hartree_zero_left_Kummer_regularized_Volterra_slope_bound; actual_Hartree_zero_left_Kummer_regularized_Volterra_weighted_C1_bound |
+| [42531500587](https://github.com/penghongzhong/HBL/actions/runs/42531500587) | 13637228884 | 1efd554ffa20 | actual_Hartree_matched_zero_left_spectral_weighted_C1_response; actual_Hartree_matched_zero_left_spectral_weighted_C1_derivative |
+| [42531018076](https://github.com/penghongzhong/HBL/actions/runs/42531018076) | 13637702928 | 5e7832612114 | actual_Hartree_true_source_selected_whole_original_Green_no_radius_loss |
+| [42531018033](https://github.com/penghongzhong/HBL/actions/runs/42531018033) | 13637359625 | 5e7832612114 | actual_Hartree_true_source_selected_whole_matched_weighted_no_radius_loss |
+
+The artifact source files contain no actual Lean sorry/admit/axiom declarations (ordinary English use of the word “constant” in module documentation is not a declaration). The pinned workflow explicitly checks Mathlib at **a98628e16c11f5167f16124105ddce53efa9bfe5** and runs --trust=0 with -DwarningAsError=true. These are independent fully audited **auxiliary successes**. The complete evolving physical four-domain PDE remainder, finite recursion, and derived Type-II rate are **not** their conclusion; original 13-environment ledger remains **11/13**.
