@@ -28,3 +28,51 @@
 Published high-regularity Hartree local theory and standard embedding facts can be explicitly cited as analytic input, but a full 2.13 matching/cancellation theorem (or equivalent) must **never** be inserted as an external assumption. Strict `#print axioms` audits alone do not certify that all declared mathematical input hypotheses are supplied by the actual PDE.
 
 **Target next formal gain:** Complete the frozen linear physical-to-Kummer operator conjugacy in strict CI, then close the offterminal mixed weighted source/remote cutoff transfer. Only a complete physical statement of 2.13 may change the revised numerator from 11 to 12.
+
+
+## 2026-11-08 strict physical Green continuation (addendum)
+
+The exact **revised manuscript** count remains **11/13**: §2.13 and the
+final PDE-derived Type-II theorem remain unaccepted. This dated addendum
+updates the November 2 bridge ledger without retroactively editing its
+historical findings.
+
+- **Strict Success** [42531018076](https://github.com/penghongzhong/HBL/actions/runs/42531018076): the full original Hartree selected Green estimate; the real
+  Cramer speed and actual physical source remain tied together.
+- **Strict Success** [42531500587](https://github.com/penghongzhong/HBL/actions/runs/42531500587) and
+  [42531450638](https://github.com/penghongzhong/HBL/actions/runs/42531450638):
+  original zero-left spectral weighted-value/derivative and Cramer--Volterra
+  slope; **Strict Success** [42535477786](https://github.com/penghongzhong/HBL/actions/runs/42535477786):
+  unweighted slope only for the exact **inverse-linear** source class,
+  not for the complete physical quartic Riesz source of order \(r^{-2}\).
+- **Strict Success** [42532174429](https://github.com/penghongzhong/HBL/actions/runs/42532174429):
+  same-source, same-real-speed corrected four-piece **three-C¹** joins;
+  [42532363535](https://github.com/penghongzhong/HBL/actions/runs/42532363535):
+  actual-source selected quadratic spectral defect and same three joins.
+- **Strict Success** [42532174421](https://github.com/penghongzhong/HBL/actions/runs/42532174421):
+  the **exact nonlinear finite four-piece PDE telescope only**, not a
+  decay estimate. The stronger exact transitive-axiom allowlist and
+  current-dependency rerun were triggered at
+  [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509).
+- **Strict Success** [42533177432](https://github.com/penghongzhong/HBL/actions/runs/42533177432):
+  a moving Green source/endpoint mixed Lipschitz cross bound deduced
+  from a *visible bounded physical source time-derivative hypothesis*.
+  This does not prove that bound from the PDE trajectory.
+- **Pending dedicated replay**: the separate *original physical quartic
+  Riesz* no-left-radius energy-weighted slope
+  [42536419967](https://github.com/penghongzhong/HBL/actions/runs/42536419967);
+  selected derivative from critical scaled Hartree orbit
+  [42536615928](https://github.com/penghongzhong/HBL/actions/runs/42536615928);
+  three original Riesz source-time derivatives composed with actual real
+  Cramer speed
+  [42536770197](https://github.com/penghongzhong/HBL/actions/runs/42536770197).
+  These are **not** recorded as accepted before Success and exact audits.
+
+**Remaining essential edges:** the actual physical orbit must furnish
+the derivative/weighted norms for all three original Riesz interactions;
+one must control the moving Kummer basis, matching endpoints and real
+selected speeds; prove the **complete four-domain nonlinear PDE
+residual gains a strictly positive order** with parameter Lipschitz
+control; induct on genuine finite physical profiles; then derive
+the Type-II scale law from the resulting Hartree dynamics.
+No auxiliary successful theorem can increase the original-environment numerator.
