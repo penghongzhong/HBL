@@ -60,7 +60,13 @@ theorem actual_Hartree_mixed_quartic_time_derivative_from_real_complex_orbit
   have hTotalRe :
       HasDerivAt (fun t => ((V t rho : ℂ) + z t rho).re)
         ((dV s rho : ℂ) + dz s rho).re s := by
-    simpa only [Complex.add_re, Complex.ofReal_re, Pi.add_apply] using hV.add hRe
+    have hAdd : HasDerivAt
+        (fun t => V t rho + (z t rho).re)
+        (dV s rho + (dz s rho).re) s := by
+      convert hV.add hRe using 1
+      funext t
+      rfl
+    simpa only [Complex.add_re, Complex.ofReal_re] using hAdd
   have hTotalIm :
       HasDerivAt (fun t => ((V t rho : ℂ) + z t rho).im)
         ((dV s rho : ℂ) + dz s rho).im s := by
