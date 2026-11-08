@@ -1759,4 +1759,55 @@ parameter regularity must still be connected in Lean.  This is
 neither an independent assumption on $B_{F_{\rm adj}}$ nor a
 positive-time-order conclusion.
 
+
+\medskip
+\noindent\textbf{Full original source-driven Green field: no hidden matching
+radius loss (new Lean composition; strict replay pending).}
+The true scaled three-dimensional quartic Hartree forcing
+$F_0(r)=-a^2\mathcal S_{\mathrm H}(ar)$ has a proved
+\emph{two-sided original Wronskian source-moment certificate}
+on the \emph{whole} normalized moving annulus:
+\[
+ \sup_{L/a\le r\le B}
+ \bigl\{\lvert A_{F_0}(r)\rvert,\,
+       \lvert B_{F_0}(r)\rvert\bigr\}
+ \le \frac83 G Q_{\rm H}L^{-3/8},
+ \qquad Q_{\rm H}
+ =C_{\rm phys}\ell^{1/8}.
+\]
+This follows from the previously strictly verified
+\texttt{actual\_Hartree\_scaled\_Kummer\_both\_Green\_coefficients\_uniform},
+rather than from a coarse inverse-square envelope.  Combining the
+same two moments with the exact
+identity \eqref{eq:exact-original-green-weighted-moments} gives
+\begin{equation}
+ \boxed{\quad
+ \sup_{L/a\le r\le B}
+ \left|r\,\mathcal G_{K_0}[F_0](r)\right|
+ \le \frac{16}{3}G^2\,Q_{\rm H}\,L^{-3/8}.
+ \quad}
+ \label{eq:original-hartree-full-physical-green-no-radius-loss}
+\end{equation}
+This controls \emph{both} original Green branches at \emph{every}
+intermediate radius, and neither its constant nor its source norm
+contains an independent matching-boundary amplitude or a concealed
+$\operatorname{OriginBasisOn}(K_0,L/a,B,C)$ certificate.
+The source-faithful composite is in
+\texttt{ActualHartreeOriginalFullGreenWeightedGain.lean};
+its independent strict workflow
+\texttt{hbl-213-original-full-green-weighted-gain.yml}
+is pending acceptance as of this manuscript revision.
+
+To avoid a false inference, the adjusted source selected by the
+real Fredholm compatibility equation remains
+$F_{\rm adj}=F_0-p_1P_{\rm sc}-p_2P_{\rm ph}$;
+the two speed-induced lower moments in
+\eqref{eq:original-Hartree-speed-regular-all-radii} and the outgoing
+singular component must be combined with
+\eqref{eq:original-hartree-full-physical-green-no-radius-loss}
+using the \emph{same unique} $(p_1,p_2)$.
+The resulting fully matched field, genuine moving spectral $C^1$
+repair and original four-region nonlinear remainder require further
+theorems; original \S2.13 remains open.
+
 \end{document}
