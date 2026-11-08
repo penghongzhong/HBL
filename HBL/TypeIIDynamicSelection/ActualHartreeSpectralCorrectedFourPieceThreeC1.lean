@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeSpectralCorrectedPhysicalOuterC1
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedKummerPullback
+import HBL.TypeIIDynamicSelection.ActualHartreeInnerKummerRepairFourPieceC1
 import HBL.TypeIIDynamicSelection.ActualHartreePhysicalKummerC1Splice
 import Mathlib.Tactic
 
@@ -94,11 +95,8 @@ theorem actual_Hartree_spectral_inner_four_piece_three_C1_joins
   dsimp only at hSelected
   have hOriginalV : HasDerivAt v0 ((1 / a : ℝ) • J.2) L := by
     have h := hOrigLeft.2.1.scomp L ((hasDerivAt_id L).div_const a)
-    change HasDerivAt
-      (fun x : ℝ => actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 (x / a))
-      ((1 / a : ℝ) • J.2) L
-    simpa only [Function.comp_def, id_eq, one_div,
-      Complex.real_smul, Complex.ofReal_inv] using h
+    simpa only [v0, actualOriginMatchedKummerPullback, Function.comp_def,
+      id_eq, one_div, Complex.real_smul, Complex.ofReal_inv] using h
   have hJetDerivative : ((1 / a : ℝ) • J.2) = deriv u L :=
     hOriginalV.unique hOld.2.1
   have hCorrectedV : HasDerivAt v (deriv u L) L := by
