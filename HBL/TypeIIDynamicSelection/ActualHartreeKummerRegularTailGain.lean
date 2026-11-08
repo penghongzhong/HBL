@@ -225,4 +225,166 @@ theorem actual_Hartree_scaled_Kummer_regular_Green_tail_gain
       ring
     _ = _ := by rfl
 
+
+/-- The SAME actual scaled Hartree source controls the complementary outgoing
+Green coefficient with no 1/r0 loss at the coefficient level. The exact
+physical Wronskian and original mixed source yield the SAME L^(-3/8)
+factor as the regular coefficient. Multiplication by the physical
+singular fundamental solution is a distinct task, not claimed here. -/
+theorem actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (D G L R a B A ell c : ℝ)
+    (_hD : 0 ≤ D) (hG : 0 ≤ G)
+    (hL : 1 ≤ L) (ha : 0 < a)
+    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (_hcoeff : ∀ r ∈ Icc 0 scale,
+      ‖originFirstCoeff r‖ + ‖originZeroCoeff mu theta‖ ≤ D)
+    (hbound : ∀ r ∈ Icc 0 scale,
+      ‖K.y r‖ ≤ G ∧ ‖K.dy r‖ ≤ G ∧ ‖K.x r‖ ≤ G ∧ ‖K.dx r‖ ≤ G)
+    (hB : 0 ≤ B) (hA : 0 ≤ A)
+    (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    (hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
+    (hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ A) :
+    let F := fun r => -actualHartreeLaplacianScaledKummerSource a ell c z r
+    ‖originGreenCoeffA K R F (L / a)‖ ≤
+      (8 / 3 : ℝ) * G *
+        (actualHartreePhysicalWeightedSourceConstant B A *
+          ell ^ (1 / 8 : ℝ)) *
+        L ^ (-(3 / 8 : ℝ)) := by
+  dsimp only
+  let F : ℝ → ℂ :=
+    fun r => -actualHartreeLaplacianScaledKummerSource a ell c z r
+  let M : ℝ :=
+    actualHartreePhysicalWeightedSourceConstant B A * ell ^ (1 / 8 : ℝ)
+  let r0 : ℝ := L / a
+  have hLp : 0 < L := lt_of_lt_of_le zero_lt_one hL
+  have hr0 : 0 < r0 := div_pos hLp ha
+  have hRpos : 0 < R := hr0.trans_le hOrder
+  have hM : 0 ≤ M := by
+    dsimp [M]
+    exact mul_nonneg
+      (actualHartreePhysicalWeightedSourceConstant_nonneg B A hB hA)
+      (Real.rpow_nonneg hell.le _)
+  have hK := origin_kummer_annulus_bound K r0 R G hr0 hRscale hG hbound
+  have hFI : IntervalIntegrable F volume r0 R :=
+    (actual_Hartree_scaled_Kummer_source_intervalIntegrable
+      B A ell c a r0 R hB hA hell hellOne hc ha hr0 hOrder
+      z hz hSup hStrauss).neg
+  have hIB := (actual_origin_Green_source_integrability K hK hOrder F hFI).1
+  have hDensity (r : ℝ) (hr : r ∈ Icc r0 R) :
+      ‖originGreenSourceA K F r‖ ≤
+        G * M * a * (a * r) ^ (-(11 / 8 : ℝ)) := by
+    have hrp : 0 < r := hr0.trans_le hr.1
+    have har : 0 < a * r := mul_pos ha hrp
+    have hary : L ≤ a * r := by
+      have hh := (div_le_iff₀ ha).1 hr.1
+      simpa only [mul_comm] using hh
+    have hphys := actual_Hartree_physical_source_unweighted_pointwise
+      B A ell c (a * r) hB hA hell hellOne hc har z hz hSup hStrauss
+    have hF :
+        ‖F r‖ ≤ a ^ 2 * M * (1 + a * r) ^ (-(19 / 8 : ℝ)) := by
+      dsimp [F, M]
+      rw [norm_neg, actualHartreeLaplacianScaledKummerSource, norm_mul,
+        Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg a)]
+      simpa only [mul_assoc] using
+        (mul_le_mul_of_nonneg_left hphys (sq_nonneg a))
+    have hy := hbound r ⟨hrp.le, hr.2.trans hRscale.le⟩
+    have hyPhys : ‖originPhysicalValue K.y r‖ ≤ G / r := by
+      rw [originPhysicalValue, norm_div, Complex.norm_real,
+        Real.norm_eq_abs, abs_of_pos hrp]
+      exact div_le_div_of_nonneg_right hy.2.2.1 hrp.le
+    have hInv := regular_tail_inverse_wronskian_norm K r hrp
+      (hr.2.trans hRscale.le)
+    have hTail :
+        (a * r) * (1 + a * r) ^ (-(19 / 8 : ℝ)) ≤
+          (a * r) ^ (-(11 / 8 : ℝ)) := by
+      have hp :
+          (1 + a * r) ^ (-(19 / 8 : ℝ)) ≤
+            (a * r) ^ (-(19 / 8 : ℝ)) :=
+        Real.rpow_le_rpow_of_nonpos har (by linarith) (by norm_num)
+      calc
+        _ ≤ (a * r) * (a * r) ^ (-(19 / 8 : ℝ)) :=
+          mul_le_mul_of_nonneg_left hp har.le
+        _ = (a * r) ^ (1 : ℝ) * (a * r) ^ (-(19 / 8 : ℝ)) := by
+          rw [Real.rpow_one]
+        _ = (a * r) ^ ((1 : ℝ) + (-(19 / 8 : ℝ))) :=
+          (Real.rpow_add har (1 : ℝ) (-(19 / 8 : ℝ))).symm
+        _ = (a * r) ^ (-(11 / 8 : ℝ)) := by
+          congr 1
+          norm_num
+    rw [originGreenSourceA, div_eq_mul_inv, norm_mul, norm_mul, hInv]
+    calc
+      _ ≤ (G / r) *
+          (a ^ 2 * M * (1 + a * r) ^ (-(19 / 8 : ℝ))) * r ^ 2 :=
+        mul_le_mul_of_nonneg_right
+          (mul_le_mul hyPhys hF (norm_nonneg _) (by positivity))
+          (sq_nonneg r)
+      _ = G * M * a * ((a * r) *
+          (1 + a * r) ^ (-(19 / 8 : ℝ))) := by
+        field_simp [hrp.ne']
+      _ ≤ G * M * a * (a * r) ^ (-(11 / 8 : ℝ)) :=
+        mul_le_mul_of_nonneg_left hTail (by positivity)
+  have hScale (r : ℝ) (hr : 0 < r) :
+      a * (a * r) ^ (-(11 / 8 : ℝ)) =
+        a ^ (-(3 / 8 : ℝ)) * r ^ (-(11 / 8 : ℝ)) := by
+    rw [Real.mul_rpow ha.le hr.le]
+    calc
+      a * (a ^ (-(11 / 8 : ℝ)) * r ^ (-(11 / 8 : ℝ))) =
+          (a * a ^ (-(11 / 8 : ℝ))) * r ^ (-(11 / 8 : ℝ)) := by ring
+      _ = (a ^ (1 : ℝ) * a ^ (-(11 / 8 : ℝ))) *
+          r ^ (-(11 / 8 : ℝ)) := by rw [Real.rpow_one]
+      _ = a ^ ((1 : ℝ) + (-(11 / 8 : ℝ))) *
+          r ^ (-(11 / 8 : ℝ)) := by
+            rw [Real.rpow_add ha]
+      _ = a ^ (-(3 / 8 : ℝ)) * r ^ (-(11 / 8 : ℝ)) := by
+        congr 2
+        norm_num
+  let Ctail : ℝ := G * M * a ^ (-(3 / 8 : ℝ))
+  have hCtail : 0 ≤ Ctail := by
+    dsimp [Ctail]
+    positivity
+  have hTailInt := regular_tail_rpow_integral r0 R hr0 hOrder
+  have hMajor : IntervalIntegrable
+      (fun r : ℝ => Ctail * r ^ (-(11 / 8 : ℝ))) volume r0 R :=
+    hTailInt.1.const_mul Ctail
+  have hNorm :
+      ‖originGreenCoeffA K r0 F R‖ ≤
+        ∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ)) := by
+    unfold originGreenCoeffA
+    apply intervalIntegral.norm_integral_le_of_norm_le hOrder
+    · filter_upwards with r
+      intro hrI
+      have hrmem : r ∈ Icc r0 R := ⟨hrI.1.le, hrI.2⟩
+      have hd := hDensity r hrmem
+      have hd' :
+          ‖originGreenSourceA K F r‖ ≤
+            G * M * (a * (a * r) ^ (-(11 / 8 : ℝ))) := by
+        simpa only [mul_assoc] using hd
+      rw [hScale r (hr0.trans_le hrmem.1)] at hd'
+      simpa only [Ctail, mul_assoc] using hd'
+    · exact hMajor
+  have hInt :
+      (∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ))) ≤
+        Ctail * ((8 / 3 : ℝ) * r0 ^ (-(3 / 8 : ℝ))) := by
+    rw [intervalIntegral.integral_const_mul]
+    exact mul_le_mul_of_nonneg_left hTailInt.2 hCtail
+  have haPow : a ^ (-(3 / 8 : ℝ)) ≠ 0 :=
+    ne_of_gt (Real.rpow_pos_of_pos ha _)
+  have hCancel :
+      a ^ (-(3 / 8 : ℝ)) * r0 ^ (-(3 / 8 : ℝ)) =
+        L ^ (-(3 / 8 : ℝ)) := by
+    dsimp [r0]
+    rw [Real.div_rpow hLp.le ha.le]
+    field_simp [haPow]
+  calc
+    ‖originGreenCoeffA K r0 F R‖ ≤
+        ∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ)) := hNorm
+    _ ≤ Ctail * ((8 / 3 : ℝ) * r0 ^ (-(3 / 8 : ℝ))) := hInt
+    _ = (8 / 3 : ℝ) * G * M * L ^ (-(3 / 8 : ℝ)) := by
+      dsimp [Ctail]
+      rw [← hCancel]
+      ring
+    _ = _ := by rfl
+
 end HBL.TypeIIDynamicSelection
