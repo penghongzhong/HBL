@@ -440,4 +440,49 @@ The local bound is distinct from the full right-endpoint coefficient
 (which also contains the corrected Fredholm left trace) and from the
 time-dependent complete nonlinear Hartree residual.
 
+
+\medskip
+\noindent\textbf{The full compatible selected singular Green component.}
+The unique genuine real speed is also used in the corrected left
+Fredholm sources \(F_{+,{\rm adj}}\) and \(F_{-,{\rm adj}}\), and in their
+\emph{single} normalized Cauchy jet \(J=(U,DU)\). Write
+\[
+ N_{\rm adj}
+ :=\|F_{+,{\rm adj}}\|_{L^2_{7/4}}
+   +\|F_{-,{\rm adj}}\|_{L^2_{7/4}},\qquad
+ C_{\rm tr}:=1+(D+1)G(B^2+2),
+\]
+and let \(C_{\rm F}\) denote the previously verified
+two-channel Fredholm value/derivative source constant.
+The original outgoing Wronskian trace obeys
+\[
+ |J_-(r_0)|\le C_{\rm tr}r_0 C_{\rm F}N_{\rm adj},
+ \qquad
+ \frac{r_0}{r}\le1.
+\]
+Because the genuine selected compatibility equation cancels the
+\emph{right} singular obstruction, the original Green transport law is
+\[
+ A_B[F_{\rm adj}](r)
+ =J_-(r_0)-\int_{r_0}^{r}
+    \frac{X(\rho)F_{\rm adj}(\rho)}{W(\rho)}\,d\rho.
+\]
+Combining the preceding same-source local estimate with the left trace
+projection yields the explicitly scale-free physical singular component
+\begin{align}
+ |Y(r)A_B[F_{\rm adj}](r)|
+ &\le GC_{\rm tr}C_{\rm F}N_{\rm adj}
+       +GC_{\rm reg}M_{\HH}
+       +G^2C_sC_{\rm sel}
+           (N_{\rm Fredholm}+M_{\HH}).
+ \label{eq:true-selected-full-singular-green}
+\end{align}
+This is a \emph{new Lean proof candidate} in
+\texttt{ActualHartreeTrueSourceSelectedFullSingularGreenGain.lean},
+commit \texttt{047fc66}, under the independent strict
+CI \texttt{42454285470} (pending at this checkpoint).
+It controls the full right-endpoint singular Green coefficient
+but not the separate regular Green component, interface-repair field,
+their time derivatives or the complete nonlocal Hartree PDE residual.
+
 \end{document}
