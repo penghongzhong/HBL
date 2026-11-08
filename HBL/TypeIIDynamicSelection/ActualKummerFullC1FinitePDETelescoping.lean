@@ -93,7 +93,7 @@ def actualKummerFiniteFullC1PDEIncrements
         actualKummerFiniteFullC1Field ps t y) b omega s r) +
     actualKummerFiniteFullC1PDEIncrements ps ell c time z b omega s r
 
-/-- Actual source-dependent global C1 Kummer fields admit exact full-Hartree
+/-- Actual source-dependent global C1 Kummer fields satisfy exact full-Hartree
 finite nonlinear PDE telescoping. This is an exact structural identity, NOT
 an assertion of smallness or yet a revised §2.13 environment. -/
 theorem actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes

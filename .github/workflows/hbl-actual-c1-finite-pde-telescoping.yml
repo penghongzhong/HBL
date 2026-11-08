@@ -80,12 +80,6 @@ jobs:
           set_option pp.all true
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
-          #check @HBL.TypeIIDynamicSelection.actual_Kummer_finite_physical_PDE_constant_nonneg
-          #check @HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
-          set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
-          set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Kummer_finite_physical_PDE_constant_nonneg
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
           EOF
