@@ -316,3 +316,19 @@ the original PDE have not been proved.
 - These statements concern fixed-time original physical Green integrals and frozen spectral displacement. They do **not** claim a derived time decay for `mu(s)-mu0`, the true fully moving three-interface C¹ source field after spectral correction, the same-orbit nonlinear four-region PDE residual `O(s^(-9/4))`, the finite physical recursion, or the dynamically selected Type-II exponent.
 
 **Formal revised retained manuscript count remains strictly 11/13.** Neither source-faithful all-radius Green control nor any number of auxiliary CI successes changes the original environment numerator.
+
+
+### Independent retrieved CI evidence, exact Lean type and transitive axioms
+
+The original GitHub Actions artifact ZIP files were downloaded and inspected, not inferred from workflow labels. Every listed artifact contains its original source hash, pinned Lean version, exact pretty-printed `#check @...` declaration, `#print axioms` report and **empty `strict.log`**:
+
+| Strict CI | Evidence artifact ID | Target Lean declaration | Exact transitive axioms |
+|---|---:|---|---|
+| [42522024695](https://github.com/penghongzhong/HBL/actions/runs/42522024695) | 13634301842 | `actual_Hartree_speed_regular_Green_coefficients_all_radii` | `propext`, `Classical.choice`, `Quot.sound` |
+| [42522041952](https://github.com/penghongzhong/HBL/actions/runs/42522041952) | 13634470670 | `actual_Hartree_true_source_selected_regular_Green_moment_all_radii` | `propext`, `Classical.choice`, `Quot.sound` |
+| [42522171670](https://github.com/penghongzhong/HBL/actions/runs/42522171670) | 13634650113 | `actual_Hartree_original_source_full_Green_weighted_no_radius_loss`, `actual_Hartree_original_source_spectral_drift_weighted_no_radius_loss` | `propext`, `Classical.choice`, `Quot.sound` for **each** |
+| [42522403614](https://github.com/penghongzhong/HBL/actions/runs/42522403614) | 13633912583 | `actual_Hartree_adjusted_original_regular_Green_all_radii` | `propext`, `Classical.choice`, `Quot.sound` |
+
+All four archives independently report **Lean 4.35.0-rc3**. CI workflow source pins Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, invokes `lake env lean --trust=0 -DwarningAsError=true` and rejects unexpected axioms or `sorryAx`. The local `source-hashes.txt` members match each archived targeted source. The extended Hartree spectral-drift theorem is genuinely new and uses the original physical source, but **does not** derive a positive time exponent for `mu(s)-mu0`.
+
+The standalone two-speed integral-linearity module `ActualHartreeTwoSpeedRegularGreenAllRadii.lean` has not yet received replacement Strict Success at this checkpoint. Likewise the unique selected **full adjusted** regular Green and **full inhomogeneous** Green composite require their own successful CI. The original revised retained environment count remains **11/13**.
