@@ -54,8 +54,6 @@ theorem actual_Hartree_two_stage_critical_radiation_time_hasDerivAt
   have hX : HasDerivAt x
       (ellDot * (a s * r) + ell s * (adot * r)) s := by
     convert hEll.mul hAR using 1
-    funext t
-    rfl
   have hXPair : HasDerivAt (fun t => (t, x t))
       (1, ellDot * (a s * r) + ell s * (adot * r)) s :=
     (hasDerivAt_id s).prodMk hX
@@ -70,8 +68,6 @@ theorem actual_Hartree_two_stage_critical_radiation_time_hasDerivAt
       (adot / (2 * Real.sqrt (a s)) * Real.sqrt (ell s) +
         Real.sqrt (a s) * (ellDot / (2 * Real.sqrt (ell s)))) s := by
     convert hAroot.mul hEllroot using 1
-    funext t
-    rfl
   have hRootC := hRoot.ofReal_comp
   have hTotal := hRootC.mul hRadiation
   convert hTotal using 1
@@ -79,7 +75,8 @@ theorem actual_Hartree_two_stage_critical_radiation_time_hasDerivAt
     dsimp [rescalePhysicalRadiation, x]
     push_cast
     ring
-  · push_cast
+  · dsimp only [Function.comp_apply, x]
+    push_cast
     ring
 
 end HBL.TypeIIDynamicSelection
