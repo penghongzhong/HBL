@@ -147,11 +147,15 @@ theorem actual_Hartree_true_source_selected_adjusted_regular_Green_all_radii
   have hOutput :
       ‖originGreenCoeffB K (L / a) Fadj r‖ ≤
         (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
-          (Csp * G * B * Csel) * (N + Q) :=
-    hRaw.trans ((add_le_add_left hSpeedApplied _).trans
-      (le_of_eq (congrArg
-        (fun x : ℝ =>
-          (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) + x) hCancel))
+          (Csp * G * B * Csel) * (N + Q) := by
+    calc
+      _ ≤ (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
+            (Csp * G * a * B) * (|p.1| + |p.2|) := hRaw
+      _ ≤ (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
+            (Csp * G * a * B) * ((Csel / a) * (N + Q)) :=
+        add_le_add_left hSpeedApplied _
+      _ = (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
+            (Csp * G * B * Csel) * (N + Q) := by rw [hCancel]
   simpa only [Fadj, Fsp, F0, Q, N] using hOutput
 
 end HBL.TypeIIDynamicSelection
