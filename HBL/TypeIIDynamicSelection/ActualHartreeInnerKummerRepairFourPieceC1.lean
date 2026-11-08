@@ -103,7 +103,7 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
       if y ≤ 2 * a * B then rep y else 0) = v y
     simp [le_of_lt hy]
   have hGDeriv : HasDerivAt glued (deriv u L) L :=
-    (hInner.2.1).congr_of_eventuallyEq hGNear.symm
+    (hInner.2.1).congr_of_eventuallyEq hGNear
   have hGValue : u L = glued L := by
     have hglue : glued L = v L := by
       dsimp [glued, actualPhysicalMatchedKummerC1Splice]
@@ -113,9 +113,10 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
     have hends :=
       actual_Kummer_physical_interface_repair_endpoint_jets
         a B ha hBpos UB DUB
-    dsimp [glued, actualPhysicalMatchedKummerC1Splice]
-    have hnot : ¬(2 * a * B ≤ a * B) := not_le.mpr hAB
-    simp [hnot, hends.2.2.1]
+    change (if 2 * a * B ≤ a * B then v (2 * a * B)
+      else if 2 * a * B ≤ 2 * a * B then rep (2 * a * B) else 0) = 0
+    rw [if_neg (not_le.mpr hAB), if_pos le_rfl]
+    exact hends.2.2.1
   have hGzeroFar (y : ℝ) (hy : 2 * a * B < y) :
       glued y = 0 := by
     dsimp [glued, actualPhysicalMatchedKummerC1Splice]
@@ -143,9 +144,10 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
   have hFullNear : full =ᶠ[𝓝 (a * B)] glued := by
     filter_upwards [Ioi_mem_nhds hStrict] with y hy
     change (if y ≤ L then u y else glued y) = glued y
+    change L < y at hy
     simp [not_le.mpr hy]
   have hAt : HasDerivAt full ((1 / a : ℝ) • DUB) (a * B) :=
-    hOuter.1.congr_of_eventuallyEq hFullNear.symm
+    hOuter.1.congr_of_eventuallyEq hFullNear
   change HasDerivAt full (deriv u L) L ∧
     HasDerivAt full ((1 / a : ℝ) • DUB) (a * B) ∧
     HasDerivAt full (0 : ℂ) (2 * a * B)

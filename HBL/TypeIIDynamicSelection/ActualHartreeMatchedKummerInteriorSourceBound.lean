@@ -65,7 +65,7 @@ theorem actual_Hartree_matched_Kummer_interior_source_and_regular_bound
       _ = ‖originGreenValue K a b F r‖ +
           ‖q‖ * ‖originPhysicalValue K.x r‖ := by rw [norm_mul]
       _ ≤ ‖originGreenValue K a b F r‖ + ‖q‖ * C := by
-        exact add_le_add_left
+        exact add_le_add_right
           (mul_le_mul_of_nonneg_left hx (norm_nonneg q)) _
       _ = _ := by ring
   have hSlope :
@@ -80,7 +80,7 @@ theorem actual_Hartree_matched_Kummer_interior_source_and_regular_bound
       _ = ‖originGreenSlope K a b F r‖ +
           ‖q‖ * ‖originPhysicalSlope K.x K.dx r‖ := by rw [norm_mul]
       _ ≤ ‖originGreenSlope K a b F r‖ + ‖q‖ * C := by
-        exact add_le_add_left
+        exact add_le_add_right
           (mul_le_mul_of_nonneg_left hdx (norm_nonneg q)) _
       _ = _ := by ring
   change ‖actualOriginMatchedKummerValue K a b F U DU r‖ +
@@ -153,7 +153,7 @@ theorem actual_Hartree_matched_Kummer_interior_from_source_and_left_jet
         2 * C * ‖actualOriginMatchedRegularCoeff K a b F U DU‖ := hFull
     _ ≤ (2 * C ^ 3 * (b - a)) * M +
         2 * C * (C ^ 2 * (‖U‖ + ‖DU‖)) :=
-      add_le_add_left (mul_le_mul_of_nonneg_left hCoeff hC2) _
+      add_le_add_right (mul_le_mul_of_nonneg_left hCoeff hC2) _
     _ = _ := by ring
 
 end HBL.TypeIIDynamicSelection
