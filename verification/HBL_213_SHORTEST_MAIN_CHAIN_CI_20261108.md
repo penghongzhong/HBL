@@ -25,26 +25,54 @@ and `Quot.sound` (possibly printed with universe annotations), with no
 `-DwarningAsError=true`; the above statuses are real GitHub Actions
 conclusions, not local assertions.
 
-## New source-to-weighted-correction integration: strict CI pending
+## Strictly accepted source-to-weighted-correction integration
 
 - `ActualHartreeOriginalSelectedSpectralC1Joint.lean` combines the
   **same real selected physical Hartree source** with the joint source-driven
   first-order C¹ and second-order Kummer residual bound.
-  Strict workflow: [42504110208](https://github.com/penghongzhong/HBL/actions/runs/42504110208).
+  Strict workflow: [42504110208](https://github.com/penghongzhong/HBL/actions/runs/42504110208), **Success**.
 - `ActualHartreeMatchedSpectralRegularizedQuadratic.lean` converts the
   actual matched profile's **weighted** bound to a genuinely zero-left-jet
   correction with quadratic spectral defect; this step **alone** does not
   produce the weighted bound from a physical orbit.
-  Strict workflow: [42504361153](https://github.com/penghongzhong/HBL/actions/runs/42504361153).
+  Strict workflow: [42504361153](https://github.com/penghongzhong/HBL/actions/runs/42504361153), **Success**.
 - `ActualHartreeMatchedOriginalSourceWeightedSpectral.lean` derives
   **rather than assumes** the weighted first Cramer-matched profile from the
   original inverse-square source and actual Fredholm left Cauchy jet, then
   passes it into the zero-left regularized spectral gain.
-  Strict workflow: [42504578042](https://github.com/penghongzhong/HBL/actions/runs/42504578042).
+  Strict workflow: [42504578042](https://github.com/penghongzhong/HBL/actions/runs/42504578042), **Success**.
 
-**Pending is not Success.** If any of these new workflows fails, inspect
-the decoded strict job logs and repair the actual Lean file before accepting
-any statement. An earlier run, [42501019413](https://github.com/penghongzhong/HBL/actions/runs/42501019413),
+The three preceding workflows are now **strictly successful** (independent
+Lean compilation, exact theorem type, original pinned kernel and axiom audit).
+Their conclusions are limited to their literal fixed-annulus theorem types;
+none establishes revised original §2.13.
+
+## New regular Cramer-jet proof chain: CI not yet accepted
+
+- `ActualHartreeMatchedRegularJetNoRadiusLoss.lean`: original Wronskian
+  cancellation in the **actual regular Cramer coefficient**
+  \(|\gamma_{\rm reg}|\le
+  G\{r_0\|DU\|+(r_0+1)\|U\|\}\), plus the \(r\)-weighted regular mode
+  bound independent of any \(r_0^{-1}\) or unweighted singular Kummer basis.
+  [42505966960](https://github.com/penghongzhong/HBL/actions/runs/42505966960),
+  **unaccepted until strictly successful**.
+- `ActualHartreeMatchedSourceUniformRegularJet.lean`: combines the
+  **same original inverse-square source** and compatible Fredholm left jet
+  with the regular-coefficient cancellation to bound the complete weighted
+  first matched field and the second-order spectral defect. The remaining
+  Green contribution still contains the original `OriginBasisOn`
+  constant. Latest [42506363468](https://github.com/penghongzhong/HBL/actions/runs/42506363468),
+  **unaccepted until strictly successful**.
+- `ActualHartreeTrueSelectedMatchedFirstWeighted.lean`: substitutes the
+  **unique real selected speed** from the genuine Hartree source, the
+  actual corrected inner Fredholm jet and its generated outer \(Q_a\) into
+  that matched profile estimate. It has no independently assumed jet
+  or adjusted source bound; the true *time-dependent* orbit is not yet
+  constructed. [42506528872](https://github.com/penghongzhong/HBL/actions/runs/42506528872),
+  **unaccepted until strictly successful**.
+
+**Pending is not Success.** Inspect any failed decoded strict job log and
+repair Lean before accepting any of these three new statements. An earlier run, [42501019413](https://github.com/penghongzhong/HBL/actions/runs/42501019413),
 failed on definitional derivative/continuity rewrites and was repaired in
 successful successor H2. [42501379178](https://github.com/penghongzhong/HBL/actions/runs/42501379178)
 failed because of that upstream dependency; successful successor H5
@@ -58,7 +86,7 @@ TRUE PHYSICAL ORBIT
     [✓] Source-driven fixed frozen-Kummer quadratic residual
     [✓] Exact left C1-preserving matched correction
     [✓] Regularized outgoing flux and zero-left weighted Volterra mapping
-    [?] Derive uniform moving-radius first-profile bounds for SAME orbit
+    [?] Derive uniform moving-radius first-profile bounds for SAME orbit (new regular-jet cancellation in strict CI)
     [?] Select continuously differentiable modulation path; moving Kummer basis
     [?] Remove spectral correction outgoing obstruction with SAME two speeds
     [?] Actual globally matched THREE C1 joins after spectral correction
