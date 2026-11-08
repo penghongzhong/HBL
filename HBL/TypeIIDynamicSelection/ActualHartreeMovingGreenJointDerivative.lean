@@ -63,8 +63,10 @@ theorem actual_origin_Green_moving_selected_cross_hasDerivAt_zero
     unfold actualOriginGreenMovingSelectedCross
     abel
   have hRlim : Tendsto (fun t => |r0 s - r0 t|) (𝓝 s) (𝓝 0) := by
+    have hConst : Tendsto (fun _ : ℝ => r0 s) (𝓝 s) (𝓝 (r0 s)) :=
+      tendsto_const_nhds
     simpa only [sub_self, abs_zero] using
-      (tendsto_const_nhds.sub hR.continuousAt.tendsto).abs
+      (hConst.sub hR.continuousAt.tendsto).abs
   have hUpper : Tendsto (fun t => C * |r0 s - r0 t|) (𝓝 s) (𝓝 0) := by
     simpa only [mul_zero] using hRlim.const_mul C
   apply hasDerivAt_iff_tendsto.mpr
