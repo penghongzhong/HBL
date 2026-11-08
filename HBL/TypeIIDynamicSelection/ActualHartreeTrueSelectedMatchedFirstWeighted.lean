@@ -149,8 +149,7 @@ theorem actual_Hartree_true_source_unique_speed_matched_weighted_from_Fredholm_j
     intro x hx
     exact ⟨(hbound x hx).1, (hbound x hx).2.1, (hbound x hx).2.2.1⟩
   refine ⟨p, Qa, ?_, ?_, hQa, hQaOriginal, ?_⟩
-  · simpa only [F0, r0] using hObstruction
-      -- original compatibility uses the equivalent canonical Fredholm jet
+  · simpa only [F0, r0] using hCompat
   · intro q hq
     apply hUnique
     simpa only [F0, r0] using hq
