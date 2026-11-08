@@ -1633,4 +1633,74 @@ a differentiated-in-time matched field, or a four-region nonlinear
 relative residual order.  None of those unproved requirements is
 inserted as a hypothesis into the manuscript's Type--II claim.
 
+
+\medskip
+\noindent\textbf{Exact source-moment replacement for the hidden basis-budget loss
+(November 8 continuation; new strict audit pending).}
+Let $r_0=L/a>0$, let the frozen \emph{regularized} Kummer pair be
+$x(r),y(r)$, and write its exact physical modes
+$X(r)=x(r)/r$, $Y(r)=y(r)/r$.  For the same true adjusted source
+$F_{\rm adj}$ and original, unswapped Green moments
+\[
+ A(r)=\int_r^B\frac{X(\rho)F_{\rm adj}(\rho)}{W(\rho)}\,d\rho,
+ \qquad
+ B_-(r)=\int_{r_0}^r\frac{Y(\rho)F_{\rm adj}(\rho)}{W(\rho)}\,d\rho,
+\]
+the genuine Green response obeys the \emph{exact} identity
+\begin{equation}
+ r\,\mathcal G_{K_0}[F_{\rm adj}](r)
+       =y(r)A(r)+x(r)B_-(r).
+ \label{eq:exact-original-green-weighted-moments}
+\end{equation}
+Thus the globally bounded regularized origin modes
+$\lvert y(r)\rvert,\lvert x(r)\rvert\le G$ give
+\begin{equation}
+ \lvert r\mathcal G_{K_0}[F_{\rm adj}](r)\rvert
+ \le G\bigl(\lvert A(r)\rvert+\lvert B_-(r)\rvert\bigr).
+ \label{eq:original-green-moment-no-hidden-C}
+\end{equation}
+The crucial point is the algebraic multiplication by $r$
+\emph{before} taking the modulus.  No fixed-annulus
+$\operatorname{OriginBasisOn}(K_0,r_0,B,C)$ appears, so no hidden
+$C\sim r_0^{-2}$ has been smuggled into
+\eqref{eq:original-green-moment-no-hidden-C}.
+
+For the actual time-dependent Hartree-adjusted source
+$F_s$ and frozen spectral change
+\[
+ \delta_s=b(\mu(s),\theta(s))-b(\mu_0,\theta_0),
+\]
+the exact ODE defect is
+\[
+ (\mathcal L_{\mu(s),\theta(s)}-\mathcal L_{\mu_0,\theta_0})
+ \mathcal G_{K_0}[F_s]
+      =\delta_s\mathcal G_{K_0}[F_s].
+\]
+Consequently the original PDE forcing has the rigorously reduced
+pointwise spectral defect
+\begin{equation}
+ \bigl|r\delta_s\mathcal G_{K_0}[F_s](r)\bigr|
+ \le
+ \bigl(|\mu(s)-\mu_0|+|\theta(s)-\theta_0|\bigr)
+ G\bigl(|A_s(r)|+|B_{-,s}(r)|\bigr).
+ \label{eq:original-hartree-moving-moment-defect}
+\end{equation}
+The three exact-formula Lean statements, including specialization
+to the \emph{literal} time-dependent nonlocal Hartree source,
+are in \texttt{ActualHartreeExactGreenMomentsMovingSpectral.lean}.
+Their pinned \texttt{--trust=0}, \texttt{warningAsError} and exhaustive
+three-declaration axiom/type audit are launched in
+\texttt{hbl-213-exact-green-moments-spectral.yml}; they remain
+\emph{candidates} until the workflow reports strict success.
+
+Equations \eqref{eq:original-green-moment-no-hidden-C} and
+\eqref{eq:original-hartree-moving-moment-defect} are not a numerical
+upper bound for $A_s,B_{-,s}$: those two \emph{true} integrals must
+still be estimated from the same Cramer-selected physical source.
+In particular, the previously accepted outgoing $A_s$ bound is not
+automatically a bound for the distinct lower-endpoint $B_{-,s}$.
+No expected temporal decay, fixed scaling law, four-region nonlinear
+residual, or Type--II exponent is assumed here.  The revised original
+manuscript count remains $11/13$.
+
 \end{document}
