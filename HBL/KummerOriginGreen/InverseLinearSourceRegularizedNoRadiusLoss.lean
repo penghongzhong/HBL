@@ -73,7 +73,6 @@ theorem originGreen_inverse_linear_source_regularized_uniform
       ‖p r‖ / r * ‖F r‖ * r ^ 2 =
           ‖p r‖ * (‖F r‖ * r) := by
             field_simp [hr0.ne']
-            ring
       _ ≤ G * M :=
         mul_le_mul hp hFM
           (mul_nonneg (norm_nonneg _) hr0.le) hG
@@ -83,7 +82,7 @@ theorem originGreen_inverse_linear_source_regularized_uniform
 the regularized origin basis, with NO inverse-left-radius constant. -/
 theorem originGreen_inverse_linear_coefficients_regularized_uniform
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (a b G M : ℝ) (ha : 0 < a) (hab : a ≤ b)
+    (a b G M : ℝ) (ha : 0 < a) (_hab : a ≤ b)
     (hb : b ≤ scale) (hG : 0 ≤ G) (hM : 0 ≤ M)
     (hbound : ∀ x ∈ Icc 0 scale,
         ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
