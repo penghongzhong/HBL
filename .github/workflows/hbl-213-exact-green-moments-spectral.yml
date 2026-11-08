@@ -86,7 +86,7 @@ jobs:
           assert len(reports)==3, f"Expected exactly three axiom reports, found {len(reports)}"
           actual=set()
           for report in reports:
-              actual |= {re.sub(r'\\.\\{[^}]+\\}
+              actual |= {re.sub(r'\.\{[^}]+\}$','',x.strip()) for x in report.split(',') if x.strip()}
           allowed={'propext','Classical.choice','Quot.sound'}
           assert actual <= allowed, f"Unexpected axioms: {actual-allowed}"
           assert 'sorryAx' not in data
