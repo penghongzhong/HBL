@@ -1,0 +1,152 @@
+import HBL.TypeIIDynamicSelection.ActualHartreeSelectedUpperJetTimeOrder
+import HBL.TypeIIDynamicSelection.ActualKummerRepairClockSqrtRadius
+import HBL.TypeIIDynamicSelection.ActualKummerPhysicalTailWeightedLipschitz
+import Mathlib.Tactic
+
+/-!
+# Same-source compatibility to actual decaying physical Kummer repair
+
+The already constructed unique real speed is reused. Its true upper value
+and slope come from the original coupled weighted Hartree source; no
+independent jet-decay hypothesis is inserted. The physical clock supplies
+a * B <= sqrt(Cq) * sqrt(s), hence rho >= 1/2+delta produces decay delta.
+This is an explicit subchain of revised 2.13, not a whole global parametrix.
+-/
+
+noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open Set MeasureTheory
+open scoped Topology
+namespace HBL.TypeIIDynamicSelection
+open HBL.Profile.Kummer
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Profile.ActualInner HBL.L2Kernel
+
+theorem actual_Hartree_selected_physical_Kummer_repair_from_source_order
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (D G B : ℝ) (hD : 0 ≤ D) (hG : 0 ≤ G) (hB : 0 < B)
+    (hBOne : B ≤ 1) (hBR : B < scale)
+    (hcoeff : ∀ r ∈ Icc 0 scale,
+      ‖originFirstCoeff r‖ + ‖originZeroCoeff mu theta‖ ≤ D)
+    (hbound : ∀ r ∈ Icc 0 scale,
+      ‖K.y r‖ ≤ G ∧ ‖K.dy r‖ ≤ G ∧ ‖K.x r‖ ≤ G ∧ ‖K.dx r‖ ≤ G)
+    (hsmallB : ((D + 1) * G + 1 / 4) * B ^ 2 ≤ 1) :
+    ∃ L0 epsilon C : ℝ,
+      6 ≤ L0 ∧ 0 < epsilon ∧ epsilon ≤ 1 ∧ 0 < C ∧
+      ∀ (L c a s rho delta Csrc Cq : ℝ) (hLp : 0 < L),
+        L0 ≤ L → L ^ 3 ≤ a → a * |c| ≤ epsilon →
+        1 ≤ s → 0 ≤ Csrc → 0 ≤ Cq →
+        a ^ 2 ≤ Cq * s → 0 < delta →
+        1 / 2 + delta ≤ rho →
+      ∀ (Fp Fm : ℝ → ℝ)
+        (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+        (hm : InWeightedL2 (7 / 4 : ℝ) Fm),
+        Continuous Fp → Continuous Fm →
+      ∀ (F : ℝ → ℂ) (Q Kreg : ℝ), 0 ≤ Q → 0 ≤ Kreg →
+        IntervalIntegrable F volume (L / a) B →
+        (∀ r ∈ Icc (L / a) B, ‖F r‖ ≤ Q / r ^ 2) →
+        ‖originGreenCoeffB K (L / a) F B‖ ≤
+          Kreg * (innerWeightedNorm (7 / 4 : ℝ) Fp +
+            innerWeightedNorm (7 / 4 : ℝ) Fm + Q) →
+        innerWeightedNorm (7 / 4 : ℝ) Fp +
+            innerWeightedNorm (7 / 4 : ℝ) Fm + Q ≤
+          Csrc * s ^ (-rho) →
+        ∃ p : ℝ × ℝ,
+          actualMomentLockedCoupledCompatibility K L c hLp a (L / a) B
+            Fp Fm hp hm F p.1 p.2 = 0 ∧
+          (∀ q : ℝ × ℝ,
+            actualMomentLockedCoupledCompatibility K L c hLp a (L / a) B
+              Fp Fm hp hm F q.1 q.2 = 0 → q = p) ∧
+          let Gp := actualMomentLockedInnerPhaseSource L c
+          let Gm := actualMomentLockedInnerScaleSource L c
+          let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
+          let hgm := actual_Hartree_moment_locked_inner_scale_source_weighted L c hLp
+          let Fpa := fun r => Fp r + p.2 * Gp r
+          let Fma := fun r => Fm r + p.1 * Gm r
+          let hpa := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fp Gp hp hgp p.2
+          let hma := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fm Gm hm hgm p.1
+          let S := actualMomentLockedScaledScaleSource a c
+          let P := actualMomentLockedScaledPhaseSource a c
+          let Fo := fun r => F r + (-(p.1 : ℂ)) * S r + (-(p.2 : ℂ)) * P r
+          let J := actualMomentLockedCanonicalInnerJet Fpa Fma hpa hma a (L / a)
+          let UB := actualOriginMatchedKummerValue K (L / a) B Fo J.1 J.2 B
+          let DUB := actualOriginMatchedKummerSlope K (L / a) B Fo J.1 J.2 B
+          let CD := actualHartreeSelectedUpperJetBasisConstant D G B *
+            (C + Kreg) * Csrc
+          (‖UB‖ + B * ‖DUB‖ ≤ CD * s ^ (-rho)) ∧
+          ∀ y : ℝ, 0 < y →
+            ‖actualKummerPhysicalOuterRepair
+                (fun _ : ℝ => a) B (fun _ : ℝ => UB)
+                (fun _ : ℝ => DUB) s y‖ ≤
+              ((1 + 2 * Real.sqrt Cq) * CD) *
+                s ^ (-delta) * bubble y := by
+  obtain ⟨L0, epsilon, C, hL0, heps, hepsOne, hC, hSelected⟩ :=
+    actual_Hartree_selected_upper_jet_inherits_source_time_order
+      K D G B hD hG hB hBOne hBR hcoeff hbound hsmallB
+  refine ⟨L0, epsilon, C, hL0, heps, hepsOne, hC, ?_⟩
+  intro L c a s rho delta Csrc Cq hLp hLarge ha3 hSmall
+    hs hCsrc hCq hClock _hdelta hOrder
+    Fp Fm hp hm hcp hcm F Q Kreg hQ hKreg
+    hF hEnvelope hBase hSource
+  obtain ⟨p, hCompat, hUnique, hJet⟩ :=
+    hSelected L c a s rho Csrc hLp hLarge ha3 hSmall hs hCsrc
+      Fp Fm hp hm hcp hcm F Q Kreg hQ hKreg hF hEnvelope hBase hSource
+  refine ⟨p, hCompat, hUnique, ?_⟩
+  dsimp only at hJet ⊢
+  let Gp := actualMomentLockedInnerPhaseSource L c
+  let Gm := actualMomentLockedInnerScaleSource L c
+  let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
+  let hgm := actual_Hartree_moment_locked_inner_scale_source_weighted L c hLp
+  let Fpa := fun r => Fp r + p.2 * Gp r
+  let Fma := fun r => Fm r + p.1 * Gm r
+  let hpa := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fp Gp hp hgp p.2
+  let hma := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fm Gm hm hgm p.1
+  let S := actualMomentLockedScaledScaleSource a c
+  let P := actualMomentLockedScaledPhaseSource a c
+  let Fo := fun r => F r + (-(p.1 : ℂ)) * S r + (-(p.2 : ℂ)) * P r
+  let J := actualMomentLockedCanonicalInnerJet Fpa Fma hpa hma a (L / a)
+  let UB := actualOriginMatchedKummerValue K (L / a) B Fo J.1 J.2 B
+  let DUB := actualOriginMatchedKummerSlope K (L / a) B Fo J.1 J.2 B
+  let CD := actualHartreeSelectedUpperJetBasisConstant D G B *
+    (C + Kreg) * Csrc
+  have hJ : ‖UB‖ + B * ‖DUB‖ ≤ CD * s ^ (-rho) := by
+    convert hJet using 1
+  have hBasis :
+      0 ≤ actualHartreeSelectedUpperJetBasisConstant D G B := by
+    dsimp [actualHartreeSelectedUpperJetBasisConstant]
+    positivity
+  have hCD : 0 ≤ CD := by
+    dsimp [CD]
+    exact mul_nonneg (mul_nonneg hBasis (add_nonneg hC.le hKreg)) hCsrc
+  have ha : 0 < a := (pow_pos hLp 3).trans_le ha3
+  have hX : a * B ≤ Real.sqrt Cq * s ^ (1 / 2 : ℝ) :=
+    actual_Kummer_repair_radius_sqrt_from_clock
+      a B (a ^ 2) s Cq ha.le hBOne hs hCq rfl hClock
+  have hExpo : s ^ (-(rho - 1 / 2 : ℝ)) ≤ s ^ (-delta) :=
+    Real.rpow_le_rpow_of_exponent_le hs (by linarith)
+  have hCoef : 0 ≤ (1 + 2 * Real.sqrt Cq) * CD := by
+    have hCX : 0 ≤ Real.sqrt Cq := Real.sqrt_nonneg _
+    positivity
+  refine ⟨hJ, ?_⟩
+  intro y hy
+  have hRaw :=
+    actual_Kummer_physical_outer_repair_bubble_time_gain
+      (fun _ : ℝ => a) B (fun _ : ℝ => UB) (fun _ : ℝ => DUB)
+      s rho (Real.sqrt Cq) CD
+      ha hB hs (Real.sqrt_nonneg _) hCD hX hJ y hy
+  calc
+    ‖actualKummerPhysicalOuterRepair
+        (fun _ : ℝ => a) B (fun _ : ℝ => UB)
+        (fun _ : ℝ => DUB) s y‖ ≤
+      ((1 + 2 * Real.sqrt Cq) * CD) *
+        s ^ (-(rho - 1 / 2 : ℝ)) * bubble y := hRaw
+    _ ≤ ((1 + 2 * Real.sqrt Cq) * CD) *
+          s ^ (-delta) * bubble y :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left hExpo hCoef) (bubble_nonneg y)
+    _ = ((1 + 2 * Real.sqrt Cq) *
+          (actualHartreeSelectedUpperJetBasisConstant D G B *
+            (C + Kreg) * Csrc)) * s ^ (-delta) * bubble y := rfl
+
+end HBL.TypeIIDynamicSelection
