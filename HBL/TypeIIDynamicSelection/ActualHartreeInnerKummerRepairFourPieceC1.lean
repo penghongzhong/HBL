@@ -96,11 +96,12 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
       funext y
       simp
     rw [hEq] at hD
-    simpa using hD
+    simpa only [zero_add] using hD
   have hGNear : glued =ᶠ[𝓝 L] v := by
     filter_upwards [Iio_mem_nhds hStrict] with y hy
     change (if y ≤ a * B then v y else
       if y ≤ 2 * a * B then rep y else 0) = v y
+    change y < a * B at hy
     simp [le_of_lt hy]
   have hGDeriv : HasDerivAt glued (deriv u L) L :=
     (hInner.2.1).congr_of_eventuallyEq hGNear
@@ -115,8 +116,8 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
         a B ha hBpos UB DUB
     change (if 2 * a * B ≤ a * B then v (2 * a * B)
       else if 2 * a * B ≤ 2 * a * B then rep (2 * a * B) else 0) = 0
-    rw [if_neg (not_le.mpr hAB), if_pos le_rfl]
-    exact hends.2.2.1
+    have hr : rep (2 * a * B) = 0 := hends.2.2.1
+    simp [not_le.mpr hAB, hr]
   have hGzeroFar (y : ℝ) (hy : 2 * a * B < y) :
       glued y = 0 := by
     dsimp [glued, actualPhysicalMatchedKummerC1Splice]
