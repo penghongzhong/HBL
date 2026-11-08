@@ -1,4 +1,4 @@
-import HBL.HartreeSpatialCompletion
+import HBL.HartreeQuarticGradient
 import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Tactic
 
@@ -31,6 +31,7 @@ open scoped Topology
 namespace HBL.TypeIIDynamicSelection
 open HBL.RegularRadiation
 open HBL.RegularRadiation.SpatialCompletion
+open HBL.RegularRadiation.QuarticGradient
 
 /-- The genuine original 3D quartic physical radiation density. -/
 def actualHartreeThreeDQuarticRadiationDensity
@@ -75,6 +76,47 @@ theorem actual_Hartree_threeD_quartic_potential_moving_observer_hasDerivAt
       ε hε hεlim he0 he1 hi0 hi1
   have hObserver :
       HasDerivAt (fun t => (a t) • x0) (aDot • x0) s :=
+    hA.smul_const x0
+  exact (hSpatial ((a s) • x0)).comp_hasDerivAt s hObserver
+
+
+/-- Stronger, field-generated version: the genuine spatial gradient of the
+quartic Hartree density and all its L1/L∞ budgets are derived from one
+physical 3D complex radiation slice. No independently supplied density
+gradient D or potential spatial derivative remains. The noncompact
+smooth-core approximation is still a visible analytic requirement. -/
+theorem actual_Hartree_threeD_quartic_moving_observer_from_field
+    (z : ℝ → Space → ℂ) (s : ℝ)
+    (a : ℝ → ℝ) (aDot : ℝ)
+    (hA : HasDerivAt a aDot s) (x0 : Space)
+    (hz : ContDiff ℝ 1 (z s))
+    (h4 : Integrable (fun y : Space => ‖z s y‖ ^ 4))
+    (hd : MemLp (fderiv ℝ (z s)) 2)
+    (M L : ℝ) (hM : 0 ≤ M) (hL : 0 ≤ L)
+    (hzb : ∀ᵐ y : Space, ‖z s y‖ ≤ M)
+    (hzdb : ∀ᵐ y : Space, ‖fderiv ℝ (z s) y‖ ≤ L)
+    (ρn : ℕ → Space → ℂ) (hc : ∀ n, HasCompactSupport (ρn n))
+    (hn : ∀ n, ContDiff ℝ 1 (ρn n))
+    (ε : ℕ → ℝ) (hε : ∀ n, 0 ≤ ε n)
+    (hεlim : Tendsto ε atTop (𝓝 0))
+    (he0 : ∀ n, ∀ᵐ y : Space,
+      ‖ρn n y - quarticDensity (z s) y‖ ≤ ε n)
+    (he1 : ∀ n, ∀ᵐ y : Space,
+      ‖fderiv ℝ (ρn n) y - fderiv ℝ (quarticDensity (z s)) y‖ ≤ ε n)
+    (hi0 : ∀ n, (∫ y : Space,
+      ‖ρn n y - quarticDensity (z s) y‖) ≤ ε n)
+    (hi1 : ∀ n, (∫ y : Space,
+      ‖fderiv ℝ (ρn n) y - fderiv ℝ (quarticDensity (z s)) y‖) ≤ ε n) :
+    HasDerivAt
+      (fun t => potential (quarticDensity (z s)) ((a t) • x0))
+      (gradientPotential (fderiv ℝ (quarticDensity (z s)))
+        ((a s) • x0) (aDot • x0)) s := by
+  have hSpatial :=
+    quarticPotential_derivative_of_core_approximation
+      (z s) hz h4 hd M L hM hL hzb hzdb
+      ρn hc hn ε hε hεlim he0 he1 hi0 hi1
+  have hObserver : HasDerivAt
+      (fun t => (a t) • x0) (aDot • x0) s :=
     hA.smul_const x0
   exact (hSpatial ((a s) • x0)).comp_hasDerivAt s hObserver
 
