@@ -4,6 +4,8 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSelectedMatchedFirstWeighted.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedRegularJetNoRadiusLoss.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSourceUniformRegularJet.lean'
       - '.github/workflows/hbl-213-true-selected-matched-first-weighted.yml'
   workflow_dispatch:
 permissions:
