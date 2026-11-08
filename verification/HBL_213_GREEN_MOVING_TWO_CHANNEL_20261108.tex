@@ -178,6 +178,32 @@ established to convert the algebraic cancellation into uniform
 full-field $H^1$ and Hartree source bounds.
 
 \medskip
+\noindent\textbf{Near-interface quantitative local Hartree source moment.}
+In addition to the whole-annulus coefficient estimate, the original
+physical source and regular Kummer mode give the pointwise bound
+\[
+ \left|\frac{X(r)F(r)}{W(r)}\right|
+ \le GM_{\HH}\,a(ar)^{-11/8}
+ \le GM_{\HH}\,aL^{-11/8},\qquad ar\ge L.
+\]
+Integrating over the genuine moving segment $[L/a,r]$ yields
+\begin{equation}
+ \left|\int_{L/a}^{r}
+       \frac{X(\rho)F(\rho)}{W(\rho)}\,d\rho\right|
+ \le GM_{\HH}\,(ar-L)L^{-11/8}.
+ \label{eq:actual-local-hartree-green-moment}
+\end{equation}
+This is precisely zero at the left interface. Together with
+\eqref{eq:actual-singular-green-transport} it separates the singular
+mode into a source-selected left-jet contribution and a locally
+vanishing true PDE source moment. Multiplication by the singular
+fundamental solution and the resulting global spatial and time estimates
+still require further quantitative control. The corresponding new
+Lean source is
+\texttt{ActualHartreeKummerOutgoingLocalMomentGain.lean};
+its strict CI acceptance remains pending at this checkpoint.
+
+\medskip
 \noindent\textbf{Lean verification scope (new candidates).}
 The preceding singular Green transport and the positive-radius
 Wronskian trace bounds correspond respectively to
