@@ -56,7 +56,7 @@ theorem actual_Hartree_zero_left_Kummer_regularized_Volterra_identity
   rw [hSing, hReg]
   simp only [zero_mul, add_zero]
   unfold originPhysicalValue
-  field_simp [hrC] <;> ring
+  field_simp [hrC]; ring
 
 theorem actual_Hartree_zero_left_Kummer_regularized_Volterra_value_bound
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
@@ -100,7 +100,7 @@ theorem actual_Hartree_zero_left_Kummer_regularized_Volterra_value_bound
         _ ≤ ‖K.y r‖ * (‖originGreenCoeffA K b F r‖ +
                 ‖originGreenCoeffA K b F a‖) +
               ‖K.x r‖ * ‖originGreenCoeffB K a F r‖ :=
-            add_le_add_right
+            add_le_add_left
               (mul_le_mul_of_nonneg_left
                 (norm_sub_le _ _) (norm_nonneg _)) _
     _ ≤ G * ((G * M) * (b - r) + (G * M) * (b - a)) +
