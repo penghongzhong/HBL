@@ -60,7 +60,7 @@ theorem actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
   have hr0 : 0 < r := ha.trans_le hr.1
   have hb0 : 0 ≤ b := (ha.trans_le hab).le
   have hrscale : r ∈ Icc 0 scale :=
-    ⟨hr0.le, hr.2.trans_le hb.le⟩
+    ⟨hr0.le, hr.2.trans hb.le⟩
   have hJ : 0 ≤ J := by dsimp [J]; positivity
   have hGM : 0 ≤ G * M := mul_nonneg hG hM
   have hJM : 0 ≤ J * M := mul_nonneg hJ hM
@@ -77,7 +77,9 @@ theorem actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
       _ ≤ r * G + G :=
         add_le_add (mul_le_mul_of_nonneg_left hModes.2.1 hr0.le) hModes.1
       _ ≤ b * G + G :=
-        add_le_add_right (mul_le_mul_of_nonneg_right hr.2 hG) G
+        by
+          have hMul : r * G ≤ b * G := mul_le_mul_of_nonneg_right hr.2 hG
+          linarith
       _ = (b + 1) * G := by ring
   have hJet :=
     origin_kummer_regular_jet_bound K D G hD hG hcoeff hbound r hrscale
@@ -143,7 +145,13 @@ theorem actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
             originGreenCoeffA K b F a‖ +
         ‖(r : ℂ) * K.dx r - K.x r‖ *
           ‖originGreenCoeffB K a F r‖ := by
-            simpa only [norm_mul] using norm_add_le _ _
+            simpa only [norm_mul] using
+              (norm_add_le
+                (((r : ℂ) * K.dy r - K.y r) *
+                  (originGreenCoeffA K b F r -
+                    originGreenCoeffA K b F a))
+                (((r : ℂ) * K.dx r - K.x r) *
+                  originGreenCoeffB K a F r))
       _ ≤ ((b + 1) * G) * ((J * M) * r ^ 2) +
           ((2 * (D + 1) * G) * r ^ 3) *
             ((G * M) * r) := by
@@ -156,8 +164,9 @@ theorem actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
           (2 * (D + 1) * G ^ 2 * M) * r ^ 4 := by ring
       _ ≤ ((b + 1) * G * J * M) * r ^ 2 +
           (2 * (D + 1) * G ^ 2 * M) * (b ^ 2 * r ^ 2) :=
-        add_le_add_left
-          (mul_le_mul_of_nonneg_left hr4 hXconstFull) _
+        by
+          have hMul := mul_le_mul_of_nonneg_left hr4 hXconstFull
+          linarith
       _ = E * r ^ 2 := by dsimp [E]; ring
   have hNorm :
       ‖(r : ℂ) ^ 2 * actualOriginMatchedKummerSlope K a b F 0 0 r‖ =
@@ -172,7 +181,7 @@ theorem actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
       _ = r ^ 2 * E := by ring
   have hFinal :
       ‖actualOriginMatchedKummerSlope K a b F 0 0 r‖ ≤ E :=
-    (mul_le_mul_left (pow_pos hr0 2)).mp hE
+    (mul_le_mul_iff_of_pos_left (pow_pos hr0 2)).mp hE
   simpa only [E, J, mul_assoc] using hFinal
 
 end HBL.TypeIIDynamicSelection
