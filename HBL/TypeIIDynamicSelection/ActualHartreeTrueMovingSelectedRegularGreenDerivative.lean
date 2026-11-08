@@ -39,9 +39,9 @@ def actualHartreeTrueMovingAdjustedSourceDot
   let pw : ℝ → ℝ := fun u =>
     (actualRealCramerCorrection (b u) (w u) (Z u)).2
   Fdot t r -
-    ((deriv pb t : ℂ) * actualMomentLockedScaledScaleSource (a t) (c t) r +
+    (((deriv pb t : ℝ) : ℂ) * actualMomentLockedScaledScaleSource (a t) (c t) r +
       (pb t : ℂ) * Sdot t r) -
-    ((deriv pw t : ℂ) * actualMomentLockedScaledPhaseSource (a t) (c t) r +
+    (((deriv pw t : ℝ) : ℂ) * actualMomentLockedScaledPhaseSource (a t) (c t) r +
       (pw t : ℂ) * Pdot t r)
 
 /-- A true moving Hartree physical source, with its actual selected speed,
