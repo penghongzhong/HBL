@@ -124,7 +124,6 @@ theorem actual_Hartree_true_source_selected_full_singular_Green_physical_no_scal
   have hqp : q = p := hUnique q hCompatT
   subst q
   refine ⟨p, hCompat, hUnique, hSize, ?_⟩
-  dsimp only
   let F0 : ℝ → ℂ :=
     fun x => -actualHartreeLaplacianScaledKummerSource a ell c z x
   let Q : ℝ :=
