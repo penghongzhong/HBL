@@ -113,7 +113,7 @@ theorem actual_Hartree_speed_correction_singular_Green_no_scale_loss :
         mul_le_mul_of_nonneg_right
           (mul_le_mul hX (hF x hx) (norm_nonneg _)
             (by positivity)) (sq_nonneg x)
-      _ = Cg := by dsimp [Cg, P]; field_simp [hxpos.ne']; ring
+      _ = Cg := by dsimp [Cg, P]; field_simp [hxpos.ne']
   have hMoment :
       ‖originGreenCoeffA K r Fsp r0‖ ≤ Cg * (r - r0) := by
     unfold originGreenCoeffA
@@ -124,7 +124,8 @@ theorem actual_Hartree_speed_correction_singular_Green_no_scale_loss :
       intro x hx
       rw [uIoc_of_le hr.1] at hx
       exact hDensity x ⟨hx.1.le,hx.2⟩
-    simpa only [abs_of_nonneg (sub_nonneg.mpr hr.1)] using hRaw
+    rw [abs_of_nonneg (sub_nonneg.mpr hr.1)] at hRaw
+    exact hRaw
   have hY : ‖originPhysicalValue K.y r‖ ≤ G / r := by
     have hRef := hbound r ⟨hrp.le,hr.2.trans hBR.le⟩
     rw [originPhysicalValue, norm_div, Complex.norm_real,
