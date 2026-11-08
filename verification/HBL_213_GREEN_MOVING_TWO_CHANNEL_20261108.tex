@@ -1043,4 +1043,58 @@ residual of order \(O(s^{-9/4})\), including the direct shooting
 Lipschitz bound, are NOT asserted by
 \eqref{eq:true-hartree-complete-nonlocal-interaction-time}.
 
+
+\medskip
+\noindent\textbf{Spatial derivative of the ORIGINAL three-dimensional
+Riesz potential under the physical moving observation point.}
+For the actual complex physical radiation at a fixed time \(s\),
+set \(\rho_s(y)=|z(s,y)|^4\) and retain the original convolution
+\[
+ \mathcal P_3[\rho_s](x)
+ =\int_{\mathbb R^3}\frac{\rho_s(y)}{|x-y|^2}\,dy .
+\]
+Instead of differentiating the singular kernel directly, the
+pre-existing noncompact-convolution completion theorem transfers
+the spatial derivative to the \emph{actual} quartic density:
+\begin{align}
+ D_x\mathcal P_3[\rho_s](x)[h]
+ &=\int_{\mathbb R^3}
+    \frac{D\rho_s(y)[h]}{|x-y|^2}\,dy ,
+ \label{eq:true-hartree-threeD-spatial-gradient}
+\end{align}
+provided \(z(s)\in C^1\cap L^4\), \(Dz(s)\in L^2\) with
+the displayed boundedness assumptions, and the genuine density
+\(\rho_s\) together with \(D\rho_s\) admits compactly supported
+smooth approximants in the explicitly required \(L^1\) and
+uniform bounds. In this same setting, the physical observer
+\(x(s)=a(s)x_0\) obeys
+\begin{align}
+ \left.\frac{d}{dt}
+   \mathcal P_3[\rho_s](a(t)x_0)\right|_{t=s}
+ &=D_x\mathcal P_3[\rho_s](a(s)x_0)
+   [a'(s)x_0].
+ \label{eq:true-hartree-threeD-moving-observer}
+\end{align}
+The original source density is used in
+\texttt{ActualHartreeThreeDMovingObserverDerivative.lean}.
+Its initial version (an independently specified density gradient)
+passed CI \texttt{42476562067}; the strengthened version
+\emph{derives} the quartic density gradient and its budgets
+from the original field, using the previously verified
+\texttt{HartreeQuarticGradient.lean}.
+The exact strengthened theorem
+\texttt{actual\_Hartree\_threeD\_quartic\_moving\_observer\_from\_field}
+is independently strict by CI \texttt{42476734964} (\emph{Success}),
+source commit \texttt{3218ca9}, workflow commit \texttt{a962e99}.
+
+The conclusion of \eqref{eq:true-hartree-threeD-moving-observer}
+is the spatial observer term with the \emph{physical density time
+frozen at \(s\)}. It is not asserted that the original half-line
+radial logarithmic representation has already been identified with
+this three-dimensional convolution in the formal proof chain.
+That radialization identity, the simultaneous \(s\)-dependent
+density and moving observer derivative, the moving Kummer basis,
+and the full physical \(O(s^{-9/4})\) residual remain genuine
+separate obligations.
+
 \end{document}
