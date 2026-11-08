@@ -160,6 +160,8 @@ The true regular origin homogeneous coefficient has a separate source-to-amplitu
 3. ActualHartreeTrueSourceSelectedCorrectedNorm.lean, commit d882d6f, CI [42454532669](https://github.com/penghongzhong/HBL/actions/runs/42454532669): derive both corrected weighted inner norm and outer envelope from original quartic Hartree source.
 4. ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean, commit d4e8da4: eliminate corrected norm from full singular Green bound in favor of original N_F+Q_H. Dedicated CI [42454628449](https://github.com/penghongzhong/HBL/actions/runs/42454628449) was triggered by .github/workflows/hbl-true-source-full-original-norm.yml; it is **pending**, not a strict acceptance at this checkpoint.
 
-TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex (commit 74694b6).
+5. ActualHartreeOnePhysicalSourceFullSelectedSingularGreen.lean, commit 47a907b, initial strict CI [42454937267](https://github.com/penghongzhong/HBL/actions/runs/42454937267) and current source-corrected run [42454972827](https://github.com/penghongzhong/HBL/actions/runs/42454972827): bind both Fredholm channels and F0 to one and the same complete Hartree nonlocal Riesz interaction, with source continuity a visible input. Strict outcome is pending.
+
+TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex (latest commit f17a373; subsequent strict-status updates may follow).
 
 **Unchanged strict revised 13-environment count: 11/13 = 84.62%.** Neither full dynamical physical Fredholm/Green/repair/remote residual nor O(s^-9/4) positive relative gain and threshold Lipschitz are proved by the fixed-slice Green estimates. Dynamical Type-II exponent must be derived, not assumed.
