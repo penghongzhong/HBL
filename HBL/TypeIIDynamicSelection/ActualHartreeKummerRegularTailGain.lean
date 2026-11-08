@@ -387,4 +387,88 @@ theorem actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
       ring
     _ = _ := by rfl
 
+
+/-- BOTH genuine origin Green source coefficients are controlled at EVERY
+normalized radius between the moving inner boundary L/a and the fixed
+outer interface R. The exact original Riesz source is unchanged, and the
+same L^(-3/8) factor works for both channels: to bound A(r) use its
+already-verified tail theorem with lower physical cutoff a*r, while
+B(r) uses its verified theorem with upper normalized radius r.
+
+This does not turn the coefficients into a bound on the physical Green
+field: multiplication by each actual (possibly singular) fundamental
+solution still requires its own matched-interface estimates. -/
+theorem actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (D G L R a B A ell c : ℝ)
+    (hD : 0 ≤ D) (hG : 0 ≤ G)
+    (hL : 1 ≤ L) (ha : 0 < a)
+    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (hcoeff : ∀ x ∈ Icc 0 scale,
+      ‖originFirstCoeff x‖ + ‖originZeroCoeff mu theta‖ ≤ D)
+    (hbound : ∀ x ∈ Icc 0 scale,
+      ‖K.y x‖ ≤ G ∧ ‖K.dy x‖ ≤ G ∧ ‖K.x x‖ ≤ G ∧ ‖K.dx x‖ ≤ G)
+    (hB : 0 ≤ B) (hA : 0 ≤ A)
+    (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    (hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ B)
+    (hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ A)
+    (x : ℝ) (hx : x ∈ Icc (L / a) R) :
+    let F := fun t : ℝ =>
+      -actualHartreeLaplacianScaledKummerSource a ell c z t
+    let M := actualHartreePhysicalWeightedSourceConstant B A * ell ^ (1 / 8 : ℝ)
+    ‖originGreenCoeffA K R F x‖ ≤
+      ((8 / 3 : ℝ) * G * M) * L ^ (-(3 / 8 : ℝ)) ∧
+    ‖originGreenCoeffB K (L / a) F x‖ ≤
+      ((8 / 3 : ℝ) * G * M) * L ^ (-(3 / 8 : ℝ)) := by
+  dsimp only
+  let F : ℝ → ℂ := fun t =>
+    -actualHartreeLaplacianScaledKummerSource a ell c z t
+  let M : ℝ := actualHartreePhysicalWeightedSourceConstant B A * ell ^ (1 / 8 : ℝ)
+  let C0 : ℝ := (8 / 3 : ℝ) * G * M
+  have hLp : 0 < L := lt_of_lt_of_le zero_lt_one hL
+  have hxpos : 0 < x := (div_pos hLp ha).trans_le hx.1
+  have hxOut : x < scale := hx.2.trans_lt hRscale
+  have hLax : L ≤ a * x := by
+    have h := (div_le_iff₀ ha).1 hx.1
+    simpa only [mul_comm] using h
+  have hOne : 1 ≤ a * x := hL.trans hLax
+  have hDiv : a * x / a = x := by
+    field_simp [ha.ne']
+  have hM : 0 ≤ M := by
+    dsimp [M]
+    exact mul_nonneg
+      (actualHartreePhysicalWeightedSourceConstant_nonneg B A hB hA)
+      (Real.rpow_nonneg hell.le _)
+  have hC0 : 0 ≤ C0 := by
+    dsimp [C0]
+    positivity
+  have hOutRaw :=
+    actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
+      K D G (a * x) R a B A ell c hD hG hOne ha
+      (by simpa only [hDiv] using hx.2) hRscale hcoeff hbound
+      hB hA hell hellOne hc z hz hSup hStrauss
+  have hOut :
+      ‖originGreenCoeffA K R F x‖ ≤
+        C0 * (a * x) ^ (-(3 / 8 : ℝ)) := by
+    change ‖originGreenCoeffA K R F (a * x / a)‖ ≤
+      C0 * (a * x) ^ (-(3 / 8 : ℝ)) at hOutRaw
+    rw [hDiv] at hOutRaw
+    exact hOutRaw
+  have hInRaw :=
+    actual_Hartree_scaled_Kummer_regular_Green_tail_gain
+      K D G L x a B A ell c hD hG hL ha
+      hx.1 hxOut hcoeff hbound hB hA hell hellOne hc
+      z hz hSup hStrauss
+  have hIn :
+      ‖originGreenCoeffB K (L / a) F x‖ ≤
+        C0 * L ^ (-(3 / 8 : ℝ)) := by
+    change ‖originGreenCoeffB K (L / a) F x‖ ≤
+      C0 * L ^ (-(3 / 8 : ℝ)) at hInRaw
+    exact hInRaw
+  have hPow :
+      (a * x) ^ (-(3 / 8 : ℝ)) ≤ L ^ (-(3 / 8 : ℝ)) :=
+    Real.rpow_le_rpow_of_nonpos hLp hLax (by norm_num)
+  exact ⟨hOut.trans (mul_le_mul_of_nonneg_left hPow hC0), hIn⟩
+
 end HBL.TypeIIDynamicSelection

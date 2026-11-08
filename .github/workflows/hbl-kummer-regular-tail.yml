@@ -75,9 +75,11 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_regular_Green_tail_gain
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_regular_Green_tail_gain
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform
           EOF
           lake env lean --trust=0 -DwarningAsError=true KummerTailAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
