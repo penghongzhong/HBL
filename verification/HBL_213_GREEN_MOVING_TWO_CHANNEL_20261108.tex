@@ -1,0 +1,115 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\G}{\mathcal G}
+\newcommand{\N}{\mathcal N}
+\DeclareMathOperator{\Ree}{Re}
+\begin{document}
+\title{HBL \S2.13: the two original moving Kummer Green channels}
+\date{November 8, 2026}
+\maketitle
+
+\noindent\textbf{Scope.}
+The statements below concern the actual three-dimensional inverse-square
+quartic Hartree source, its origin-normalized Kummer Green integrals,
+and the matched physical field.  They do not assert the still-open
+full nonlinear physical parametrix or its $s^{-9/4}$ residual bound.
+
+Let $a>0$, $L\ge 1$, $r_0=L/a\le B<R_K$,
+and let $K$ denote the original origin-normalized Kummer basis.
+For the actual physical source $\mathcal S_\HH$ put
+\[
+ F(r):=-a^2\mathcal S_\HH(ar),\qquad
+ M_\HH:=C_{\mathrm{phys}}(B_z,A_z)\,\ell^{1/8}.
+\]
+The previously established source and normalized basis bounds read
+\[
+ |\mathcal S_\HH(y)|\le M_\HH(1+y)^{-19/8},\qquad
+ |X(r)|+|Y(r)|\le 2G/r,\qquad r_0\le r\le B,
+\]
+where $X$ and $Y$ are the actual physical fundamental solutions
+and the Wronskian, with its original normalization, satisfies
+\[
+ W(r)=r^{-2}e^{-ir^2/4},\qquad |W(r)^{-1}|=r^2.
+\]
+Consequently, for $Z\in\{X,Y\}$ and $r\in[r_0,B]$,
+\begin{align*}
+ \left|\frac{Z(r)F(r)}{W(r)}\right|
+ &\le G a^2 M_\HH\,r(1+ar)^{-19/8}\\
+ &\le G M_\HH a\,(ar)^{-11/8}.
+\end{align*}
+For every $\rho\in[r_0,B]$ define the \emph{original}, unswapped
+Green coefficients
+\[
+ A(\rho)=\int_\rho^B\frac{X(r)F(r)}{W(r)}\,dr,\qquad
+ B(\rho)=\int_{r_0}^{\rho}\frac{Y(r)F(r)}{W(r)}\,dr.
+\]
+The exact physical change of variables $x=ar$ gives
+\begin{align*}
+ |A(\rho)|
+ &\le GM_\HH\int_{a\rho}^{aB}x^{-11/8}\,dx
+ \le \frac83 GM_\HH L^{-3/8},\\
+ |B(\rho)|
+ &\le GM_\HH\int_L^{a\rho}x^{-11/8}\,dx
+ \le \frac83 GM_\HH L^{-3/8},\\
+ |A(\rho)|+|B(\rho)|
+ &\le \frac{16}{3}GM_\HH L^{-3/8}.
+\end{align*}
+In particular, \emph{neither Green coefficient carries a positive
+power of $a$}.  The estimate applies at every normalized radius,
+not only at the upper interface.
+
+With the genuine coupled compatibility obstruction $\sigma=0$,
+the matched Kummer field is exactly
+\[
+ w(\rho)=Y(\rho)A(\rho)+X(\rho)\bigl(B(\rho)+\gamma\bigr),
+ \qquad
+ \gamma=\frac{Y(r_0)DU-Y'(r_0)U}{W(r_0)}.
+\]
+The first equality is a statement about the complete inhomogeneous
+Green branch, not an indicator-supported outer repair.  The second
+equality fixes the regular coefficient from the actual left Fredholm
+Cauchy jet $(U,DU)$, rather than introducing a free amplitude.
+
+\medskip
+\noindent\textbf{Remaining quantitative distinction.}
+The coefficient estimate cannot be multiplied by $|Y(\rho)|\le G/\rho$
+and declared uniform as $r_0=L/a\to0$.
+A source-and-left-jet fixed-annulus estimate instead gives
+\[
+ |w(\rho)|+|w'(\rho)|
+ \le E,\qquad
+ E:=2C^3\bigl((B-r_0)M+\lvert U\rvert+\lvert DU\rvert\bigr),
+\]
+where $C$ is the original \emph{annulus-dependent} basis budget
+and $M$ bounds the original Kummer forcing on this annulus.
+For $v(y)=w(y/a)$ one obtains
+\[
+ \int_L^{aB}y^2\lvert v'(y)\rvert^2\,dy
+ \le a(B-r_0)(BE)^2,\qquad
+ |v(y)|\le (1+aB)E(1+y^2)^{-1/2}.
+\]
+These last physical source-controlled energy and bubble inequalities
+are separate Lean candidates at the checkpoint; the entire time-uniform
+inner/Green/repair/remote field estimate does not follow until
+the moving-origin basis, exact cancellations, and true time derivative
+are controlled.
+
+\medskip
+\noindent\textbf{Formal verification correspondence.}
+The fixed-annulus interior norm certificate is strictly accepted
+(CI 42439861649).  The two endpoint Green coefficient estimates
+are strictly accepted (CI 42440630160 and the older regular-channel
+certificate).  The all-$\rho$ two-channel bridge and the physical
+Green-region energy/bubble and four-piece $C^1$ bridges require their
+independent CI results before citation as accepted theorems.
+
+\medskip
+\noindent\textbf{Unchanged final target.}
+For one genuine radial Hartree orbit, establish the complete nonlinear
+weighted residual and its two-parameter Lipschitz difference at
+$O(s^{-9/4})$, then derive the Type--II blowup exponent dynamically,
+without prescribing the rate.
+\end{document}
