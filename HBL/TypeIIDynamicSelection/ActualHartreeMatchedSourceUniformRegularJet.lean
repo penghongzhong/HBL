@@ -60,9 +60,6 @@ theorem actual_Hartree_matched_source_and_uniform_regular_jet_weighted
   have hnormr : ‖(r : ℂ)‖ = r := by
     rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos hrpos]
   have hb0 : 0 ≤ b := ha.le.trans hab
-  have hQExpr : 0 ≤ (2 * C ^ 2 * (b - a)) * Q := by
-    have hba : 0 ≤ b - a := sub_nonneg.mpr hab
-    positivity
   have hGreenWeighted :
       ‖(r : ℂ) * originGreenValue K a b F r‖ ≤
         b * ((2 * C ^ 2 * (b - a)) * Q) := by
