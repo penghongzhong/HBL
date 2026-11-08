@@ -2451,4 +2451,69 @@ repair, not a new PDE estimate. Until the whole source-selected
 time-dependent residual and finite recursion are proved,
 the strict original-environment count is still \(11/13\).
 
+
+\medskip
+\noindent\textbf{Strict source-selected whole Green and matched weighted
+field, with a single real Cramer compatibility speed.}
+For the \emph{actual} scaled inverse-square quartic Hartree forcing
+\(F_0\), the original Fredholm two-channel conditions uniquely determine
+\(p=(p_1,p_2)\in\mathbb R^2\). Set
+\[
+ F_{\mathrm{adj}}=F_0-p_1S_{\mathrm{scale}}
+                       -p_2S_{\mathrm{phase}},\qquad
+ r_0=L/a.
+\]
+The complete original Green coefficient decomposition, including both
+singular and regular inhomogeneous channels of the \emph{same} selected
+source, has a rigorously constructed envelope \(H_G\) such that
+\[
+ \|r\,G_{K_0}[F_{\mathrm{adj}}](r)\|
+   \le H_G,\qquad r_0\le r\le B.
+\]
+Here \(H_G\) is the \emph{explicit source-derived expression} in
+\texttt{actual\_Hartree\_true\_source\_selected\_whole\_original\_Green\_no\_radius\_loss},
+not an independent envelope or an assumed time power. It retains
+the actual Fredholm source norm, the physical radiation budget
+\(C_{\mathrm{phys}}\ell^{1/8}\), and \(L^{-3/8}\), with no
+additional inverse \(r_0\) factor from the Wronskian method.
+
+The original Cramer coefficient determined by the true left Fredholm
+jet \(J=(U,DU)\) then gives the \emph{complete matched profile}
+\[
+ \boxed{\;
+ \sup_{r_0\le r\le B}r\,
+ \bigl|\mathcal G_{K_0}^{\mathrm{match}}
+           [F_{\mathrm{adj}};U,DU](r)\bigr|
+ \le H_G+G^2\bigl(r_0|DU|+(r_0+1)|U|\bigr).\;}
+\]
+Crucially, this matched estimate uses precisely the \emph{same unique}
+real speed \(p\) as the actual three-interface physical
+Fredholm--Green--repair--zero field. No second independently selected
+velocity is inserted. The three strict accepted exact targets are
+\texttt{actual\_Hartree\_true\_source\_selected\_whole\_original\_Green\_no\_radius\_loss},
+\texttt{actual\_Hartree\_true\_source\_selected\_whole\_matched\_weighted\_no\_radius\_loss},
+and
+\texttt{actual\_Hartree\_same\_selected\_speed\_whole\_Green\_and\_three\_C1},
+with respective GitHub Actions CI identifiers
+\texttt{42531018076}, \texttt{42531018033} and
+\texttt{42531018032} (\emph{all Success}).
+The original archives \texttt{13637702928},
+\texttt{13637359625}, and \texttt{13637652105}
+have been examined independently: each \texttt{strict.log}
+is empty, Lean 4.35.0-rc3 is pinned, the exact theorem is
+type-checked, and every transitive \texttt{\#print axioms}
+lists only \texttt{propext}, \texttt{Classical.choice},
+and \texttt{Quot.sound}, without \texttt{sorryAx}.
+
+\emph{Acceptance boundary:} these source-faithful weighted
+bounds and the same-speed three-interface certificate concern
+the \emph{uncorrected} original field. The separately verified
+spectrally corrected three-\(C^1\)-join theorem must still be
+composed with the \emph{same} source-derived \(p\).
+Moreover, no time-positive estimate for the moving basis,
+the complete four-region quartic nonlocal PDE residual,
+the true finite recursion or the dynamic Type-II exponent
+follows from these fixed-time estimates. The original revised
+acceptance count therefore remains \(11/13\).
+
 \end{document}
