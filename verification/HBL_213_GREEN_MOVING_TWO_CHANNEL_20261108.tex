@@ -1484,4 +1484,42 @@ also remain unproved; no physical Type-II exponent is assumed here.
 The original §2.13 environment and final theorem are therefore
 \emph{not} accepted by these separate strict Cramer lemmas.
 
+\medskip
+\noindent\textbf{Joint physical-source selection and spectral interface jet
+estimate.}
+The genuine nonlocal Hartree source and the single unique real
+compatibility speed now produce, \emph{in one theorem}, both the
+first-order \emph{isolated} Green--slope perturbation and the
+second-order frozen-Kummer PDE residual. Writing
+\[
+  \Delta_{\mu,\theta}
+    =|\mu-\mu_0|+|\theta-\theta_0|,
+  \quad E_1=2C_K^2(B-r_0),\quad E_2=2C_K^3(B-r_0),
+  \quad M_{\rm phys}
+    =C_{\rm sel}(N_{\rm F}+C_{\rm phys}\ell^{1/8}),
+\]
+their simultaneously valid estimates are
+\[
+ \begin{aligned}
+ &\|u_{\rm corr}-u_0\|
+   +\|S_{\rm corr}-S_0\|
+     \le E_2\Delta_{\mu,\theta}E_1M_{\rm phys},\\
+ &\|\mathcal L_{\mu,\theta}u_{\rm corr}
+       -F_{\rm adj}\|
+     \le\Delta_{\mu,\theta}^{2}E_1E_2M_{\rm phys}.
+ \end{aligned}
+\]
+No independent selected speed, adjusted source envelope or expected
+time-decay rate is posited. This is precisely
+\texttt{actual\_Hartree\_original\_selected\_spectral\_C1\_and\_quadratic\_residual}
+in \texttt{ActualHartreeOriginalSelectedSpectralC1Joint.lean},
+strict CI \texttt{42503807361} (\emph{Success});
+the pinned \texttt{--trust=0} audit reports only
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, no \texttt{sorryAx}.
+The fixed-annulus basis constant still cannot be assumed uniformly
+bounded on shrinking moving annuli; the distinct \emph{matched}
+left-jet-preserving construction and its outgoing flux must be
+controlled as above before global four-region recursion.
+
 \end{document}
