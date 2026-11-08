@@ -781,4 +781,68 @@ exact axiom audit was corrected in workflow commit \texttt{132efe7}.
 The original-source, moving-endpoint and Kummer-basis time terms
 must still be joined and bounded in the full physical field.
 
+
+\medskip
+\noindent\textbf{Exact source--moving-endpoint cross difference, with
+the actual selected Hartree source.}
+For one physical orbit let
+\(
+F_s(r)=F_{\mathrm{adj}}(s,r)
+\)
+and
+\(
+r_s=\ell(s)^{-1/16}/a(s)
+\).
+At a fixed origin Kummer basis \(K\), write
+\(
+G_K(u;F)=\int_u^B Y_K(r)F(r)/W_K(r)\,dr
+\).
+By exact interval-integral additivity and linearity, without
+an asymptotic expansion,
+\begin{align}
+\mathfrak E_K(t,s)
+ &:=
+ G_K(r_t;F_t)-G_K(r_s;F_t)
+ -G_K(r_t;F_s)+G_K(r_s;F_s)\notag\\
+ &=\int_{r_t}^{r_s}
+    \frac{Y_K(r)}{W_K(r)}
+       [F_t(r)-F_s(r)]\,dr .
+ \label{eq:true-hartree-green-source-endpoint-cross}
+\end{align}
+Under interval integrability of the original Green densities and the
+\emph{explicit} local temporal Lipschitz assumption
+\[
+ \left|\frac{Y_K(r)}{W_K(r)}
+       [F_t(r)-F_s(r)]\right|
+ \le C|t-s|,\qquad
+ r\in[\min(r_t,r_s),\max(r_t,r_s)],
+\]
+the exact physical remainder satisfies
+\begin{align}
+ |\mathfrak E_K(t,s)|
+ &\le C|t-s|\,|r_t-r_s|.\label{eq:true-hartree-green-cross-bound}
+\end{align}
+These are formally checked by
+\texttt{ActualHartreeMovingSelectedGreenMixedDifference.lean},
+strict CI \texttt{42472592872} (\emph{Success}).
+Since the endpoint derivative has already been derived from the genuine
+\(\ell(s),a(s)\), \(r_t-r_s=O(|t-s|)\) locally. Therefore
+\(\mathfrak E_K(t,s)=O(|t-s|^2)=o(|t-s|)\), and, in combination
+with the separately verified source and endpoint derivatives,
+the desired \emph{fixed-basis joint} formula is
+\begin{align}
+ \frac{d}{ds}G_K(r_s;F_s)
+ &=G_K(r_s;\partial_sF_s)
+   -r_s'\frac{Y_K(r_s)F_s(r_s)}{W_K(r_s)}.
+ \label{eq:true-hartree-green-joint-source-endpoint-derivative}
+\end{align}
+The last implication is the new Lean candidate
+\texttt{ActualHartreeMovingGreenJointDerivative.lean},
+commit \texttt{79c38a5}, with independent strict
+CI \texttt{42472877057} still pending at this checkpoint.
+Neither the original physical source's temporal Lipschitz hypothesis
+nor the moving Kummer \emph{basis} derivative is inferred merely from
+measurable radiation. The nonlinear full-field weighted
+\(O(s^{-9/4})\) remainder and direct threshold Lipschitz remain open.
+
 \end{document}
