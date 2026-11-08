@@ -126,7 +126,9 @@ theorem actual_Hartree_compatible_full_singular_Green_physical_source_gain
   have hRadius : r0 / y ≤ 1 :=
     (div_le_iff₀ hypos).2 (by linarith [hy.1])
   have hCr : 0 ≤ Cr := by dsimp [Cr]; positivity
-  have hCf : 0 ≤ Cf := by dsimp [Cf]; positivity
+  have hCf : 0 ≤ Cf := by
+    dsimp [Cf, actualInnerShellValueConstant, actualInnerShellDerivativeConstant]
+    positivity
   have hN : 0 ≤ N := by
     dsimp [N]
     exact add_nonneg (innerWeightedNorm_nonneg _ _) (innerWeightedNorm_nonneg _ _)
@@ -142,7 +144,6 @@ theorem actual_Hartree_compatible_full_singular_Green_physical_source_gain
         mul_le_mul hY hTrace (norm_nonneg _) (div_nonneg hG hypos.le)
       _ = (G * Cr * (Cf * N)) * (r0 / y) := by
         field_simp [hypos.ne']
-        ring
       _ ≤ (G * Cr * (Cf * N)) * 1 :=
         mul_le_mul_of_nonneg_left hRadius hCoef
       _ = G * Cr * (Cf * N) := by ring
@@ -152,8 +153,7 @@ theorem actual_Hartree_compatible_full_singular_Green_physical_source_gain
         actualOriginOutgoingTrace K r0 J.1 J.2 -
         originPhysicalValue K.y y *
           originGreenCoeffA K y F r0‖ := by
-      rw [hCompat]
-      ring
+      rw [hCompat, mul_sub]
     _ ≤ ‖originPhysicalValue K.y y *
         actualOriginOutgoingTrace K r0 J.1 J.2‖ +
       ‖originPhysicalValue K.y y *
