@@ -185,3 +185,17 @@ The following two genuinely new full-component auxiliaries have **STRICT SUCCESS
 - [42455841135](https://github.com/penghongzhong/HBL/actions/runs/42455841135): actual_Hartree_one_physical_source_selected_full_singular_Green_gain; instantiates BOTH original Fredholm channels and the outer Kummer source from ONE genuine 3D inverse-square quartic Hartree interaction.
 
 Independently retrieved the archived audit.log, strict.log, source hash, and pinned compiler-version outputs of BOTH runs. In each, strict.log is empty, no sorryAx is present, and #print axioms has **exactly [propext, Classical.choice, Quot.sound]**. No extra axioms were introduced in the proof dependence. The earlier independent upstream lint error was removed in commit 89ecbc6d; that modified parent declaration needs its OWN replacement CI 42456627583, still pending here. This does not establish time differentiation or the O(s^(-9/4)) four-piece PDE residual. Formal count remains 11/13.
+
+
+### Strict triad all at revision 89ecbc6d, after independent audit
+
+Full true-source singular Green derivative-free chain is now strictly reaccepted on SAME source revision 89ecbc6d:
+- 42456627583 SUCCESS: true source and compatible full right-endpoint singular Green.
+- 42456627562 SUCCESS: elimination of adjusted Fredholm norm, original N_F+Cphys*ell^(1/8) only.
+- 42456627579 SUCCESS: both weighted inner channels plus outer source instantiated from the SAME original quartic Hartree nonlocal physical expression.
+
+This eliminates the strict unused-binder warning, not an additional mathematical hypothesis. Thus the standalone and dependent compositional modules are all currently successful on a common SHA. None supplies the time differentiability of the complete C1 four-piece field or O(s^-9/4) full 3D Hartree residual.
+
+The first moving original-source derivative CI 42456222166 failed a term-level let/negative-source Lean parse ambiguity (no theorem accepted); fixed in fc786e1. Both corrected 42457157758 (moving physical source derivative) and 42457157917 (dominated true-source regular Green integral derivative) remain STRICT CI PENDING at this checkpoint. Their explicit source derivatives and majorant still require original PDE estimates.
+
+Speed optimization experiment: workflow .github/workflows/hbl-true-source-selected-speed-green-no-scale.yml now includes a nonblocking pinned shared Lake build cache SAVE step, commit 973c46d, CI 42457325903. The existing strict workflows already use compatible restore prefixes; acceleration is provisional until cache upload succeeds.
