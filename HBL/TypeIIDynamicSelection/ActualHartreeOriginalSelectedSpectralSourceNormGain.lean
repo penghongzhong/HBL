@@ -166,12 +166,16 @@ theorem actual_Hartree_original_selected_spectral_step_from_initial_source_norm
           (|mu t - mu0| + |theta t - theta0|) ^ 2 *
             (2 * Ck ^ 3 * (B - r0)) ^ 2 *
             (Csel * (N + Q) / r0 ^ 2) := by
-      have hPow := sq_nonneg (2 * Ck ^ 3 * (B - r0))
-      have h1 := mul_le_mul_of_nonneg_right hParamSq hPow
+      have hPow : 0 ≤ (2 * Ck ^ 3 * (B - r0)) ^ 2 :=
+        sq_nonneg _
+      have hParamPos :
+          0 ≤ (|mu t - mu0| + |theta t - theta0|) ^ 2 :=
+        sq_nonneg _
+      have h1 := mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_right hParamSq hPow) hM
       have h2 := mul_le_mul_of_nonneg_left hSize
-        (mul_nonneg (sq_nonneg _) hPow)
-      have hQaPos := hM
-      nlinarith only [h1, h2, hQaPos, hParamSq, hSize, hPow]
+        (mul_nonneg hParamPos hPow)
+      exact h1.trans h2
     have hFinal := hResult.trans hNum
     simpa only [Fadj, F0, r0, delta, N, Q] using hFinal
 
