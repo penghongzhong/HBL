@@ -2193,4 +2193,65 @@ time-dependent four-region quartic Hartree residual, threshold
 Lipschitz and dynamically selected Type-II rate remain open.
 
 
+
+
+\medskip
+\noindent\textbf{Same source-selected spectral defect and corrected
+three-interface field.}
+The last fixed-time matching step is to use \emph{one and the same}
+real two-speed for the weighted spectral residual and all three
+physical transmission interfaces, rather than independently matching
+each field. Denote by $p=(p_1,p_2)$ the unique real solution of the
+original two-component Fredholm compatibility equation produced by
+the actual quartic Hartree source
+\[
+ F_0=-\mathcal S_{\mathrm H}^{\mathrm{phys}},
+ \qquad
+ F_{\mathrm{adj}}
+    =F_0-p_1\mathcal P_{\mathrm{scale}}
+          -p_2\mathcal P_{\mathrm{phase}}.
+\]
+With the genuine adjusted inner Cauchy jet
+$J=(U,D U)$, put $r_0=L/a$ and define
+\[
+ H_{\mathrm{phys}}
+  = H_G+G^2\bigl(r_0|D U|+(r_0+1)|U|\bigr),
+ \qquad
+ v_d=u_0-\mathcal G_{K_0}^{\mathrm{match}}[d u_0;0,0].
+\]
+Here $H_G$ is the explicitly derived source-selected whole
+inhomogeneous Green bound above, not an additional hypothesis.
+The shortest proposed composite has the simultaneous conclusions
+\[
+ \begin{aligned}
+ v_d(r_0)&=U,&
+ \partial_r v_d(r_0)&=D U,\\
+ \sup_{r_0\le r\le B}
+  r\,\bigl|\mathcal L_d v_d-F_{\mathrm{adj}}\bigr|
+   &\le 2G^2(B-r_0)|d|^2H_{\mathrm{phys}},&
+ \partial_\rho U_d^{\mathrm{four}}(L)
+   &=\partial_\rho u_{\mathrm{inner}}(L),\\
+ \partial_\rho U_d^{\mathrm{four}}(aB)
+   &=a^{-1}\partial_r v_d(B),&
+ \partial_\rho U_d^{\mathrm{four}}(2aB)&=0.
+ \end{aligned}
+\]
+The crucial change at the outer transmission radius is that the
+repair uses the \emph{spectrally corrected} value and derivative at
+$B$. Uniqueness of the real compatibility selector identifies the
+velocity in both constructions. The precise Lean target is
+\texttt{actual\_Hartree\_true\_source\_selected\_spectral\_quadratic\_and\_three\_C1}
+in
+\texttt{ActualHartreeTrueSelectedSpectralQuadraticThreeC1.lean};
+the dedicated pinned CI workflow is
+\texttt{hbl-213-true-selected-spectral-quadratic-three-c1.yml}.
+This composite is a submitted \emph{candidate}, not an accepted
+original \S2.13 environment until its exact-type and transitive-axiom
+CI passes. The source is assumed continuous in the positive matching
+interval for classical differentiability; this regularity must be
+derived for the eventual genuine dynamic PDE trajectory.
+Neither $d(s)$ nor its desired decay, the moving Kummer transport,
+the nonlocal four-region PDE gain, the finite physical recursion, or
+the Type-II rate is supplied as an extra premise.
+
 \end{document}
