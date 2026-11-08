@@ -4,6 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSpectralFourPieceFinitePDETelescoping.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSpectralCorrectedFourPieceThreeC1.lean'
       - '.github/workflows/hbl-213-spectral-four-piece-nonlinear-PDE-telescope.yml'
   workflow_dispatch:
 permissions:
