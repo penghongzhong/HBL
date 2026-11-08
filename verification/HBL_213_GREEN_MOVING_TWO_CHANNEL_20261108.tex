@@ -2747,4 +2747,35 @@ independent main-chain obligation. Hence the original
 \(\S2.13\) environment is still not complete, and
 the original environment count remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{Single source--selector spectral quadratic defect plus
+all three corrected joins: strict common theorem.}
+The one-real-two-speed theorem
+\texttt{actual_Hartree_true_source_selected_spectral_quadratic_and_three_C1}
+is now independently audited in GitHub Actions
+\texttt{42532363535} (artifact \texttt{13638605835},
+commit \texttt{866bc8ed}). Its compiler is Lean 4.35.0-rc3,
+the \texttt{strict.log} is empty, the exact \texttt{\#check}
+elaboration is present, and \texttt{\#print axioms} lists
+only \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}.
+For the true Hartree source-selected field, it certifies
+\[
+ \sup_{r_0\le r\le B}
+ r\left|\mathcal L_d v_d-F_{\rm adj}\right|
+ \le 2G^2(B-r_0)|d|^2H_{\rm phys},
+ \qquad
+ U_{\rm corr}^{\rm four}\in C^1
+       \text{ at } \{L,aB,2aB\}.
+\]
+The weighted size \(H_{\rm phys}\) is constructed from
+the \emph{same} original physical source and corrected Fredholm
+left Cauchy data, not independently prescribed.
+The spectral displacement \(d(t)\) is still not proved to
+obey a positive time-order bound on the original PDE orbit.
+The theorem proves neither the complete four-region nonlocal
+residual estimate nor the dynamical Type--II rate; the
+original manuscript count therefore remains \(11/13\).
+
 \end{document}
