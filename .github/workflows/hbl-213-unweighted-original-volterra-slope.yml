@@ -76,7 +76,20 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeZeroLeftVolterraUnweightedSlopeAudit.lean > evidence/audit.log 2>&1
-          grep -q sorryAx evidence/audit.log && exit 1 || true
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('evidence/audit.log').read_text()
+          goal='HBL.TypeIIDynamicSelection.actual_Hartree_zero_left_Kummer_Volterra_unweighted_slope_no_left_radius'
+          assert goal in s, 'missing exact Lean theorem check'
+          assert 'sorryAx' not in s and 'admit' not in s
+          audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
+          assert len(audits)==1, f'expected one axiom report, got {len(audits)}'
+          names={v.strip() for v in audits[0].split(',') if v.strip()}
+          allowed=('propext','Classical.choice','Quot.sound')
+          assert all(v in allowed or any(v.startswith(w+'.{') for w in allowed) for v in names),names
+          print('Verified exact unweighted zero-left Volterra slope axioms:', sorted(names))
+          PY
           mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
