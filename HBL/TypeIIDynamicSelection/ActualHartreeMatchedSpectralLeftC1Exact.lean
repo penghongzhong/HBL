@@ -70,8 +70,8 @@ theorem actual_Hartree_matched_spectral_corrected_left_C1_and_exact_equation
   have hQcont : ∀ r ∈ Ioo 0 scale, ContinuousAt q r := by
     intro r hr
     have hu : ContinuousAt u r := (hU r hr).1.continuousAt
-    simpa only [q, actualHartreeMatchedSpectralFirstSource, u] using
-      (continuousAt_const.mul hu : ContinuousAt (fun x : ℝ => d * u x) r)
+    change ContinuousAt (fun x : ℝ => d * u x) r
+    exact continuousAt_const.mul hu
   have hW := actual_origin_matched_Kummer_classical_on_positive_interval
       K ha hab hb q hQcont 0 0
   have hLeftU := actual_origin_matched_Kummer_actual_endpoint_jets
@@ -94,9 +94,26 @@ theorem actual_Hartree_matched_spectral_corrected_left_C1_and_exact_equation
       filter_upwards [Ioo_mem_nhds hr.1 hr.2] with t ht
       exact hDeriv t ht
     have hDiff := (hU r hr).2.1.sub (hW r hr).2.1
-    exact (hDiff.congr_of_eventuallyEq hNear).deriv
+    have hDiffAt := (hDiff.congr_of_eventuallyEq hNear).deriv
+    have hU2 := ((hU r hr).2.1).deriv
+    have hW2 := ((hW r hr).2.1).deriv
+    calc
+      deriv (deriv v) r =
+          (F r - frozenFirstCoeff r *
+            actualOriginMatchedKummerSlope K a b F U DU r -
+            frozenZeroCoeff mu theta *
+              actualOriginMatchedKummerValue K a b F U DU r) -
+          (q r - frozenFirstCoeff r *
+            actualOriginMatchedKummerSlope K a b q 0 0 r -
+            frozenZeroCoeff mu theta *
+              actualOriginMatchedKummerValue K a b q 0 0 r) := hDiffAt
+      _ = deriv (deriv u) r - deriv (deriv w1) r := by
+        rw [hU2, hW2]
   have hLeftV : v a = U := by
-    rw [hVdef a, hLeftU.1, hLeftW.1]
+    rw [hVdef a]
+    have hu : u a = U := hLeftU.1
+    have hw : w1 a = 0 := hLeftW.1
+    rw [hu, hw]
     simp
   have hLeftD : HasDerivAt v DU a := by
     have hv : HasDerivAt (fun t => u t - w1 t) (DU - 0) a :=
@@ -147,8 +164,8 @@ theorem actual_Hartree_matched_spectral_upper_defect_exact
   have hQcont : ∀ r ∈ Ioo 0 scale, ContinuousAt q r := by
     intro r hr
     have hu : ContinuousAt u r := (hU r hr).1.continuousAt
-    simpa only [q, actualHartreeMatchedSpectralFirstSource, u] using
-      (continuousAt_const.mul hu : ContinuousAt (fun x : ℝ => d * u x) r)
+    change ContinuousAt (fun x : ℝ => d * u x) r
+    exact continuousAt_const.mul hu
   have hW := actual_origin_matched_Kummer_classical_on_positive_interval
       K ha hab hb q hQcont 0 0
   have hbIn : b ∈ Ioo 0 scale := ⟨ha.trans_le hab, hb⟩
@@ -165,6 +182,8 @@ theorem actual_Hartree_matched_spectral_upper_defect_exact
   have hCorrection :=
     actual_origin_matched_Kummer_actual_upper_trace K ha hab hb q hQcont 0 0
   have hvValue : v b = u b - w1 b := rfl
+  change actualOriginOutgoingTrace K b (v b) (deriv v b) =
+    -actualMomentLockedIntervalObstruction K a b q 0 0
   rw [hvValue, hDeriv]
   calc
     actualOriginOutgoingTrace K b (u b - w1 b)
