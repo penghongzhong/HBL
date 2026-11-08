@@ -2865,4 +2865,30 @@ Riesz term. The actual-Riesz energy-weighted result in the preceding
 paragraph retains its separate pending strict CI status.
 The original manuscript tally therefore remains $11/13$.
 
+
+\medskip
+\noindent\textbf{Independent original inverse-linear zero-left radial slope: strict success.}
+The actual zero-left Cramer--Volterra Green solution for an
+\emph{inverse-linear} source $|q(r)|\le M/r$ has now been verified
+with an \emph{unweighted} radial derivative bound,
+\[
+  \boxed{\quad
+  \sup_{r_0\le r\le B}|w_1'(r)|
+  \le (B+1)G\bigl[1+(D+1)GB^2\bigr]M
+     +2(D+1)G^2MB^2 .\quad}
+\]
+This follows by retaining the exact regular $A$-moment radius gain,
+the $O(r^3)$ cancellation in $r x'(r)-x(r)$, and the original
+Wronskian identity before taking the supremum.
+The exact Lean declaration is
+\texttt{actual\_Hartree\_zero\_left\_Kummer\_Volterra\_unweighted\_slope\_no\_left\_radius},
+in \texttt{ActualHartreeZeroLeftVolterraUnweightedSlope.lean};
+strict compilation and the dedicated exact-type audit succeeded in
+GitHub Actions \texttt{42535477786}. This result is \emph{not}
+substituted for the complete original quartic Riesz source
+$|F_0(r)|\le Q/r^2$.
+The source-specific \emph{energy-weighted} $r|w_0'(r)|$ result
+requires its separate strict proof and audit. Neither estimate supplies
+the missing positive-time-order four-region PDE residual.
+
 \end{document}
