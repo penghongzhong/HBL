@@ -41,7 +41,6 @@ theorem actual_Hartree_fixed_basis_true_selected_spectral_relative_source_gain
     (z : ℝ → ℝ → ℂ) (b w Z : ℝ → ℂ)
     (t B C M : ℝ)
     (hC : 0 ≤ C) (hM : 0 ≤ M)
-    (hB : actualHartreeSlowInnerRadius (ell t) / a t ≤ B)
     (hBasis : OriginBasisOn K
       (actualHartreeSlowInnerRadius (ell t) / a t) B C)
     (hSource : ∀ r ∈ Icc
