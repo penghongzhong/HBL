@@ -101,12 +101,11 @@ theorem actual_Hartree_Kummer_regular_coefficient_no_inverse_radius
       mul_le_mul_of_nonneg_right hNumerator (sq_nonneg r)
     _ = G * r * ‖DU‖ + G * (r + 1) * ‖U‖ := by
       field_simp [hrpos.ne']
-      ring
     _ ≤ G * r * ‖DU‖ + 2 * G * ‖U‖ :=
       add_le_add_left
         (mul_le_mul_of_nonneg_right hGr (norm_nonneg U)) _
     _ ≤ 2 * G * r * ‖DU‖ + 2 * G * ‖U‖ :=
-      add_le_add_right hTwo _
+      add_le_add_left hTwo _
     _ = 2 * G * (‖U‖ + r * ‖DU‖) := by ring
 
 theorem actual_Hartree_Fredholm_regular_coefficient_from_weighted_source
