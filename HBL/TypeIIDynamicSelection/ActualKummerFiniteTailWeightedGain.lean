@@ -26,7 +26,7 @@ namespace HBL.TypeIIDynamicSelection
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 theorem actual_Kummer_finite_physical_tail_positive_time_bubble_gain
-    (s delta : ℝ) (hs : 1 ≤ s) (hdelta : 0 < delta)
+    (s delta : ℝ) (hs : 1 ≤ s) (_hdelta : 0 < delta)
     (packets : List (ActualKummerPhysicalShellPacket s))
     (hOrders : ∀ P ∈ packets, 1 / 2 + delta ≤ P.rho)
     (y : ℝ) (hy : 0 < y) :

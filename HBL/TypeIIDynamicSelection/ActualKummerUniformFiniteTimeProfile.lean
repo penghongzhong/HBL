@@ -35,8 +35,11 @@ estimate along a single true modulation trajectory. -/
 structure ActualKummerUniformPhysicalTailPacket (s0 delta : ℝ) where
   a : ℝ → ℝ
   R : ℝ
-  p q : ℝ → ℂ
-  rho CX CD : ℝ
+  p : ℝ → ℂ
+  q : ℝ → ℂ
+  rho : ℝ
+  CX : ℝ
+  CD : ℝ
   Rpos : 0 < R
   aPos : ∀ s : ℝ, s0 ≤ s → 0 < a s
   rhoGain : 1 / 2 + delta ≤ rho
@@ -83,7 +86,7 @@ moving Kummer correction along ONE time-dependent physical orbit. -/
 theorem actual_Kummer_uniform_finite_repair_positive_time_gain
     {s0 delta : ℝ}
     (packets : List (ActualKummerUniformPhysicalTailPacket s0 delta))
-    (hs0 : 1 ≤ s0) (hdelta : 0 < delta) :
+    (hs0 : 1 ≤ s0) (_hdelta : 0 < delta) :
     ∀ s : ℝ, s0 ≤ s → ∀ y : ℝ, 0 < y →
       ‖actualKummerUniformPhysicalTail packets s y‖ ≤
         actualKummerUniformPhysicalTailConstant packets *
