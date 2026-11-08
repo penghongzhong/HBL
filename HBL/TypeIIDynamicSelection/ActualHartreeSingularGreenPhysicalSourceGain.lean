@@ -42,9 +42,15 @@ private theorem actual_hartree_rpow_shape_unit_bound
   have hExponent :
       q ^ (-(19 / 8 : ℝ)) ≤ q ^ (-(2 : ℝ)) :=
     Real.rpow_le_rpow_of_exponent_le hq (by norm_num)
-  have hCancel : q ^ 2 * q ^ (-(2 : ℝ)) = 1 := by
-    simpa only [Real.rpow_natCast, add_neg_cancel, Real.rpow_zero] using
+  have hCancelR :
+      q ^ (2 : ℝ) * q ^ (-(2 : ℝ)) = 1 := by
+    simpa only [add_neg_cancel, Real.rpow_zero] using
       (Real.rpow_add hqpos (2 : ℝ) (-(2 : ℝ))).symm
+  have hCast : q ^ (2 : ℝ) = q ^ (2 : ℕ) := by
+    norm_num [rpow_natCast]
+  have hCancel : q ^ 2 * q ^ (-(2 : ℝ)) = 1 := by
+    rw [hCast] at hCancelR
+    exact hCancelR
   calc
     _ ≤ q ^ 2 * q ^ (-(2 : ℝ)) :=
       mul_le_mul_of_nonneg_left (hPow.trans hExponent) (sq_nonneg q)
@@ -96,15 +102,6 @@ theorem actual_Hartree_singular_Green_local_moment_full_product_gain
       (Real.rpow_nonneg hell.le _)
   have hCreg : 0 ≤ Creg := by dsimp [Creg]; positivity
   have hConst : 0 ≤ Creg * M := mul_nonneg hCreg hM
-  have hFI : IntervalIntegrable F volume r0 r :=
-    (actual_Hartree_scaled_Kummer_source_intervalIntegrable
-      B A ell c a r0 r hB hA hell hellOne hc ha hr0
-      (by simpa only [r0] using hr.1) z hz hSup hStrauss).neg
-  have hK : OriginBasisOn K r0 r G :=
-    origin_kummer_annulus_bound K r0 r G hr0
-      (hr.2.trans_lt hRscale) hG hbound
-  have hInt := (actual_origin_Green_source_integrability
-      K hK (by simpa only [r0] using hr.1) F hFI).1
   have hDens (x : ℝ) (hx : x ∈ Icc r0 r) :
       ‖originGreenSourceA K F x‖ ≤ Creg * M := by
     have hxpos : 0 < x := hr0.trans_le hx.1
@@ -191,7 +188,6 @@ theorem actual_Hartree_singular_Green_local_moment_full_product_gain
           (div_nonneg hG hrpos.le)
       _ = G * (Creg * M) * ((r - r0) / r) := by
         field_simp [hrpos.ne']
-        ring
       _ ≤ G * (Creg * M) * 1 :=
         mul_le_mul_of_nonneg_left hFrac hGConst
       _ = G * Creg * M := by ring
