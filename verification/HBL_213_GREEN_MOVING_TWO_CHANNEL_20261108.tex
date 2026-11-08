@@ -836,13 +836,49 @@ the desired \emph{fixed-basis joint} formula is
    -r_s'\frac{Y_K(r_s)F_s(r_s)}{W_K(r_s)}.
  \label{eq:true-hartree-green-joint-source-endpoint-derivative}
 \end{align}
-The last implication is the new Lean candidate
-\texttt{ActualHartreeMovingGreenJointDerivative.lean},
-commit \texttt{79c38a5}, with independent strict
-CI \texttt{42472877057} still pending at this checkpoint.
-Neither the original physical source's temporal Lipschitz hypothesis
-nor the moving Kummer \emph{basis} derivative is inferred merely from
-measurable radiation. The nonlinear full-field weighted
-\(O(s^{-9/4})\) remainder and direct threshold Lipschitz remain open.
+The exact joint derivative has now passed pinned strict CI
+\texttt{42473023783} (\emph{Success}) in
+\texttt{ActualHartreeMovingGreenJointDerivative.lean}, corrected
+commit \texttt{811ef15}. The same derivative is instantiated
+for the \emph{one genuine original nonlocal Hartree source}, its
+unique real Cramer speed and the actual slow-inner moving radius
+in \texttt{ActualHartreeOnePhysicalMovingGreenJoint.lean},
+strict CI \texttt{42473151794} (\emph{Success}).
+The only remaining time regularity assumption of the mixed error
+is a local Lipschitz bound on the ORIGINAL Green source density,
+not an independent assumed vanishing mixed derivative.
+
+\medskip
+\noindent\textbf{Producing the local Green time Lipschitz estimate
+from the genuine physical source time derivative.}
+For each physical radius \(r\) on the moving interface interval,
+suppose the full actual time-dependent selected source satisfies
+\(\|\partial_\tau F_\tau(r)\|\le D\) for every \(\tau\) between
+\(s\) and \(t\), and the original fixed-basis Wronskian multiplier
+satisfies \(|Y_K(r)/W_K(r)|\le C_K\). The mean value theorem then
+gives
+\begin{align}
+ \left|\frac{Y_K(r)}{W_K(r)}
+          [F_t(r)-F_s(r)]\right|
+ &\le C_KD\,|t-s|.
+ \label{eq:true-hartree-green-density-time-mvt}
+\end{align}
+This \emph{derives} the Lipschitz input of
+\eqref{eq:true-hartree-green-cross-bound}
+from the actual source-time derivative, not from mere
+measurability. The exact original-Hartree specialization is
+\texttt{ActualHartreeSelectedGreenDensityTimeMVT.lean},
+strict CI \texttt{42473401888} (\emph{Success}).
+The further composition removing the independently stated
+Green-density Lipschitz hypothesis is
+\texttt{ActualHartreeOnePhysicalGreenJointFromDerivative.lean},
+source commit \texttt{6242b8c}, with dedicated
+strict CI \texttt{42473541248} pending at this checkpoint.
+
+Even after this fixed-Kummer-basis time calculus, the original
+3D nonlocal source's derivative bounds must be produced along
+one PDE orbit; the \emph{moving Kummer basis} derivative,
+full \(O(s^{-9/4})\) three-region nonlinear residual and direct
+threshold Lipschitz remain open.
 
 \end{document}
