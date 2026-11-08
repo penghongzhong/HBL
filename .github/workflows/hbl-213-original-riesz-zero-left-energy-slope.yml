@@ -83,7 +83,7 @@ jobs:
           goal='actual_Hartree_original_Riesz_zero_left_energy_weighted_slope_no_left_radius'
           assert goal in s, 'missing exact target audit'
           assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
-          m=re.search(r'depends on axioms:\s*\\[([^\\]]*)\\]',s)
+          m=re.search(r'depends on axioms:\s*\[([^\]]*)\]',s)
           assert m, 'axiom report not found'
           axioms=[v.strip() for v in m.group(1).split(',') if v.strip()]
           allowed=('propext','Classical.choice','Quot.sound')
