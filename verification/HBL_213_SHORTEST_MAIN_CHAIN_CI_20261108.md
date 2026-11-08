@@ -354,3 +354,67 @@ The last two are genuine **intermediate** theorems using the first matched profi
 **Exact mathematical scope gap:** even simultaneous fixed-time source-selected weighted spectral quadratic defect and corrected physical C¹ interfaces do not yield the original **full four-region nonlocal Hartree PDE** `O(s^(-9/4))` and parameter-Lipschitz estimates on one time-varying orbit. The moving base, Hartree Riesz interaction of the complete corrected fields, the actual parameter time derivatives, complete next-layer source classification, and the finite genuine PDE recurrence are still indispensable. The final Type-II exponent must be obtained from the actual PDE dynamics; no rate is assumed.
 
 **Formal 13-environment revised manuscript acceptance: 11/13 = 84.62%. Neither §2.13 nor the final main theorem is yet closed.**
+
+### November 8 follow-on: exact log diagnostics and genuine common-selector composite
+
+Rechecked original pinned runs directly through GitHub job logs:
+[42500440029](https://github.com/penghongzhong/HBL/actions/runs/42500440029) **SUCCESS**, with its downloaded original evidence showing an empty `strict.log` and precise transitive axiom sets `[propext, Classical.choice, Quot.sound]` (possibly universe-annotated) for the two target declarations.
+[42501019413](https://github.com/penghongzhong/HBL/actions/runs/42501019413) and
+[42501379178](https://github.com/penghongzhong/HBL/actions/runs/42501379178) **FAILURE** with literal old Lean simplification / type rewrite diagnostics. These failures were not retrospectively relabeled successful.
+
+Rechecked the newer workflow jobs. Original
+[42527186005](https://github.com/penghongzhong/HBL/actions/runs/42527186005),
+[42527710745](https://github.com/penghongzhong/HBL/actions/runs/42527710745),
+[42528138223](https://github.com/penghongzhong/HBL/actions/runs/42528138223),
+[42528244780](https://github.com/penghongzhong/HBL/actions/runs/42528244780),
+[42528244771](https://github.com/penghongzhong/HBL/actions/runs/42528244771),
+[42528244857](https://github.com/penghongzhong/HBL/actions/runs/42528244857)
+and [42529092477](https://github.com/penghongzhong/HBL/actions/runs/42529092477)
+report **SUCCESS**. Of these, the current run independently downloaded the evidence ZIP for
+42528138223 and rechecked its empty `strict.log` and standard axiom report;
+success of a fixed-time corrected upper repair does not supply the missing true
+four-region time-dependent nonlocal source bound.
+
+Actual failure log for
+[42528957269](https://github.com/penghongzhong/HBL/actions/runs/42528957269)
+isolated `ActualHartreeTrueSourceSelectedWholeMatchedWeighted.lean:147`:
+the coupled compatibility definition contains `F0-p1*P1-p2*P2`,
+whereas the original selected Green source used `F0+(-p1)*P1+(-p2)*P2`.
+The correction in
+[commit d5f6c0d](https://github.com/penghongzhong/HBL/commit/d5f6c0d345410ca345c3d89526b6af19390d08cf)
+inserts the exact pointwise ring identity in the proof, without adding
+a premise or changing the theorem statement.
+
+Actual failure log for
+[42529333272](https://github.com/penghongzhong/HBL/actions/runs/42529333272)
+isolated unopened `InWeightedL2` namespace and the definitional
+difference between a physical Kummer pullback and the corresponding
+literal composition `fun y => w(y/a)`.
+Both were repaired in
+[commit e246d97](https://github.com/penghongzhong/HBL/commit/e246d97dc9e47c88208b5c7ac2ba9812e1f850c5);
+the already-successful corrected outer two-C1 CI 42529092477 is a different
+certificate.
+
+New actual source-faithful composite
+`ActualHartreeTrueSelectedSpectralQuadraticThreeC1.lean` at
+[commit 46308fd](https://github.com/penghongzhong/HBL/commit/46308fddc971c148a72a6ffccd46ff4bd0183a62)
+forms **one theorem** with the uniquely selected physical real two-speed
+simultaneously controlling the source-derived matched weighted quadratic
+spectral residual and the corrected three physical C¹ transmission jets.
+Its exact-type/axiom pinned CI is
+`.github/workflows/hbl-213-true-selected-spectral-quadratic-three-c1.yml`
+([commit 10ac46f](https://github.com/penghongzhong/HBL/commit/10ac46f55e97b208d6272d12a9a737d337b96c9c)).
+The submitted composite depends on the two upstream proofs; strict success
+for it and for the latest repairs is **not yet verified**. The manuscript is
+synchronized in [commit 05bb9fa](https://github.com/penghongzhong/HBL/commit/05bb9fa140c98d4fed032e79901ce038b81771d0).
+An additional full-Green tactic repair was made at
+[commit ac2a603](https://github.com/penghongzhong/HBL/commit/ac2a6034cb91ce9f774f7d0993ff1754ca488de9).
+
+The remaining *genuine mathematical* shortest-path gap is not an algebraic
+resummation: the fixed-time selected corrected C¹ field must become a
+time-dependent Hartree PDE trajectory, with derived moving Kummer basis
+parameter derivatives, true cross-region nonlocal Riesz interactions,
+positive-time `s` gain for the **whole** PDE remainder, and exact finite
+profile iteration leading to a **derived** Type-II rate. No external
+parameter rate, full PDE bound, or spatial matching constant may be silently
+inserted as a hypothesis. **Formal original revised environments: 11/13.**
