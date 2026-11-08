@@ -37,8 +37,8 @@ private theorem physicalTwoPiece_hasDerivAt_at_join
     HasDerivAt (physicalTwoPiece a f g) d a := by
   have heqL : EqOn (physicalTwoPiece a f g) f (Iic a) := by
     intro y hy
-    change (if y ≤ a then f y else g y) = f y
-    simp [hy]
+    change y ≤ a at hy
+    simp [physicalTwoPiece, hy]
   have heqR : EqOn (physicalTwoPiece a f g) g (Ici a) := by
     intro y hy
     by_cases hya : y = a
