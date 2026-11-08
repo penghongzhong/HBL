@@ -949,4 +949,98 @@ Kummer fundamental pair remains fixed in this theorem.
 The actual moving-\(K\) derivative and the full
 \(O(s^{-9/4})\) original nonlocal Hartree PDE residual remain open.
 
+
+\medskip
+\noindent\textbf{Original nonlocal Hartree source: deriving its time
+derivative from the same real core and complex radiation orbit.}
+On one physical slice \(s\), put \(u=V+z\),
+\(C(u)=|u|^2u\), and retain the three ORIGINAL radial
+logarithmic Riesz potentials
+\[
+ P_{\rm m}=\mathcal I_2[|V+z|^4-|V|^4-|z|^4],
+ \qquad
+ P_z=\mathcal I_2[|z|^4],
+ \qquad
+ P_V=\mathcal I_2[|V|^4],
+\]
+with \(\mathcal I_2[f](r)=
+ \frac{2\pi\kappa_{\rm H}}{r}
+ \int_0^\infty \rho\,K_{\log}(r,\rho) f(\rho)\,d\rho\).
+For the same actual fields \(V(s,r)\in\mathbb R\) and
+\(z(s,r)\in\mathbb C\), the pointwise derivatives are
+\begin{align}
+ \partial_s|z|^4
+ &=4|z|^2\Re(\bar z z_s),\notag\\
+ \partial_s\bigl(|V+z|^4-|V|^4-|z|^4\bigr)
+ &=4|V+z|^2\Re\bigl(\overline{V+z}(V_s+z_s)\bigr)
+   -4V^3 V_s-4|z|^2\Re(\bar z z_s).
+ \label{eq:true-hartree-three-quartic-densities-time}
+\end{align}
+Under explicitly stated integrability and a common majorant for
+each ORIGINAL log-kernel weighted quartic velocity,
+the dominated-parametric-integral theorem gives
+\begin{align}
+ \partial_sP_\alpha(s,r)
+ &=
+ \frac{2\pi\kappa_{\rm H}}{r}
+ \int_0^\infty \rho\,K_{\log}(r,\rho)
+       \partial_s f_\alpha(s,\rho)\,d\rho,
+ \qquad \alpha\in\{{\rm m},z,V\},\quad r>0.
+ \label{eq:true-hartree-three-riesz-potentials-time}
+\end{align}
+The \(z\) and mixed components are strictly verified by
+\texttt{ActualHartreeRadialRieszTimeDerivative.lean}
+(CI \texttt{42474757711}, \emph{Success}) and
+\texttt{ActualHartreeMixedRieszTimeDerivative.lean}
+(CI \texttt{42475283498}, \emph{Success}).
+The real-core case is the same strictly verified quartic derivative
+after embedding \(V\) into \(\mathbb C\), as made explicit in
+\texttt{ActualHartreeFullInteractionTimeFromOrbit.lean}
+(CI \texttt{42475826921}, \emph{Success}).
+
+For the ACTUAL cubic multiplier, including at \(u=0\), the
+calculated derivative is
+\[
+ \partial_s C(u)
+ =2\Re(\bar u u_s)u+|u|^2u_s .
+\]
+This is checked in
+\texttt{ActualHartreeLocalCubicTimeDerivative.lean},
+CI \texttt{42475554508} (\emph{Success}).
+The resulting COMPLETE three-potential interaction
+\(
+ \mathcal N_{\rm int}
+ =P_{\rm m}C(u)
+ +P_z[C(u)-C(z)]
+ +P_V[C(u)-C(V)]
+\)
+has the exact time derivative
+\begin{align}
+ \partial_s\mathcal N_{\rm int}
+ &=P_{\rm m}'C(u)+P_{\rm m}\partial_s C(u)\notag\\
+ &\quad+P_z'[C(u)-C(z)]
+       +P_z[\partial_sC(u)-\partial_sC(z)]\notag\\
+ &\quad+P_V'[C(u)-C(V)]
+       +P_V[\partial_sC(u)-\partial_sC(V)].
+ \label{eq:true-hartree-complete-nonlocal-interaction-time}
+\end{align}
+The precise three-potential product theorem is accepted by
+CI \texttt{42475714014} (\emph{Success}). More strongly,
+\texttt{ActualHartreeFullInteractionTimeFromOrbit.lean},
+CI \texttt{42475826921} (\emph{Success}), derives
+\eqref{eq:true-hartree-complete-nonlocal-interaction-time}
+from the primitive \(V_s,z_s\), actual quartic integrability,
+and three genuine Riesz dominated-velocity bounds:
+no assumed potential derivatives or independent full-source
+time derivative remain.
+
+\emph{Scope of this result:} the physical radial observation
+point \(r\) is fixed. The same-orbit regularity assumptions and
+integrable majorants are visible and must still be produced from
+high-regularity Hartree dynamics. The moving observation
+\(r=a(s)r_K\), moving Kummer fundamental pair and full four-piece
+residual of order \(O(s^{-9/4})\), including the direct shooting
+Lipschitz bound, are NOT asserted by
+\eqref{eq:true-hartree-complete-nonlocal-interaction-time}.
+
 \end{document}
