@@ -4,7 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedZeroLeftSpectralWeightedC1.lean'
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedZeroLeftSpectralWeightedC1.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeZeroLeftRegularizedVolterraSlope.lean'
       - '.github/workflows/hbl-213-matched-spectral-weighted-C1.yml'
   workflow_dispatch:
 permissions:
