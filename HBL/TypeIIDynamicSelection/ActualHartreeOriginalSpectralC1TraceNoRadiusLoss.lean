@@ -42,7 +42,7 @@ must enter the actual physical C¹ matching/repair. -/
 theorem actual_Hartree_original_spectral_C1_trace_no_left_radius_loss
     {mu0 theta0 scale : ℝ} (K : OriginKummerPair mu0 theta0 scale)
     (a b C Q : ℝ)
-    (ha : 0 < a) (hC : 0 ≤ C) (hQ : 0 ≤ Q)
+    (ha : 0 < a) (hab : a ≤ b) (hC : 0 ≤ C) (hQ : 0 ≤ Q)
     (hK : OriginBasisOn K a b C)
     (F : ℝ → ℂ)
     (hF : ∀ x ∈ Icc a b, ‖F x‖ ≤ Q / x ^ 2)
@@ -64,6 +64,7 @@ theorem actual_Hartree_original_spectral_C1_trace_no_left_radius_loss
     have hn : 0 ≤ ‖originGreenSlope K a b F x‖ := norm_nonneg _
     dsimp [E1]
     linarith only [hFull, hn]
+  have hba : 0 ≤ b - a := sub_nonneg.mpr hab
   have hM1 : 0 ≤ M1 := by dsimp [M1, E1]; positivity
   have hQ1 : ∀ x ∈ Icc a b, ‖Q1 x‖ ≤ M1 := by
     intro x hx
@@ -109,7 +110,7 @@ theorem actual_Hartree_original_spectral_C1_and_residual_no_left_radius_loss
           (2 * C ^ 3 * (b - a)) * Q) := by
   exact ⟨
     actual_Hartree_original_spectral_C1_trace_no_left_radius_loss
-      K a b C Q ha hC hQ hK F hF d r hr,
+      K a b C Q ha hab hC hQ hK F hF d r hr,
     actual_Hartree_original_first_spectral_correction_inverse_square_no_radius_loss
       K a b C Q ha hab hC hQ hK F hF d r hr⟩
 
