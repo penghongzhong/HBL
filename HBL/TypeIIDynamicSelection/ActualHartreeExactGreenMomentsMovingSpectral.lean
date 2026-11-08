@@ -32,7 +32,7 @@ fixed-annulus C^3 bound, its right side has no hidden OriginBasisOn
 constant and no inverse left matching radius. -/
 theorem actual_Hartree_origin_Green_weighted_exact_moments
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (a B G : ℝ) (ha : 0 < a) (hab : a ≤ B) (hB : B ≤ scale)
+    (a B G : ℝ) (ha : 0 < a) (_hab : a ≤ B) (hB : B ≤ scale)
     (hbound : ∀ x ∈ Icc 0 scale, ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
     (F : ℝ → ℂ) (r : ℝ) (hr : r ∈ Icc a B) :
     ‖(r : ℂ) * originGreenValue K a B F r‖ ≤
