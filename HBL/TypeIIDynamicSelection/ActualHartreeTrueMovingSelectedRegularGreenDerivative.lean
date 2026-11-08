@@ -31,7 +31,7 @@ open HBL.Profile.Kummer
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 def actualHartreeTrueMovingAdjustedSourceDot
-    (a ell c : ℝ → ℝ) (z : ℝ → ℝ → ℂ)
+    (a _ell c : ℝ → ℝ) (_z : ℝ → ℝ → ℂ)
     (b w Z : ℝ → ℂ)
     (Fdot Sdot Pdot : ℝ → ℝ → ℂ) (t r : ℝ) : ℂ :=
   let pb : ℝ → ℝ := fun u =>
