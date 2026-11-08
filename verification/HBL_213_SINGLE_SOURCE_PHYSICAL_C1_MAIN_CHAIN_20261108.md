@@ -317,3 +317,23 @@ The remaining original-source term was NOT replaced by arbitrary forcing. The ex
 The related mathematics and notation are synchronized to `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, latest synchronized TeX commit 1e5cc51, with the unsigned-source/negative-forcing sign explicitly distinguished. The new critical-scaling route ELIMINATES the need to differentiate the logarithmic radial observer argument a(s)r directly: all source time dependence is moved to a genuine nonlocal interaction at a FIXED normalized Kummer radius. This is a genuine shorter proof route; the separate original 3D noncompact spatial observer proof is not misidentified with the radialized kernel.
 
 **Noncircularity:** These successful CONDITIONAL mathematical theorems retain actual C1 of original high-regularity physical radiation and original quartic Riesz velocity domination as input; no genuine Hartree PDE existence/trapping or global matching is derived from these. Remaining: physical Z time/spatial regularity on one orbit; time-varying Kummer basis, all-domain complete four-piece nonlocal PDE residual `O(s^(-9/4))` with relative gain, threshold Lipschitz, real finite recursion and finally the dynamically selected Type-II rate. **The revised manuscript environment count remains 11/13 (84.62%).**
+
+
+## 2026-11-08 strict original source-norm elimination in one spectral Green step
+
+**STRICT SUCCESS** [CI 42485891640](https://github.com/penghongzhong/HBL/actions/runs/42485891640), source commit `2ab28476aa304be6c727282c0fdf9b056a778777`,
+`HBL/TypeIIDynamicSelection/ActualHartreeOriginalSelectedSpectralSourceNormGain.lean`.
+
+The exact proof begins with the genuine full quartic nonlocal Hartree Riesz source, actual original H+/H- Fredholm weighted data, and the original source-derived unique real compatibility speed (NOT a free chosen p or a synthetic forcing). The existing physical corrected-envelope producer constructs Qa>=0 and
+`||Fadj(r)|| <= Qa/r²`, `Qa<=Csel*(N_F+Cphys*ell^(1/8))`.
+The original Wronskian Green inversion then constructs the first spectral correction u1=G_K0[(b(mu,theta)-b(mu0,theta0))*G_K0[Fadj]], and verifies EXACT
+`L_{mu,theta}(u0-u1)-Fadj=-delta*u1`
+with a quadratic error bound using **only** these initial physical norms. Crucially, the former **independent** bound `||Fadj||<=M` is completely eliminated.
+
+Exact target audit: strict `--trust=0`, warning-as-error, target `#check` and target `#print axioms` succeed. The retrieved build artifact 13618619099 has EMPTY strict.log, source SHA256 evidence, compiler version Lean 4.35.0-rc3, and EXACT axioms `[propext, Classical.choice, Quot.sound]` with no `sorryAx`. This is one successful auxiliary theorem, **not** a full revised manuscript environment.
+
+**Mathematical limitation:** The resulting bound has factor
+`(abs(mu-mu0)+abs(theta-theta0))² * [2*Ck³*(B-r0)]² / r0²`
+with `r0=L/a`. This is NOT independently known to be time-small. Neither delta/r0 nor a uniform moving-left-endpoint original Kummer basis constant has yet been shown to have a positive time order from the same PDE orbit. The first Green correction also changes boundary traces and must be tied to the physical Fredholm/repair/remote field in all three regions. The full nonlinear 3D Hartree residual `O(s^(-9/4))`, its direct threshold Lipschitz, actual finite recursion and derived Type-II rate remain open.
+
+Mathematics synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `b83f5b96cebca4f9872a42caf7848e88f6ec04c3`. Formal revised count **11/13 = 84.62%**; do NOT count this local spectral estimate as 12/13.
