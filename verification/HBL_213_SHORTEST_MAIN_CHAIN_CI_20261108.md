@@ -452,3 +452,18 @@ Each of the following **original Actions evidence archives was downloaded and op
 | [42531018033](https://github.com/penghongzhong/HBL/actions/runs/42531018033) | 13637359625 | 5e7832612114 | actual_Hartree_true_source_selected_whole_matched_weighted_no_radius_loss |
 
 The artifact source files contain no actual Lean sorry/admit/axiom declarations (ordinary English use of the word “constant” in module documentation is not a declaration). The pinned workflow explicitly checks Mathlib at **a98628e16c11f5167f16124105ddce53efa9bfe5** and runs --trust=0 with -DwarningAsError=true. These are independent fully audited **auxiliary successes**. The complete evolving physical four-domain PDE remainder, finite recursion, and derived Type-II rate are **not** their conclusion; original 13-environment ledger remains **11/13**.
+
+
+### Three additional successful independent strict audits: true selected C1, nonlinear PDE telescope, original regular moment
+
+The original successful Actions archive ZIP files were downloaded and inspected: each has an **empty strict.log**, Lean **4.35.0-rc3**, complete #check of the exact exported theorem, and #print axioms with precisely the three standard transitive families **propext, Classical.choice, Quot.sound** and no sorryAx.
+
+| Strict CI | Original artifact | Exact Lean theorem and scope |
+|---|---|---|
+| [42532174429](https://github.com/penghongzhong/HBL/actions/runs/42532174429) | 13638436296 | actual_Hartree_true_source_selected_spectral_four_piece_three_C1 — the same actual quartic Hartree source, unique real Cramer pair, spectrally corrected physical four-piece field and all three C1 joins |
+| [42532174421](https://github.com/penghongzhong/HBL/actions/runs/42532174421) | 13638575634 | actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes — **exact nonlinear background-aware telescoping** of the *full original four-domain nonlocal PDE residual*, including the actual spectral corrected fields and all interactions; proves no individual time-order bound |
+| [42532387774](https://github.com/penghongzhong/HBL/actions/runs/42532387774) | 13638131323 | originGreen_inverse_linear_regular_A_moment_difference_radius_gain — original Frobenius mode yields extra radius factor for inverse-linear forcing, without artificial inverse left-radius loss |
+
+In particular, the old telescope CI 42530158681 and its first retrigger 42531641946 both **failed** due to the now-restored correct physical pullback derivative elaboration. The new **same-target** CI 42532174421 succeeds, as does the true-source C1 dependency 42532174429 at commit cd5690848cb1bce924e939249b648dd75015c949. These are not merely hypothetical results. The nonlinear theorem's identity telescopes exact residual *values* and does not yield O(s^-9/4), quantitative parameter Lipschitz, finite physical correction order gain, or dynamically derived Type-II explosion exponent. Mathematical manuscript synchronized in [commit 467f3000](https://github.com/penghongzhong/HBL/commit/467f3000737ae7d22f5c26f6bf4486d773e86994).
+
+**Formal accepted original manuscript environments remain 11/13.** The §2.13 and final theorem still require genuine same-PDE quantitative closure.
