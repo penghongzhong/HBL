@@ -218,3 +218,16 @@ The full selected Green source/adjusted-norm/original physical-source CI triad 4
 Paper synchronization: verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, updated commit 35c5709.
 
 **Strict scope boundary:** These are three separate, rigorously typed partial derivative theorems, NOT a joint differentiated complete four-piece Hartree field. The latter still requires a genuine joint source/endpoint/basis derivative, actual time-differentiable nonlocal Riesz interaction and full three-dimensional cross-density terms. The fixed-order complete PDE residual O(s^(-9/4)), direct threshold Lipschitz and final derived Type-II exponent remain unproved. Revised manuscript count remains **11/13 (84.62%)**.
+
+
+## 2026-11-08 physical time budgets: strict no-extra-a-loss acceptance
+
+**Two new strictly accepted load-bearing auxiliary theorems**; neither is counted as the complete §2.13 environment.
+
+1. `ActualHartreeMovingSelectedSourceTimeBudget.lean`, final source `de54e97003620e0793fae1aa80877611b7849260`. Initial compile passed on [CI 42471292372](https://github.com/penghongzhong/HBL/actions/runs/42471292372). The first audit workflow still printed the axioms of an older dependency; that was corrected explicitly in commit `f0cf6ae`. **Exact target strict re-audit [CI 42471590107](https://github.com/penghongzhong/HBL/actions/runs/42471590107): SUCCESS.** The actual Cramer velocity derivative times true speed profiles loses no factor `a^(-1)`. It proves the true, time-varying adjusted original Hartree forcing pointwise estimate with `1024 Cs/(B²r) * ||Z'+p_b b'+p_omega w'||` and explicitly retained physical `F0',Sb',Sw'` terms.
+
+2. `ActualHartreeSelectedSpeedGreenTimeNoScale.lean`, final source `a6155594b8c4ffadbe9b0276ff2a3cacd21f902c`. This combines the original normalized regular Green source integrals `||B_K[S_b]||,||B_K[S_omega]||≤Cs G a B` with the *same actual differentiated real Cramer speed*. The direct time coefficient is bounded by `(1024 Cs G/B)||Z'+p_b b'+p_omega w'||`; the moving scale `a` cancels, no artificial forcing or prescribed Type-II rate. The initial workflow's stale axiom print was corrected in `132efe7`. **Exact-target strict [CI 42471592939](https://github.com/penghongzhong/HBL/actions/runs/42471592939): SUCCESS.**
+
+**Independent archive inspection of BOTH exact-target strict runs:** reproduced Lean version 4.35.0-rc3; target-checked source SHA256 and empty `strict.log`; direct `#print axioms` yields exactly `[propext, Classical.choice, Quot.sound]`, no `sorryAx`, `admit` or added axioms in the target proof dependencies. The 0-error, trust-zero and warnings-as-errors success applies to the audited SHA, not untested later edits.
+
+**Manuscript synced** to `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `61ed0041`. Both estimates are for the actual moving source and actual regular Green coefficient; they are CONDITIONAL on the explicitly stated differentiability of original physical source and moving compatibility columns/obstruction. The nonlocal Hartree time/source Lipschitz along the PDE orbit, the *joint* moving-source/moving-endpoint/moving-Kummer-basis Green derivative, the full four-piece residual `O(s^(-9/4))`, direct threshold Lipschitz and dynamically DERIVED Type-II exponent remain unproved. **Formal revised environment count remains 11/13 = 84.62%.**
