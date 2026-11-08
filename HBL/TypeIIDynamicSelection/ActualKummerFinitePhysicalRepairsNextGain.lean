@@ -173,8 +173,8 @@ theorem actual_Hartree_finite_prior_Kummer_repairs_next_PDE_locked_gain
     let kl := actualHartreeLockedKappa beta rhoStar
     ‖complexRadialRenormalizedResidual
         (fun t y => U t y + actualKummerPhysicalOuterRepair a R p q t y)
-        (b s) (omega s) s r -
-      complexRadialRenormalizedResidual U (b s) (omega s) s r‖ ≤
+        b omega s r -
+      complexRadialRenormalizedResidual U b omega s r‖ ≤
       (2 * (4 * Real.pi * hartreeKappa) * Ct * M ^ 3) *
         s ^ (-(rho + kl)) := by
   dsimp only
@@ -191,7 +191,7 @@ theorem actual_Hartree_finite_prior_Kummer_repairs_next_PDE_locked_gain
       actual_Kummer_finite_physical_tail_bubble_bound s hs packets u hu
   have hNext :=
     actual_Hartree_moving_Kummer_corrected_outer_full_PDE_next_locked_gain
-      a ell c time R p q z H (b s) (omega s) s r
+      a ell c time R p q z H b omega s r
       B A CH beta rhoStar rho CX CD
       ha haCont hR hell hellOne hc hB hA hCH
       hs hbeta hrhoStar hflat hrho htrap
