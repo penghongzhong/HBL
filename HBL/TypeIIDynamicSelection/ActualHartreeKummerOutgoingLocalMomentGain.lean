@@ -34,7 +34,7 @@ theorem actual_Hartree_Kummer_outgoing_local_source_moment_bound
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (G L R a B A ell c : ℝ) (hG : 0 ≤ G)
     (hL : 1 ≤ L) (ha : 0 < a)
-    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (_hOrder : L / a ≤ R) (hRscale : R < scale)
     (hbound : ∀ x ∈ Icc 0 scale,
       ‖K.y x‖ ≤ G ∧ ‖K.dy x‖ ≤ G ∧
         ‖K.x x‖ ≤ G ∧ ‖K.dx x‖ ≤ G)
