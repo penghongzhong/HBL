@@ -158,7 +158,7 @@ The true regular origin homogeneous coefficient has a separate source-to-amplitu
 1. ActualHartreeTrueSourceSelectedAdjustedLocalGreenNoScale.lean, commit dffbae9, CI [42453950339](https://github.com/penghongzhong/HBL/actions/runs/42453950339): genuine F0 minus both selected modulation sources in the local singular Green physical product.
 2. ActualHartreeTrueSourceSelectedFullSingularGreenGain.lean, commit 047fc66, CI [42454285470](https://github.com/penghongzhong/HBL/actions/runs/42454285470): same selector, corrected physical Fredholm jet and full *right-endpoint singular* Green transport.
 3. ActualHartreeTrueSourceSelectedCorrectedNorm.lean, commit d882d6f, CI [42454532669](https://github.com/penghongzhong/HBL/actions/runs/42454532669): derive both corrected weighted inner norm and outer envelope from original quartic Hartree source.
-4. ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean, commit d4e8da4: eliminate corrected norm from full singular Green bound in favor of original N_F+Q_H. Dedicated CI is triggered by .github/workflows/hbl-true-source-full-original-norm.yml; its actual status needs verification.
+4. ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean, commit d4e8da4: eliminate corrected norm from full singular Green bound in favor of original N_F+Q_H. Dedicated CI [42454628449](https://github.com/penghongzhong/HBL/actions/runs/42454628449) was triggered by .github/workflows/hbl-true-source-full-original-norm.yml; it is **pending**, not a strict acceptance at this checkpoint.
 
 TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex (commit 74694b6).
 
