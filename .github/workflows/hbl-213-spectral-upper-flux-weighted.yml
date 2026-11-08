@@ -5,6 +5,8 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralUpperFluxWeighted.lean'
       - '.github/workflows/hbl-213-spectral-upper-flux-weighted.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralLeftC1Exact.lean'
+      - 'HBL/KummerOriginGreen/InverseLinearSourceRegularizedNoRadiusLoss.lean'
   workflow_dispatch:
 permissions:
   contents: read
@@ -72,9 +74,13 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_upper_obstruction_weighted_bound
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_corrected_upper_flux_bound
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_upper_obstruction_regularized_bound
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_corrected_upper_flux_regularized
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_upper_obstruction_weighted_bound
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_corrected_upper_flux_bound
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_upper_obstruction_regularized_bound
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_spectral_corrected_upper_flux_regularized
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeSpectralUpperFluxWeightedAudit.lean > evidence/audit.log 2>&1
           grep -q sorryAx evidence/audit.log && exit 1 || true
