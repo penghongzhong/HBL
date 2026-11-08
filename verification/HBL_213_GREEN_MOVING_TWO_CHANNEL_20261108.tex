@@ -750,4 +750,34 @@ source commit \texttt{3b4f928} with pinned strict workflow
 \texttt{hbl-true-moving-selected-source-time-budget.yml},
 commit \texttt{7b0cad2}; its CI acceptance remains pending.
 
+
+\medskip
+\noindent\textbf{Selected speed derivative in the ORIGINAL regular
+Green coefficient.}
+The already verified normalized Green speed-source estimates imply
+\[
+ |B_K[S_b](L/a,B)|,\ |B_K[S_\omega](L/a,B)|
+ \le C_sG\,aB,
+\]
+where \(B_K\) is the original Wronskian-normalized coefficient,
+rather than an artificial integral packet. Hence the real
+two-column Cramer speed derivative satisfies
+\begin{align}
+ &\left|p_b'(s)\,B_K[S_b](L/a,B)
+       +p_\omega'(s)\,B_K[S_\omega](L/a,B)\right|\notag\\
+ &\quad\le \frac{1024C_sG}{B}
+     \left|Z'(s)+p_b(s)b'(s)+p_\omega(s)w'(s)\right|.
+ \label{eq:true-hartree-selected-speed-green-time}
+\end{align}
+The moving scale \(a\) cancels identically. This is a genuinely
+Green-integrated estimate, stronger than the corresponding pointwise
+control, and it does not require assuming a separate speed derivative
+or a Type-II exponent. The matched direct Lean candidate is
+\texttt{ActualHartreeSelectedSpeedGreenTimeNoScale.lean}
+(commit \texttt{eaaa182}); its dedicated pinned strict workflow
+is \texttt{hbl-selected-speed-original-green-time-no-scale.yml},
+commit \texttt{21cb019}; success is pending.
+The original-source, moving-endpoint and Kummer-basis time terms
+must still be joined and bounded in the full physical field.
+
 \end{document}
