@@ -591,4 +591,46 @@ constitute a proof of the true time-varying \(\mathcal S_{\HH}(s,r)\)
 derivative. Those missing physical derivatives and cross-region
 Riesz interactions remain essential for the relative residual gain.
 
+
+\medskip
+\noindent\textbf{Time differentiation without freezing the three physical
+source profiles (new Lean bridge, pending strict CI).}
+Writing
+\[
+ F_{\mathrm{adj}}(s,r)=F_0(s,r)
+   -p_b(s)S_b(s,r)-p_\omega(s)S_\omega(s,r),
+ \qquad
+ F_0(s,r)=-a(s)^2\mathcal S_{\HH}(\ell(s),c(s),z(s);a(s)r),
+\]
+the selected pair is not a new differentiable input:
+\[
+ (p_b(s),p_\omega(s))
+  =\operatorname{Cramer}\bigl(b(s),w(s),Z(s)\bigr).
+\]
+Under the explicitly stated differentiability assumptions on the
+\emph{original} sources \(F_0,S_b,S_\omega\) and on the compatibility
+columns and obstruction, the exact product rule gives
+\[
+ \partial_s F_{\mathrm{adj}}
+ =\partial_s F_0
+  -p_b'S_b-p_b\,\partial_sS_b
+  -p_\omega'S_\omega-p_\omega\,\partial_sS_\omega,
+ \qquad
+ |p_b'|+|p_\omega'|
+ \le\frac{1024}{aB^2}
+  |Z'+p_b b'+p_\omega w'|.
+\]
+This chain is formalized in
+\texttt{ActualHartreeTrueMovingAdjustedSourceDerivative.lean}
+(commit \texttt{c2ae7be}); the dedicated pinned trust-zero strict
+compiler audit was submitted by workflow commit \texttt{01459ae}
+and must not be treated as accepted until it succeeds.
+In contrast to the frozen-profile Green derivative, all three
+physical sources depend on \(s\) in this identity. The assumptions
+\(\partial_sF_0,\partial_sS_b,\partial_sS_\omega\) remain
+\emph{visible}; their derivation from the one-orbit 3D Hartree
+equation, differentiation of the moving Kummer basis, and
+\(O(s^{-9/4})\) weighted residual and Lipschitz estimates are
+separate, unsolved analytic steps.
+
 \end{document}
