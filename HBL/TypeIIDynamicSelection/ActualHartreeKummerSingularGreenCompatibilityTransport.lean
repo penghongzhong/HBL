@@ -67,7 +67,7 @@ theorem actual_Hartree_compatible_singular_Green_coefficient_local_transport
         originGreenCoeffA K b F a -
           ∫ x in a..r, originGreenSourceA K F x := by
       unfold originGreenCoeffA
-      linear_combination -hSplit
+      linear_combination hSplit
     _ = actualOriginOutgoingTrace K a U DU -
           ∫ x in a..r, originGreenSourceA K F x := by
       rw [hSource]
