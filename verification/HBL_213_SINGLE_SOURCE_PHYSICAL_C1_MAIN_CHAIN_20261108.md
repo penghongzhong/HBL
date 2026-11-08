@@ -246,3 +246,17 @@ The Hartree source and the true normalized Kummer lower endpoint are NO LONGER m
 Each accepted target CI uses the fixed Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, warningAsError, exact #check and #print axioms on its own target statement (not a template dependency), with no sorryAx reported. CI success concerns these auxiliary declarations only.
 
 Manuscript mathematics and status synchronized to verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, commit 7083c6a. **Formal revised 13-environment acceptance remains 11/13 = 84.62%**. Genuine remaining analytic obligations are (i) original nonlocal full Hartree PDE source time derivative and weighted uniform derivative bounds along one orbit, including all Riesz mixed cross-density terms, (ii) the moving Kummer fundamental pair and its spatial-temporal basis derivatives, (iii) all-four-piece Fredholm/Green/repair/remote residual O(s^-9/4), and (iv) direct threshold Lipschitz and final dynamically DERIVED Type-II blowup rate. Do not assume a blowup rate or raise manuscript environment counts on partial green calculus alone.
+
+
+## 2026-11-08 regular upper Kummer jet: moving Fredholm + joint Green derivative
+
+**STRICT SUCCESS:** [CI 42474096247](https://github.com/penghongzhong/HBL/actions/runs/42474096247), corrected source commit a6db90c, ActualHartreeMovingMatchedRegularUpperJet.lean. This connects THREE previously strict sources of actual mathematics:
+(1) the moving Fredholm left Kummer value U(s), slope DU(s) and actual normalized Wronskian determine the source-independent regular homogeneous coefficient beta_reg(s);
+(2) the ORIGINAL joint time-varying Green term B_K[F(s)](ell(s)^(-1/16)/a(s),B) has the already proved source-plus-endpoint derivative, including its actual mixed-error cancellation;
+(3) the full compatibility-cancelled forced regular coefficient gamma(s)=beta_reg(s)+B_K[F(s)] produces the actual regular upper value X_K(B)gamma(s) and slope X'_K(B)gamma(s).
+
+The checked result derives gamma' and BOTH upper-jet time derivatives from the earlier certified Fredholm-jet and Green derivatives. It does not assume a derivative for gamma as a new independent input. The Kummer basis is frozen in this derivative. The full original PDE residual is not yet proved.
+
+**One-original-physical-source specialization pending:** ActualHartreeOnePhysicalSelectedUpperJetTime.lean, commit 1a3559c; [CI 42474332557](https://github.com/penghongzhong/HBL/actions/runs/42474332557). This binds F to one actual 3D inverse-square quartic Hartree source with one selected Cramer speed and r0(s)=ell(s)^(-1/16)/a(s), and feeds the preceding validated source-produced joint Green derivative into the matched regular upper jets. Its physical source-time, original Green dominated-integral, and Fredholm left-jet time regularity remain visible analytic premises. Do not count before strict success.
+
+Corresponding human-readable formulas and named equation references synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, commit e4fd3e3. Formal revised manuscript count remains **11/13 (84.62%)**. Next indispensable step is to DERIVE those time and weighted derivative budgets from the same actual nonlocal Hartree PDE orbit and then include the MOVING KUMMER BASIS and full nonlinear four-piece error gain. Neither the final Type-II rate nor the claimed s^-9/4 residual is assumed.
