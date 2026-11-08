@@ -52,8 +52,7 @@ theorem actual_Hartree_two_stage_critical_core_time_hasDerivAt
       (adot / (2 * Real.sqrt (a s))) s := ha.sqrt hapos.ne'
   have hProd := hRoot.mul hCore
   convert hProd using 1
-  · funext t
-    rfl
-  · ring
+  funext t
+  rfl
 
 end HBL.TypeIIDynamicSelection
