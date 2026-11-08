@@ -2778,4 +2778,70 @@ The theorem proves neither the complete four-region nonlocal
 residual estimate nor the dynamical Type--II rate; the
 original manuscript count therefore remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{A source-specific radial energy slope, without upgrading
+the original source to an inverse-linear envelope (strict replay pending).}
+The preceding unweighted Volterra lemma applies only to the
+\emph{inverse-linear} class $|q(r)|\le M/r$.
+It cannot be substituted, with a matching-radius-independent $M$, for
+the \emph{complete original} quartic Hartree source
+\[
+ F_0(r)=-a^2\mathcal S_{\HH}(ar),\qquad
+ |F_0(r)|\le Q/r^2,\qquad
+ Q=C_{\mathrm{phys}}(B_z,A_z)\ell^{1/8}.
+\]
+For this original Riesz forcing the appropriate coordinate for radial
+three-dimensional energy is instead $r|\partial_r w_0(r)|$,
+since $r^2|\partial_r w_0|^2$ is the radial energy density.
+Let $w_0=\G_{r_0,B}^{\,\mathrm{zero-left}}[F_0]$,
+$r_0=L/a$, and use the actual physical origin-normalized Kummer
+modes $X=x/r$ and $Y=y/r$.  Set
+\[
+ J=1+(D+1)GB^2,\qquad
+ T=\frac83\,GQL^{-3/8}.
+\]
+The true original source and the exact physical Wronskian yield
+\begin{align*}
+  \left|\frac{X(\rho)F_0(\rho)}{W_K(\rho)}\right|
+  &\le JQ,&
+  |A_{F_0}(r)-A_{F_0}(r_0)|
+  &\le JQ(r-r_0),\\
+  |B_{F_0}(r)|
+  &\le T,&
+  |r y'(r)-y(r)|
+  &\le (B+1)G,\\
+  |r x'(r)-x(r)|
+  &\le 2(D+1)Gr^3.
+\end{align*}
+The $B$-moment bound here is the \emph{actual}
+$L^{-3/8}$ Riesz tail estimate, not an independently imposed bound.
+The exact, zero-left Wronskian identity then gives
+\begin{align*}
+ r^2 w_0'(r)
+ &=\bigl(ry'(r)-y(r)\bigr)
+     \bigl(A_{F_0}(r)-A_{F_0}(r_0)\bigr)
+    +\bigl(rx'(r)-x(r)\bigr)B_{F_0}(r),\\
+ \boxed{\quad
+ r|w_0'(r)|
+ &\le (B+1)GJQ+2(D+1)GB^2T,\qquad r_0\le r\le B.
+ \quad}
+\end{align*}
+In particular no inverse power of $r_0$ is introduced.
+This addresses the \emph{original Riesz} part of the zero-left
+radial energy estimate. The selected modulation-generator part and
+the homogeneous inner-jet component still require the same-speed
+composition; the complete four-domain time-dependent nonlinear PDE
+residual and genuine finite induction remain open.
+
+The source-specific Lean implementation is
+\texttt{ActualHartreeOriginalRieszZeroLeftEnergySlope.lean},
+submitted at commit \texttt{95fb3ec6}, with a separate locked
+\texttt{--trust=0} and exact transitive-axiom workflow.
+Until the dedicated CI is complete and its original evidence is
+audited, the displayed theorem is a \emph{proof candidate}, not a
+newly certified assertion, and cannot increase the original count
+above $11/13$.
+
 \end{document}
