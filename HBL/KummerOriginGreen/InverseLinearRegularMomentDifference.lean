@@ -37,7 +37,7 @@ namespace HBL.Profile.Kummer
 theorem originGreen_inverse_linear_regular_A_moment_difference_radius_gain
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (a b C D G M : ℝ)
-    (ha : 0 < a) (hab : a ≤ b) (hb : b < scale)
+    (ha : 0 < a) (_hab : a ≤ b) (hb : b < scale)
     (hD : 0 ≤ D) (hG : 0 ≤ G) (hM : 0 ≤ M)
     (hK : OriginBasisOn K a b C)
     (hcoeff : ∀ x ∈ Icc 0 scale,
