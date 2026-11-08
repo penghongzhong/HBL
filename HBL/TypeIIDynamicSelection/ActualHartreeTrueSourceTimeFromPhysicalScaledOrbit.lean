@@ -156,7 +156,7 @@ theorem actual_Hartree_original_Kummer_source_time_from_full_scaled_orbit
                 (fun τ x =>
                   (actualHartreeTrueTwoStageScaledCore a c τ x : ℂ))
                 (fun τ x => (dV τ x : ℂ)) r s rho)
-          s r
+          s r;
        -( ((adot / (2 * Real.sqrt (a s)) : ℝ) : ℂ) /
             (((Real.sqrt (a s) : ℝ) : ℂ) ^ 2)) *
           actualHartreeTrueCriticallyScaledOriginalInteraction a ell c z s r +
