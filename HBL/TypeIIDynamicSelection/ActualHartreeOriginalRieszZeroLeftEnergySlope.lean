@@ -141,7 +141,7 @@ theorem actual_Hartree_original_Riesz_zero_left_energy_weighted_slope_no_left_ra
       simpa only [J] using
         (origin_kummer_regular_physical_bound K D G hD hG
           hBscale.le hcoeff hbound x ⟨hxpos, hxB.2⟩).1
-    have hWr := origin_physical_wronskian_exact K hxscale hxpos.ne'
+    have hWr := originGreenWronskian_exact K hK hxB
     have hExp :
         ‖Complex.exp (-Complex.I * (x : ℂ) ^ 2 / 4)‖ = 1 := by
       rw [Complex.norm_exp]
@@ -262,8 +262,8 @@ theorem actual_Hartree_original_Riesz_zero_left_energy_weighted_slope_no_left_ra
           (2 * (D + 1) * G * T) * r ^ 3 := by ring
       _ ≤ ((B + 1) * G * J * Q) * r +
           (2 * (D + 1) * G * T) * (B ^ 2 * r) :=
-        add_le_add_left
-          (mul_le_mul_of_nonneg_left hr3 hXFull) _
+        exact add_le_add (le_refl _)
+          (mul_le_mul_of_nonneg_left hr3 hXFull)
       _ = E * r := by dsimp [E]; ring
   have hNorm :
       ‖(r : ℂ) ^ 2 * actualOriginMatchedKummerSlope K (L / a) B F 0 0 r‖ =
