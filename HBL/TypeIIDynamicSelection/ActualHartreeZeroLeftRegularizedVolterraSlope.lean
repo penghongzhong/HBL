@@ -105,7 +105,7 @@ theorem actual_Hartree_zero_left_Kummer_regularized_Volterra_slope_bound
       _ ≤ r * G + G :=
         add_le_add (mul_le_mul_of_nonneg_left hdp hr0.le) hp
       _ ≤ b * G + G :=
-        add_le_add_right
+        add_le_add_left
           (mul_le_mul_of_nonneg_right hr.2 hG) G
       _ = (b + 1) * G := by ring
   have hY : ‖(r : ℂ) * K.dy r - K.y r‖ ≤ (b + 1) * G :=
