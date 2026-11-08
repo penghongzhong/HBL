@@ -1411,4 +1411,77 @@ and the corresponding zero-left-jet matched Volterra correction,
 remain to be proved uniformly; they are not assumptions on
 the main Type-II theorem.
 
+
+\medskip
+\noindent\textbf{The exact left-jet-preserving matched spectral response.}
+The preceding isolated Green correction need not preserve the
+original Fredholm Cauchy jet. With the \emph{complete} original
+Cramer-matched field $w_0$ and $q=\delta w_0$, instead set
+\[
+ w_1(r)=w_{\rm match}[q,0,0](r),
+ \qquad
+ v(r)=w_0(r)-w_1(r).
+\]
+The zero left value and slope are imposed on the \emph{actual}
+Cramer solution, not on a free homogeneous repair. Direct calculation
+with the original Kummer operator gives
+\[
+ v(r_0)=w_0(r_0),\qquad
+ \partial_rv(r_0)=\partial_rw_0(r_0),\qquad
+ {\cal L}_{\mu,\theta}v-F_{\rm adj}=-\delta w_1 .
+\]
+The right outgoing defect is \emph{not} automatically zero:
+\[
+ {\cal T}_{B}[v]
+   =-\mathfrak O_{[r_0,B]}[q,0,0]
+   \quad\text{when}\quad
+   \mathfrak O_{[r_0,B]}[F_{\rm adj},U,DU]=0.
+\]
+These exact identities are verified in
+\texttt{ActualHartreeMatchedSpectralLeftC1Exact.lean};
+strict CI \texttt{42502178507} returned \emph{Success}.
+
+For the original regularized Kummer modes
+$y(r)=rY(r)$ and $x(r)=rX(r)$,
+the \emph{actual} zero-left Cramer coefficient satisfies the
+cancellation
+\[
+ r\,w_1(r)
+ =y(r)\{A_q(r)-A_q(r_0)\}+x(r)B_q(r).
+\]
+Thus no independent singular homogeneous coefficient is inserted.
+If the first \emph{same} matched profile is controlled by
+$\sup_{[r_0,B]}r\|w_0(r)\|\le H$ and
+$\|x(r)\|,\|y(r)\|\le G$, then the exact Wronskian integral gives
+\[
+ \|r w_1(r)\|
+  \le 2G^2(B-r_0)|\delta|H,\qquad
+ \|\delta w_1(r)\|
+  \le \frac{2G^2(B-r_0)|\delta|^2H}{r}.
+\]
+The first bound and the Cramer cancellation are strictly checked in
+\texttt{ActualHartreeZeroLeftRegularizedVolterra.lean},
+CI \texttt{42503893981} (\emph{Success}).
+The corrected outgoing flux independently obeys
+\[
+ \left\|{\cal T}_{B}[v]\right\|
+ \le G|\delta|H(B-r_0),
+\]
+with original regularized IVP bounds rather than a potentially
+divergent unweighted singular Kummer basis.
+Its strict audit is
+\texttt{ActualHartreeMatchedSpectralUpperFluxWeighted.lean},
+CI \texttt{42503498370} (\emph{Success}).
+The three accepted strict audits list precisely
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}; they contain no \texttt{sorryAx}.
+
+\emph{Remaining physical input:} the displayed $H$ must be
+derived from the \emph{same} genuine source-selected Hartree trajectory
+and its Fredholm Cauchy coordinates. The complete moving-basis estimates,
+nonlocal four-region PDE error and true time-positive finite recurrence
+also remain unproved; no physical Type-II exponent is assumed here.
+The original §2.13 environment and final theorem are therefore
+\emph{not} accepted by these separate strict Cramer lemmas.
+
 \end{document}
