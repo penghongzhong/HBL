@@ -1968,4 +1968,37 @@ hypothesis. The missing outgoing upper-channel transport, the
 full three-interface $C^1$ repair and the nonlinear PDE gain
 are not consequences of \eqref{eq:actual-three-source-regular-green}.
 
+
+\medskip
+\noindent\textbf{The genuine selected speed in the complete adjusted
+regular channel (physical-source Lean composition, strict replay pending).}
+The real compatibility equations produce one uniquely selected
+$p=(p_1,p_2)$ for the \emph{same} original $F_0$ and its Fredholm
+left data. The verified speed estimate
+\[
+ |p_1|+|p_2|\le \frac{C_{\rm sel}}{a}
+    (N_{\rm F}+Q_{\rm H})
+\]
+inserted in \eqref{eq:actual-three-source-regular-green} gives
+\begin{equation}
+ \boxed{\quad\sup_{L/a\le r\le B}
+ \left|B_{F_{\rm adj}}(r)\right|
+ \le \frac83 GQ_{\rm H}L^{-3/8}
+   +C_{\rm sp}GBC_{\rm sel}(N_{\rm F}+Q_{\rm H}).\quad}
+ \label{eq:original-unique-selected-adjusted-regular}
+\end{equation}
+Here $F_{\rm adj}$ contains the \emph{exact} original nonlocal Hartree
+source and both original real-speed forcing profiles, rather than
+an independently postulated adjusted-source amplitude.
+The kernel proof is submitted as
+\texttt{ActualHartreeSelectedAdjustedRegularGreenAllRadii.lean}
+with independent locked workflow
+\texttt{hbl-213-selected-adjusted-regular-green-all-radii.yml}.
+Until that full strict build is successful the displayed bound is a
+derived analytical target, not an accepted Lean theorem.
+The same-source singular Green branch and Cramer homogeneous component
+must next be combined, then the actual time-dependent moving basis,
+three $C^1$ transmission interfaces and the complete four-region PDE
+source must be handled without a hypothesized time exponent.
+
 \end{document}
