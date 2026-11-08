@@ -120,7 +120,6 @@ theorem actual_Hartree_true_source_selected_matched_spectral_weighted_quadratic
       Fp Fm hp hm hcp hcm Bz Az ell hBz hAz hell hellOne
       z hz hSup hStrauss
   refine ⟨p, hCompat, hUnique, ?_⟩
-  dsimp only
   let F0 : ℝ → ℂ := fun x =>
     -actualHartreeLaplacianScaledKummerSource a ell c z x
   let Fadj : ℝ → ℂ := fun x =>
