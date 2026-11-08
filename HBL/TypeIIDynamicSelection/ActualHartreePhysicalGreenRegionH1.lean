@@ -60,7 +60,7 @@ theorem actual_Hartree_matched_physical_Green_region_derivative_bound
   have hyScale : y ∈ Ioo 0 (A * scale) := by
     constructor
     · exact (mul_pos hA ha).trans_le hy.1
-    · exact hy.2.trans (mul_lt_mul_of_pos_left hb hA)
+    · exact hy.2.trans_lt (mul_lt_mul_of_pos_left hb hA)
   have hClass :=
     (actual_origin_matched_Kummer_classical_on_positive_interval
       K ha hab hb F hFcont U DU (y / A)
@@ -133,7 +133,7 @@ theorem actual_Hartree_matched_physical_Green_region_radial_H1_energy
         _ ≤ (A * b) * (E / A) :=
           mul_le_mul (by simpa only [hi] using hy.2)
             hDerivative (norm_nonneg _) (by positivity)
-        _ = D := by dsimp [D]; field_simp [hA.ne']; ring
+        _ = D := by dsimp [D]; field_simp [hA.ne']
     have hNonneg : 0 ≤ y * ‖deriv v y‖ :=
       mul_nonneg hy0 (norm_nonneg _)
     calc
