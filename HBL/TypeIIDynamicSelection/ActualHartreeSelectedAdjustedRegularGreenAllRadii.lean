@@ -153,9 +153,9 @@ theorem actual_Hartree_true_source_selected_adjusted_regular_Green_all_radii
             (Csp * G * a * B) * (|p.1| + |p.2|) := hRaw
       _ ≤ (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
             (Csp * G * a * B) * ((Csel / a) * (N + Q)) :=
-        add_le_add_left hSpeedApplied _
+        add_le_add_right hSpeedApplied _
       _ = (((8 / 3 : ℝ) * G * Q) * L ^ (-(3 / 8 : ℝ))) +
             (Csp * G * B * Csel) * (N + Q) := by rw [hCancel]
-  simpa only [Fadj, Fsp, F0, Q, N] using hOutput
+  simpa only [Fadj, Fsp, F0, Q, N, add_assoc] using hOutput
 
 end HBL.TypeIIDynamicSelection
