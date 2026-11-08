@@ -1562,8 +1562,11 @@ $r_0|DU|+(r_0+1)|U|\ge0$, since $r_0>0$;
 thus the full coefficient upper bound is nonnegative, not merely $G$.
 This estimate is implemented in
 \texttt{ActualHartreeMatchedRegularJetNoRadiusLoss.lean}
-with pinned strict kernel/type/axiom checks; until the dedicated CI
-succeeds it is an unaccepted new intermediate proof.  The two left jets
+with its accepted exact strict kernel/type/axiom audit
+\texttt{42511347313} (\emph{Success}, commit \texttt{2d94b7ce}).
+Both declarations depend on precisely the standard Lean logical axioms
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound};
+no \texttt{sorryAx} or additional premise is present.  The two left jets
 must still be controlled by the \emph{same} physically selected Fredholm
 trajectory, and the source-driven nonlocal Green part, moving basis,
 outgoing obstruction, three physical $C^1$ joins, and the four-region
