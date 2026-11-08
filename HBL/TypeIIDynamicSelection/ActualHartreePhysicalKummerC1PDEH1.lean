@@ -147,6 +147,7 @@ theorem actual_Hartree_physical_Kummer_C1Splice_three_source_regions
       filter_upwards [Iio_mem_nhds hy.2] with t ht
       change (if t ≤ a * B then v t
         else if t ≤ 2 * a * B then rep t else 0) = v t
+      change t < a * B at ht
       simp [le_of_lt ht]
     have hOp :=
       actual_matched_scaled_Kummer_apply_of_eventuallyEq
@@ -162,12 +163,15 @@ theorem actual_Hartree_physical_Kummer_C1Splice_three_source_regions
         with t htlo hthi
       change (if t ≤ a * B then v t
         else if t ≤ 2 * a * B then rep t else 0) = rep t
+      change a * B < t at htlo
+      change t < 2 * a * B at hthi
       simp [not_le.mpr htlo, hthi.le]
     exact actual_matched_scaled_Kummer_apply_of_eventuallyEq
       mu theta a y glued rep hNear
   · intro y hy
     have hNear : glued =ᶠ[𝓝 y] (fun _ => (0 : ℂ)) := by
       filter_upwards [Ioi_mem_nhds hy] with t ht
+      change 2 * a * B < t at ht
       have htlo : a * B < t := hAB.trans ht
       change (if t ≤ a * B then v t
         else if t ≤ 2 * a * B then rep t else 0) = 0
