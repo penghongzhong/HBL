@@ -1934,4 +1934,38 @@ Neither a decay rate for $\delta(s)$ nor a genuine four-region
 nonlinear residual has been proved here; these must come from the
 actual modulation equations and the real physical PDE orbit.
 
+
+\medskip
+\noindent\textbf{The adjusted physical source: original regular
+Green coefficient at every radius (new strict Lean candidate).}
+Let $F_{\rm adj}=F_0-p_1P_{\rm sc}-p_2P_{\rm ph}$.
+For $r\in[L/a,B]$, the original Wronskian integrability certificates
+for $F_0,P_{\rm sc},P_{\rm ph}$ imply the exact identity
+\[
+ B_{F_{\rm adj}}(r)=
+ B_{F_0}(r)-p_1 B_{P_{\rm sc}}(r)-p_2B_{P_{\rm ph}}(r).
+\]
+No distributional interchange or replacement of the source by a
+postulated forcing envelope is used. The authentic quartic Riesz
+source and the real speed generators consequently give
+\begin{equation}
+ \sup_{L/a\le r\le B}|B_{F_{\rm adj}}(r)|
+ \le \frac83 GQ_{\rm H}L^{-3/8}
+  +C_{\rm sp}GaB(|p_1|+|p_2|).
+ \label{eq:actual-three-source-regular-green}
+\end{equation}
+The theorem
+\texttt{actual\_Hartree\_adjusted\_original\_regular\_Green\_all\_radii}
+is implemented in
+\texttt{ActualHartreeAdjustedRegularGreenAllRadii.lean} and
+submitted with pinned strict exact-type/axiom workflow
+\texttt{hbl-213-adjusted-regular-green-all-radii.yml};
+its acceptance requires a successful run. The substitution of
+the \emph{unique} real Fredholm--Cramer speed in
+\eqref{eq:actual-three-source-regular-green}
+will eliminate $a(|p_1|+|p_2|)$ without introducing a new physical
+hypothesis. The missing outgoing upper-channel transport, the
+full three-interface $C^1$ repair and the nonlinear PDE gain
+are not consequences of \eqref{eq:actual-three-source-regular-green}.
+
 \end{document}
