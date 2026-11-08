@@ -2516,4 +2516,72 @@ the true finite recursion or the dynamic Type-II exponent
 follows from these fixed-time estimates. The original revised
 acceptance count therefore remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{Strict zero-left Wronskian--Cramer slope and full
+weighted $C^1$ control.}
+The original matched Kummer field with \emph{zero} left Cauchy data,
+\(w_1=\mathcal G_{K_0}^{\mathrm{match}}[q;0,0]\),
+has exactly the regularized-origin derivative identity
+\[
+ \begin{aligned}
+ r^2 w_1'(r)
+  &=[r\,y'(r)-y(r)]\,[A_q(r)-A_q(r_0)]\\
+  &\quad+[r\,x'(r)-x(r)]\,B_q(r).
+ \end{aligned}
+\]
+With the true original Wronskian
+\(\|W_K(r)^{-1}\|=r^2\),
+the original regularized IVP bounds
+\(\|y\|,\|y'\|,\|x\|,\|x'\|\le G\)
+on the fixed positive interval, and the physical inverse-linear
+source envelope \(\|q(r)\|\le M/r\), the following simultaneous
+estimates have now passed strict Lean:
+\[
+ \boxed{
+ \begin{aligned}
+ \|r\,w_1(r)\|&\le 2G^2(B-r_0)M,\\
+ \|r^2 w_1'(r)\|&\le 2(B+1)G^2(B-r_0)M,\\
+ \|r\,w_1(r)\|+\|r^2w_1'(r)\|
+ &\le 2(B+2)G^2(B-r_0)M .
+ \end{aligned}}
+\]
+These are the exact target declarations in
+\texttt{ActualHartreeZeroLeftRegularizedVolterraSlope.lean};
+CI \texttt{42531450638} is \emph{Success}.
+The independently inspected evidence archive
+\texttt{13638185198} has an empty
+\texttt{strict.log}, pinned Lean 4.35.0-rc3,
+and \texttt{\#print axioms} containing only the
+three standard Lean axioms, without \texttt{sorryAx}.
+
+A further source-faithful strict theorem proves the stronger
+\emph{pointwise} density estimate for the original regular
+Kummer solution \(X(r)=x(r)/r\):
+\[
+ \boxed{
+ \left\|\frac{X(r)q(r)}{W_K(r)}\right\|
+ \le J M r,\qquad J=1+(D+1)GB^2.}
+\]
+Its original code is
+\texttt{InverseLinearRegularSourceRadiusGain.lean},
+strict CI \texttt{42532197451} (\emph{Success}),
+original evidence archive \texttt{13637489646};
+the exact target's axioms are again just
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound} with zero-byte strict log.
+The extra factor \(r\) must be retained when taking
+\(A_q(r)-A_q(r_0)\); taking a source supremum prematurely
+would lose the uniform radial \(\dot H^1\) estimate needed later.
+
+\emph{Scope:} the verified bound on \(r^2 w_1'\) is
+\emph{not} yet an unweighted \(w_1'\) or radial
+\(\dot H^1\) bound uniform as \(r_0\to0\).
+The exact moment-difference radius gain and its combination
+with the actual spectral source \(q=d u_0\) are separate
+strict-CI targets. The complete nonlocal Hartree residual
+time gain, parameter Lipschitz estimate, genuine finite
+iteration, and PDE-derived Type-II exponent remain open;
+the original 13-environment count stays \(11/13\).
+
 \end{document}
