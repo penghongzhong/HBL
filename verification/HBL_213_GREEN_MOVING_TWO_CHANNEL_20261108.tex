@@ -1190,4 +1190,68 @@ come from the final physical PDE trajectory.
 The moving Kummer basis and the full weighted nonlinear
 \(O(s^{-9/4})\) residual are not inferred from these identities.
 
+
+\medskip
+\noindent\textbf{The actual real-compatible Hartree source under one
+fixed-basis spectral Kummer correction.}
+Let \(K_0\) denote the original origin-normalized Kummer pair at
+\((\mu_0,\theta_0)\), and let
+\(r_0=L/a\), \(F_0(r)=-a^2\mathcal S_{\rm H}(ar)\).
+The genuine Fredholm two-channel compatibility condition determines
+one unique real pair \(p=(p_b,p_\omega)\), giving
+\[
+ F_{\rm adj}(r)=F_0(r)-p_bS_b(r)-p_\omega S_\omega(r).
+\]
+The accepted original-source estimate yields a nonnegative \(Q_a\)
+such that
+\[
+ \|F_{\rm adj}(r)\|\le Q_a/r^2,\qquad
+ 0\le Q_a\le C_{\rm sel}
+   \bigl(N_{\rm F}+C_{\rm phys}\ell^{1/8}\bigr).
+\]
+Writing
+\(
+ \delta=b(\mu,\theta)-b(\mu_0,\theta_0)
+\)
+and using the \emph{same} original normalized Green operator \(G_0\),
+set
+\[
+ u_0=G_0[F_{\rm adj}],\qquad
+ u_1=G_0[\delta u_0].
+\]
+The genuine frozen Kummer differential equation implies the
+\emph{exact} cancellation
+\[
+ {\cal L}_{\mu,\theta}(u_0-u_1)
+      -F_{\rm adj}=-\delta u_1.
+\]
+The full original physical source, without a separately inserted
+pointwise bound \(M\), therefore satisfies
+\[
+ \bigl\|{\cal L}_{\mu,\theta}(u_0-u_1)
+           -F_{\rm adj}\bigr\|
+ \le
+ \bigl(|\mu-\mu_0|+|\theta-\theta_0|\bigr)^2
+ [2C_K^3(B-r_0)]^2
+ \frac{C_{\rm sel}(N_{\rm F}+C_{\rm phys}\ell^{1/8})}{r_0^2}.
+\]
+The complete chain is formalized by
+\texttt{ActualHartreeOriginalSelectedSpectralSourceNormGain.lean},
+commit \texttt{2ab28476},
+with strict trust-zero and target-axiom audit CI
+\texttt{42485891640} (\emph{Success}).
+Its dependence is confined to the standard Lean axioms
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound};
+there are no \texttt{sorryAx} dependencies.
+
+\emph{Crucial restriction:} the \(r_0^{-2}\) factor has \emph{not}
+been absorbed into a positive time order. A true positive-order
+step needs a PDE-derived quantitative bound on
+\((|\mu-\mu_0|+|\theta-\theta_0|)/r_0\)
+and time-uniform bounds for the fixed basis, as well as control of
+the other three-region full nonlocal Hartree residual components.
+Thus this strictly accepted theorem is a source-faithful
+\emph{local spectral correction}, not §2.13 or a prescribed
+Type-II exponent.
+
 \end{document}
