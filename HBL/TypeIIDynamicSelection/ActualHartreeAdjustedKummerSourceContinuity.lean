@@ -103,16 +103,16 @@ theorem actual_Hartree_adjusted_Kummer_source_continuousAt
   have hScale : ContinuousAt
       (fun x : ℝ => actualMomentLockedScaleProfile c (a * x)) r :=
     (actual_Hartree_moment_locked_scale_profile_continuousAt c (a * r) hPos).comp
-      r hArg
+      hArg
   have hCore : ContinuousAt
       (fun x : ℝ => actualMomentLockedCore c (a * x)) r :=
-    (monopoleMovingCutoffSpatial_hasDerivAt c hPos).continuousAt.comp r hArg
+    (monopoleMovingCutoffSpatial_hasDerivAt c hPos).continuousAt.comp hArg
   have hRealScale : ContinuousAt
       (fun x : ℝ => (actualMomentLockedScaleProfile c (a * x) : ℂ)) r :=
-    Complex.continuous_ofReal.continuousAt.comp r hScale
+    Complex.continuous_ofReal.continuousAt.comp hScale
   have hRealCore : ContinuousAt
       (fun x : ℝ => (actualMomentLockedCore c (a * x) : ℂ)) r :=
-    Complex.continuous_ofReal.continuousAt.comp r hCore
+    Complex.continuous_ofReal.continuousAt.comp hCore
   have hS : ContinuousAt (actualMomentLockedScaledScaleSource a c) r := by
     unfold actualMomentLockedScaledScaleSource actualMomentLockedScaleSource
     exact continuousAt_const.mul (continuousAt_const.mul hRealScale)
