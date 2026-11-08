@@ -2698,4 +2698,53 @@ physical radial slope is being compiled separately; it is
 not to be counted without its own successful strict CI.
 No time-decay exponent or new source bound is assumed.
 
+
+\medskip
+\noindent\textbf{Strictly accepted selected corrected three-interface
+profile and full nonlinear finite telescope.}
+The corrected physical field is now verified at all three matching
+interfaces under one \emph{genuine} quartic Hartree source and one
+unique real Cramer-selected two-speed:
+\[
+ \left(U_{\rm corr}^{\rm four}\right)'(L)
+       =u_{\rm inner}'(L),\qquad
+ \left(U_{\rm corr}^{\rm four}\right)'(aB)
+       =a^{-1}v_{\rm corr}'(B),\qquad
+ \left(U_{\rm corr}^{\rm four}\right)'(2aB)=0.
+\]
+The exact theorem is
+\texttt{actual_Hartree_true_source_selected_spectral_four_piece_three_C1},
+strict Actions \texttt{42532174429}, archived evidence
+\texttt{13638436296}. Its original \texttt{strict.log} is
+empty, compiler Lean 4.35.0-rc3, and exact transitive axioms
+are only
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}.
+
+For genuine four-region \emph{time-dependent} corrected packets,
+write
+\(\mathfrak R[\Phi]\) for the full original renormalized
+nonlocal Hartree residual of a physical field \(\Phi\), and
+\(\Phi_n=\Phi_0+\sum_{j=1}^{n}V_j\).
+The nonlinear, background-aware identity
+\[
+ \mathfrak R[\Phi_n]-\mathfrak R[\Phi_0]
+ =\sum_{j=1}^{n}
+    \bigl(\mathfrak R[\Phi_j]-\mathfrak R[\Phi_{j-1}]\bigr)
+\]
+is strictly certified for the exact spectrally corrected
+four-piece fields in
+\texttt{actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes},
+Actions \texttt{42532174421}, artifact \texttt{13638575634},
+with an empty \texttt{strict.log}, exact type audit and the same
+three standard transitive axioms. Unlike a spurious assertion
+of nonlinear additivity, this formula evaluates each increment
+on the \emph{full preceding background}. It does
+\emph{not} imply that any increment is
+\(O(s^{-9/4})\); deriving quantitative positive time gains
+from the original nonlocal Hartree PDE trajectory remains an
+independent main-chain obligation. Hence the original
+\(\S2.13\) environment is still not complete, and
+the original environment count remains \(11/13\).
+
 \end{document}
