@@ -4,6 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSourceUniformRegularJet.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedRegularJetNoRadiusLoss.lean'
       - '.github/workflows/hbl-213-matched-source-regular-jet-quadratic.yml'
       - 'HBL/KummerOriginGreen/InverseLinearSourceRegularizedNoRadiusLoss.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMomentLockedMatchedKummer.lean'
