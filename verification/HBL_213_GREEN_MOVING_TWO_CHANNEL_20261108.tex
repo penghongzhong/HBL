@@ -216,4 +216,48 @@ Each new declaration must pass its own strict kernel/axiom CI before
 being labelled a verified theorem. The full fixed-order
 physical profile at $s^{-9/4}$ remains unproved.
 
+
+\medskip
+\noindent\textbf{Sharper estimate for the \emph{product} with the singular Green mode.}
+The preceding estimate \eqref{eq:actual-local-hartree-green-moment}
+used the coarse bound $|X(r)|\le G/r$, although $X$ is the
+\emph{regular} origin mode. The actual Frobenius jet improves it to
+\[
+ |X(r)|\le C_{\rm reg}:=1+(D+1)G B^2
+ \quad(0<r\le B).
+\]
+Retaining this improvement \emph{before} estimating the source
+density and using the exact physical Wronskian gives, with $y=ar\ge L\ge1$,
+\begin{align*}
+ \left|\frac{X(r)F(r)}{W(r)}\right|
+ &\le C_{\rm reg}a^2 M_{\HH}r^2(1+ar)^{-19/8}\\
+ &=C_{\rm reg}M_{\HH}y^2(1+y)^{-19/8}
+ \le C_{\rm reg}M_{\HH}y^{-3/8}
+ \le C_{\rm reg}M_{\HH}.
+\end{align*}
+Therefore, for all $L/a\le r\le B$,
+\begin{align}
+ \left|\int_{L/a}^r\frac{X(\rho)F(\rho)}{W(\rho)}d\rho\right|
+ &\le C_{\rm reg}M_{\HH}(r-L/a),\\
+ \left|Y(r)\int_{L/a}^r
+     \frac{X(\rho)F(\rho)}{W(\rho)}d\rho\right|
+ &\le G C_{\rm reg}M_{\HH}\frac{r-L/a}{r}
+ \le G C_{\rm reg}M_{\HH}.
+ \label{eq:true-hartree-singular-green-product}
+\end{align}
+This is the needed \emph{physical product bound}: the apparent positive
+power of the Kummer scale $a$ disappears \emph{after the singular mode
+is multiplied back in}. Since $M_{\HH}$ contains the independently
+established factor $\ell^{1/8}$, the bound retains a genuine
+positive smallness factor instead of an artificial $a$-loss.
+The estimate remains a \emph{candidate} pending strict CI
+\texttt{ActualHartreeSingularGreenPhysicalSourceGain.lean};
+it must not be counted as accepted before kernel replay.
+
+The remaining part of $Y(r)A(r)$ is $Y(r)J_-(r_0)$,
+to be estimated from the real two-channel Fredholm source and the
+Wronskian trace; this is a distinct candidate. Neither estimate
+replaces the true time derivative, the remote-region matching, nor
+the complete nonlinear $s^{-9/4}$ Hartree residual.
+
 \end{document}
