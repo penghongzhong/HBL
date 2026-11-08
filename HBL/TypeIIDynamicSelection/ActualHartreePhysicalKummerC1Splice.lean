@@ -37,7 +37,8 @@ private theorem physicalTwoPiece_hasDerivAt_at_join
     HasDerivAt (physicalTwoPiece a f g) d a := by
   have heqL : EqOn (physicalTwoPiece a f g) f (Iic a) := by
     intro y hy
-    simp [physicalTwoPiece, hy]
+    change (if y ≤ a then f y else g y) = f y
+    exact if_pos hy
   have heqR : EqOn (physicalTwoPiece a f g) g (Ici a) := by
     intro y hy
     by_cases hya : y = a
@@ -107,8 +108,8 @@ theorem actual_physical_three_piece_C1_interfaces
     have hya : ¬y ≤ a := not_le.mpr hy
     simp [splice, pieceR, physicalTwoPiece, hya]
   constructor
-  · exact hLeft.congr_of_eventuallyEq hNearL (hNearL.eq_of_nhds)
-  · exact hRight.congr_of_eventuallyEq hNearR (hNearR.eq_of_nhds)
+  · exact hLeft.congr_of_eventuallyEq hNearL
+  · exact hRight.congr_of_eventuallyEq hNearR
 
 /-- For the actual origin-normalized Green solution, *same-source*
 boundary jet UB,DUB and its physical repair, the correctly spliced
