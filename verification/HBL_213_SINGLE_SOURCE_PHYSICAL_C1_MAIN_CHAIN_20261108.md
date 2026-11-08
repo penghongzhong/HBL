@@ -358,3 +358,22 @@ The last source-norm elimination theorem had a crude `r0^-2` factor from prematu
 - The Type-II blowup law must be DERIVED from the eventual actual PDE orbit, never inserted as an exponent assumption.
 
 Manuscript formulas synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `1748b40ea75dadca7e016002c1b045134867d8fb`. Revised original environment count **11/13 = 84.62%**; §2.13 and the final dynamically selected Type-II theorem are STILL OPEN.
+
+
+## 2026-11-08/09 strict extension: original spectral PDE defect AND C¹ trace on one annulus
+
+- New verified theorem module: `HBL/TypeIIDynamicSelection/ActualHartreeOriginalSpectralC1TraceNoRadiusLoss.lean` at commit `dc810e60f79e8857870450daf82fd29e6e5da736`.
+- Strict CI: https://github.com/penghongzhong/HBL/actions/runs/42500440029 — **SUCCESS**.
+- Source-faithful inputs: original `OriginKummerPair`, `OriginBasisOn K a b C`, `0<a≤b`, and actual inverse-square forcing bound `‖F(r)‖≤Q/r²`; the selected genuine Hartree source from the prior CI `42486875347` supplies this forcing envelope.
+- New two-coordinate jet theorem:
+  ```
+  ||(G0[F]-G0[dG0[F]])(r)-G0[F](r)||
+  + ||(S0[F]-S0[dG0[F]])(r)-S0[F](r)||
+     <= [2 C³ (b-a)] |d| [2 C² (b-a)] Q.
+  ```
+  In the SAME theorem, the exact original radial Kummer PDE residual is at most
+  `|d|² [2 C² (b-a)] [2 C³ (b-a)] Q`.
+- Independently downloaded the CI archive `13626205016`: `strict.log` is empty, compiler is Lean 4.35.0-rc3, and exact `#print axioms` for both theorem declarations is `[propext, Classical.choice, Quot.sound]`, without `sorryAx`.
+- Human-readable matching mathematics synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `b30c5ebedbc15fe464366833316f3630e00e4a5d`.
+- The new theorem controls the change in Cauchy data, but does **not** preserve the left Fredholm jet or cancel the new upper outgoing obstruction. The left-preserving full matched spectral correction and radius-uniform regularized Wronskian/Volterra tools are under new dedicated CIs. Their success is NOT assumed here.
+- Formal revised original environment count is still **11/13**. `§2.13` requires a uniform genuine full-PDE remainder gain; the dynamically derived Type-II theorem is also OPEN.
