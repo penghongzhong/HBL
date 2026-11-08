@@ -290,7 +290,7 @@ theorem actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
       simpa only [mul_assoc] using
         (mul_le_mul_of_nonneg_left hphys (sq_nonneg a))
     have hy := hbound r ⟨hrp.le, hr.2.trans hRscale.le⟩
-    have hyPhys : ‖originPhysicalValue K.y r‖ ≤ G / r := by
+    have hyPhys : ‖originPhysicalValue K.x r‖ ≤ G / r := by
       rw [originPhysicalValue, norm_div, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos hrp]
       exact div_le_div_of_nonneg_right hy.2.2.1 hrp.le
@@ -349,7 +349,7 @@ theorem actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
       (fun r : ℝ => Ctail * r ^ (-(11 / 8 : ℝ))) volume r0 R :=
     hTailInt.1.const_mul Ctail
   have hNorm :
-      ‖originGreenCoeffA K r0 F R‖ ≤
+      ‖originGreenCoeffA K R F r0‖ ≤
         ∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ)) := by
     unfold originGreenCoeffA
     apply intervalIntegral.norm_integral_le_of_norm_le hOrder
@@ -378,7 +378,7 @@ theorem actual_Hartree_scaled_Kummer_outgoing_Green_tail_gain
     rw [Real.div_rpow hLp.le ha.le]
     field_simp [haPow]
   calc
-    ‖originGreenCoeffA K r0 F R‖ ≤
+    ‖originGreenCoeffA K R F r0‖ ≤
         ∫ r in r0..R, Ctail * r ^ (-(11 / 8 : ℝ)) := hNorm
     _ ≤ Ctail * ((8 / 3 : ℝ) * r0 ^ (-(3 / 8 : ℝ))) := hInt
     _ = (8 / 3 : ℝ) * G * M * L ^ (-(3 / 8 : ℝ)) := by
