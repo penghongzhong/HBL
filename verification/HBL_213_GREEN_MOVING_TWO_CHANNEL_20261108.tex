@@ -1810,4 +1810,46 @@ The resulting fully matched field, genuine moving spectral $C^1$
 repair and original four-region nonlinear remainder require further
 theorems; original \S2.13 remains open.
 
+
+\medskip
+\noindent\textbf{Linear two-speed regular moment as the original Green integral
+(new Lean formalization; strict replay pending).}
+Let $(p_1,p_2)\in\mathbb R^2$ be the \emph{actual} pair eventually
+provided by the real two-channel Cramer compatibility equation, and
+let $P_{\rm sc},P_{\rm ph}$ denote the original physical modulation
+source profiles.  Their exact joint forcing is
+\[
+ F_{\rm sp}=-p_1P_{\rm sc}-p_2P_{\rm ph}.
+\]
+Both source profiles have the previously verified integral-integrability
+certificates on $[L/a,r]$.  Thus, using the literal lower-origin Green
+density and the original Wronskian in each summand, not a formal
+superposition of nonlinear Hartree operators, one obtains
+\[
+ B_{F_{\rm sp}}(r)
+   =-p_1 B_{P_{\rm sc}}(r)-p_2 B_{P_{\rm ph}}(r).
+\]
+Consequently, the source-derived all-radius bound
+\eqref{eq:original-Hartree-speed-regular-all-radii} implies
+\begin{equation}
+ \boxed{\quad
+ \sup_{L/a\le r\le B}|B_{F_{\rm sp}}(r)|
+ \le C_{\rm sp}G\,aB\bigl(|p_1|+|p_2|\bigr).
+ \quad}
+ \label{eq:original-hartree-two-speed-regular-moment}
+\end{equation}
+The original \emph{integral linearity} and the two actual speed
+source-integrability certificates are formalized in
+\texttt{ActualHartreeTwoSpeedRegularGreenAllRadii.lean}, with
+a pinned strict exact-type/axiom replay in
+\texttt{hbl-213-two-speed-regular-green-all-radii.yml};
+the new theorem is a candidate until CI success.  After substituting
+the independently already verified \emph{derived} unique-real-speed
+estimate $|p_1|+|p_2|\lesssim a^{-1}(N_{\rm F}+Q_{\rm H})$,
+the factor $a$ cancels, leaving a genuinely radius-uniform
+regular Green coefficient.  This future same-selector composition,
+the complete $C^1$ rematching and the four-region nonlinear Hartree
+time-positive residual are not yet established by
+\eqref{eq:original-hartree-two-speed-regular-moment}.
+
 \end{document}
