@@ -1303,4 +1303,64 @@ residual. These remain necessary to prove a positive
 time-order step and the revised manuscript §2.13.
 No Type-II concentration exponent has been assumed.
 
+\medskip
+\noindent\textbf{The original Wronskian spectral correction also
+controls the complete two-coordinate boundary jet.}
+The preceding quadratic PDE estimate is insufficient by itself
+for a physical splice, since the second Green response changes
+both the value and the radial slope. Write
+\[
+ E_1=2C_K^2(B-r_0),\qquad
+ E_2=2C_K^3(B-r_0),\qquad
+ Q_1=\delta G_0[F_{\rm adj}].
+\]
+The original inverse-square source estimate, applied \emph{before}
+the first Green integration, gives
+\[
+ \|G_0[F_{\rm adj}](r)\|+
+ \|S_0[F_{\rm adj}](r)\|
+ \le E_1Q_a.
+\]
+Consequently \(\|Q_1(r)\|\le |\delta|E_1Q_a\).
+A second application of the \emph{same} normalized Green operator
+in its original value--slope form gives
+\[
+ \|G_0[Q_1](r)\|+\|S_0[Q_1](r)\|
+ \le E_2|\delta|E_1Q_a,\qquad r_0\le r\le B.
+\]
+In particular, with the literal corrected jet
+\(
+ (u_{\rm corr},S_{\rm corr})=
+ (G_0[F_{\rm adj}]-G_0[Q_1],
+  S_0[F_{\rm adj}]-S_0[Q_1])
+\), both estimates hold \emph{simultaneously}:
+\[
+ \boxed{\begin{aligned}
+ &\|u_{\rm corr}(r)-G_0[F_{\rm adj}](r)\|
+   +\|S_{\rm corr}(r)-S_0[F_{\rm adj}](r)\|
+     \le E_2|\delta|E_1Q_a,\\
+ &\|\mathcal L_{\mu,\theta}u_{\rm corr}(r)
+      -F_{\rm adj}(r)\|
+     \le |\delta|^2E_1E_2Q_a.
+ \end{aligned}}
+\]
+The general source-class statement and its joint proof are implemented
+in \texttt{ActualHartreeOriginalSpectralC1TraceNoRadiusLoss.lean}.
+The dedicated strict GitHub CI
+\texttt{42500440029} completed successfully with Lean
+4.35.0-rc3, \texttt{--trust=0}, warning-as-error,
+and a verified \texttt{\#print axioms} report containing only
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, with no \texttt{sorryAx}.
+The exact input assumption remains \(\|F(r)\|\le Q/r^2\);
+it is supplied by the preceding selected original Hartree source.
+
+\emph{Boundary condition caveat:}
+this estimate bounds the changed jet but does not \emph{restore}
+the original Fredholm left interface or outgoing right compatibility.
+Moreover, \(C_K\) still depends potentially on the moving left
+radius. The genuinely matched zero-left-Cauchy-jet correction
+and the regularized-origin weighted Volterra bounds must be
+linked before any time-positive full Hartree PDE claim.
+
 \end{document}
