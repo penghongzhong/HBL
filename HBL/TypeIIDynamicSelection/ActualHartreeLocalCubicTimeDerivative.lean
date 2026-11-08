@@ -71,7 +71,7 @@ theorem actual_Hartree_local_cubic_multiplier_time_derivative
   · funext t
     dsimp [actualWholeRadiationLocalCubic]
     rw [← Complex.normSq_eq_norm_sq (u t r), Complex.normSq_apply]
-    rfl
+    simp only [pow_two]
   · unfold actualHartreeLocalCubicTimeVelocity
     rw [← Complex.normSq_eq_norm_sq (u s r), Complex.normSq_apply]
     push_cast
