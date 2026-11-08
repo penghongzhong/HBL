@@ -665,8 +665,13 @@ Cramer pair all vary with \(s\). The new Lean candidate
 real-source Cramer derivative module. The original source derivative
 module's initial compile failed on a term-level let/minus parsing
 ambiguity; this was corrected in commit \texttt{fc786e1}.
-Strict tests \texttt{42457157758} and \texttt{42457157917} are
-pending and neither theorem may be called accepted yet.
+The Green derivative CI \texttt{42457157917} exposed a
+function-level versus pointwise-function normalisation mismatch
+in the imported source-derivative proof. After adding
+\texttt{Pi.sub\_apply} and \texttt{Pi.mul\_apply}, the
+same mathematical conclusion was resubmitted as commit
+\texttt{c9a5989}. New strict tests \texttt{42458002571} and
+\texttt{42458002671} are pending; neither theorem is accepted yet.
 The moving lower endpoint \(r_0(s)\), the moving Kummer basis,
 and domination of the original full Hartree PDE time derivative
 remain genuine separate analytic obligations.
