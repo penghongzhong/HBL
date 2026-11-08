@@ -97,6 +97,7 @@ theorem actual_Hartree_true_moving_adjusted_source_derivative
   have hTotal := (hF.sub (hpbC.mul hS)).sub (hpwC.mul hP)
   refine ⟨pbDot, pwDot, hpbReal, hpwReal, ?_, ?_⟩
   · simpa only [pb, pw] using hSpeed
-  · simpa only [actualHartreeTrueMovingAdjustedSource, pb, pw] using hTotal
+  · simpa only [actualHartreeTrueMovingAdjustedSource, pb, pw,
+      Pi.sub_apply, Pi.mul_apply] using hTotal
 
 end HBL.TypeIIDynamicSelection
