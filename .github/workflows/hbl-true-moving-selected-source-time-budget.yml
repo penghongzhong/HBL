@@ -83,7 +83,7 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_true_moving_selected_source_time_budget
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_moving_adjusted_source_derivative
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_moving_selected_source_time_budget
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeSelectedMovingBudgetAudit.lean > evidence/audit.log 2>&1
           grep -q sorryAx evidence/audit.log && exit 1 || true
