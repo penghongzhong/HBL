@@ -112,4 +112,82 @@ For one genuine radial Hartree orbit, establish the complete nonlinear
 weighted residual and its two-parameter Lipschitz difference at
 $O(s^{-9/4})$, then derive the Type--II blowup exponent dynamically,
 without prescribing the rate.
+
+\medskip
+\noindent\textbf{Left outgoing trace: positive radius gain.}
+The original regular normalized physical Kummer mode $X$ has the genuine
+Frobenius estimates on $0<r\le B\le 1$,
+\[
+ |X(r)|\le 1+(D+1)G B^2,\qquad
+ |X'(r)|\le 2(D+1)Gr.
+\]
+Together with $|W(r)^{-1}|=r^2$, the original Wronskian projection
+of the \emph{actual} left Cauchy data satisfies
+\begin{align*}
+ J_-(r_0)
+  &:=\frac{U X'(r_0)-DU\,X(r_0)}{W(r_0)},\\
+ |J_-(r_0)|
+  &\le C_{\mathrm{reg}}\,r_0\bigl(|U|+r_0|DU|\bigr),\\
+ C_{\mathrm{reg}}
+  &:=1+(D+1)G(B^2+2).
+\end{align*}
+The original normalized two-channel Fredholm inverse proves
+\[
+ |U|+r_0|DU|
+ \le C_{\mathrm{F}}\,
+  \bigl(\|F_+\|_{L^{2,7/4}}+\|F_-\|_{L^{2,7/4}}\bigr),
+ \qquad r_0=L/a,
+\]
+and hence, without a $r_0^{-1}$ loss,
+\[
+ |J_-(r_0)|\le C_{\mathrm{reg}}C_{\mathrm F}\,r_0
+  \bigl(\|F_+\|_{L^{2,7/4}}+\|F_-\|_{L^{2,7/4}}\bigr).
+\]
+These formulas use the actual origin-normalized basis, its regular
+mode, and the exact two-channel Fredholm source; they do not
+prescribe a Type--II scaling rate.
+
+\medskip
+\noindent\textbf{Transport of the genuine compatible source moment.}
+The exact compatibility equation at the left interface is
+\[
+ A(r_0)=J_-(r_0).
+\]
+For every $r\in[r_0,B]$, interval additivity of the original
+Green source yields
+\begin{equation}
+ A(r)=J_-(r_0)-
+  \int_{r_0}^{r}\frac{X(\rho)F(\rho)}{W(\rho)}\,d\rho.
+ \label{eq:actual-singular-green-transport}
+\end{equation}
+The matched origin Green field is therefore exactly
+\[
+ w(r)
+  =Y(r)\left[J_-(r_0)-
+      \int_{r_0}^{r}\frac{X(\rho)F(\rho)}{W(\rho)}\,d\rho
+    \right]
+   +X(r)\left[\gamma+\int_{r_0}^{r}
+      \frac{Y(\rho)F(\rho)}{W(\rho)}\,d\rho
+     \right].
+\]
+The first integral vanishes at $r=r_0$; this is stronger than
+estimating $A(r)$ by a global constant and is essential when
+the physical singular mode is multiplied back in.
+A genuine near-$r_0$ weighted local-moment estimate remains to be
+established to convert the algebraic cancellation into uniform
+full-field $H^1$ and Hartree source bounds.
+
+\medskip
+\noindent\textbf{Lean verification scope (new candidates).}
+The preceding singular Green transport and the positive-radius
+Wronskian trace bounds correspond respectively to
+\texttt{ActualHartreeKummerSingularGreenCompatibilityTransport.lean}
+and
+\texttt{ActualHartreeOriginOutgoingTraceNoRadiusLoss.lean},
+and their same-source Fredholm composition is
+\texttt{ActualHartreeFredholmOutgoingNoRadiusLoss.lean}.
+Each new declaration must pass its own strict kernel/axiom CI before
+being labelled a verified theorem. The full fixed-order
+physical profile at $s^{-9/4}$ remains unproved.
+
 \end{document}
