@@ -111,7 +111,7 @@ theorem actual_Hartree_selected_speed_derivative_original_regular_Green_no_scale
           (by simpa only [pb, pw] using hSpeed) hE
       _ = _ := by
         dsimp [E]
-        field_simp [ha.ne', hB.ne'] <;> ring
+        field_simp [ha.ne', hB.ne']
   refine ⟨Cs, hCs, pbDot, pwDot, ?_, ?_, ?_⟩
   · simpa only [pb] using hpb
   · simpa only [pw] using hpw
