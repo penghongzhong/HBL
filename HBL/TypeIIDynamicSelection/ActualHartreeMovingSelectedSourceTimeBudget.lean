@@ -128,7 +128,7 @@ theorem actual_Hartree_true_moving_selected_source_time_budget
           (by simpa only [pb, pw] using hspeed) hC0
       _ = _ := by
         dsimp [C0]
-        field_simp [ha.ne', hB.ne', hrpos.ne'] <;> ring
+        field_simp [ha.ne', hB.ne', hrpos.ne']
   have hRaw :
       ‖D‖ ≤ ‖Fdot‖ + ((|pbDot| + |pwDot|) * C0 +
         |pb s| * ‖Sdot‖ + |pw s| * ‖Pdot‖) := by
