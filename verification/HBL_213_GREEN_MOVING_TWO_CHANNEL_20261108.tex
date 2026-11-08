@@ -1555,7 +1555,12 @@ $rX(r)=x(r)$ for the regular physical mode,
  \le G^2\{r_0|DU|+(r_0+1)|U|\}. \;}
 \]
 There is no explicit inverse matching radius or
-$\sup|Y|,\sup|Y'|$ on the right.  This estimate is implemented in
+$\sup|Y|,\sup|Y'|$ on the right.  Here the multiplication
+of the coefficient bound by $|x(r)|\le G$ is justified by
+$G\ge0$ and
+$r_0|DU|+(r_0+1)|U|\ge0$, since $r_0>0$;
+thus the full coefficient upper bound is nonnegative, not merely $G$.
+This estimate is implemented in
 \texttt{ActualHartreeMatchedRegularJetNoRadiusLoss.lean}
 with pinned strict kernel/type/axiom checks; until the dedicated CI
 succeeds it is an unaccepted new intermediate proof.  The two left jets
