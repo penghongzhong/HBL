@@ -2618,4 +2618,44 @@ these \emph{same} data and the \emph{same} unique selected speed.
 No unconditional dynamical rate or full \(O(s^{-9/4})\) residual
 is asserted.
 
+
+\medskip
+\noindent\textbf{Original critically scaled Hartree source and actual
+Cramer speed: a joint time-derivative composition.}
+The moving baseline source is not a freely differentiated
+forcing. The exact critical Riesz scaling already established
+for the original orbit is
+\[
+ F_{\rm old}(t,r)=a(t)^{-1/2}\,\mathcal I_{\rm crit}(t,r).
+\]
+For a differentiable physical scale \(a(t)>0\) and the
+\emph{original} fixed-observer nonlocal Hartree interaction,
+\[
+ \begin{aligned}
+ \partial_tF_{\rm old}
+ &= -\frac{a'}{2a^{3/2}}\mathcal I_{\rm crit}
+       +a^{-1/2}\partial_t\mathcal I_{\rm crit},\\
+ F_{\rm adj}
+ &= -F_{\rm old}-p_1 S_1-p_2 S_2,\\
+ \partial_tF_{\rm adj}
+ &= -\partial_tF_{\rm old}
+    -p_1'S_1-p_1\partial_tS_1
+    -p_2'S_2-p_2\partial_tS_2 .
+ \end{aligned}
+\]
+The derivatives \(p_1'\), \(p_2'\) are \emph{outputs} of the
+real Cramer-determinant differentiation, rather than independent
+inputs. The new compositional Lean target
+\texttt{actual_Hartree_true_selected_source_derivative_from_scaled_orbit}
+in
+\texttt{ActualHartreeSelectedSourceDerivativeFromScaledOrbit.lean}
+was submitted at commit \texttt{a8cf1827} with a separate
+fixed-dependency, exact-type and transitive-axiom workflow
+\texttt{42532639028}, initially pending.
+It removes the need to assume the derivative of \(F_{\rm old}\)
+as a separate auxiliary input, but still requires producing
+\(\partial_t\mathcal I_{\rm crit}\) and its weighted bounds from
+the \emph{actual nonlocal PDE orbit}. Thus it does not
+assert any time-positive residual rate or the Type--II exponent.
+
 \end{document}
