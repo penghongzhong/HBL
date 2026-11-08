@@ -59,7 +59,9 @@ theorem actual_Hartree_origin_outgoing_trace_without_inverse_radius_loss
     calc
       _ ≤ 2 * ((D + 1) * G) * r := hReg.2
       _ ≤ 2 * ((D + 1) * G) := by
-        exact mul_le_mul_of_nonneg_left hrOne (by positivity)
+        simpa only [mul_one] using
+          (mul_le_mul_of_nonneg_left hrOne
+            (show 0 ≤ 2 * ((D + 1) * G) by positivity))
       _ ≤ J := by
         dsimp [J]
         nlinarith [mul_nonneg hDGN (sq_nonneg B)]
