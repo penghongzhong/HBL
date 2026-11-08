@@ -7,6 +7,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualKummerFinitePhysicalRepairsNextGain.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerPhysicalTailWeightedLipschitz.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerMovingCorrectedPDENextLockedGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualKummerRepairCorrectedNonlinearSource.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairBubbleEnvelopeFromClock.lean'
       - '.github/workflows/hbl-finite-physical-kummer-time.yml'
   workflow_dispatch:
