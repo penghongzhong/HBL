@@ -276,4 +276,77 @@ components. The stronger \emph{scale-free product} estimate
 \eqref{eq:true-hartree-singular-green-product} still awaits the
 separate strict kernel replay and has not been counted.
 
+
+\medskip
+\noindent\textbf{The genuine regular homogeneous coefficient also avoids
+an inverse matching-radius loss.}
+For the singular origin basis $Y(r)=y(r)/r$, the original bounds
+$|y(r)|+|y'(r)|\le 2G$ yield
+\[
+ |Y(r)|\le G/r,\qquad
+ |Y'(r)|\le G/r+G/r^2.
+\]
+The exact Wronskian therefore converts its actual left-jet coefficient to
+\begin{align*}
+ |\gamma|
+ &=\left|\frac{Y(r_0)DU-Y'(r_0)U}{W(r_0)}\right|\\
+ &\le Gr_0|DU|+G(1+r_0)|U|\\
+ &\le 2G\bigl(|U|+r_0|DU|\bigr),
+ \qquad 0<r_0\le1.
+\end{align*}
+The already accepted two-channel weighted Fredholm shell theorem gives
+$|U|+r_0|DU|\le C_{\rm F}N_{\rm F}$; thus
+\[
+ |\gamma|\le 2GC_{\rm F}N_{\rm F}.
+\]
+These are formulas for the \emph{actual regular origin homogeneous
+coefficient}, not a freely adjusted amplitude.  The corresponding
+new Lean module
+\texttt{ActualHartreeRegularOriginCoefficientSourceBound.lean}
+is a pending strict-CI candidate and is not counted as accepted.
+
+\medskip
+\noindent\textbf{The original nonlocal Hartree source as the selector input.}
+Set
+\[
+ F_0(r)=-a^2\mathcal S_{\HH}(\ell,c,z)(ar),\qquad
+ Q_{\HH}=C_{\rm phys}(B_z,A_z)\ell^{1/8}.
+\]
+The original measured physical Riesz source, without any abstract
+forcing packet, satisfies
+\[
+ \|F_0(r)\|\le Q_{\HH}/r^2,\qquad
+ F_0\in L^1_{\rm loc}((0,\infty);\C).
+\]
+For the genuine origin-normalized regular Green coefficient,
+\[
+ \left|\int_{L/a}^B\frac{Y(r)F_0(r)}{W(r)}\,dr\right|
+ \le\frac83 GQ_{\HH}L^{-3/8}
+ \le\frac83GQ_{\HH}\quad(L\ge1).
+\]
+The previously proved real two-channel Cramer compatibility selector
+can therefore be applied to the \emph{original} Hartree source:
+for each admissible fixed annular slice there is one unique
+$p=(p_b,p_\omega)\in\R^2$ satisfying the actual coupled
+Fredholm--Kummer compatibility equation, with
+\[
+ |p_b|+|p_\omega|
+ \le\frac{C_{\rm sel}}a
+ \bigl(N_{\rm F}+Q_{\HH}\bigr).
+\]
+The selected adjusted outer forcing is
+\[
+ F_{\rm adj}(r)=F_0(r)-p_bS_b(r)-p_\omega S_\omega(r).
+\]
+This is not the same as imposing compatibility on $F_0$ with
+$p_b=p_\omega=0$; the latter would be an unjustified restriction.
+The actual selected-speed and selected-upper-Kummer-jet
+specializations are new strict-CI candidates
+\texttt{ActualHartreeTrueSourceSpeedSelection.lean} and
+\texttt{ActualHartreeTrueSourceSelectedUpperJet.lean}.
+The time-dependent selected $p(s)$ and the physical all-region
+residual $O(s^{-9/4})$ are \emph{not} consequences of a fixed-slice
+Cramer theorem; they still require the real differentiated source,
+compatibility motion, and nonlocal Hartree feedback estimates.
+
 \end{document}
