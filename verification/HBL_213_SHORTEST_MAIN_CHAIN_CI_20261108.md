@@ -264,3 +264,44 @@ Then use the exact Cramer Fredholm regular jet and spectral correction
 without `Ck(r0)`, repair each of three physical C¹ boundaries, and
 derive positive time gain from the actual full nonlocal Hartree PDE
 rather than from an a priori budget. No increase from **11/13**.
+
+### Nov 8 additional genuine unique-selector bridge and first CI repair
+
+New `ActualHartreeTwoSpeedRegularGreenAllRadii.lean`, commit
+[9473840d](https://github.com/penghongzhong/HBL/commit/9473840d4fdc889e9038b37a55ca4e17d89f920a),
+formalizes original Wronskian **integral linearity** with exact
+interval-integrability certificates for the two genuine real-speed
+directions. It derives for all r:
+`‖CoeffB(-p1 P_scale-p2 P_phase)(r)‖ ≤ C_sp G a B (|p1|+|p2|)`,
+not a freely assumed adjusted source envelope. Its strict pinned
+[CI 42518956191](https://github.com/penghongzhong/HBL/actions/runs/42518956191)
+is in progress.
+
+New `ActualHartreeSelectedSpeedRegularGreenAllRadii.lean`, commit
+[24e9b80d](https://github.com/penghongzhong/HBL/commit/24e9b80d9fd4910174e8777b6c5c1c9015b9242c),
+composes the literal physical three-dimensional quartic Hartree source
+unique real two-speed Cramer producer with this genuine all-radii
+regular-moment estimate, using the SAME p; it removes a from
+`(C_sp G a B) * (C_sel/a) (N+Q)` to conclude
+`‖CoeffB(F_sp)(r)‖ ≤ C_sp G B C_sel (N+Q)`
+without supplied bound on selected velocity.
+Dedicated pinned [CI 42519156651](https://github.com/penghongzhong/HBL/actions/runs/42519156651)
+is in progress. Both mathematical formulas are synchronized in
+§2.13 TeX commit
+[b467ffe3](https://github.com/penghongzhong/HBL/commit/b467ffe3689d6f119766a5f01a24cadfbf4ac1a4).
+
+First run of exact original Green spectral moment
+[CI 42518163620](https://github.com/penghongzhong/HBL/actions/runs/42518163620)
+**FAILED** on a genuine warning-as-error:
+Lean compiler `ActualHartreeExactGreenMomentsMovingSpectral.lean:35:30`
+reported unused binder `hab`; original CI log was actually downloaded.
+The mathematical proof had no reported failed goals. Changed
+`(hab : a ≤ B)` to `(_hab : a ≤ B)`, with same exact type and
+logical strength, commit
+[9c528cbd](https://github.com/penghongzhong/HBL/commit/9c528cbda7d5c99c7b41b34e52863f2a01c98755).
+Replacement pinned [CI 42519218237](https://github.com/penghongzhong/HBL/actions/runs/42519218237)
+is in progress. No premature CI success is declared.
+
+The original formal environment counter remains **11/13**; the
+complete revised original §2.13 and full Type-II blowup rate from
+the original PDE have not been proved.
