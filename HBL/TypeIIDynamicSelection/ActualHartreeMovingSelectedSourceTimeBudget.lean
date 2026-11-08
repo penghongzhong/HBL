@@ -105,16 +105,18 @@ theorem actual_Hartree_true_moving_selected_source_time_budget
       ‖Db‖ ≤ ‖(pbDot : ℂ) * Sb‖ + ‖(pb s : ℂ) * Sdot‖ := norm_add_le _ _
       _ = |pbDot| * ‖Sb‖ + |pb s| * ‖Sdot‖ := by
         simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
-      _ ≤ |pbDot| * C0 + |pb s| * ‖Sdot‖ :=
-        add_le_add_right (mul_le_mul_of_nonneg_left hSbound (abs_nonneg _)) _
+      _ ≤ |pbDot| * C0 + |pb s| * ‖Sdot‖ := by
+        have hbNorm := mul_le_mul_of_nonneg_left hSbound (abs_nonneg pbDot)
+        linarith only [hbNorm]
   have hDw :
       ‖Dw‖ ≤ |pwDot| * C0 + |pw s| * ‖Pdot‖ := by
     calc
       ‖Dw‖ ≤ ‖(pwDot : ℂ) * Sw‖ + ‖(pw s : ℂ) * Pdot‖ := norm_add_le _ _
       _ = |pwDot| * ‖Sw‖ + |pw s| * ‖Pdot‖ := by
         simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
-      _ ≤ |pwDot| * C0 + |pw s| * ‖Pdot‖ :=
-        add_le_add_right (mul_le_mul_of_nonneg_left hPbound (abs_nonneg _)) _
+      _ ≤ |pwDot| * C0 + |pw s| * ‖Pdot‖ := by
+        have hwNorm := mul_le_mul_of_nonneg_left hPbound (abs_nonneg pwDot)
+        linarith only [hwNorm]
   have hDetBudget :
       (|pbDot| + |pwDot|) * C0 ≤
         (1024 * Cs / (B ^ 2 * r)) *
@@ -134,11 +136,12 @@ theorem actual_Hartree_true_moving_selected_source_time_budget
       ‖D‖ ≤ (‖Fdot‖ + ‖Db‖) + ‖Dw‖ := by
         calc
           _ ≤ ‖Fdot - Db‖ + ‖Dw‖ := norm_sub_le _ _
-          _ ≤ (‖Fdot‖ + ‖Db‖) + ‖Dw‖ :=
-            add_le_add_right (norm_sub_le _ _) _
+          _ ≤ (‖Fdot‖ + ‖Db‖) + ‖Dw‖ := by
+            have hsub := norm_sub_le Fdot Db
+            linarith only [hsub]
       _ ≤ (‖Fdot‖ + (|pbDot| * C0 + |pb s| * ‖Sdot‖)) +
-          (|pwDot| * C0 + |pw s| * ‖Pdot‖) :=
-        add_le_add (add_le_add_left hDb _) hDw
+          (|pwDot| * C0 + |pw s| * ‖Pdot‖) := by
+        linarith only [hDb, hDw]
       _ = _ := by ring
   have hMain :
       ‖D‖ ≤ ‖Fdot‖ +
@@ -152,9 +155,8 @@ theorem actual_Hartree_true_moving_selected_source_time_budget
       _ ≤ ‖Fdot‖ +
         ((1024 * Cs / (B ^ 2 * r)) *
           ‖Zdot + (pb s : ℂ) * bdot + (pw s : ℂ) * wdot‖ +
-          |pb s| * ‖Sdot‖ + |pw s| * ‖Pdot‖) :=
-        add_le_add_left (add_le_add_right
-          (add_le_add_right hDetBudget _) _) _
+          |pb s| * ‖Sdot‖ + |pw s| * ‖Pdot‖) := by
+        linarith only [hDetBudget]
       _ = _ := by ring
   refine ⟨Cs, hCs, pbDot, pwDot, ?_, ?_, ?_, ?_⟩
   · simpa only [pb] using hpb
