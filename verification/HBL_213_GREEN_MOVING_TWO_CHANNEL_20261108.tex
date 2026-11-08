@@ -722,4 +722,32 @@ endpoint term, not the joint moving Green derivative.
 Its combination with the evolving-source Green derivative and
 the moving Kummer basis still requires additional analytic proofs.
 
+
+\medskip
+\noindent\textbf{A quantitative no-\(a^{-1}\)-loss time budget for the
+one real speed-selected Hartree source.}
+The genuine two Cramer speed directions have
+\(\|S_b(s,r)\|,\|S_\omega(s,r)\|\le C_s a(s)/r\) throughout
+the actual normalized annulus \(L/a\le r\le B\). Combined with
+the verified real Cramer derivative estimate, this gives
+\begin{align}
+ \bigl\|\partial_sF_{\rm adj}(s,r)\bigr\|
+ &\le \bigl\|\partial_sF_0(s,r)\bigr\|
+  +\frac{1024 C_s}{B^2r}
+    \bigl\|Z'(s)+p_b(s)b'(s)+p_\omega(s)w'(s)\bigr\| \notag\\
+ &\quad+|p_b(s)|\,\|\partial_sS_b(s,r)\|
+  +|p_\omega(s)|\,\|\partial_sS_\omega(s,r)\|.
+ \label{eq:true-hartree-selected-source-time-budget}
+\end{align}
+In particular, the Cramer inverse factor \(a^{-1}\) cancels against
+the \emph{actual} \(a/r\) source envelope. The remaining factor
+\(r^{-1}\) is explicitly retained and must be handled in the full
+weighted source norms: the bound does \emph{not} assert that the
+complete PDE residual is \(O(s^{-9/4})\).
+The proposed Lean composition is
+\texttt{ActualHartreeMovingSelectedSourceTimeBudget.lean},
+source commit \texttt{3b4f928} with pinned strict workflow
+\texttt{hbl-true-moving-selected-source-time-budget.yml},
+commit \texttt{7b0cad2}; its CI acceptance remains pending.
+
 \end{document}
