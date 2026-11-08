@@ -59,6 +59,27 @@ def actualKummerC1SplicedMovingField
       (P.K t) P.r0 P.B (P.F t) (P.U t) (P.DU t) P.B)
   actualPhysicalMatchedKummerC1Splice (P.a t) P.B v rep y
 
+/-- Every time slice is genuinely C1 at both moving physical joins once
+the original Green forcing is locally continuous and the geometric scale
+is positive. No independently assigned boundary values or derivatives. -/
+theorem actual_Kummer_C1_spliced_moving_packet_true_junctions
+    (P : ActualKummerC1SplicedMovingPacket) (t : ℝ)
+    (ha : 0 < P.a t)
+    (hr0 : 0 < P.r0) (horder : P.r0 ≤ P.B)
+    (hB : P.B < P.scale t)
+    (hF : ∀ r ∈ Ioo (0 : ℝ) (P.scale t), ContinuousAt (P.F t) r) :
+    let DUB := actualOriginMatchedKummerSlope
+      (P.K t) P.r0 P.B (P.F t) (P.U t) (P.DU t) P.B
+    HasDerivAt (actualKummerC1SplicedMovingField P t)
+      ((1 / P.a t : ℝ) • DUB) (P.a t * P.B) ∧
+    HasDerivAt (actualKummerC1SplicedMovingField P t)
+      (0 : ℂ) (2 * P.a t * P.B) := by
+  have h :=
+    actual_Hartree_matched_Kummer_repair_is_C1_at_both_physical_joins
+      (P.K t) (P.a t) ha hr0 horder hB (P.F t) hF (P.U t) (P.DU t)
+  dsimp only at h ⊢
+  exact h
+
 /-- A genuine finite sum of full physical spliced Kummer fields. -/
 def actualKummerFiniteFullC1Field
     (packets : List ActualKummerC1SplicedMovingPacket) (t y : ℝ) : ℂ :=

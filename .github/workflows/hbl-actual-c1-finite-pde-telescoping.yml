@@ -79,8 +79,10 @@ jobs:
           import HBL.TypeIIDynamicSelection.ActualKummerFullC1FinitePDETelescoping
           set_option pp.all true
           set_option pp.maxSteps 10000000
+          #check @HBL.TypeIIDynamicSelection.actual_Kummer_C1_spliced_moving_packet_true_junctions
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
           set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Kummer_C1_spliced_moving_packet_true_junctions
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_finite_full_C1_spliced_PDE_residual_telescopes
           EOF
           lake env lean --trust=0 -DwarningAsError=true FullC1FiniteHartreePDETelescopingAudit.lean > evidence/audit.log 2>&1
