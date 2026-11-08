@@ -126,11 +126,19 @@ theorem actual_Hartree_matched_regular_part_weighted_no_radius_loss
         actualOriginMatchedRegularCoeff K a b F U DU * K.x r := by
     unfold originPhysicalValue
     field_simp [hrC]
+  have haPlus : 0 ≤ a + 1 := by linarith only [ha.le]
+  have hJetNonneg : 0 ≤ a * ‖DU‖ + (a + 1) * ‖U‖ :=
+    add_nonneg
+      (mul_nonneg ha.le (norm_nonneg DU))
+      (mul_nonneg haPlus (norm_nonneg U))
+  have hCoeffRHSNonneg :
+      0 ≤ G * (a * ‖DU‖ + (a + 1) * ‖U‖) :=
+    mul_nonneg hG hJetNonneg
   rw [hEq, norm_mul]
   calc
     ‖actualOriginMatchedRegularCoeff K a b F U DU‖ * ‖K.x r‖ ≤
         (G * (a * ‖DU‖ + (a + 1) * ‖U‖)) * G :=
-      mul_le_mul hCoeff hx (norm_nonneg _) hG
+      mul_le_mul hCoeff hx (norm_nonneg _) hCoeffRHSNonneg
     _ = G ^ 2 * (a * ‖DU‖ + (a + 1) * ‖U‖) := by ring
 
 end HBL.TypeIIDynamicSelection
