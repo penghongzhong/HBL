@@ -54,8 +54,7 @@ theorem actual_Hartree_two_real_speed_regular_Green_moment_all_radii :
   obtain ⟨Csp, hCsp, hAll⟩ :=
     actual_Hartree_speed_regular_Green_coefficients_all_radii
   refine ⟨Csp, hCsp, ?_⟩
-  intro mu theta scale K G L c a B hG hL ha hBOne hBR hSmall hbound
-  intro p r hr
+  intro mu theta scale K G L c a B hG hL ha hBOne hBR hSmall hbound p r hr
   dsimp only
   let r0 : ℝ := L / a
   let Psc : ℝ → ℂ := actualMomentLockedScaledScaleSource a c
