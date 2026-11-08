@@ -88,3 +88,22 @@ Formal revised manuscript numerator remains **11/13 (84.62%)**. The final Type-I
 Mathematical manuscript derivation is synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`; CI-pending claims therein are explicitly labelled candidates.
 
 **The remaining §2.13 gate is unchanged:** assemble the SAME actual time-dependent inner/Green/repair/remote correction in original 3D Hartree PDE, derive true moving interface/time-parameter derivative and all quartic nonlocal cross-region source estimates as a genuine relative residual-order increment, prove time-uniform weighted center/threshold `O(s^(-9/4))` and direct two-coordinate Lipschitz, then strict-replay the whole revised theorem statement. The final Type-II speed exponent is an output of the PDE orbit, never a rate hypothesis. **Revised original environment count: 11/13 (84.62%).**
+
+
+## November 8 formal acceptance update — verified source-to-C1 chain
+
+Strictly accepted at the pinned Lean/Mathlib kernel (dedicated CI):
+
+- **Genuine compatible singular Green moment transport** `actual_Hartree_compatible_singular_Green_coefficient_local_transport` and full matched expression: [42442134533](https://github.com/penghongzhong/HBL/actions/runs/42442134533) — **SUCCESS**.
+- **Actual original Wronskian outgoing trace radius gain** `actual_Hartree_origin_outgoing_trace_without_inverse_radius_loss`: [42447225839](https://github.com/penghongzhong/HBL/actions/runs/42447225839) — **SUCCESS**.
+- **True two-channel Fredholm source → trace radius gain** `actual_Hartree_original_Fredholm_outgoing_trace_source_radius_gain`: [42447225916](https://github.com/penghongzhong/HBL/actions/runs/42447225916) — **SUCCESS**.
+- **Full physical four-piece Fredholm/Green/repair/zero C¹ at three interfaces** `actual_Hartree_inner_Kummer_four_piece_three_C1_joins`: [42447225879](https://github.com/penghongzhong/HBL/actions/runs/42447225879) — **SUCCESS**.
+
+The revised **11/13 (84.62%)** count remains unchanged: each success is a load-bearing auxiliary proof, not yet the **whole** retained manuscript §2.13 physical parametrix or final dynamical Type-II blowup theorem. The true full nonlinear same-orbit weighted residual `O(s^(-9/4))` and threshold Lipschitz are open.
+
+New strict CI candidates not yet accepted at this checkpoint:
+- Original Hartree local source moment: branch commit `2980bcc437bf4762bdd57a5d92dae96fedb8c028`; CI [42447752525](https://github.com/penghongzhong/HBL/actions/runs/42447752525).
+- Regular-origin improved `|X|=O(1)` times singular physical Green source integral, **scale-free** `O(C_reg*G*C_phys*ell^(1/8))`: [42447752489](https://github.com/penghongzhong/HBL/actions/runs/42447752489).
+- Fully compatible source and original Fredholm trace on the singular physical Green branch: [42447752505](https://github.com/penghongzhong/HBL/actions/runs/42447752505).
+
+Crucial quantifier distinction: the latter two conditional candidate statements explicitly assume exact compatibility of the **same original complex Hartree source**. The existing unique Cramer-speed producer supplies compatibility for its own *adjusted* source; those must be identified before claiming unconditional one-orbit construction. No new fixed-rate assumption may enter.

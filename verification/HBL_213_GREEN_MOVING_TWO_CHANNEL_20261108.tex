@@ -260,4 +260,20 @@ Wronskian trace; this is a distinct candidate. Neither estimate
 replaces the true time derivative, the remote-region matching, nor
 the complete nonlinear $s^{-9/4}$ Hartree residual.
 
+
+\medskip
+\noindent\textbf{Formal audit status at the latest checkpoint.}
+The actual source-selected origin Wronskian outgoing trace
+(the positive $r_0$ gain) has strict Lean Success
+\texttt{42447225839}; its composition with the original two-channel
+Fredholm source has strict Lean Success \texttt{42447225916}.
+The full \emph{four-piece} physical Fredholm/Green/repair/zero
+field is now strictly proved $C^1$ at all three interfaces:
+\texttt{42447225879}. The singular Green transport identity
+\eqref{eq:actual-singular-green-transport} is strictly replayed in
+\texttt{42442134533}. These statements are verified auxiliary
+components. The stronger \emph{scale-free product} estimate
+\eqref{eq:true-hartree-singular-green-product} still awaits the
+separate strict kernel replay and has not been counted.
+
 \end{document}
