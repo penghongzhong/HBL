@@ -1894,4 +1894,44 @@ synthetic forcing.  Full moving three-interface $C^1$, four-region
 nonlocal PDE time-order improvement and physical finite induction
 remain indispensable beyond the fixed-time source calculation.
 
+
+\medskip
+\noindent\textbf{Actual Riesz source to frozen-moving spectral drift
+without a shrinking-origin basis constant (Lean extension submitted).}
+Fix the origin-normalized Kummer pair at $(\mu_0,\theta_0)$.
+At a fixed physical epoch $s$ let $\mu(s),\theta(s)$ be the actual
+spectral coefficients.  Set
+\[
+ \delta(s):=|\mu(s)-\mu_0|+|\theta(s)-\theta_0|,\qquad
+ E_0:=\frac{16}{3}G^2 Q_{\rm H}L^{-3/8}.
+\]
+By the exact scalar coefficient identity and the literal source-driven
+whole-Green estimate
+\eqref{eq:original-hartree-full-physical-green-no-radius-loss},
+\begin{align}
+ &r\bigl(\mathcal L_{\mu(s),\theta(s)}
+      \mathcal G_{K_0}[F_0](r)-F_0(r)\bigr)\notag\\
+ &\quad=\bigl(q_0(\mu(s),\theta(s))
+              -q_0(\mu_0,\theta_0)\bigr)
+          r\mathcal G_{K_0}[F_0](r),\notag\\
+ &\sup_{L/a\le r\le B}
+ \left|r\bigl(\mathcal L_{\mu(s),\theta(s)}
+      \mathcal G_{K_0}[F_0](r)-F_0(r)\bigr)\right|
+ \le \delta(s)E_0.
+ \label{eq:true-physical-frozen-spectral-drift}
+\end{align}
+The estimate is derived from the original nonlocal physical source,
+not from an assumed norm of $\mathcal G_{K_0}[F_0]$; it is independent
+of an \texttt{OriginBasisOn} bound that may diverge as $L/a\to0$.
+Its exact source--operator composition is implemented in
+\texttt{ActualHartreeOriginalFullGreenWeightedGain.lean}
+as
+\texttt{actual\_Hartree\_original\_source\_spectral\_drift\_weighted\_no\_radius\_loss},
+with an additional strict kernel/axiom audit in
+\texttt{hbl-213-original-full-green-weighted-gain.yml}.
+This new declaration remains subject to its replacement CI result.
+Neither a decay rate for $\delta(s)$ nor a genuine four-region
+nonlinear residual has been proved here; these must come from the
+actual modulation equations and the real physical PDE orbit.
+
 \end{document}
