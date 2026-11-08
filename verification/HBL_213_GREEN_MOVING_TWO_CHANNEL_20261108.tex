@@ -521,4 +521,34 @@ commit \texttt{d4e8da4}, under a dedicated strict CI; it remains
 The complete, time-differentiable four-piece physical Hartree field and
 its \(s^{-9/4}\) nonlinear residual remain open.
 
+
+\medskip
+\noindent\textbf{Identifying both Fredholm channels with one physical source.}
+To exclude the spurious possibility of choosing unrelated inner and
+outer right-hand sides, fix the same physical interaction
+\(\mathcal S_{\HH}(\ell,c,z)\) and take the canonical conjugated,
+localized transmission channels
+\[
+ F_+:=\Ree\!\left(r\chi_{\mathrm{in}}\mathcal S_{\HH}(\ell,c,z)\right),
+ \qquad
+ F_-:=\operatorname{Im}\!\left(r\chi_{\mathrm{in}}
+                         \mathcal S_{\HH}(\ell,c,z)\right),
+ \qquad
+ F_0(r)=-a^2\mathcal S_{\HH}(\ell,c,z)(ar).
+\]
+The previously accepted original slow-inner \(1/16\) weighted
+source theorem yields \(F_\pm\in L^2_{7/4}\) for this \emph{same}
+Hartree interaction. The genuine two-speed selector then
+generates the full singular-component estimate
+\eqref{eq:true-selected-original-norm-singular-green}
+with these identical data.
+The new source-locked Lean wrapper
+\texttt{ActualHartreeOnePhysicalSourceFullSelectedSingularGreen.lean},
+commit \texttt{47a907b}, is under strict CI
+\texttt{42454937267}/\texttt{42454972827} (pending);
+it does \emph{not} infer the required continuity of \(F_+\) and
+\(F_-\) from measurability alone.
+These fixed-slice facts still do not produce the
+time-dependent full original-PDE residual or the blowup rate.
+
 \end{document}
