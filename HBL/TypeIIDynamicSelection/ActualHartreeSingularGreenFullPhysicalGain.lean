@@ -90,7 +90,8 @@ theorem actual_Hartree_compatible_full_singular_Green_physical_source_gain
     (actual_Hartree_scaled_Kummer_source_intervalIntegrable
       B A ell c a r0 R hB hA hell hellOne hc ha hr0
       (by simpa only [r0] using hOrder) z hz hSup hStrauss).neg
-  have hBasis : OriginBasisOn K r0 R G :=
+  let Cbasis : ℝ := G * (1 / r0 + 1 / r0 ^ 2) + R ^ 2 + 1
+  have hBasis : OriginBasisOn K r0 R Cbasis :=
     origin_kummer_annulus_bound K r0 R G hr0 hRscale hG hbound
   have hCompat :
       originGreenCoeffA K R F y =
@@ -98,7 +99,7 @@ theorem actual_Hartree_compatible_full_singular_Green_physical_source_gain
           originGreenCoeffA K y F r0 := by
     have h :=
       actual_Hartree_compatible_singular_Green_coefficient_local_transport
-        K r0 R G hBasis hOrder F hSource J.1 J.2 hzero y hy
+        K r0 R Cbasis hBasis hOrder F hSource J.1 J.2 hzero y hy
     simpa only [originGreenCoeffA] using h
   have hTraceRaw :=
     actual_Hartree_original_Fredholm_outgoing_trace_source_radius_gain

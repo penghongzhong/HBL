@@ -81,14 +81,15 @@ theorem actual_Hartree_compatible_outgoing_Green_quantitative_from_true_source
     (actual_Hartree_scaled_Kummer_source_intervalIntegrable
       B A ell c a r0 R hB hA hell hellOne hc ha hr0
       (by simpa only [r0] using hOrder) z hz hSup hStrauss).neg
-  have hK : OriginBasisOn K r0 R G :=
+  let Cbasis : ℝ := G * (1 / r0 + 1 / r0 ^ 2) + R ^ 2 + 1
+  have hBasis : OriginBasisOn K r0 R Cbasis :=
     origin_kummer_annulus_bound K r0 R G hr0 hRscale hG hbound
   have hCompat :
       originGreenCoeffA K R F y =
         actualOriginOutgoingTrace K r0 J.1 J.2 -
           ∫ x in r0..y, originGreenSourceA K F x :=
     actual_Hartree_compatible_singular_Green_coefficient_local_transport
-      K r0 R G hK hOrder F hSource J.1 J.2 hzero y hy
+      K r0 R Cbasis hBasis hOrder F hSource J.1 J.2 hzero y hy
   have hTraceRaw :=
     actual_Hartree_original_Fredholm_outgoing_trace_source_radius_gain
       K D G R L a hD hG hR hROne hRscale.le hcoeff hbound
