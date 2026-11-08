@@ -676,4 +676,41 @@ The moving lower endpoint \(r_0(s)\), the moving Kummer basis,
 and domination of the original full Hartree PDE time derivative
 remain genuine separate analytic obligations.
 
+
+\medskip
+\noindent\textbf{The actual slow-inner moving endpoint.}
+The physical Fredholm radius and normalized Kummer left interface are
+\[
+ L(s)=\ell(s)^{-1/16},\qquad
+ r_0(s)=\frac{L(s)}{a(s)}.
+\]
+Without fixing any final Type-II blow-up rate, differentiation of these
+\emph{actual} parameter expressions, provided
+\(\ell(s),a(s)>0\), gives
+\begin{align}
+ L'(s)&=-\frac1{16}\ell(s)^{-17/16}\ell'(s),\\
+ r_0'(s)&=\frac{L'(s)a(s)-L(s)a'(s)}{a(s)^2}.
+ \label{eq:actual-hartree-moving-green-left-velocity}
+\end{align}
+At fixed \(s\), the genuinely selected original Hartree forcing
+\(F_{\mathrm{adj}}(s,\cdot)\), when continuous on the relevant annulus,
+has the original Green moving-left-endpoint contribution
+\[
+ \left.\frac{d}{dt}
+ B_K\bigl[F_{\mathrm{adj}}(s,\cdot)\bigr](r_0(t),B)
+ \right|_{t=s}
+ =-r_0'(s)\,\frac{Y_K(r_0(s))
+   F_{\mathrm{adj}}(s,r_0(s))}{W_K(r_0(s))}.
+\]
+This statement does not freeze the \emph{radius}; only the source and
+basis are held at the reference slice to isolate that contribution.
+The exact formula and the source-specific original Green FTC bridge
+are now implemented as candidate
+\texttt{ActualHartreeSlowInnerMovingGreenEndpoint.lean},
+commit \texttt{bac3d6f}, with dedicated strict audit workflow
+\texttt{hbl-true-hartree-moving-physical-endpoint.yml},
+commit \texttt{9f54a71}, pending success.
+Its combination with the evolving-source Green derivative and
+the moving Kummer basis still requires additional analytic proofs.
+
 \end{document}
