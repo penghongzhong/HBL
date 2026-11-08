@@ -2354,4 +2354,37 @@ Their independent strict replays are GitHub Actions
 manuscript ledger until successful exact-target \texttt{--trust=0}
 compilation and transitive axiom audit.}
 
+
+\medskip
+\noindent\textbf{Three spectrally corrected Fredholm--Kummer--repair
+$C^1$ joins: strict acceptance.}
+Unlike the earlier outgoing-only certificate, the full physical field
+now retains the original weighted Fredholm inner solution up to $L$,
+uses the literal original zero-left Cramer spectral correction through
+$aB$, repairs from its \emph{new} corrected upper value and slope, and
+vanishes outside $2aB$. With continuous actual source on the positive
+Kummer interval and the original physical scaling, all three
+two-sided derivatives are proved:
+\[
+ \left(U_{\mathrm{corr}}^{\mathrm{four}}\right)'(L)
+    =u_{\mathrm{inner}}'(L),\qquad
+ \left(U_{\mathrm{corr}}^{\mathrm{four}}\right)'(aB)
+    =a^{-1}v_d'(B),\qquad
+ \left(U_{\mathrm{corr}}^{\mathrm{four}}\right)'(2aB)=0.
+\]
+The precise module is
+\texttt{ActualHartreeSpectralCorrectedFourPieceThreeC1.lean},
+with strict CI \texttt{42530313725} (\emph{Success})
+and evidence archive \texttt{13636899879}. The archive has a
+zero-byte \texttt{strict.log}, Lean 4.35.0-rc3, the exact
+\texttt{\#check} type, and \texttt{\#print axioms} reporting only
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}; no \texttt{sorryAx}.
+This is a \emph{generic true source + actual Fredholm jet} theorem.
+Its specialization to the \emph{uniquely selected original Hartree}
+source and the independent time-positive residual estimates still
+have separate obligations. In particular, no $O(s^{-9/4})$ full
+quartic nonlocal PDE residual or dynamically selected Type-II rate
+is inferred from fixed-time $C^1$ differentiability.
+
 \end{document}
