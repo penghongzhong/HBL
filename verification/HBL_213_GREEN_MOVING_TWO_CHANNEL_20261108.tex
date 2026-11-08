@@ -1119,12 +1119,16 @@ The exact nonlocal critical covariance gives
 \begin{align}
  {\mathfrak I}(V_a,Z_a)(r)
  &=a^{5/2}{\mathfrak I}(V,Z)(ar),\label{eq:hbl-critical-full-mixed-scaling}\\
- \sqrt a\,F_0(r)
+ \sqrt a\,\mathscr S_K(r)
  &={\mathfrak I}\bigl(V_{a,\ell,c},Z_{a,\ell}\bigr)(r),
  \qquad
- F_0(r)=a^2 {\mathfrak I}(V_{\ell,c},Z_\ell)(ar).
+ \mathscr S_K(r)=a^2 {\mathfrak I}(V_{\ell,c},Z_\ell)(ar).
  \label{eq:hbl-critical-original-source-fixed-radius}
 \end{align}
+Here \(\mathscr S_K\) denotes the unsigned scaled Kummer source
+\texttt{actualHartreeLaplacianScaledKummerSource}; the forcing
+used in the selected four-piece Green construction has the
+\emph{opposite sign}, \(F_0=-\mathscr S_K\).
 In particular, the moving observation point \(ar\) is absent
 from the right-hand side of the second identity; \emph{all}
 time variation is transferred into the actual rescaled core,
@@ -1139,13 +1143,15 @@ fixed-radius scaled interaction
 \(\widetilde F(s,r):={\mathfrak I}(V_{a,\ell,c}(s),
 Z_{a,\ell}(s))(r)\), the exact product rule is
 \begin{align}
- \partial_sF_0(s,r)
+ \partial_s\mathscr S_K(s,r)
   &=a(s)^{-1/2}\partial_s\widetilde F(s,r)
-     -\frac{a'(s)}{2a(s)^{3/2}}\widetilde F(s,r).
+     -\frac{a'(s)}{2a(s)^{3/2}}\widetilde F(s,r),\qquad
+ \partial_sF_0=-\partial_s\mathscr S_K.
  \label{eq:hbl-original-hartree-source-time-via-critical}
 \end{align}
 This does not assume a terminal Type-II power law.
-The Lean producer
+The Lean producer of the unsigned \(\partial_s\mathscr S_K\)
+(the actual forcing derivative is its negative)
 \texttt{ActualHartreeTrueMovingOriginalSourceFromScaledOrbit.lean}
 has strict CI \texttt{42478989692} (\emph{Success}),
 which derives \(\partial_sF_0\), rather than taking it as
