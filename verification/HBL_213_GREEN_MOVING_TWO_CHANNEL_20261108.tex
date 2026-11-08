@@ -390,14 +390,54 @@ incorrectly assign the baseline source's $(1+ar)^{-19/8}$
 decay to the speed correction.
 
 The underlying original-source unique-selector theorem has a strict
-Lean Success (\texttt{42449888073}). The two matching physical Green
-bounds are newly submitted as
+Lean Success (\texttt{42449888073}). The speed-source physical Green bound
 \texttt{ActualHartreeSelectedSpeedSingularGreenGain.lean}
-and
-\texttt{ActualHartreeSelectedSpeedPhysicalGreenNoScale.lean}.
-They are proof candidates pending their independent strict CI.
+is strictly accepted (CI \texttt{42451607569}).
+The composed true-source selector estimate in
+\texttt{ActualHartreeSelectedSpeedPhysicalGreenNoScale.lean}
+has a targeted proof correction committed at \texttt{378783e};
+its new independent CI \texttt{42453696842} remains pending
+at this manuscript checkpoint.
 Equation \eqref{eq:true-selected-speed-singular-green}
 is not yet a full three-region, time-dependent Hartree residual
 of size $s^{-9/4}$.
+
+
+\medskip
+\noindent\textbf{The complete selected \emph{local} singular Green source.}
+The genuine regular-origin Frobenius bound on the normalized annulus gives
+\[
+ \left|Y(r)\int_{r_0}^{r}
+     \frac{X(\rho)F_0(\rho)}{W(\rho)}\,d\rho\right|
+ \le G C_{\rm reg} M_{\HH},\qquad
+ C_{\rm reg}=1+(D+1)GB^2,\quad r_0=\frac La.
+\]
+The source densities are interval integrable by the original Hartree
+Riesz estimates and the actual scale/phase source integrability
+certificates. Thus the original Green map is linear for the
+\emph{same} \(F_0,F_{\rm sp}\) and selected \(p\):
+\[
+ \int_{r_0}^{r}\frac{X(\rho)F_{\rm adj}(\rho)}{W(\rho)}\,d\rho
+ =
+ \int_{r_0}^{r}\frac{X(\rho)F_0(\rho)}{W(\rho)}\,d\rho+
+ \int_{r_0}^{r}\frac{X(\rho)F_{\rm sp}(\rho)}{W(\rho)}\,d\rho.
+\]
+Consequently,
+\begin{align}
+ \left|Y(r)\int_{r_0}^{r}
+       \frac{X(\rho)F_{\rm adj}(\rho)}{W(\rho)}\,d\rho\right|
+ &\le GC_{\rm reg}M_{\HH}
+       +G^2C_sC_{\rm sel}
+          (N_{\mathrm{Fredholm}}+M_{\HH}).
+ \label{eq:true-adjusted-hartree-local-green}
+\end{align}
+No additional moving-scale \(a\) or \(a^{-1}\) is introduced.
+This precise local source-composition theorem is newly submitted as
+\texttt{ActualHartreeTrueSourceSelectedAdjustedLocalGreenNoScale.lean}
+(commit \texttt{dffbae9}), with strict CI \texttt{42453950339}
+\emph{pending}, not yet accepted.
+The local bound is distinct from the full right-endpoint coefficient
+(which also contains the corrected Fredholm left trace) and from the
+time-dependent complete nonlinear Hartree residual.
 
 \end{document}
