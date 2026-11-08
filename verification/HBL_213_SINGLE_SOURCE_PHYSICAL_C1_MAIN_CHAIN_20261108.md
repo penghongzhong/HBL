@@ -337,3 +337,24 @@ Exact target audit: strict `--trust=0`, warning-as-error, target `#check` and ta
 with `r0=L/a`. This is NOT independently known to be time-small. Neither delta/r0 nor a uniform moving-left-endpoint original Kummer basis constant has yet been shown to have a positive time order from the same PDE orbit. The first Green correction also changes boundary traces and must be tied to the physical Fredholm/repair/remote field in all three regions. The full nonlinear 3D Hartree residual `O(s^(-9/4))`, its direct threshold Lipschitz, actual finite recursion and derived Type-II rate remain open.
 
 Mathematics synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `b83f5b96cebca4f9872a42caf7848e88f6ec04c3`. Formal revised count **11/13 = 84.62%**; do NOT count this local spectral estimate as 12/13.
+
+
+## 2026-11-08 exact physical Wronskian cancellation — three strict successes
+
+The last source-norm elimination theorem had a crude `r0^-2` factor from prematurely replacing `||Fadj(r)|| <= Qa/r^2` by the constant `Qa/r0^2`. This factor is **now eliminated at its mathematical origin** using the exact original normalized Kummer Wronskian identity `||W_K(r)^(-1)||=r^2`.
+
+**New source-faithful strict proof chain:**
+
+1. [CI 42486794147](https://github.com/penghongzhong/HBL/actions/runs/42486794147), corrected source commit `e502dc56974b368426533769ebb95fa0a3fa76a7`, `HBL/KummerOriginGreen/InverseSquareSourceNoLeftRadiusLoss.lean`. For `||F(r)||<=Qa/r²`, derive BOTH original Green source density bounds `<=Ck*Qa`, BOTH Wronskian coefficient integral bounds and `||G_K[F](r)||+||∂_rG_K[F](r)|| <= 2*Ck²*(B-r0)*Qa`. No explicit `r0^-2`.
+2. [CI 42486794135](https://github.com/penghongzhong/HBL/actions/runs/42486794135), source commit `ef7484c2b6227263364fa5afda9992e99536565e`, `ActualHartreeFixedKummerSpectralNoLeftRadiusLoss.lean`: the ACTUAL first spectral Green correction `u1=G_K0[delta*G_K0[F]]` satisfies exact `L_{mu,theta}(u0-u1)-F=-delta*u1`; the residual bound is `||delta||²*(2*Ck²*(B-r0))*(2*Ck³*(B-r0))*Qa`.
+3. [CI 42486875347](https://github.com/penghongzhong/HBL/actions/runs/42486875347), source commit `858bec646e725a26363de4e9a71f22f5bdbbc66c`, `ActualHartreeOriginalSelectedSpectralNoRadiusLoss.lean`: instantiates BOTH Green fields using the SAME genuine quartic inverse-square Hartree source and its uniquely compatible real two-channel Cramer selection. The physical corrected outer norm `Qa<=Csel*(N_F+Cphys*ell^(1/8))` is derived from the original Fredholm and radiation inputs, not taken as a new hypothesis. **No independent M, Qa, or modulation pair is assumed.** Therefore the source-specific quadratic bound has **no explicit inverse matching radius factor**.
+
+**Independently extracted and audited all three GitHub Actions evidence archives:** 13619188816, 13619548762, 13619213733. Each archived `strict.log` is empty; each exact-target `#print axioms` reports precisely `[propext, Classical.choice, Quot.sound]`; fixed Lean 4.35.0-rc3, pinned Mathlib `a98628e16`, trust-zero and warning-as-error. No `sorryAx`, no new axiom.
+
+**Important remaining physical proof obligations:**
+- The annular physical basis constant `Ck` in `OriginBasisOn K r0 B Ck` may itself depend on the moving left interface `r0`. The explicit `r0^-2` cancellation does **NOT** establish a uniform basis norm as `r0 -> 0`.
+- The actual spectral parameter displacement `delta(t)` still requires a PDE-derived positive time order, and the second Green correction modifies real lower/upper physical interface traces. A new matched repair must preserve full three-junction `C^1` compatibility.
+- The full original three-dimensional Hartree nonlinear interaction, its real four-piece time/space derivatives, remote Riesz feedback, uniform `O(s^-9/4)` residual, direct threshold Lipschitz and genuine finite recursion are **not** consequences of this single Kummer spectral cancellation.
+- The Type-II blowup law must be DERIVED from the eventual actual PDE orbit, never inserted as an exponent assumption.
+
+Manuscript formulas synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`, commit `1748b40ea75dadca7e016002c1b045134867d8fb`. Revised original environment count **11/13 = 84.62%**; §2.13 and the final dynamically selected Type-II theorem are STILL OPEN.
