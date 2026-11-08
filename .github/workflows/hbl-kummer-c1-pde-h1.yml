@@ -5,6 +5,7 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalKummerC1PDEH1.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedKummerRepairTwoC1Jets.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalKummerC1Splice.lean'
       - '.github/workflows/hbl-kummer-c1-pde-h1.yml'
   workflow_dispatch:
 permissions:
