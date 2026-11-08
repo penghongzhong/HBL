@@ -485,4 +485,38 @@ It controls the full right-endpoint singular Green coefficient
 but not the separate regular Green component, interface-repair field,
 their time derivatives or the complete nonlocal Hartree PDE residual.
 
+
+\medskip
+\noindent\textbf{Eliminating the adjusted Fredholm norm.}
+The original Hartree Riesz forcing itself feeds the already established
+two-channel source correction theorem.  In the same compatible speed,
+let \(Q_{\rm adj}\ge0\) be the \emph{derived} adjusted outer envelope,
+not an independent input.  The actual selected source theorem gives
+\[
+ N_{\rm adj}+Q_{\rm adj}\le C_{\rm adj}
+                  (N_{\rm Fredholm}+M_{\HH}),
+ \qquad Q_{\rm adj}\ge0.
+\]
+The precise genuine-Hartree-source specialization is encoded in
+\texttt{ActualHartreeTrueSourceSelectedCorrectedNorm.lean}
+(commit \texttt{d882d6f}), with its own strict Lean CI pending.
+Substitution into \eqref{eq:true-selected-full-singular-green}
+reduces the right-hand side to the \emph{original} source size:
+\begin{align}
+ |Y(r)A_B[F_{\rm adj}](r)|
+ &\le \bigl(GC_{\rm tr}C_{\rm F}C_{\rm adj}
+            +GC_{\rm reg}+G^2C_sC_{\rm sel}\bigr)
+         (N_{\rm Fredholm}+M_{\HH}).
+ \label{eq:true-selected-original-norm-singular-green}
+\end{align}
+Both the source-selected speed and the corrected source envelope are
+produced, not assumed, and all constants are independent of the
+moving Kummer scale \(a\) within the stated annular range.
+The same-source composite proof is
+\texttt{ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean},
+commit \texttt{d4e8da4}, under a dedicated strict CI; it remains
+\emph{unaccepted} until that CI completes successfully.
+The complete, time-differentiable four-piece physical Hartree field and
+its \(s^{-9/4}\) nonlinear residual remain open.
+
 \end{document}
