@@ -1097,4 +1097,91 @@ density and moving observer derivative, the moving Kummer basis,
 and the full physical \(O(s^{-9/4})\) residual remain genuine
 separate obligations.
 
+
+\medskip
+\noindent\textbf{Exact critical transport of the original Hartree
+interaction from the moving observer to fixed Kummer radius.}
+Write the full nonlocal interaction of one real radial core \(V\)
+and one complex radiation \(Z\) as
+\[
+ {\mathfrak I}(V,Z)
+ =\mathcal N_{\HH}(V+Z)-\mathcal N_{\HH}(V)
+   -\mathcal N_{\HH}(Z),\qquad
+ \mathcal N_{\HH}(U)=\bigl(|x|^{-2}*|U|^4\bigr)|U|^2U,
+\]
+where its original radial expression contains all three genuine
+inverse-square quartic Riesz contributions. For each \(a>0\)
+put
+\[
+ V_a(r)=a^{1/2}V(ar),\qquad Z_a(r)=a^{1/2}Z(ar).
+\]
+The exact nonlocal critical covariance gives
+\begin{align}
+ {\mathfrak I}(V_a,Z_a)(r)
+ &=a^{5/2}{\mathfrak I}(V,Z)(ar),\label{eq:hbl-critical-full-mixed-scaling}\\
+ \sqrt a\,F_0(r)
+ &={\mathfrak I}\bigl(V_{a,\ell,c},Z_{a,\ell}\bigr)(r),
+ \qquad
+ F_0(r)=a^2 {\mathfrak I}(V_{\ell,c},Z_\ell)(ar).
+ \label{eq:hbl-critical-original-source-fixed-radius}
+\end{align}
+In particular, the moving observation point \(ar\) is absent
+from the right-hand side of the second identity; \emph{all}
+time variation is transferred into the actual rescaled core,
+radiation and explicit prefactor. Both equalities, including the
+original logarithmic radial Riesz kernel, are proved in
+\texttt{ActualHartreeCriticalScaledInteraction.lean};
+dedicated strict CI \texttt{42478335181} reports
+\emph{Success} under pinned Lean 4.35.0-rc3.
+
+For differentiable \(a(s)>0\) and differentiable original
+fixed-radius scaled interaction
+\(\widetilde F(s,r):={\mathfrak I}(V_{a,\ell,c}(s),
+Z_{a,\ell}(s))(r)\), the exact product rule is
+\begin{align}
+ \partial_sF_0(s,r)
+  &=a(s)^{-1/2}\partial_s\widetilde F(s,r)
+     -\frac{a'(s)}{2a(s)^{3/2}}\widetilde F(s,r).
+ \label{eq:hbl-original-hartree-source-time-via-critical}
+\end{align}
+This does not assume a terminal Type-II power law.
+The Lean producer
+\texttt{ActualHartreeTrueMovingOriginalSourceFromScaledOrbit.lean}
+has strict CI \texttt{42478989692} (\emph{Success}),
+which derives \(\partial_sF_0\), rather than taking it as
+a source-derivative hypothesis. The next full physical-orbit
+producer \texttt{ActualHartreeTrueSourceTimeFromPhysicalScaledOrbit.lean}
+attempts to obtain \(\partial_s\widetilde F\) from the previously
+verified full three-Riesz time differentiation, with only primitive
+core/radiation \(C^1\) and original integrable velocity-envelope
+inputs. Its independent strict CI must be checked before acceptance.
+
+The concrete two-stage real core has
+\[
+ V_{a,c}(s,r)=a(s)^{1/2}V_{c(s)}(a(s)r),
+\]
+and its derivative, valid also across \(c(s)=0\), is
+\begin{align}
+ \partial_s V_{a,c}
+ &=\frac{a'}{2\sqrt a}V_c(ar)
+ +\sqrt a\Bigl[
+       c'\,\partial_cV_c(ar)+a'r\,\partial_RV_c(ar)
+       \Bigr].
+ \label{eq:hbl-two-stage-core-time-tangent}
+\end{align}
+The expression uses the exact moment-locked cutoff parameter
+tangent and spatial tangent, not a formal derivative of
+\(|c|\) at zero. This has independent strict CI
+\texttt{42479257326} (\emph{Success}) in
+\texttt{ActualHartreeTwoStageCoreTimeTangent.lean}.
+The true two-stage radiation
+\(\sqrt{a(s)\ell(s)}\,z(s,a(s)\ell(s)r)\)
+has a corresponding complete chain-rule module,
+\texttt{ActualHartreeTwoStageRadiationTimeTangent.lean},
+submitted for strict audit. All original time/spatial radiation
+regularity and nonlocal quartic velocity majorants must still
+come from the final physical PDE trajectory.
+The moving Kummer basis and the full weighted nonlinear
+\(O(s^{-9/4})\) residual are not inferred from these identities.
+
 \end{document}
