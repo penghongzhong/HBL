@@ -175,3 +175,13 @@ TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex (
 - TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, commit 626606d.
 
 **Formal revised environment count remains 11/13 = 84.62%.** Outstanding §2.13: genuine one-orbit full four-piece time and original 3D nonlocal cross-density estimates, weighted O(s^(-9/4)) and direct threshold Lipschitz; then final dynamically derived Type-II rate (not prescribed).
+
+
+### 2026-11-08 audited full singular Green source composite
+
+The following two genuinely new full-component auxiliaries have **STRICT SUCCESS** at commit 7b6da7315e903b57ceb2b35f7cfa1628aea6c39e:
+
+- [42455841142](https://github.com/penghongzhong/HBL/actions/runs/42455841142): actual_Hartree_true_source_selected_full_singular_original_norm_gain; eliminates the adjusted Fredholm norm from the entire right-endpoint singular Green bound.
+- [42455841135](https://github.com/penghongzhong/HBL/actions/runs/42455841135): actual_Hartree_one_physical_source_selected_full_singular_Green_gain; instantiates BOTH original Fredholm channels and the outer Kummer source from ONE genuine 3D inverse-square quartic Hartree interaction.
+
+Independently retrieved the archived audit.log, strict.log, source hash, and pinned compiler-version outputs of BOTH runs. In each, strict.log is empty, no sorryAx is present, and #print axioms has **exactly [propext, Classical.choice, Quot.sound]**. No extra axioms were introduced in the proof dependence. The earlier independent upstream lint error was removed in commit 89ecbc6d; that modified parent declaration needs its OWN replacement CI 42456627583, still pending here. This does not establish time differentiation or the O(s^(-9/4)) four-piece PDE residual. Formal count remains 11/13.
