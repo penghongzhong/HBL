@@ -128,3 +128,20 @@ The companion `ActualHartreeTrueSourceSelectedUpperJet.lean`, commit `8d91cf9456
 The true regular origin homogeneous coefficient has a separate source-to-amplitude **candidate**, `ActualHartreeRegularOriginCoefficientSourceBound.lean`, commit `8e5532501a6f452dba4b2aefcf7c5a24dc4c9d07`, strict CI [42450013151](https://github.com/penghongzhong/HBL/actions/runs/42450013151), **pending**. Target `||gamma|| ≤ 2G*(||U||+r0||DU||) ≤ 2G*C_F*N_F`, no inverse moving radius.
 
 **Critical PDE scope:** The unique selected speed cancels the compatibility condition of the adjusted source `F0-p_b S_b-p_omega S_omega`, not of the unadjusted physical source `F0`. Previously accepted conditional singular Green estimates with `hzero` imposed for the unadjusted source cannot be substituted without a separately verified producer connecting the adjusted source to the actual selected speed. Original revised environments remain **11/13** until the full same-orbit `O(s^(-9/4))` and threshold Lipschitz are strictly established.
+
+
+## 2026-11-08 strict CI acceptance and selected-speed physical Green interface (latest)
+
+**New strict kernel successes (replace earlier 'pending' labels):**
+- `actual_Hartree_true_nonlocal_source_selects_unique_real_speed` on the ORIGINAL full inverse-square quartic Hartree Riesz source, with real two-channel compatibility and `|p_1|+|p_2| ≤ C/a(N_F+Q)`: [42449888073](https://github.com/penghongzhong/HBL/actions/runs/42449888073) **SUCCESS**.
+- `actual_Hartree_singular_Green_local_moment_full_product_gain` for the TRUE baseline Hartree source, with the physical singular basis multiplied back and no moving-`a` loss: [42450195229](https://github.com/penghongzhong/HBL/actions/runs/42450195229) and [42450323793](https://github.com/penghongzhong/HBL/actions/runs/42450323793) **SUCCESS**.
+- `actual_Hartree_finite_original_Fredholm_four_piece_PDE_telescopes`, exact nonlinear four-piece Fredholm/Green/repair/zero Hartree residual identity: [42448073193](https://github.com/penghongzhong/HBL/actions/runs/42448073193) **SUCCESS**. This is an exact telescoping identity, NOT a full weighted estimate.
+
+**New true speed-correction source subchain (strict CI pending at this checkpoint):**
+- `ActualHartreeSelectedSpeedSingularGreenGain.lean`, [commit e8d15da](https://github.com/penghongzhong/HBL/commit/e8d15dafb6a001f529b92a7e8e4a0cd9616c08c3), [CI 42450807652](https://github.com/penghongzhong/HBL/actions/runs/42450807652): derives `||Y(r) A_{speed}(r)|| ≤ G² C_s a (|p_1|+|p_2|)` from the genuine speed source `S_b,S_omega=O(a/r)`, not the baseline source's `(1+ar)^(-19/8)` tail.
+- `ActualHartreeSelectedSpeedPhysicalGreenNoScale.lean`, [commit c50a7ad](https://github.com/penghongzhong/HBL/commit/c50a7ade6b664ceed37da3b9d204d1d235b6f411), [CI 42450891480](https://github.com/penghongzhong/HBL/actions/runs/42450891480): composes the strict original-source unique selector and the physical speed-product bound for the SAME `p`; expected result `||Y A_{speed}|| ≤ G² C_s C(N_F+Q)`, with no `a` or `1/a` loss. **Do not count until CI Success.**
+- The exact derivation is synchronized to `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+
+**One rejected interpretation:** The corrected Green source is `F_o=F_0-p_bS_b-p_omega S_omega`; the high-decay `F_0` bound is NOT valid for the speed components separately. Decomposition into the verified physical baseline `Y A_{F_0}` and the speed products is mandatory. All resulting terms must be attached to the same actual speed-selected, time-dependent physical profile, and the full Hartree `O(s^(-9/4))` residual and threshold Lipschitz remain open.
+
+**Revised manuscript environment count remains 11/13 (84.62%).** The fixed-order §2.13 single-orbit parametrix and the final dynamically derived Type-II blowup theorem are NOT yet accepted. Earlier branch-specific successful CI modules do not convert a conditional full-PDE source smallness assumption into a proved original environment.
