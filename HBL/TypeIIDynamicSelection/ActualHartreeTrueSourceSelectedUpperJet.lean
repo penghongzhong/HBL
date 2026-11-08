@@ -150,8 +150,9 @@ theorem actual_Hartree_true_nonlocal_source_selected_upper_Kummer_jet
     calc
       _ ≤ (Kr * Q) * L ^ (-(3 / 8 : ℝ)) := by
         simpa only [Kr, Q, F, mul_assoc] using hRegRaw
-      _ ≤ Kr * Q :=
-        mul_le_mul_of_nonneg_left hPow (mul_nonneg hKr hQ)
+      _ ≤ Kr * Q := by
+        simpa only [mul_one] using
+          (mul_le_mul_of_nonneg_left hPow (mul_nonneg hKr hQ))
       _ ≤ Kr * (N + Q) :=
         mul_le_mul_of_nonneg_left (le_add_of_nonneg_left hN) hKr
   obtain ⟨p, hCompat, hUnique, hJet⟩ :=
