@@ -1225,33 +1225,82 @@ The genuine frozen Kummer differential equation implies the
  {\cal L}_{\mu,\theta}(u_0-u_1)
       -F_{\rm adj}=-\delta u_1.
 \]
-The full original physical source, without a separately inserted
-pointwise bound \(M\), therefore satisfies
-\[
- \bigl\|{\cal L}_{\mu,\theta}(u_0-u_1)
-           -F_{\rm adj}\bigr\|
- \le
- \bigl(|\mu-\mu_0|+|\theta-\theta_0|\bigr)^2
- [2C_K^3(B-r_0)]^2
- \frac{C_{\rm sel}(N_{\rm F}+C_{\rm phys}\ell^{1/8})}{r_0^2}.
-\]
-The complete chain is formalized by
+The original physical source, with no separately prescribed
+corrected-forcing supremum \(M\), first yields a valid but
+suboptimal estimate with factor \(r_0^{-2}\);
+this earlier bound was strictly checked by
 \texttt{ActualHartreeOriginalSelectedSpectralSourceNormGain.lean},
-commit \texttt{2ab28476},
-with strict trust-zero and target-axiom audit CI
-\texttt{42485891640} (\emph{Success}).
-Its dependence is confined to the standard Lean axioms
-\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound};
-there are no \texttt{sorryAx} dependencies.
+CI \texttt{42485891640} (\emph{Success}).
+Taking the supremum \(\|F_{\rm adj}(r)\|\le Q_a/r_0^2\)
+\emph{before} the Green integral, however, discards an exact
+physical cancellation.
 
-\emph{Crucial restriction:} the \(r_0^{-2}\) factor has \emph{not}
-been absorbed into a positive time order. A true positive-order
-step needs a PDE-derived quantitative bound on
-\((|\mu-\mu_0|+|\theta-\theta_0|)/r_0\)
-and time-uniform bounds for the fixed basis, as well as control of
-the other three-region full nonlocal Hartree residual components.
-Thus this strictly accepted theorem is a source-faithful
-\emph{local spectral correction}, not §2.13 or a prescribed
-Type-II exponent.
+Indeed, the original normalized Wronskian obeys
+\(\|W_K(r)^{-1}\|=r^2\), so on the actual annulus
+\[
+ \left\|\frac{X_K(r)F_{\rm adj}(r)}{W_K(r)}\right\|,
+ \quad
+ \left\|\frac{Y_K(r)F_{\rm adj}(r)}{W_K(r)}\right\|
+ \le C_KQ_a.
+\]
+Consequently the genuine original Green operator satisfies
+\[
+ \|G_0[F_{\rm adj}](r)\|+
+ \|\partial_rG_0[F_{\rm adj}](r)\|
+ \le 2C_K^2(B-r_0)Q_a
+\]
+with \emph{no explicit inverse left-radius factor}.
+This sharpened Kummer result has strict CI
+\texttt{42486794147} (\emph{Success}).
+The second original Green integral
+\(u_1=G_0[\delta G_0[F_{\rm adj}]]\)
+then satisfies
+\[
+ \|\mathcal L_{\mu,\theta}(u_0-u_1)-F_{\rm adj}\|
+ \le |\delta|^2
+ [2C_K^2(B-r_0)][2C_K^3(B-r_0)]Q_a.
+\]
+This is the exact linear Kummer spectral correction,
+strictly checked in
+\texttt{ActualHartreeFixedKummerSpectralNoLeftRadiusLoss.lean},
+CI \texttt{42486794135} (\emph{Success}).
+
+Finally, the full physical Cramer/Fredholm source construction
+supplies \(Q_a\le C_{\rm sel}(N_{\rm F}
++C_{\rm phys}\ell^{1/8})\), while
+\(|\delta|\le|\mu-\mu_0|+|\theta-\theta_0|\).
+For the \emph{same} original quartic Hartree source,
+\emph{same} unique selected real speed and \emph{same}
+normalized basis, the main quantitative result is therefore
+\[
+ \boxed{\begin{aligned}
+ &\bigl\|\mathcal L_{\mu,\theta}(u_0-u_1)
+             -F_{\rm adj}\bigr\|\\
+ &\qquad\le
+ (|\mu-\mu_0|+|\theta-\theta_0|)^2
+ [2C_K^2(B-r_0)][2C_K^3(B-r_0)]\\
+ &\hspace{52mm}\cdot C_{\rm sel}
+ (N_{\rm F}+C_{\rm phys}\ell^{1/8}).
+ \end{aligned}}
+\]
+The exact original-input, source-selected composition is
+\texttt{ActualHartreeOriginalSelectedSpectralNoRadiusLoss.lean},
+strict CI \texttt{42486875347} (\emph{Success}).
+All three new independent audits used the pinned Lean compiler,
+\texttt{--trust=0}, warnings as errors and the
+\emph{exact target theorem} in both \texttt{\#check}
+and \texttt{\#print axioms}, without additional axioms.
+
+\emph{Scope:} the cancellation removes the explicit
+\(r_0^{-2}\) originating from the old source supremum.
+It does \emph{not} prove a uniform \(C_K\) as \(r_0\to0\);
+the true Kummer basis may itself carry radius dependence.
+Nor does this statement establish the physical modulation
+decay of \(\delta\), restore the altered physical Cauchy
+traces after the second Green correction, or estimate
+the complete inner--Kummer--repair--remote nonlocal PDE
+residual. These remain necessary to prove a positive
+time-order step and the revised manuscript §2.13.
+No Type-II concentration exponent has been assumed.
 
 \end{document}
