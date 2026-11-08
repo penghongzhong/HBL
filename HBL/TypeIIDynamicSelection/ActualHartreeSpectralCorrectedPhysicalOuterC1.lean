@@ -75,7 +75,9 @@ theorem actual_Hartree_spectral_corrected_physical_two_outer_C1_joins
   have hBpos : 0 < B := hr0.trans_le hOrder
   have hAt : a * B / a = B := by field_simp [ha.ne']
   have hV : HasDerivAt v ((1 / a : ℝ) • DUB) (a * B) := by
-    have hPull := hW.scomp (a * B) ((hasDerivAt_id (a * B)).div_const a)
+    have hWat : HasDerivAt w (deriv w B) (a * B / a) := by
+      simpa only [hAt] using hW
+    have hPull := hWat.scomp (a * B) ((hasDerivAt_id (a * B)).div_const a)
     simpa only [v, DUB, Function.comp_def, id_eq, hAt, one_div,
       Complex.real_smul, Complex.ofReal_inv] using hPull
   have hEnds := actual_Kummer_physical_interface_repair_endpoint_jets
@@ -92,7 +94,9 @@ theorem actual_Hartree_spectral_corrected_physical_two_outer_C1_joins
     exact hd
   have hValL : v (a * B) = rep (a * B) := by
     change w (a * B / a) = rep (a * B)
-    rw [hAt, hEnds.1]
+    rw [hAt]
+    change w B = actualKummerPhysicalInterfaceRepair a B UB DUB (a * B)
+    rw [hEnds.1]
   have hValR : rep (2 * a * B) = 0 := hEnds.2.2.1
   have hAB : a * B < 2 * a * B := by
     have hp := mul_pos ha hBpos
