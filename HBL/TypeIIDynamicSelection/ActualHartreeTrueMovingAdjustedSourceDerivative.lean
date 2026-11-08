@@ -32,7 +32,7 @@ real Cramer pair of the evolving compatibility data. -/
 def actualHartreeTrueMovingAdjustedSource
     (a ell c : ℝ → ℝ) (z : ℝ → ℝ → ℂ)
     (b w Z : ℝ → ℂ) (t r : ℝ) : ℂ :=
-  let p := actualRealCramerCorrection (b t) (w t) (Z t)
+  let p := actualRealCramerCorrection (b t) (w t) (Z t);
   -actualHartreeLaplacianScaledKummerSource
       (a t) (ell t) (c t) (z t) r -
     (p.1 : ℂ) * actualMomentLockedScaledScaleSource (a t) (c t) r -
