@@ -4,7 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/KummerOriginGreen/InverseLinearRegularMomentDifference.lean'
-      - 'HBL/KummerOriginGreen/InverseLinearRegularMomentDifference.lean'
+      - 'HBL/KummerOriginGreen/InverseLinearRegularSourceRadiusGain.lean'
       - '.github/workflows/hbl-213-inverse-linear-A-moment-radius.yml'
   workflow_dispatch:
 permissions:
