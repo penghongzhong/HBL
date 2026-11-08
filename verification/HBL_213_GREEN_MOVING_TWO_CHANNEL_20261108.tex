@@ -2094,4 +2094,101 @@ transmission jet. Thus they do not yet establish the corrected
 dynamical matching, the complete four-region Hartree PDE error,
 the finite recurrence, or the Type-II blowup conclusion.
 
+\medskip
+\noindent\textbf{Original weighted Cramer matching, the zero-left
+Volterra spectral correction, and the quadratic PDE defect.}
+The source-selected complete \emph{inhomogeneous} Green estimate
+and the forced regular Cramer homogeneous component combine as
+follows. Given the original compatible Fredholm jet \((U,DU)\)
+and the actual adjusted Hartree forcing \(F_{\rm adj}\), let
+\[
+ u_0(r)=\mathcal G^{\rm match}_{K_0}
+       [F_{\rm adj};U,DU](r),\qquad
+ H_G=\sup_{r_0\le r\le B}
+     r\,|\mathcal G_{K_0}[F_{\rm adj}](r)|.
+\]
+The original Cramer obstruction equation makes its singular
+homogeneous coefficient exactly zero, and the normalized Wronskian
+cancels all explicit negative powers of \(r_0\) in its
+regular homogeneous coefficient. Therefore
+\begin{equation}
+ \sup_{r_0\le r\le B}r|u_0(r)|
+ \le H_G+G^2\left(r_0|DU|+(r_0+1)|U|\right)
+ =:H_{\rm match}.
+ \label{eq:hbl-selected-weighted-original-matched}
+\end{equation}
+This is the \emph{original} Cramer and Fredholm solution, not an
+independently supplied regular homogeneous amplitude.
+The abstract true-Green-to-matched proof is strictly checked in
+\texttt{ActualHartreeMatchedFromWeightedOriginalGreenCramer.lean},
+CI \texttt{42527710745} (\emph{Success}), with pinned
+\texttt{--trust=0}, a zero-length \texttt{strict.log}, and only
+the three standard Lean axioms. Its specialization to the literal
+source-selected Hartree field is an additional formal composite,
+not automatically certified by that single CI.
+
+Write the original Wronskian coefficient integrals for an
+inverse-linear source \(q\) as
+\[
+ A_q(r)=\int_r^B \frac{X(s)q(s)}{W_K(s)}\,ds,\qquad
+ B_q(r)=\int_{r_0}^r\frac{Y(s)q(s)}{W_K(s)}\,ds .
+\]
+The exact zero-left-Cauchy-data matched solution
+\(u_1=\mathcal G^{\rm match}_{K_0}[q;0,0]\)
+has singular coefficient \(-A_q(r_0)\) and vanishing
+regular homogeneous coefficient. For the normalized origin
+IVP basis \(y=rY\), \(x=rX\), this gives the \emph{identity}
+\[
+ \boxed{r u_1(r)=
+  y(r)\bigl(A_q(r)-A_q(r_0)\bigr)+x(r) B_q(r).}
+\]
+Since the exact physical Wronskian satisfies
+\(\lvert W_K^{-1}(r)\rvert=r^2\), if
+\(\sup_{0\le r\le B}(|x(r)|+|y(r)|)\le2G\) and
+\(|q(r)|\le M/r\), both coefficient densities are bounded by
+\(GM\). Hence
+\begin{equation}
+ \sup_{r_0\le r\le B}r|u_1(r)|
+ \le 2G^2(B-r_0)M .
+ \label{eq:hbl-original-zero-left-volterra-weighted}
+\end{equation}
+Unlike a direct physical-basis estimate, this bound has no
+\(r_0^{-1}\) or \(r_0^{-2}\) loss. The actual spectral-response
+source \(q=\delta u_0\) has \(M=|\delta|H_{\rm match}\).
+The matched correction \(u_{\rm corr}=u_0-u_1\)
+thus preserves its \emph{literal} left Cauchy data and obeys
+\[
+ \begin{aligned}
+ u_{\rm corr}(r_0)&=U,&
+ \partial_r u_{\rm corr}(r_0)&=DU,\\
+ \mathcal L_\delta u_{\rm corr}-F_{\rm adj}
+   &=-\delta u_1,&
+ \sup_{r_0\le r\le B}
+ r|\mathcal L_\delta u_{\rm corr}-F_{\rm adj}|
+   &\le 2G^2(B-r_0)|\delta|^2H_{\rm match}.
+ \end{aligned}
+\]
+For the physical upper join one must \emph{recompute} the repair
+using
+\[
+ (U_B^{\rm corr},D_B^{\rm corr})
+  :=\bigl(u_{\rm corr}(B),\partial_r u_{\rm corr}(B)\bigr),
+\]
+not the old uncorrected jet. The corrected repair field then has
+the candidate exact derivatives
+\[
+ \partial_yu_{\rm splice}(aB)
+  =a^{-1}D_B^{\rm corr},\qquad
+ \partial_yu_{\rm splice}(2aB)=0.
+\]
+The zero-left Volterra identity, its weighted estimate, the
+left-preserving quadratic residual, and the actual re-matched
+outer \(C^1\) statements have separate Lean modules and
+strict workflow replays. A full main-chain acceptance requires
+all these replays to succeed and to be composed with the
+\emph{same source-selected} \(p\) and Fredholm jet; the
+time-dependent four-region quartic Hartree residual, threshold
+Lipschitz and dynamically selected Type-II rate remain open.
+
+
 \end{document}
