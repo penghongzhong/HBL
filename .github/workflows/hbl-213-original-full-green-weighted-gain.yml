@@ -73,13 +73,17 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_source_full_Green_weighted_no_radius_loss
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_source_full_Green_weighted_no_radius_loss
+          set_option pp.all true in
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_source_spectral_drift_weighted_no_radius_loss
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_source_spectral_drift_weighted_no_radius_loss
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeOriginalFullGreenWeightedGainAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
           import re, pathlib
           data=pathlib.Path('evidence/audit.log').read_text()
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',data)
-          assert len(reports)==1, f"Expected exactly one axiom report, found {len(reports)}"
+          assert len(reports)==2, f"Expected exactly two axiom reports, found {len(reports)}"
           actual=set()
           for report in reports:
               actual |= {re.sub(r'\.\{[^}]+\}$','',x.strip()) for x in report.split(',') if x.strip()}
