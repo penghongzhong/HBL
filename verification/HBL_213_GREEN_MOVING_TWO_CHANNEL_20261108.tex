@@ -2254,4 +2254,55 @@ Neither $d(s)$ nor its desired decay, the moving Kummer transport,
 the nonlocal four-region PDE gain, the finite physical recursion, or
 the Type-II rate is supplied as an extra premise.
 
+
+\medskip
+\noindent\textbf{Strictly verified right-hand $C^1$ repair of the
+genuine spectral-corrected original Kummer profile.}
+Fix the original Cramer matched field
+\(u_0=\mathcal G^{\mathrm{match}}_{K_0}[F;U,DU]\) and its
+zero-left-Cauchy-data first spectral correction
+\(u_1=\mathcal G^{\mathrm{match}}_{K_0}[d u_0;0,0]\).
+The physical continuation and the actual new endpoint jets are
+\[
+  w=u_0-u_1,\qquad
+  v(y)=w(y/a),\qquad
+  U_B=w(B),\quad D_B=w'(B).
+\]
+Let \(\operatorname{Rep}_{a,B}[U_B,D_B]\) denote the original smooth
+physical Kummer interface repair, built from precisely these new
+jet values. The literal corrected right-hand splice is
+\[
+ \mathcal U(y)=
+ \begin{cases}
+     v(y),&y\le aB,\\
+     \operatorname{Rep}_{a,B}[U_B,D_B](y),
+       &aB<y\le 2aB,\\
+     0,&y>2aB.
+ \end{cases}
+\]
+For \(a>0\), \(0<r_0\le B<\mathrm{scale}\), and the original
+continuous physical source in the positive Kummer domain,
+the genuine two-sided derivative is proved at both interfaces:
+\[
+  \boxed{
+    \mathcal U'(aB)=a^{-1}D_B,\qquad
+    \mathcal U'(2aB)=0.}
+\]
+The exact original source and its zero-left Green correction determine
+\(U_B,D_B\); they are not freely prescribed independent data.
+This isolated outer-pair theorem is
+\texttt{actual\_Hartree\_spectral\_corrected\_physical\_two\_outer\_C1\_joins},
+strictly verified in
+\texttt{ActualHartreeSpectralCorrectedPhysicalOuterC1.lean},
+GitHub Actions CI \texttt{42529092477} (\emph{Success}).
+Its archived artifact \texttt{13637410229} was inspected:
+\texttt{strict.log} is empty, the compiler is Lean 4.35.0-rc3,
+and the only transitive axioms are \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}; there is no
+\texttt{sorryAx}.
+This verifies the \emph{two outer interfaces}, not yet the full
+source-selected first Fredholm interface on one dynamic orbit.
+It does not give a positive time-order full-Hartree PDE bound or
+the dynamically derived Type-II exponent.
+
 \end{document}
