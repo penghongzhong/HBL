@@ -145,3 +145,21 @@ The true regular origin homogeneous coefficient has a separate source-to-amplitu
 **One rejected interpretation:** The corrected Green source is `F_o=F_0-p_bS_b-p_omega S_omega`; the high-decay `F_0` bound is NOT valid for the speed components separately. Decomposition into the verified physical baseline `Y A_{F_0}` and the speed products is mandatory. All resulting terms must be attached to the same actual speed-selected, time-dependent physical profile, and the full Hartree `O(s^(-9/4))` residual and threshold Lipschitz remain open.
 
 **Revised manuscript environment count remains 11/13 (84.62%).** The fixed-order §2.13 single-orbit parametrix and the final dynamically derived Type-II blowup theorem are NOT yet accepted. Earlier branch-specific successful CI modules do not convert a conditional full-PDE source smallness assumption into a proved original environment.
+
+
+## 2026-11-08 genuine selected Green main-chain continuation (verified checkpoint)
+
+- **STRICT SUCCESS:** original nonlocal Hartree source → unique real two-speed, [CI 42449888073](https://github.com/penghongzhong/HBL/actions/runs/42449888073).
+- **STRICT SUCCESS:** true Hartree local singular Green physical product without matching-scale loss, [CI 42450195229](https://github.com/penghongzhong/HBL/actions/runs/42450195229).
+- **STRICT SUCCESS:** same genuine selected speed, its physical singular Green correction and original source selected-speed bound **jointly**; [CI 42453696842](https://github.com/penghongzhong/HBL/actions/runs/42453696842), repaired commit 378783e. Exact statement: ActualHartreeSelectedSpeedPhysicalGreenNoScale.lean. No additional moving-scale factor.
+- **STRICT SUCCESS from existing branch:** same source → adjusted compatible outgoing Green transport [CI 42451487366](https://github.com/penghongzhong/HBL/actions/runs/42451487366); same selected-speed full inner/Green/repair/zero three-interface C1 field [CI 42451545608](https://github.com/penghongzhong/HBL/actions/runs/42451545608).
+
+**Unaccepted committed proof candidates (do not increment environment numerator):**
+1. ActualHartreeTrueSourceSelectedAdjustedLocalGreenNoScale.lean, commit dffbae9, CI [42453950339](https://github.com/penghongzhong/HBL/actions/runs/42453950339): genuine F0 minus both selected modulation sources in the local singular Green physical product.
+2. ActualHartreeTrueSourceSelectedFullSingularGreenGain.lean, commit 047fc66, CI [42454285470](https://github.com/penghongzhong/HBL/actions/runs/42454285470): same selector, corrected physical Fredholm jet and full *right-endpoint singular* Green transport.
+3. ActualHartreeTrueSourceSelectedCorrectedNorm.lean, commit d882d6f, CI [42454532669](https://github.com/penghongzhong/HBL/actions/runs/42454532669): derive both corrected weighted inner norm and outer envelope from original quartic Hartree source.
+4. ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean, commit d4e8da4: eliminate corrected norm from full singular Green bound in favor of original N_F+Q_H. Dedicated CI is triggered by .github/workflows/hbl-true-source-full-original-norm.yml; its actual status needs verification.
+
+TeX synchronized in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex (commit 74694b6).
+
+**Unchanged strict revised 13-environment count: 11/13 = 84.62%.** Neither full dynamical physical Fredholm/Green/repair/remote residual nor O(s^-9/4) positive relative gain and threshold Lipschitz are proved by the fixed-slice Green estimates. Dynamical Type-II exponent must be derived, not assumed.
