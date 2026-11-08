@@ -36,7 +36,7 @@ namespace HBL.Profile.Kummer
 
 theorem originGreen_inverse_linear_source_regularized_uniform
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (G M : ℝ) (hG : 0 ≤ G) (hM : 0 ≤ M)
+    (G M : ℝ) (hG : 0 ≤ G) (_hM : 0 ≤ M)
     (hbound : ∀ x ∈ Icc 0 scale,
         ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
     (F : ℝ → ℂ) (r : ℝ) (hr : r ∈ Ioc 0 scale)
