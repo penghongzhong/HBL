@@ -932,14 +932,21 @@ the regular upper Kummer jet has
  \end{pmatrix}\gamma'(s).
  \label{eq:true-hartree-moving-upper-regular-jet-derivative}
 \end{align}
-The direct Lean composition of the existing strict
-moving Fredholm jet, the new strict joint Green time calculus and
-the established regular upper-jet derivative is
-\texttt{ActualHartreeMovingMatchedRegularUpperJet.lean},
-source commit \texttt{9dd2ed4}, dedicated strict CI
-\texttt{42473884674} (pending at this checkpoint).
-This is the frozen-\(K\), source-selected upper regular jet, not yet
-the actual moving Kummer basis derivative. It does not prove the
-full \(O(s^{-9/4})\) original nonlocal Hartree PDE remainder.
+The direct composition of the moving Fredholm jet, the
+strict joint Green time calculus and the regular upper-jet derivative
+is \texttt{ActualHartreeMovingMatchedRegularUpperJet.lean},
+original commit \texttt{9dd2ed4}, corrected commit \texttt{a6db90c},
+dedicated pinned trust-zero CI \texttt{42474096247} (\emph{Success}).
+The stronger instance using the \emph{single original quartic Hartree
+Riesz source} corrected by the unique real Cramer speed and the actual
+moving radius \(\ell(s)^{-1/16}/a(s)\) has been submitted in
+\texttt{ActualHartreeOnePhysicalSelectedUpperJetTime.lean},
+commit \texttt{1a3559c}, dedicated CI \texttt{42474332557}
+(pending at this checkpoint).
+The motion of the Fredholm left value and slope must still be
+verified along the one original PDE orbit, and the spatial
+Kummer fundamental pair remains fixed in this theorem.
+The actual moving-\(K\) derivative and the full
+\(O(s^{-9/4})\) original nonlocal Hartree PDE residual remain open.
 
 \end{document}
