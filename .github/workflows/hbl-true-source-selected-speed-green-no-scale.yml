@@ -89,6 +89,13 @@ jobs:
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
           cp TrueSourceSelectedSpeedGreenAudit.lean evidence/
+      - name: Save shared pinned HBL build cache for subsequent strict checks
+        if: success()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hbl-realized-atlas-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
