@@ -551,4 +551,33 @@ it does \emph{not} infer the required continuity of \(F_+\) and
 These fixed-slice facts still do not produce the
 time-dependent full original-PDE residual or the blowup rate.
 
+
+\medskip
+\noindent\textbf{The remaining genuinely time-dependent Cramer bridge.}
+For an actual slow-time Hartree orbit, let \(b(s),w(s)\in\C\) denote
+the two original compatibility columns and \(Z(s)\in\C\) its
+unmodified, original-source obstruction.
+If these \emph{actual} quantities are differentiable and the genuine
+Cramer determinant has the verified lower bound, the selected real
+pair satisfies
+\begin{align*}
+ b(s)p_b(s)+w(s)p_\omega(s)+Z(s)&=0,\\
+ b(s)p_b'(s)+w(s)p_\omega'(s)
+  &=-Z'(s)-p_b(s)b'(s)-p_\omega(s)w'(s),\\
+ |p_b'(s)|+|p_\omega'(s)|
+ &\le \frac{1024}{a(s)B^2}
+      \bigl|Z'(s)+p_b(s)b'(s)+p_\omega(s)w'(s)\bigr|.
+\end{align*}
+The last implication is encoded in the existing Lean
+\texttt{ActualHartreeCramerSpeedDerivativeBound.lean}.
+However, this conditional implication alone does not establish
+differentiability of the \emph{actual} Hartree interaction, its moving
+Kummer coefficients or the full nonlinear source along an orbit.
+The previously implemented
+\texttt{ActualHartreeSelectedGreenTimeDerivative.lean}
+treats frozen spatial source profiles; its hypotheses do not
+constitute a proof of the true time-varying \(\mathcal S_{\HH}(s,r)\)
+derivative. Those missing physical derivatives and cross-region
+Riesz interactions remain essential for the relative residual gain.
+
 \end{document}
