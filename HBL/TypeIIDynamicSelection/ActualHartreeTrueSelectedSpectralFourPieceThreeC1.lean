@@ -111,7 +111,6 @@ theorem actual_Hartree_true_source_selected_spectral_four_piece_three_C1
       Fp Fm hp hm hcp hcm Bz Az ell hBz hAz hell hellOne
       z hz hSup hStrauss hF0Cont
   refine ⟨p, hCompat, hUnique, hSpeed, ?_⟩
-  dsimp only
   let F0 : ℝ → ℂ := fun x =>
     -actualHartreeLaplacianScaledKummerSource a ell c z x
   let Fo : ℝ → ℂ := fun x =>
