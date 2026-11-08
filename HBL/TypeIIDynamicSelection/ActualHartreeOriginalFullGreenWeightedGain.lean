@@ -87,4 +87,74 @@ theorem actual_Hartree_original_source_full_Green_weighted_no_radius_loss
     hWeight.trans (mul_le_mul_of_nonneg_left hSum hG)
   simpa only [F0, C0, M] using hFull
 
+
+/-- The original 3D nonlocal Hartree source (rather than an independently
+bounded Green profile) controls the frozen-origin Kummer spectral drift.
+The coefficient is the *actual* mu/theta displacement; no claim that
+it has a preferred time rate is made. Multiplication by r is taken
+before the Green estimate, removing the hidden moving-origin loss. -/
+theorem actual_Hartree_original_source_spectral_drift_weighted_no_radius_loss
+    {mu0 theta0 scale : ℝ} (K : OriginKummerPair mu0 theta0 scale)
+    (mu theta : ℝ → ℝ) (D G L R a Bz Az ell c : ℝ)
+    (hD : 0 ≤ D) (hG : 0 ≤ G)
+    (hL : 1 ≤ L) (ha : 0 < a)
+    (hOrder : L / a ≤ R) (hRscale : R < scale)
+    (hcoeff : ∀ x ∈ Icc 0 scale,
+      ‖originFirstCoeff x‖ + ‖originZeroCoeff mu0 theta0‖ ≤ D)
+    (hbound : ∀ x ∈ Icc 0 scale,
+      ‖K.y x‖ ≤ G ∧ ‖K.dy x‖ ≤ G ∧
+        ‖K.x x‖ ≤ G ∧ ‖K.dx x‖ ≤ G)
+    (hBz : 0 ≤ Bz) (hAz : 0 ≤ Az)
+    (hell : 0 < ell) (hellOne : ell ≤ 1) (hc : |c| ≤ 1)
+    (z : ℝ → ℂ) (hz : Measurable z)
+    (hSup : ∀ u : ℝ, 0 < u → ‖z u‖ ≤ Bz)
+    (hStrauss : ∀ u : ℝ, 1 ≤ u → u * ‖z u‖ ≤ Az)
+    (s r : ℝ) (hr : r ∈ Icc (L / a) R) :
+    let F0 : ℝ → ℂ :=
+      fun x => -actualHartreeLaplacianScaledKummerSource a ell c z x
+    ‖(r : ℂ) *
+        (actualHartreeFrozenBasisMovingSpectrumResidual K mu theta
+          (fun _ => L / a) R (fun _ => F0) s r - F0 r)‖ ≤
+      (|mu s - mu0| + |theta s - theta0|) *
+        (G * (2 * (((8 / 3 : ℝ) * G *
+          (actualHartreePhysicalWeightedSourceConstant Bz Az *
+            ell ^ (1 / 8 : ℝ))) * L ^ (-(3 / 8 : ℝ))))) := by
+  dsimp only
+  let F0 : ℝ → ℂ :=
+    fun x => -actualHartreeLaplacianScaledKummerSource a ell c z x
+  let E : ℝ :=
+    G * (2 * (((8 / 3 : ℝ) * G *
+      (actualHartreePhysicalWeightedSourceConstant Bz Az *
+        ell ^ (1 / 8 : ℝ))) * L ^ (-(3 / 8 : ℝ))))
+  let d : ℂ :=
+    frozenZeroCoeff (mu s) (theta s) - frozenZeroCoeff mu0 theta0
+  have hGreen :
+      ‖(r : ℂ) * originGreenValue K (L / a) R F0 r‖ ≤ E := by
+    simpa only [E, F0] using
+      (actual_Hartree_original_source_full_Green_weighted_no_radius_loss
+        K D G L R a Bz Az ell c
+        hD hG hL ha hOrder hRscale hcoeff hbound
+        hBz hAz hell hellOne hc z hz hSup hStrauss r hr)
+  have hE : 0 ≤ E :=
+    (norm_nonneg ((r : ℂ) * originGreenValue K (L / a) R F0 r)).trans hGreen
+  have hd : ‖d‖ ≤ |mu s - mu0| + |theta s - theta0| := by
+    dsimp [d]
+    exact frozenZeroCoeff_difference_norm_le
+      (mu s) (theta s) mu0 theta0
+  have hEq :
+      (r : ℂ) *
+        (actualHartreeFrozenBasisMovingSpectrumResidual K mu theta
+          (fun _ => L / a) R (fun _ => F0) s r - F0 r) =
+      d * ((r : ℂ) * originGreenValue K (L / a) R F0 r) := by
+    rw [actual_Hartree_fixed_basis_moving_spectrum_exact]
+    dsimp [d]
+    ring
+  change ‖(r : ℂ) *
+    (actualHartreeFrozenBasisMovingSpectrumResidual K mu theta
+      (fun _ => L / a) R (fun _ => F0) s r - F0 r)‖ ≤
+    (|mu s - mu0| + |theta s - theta0|) * E
+  rw [hEq, norm_mul]
+  exact (mul_le_mul_of_nonneg_left hGreen (norm_nonneg d)).trans
+    (mul_le_mul_of_nonneg_right hd hE)
+
 end HBL.TypeIIDynamicSelection
