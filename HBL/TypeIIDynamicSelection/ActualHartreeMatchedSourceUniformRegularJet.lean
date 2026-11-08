@@ -163,7 +163,11 @@ theorem actual_Hartree_matched_source_regular_jet_spectral_outgoing_bound
         F hF U DU hCompatible x hx
     rw [norm_mul, hnormx] at hWeighted
     apply (le_div_iff₀ hxpos).2
-    simpa only [mul_comm] using hWeighted
+    calc
+      ‖actualOriginMatchedKummerValue K a b F U DU x‖ * x =
+          x * ‖actualOriginMatchedKummerValue K a b F U DU x‖ := by
+            ring
+      _ ≤ H := hWeighted
   exact actual_Hartree_matched_spectral_upper_obstruction_regularized_bound
     K a b G H ha hab hb hG hH
     (fun x hx => ⟨(hbound x hx).1, (hbound x hx).2.2⟩)
