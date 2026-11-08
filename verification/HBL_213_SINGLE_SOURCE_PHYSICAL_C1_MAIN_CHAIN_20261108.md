@@ -66,3 +66,25 @@ New unaccepted main-chain candidates (do NOT count before successful strict repl
 Next indispensable bridge: put the ORIGINAL time-dependent 3D Hartree PDE residual on this *inner–Green–repair–remote* global field, including dynamic moving endpoints, original nonlocal quartic interactions, genuine radial Hdot1 energy in the inner/Green/remote regions, and gain estimates relative to the prior full physical residual. Then obtain the uniform fixed `O(s^(-9/4))` residual and threshold-coordinate Lipschitz bound. Do not equate the older indicator-tail core gain with the full-field residual.
 
 Formal revised manuscript numerator remains **11/13 (84.62%)**. The final Type-II blowup exponent must still be derived dynamically from the actual Hartree orbit; no a priori rate assumption is permitted.
+
+
+## 2026-11-08 next actual Green load-bearing acceptance
+
+**Strict source → interior Green field:** CI https://github.com/penghongzhong/HBL/actions/runs/42439861649 SUCCESS, theorem `actual_Hartree_matched_Kummer_interior_from_source_and_left_jet`. It proves the genuine matched origin Green value and slope across a fixed annulus, source-plus-Fredholm-jet controlled. Its `OriginBasisOn K a b C` budget is **not automatically uniform** as `a=L/scale` moves towards zero.
+
+**Strict physical Green radial energy:** CI https://github.com/penghongzhong/HBL/actions/runs/42440742250 SUCCESS, theorem `actual_Hartree_matched_physical_Green_region_radial_H1_energy`. Integrates the real physical 3D weight `y^2` over `[A*a,A*b]` using the ORIGINAL Green source, not an abstract H1 packet.
+
+**Strict physical Green bubble envelope:** CI https://github.com/penghongzhong/HBL/actions/runs/42440955622 SUCCESS, theorem `actual_Hartree_matched_physical_Green_bubble_from_source`. Proves `||v(y)|| <= (1+A*b)*E*bubble(y)`, with `E=2*C^3*((b-a)*M+||U||+||DU||)`. C is still the original fixed-annulus budget.
+
+**Both TRUE Hartree Wronskian source Green coefficients at EVERY radius of the moving interval**: CI https://github.com/penghongzhong/HBL/actions/runs/42441060509 SUCCESS for `actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform`. Both original normalized source integrals are controlled by `(8/3)*G*Cphys*ell^(1/8)*L^(-3/8)`; neither coefficient has a positive extra power of physical Kummer scale. `G` is the explicitly assumed uniform `K.y,K.dy,K.x,K.dx` solution budget. This is **not** yet a time-uniform full physical field bound after multiplication by the singular fundamental solution.
+
+**New CI candidates, not yet counted:**
+- Full **Fredholm inner–Kummer Green–repair–zero** physical three C¹ joins, commit `e1d516885bd7edc30e2b503e3a7a17040133e8a7`, CI https://github.com/penghongzhong/HBL/actions/runs/42441307918.
+- Exact **compatible singular Green source-moment transport** `A(r)=J_-(r0)-∫_{r0}^r (X F/W)`, commit `fec65b97486c1429e39ec8b8084d21eb41204a81`, CI https://github.com/penghongzhong/HBL/actions/runs/42441241401.
+- Genuine **regular origin mode+exact Wronskian** projection `||J_-(r0)|| <= C_reg*r0*(||U||+r0||DU||)`, commit `ec689c2cc052085ca0c5dbfaab2a5c1cba8087b3`, CI https://github.com/penghongzhong/HBL/actions/runs/42441530145.
+- Combined **original two-channel Fredholm source → outgoing trace with an r0 gain** (no independent left jet), commit `d7693be6cbea5ef5573bfe607a807dd5bcd97d6d`, CI https://github.com/penghongzhong/HBL/actions/runs/42441627000.
+- **Actual near-inner-interface local Hartree Green source moment vanishing linearly at r=r0**, commit `5293bf6c1370ba28ca9456f3646b42b7d87dffd4`, CI https://github.com/penghongzhong/HBL/actions/runs/42441909936.
+
+Mathematical manuscript derivation is synchronized in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`; CI-pending claims therein are explicitly labelled candidates.
+
+**The remaining §2.13 gate is unchanged:** assemble the SAME actual time-dependent inner/Green/repair/remote correction in original 3D Hartree PDE, derive true moving interface/time-parameter derivative and all quartic nonlocal cross-region source estimates as a genuine relative residual-order increment, prove time-uniform weighted center/threshold `O(s^(-9/4))` and direct two-coordinate Lipschitz, then strict-replay the whole revised theorem statement. The final Type-II speed exponent is an output of the PDE orbit, never a rate hypothesis. **Revised original environment count: 11/13 (84.62%).**
