@@ -349,4 +349,55 @@ residual $O(s^{-9/4})$ are \emph{not} consequences of a fixed-slice
 Cramer theorem; they still require the real differentiated source,
 compatibility motion, and nonlocal Hartree feedback estimates.
 
+
+\medskip
+\noindent\textbf{The genuinely selected speed-source Green product.}
+The nonlinear baseline Hartree source and the two modulation-speed
+sources have \emph{different} spatial decay and must be treated
+separately.  For the actual scale and phase source directions
+$S_b,S_\omega$, the verified inverse-radius bound is
+\[
+ |S_b(r)|,\ |S_\omega(r)|\le C_s\,a/r,\qquad L/a\le r\le B.
+\]
+The real selected speed is unique, with
+\[
+ |p_b|+|p_\omega|
+  \le \frac{C_{\rm sel}}{a}
+     \left(N_{\mathrm{Fredholm}}+M_{\HH}\right).
+\]
+Put $F_{\rm sp}=-p_bS_b-p_\omega S_\omega$. The original
+fundamental-solution and exact Wronskian estimates give
+\begin{align*}
+ \left|\frac{X(r)F_{\rm sp}(r)}{W(r)}\right|
+ &\le (G/r)\frac{C_s a}{r}
+       (|p_b|+|p_\omega|)\,r^2\\
+ &=G C_s a(|p_b|+|p_\omega|).
+\end{align*}
+Integrating \emph{from the same moving left endpoint} and multiplying
+back by the genuine physical singular basis yields
+\begin{align}
+ \left|Y(r)\int_{L/a}^{r}
+       \frac{X(\rho)F_{\rm sp}(\rho)}{W(\rho)}\,d\rho\right|
+ &\le G^2 C_s a(|p_b|+|p_\omega|)
+       \frac{r-L/a}{r}\notag\\
+ &\le G^2 C_s C_{\rm sel}
+       (N_{\mathrm{Fredholm}}+M_{\HH}).
+ \label{eq:true-selected-speed-singular-green}
+\end{align}
+This is the missing compensation of the selector's $a^{-1}$
+by the physical Green integral's factor $a$. It does \emph{not}
+incorrectly assign the baseline source's $(1+ar)^{-19/8}$
+decay to the speed correction.
+
+The underlying original-source unique-selector theorem has a strict
+Lean Success (\texttt{42449888073}). The two matching physical Green
+bounds are newly submitted as
+\texttt{ActualHartreeSelectedSpeedSingularGreenGain.lean}
+and
+\texttt{ActualHartreeSelectedSpeedPhysicalGreenNoScale.lean}.
+They are proof candidates pending their independent strict CI.
+Equation \eqref{eq:true-selected-speed-singular-green}
+is not yet a full three-region, time-dependent Hartree residual
+of size $s^{-9/4}$.
+
 \end{document}
