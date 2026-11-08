@@ -228,3 +228,39 @@ three physical terms to the exact weighted spectral formula.
 Do not count either candidate module or this argument as revised 2.13.
 
 Formal revised original environment count **11/13**.
+
+### Original Riesz source to WHOLE weighted Green field — candidate direct composite
+
+Located **strict accepted [42441060509](https://github.com/penghongzhong/HBL/actions/runs/42441060509)** in
+`ActualHartreeKummerRegularTailGain.lean`; its theorem
+`actual_Hartree_scaled_Kummer_both_Green_coefficients_uniform`
+already controls **both** original upper and lower Green coefficients
+at every physical radius for the same literal full Riesz source
+`F0=-actualHartreeLaplacianScaledKummerSource a ell c z`:
+`‖CoeffA(F0)(r)‖, ‖CoeffB(F0)(r)‖ ≤ (8/3) G Q_H L^(-3/8)`.
+This solves the unadjusted-source part of the two-moment problem
+directly without reconstructing rpow integration. No implied new
+source-envelope premise is needed.
+
+Composite file `HBL/TypeIIDynamicSelection/ActualHartreeOriginalFullGreenWeightedGain.lean`
+commit [92ae187c](https://github.com/penghongzhong/HBL/commit/92ae187cc528940a69c5666be22daa7e84acabba)
+connects that genuine two-coefficient source theorem to the new exact
+radius-weighted Green identity, producing the complete original field bound
+`‖r*Green(F0)(r)‖ ≤ (16/3) G^2 Q_H L^(-3/8)` at every r, with no
+hidden `OriginBasisOn` constant. Its dedicated pinned exact type/axiom
+[CI 42518707587](https://github.com/penghongzhong/HBL/actions/runs/42518707587)
+is **IN PROGRESS**, so the new composite is not yet accepted. The
+corresponding mathematical proof has been added to the §2.13 manuscript,
+commit [71071699](https://github.com/penghongzhong/HBL/commit/71071699983d28a73e926d492c63a2587d0a24c5).
+
+**Next shortest link:** combine (1) this true full baseline field
+`Green(F0)`, (2) the source-faithful uniquely selected
+`(p_1,p_2)` from CI 42512365232 and (3) the two speed
+regular Green-moment all-radii bounds under CI 42518450478,
+together with the already strictly accepted outgoing singular-speed
+product, to derive a genuinely *source-only uniform* weighted
+`Green(F0 - p_1 P_sc - p_2 P_ph)` estimate.
+Then use the exact Cramer Fredholm regular jet and spectral correction
+without `Ck(r0)`, repair each of three physical C¹ boundaries, and
+derive positive time gain from the actual full nonlocal Hartree PDE
+rather than from an a priori budget. No increase from **11/13**.
