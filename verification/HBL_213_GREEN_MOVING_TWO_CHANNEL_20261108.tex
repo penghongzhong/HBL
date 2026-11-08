@@ -2001,4 +2001,46 @@ must next be combined, then the actual time-dependent moving basis,
 three $C^1$ transmission interfaces and the complete four-region PDE
 source must be handled without a hypothesized time exponent.
 
+
+\medskip
+\noindent\textbf{Same-source complete inhomogeneous Green field
+without moving-radius loss (strict Lean replay submitted).}
+Write
+\[
+ S=(G C_r C_f C_n+G C_p+G^2C_sC)(N_{\rm F}+Q_{\rm H}),
+ \qquad
+ T=\frac83 GQ_{\rm H}L^{-3/8}
+   +C_{\rm sp}GBC_{\rm sel}(N_{\rm F}+Q_{\rm H}),
+\]
+where $C_r,C_p,C_f,C_n,C_s,C$ are the genuine source-derived
+coefficients of the original outgoing singular Green theorem.
+Uniqueness in the original two-real-channel compatibility system
+identifies the selected velocities in the singular and regular
+estimates; thus they refer to a single physical $F_{\rm adj}$.
+Using the exact Kummer decomposition
+$\mathcal G_{K_0}[F_{\rm adj}]=
+Y A_{F_{\rm adj}}+X B_{F_{\rm adj}}$,
+the origin-normalized identity $rX(r)=x(r)$ and $0<r\le B$,
+\begin{align}
+ \left|r\mathcal G_{K_0}[F_{\rm adj}](r)\right|
+ &\le r\left|Y(r)A_{F_{\rm adj}}(r)\right|
+       +|x(r)|\,\left|B_{F_{\rm adj}}(r)\right|
+       \notag\\
+ &\le B S+G T,\qquad L/a\le r\le B.
+ \label{eq:original-true-selected-whole-green-no-loss}
+\end{align}
+This estimate has no independently assumed selected speed,
+regular Green amplitude, or divergent
+$\operatorname{OriginBasisOn}(K_0,L/a,B,C)$ certificate.
+The exact same-selector formal composition is now in
+\texttt{ActualHartreeTrueSourceSelectedFullOriginalGreenNoRadiusLoss.lean}
+with independent strict workflow
+\texttt{hbl-213-true-selected-full-original-green-no-radius-loss.yml}.
+It is not cited as strictly accepted until successful pinned
+\texttt{--trust=0}, \texttt{warningAsError}, exact type and axiom
+replay. The result is the complete \emph{inhomogeneous} Green field:
+the physical Cramer homogeneous component, moving-basis derivative,
+corrected three-interface $C^1$ matching, actual four-region
+nonlocal PDE time gain and finite physical recurrence remain necessary.
+
 \end{document}
