@@ -107,7 +107,6 @@ theorem actual_Hartree_true_source_unique_speed_selected_Green_transport
       Fp Fm hp hm hcp hcm Bz Az ell hBz hAz hell hellOne
       z hz hSup hStrauss
   refine ⟨p, hCompat, hUnique, hSize, ?_⟩
-  dsimp only
   let Gp := actualMomentLockedInnerPhaseSource L c
   let Gm := actualMomentLockedInnerScaleSource L c
   let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
