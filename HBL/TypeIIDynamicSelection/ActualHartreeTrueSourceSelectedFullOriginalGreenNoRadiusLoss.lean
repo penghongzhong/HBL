@@ -205,8 +205,8 @@ theorem actual_Hartree_true_source_selected_whole_original_Green_no_radius_loss
       _ ≤ r * ‖originPhysicalValue K.y r *
           originGreenCoeffA K B Fadj r‖ +
           G * ‖originGreenCoeffB K (L / a) Fadj r‖ :=
-            add_le_add_left
-              (mul_le_mul_of_nonneg_right hx (norm_nonneg _)) _
+            add_le_add (le_refl _)
+              (mul_le_mul_of_nonneg_right hx (norm_nonneg _))
   have hSingBudget :
       r * ‖originPhysicalValue K.y r *
           originGreenCoeffA K B Fadj r‖ ≤ B * S :=
