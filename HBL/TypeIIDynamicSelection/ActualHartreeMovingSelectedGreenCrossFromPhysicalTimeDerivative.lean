@@ -91,7 +91,10 @@ theorem actual_Hartree_moving_selected_Green_cross_from_physical_time_derivative
     have hbound : ∀ v ∈ Icc s t, ‖deriv f v‖ ≤ C := by
       intro v hv
       obtain ⟨D, hD, hNorm⟩ := hTimeDeriv x hx v hv
-      simpa only [hD.deriv] using hNorm
+      have hEq : deriv f v = D := by
+        simpa only [f] using hD.deriv
+      rw [hEq]
+      exact hNorm
     have hMean := (convex_Icc s t).norm_image_sub_le_of_norm_deriv_le
       hdifferentiable hbound
       (show s ∈ Icc s t from ⟨le_refl s, hst⟩)
