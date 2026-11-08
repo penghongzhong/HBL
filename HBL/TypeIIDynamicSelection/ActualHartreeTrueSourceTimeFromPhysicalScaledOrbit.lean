@@ -186,13 +186,17 @@ theorem actual_Hartree_original_Kummer_source_time_from_full_scaled_orbit
       hMixMeas hMixInt hMixDotMeas BM hBM hMixBound
       hZMeas hZInt hZDotMeas BZ hBZ hZBound
       hVMeas hVInt hVDotMeas BV hBV hVBound
+  have hSame : 
+      (fun t => actualHartreeTrueCriticallyScaledOriginalInteraction
+        a ell c z t r) =
+      (fun t => actualOneLayerInteractionOnly V Z t r) := by
+    funext t
+    rfl
   have hScaled : HasDerivAt
       (fun t => actualHartreeTrueCriticallyScaledOriginalInteraction
         a ell c z t r) D s := by
-    simpa only [actualHartreeTrueCriticallyScaledOriginalInteraction,
-      V, Z, D, mDot, zDot, vDot,
-      actualHartreeTrueTwoStageScaledCore,
-      actualHartreeTrueTwoStageScaledRadiation] using hFull
+    rw [hSame]
+    simpa only [D, mDot, zDot, vDot] using hFull
   have hOriginal :=
     actual_Hartree_original_moving_source_derivative_from_scaled_orbit
       a ell c z s r adot hA ha D hScaled
