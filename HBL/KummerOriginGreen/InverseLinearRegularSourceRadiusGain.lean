@@ -35,7 +35,7 @@ namespace HBL.Profile.Kummer
 theorem originGreen_inverse_linear_regular_density_one_extra_radius
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (D G B M : ℝ)
-    (hD : 0 ≤ D) (hG : 0 ≤ G) (hM : 0 ≤ M)
+    (hD : 0 ≤ D) (hG : 0 ≤ G) (_hM : 0 ≤ M)
     (hB : B ≤ scale)
     (hcoeff : ∀ x ∈ Icc 0 scale,
       ‖originFirstCoeff x‖ + ‖originZeroCoeff mu theta‖ ≤ D)
