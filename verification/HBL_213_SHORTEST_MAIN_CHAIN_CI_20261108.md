@@ -159,3 +159,43 @@ where `Y=y/r`, `X=x/r` and the compatible singular homogeneous coefficient is ze
 (iii) the remaining **regular Green product** `X B_Fo` must be bounded at **all intermediate radii**, not just at `B`, by combining the genuine baseline Hartree Riesz coefficient estimate and `ActualHartreeSpeedRegularGreen.lean`'s true `O(a B)` speed-source density bound (with the unique selected speeds). A blanket `Q_H/r^2` substitution for the speed channels is too weak and introduces a spurious logarithm; preserve their genuine `O(a/r)` decay.
 
 Only after proving (iii) for the SAME selected source can one substitute a truly uniform, explicitly source-derived weighted first-profile bound in the audited zero-left spectral quadratic Volterra estimate. Then prove the matching `C^1` outgoing repair and the **full same-orbit four-region Hartree time-order gain**, before real physical packet recursion. This is a proposed analytical reduction, **not** an accepted new theorem or assumed estimate; original count stays **11/13**.
+
+### November 8 continuation — source-derivable exact Green-moment spectral step
+
+Confirmed the selected source–unique real speed–actual corrected Fredholm left jet proof is now **strict Success**:
+[42512365232](https://github.com/penghongzhong/HBL/actions/runs/42512365232),
+source SHA `23171a5a0521ddf4d0c17bf028ebfc74d79d4311`. Its workflow
+executes `lake env lean --trust=0 -DwarningAsError=true`, the exact
+`#check @actual_Hartree_true_source_unique_speed_matched_weighted_from_Fredholm_jet`,
+and a one-declaration `#print axioms` audit with allowable
+`propext`, `Classical.choice`, `Quot.sound` and no `sorryAx`.
+Do not confuse this fixed-annulus theorem with an actual moving-time
+uniform full PDE estimate.
+
+**New substantive Lean step:** `ActualHartreeExactGreenMomentsMovingSpectral.lean`
+(commit [96562fe1](https://github.com/penghongzhong/HBL/commit/96562fe1bcbf855612bee1c449f4ca68da237376))
+makes the mathematical cancellation `r*(Y A+X B)=y A+x B` *before*
+taking norms; it bounds the exact original Green response and the
+fixed-basis varying-spectral defect solely by **both literal Green
+source integrals**, a global regularized-mode constant `G`, and the
+actual spectral-parameter difference, without any assumed `OriginBasisOn`
+constant and its hidden `r0^{-2}` loss. The third statement instantiates
+the original time-dependent adjusted nonlocal Hartree source verbatim.
+
+Pinned 3-type/3-axiom strict workflow
+`.github/workflows/hbl-213-exact-green-moments-spectral.yml`
+was first rejected by GitHub for a malformed duplicate trailing block;
+fixed in commit
+[097174eb](https://github.com/penghongzhong/HBL/commit/097174ebb37a18754f6d5abfbe5a208e10a3a6d1).
+Its replacement [CI 42518163620](https://github.com/penghongzhong/HBL/actions/runs/42518163620)
+is **IN PROGRESS** at this checkpoint, *not accepted*.
+
+The same formula is synchronised into
+`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`
+(commit [c6b4da4d](https://github.com/penghongzhong/HBL/commit/c6b4da4df7b1bc4fc07257ef418e7938b6b38eca)).
+This fixes **only the algebraic exposure of the hidden constant**;
+it does not derive bounds for the remaining actual regular moment
+`B_Fo` under unique real speed, prove three C¹ joins of the *spectrally
+corrected* whole field, derive four-region source-norm relative time gain
+or perform the physical finite PDE recursion. The original §2.13 remains
+OPEN, **11/13**. No preassigned II-type rate or time-decay hypothesis.
