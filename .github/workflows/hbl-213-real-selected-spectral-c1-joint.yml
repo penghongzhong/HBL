@@ -80,22 +80,7 @@ jobs:
           data=pathlib.Path('evidence/audit.log').read_text()
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',data)
           assert len(reports)==1, f"Expected exactly one axiom report, found {len(reports)}"
-          actual={re.sub(r'\.\{[^}]+\}
-          allowed={'propext','Classical.choice','Quot.sound'}
-          assert actual <= allowed, f"Unexpected axioms: {actual-allowed}"
-          assert 'sorryAx' not in data
-          PY
-          mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
-          cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
-          sha256sum "$target" > evidence/source-hashes.txt
-          cp HartreeSelectedSpectralC1JointAudit.lean evidence/
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: hbl-true-selected-spectral-c1-joint-strict-evidence
-          path: evidence
-          retention-days: 14
-,'',x.strip()) for x in reports[0].split(',') if x.strip()}
+          actual={re.sub(r'\.\{[^}]+\}$','',x.strip()) for x in reports[0].split(',') if x.strip()}
           allowed={'propext','Classical.choice','Quot.sound'}
           assert actual <= allowed, f"Unexpected axioms: {actual-allowed}"
           assert 'sorryAx' not in data
