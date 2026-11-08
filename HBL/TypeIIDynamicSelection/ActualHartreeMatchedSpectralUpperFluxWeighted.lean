@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedSpectralLeftC1Exact
 import HBL.KummerOriginBasis.RegularDerivativeBound
+import HBL.KummerOriginGreen.InverseLinearSourceRegularizedNoRadiusLoss
 import Mathlib.Tactic
 
 /-!
@@ -168,5 +169,75 @@ theorem actual_Hartree_matched_spectral_corrected_upper_flux_bound
   rw [hFlux, norm_neg]
   exact actual_Hartree_matched_spectral_upper_obstruction_weighted_bound
     K D G a b H hD hG ha hab hb.le hH hcoeff hbound F U DU d hProfile
+
+
+/-- True matched Kummer spectral correction: outgoing flux controlled by
+ONLY the bounded REGULARIZED origin IVP pair, without any moving-annulus
+unweighted singular basis constant. -/
+theorem actual_Hartree_matched_spectral_upper_obstruction_regularized_bound
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (a b G H : ℝ)
+    (ha : 0 < a) (hab : a ≤ b) (hb : b ≤ scale)
+    (hG : 0 ≤ G) (hH : 0 ≤ H)
+    (hbound : ∀ x ∈ Icc 0 scale,
+        ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
+    (F : ℝ → ℂ) (U DU d : ℂ)
+    (hProfile : ∀ x ∈ Icc a b,
+      ‖actualOriginMatchedKummerValue K a b F U DU x‖ ≤ H / x) :
+    ‖actualMomentLockedIntervalObstruction K a b
+        (actualHartreeMatchedSpectralFirstSource K a b F U DU d) 0 0‖ ≤
+      G * (‖d‖ * H) * (b - a) := by
+  let q : ℝ → ℂ := actualHartreeMatchedSpectralFirstSource K a b F U DU d
+  have hMH : 0 ≤ ‖d‖ * H := mul_nonneg (norm_nonneg d) hH
+  have hsource : ∀ x ∈ Icc a b,
+      ‖q x‖ ≤ (‖d‖ * H) / x := by
+    intro x hx
+    change ‖d * actualOriginMatchedKummerValue K a b F U DU x‖ ≤ _
+    rw [norm_mul]
+    calc
+      ‖d‖ * ‖actualOriginMatchedKummerValue K a b F U DU x‖ ≤
+          ‖d‖ * (H / x) :=
+        mul_le_mul_of_nonneg_left (hProfile x hx) (norm_nonneg d)
+      _ = (‖d‖ * H) / x := by ring
+  have hCoef :=
+    originGreen_inverse_linear_coefficients_regularized_uniform
+      K a b G (‖d‖ * H) ha hab hb hG hMH hbound q hsource
+      a ⟨le_refl a, hab⟩
+  have hIdent :
+      actualMomentLockedIntervalObstruction K a b q 0 0 =
+        -originGreenCoeffA K b q a := by
+    unfold actualMomentLockedIntervalObstruction actualOriginOutgoingTrace
+    simp
+  rw [hIdent, norm_neg]
+  simpa only [q] using hCoef.1
+
+/-- The same genuinely left-C¹-preserving corrected physical field has
+an outgoing compatibility mismatch O(|d|), with no singular-basis Ck.
+This is the exact quantity that the real two-channel speed selection
+must cancel before global three-interface matching. -/
+theorem actual_Hartree_matched_spectral_corrected_upper_flux_regularized
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (a b G H : ℝ)
+    (ha : 0 < a) (hab : a ≤ b) (hb : b < scale)
+    (hG : 0 ≤ G) (hH : 0 ≤ H)
+    (hbound : ∀ x ∈ Icc 0 scale,
+        ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
+    (F : ℝ → ℂ)
+    (hF : ∀ r ∈ Ioo 0 scale, ContinuousAt F r)
+    (U DU d : ℂ)
+    (hCompatible : actualMomentLockedIntervalObstruction K a b F U DU = 0)
+    (hProfile : ∀ x ∈ Icc a b,
+      ‖actualOriginMatchedKummerValue K a b F U DU x‖ ≤ H / x) :
+    ‖actualOriginOutgoingTrace K b
+        (actualHartreeMatchedSpectralCorrectedValue K a b F U DU d b)
+        (deriv (actualHartreeMatchedSpectralCorrectedValue
+          K a b F U DU d) b)‖ ≤
+      G * (‖d‖ * H) * (b - a) := by
+  have hFlux := actual_Hartree_matched_spectral_upper_defect_exact
+    K a b ha hab hb F hF U DU d hCompatible
+  dsimp only at hFlux
+  rw [hFlux, norm_neg]
+  exact actual_Hartree_matched_spectral_upper_obstruction_regularized_bound
+    K a b G H ha hab hb.le hG hH hbound F U DU d hProfile
 
 end HBL.TypeIIDynamicSelection
