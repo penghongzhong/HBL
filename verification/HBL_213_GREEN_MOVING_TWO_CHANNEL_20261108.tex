@@ -1619,8 +1619,14 @@ and its outgoing mismatch is bounded, \emph{not} set to zero,
 \]
 These are the source-derived specializations in
 \texttt{ActualHartreeMatchedSourceUniformRegularJet.lean}.
-The previously strictly accepted general zero-left Cramer identities
-do not by themselves validate these three source-derived composites.
+These three source-derived matched-profile, quadratic-defect and
+outgoing-obstruction estimates now have their own strict pinned
+kernel/type/axiom acceptance, CI \texttt{42511347298}
+(\emph{Success}, commit \texttt{2d94b7ce}), with precisely
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+This acceptance is separate from the preceding general
+zero-left Cramer identities and does not yet include the genuinely
+time-dependent Hartree source-selected Fredholm orbit.
 The original interval estimate uses the explicit $C,G,Q,U,DU$;
 it does not assert uniform control of $C$ along a moving Kummer basis,
 a differentiated-in-time matched field, or a four-region nonlinear
