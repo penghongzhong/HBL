@@ -2584,4 +2584,38 @@ time gain, parameter Lipschitz estimate, genuine finite
 iteration, and PDE-derived Type-II exponent remain open;
 the original 13-environment count stays \(11/13\).
 
+
+\medskip
+\noindent\textbf{Strict first actual matched spectral source:
+weighted $C^1$ response and true derivative.}
+Let \(u_0\) denote the original Cramer matched Kummer field with
+the \emph{original} Fredholm left Cauchy jet. If its weighted
+envelope \(r\|u_0(r)\|\le H\) is obtained from that field,
+the first spectral correction source is \emph{literally}
+\(q=\delta u_0\). Consequently the inverse-linear norm
+\(\|q(r)\|\le|\delta|H/r\) is derived, not supplied
+as a separately chosen adjusted-source hypothesis.
+With \(w_1=\mathcal G_{K_0}^{\mathrm{match}}[q;0,0]\),
+\[
+ \boxed{\;
+ \|r\,w_1(r)\|+\|r^2w_1'(r)\|
+ \le 2(B+2)G^2(B-r_0)|\delta|H.\;}
+\]
+Both this weighted response and its identification with the
+\emph{classical} derivative of the genuine original Cramer solution
+were strictly proved in
+\texttt{ActualHartreeMatchedZeroLeftSpectralWeightedC1.lean}.
+Dedicated CI \texttt{42531500587} finished
+\emph{Success}. Independently audited artifact
+\texttt{13637228884} records empty \texttt{strict.log},
+pinned Lean 4.35.0-rc3, the exact two theorem types,
+and only \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound} as their transitive axioms.
+The prior true Hartree selected matched weighted theorem now
+supplies the source-dependent \(H\) as a separate
+already-verified producer; a further composite must identify
+these \emph{same} data and the \emph{same} unique selected speed.
+No unconditional dynamical rate or full \(O(s^{-9/4})\) residual
+is asserted.
+
 \end{document}
