@@ -2844,4 +2844,22 @@ audited, the displayed theorem is a \emph{proof candidate}, not a
 newly certified assertion, and cannot increase the original count
 above $11/13$.
 
+
+
+\medskip
+\noindent\textbf{Precise verification update for the inverse-linear
+auxiliary Volterra radial slope.}
+GitHub Actions \texttt{42535477786} (original evidence artifact
+\texttt{13639651318}, commit \texttt{642d79e3}) has now
+\emph{strictly succeeded}: independent inspection of
+\texttt{strict.log} gives zero bytes, the exact full-type
+\texttt{\#check} is present, and \texttt{\#print axioms}
+lists precisely \texttt{propext},
+\texttt{Classical.choice}, \texttt{Quot.sound}.
+This certifies the inverse-linear forcing result only;
+it does not change the proven source class of the original quartic
+Riesz term. The actual-Riesz energy-weighted result in the preceding
+paragraph retains its separate pending strict CI status.
+The original manuscript tally therefore remains $11/13$.
+
 \end{document}
