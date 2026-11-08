@@ -636,4 +636,36 @@ equation, differentiation of the moving Kummer basis, and
 \(O(s^{-9/4})\) weighted residual and Lipschitz estimates are
 separate, unsolved analytic steps.
 
+
+\medskip
+\noindent\textbf{Real time-varying Hartree source under the original regular Green integral.}
+The original Green coefficient is linear in its forcing. Denote
+\(
+ B_K[F](r_0,B)=
+ \int_{r_0}^{B} Y_K(x)F(x)/W_K(x)\,dx
+\)
+with \(K\) held fixed. Provided the genuine moving physical forcing
+\(F_{\mathrm{adj}}(s,x)\) and its derived derivative from the preceding
+Cramer bridge satisfy the dominated-parametric-integral hypotheses,
+including a common \(L^1\) majorant for
+\(Y_K\partial_sF_{\mathrm{adj}}/W_K\), then
+\[
+ \frac{d}{ds}B_K[F_{\mathrm{adj}}(s,\cdot)](r_0,B)
+ = B_K[\partial_sF_{\mathrm{adj}}(s,\cdot)](r_0,B).
+\]
+Unlike the previous frozen spatial-shapes statement, the source,
+both genuine modulation directions, and the unique real selected
+Cramer pair all vary with \(s\). The new Lean candidate
+\texttt{ActualHartreeTrueMovingSelectedRegularGreenDerivative.lean}
+(commit \texttt{cea8867}), consumes the existing, already verified
+\texttt{ActualOriginGreenSourceTimeDerivative.lean} and the
+real-source Cramer derivative module. The original source derivative
+module's initial compile failed on a term-level let/minus parsing
+ambiguity; this was corrected in commit \texttt{fc786e1}.
+Strict tests \texttt{42457157758} and \texttt{42457157917} are
+pending and neither theorem may be called accepted yet.
+The moving lower endpoint \(r_0(s)\), the moving Kummer basis,
+and domination of the original full Hartree PDE time derivative
+remain genuine separate analytic obligations.
+
 \end{document}
