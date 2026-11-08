@@ -122,6 +122,5 @@ theorem actual_Hartree_original_source_selected_speed_Green_no_scale_loss
       mul_le_mul_of_nonneg_left hSize hCoef
     _ = (G ^ 2 * Cs * C) * (N + Q) := by
       field_simp [ha.ne']
-      ring
 
 end HBL.TypeIIDynamicSelection
