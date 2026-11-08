@@ -885,4 +885,61 @@ one PDE orbit; the \emph{moving Kummer basis} derivative,
 full \(O(s^{-9/4})\) three-region nonlinear residual and direct
 threshold Lipschitz remain open.
 
+
+\medskip
+\noindent\textbf{The complete compatibility-cancelled regular upper
+Kummer coefficient from the moving Fredholm jet and joint Green term.}
+Let \(r_0(s)=\ell(s)^{-1/16}/a(s)\), and let
+\(U(s),D U(s)\) be the actual left Fredholm value and slope.
+After the uniquely selected real speed cancels the singular
+compatibility mode, the forced regular amplitude is
+\begin{align}
+ \gamma(s)
+ &=
+ \underbrace{
+   \frac{Y_K(r_0(s))D U(s)-Y'_K(r_0(s))U(s)}
+        {W_K(r_0(s))}}_{\beta_{\mathrm{reg}}(s)}
+ +\underbrace{\int_{r_0(s)}^B
+    \frac{Y_K(r)F_{\mathrm{adj}}(s,r)}{W_K(r)}\,dr}
+  _{\mathcal B_K(s)}.
+ \label{eq:true-hartree-moving-regular-gamma}
+\end{align}
+The already proved moving-jet derivative, together with the joint
+original-source and moving-endpoint Green derivative, gives
+\begin{align}
+ \gamma'(s)
+ &=\frac{N'(s)W(s)-N(s)W'(s)}{W(s)^2}
+   +\int_{r_0(s)}^B
+    \frac{Y_K(r)\partial_sF_{\mathrm{adj}}(s,r)}{W_K(r)}\,dr
+   -r_0'(s)\frac{Y_K(r_0(s))F_{\mathrm{adj}}(s,r_0(s))}
+       {W_K(r_0(s))},\notag\\
+ N(s)&=Y_K(r_0(s))D U(s)-Y_K'(r_0(s))U(s),\qquad
+ W(s)=W_K(r_0(s)).
+ \label{eq:true-hartree-moving-regular-gamma-derivative}
+\end{align}
+At fixed basis parameters and fixed positive upper interface \(B\),
+the regular upper Kummer jet has
+\begin{align}
+ \frac{d}{ds}
+ \begin{pmatrix}
+ X_K(B)\gamma(s)\\
+ X_K'(B)\gamma(s)
+ \end{pmatrix}
+ &=
+ \begin{pmatrix}
+ X_K(B)\\
+ X_K'(B)
+ \end{pmatrix}\gamma'(s).
+ \label{eq:true-hartree-moving-upper-regular-jet-derivative}
+\end{align}
+The direct Lean composition of the existing strict
+moving Fredholm jet, the new strict joint Green time calculus and
+the established regular upper-jet derivative is
+\texttt{ActualHartreeMovingMatchedRegularUpperJet.lean},
+source commit \texttt{9dd2ed4}, dedicated strict CI
+\texttt{42473884674} (pending at this checkpoint).
+This is the frozen-\(K\), source-selected upper regular jet, not yet
+the actual moving Kummer basis derivative. It does not prove the
+full \(O(s^{-9/4})\) original nonlocal Hartree PDE remainder.
+
 \end{document}
