@@ -4,6 +4,8 @@ on:
     branches: [hbl-213-conjugated-two-weight-integrated-20261103]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSingularGreenPhysicalSourceGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerRegularTailGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerOutgoingLocalMomentGain.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerOutgoingLocalMomentGain.lean'
       - 'HBL/KummerOriginBasis/RegularDerivativeBound.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerRegularTailGain.lean'
