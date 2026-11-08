@@ -118,7 +118,6 @@ theorem actual_Hartree_true_source_selected_adjusted_local_Green_no_scale_loss
       z hz hSup hStrauss
   refine ⟨p, hCompat, hUnique, hSize, ?_⟩
   intro r hr
-  dsimp only
   let Fsp : ℝ → ℂ := fun x =>
     (-(p.1 : ℂ)) * actualMomentLockedScaledScaleSource a c x +
       (-(p.2 : ℂ)) * actualMomentLockedScaledPhaseSource a c x
