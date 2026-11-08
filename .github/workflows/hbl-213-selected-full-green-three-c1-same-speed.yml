@@ -4,6 +4,8 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedFullGreenThreeC1SameSpeed.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceSelectedFullOriginalGreenNoRadiusLoss.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceSelectedFourPieceC1.lean'
       - '.github/workflows/hbl-213-selected-full-green-three-c1-same-speed.yml'
   workflow_dispatch:
 permissions:
