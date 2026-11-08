@@ -64,7 +64,6 @@ theorem actual_Hartree_matched_regular_coefficient_no_left_radius_loss
     dsimp [N]
     unfold originPhysicalValue originPhysicalSlope
     field_simp [haC]
-    ring
   have hCoefficient :
       ‖actualOriginMatchedRegularCoeff K a b F U DU‖ =
         ‖N‖ * a ^ 2 := by
@@ -128,7 +127,6 @@ theorem actual_Hartree_matched_regular_part_weighted_no_radius_loss
         actualOriginMatchedRegularCoeff K a b F U DU * K.x r := by
     unfold originPhysicalValue
     field_simp [hrC]
-    ring
   rw [hEq, norm_mul]
   calc
     ‖actualOriginMatchedRegularCoeff K a b F U DU‖ * ‖K.x r‖ ≤
