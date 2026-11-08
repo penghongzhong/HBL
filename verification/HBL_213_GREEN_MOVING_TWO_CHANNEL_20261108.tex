@@ -2658,4 +2658,44 @@ as a separate auxiliary input, but still requires producing
 the \emph{actual nonlocal PDE orbit}. Thus it does not
 assert any time-positive residual rate or the Type--II exponent.
 
+
+\medskip
+\noindent\textbf{Strictly verified additional radius gain in the genuine
+zero-left original Green coefficient difference.}
+The original Cramer construction contains
+\[
+ A_q(r)-A_q(r_0)=-\int_{r_0}^{r}
+               \frac{X(s)q(s)}{W_K(s)}\,ds,
+ \qquad r_0\le r\le B.
+\]
+For the actual inverse-linear source class
+\(\|q(s)\|\le M/s\) and the genuine origin-regularized
+coefficient/solution bounds, the previously verified
+\(\|X(s)q(s)/W_K(s)\|\le JM s\),
+\(J=1+(D+1)GB^2\), now integrates \emph{without taking
+a premature supremum over the entire annulus}:
+\[
+ \boxed{\;
+ \|A_q(r)-A_q(r_0)\|
+       \le JMr(r-r_0).\;}
+\]
+This is a quantitative gain over bounding \(A_q(r)\)
+and \(A_q(r_0)\) separately. The exact original
+integral decomposition, continuity on the positive interval
+and Wronskian norms are used.
+The dedicated original target is
+\texttt{originGreen\_inverse\_linear\_regular\_A\_moment\_difference\_radius\_gain}
+in
+\texttt{InverseLinearRegularMomentDifference.lean},
+strict CI \texttt{42532387774}
+(\emph{Success}). Independently inspected evidence archive
+\texttt{13638131323} reports Lean 4.35.0-rc3,
+empty \texttt{strict.log} and exact transitive axioms
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, with no \texttt{sorryAx}.
+The ensuing \emph{unweighted} bound on the actual original
+physical radial slope is being compiled separately; it is
+not to be counted without its own successful strict CI.
+No time-decay exponent or new source bound is assumed.
+
 \end{document}
