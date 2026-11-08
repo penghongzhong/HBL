@@ -49,8 +49,7 @@ theorem actual_Hartree_speed_regular_Green_coefficients_all_radii :
   obtain ⟨C, hC, hOriginal⟩ :=
     actual_Hartree_speed_regular_Green_coefficients
   refine ⟨C, hC, ?_⟩
-  intro mu theta scale K G L c a B hG hL ha hB hBR hc hbound
-  intro r hr
+  intro mu theta scale K G L c a B hG hL ha hB hBR hc hbound r hr
   have hrOne : r ≤ 1 := hr.2.trans hB
   have hrScale : r < scale := hr.2.trans_lt hBR
   have hAtR :=
