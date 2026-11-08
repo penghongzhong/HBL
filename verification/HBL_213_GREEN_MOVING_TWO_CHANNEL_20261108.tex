@@ -2387,4 +2387,68 @@ have separate obligations. In particular, no $O(s^{-9/4})$ full
 quartic nonlocal PDE residual or dynamically selected Type-II rate
 is inferred from fixed-time $C^1$ differentiability.
 
+
+\medskip
+\noindent\textbf{From an actual selected Hartree source time derivative
+to the moving Green cross term.}
+Write
+\[
+ F(t,r)=-a(t)^2\mathcal S_{\HH}
+    (\ell(t),c(t),z(t);a(t)r)
+       -p_1(t)\mathcal P_1(t,r)-p_2(t)\mathcal P_2(t,r),
+ \quad
+ R(t)=\frac{\ell(t)^{-1/16}}{a(t)},
+\]
+where \(p(t)\in\R^2\) is the unique real compatibility selector.
+For the original normalized Wronskian density
+\(g(t,r)=Y(r)F(t,r)/W_K(r)\), the genuinely mixed
+source--endpoint increment is, exactly,
+\[
+ \begin{aligned}
+  \mathcal C(s,t)
+  :={}&G(R(t),F(t))-G(R(s),F(t))\\
+     &-G(R(t),F(s))+G(R(s),F(s))\\
+   ={}&\int_{R(t)}^{R(s)}
+             \bigl(g(t,r)-g(s,r)\bigr)\,dr .
+ \end{aligned}
+\]
+On a common admissible time interval \(s\le t\), a derived uniform
+bound on the \emph{actual selected density derivative},
+\[
+  \bigl|\partial_\tau g(\tau,r)\bigr|\le C_{\rm dyn},
+ \qquad
+ \tau\in[s,t],\quad
+ r\in[R(t),R(s)]_{\rm unoriented},
+\]
+implies by the vector-valued fundamental theorem of calculus and
+the same original interval integral inequality
+\begin{equation}
+  |\mathcal C(s,t)|
+   \le C_{\rm dyn}|t-s|\,|R(t)-R(s)|.
+ \label{eq:actual-hartree-moving-green-derived-cross}
+\end{equation}
+The new Lean proof candidate
+\texttt{ActualHartreeMovingSelectedGreenCrossFromPhysicalTimeDerivative.lean}
+(revisions \texttt{00dad2b9}, \texttt{74c06cfd})
+replaces a \emph{freestanding time-Lipschitz assumption} with
+this transparent sufficient derivative obligation for the actual
+selected Hartree source; its pinned audit was submitted as
+GitHub Actions \texttt{42532008498}. A bound on
+\(\partial_\tau g\) derived from the complete original Hartree
+orbit, moving Kummer basis and modulation equations is
+\emph{not yet proved}; accordingly
+\eqref{eq:actual-hartree-moving-green-derived-cross}
+does not assert the required positive-time-order estimate
+for the four-region PDE remainder.
+
+The original verified generic corrected Fredholm--Kummer--repair
+three-interface \(C^1\) proof passed in \texttt{42530313725}.
+A later attempted simplification of its pullback-derivative
+elaboration regressed at line 98 in \texttt{42531033761};
+the exact earlier strictly successful proof step was restored
+in commit \texttt{cd569084}. This is a proof elaboration
+repair, not a new PDE estimate. Until the whole source-selected
+time-dependent residual and finite recursion are proved,
+the strict original-environment count is still \(11/13\).
+
 \end{document}
