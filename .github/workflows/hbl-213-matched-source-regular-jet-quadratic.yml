@@ -75,16 +75,18 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_and_uniform_regular_jet_weighted
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_regular_jet_quadratic_spectral_error
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_regular_jet_spectral_outgoing_bound
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_and_uniform_regular_jet_weighted
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_regular_jet_quadratic_spectral_error
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_source_regular_jet_spectral_outgoing_bound
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeMatchedSourceRegularJetAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
           import re, pathlib
           data=pathlib.Path('evidence/audit.log').read_text()
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',data)
-          assert len(reports)==2, f"Expected two axiom reports, found {len(reports)}"
+          assert len(reports)==3, f"Expected three axiom reports, found {len(reports)}"
           allowed={'propext','Classical.choice','Quot.sound'}
           for report in reports:
               actual={re.sub(r'\.\{[^}]+\}$','',name.strip())
