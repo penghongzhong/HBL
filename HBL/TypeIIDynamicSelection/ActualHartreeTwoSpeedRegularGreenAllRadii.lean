@@ -45,7 +45,7 @@ theorem actual_Hartree_two_real_speed_regular_Green_moment_all_radii :
         (∀ x ∈ Icc 0 scale,
           ‖K.y x‖ ≤ G ∧ ‖K.dy x‖ ≤ G ∧
           ‖K.x x‖ ≤ G ∧ ‖K.dx x‖ ≤ G) →
-        ∀ (p : ℝ × ℝ) (r : ℝ) (hr : r ∈ Icc (L / a) B),
+        ∀ (p : ℝ × ℝ) (r : ℝ) (_hr : r ∈ Icc (L / a) B),
           let Fsp : ℝ → ℂ :=
             fun x => (-(p.1 : ℂ)) * actualMomentLockedScaledScaleSource a c x +
               (-(p.2 : ℂ)) * actualMomentLockedScaledPhaseSource a c x
