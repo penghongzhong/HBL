@@ -49,3 +49,20 @@ The accepted strict CI results above are valid subtheorems; none of them alone e
 
 Lean 4.35.0-rc3; pinned Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`.
 Dedicated strict builds use `--trust=0`, warningAsError and `#print axioms`; preserve build artifacts and audit log. Check no `sorryAx`, `admit`, new axioms, or hidden replacement of a needed original-PDE producer. The exact paper theorem and formal statement must be matched before increasing 11/13.
+
+
+## 2026-11-08 subsequent strict acceptance and next two source-faithful producers
+
+Strict results independently verified:
+- Stronger *original-source-continuity-only* selected C1 Kummer source theorem: `42435748242` **success**, commit `c3ecc6c254a37d6c714f6e69cd9010a76f518fc1`. Dedicated adjusted-source continuity: `42435689620` **success**.
+- Exact nonlinearly telescoped residual of the moving complete Green–repair–zero Kummer fields, with actual two C1 junctions: `42436411714` **success**, commit `9fce9a9ba22b3865523e1df9c286bb291980f60c`. This proves an *identity*, not an `s^(-9/4)` norm bound.
+
+New unaccepted main-chain candidates (do NOT count before successful strict replay):
+1. `HBL/TypeIIDynamicSelection/ActualHartreeMatchedKummerInteriorSourceBound.lean`, commit `80f8da751c799e001674b13c7ddede0880241118`, CI https://github.com/penghongzhong/HBL/actions/runs/42438443690. Proves that after genuine obstruction cancellation the interior Green and regular Kummer field is controlled by the source norm and actual LEFT Fredholm jet, not an independent regular homogeneous amplitude:
+   `||w(r)|| + ||w'(r)|| <= 2 C^3 ((b-a) M + ||U|| + ||DU||)` on `r in [a,b]`.
+   This is currently a fixed-annulus estimate with explicitly visible `OriginBasisOn K a b C`. A time-uniform control on shrinking left interfaces remains a NONTRIVIAL outstanding analytic requirement.
+2. `HBL/TypeIIDynamicSelection/ActualHartreeInnerKummerRepairFourPieceC1.lean`, commit `b4086ab71708a634b50b8e74c6bb36fe6f05c481`, CI https://github.com/penghongzhong/HBL/actions/runs/42438690207. Joins the ACTUAL normalized Fredholm inner field at `L` to the same-source Kummer Green continuation on `(L,aB]`, its physical repair on `(aB,2aB]`, and zero beyond. It targets all THREE value/derivative matching joins, not merely the separate Green–repair–zero field.
+
+Next indispensable bridge: put the ORIGINAL time-dependent 3D Hartree PDE residual on this *inner–Green–repair–remote* global field, including dynamic moving endpoints, original nonlocal quartic interactions, genuine radial Hdot1 energy in the inner/Green/remote regions, and gain estimates relative to the prior full physical residual. Then obtain the uniform fixed `O(s^(-9/4))` residual and threshold-coordinate Lipschitz bound. Do not equate the older indicator-tail core gain with the full-field residual.
+
+Formal revised manuscript numerator remains **11/13 (84.62%)**. The final Type-II blowup exponent must still be derived dynamically from the actual Hartree orbit; no a priori rate assumption is permitted.
