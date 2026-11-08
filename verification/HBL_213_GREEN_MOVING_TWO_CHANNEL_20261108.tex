@@ -487,10 +487,13 @@ initial commit \texttt{047fc66}, whose first strict CI
 The updated CI \texttt{42454972909} reached this module
 but failed only on a redundant no-op \texttt{dsimp}.
 That tactic was removed in commit \texttt{5637b71};
-strict CI \texttt{42455814268} then exposed redundant unused proof binders
-in the theorem statement. They were removed without changing the bound
-(commit \texttt{89ecbc6}); replacement CI \texttt{42456627583}
-is pending and not yet accepted independently.
+strict CI \texttt{42455814268} exposed redundant unused proof binders.
+They were removed without changing the bound in commit \texttt{89ecbc6}.
+The replacement upstream \texttt{42456627583}, original-norm composite
+\texttt{42456627562}, and one-original-source wrapper
+\texttt{42456627579} all independently report \emph{Success} on
+that same commit. These are strictly accepted fixed-slice auxiliary
+statements, not a completed \S2.13 environment.
 It controls the full right-endpoint singular Green coefficient
 but not the separate regular Green component, interface-repair field,
 their time derivatives or the complete nonlocal Hartree PDE residual.
