@@ -1566,4 +1566,57 @@ positive-time-order residual are separate requirements.  In particular,
 neither original \S2.13 nor the final Type-II blowup theorem is promoted
 on the basis of this fixed-Kummer cancellation.
 
+
+\medskip
+\noindent\textbf{Derived first-profile envelope and corrected spectral bounds.}
+Set $a=r_0$, $b=B$, and suppose the \emph{same compatible adjusted}
+Hartree forcing $F_{\rm adj}$ satisfies
+$\|F_{\rm adj}(r)\|\le Q/r^2$ on $[a,b]$, with its actual
+Fredholm--Cramer left jet $(U,DU)$.  Let $w_0$ be the uniquely
+Cramer-matched Kummer field.  Assuming the explicitly stated
+normalized-basis budgets
+$\operatorname{OriginBasisOn}(K,a,b,C)$ and
+$\|y\|,\|y'\|,\|x\|\le G$ on $[0,R_K]$, the two terms of the
+\emph{same} matched field obey
+\[
+ \|r\,\mathcal G_K[F_{\rm adj}](r)\|
+ \le 2bC^2(b-a)Q,\qquad
+ \|r\gamma_{\rm reg}X(r)\|
+ \le G^2\bigl(a|DU|+(a+1)|U|\bigr).
+\]
+The singular homogeneous Cramer coefficient vanishes by the
+\emph{selected} compatibility equation.  Hence the first-field
+envelope is an \emph{output},
+\[
+ \boxed{\quad
+ \sup_{a\le r\le b}\|r\,w_0(r)\|
+ \le H_{\rm phys}:=
+  2bC^2(b-a)Q+
+  G^2\bigl(a|DU|+(a+1)|U|\bigr).\quad}
+\]
+The precise Lean correspondence is
+\texttt{actual\_Hartree\_matched\_source\_and\_uniform\_regular\_jet\_weighted}.
+For $q=\delta w_0$, the \emph{same} zero-left-jet correction
+$w_1=w_{\rm match}[q,0,0]$ therefore satisfies
+\[
+ \|r\,w_1(r)\|\le 2G^2(b-a)|\delta|H_{\rm phys},
+ \qquad
+ \|\delta w_1(r)\|\le
+  \frac{2G^2(b-a)|\delta|^2H_{\rm phys}}r,
+\]
+and its outgoing mismatch is bounded, \emph{not} set to zero,
+\[
+ \left|\mathfrak O_{[a,b]}[q,0,0]\right|
+ \le G|\delta|(b-a)H_{\rm phys}.
+\]
+These are the source-derived specializations in
+\texttt{ActualHartreeMatchedSourceUniformRegularJet.lean}.
+The previously strictly accepted general zero-left Cramer identities
+do not by themselves validate these three source-derived composites.
+The original interval estimate uses the explicit $C,G,Q,U,DU$;
+it does not assert uniform control of $C$ along a moving Kummer basis,
+a differentiated-in-time matched field, or a four-region nonlinear
+relative residual order.  None of those unproved requirements is
+inserted as a hypothesis into the manuscript's Type--II claim.
+
 \end{document}
