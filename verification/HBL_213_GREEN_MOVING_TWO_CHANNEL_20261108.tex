@@ -1703,4 +1703,60 @@ No expected temporal decay, fixed scaling law, four-region nonlinear
 residual, or Type--II exponent is assumed here.  The revised original
 manuscript count remains $11/13$.
 
+
+\medskip
+\noindent\textbf{Original real-speed regular Green moments at every intermediate
+radius (new Lean theorem; strict replay pending).}
+The original two modulation source directions satisfy the
+verified sharper physical bound
+\[
+ |P_{\rm sc}(r)|+|P_{\rm ph}(r)|\lesssim a/r,
+ \qquad L/a\le r\le B,
+\]
+not merely the coarse $r^{-2}$ envelope.  Inserting the exact original
+Wronskian $\lvert W(r)^{-1}\rvert=r^2$ and
+$\lvert Y(r)\rvert\le G/r$ into the \emph{lower-endpoint regular Green
+moment} gives a bounded density, uniformly in the moving left endpoint.
+The existing source theorem at a general upper endpoint $b$ proves
+\[
+ \left|\int_{L/a}^{b}\frac{Y(\rho)P_j(\rho)}
+ {W(\rho)}\,d\rho\right|
+ \le C_{\rm sp}G\,a\,b
+ \qquad(j\in\{\mathrm{sc},\mathrm{ph}\}).
+\]
+Every intermediate radius $r$ satisfies $r\le B\le1$ and $r<R_K$;
+hence applying this \emph{same} original theorem with $b=r$
+yields the single-constant uniform estimate
+\begin{equation}
+ \sup_{L/a\le r\le B}
+ \left|\int_{L/a}^{r}\frac{Y(\rho)P_j(\rho)}
+ {W(\rho)}\,d\rho\right|
+ \le C_{\rm sp}G\,a B,
+ \qquad j\in\{\mathrm{sc},\mathrm{ph}\}.
+ \label{eq:original-Hartree-speed-regular-all-radii}
+\end{equation}
+No $r_0^{-1}$ or artificial $\log(B/r_0)$ is generated.
+The proof is formalized in
+\texttt{ActualHartreeSpeedRegularGreenAllRadii.lean}, using the
+previously verified endpoint producer
+\texttt{actual\_Hartree\_speed\_regular\_Green\_coefficients};
+the new strict exact-type/axiom workflow is
+\texttt{hbl-213-speed-regular-green-all-radii.yml}.
+This is a new \emph{candidate} until its dedicated CI succeeds.
+
+For the uniquely selected real pair $(p_1,p_2)$ the true adjusted
+source is $F_{\rm adj}=F_0-p_1P_{\rm sc}-p_2P_{\rm ph}$.
+Linearity of the original Green functional then requires
+\[
+ B_{F_{\rm adj}}(r)=B_{F_0}(r)-
+       p_1 B_{P_{\rm sc}}(r)-p_2 B_{P_{\rm ph}}(r).
+\]
+Equation \eqref{eq:original-Hartree-speed-regular-all-radii}
+controls the last two terms after multiplying by the \emph{derived}
+real-speed bound; the exact same-source, all-$r$ physical
+$B_{F_0}$ estimate and its joint Green/product and temporal
+parameter regularity must still be connected in Lean.  This is
+neither an independent assumption on $B_{F_{\rm adj}}$ nor a
+positive-time-order conclusion.
+
 \end{document}
