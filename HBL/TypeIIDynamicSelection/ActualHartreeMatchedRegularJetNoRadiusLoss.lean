@@ -33,7 +33,6 @@ The y/a and dy/a-y/a² factors cancel exactly against W(a)^{-1}. -/
 theorem actual_Hartree_matched_regular_coefficient_no_left_radius_loss
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (a b G : ℝ) (ha : 0 < a) (hab : a ≤ b) (hb : b ≤ scale)
-    (hG : 0 ≤ G)
     (hbound : ∀ x ∈ Icc 0 scale,
       ‖K.y x‖ ≤ G ∧ ‖K.dy x‖ ≤ G)
     (F : ℝ → ℂ) (U DU : ℂ) :
@@ -117,7 +116,7 @@ theorem actual_Hartree_matched_regular_part_weighted_no_radius_loss
   have hrC : (r : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hr0.ne'
   have hCoeff :=
     actual_Hartree_matched_regular_coefficient_no_left_radius_loss
-      K a b G ha hab hb hG
+      K a b G ha hab hb
       (fun x hx => ⟨(hbound x hx).1,(hbound x hx).2.1⟩) F U DU
   have hx : ‖K.x r‖ ≤ G := (hbound r ⟨hr0.le,hr.2.trans hb⟩).2.2
   have hEq :
@@ -131,7 +130,7 @@ theorem actual_Hartree_matched_regular_part_weighted_no_radius_loss
   calc
     ‖actualOriginMatchedRegularCoeff K a b F U DU‖ * ‖K.x r‖ ≤
         (G * (a * ‖DU‖ + (a + 1) * ‖U‖)) * G :=
-      mul_le_mul hCoeff hx (norm_nonneg _) (by positivity)
+      mul_le_mul hCoeff hx (norm_nonneg _) hG
     _ = G ^ 2 * (a * ‖DU‖ + (a + 1) * ‖U‖) := by ring
 
 end HBL.TypeIIDynamicSelection
