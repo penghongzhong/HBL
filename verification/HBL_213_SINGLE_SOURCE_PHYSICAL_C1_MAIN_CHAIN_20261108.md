@@ -205,3 +205,16 @@ Speed optimization experiment: workflow .github/workflows/hbl-true-source-select
 CI 42457157917 failed on an ordinary Lean conversion between pointwise `fun t =>` and the function-level `Pi.sub`/`Pi.mul` result of HasDerivAt subtraction/product rules in ActualHartreeTrueMovingAdjustedSourceDerivative.lean:100, not a Hartree estimate or added axiom. Corrected with `Pi.sub_apply` and `Pi.mul_apply`, commit c9a598959f29222372250de68c5af4175e4e1c6c. Strict new runs 42458002571 (moving original source derivative) and 42458002671 (moving regular Green derivative) are IN PROGRESS, not accepted. TeX synced commit 3099cdf4.
 
 The full selected Green source/adjusted-norm/original physical-source CI triad 42456627583 / 42456627562 / 42456627579 remains STRICT SUCCESS at same earlier SHA 89ecbc6d. No change to 11/13.
+
+
+## 2026-11-08 moving Hartree source and actual Green endpoint — strict acceptance
+
+1. **STRICT SUCCESS:** [CI 42458168170](https://github.com/penghongzhong/HBL/actions/runs/42458168170) at commit 3e278d00b1b022e83c7d487aec967182997ab7e8, ActualHartreeTrueMovingAdjustedSourceDerivative.lean. Differentiates the genuine evolving F0(s,r) - pb(s) Sb(s,r) - pw(s) Sw(s,r), deriving pb',pw' from the actual Cramer pair and retaining all three physical source derivative contributions. Source and compatibility-data differentiability remain explicit premises, not produced from measurable radiation.
+
+2. **STRICT SUCCESS:** [CI 42465956550](https://github.com/penghongzhong/HBL/actions/runs/42465956550) at commit 2fdd446d3e3bcf8a82194f39f2566c7f4997842d, ActualHartreeTrueMovingSelectedRegularGreenDerivative.lean. By the existing dominated parametric interval integral theorem, the ORIGINAL regular Green coefficient has the true source-time derivative when the original evolving Hartree source and its selected real speeds satisfy the explicitly stated derivative, dominated-majorant, measurability and integrability hypotheses. The original proof's real/complex derivative casts and unused argument warnings were fixed. The Kummer basis and integration endpoints are frozen only in THIS partial derivative.
+
+3. **STRICT SUCCESS:** [CI 42466055866](https://github.com/penghongzhong/HBL/actions/runs/42466055866) at commit 9f54a713817f354bbb79e9b799c12aba80a32f9a, ActualHartreeSlowInnerMovingGreenEndpoint.lean. The true source-localization radius L(s)=ell(s)^(-1/16) and the physical Kummer interface r0(s)=L(s)/a(s) have derived time derivatives from ell'(s),a'(s), including the original selected source Green lower-endpoint contribution at a fixed source slice. Original forcing continuity is explicit. No Type-II blowup rate is assumed.
+
+Paper synchronization: verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, updated commit 35c5709.
+
+**Strict scope boundary:** These are three separate, rigorously typed partial derivative theorems, NOT a joint differentiated complete four-piece Hartree field. The latter still requires a genuine joint source/endpoint/basis derivative, actual time-differentiable nonlocal Riesz interaction and full three-dimensional cross-density terms. The fixed-order complete PDE residual O(s^(-9/4)), direct threshold Lipschitz and final derived Type-II exponent remain unproved. Revised manuscript count remains **11/13 (84.62%)**.
