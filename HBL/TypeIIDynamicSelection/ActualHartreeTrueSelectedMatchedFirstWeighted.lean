@@ -154,7 +154,6 @@ theorem actual_Hartree_true_source_unique_speed_matched_weighted_from_Fredholm_j
     apply hUnique
     simpa only [F0, r0] using hq
   · intro r hr
-    dsimp only
     simpa only [Fadj, F0, r0, J] using
       actual_Hartree_matched_source_and_uniform_regular_jet_weighted
         K r0 B Ck G Qa hr0 hOrder hBR.le
