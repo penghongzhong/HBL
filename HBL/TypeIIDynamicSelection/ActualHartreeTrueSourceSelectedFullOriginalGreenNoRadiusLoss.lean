@@ -191,7 +191,7 @@ theorem actual_Hartree_true_source_selected_whole_original_Green_no_radius_loss
       _ = r * ‖originPhysicalValue K.y r *
           originGreenCoeffA K B Fadj r‖ +
           ‖K.x r‖ * ‖originGreenCoeffB K (L / a) Fadj r‖ := by
-            simpa only [norm_mul, hNormR]
+            simp only [norm_mul, hNormR]
       _ ≤ r * ‖originPhysicalValue K.y r *
           originGreenCoeffA K B Fadj r‖ +
           G * ‖originGreenCoeffB K (L / a) Fadj r‖ :=
