@@ -1,4 +1,5 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedKummerInteriorSourceBound
+import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedKummerPullback
 import Mathlib.Tactic
 
 /-!
