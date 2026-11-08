@@ -64,15 +64,12 @@ theorem actual_Hartree_local_cubic_multiplier_time_derivative
       (fun t => (u t r).re ^ 2 + (u t r).im ^ 2)
       (2 * ((u s r).re * du.re + (u s r).im * du.im)) s := by
     convert (hRe.pow 2).add (hIm.pow 2) using 1
-    · funext t
-      simp only [Pi.add_apply]
-    · ring
+    ring
   have hComplex := hReal.ofReal_comp
   have hProduct := hComplex.mul hu
   convert hProduct using 1
   · funext t
     dsimp [actualWholeRadiationLocalCubic]
-    simp only [Pi.mul_apply]
     rw [← Complex.normSq_eq_norm_sq (u t r), Complex.normSq_apply]
     rfl
   · unfold actualHartreeLocalCubicTimeVelocity
