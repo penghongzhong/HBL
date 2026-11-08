@@ -482,8 +482,13 @@ projection yields the explicitly scale-free physical singular component
 \end{align}
 This is a \emph{new Lean proof candidate} in
 \texttt{ActualHartreeTrueSourceSelectedFullSingularGreenGain.lean},
-commit \texttt{047fc66}, under the independent strict
-CI \texttt{42454285470} (pending at this checkpoint).
+initial commit \texttt{047fc66}, whose first strict CI
+\texttt{42454285470} failed on the old imported local module.
+The updated CI \texttt{42454972909} reached this module
+but failed only on a redundant no-op \texttt{dsimp}.
+That tactic was removed in commit \texttt{5637b71};
+the new strict CI \texttt{42455814268} is pending,
+and the theorem is not yet strictly accepted.
 It controls the full right-endpoint singular Green coefficient
 but not the separate regular Green component, interface-repair field,
 their time derivatives or the complete nonlocal Hartree PDE residual.
@@ -518,8 +523,12 @@ produced, not assumed, and all constants are independent of the
 moving Kummer scale \(a\) within the stated annular range.
 The same-source composite proof is
 \texttt{ActualHartreeTrueSourceSelectedFullSingularOriginalNorm.lean},
-commit \texttt{d4e8da4}, under a dedicated strict CI; it remains
-\emph{unaccepted} until that CI completes successfully.
+initial commit \texttt{d4e8da4}.  Its first strict CI
+\texttt{42454628449} failed because an imported local module
+had not yet been corrected; redundant local simplification steps
+were subsequently removed in commit \texttt{7b6da73}.
+The new CI \texttt{42455841142} is pending; this composite
+is \emph{not yet strictly accepted}.
 The complete, time-differentiable four-piece physical Hartree field and
 its \(s^{-9/4}\) nonlinear residual remain open.
 
@@ -546,8 +555,8 @@ generates the full singular-component estimate
 with these identical data.
 The new source-locked Lean wrapper
 \texttt{ActualHartreeOnePhysicalSourceFullSelectedSingularGreen.lean},
-commit \texttt{47a907b}, is under strict CI
-\texttt{42454937267}/\texttt{42454972827} (pending);
+commit \texttt{47a907b}, has a strict CI rerun
+\texttt{42455841135} (pending, following upstream repairs);
 it does \emph{not} infer the required continuity of \(F_+\) and
 \(F_-\) from measurability alone.
 These fixed-slice facts still do not produce the
