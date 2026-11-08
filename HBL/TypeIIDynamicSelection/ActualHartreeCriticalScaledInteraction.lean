@@ -141,7 +141,6 @@ theorem actual_Hartree_critical_scaled_full_mixed_interaction
           (fun _ : ℝ => V) (fun _ : ℝ => Z) 0 (a*r)
   unfold actualOneLayerInteractionOnly
   rw [hPm, hPz, hPv, hCt, hCz, hCv]
-  change _ = _
   push_cast
   ring
 
