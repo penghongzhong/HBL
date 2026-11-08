@@ -19,10 +19,11 @@ bounded, independent of the moving left interface r0=L/a.
 This is the coordinate required by the 3D radial Hdot1 density
 r²|u'|². It does NOT impose an unweighted pointwise |u'| bound.
 
-All source-size data below are produced from the original Hartree
-interaction and actual radiation Strauss envelopes; the only extra
-analytic regularity input is local continuity of that actual
-physical source, which must ultimately follow from the PDE orbit.
+All source-size and integrability data below are produced from the
+original Hartree interaction and actual radiation Strauss envelopes.
+The moment identity is derived by interval-integrability and the
+original Green source-integrability theorem, WITHOUT assuming
+extra continuity of the physical source.
 This is an auxiliary Cramer/energy estimate, not a full four-region
 nonlocal PDE time-gain or a prescribed Type-II blowup exponent.
 -/
@@ -59,9 +60,6 @@ theorem actual_Hartree_original_Riesz_zero_left_energy_weighted_slope_no_left_ra
     (z : ℝ → ℂ) (hz : Measurable z)
     (hSup : ∀ y : ℝ, 0 < y → ‖z y‖ ≤ Bz)
     (hStrauss : ∀ y : ℝ, 1 ≤ y → y * ‖z y‖ ≤ Az)
-    (hFCont : ∀ x ∈ Ioo 0 scale,
-      ContinuousAt
-        (fun y => -actualHartreeLaplacianScaledKummerSource a ell c z y) x)
     (r : ℝ) (hr : r ∈ Icc (L / a) B) :
     let Q : ℝ := actualHartreePhysicalWeightedSourceConstant Bz Az *
       ell ^ (1 / 8 : ℝ)
@@ -101,24 +99,21 @@ theorem actual_Hartree_original_Riesz_zero_left_energy_weighted_slope_no_left_ra
     origin_kummer_annulus_bound K (L / a) B G
       hr0 hBscale hG hbound
   let q : ℝ → ℂ := originGreenSourceA K F
-  have hCont (x : ℝ) (hx : x ∈ Icc (L / a) B) :
-      ContinuousAt q x := by
-    have hxOpen : x ∈ Ioo (0 : ℝ) scale :=
-      ⟨hr0.trans_le hx.1, hx.2.trans_lt hBscale⟩
-    rcases hK x hx with ⟨hy, hdy, hxmode, hdx, _, hW, _, _, _, _, _⟩
-    have hWr : ContinuousAt (originGreenWronskian K) x :=
-      (hy.continuousAt.mul hdx.continuousAt).sub
-        (hdy.continuousAt.mul hxmode.continuousAt)
-    change ContinuousAt
-      (fun t => originPhysicalValue K.x t * F t /
-        originGreenWronskian K t) x
-    exact (hxmode.continuousAt.mul (hFCont x hxOpen)).div hWr hW
-  have hContinuous : ContinuousOn q (Icc (L / a) B) :=
-    fun x hx => (hCont x hx).continuousWithinAt
+  have hFI : IntervalIntegrable F volume (L / a) B :=
+    (actual_Hartree_scaled_Kummer_source_intervalIntegrable
+      Bz Az ell c a (L / a) B hBz hAz hell hellOne hc
+      ha hr0 hOrder z hz hSup hStrauss).neg
+  have hIq : IntervalIntegrable q volume (L / a) B := by
+    simpa only [q] using
+      (actual_origin_Green_source_integrability K hK hOrder F hFI).1
   have hIar : IntervalIntegrable q volume (L / a) r :=
-    (hContinuous.mono (Icc_subset_Icc_right hr.2)).intervalIntegrable_of_Icc hr.1
+    hIq.mono_set (by
+      rw [uIcc_of_le hr.1, uIcc_of_le hOrder]
+      exact Icc_subset_Icc_right hr.2)
   have hIrb : IntervalIntegrable q volume r B :=
-    (hContinuous.mono (Icc_subset_Icc_left hr.1)).intervalIntegrable_of_Icc hr.2
+    hIq.mono_set (by
+      rw [uIcc_of_le hr.2, uIcc_of_le hOrder]
+      exact Icc_subset_Icc_left hr.1)
   have hAdd := intervalIntegral.integral_add_adjacent_intervals hIar hIrb
   have hDifference :
       originGreenCoeffA K B F r -
