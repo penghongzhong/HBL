@@ -100,6 +100,7 @@ theorem actual_Hartree_original_moving_source_derivative_from_scaled_orbit
             a ell c z t r := by rw [hScale]; rfl
   have hResult := hProd.congr_of_eventuallyEq hIdentity
   convert hResult using 1
+  simp only [Pi.inv_apply]
   ring
 
 end HBL.TypeIIDynamicSelection
