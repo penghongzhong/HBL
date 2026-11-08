@@ -1522,4 +1522,48 @@ bounded on shrinking moving annuli; the distinct \emph{matched}
 left-jet-preserving construction and its outgoing flux must be
 controlled as above before global four-region recursion.
 
+
+\medskip
+\noindent\textbf{Radius-uniform Cramer regular coefficient from the original left jet.}
+The regular homogeneous component in the matched field is not a free
+parameter: its coefficient is given by the original left Cauchy data
+$(U,DU)$ and the same origin-normalized Kummer pair.  Writing
+$Y(r)=y(r)/r$, the original Wronskian formula yields
+\[
+ \gamma_{\mathrm{reg}}
+  =\frac{Y(r_0)DU-Y'(r_0)U}{W_K(r_0)},\qquad
+ |W_K(r_0)^{-1}|=r_0^2.
+\]
+Consequently, \emph{before} applying a norm estimate, the factors
+$r_0^{-1}$ and $r_0^{-2}$ cancel:
+\[
+ \begin{aligned}
+ |\gamma_{\mathrm{reg}}|
+ &=\left|r_0y(r_0)DU-
+    \bigl(r_0y'(r_0)-y(r_0)\bigr)U\right|\\
+ &\le G\{r_0|DU|+(r_0+1)|U|\}.
+ \end{aligned}
+\]
+The equality of absolute values uses
+$|W_K(r_0)^{-1}|=r_0^2$; it does \emph{not} assert equality of
+the complex phases.  In particular, since
+$rX(r)=x(r)$ for the regular physical mode,
+\[
+ \boxed{\;
+ \sup_{r_0\le r\le B}
+  |r\,\gamma_{\mathrm{reg}}X(r)|
+ \le G^2\{r_0|DU|+(r_0+1)|U|\}. \;}
+\]
+There is no explicit inverse matching radius or
+$\sup|Y|,\sup|Y'|$ on the right.  This estimate is implemented in
+\texttt{ActualHartreeMatchedRegularJetNoRadiusLoss.lean}
+with pinned strict kernel/type/axiom checks; until the dedicated CI
+succeeds it is an unaccepted new intermediate proof.  The two left jets
+must still be controlled by the \emph{same} physically selected Fredholm
+trajectory, and the source-driven nonlocal Green part, moving basis,
+outgoing obstruction, three physical $C^1$ joins, and the four-region
+positive-time-order residual are separate requirements.  In particular,
+neither original \S2.13 nor the final Type-II blowup theorem is promoted
+on the basis of this fixed-Kummer cancellation.
+
 \end{document}
