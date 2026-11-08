@@ -2305,4 +2305,53 @@ source-selected first Fredholm interface on one dynamic orbit.
 It does not give a positive time-order full-Hartree PDE bound or
 the dynamically derived Type-II exponent.
 
+
+\medskip
+\noindent\textbf{Cramer--Volterra derivative cancellation at the moving left interface (strict replay pending).}
+The previous zero-left data matching yields an identity for the radial
+\emph{derivative}, not merely a bound on the value. For the same genuine
+original Green source \(q\), let
+\[
+ A_q(r)=\int_r^B \frac{X(t)q(t)}{W_K(t)}\,dt,\qquad
+ B_q(r)=\int_{r_0}^r \frac{Y(t)q(t)}{W_K(t)}\,dt.
+\]
+Writing \(y=rY,\ x=rX\) for the original regularized IVP modes,
+the exact Cramer coefficients give the two algebraic identities
+\[
+ \begin{aligned}
+ r u_1(r)&=y(r)\,[A_q(r)-A_q(r_0)]+x(r)B_q(r),\\
+ r^2 u_1'(r)&=
+ [r y'(r)-y(r)]\,[A_q(r)-A_q(r_0)]\\
+ &\quad+[r x'(r)-x(r)]\,B_q(r).
+ \end{aligned}
+\]
+If \(\|q(r)\|\le M/r\) and the true IVP bounds are
+\(
+\|y(r)\|,\|y'(r)\|,\|x(r)\|,\|x'(r)\|\le G
+\)
+on the common fixed regularized interval, the same original Wronskian
+estimates give
+\[
+ \boxed{
+ \|r u_1(r)\|+\|r^2 u_1'(r)\|
+ \le 2(B+2)G^2(B-r_0)M,\quad r_0\le r\le B.}
+\]
+For the \emph{literal} spectral correction \(q=\delta u_0\),
+the weighted first-profile estimate yields
+\(M=|\delta|H_{\mathrm{match}}\), not a separately introduced
+correction-source constant. Under the actual positive-radius source
+continuity, the second bound concerns the true classical derivative
+of the original matched Green solution. In the physical variable
+\(y=ar\), the derivative is \(a^{-1}\partial_r u_1(y/a)\);
+no dynamical bound on this rescaling factor or time order is claimed.
+
+The exact candidate Lean modules are
+\texttt{ActualHartreeZeroLeftRegularizedVolterraSlope.lean}
+and \texttt{ActualHartreeMatchedZeroLeftSpectralWeightedC1.lean}.
+Their independent strict replays are GitHub Actions
+\texttt{42530358097} and \texttt{42530472494}.
+\emph{These statements must remain unaccepted in the original
+manuscript ledger until successful exact-target \texttt{--trust=0}
+compilation and transitive axiom audit.}
+
 \end{document}
