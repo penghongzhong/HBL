@@ -2043,4 +2043,48 @@ the physical Cramer homogeneous component, moving-basis derivative,
 corrected three-interface $C^1$ matching, actual four-region
 nonlocal PDE time gain and finite physical recurrence remain necessary.
 
+
+\medskip
+\noindent\textbf{Compatibility of the full Green bound with all three
+physical $C^1$ interfaces (same-speed composition; strict replay pending).}
+Let $p=(p_1,p_2)$ solve the literal two-real-dimensional compatibility
+system determined by $F_0$ and the corrected Fredholm left sources.
+The strict source-selector already proves
+\[
+  \mathcal C_{\rm physical}(p;F_0,F_+,F_-)=0,
+  \qquad
+  \mathcal C_{\rm physical}(q;F_0,F_+,F_-)=0
+       \ \Longrightarrow\ q=p.
+\]
+Consequently the selected velocity in
+\eqref{eq:original-true-selected-whole-green-no-loss}
+agrees with the selected velocity in the previously constructed
+Fredholm--Kummer--repair--zero $C^1$ field. Writing this physical
+four-piece field as $u_{\rm four}$, its uncorrected matching jets are
+\[
+ \begin{aligned}
+  \partial_\rho u_{\rm four}(L)
+     &=\partial_\rho u_{\rm inner}(L),\\
+  \partial_\rho u_{\rm four}(aB)
+     &=a^{-1}\,\partial_r u_{\rm matched}(B),\\
+  \partial_\rho u_{\rm four}(2aB)&=0.
+ \end{aligned}
+\]
+These are full differentiability statements at the three points, not
+merely formal equalities between one-sided expressions.  This
+composition uses the original source continuity on the positive
+Kummer interval as an \emph{explicit regularity premise}; bounded
+measurable radiation data alone do not establish that continuity.
+The same-speed composite has been submitted to
+\texttt{ActualHartreeSelectedFullGreenThreeC1SameSpeed.lean}
+and the pinned strict workflow
+\texttt{hbl-213-selected-full-green-three-c1-same-speed.yml}.
+Until its exact Lean kernel and axiom audit succeeds it is not listed as
+a formally accepted lemma.  More importantly, these are fixed-time
+$C^1$ joins of the uncorrected physical field: the spectral repair
+still has a genuine outgoing obstruction and can modify the upper
+transmission jet. Thus they do not yet establish the corrected
+dynamical matching, the complete four-region Hartree PDE error,
+the finite recurrence, or the Type-II blowup conclusion.
+
 \end{document}
