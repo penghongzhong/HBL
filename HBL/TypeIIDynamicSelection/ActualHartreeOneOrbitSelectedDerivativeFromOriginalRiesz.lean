@@ -168,7 +168,7 @@ theorem actual_Hartree_one_orbit_original_Riesz_produces_selected_source_derivat
   have hFnegative : HasDerivAt
       (fun t => -actualHartreeLaplacianScaledKummerSource
         (a t) (ell t) (c t) (z t) r) (-Fdot) s := by
-    convert hFdot.neg using 1 <;> (funext t; rfl)
+    convert hFdot.neg using 1
   obtain ⟨pbDot, pwDot, hpb, hpw, hSpeed, hFull⟩ :=
     actual_Hartree_true_moving_adjusted_source_derivative
       a ell c z b w Z s r (a s) B ha hB
