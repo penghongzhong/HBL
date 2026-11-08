@@ -43,7 +43,7 @@ theorem actual_Hartree_regular_outgoing_source_from_weighted_profile
     (hbound : ∀ r ∈ Icc 0 scale,
       ‖K.y r‖ ≤ G ∧ ‖K.dy r‖ ≤ G ∧
         ‖K.x r‖ ≤ G ∧ ‖K.dx r‖ ≤ G)
-    (q : ℝ → ℂ) (H : ℝ) (hH : 0 ≤ H)
+    (q : ℝ → ℂ) (H : ℝ) (_hH : 0 ≤ H)
     (r : ℝ) (hr : r ∈ Ioc 0 b)
     (hsource : ‖q r‖ ≤ H / r ^ 2) :
     ‖originGreenSourceA K q r‖ ≤
@@ -115,7 +115,7 @@ theorem actual_Hartree_matched_spectral_upper_obstruction_weighted_bound
       rw [norm_mul]
       have h := mul_le_mul_of_nonneg_left hBase (norm_nonneg d)
       dsimp [M]
-      convert h using 1 <;> ring
+      convert h using 1; ring
     exact actual_Hartree_regular_outgoing_source_from_weighted_profile
       K D G b hD hG hb hcoeff hbound q M hM r ⟨hr0, hr.2⟩ hQ
   have hCoeff :
