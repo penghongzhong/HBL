@@ -76,8 +76,9 @@ theorem actual_Hartree_moving_matched_regular_upper_jet_hasDerivAt
       HasDerivAt (actualOriginMovingMatchedRegularGamma K B r0 F U DU)
         (actualOriginRegularCoeffFromMovingJetDot
           K r0 U DU s rdot Udot DUdot + GreenDot) s := by
-    simpa only [actualOriginMovingMatchedRegularGamma, Pi.add_apply] using
-      hReg.add hGreen
+    convert hReg.add hGreen using 1
+    funext t
+    simp only [actualOriginMovingMatchedRegularGamma, Pi.add_apply]
   have hUpper :=
     actual_origin_regular_upper_jet_hasDerivAt
       K B (actualOriginMovingMatchedRegularGamma K B r0 F U DU)
