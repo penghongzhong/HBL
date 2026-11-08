@@ -2075,12 +2075,19 @@ merely formal equalities between one-sided expressions.  This
 composition uses the original source continuity on the positive
 Kummer interval as an \emph{explicit regularity premise}; bounded
 measurable radiation data alone do not establish that continuity.
-The same-speed composite has been submitted to
-\texttt{ActualHartreeSelectedFullGreenThreeC1SameSpeed.lean}
-and the pinned strict workflow
-\texttt{hbl-213-selected-full-green-three-c1-same-speed.yml}.
-Until its exact Lean kernel and axiom audit succeeds it is not listed as
-a formally accepted lemma.  More importantly, these are fixed-time
+The same-speed composite is strictly validated in
+\texttt{ActualHartreeSelectedFullGreenThreeC1SameSpeed.lean}.
+The complete pinned Lean CI \texttt{42527186005} finished
+\emph{Success}; its independently inspected archive
+\texttt{13635837748} contains an empty \texttt{strict.log},
+the exact statement, and precisely
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}
+as its transitive axioms. This certificate combines the same uniquely
+selected source, the radius-weighted whole original Green field and
+three actual physical $C^1$ joins. The separate direct strict build
+of the upstream whole-Green module remains subject to its own compiler
+lint audit and is not silently substituted for this successful
+composite verification.  More importantly, these are fixed-time
 $C^1$ joins of the uncorrected physical field: the spectral repair
 still has a genuine outgoing obstruction and can modify the upper
 transmission jet. Thus they do not yet establish the corrected
