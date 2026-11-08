@@ -30,7 +30,7 @@ open HBL.Profile.Kummer
 the inverse-linear source class whenever that same field is r-weighted. -/
 theorem actual_Hartree_matched_spectral_first_source_inverse_linear
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (a b H : ℝ) (ha : 0 < a) (hH : 0 ≤ H)
+    (a b H : ℝ) (ha : 0 < a) (_hH : 0 ≤ H)
     (F : ℝ → ℂ) (U DU d : ℂ)
     (hProfile : ∀ x ∈ Icc a b,
       ‖(x : ℂ) * actualOriginMatchedKummerValue K a b F U DU x‖ ≤ H)
