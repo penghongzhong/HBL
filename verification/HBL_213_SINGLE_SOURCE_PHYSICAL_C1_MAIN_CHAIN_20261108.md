@@ -277,3 +277,24 @@ New main-chain producers strict at pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11
 **REAL REMAINING BLOCKER:** All currently accepted Riesz and nonlinear-source time derivatives hold at FIXED physical observation radius. We have NOT produced the time-dependent observation chain rule r=a(s)r_K, derivative of the moving original Kummer fundamental pair K(s), or proved weighted O(s^(-9/4)) full physical residual and its direct threshold Lipschitz along the same actual three-dimensional Hartree PDE orbit. Primitive time C1 and domination premises still require concrete high-regularity Hartree dynamics (standard published local theory may be cited, but must never be used to assume the needed global matching theorem). No Type-II concentration rate is prescribed.
 
 **Formal revised 13-environment count stays 11/13 (84.62%).** The complete §2.13 physical parametrix and the final dynamically derived Type-II blowup theorem remain OPEN. Auxiliary strict successes do not increment the manuscript environment tally.
+
+
+## 2026-11-08 original 3D kernel and moving physical observation (strict)
+
+This step reuses three genuine earlier analytic producers:
+- HBL/HartreeSpatialCore.lean differentiates the ORIGINAL three-dimensional inverse-square kernel convolution by transferring spatial derivatives to the density instead of differentiating the singular kernel;
+- HBL/HartreeSpatialCompletion.lean extends the spatial Frechet derivative from smooth compact density approximants to a noncompact density/gradient under explicit simultaneous L1 and uniform convergence hypotheses;
+- HBL/HartreeQuarticGradient.lean derives the quartic density gradient and its L1/L∞ budgets directly from an actual complex 3D field f in C1 and L4 with Df in L2 and stated boundedness.
+
+**STRICT SUCCESS:** [42476562067](https://github.com/penghongzhong/HBL/actions/runs/42476562067), source 4d7fbde. ActualHartreeThreeDMovingObserverDerivative.lean specializes genuine 3D quartic density rho_s=|z(s,·)|^4 to the moving observation point x(t)=a(t)x0; the spatial source derivative follows from noncompact core approximation, not a premise about differentiability of the Hartree potential. This first version retains an explicit density-gradient input D.
+
+**STRONGER STRICT SUCCESS:** [42476734964](https://github.com/penghongzhong/HBL/actions/runs/42476734964), enhanced source 3218ca9 and exact theorem-axiom workflow a962e99. The theorem actual_Hartree_threeD_quartic_moving_observer_from_field eliminates the independently specified density gradient D by applying the earlier original quartic-gradient theorem to f=z(s,·) and establishes
+
+  d/dt P3[|z(s)|^4](a(t)x0)|_{t=s}
+    = grad P3[|z(s)|^4](a(s)x0)[a'(s)x0],
+
+where grad P3 is the original convolution against the differentiated **actual physical quartic density**. The noncompact smooth-core approximation (both L1 and uniform convergence of density and gradient) remains an explicit regularity premise, not a consequence claimed for general energy-class data.
+
+TeX derivation and equation references synchronized to verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex, commit a363ea6.
+
+**Important strict scope boundary:** The exact 3D inverse-square convolution and the original half-line radial logarithmic Riesz expression have NOT yet been identified by a strict physical radialization theorem. Nor have source-time and moving-observer derivatives been combined for one dynamically varying 3D density; the moving Kummer fundamental pair, all four-piece PDE residual gain O(s^(-9/4)), direct threshold Lipschitz, and final dynamically derived Type-II exponent remain OPEN. No artificial radius law or rate was postulated. Formal revised-manuscript environment tally is **11/13 (84.62%)**; auxiliary successes do not increment the numerator.
