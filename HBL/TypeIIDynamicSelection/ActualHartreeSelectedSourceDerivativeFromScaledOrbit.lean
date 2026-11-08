@@ -84,7 +84,9 @@ theorem actual_Hartree_true_selected_source_derivative_from_scaled_orbit
   have hF : HasDerivAt
       (fun t => -actualHartreeLaplacianScaledKummerSource
         (a t) (ell t) (c t) (z t) r) Fdot s := by
-    simpa only [Fdot, Pi.neg_apply] using hPhysical0.neg
+    -- Keep the actual scaled Hartree source definition opaque here:
+    -- conversion identifies the two physical functions before reducing jets.
+    convert hPhysical0.neg using 1
   exact actual_Hartree_true_moving_adjusted_source_derivative
     a ell c z b w Z s r alpha B halpha hB
     bdot wdot Zdot Fdot Sdot Pdot
