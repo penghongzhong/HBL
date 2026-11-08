@@ -144,9 +144,19 @@ theorem actual_Hartree_true_source_selected_whole_matched_weighted_no_radius_los
   have hr0 : 0 < L / a := div_pos hLp ha
   have hCompatible :
       actualMomentLockedIntervalObstruction K (L / a) B Fadj J.1 J.2 = 0 := by
-    change actualMomentLockedIntervalObstruction K (L / a) B Fadj J.1 J.2 = 0
-      at hCompat
-    exact hCompat
+    change actualMomentLockedIntervalObstruction K (L / a) B
+        (fun x => F0 x -
+          (p.1 : ℂ) * actualMomentLockedScaledScaleSource a c x -
+          (p.2 : ℂ) * actualMomentLockedScaledPhaseSource a c x)
+        J.1 J.2 = 0 at hCompat
+    have hSource :
+        (fun x => F0 x -
+          (p.1 : ℂ) * actualMomentLockedScaledScaleSource a c x -
+          (p.2 : ℂ) * actualMomentLockedScaledPhaseSource a c x) = Fadj := by
+      funext x
+      dsimp only [Fadj]
+      ring
+    simpa only [hSource] using hCompat
   have hWeightedGreen : ∀ x ∈ Icc (L / a) B,
       ‖(x : ℂ) * originGreenValue K (L / a) B Fadj x‖ ≤ Hg := by
     intro x hx
