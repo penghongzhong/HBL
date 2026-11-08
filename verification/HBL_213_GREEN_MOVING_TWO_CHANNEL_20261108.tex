@@ -1881,8 +1881,8 @@ independent Green-field envelope, speed bound, or time exponent has been
 inserted.  The Lean composition is
 \texttt{ActualHartreeSelectedSpeedRegularGreenAllRadii.lean}
 and the dedicated strict workflow is
-\texttt{hbl-213-selected-speed-regular-green-all-radii.yml}
-(pending, not yet accepted).
+\texttt{hbl-213-selected-speed-regular-green-all-radii.yml};
+the true-source unique-speed regular Green theorem is strictly accepted by pinned CI 42522041952.
 
 The remaining fixed-time first-profile bridge consists of summing
 \eqref{eq:original-hartree-full-physical-green-no-radius-loss}
@@ -1929,7 +1929,7 @@ as
 \texttt{actual\_Hartree\_original\_source\_spectral\_drift\_weighted\_no\_radius\_loss},
 with an additional strict kernel/axiom audit in
 \texttt{hbl-213-original-full-green-weighted-gain.yml}.
-This new declaration remains subject to its replacement CI result.
+The new physical-source spectral-drift declaration is strictly accepted by pinned CI 42522171670, which checks its exact type and transitive axiom dependencies.
 Neither a decay rate for $\delta(s)$ nor a genuine four-region
 nonlinear residual has been proved here; these must come from the
 actual modulation equations and the real physical PDE orbit.
@@ -1960,7 +1960,7 @@ is implemented in
 \texttt{ActualHartreeAdjustedRegularGreenAllRadii.lean} and
 submitted with pinned strict exact-type/axiom workflow
 \texttt{hbl-213-adjusted-regular-green-all-radii.yml};
-its acceptance requires a successful run. The substitution of
+the literal three-source Green integral is strictly accepted by pinned CI 42522403614, which checks its exact type and transitive axiom dependencies. The substitution of
 the \emph{unique} real Fredholm--Cramer speed in
 \eqref{eq:actual-three-source-regular-green}
 will eliminate $a(|p_1|+|p_2|)$ without introducing a new physical
