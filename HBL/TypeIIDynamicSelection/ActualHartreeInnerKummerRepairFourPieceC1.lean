@@ -59,10 +59,8 @@ theorem actual_Hartree_inner_Kummer_four_piece_three_C1_joins
     (hF : ∀ r ∈ Ioo (0 : ℝ) scale, ContinuousAt F r) :
     let u := actualHartreeTwoChannelInner Fp Fm hp hm
     let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
-    let v := actualOriginMatchedKummerPullback K a (L / a) B F J.1 J.2
     let UB := actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 B
     let DUB := actualOriginMatchedKummerSlope K (L / a) B F J.1 J.2 B
-    let rep := actualKummerPhysicalInterfaceRepair a B UB DUB
     let full := actualHartreeInnerKummerFourPiece K L a B Fp Fm hp hm F
     HasDerivAt full (deriv u L) L ∧
       HasDerivAt full ((1 / a : ℝ) • DUB) (a * B) ∧
