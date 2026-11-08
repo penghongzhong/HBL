@@ -5,6 +5,7 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedKummerThreeRegionC1SourceBridge.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalKummerC1PDEH1.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeAdjustedKummerSourceContinuity.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedUpperJetTimeOrder.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerRepairClockSqrtRadius.lean'
       - 'HBL/TypeIIDynamicSelection/ActualKummerPhysicalTailWeightedLipschitz.lean'

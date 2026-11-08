@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeSelectedKummerRepairSourceTimeGain
 import HBL.TypeIIDynamicSelection.ActualHartreePhysicalKummerC1PDEH1
+import HBL.TypeIIDynamicSelection.ActualHartreeAdjustedKummerSourceContinuity
 import Mathlib.Tactic
 
 /-!
@@ -12,9 +13,9 @@ satisfies the pointwise positive-time bubble bound, physical C1 matching
 at both joins, exact frozen scaled Kummer equations in all three open
 regions, and positive radial Hdot1 shell energy gain.
 
-The adjusted forcing is required to be continuous, a local regularity
-interface, rather than assuming any jet decay, PDE residual order, or
-independent remote trace. This does NOT solve the global nonlinear
+Continuity of the adjusted forcing follows from the original source F
+and the genuine monopole speed directions. No new regularity assumption
+is imposed on the adjusted source, selected jet, or remote trace. This does NOT solve the global nonlinear
 three-region Hartree PDE or the order 9/4 parametrix problem.
 -/
 
@@ -57,10 +58,7 @@ theorem actual_Hartree_selected_source_Kummer_three_region_C1_PDE_and_H1
         innerWeightedNorm (7 / 4 : ℝ) Fp +
             innerWeightedNorm (7 / 4 : ℝ) Fm + Q ≤
           Csrc * s ^ (-rho) →
-        (∀ p : ℝ × ℝ, ∀ r ∈ Ioo (0 : ℝ) scale,
-          ContinuousAt (fun x => F x +
-            (-(p.1 : ℂ)) * actualMomentLockedScaledScaleSource a c x +
-            (-(p.2 : ℂ)) * actualMomentLockedScaledPhaseSource a c x) r) →
+        (∀ r ∈ Ioo (0 : ℝ) scale, ContinuousAt F r) →
         ∃ p : ℝ × ℝ,
           actualMomentLockedCoupledCompatibility K L c hLp a (L / a) B
             Fp Fm hp hm F p.1 p.2 = 0 ∧
@@ -116,7 +114,7 @@ theorem actual_Hartree_selected_source_Kummer_three_region_C1_PDE_and_H1
   intro L c a s rho delta Csrc Cq beta hLp hLarge ha3 hSmall hs
     hCsrc hCq hClock hdelta hRho hBeta hXlow
     Fp Fm hp hm hcp hcm F Q Kreg hQ hKreg hF hEnvelope hBase
-    hSource hFoCont
+    hSource hFcont
   obtain ⟨p, hCompat, hUnique, hSelectedRest⟩ :=
     hSelected L c a s rho delta Csrc Cq hLp hLarge ha3 hSmall hs
       hCsrc hCq hClock hdelta hRho
@@ -150,7 +148,11 @@ theorem actual_Hartree_selected_source_Kummer_three_region_C1_PDE_and_H1
     simpa only [mul_comm] using hXlow)
   have hFo : ∀ r ∈ Ioo (0 : ℝ) scale, ContinuousAt Fo r := by
     intro r hr
-    exact hFoCont p r hr
+    change ContinuousAt (fun x : ℝ =>
+      F x + (-(p.1 : ℂ)) * actualMomentLockedScaledScaleSource a c x +
+        (-(p.2 : ℂ)) * actualMomentLockedScaledPhaseSource a c x) r
+    exact actual_Hartree_adjusted_Kummer_source_continuousAt
+      a c r ha hr.1 F (hFcont r hr) p
   have hCX : 0 ≤ Real.sqrt Cq := Real.sqrt_nonneg _
   have hRadius : a * B ≤ Real.sqrt Cq * s ^ (1 / 2 : ℝ) :=
     actual_Kummer_repair_radius_sqrt_from_clock
