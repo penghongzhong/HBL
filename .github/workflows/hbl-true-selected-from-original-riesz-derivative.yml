@@ -1,7 +1,7 @@
 name: HBL physical three Riesz source to actual selected Cramer speed derivative strict
 on:
   push:
-    branches: [hbl-213-conjugated-two-weight-integrated-20261103]
+    branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeOneOrbitSelectedDerivativeFromOriginalRiesz.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceTimeFromPhysicalScaledOrbit.lean'
@@ -104,7 +104,19 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_orbit_original_Riesz_produces_selected_source_derivative
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeTrueSelectedFromRieszAudit.lean > evidence/audit.log 2>&1
-          grep -q sorryAx evidence/audit.log && exit 1 || true
+          python3 - <<'PY'
+          import pathlib, re
+          s=pathlib.Path('evidence/audit.log').read_text()
+          name='actual_Hartree_one_orbit_original_Riesz_produces_selected_source_derivative'
+          assert name in s
+          assert 'sorryAx' not in s and 'admit' not in s
+          found=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
+          assert len(found)==1, f'Expected exactly one axiom report: {len(found)}'
+          allowed={'propext','Classical.choice','Quot.sound'}
+          vals={t.strip() for t in found[0].split(',') if t.strip()}
+          assert all(v in allowed or any(v.startswith(t+'.{') for t in allowed) for v in vals),vals
+          print('Exact 3-Riesz original orbit to unique real Cramer speed transitive axioms', sorted(vals))
+          PY
           mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
