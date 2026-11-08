@@ -199,3 +199,9 @@ This eliminates the strict unused-binder warning, not an additional mathematical
 The first moving original-source derivative CI 42456222166 failed a term-level let/negative-source Lean parse ambiguity (no theorem accepted); fixed in fc786e1. Both corrected 42457157758 (moving physical source derivative) and 42457157917 (dominated true-source regular Green integral derivative) remain STRICT CI PENDING at this checkpoint. Their explicit source derivatives and majorant still require original PDE estimates.
 
 Speed optimization experiment: workflow .github/workflows/hbl-true-source-selected-speed-green-no-scale.yml now includes a nonblocking pinned shared Lake build cache SAVE step, commit 973c46d, CI 42457325903. The existing strict workflows already use compatible restore prefixes; acceleration is provisional until cache upload succeeds.
+
+### Moving-source post-compile correction
+
+CI 42457157917 failed on an ordinary Lean conversion between pointwise `fun t =>` and the function-level `Pi.sub`/`Pi.mul` result of HasDerivAt subtraction/product rules in ActualHartreeTrueMovingAdjustedSourceDerivative.lean:100, not a Hartree estimate or added axiom. Corrected with `Pi.sub_apply` and `Pi.mul_apply`, commit c9a598959f29222372250de68c5af4175e4e1c6c. Strict new runs 42458002571 (moving original source derivative) and 42458002671 (moving regular Green derivative) are IN PROGRESS, not accepted. TeX synced commit 3099cdf4.
+
+The full selected Green source/adjusted-norm/original physical-source CI triad 42456627583 / 42456627562 / 42456627579 remains STRICT SUCCESS at same earlier SHA 89ecbc6d. No change to 11/13.
