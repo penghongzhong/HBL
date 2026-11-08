@@ -74,12 +74,8 @@ theorem actual_Hartree_true_source_selected_full_singular_Green_physical_no_scal
         (|p.1| + |p.2| ≤ (C / a) * (N + Q)) ∧
         let Gp := actualMomentLockedInnerPhaseSource L c
         let Gm := actualMomentLockedInnerScaleSource L c
-        let hgp := actual_Hartree_moment_locked_inner_phase_source_weighted L c hLp
-        let hgm := actual_Hartree_moment_locked_inner_scale_source_weighted L c hLp
         let Fpa := fun x => Fp x + p.2 * Gp x
         let Fma := fun x => Fm x + p.1 * Gm x
-        let hpa := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fp Gp hp hgp p.2
-        let hma := innerWeighted_add_smul_mem (7 / 4 : ℝ) Fm Gm hm hgm p.1
         let Nadj := innerWeightedNorm (7 / 4 : ℝ) Fpa +
           innerWeightedNorm (7 / 4 : ℝ) Fma
         let Fo : ℝ → ℂ := fun x =>
