@@ -76,7 +76,20 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeSpectralFourPiecePDEAudit.lean > evidence/audit.log 2>&1
-          grep -q sorryAx evidence/audit.log && exit 1 || true
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          data = Path('evidence/audit.log').read_text()
+          goal = 'HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes'
+          assert goal in data, 'Missing exact target #check/#print axioms'
+          assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom in Lean audit'
+          reports = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', data)
+          assert len(reports) == 1, f'Expected exactly one theorem axiom report, found {len(reports)}'
+          actual = [s.strip() for s in reports[0].split(',') if s.strip()]
+          allowed = ('propext', 'Classical.choice', 'Quot.sound')
+          assert all(x in allowed or any(x.startswith(y + '.{') for y in allowed) for x in actual), actual
+          print('Strict --trust=0 original nonlinear PDE telescoping target; transitive axioms:', actual)
+          PY
           mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
