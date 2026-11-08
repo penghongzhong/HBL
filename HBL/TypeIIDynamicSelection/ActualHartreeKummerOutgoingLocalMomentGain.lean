@@ -92,7 +92,7 @@ theorem actual_Hartree_Kummer_outgoing_local_source_moment_bound
         Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg a)]
       simpa only [mul_assoc] using
         mul_le_mul_of_nonneg_left hPhysical (sq_nonneg a)
-    have hBasis := hbound x ⟨hxpos.le, hx.2.trans_le (hr.2.trans_lt hRscale)⟩
+    have hBasis := hbound x ⟨hxpos.le, hx.2.trans_le (hr.2.trans_lt hRscale).le⟩
     have hX : ‖originPhysicalValue K.x x‖ ≤ G / x := by
       rw [originPhysicalValue, norm_div, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos hxpos]
@@ -102,7 +102,7 @@ theorem actual_Hartree_Kummer_outgoing_local_source_moment_bound
           (x : ℂ)⁻¹ ^ 2 *
             Complex.exp (-Complex.I * (x : ℂ) ^ 2 / 4) :=
       origin_physical_wronskian_exact K
-        ⟨hxpos.le, hx.2.trans_le (hr.2.trans_lt hRscale)⟩ hxpos.ne'
+        ⟨hxpos.le, hx.2.trans_le (hr.2.trans_lt hRscale).le⟩ hxpos.ne'
     have hE : ‖Complex.exp (-Complex.I * (x : ℂ) ^ 2 / 4)‖ = 1 := by
       rw [Complex.norm_exp]
       simp [Complex.mul_re, Complex.mul_im, pow_two]
