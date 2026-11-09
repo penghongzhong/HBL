@@ -994,3 +994,31 @@ This still requires a rigorous moving Sobolev-gluing theorem,
 measurable/time-regular bulk fields, and a genuine PDE-source estimate
 for all four domains and the selected modulations. Nothing is counted
 as accepted on the basis of this proposed route.
+
+
+### 2026-11-09 unshifted original-spectral strict PDE and backward-shell source
+
+**New strict Success** [42562774111](https://github.com/penghongzhong/HBL/actions/runs/42562774111), source [22799826](https://github.com/penghongzhong/HBL/commit/2279982605566d97f5a835edf0531f7a9865c070), original job 128982599861, evidence artifact 13650098975. Two exact audited theorem types in ActualHartreeMatchedSpectralOriginalPDEMismatch.lean establish, for the original normalized Kummer Green and its genuine spectral correction,
+\[
+ \mathcal L_K(u_0-u_1)=F-\delta u_0,\qquad
+ \mathcal L_K^{(a)}[(u_0-u_1)(\cdot/a)]
+    =a^{-2}[F(\cdot/a)-\delta u_0(\cdot/a)].
+\]
+Original CI contains Lean 4.35.0-rc3, pinned Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, trust=0, warningAsError, exact #check and #print axioms for BOTH targets, zero-byte strict.log, and precisely the allowed three transitive axiom families, with no sorryAx or admit. This formally proves an exact ORIGINAL-PDE source, not the positive-time §2.13 residual.
+
+On the actual *backward* overlap [R,2R]=[L/2,L], the original Fredholm shell theorem produces
+\[
+ A_R=(C_{\rm eq}R^{-4}+C_Ka^{-2})N_F,\qquad
+ \|u-v_0\|\le8R^2A_R,\qquad \|u\|\le C_{\rm val}N_F.
+\]
+Thus the original matched Green field obeys
+\(\|v_0\|\le D_R:=C_{\rm val}N_F+8R^2A_R\)
+**without an independent value envelope** and without invalidly extending the right-annulus Green estimate backwards. Candidate ActualHartreeBackwardMatchedValueGain.lean has [CI 42563548889](https://github.com/penghongzhong/HBL/actions/runs/42563548889). The same-physical-source Hartree plateau cancellation, composed with the first strict original-PDE theorem, is in ActualHartreePlateauSpectralOriginalSourceCancel.lean, [CI 42563426525](https://github.com/penghongzhong/HBL/actions/runs/42563426525).
+
+Candidate ActualHartreeBackwardSpectralFirstOrderShellGain.lean, source [e2623e](https://github.com/penghongzhong/HBL/commit/e2623e76775d60032da9ad714ccee20375e36bc5), [CI 42563980436](https://github.com/penghongzhong/HBL/actions/runs/42563980436), bounds the LITERAL original spectral source via the honest shell geometry
+\[
+ \|\mathbf1_{(R,2R)}r\,a^{-2}\delta v_0\|_{L^{2,7/4}}
+ \le20R^{13/4}a^{-2}|\delta|D_R
+ \le20R^{-3/4}|\delta|D_R,\quad a\ge(2R)^3.
+\]
+These latter three runs are PENDING at this checkpoint, not credited without original Success and exact axiom logs. This is an ell-power shell gain, NOT an s-power or global four-domain Hartree nonlinear residual, parameter Lipschitz, actual finite recursion, or dynamically deduced Type-II rate. **Original acceptance remains 11/13**.
