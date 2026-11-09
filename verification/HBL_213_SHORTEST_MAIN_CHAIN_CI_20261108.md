@@ -1392,3 +1392,16 @@ physical `a_phys` factor. No time decay for `d,H,a_phys`, moving-basis
 derivative, four-domain nonlinear error, or II-type rate is inferred.
 
 **Revised original environments remain 11/13.**
+
+
+### 9 November: genuine radial Hdot1 energy of same matched spectral correction (CI pending)
+
+Source: `HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralRadialEnergy.lean` (source commit `b0f310544cf879ffacf61b4bd34b7cba911f71a7`). Strict pinned trust-zero exact theorem/axiom workflow created in `9614958a5a1c3d5a69ebe73127e2ccce511e7450`: [42706314302](https://github.com/penghongzhong/HBL/actions/runs/42706314302). **Pending, not accepted** until original job Success and printed theorem/axioms audited.
+
+The *same* original Hartree source-matched (u_0) produces (q=d u_0) and the actual classical zero-left Green correction (u_1). New candidate concludes both actual density `IntegrableOn (fun r => r^2 * ‖deriv u₁ r‖^2) (Icc a b) volume` and
+
+\[
+\int_a^b r^2|\partial_r u_1|^2\,dr \le (b-a)b^2 C_{\mathrm{spec}}(D,G,b)^2 |d|^2H^2.
+\]
+
+This is the 3D radial **native** energy estimate, explicitly free of inverse powers of the moving left endpoint, and not an abstract source or assumed gradient-energy envelope. The more precise physical-variable cubic-volume bound remains a paper calculation; it retains a genuine multiplying (a_{\rm phys}) after (y=a_{\rm phys}r). No dynamic gain, moving selector derivative, four-region source Lipschitz, finite nonlinear recurrence or Type-II rate is inferred. **Original acceptance remains 11/13**.
