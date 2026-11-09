@@ -323,3 +323,25 @@ Commit [33abb6c0](https://github.com/penghongzhong/HBL/commit/33abb6c060f9356af2
 - Composite source commit [931eec371](https://github.com/penghongzhong/HBL/commit/931eec3713fe1d2fc7ac1d7e8c5d3ccce227eda5) now derives **from the concrete physical Fredholm budget** that `D_R >= 0` and combines `a >= L^3`, `L=2R` with the literal original source norm to target `(5/32) G^2 R^(-19/4) |delta|^2 D_R`. It does **not** assume source-envelope magnitude, a positive time order, or a blowup rate.
 - The exact `#check` and `#print axioms` audit for all three source/scalar/composite declarations is configured by [9d55ccdda](https://github.com/penghongzhong/HBL/commit/9d55ccdda242851867ef4378e39a9ca3a030585a); [strict CI 42603288411](https://github.com/penghongzhong/HBL/actions/runs/42603288411) is **pending**. Its new composite is not yet accepted and it does not count toward the original 13 environments.
 - Remaining main-chain producer is a complete full-original four-region Hartree PDE moving-time weighted residual and parameter-Lipschitz estimate (including nonlocal feedback and true moving C1 interfaces), followed by actual generated-source classification and finite physical recursion, and the separate PDE-selected Type-II dynamic orbit. **Original acceptance 11/13 (84.62%).**
+
+
+**2026-11-09 direct strict replay and repair:** Runs
+[42602025843](https://github.com/penghongzhong/HBL/actions/runs/42602025843)
+and [42602051763](https://github.com/penghongzhong/HBL/actions/runs/42602051763)
+**FAILED** the *new scalar* declaration at
+`ActualHartreePhysicalPlateauMovingSpectralQuadraticShellGain.lean:255:27`:
+the raw Lean rewriter transformed the entire left expression to
+`(R ^ 1) ^ (13/4) * R ^ 1 = (R ^ 1) ^ (17/4)`,
+so no direct `R^p*R^q` pattern remained. This is a proof elaboration
+failure, **not** a counterexample or a failure of the already strictly
+accepted source theorem at earlier commit `33abb6c0`.
+Commit [915e8952](https://github.com/penghongzhong/HBL/commit/915e8952ef165118a0e6d33489ed147ca09eaf7d)
+repairs the exact `R^{13/4}R=R^{17/4}` step with
+`Real.rpow_add_one`, instead of rewriting every occurrence of `R`.
+New pinned [CI 42603968381](https://github.com/penghongzhong/HBL/actions/runs/42603968381)
+is **pending** and includes precise three-theorem `#check` /
+`#print axioms` audits. A source-composed
+`actual_Hartree_true_plateau_moving_spectral_quadratic_cubic_shell_gain`
+has also been added in `931eec37`, but it remains **unaccepted until
+the newer strict CI succeeds**. No original environment is closed:
+**11/13**.
