@@ -89,7 +89,7 @@ theorem actual_Hartree_quadratic_density_Riesz_spatial_decay_from_Linfty
       _ = C * bubble x ^ 2 := by dsimp [C, W]; ring
   have h := actual_Hartree_true_Riesz_bubble_squared_dominated_spatial_decay
     (fun x => actualHartreeComplexDensityRemainder (U x) (H x))
-    hFmeas hC hFbound hr
+    hFmeas C hC hFbound hr
   simpa only [C] using h
 
 
