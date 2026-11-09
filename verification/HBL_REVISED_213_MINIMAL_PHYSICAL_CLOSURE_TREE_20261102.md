@@ -156,3 +156,32 @@ M_delta(y) = [Fp(y) + i Fm(y)]/y
 The `ActualHartreeMatchedShellWeightedGain` hypothesis is **not automatically satisfied**: it would require `M_delta = 0`; the actual PDE instead must bound `M_delta` in the conjugated, moving-shell `L^{2,7/4}` source norm, including derivative and two-parameter Lipschitz costs. A quadratic defect for the *shifted* Kummer operator cannot silently replace the generally first-order `-delta*u0` contribution in the *original* Hartree PDE. The source decomposition is recorded in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex` as a next proof obligation, not as a new Lean-certified theorem.
 
 **Formal original manuscript acceptance remains 11/13.** Only complete revised §2.13 and the terminal dynamical Type-II theorem can increase it.
+
+
+## 2026-11-09 strict spectral integration and exact true Hartree plateau cancellation
+
+Confirmed independent original GitHub Actions conclusions at repaired source `d2bfb1120a6d917891e24f595f4b0ddc05b5661e`:
+
+| Run | Exact strict target | Original job / artifact | Transitive axioms |
+|---|---|---|---|
+| [42561772359](https://github.com/penghongzhong/HBL/actions/runs/42561772359) **Success** | `actual_Hartree_spectral_inner_four_piece_three_C1_joins` | `128979543706` / `13649649805` | `propext`, `Classical.choice`, `Quot.sound` |
+| [42561772339](https://github.com/penghongzhong/HBL/actions/runs/42561772339) **Success** | `actual_Hartree_true_source_selected_spectral_four_piece_three_C1` | `128979544093` / `13650137059` | same three |
+| [42561772340](https://github.com/penghongzhong/HBL/actions/runs/42561772340) **Success** | `actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes` | `128979543745` / `13650455896` | same three |
+| [42562474659](https://github.com/penghongzhong/HBL/actions/runs/42562474659) **Success** | `actual_Hartree_true_source_selected_spectral_quadratic_and_three_C1` | `128981699599` / `13649894367` | restricted by strict allowlist |
+
+The first three artifacts were downloaded and their `audit.log` directly parsed; each reports only the three listed axioms and a **zero-byte `strict.log`**. The fourth CI strictly asserts the exact same three-axiom allowlist. All four jobs use Lean 4.35.0-rc3, pinned Mathlib, `--trust=0`, `-DwarningAsError=true`, exact `#check` and `#print axioms`.
+
+More precise source analysis: `ActualHartreeMomentLockedPlateauSource.lean` ALREADY proves the original full nonlocal Hartree inner/outer source identity under the same physical `z` and the same two real speeds on `0<y≤L`:
+```text
+S_inner_adjusted(y) + a^(-2) F_adjusted(y/a) = 0.
+```
+Combining this with the ORIGINAL unshifted spectral equation gives
+```text
+M_delta(y) = -a^(-2) delta * u0(y/a),       0<y≤L,
+L_K^a(u-v_delta) = E_inner + a^(-2) delta*u0(y/a).
+```
+This applies exactly to the backward shell `R=L/2`, `[R,2R]=[L/2,L]`: all actual quartic source and two modulation-speed terms cancel there. It is **incorrect** to replace the surviving first-order term with the smaller shifted-operator quadratic defect. The original weighted Green source estimate controls `u0(x)` for `x∈[L/a,B]`, whereas the shell needs `x∈[L/(2a),L/a]` **to the left of that interval**. This dyadic backward extension with no hidden left-radius loss, followed by the moving time/Lipschitz bound, is now the exact next analytical bottleneck.
+
+New source-faithful spectral `ActualHartreeOnePhysicalSourceSpectralQuadraticThreeC1.lean` specializes both Fredholm channels to the same original quartic Hartree `z`; its separate strict CI is [42562872297](https://github.com/penghongzhong/HBL/actions/runs/42562872297). The exact original spectral operator lemma `ActualHartreeMatchedSpectralOriginalPDEMismatch.lean` is in [42562774111](https://github.com/penghongzhong/HBL/actions/runs/42562774111); combining it with the plateau identity in `ActualHartreePlateauSpectralOriginalSourceCancel.lean` is under [42563426525](https://github.com/penghongzhong/HBL/actions/runs/42563426525). **Do not count any of these last three as accepted before raw Success and individual axiom audit.** The new plateau source reduction is fully recorded in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+
+**Original manuscript environment count unchanged: 11/13**. A genuine full four-region `s^{-rho-kappa}` PDE residual with moving basis, speed and interface derivatives, parameter Lipschitz, and the derived finite Type-II rate remains unproved.
