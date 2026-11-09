@@ -4,6 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueQuadraticRieszCubicFiveWeight.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceQuadraticRieszSpatialDecay.lean'
       - '.github/workflows/hbl-213-true-quadratic-riesz-cubic-fifth-weight.yml'
   workflow_dispatch:
 permissions:
