@@ -28,7 +28,7 @@ open HBL.Profile.ActualInner HBL.Profile.Kummer HBL.L2Kernel
 
 /-- Same-source matched original physical Kummer continuation has no
 hidden value envelope assumption on the backward overlap; it follows
-from the genuine normalized H+/- Fredholm values and their zero-jet
+from the genuine normalized H-plus and H-minus Fredholm values and their zero-jet
 mismatch equation. -/
 theorem actual_Hartree_backward_original_matched_Kummer_value_from_same_source
     (mu theta a R r0 : ℝ)
