@@ -404,3 +404,25 @@ regional Hdot1 convergence + actual matching + no assumed blow-up speed
 The **first** missing producer is one actual full-PDE corrected increment with positive gain `rho -> rho+kappa` in `X`, including exact moving Kummer coefficients/interfaces, selected-speed derivatives, and all cross-zone original Riesz contributions. The frozen plateau quadratic shell result is only one part of that increment. Once the *realized* one-step gain and direct difference bound are proved, iterate only to `9/4` (not arbitrary `N`) and invoke the existing direct-residual backward fixed-point framework. For the fixed-point input set `H(s,theta)=R_H(s,theta)-R_H(s,0)` so `H(s,0)=0` follows identically; keep the nonzero base residual separate. Then construct the actual solution and derive its rate dynamically rather than assuming the orbit or its rate in a source estimate.
 
 **Acceptance remains 11/13.** Do not launch new isolated C1/Volterra/identity CI runs except where the missing full-PDE increment theorem has a direct import edge. The next priority is the original physical one-step gain with a concrete `R_H` norm and direct threshold difference, **not** more proofs of generic termination or formal telescoping.
+
+
+### 2026-11-09 physical spectral shell trapped-time conversion (NEW proof obligation)
+
+The **existing strictly verified, genuine quartic-source** moving-coefficient plateau bound, CI [42610627350](https://github.com/penghongzhong/HBL/actions/runs/42610627350) (original job `129137812702`, artifact `13670253589`, all three axiom reports within the exact allowlist), gives
+
+```text
+||E_spec||_(X_R) <= (5/32) G^2 R^(-19/4) |delta|^2 D_R,
+R=ell^(-1/16)/2,
+R^(-19/4) = 2^(19/4) ell^(19/64).
+```
+
+In the **visible intermediate physical length bootstrap** `0<ell(s)<=s^(-beta)` for `beta>1/2`, `s>=1`, the same source-specific estimate gives a *derived* factor `s^(-19 beta/64)`. If the *current* original Fredholm source budget `D_R(s)` (as defined from the real two-channel weighted norms, **not** an independently assumed next residual) obeys `D_R(s)<=C_D s^(-rho)`, and the true spectral coefficient difference stays bounded `|delta(s)|<=C_delta`, then **this spectral plateau contribution** gains `kappa_spec=19 beta/64>19/128` in time, with no direct hypothesis of a higher-order corrected PDE residual. Algebraically:
+
+```text
+||E_spec(s)||_(X_R) <= (5/32) 2^(19/4) G^2 C_delta^2 C_D
+                        * s^(-(rho+19 beta/64)).
+```
+
+New exact Lean source [ActualHartreePlateauSpectralTrappedGain.lean](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreePlateauSpectralTrappedGain.lean), commit `ef37cf2cd5dd870f99901e326fbb19b6770a9d09`; new pinned strict workflow `hbl-213-physical-plateau-spectral-trapped-time-gain.yml`, CI [42619593894](https://github.com/penghongzhong/HBL/actions/runs/42619593894), was **in progress on last audit**. Its proof and transitive axioms cannot be credited until raw Success and exact three-target audits. The matching TeX manuscript update is commit `8c7da3068ddc10644e2966beeff009c624e22624`.
+
+**Scope limit**: this helps the **spectrally quadratic original plateau**, not the entire four-region physical PDE residual. Independently, a one-global *actual* nonlinear correction source-to-next-step theorem is under [CI 42619594632](https://github.com/penghongzhong/HBL/actions/runs/42619594632), but its exact statement still takes the physical principal linear correction equation as a hypothesis. Completing that solvability from the same uniquely selected, fully C1-matched original Hartree packet, furnishing all-region original norm and parameter differences, and closing the physical bootstrap remain essential. No additional original environment accepted: **11/13**.
