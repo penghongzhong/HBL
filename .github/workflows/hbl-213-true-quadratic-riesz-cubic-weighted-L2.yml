@@ -4,6 +4,8 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueQuadraticRieszCubicWeightedL2.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceQuadraticRieszSpatialDecay.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueQuadraticRieszCubicFiveWeight.lean'
       - '.github/workflows/hbl-213-true-quadratic-riesz-cubic-weighted-L2.yml'
   workflow_dispatch:
 permissions:
