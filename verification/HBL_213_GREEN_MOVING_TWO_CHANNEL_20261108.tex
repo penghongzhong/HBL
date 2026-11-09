@@ -3299,4 +3299,80 @@ Type--II scale remain open; neither a scale-decay trap nor the
 blow-up rate is an allowed input. The strict revised original
 environment count remains $11/13$.
 
+
+
+\medskip
+\noindent\textbf{Native a.e. derivative and source-selected radial
+$\dot H^1$ bridge: independent Lean candidates.}
+The existing source-integrable origin Green certificate gives
+\[
+ \mathcal S_K[F;U,DU](r)
+  =\partial_r w_{\mathrm{matched}}(r)
+ \quad\text{for almost every }r\in[r_0,B],
+\]
+where \(w_{\mathrm{matched}}\) is the \emph{actual} original
+Cramer-selected Green field, and no pointwise continuous forcing
+is assumed. Thus a pointwise \emph{algebraic} bound
+\(r|\mathcal S_K[F;U,DU](r)|\le E\) gives the genuine weighted
+radial integral
+\[
+ \boxed{\;
+ \int_{r_0}^{B} r^2
+      |\partial_r w_{\mathrm{matched}}(r)|^2\,dr
+ \le (B-r_0)E^2.
+ \;}
+\]
+The shortest generic statement is
+\texttt{ActualHartreeMatchedRadialH1FromAlgebraicSlope.lean}
+under strict CI \texttt{42541465634}.
+The complete original-source, unique real Cramer speed and
+corrected Fredholm-jet producer feeds that bridge in
+\texttt{ActualHartreeTrueSelectedFullMatchedRadialH1.lean},
+strict CI \texttt{42541621509}; neither is accepted until
+its own compilation, exact type and original transitive axiom
+evidence pass. The related physical full matched algebraic
+energy theorem is under CI \texttt{42541312631}.
+The identity holds on the normalized Kummer annulus; the
+rescaled physical $\dot H^1$ and global four-domain assembly
+are separate obligations.
+
+\medskip
+\noindent\textbf{No preassigned renormalized rate for the integrated
+moving-shell physical-clock budget.}
+The exact underlying physical modulation equations give
+\[
+ \ell'(s)=-b(s)\ell(s),\qquad
+ t'(s)=\ell(s)^2.
+\]
+For \(s_0\le s_1\), \(0<\ell(s)\le1\), and the genuine
+differentiable physical orbit, the source factor obeys
+\[
+ \ell(s)^{5/2}
+ =\ell(s)^2\sqrt{\ell(s)}
+ \le t'(s).
+\]
+The finite slow-time integral can be bounded \emph{without}
+\(\ell(s)\le s^{-\beta}\):
+\[
+ \boxed{\quad
+ \int_{s_0}^{s_1}\ell(s)^{5/2}\,ds
+ \le \int_{s_0}^{s_1}t'(s)\,ds
+ =t(s_1)-t(s_0).
+ \quad}
+\]
+The true PDE shell's pointwise clock domination was
+independently strictly verified in CI \texttt{42540898273},
+original evidence artifact \texttt{13642040098}, with empty
+strict log and exactly \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound} as
+transitive axioms. The \emph{integrated} inequality is a
+separate new Lean candidate,
+\texttt{ActualHartreeOneOrbitShellClockIntegrated.lean},
+strict CI \texttt{42541952006}, pending.
+A uniform global four-region error controlled by this shell
+budget, finite physical terminal time, dynamically propagated
+modulation and actual Hartree recursion still have to be
+derived; no Type--II rate is assumed.
+The manuscript environment count stays \(11/13\).
+
 \end{document}
