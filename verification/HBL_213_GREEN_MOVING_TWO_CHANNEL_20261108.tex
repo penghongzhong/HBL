@@ -5474,4 +5474,43 @@ moving four-region Hartree correction and its dynamical
 modulation equations.  No original revised environment is
 newly closed: \texttt{11/13}.
 
+
+\medskip
+\noindent\textbf{Actual Kummer replacement: the half-clock loss in the main proof.}
+The previously proved (and separately strict-audited) genuine compact
+physical Kummer repair is supported in its moving annulus
+$X(s)<r\le 2X(s)$, where $X(s)=a(s)R$.
+Its true selected value/slope jet only supplies
+\[
+ |p(s)|+R|q(s)|\le C_Ds^{-\rho},
+ \qquad X(s)\le C_Xs^{1/2}.
+\]
+The exactly matched repair estimate in
+\texttt{ActualKummerPhysicalTailWeightedLipschitz.lean}
+therefore gives
+\[
+ |H_K(s,r)|
+ \le (1+2C_X)C_D
+ s^{-(\rho-1/2)}W(r),
+\]
+and the actual two-point selected-jet difference has the same
+half-order loss. Thus for $\rho=9/8$ the strongest globally
+source-derived $W$ coefficient is $e(s)=O(s^{-5/8})$,
+whereas the full nonlinear Hartree Taylor weighted-$L^2$
+theorem needs $e(s)=O(s^{-9/8})$ to deliver
+$s^{-9/4}$. Simply inserting the weaker global bound
+would give only $O(s^{-5/4})$.
+
+The obstruction is \emph{geometric}, not a Lean compiler
+or Kummer $C^1$ error. A complete proof must either establish
+an extra half-order on the actual selected upper jet, exploit the
+original shell support and two-scale nonlocal radial Riesz geometry
+\emph{before} taking the full $W$ norm, or perform enough
+genuinely constructed physical correction steps to recover the loss.
+The new strictly accepted six-product nonlocal source estimates
+and original quadratic Riesz parameter differences give genuine
+analytic inputs but do not alone construct the required corrected
+four-zone Hartree trajectory. Consequently revised~\S2.13 and the
+final PDE-derived Type--II rate are still open at 11/13.
+
 \end{document}
