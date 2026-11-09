@@ -1341,3 +1341,45 @@ requires the same-source corrected field/region/moving-time assembly.
 Thus no positive-order full PDE residual, parameter Lipschitz,
 physical finite packet recursion or dynamical Type-II rate follows.
 **Original revised-paper environments STILL 11/13.**
+
+
+### 2026-11-09 exact unweighted matched spectral Cramer derivative — strict replay pending
+
+A new direct source-faithful step uses the **already verified** original
+inverse-linear Volterra moment improvement rather than the weaker bound
+`r²|u'_1|≤C`. For the literal original matched profile
+`u₀=actualOriginMatchedKummerValue(K,a,b,F,U,DU)`, if
+`|r u₀(r)|≤H`, the **actual** spectral source `q=d*u₀` obeys
+`|q(r)|≤|d|H/r` without an independently assigned source envelope.
+The true origin-Cramer derivative therefore satisfies
+`
+|u₁'(r)| ≤ [(b+1)G(1+(D+1)Gb²)+2(D+1)G²b²]|d|H,
+`
+uniformly for `a≤r≤b`, with **no inverse power of the moving left radius
+a**. The exact corrected derivative gap is
+`|∂r(u₀-u₁)-∂r u₀|=|u₁'|`.
+This is stronger than a bound on `r²u₁'`, and is an output of the genuine
+source `q=d*u₀`, not a postulated radial slope.
+
+Committed source
+`HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralUnweightedDerivative.lean`
+at `c9d59d5`; two explicit declarations are
+`actual_Hartree_original_matched_spectral_unweighted_C1_no_left_radius`
+and `actual_Hartree_original_spectral_corrected_derivative_gap_no_left_radius`.
+Dedicated pinned `--trust=0`, warning-as-error, two-theorem exact
+`#check` and `#print axioms` workflow
+[CI 42693424757](https://github.com/penghongzhong/HBL/actions/runs/42693424757),
+commit `d0ae557f`, was triggered. **At this checkpoint the CI is in
+progress, so neither theorem is counted as formally accepted.**
+
+Analytical scaling consequence (paper-only until a separate strict audit):
+for physical coordinate `y=a_phys*r` and `r₀=L/a_phys`,
+`
+∫_L^(a_phys*b) y² |∂y u₁(y/a_phys)|² dy
+ ≤ a_phys/3 (b³-r₀³) C(D,G,b)² |d|² H².
+`
+This removes the spurious `r₀^(-1)` energy loss but retains the genuine
+physical `a_phys` factor. No time decay for `d,H,a_phys`, moving-basis
+derivative, four-domain nonlinear error, or II-type rate is inferred.
+
+**Revised original environments remain 11/13.**
