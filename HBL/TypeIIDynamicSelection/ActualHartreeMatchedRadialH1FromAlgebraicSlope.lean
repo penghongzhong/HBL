@@ -37,7 +37,7 @@ the *algebraic* radius-weighted slope bound, whose derivative
 identification is obtained from the existing native a.e. certificate. -/
 theorem actual_Hartree_matched_radial_H1_of_algebraic_slope_bound
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (a b C E : ℝ) (hab : a ≤ b) (hE : 0 ≤ E)
+    (a b C E : ℝ) (hab : a ≤ b) (_hE : 0 ≤ E)
     (hK : OriginBasisOn K a b C)
     (F : ℝ → ℂ) (hFI : IntervalIntegrable F volume a b)
     (U DU : ℂ)
