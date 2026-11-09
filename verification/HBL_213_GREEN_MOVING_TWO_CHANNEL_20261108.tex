@@ -3884,4 +3884,69 @@ has yet been strictly accepted; neither original Section~2.13 nor
 the terminal dynamical blowup result follows from the present
 matched-shell estimate. The revised original count remains $11/13$.
 
+\medskip
+\noindent\textbf{Original-operator spectral source mismatch:
+the exact term that the matched-shell theorem cannot discard
+(9 November 2026).}
+Write \(u_0=G_{\rm match}[F_{\rm adj};J]\),
+\(u_1=G_{\rm left}[\delta u_0;0,0]\),
+\(w_\delta=u_0-u_1\), and \(v_\delta(y)=w_\delta(y/a)\).
+The already checked classical Green equations give, on the genuine
+Kummer interval,
+\[
+ \mathcal L_Ku_0=F_{\rm adj},\qquad
+ \mathcal L_Ku_1=\delta u_0,\qquad
+ (\mathcal L_K+\delta)w_\delta-F_{\rm adj}
+   =-\delta u_1.
+\]
+The last member is quadratic in \(\delta\) under the previously
+proved Volterra bound.  Crucially, the \emph{original} (unshifted)
+PDE operator instead obeys
+\[
+ \mathcal L_K^a v_\delta(y)
+  =a^{-2}\bigl(F_{\rm adj}(y/a)
+                  -\delta u_0(y/a)\bigr).
+\]
+For the physical inner Fredholm field
+\(u=\mathcal G_{\rm in}(F_+,F_-)\), let
+\[
+ S_{\rm in}(y)=\frac{F_+(y)+iF_-(y)}{y},\qquad
+ E_{\rm in}(y)=\mathcal L_K^a u(y)+S_{\rm in}(y).
+\]
+Consequently the \emph{actual source discrepancy} on the
+backward overlap is
+\[
+ \boxed{\quad
+ \mathcal L_K^a(u-v_\delta)
+  =E_{\rm in}-\mathfrak M_\delta,\qquad
+ \mathfrak M_\delta(y)
+   =S_{\rm in}(y)+a^{-2}
+     \bigl(F_{\rm adj}(y/a)-\delta u_0(y/a)\bigr).
+ \quad}
+\]
+The fixed-inner defect \(E_{\rm in}\) has the previously
+verified \(R^{-4}+a^{-2}\) norm budget.  It is \emph{not}
+legitimate to apply the common-source matched-shell gain unless
+\(\mathfrak M_\delta=0\), or to replace \(\mathfrak M_\delta\) by
+the \emph{quadratic shifted-operator} defect
+\(-\delta u_1\).  For the actual quartic Hartree sources
+\(S_{\rm in}\) and \(F_{\rm adj}\), neither this equality nor the
+needed weighted source-norm/time-order estimate has yet been
+derived from the same orbit.  The next genuine proof target is
+\[
+ \bigl\|
+  \mathbf 1_{(R,2R)}(y)\,
+  y\,\mathfrak M_{\delta(s)}(s,y)
+ \bigr\|_{L^{2,7/4}(dy)}
+ \le C\,s^{-\rho-\kappa},\qquad\kappa>0,
+\]
+with the required two-parameter Lipschitz differences produced
+from the actual PDE. This target is displayed as an
+\emph{unproved obligation}, not inserted as a hypothesis into
+any acceptance certificate.  Its displayed algebraic
+decomposition has not been separately compiled as a new Lean
+theorem; the previously accepted Green/Volterra components
+remain the only formal inputs.  No change to the formal
+\(11/13\) tally follows.
+
 \end{document}
