@@ -164,6 +164,6 @@ theorem actual_Hartree_one_orbit_uniform_full_shell_clock_integral
   calc
     (∫ s in s0..s1, E s) ≤
         (∫ s in s0..s1, K * (ell s) ^ 2) := hMono
-    _ = K * (∫ s in s0..s1, (ell s) ^ 2) :=
-      intervalIntegral.integral_const_mul _ _ _
+    _ = K * (∫ s in s0..s1, (ell s) ^ 2) := by
+      rw [intervalIntegral.integral_const_mul]
     _ = K * (time s1 - time s0) := by rw [hFTC]
