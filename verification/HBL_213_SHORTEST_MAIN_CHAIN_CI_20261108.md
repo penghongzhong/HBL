@@ -1070,3 +1070,29 @@ HBL.TypeIIDynamicSelection.actual_Hartree_backward_spectral_first_order_shell_so
 This bounds the genuine *reference* \(-a^{-2}\delta u_0\) shell source in the original conjugated weighted norm by \(20R^{-3/4}|\delta|D_R\) for \(a\ge(2R)^3\). The actual matched physical Green field on the **backward** physical interval \([R,2R]\) is bounded from the two original Fredholm sources (verified [42564376709](https://github.com/penghongzhong/HBL/actions/runs/42564376709), artifact 13650812421), not an independent envelope. Exact trust-zero, warnings-as-errors, and three-axiom audit succeeded. It is **not** yet the moving-coefficient quadratic \(-\delta u_1\) estimate.
 
 **Pending true backward zero-jet Volterra**: source [533d8ef](https://github.com/penghongzhong/HBL/commit/533d8ef616ac9a075f297d631848bf46338cfb1e), strict [CI 42566011025](https://github.com/penghongzhong/HBL/actions/runs/42566011025). Unlike right-annulus estimates, the source is evaluated at normalized \(r\in[r_0/2,r_0]\), **left of its zero-Cauchy-jet anchor** \(r_0=L/a\). The strict target bounds \(G_{K_0}[F;0,0]\) there by \(2G^2M\), from actual reversed Wronskian integrals and \( |F(r)|\le M/r\). For the same physical \(u_0\) and \(F=\delta u_0\), the matched backward value producer suggests \(M=r_0|\delta|D_R\). This would yield a genuinely quadratic spatial source with no inverse moving-radius loss but is **not strict accepted** until its job succeeds. All other four-region, nonlinear time/moving-boundary, modulation-Lipschitz, finite recursion and dynamic Type-II rate obligations remain open.
+
+
+### 2026-11-09 backward quadratic matched-source CI 42566992080 and exact scale budget (strict pending)
+
+The actual new producer HBL.TypeIIDynamicSelection.actual_Hartree_matched_backward_quadratic_spectral_source was committed in [2387705d](https://github.com/penghongzhong/HBL/commit/2387705d6e5714c8990931da640030a714270359) and given an independent pinned strict [CI 42566992080](https://github.com/penghongzhong/HBL/actions/runs/42566992080). **Not accepted unless full job success and exact single-target axiom audit are confirmed.** Its source calls the original two-channel Fredholm matched backward value theorem and the newly attempted genuine reverse-integral Volterra theorem for the SAME \(u_0\). The true backward original source coherence and its regularity/integrability are visible inputs; it is not a proof of the four-region time residual or unique-speed construction by itself.
+
+Writing \(L=2R\), \(r_0=L/a\), and \(D_R=C_{\rm val}N_F+8R^2\mathcal A_{\rm shell}\), the intended bound follows from the actual source \(q=\delta u_0\), which obeys \(|q(x)|\le r_0|\delta|D_R/x\) on the correctly oriented normalized interval \([r_0/2,r_0]\). The genuine Cramer zero-left inverse would yield
+\[
+ |u_1(x)|\le2G^2r_0|\delta|D_R,\qquad
+ |a^{-2}\delta u_1(y/a)|
+     \le 2G^2La^{-3}|\delta|^2D_R
+     \quad (R\le y\le2R).
+\]
+Applying the *original radial-conjugated* shell geometry to the measurable physical residual:
+\[
+ \|\mathbf1_{(R,2R)}y\,a^{-2}\delta u_1(y/a)\|_{L^{2,7/4}(dy)}
+ \le40G^2 LR^{13/4}a^{-3}|\delta|^2D_R.
+\]
+The genuine established physical separation \(a\ge L^3\) would give the purely **spatial** improvement
+\[
+ 40 LR^{13/4}a^{-3}
+ \le(5/32)R^{-19/4}
+ = (5/32)\,2^{19/4}\ell^{19/64}
+ \quad\text{if }L=2R=\ell^{-1/16}.
+\]
+**This last norm inequality is still an analytical consequence, not a separate Lean-accepted theorem**: derive residual measurability, identify the same spectrally selected \(u_1\) and its legitimate physical source, and close the pending reverse-Volterra CI first. The 11/13 original statement tally is unchanged. Independently accepted actual-source/variable-coefficient cancellation: [42565184656](https://github.com/penghongzhong/HBL/actions/runs/42565184656) (artifact 13651342799); independent full physical moving coefficient equality: [42566073115](https://github.com/penghongzhong/HBL/actions/runs/42566073115) (artifact 13651906616). Neither assigns an \(s^{-9/4}\) bound.
