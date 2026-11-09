@@ -1142,3 +1142,19 @@ The exact Kummer quadratic source and backwards Volterra source are
 strictly verified; as of this audit the full time-dependent actual
 profile, feedback, parameter/Lipschitz estimates and generated-term
 recursion remain absent. Revised original count still **11/13**.
+
+
+## 2026-11-09 new original four-piece/PDE and genuine weighted-source verification checkpoint
+
+The latest branch has strict **Success** for the formerly failing spectral finite PDE telescope: [42648496792](https://github.com/penghongzhong/HBL/actions/runs/42648496792), original job `129268151514`, artifact `13688728524`. Exact target: `HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes`; the original CI log includes `--trust=0`, `-DwarningAsError=true`, precise `#check` and `#print axioms`, and prints exactly `[propext, Classical.choice, Quot.sound]`. This eliminates the earlier broken upstream dependency from run 42530158681 **without** mistaking the telescoping identity for a positive-order residual bound.
+
+The actual corrected three-C1 four-piece source is independently successful in [42648994008](https://github.com/penghongzhong/HBL/actions/runs/42648994008). Its same-physical-source selected spectral quadratic companion is successful in [42650515961](https://github.com/penghongzhong/HBL/actions/runs/42650515961) and the spectral original PDE plateau cancellation in [42650515956](https://github.com/penghongzhong/HBL/actions/runs/42650515956). The fifth-power bound for one genuine two-scale quartic density Riesz-times-cubic atom is successful in [42649080513](https://github.com/penghongzhong/HBL/actions/runs/42649080513).
+
+For the *one* genuine nonlinear atom `F(r)=I_2[\mathcal D_{4,\ge 2}(U,H)](r)\,|U(r)|^2U(r)`, put
+`P=((6M^2+4Me+e^2)e^2)C_R` and `K=2(D^2+E^2)`. The proved fifth-weight square majorant `(1+r)^5||F(r)||^2\le P^2 K^3` implies the mathematically exact original half-line norm estimate
+
+`\int_0^\infty (1+r^2)^{7/4}||F(r)||^2\,dr \le P^2K^3\int_0^\infty(1+r)^{-3/2}\,dr = 2P^2K^3`.
+
+The target Lean file `ActualHartreeTrueQuadraticRieszCubicWeightedL2.lean` states this native `MemLp 2` estimate on the actual nonlocal source and explicitly **assumes** `||H(r)||\le e\,bubble(r)`; this decay is not independently constructed from the physical PDE. The first strict run [42649085863](https://github.com/penghongzhong/HBL/actions/runs/42649085863) failed on nat/real power coercions. A second strict run [42650866787](https://github.com/penghongzhong/HBL/actions/runs/42650866787) failed at lines 68 and 87 on explicit `^ (2:ℝ)` versus `^ (2:ℕ)`, and `^ (5:ℝ)` versus `^ (5:ℕ)`. Source commit [4dda33f](https://github.com/penghongzhong/HBL/commit/4dda33f5527a16c8655d422cad5109167fbe8c0a) repairs precisely these two failures with `Real.rpow_natCast`; strict [42652808504](https://github.com/penghongzhong/HBL/actions/runs/42652808504) was **running at this checkpoint**. No acceptance is claimed until its actual conclusion and exact axioms are checked.
+
+**Formal revised-paper count: 11/13.** Genuine time-differentiated moving Kummer basis, endpoints and selected speed, the other quartic Taylor atoms, full four-region nonlocal remainder and parameter Lipschitz, and physical fixed high-order profile recursion/Hessian and dynamically selected Type-II rate are still missing. The one-atom norm and the finite telescoping identity must not be promoted to §2.13.
