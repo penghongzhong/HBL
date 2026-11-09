@@ -243,3 +243,40 @@ New original-Cramer source module `HBL/TypeIIDynamicSelection/ActualHartreeBackw
 ### 2026-11-09 first all-finite reverse Green iteration strict audited
 
 The **base** genuine finite spectral Neumann iteration theorem `actual_Hartree_backward_spectral_Neumann_all_finite_value_gain` has now achieved direct original [CI 42572303237](https://github.com/penghongzhong/HBL/actions/runs/42572303237) **Success** on source SHA `df33da3fbd00d08cc94b4127080654cbbeb8b924`, job `129012205405`, artifact `13654102892`. Original raw log confirms `lake env lean --trust=0 -DwarningAsError=true`, exact target `#check` and `#print axioms`, and `Transitive axiom allowlist accepted: ['propext', 'Classical.choice', 'Quot.sound']` with no `sorryAx`/admit; original `strict.log` empty. The *stronger* source-faithful Hartree-Cramer-Jet specialization was added later and is separately **pending** original strict CI 42572780271; this old success must **not** be imputed to it. No original §2.13 environment acceptance; 11/13 unchanged.
+
+
+### 2026-11-09 backward radial slope strict failure and repair; current acceptance boundary
+
+- Rechecked live branch HEAD and original strict workflow log. The pinned
+  [CI 42573485568](https://github.com/penghongzhong/HBL/actions/runs/42573485568)
+  failed at `ActualHartreeBackwardZeroLeftSpectralVolterraSlope.lean:34:17`
+  with the Lean warning-as-error `Variable name ha is not explicitly referenced`.
+  This is an unused proof binder, **not** a mathematical counterexample or
+  successful axiom audit. Source commit
+  [79652cdb](https://github.com/penghongzhong/HBL/commit/79652cdb23f19f188a60a3c66a06a3f9dcfe3ef1)
+  changes only that binder to `_ha`, preserving the exact theorem type;
+  new pinned strict [CI 42574795691](https://github.com/penghongzhong/HBL/actions/runs/42574795691)
+  was triggered and must not be accepted before its raw job and exact three-axiom audit.
+- The stronger true derivative estimate for **every finite spectral iterate**
+  in `ActualHartreeBackwardSpectralNeumannFiniteC1.lean` imports the
+  repaired slope module. Commit
+  [31502ca3](https://github.com/penghongzhong/HBL/commit/31502ca300c885f1e0f371a1573111281d13d3c2)
+  fixes its workflow's missing dependency-trigger paths (slope and finite-value
+  producer). Independent pinned [CI 42574812863](https://github.com/penghongzhong/HBL/actions/runs/42574812863)
+  is pending; the earlier [42574117292](https://github.com/penghongzhong/HBL/actions/runs/42574117292)
+  was still building at recheck. **No success is imputed to these CI runs.**
+- The true Green finite-value producer [CI 42572780271](https://github.com/penghongzhong/HBL/actions/runs/42572780271)
+  is directly verified **Success**, original job `129013716503`, artifact
+  `13654546805`. The raw job invokes pinned Mathlib and Lean,
+  `--trust=0 -DwarningAsError=true`, exact `#check`/`#print axioms`, and
+  an explicit allowed-axiom parser; the auxiliary status is **not** original 2.13.
+
+Even an all-finite **spatial** spectral Neumann bound, with its true
+radial derivative, does not control the new nonlinear Riesz cross terms,
+far-field outgoing C¹ rematching, moving Kummer basis/endpoint and real
+selected-speed derivatives, full positive **time** order and parameter
+Lipschitz. In particular the global (G) in the Neumann factor
+`2 G² r0 |delta|` must be tracked **uniformly along the moving physical
+orbit** before it can be called a small dynamical factor. Original revised
+strict theorem count remains **11/13**; the complete physical profile and
+PDE-derived Type-II main theorem remain outstanding.
