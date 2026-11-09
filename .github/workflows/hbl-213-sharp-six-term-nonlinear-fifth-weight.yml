@@ -3,7 +3,7 @@ on:
   push:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
-      - 'HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeightSharpSharp.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeightSharp.lean'
       - '.github/workflows/hbl-213-sharp-six-term-nonlinear-fifth-weight.yml'
   workflow_dispatch:
 permissions:
@@ -61,7 +61,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          target=HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeightSharpSharp.lean
+          target=HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeightSharp.lean
           module=HBL.TypeIIDynamicSelection.ActualHartreeSixTermNonlocalFifthWeightSharp
           lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
           lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
