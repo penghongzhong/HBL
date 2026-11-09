@@ -3391,4 +3391,68 @@ modulation and actual Hartree recursion still have to be
 derived; no Type--II rate is assumed.
 The manuscript environment count stays \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Original-source selected annular radial $H^1$,
+and a time-uniform clock alternative for the true moving shell.}
+The actual matched origin Kummer field $W_s$ is constructed from the
+\emph{same} genuine quartic Hartree Riesz source, its unique real
+two-column compatibility selector, and the corrected original Fredholm
+outgoing Cauchy jet.  The genuine almost-everywhere derivative
+identification, integrable radial density, and algebraic weighted-slope
+estimate now give
+\[
+ \int_{L/a}^{B}r^2\,|\partial_r W_s(r)|^2\,dr
+ \le (B-L/a)\,E_{\mathrm{full}}^2.
+\]
+Here $E_{\mathrm{full}}$ is the \emph{same-source} explicit bound
+from the original selected outgoing trace and regular channel, with
+no hidden inverse power of $L/a$.  The complete source-specific
+$H^1$ statement is strictly accepted in CI \texttt{42541621509}
+and strictly replayed in CI \texttt{42542644205}
+(artifact \texttt{13642522324}); the independent genuine
+integrable-density and a.e.-slope transfer certificates are
+strictly accepted in CI \texttt{42542447894} and
+\texttt{42542644210}, with artifacts \texttt{13642596037}
+and \texttt{13642297624}, respectively.  All three newer
+audits report precisely \texttt{propext},
+\texttt{Classical.choice}, \texttt{Quot.sound},
+with exact theorem \texttt{\#check}, \texttt{\#print axioms},
+\texttt{--trust=0}, and \texttt{warningAsError}.
+
+The moving cutoff's \emph{genuine} nonlinear Hartree commutator,
+including its Laplacian and the original nonlocal quartic density,
+has source-derived size $\ell(s)^2\sqrt{\ell(s)}$.  The
+previous power-rate conversion imposed the separate bound
+$\ell(s)\le s^{-\beta}$; this cannot be a premise of the final
+dynamical Type--II conclusion.  Combining the original
+moment-radius drift, the \emph{universal} smooth cutoff constants
+and the actual physical clock produces instead the candidate
+\[
+ \left\|
+ \mathcal R\bigl[\chi_{R(s)}f\bigr](s,r)
+ -\chi_{R(s)}(r)\mathcal R[f](s,r)
+ \right\|
+ \le K(M,B,A,J)\,\ell(s)^2
+ =K(M,B,A,J)\,t'(s),
+ \quad R(s)\le r\le2R(s).
+\]
+The single source file
+\texttt{ActualHartreeUniformFullShellClockNoBeta.lean},
+commit \texttt{378bbf2c}, places the cutoff constants before
+all orbit, time, source and radius variables.  It requires
+$0<\ell(s)\le1$ and the explicitly visible actual moment-flux,
+regularity and Strauss inputs, but \emph{no} prescribed
+renormalized-time decay or blowup exponent.
+Its independent strict CI is \texttt{42543500708};
+this strengthened uniform-quantifier statement is
+\emph{not accepted until that CI reports Success}.
+Even after acceptance, uniform control of $M,B,A,J$,
+the moving parameter/source derivatives, the global
+\emph{four-region} residual and its two-coordinate
+Lipschitz increment, finite real Hartree iteration,
+and the PDE-derived finite-time Type--II rate remain
+indispensable.  The formal manuscript count remains $11/13$.
+
 \end{document}
