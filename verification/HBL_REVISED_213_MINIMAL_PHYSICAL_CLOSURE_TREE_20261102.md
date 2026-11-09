@@ -280,3 +280,6 @@ Lipschitz. In particular the global (G) in the Neumann factor
 orbit** before it can be called a small dynamical factor. Original revised
 strict theorem count remains **11/13**; the complete physical profile and
 PDE-derived Type-II main theorem remain outstanding.
+
+
+**Additional raw C1 audit-parser correction (2026-11-09).** The original [CI 42574117292](https://github.com/penghongzhong/HBL/actions/runs/42574117292), job `129017876206`, compiled through the strict target but **failed its final audit script** with `AssertionError: expected one exact axiom report: 2`. Its audit file intentionally contained two distinct `#print axioms` declarations, so the script expectation was erroneous. Commit [f4c65bec](https://github.com/penghongzhong/HBL/commit/f4c65bec0cf74d0a7f90c0fe4baeb11dcfef35cd) corrects `len(reports)==1` to `len(reports)==2` while still individually checking the exact three-axiom allowlist for both declarations; new strict [CI 42575319719](https://github.com/penghongzhong/HBL/actions/runs/42575319719) is **pending**. The prior failure is not a Lean proof failure, but neither is it formal acceptance. Revised original count **11/13**.
