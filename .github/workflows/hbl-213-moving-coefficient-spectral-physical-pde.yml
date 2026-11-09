@@ -4,7 +4,8 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingCoefficientSpectralPhysicalPDE.lean'
-      - '.github/workflows/hbl-213-moving-coefficient-spectral-physical-pde.yml'\n      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralOriginalPDEMismatch.lean'
+      - '.github/workflows/hbl-213-moving-coefficient-spectral-physical-pde.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralOriginalPDEMismatch.lean'
   workflow_dispatch:
 permissions:
   contents: read
