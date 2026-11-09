@@ -4799,4 +4799,24 @@ endpoint and selected-speed time derivatives, parameter-Lipschitz,
 actual finite-layer recursion and PDE-derived Type--II rate remain
 open. Revised original tally: \textbf{11/13}.
 
+
+\medskip
+\noindent\textbf{10:57 UTC source-to-cubic proof repair, strict audit pending.}
+Original [CI 42603288411, job 129112754147] failed in the raw
+Lean compiler at the previously known real-power
+\texttt{rpow} rewrite and the new bound's parenthesis-sensitive
+\texttt{hBound.trans hSpatial} step.
+The scalar-power correction [commit \texttt{915e8952ef}]
+was separately replayed by CI 42603968381, whose original
+failure now isolates \emph{only} the latter multiplication-association
+mismatch (line 427). This is resolved in
+\texttt{a5dcde496232fd90e8f7c71bc5c81914e3b10143}
+by a ring-certified intermediate \texttt{hSpatialAssoc};
+the mathematical expression and true Hartree source are unchanged.
+The replacement exact three-target trust-zero compiler and axiom audit
+is CI \texttt{42605032312}, \emph{not yet marked successful}.
+Consequently the physical finite-profile stage remains unverified:
+no time-positive all-region nonlinear Hartree PDE residual or actual
+finite generated-layer closure follows from this spatial estimate.
+
 \end{document}
