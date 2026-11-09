@@ -3324,14 +3324,26 @@ radial integral
 \]
 The shortest generic statement is
 \texttt{ActualHartreeMatchedRadialH1FromAlgebraicSlope.lean}
-under strict CI \texttt{42541465634}.
+under initial strict CI \texttt{42541465634}, which
+failed only on an unused nonnegativity proof binder; repaired
+source \texttt{e09801db} is under new CI
+\texttt{42542644210}.
 The complete original-source, unique real Cramer speed and
 corrected Fredholm-jet producer feeds that bridge in
 \texttt{ActualHartreeTrueSelectedFullMatchedRadialH1.lean},
-strict CI \texttt{42541621509}; neither is accepted until
-its own compilation, exact type and original transitive axiom
-evidence pass. The related physical full matched algebraic
-energy theorem is under CI \texttt{42541312631}.
+\emph{strictly accepted} by CI \texttt{42541621509},
+original artifact \texttt{13641534753}, commit
+\texttt{62ce5d29}. Its target \texttt{\#check} and
+\texttt{\#print axioms} report precisely
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}, with zero-byte \texttt{strict.log}
+and no \texttt{sorryAx}.
+The source-selected full matched \emph{algebraic} energy
+estimate is also strictly accepted in CI
+\texttt{42541312631}, original artifact
+\texttt{13642007254}. Both conclusions hold for the
+same unique real Hartree/Cramer speed and its corrected
+Fredholm Cauchy data.
 The identity holds on the normalized Kummer annulus; the
 rescaled physical $\dot H^1$ and global four-domain assembly
 are separate obligations.
@@ -3365,10 +3377,14 @@ independently strictly verified in CI \texttt{42540898273},
 original evidence artifact \texttt{13642040098}, with empty
 strict log and exactly \texttt{propext},
 \texttt{Classical.choice}, and \texttt{Quot.sound} as
-transitive axioms. The \emph{integrated} inequality is a
-separate new Lean candidate,
+transitive axioms. The \emph{integrated} inequality is
+independently \emph{strictly accepted}:
 \texttt{ActualHartreeOneOrbitShellClockIntegrated.lean},
-strict CI \texttt{42541952006}, pending.
+CI \texttt{42541952006}, original evidence artifact
+\texttt{13641333733}, commit \texttt{8709737a}.
+The strict log is empty; full \texttt{\#check}
+and \texttt{\#print axioms} report only the three standard
+transitive axiom families, with no \texttt{sorryAx}.
 A uniform global four-region error controlled by this shell
 budget, finite physical terminal time, dynamically propagated
 modulation and actual Hartree recursion still have to be
