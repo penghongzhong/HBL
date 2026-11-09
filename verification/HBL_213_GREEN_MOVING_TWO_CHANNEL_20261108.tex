@@ -5425,6 +5425,12 @@ the \emph{complete original nonlinear Taylor remainder} has
 $L^{2,7/4}$ norm $O(s^{-9/4})$ without a negative
 power of $\ell$.
 
+The preceding sharp $S$ is an analytic estimate for the exact six-term
+formula; it is \emph{not} the conclusion of the older strict six-product
+formal theorem, which used the weaker $S_{\rm loose}$ and hence cannot
+supply the claimed quadratic source order.  A new strict sharp target
+is pending.\par
+
 The exact \emph{six complex-product fifth-weight algebraic estimate}
 has now passed pinned strict Lean CI \texttt{42659015432},
 job \texttt{129305194717}, artifact \texttt{13691974697},
@@ -5734,7 +5740,18 @@ native weighted space $L^{2,7/4}(dr)$, with
  \right\|_{L^{2,7/4}(dr)}^2
  \le Q\int_0^\infty(1+r)^{-3/2}\,dr=2Q.
 \]
-For $e\le1$ this is a weighted norm estimate of order $O(e^2)$.
+For $e\le1$ this particular, literally verified bound only yields
+an $O(e)$ weighted norm estimate: its coefficient
+$S_{\rm loose}=(A_0+A_1+A_R)(B_1+B_R)$ contains the spurious
+first-order product $A_0B_1=O(e)$, even though the actual Taylor
+remainder contains no $P_0C_1$.  The mathematically correct source
+coefficient is
+$S_{\rm sharp}=A_0B_R+(A_1+A_R)(B_1+B_R)=O(e^2)$.
+The independent Lean theorem
+\texttt{actual\_Hartree\_six\_original\_nonlocal\_Taylor\_products\_fifth\_weight\_sharp}
+has been submitted for strict CI, but is not yet accepted; consequently
+the previously strict old assembled estimate by itself does not
+establish the paper's quadratic $s^{-9/4}$ source order.
 The exact theorem
 \texttt{actual\_Hartree\_full\_original\_six\_term\_nonlinear\_weighted\_L2}
 and its original measurability theorem passed \emph{strict}
