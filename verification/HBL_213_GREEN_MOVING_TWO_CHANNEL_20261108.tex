@@ -3090,4 +3090,60 @@ equivalent rate-free integrability mechanism; it may not postulate
 a Type--II scale law in advance. The already certified finite
 nonlinear four-zone telescope proves an identity, not this estimate.
 
+
+
+\medskip
+\noindent\textbf{Full compatible Kummer radial slope: the indispensable
+outgoing Fredholm trace (new exact proof candidate).}
+The zero-left source bound alone does not control the physical matched
+slope: compatibility cancels the additional homogeneous singular
+coefficient, but the outgoing source integral at $r_0$ remains equal
+to the original Fredholm trace $J_-(r_0)$.
+Let $F=F_{\rm adj}$ and define
+\[
+ J_-:=\frac{U X'(r_0)-DU X(r_0)}{W_K(r_0)},
+ \qquad
+ \gamma:=\frac{Y(r_0)DU-Y'(r_0)U}{W_K(r_0)}.
+\]
+Here $X,Y$ are the \emph{physical} Kummer basis; in the original
+normalization $J_-=\operatorname{outgoingTrace}(K,r_0,U,DU)$.
+With $\mathcal S_K[F;0,0]$ the zero-left Cramer slope,
+the correct exact algebraic identity is
+\[
+ \boxed{\quad
+ \mathcal S_K[F;U,DU](r)=
+   \mathcal S_K[F;0,0](r)
+   +J_-\,Y'(r)+\gamma\,X'(r).
+ \quad}
+\]
+The term $J_-Y'(r)$ must \emph{not} be omitted. Since
+\[
+ |J_-|\le C_{\rm tr}r_0 N_{\rm adj},\quad
+ |r^2Y'(r)|\le(B+1)G,\quad
+ |X'(r)|\le2(D+1)Gr,\quad
+ |\gamma|\le G\{r_0|DU|+(r_0+1)|U|\},
+\]
+the ratio $r_0/r\le1$ supplies the crucial cancellation:
+\begin{align*}
+ r\,|\mathcal S_K[F;U,DU](r)|
+ &\le r\,|\mathcal S_K[F;0,0](r)|
+    +(B+1)G C_{\rm tr}N_{\rm adj}\\
+ &\quad+2(D+1)G^2 B^2
+         \{r_0|DU|+(r_0+1)|U|\}.
+\end{align*}
+No inverse moving-left-radius constant appears.
+The first identity is formalized as the candidate
+\texttt{ActualHartreeMatchedSlopeFromZeroLeftAndPhysicalJet.lean}
+with strict CI \texttt{42539730025}; the general bound is
+\texttt{ActualHartreeMatchedSlopeFromTraceEnergyBound.lean}
+with CI \texttt{42540031173}.
+These new proofs have \emph{not yet passed} their own strict
+build and axiom checks. The full physical conclusion will require
+the already established original Fredholm source/trace producer
+and the same Cramer speed, not a fresh independently assumed trace.
+It also requires the a.e./classical identification of the algebraic
+Green slope with a derivative of the actual field before asserting
+a radial $\dot H^1$ theorem.
+The original revised environment count is still $11/13$.
+
 \end{document}
