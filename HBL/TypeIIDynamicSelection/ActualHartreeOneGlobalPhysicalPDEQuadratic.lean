@@ -94,6 +94,7 @@ theorem actual_Hartree_one_global_PDE_quadratic_remainder_sharp
     calc
       _ ≤ 63 * (M + e) ^ 5 * e ^ 2 * bubble r ^ 5 := hTaylorRaw
       _ ≤ 63 * (M + CH) ^ 5 * e ^ 2 * bubble r ^ 5 := by
+        have hbubble : 0 ≤ bubble r := bubble_nonneg r
         have hfactor : 0 ≤ 63 * e ^ 2 * bubble r ^ 5 := by
           positivity
         calc
