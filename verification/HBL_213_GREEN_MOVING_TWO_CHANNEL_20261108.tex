@@ -5021,4 +5021,31 @@ difference.  Once proved at fixed order $9/4$, existing backward
 fixed-point theorems may be applied; until then revised~\S2.13
 and the final dynamical theorem remain unaccepted.
 
+
+\medskip
+\noindent\textbf{Two-scale Hartree envelope warning.}
+The global single-bubble majorant used in the conditional one-global
+nonlinear remainder theorem cannot be applied with a time-uniform
+coefficient to the actual nonzero regular radiation
+$Z_\ell(r)=\sqrt{\ell}\,z(\ell r)$.  For $z(1)\ne0$ and
+$0<\ell\le1$, the original Hartree bubble satisfies
+\[
+ \frac{|Z_\ell(\ell^{-1})|}{W(\ell^{-1})}
+  = |z(1)|\sqrt{\ell}\sqrt{1+\ell^{-2}}
+  \ge |z(1)|\,\ell^{-1/2}.
+\]
+Thus a bound $|V_c+Z_\ell|\le M W$ generally requires
+$M\gtrsim\ell^{-1/2}$, and the fifth-power coefficient in the
+bubble-Taylor estimate may incur $\ell^{-5/2}$.  The proof must
+instead exploit the original, separately certified two-scale
+majorants
+\[
+ (1+r)|V_c(r)|\le D,\qquad
+ (1+\ell r)|Z_\ell(r)|\le E\sqrt{\ell},
+\]
+together with regional Riesz and moving-interface bounds.
+The principal-defect reduction is an exact nonlocal PDE identity
+under its displayed premises, but does not yet provide uniform
+four-zone source-norm gain or the locked $9/4$ profile.
+
 \end{document}
