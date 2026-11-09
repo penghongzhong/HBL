@@ -19,7 +19,7 @@ is evaluated on the SUM of these fields; consequently every nonlocal
 cross interaction, moving endpoint contribution and time derivative is
 retained inside the genuine differential operator.
 
-The telescope below is an exact identity of these nonlinear residuals,
+This target is revalidated against the corrected spectral three-C1 producer.\nThe telescope below is an exact identity of these nonlinear residuals,
 not an invalid linear superposition. It provides the correct FINITE
 spectral-corrected target for the next source-norm estimates, but does not
 by itself prove positive time order or dynamically selected blowup.
