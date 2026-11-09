@@ -5879,10 +5879,15 @@ statements
 \texttt{actual\_Hartree\_original\_matched\_spectral\_unweighted\_C1\_no\_left\_radius}
 and
 \texttt{actual\_Hartree\_original\_spectral\_corrected\_derivative\_gap\_no\_left\_radius}
-have been submitted to strict GitHub CI \texttt{42693424757}.
-At the time of this note that CI remains \emph{pending}; the paper
-calculation is not recorded as a passed Lean theorem before the exact
-type and transitive axiom replay.  In particular, this fixed-time
+have now independently \emph{passed} strict pinned Lean
+CI \texttt{42693424757}, original job \texttt{129418885376},
+artifact \texttt{13707888793}. The job log confirms the exact
+\texttt{--trust=0}, warning-as-error, and two exact \texttt{\#check}
+and \texttt{\#print axioms} audits. The sole transitive axioms are
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}
+(including the standard universe suffix on the second report).
+The displayed physical radial-energy corollary is a further mathematical
+calculation, not an independently accepted Lean environment.  In particular, this fixed-time
 estimate does not imply a new temporal order for \(d\), construct the
 moving four-region Hartree orbit, or prove the physical packet
 recursion or Type--II rate. The original accepted count remains \(11/13\).
