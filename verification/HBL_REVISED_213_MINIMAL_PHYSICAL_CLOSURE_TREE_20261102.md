@@ -380,3 +380,27 @@ No extra original 13-environment acceptance is warranted.
 - CI 42603968381 failed at line 427 on multiplication grouping of the source-composite bound. The newer CI 42605032312, original job **129118702633**, evidence **13667892574**, confirmed that type mismatch fixed; its **only remaining error** was warningAsError linter unnecessarySeqFocus at ActualHartreePhysicalPlateauMovingSpectralQuadraticShellGain.lean:236:22, on the tactic sequence convert h using 1 <;> ring. Commit [8496cc48](https://github.com/penghongzhong/HBL/commit/8496cc483c661dea79cd752ff040cb906e8c03f2) replaces it with convert h using 1; ring. Strict three-target [CI 42610627350](https://github.com/penghongzhong/HBL/actions/runs/42610627350) **in progress at observation**, with no proof or axiom acceptance yet attributed to this new composite.
 - **Mathematical operator scope:** for actual physical Kummer plateau, L0(u0-u1)-Fadj=-delta*u0, whereas (L0+delta)(u0-u1)-Fadj=-delta*u1. The current moving-coefficient identity justifies the second cancellation in that plateau, not globally across the original four-zone moving nonlocal PDE. Thus the negative spatial radius power cannot be substituted for an original unshifted residual estimate or a positive time order. Still needed: the whole PDE time derivatives of basis, endpoints, actual real selected speeds, nonlocal cross-zone Hartree feedback, parameter Lipschitz, source generation, true finite recursion and dynamical Type-II rate.
 - **Original revised manuscript strictly 11/13**. No auxiliary statement increases this numerator.
+
+
+### 2026-11-09 structural bottleneck audit — stop conditional-to-original promotion
+
+**Verified new strict success**: [CI 42610627350](https://github.com/penghongzhong/HBL/actions/runs/42610627350) at commit `8496cc483c661dea79cd752ff040cb906e8c03f2`, original job `129137812702`, artifact `13670253589`; the job's three exact theorem `#print axioms` reports each contain only `propext`, `Classical.choice`, and `Quot.sound`. It compiles with Lean 4.35.0-rc3 / Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, `--trust=0`, and `warningAsError`. Accepted **auxiliary only**: genuine same-source current-coefficient plateau spectral *spatial* cubic shell bound. No temporal or global estimate follows.
+
+**Exact obstruction, confirmed by reading original Lean theorem TYPES, not by compiler-error guesses:**
+
+1. `ActualHartreeFullFourPieceFinitePDETelescoping.lean:93-143` proves `R(U_J)-R(U_0)=sum_j [R(U_{j+1})-R(U_j)]` by induction and `ring`. It proves **no estimate** on the original four-zone nonlocal operator `R` or its time/parameter difference.
+2. `ActualHartreePhysicalOneLayerGain.lean:84-125` defines a generated term's `order` from an input cause tag and nonnegative `extra`. There is **no producer here** that identifies every term in the actual nonlinear `R(U+H)-R(U)` with a certified generated term. `ActualHartreePhysicalFiniteProfile.lean:105-147` takes arbitrary packets and the genuine growth inequality `hstep` **as hypotheses**; its proof does not construct any actual physical Hartree packet from the preceding residual. In particular, even an empty packet list does not certify an approximate PDE solution.
+3. `WeightedJointBackwardResidualLipschitz.lean:224-256` proves a fixed-point theorem **conditional** on `hHlip`, `hGzero`, `hGlip`, `hsmall`, etc. The required *original Hartree source* direct threshold Lipschitz estimate is not produced there. `ActualHartreeFullInteractionTimeFromOrbit.lean` proves an accurate derivative formula **conditional** on actual orbit C¹, integrable dominating functions and bounds; it does not produce such a trajectory.
+
+**Noncircular, shortest remaining acceptance theorem (locked single-orbit target):** construct a genuine time-dependent, four-piece physical field `U_*(s,theta)` and a fixed finite list of its actual Hartree correction packets from their explicit same-PDE source, such that for `s>=s0`
+
+```text
+||R_H[U_*(s,theta)]||_X <= C s^(-9/4)
+||R_H[U_*(s,theta)]-R_H[U_*(s,eta)]||_X
+    <= C s^(-9/4) ||theta-eta||
+regional Hdot1 convergence + actual matching + no assumed blow-up speed
+```
+
+The **first** missing producer is one actual full-PDE corrected increment with positive gain `rho -> rho+kappa` in `X`, including exact moving Kummer coefficients/interfaces, selected-speed derivatives, and all cross-zone original Riesz contributions. The frozen plateau quadratic shell result is only one part of that increment. Once the *realized* one-step gain and direct difference bound are proved, iterate only to `9/4` (not arbitrary `N`) and invoke the existing direct-residual backward fixed-point framework. For the fixed-point input set `H(s,theta)=R_H(s,theta)-R_H(s,0)` so `H(s,0)=0` follows identically; keep the nonzero base residual separate. Then construct the actual solution and derive its rate dynamically rather than assuming the orbit or its rate in a source estimate.
+
+**Acceptance remains 11/13.** Do not launch new isolated C1/Volterra/identity CI runs except where the missing full-PDE increment theorem has a direct import edge. The next priority is the original physical one-step gain with a concrete `R_H` norm and direct threshold difference, **not** more proofs of generic termination or formal telescoping.
