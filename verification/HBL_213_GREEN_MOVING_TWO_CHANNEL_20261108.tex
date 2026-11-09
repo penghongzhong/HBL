@@ -3762,4 +3762,53 @@ cannot substitute for this spatial source estimate, and the source
 exponent cannot be declared before the same-orbit PDE produces it.
 The original revised environment count remains $11/13$.
 
+
+\medskip
+\noindent\textbf{Genuine nonlinear Hartree correction as a radial-conjugated
+shell source: exact moving-radius cost.}
+The true same-core remainder from
+\eqref{eq:hbl-global-core-spatial-remainder} is
+\(\mathcal E_{U,H}=\mathcal R[U+H]-\mathcal R[U]-\mathcal P_U(H)\).
+For \(R(s)\ge1\), \(1\le s\), and the visible same-field
+regularity, amplitude, dilation and speed hypotheses, the established
+original shell norm geometry converts its \emph{actual} nonlinear
+PDE residual to the radial-conjugated source
+\[
+ G_{s,R}(r):=
+ \mathbf1_{(R,2R)}(r)\,r\,|\mathcal E_{U,H}(s,r)|.
+\]
+Writing \(\kappa=\kappa_{\rm phys}>0\) and
+\(C_0=C_v(C_{\Lambda H}+C_H)+63(M+C_H)^5C_H^2\), the new
+strict Lean target proves (subject to its independent CI)
+\[
+ \boxed{\quad
+  G_{s,R}\in L^{2,7/4}(dr),\qquad
+  \|G_{s,R}\|_{L^{2,7/4}(dr)}
+  \le20 R^{13/4}C_0\,s^{-(\rho+\kappa)}.
+ \quad}
+\]
+The original source is conjugated by \(r\); the factor
+\(R^{13/4}=R^{1+7/4+1/2}\) includes the radial
+conjugation, weight and square-root shell volume, respectively.
+These cannot be erased by a pointwise temporal residual atom.
+The source file
+\texttt{ActualHartreeOneGlobalCoreConjugatedShellWeighted.lean},
+commit \texttt{3223bb8}, and exact-audit workflow
+\texttt{hbl-213-one-global-core-conjugated-shell-weighted.yml},
+commit \texttt{e707b646}, are under strict CI
+\texttt{42553324852}; do not claim Success before checking its
+original logs and artifact.
+For an additional \emph{derived} upper radius bound
+\(R(s)\le C_Rs^{1/2}\) the displayed coarse shell estimate behaves as
+\(O(s^{-(\rho+\kappa-13/8)})\); it reaches \(s^{-9/4}\)
+only if the available order satisfies
+\(\rho+\kappa\ge31/8\), unless the true shell gains
+extra radial cancellation or decay. This implication is an
+exponent audit, not an assumed physical \(R(s)\)-law or a
+new blowup-rate hypothesis.
+The real full four-domain profile and its moving/selected-speed
+parameter differences must still be derived, with no
+global weighted source or Type--II law asserted. Manuscript
+environment count remains \(11/13\).
+
 \end{document}
