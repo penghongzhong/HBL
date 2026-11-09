@@ -4746,8 +4746,16 @@ Here the last inequality uses \(a^3\ge (2R)^9=512R^9\).
 This is a strict geometric gain with a \emph{spatial} negative radius
 exponent. A separate Lean scalar reduction
 \texttt{actual\_Hartree\_quadratic\_backward\_shell\_cubic\_spatial\_factor}
-has been submitted to exact pinned CI \texttt{42602051763};
-it is \emph{pending} independent strict acceptance.
+was submitted to exact pinned CI \texttt{42602051763}.
+This original strict job \emph{failed} in the new scalar proof at
+\texttt{Real.rpow\_add} rewriting: a global rewrite changed the
+base \(R\) before multiplication could be combined.
+Commit \texttt{915e8952} now replaces that step by the exact
+\texttt{Real.rpow\_add\_one} equality. The revised strict
+CI \texttt{42603968381} is pending. The same-source
+composite \texttt{actual\_Hartree\_true\_plateau\_moving\_spectral\_quadratic\_cubic\_shell\_gain}
+has separately been submitted for exact type and allowed-axiom
+review; no Success is attributed before original raw logs.
 In particular, neither the geometric bound nor the finite spectral
 telescoping provides the original renormalized-time gain or parameter
 Lipschitz estimates. The complete moving-basis/endpoint/source
