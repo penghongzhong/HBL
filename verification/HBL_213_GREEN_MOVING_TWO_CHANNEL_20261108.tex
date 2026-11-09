@@ -3492,10 +3492,14 @@ the selected trajectory is an \emph{explicit regularity
 premise}, rather than an independent small or
 time-decaying envelope.  The generated
 \texttt{ActualHartreeUniformFullShellClockIntegral.lean}
-and its independent CI \texttt{42546689719} must
-not be called verified until its exact \texttt{\#check},
-\texttt{\#print axioms} and \texttt{--trust=0}
-strict run succeed.  Even if accepted this controls only
+and its independent strict replacement CI \texttt{42547747317}
+\emph{has succeeded}; source commit \texttt{01c263a0},
+original evidence artifact \texttt{13644346248}.
+The \texttt{\#check}, \texttt{\#print axioms},
+\texttt{--trust=0} and \texttt{warningAsError}
+audit reports only \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound},
+with no \texttt{sorryAx}.  Even if accepted this controls only
 the moving overlap shell, not the full spatially weighted
 four-region error or the rate-defining modulation ODE.
 
@@ -3593,8 +3597,11 @@ are \emph{strictly accepted} in
 \texttt{Quot.sound} (universe annotations allowed).
 The downstream genuinely realized residual-atom wrapper,
 \texttt{ActualHartreeOneGlobalCoreCorrectionResidualAtom.lean},
-has separate CI \texttt{42547935578} and is \emph{pending}
-until that CI is strictly successful.
+had an initial namespace-resolution failure in
+CI \texttt{42547935578} (original \texttt{bubble}
+was not opened); repaired source commit \texttt{416022b0}
+replaces it with strict CI \texttt{42548637148},
+\emph{pending} independent success and axioms audit.
 
 The remaining non-circular step is to produce the relevant
 full four-region $U,H$ from the \emph{same actual orbit} and
