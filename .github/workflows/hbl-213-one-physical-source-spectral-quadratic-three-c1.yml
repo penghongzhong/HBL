@@ -76,7 +76,7 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_source_spectral_quadratic_and_three_C1
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_source_selected_spectral_quadratic_and_three_C1
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_source_spectral_quadratic_and_three_C1
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
