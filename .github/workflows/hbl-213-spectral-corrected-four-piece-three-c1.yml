@@ -87,7 +87,7 @@ jobs:
           goal = 'HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins'
           assert goal in data, 'Missing exact theorem #check'
           assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom'
-          reports = re.findall(r'depends on axioms:\\s*\\[([^\\]]*)\\]', data)
+          reports = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', data)
           assert len(reports) == 1, f'Expected exactly one axiom report, got {len(reports)}'
           axioms = [v.strip() for v in reports[0].split(',') if v.strip()]
           allowed = ('propext', 'Classical.choice', 'Quot.sound')
