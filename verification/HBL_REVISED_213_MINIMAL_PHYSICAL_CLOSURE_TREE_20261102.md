@@ -440,3 +440,20 @@ The one-global genuine Hartree (full quartic nonlocal) source now has a proposed
 Explicit positive-gain factor: `kappa=actualHartreePhysicalKappa beta rhoStar >0`; coefficient `Cspeed*(CHd+CH)+63*(M+CH)^5*CH^2*bubble(r)^5`. The estimated nonlinear residual is genuine (same global quartic Hartree operator). Remaining producing edge is the original Fredholm/Kummer/outer-region linearized defect, including moving-time derivatives and pointwise-to-weighted source norms. Follow with **direct** threshold-coordinate difference and fixed `9/4` bound.
 
 New pinned trust-zero CI runs are tracked by workflow `.github/workflows/hbl-213-one-global-physical-pde-step.yml`; these targets are **pending, not accepted** until successful original job logs and exact #check / #print axioms audits. This proposal does **not** increase the retained manuscript count (still **11/13**).
+
+
+### 2026-11-09 two-scale envelope obstruction to global PDE-step instantiation
+
+**Mathematical scope correction (independent of CI result).** The new one-global nonlocal Taylor theorem requires the explicit *global* pointwise hypothesis `||U(s,r)|| <= M*bubble(r)`, with analogous `||H|| <= C_H s^{-rho} bubble(r)`. These are not known uniformly for the physically required `U=V_c+Z_ell`, `Z_ell(r)=sqrt(ell) z(ell*r)`. For a fixed legitimate regular radiation with `z(1) != 0`, at `r=1/ell`:
+
+```text
+||Z_ell(1/ell)|| / bubble(1/ell)
+ = |z(1)| sqrt(ell) sqrt(1+ell^(-2))
+ >= |z(1)| / sqrt(ell).
+```
+
+Therefore a uniform `M` for `U=V_c+Z_ell` generally fails; the required envelope constant can be `Omega(ell^(-1/2))`. Substituting this into the fifth-power Taylor coefficient incurs a possible `ell^(-5/2)` cost and may destroy the positive gain. **Do not infer** the four-zone order `9/4` or a uniform-in-time `X_s` estimate from a globally bubble-bounded correction theorem.
+
+The required actual next step is to preserve the two distinct radial scales using existing `ActualHartreeFullMixedRieszEnvelope.lean`: `(1+r)|V_c(r)| <= D` and `(1+ell*r)||Z_ell(r)|| <= E sqrt(ell)`, and to prove the full `U+H` second-order Hartree density and cubic multiplier remainder in those two envelopes across inner/Kummer/repair/remote regions. Then bound the *original linear principal defect* from the real Fredholm/Green matched field and its moving-time derivatives, integrate into the source norm, and establish direct threshold-coordinate differences. A one-scale global bubble Taylor estimate is an accepted conditional local algebraic tool, not a valid automatic global closure producer.
+
+The conditional principal-defect reduction (pending CI) still has a legitimate use wherever its hypotheses can genuinely be produced; it is not itself the missing uniform two-scale PDE estimate. Revised original count **11/13**.
