@@ -21,6 +21,11 @@ Positive time order for d, the moving basis and other full Hartree PDE
 terms remain a separate genuine dynamics task, not an added hypothesis.
 The source continuity is explicitly required to justify true classical
 derivatives and cannot follow from measurable radiation alone.
+
+The nested selected-source proof uses no redundant `dsimp` after refining
+the existential witness; this is the repair to the former strict proof's
+`tactic made no progress` error. Its spectral defect is spatial/frozen,
+not an assertion of positive renormalized-time order.
 -/
 
 noncomputable section
