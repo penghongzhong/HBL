@@ -82,7 +82,7 @@ theorem actual_Hartree_fifth_weight_square_to_original_weighted_L2
       calc
         _ = (1 + r) ^ (-(3 / 2 : ℝ) + 5) := by norm_num
         _ = (1 + r) ^ (-(3 / 2 : ℝ)) *
-              (1 + r) ^ (5 : ℝ) := Real.rpow_add ht _ _
+              (1 + r) ^ (5 : ℝ) := Real.rpow_add ht
         _ = (1 + r) ^ (-(3 / 2 : ℝ)) * (1 + r) ^ 5 := by
           simp only [Real.rpow_natCast]
     calc
