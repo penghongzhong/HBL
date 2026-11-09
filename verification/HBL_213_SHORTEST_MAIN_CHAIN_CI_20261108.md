@@ -769,3 +769,32 @@ Previously failed [CI 42546689719](https://github.com/penghongzhong/HBL/actions/
 - **One global actual-Hartree corrected residual atom**: [42548637148](https://github.com/penghongzhong/HBL/actions/runs/42548637148) is now **SUCCESS** (not pending), source commit `416022b05dac2f5f7ab0316e3bee2b4de46d19ad`, original evidence **13645185877**, exact audited target `HBL.TypeIIDynamicSelection.actual_Hartree_one_global_core_correction_realized_atom`. Original job confirms pinned compiler/dependencies, `--trust=0`, `warningAsError`, exact `#check` and `#print axioms`; transitive axioms **exactly** `[propext, Classical.choice, Quot.sound]`, no `sorryAx` or added axiom. The previous run **42547935578** failed because the original `bubble` namespace was not opened, now repaired. The atom's value is the literal same-global-background quartic nonlocal PDE remainder at a **fixed radial position**; it is conditionally bounded in time by `C s^(-rho-kappa_phys)` from explicit background/correction/speed bounds, with no second incompatible core-parameter path.
 - **Decisive non-circularity and norm boundary:** `WeightedResidualAtom ℂ` in `HBL/FiniteProfileResidualLedger.lean` is a **time-weighted scalar** class. Its theorem `actual_Hartree_one_global_core_correction_realized_atom` fixes `r>0` before constructing the atom. Thus it is **not** a theorem of the full spatial norm `‖⟨r⟩^(7/4) E(s,·)‖_(L²(dr)) ≤ C s^(-rho-kappa_phys)`. The scalar uniform bound obtained by replacing `bubble(r)^5` with 1 is not spatially integrable on the half-line. The speed-cross terms require a genuinely integrable radial profile and uniform moving-domain bounds, and the true correction `H` plus its principal equation must be derived from the **same four-piece physical Hartree orbit**. Earlier clock-only weighted scaling `ell^(2-sigma)` at sigma=7/4 gives `ell^(1/4)`, not `ell^2`. Neither a fixed-radius time atom nor the physical-clock shell integral resolves this. This is a **blocking mathematical norm gap**, not a CI elaboration error.
 - **Next exact main-chain obligations (no surrogate assumptions):** physical moving-basis Kummer derivative and the uniquely selected four-piece correction actually solving the principal Hartree PDE; genuine spatially weighted full four-region remainder with rate-free integrability or source-derived `s^(-9/4)` and two-threshold-coordinate Lipschitz; finite physical correction recurrence; original dynamical modulation/terminal shooting producing `mu_infty>9/16` and the Type-II law. Only strict closure of the original §2.13 increases the numerator to **12/13**, and only the derived Type-II theorem increases it to **13/13**.
+
+
+### 2026-11-09: retain the radial spatial profile in the original nonlinear correction (strict replay pending)
+
+A single physical background `U(s,r)`, its correction `H(s,r)`, and the literal original nonlocal quartic PDE yield the exact identity
+\[
+\mathcal E_{U,H}
+=i\,\Delta b\,\Lambda H+\Delta\omega\,H+\mathcal Q_{\mathrm H}(U,H).
+\]
+The old realized `WeightedResidualAtom` hides the spatial gain by flattening both modulation crosses into a radius-independent constant. The new **source file**
+`HBL/TypeIIDynamicSelection/ActualHartreeOneGlobalCoreSpatialRemainderBridge.lean` (latest source commit [ec8efcee](https://github.com/penghongzhong/HBL/commit/ec8efcee88434c0bd91b05ed45d95dd9a5673d5f)) instead retains **actual** radii:
+\[
+|\mathcal E_{U,H}(s,r)|
+\le C_v s^{-\rho}(|\Lambda H(s,r)|+|H(s,r)|)
++63(M+C_Hs^{-\rho})^5 C_H^2s^{-2\rho}(1+r^2)^{-5/2}.
+\]
+This statement needs the *visible* pointwise original-field bubble assumptions, speed control, regularity and measurability, but does **not** assume a radius-independent norm for \(\Lambda H\) or a residual gain. Initial [CI 42551656354](https://github.com/penghongzhong/HBL/actions/runs/42551656354) failed at the two complex-norm simplifications (its raw job reported \(\|db\|=|db|\) not discharged). They were corrected in commit `ec8efcee`; replacement [strict CI 42552019761](https://github.com/penghongzhong/HBL/actions/runs/42552019761) is **PENDING**, not counted as a success until audited.
+
+**Exact quantitative remaining norm gate** (mathematical consequence, NOT yet a Lean-accepted full source theorem): with \(w(r)=(1+r^2)^{7/8}\), the Fredholm conjugated source is \(r\mathcal E\). If the actual field's two speed-cross norms are finite, then
+\[
+\|wr\mathcal E(s,\cdot)\|_{L^2(0,\infty)}
+\le C_vs^{-\rho}\bigl(\|wr\Lambda H_s\|_2+\|wrH_s\|_2\bigr)
++63(M+C_Hs^{-\rho})^5C_H^2s^{-2\rho}\,C_*,
+\]
+\[
+C_*^2=\int_0^\infty r^2(1+r^2)^{-13/4}\,dr
+=\tfrac12\mathrm B(\tfrac32,\tfrac74)<\infty.
+\]
+The speed-cross norms are **not** derived by the fixed-radius `WeightedResidualAtom`. Indeed the generic bubble majorant \(|H|\lesssim (1+r^2)^{-1/2}\) alone fails to place \(rH\) in this globally weighted \(L^2\). The **actual mixed regional source space** remains the intended route: weighted conjugated inner source and unweighted exterior source (as in `ActualHartreeTwoWeightPhysicalSourceClosure.lean`), with true moving-shell support, physical speeds, Green/repair fields, and their parameter differences. Do not replace this with a fictitious global norm assumption, and do not assert the missing \(s^{-9/4}\) rate. Original revised manuscript tally stays **11/13**; §2.13 and Type-II main theorem remain open.
