@@ -171,7 +171,9 @@ theorem actual_Hartree_true_source_unique_speed_zero_left_energy_slope
           have hone : 1 ≤ a := (one_le_pow₀ hL).trans ha3
           have hc0 : a * |c| ≤ 1 := hSmallN.trans hepsnOne
           have hnonneg : 0 ≤ |c| := abs_nonneg c
-          nlinarith)
+          have hprod : 0 ≤ (a - 1) * |c| :=
+            mul_nonneg (by linarith) hnonneg
+          nlinarith only [hc0, hprod])
         ha hr0 hOrder z hz hSup hStrauss).neg
     have hFIspeed := actual_Hartree_moment_locked_scaled_speed_integrable_on
       a c (L / a) B ha hr0 hOrder
