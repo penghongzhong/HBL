@@ -5704,4 +5704,55 @@ support, its boundary jets and time derivative, and the other
 matched noncompact regions and the selected speeds must be included.
 
 
+
+
+\medskip
+\noindent\textbf{Strict original six-term nonlocal weighted estimate
+(9 November; static source integration).}
+The abstract fifth-weight six-product estimate is now joined to the
+\emph{actual} radial inverse-square Riesz potentials of the complex
+quartic density and its linear and nonlinear variations, rather than
+assuming those three potential bounds independently.  Namely, for
+measurable $U,H$ with
+\[
+ |U(r)|\le M,\qquad (1+r)|U(r)|^2\le K,\qquad
+ |H(r)|\le e\,W(r)\quad (r>0),\qquad M,K,e\ge0,
+\]
+put $C=C_{\rm Riesz}>0$ and
+\[
+ A_0=K^2C,\quad A_1=8MKeC,\quad
+ A_R=(6M^2+4Me+e^2)e^2C,\quad
+ Q=2\left[
+ A_R^2K^3+
+ \bigl((A_0+A_1+A_R)(6Ke+4(3M+e)e^2)\bigr)^2\right].
+\]
+Then the entire original complex nonlinear Hartree Taylor remainder
+$\mathcal R_{\rm H}^{\ge2}(U,H)$ is measurable and belongs to the
+native weighted space $L^{2,7/4}(dr)$, with
+\[
+ \left\|\mathcal R_{\rm H}^{\ge2}(U,H)
+ \right\|_{L^{2,7/4}(dr)}^2
+ \le Q\int_0^\infty(1+r)^{-3/2}\,dr=2Q.
+\]
+For $e\le1$ this is a weighted norm estimate of order $O(e^2)$.
+The exact theorem
+\texttt{actual\_Hartree\_full\_original\_six\_term\_nonlinear\_weighted\_L2}
+and its original measurability theorem passed \emph{strict}
+Lean CI \texttt{42660829087}, original job
+\texttt{129311622891}, evidence artifact
+\texttt{13694147812}.  The pinned toolchain was Lean
+\texttt{4.35.0-rc3}, Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5}.
+Both exact \texttt{\#check}/\texttt{\#print axioms} reports
+contain only \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}, with \texttt{--trust=0} and warnings
+as errors.  This settles the \emph{static original six-term
+source derivation} under its displayed field hypotheses; it
+does \emph{not} supply the $eW$ envelope for the moving
+uniquely selected Kummer repair.  In particular it cannot
+replace the shell-sensitive $e^2 X^{3/4}$ estimate above
+when the actual outer field only has bounded shell amplitude.
+No original \S2.13 theorem or dynamically derived Type--II
+rate is thereby certified; the formal total remains $11/13$.
+
 \end{document}
