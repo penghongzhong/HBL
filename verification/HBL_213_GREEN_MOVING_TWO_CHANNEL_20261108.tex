@@ -4447,8 +4447,12 @@ These results provide the source-specific quadratic spatial
 bound in the backward overlap, not a full temporal PDE gain.
 The independent \(L^{2,7/4}\) compilation
 \texttt{ActualHartreeMatchedBackwardQuadraticSpectralWeighted.lean}
-has strict CI \texttt{42568496790}; only a successfully
-audited job may upgrade its proof status. None of these
+has strict CI \texttt{42568496790}, original job
+\texttt{129000199272}, artifact \texttt{13652482181}, now
+\emph{Success} under pinned Lean 4.35.0-rc3, Mathlib,
+\texttt{--trust=0}, warnings-as-errors, exact target
+\texttt{\#check} and \texttt{\#print axioms}, and only
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. None of these
 auxiliary results can raise the original
 \(11/13\) acceptance count.
 
