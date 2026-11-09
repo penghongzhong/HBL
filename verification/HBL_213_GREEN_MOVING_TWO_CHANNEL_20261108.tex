@@ -5676,6 +5676,28 @@ difference then yield
 In particular, the coefficient for two corrections at a fixed
 physical shell is $O(s^{-\rho+3/8})=O(s^{-3/4})$
 when $\rho=9/8$.
+
+The original pointwise cubic-remainder difference estimate used above,
+\[
+ \bigl\|C_R(u,h)-C_R(u,k)\bigr\|
+ \le (6Me+3e^2)d,\qquad
+ \|u\|\le M,\quad \|h\|,\|k\|\le e,\quad
+ \|h-k\|\le d,
+\]
+is now \emph{independently strict Lean success} in
+\texttt{ActualHartreeCubicRemainderDirectLipschitz.lean}:
+CI \texttt{42672215921}, original job \texttt{129348755922},
+artifact \texttt{13700110697}, source commit \texttt{d870286}.
+The actual job used pinned Lean 4.35.0-rc3, pinned Mathlib,
+\texttt{--trust=0}, warning-as-error, exact \texttt{\#check}
+and \texttt{\#print axioms}; the sole transitive axioms are
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+This proves the original \emph{cubic factor} of the static
+difference rather than borrowing a generic assumed Lipschitz
+source bound.  The full shell-sensitive nonlocal \(L^{2,7/4}\)
+two-point result in the preceding display remains a paper
+calculation, not a separately accepted Lean target.
+
 This is \emph{not} the required full parameter-Lipschitz theorem
 for the physical moving orbit: varying $X(s,\theta)$ changes the
 support, its boundary jets and time derivative, and the other
