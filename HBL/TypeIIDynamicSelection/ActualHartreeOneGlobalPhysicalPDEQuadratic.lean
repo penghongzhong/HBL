@@ -181,6 +181,7 @@ theorem actual_Hartree_one_global_PDE_locked_nine_fourths
     hs (by norm_num) hCs hCHd hCH hM hr
     hUtime hHtime hUspace hHspace hUsecond hHsecond
     hUmeas hHmeas hSpeed hDilation hUB hHB hPrincipal
-  convert h using 1 <;> norm_num
+  have hexp : (-2 * (9 / 8 : ℝ)) = -(9 / 4 : ℝ) := by norm_num
+  simpa only [hexp] using h
 
 end HBL.TypeIIDynamicSelection
