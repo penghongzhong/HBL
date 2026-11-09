@@ -4197,13 +4197,17 @@ equation from the same physical source and its Cauchy jet;
 global measurability of the original Green pullback is retained
 as a visible regularity premise, not a size hypothesis.
 The strict CI \texttt{42564445964} is pending, not an accepted result.
-The companion raw CI \texttt{42563548889} failed on an unterminated
-nested Lean comment token in the matched-value source;
-commit \texttt{fa3d78fb} repairs that exact source-text error.
+The initial matched-value CI \texttt{42563548889} failed on a
+source-text comment token, corrected by \texttt{fa3d78fb}.
+The independent replacement CI \texttt{42564376709} is now
+\emph{strictly Success}, original job \texttt{128987568469},
+artifact \texttt{13650812421}: the exact backward-source theorem
+has passed \texttt{\#check} and \texttt{\#print axioms},
+\texttt{--trust=0}, \texttt{warningAsError}, with only
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
 The separate plateau spectral CI \texttt{42563426525} failed on
-an unused Lean binder with \texttt{warningAsError}; commit
-\texttt{f379fbfc} repairs it. Fresh strict CI and exact axiom checks
-are required for both.  Nothing here supplies a spectral time rate
+an unused Lean binder; its corrected strict CI
+\texttt{42565353947} must still be checked before acceptance.  Nothing here supplies a spectral time rate
 \(\delta(s)\), the moving-interface source norm outside the plateau,
 parameter Lipschitz bounds, a verified finite PDE recursion or
 the dynamical Type--II speed. The original count stays \(11/13\).
