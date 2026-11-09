@@ -210,7 +210,7 @@ theorem actual_Hartree_zero_left_inverse_square_energy_slope_core
       _ = ((B + 1) * G * J * Q) * r +
           (2 * (D + 1) * G * T) * r ^ 3 := by ring
       _ ≤ ((B + 1) * G * J * Q) * r +
-          (2 * (D + 1) * G * T) * (B ^ 2 * r) :=
+          (2 * (D + 1) * G * T) * (B ^ 2 * r) := by
         exact add_le_add (le_refl _)
           (mul_le_mul_of_nonneg_left hr3 hXFull)
       _ = E * r := by dsimp [E]; ring
