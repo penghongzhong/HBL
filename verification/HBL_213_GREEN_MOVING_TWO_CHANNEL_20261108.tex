@@ -4319,4 +4319,93 @@ renormalized Hartree PDE time remainder, parameter Lipschitz,
 genuine generated-source recurrence, or a dynamically deduced
 Type--II law.  Formal original acceptance remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Backward zero-left Volterra quadratic source: exact spatial scale budget.}
+The original physical backward plateau is
+\([R,2R]\) with \(R=L/2\); its normalized interval is
+\([r_0/2,r_0]\) with \(r_0=L/a\). This interval is to the
+\emph{left} of the actual zero-Cauchy-jet anchor \(r_0\);
+the previously proved forward Green estimate has no automatic
+validity there. For the genuine matched reference field
+\(u_0\), the source-locked two-channel Fredholm estimate gives
+\[
+ |u_0(r)|\le D_R,\qquad r_0/2\le r\le r_0,
+ \qquad
+ D_R=C_{\rm val}N_F+8R^2\mathcal A_{\rm shell}.
+\]
+Let \(q(r)=\delta u_0(r)\), and let
+\(u_1=G_{K_0}[q;0,0]\) denote the original
+\emph{zero-left Cramer} correction.
+The genuine Wronskian representation, after canceling its
+left coefficient, reads
+\[
+ r u_1(r)=
+ y_K(r)\int_{r_0}^{r}\frac{x_K(v)\,q(v)}
+              {vW_K(v)}\,dv
+ +x_K(r)\int_{r_0}^{r}\frac{y_K(v)\,q(v)}
+              {vW_K(v)}\,dv,
+ \qquad r_0/2\le r\le r_0,
+\]
+with the signs of the original two Green primitives
+retained in their actual definitions. In the absolute-value
+estimate their orientation is immaterial. Under the real
+inverse-linear bound
+\[
+ |q(v)|\le \frac{M}{v},\qquad
+ M=r_0|\delta|D_R,
+ \qquad r_0/2\le v\le r_0,
+\]
+the exactly normalized Wronskian and bounded regularized
+Kummer modes yield
+\begin{equation}
+ \sup_{r_0/2\le r\le r_0}|u_1(r)|
+ \le2G^2M=2G^2r_0|\delta|D_R.
+ \label{eq:hbl-backward-zerojet-spectral-value}
+\end{equation}
+The new strict Lean candidate
+\texttt{ActualHartreeBackwardZeroLeftSpectralVolterra.lean}
+is assigned CI \texttt{42567116515}; its initial
+CI \texttt{42566011025} failed on an unused positive-anchor
+Lean proof binder, not an invalid integral identity.
+The source-to-field composition is a second candidate
+\texttt{ActualHartreeMatchedBackwardQuadraticSpectralSource.lean},
+CI \texttt{42566992080}. Neither is marked accepted until
+the actual strict logs and axiom audits succeed.
+
+Combining \eqref{eq:hbl-actual-spectral-quadratic-plateau},
+\eqref{eq:hbl-backward-zerojet-spectral-value}, and the
+original conjugated moving-shell volume estimate, the
+\emph{conditional} quadratic bound is
+\[
+ \left\|
+ \mathbf 1_{(R,2R)}y\,a^{-2}\delta u_1(y/a)
+ \right\|_{L^{2,7/4}(dy)}
+ \le40G^2\,\frac{LR^{13/4}}{a^3}
+       |\delta|^2D_R.
+\]
+The physical separation \(a\ge L^3\), \(L=2R\), gives
+\begin{equation}
+ \boxed{\quad
+ \left\|\mathbf 1_{(R,2R)}
+       y\,a^{-2}\delta u_1(y/a)\right\|_{L^{2,7/4}}
+ \le \frac{5}{32}G^2R^{-19/4}|\delta|^2D_R.
+ \quad}
+ \label{eq:hbl-backward-spectral-weighted-quadratic}
+\end{equation}
+This is a \emph{calculated spatial-scale consequence},
+not yet an independently accepted Lean
+\(L^{2,7/4}\) theorem; in particular its
+source regularity and actual measurable field must be
+formally transferred. The geometric
+\(R^{-19/4}=2^{19/4}\ell^{19/64}\)
+is a genuine positive \(\ell\)-power
+(\(L=\ell^{-1/16}\)) without an assumed Type--II rate.
+It is \emph{not} automatically the required positive
+\(s\)-power. Moving time/basis/selected-speed derivatives,
+the three remaining nonlocal Hartree regions and parameter
+Lipschitz must still enter the original PDE norm.
+The revised theorem-environment score remains \(11/13\).
+
 \end{document}
