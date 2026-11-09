@@ -67,10 +67,14 @@ theorem actual_Hartree_quartic_density_Riesz_direct_Lipschitz
     have hCoef :
         12*M^2*e + 12*M*e^2*W + 4*e^3*W^2 ≤
         12*M^2*e + 12*M*e^2 + 4*e^3 := by
-      have h1 : 12*M*e^2*W ≤ 12*M*e^2 :=
-        mul_le_mul_of_nonneg_left hW1 (by positivity)
-      have h2 : 4*e^3*W^2 ≤ 4*e^3 :=
-        mul_le_mul_of_nonneg_left hW2 (by positivity)
+      have h1 : 12*M*e^2*W ≤ 12*M*e^2 := by
+        simpa only [mul_one] using
+          (mul_le_mul_of_nonneg_left hW1
+            (show (0 : ℝ) ≤ 12*M*e^2 by positivity))
+      have h2 : 4*e^3*W^2 ≤ 4*e^3 := by
+        simpa only [mul_one] using
+          (mul_le_mul_of_nonneg_left hW2
+            (show (0 : ℝ) ≤ 4*e^3 by positivity))
       linarith
     calc
       |F x| ≤
