@@ -1410,3 +1410,18 @@ This is the 3D radial **native** energy estimate, explicitly free of inverse pow
 ### Quantified sharp shell deficit (analytic obstruction, not a Lean closure)
 
 For the largest shells admitted by the current physical support class, `X(s) ≍ s^(1/2)`, the rigorously established **conditional paper** power count `‖R_H^{≥2}‖ ≤ C e² X^(3/4)` with `e ≤ C s^(-ρ)` yields `s^(-2ρ+3/8)`. Achieving the *previous* `s^(-9/4)` target by this absolute-value bound alone requires `ρ ≥ 21/16`, an extra `3/16` amplitude decay over the provisional `ρ = 9/8`; equivalently the source lacks `s^(-3/8)`. The paper's annular counterexample makes the X exponent sharp for its size/energy/support class. A real PDE sign cancellation, smaller **dynamically derived** shell, or a revised recurrence that accepts the relative `s^(-3/4)` gain may avoid the stronger target. **None is established yet**, and no time rate or source envelope is added as a hypothesis. Original count stays 11/13.
+
+### 2026-11-09 shell-source time integration: non-oscillatory Duhamel obstruction
+
+**Power calculation (mathematical, not a new PDE theorem).** The sharp **conditional static** moving-shell nonlinear bound is `O(e(s)^2 X(s)^(3/4))`. At the proposed worst-case amplitude `e(s)=O(s^(-9/8))` and allowed shell scale `X(s)=O(s^(1/2))`, this gives only `O(s^(-15/8))`. Absolute future-time integration of the saturating positive scalar model gives
+`
+∫_s^∞ τ^(-15/8) dτ = (8/7) s^(-7/8),
+`
+and its ratio to the desired `s^(-9/8)` corrector is `(8/7)s^(1/4)`, unbounded. A *spatial relative order gain* of `3/4` is therefore not enough, by itself, for an **undamped absolute-Duhamel** profile recurrence: time integration consumes one order.
+
+In general `e=O(s^(-rho)), X=O(s^alpha)` yields source power `-2rho+3alpha/4`. Plain integration preserves the first correction's `s^(-rho)` class **only if** `rho >= 1+3alpha/4`. At `rho=9/8`, it requires `alpha<=1/6`; at `alpha=1/2`, it requires `rho>=11/8`. The currently proposed `rho=9/8,alpha=1/2` would need at least **another 1/4 power in the *time inversion* or source estimate**, or a different non-absolute PDE closure. This is a **necessary condition for this particular proof route**, not an impossibility claim for the actual renormalized Hartree dynamics, whose oscillations or modulation cancellation could improve the inversion.
+
+Created `HBL/TypeIIDynamicSelection/ActualHartreeShellDuhamelExponent.lean` (commit `3d1bb521`) with four elementary real-power and necessary-threshold Lean statements. The dedicated pinned strict workflow was introduced at `d1905694`, initial run [42710992024](https://github.com/penghongzhong/HBL/actions/runs/42710992024). **Pending exact job success and transitive axiom audit; never credit the revised original environments**. This necessary time-budget check does **not** replace a constructed physical moving-spectral field, Riesz residual, PDE inversion or modulation-driven Type-II rate.
+
+**Original revised acceptance remains 11/13 (84.62%).**
+
