@@ -3982,6 +3982,58 @@ by the shifted-operator quadratic term \(\delta u_1\).
 The complementary support region \(y>L\) and its nonlocal
 feedback require separate control.
 
+
+A direct route to this missing left-hand estimate is to conjugate
+the \emph{original} Kummer equation by \(x(r)=r\,u_0(r)\).
+For the normalized first-order coefficient
+\(2/r+\tfrac{i}{2}r\), this gives the regular equation
+\[
+ x''(r)+\frac{ir}{2}x'(r)
+      +\left(\lambda-\frac i2\right)x(r)=rF_{\rm adj}(r),
+ \qquad \lambda=\operatorname{frozenZeroCoeff}(\mu,\theta).
+\]
+Writing \(r=r_0t\), \(t\in[1/2,1]\),
+\(r_0=L/a\), yields
+\[
+ \partial_t^2 x+\frac{i r_0^2t}{2}\partial_t x+
+ r_0^2\left(\lambda-\frac i2\right)x
+     =r_0^2 (rF_{\rm adj})(r_0t).
+\]
+Thus the \emph{proposed dyadic backward Green estimate}, to be
+proved with the actual original source rather than postulated, is
+\[
+\begin{split}
+ &\sup_{r_0/2\le r\le r_0}
+   \left(\lvert r u_0(r)\rvert+
+         \lvert r^2u_0'(r)\rvert\right)\\
+ &\qquad \le C_D
+  \left(\lvert r_0U\rvert+
+        \lvert r_0^2DU\rvert+
+        r_0^2\!\sup_{r_0/2\le r\le r_0}
+                         \lvert r F_{\rm adj}(r)\rvert\right),
+ \qquad 0<r_0\le1,\quad |\lambda|\le D.
+\end{split}
+\]
+This is a \emph{proof target}, not an already verified Lean
+declaration.  Its key feature is that the normalized IVP
+coefficients are bounded independently of \(r_0^{-1}\).
+With a backward bound \(H_{\leftarrow}\) on
+\(\lvert r u_0(r)\rvert\), the spectral forcing then satisfies
+\[
+ \left\|\mathbf1_{[R,2R]}(y)\,
+   y a^{-2}\delta\,u_0(y/a)\right\|_{L^{2,7/4}(dy)}
+ \le C\frac{|\delta|H_{\leftarrow}}{a}\,R^{9/4}
+ \le C'|\delta|H_{\leftarrow}L^{-3/4},
+ \quad R=L/2,\ a\ge L^3.
+\]
+The resulting spatial gain \(L^{-3/4}=\ell^{3/64}\)
+does \emph{not} by itself establish a positive
+\emph{time} exponent, nor does it control the moving
+basis, selected-speed derivative, or four-region
+nonlocal Hartree feedback. The required physical
+\(H_{\leftarrow}\), \(\delta(s)\), and corresponding
+two-parameter estimates remain to be derived.
+
 The actual weighted Green bound already established for
 \(u_0(x)\) covers \(x\in[L/a,B]\), whereas this backward overlap
 requires \(x=y/a\in[L/(2a),L/a]\).  Applying that right-hand
