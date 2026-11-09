@@ -44,7 +44,7 @@ theorem actual_Hartree_shell_ell_two_sqrt_le_true_clock_derivative
   calc
     (ell s) ^ 2 * Real.sqrt (ell s) ≤
         (ell s) ^ 2 * 1 :=
-      mul_le_mul_of_nonneg_left hSqrt (sq_nonneg (ell s))
+      mul_le_mul_of_nonneg_left hSqrt (pow_nonneg hell.le 2)
     _ = (ell s) ^ 2 := by ring
     _ = deriv time s := (hClock.deriv).symm
 
