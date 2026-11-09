@@ -941,3 +941,28 @@ still **not** an accepted original section.
 
 Exact original-environment ledger: **11/13 (84.62%)**, §2.13 open,
 final dynamically obtained Type-II theorem open.
+
+
+### Potential shortest terminal link: rate-free qualitative Type-II criterion (analytic, NOT Lean acceptance)
+
+If a **genuine PDE-generated** concentration scale satisfies
+\[
+ \ell_s=-b\ell,\qquad t_s=\ell^2,\qquad
+ T=\lim_{s\to\infty}t(s)<\infty,\qquad \ell(s)>0,
+\]
+then for every \(s\), writing \(B_s=\sup_{u\ge s}b(u)\in(0,\infty)\),
+\(\ell(u)\ge\ell(s)e^{-B_s(u-s)}\) for \(u\ge s\). Consequently
+\[
+ T-t(s)=\int_s^\infty\ell(u)^2\,du
+ \ge \frac{\ell(s)^2}{2B_s},
+ \qquad
+ \frac{\ell(s)^2}{T-t(s)}\le2B_s.
+\]
+Thus a separately derived \(b(s)\to0\) and finite terminal physical
+time imply the **qualitative Type-II scale**
+\(\ell(s)=o(\sqrt{T-t(s)})\), without any prescribed \(s^{-\beta}\)
+power. This is proposed as a shorter final step, **not a replacement**
+for an original theorem demanding a specific numerical explosion
+exponent and **not** a claimed Lean theorem.
+Neither \(T<\infty\) nor \(b(s)\to0\) is currently proven for the
+real four-domain Hartree profile, and those are genuine PDE obligations.
