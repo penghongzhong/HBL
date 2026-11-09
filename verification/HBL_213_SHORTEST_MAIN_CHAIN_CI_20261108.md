@@ -1199,3 +1199,51 @@ Independent Lean cubic-remainder two-point Lipschitz attempt [42661580975](https
 
 
 **Static same-shell two-point extension:** If `H₁,H₂` share the annulus `[X,2X]` and `|H_j|≤e`, `|H₁-H₂|≤d`, `e√X≤c₀`, the *actual* quartic/cubic Taylor differences and positive Riesz kernel give `‖R_H(U,H₁)-R_H(U,H₂)‖_{L^{2,7/4}}≤C e d X^{3/4}`. With `ρ=9/8`, `X≲s^{1/2}`, the Lipschitz coefficient is `O(s^{-3/4})`. This does **not** address moving-support parameters, differentiated Kummer basis, modulation derivatives or full four-region PDE cancellation. Source: synchronized §2.13 TeX (paper calculation; no Lean success or original environment credit).
+
+
+### 2026-11-09 actual original six-term nonlocal source: strict *assembled* weighted L2
+
+**Strict Success**, not merely the six-product algebraic precursor:
+[CI 42660829087](https://github.com/penghongzhong/HBL/actions/runs/42660829087),
+original job **129311622891**, evidence artifact **13694147812**;
+source file `HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalPhysicalWeightedL2.lean`.
+Direct original log confirms Lean **4.35.0-rc3**, Mathlib
+`a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`lake env lean --trust=0 -DwarningAsError=true`, empty
+`strict.log`, exact `#check` and `#print axioms` for BOTH
+`HBL.TypeIIDynamicSelection.actual_Hartree_full_original_six_term_nonlinear_weighted_L2`
+and
+`HBL.TypeIIDynamicSelection.actual_Hartree_complex_original_nonlinear_Taylor_measurable`.
+Both transitive axiom reports were **exactly**
+`[propext, Classical.choice, Quot.sound]`.
+
+Unlike the earlier abstract six-product inequality, the literal new theorem
+obtains the genuine background Riesz row, real-linear Riesz row and quadratic
+density Riesz row from *measurable* complex physical profiles `U,H` using
+only the primitive profile conditions (for `r>0`)
+`||U(r)||<=M`, `(1+r)||U(r)||²<=K`,
+`||H(r)||<=e*bubble(r)`, and `M,K,e>=0`.
+Writing `C=actualHartreeBubbleSquaredRieszDecayConstant`,
+`A0=K² C`, `A1=8 M K e C`,
+`AR=(6 M²+4 M e+e²)e² C`, and
+`Q=2[AR² K³+((A0+A1+AR)(6 K e+4(3M+e)e²))²]`,
+the theorem establishes `MemLp` of the **actual full complex
+quartic inverse-square Hartree Taylor remainder** under weight
+`affineJapaneseWeight (7/4) r` on the positive half-line and
+`∫weight²*||R||² ≤ Q*∫(1+r)^(-3/2) = 2Q`.
+For fixed `M,K` and `0<=e<=1`, this is `O(e²)` in the
+weighted L2 *norm*, with no independently postulated three Riesz-row
+bounds or nonlinear source majorant.
+
+**Scope warning:** the assumption `||H(r)||<=e*bubble(r)` is still an
+input, and the actually constructed uniquely selected Kummer replacement
+does not currently supply it with `e=O(s^{-9/8})`: moving-annulus
+conversion incurs the already diagnosed half-clock loss. Consequently
+this strict, fully assembled static theorem **does not establish**
+the source norm for the SAME physical four-piece orbit, nor the moving
+derivatives, shell-sensitive two-point bound, finite PDE iteration,
+original §2.13 or the dynamical Type-II law. The precise stationary
+annular salvage remains only `O(e² X^{3/4})`, and its sharpness
+within the coarse profile class remains material.
+
+**Original revised-paper environment acceptance: unchanged 11/13.**
