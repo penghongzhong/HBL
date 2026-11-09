@@ -813,3 +813,46 @@ Even if the *actual moment radius* has the independently known upper window \(R\
 \le20\,C\,Q^{13/4}\ell^{-3/4},
 \]
 **not** a vanishing positive gain. The estimate does not say the actual shell norm diverges: it proves only that a radius-independent pointwise clock bound and shell support alone cannot close the required Fredholm source budget. One needs stronger genuine spatial decay/cancellation, region-specific norms or actual PDE control of the remaining moving modes. This radius power is not an optional bookkeeping factor. No increase to 12/13.
+
+
+### 2026-11-09 original conjugated shell norm: actual nonlinear residual and explicit radius loss
+
+The exact same-global-background original quartic Hartree residual is now
+inserted into the genuine radial (q=rH) source, rather than reusing a
+scalar-in-time `WeightedResidualAtom`. New Lean module
+`ActualHartreeOneGlobalCoreConjugatedShellWeighted.lean` at commit
+[`3223bb8`](https://github.com/penghongzhong/HBL/commit/3223bb8ba464ead0f22636e2821f6685c898f094)
+and strict workflow at
+[`e707b646`](https://github.com/penghongzhong/HBL/commit/e707b64641473deebe0e51832c414278fda7b0b1)
+have independent [CI 42553324852](https://github.com/penghongzhong/HBL/actions/runs/42553324852).
+**PENDING until original Success and exact axiom logs are confirmed.**
+
+For true (E_{U,H}:=\mathcal R[U+H]-\mathcal R[U]-\mathcal P_U(H)),
+(s\ge1), (R\ge1), under the same-orbit regularity, speed and field
+bounds explicitly present in the theorem, the proposed verified target is
+[
+ \mathbf1_{(R,2R)}r|E_{U,H}(s,r)|\in L^{2,7/4}(dr),\qquad
+ \|\mathbf1_{(R,2R)}r|E_{U,H}(s,r)|\|_{L^{2,7/4}}
+ \le 20R^{13/4}C_0s^{-(\rho+\kappa_{\rm phys})},
+]
+where
+(C_0=C_{\rm speed}(C_{\Lambda H}+C_H)+63(M+C_H)^5C_H^2).
+This explicitly preserves the original conjugation factor (r), weight
+(r^{7/4}) and shell-volume factor (R^{1/2}). A blanket
+(O(s^{-\rho-\kappa})) pointwise residual does **not** yield the original
+(O(s^{-9/4})) four-region norm without further spatial decay.
+If one later derives (R(s)\lesssim s^{1/2}) from actual modulation, the
+coarse estimate is at most (O(s^{-(\rho+\kappa-13/8)})); achieving the
+original order by *this coarse bound* requires
+(\rho+\kappa\ge31/8). That is not an assumed law.
+
+**Additional non-circularity audit:** the historical
+`ActualHartreeKummerTailTimeGain.lean` and
+`ActualKummerPhysicalRepairTimeGain.lean` turn
+(L^{-3/8}=\ell^{3/128}) into an (s)-power by the explicit
+bootstrap `htrap : ell ≤ s ^ (-beta)`. This remains a conditional
+source of time order, not a PDE-derived rate and not an allowed
+final-threshold input. The physical clock/shell route bypasses
+`htrap` for selected overlap-shell terms only; global Kummer repair,
+selected-speed derivative and recursion still need a rate-free source
+of gain. **Original acceptance: 11/13.**
