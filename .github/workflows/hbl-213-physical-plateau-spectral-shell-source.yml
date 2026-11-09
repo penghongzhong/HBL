@@ -5,6 +5,9 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreePhysicalPlateauSpectralShellSource.lean'
       - '.github/workflows/hbl-213-physical-plateau-spectral-shell-source.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardMatchedValueGain.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreePlateauSpectralOriginalSourceCancel.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralFirstOrderShellGain.lean'
   workflow_dispatch:
 permissions:
   contents: read
