@@ -132,7 +132,5 @@ theorem actual_Hartree_backward_spectral_Neumann_all_finite_value_gain
           rw [pow_succ]
           ring
 
-#check @actual_Hartree_backward_spectral_Neumann_all_finite_value_gain
-#print axioms actual_Hartree_backward_spectral_Neumann_all_finite_value_gain
 
 end HBL.TypeIIDynamicSelection
