@@ -95,8 +95,10 @@ theorem actual_Hartree_spectral_inner_four_piece_three_C1_joins
   dsimp only at hSelected
   have hOriginalV : HasDerivAt v0 ((1 / a : ℝ) • J.2) L := by
     have h := hOrigLeft.2.1.scomp L ((hasDerivAt_id L).div_const a)
-    simpa only [v0, actualOriginMatchedKummerPullback, Function.comp_def,
-      id_eq, one_div, Complex.real_smul, Complex.ofReal_inv] using h
+    -- Make the pullback definition transparent before normalizing scalar actions.
+    change HasDerivAt (fun x : ℝ => w0 (x / a)) ((1 / a : ℝ) • J.2) L
+    simpa only [Function.comp_def, id_eq, one_div,
+      Complex.real_smul, Complex.ofReal_inv, mul_comm] using h
   have hJetDerivative : ((1 / a : ℝ) • J.2) = deriv u L :=
     hOriginalV.unique hOld.2.1
   have hCorrectedV : HasDerivAt v (deriv u L) L := by
