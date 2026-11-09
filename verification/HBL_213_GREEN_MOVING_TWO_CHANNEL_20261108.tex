@@ -5831,4 +5831,60 @@ Its explicit factor $e^2$ is \emph{not} a temporal gain for
 the actual moving four-region PDE until its hypothesized
 $|H(r)|\le eW(r)$ is produced by the selected physical orbit.
 
+
+\medskip
+\noindent\textbf{The actual unweighted spectral Cramer derivative on a
+shrinking matching annulus.}
+For the original complete matched Green field
+\(u_0(r)=u_{\rm Cramer}(r;F,U,DU)\), let
+\(q(r)=d\,u_0(r)\) and \(u_1=G_{\rm Cramer}[q;0,0]\).
+The only spectral source-size input is the original profile bound
+\[
+ \sup_{a\le r\le b}|r\,u_0(r)|\le H,\qquad
+ |q(r)|\le |d|H/r,\qquad 0<a\le b<R.
+\]
+Assume the regularized origin Kummer pair and its first derivatives are
+bounded by \(G\), and its origin coefficients have bound \(D\).
+The refined inverse-linear Green moment difference and the original
+regularized Wronskian derivative identity yield the pointwise
+\emph{unweighted} estimate
+\[
+ \boxed{\quad
+ \big|\partial_r u_1(r)\big|
+ \le C_{\rm spec}(D,G,b)\,|d|H,\qquad
+ C_{\rm spec}(D,G,b)
+ =(b+1)G\{1+(D+1)Gb^2\}+2(D+1)G^2b^2.
+ \quad}
+\]
+In particular the exact spectral-corrected profile satisfies
+\[
+ \big|\partial_r(u_0-u_1)(r)-\partial_r u_0(r)\big|
+ \le C_{\rm spec}(D,G,b)\,|d|H,
+\]
+with no negative power of the shrinking left endpoint \(a\).
+For \(r_0=L/a_{\rm phys}\) and \(y=a_{\rm phys}r\), the
+corresponding physical radial-energy consequence is
+\[
+ \int_L^{a_{\rm phys}b} y^2
+ \left|\partial_y u_1(y/a_{\rm phys})\right|^2\,dy
+ \le \frac{a_{\rm phys}}3(b^3-r_0^3)
+       C_{\rm spec}(D,G,b)^2|d|^2H^2.
+\]
+The factor \(a_{\rm phys}\) is genuine and is not suppressed by this
+spatial gain.  The origin data \(U,DU\), first profile and spectral source
+are those of the original source-matched Cramer field; the unique real
+Hartree selector and physical source-to-\(H\) producer are supplied by
+the preceding matched-source results.  The proposed precise Lean
+statements
+\texttt{actual\_Hartree\_original\_matched\_spectral\_unweighted\_C1\_no\_left\_radius}
+and
+\texttt{actual\_Hartree\_original\_spectral\_corrected\_derivative\_gap\_no\_left\_radius}
+have been submitted to strict GitHub CI \texttt{42693424757}.
+At the time of this note that CI remains \emph{pending}; the paper
+calculation is not recorded as a passed Lean theorem before the exact
+type and transitive axiom replay.  In particular, this fixed-time
+estimate does not imply a new temporal order for \(d\), construct the
+moving four-region Hartree orbit, or prove the physical packet
+recursion or Type--II rate. The original accepted count remains \(11/13\).
+
 \end{document}
