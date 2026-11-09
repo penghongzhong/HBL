@@ -144,7 +144,9 @@ theorem actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_nor
   have hcp : Continuous Fp := hcp0.add (continuous_const.mul hSpeedCont.2)
   have hcm : Continuous Fm := hcm0.add (continuous_const.mul hSpeedCont.1)
   refine ⟨hp, hm, ?_⟩
-  let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
+  -- Keep the jet at the literal anchor required by the quadratic Green theorem.
+  -- The physical equality 2 * R = L is applied only when converting the output.
+  let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (2 * R / a)
   let v := actualOriginMatchedKummerPullback K a (L / a) B Fo J.1 J.2
   let U : Set ℝ := Ioo 0 (a * scale)
   have hR : 2 < R := by dsimp [R, L]; linarith
