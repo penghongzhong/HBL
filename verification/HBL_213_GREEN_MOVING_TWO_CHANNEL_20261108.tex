@@ -5339,4 +5339,89 @@ parameter Lipschitz, a finite PDE profile to sufficient order, nor
 a dynamically selected Type-II rate. The retained original
 environment count therefore remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{Six-term full original Hartree Taylor remainder:
+two-scale weighted \(L^2\) route (paper computation; Lean pending).}
+For a measurable complex radial physical background $U$ and correction
+$H$, assume for $r>0$
+\[
+ t=1+r,\qquad t|U(r)|^2\le K,\qquad |U(r)|\le M,
+ \qquad |H(r)|\le eW(r),\quad 0\le e\le 1,
+\]
+with $M,K\ge0$, and $W(r)=(1+r^2)^{-1/2}$. Since
+$W(r)\le 2/t$ and $t^{-2}\le W(r)^2$, the actual quartic-density
+Taylor terms $\mathcal D_0=|U|^4$,
+$\mathcal D_1=4|U|^2\mathrm{Re}(\overline U H)$,
+and $\mathcal D_R=\mathcal D_{4,\ge2}(U,H)$ satisfy
+\[
+ |\mathcal D_0|\le K^2W^2,\qquad
+ |\mathcal D_1|\le 8MKeW^2,\qquad
+ |\mathcal D_R|\le QW^2,\quad
+ Q=e^2(6M^2+4Me+e^2).
+\]
+The genuine positive logarithmic radial inverse-square
+Riesz estimate, already strictly verified in the physical source
+library, now yields absolute convergence and
+\[
+ |P_0(r)|\le\frac{A_0}{t},\quad
+ |P_1(r)|\le\frac{A_1}{t},\quad
+ |P_R(r)|\le\frac{A_R}{t},
+ \quad
+ (A_0,A_1,A_R)
+ =C_R(K^2,8MKe,Q).
+\]
+Here $P_j=I_2[\mathcal D_j]$ and $C_R$ is the actual
+verified radial Riesz decay constant.
+The exact original cubic Taylor coefficients
+$C_0=|U|^2U$, $C_1=D(|U|^2U)[H]$,
+$C_R=\mathcal C_{3,\ge2}(U,H)$ obey
+\[
+ t^3|C_0|^2\le K^3,\qquad
+ |C_1|\le\frac{B_1}{t^2},\quad B_1=6Ke,
+ \qquad
+ |C_R|\le\frac{B_R}{t^2},\quad
+ B_R=4(3M+e)e^2.
+\]
+In particular, the exact nonlocal Taylor expansion is
+\[
+\begin{aligned}
+ \mathcal N_{\mathrm H}(U+H)-\mathcal N_{\mathrm H}(U)
+  -D\mathcal N_{\mathrm H}(U)[H]
+   &= P_0C_R+P_1(C_1+C_R)+P_R(C_0+C_1+C_R)\\
+   &= P_RC_0+\mathcal E_{\rm five}.
+\end{aligned}
+\]
+Set $S=A_0B_R+A_1(B_1+B_R)+A_R(B_1+B_R)$.
+The five remaining terms satisfy $|\mathcal E_{\rm five}|
+\le St^{-3}$; the slowest actual term obeys
+$t^5|P_RC_0|^2\le A_R^2K^3$. Thus,
+\[
+ t^5|\mathcal R_{\mathrm H}^{\ge2}(U,H)|^2
+ \le 2A_R^2K^3+2S^2,
+\]
+and, using
+$\langle r\rangle^{7/2}\le(1+r)^{7/2}$ and
+$\int_0^\infty(1+r)^{-3/2}\,dr=2$,
+\[
+ \boxed{\ 
+ \bigl\|\mathcal R_{\mathrm H}^{\ge2}(U,H)
+       \bigr\|_{L^{2,7/4}(dr)}^2
+  \le 4(A_R^2K^3+S^2).\ }
+\]
+For $0\le e\le1$, both $A_R$ and $S$ are $O(e^2)$
+with a constant depending only on the displayed physical
+$M,K,C_R$. Hence if $e(s)\le C_H s^{-9/8}$,
+the \emph{complete original nonlinear Taylor remainder} has
+$L^{2,7/4}$ norm $O(s^{-9/4})$ without a negative
+power of $\ell$.
+
+This is an actual six-product nonlocal algebraic and analytic
+calculation; it is not yet a strict Lean theorem. The hypotheses
+that a real Fredholm/Kummer four-piece physical correction $H$
+obeys the uniform $eW$ envelope, solves the original linearized
+principal equation, and has the necessary moving-time/parameter
+bounds must still be \emph{constructed}. The full original
+$\S2.13$ and final dynamical theorem remain unaccepted.
+
 \end{document}
