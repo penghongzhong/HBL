@@ -1097,3 +1097,48 @@ The genuine established physical separation \(a\ge L^3\) would give the purely *
 \]
 **This last norm inequality is still an analytical consequence, not a separate Lean-accepted theorem**: derive residual measurability, identify the same spectrally selected \(u_1\) and its legitimate physical source, and close the pending reverse-Volterra CI first. The 11/13 original statement tally is unchanged. Independently accepted actual-source/variable-coefficient cancellation: [42565184656](https://github.com/penghongzhong/HBL/actions/runs/42565184656) (artifact 13651342799); independent full physical moving coefficient equality: [42566073115](https://github.com/penghongzhong/HBL/actions/runs/42566073115) (artifact 13651906616). Neither assigns an \(s^{-9/4}\) bound.
 \n\n## 2026-11-09 precise original §2.13 acceptance gate and targeted reversal of the radius-loss argument\n\n- **The original retained 13-environment §2.13 (label `thm:finite-profile-stage3`) is strictly stronger than a frozen-order shell estimate or the newer `LockedSingleOrbitBackward.lean` conditional fixed-point theorem.** The reconciled manuscript actually states: fix `M>4`, `ell_lr>=0`, choose `N>M+3+ell_lr`; construct from the original Hartree PDE one finite physical profile `V_N[h;g]` such that `F_PDE(V_N)=P_N zeta_s+E_N`, `||E_N||_{Y_(M+1+ell_lr)} <= C s0^(M+1+ell_lr-N)`, `D_zeta Theta_N=I_2+o(1)`, and the full Hessian decomposition `L_N=L_0+K_sl+R_int`, including time-derivative integrability, parameter Lipschitz and center/radiation norms. This cannot be credited by a bare `s^(-9/4)` source estimate or by numerical finite termination. The 9/4 backward fixed-point code is an alternative downstream proof route only **after its actual forcing and all profile-to-energy matching are constructed**.\n\n- **New strict source-specific closure (not original count):** [CI 42567116515](https://github.com/penghongzhong/HBL/actions/runs/42567116515), source `fc7e87b`, original job `128995924948`, artifact `13652276776`, strictly verifies BOTH `actual_Hartree_zero_left_original_Green_backward_identity` and `actual_Hartree_zero_left_original_Green_backward_inverse_linear_bound`. The exact reverse Green-Wronskian integral bounds apply on the physically required normalized backward interval `[r0/2,r0]`, with no fictitious extension from the forward interval. Strict audit `--trust=0`, warnings as errors, exactly `propext, Classical.choice, Quot.sound` (universe instantiations permitted).\n\n- **New strict composition (not original count):** [CI 42566992080](https://github.com/penghongzhong/HBL/actions/runs/42566992080), source `2387705d`, original job `128995543355`, artifact `13652650582`. Exact audited `actual_Hartree_matched_backward_quadratic_spectral_source` begins from the original matched two-channel Fredholm field, uses the *same* source `q=delta*u0`, the true zero-Cauchy Green correction `u1=G_K0[q;0,0]` and the reverse interval to prove\n\n  `|a^(-2) delta u1(y/a)| <= a^(-2)|delta| * (2 G^2 ( (2R/a)|delta| D_R ))`, for `R<=y<=2R`. The original log explicitly shows `--trust=0`, `-DwarningAsError=true`, exact target `#check` and `#print axioms`, and only the three allowed axioms. This closes a material source-specific **spatial quadratic** gap, not §2.13.\n\n- **Immediate original radial-conjugated source norm:** New module `ActualHartreeMatchedBackwardQuadraticSpectralWeighted.lean`, source [df93c58b](https://github.com/penghongzhong/HBL/commit/df93c58b7e1caf00415a2e170aa04e77482a3c8d), workflow [4a8642fd](https://github.com/penghongzhong/HBL/commit/4a8642fdbf4eebb760cfb964479a035425d6159f), strict [CI 42568496790](https://github.com/penghongzhong/HBL/actions/runs/42568496790) **PENDING**. It composes the *actual same-source quadratic Green* inequality with the original `InWeightedL2 (7/4)` shell norm, retaining `R^(13/4)`, the physical `a^(-2)` and original field measurability premise. The separately derived scale reduction under `a>= (2R)^3` is `(5/32) G^2 R^(-19/4)|delta|^2 D_R` (analytical implication; do not mark it independently Lean-accepted until a formal target checks it).\n\n- **One viable meaningful shortening** of the manuscript statement is to construct a **single fixed high order `N0>M+3+ell_lr`** for one physical terminal radiation, if downstream energy/gluing and actual selected-rate proof are explicitly reverified for that `N0`. Do not replace it with an arbitrary empty packet list, a `hstep` hypothesis, a mere `mainJet=id`, or only `s^(-9/4)` with no full physical profile. **The currently proved finite recursion remains conditional on `hstep` and labels, not a producer of `V_N`.**\n\n**Strict original manuscript count still 11/13**. To move to 12/13 the missing source-to-profile producer must derive from the *actual four-zone nonlocal Hartree PDE* at least one positive full weighted residual-order step including real moving-time/endpoint and Kummer basis/selected-speed derivatives and parameter Lipschitz; finite continuation must reach the fixed sufficient `N0` and provide its actual Hessian terms. Only then may original §2.13 be accepted. The final dynamically selected Type-II orbit/rate remains the 13th environment.\n
+
+### 2026-11-09 quantitative spectral-shell time-order deficit at admissible beta
+
+This is a **conditional exponent audit** showing why merely piling up the
+new quadratic shell lemmas cannot close the original high-order §2.13.
+
+For the physical kinematic choice \(A=4\mu_\infty\), the locked formula in
+HBL/KinematicSliceNormalizationBridge.lean is
+\(\beta=(A+1)/(2A)=1/2+1/(8\mu_\infty)\). The original target
+restricts \(\mu_\infty>9/16\), hence
+\[
+  \frac12<\beta<\frac{13}{18}.
+\]
+Under the *hypothetical PDE-produced* terminal parameter speed
+\(|\delta(s)|\lesssim s^{-(2\beta-1)}\) and an optimistic matched
+Fredholm source budget \(D_R(s)\lesssim\ell(s)^{1/8}\) with
+\(\ell(s)\lesssim s^{-\beta}\), the newly obtained spatial bound
+\[
+ \|r\,a^{-2}\delta u_1\|_{L^{2,7/4}(R,2R)}
+ \lesssim \ell^{19/64}|\delta|^2 D_R
+\]
+yields **only the generic** time exponent
+\[
+  \rho_{\rm single}=
+  2(2\beta-1)+\frac{27\beta}{64}
+  =\frac{283\beta}{64}-2
+  <\frac{1375}{1152}\approx1.194<\frac94.
+\]
+The numerical bound is an *upper bound on the order supplied by these
+specific generic assumptions*, NOT a lower bound on the true residual;
+additional cancellation or stronger physical estimates may improve it.
+If \(D_R\) decays more slowly, the guaranteed order is even weaker.
+Thus a single frozen spectral correction, even with exact quadratic
+cancellation, cannot certify the **required \(s^{-9/4}\)** from these
+available generic rate inputs, let alone the original arbitrary fixed
+\(N>M+3+\ell_{\rm lr}\). The only honest routes are genuine
+higher-order physical recursion with verified source classification,
+or a separately justified reformulation of the final shooting/energy
+argument. Do NOT multiply the same shell gain repeatedly without
+constructing actual new physical PDE corrections.
+
+The exact Kummer quadratic source and backwards Volterra source are
+strictly verified; as of this audit the full time-dependent actual
+profile, feedback, parameter/Lipschitz estimates and generated-term
+recursion remain absent. Revised original count still **11/13**.
