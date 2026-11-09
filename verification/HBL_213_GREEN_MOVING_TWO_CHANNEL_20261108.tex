@@ -5619,4 +5619,34 @@ can close with the weaker $3/4$ positive relative gain rather than
 silently assuming the stronger full-bubble $s^{-9/4}$ bound.
 This computation does not change the accepted 11/13 environments.
 
+The $X^{3/4}$ exponent cannot be reduced using only the preceding
+size, support and energy bounds.  To see this, take smooth nonnegative
+radial cutoffs $\phi,\psi$ supported in $[1,2]$ and bounded below
+by a positive constant on $[4/3,5/3]$, and put
+\[
+ U_X(r)=X^{-1/2}\phi(r/X),\qquad
+ H_X(r)=e\psi(r/X),\quad eX^{1/2}\le1.
+\]
+These are finite-energy radial profiles, with
+$\|\nabla U_X\|_{L^2(\mathbb R^3)}=O(1)$,
+and satisfy uniform bounds of the displayed background class.
+Every coefficient in the positive real Hartree Taylor expansion is
+nonnegative.  On $4X/3\le r\le5X/3$,
+\[
+ \mathcal D_R(U_X,H_X)\gtrsim e^2X^{-1},
+ \quad I_2[\mathcal D_R](r)\gtrsim e^2,
+ \quad C_0(r)\gtrsim X^{-3/2},
+\]
+hence
+\[
+ \|\mathcal R_{\rm H}^{\ge2}(U_X,H_X)\|_{L^{2,7/4}(dr)}
+ \gtrsim e^2X^{3/4}.
+\]
+Thus an $e^2$ bound uniform in $X$ is \emph{false for this
+general radial-energy size class}. A better order for the
+\emph{actual} Hartree orbit must exploit additional dynamical
+structure (cancellation, stronger selected jet or radial-energy tail
+smallness), not just a sharper use of the same absolute-value
+inequalities.  No such dynamical improvement is yet certified.
+
 \end{document}
