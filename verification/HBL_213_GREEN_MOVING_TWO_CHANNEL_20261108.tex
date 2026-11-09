@@ -4879,4 +4879,51 @@ order, global nonlocal feedback bound, Lipschitz estimate, true
 finite-layer recursion or dynamically selected Type--II rate follows.
 Original revised manuscript count remains \textbf{11/13}.
 
+
+\medskip
+\noindent\textbf{Structural verification boundary (November 9, 2026).}
+Strict CI \texttt{42610627350}, original job \texttt{129137812702}
+and artifact \texttt{13670253589}, has now succeeded for all three exact
+moving-spectral backward-shell audit targets. Only
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound} occur
+in their transitive Lean axiom reports.
+This verifies a same-Hartree-source \emph{spatial} spectral-quadratic
+and cubic shell estimate; no temporal gain or global PDE consequence is asserted.
+
+The precise missing implication is not the finite telescoping identity
+\[
+  \mathcal R_{\mathrm H}(U_J)-\mathcal R_{\mathrm H}(U_0)
+  =\sum_{j=0}^{J-1}
+  \bigl[\mathcal R_{\mathrm H}(U_{j+1})
+        -\mathcal R_{\mathrm H}(U_j)\bigr],
+\]
+which is already strictly checked.  It is the \emph{genuine one-step
+physical estimate} derived from that same original nonlinear Hartree
+operator, without supplying the improvement as an independent hypothesis:
+\[
+  \|\mathcal R_{\mathrm H}(U_j+H_j)\|_{X_s}
+   \le C_j s^{-(\rho_j+\kappa)},\qquad
+  \|\mathcal R_{\mathrm H}(U_j+H_j;\vartheta)
+   -\mathcal R_{\mathrm H}(U_j+H_j;\eta)\|_{X_s}
+   \le C_j s^{-(\rho_j+\kappa)}|\vartheta-\eta|.
+\]
+The present \texttt{ActualHartreePhysicalFiniteProfile.lean} accepts
+a weight step \texttt{hstep} and a finite packet list as inputs; it does
+not produce either from the physical PDE.  The backward Banach theorem
+similarly accepts the direct residual Lipschitz bound as an explicit
+hypothesis.  These are honest conditional statements but cannot certify
+revised~\S2.13.  Under the locked single-orbit reduction, the only
+required endpoint is fixed order $9/4$; arbitrary-order recursion and
+a full Fr\'echet derivative family need not be recovered.
+
+An admissible closing proof must supply the true four-zone moving-time
+source decomposition, all nonlocal Riesz interactions, the selected
+two real speeds and their time motion, moving Kummer coefficients and
+interfaces, the regional $\dot H^1$ bounds, and the parameter difference
+in the exact norm $X_s$.  A separate time-rate or blow-up-rate hypothesis
+cannot fill this gap.  Consequently the revised original acceptance
+stays \textbf{11/13}; only a proved physical $9/4$ parametrix can
+promote \S2.13 and only a constructed true Hartree orbit with dynamically
+selected rate can promote the final theorem.
+
 \end{document}
