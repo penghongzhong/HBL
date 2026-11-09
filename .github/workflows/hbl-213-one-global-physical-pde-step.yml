@@ -82,7 +82,7 @@ jobs:
           goal='actual_Hartree_full_PDE_next_gain_from_principal_cancellation'
           assert goal in s, 'missing exact target audit'
           assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
-          reports=re.findall(r'depends on axioms:\\s*\\[([^\\]]*)\\]',s)
+          reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
           assert len(reports)==1, f'expected one exact axiom report: {len(reports)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in reports:
