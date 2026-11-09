@@ -919,8 +919,16 @@ PDE residual on a sum of spectral four-piece fields, not a claim
 that the increments are positive time order. A further current-HEAD
 replay was triggered from source commit
 [`2f83bf26e`](https://github.com/penghongzhong/HBL/commit/2f83bf26eecf4d8d8eb3c67c7da3114507aff3ae),
-[CI `42553800224`](https://github.com/penghongzhong/HBL/actions/runs/42553800224);
-it must be separately checked before advertising the new replay as successful.
+[CI `42553800224`](https://github.com/penghongzhong/HBL/actions/runs/42553800224)
+has now **strictly SUCCEEDED**, original job `128954948052`,
+artifact **13646732923**. The workflow rebuilt the actual finite
+spectral-corrected four-zone field under pinned Lean 4.35.0-rc3 and
+Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+ran exact `#check` and `#print axioms` under
+`--trust=0 -DwarningAsError=true`, and the original job explicitly
+accepted only `[propext, Classical.choice, Quot.sound]`.
+No `sorryAx` or additional axiom. This is a true **auxiliary
+nonlinear PDE identity**, not a residual time-gain estimate.
 
 The new `ActualHartreeOneGlobalCoreConjugatedShellWeighted.lean`
 treats the *literal* same-background Hartree correction residual in
