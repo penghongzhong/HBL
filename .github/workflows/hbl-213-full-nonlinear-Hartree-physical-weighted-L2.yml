@@ -1,0 +1,113 @@
+name: HBL entire true nonlocal quartic Hartree Taylor physical weighted L2 strict
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalPhysicalWeightedL2.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeHalfRadialOriginalRieszLinear.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalSixTermWeightedL2.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalSixTermFifthWeight.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeHalfRadialCubicTaylorWeights.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalSixTermFifthWeight.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeHalfRadialCubicTaylorWeights.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeight.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSixTermNonlocalFifthWeight.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeHalfRadialCubicTaylorWeights.lean'
+      - '.github/workflows/hbl-213-full-nonlinear-Hartree-physical-weighted-L2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict-locked-gain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          test -f "$archive" || curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache@v4
+        with:
+          path: .lake/packages
+          key: hbl-pinned-mathlib-tactics-${{ runner.os }}-a98628e16c11f5167f16124105ddce53efa9bfe5-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, subprocess, textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+          lake exe cache get Mathlib.Tactic > evidence/tactic-cache.log 2>&1 || true
+          lean --version > evidence/compiler-version.txt
+          git rev-parse HEAD > evidence/commit.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-original-riesz-zero-left-radial-energy-slope-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-realized-atlas-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-kummer-atom-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Strict true entire Hartree nonlinear weighted L2 audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=HBL/TypeIIDynamicSelection/ActualHartreeFullNonlocalPhysicalWeightedL2.lean
+          module=HBL.TypeIIDynamicSelection.ActualHartreeFullNonlocalPhysicalWeightedL2
+          lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
+          lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
+          test ! -s evidence/strict.log
+          cat > HartreeFullNonlocalPhysicalWeightedL2Audit.lean <<'EOF'
+          import HBL.TypeIIDynamicSelection.ActualHartreeFullNonlocalPhysicalWeightedL2
+          set_option pp.all true
+          set_option pp.maxSteps 10000000
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_full_original_six_term_nonlinear_weighted_L2
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_original_six_term_nonlinear_weighted_L2
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_complex_original_nonlinear_Taylor_measurable
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_complex_original_nonlinear_Taylor_measurable
+          EOF
+          lake env lean --trust=0 -DwarningAsError=true HartreeFullNonlocalPhysicalWeightedL2Audit.lean > evidence/audit.log 2>&1
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('evidence/audit.log').read_text()
+          assert 'actual_Hartree_full_original_six_term_nonlinear_weighted_L2' in s, 'missing exact theorem'
+          assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
+          reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
+          assert len(reports)==2, f'expected two exact axiom reports: {len(reports)}'
+          allowed=('propext','Classical.choice','Quot.sound')
+          for report in reports:
+            axioms=[v.strip() for v in report.split(',') if v.strip()]
+            assert all(a in allowed or any(a.startswith(b+'.{') for b in allowed) for a in axioms),axioms
+            print('Transitive axiom allowlist accepted:',axioms)
+          PY
+          mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
+          cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
+          sha256sum "$target" > evidence/source-hashes.txt
+          cp HartreeFullNonlocalPhysicalWeightedL2Audit.lean evidence/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-true-entire-Hartree-nonlinear-weighted-L2-evidence
+          path: evidence
+          retention-days: 14
