@@ -4,6 +4,8 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralNeumannFiniteC1.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardZeroLeftSpectralVolterraSlope.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralNeumannFiniteGain.lean'
       - '.github/workflows/hbl-213-backward-spectral-neumann-finite-C1.yml'
   workflow_dispatch:
 permissions:
