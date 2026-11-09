@@ -4078,7 +4078,7 @@ remain the only formal inputs.  No change to the formal
 \noindent\textbf{Exact unshifted spectral PDE source: strict kernel acceptance.}
 For \(u_0=G_K[F_{\rm adj};U,DU]\) and
 \(u_1=G_K[\delta u_0;0,0]\), put \(w_\delta=u_0-u_1\).
-The \emph{original, unshifted} Kummer equation and its physical
+The \emph{fixed-reference, unshifted} Kummer equation and its physical
 pullback have now both passed the independent strict Lean audit
 \texttt{42562774111}, original job \texttt{128982599861},
 evidence artifact \texttt{13650098975}. In particular,
@@ -4207,5 +4207,46 @@ are required for both.  Nothing here supplies a spectral time rate
 \(\delta(s)\), the moving-interface source norm outside the plateau,
 parameter Lipschitz bounds, a verified finite PDE recursion or
 the dynamical Type--II speed. The original count stays \(11/13\).
+
+
+\medskip
+\noindent\textbf{Operator-identification gate for the actual moving Hartree PDE.}
+The exact operator choice for the original Hartree PDE has to be
+established from the physical renormalized equation, rather than
+inferred from an informal original/shifted label for a
+\emph{frozen} Kummer Green computation. For
+\(u_0=G_{K_0}[F_{\rm adj}]\), \(u_1=G_{K_0}[\delta u_0]\) and
+\(w_\delta=u_0-u_1\), both of the following are correct:
+\[
+ \boxed{\quad
+  \mathcal L_{K_0}w_\delta-F_{\rm adj}=-\delta u_0,
+  \qquad
+  (\mathcal L_{K_0}+\delta)w_\delta-F_{\rm adj}
+       =-\delta u_1 .
+ \quad}
+\]
+The first identity was strictly audited by
+\texttt{42562774111}; the second by the existing matched
+spectral Green theorem. If \(\delta(s)\) denotes the
+\emph{actual coefficient displacement}
+\(q_0(\mu(s),\theta(s))-q_0(\mu_0,\theta_0)\), then
+\(\mathcal L_{\mu(s),\theta(s)}
+=\mathcal L_{\mu_0,\theta_0}+\delta(s)\)
+as frozen spatial differential expressions and the
+corresponding \emph{moving-parameter} spatial residual is
+\(-\delta u_1\), quadratic under the source-derived
+Volterra bound. By contrast, for a reference operator
+\(\mathcal L_{K_0}\) with an additional independently
+introduced correction parameter, \(-\delta u_0\) survives.
+Neither algebraic identity alone identifies the precise
+physical renormalized Hartree operator, whose moving basis,
+selected speeds, time transport and nonlocal couplings
+must be inserted from the same PDE orbit.
+Consequently the first-order backward-shell estimate is
+a valid \emph{reference-operator bound}; it is not proof
+that the full actual moving-parameter Hartree residual
+necessarily contains such an uncanceled term. This
+distinction avoids an invalid comparison of two different
+operators and does not change original \(11/13\) acceptance.
 
 \end{document}
