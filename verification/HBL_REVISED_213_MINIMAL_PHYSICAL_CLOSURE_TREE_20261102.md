@@ -353,3 +353,23 @@ the newer strict CI succeeds**. No original environment is closed:
 - The scalar-power rewrite is corrected by [915e8952](https://github.com/penghongzhong/HBL/commit/915e8952ef), original follow-up [CI 42603968381](https://github.com/penghongzhong/HBL/actions/runs/42603968381) independently confirms the **scalar rewrite no longer fails**; its sole raw remaining compiler error is the second source-composite multiplication association at line 427, artifact `13666464203`.
 - [a5dcde496](https://github.com/penghongzhong/HBL/commit/a5dcde496232fd90e8f7c71bc5c81914e3b10143) repairs this second error with a separate `hSpatialAssoc` ring-normalized inequality and a genuine `hBound.trans` chain. Strict three-target rerun: [CI 42605032312](https://github.com/penghongzhong/HBL/actions/runs/42605032312), pending original job `129118702633`. This composite must not be counted successful before original strict log and exact axiom readback.
 - The underlying source-specific *quadratic* physical shell bound remains strictly accepted at [CI 42595684617](https://github.com/penghongzhong/HBL/actions/runs/42595684617), original job `129087607890`. Original manuscript **11/13**; the missing time-dependent all-region Hartree residual, Lipschitz, actual finite recursion, and dynamical Type-II rate have not been proved.
+
+
+### Operator-scope warning (unshifted versus shifted) — 2026-11-09
+
+The already existing **actual physical original plateau** proofs
+`actual_Hartree_matched_spectral_original_unshifted_source` and
+`actual_Hartree_plateau_original_Kummer_PDE_spectral_source`
+force the distinction:
+`L0 (u0-u1) - Fadj = -delta*u0`, whereas
+`(L0+delta)(u0-u1) - Fadj = -delta*u1`.
+The new `R^(-19/4)|delta|^2 D_R` estimate concerns the **shifted-operator**
+quadratic correction. It does not close the original unshifted PDE unless
+the moving physical operator is *proved to be* that shifted operator and
+the complete nonlocal/time-dependent remainder has been accounted for.
+For the physically unshifted plateau, the independent already-proved
+source-faithful norm
+`actual_Hartree_true_plateau_original_spectral_shell_source_norm`
+retains the first-order `-delta*u0`, with `20 |delta| D_R R^(-3/4)`.
+This is a main-chain mathematical gate, not a bookkeeping choice.
+No extra original 13-environment acceptance is warranted.
