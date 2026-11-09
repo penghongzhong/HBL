@@ -1,3 +1,4 @@
+import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Tactic
 
@@ -70,5 +71,19 @@ theorem actual_Hartree_shell_plain_Duhamel_amplitude_threshold
        rho + 1) :
     (11 / 8 : ℝ) ≤ rho := by
   linarith
+
+
+/-- The exact *improper* future-time integral of the physical shell-sensitive
+source. This closes the analytic statement left paper-only by the exponent
+arithmetic: an absolute Duhamel primitive has order s^(-7/8), not s^(-9/8).
+It does not model an oscillatory Hartree propagator or establish its absence. -/
+theorem actual_Hartree_shell_exact_absolute_Duhamel_integral
+    (s : ℝ) (hs : 0 < s) :
+    (∫ t : ℝ in Set.Ioi s, t ^ (-(15 / 8 : ℝ))) =
+      (8 / 7 : ℝ) * s ^ (-(7 / 8 : ℝ)) := by
+  rw [integral_Ioi_rpow_of_lt (show -(15 / 8 : ℝ) < -1 by norm_num) hs]
+  have hpow : -(15 / 8 : ℝ) + 1 = -(7 / 8 : ℝ) := by norm_num
+  rw [hpow]
+  ring
 
 end HBL.TypeIIDynamicSelection
