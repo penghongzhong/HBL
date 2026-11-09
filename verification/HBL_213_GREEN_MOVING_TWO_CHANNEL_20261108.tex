@@ -2891,4 +2891,85 @@ The source-specific \emph{energy-weighted} $r|w_0'(r)|$ result
 requires its separate strict proof and audit. Neither estimate supplies
 the missing positive-time-order four-region PDE residual.
 
+
+
+\medskip
+\noindent\textbf{Derived source-selected, zero-left radial-energy slope:
+separate strict audit pending.}
+The zero-left radial-energy argument can be separated into an exact
+source-class Wronskian lemma and the distinct \emph{physical producer}.
+For a source $F$ with $|F(r)|\le Q_a/r^2$ and the original
+regular-channel Green moment
+$|B_F(r)|\le T$, the exact left-zero Cramer identity yields
+\[
+  \boxed{\quad r|\mathcal S_K[F](r)|
+     \le (B+1)G\bigl(1+(D+1)GB^2\bigr)Q_a
+            +2(D+1)GB^2 T,\quad r_0\le r\le B. \quad}
+\]
+Here $\mathcal S_K[F]$ denotes the \emph{algebraically defined}
+\texttt{actualOriginMatchedKummerSlope}; the strict Lean type
+does not identify it with a pointwise classical derivative for an
+arbitrary merely measurable source. A classical Green-derivative
+identification must be supplied by regularity of the same physical
+PDE trajectory (or a suitable almost-everywhere Sobolev statement).
+
+Crucially, the physical wrapper supplies both inputs without
+assuming them independently:
+\begin{align*}
+ F_{\rm adj}(r)&=F_0(r)
+     -p_1S_{\mathrm{scale}}(r)-p_2S_{\mathrm{phase}}(r),\\
+ F_0(r)&=-a^2\mathcal S_{\HH}(ar),\\
+ |F_{\rm adj}(r)|&\le Q_a/r^2,\qquad
+   Q_a\le C_n(N+Q),\\
+ |B_{F_{\rm adj}}(r)|&\le
+       \underbrace{\tfrac83\,GQL^{-3/8}
+                 +(C_{\rm sp}GBC_{\rm sel})(N+Q)}_{=:T_{\rm phys}},\\
+ |p_1|+|p_2|&\le (C_{\rm sel}/a)(N+Q).
+\end{align*}
+The \emph{same} unique real pair $(p_1,p_2)$ satisfies both
+physical source and full original Green-moment results;
+its uniqueness is used to identify the two producer outputs.
+In particular
+\[
+ \boxed{\quad
+ r|\mathcal S_K[F_{\rm adj}](r)|
+   \le (B+1)G\bigl(1+(D+1)GB^2\bigr)C_n(N+Q)
+       +2(D+1)GB^2T_{\rm phys}.
+ \quad}
+\]
+This is a source-specific candidate for eliminating inverse
+left-interface-radius losses in the corrected physical Kummer
+radial-energy control; it is \emph{not} the full nonlinear PDE
+time-gain or the final Type--II rate.
+
+The mathematical core is submitted as
+\texttt{ActualHartreeZeroLeftInverseSquareEnergySlopeCore.lean},
+strict CI \texttt{42537615993}.
+The same-source selected physical theorem is
+\texttt{ActualHartreeTrueSourceSelectedZeroLeftEnergySlope.lean},
+strict CI \texttt{42537783978}. Both are \emph{pending}
+independent compiler and transitive-axiom acceptance and must not
+increase the manuscript count.
+
+\medskip
+\noindent\textbf{Accepted exact derivative and nonlinear telescope
+interfaces---scope of their conclusions.}
+Three original evidence archives have been separately audited:
+\texttt{42536615928}/\texttt{13640116712},
+\texttt{42536770197}/\texttt{13640460945},
+and \texttt{42536552509}/\texttt{13639851938}.
+Each has empty \texttt{strict.log}, pinned Lean 4.35.0-rc3,
+an explicit fully elaborated \texttt{\#check}, and precisely
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound} as transitive axioms.
+The first two produce exact time derivatives of the
+actual Cramer-selected source from specified original
+scaled-orbit differentiation inputs; they have \emph{not}
+yet proved their required globally weighted
+\emph{quantitative} time-growth bounds directly from the
+nonlocal Hartree PDE. The last re-verifies the full
+nonlinear four-piece finite residual \emph{telescoping identity},
+not a positive time-order estimate.
+The original count remains $11/13$.
+
 \end{document}
