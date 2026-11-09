@@ -716,3 +716,37 @@ time-integrated CI 42547747317 concerns one moving radius
 Keep unchanged the **11/13** original environment count until the
 full original PDE norm, real finite correction recurrence and
 dynamical rate are constructed.
+
+
+### Original Hartree nonlinear correction without incompatible core paths: STRICT SUCCESS 42547533614
+
+**Strict original CI** [42547533614](https://github.com/penghongzhong/HBL/actions/runs/42547533614) **SUCCESS** on commit [d7ecbe316](https://github.com/penghongzhong/HBL/commit/d7ecbe3160f04be812501cb1cb7fe9b7e0ada54d); artifact **13644785150**. Source file \`HBL/TypeIIDynamicSelection/ActualHartreeOneGlobalCoreCorrectionNextLayer.lean\` came from commit \`263e8d1b4a4588c81cb5397de85900eb9a836406\`. Decoded original job logs show strict \`lake build\`, \`lake env lean --trust=0 -DwarningAsError=true\`, exact \`#check\` of BOTH theorem types, exact individual \`#print axioms\`, successful parsing of **two** transitive axiom reports:
+1. \`actual_Hartree_one_global_core_correction_remainder_exact\`: \`[propext, Classical.choice, Quot.sound]\`;
+2. \`actual_Hartree_one_global_core_correction_next_physical_layer\`: \`[propext, Classical.choice.{u}, Quot.sound.{u}]\`.
+
+No \`sorryAx\` nor new axiom; pinned compiler Mathlib as required. On a single global complex background \`U\` and correction \`H\`, define the *literal original nonlocal quartic Hartree PDE* residual
+\[
+ \mathcal E_{U,H}
+ = \mathcal R[U+H;b+\Delta b,\omega+\Delta\omega]
+   -\mathcal R[U;b,\omega]-\mathcal P_U(H;\Delta b,\Delta\omega),
+\]
+where \(\mathcal P_U\) contains the genuine PDE linearization and the
+\(\Delta b\,\Lambda U,\Delta\omega\,U\) modulation source, but not the speed
+cross on \(H\). Lean proves **exactly**
+\[
+ \mathcal E_{U,H}
+ = i\Delta b\,\Lambda H+\Delta\omega\,H+\mathcal Q_{\rm H}(U,H),
+\]
+where \(\mathcal Q_{\rm H}\) is the original complete quartic nonlocal Hartree Taylor remainder. Under the theorem's explicit uniform bubble envelope for \(U\), decaying \(H\) and dilation, and true two-speed bound, the derived norm is
+\[
+ \|\mathcal E_{U,H}(s,r)\|
+ \le \Big(C_{\rm speed}(C_{Hd}+C_H)
+    +63(M+C_H)^5 C_H^2 {\rm bubble}(r)^5\Big)
+      s^{-(\rho+\kappa_{\rm phys})},\quad
+ 0<\kappa_{\rm phys}\le\rho.
+\]
+This removes the **global equality** \`c1(s)=c0(s)\` from the nonlinear layer, so the new proof does **not** force \(\Delta b\,c=0\). The principal correction equation, true four-region global field, strong radiation nonlocal feedback, source class and speed norms, two-coordinate parameter Lipschitz and actual finite iteration remain separate **unproved** HBL §2.13 producer obligations.
+
+**Next source-faithful atom candidate:** \`ActualHartreeOneGlobalCoreCorrectionResidualAtom.lean\`, source commit \`4d5d774743cbe7ac78840b1c2690a39f5688edd5\`, strict [CI 42547935578](https://github.com/penghongzhong/HBL/actions/runs/42547935578) under run at this checkpoint. It packages the *same explicit physical residual* into the downstream \`WeightedResidualAtom\`, rather than the globally impossible two-core condition. Do **not** accept before its separate strict CI and exact axiom audit.
+
+The original manuscript remains **11/13 (84.62%)**, neither §2.13 nor final Type-II existence/dynamic rate has been established.
