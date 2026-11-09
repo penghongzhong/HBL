@@ -3183,4 +3183,54 @@ This suggests a shorter non-circular route for the shell but
 does not yet close the global nonlinear recursion or derive
 the blow-up rate.
 
+
+
+\medskip
+\noindent\textbf{One physical quartic Hartree source and unique selected
+speed for the \emph{full} matched radial slope (strict replay pending).}
+Set $F_{\rm adj}=F_0-p_bS_b-p_\omega S_\omega$ with the unique
+Cramer-selected pair already produced by the genuine original Riesz
+source and original Fredholm inputs.
+Define the corresponding, source-generated corrected inner forcings
+\[
+ F_{+,a}=F_+ +p_\omega G_+,\qquad
+ F_{-,a}=F_- +p_bG_-,\qquad
+ N_a=\|F_{+,a}\|_{L^2_{7/4}}+
+     \|F_{-,a}\|_{L^2_{7/4}}.
+\]
+Let $(U,DU)$ be the actual canonical Cauchy jet of the
+corrected two-channel Fredholm solution.
+The strict existing trace producer gives
+\[
+ |J_-(r_0)|\le C_{\rm tr}\,r_0 C_{\rm F}N_a,
+ \qquad C_{\rm tr}=1+(D+1)G(B^2+2).
+\]
+In the same unique speed the genuine full matched Kummer energy
+estimate now reduces to the following source-derived inequality:
+\begin{align*}
+ r|\mathcal S_K[F_{\rm adj};U,DU](r)|
+ &\le \underbrace{
+  (B+1)GJ C_n(N+Q)+2(D+1)GB^2T_{\rm phys}
+   }_{E_{\rm zero}}\\
+ &\quad+(B+1)G C_{\rm tr}C_{\rm F}N_a\\
+ &\quad+2(D+1)G^2 B^2\{
+      r_0|DU|+(r_0+1)|U|\},
+ \qquad r_0\le r\le B.
+\end{align*}
+Each term is produced by the same original forcing and
+compatibility-selected real pair; neither $N_a$ nor the left jet is
+an independently chosen Kummer datum.
+The new composite Lean candidate is
+\texttt{ActualHartreeTrueSelectedFullMatchedRadialEnergy.lean},
+under its own strict CI \texttt{42540289263}; its exact-type and
+transitive-axiom audit are \emph{pending}, and the manuscript count
+does not change.
+
+This is still a \emph{fixed-time algebraic radial slope} statement.
+The genuine radial $\dot H^1$ norm needs identification with
+the derivative almost everywhere and then integration in
+$r^2dr$; the complete four-region nonlocal Hartree residual and
+positive slow-time order, parameter Lipschitz, finite source recurrence
+and derived Type--II explosion law remain separate obligations.
+
 \end{document}
