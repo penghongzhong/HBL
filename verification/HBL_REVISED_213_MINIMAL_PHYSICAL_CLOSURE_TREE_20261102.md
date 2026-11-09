@@ -235,3 +235,7 @@ source norm and PDE-driven rate obligations remain; the formal
 13-environment count is **11/13**.
 
 **C¹ gluing caveat:** The iterated zero-left Green correction has zero Cauchy jet at its *left* anchor by construction. It generally has a nonzero value/derivative at the *far-field* matching endpoints. Consequently it does not, by itself, propagate the accepted three physical C¹ interfaces; each new spectral correction requires a same-source outgoing/tranmission re-match and the true nonlocal quartic cross terms generated between layers. A finite Neumann sum of the frozen operator is **not** a finite nonlinear Hartree profile.
+
+### 2026-11-09 exact backward Wronskian slope (strict pending)
+
+New original-Cramer source module `HBL/TypeIIDynamicSelection/ActualHartreeBackwardZeroLeftSpectralVolterraSlope.lean` commits `1082defe`, strict workflow `hbl-213-backward-zero-left-spectral-volterra-slope.yml` commit `9c937adc`. It proves candidate identity `r²u'(r)=(r y'_K-y_K)[A_K(r)-A_K(r0)]+(r x'_K-x_K)B_K(r)` **also below** the original left anchor and candidate inverse-linear bound `|r²u'(r)|≤2(r0+1)G²M(r0-r)` with backward source integrals, no hidden negative powers of r0. Strict CI is pending: do not count as validated until raw job `Success`, exact #check and #print axioms. This provides a derivative counterpart to the successful backward value theorem, still not the physical time-dependent residual or nonlinear finite-profile recursion; manuscript acceptance 11/13.
