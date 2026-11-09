@@ -199,10 +199,17 @@ theorem actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_nor
               (2 * R / a) B Fo U DU x) 0 0 (y / a))) := by
     rw [hTwoR]
     exact hMeas
+  have hSame' : ∀ y ∈ Icc R (2 * R),
+      actualMatchedScaledKummerApply mu theta a
+        (actualOriginMatchedKummerPullback K a (2 * R / a) B Fo
+          (actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (2 * R / a)).1
+          (actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (2 * R / a)).2) y =
+      -actualHartreeTwoChannelPhysicalSource Fp Fm y := by
+    simpa only [hTwoR, J, v] using hSame
   have hResult := actual_Hartree_matched_backward_quadratic_spectral_source_weighted
     K a R B C G ha hR (by rw [hTwoR]; exact hLB) hB
     hG hBasisR hModes hSmallR
-    Fp Fm hp hm hcp hcm Fo hFo hSame delta hInt' hIntR' hMeas'
+    Fp Fm hp hm hcp hcm Fo hFo hSame' delta hInt' hIntR' hMeas'
   simpa only [hTwoR, L, R, Fp, Fm, Fo] using hResult
 
 end HBL.TypeIIDynamicSelection
