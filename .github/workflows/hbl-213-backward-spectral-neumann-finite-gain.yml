@@ -73,17 +73,20 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_backward_spectral_Neumann_all_finite_value_gain
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_backward_spectral_Neumann_all_finite_value_gain
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_same_source_backward_spectral_Neumann_finite_gain
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_same_source_backward_spectral_Neumann_finite_gain
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeBackwardSpectralNeumannFiniteGainAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
           from pathlib import Path
           import re
           s=Path('evidence/audit.log').read_text()
-          goal='actual_Hartree_backward_spectral_Neumann_all_finite_value_gain'
-          assert goal in s, 'missing exact target audit'
+          targets=('actual_Hartree_backward_spectral_Neumann_all_finite_value_gain',
+                   'actual_Hartree_same_source_backward_spectral_Neumann_finite_gain')
+          assert all(goal in s for goal in targets), 'missing exact target audit'
           assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
-          assert len(reports)==1, f'expected one exact axiom report: {len(reports)}'
+          assert len(reports)==2, f'expected two exact axiom reports: {len(reports)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in reports:
             axioms=[v.strip() for v in report.split(',') if v.strip()]
