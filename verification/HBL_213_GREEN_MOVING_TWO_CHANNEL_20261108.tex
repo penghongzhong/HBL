@@ -5135,4 +5135,40 @@ To obtain a full theorem for revised~\S2.13, one must apply the
 two-scale density terms, retain contributions from the four moving
 regions, and prove the source-norm and threshold Lipschitz gains.
 
+
+\medskip
+\noindent\textbf{Original nonlocal quartic remainder bound (November 9).}
+The actual two-scale quartic and cubic pointwise Taylor inequalities
+are strictly accepted in CI \texttt{42620707912},
+raw job \texttt{129171794160}, evidence \texttt{13675688627},
+with only the three allowed Lean axioms.
+The original trapped-plateau spectral-shell time-factor lemma
+is also strict success in CI \texttt{42619593894},
+raw job \texttt{129168006311}, evidence \texttt{13676876666}.
+These do not certify the moving four-region nonlinear residual.
+
+For a measurable complex background $U$ satisfying
+$\|U\|_\infty\le M$, and correction $|H(r)|\le e W(r)$,
+the actual quartic density remainder obeys
+\[
+ |\mathcal D_{4,\ge2}(U,H)(r)|
+ \le (6M^2+4Me+e^2)e^2W(r)^2.
+\]
+The previously certified original radial logarithmic Riesz row,
+applied to this \emph{actual} polynomial, yields the proposed
+nonlocal estimate
+\[
+ \bigl|I_2[\mathcal D_{4,\ge2}(U,H)](r)\bigr|
+ \le C_{\mathrm{row}}(6M^2+4Me+e^2)e^2 .
+\]
+This is formalized in
+\texttt{ActualHartreeBoundedBackgroundQuadraticRiesz.lean},
+with independent strict CI \texttt{42621587679} still awaiting
+acceptance. The estimate is quadratic in $e$ and does not impose
+the false global $MW$ envelope on $U=V_c+Z_\ell$.
+It is only the nonlocal \emph{density} remainder: the cubic multiplier
+variation, moving interfaces, linearized equation, direct parameter
+difference and the original weighted source norm require separate
+proofs before revised~\S2.13 may be accepted.
+
 \end{document}
