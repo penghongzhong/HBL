@@ -424,6 +424,20 @@ theorem actual_Hartree_true_plateau_moving_spectral_quadratic_cubic_shell_gain
   have hSpatial := actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
     a R G D delta hR hCubicR hD
   rw [hTwoR] at hSpatial
-  exact hBound.trans hSpatial
+  -- The original weighted estimate has the coefficient product grouped
+  -- together; the exact scalar scale lemma uses left association.
+  -- This is just ring reassociation, not an additional analytic bound.
+  have hSpatialAssoc :
+      20 * R ^ (13 / 4 : ℝ) *
+          (((a ^ 2)⁻¹ * ‖delta‖) *
+            (2 * G ^ 2 * ((L / a) * ‖delta‖ * D))) ≤
+        (5 / 32 : ℝ) * G ^ 2 * R ^ (-(19 / 4 : ℝ)) *
+          ‖delta‖ ^ 2 * D := by
+    calc
+      _ = 20 * R ^ (13 / 4 : ℝ) *
+            ((a ^ 2)⁻¹ * ‖delta‖) *
+              (2 * G ^ 2 * ((L / a) * ‖delta‖ * D)) := by ring
+      _ ≤ _ := hSpatial
+  exact hBound.trans hSpatialAssoc
 
 end HBL.TypeIIDynamicSelection
