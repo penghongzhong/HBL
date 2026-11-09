@@ -1196,3 +1196,6 @@ Independent Lean cubic-remainder two-point Lipschitz attempt [42661580975](https
 
 
 **Sharpness check on radial energy profiles.** For smooth positive shell cutoffs, `U_X=X^{-1/2}φ(r/X)` and `H_X=eψ(r/X)` have `‖∇U_X‖_{L²(R³)}=O(1)`, satisfy the half-radial original background/potential size class and give `I₂[D_R]≳e²`, `C₀≳X^{-3/2}` on a subannulus. Hence `‖R_H^{≥2}‖_{L^{2,7/4}}≳e²X^{3/4}`. The exponent `3/4` is sharp *within that size/support class*. This is a stress test, **not a counterexample to any PDE-specific theorem**: stronger genuine radiation tail smallness, cancellation or modulation may still improve the actual orbit. Any proof claiming uniform `O(e²)` using only those coarse hypotheses is invalid. **Original acceptance unchanged: 11/13.**
+
+
+**Static same-shell two-point extension:** If `H₁,H₂` share the annulus `[X,2X]` and `|H_j|≤e`, `|H₁-H₂|≤d`, `e√X≤c₀`, the *actual* quartic/cubic Taylor differences and positive Riesz kernel give `‖R_H(U,H₁)-R_H(U,H₂)‖_{L^{2,7/4}}≤C e d X^{3/4}`. With `ρ=9/8`, `X≲s^{1/2}`, the Lipschitz coefficient is `O(s^{-3/4})`. This does **not** address moving-support parameters, differentiated Kummer basis, modulation derivatives or full four-region PDE cancellation. Source: synchronized §2.13 TeX (paper calculation; no Lean success or original environment credit).
