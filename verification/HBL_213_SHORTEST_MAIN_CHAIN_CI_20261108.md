@@ -1231,9 +1231,7 @@ the theorem establishes `MemLp` of the **actual full complex
 quartic inverse-square Hartree Taylor remainder** under weight
 `affineJapaneseWeight (7/4) r` on the positive half-line and
 `∫weight²*||R||² ≤ Q*∫(1+r)^(-3/2) = 2Q`.
-For fixed `M,K` and `0<=e<=1`, this is `O(e²)` in the
-weighted L2 *norm*, with no independently postulated three Riesz-row
-bounds or nonlinear source majorant.
+For fixed `M,K` and `0<=e<=1`, **this exact, loosely grouped formal bound yields only `O(e)` in the weighted L2 norm**, not `O(e²)`: it contains the superfluous coefficient `A0*B1=O(e)` inside `S=(A0+A1+AR)*(B1+BR)`, although `P0*C1` does not occur in the true second-order Hartree Taylor remainder. The theorem itself is valid and strictly compiled, but its certificate does not prove quadratic smallness. No three independent Riesz-row or nonlinear source majorant was postulated. The corrected coefficient `S_sharp=A0*BR+(A1+AR)*(B1+BR)=O(e²)` is an explicit proof obligation, with a new independent strict workflow requested for `ActualHartreeSixTermNonlocalFifthWeightSharp.lean`; do not count it as accepted before its original CI succeeds.
 
 **Scope warning:** the assumption `||H(r)||<=e*bubble(r)` is still an
 input, and the actually constructed uniquely selected Kummer replacement
