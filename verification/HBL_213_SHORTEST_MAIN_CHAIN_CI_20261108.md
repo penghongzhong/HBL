@@ -974,3 +974,23 @@ for an original theorem demanding a specific numerical explosion
 exponent and **not** a claimed Lean theorem.
 Neither \(T<\infty\) nor \(b(s)\to0\) is currently proven for the
 real four-domain Hartree profile, and those are genuine PDE obligations.
+
+
+### Candidate weak moving-interface shortcut (not yet a Lean theorem)
+
+To shorten the actual time-dependent four-piece PDE chain, formulate
+the nonlinear residual first in the weak/spatial-a.e. sense. For a
+moving boundary \(r=R(s)\) and fields \(u_-,u_+\) on either side,
+the distributional interface terms are respectively proportional to
+\(R_s[u]\) in \(\partial_s u\), \([u]\) in \(\partial_r u\),
+and \([\partial_r u]\) in \(\partial_r^2u\), where
+\([u]=u_+-u_-\). The already **fixed-slice** accepted three-\(C^1\)
+matching removes the spatial jump coefficients and also the time
+distributional delta, once those matches hold along the same moving
+physical interface for each \(s\). Therefore the original \(L^2\)
+residual can in principle be reduced to four **bulk** PDE residuals
+a.e., without demanding pointwise second derivatives *at* each join.
+This still requires a rigorous moving Sobolev-gluing theorem,
+measurable/time-regular bulk fields, and a genuine PDE-source estimate
+for all four domains and the selected modulations. Nothing is counted
+as accepted on the basis of this proposed route.
