@@ -5,6 +5,7 @@ on:
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralFirstOrderShellGain.lean'
       - '.github/workflows/hbl-213-backward-spectral-first-order-shell-gain.yml'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardMatchedValueGain.lean'
   workflow_dispatch:
 permissions:
   contents: read
