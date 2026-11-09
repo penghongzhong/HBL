@@ -4755,4 +4755,40 @@ derivative, nonlinear outer Hartree couplings and the physical
 finite-profile recursion are still required. Revised original
 statement count: \textbf{11/13}.
 
+
+\medskip
+\noindent\textbf{Composed source-to-cubic spectral shell norm: exact CI target (2026-11-09).}
+The fixed-slice quadratic spectral source is now linked to the original
+physical cubic scale separation \(\,a\ge L^3,\ L=2R>4\),
+in the same Lean declaration
+\texttt{actual\_Hartree\_true\_plateau\_moving\_spectral\_quadratic\_cubic\_shell\_gain}.
+Unlike a free-envelope corollary, this declaration retains the actual
+quartic Hartree source, both physical modulation channels, the literal
+Cramer-jet matched zero-Cauchy Green iterate, and the original
+weighted source norms. In particular,
+\(D_R=C_{\rm val}(N_++N_-)+8R^2{\mathcal A}_{\rm shell}\ge0\)
+is proved from the concrete nonnegative Fredholm norms and the
+physical two-channel shell budget, not inserted as a new source-size
+hypothesis. It concludes
+\[
+ \left\|\mathbf{1}_{(R,2R)}y\,a^{-2}\delta u_1(y/a)
+       \right\|_{L^{2,7/4}(dy)}
+ \le\frac5{32}G^2R^{-19/4}|\delta|^2D_R.
+\]
+The same original Green-source integrability, source continuity and
+measurability remain explicit regularity hypotheses.
+Code commit \texttt{931eec3713fe1d2fc7ac1d7e8c5d3ccce227eda5};
+strict workflow audit commit
+\texttt{9d55ccdda242851867ef4378e39a9ca3a030585a}.
+Dedicated original CI
+\texttt{42603288411} is \emph{pending strict compiler and exact
+three-target transitive-axiom audit}; this estimate is NOT counted
+before Success. In any event \(G\), \(|\delta|\) and \(D_R\)
+still require bounds along the genuine moving PDE orbit; a frozen
+negative radius power alone is not a positive \(s\)-order.
+Nonlocal cross-region Hartree feedback, moving Kummer columns,
+endpoint and selected-speed time derivatives, parameter-Lipschitz,
+actual finite-layer recursion and PDE-derived Type--II rate remain
+open. Revised original tally: \textbf{11/13}.
+
 \end{document}
