@@ -1245,3 +1245,47 @@ annular salvage remains only `O(e² X^{3/4})`, and its sharpness
 within the coarse profile class remains material.
 
 **Original revised-paper environment acceptance: unchanged 11/13.**
+
+
+### 2026-11-09 correction of an O(e) overestimate in the verified six-product algebra
+
+**The existing strict CI 42660829087 proves a true native weighted L2
+inequality but NOT quadratic smallness.** With
+`A0=K² C=O(1)`, `A1=8MKeC=O(e)`,
+`AR=(6M²+4Me+e²)e² C=O(e²)`,
+`B1=6Ke=O(e)`, `BR=4(3M+e)e²=O(e²)`,
+its literal `S_old=(A0+A1+AR)*(B1+BR)` has
+`A0*B1=O(e)`: therefore `Q_old=O(e²)` and
+`||R_H||_{L2,7/4}=O(e)`, not `O(e²)`.
+This is a **proof certificate loss**, not an actual `P0*C1` Taylor term.
+The exact nonlinear Taylor identity gives
+`P0*CR+(P1+PR)*(C1+CR)+PR*C0`, with sharp
+`S_sharp=A0*BR+(A1+AR)*(B1+BR)=O(e²)`.
+The new **exact sharp six-product algebraic lemma** is
+`HBL.TypeIIDynamicSelection.actual_Hartree_six_original_nonlocal_Taylor_products_fifth_weight_sharp`.
+Its original pinned strict **SUCCESS** is
+[CI 42675245110](https://github.com/penghongzhong/HBL/actions/runs/42675245110),
+job `129354762216`, evidence artifact `13700530607`;
+original job log confirms `--trust=0`, warning-as-error,
+exact `#check`, exact `#print axioms`,
+and transitive axiom list **only**
+`[propext, Classical.choice, Quot.sound]`.
+
+The physically sourced corrected chain has now been added in
+`ActualHartreeFullNonlocalSixTermFifthWeightSharp.lean`,
+`ActualHartreeFullNonlocalSixTermWeightedL2Sharp.lean`,
+`ActualHartreeFullNonlocalPhysicalWeightedL2Sharp.lean`.
+Dedicated strict workflow
+[42675724789](https://github.com/penghongzhong/HBL/actions/runs/42675724789)
+was triggered on head `2c7c3eff` and is **not accepted until its own
+build, exact theorem type and axiom replay finish successfully**.
+If successful, it will prove the real original six-term nonlocal source
+`O(e²)` under the explicitly assumed physical `||H||≤e*bubble`
+rather than assuming an abstract Riesz bound or a false time rate.
+
+**Indispensable remaining gap:** the uniquely selected *moving*
+four-region correction only yields shell-sensitive amplitude and does
+not yet satisfy the global `e=bO(s^{-9/8})` bubble envelope; neither
+a static source lemma nor a telescoping identity provides
+the true full PDE residual time gain, Lipschitz moving endpoints,
+physical layer iteration, or the Type-II rate. **Original 11/13.**
