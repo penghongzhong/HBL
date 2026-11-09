@@ -4534,4 +4534,35 @@ the genuine Hartree finite physical source recursion have
 \texttt{thm:finite-profile-stage3}, no assumed Type--II rate,
 and no increase beyond $11/13$ is asserted.
 
+
+\medskip
+\noindent\textbf{No-loss backward original Cramer slope, pending independent strict proof.}
+In addition to the reverse zero-left value estimate already strictly
+accepted, the exact regularized Wronskian formula gives, on
+$r\in[r_0/2,r_0]$,
+\[
+ \begin{split}
+ r^2u'(r)
+   &=[r\,y_K'(r)-y_K(r)]\!
+       \left(A_K(r)-A_K(r_0)\right)\\
+   &\quad +[r\,x_K'(r)-x_K(r)]B_K(r),\\
+ |r^2u'(r)|&\le
+   2(r_0+1)G^2M(r_0-r),
+ \qquad |q(r)|\le M/r.
+ \end{split}
+\]
+The integrals inside $A_K(r)-A_K(r_0)$ and $B_K(r)$ are
+taken with the genuine backward orientation. Neither term
+contains a negative power of $r_0$, and the zero-Cauchy
+left-anchor data are retained. The independent theorem file is
+\texttt{ActualHartreeBackwardZeroLeftSpectralVolterraSlope.lean},
+with strict workflow
+\texttt{hbl-213-backward-zero-left-spectral-volterra-slope.yml}.
+Only a verified original Success and exact allowed-axiom audit
+can promote this pending claim to a formal fact.
+The actual $u_j$ recursion still needs this slope bound composed
+with its source-produced value estimate and independently
+re-matched at the \emph{two other} physical C$^1$ interfaces;
+no full original §2.13 acceptance is claimed.
+
 \end{document}
