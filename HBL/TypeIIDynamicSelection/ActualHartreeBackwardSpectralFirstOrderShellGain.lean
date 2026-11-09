@@ -98,14 +98,16 @@ theorem actual_Hartree_backward_spectral_first_order_shell_source_gain
       dsimp only [E]
       rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hInv,
         norm_mul]
+      ring
     calc
       ‖E y‖ = ((a ^ 2)⁻¹ * ‖delta‖) * ‖v y‖ := heq
       _ ≤ ((a ^ 2)⁻¹ * ‖delta‖) * D :=
         mul_le_mul_of_nonneg_left hValue hCoef
       _ = S := rfl
   have hEMeas : Measurable E := by
-    dsimp [E]
-    exact (measurable_const.smul (measurable_const.mul hMeas))
+    change Measurable (fun y : ℝ =>
+      (((a ^ 2)⁻¹ : ℝ) : ℂ) * (delta * v y))
+    exact measurable_const.mul (measurable_const.mul hMeas)
   have hShell :=
     actual_conjugated_shell_weighted_power_bound
       R S hRone hS E hEMeas hPoint
