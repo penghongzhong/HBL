@@ -152,8 +152,8 @@ theorem actual_Hartree_half_radial_background_and_linear_Riesz_decay
         _ ≤ t^2*((4*‖U x‖^2*‖U x‖)*‖H x‖) :=
           mul_le_mul_of_nonneg_left hPairRaw (sq_nonneg _)
         _ = 4*((t*‖U x‖^2)*‖U x‖)*(t*‖H x‖) := by ring
-        _ ≤ 4*((K*M)*(2*e)) :=
-          mul_le_mul_of_nonneg_left hAB (show (0 : ℝ) ≤ 4 by norm_num)
+        _ = 4*(((t*‖U x‖^2)*‖U x‖)*(t*‖H x‖)) := by ring
+        _ ≤ 4*((K*M)*(2*e)) := hFourAB
         _ = 8*M*K*e := by ring
     calc
       |actualHartreeComplexDensityLinear (U x) (H x)| =
