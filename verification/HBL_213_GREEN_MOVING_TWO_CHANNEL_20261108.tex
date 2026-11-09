@@ -3601,7 +3601,12 @@ had an initial namespace-resolution failure in
 CI \texttt{42547935578} (original \texttt{bubble}
 was not opened); repaired source commit \texttt{416022b0}
 replaces it with strict CI \texttt{42548637148},
-\emph{pending} independent success and axioms audit.
+\emph{strictly accepted} at original source commit \texttt{416022b0},
+with archived original evidence \texttt{13645185877}.  The
+\texttt{--trust=0}, \texttt{warningAsError}, exact target
+\texttt{\#check} and \texttt{\#print axioms} audit reports exactly
+\texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, without \texttt{sorryAx}.
 
 The remaining non-circular step is to produce the relevant
 full four-region $U,H$ from the \emph{same actual orbit} and
@@ -3611,5 +3616,54 @@ Fredholm norms, parameter Lipschitz and finite recursion.
 The verified estimate alone neither constructs those fields
 nor proves the final dynamical blowup rate. Revised original
 count remains $11/13$.
+
+
+
+\medskip
+\noindent\textbf{Strict verification scope: the realized atom is
+temporal at one fixed radius, not the original weighted spatial norm.}
+The now accepted
+\texttt{actual\_Hartree\_one\_global\_core\_correction\_realized\_atom}
+constructs, for each fixed \(r>0\), an actual
+\texttt{WeightedResidualAtom} with
+\[
+ E_r(s)=\mathcal R[U+H](s,r)-\mathcal R[U](s,r)
+       -\mathcal P_U(H)(s,r),\qquad
+ |E_r(s)|\le C_0s^{-\rho-\kappa_{\rm phys}}.
+\]
+Its displayed coefficient is uniform in \(r\) only after
+using \(W(r)^5\le1\).  The data type
+\texttt{WeightedResidualAtom} controls \emph{time order of a
+scalar complex-valued field}, not
+\(\|\langle r\rangle^{7/4}E(s,\cdot)\|_{L^2_r}\).
+Indeed a spatially constant upper envelope is not integrable
+in the weighted half-line.  The quartic Taylor summand retains
+\(W(r)^5\), but the speed-cross summands require their own
+spatially integrable, same-field bound and moving-domain
+control.  Neither the exact nonlinear telescope nor the
+now certified residual atom proves the global
+\(O(s^{-9/4})\) source in the original Fredholm/threshold
+space.  This is an essential type-and-norm distinction for
+the manuscript's \S2.13 acceptance.
+
+\medskip
+\noindent\textbf{Previously failed finite full-PDE telescope:
+successful original strict rerun.}
+The initial Actions \texttt{42530158681} failed on the
+upstream unresolved Fredholm
+\texttt{InWeightedL2} namespace and related elaboration.
+After the prerequisite repairs, the unchanged full
+nonlinear spectral four-piece telescope has now
+independently passed strict Actions \texttt{42532174421}
+and a further exact-audit rerun \texttt{42536552509};
+the latter has original evidence \texttt{13639851938}.
+The original job log confirms
+\texttt{lake env lean --trust=0 -DwarningAsError=true},
+\texttt{\#check} of the full declaration, and
+\texttt{\#print axioms} with precisely the three allowed
+axioms.  The statement is an algebraic telescoping
+identity for the \emph{full nonlinear PDE evaluated on each
+successive background}; it asserts no time-order gain.
+The revised original environment tally remains \(11/13\).
 
 \end{document}
