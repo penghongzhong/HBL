@@ -825,7 +825,7 @@ scalar-in-time `WeightedResidualAtom`. New Lean module
 and strict workflow at
 [`e707b646`](https://github.com/penghongzhong/HBL/commit/e707b64641473deebe0e51832c414278fda7b0b1)
 have independent [CI 42553324852](https://github.com/penghongzhong/HBL/actions/runs/42553324852).
-**PENDING until original Success and exact axiom logs are confirmed.**
+**Initial CI 42553324852 FAILED** solely on the Lean addition-order elaboration of a proved scalar coefficient bound at line 115 (original job log). Source was repaired at [903b870](https://github.com/penghongzhong/HBL/commit/903b870ee09088c28b24fa1b90b9cdfc2f0d4d67) with direct `add_le_add (le_refl _) hh2`; **replacement [CI 42554311787](https://github.com/penghongzhong/HBL/actions/runs/42554311787) is PENDING** until actual Success and exact axiom logs are confirmed.
 
 For true (E_{U,H}:=\mathcal R[U+H]-\mathcal R[U]-\mathcal P_U(H)),
 (s\ge1), (R\ge1), under the same-orbit regularity, speed and field
