@@ -65,7 +65,7 @@ theorem actual_Hartree_fifth_weight_square_to_original_weighted_L2
         (1 + r) ^ (7 / 2 : ℝ) := by
       calc
         _ = ((1 + r) ^ (2 : ℝ)) ^ (7 / 4 : ℝ) := by
-          simp only [Real.rpow_natCast]
+          rfl
         _ = (1 + r) ^ ((2 : ℝ) * (7 / 4 : ℝ)) :=
           (Real.rpow_mul ht.le 2 (7 / 4 : ℝ)).symm
         _ = _ := by norm_num
@@ -82,9 +82,9 @@ theorem actual_Hartree_fifth_weight_square_to_original_weighted_L2
       calc
         _ = (1 + r) ^ (-(3 / 2 : ℝ) + 5) := by norm_num
         _ = (1 + r) ^ (-(3 / 2 : ℝ)) *
-              (1 + r) ^ (5 : ℝ) := Real.rpow_add ht
+              (1 + r) ^ (5 : ℝ) := Real.rpow_add ht _ _
         _ = (1 + r) ^ (-(3 / 2 : ℝ)) * (1 + r) ^ 5 := by
-          simp only [Real.rpow_natCast]
+          rfl
     calc
       S r ^ 2 = (affineJapaneseWeight (7 / 4 : ℝ) r) ^ 2 *
           ‖F r‖ ^ 2 := by dsimp [S]; ring
