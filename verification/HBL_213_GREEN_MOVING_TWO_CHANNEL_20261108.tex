@@ -5280,4 +5280,59 @@ products, the actual four-zone linearized principal cancellation,
 or the two-coordinate residual Lipschitz bound.
 No revised original theorem environment is promoted beyond 11/13.
 
+
+\medskip
+\noindent\textbf{Current true quadratic Riesz atom and full spectral-PDE telescoping audit (November 9).}
+For the genuine complex two-scale background
+\(U=V_c+Z_\ell\) and the actual Taylor density
+\(\mathcal D_{4,\ge2}(U,H)\), the radial nonlocal atom is
+\[
+  F(r)=I_2[\mathcal D_{4,\ge2}(U,H)](r)\,|U(r)|^2U(r).
+\]
+With the explicitly stated physical input
+\(\lvert H(r)\rvert\le e\,\mathrm{bubble}(r)\), the original
+fifth-weight bound \texttt{ActualHartreeTrueQuadraticRieszCubicFiveWeight.lean}
+has strict CI \texttt{42649080513} (Success).
+Writing \(P=C_R(6M^2+4Me+e^2)e^2\) and
+\(K=2(D^2+E^2)\), this source satisfies
+\[
+ (1+r)^5 |F(r)|^2\le P^2K^3\qquad(r>0).
+\]
+The exact elementary change of weights yields
+\begin{align*}
+ (1+r^2)^{7/4}&\le(1+r)^{7/2},\\
+ \int_0^\infty(1+r^2)^{7/4}|F(r)|^2\,dr
+ &\le P^2K^3\int_0^\infty(1+r)^{-3/2}\,dr
+   =2P^2K^3.
+\end{align*}
+Thus this \emph{one} genuine Riesz--cubic nonlinear atom has a
+native \(L^{2,7/4}\) estimate of quadratic order in \(e\), provided
+the displayed source and correction-envelope hypotheses hold.
+The corresponding exact Lean \texttt{MemLp} target is
+\texttt{ActualHartreeTrueQuadraticRieszCubicWeightedL2.lean}.
+Its successive strict compilation failures \texttt{42649085863}
+and \texttt{42650866787} were concrete real-power/natural-power
+cast mismatches; commit \texttt{4dda33f} replaced both invalid
+definitional equalities by \texttt{Real.rpowNatCast} normalization.
+Strict replay \texttt{42652808504} was running at this checkpoint
+and is \emph{not} labelled accepted until the final audit succeeds.
+
+Separately the original finite four-piece nonlinear Hartree PDE
+telescoping identity \texttt{actual\_Hartree\_finite\_spectral\_Fredholm\_four\_piece\_full\_PDE\_telescopes}
+has strict CI \texttt{42648496792} (Success), job
+\texttt{129268151514}, artifact \texttt{13688728524}.
+The source-selected corrected three-\(C^1\)-interface theorem
+has strict CI \texttt{42648994008} (Success), and the
+same-source selected spectral quadratic module has strict CI
+\texttt{42650515961} (Success).
+The exact spectral PDE telescope is a nonlinear \emph{identity},
+not a positive time-gain estimate. The current weighted source
+bound treats \emph{only one} of the genuine quartic nonlocal atoms,
+and assumes the physical correction envelope rather than producing
+it from a four-region PDE evolution. Neither result supplies moving
+Kummer basis/endpoints/speed derivative gains, all source products,
+parameter Lipschitz, a finite PDE profile to sufficient order, nor
+a dynamically selected Type-II rate. The retained original
+environment count therefore remains \(11/13\).
+
 \end{document}
