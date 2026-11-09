@@ -272,4 +272,156 @@ theorem actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
           ‖delta‖ ^ 2 * D := by ring
 
 
+
+/-- The SAME physical quartic source and actual zero-Cauchy spectral
+Volterra field, with the original separation a >= L^3, give a
+negative-radius weighted norm. No independent source budget, frozen-time
+decay rate, or Type-II speed law is assumed. -/
+theorem actual_Hartree_true_plateau_moving_spectral_quadratic_cubic_shell_gain
+    {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
+    (B ell c a db dw C G : ℝ) (z : ℝ → ℂ)
+    (hp0 : InWeightedL2 (7 / 4 : ℝ)
+      (actualHartreeTransmissionPlusSource ell c z))
+    (hm0 : InWeightedL2 (7 / 4 : ℝ)
+      (actualHartreeTransmissionMinusSource ell c z))
+    (hcp0 : Continuous (actualHartreeTransmissionPlusSource ell c z))
+    (hcm0 : Continuous (actualHartreeTransmissionMinusSource ell c z))
+    (hLarge : 4 < actualHartreeSlowInnerRadius ell)
+    (ha : 0 < a)
+    (hLB : actualHartreeSlowInnerRadius ell / a ≤ B)
+    (hB : B < scale)
+    (hG : 0 ≤ G)
+    (hBasis : OriginBasisOn K
+       (actualHartreeSlowInnerRadius ell / a) B C)
+    (hModes : ∀ x ∈ Icc 0 scale,
+      ‖K.y x‖ ≤ G ∧ ‖K.x x‖ ≤ G)
+    (hSmall : 16 * (actualHartreeSlowInnerRadius ell / 2) ^ 2 *
+      ((1 + ‖frozenZeroCoeff mu theta‖) / a ^ 2) ≤ 1)
+    (hCubic : actualHartreeSlowInnerRadius ell ^ 3 ≤ a)
+    (hFo : ∀ r ∈ Ioo (0 : ℝ) scale,
+      ContinuousAt
+        (fun t => -actualHartreeLaplacianScaledKummerSource a ell c z t -
+          (db : ℂ) * actualMomentLockedScaledScaleSource a c t -
+          (dw : ℂ) * actualMomentLockedScaledPhaseSource a c t) r)
+    (delta : ℂ)
+    (hInt : ∀ (U DU : ℂ) (x : ℝ),
+      x ∈ Icc ((actualHartreeSlowInnerRadius ell / a) / 2)
+        (actualHartreeSlowInnerRadius ell / a) →
+      IntervalIntegrable
+        (originGreenSourceA K
+          (fun t => delta * actualOriginMatchedKummerValue K
+            (actualHartreeSlowInnerRadius ell / a) B
+            (fun r => -actualHartreeLaplacianScaledKummerSource a ell c z r -
+              (db : ℂ) * actualMomentLockedScaledScaleSource a c r -
+              (dw : ℂ) * actualMomentLockedScaledPhaseSource a c r)
+            U DU t))
+        volume x (actualHartreeSlowInnerRadius ell / a))
+    (hIntR : ∀ (U DU : ℂ),
+      IntervalIntegrable
+        (originGreenSourceA K
+          (fun t => delta * actualOriginMatchedKummerValue K
+            (actualHartreeSlowInnerRadius ell / a) B
+            (fun r => -actualHartreeLaplacianScaledKummerSource a ell c z r -
+              (db : ℂ) * actualMomentLockedScaledScaleSource a c r -
+              (dw : ℂ) * actualMomentLockedScaledPhaseSource a c r)
+            U DU t))
+        volume (actualHartreeSlowInnerRadius ell / a) B)
+    (hMeas : ∀ (U DU : ℂ),
+      Measurable (fun y : ℝ =>
+        (((a ^ 2)⁻¹ : ℝ) : ℂ) *
+          (delta * actualOriginMatchedKummerValue K
+            (actualHartreeSlowInnerRadius ell / a) B
+            (fun x => delta * actualOriginMatchedKummerValue K
+              (actualHartreeSlowInnerRadius ell / a) B
+              (fun r => -actualHartreeLaplacianScaledKummerSource a ell c z r -
+                (db : ℂ) * actualMomentLockedScaledScaleSource a c r -
+                (dw : ℂ) * actualMomentLockedScaledPhaseSource a c r)
+              U DU x)
+            0 0 (y / a)))) :
+    let L := actualHartreeSlowInnerRadius ell
+    let R := L / 2
+    let Fp := fun r => actualHartreeTransmissionPlusSource ell c z r +
+      dw * actualMomentLockedInnerPhaseSource L c r
+    let Fm := fun r => actualHartreeTransmissionMinusSource ell c z r +
+      db * actualMomentLockedInnerScaleSource L c r
+    let Fo := fun r =>
+      -actualHartreeLaplacianScaledKummerSource a ell c z r -
+      (db : ℂ) * actualMomentLockedScaledScaleSource a c r -
+      (dw : ℂ) * actualMomentLockedScaledPhaseSource a c r
+    ∃ (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+      (hm : InWeightedL2 (7 / 4 : ℝ) Fm),
+      let r0 := L / a
+      let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a r0
+      let u0 := actualOriginMatchedKummerValue K r0 B Fo J.1 J.2
+      let u1 := actualOriginMatchedKummerValue K r0 B
+        (fun x => delta * u0 x) 0 0
+      let E : ℝ → ℂ := fun y =>
+        (((a ^ 2)⁻¹ : ℝ) : ℂ) * (delta * u1 (y / a))
+      let D := actualInnerShellValueConstant *
+        (innerWeightedNorm (7 / 4 : ℝ) Fp +
+          innerWeightedNorm (7 / 4 : ℝ) Fm) +
+        8 * R ^ 2 * actualHartreeTwoChannelShellBudget mu theta a R Fp Fm
+      InWeightedL2 (7 / 4 : ℝ) (actualConjugatedShellMagnitude R E) ∧
+        innerWeightedNorm (7 / 4 : ℝ)
+          (actualConjugatedShellMagnitude R E) ≤
+          (5 / 32 : ℝ) * G ^ 2 * R ^ (-(19 / 4 : ℝ)) *
+            ‖delta‖ ^ 2 * D := by
+  -- Exact same quartic source and two real Fredholm forcing channels.
+  -- The nonnegativity of D is derived from the actual weighted norms.
+  have hOriginal :=
+    actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_norm
+      K B ell c a db dw C G z hp0 hm0 hcp0 hcm0 hLarge
+      ha hLB hB hG hBasis hModes hSmall hFo delta hInt hIntR hMeas
+  dsimp only at hOriginal ⊢
+  obtain ⟨hp, hm, hMem, hBound⟩ := hOriginal
+  refine ⟨hp, hm, hMem, ?_⟩
+  let L := actualHartreeSlowInnerRadius ell
+  let R := L / 2
+  let Fp := fun r => actualHartreeTransmissionPlusSource ell c z r +
+    dw * actualMomentLockedInnerPhaseSource L c r
+  let Fm := fun r => actualHartreeTransmissionMinusSource ell c z r +
+    db * actualMomentLockedInnerScaleSource L c r
+  let D := actualInnerShellValueConstant *
+      (innerWeightedNorm (7 / 4 : ℝ) Fp +
+        innerWeightedNorm (7 / 4 : ℝ) Fm) +
+    8 * R ^ 2 * actualHartreeTwoChannelShellBudget mu theta a R Fp Fm
+  have hR : 2 < R := by dsimp [R, L]; linarith
+  have hTwoR : 2 * R = L := by dsimp [R]; ring
+  have hCubicR : (2 * R) ^ 3 ≤ a := by
+    rw [hTwoR]
+    exact hCubic
+  have hValue : 0 ≤ actualInnerShellValueConstant := by
+    unfold actualInnerShellValueConstant
+    positivity
+  have hDeriv : 0 ≤ actualInnerShellDerivativeConstant := by
+    unfold actualInnerShellDerivativeConstant
+    positivity
+  have hEquation : 0 ≤ actualInnerShellEquationConstant := by
+    unfold actualInnerShellEquationConstant
+    positivity
+  have hKummer : 0 ≤ actualInnerShellKummerConstant mu theta := by
+    unfold actualInnerShellKummerConstant
+    positivity
+  have hN : 0 ≤ innerWeightedNorm (7 / 4 : ℝ) Fp +
+      innerWeightedNorm (7 / 4 : ℝ) Fm :=
+    add_nonneg (innerWeightedNorm_nonneg _ _) (innerWeightedNorm_nonneg _ _)
+  have hBudget : 0 ≤
+      actualHartreeTwoChannelShellBudget mu theta a R Fp Fm := by
+    unfold actualHartreeTwoChannelShellBudget
+    have hRad : 0 < R := by linarith
+    have hCoefficient :
+        0 ≤ actualInnerShellEquationConstant / R ^ 4 +
+          actualInnerShellKummerConstant mu theta / a ^ 2 :=
+      add_nonneg (div_nonneg hEquation (pow_nonneg hRad.le 4))
+        (div_nonneg hKummer (sq_nonneg a))
+    exact mul_nonneg hCoefficient hN
+  have hD : 0 ≤ D := by
+    dsimp only [D]
+    exact add_nonneg (mul_nonneg hValue hN)
+      (mul_nonneg (by positivity : 0 ≤ 8 * R ^ 2) hBudget)
+  have hSpatial := actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
+    a R G D delta hR hCubicR hD
+  rw [hTwoR] at hSpatial
+  exact hBound.trans hSpatial
+
 end HBL.TypeIIDynamicSelection
