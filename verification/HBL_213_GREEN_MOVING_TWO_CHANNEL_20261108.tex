@@ -3801,8 +3801,11 @@ at the Lean proof of an ordered sum inequality, line 115,
 not on a PDE or spatial estimate.  Source commit
 \texttt{903b870} replaces the tactic with the correctly
 oriented \texttt{add\_le\_add}; strict replacement CI
-\texttt{42554311787} remains pending until original
-Success and exact type/axiom evidence are independently checked.
+\texttt{42554311787} is \emph{Success}. The original job
+confirms exact target \texttt{\#check}, \texttt{\#print axioms},
+\texttt{--trust=0}, \texttt{warningAsError}, and precisely
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound},
+without \texttt{sorryAx}.
 For an additional \emph{derived} upper radius bound
 \(R(s)\le C_Rs^{1/2}\) the displayed coarse shell estimate behaves as
 \(O(s^{-(\rho+\kappa-13/8)})\); it reaches \(s^{-9/4}\)
