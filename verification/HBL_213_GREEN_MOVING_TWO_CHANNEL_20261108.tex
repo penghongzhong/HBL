@@ -4253,4 +4253,70 @@ necessarily contains such an uncanceled term. This
 distinction avoids an invalid comparison of two different
 operators and does not change original \(11/13\) acceptance.
 
+
+
+\medskip
+\noindent\textbf{Strict same-source moving-spectrum cancellation in the true quartic Hartree plateau.}
+For the unique physical two-channel adjusted source at any one frozen
+physical slice, set
+\[
+  \delta:=q_0(\mu,\theta)-q_0(\mu_0,\theta_0),\qquad
+  u_0:=G_{K_0}[F_{\rm adj};J_+,J_-],\qquad
+  u_1:=G_{K_0}[\delta u_0;0,0],\qquad
+  v_\delta(y):=(u_0-u_1)(y/a).
+\]
+On the genuine inner-source plateau \(0<y\le L\), the physical
+quartic Hartree source and both real scale/phase sources have the
+same exact source identity as the original matched Green field.
+Consequently the \emph{current-coefficient} operator obeys
+\begin{equation}
+  \mathcal L_{\mu,\theta}^{(a)}v_\delta
+   +\mathcal S_{\rm in}
+     =-a^{-2}\delta u_1(y/a).
+\label{eq:hbl-actual-spectral-quadratic-plateau}
+\end{equation}
+The \(-a^{-2}\delta u_0\) term of the fixed-reference operator
+has canceled against its genuine changed zero-order coefficient.
+This is an exact PDE-source identity, not a hypothesis of second-order
+smallness.  Independent strict Lean CI \texttt{42565184656},
+original job \texttt{128990057404}, artifact \texttt{13651342799},
+has \emph{Success} for the precise physical-source/variable-spectrum
+theorem
+\texttt{actual\_Hartree\_plateau\_current\_moving\_spectrum\_exact\_quadratic\_source}.
+Pinned Lean 4.35.0-rc3 and Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+trust zero, warning-as-error and exact target axiom audit are
+strictly satisfied, with only \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}.
+
+The distinct reference-operator first-order source
+\(-a^{-2}\delta u_0\) on the physical backward shell
+\([R,2R]\) satisfies the genuine radial-conjugated weighted
+estimate
+\[
+ \|\mathbf 1_{(R,2R)}y\,a^{-2}\delta u_0(y/a)\|_{L^{2,7/4}(dy)}
+   \le 20R^{-3/4}|\delta|D_R,\qquad a\ge(2R)^3,
+\]
+where \(D_R\) is derived from the same two Fredholm sources
+and the matched Green Cauchy jet, not an imposed exterior field bound.
+Independent strict CI \texttt{42565447419}, artifact
+\texttt{13651526711}, \emph{Success}; only the three permitted
+transitive axioms.  This reference-operator bound should not be
+substituted for the actual quadratic term in
+\eqref{eq:hbl-actual-spectral-quadratic-plateau}.
+
+The needed zero-Cauchy-jet Volterra estimate \emph{below} its
+original normalized left anchor \(r_0=L/a\) is new candidate
+\texttt{ActualHartreeBackwardZeroLeftSpectralVolterra.lean},
+strict CI \texttt{42566011025}, not yet independently accepted
+at this writing.  It is essential to control
+\(u_1(r)=G_{K_0}[\delta u_0;0,0](r)\)
+on \(r\in[r_0/2,r_0]\); the already proved Volterra bounds
+restricted to \(r\ge r_0\) cannot be reused there.
+Neither the exact current-coefficient cancellation nor the
+reference shell estimate establishes a complete four-region
+renormalized Hartree PDE time remainder, parameter Lipschitz,
+genuine generated-source recurrence, or a dynamically deduced
+Type--II law.  Formal original acceptance remains \(11/13\).
+
 \end{document}
