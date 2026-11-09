@@ -798,3 +798,18 @@ C_*^2=\int_0^\infty r^2(1+r^2)^{-13/4}\,dr
 =\tfrac12\mathrm B(\tfrac32,\tfrac74)<\infty.
 \]
 The speed-cross norms are **not** derived by the fixed-radius `WeightedResidualAtom`. Indeed the generic bubble majorant \(|H|\lesssim (1+r^2)^{-1/2}\) alone fails to place \(rH\) in this globally weighted \(L^2\). The **actual mixed regional source space** remains the intended route: weighted conjugated inner source and unweighted exterior source (as in `ActualHartreeTwoWeightPhysicalSourceClosure.lean`), with true moving-shell support, physical speeds, Green/repair fields, and their parameter differences. Do not replace this with a fictitious global norm assumption, and do not assert the missing \(s^{-9/4}\) rate. Original revised manuscript tally stays **11/13**; §2.13 and Type-II main theorem remain open.
+
+
+### 2026-11-09: quantified moving-shell radial-conjugation loss — cannot convert the clock bound by support alone
+
+The existing actual moving-shell PDE clock estimate yields a **pointwise** residual on \(R(s)\le r\le2R(s)\) bounded by \(C\ell(s)^{5/2}\) before weakening to \(C t_s=C\ell(s)^2\); the actual radial-conjugated inner Fredholm forcing is \(rE\), not \(E\). Applying the original shell geometry of \`ActualHartreeShellWeightedNorm.lean\` to a shell residual of this amplitude gives, for \(R\ge1\),
+\[
+\|\langle r\rangle^{7/4}r\,\mathbf 1_{(R,2R)}E\|_{L^2(dr)}
+\le20\,C\,R^{13/4}\ell^{5/2}.
+\]
+Even if the *actual moment radius* has the independently known upper window \(R\le Q/\ell\) and \(0<\ell\le1\), this crude implication is only
+\[
+\|\langle r\rangle^{7/4}r\,\mathbf 1_{(R,2R)}E\|_2
+\le20\,C\,Q^{13/4}\ell^{-3/4},
+\]
+**not** a vanishing positive gain. The estimate does not say the actual shell norm diverges: it proves only that a radius-independent pointwise clock bound and shell support alone cannot close the required Fredholm source budget. One needs stronger genuine spatial decay/cancellation, region-specific norms or actual PDE control of the remaining moving modes. This radius power is not an optional bookkeeping factor. No increase to 12/13.
