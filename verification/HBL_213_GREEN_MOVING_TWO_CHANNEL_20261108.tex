@@ -4609,4 +4609,64 @@ statement; new strict CI \texttt{42575319719} is pending. This is
 not yet an accepted strict C$^1$ audit and does not change the
 original environment count $11/13$.
 
+
+\medskip
+\noindent\textbf{2026-11-09 strict reverse Volterra and finite radial-$C^1$ audits; physical quadratic plateau bridge.}
+The previously pending original reverse regularized Cramer slope
+has now passed strict CI \texttt{42574795691}, job
+\texttt{129019975598}. Both exact declarations
+\texttt{actual\_Hartree\_zero\_left\_backward\_original\_Green\_slope\_identity}
+and \texttt{actual\_Hartree\_zero\_left\_backward\_original\_Green\_slope\_bound}
+have transitive axiom lists consisting solely of
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}
+(with ordinary universe parameters).
+The entire finite reverse spectral iteration's radial-weighted
+$C^1$ estimate likewise has strict \emph{Success},
+CI \texttt{42575319719}, job \texttt{129021613235}.
+Its two independently printed target axiom reports are
+\texttt{[propext,Classical.choice,Quot.sound]} and
+\texttt{[propext,Classical.choice.\{u\},Quot.sound.\{u\}]}.
+Both jobs used the pinned compiler and Mathlib,
+\texttt{--trust=0}, warning-as-error, and exact audit targets.
+They are auxiliary spatial statements, not original manuscript
+environment completions.
+
+The current moving Kummer coefficient gives, using the \emph{same}
+actual quartic Hartree plateau source and real modulation channels,
+\[
+ (\mathcal L_{K_0}+\delta)(u_0-u_1)+S_{\rm in}
+       =-a^{-2}\delta\,u_1(y/a),\qquad
+ u_1=G_{K_0}[\delta u_0;0,0].
+\]
+Here the first-order term cancels by the \emph{physical} coefficient
+difference and source identity, rather than by treating the shifted
+and original Kummer operators as identical.
+The source-specific spatial estimate to be checked in the newly
+committed Lean module
+\texttt{ActualHartreePhysicalPlateauMovingSpectralQuadraticShellGain.lean}
+is, with $R=L/2$, $r_0=L/a$,
+$c_R=2G^2r_0|\delta|$, and the source-derived $D_R$,
+\[
+ \bigl\|\mathbf1_{(R,2R)}\,y a^{-2}\delta u_1(y/a)
+ \bigr\|_{L^{2,7/4}}
+ \le 20R^{13/4} a^{-2}|\delta|\, c_R D_R.
+\]
+The proof must derive the shared Kummer source on $[R,L]$ directly
+from the quartic Hartree plateau equation, not assume a second
+source-to-Green matching hypothesis. The only remaining
+\emph{explicit analytic} inputs in this frozen-shell specialization
+are weighted membership and source continuity, actual Green-source
+interval integrability, Kummer basis bounds, and source-field
+measurability. The dedicated strict CI \texttt{42589214801}
+was initiated at commit \texttt{d43717be}; until its build,
+exact target type and transitive axioms independently pass,
+this source-specialized theorem is not Lean accepted.
+
+In particular, even a successful source-specific quadratic
+spatial estimate cannot replace the time-dependent PDE residual
+bound. The nonlocal cross-zone source, moving basis and endpoint
+derivatives, the selected real speeds, parameter Lipschitz, and
+true nonlinear finite-profile induction remain indispensable.
+The retained original statement count is \textbf{11/13}.
+
 \end{document}
