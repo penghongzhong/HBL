@@ -1173,3 +1173,10 @@ The complete genuine logarithmic radial Hartree Riesz potential of the **differe
 The proof gives, for genuine measurable background U and corrections H1,H2 with `||U|| ≤ M`, `||Hj|| ≤ e bubble`, and `||H1-H2|| ≤ d bubble`, absolute convergence and `|I2[D_R(U,H1)-D_R(U,H2)](r)| ≤ C_R(12 M² e+12 M e²+4 e³)d/(1+r)` for every `r>0`. This is original nonlocal **direct difference**, not a freely assumed source Lipschitz condition or a time-derived PDE correction bound. It still needs actual selected four-piece corrections with the displayed envelopes before it can be substituted into the main PDE residual.
 
 **Formal original-paper acceptance: 11/13**, §2.13 and final dynamics both open.
+
+
+### 2026-11-09 exact six-product nonlinear Hartree Taylor coefficient inequality strict
+
+The genuine **six-product algebraic fifth-weight** lemma `HBL.TypeIIDynamicSelection.actual_Hartree_six_original_nonlocal_Taylor_products_fifth_weight` is strict **Success** [CI 42659015432](https://github.com/penghongzhong/HBL/actions/runs/42659015432), job `129305194717`, artifact `13691974697`, source of commit `85453ca6`. Raw audit confirmed empty strict compile log, pinned `--trust=0 -DwarningAsError=true`, exact `#check` and `#print axioms` with only `propext`, `Classical.choice`, `Quot.sound`.
+
+Its precise scope is the `t^5‖P0·CR+P1·(C1+CR)+PR·(C0+C1+CR)‖²` bound from explicit potential and cubic coefficient budgets, including the slow `PR·C0` contribution; it **does not** construct those coefficient bounds on the same source, infer the correction `H≤eW` from the uniquely selected four-piece physical Green field, or prove the full nonlinear PDE positive time-gain. Its predecessor 42658585669 failed solely on the unused-variable `hK` strict linter, repaired by renaming to `_hK` (no new mathematical premise). Actual original env count unchanged **11/13**.
