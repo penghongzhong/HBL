@@ -1022,3 +1022,30 @@ Candidate ActualHartreeBackwardSpectralFirstOrderShellGain.lean, source [e2623e]
  \le20R^{-3/4}|\delta|D_R,\quad a\ge(2R)^3.
 \]
 These latter three runs are PENDING at this checkpoint, not credited without original Success and exact axiom logs. This is an ell-power shell gain, NOT an s-power or global four-domain Hartree nonlinear residual, parameter Lipschitz, actual finite recursion, or dynamically deduced Type-II rate. **Original acceptance remains 11/13**.
+
+
+### Operator-selection caution for reference versus moving PDE
+
+An exact Lean theorem for the unshifted reference Kummer operator
+does NOT prove that the actual moving-parameter Hartree PDE uses
+the same operator. For the real matched spectral construction
+\(u_1=G_{K_0}[\delta u_0]\), \(w_\delta=u_0-u_1\), both exact formulas hold:
+\[
+ \mathcal L_{K_0}w_\delta-F_{\rm adj}=-\delta u_0,\qquad
+ (\mathcal L_{K_0}+\delta)w_\delta-F_{\rm adj}=-\delta u_1 .
+\]
+The first was independently strict-verified in CI 42562774111;
+the second is an already checked exact shifted spectral identity.
+If the coefficient displacement is actually
+\(\delta(s)=q_0(\mu(s),\theta(s))-q_0(\mu_0,\theta_0)\),
+the current frozen Kummer operator is \(\mathcal L_{K_0}+\delta(s)\)
+and the correct *moving-coefficient spatial* defect is quadratic,
+not the reference first-order defect. Thus the first-order backward-shell
+bound is a mathematically valid reference-operator source estimate, but
+it may be unnecessary for the *true* moving-parameter source.
+**The operator used by the actual renormalized 3D Hartree PDE must be
+identified exactly** and its moving time transport, basis and
+nonlocal feedback retained before choosing either residual estimate.
+Do not silently switch operators or assume the spectral mismatch
+cannot cancel. This is a decisive remaining main-chain gate, with no
+new original-paper acceptance; score remains 11/13.
