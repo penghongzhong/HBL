@@ -31,7 +31,7 @@ open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 native weighted L² class; the missing tail power is 3/2, not 1. -/
 theorem actual_Hartree_fifth_weight_square_to_original_weighted_L2
     (F : ℝ → ℂ) (hF : Measurable F)
-    (Q : ℝ) (hQ : 0 ≤ Q)
+    (Q : ℝ) (_hQ : 0 ≤ Q)
     (hFive : ∀ r : ℝ, 0 < r → (1 + r) ^ 5 * ‖F r‖ ^ 2 ≤ Q) :
     MemLp (fun r : ℝ =>
       affineJapaneseWeight (7 / 4 : ℝ) r * ‖F r‖)
