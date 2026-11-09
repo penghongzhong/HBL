@@ -3934,13 +3934,13 @@ envelope conditions; the genuine exterior \(F_0\) is generated from
 The two real Cramer compatibility equations determine the
 modulation pair; they do not imply the function-valued
 identity \(S_{\rm in}=-a^{-2}F_{\rm adj}\).
-The \texttt{ActualHartreeSinglePhysicalSourceTwoChannelSelection.lean}
+The \texttt{\detokenize{ActualHartreeSinglePhysicalSourceTwoChannelSelection.lean}}
 producer already specializes the \emph{fixed-time speed selector}
 to the same physical \(z\), with
-\(F_\pm=\operatorname{Re,Im}\bigl[r(1-\chi_L)
-\mathcal S_{\HH}(r)\bigr]\), and derives the original
+\(F_\pm=\operatorname{Re,Im}\bigl[r\chi_L(r)
+\mathcal S_{\HH}(r)\bigr],\quad\chi_L(r)=1-\operatorname{cutoff}(r/L)\), and derives the original
 weighted membership; continuity is still a visible input.
-The new \texttt{ActualHartreeOnePhysicalSourceSpectralQuadraticThreeC1.lean}
+The new \texttt{\detokenize{ActualHartreeOnePhysicalSourceSpectralQuadraticThreeC1.lean}}
 composes that genuinely one-source specialization with the
 quadratic spectral and three-\(C^1\) field outputs; its
 strict CI is pending and must not be counted prematurely.
@@ -4039,7 +4039,7 @@ The actual weighted Green bound already established for
 requires \(x=y/a\in[L/(2a),L/a]\).  Applying that right-hand
 estimate on the left interval would be an \emph{invalid
 extrapolation}.  The new original-PDE plateau lemma
-\texttt{ActualHartreePlateauSpectralOriginalSourceCancel.lean}
+\texttt{\detokenize{ActualHartreePlateauSpectralOriginalSourceCancel.lean}}
 expresses the exact first-order forcing in Lean; its strict
 CI is pending.  The next quantitative proof must propagate
 the original matched Cauchy jet \emph{backward} through this
