@@ -71,7 +71,6 @@ theorem actual_Hartree_full_matched_radial_energy_from_zero_left_and_jet
         (r : ℂ) * K.dy r - K.y r := by
     unfold originPhysicalSlope
     field_simp [hrC]
-    ring
   have hY : ‖(r : ℂ) ^ 2 * originPhysicalSlope K.y K.dy r‖ ≤
       (b + 1) * G := by
     rw [hOutgoingMode]
@@ -101,8 +100,7 @@ theorem actual_Hartree_full_matched_radial_energy_from_zero_left_and_jet
   have hTraceRadNorm :
       ‖(r : ℂ) ^ 2 * (Z * Y)‖ =
         r * ‖(r : ℂ) * (Z * Y)‖ := by
-    rw [norm_mul, norm_pow, Complex.norm_real, Real.norm_eq_abs,
-      abs_of_pos hrp, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+    simp only [norm_mul, norm_pow, Complex.norm_real, Real.norm_eq_abs,
       abs_of_pos hrp]
     ring
   have hCtRadius : Ct * a ≤ Ct * r :=
