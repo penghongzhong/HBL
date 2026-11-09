@@ -137,3 +137,22 @@ and **42558807364**, commit
 [96c00fd0](https://github.com/penghongzhong/HBL/commit/96c00fd0b0fdd5fd347c6ce8836e672c3ec44d9f),
 are likewise **not yet accepted** without original jobs and axiom
 reports. These are all auxiliaries, not original environments.
+
+
+## 2026-11-09 later strict reruns, proof repair, and exact spectral-shell mismatch
+
+- Raw [42558807364](https://github.com/penghongzhong/HBL/actions/runs/42558807364) **Success** at `96c00fd0`, original job `128970433558`, artifact `13648514548`: unique true Hartree source/selected-speed/frozen weighted spectral quadratic target. Its strict job invokes `--trust=0`, `warningAsError` and exact `#check` / `#print axioms`, with a three-axiom allowlist.
+- Raw [42558721390](https://github.com/penghongzhong/HBL/actions/runs/42558721390) **Success** for the derivative of the actual selected quartic source from an explicitly differentiable scaled orbit; [42558721475](https://github.com/penghongzhong/HBL/actions/runs/42558721475) **Success** for the real selected moving Green cross estimate under its visible physical-time-derivative bound. Neither produces the missing PDE trajectory norm bounds.
+- Raw [42558807332](https://github.com/penghongzhong/HBL/actions/runs/42558807332), [42558721414](https://github.com/penghongzhong/HBL/actions/runs/42558721414), [42558721545](https://github.com/penghongzhong/HBL/actions/runs/42558721545), and [42558721526](https://github.com/penghongzhong/HBL/actions/runs/42558721526) **FAILED** on the *same actual upstream elaboration error* at `ActualHartreeSpectralCorrectedFourPieceThreeC1.lean:98:4`: a `HasDerivAt` pullback represented by an explicit lambda was not simplified to the named `actualOriginMatchedKummerPullback`. The last workflow had already built its separate original nonlinear PDE telescope dependency; that is **not** full strict acceptance of the composite.
+- Commit [d2bfb112](https://github.com/penghongzhong/HBL/commit/d2bfb1120a6d917891e24f595f4b0ddc05b5661e) changes the proof by converting the goal to the literal matched-Kummer pullback lambda *before* scalar normalization. New strict runs [42561772359](https://github.com/penghongzhong/HBL/actions/runs/42561772359), [42561772339](https://github.com/penghongzhong/HBL/actions/runs/42561772339), and [42561772340](https://github.com/penghongzhong/HBL/actions/runs/42561772340) were triggered, but **must not be credited until raw Success and axiom audit**.
+
+**Decisive mathematical constraint:** the matched Green correction satisfies
+`L_K w_delta = F_adj - delta*u0`, whereas the shifted-operator defect is only `(L_K+delta)w_delta - F_adj = -delta*u1` (quadratic after the Volterra bound). Thus, after physical pullback and the actual two-channel inner field,
+```text
+L_K^a (u - v_delta) = E_in - M_delta,
+M_delta(y) = [Fp(y) + i Fm(y)]/y
+          + a^(-2) [F_adj(y/a) - delta*u0(y/a)].
+```
+The `ActualHartreeMatchedShellWeightedGain` hypothesis is **not automatically satisfied**: it would require `M_delta = 0`; the actual PDE instead must bound `M_delta` in the conjugated, moving-shell `L^{2,7/4}` source norm, including derivative and two-parameter Lipschitz costs. A quadratic defect for the *shifted* Kummer operator cannot silently replace the generally first-order `-delta*u0` contribution in the *original* Hartree PDE. The source decomposition is recorded in `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex` as a next proof obligation, not as a new Lean-certified theorem.
+
+**Formal original manuscript acceptance remains 11/13.** Only complete revised §2.13 and the terminal dynamical Type-II theorem can increase it.
