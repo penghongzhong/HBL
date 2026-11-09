@@ -426,3 +426,17 @@ In the **visible intermediate physical length bootstrap** `0<ell(s)<=s^(-beta)` 
 New exact Lean source [ActualHartreePlateauSpectralTrappedGain.lean](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreePlateauSpectralTrappedGain.lean), commit `ef37cf2cd5dd870f99901e326fbb19b6770a9d09`; new pinned strict workflow `hbl-213-physical-plateau-spectral-trapped-time-gain.yml`, CI [42619593894](https://github.com/penghongzhong/HBL/actions/runs/42619593894), was **in progress on last audit**. Its proof and transitive axioms cannot be credited until raw Success and exact three-target audits. The matching TeX manuscript update is commit `8c7da3068ddc10644e2966beeff009c624e22624`.
 
 **Scope limit**: this helps the **spectrally quadratic original plateau**, not the entire four-region physical PDE residual. Independently, a one-global *actual* nonlinear correction source-to-next-step theorem is under [CI 42619594632](https://github.com/penghongzhong/HBL/actions/runs/42619594632), but its exact statement still takes the physical principal linear correction equation as a hypothesis. Completing that solvability from the same uniquely selected, fully C1-matched original Hartree packet, furnishing all-region original norm and parameter differences, and closing the physical bootstrap remain essential. No additional original environment accepted: **11/13**.
+
+
+### 2026-11-09 explicit original-PDE principal-defect reduction
+
+The one-global genuine Hartree (full quartic nonlocal) source now has a proposed direct Lean bridge `HBL/TypeIIDynamicSelection/ActualHartreeOneGlobalPhysicalPDEStep.lean` with two exact targets:
+
+- `actual_Hartree_full_PDE_controlled_by_actual_linear_principal_defect`: pointwise for the SAME physical global `U,H,b,omega,db,domega`, prove
+  `||R_H(U+H;b+db,omega+domega)|| <= ||R_H(U;b,omega)+P_U(H)|| + C(U,H,db,domega) s^{-(rho+kappa)}`.
+  This theorem invokes the already-proved original full-nonlinear Hartree Taylor and modulation-speed cross gain; it does NOT assume the linear defect is small.
+- `actual_Hartree_full_PDE_next_gain_from_principal_cancellation`: corollary when the genuine linearized Hartree PDE condition `P_U(H)=-R_H(U)` is *provided*, not assumed by the manuscript as a rate hypothesis. It directly bounds the corrected original PDE residual, but cannot be used as §2.13 acceptance until the original four-region physical packet is constructed and shown to solve this principal problem.
+
+Explicit positive-gain factor: `kappa=actualHartreePhysicalKappa beta rhoStar >0`; coefficient `Cspeed*(CHd+CH)+63*(M+CH)^5*CH^2*bubble(r)^5`. The estimated nonlinear residual is genuine (same global quartic Hartree operator). Remaining producing edge is the original Fredholm/Kummer/outer-region linearized defect, including moving-time derivatives and pointwise-to-weighted source norms. Follow with **direct** threshold-coordinate difference and fixed `9/4` bound.
+
+New pinned trust-zero CI runs are tracked by workflow `.github/workflows/hbl-213-one-global-physical-pde-step.yml`; these targets are **pending, not accepted** until successful original job logs and exact #check / #print axioms audits. This proposal does **not** increase the retained manuscript count (still **11/13**).
