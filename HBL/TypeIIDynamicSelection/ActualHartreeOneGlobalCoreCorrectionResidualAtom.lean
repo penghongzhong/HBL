@@ -25,7 +25,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 open HBL.Profile.ResidualLedger
 
 /-- An original nonlocal Hartree PDE residual atom from ONE global
