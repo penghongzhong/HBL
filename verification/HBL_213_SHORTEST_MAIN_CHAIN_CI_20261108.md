@@ -1425,3 +1425,39 @@ Created `HBL/TypeIIDynamicSelection/ActualHartreeShellDuhamelExponent.lean` (com
 
 **Original revised acceptance remains 11/13 (84.62%).**
 
+
+
+### 9 Nov — exact nonoscillatory time integration, independently strict
+
+At HEAD `ae818c18b973e3b25bb8ec7e69060a14d19aef2a` the full source
+`ActualHartreeShellDuhamelExponent.lean` proves, for **every** `s>0`,
+the genuinely Lebesgue-improper identity
+`∫ t in Ioi s, t ^ (-(15/8:ℝ)) = (8/7:ℝ)*s ^ (-(7/8:ℝ))`,
+via Mathlib's `integral_Ioi_rpow_of_lt`. This replaces the paper-only
+integral calculation, not only the exponent bookkeeping.
+
+**STRICT SUCCESS:** [CI 42724408829](https://github.com/penghongzhong/HBL/actions/runs/42724408829),
+original job `129526218312`, artifact `13720284425`.
+The decoded job log confirms the pinned Lean 4.35.0-rc3 compiler,
+Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`lake env lean --trust=0 -DwarningAsError=true`,
+`#check @HBL.TypeIIDynamicSelection.actual_Hartree_shell_exact_absolute_Duhamel_integral`
+and its exact `#print axioms` (plus the four preceding targets).
+Exactly five audited transitive axiom sets contain only
+`propext`, `Classical.choice`, `Quot.sound`.
+
+This is a **negative** result for an absolute, non-oscillatory,
+undamped Duhamel proof with the current conditional shell source:
+it loses a full time power and cannot propagate the putative
+`s^(-9/8)` correction from a `s^(-15/8)` source using that
+estimate alone. It is **not** a theorem about the true Hartree
+linearized propagator or a contradiction to Type-II blowup.
+An alternative requires a genuine projected moving-generator resolvent,
+elimination of its resonant modes by the actual two-speed selection,
+and a controlled original-source time derivative for normal-form
+integration by parts. None of these three required outputs is yet
+derived from the same four-region physical PDE; do not count them as
+input estimates.
+
+**Acceptance unchanged: 11/13.** §2.13 and the final dynamical
+Type-II theorem remain open. Do not add one for this auxiliary check.
