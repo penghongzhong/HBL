@@ -5102,4 +5102,36 @@ of the actual modulation bootstrap must also be proved.  Only then
 does the single-step strategy replace the long finite recursion
 in the accepted $\S2.13$ proof.  This is not yet an upgrade from 11/13.
 
+
+\medskip
+\noindent\textbf{Genuine two-scale quartic Taylor input.}
+For the original Hartree core and rescaled regular radiation let
+\[
+ U_\ell=V_c+Z_\ell,\qquad
+ A_\ell(r)=\frac{2+9C_{\rm mon}}{1+r}
+   +\frac{2(B+A)\sqrt\ell}{1+\ell r}.
+\]
+The genuine physical radial and Strauss bounds imply
+$|U_\ell(r)|\le A_\ell(r)$, with no intermediate
+$\ell^{-1/2}$ global-bubble coefficient. If $|H(r)|\le e(r)$,
+the true quartic density and local cubic Taylor expansions satisfy
+\[
+ \left|\mathcal D_{4,\ge2}(U_\ell,H)(r)\right|
+ \le 6A_\ell(r)^2 e(r)^2
+       +4A_\ell(r)e(r)^3+e(r)^4,
+\]
+\[
+ \left|\mathcal C_{3,\ge2}(U_\ell,H)(r)\right|
+ \le (3A_\ell(r)+e(r))e(r)^2.
+\]
+The exact linear density and cubic bounds follow from the same
+polynomial identity.  These input inequalities have been transcribed
+into the source-faithful Lean module
+\texttt{ActualHartreeTrueTwoScaleTaylorDensity.lean},
+with an independently triggered strict audit, not yet accepted.
+To obtain a full theorem for revised~\S2.13, one must apply the
+\emph{actual} radial inverse-square Riesz integral to all these
+two-scale density terms, retain contributions from the four moving
+regions, and prove the source-norm and threshold Lipschitz gains.
+
 \end{document}
