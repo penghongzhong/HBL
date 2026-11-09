@@ -3691,10 +3691,19 @@ and $W(r)=(1+r^2)^{-1/2}$. Then the pointwise consequence is
 \end{equation}
 This is the precise new Lean candidate
 \texttt{ActualHartreeOneGlobalCoreSpatialRemainderBridge.lean},
-source revision \texttt{ec8efcee}, strict verification
-\texttt{42552019761} pending at insertion; its initial CI
-\texttt{42551656354} failed on two elementary complex norm simplifications
-which have been repaired. A pending proof is not counted as accepted.
+source revision \texttt{ec8efcee}, now \emph{strictly accepted}
+by original CI \texttt{42552019761} (job \texttt{128949475926},
+artifact \texttt{13645594881}).  The source is checked with
+Lean \texttt{4.35.0-rc3}, Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, \texttt{warningAsError}, exact
+\texttt{\#check} and \texttt{\#print axioms}; the original job prints
+only \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}, without \texttt{sorryAx}. Initial CI
+\texttt{42551656354} failed on complex norm simplifications,
+repaired in \texttt{ec8efcee}. This is one verified
+\emph{auxiliary} spatial-shape theorem, not an accepted
+original \S2.13 environment.
 
 For the inner radial conjugation $q=rH$ and
 $w(r)=(1+r^2)^{7/8}$, the actual Fredholm forcing is
