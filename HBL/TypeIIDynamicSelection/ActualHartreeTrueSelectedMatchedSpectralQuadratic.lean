@@ -119,7 +119,6 @@ theorem actual_Hartree_true_source_selected_matched_spectral_weighted_quadratic
   intro L c a hLp hLarge ha3 hSmall hOrder
     Fp Fm hp hm hcp hcm Bz Az ell hBz hAz hell hellOne
     z hz hSup hStrauss hFcont
-  dsimp only
   obtain ⟨p, hCompat, hUnique, hProfile⟩ :=
     hSelected L c a hLp hLarge ha3 hSmall hOrder
       Fp Fm hp hm hcp hcm Bz Az ell hBz hAz hell hellOne
