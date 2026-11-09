@@ -252,8 +252,10 @@ theorem actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
       _ = R ^ (-(19 / 4 : ℝ)) / 512 := by rw [hpow]
   have hpower : R ^ (13 / 4 : ℝ) * R =
       R ^ (17 / 4 : ℝ) := by
-    rw [← Real.rpow_one R, ← Real.rpow_add hRpos]
-    norm_num
+    calc
+      _ = R ^ ((13 / 4 : ℝ) + 1) :=
+        (Real.rpow_add_one hRpos.ne' (13 / 4 : ℝ)).symm
+      _ = R ^ (17 / 4 : ℝ) := by norm_num
   have hcoef : 0 ≤ 80 * G ^ 2 * ‖delta‖ ^ 2 * D := by positivity
   calc
     20 * R ^ (13 / 4 : ℝ) *
