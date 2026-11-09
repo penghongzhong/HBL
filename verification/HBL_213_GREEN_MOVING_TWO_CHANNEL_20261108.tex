@@ -5892,4 +5892,34 @@ estimate does not imply a new temporal order for \(d\), construct the
 moving four-region Hartree orbit, or prove the physical packet
 recursion or Type--II rate. The original accepted count remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{The genuine matched spectral radial energy on the
+moving Kummer annulus (9 November, new Lean candidate).}
+Write $u_1=G_{\mathrm{Cramer}}[d u_0;0,0]$ as above and
+$E=C_{\mathrm{spec}}(D,G,b)|d|H$. The already verified pointwise estimate,
+the \emph{actual classical} Kummer derivative, and continuity of the
+original source on its positive domain give a genuinely integrable
+density and the finite-interval estimate
+\[
+ r\mapsto r^2|\partial_r u_1(r)|^2\in L^1([a,b]),\qquad
+ \int_a^b r^2|\partial_r u_1(r)|^2\,dr
+ \le (b-a)b^2 E^2.
+\]
+This deliberately uses the safe upper bound $r^2\le b^2$, not a
+vacuous inequality for a potentially non-integrable derivative.
+The separately displayed sharper factor $(b^3-a^3)/3$ follows by
+ordinary integration and remains a paper calculation; the new Lean
+candidate certifies the weaker explicit bound above. Under the
+physical change of variables $y=a_{\mathrm{phys}}r$, the radial
+energy has the exact scaling factor $a_{\mathrm{phys}}$, which
+cannot be dropped when pursuing a uniform moving-interface bound.
+The proposed formalization is
+\texttt{ActualHartreeMatchedSpectralRadialEnergy.lean}; strict CI
+\texttt{42706314302} is still pending at submission.
+This addresses only a fixed-slice spectral correction, not the
+unproved true time derivative, four-region residual, or §2.13
+finite PDE induction. The original count remains $11/13$.
+
 \end{document}
