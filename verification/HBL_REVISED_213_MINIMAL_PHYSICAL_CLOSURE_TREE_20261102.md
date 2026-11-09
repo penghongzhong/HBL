@@ -233,3 +233,5 @@ finite physical Hartree profile in the retained original 2.13.
 All moving-time, outer Riesz feedback, parameter-Lipschitz, global
 source norm and PDE-driven rate obligations remain; the formal
 13-environment count is **11/13**.
+
+**C¹ gluing caveat:** The iterated zero-left Green correction has zero Cauchy jet at its *left* anchor by construction. It generally has a nonzero value/derivative at the *far-field* matching endpoints. Consequently it does not, by itself, propagate the accepted three physical C¹ interfaces; each new spectral correction requires a same-source outgoing/tranmission re-match and the true nonlocal quartic cross terms generated between layers. A finite Neumann sum of the frozen operator is **not** a finite nonlinear Hartree profile.
