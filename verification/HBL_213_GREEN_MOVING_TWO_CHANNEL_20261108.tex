@@ -4974,4 +4974,51 @@ dedicated workflow succeeds.  This is only the plateau spectral
 feedback, moving interfaces or the original four-piece PDE residual.
 It does not upgrade the retained 11/13 acceptance.
 
+
+\medskip
+\noindent\textbf{Original-PDE principal-defect reduction (November 9).}
+Write $\mathcal R_{\rm H}(U;b,\omega)$ for the genuine complete
+radial quartic Hartree evolution residual and let
+$\mathcal P_{U;b,\omega}^{\dot b,\dot\omega}[H]$ be its explicitly
+defined first-order linearized correction, including the speed
+increment acting on the original background $U$.  The same global
+physical field $U+H$, with no separate artificially normalized source,
+obeys the exact algebraic identity
+\[
+\begin{aligned}
+ \mathcal R_{\rm H}(U+H;b+\dot b,\omega+\dot\omega)
+   ={}&
+   \mathcal R_{\rm H}(U;b,\omega)
+   +\mathcal P_{U;b,\omega}^{\dot b,\dot\omega}[H]\\
+   &+\bigl(i\dot b\,\Lambda H+\dot\omega H\bigr)
+    +\mathcal N_{\rm H}(U+H)-\mathcal N_{\rm H}(U)
+      -D\mathcal N_{\rm H}(U)[H].
+\end{aligned}
+\]
+For the already certified complex-Hartree Taylor and cross-speed
+bounds, with $s\ge1$, $\kappa>0$, $\kappa\le\rho$, and the actual
+pointwise field envelopes, the proposed independently audited
+Lean theorem gives
+\[
+\begin{aligned}
+ &\bigl|\mathcal R_{\rm H}(U+H;b+\dot b,\omega+\dot\omega)(s,r)\bigr|\\
+ &\quad\le
+ \bigl|\mathcal R_{\rm H}(U;b,\omega)(s,r)
+       +\mathcal P_{U;b,\omega}^{\dot b,\dot\omega}[H](s,r)\bigr|\\
+ &\qquad+
+ \left[
+   C_{\rm speed}(C_{H,\Lambda}+C_H)
+   +63(M+C_H)^5C_H^2W(r)^5
+ \right]s^{-(\rho+\kappa)} .
+\end{aligned}
+\]
+The right-hand principal defect is \emph{not} assumed small, and this
+pointwise estimate is \emph{not} yet an $X_s$ source norm bound.
+The original four-zone physical Fredholm/Kummer construction, moving
+endpoints and nonlocal interactions must generate a genuine estimate
+for that principal defect, together with its direct two-parameter
+difference.  Once proved at fixed order $9/4$, existing backward
+fixed-point theorems may be applied; until then revised~\S2.13
+and the final dynamical theorem remain unaccepted.
+
 \end{document}
