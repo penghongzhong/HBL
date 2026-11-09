@@ -1405,3 +1405,8 @@ The *same* original Hartree source-matched (u_0) produces (q=d u_0) and the actu
 \]
 
 This is the 3D radial **native** energy estimate, explicitly free of inverse powers of the moving left endpoint, and not an abstract source or assumed gradient-energy envelope. The more precise physical-variable cubic-volume bound remains a paper calculation; it retains a genuine multiplying (a_{\rm phys}) after (y=a_{\rm phys}r). No dynamic gain, moving selector derivative, four-region source Lipschitz, finite nonlinear recurrence or Type-II rate is inferred. **Original acceptance remains 11/13**.
+
+
+### Quantified sharp shell deficit (analytic obstruction, not a Lean closure)
+
+For the largest shells admitted by the current physical support class, `X(s) ≍ s^(1/2)`, the rigorously established **conditional paper** power count `‖R_H^{≥2}‖ ≤ C e² X^(3/4)` with `e ≤ C s^(-ρ)` yields `s^(-2ρ+3/8)`. Achieving the *previous* `s^(-9/4)` target by this absolute-value bound alone requires `ρ ≥ 21/16`, an extra `3/16` amplitude decay over the provisional `ρ = 9/8`; equivalently the source lacks `s^(-3/8)`. The paper's annular counterexample makes the X exponent sharp for its size/energy/support class. A real PDE sign cancellation, smaller **dynamically derived** shell, or a revised recurrence that accepts the relative `s^(-3/4)` gain may avoid the stronger target. **None is established yet**, and no time rate or source envelope is added as a hypothesis. Original count stays 11/13.
