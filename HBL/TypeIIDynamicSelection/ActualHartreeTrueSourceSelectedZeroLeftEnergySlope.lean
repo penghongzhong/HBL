@@ -211,7 +211,7 @@ theorem actual_Hartree_true_source_unique_speed_zero_left_energy_slope
           2 * (D + 1) * G * B ^ 2 * T ≤
         (B + 1) * G * J * (Cn * (N + Q)) +
           2 * (D + 1) * G * B ^ 2 * T :=
-      add_le_add_right (mul_le_mul_of_nonneg_left hQaBudget hFactor) _
+      add_le_add (mul_le_mul_of_nonneg_left hQaBudget hFactor) (le_refl _)
     have hFinal := hCore.trans hSize
     simpa only [Fadj, F0, J, N, Q, T] using hFinal
 
