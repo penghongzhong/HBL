@@ -1049,3 +1049,24 @@ nonlocal feedback retained before choosing either residual estimate.
 Do not silently switch operators or assume the spectral mismatch
 cannot cancel. This is a decisive remaining main-chain gate, with no
 new original-paper acceptance; score remains 11/13.
+
+
+### 2026-11-09 actual moving spectral plateau and backward inverse-Volterra proof
+
+**Current original revised theorem count 11/13, no credit for auxiliary modules.** Strict GitHub Actions [42565184656](https://github.com/penghongzhong/HBL/actions/runs/42565184656) succeeded on source 88b87b5c, original job 128990057404, artifact 13651342799, exact declaration
+HBL.TypeIIDynamicSelection.actual_Hartree_plateau_current_moving_spectrum_exact_quadratic_source.
+The same genuine quartic nonlocal Hartree plateau source and both physical real speed channels yield, with
+\(\delta=\mathrm{frozenZeroCoeff}(\mu,\theta)-\mathrm{frozenZeroCoeff}(\mu_0,\theta_0)\),
+\(u_1=G_{K_0}[\delta u_0;0,0]\), \(v_\delta=(u_0-u_1)(\cdot/a)\),
+\[
+ \mathcal L_{\mu,\theta}^{(a)}v_\delta+\mathcal S_{\mathrm{inner}}
+       =-a^{-2}\delta u_1(\cdot/a)
+       \quad (0<y\le L).
+\]
+The fixed-reference first-order source \(-a^{-2}\delta u_0\) is exactly canceled by the actual changed zero-order Kummer coefficient; the remaining *spatial* error is genuinely quadratic in \(\delta\), conditional on source-derived Volterra bounds. This is not the full Hartree PDE in time. The original run contains Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, -DwarningAsError=true, exact #check and #print axioms; only [propext, Classical.choice, Quot.sound].
+
+**Independent strict SUCCESS** [42565447419](https://github.com/penghongzhong/HBL/actions/runs/42565447419), original job 128990847961, evidence 13651526711, exact declaration
+HBL.TypeIIDynamicSelection.actual_Hartree_backward_spectral_first_order_shell_source_gain.
+This bounds the genuine *reference* \(-a^{-2}\delta u_0\) shell source in the original conjugated weighted norm by \(20R^{-3/4}|\delta|D_R\) for \(a\ge(2R)^3\). The actual matched physical Green field on the **backward** physical interval \([R,2R]\) is bounded from the two original Fredholm sources (verified [42564376709](https://github.com/penghongzhong/HBL/actions/runs/42564376709), artifact 13650812421), not an independent envelope. Exact trust-zero, warnings-as-errors, and three-axiom audit succeeded. It is **not** yet the moving-coefficient quadratic \(-\delta u_1\) estimate.
+
+**Pending true backward zero-jet Volterra**: source [533d8ef](https://github.com/penghongzhong/HBL/commit/533d8ef616ac9a075f297d631848bf46338cfb1e), strict [CI 42566011025](https://github.com/penghongzhong/HBL/actions/runs/42566011025). Unlike right-annulus estimates, the source is evaluated at normalized \(r\in[r_0/2,r_0]\), **left of its zero-Cauchy-jet anchor** \(r_0=L/a\). The strict target bounds \(G_{K_0}[F;0,0]\) there by \(2G^2M\), from actual reversed Wronskian integrals and \( |F(r)|\le M/r\). For the same physical \(u_0\) and \(F=\delta u_0\), the matched backward value producer suggests \(M=r_0|\delta|D_R\). This would yield a genuinely quadratic spatial source with no inverse moving-radius loss but is **not strict accepted** until its job succeeds. All other four-region, nonlinear time/moving-boundary, modulation-Lipschitz, finite recursion and dynamic Type-II rate obligations remain open.
