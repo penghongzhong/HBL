@@ -116,7 +116,7 @@ theorem actual_Hartree_one_global_core_conjugated_shell_weighted
           63 * (M + CH) ^ 5 * CH ^ 2 * bubble r ^ 5 ≤
             63 * (M + CH) ^ 5 * CH ^ 2 := by
         simpa only [mul_one] using hh
-      exact add_le_add_left hh2 (Cspeed * (CHd + CH))
+      exact add_le_add (le_refl _) hh2
     have hLe := hRaw.trans (mul_le_mul_of_nonneg_right hCoef hPow)
     simpa only [E, A, C0] using hLe
   have hShell :=
