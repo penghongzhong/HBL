@@ -73,6 +73,9 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_norm
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_norm
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreePhysicalPlateauMovingSpectralQuadraticShellAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -81,9 +84,10 @@ jobs:
           s=Path('evidence/audit.log').read_text()
           goal='actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_norm'
           assert goal in s, 'missing exact target audit'
+          assert 'actual_Hartree_quadratic_backward_shell_cubic_spatial_factor' in s, 'missing second spatial exponent target'
           assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
-          assert len(reports)==1, f'expected one exact axiom report: {len(reports)}'
+          assert len(reports)==2, f'expected two exact axiom reports: {len(reports)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in reports:
             axioms=[v.strip() for v in report.split(',') if v.strip()]
