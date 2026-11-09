@@ -622,3 +622,25 @@ This is the critical *genuine physical source* closure of the chain **original t
 Both the selected `p` and the quantitative `Efull` come from the SAME original nonlocal interaction and Fredholm data, not supplied as arbitrary regional speed/energy hypotheses. No explicit negative power of `L/a` occurs in the bound.
 
 **Non-vacuous integrability audit:** the exact printed 42541621509 theorem concludes an integral inequality, while the native a.e. certificate separately produces continuous algebraic slope. To make explicit `IntegrableOn (r²‖deriv W(r)‖²)` in the kernel-checked statement, `ActualHartreeMatchedRadialH1Integrable.lean` was separately submitted to [CI 42542447894](https://github.com/penghongzhong/HBL/actions/runs/42542447894); that is **PENDING**, do not record it as accepted yet. The source-specific physical pullback/global four-piece `Ḣ¹` and time-positive original full Hartree PDE remainder remain open. Original revised numerator **11/13**.
+
+
+### 2026-11-09 strict replays and uniform physical-clock shell closure candidate
+
+**Original revised manuscript: 11/13 (84.62%); §2.13 and final Type-II theorem remain OPEN.**
+
+Three original radial-H1 links are now genuinely successful, not merely pending:
+
+- [42542447894](https://github.com/penghongzhong/HBL/actions/runs/42542447894), target `actual_Hartree_matched_radial_H1_density_integrable`, artifact `13642596037`: the genuine matched a.e. derivative has integrable radial \(r^2|\partial_r w|^2\) density.
+- [42542644210](https://github.com/penghongzhong/HBL/actions/runs/42542644210), target `actual_Hartree_matched_radial_H1_of_algebraic_slope_bound`, artifact `13642297624`: the actual radial gradient integral is bounded by the *algebraic* weighted slope certificate. This fixes the previous unused-binder strict failure in 42541465634.
+- [42542644205](https://github.com/penghongzhong/HBL/actions/runs/42542644205), target `actual_Hartree_true_selected_full_matched_radial_H1_no_left_radius`, artifact `13642522324`: the SAME genuinely selected physical Hartree source, unique real Cramer pair and Fredholm outgoing trace yield the actual normalized three-dimensional Kummer annular H1 bound.
+
+Each original job log explicitly reports transitive axioms `[propext, Classical.choice, Quot.sound]`; each is pinned Lean 4.35.0-rc3 / Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, uses `--trust=0`, `-DwarningAsError=true`, and a target `#check` plus `#print axioms`. Also [42540898273](https://github.com/penghongzhong/HBL/actions/runs/42540898273) strictly succeeded after source lint repair; [42541952006](https://github.com/penghongzhong/HBL/actions/runs/42541952006) strictly succeeded for the original clock integral.
+
+**Quantifier gap removed in a new source candidate; CI acceptance pending:** new `ActualHartreeUniformFullShellClockNoBeta.lean` (commit [378bbf2](https://github.com/penghongzhong/HBL/commit/378bbf2cb95cb8a4a7c44b2db6362f4a1e598429)), dedicated strict workflow commit [c0f7550](https://github.com/penghongzhong/HBL/commit/c0f7550a91ba22e640aa7dc9b3d5d7c3124c6efc), [CI 42543500708](https://github.com/penghongzhong/HBL/actions/runs/42543500708). The exact theorem `actual_Hartree_one_orbit_full_shell_uniform_clock_no_beta` fixes cutoff constants *before* the actual PDE orbit, time and radius, and concludes for \(R(s)\le r\le 2R(s)\)
+\[
+ \left\|\mathcal R[\chi_{R(s)}f](s,r)-\chi_{R(s)}(r)\mathcal R[f](s,r)\right\|
+ \le K(M,B,A,J)\,t'(s),\qquad t'(s)=\ell(s)^2,\quad 0<\ell(s)\le1.
+\]
+No \(\ell(s)\le s^{-\beta}\) assumption or Type-II rate appears. This conclusion **still requires** its stated actual Hartree moment flux and source regularity hypotheses and is only the moving overlap shell, not the complete four-region nonlinear residual. The right-hand coefficient is time-uniform only if \(M,B,A,J\) are themselves uniformly controlled along the true PDE orbit. No success, rate gain, or original acceptance is claimed until job logs and axiom report confirm the new CI.
+
+**Decisive remaining proof gate:** choose a *single time-dependent* compatible true Hartree orbit, derive quantitative modulation/source/endpoint Lipschitz with constants on the whole interval, and prove a genuine strict increment in the original weighted norm for all four regions (not a telescoping identity); then generate and verify the actual finite recursion and dynamically selected Type-II blowup rate. The new fixed-shell candidate, even if successful, does not by itself move the original 11/13 score.
