@@ -4456,4 +4456,82 @@ has strict CI \texttt{42568496790}, original job
 auxiliary results can raise the original
 \(11/13\) acceptance count.
 
+
+\medskip
+\noindent\textbf{Finite genuine backward spectral Neumann iteration and its exact spatial power.}
+The strictly accepted reverse Cramer--Volterra estimate applies
+iteratively to the \emph{same original} normalized Green operator.
+Put $r_0=L/a=2R/a$, and keep the physically produced first field
+$u_0=G_{K_0}[F_{\rm adj};J_+,J_-]$ and its source-derived
+$D_R$ from above. For each finite $j\ge1$, define
+\[
+  u_j=G_{K_0}[\delta u_{j-1};0,0],
+  \qquad
+  w_N=\sum_{j=0}^{N}(-1)^ju_j,\qquad
+  c_R=2G^2r_0|\delta|.
+\]
+For continuous generated sources whose genuine Green primitives
+are interval integrable, the \emph{same} exact Wronskian
+formula on $[r_0/2,r_0]$ gives inductively
+\begin{equation}
+ \sup_{r_0/2\le r\le r_0}|u_j(r)|
+ \le c_R^j D_R,\qquad j\in\mathbb N.
+ \label{eq:hbl-finite-backward-neumann-spatial}
+\end{equation}
+Indeed $|u_{j-1}(x)|\le c_R^{j-1}D_R$ and $x\le r_0$
+imply
+$|\delta u_{j-1}(x)|\le
+ r_0|\delta|c_R^{j-1}D_R/x$;
+the reverse zero-jet Green estimate supplies exactly the extra
+factor $2G^2r_0|\delta|$ with no inverse-left-radius loss.
+The \emph{current-coefficient} spatial equation then telescopes
+algebraically to
+\[
+ (\mathcal L_{K_0}+\delta)w_N-F_{\rm adj}
+   =(-1)^N\delta u_N.
+\]
+The conjugated physical-shell estimate and
+$a\ge(2R)^3$ consequently give the quantitative spatial bound
+\begin{equation}
+ \left\|\mathbf1_{(R,2R)}
+   y\,a^{-2}\delta u_N(y/a)\right\|_{L^{2,7/4}}
+ \le\frac5{16}\left(\frac{G^2}{2}\right)^N
+ R^{-(11/4+2N)}|\delta|^{N+1}D_R.
+ \label{eq:hbl-finite-backward-neumann-norm}
+\end{equation}
+Its $N=1$ specialization recovers
+\eqref{eq:hbl-backward-spectral-weighted-quadratic} exactly.
+This calculation identifies a \emph{finite} route to arbitrarily high
+\emph{spatial} spectral powers without presupposing a larger physical
+source envelope. A new Lean module
+\texttt{ActualHartreeBackwardSpectralNeumannFiniteGain.lean}
+encodes the actual recursive Cramer--Green solutions and the
+all-finite-$N$ bound \eqref{eq:hbl-finite-backward-neumann-spatial};
+the corresponding dedicated pinned strict CI must succeed before
+this new target is marked Lean-accepted.
+The norm estimate \eqref{eq:hbl-finite-backward-neumann-norm}
+and the current-operator telescoping are analytic consequences here,
+not yet independently audited all-$N$ Lean targets.
+
+For the purpose of auditing \emph{conditional} slow-time budgets only,
+if the physical PDE eventually supplies
+$|\delta(s)|\lesssim s^{-(2\beta-1)}$,
+$D_R(s)\lesssim\ell(s)^{1/8}$, and
+$\ell(s)\lesssim s^{-\beta}$, the $N$-th source has
+\[
+ \rho_N=(N+1)(2\beta-1)
+             +\frac{19+8N}{64}\,\beta.
+\]
+Since $\beta>1/2$, this exponent increases with $N$,
+but none of those three dynamical inputs is granted by the
+Neumann recursion. In particular,
+\eqref{eq:hbl-finite-backward-neumann-norm} controls only
+the backward overlap of a frozen operator:
+the actual moving basis, interfaces, selected-speed derivatives,
+outside-plateau Riesz couplings, parameter Lipschitz, and
+the genuine Hartree finite physical source recursion have
+\emph{not} been deduced. No replacement of the original
+\texttt{thm:finite-profile-stage3}, no assumed Type--II rate,
+and no increase beyond $11/13$ is asserted.
+
 \end{document}
