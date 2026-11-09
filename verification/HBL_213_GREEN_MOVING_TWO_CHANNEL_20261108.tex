@@ -6006,4 +6006,41 @@ These necessary exponent relations alone establish neither a
 Hartree PDE recurrence nor revised original Section 2.13;
 the formal count remains $11/13$.
 
+
+\medskip
+\noindent\textbf{Exact absolute Duhamel integration is now formally checked
+(9 November; a necessary obstruction, not a PDE closure).}
+In addition to the previously verified power identities, the
+\emph{actual improper integral} has a separate strict Lean proof:
+\[
+ \boxed{\quad
+ \int_s^\infty \tau^{-15/8}\,d\tau
+  =\frac87s^{-7/8},\qquad s>0.\quad}
+\]
+The exact declaration is
+\texttt{HBL.TypeIIDynamicSelection.actual\_Hartree\_shell\_exact\_absolute\_Duhamel\_integral}.
+Pinned CI \texttt{42724408829}, original job \texttt{129526218312},
+artifact \texttt{13720284425} succeeded with Lean 4.35.0-rc3,
+Mathlib \texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, warning-as-error, and five exact
+\texttt{\#check}/\texttt{\#print axioms} reports containing only
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+Consequently no scalar absolute Duhamel estimate based solely on
+$\|\mathcal R_{\rm H}^{\ge2}(s)\|\lesssim s^{-15/8}$ can
+by itself propagate an $s^{-9/8}$ correction norm.
+
+A possible \emph{unproved alternative}, which must be derived from
+the genuine four-region Hartree flow rather than installed as a premise,
+is a projected time-normal-form estimate: after the same two selected
+real compatibility directions have removed genuine resonant components,
+a uniformly bounded inverse of the projected moving generator and a
+sufficiently controlled time derivative of the \emph{actual} source
+would permit temporal integration by parts.  Neither the required
+uniform projected resolvent, its moving commutator, nor the original
+nonlocal source derivative is presently available with the necessary
+boundary and parameter controls.  This remains a concrete route to
+investigate, \emph{not} an asserted oscillatory improvement, positive
+time order, finite-layer recursion, or Type--II rate. Original strict
+acceptance remains 11/13.
+
 \end{document}
