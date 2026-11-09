@@ -41,7 +41,6 @@ theorem actual_Hartree_moving_coefficient_spectral_physical_PDE_exact
     (U DU : ℂ) :
     let delta : ℂ := frozenZeroCoeff mu theta -
       frozenZeroCoeff mu0 theta0
-    let u0 := actualOriginMatchedKummerValue K r0 r1 F U DU
     let u1 := actualOriginMatchedKummerValue K r0 r1
       (actualHartreeMatchedSpectralFirstSource K r0 r1 F U DU delta) 0 0
     let v := actualHartreeMatchedSpectralPhysicalValue K a r0 r1 F U DU delta
