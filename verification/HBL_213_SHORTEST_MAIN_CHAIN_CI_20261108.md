@@ -1289,3 +1289,55 @@ not yet satisfy the global `e=bO(s^{-9/8})` bubble envelope; neither
 a static source lemma nor a telescoping identity provides
 the true full PDE residual time gain, Lipschitz moving endpoints,
 physical layer iteration, or the Type-II rate. **Original 11/13.**
+
+
+### 2026-11-09 complete true-Riesz, quadratic-in-correction weighted L2: strict SUCCESS
+
+**The exact full physically sourced sharp theorem is now independently
+STRICT SUCCESS:** [CI 42675724789](https://github.com/penghongzhong/HBL/actions/runs/42675724789),
+source SHA `2c7c3effd1125957c4a6fc6ae3f1de082740f198`,
+original job `129356428536`, archived artifact `13699654205`.
+The original job log (not only the GitHub status badge) confirms the
+pinned Lean 4.35.0-rc3, Mathlib
+`a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`lake env lean --trust=0 -DwarningAsError=true`,
+empty strict-compiler output, and exact `#check` and
+`#print axioms` of
+`HBL.TypeIIDynamicSelection.actual_Hartree_full_original_six_term_nonlinear_weighted_L2_sharp`
+and the original remainder-measurability theorem. **Both**
+original transitive axiom checks returned exactly
+`[propext, Classical.choice, Quot.sound]`, with no extra axioms,
+sorry/admit or accepted warnings.
+
+This fixes a **real defect in the previous numerical certificate**:
+the old accepted literal bound `S_old=(A0+A1+AR)(B1+BR)` was
+only `O(e)` due to a fictitious `P0*C1` contribution.
+The **new strict theorem** uses the actual complex Hartree
+linearized Taylor identity and the sharp
+`S=A0*BR+(A1+AR)*(B1+BR)`, and proves, for measurable
+complex profiles `U,H` with primitive positive-radial bounds
+`||U||≤M`, `(1+r)||U||²≤K`, `||H||≤e*bubble`,
+`M,K,e≥0`, the native `MemLp` plus
+`∫(affineJapaneseWeight(7/4,r) ||R_H(U,H,r)||)² dr
+≤ Q_sharp ∫(1+r)^(-3/2)dr = 2Q_sharp`,
+where
+`A0=K² C`, `A1=8MKe C`,
+`AR=(6M²+4Me+e²)e² C`, and
+`Q_sharp=2[AR² K³+(A0*4(3M+e)e²+
+(A1+AR)(6Ke+4(3M+e)e²))²]`.
+For bounded `M,K,C` and `0≤e≤1`, now
+`Q_sharp=O(e^4)`, so the **norm** (not just its square)
+is genuinely `O(e²)`. This is the **entire true six-product
+nonlocal source**, with all three actual Riesz rows proved from
+the primitive measurable fields, not separately assumed.
+
+**Scope remains strict:** `||H||≤e*bubble` is a visible **input**,
+not constructed for the actual time-dependent uniquely selected
+physical four-piece Kummer replacement. Existing true selected
+outer repair has a half-clock loss under this global envelope;
+the physically sharp annular estimate
+`||R_H||_{L²,7/4}≤C e² X^{3/4}` is only paper-level and still
+requires the same-source corrected field/region/moving-time assembly.
+Thus no positive-order full PDE residual, parameter Lipschitz,
+physical finite packet recursion or dynamical Type-II rate follows.
+**Original revised-paper environments STILL 11/13.**
