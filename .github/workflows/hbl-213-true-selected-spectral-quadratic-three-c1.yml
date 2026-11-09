@@ -6,6 +6,7 @@ on:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSelectedSpectralQuadraticThreeC1.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSelectedMatchedSpectralQuadratic.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSelectedSpectralFourPieceThreeC1.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSpectralCorrectedFourPieceThreeC1.lean'
       - '.github/workflows/hbl-213-true-selected-spectral-quadratic-three-c1.yml'
   workflow_dispatch:
 permissions:
