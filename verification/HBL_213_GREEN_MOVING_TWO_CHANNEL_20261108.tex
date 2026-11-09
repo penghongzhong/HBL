@@ -4596,4 +4596,17 @@ physical time order. The original thirteen-environment acceptance
 remains eleven, with \S2.13 and the terminal physical Type--II
 rate theorem outstanding.
 
+
+\medskip
+\noindent\textbf{Strict C$^1$ proof versus audit-parser status.}
+Independent CI \texttt{42574117292} completed the strict target
+compilation but failed its final evidence-parser assertion because
+two explicitly printed transitive-axiom reports were present where
+the script incorrectly expected one. Commit \texttt{f4c65bec}
+corrects the requirement to check both reports, each against the
+same permitted three axioms, without changing the mathematical
+statement; new strict CI \texttt{42575319719} is pending. This is
+not yet an accepted strict C$^1$ audit and does not change the
+original environment count $11/13$.
+
 \end{document}
