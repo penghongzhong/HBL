@@ -55,7 +55,6 @@ theorem actual_Hartree_zero_left_inverse_square_energy_slope_core
   have hrscale : r ∈ Icc 0 scale := ⟨hrp.le, hr.2.trans hBscale.le⟩
   have hJ : 0 ≤ J := by dsimp [J]; positivity
   have hJQ : 0 ≤ J * Q := mul_nonneg hJ hQ
-  have hT : 0 ≤ T := by dsimp [T]; positivity
   have hYconst : 0 ≤ (B + 1) * G := by positivity
   have hXconst : 0 ≤ 2 * (D + 1) * G := by positivity
   have hXFull : 0 ≤ 2 * (D + 1) * G * T := by positivity
