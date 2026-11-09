@@ -80,7 +80,20 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeSpectralCorrectedFourPieceThreeC1Audit.lean > evidence/audit.log 2>&1
-          grep -q sorryAx evidence/audit.log && exit 1 || true
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          data = Path('evidence/audit.log').read_text()
+          goal = 'HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins'
+          assert goal in data, 'Missing exact theorem #check'
+          assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom'
+          reports = re.findall(r'depends on axioms:\\s*\\[([^\\]]*)\\]', data)
+          assert len(reports) == 1, f'Expected exactly one axiom report, got {len(reports)}'
+          axioms = [v.strip() for v in reports[0].split(',') if v.strip()]
+          allowed = ('propext', 'Classical.choice', 'Quot.sound')
+          assert all(a in allowed or any(a.startswith(b + '.{') for b in allowed) for a in axioms), axioms
+          print('Kernel axiom audit passed:', axioms)
+          PY
           mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
