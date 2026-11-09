@@ -4408,4 +4408,48 @@ the three remaining nonlocal Hartree regions and parameter
 Lipschitz must still enter the original PDE norm.
 The revised theorem-environment score remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Original finite-profile acceptance boundary after backward quadratic spectral closure.}
+The retained manuscript's actual environment
+\texttt{thm:finite-profile-stage3} requires a finite physical
+Hartree profile \(V_N[h;g]\), for \(M>4\),
+\(\ell_{\rm lr}\ge0\) and \(N>M+3+\ell_{\rm lr}\), with
+\[
+\begin{aligned}
+ \mathcal F(V_N)&=\mathcal P_N\zeta_s+\mathcal E_N,\\
+ \sup_{s\ge s_0}s^{M+1+\ell_{\rm lr}}
+  \|\mathcal E_N(s)\|_{X_{\rm f}^{\rm sc}}
+   &\le Cs_0^{M+1+\ell_{\rm lr}-N},\\
+ D_\zeta\Theta_N&=I_2+o(1),\\
+ \mathbb L_N&=\mathbb L_0+\mathbb K_{\rm sl}
+                  +\mathbb R_{\rm int}.
+\end{aligned}
+\]
+The source also requires integrable slow-Hessian derivative,
+integrable \(\mathbb R_{\rm int}\), and local parameter Lipschitz.
+An eventual \emph{physical} fixed-order replacement might be
+sufficient for a one-orbit target only after the entire downstream
+shooting, physical energy and rate-selection argument is
+reverified. The conditional order-\(9/4\) backward fixed-point
+estimate is not itself a construction of this \(V_N\).
+
+The true reverse zero-left Cramer--Volterra estimate is now
+strictly accepted: CI \texttt{42567116515}, job
+\texttt{128995924948}, artifact \texttt{13652276776}.
+Its composition with the \emph{same} physical two-channel
+Fredholm Green field is also strictly accepted: CI
+\texttt{42566992080}, job \texttt{128995543355}, artifact
+\texttt{13652650582}. Both use the pinned trust-zero
+Lean/Mathlib setup and only the three permitted axioms.
+These results provide the source-specific quadratic spatial
+bound in the backward overlap, not a full temporal PDE gain.
+The independent \(L^{2,7/4}\) compilation
+\texttt{ActualHartreeMatchedBackwardQuadraticSpectralWeighted.lean}
+has strict CI \texttt{42568496790}; only a successfully
+audited job may upgrade its proof status. None of these
+auxiliary results can raise the original
+\(11/13\) acceptance count.
+
 \end{document}
