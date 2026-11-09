@@ -2996,4 +2996,31 @@ measurable radiation; the corrected source theorem and
 four-domain positive-time residual are separate obligations.
 The original count remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Strict independent verification of the genuine
+quartic Riesz zero-left radial-energy estimate.}
+The preceding \emph{original-source-only} energy-weighted bound
+is now independently accepted:
+\texttt{ActualHartreeOriginalRieszZeroLeftEnergySlope.lean},
+strict GitHub CI \texttt{42538089908}, artifact
+\texttt{13640232684}, commit \texttt{d6292101}.
+The archived \texttt{strict.log} is empty, Lean is
+version 4.35.0-rc3, and the exact target's transitive
+axioms are only \texttt{propext}, \texttt{Classical.choice}
+and \texttt{Quot.sound}, without \texttt{sorryAx}.
+This result controls
+\(
+r|\mathcal S_K[F_0](r)|
+\)
+with \(T=\frac83GQL^{-3/8}\) for the \emph{original}
+Hartree source \(F_0\), not yet for the uniquely selected
+\(F_{\rm adj}\).
+The genuine selected-source energy theorem remains under
+an independent strict CI and must not be counted prematurely.
+The algebraically defined Green slope and the classical
+spatial derivative require a distinct regularity identification.
+The original revised-environment count remains \(11/13\).
+
 \end{document}
