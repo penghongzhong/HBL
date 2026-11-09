@@ -5048,4 +5048,58 @@ The principal-defect reduction is an exact nonlocal PDE identity
 under its displayed premises, but does not yet provide uniform
 four-zone source-norm gain or the locked $9/4$ profile.
 
+
+\medskip
+\noindent\textbf{Sharp one-step quadratic Hartree remainder: $9/8$ to $9/4$.}
+The fixed-order single-orbit construction has a shorter possible chain than
+the old arbitrary-level recursion.  Write $\mathcal R_{\rm H}$ for the
+\emph{complete original} nonlinear radial renormalized Hartree operator,
+$U$ for the preceding physical background, and $H$ for a genuine
+four-region correction.  If the correction solves the actual
+linearized principal equation
+\[
+ \mathcal P_{U}[H;b,\omega,\Delta b,\Delta\omega]
+  =-\mathcal R_{\rm H}(U;b,\omega),
+\]
+the exact original nonlinear identity is
+\[
+ \mathcal R_{\rm H}(U+H;b+\Delta b,\omega+\Delta\omega)
+  =i\Delta b\,\Lambda H+\Delta\omega\,H+
+    \{\mathcal N_{\rm H}(U+H)-\mathcal N_{\rm H}(U)
+                   -D\mathcal N_{\rm H}(U)H\}.
+\]
+The existing native Hartree Taylor and speed-cross proofs show that,
+at each physical radius $r>0$, if the actual correction, its dilation
+and both compatible real speed increments have order $s^{-\rho}$
+under the stated bubble envelopes and regularity, then
+\[
+ \left|\mathcal R_{\rm H}
+    (U+H;b+\Delta b,\omega+\Delta\omega)(s,r)\right|
+ \le\left[
+ C_{\rm speed}(C_{\Lambda H}+C_H)
+ +63(M+C_H)^5C_H^2W(r)^5
+ \right]s^{-2\rho}.
+\]
+Thus the \emph{sharp} quadratic exponent at $\rho=9/8$ is
+$2\rho=9/4$ exactly, rather than merely
+$\rho+\kappa_{\rm phys}$ as in the arbitrary-level ledger.
+The Lean source
+\texttt{ActualHartreeOneGlobalPhysicalPDEQuadratic.lean}
+and its dedicated strict workflow
+\texttt{hbl-213-one-global-physical-pde-quadratic.yml}
+were introduced to check both this direct statement and its precise
+$9/4$ specialization.  Their CI has not been accepted until success
+and exact axiom audit.
+
+\emph{Crucial remaining boundaries.} The exact principal linear
+equation above must be \emph{constructed}, not hypothesized away, using
+the same genuine source and three $C^1$ interfaces.  Moreover, a
+pointwise spatially constant speed-cross coefficient does not by
+itself belong to the original global weighted $L^2$ source space;
+the true support geometry and regional weighted norms must be used.
+The two-threshold \emph{difference} at order $9/4$ and persistence
+of the actual modulation bootstrap must also be proved.  Only then
+does the single-step strategy replace the long finite recursion
+in the accepted $\S2.13$ proof.  This is not yet an upgrade from 11/13.
+
 \end{document}
