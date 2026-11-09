@@ -5192,4 +5192,57 @@ $1/(1+r)$ decay remain independently under CI.  The
 complete four-zone spacetime residual, threshold Lipschitz and
 dynamical blow-up selection remain unproved.
 
+
+\medskip
+\noindent\textbf{Half-radial two-scale gain: proposed weighted source bridge.}
+For every $0<\ell\le1$ and $r\ge0$ the following elementary identity
+contains the uniform scale gain:
+\[
+ (1+\ell r)^2-\ell(1+r)
+    = (1-\ell)+\ell r+\ell^2r^2\ge0,
+ \qquad
+ \frac{\ell}{(1+\ell r)^2}\le\frac1{1+r}.
+\]
+Thus the original Strauss bound
+$|Z_\ell(r)|\le E\sqrt\ell/(1+\ell r)$ implies
+\[
+ (1+r)|Z_\ell(r)|^2\le E^2.
+\]
+Combining with the moving physical monopole
+$(1+r)|V_c(r)|\le D$, we obtain
+\[
+ (1+r)|V_c(r)+Z_\ell(r)|^2
+     \le 2(D^2+E^2)=:K^2,
+\]
+uniformly in $\ell$.  This is the correct half-radial estimate;
+the stronger uniform full-bubble majorant is generally false.
+The first two inequalities are under exact Lean audit in
+\texttt{ActualHartreeScaledRadiationHalfPower.lean};
+no Success is claimed before the original CI finishes.
+
+For the \emph{already strictly verified} original Riesz decay
+$|I_2[\mathcal D_{4,\ge2}]|\le C_\mathcal D e^2(1+r)^{-1}$,
+the genuine density-remainder times original local cubic therefore
+satisfies the following paper-level consequence, conditional only
+on the displayed physical correction bound:
+\[
+ \begin{split}
+ \bigl|I_2[\mathcal D_{4,\ge2}(U,H)](r)
+                   |U(r)|^2U(r)\bigr|
+ &\le C_\mathcal D K^3 e^2(1+r)^{-5/2},\\
+ \int_0^\infty(1+r)^{7/2}
+ \bigl|I_2[\mathcal D_{4,\ge2}]\,|U|^2U\bigr|^2\,dr
+ &\le 2C_\mathcal D^2K^6e^4.
+ \end{split}
+\]
+Here $U=V_c+Z_\ell$, and $C_\mathcal D$ incorporates the
+polynomial in its uniform $L^\infty$ bound and $e$.
+For $e=C_Hs^{-9/8}$ this individual \emph{actual nonlocal}
+source contribution has the desired $s^{-9/4}$ norm order,
+without any negative $\ell$ power.
+This is a candidate source-class lemma, not yet a strictly audited
+weighted-L2 Lean theorem. The remaining nonlocal Taylor products,
+linearized four-zone principal equation, moving-time effects and
+direct parameter differences are not implied by this one bound.
+
 \end{document}
