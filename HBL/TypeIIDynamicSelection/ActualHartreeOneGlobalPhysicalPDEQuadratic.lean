@@ -25,6 +25,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Sharp s^(-2*rho) instead of downgrading to s^(-(rho+kappa_phys)).
 Every term is from the same original nonlocal radial Hartree PDE. -/
