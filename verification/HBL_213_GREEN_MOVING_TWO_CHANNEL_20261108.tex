@@ -3056,4 +3056,38 @@ This is a time-slice interface, not the complete dynamical
 four-region Hartree residual, parameter Lipschitz estimate,
 finite PDE recursion or blow-up rate. Original acceptance remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Dynamic-time bootstrap boundary (not yet a theorem
+deduced from the PDE).}
+The already proved same-physical-orbit Hartree moving-shell estimate is
+\[
+ \|\mathcal E_{\rm shell}(s)\|
+ \le C_{\rm shell}\ell(s)^2\sqrt{\ell(s)}
+ =C_{\rm shell}\ell(s)^{5/2},
+ \qquad
+ \frac{\partial_sR}{R}-b
+ =-\ell(s)^2\,\frac{m'(t(s))}{m(t(s))}.
+\]
+This uses the authentic moment-radius drift and the full nonlocal
+Riesz commutator. A separate existing temporal lemma concludes
+\(
+ \|\mathcal E_{\rm shell}(s)\|
+ \le C_{\rm shell}s^{-1-(5\beta/2-1)}
+\)
+\emph{only under the explicit trap}
+\[
+ \ell(s)\le s^{-\beta},\qquad \beta>\tfrac12.
+\]
+Consequently its positive renormalized-time order is currently
+\emph{conditional}: the actual PDE evolution has not yet supplied
+entry into and persistence in this trap, and it cannot be inserted
+as a hypothesis of the final original \S2.13 theorem. The remaining
+proof must deduce the needed integrable scale decay from the modulation
+equations and all-domain physical residual, or establish an
+equivalent rate-free integrability mechanism; it may not postulate
+a Type--II scale law in advance. The already certified finite
+nonlinear four-zone telescope proves an identity, not this estimate.
+
 \end{document}
