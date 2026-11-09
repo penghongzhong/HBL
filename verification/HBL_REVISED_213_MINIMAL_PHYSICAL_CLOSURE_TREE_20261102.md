@@ -466,3 +466,23 @@ The conditional principal-defect reduction (pending CI) still has a legitimate u
 New Lean source [ActualHartreeOneGlobalPhysicalPDEQuadratic.lean](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreeOneGlobalPhysicalPDEQuadratic.lean) pins two target statements `actual_Hartree_one_global_PDE_quadratic_remainder_sharp` and `actual_Hartree_one_global_PDE_locked_nine_fourths`; its strict workflow [CI 42620369294](https://github.com/penghongzhong/HBL/actions/runs/42620369294) is **pending** until completed and audited (no claimed Lean success yet). The exact original one-global nonlinear PDE increment with a degraded exponent is also pending on independent CI [42619594632](https://github.com/penghongzhong/HBL/actions/runs/42619594632). Paper synchronized in TeX commit `ae7783dcdcc5cd607ddec6c4cf0940a016f62466`.
 
 **Remaining decisive physical tasks:** the exact principal cancellation equation `P_U[H]=-R_H(U)` must be furnished by the SAME true-source Cramer/Fredholm/Kummer/far-field four-zone packet, in three genuine C1 joins. A pointwise constant speed-cross bound cannot be integrated blindly in the original global `L^{2,7/4}` norm: its spatial support, weighted decay and all nonlocal cross-region terms require their actual geometric estimates. The direct two-parameter Lipschitz bound of the *full residual*, and actual modulation bootstrap, must also be closed. If and only if these inputs are proved, the sharp single-step theorem can close the fixed `9/4` target of revised §2.13, then the final true-PDE blowup rate remains to derive. **Formal original count remains 11/13**.
+
+
+### True two-scale quartic density producer (independent strict CI pending)
+
+Source: `HBL/TypeIIDynamicSelection/ActualHartreeTrueTwoScaleTaylorDensity.lean`; dedicated pinned trust-zero workflow `.github/workflows/hbl-213-true-two-scale-taylor-density.yml`. This is a real same-background specialization, not an abstract order label. It combines the actual moving-monopole radial envelope, scaled high-regularity radial Strauss bound and the already-proved original complex quartic density/cubic Taylor polynomial inequalities.
+
+Define for the real physical `V_c` and complex actual scaled radiation `Z_ell`:
+
+```text
+M_ell(r) = [2+9*C_mon]/(1+r) + 2(B+A)*sqrt(ell)/(1+ell*r)
+U_ell(r) = V_c(r) + Z_ell(r)
+||U_ell(r)|| <= M_ell(r)
+|densityRemainder(U_ell(r),h(r))|
+ <= 6 M_ell(r)^2 e(r)^2 + 4 M_ell(r)e(r)^3 + e(r)^4
+||cubicRemainder(U_ell(r),h(r))|| <= (3M_ell(r)+e(r))e(r)^2
+```
+
+Also supplies the linear-density, background-cubic and linear-cubic estimates with the same physical `M_ell(r)`. This avoids the false uniform `M*bubble` assumption. At `r~ell^-1`, `M_ell(r)=O(sqrt(ell))`, so if `e(r)=O(ell*s^-rho)` the *local* quartic-density remainder has scale `O(ell^3*s^(-2rho))`, not an artificial `ell^(-5/2)` loss. **This local scaling heuristic is not the nonlocal Riesz integral estimate.**
+
+Acceptance gate for the new theorem: original GitHub Actions Success, raw job logs, exact Lean type and three-axiom audit. Until then the statement remains **unverified**. The next physical step is integrating the true `M_ell(r)`-weighted density remainders through the original logarithmic radial inverse-square Riesz kernel, handling all four-region supports and their time and parameter differences. Original environment count **11/13**.
