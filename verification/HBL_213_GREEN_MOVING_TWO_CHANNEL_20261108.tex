@@ -3666,4 +3666,63 @@ identity for the \emph{full nonlinear PDE evaluated on each
 successive background}; it asserts no time-order gain.
 The revised original environment tally remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{The spatially resolved nonlinear Hartree correction and its
+conjugated Fredholm norm gate (9 November 2026).}
+For the same global evolving background $U(s,r)$ and correction $H(s,r)$,
+the exact original quartic nonlocal Hartree residual identity reads
+\[
+ \mathcal E_{U,H}
+ =i\,\Delta b\,\Lambda H+\Delta\omega\,H+\mathcal Q_{\HH}(U,H).
+\]
+The previously accepted scalar \texttt{WeightedResidualAtom} used a
+radius-independent majorant on the modulation speed--correction products.
+To retain their genuine spatial shapes, suppose the visible actual
+regularity and source hypotheses hold, with
+$|\Delta b|+|\Delta\omega|\le C_v s^{-\rho}$,
+$|U(s,r)|\le M W(r)$, $|H(s,r)|\le C_Hs^{-\rho}W(r)$,
+and $W(r)=(1+r^2)^{-1/2}$. Then the pointwise consequence is
+\begin{equation}
+ |\mathcal E_{U,H}(s,r)|
+ \le C_v s^{-\rho}\bigl(|\Lambda H(s,r)|+|H(s,r)|\bigr)
+ +63(M+C_Hs^{-\rho})^5C_H^2s^{-2\rho}W(r)^5 .
+ \label{eq:hbl-global-core-spatial-remainder}
+\end{equation}
+This is the precise new Lean candidate
+\texttt{ActualHartreeOneGlobalCoreSpatialRemainderBridge.lean},
+source revision \texttt{ec8efcee}, strict verification
+\texttt{42552019761} pending at insertion; its initial CI
+\texttt{42551656354} failed on two elementary complex norm simplifications
+which have been repaired. A pending proof is not counted as accepted.
+
+For the inner radial conjugation $q=rH$ and
+$w(r)=(1+r^2)^{7/8}$, the actual Fredholm forcing is
+$r\mathcal E_{U,H}$. Provided the spatial speed-cross norms are finite,
+the Minkowski inequality applied to
+\eqref{eq:hbl-global-core-spatial-remainder} yields
+\[
+ \|wr\mathcal E_{U,H}(s,\cdot)\|_{L^2(0,\infty)}
+ \le C_v s^{-\rho}
+ \bigl(\|wr\Lambda H_s\|_2+\|wrH_s\|_2\bigr)
+ +63(M+C_Hs^{-\rho})^5 C_H^2s^{-2\rho}C_*,
+\]
+where
+\[
+ C_*^2=\int_0^\infty r^2(1+r^2)^{-13/4}\,dr
+ =\frac12\operatorname{B}\!\left(\frac32,\frac74\right)<\infty.
+\]
+This integral inequality is an analytical bridge, \emph{not}
+a separate claim of Lean acceptance. The mere bubble bound on $H$
+does not control $\|wrH\|_2$ over the full half-line.
+The original source decomposition instead uses a strongly weighted
+inner source and a weaker outer source, with moving matching radii;
+the present global bound can serve as a sufficient estimate only where
+those norms are actually produced. The actual four-piece field,
+its dilation, moving interfaces and selected-speed Lipschitz increments
+must provide these norms and strict time gain. Neither a global
+$O(s^{-9/4})$ bound nor a dynamically selected Type--II rate follows
+from the displayed algebra alone. The original revised count is
+$11/13$.
+
 \end{document}
