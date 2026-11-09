@@ -4715,4 +4715,44 @@ telescope proves the moving full Hartree nonlocal residual gain,
 parameter Lipschitz, actual finite nonlinear recursion or
 PDE-derived Type--II blowup law. Revised original count: $11/13$.
 
+
+\medskip
+\noindent\textbf{2026-11-09: accepted true-source backward quadratic spectral shell and cubic-radius refinement.}
+The exact original
+\texttt{actual\_Hartree\_true\_plateau\_moving\_spectral\_quadratic\_backward\_shell\_norm}
+is strictly accepted by original CI \texttt{42595684617},
+job \texttt{129087607890}, artifact \texttt{13664491091}.
+The raw strict run uses Lean 4.35.0-rc3, Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, \texttt{warningAsError}, and exact type/axiom auditing.
+Its transitive axiom list is precisely
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+The accepted estimate concerns the original two-channel source and
+its actual backward zero-Cauchy Volterra iterate, not a hypothetical
+independently bounded correction.
+
+The pre-existing scale separation \(L=2R\), \(a\ge L^3\),
+\(R>2\) turns its literal spatial coefficient into
+\[
+\begin{aligned}
+&20R^{13/4}a^{-2}|\delta|
+  \bigl(2G^2(L/a)|\delta|D_R\bigr)\\
+&\qquad =80G^2|\delta|^2D_R\,R^{17/4}a^{-3}
+\le \frac5{32}G^2|\delta|^2D_R\,R^{-19/4},
+\qquad D_R\ge0.
+\end{aligned}
+\]
+Here the last inequality uses \(a^3\ge (2R)^9=512R^9\).
+This is a strict geometric gain with a \emph{spatial} negative radius
+exponent. A separate Lean scalar reduction
+\texttt{actual\_Hartree\_quadratic\_backward\_shell\_cubic\_spatial\_factor}
+has been submitted to exact pinned CI \texttt{42602051763};
+it is \emph{pending} independent strict acceptance.
+In particular, neither the geometric bound nor the finite spectral
+telescoping provides the original renormalized-time gain or parameter
+Lipschitz estimates. The complete moving-basis/endpoint/source
+derivative, nonlinear outer Hartree couplings and the physical
+finite-profile recursion are still required. Revised original
+statement count: \textbf{11/13}.
+
 \end{document}
