@@ -233,7 +233,7 @@ theorem actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
   have hbase : 0 ≤ (2 * R) ^ 3 := by positivity
   have hden : (2 * R) ^ 9 ≤ a ^ 3 := by
     have h := pow_le_pow_left₀ hbase hCubic 3
-    convert h using 1 <;> ring
+    convert h using 1; ring
   have hR9 : 0 < (2 * R) ^ 9 := by positivity
   have hpow : R ^ (17 / 4 : ℝ) / R ^ 9 =
       R ^ (-(19 / 4 : ℝ)) := by
