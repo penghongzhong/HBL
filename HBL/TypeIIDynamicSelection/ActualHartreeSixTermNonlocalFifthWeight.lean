@@ -26,7 +26,7 @@ theorem actual_Hartree_six_original_nonlocal_Taylor_products_fifth_weight
     (t A0 A1 AR B1 BR K : ℝ)
     (ht : 1 ≤ t)
     (hA0 : 0 ≤ A0) (hA1 : 0 ≤ A1) (hAR : 0 ≤ AR)
-    (hB1 : 0 ≤ B1) (hBR : 0 ≤ BR) (hK : 0 ≤ K)
+    (hB1 : 0 ≤ B1) (hBR : 0 ≤ BR) (_hK : 0 ≤ K)
     (P0 P1 PR C0 C1 CR : ℂ)
     (hp0 : t*‖P0‖ ≤ A0)
     (hp1 : t*‖P1‖ ≤ A1)
