@@ -1343,7 +1343,7 @@ physical finite packet recursion or dynamical Type-II rate follows.
 **Original revised-paper environments STILL 11/13.**
 
 
-### 2026-11-09 exact unweighted matched spectral Cramer derivative — strict replay pending
+### 2026-11-09 exact unweighted matched spectral Cramer derivative — strict SUCCESS
 
 A new direct source-faithful step uses the **already verified** original
 inverse-linear Volterra moment improvement rather than the weaker bound
@@ -1369,8 +1369,17 @@ and `actual_Hartree_original_spectral_corrected_derivative_gap_no_left_radius`.
 Dedicated pinned `--trust=0`, warning-as-error, two-theorem exact
 `#check` and `#print axioms` workflow
 [CI 42693424757](https://github.com/penghongzhong/HBL/actions/runs/42693424757),
-commit `d0ae557f`, was triggered. **At this checkpoint the CI is in
-progress, so neither theorem is counted as formally accepted.**
+commit `d0ae557f`, is **STRICT SUCCESS** (2026-11-09), original job `129418885376`,
+archived evidence artifact `13707888793`. The original decoded job log
+shows exact pinned Mathlib SHA, `lake env lean --trust=0
+-DwarningAsError=true`, empty strict output, and successful generation of
+both exact `#check` types and independent `#print axioms` reports. The
+CI's explicit audit checked two reports and printed precisely
+`[Classical.choice, Quot.sound, propext]` for the first theorem and
+`[Classical.choice.{u}, Quot.sound.{u}, propext]` for the second
+(the universe suffix does not add axioms). Neither uses sorry/admit.
+These **two auxiliary fixed-time statements are accepted**, but the
+strict revised original-environment count remains **11/13**.
 
 Analytical scaling consequence (paper-only until a separate strict audit):
 for physical coordinate `y=a_phys*r` and `r₀=L/a_phys`,
