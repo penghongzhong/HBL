@@ -89,7 +89,7 @@ positive time order nor a norm bound is asserted here. -/
 theorem actual_Hartree_plateau_original_Kummer_PDE_spectral_source
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
     (a ell c B : ℝ) (z : ℝ → ℂ) (db dw : ℝ)
-    (ha : 0 < a) (hell : 0 < ell) (hL : 0 < actualHartreeSlowInnerRadius ell)
+    (ha : 0 < a) (_hell : 0 < ell) (hL : 0 < actualHartreeSlowInnerRadius ell)
     (hOrder : actualHartreeSlowInnerRadius ell / a ≤ B)
     (hB : B < scale)
     (U DU delta : ℂ)
