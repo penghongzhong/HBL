@@ -73,10 +73,11 @@ theorem actual_Hartree_one_global_core_spatial_remainder_bound
   have hDNorm :
       ‖Complex.I * (db : ℂ) * complexRadialDilation (H s) r‖ =
         |db| * ‖complexRadialDilation (H s) r‖ := by
-    simp only [norm_mul, Complex.norm_I, Complex.norm_real, one_mul]
+    simp only [norm_mul, Complex.norm_I, Complex.norm_real,
+      Real.norm_eq_abs, one_mul]
   have hHNorm :
       ‖(domega : ℂ) * H s r‖ = |domega| * ‖H s r‖ := by
-    simp only [norm_mul, Complex.norm_real]
+    simp only [norm_mul, Complex.norm_real, Real.norm_eq_abs]
   have hCross :
       ‖Complex.I * (db : ℂ) * complexRadialDilation (H s) r +
           (domega : ℂ) * H s r‖ ≤
