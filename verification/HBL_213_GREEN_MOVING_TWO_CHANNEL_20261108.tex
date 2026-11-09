@@ -5931,9 +5931,16 @@ candidate certifies the weaker explicit bound above. Under the
 physical change of variables $y=a_{\mathrm{phys}}r$, the radial
 energy has the exact scaling factor $a_{\mathrm{phys}}$, which
 cannot be dropped when pursuing a uniform moving-interface bound.
-The proposed formalization is
-\texttt{ActualHartreeMatchedSpectralRadialEnergy.lean}; strict CI
-\texttt{42706314302} is still pending at submission.
+The exact Lean theorem
+\texttt{actual\_Hartree\_original\_matched\_spectral\_radial\_H1\_energy\_no\_left\_radius}
+in \texttt{ActualHartreeMatchedSpectralRadialEnergy.lean}
+has now \emph{strictly passed} CI \texttt{42706314302}, original job
+\texttt{129463914783}, evidence artifact \texttt{13713044362}.
+The original job log confirms pinned Lean 4.35.0-rc3 and Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, \texttt{warningAsError}, and the one exact
+\texttt{\#check}/\texttt{\#print axioms} audit, yielding only
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
 This addresses only a fixed-slice spectral correction, not the
 unproved true time derivative, four-region residual, or §2.13
 finite PDE induction. The original count remains $11/13$.
