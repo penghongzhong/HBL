@@ -138,6 +138,6 @@ theorem actual_Hartree_full_PDE_controlled_by_actual_linear_principal_defect
     unfold actualHartreeOneGlobalCoreCorrectionRemainder
     ring
   rw [hDecomp]
-  exact (norm_add_le _ _).trans (add_le_add_left hNext _)
+  exact (norm_add_le _ _).trans (add_le_add_right hNext _)
 
 end HBL.TypeIIDynamicSelection
