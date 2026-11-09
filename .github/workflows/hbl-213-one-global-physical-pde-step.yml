@@ -73,6 +73,9 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_full_PDE_next_gain_from_principal_cancellation
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_PDE_next_gain_from_principal_cancellation
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_full_PDE_controlled_by_actual_linear_principal_defect
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_PDE_controlled_by_actual_linear_principal_defect
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeOneGlobalPhysicalPDEStepAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -81,9 +84,10 @@ jobs:
           s=Path('evidence/audit.log').read_text()
           goal='actual_Hartree_full_PDE_next_gain_from_principal_cancellation'
           assert goal in s, 'missing exact target audit'
+          assert 'actual_Hartree_full_PDE_controlled_by_actual_linear_principal_defect' in s, 'missing noncircular principal-defect target'
           assert 'sorryAx' not in s and 'admit' not in s, 'forbidden axiom'
           reports=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',s)
-          assert len(reports)==1, f'expected one exact axiom report: {len(reports)}'
+          assert len(reports)==2, f'expected two exact axiom reports: {len(reports)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in reports:
             axioms=[v.strip() for v in report.split(',') if v.strip()]
