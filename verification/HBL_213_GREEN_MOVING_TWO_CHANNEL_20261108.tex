@@ -3934,11 +3934,23 @@ envelope conditions; the genuine exterior \(F_0\) is generated from
 The two real Cramer compatibility equations determine the
 modulation pair; they do not imply the function-valued
 identity \(S_{\rm in}=-a^{-2}F_{\rm adj}\).
-This coupling must be constructed at each physical recursion
-layer from the original PDE, and its regularity and parameter
-estimates must be retained.  The quantifier structure itself
-prevents claiming that fixed-time Cramer compatibility has
-already proved the common-source shell hypothesis.
+The \texttt{ActualHartreeSinglePhysicalSourceTwoChannelSelection.lean}
+producer already specializes the \emph{fixed-time speed selector}
+to the same physical \(z\), with
+\(F_\pm=\operatorname{Re,Im}\bigl[r(1-\chi_L)
+\mathcal S_{\HH}(r)\bigr]\), and derives the original
+weighted membership; continuity is still a visible input.
+The new \texttt{ActualHartreeOnePhysicalSourceSpectralQuadraticThreeC1.lean}
+composes that genuinely one-source specialization with the
+quadratic spectral and three-\(C^1\) field outputs; its
+strict CI is pending and must not be counted prematurely.
+Even if accepted, the localized inner source is not
+automatically identical to the uncut outer source on the
+overlap: the cutoff, two selected speed directions and the
+first-order spectral term all contribute to
+\(\mathfrak M_\delta\).
+The source-difference norm and time/parameter budgets must
+therefore be derived at \emph{each physical recursion layer}.
 
 The fixed-inner defect \(E_{\rm in}\) has the previously
 verified \(R^{-4}+a^{-2}\) norm budget.  It is \emph{not}
