@@ -82,16 +82,16 @@ No auxiliary successful theorem can increase the original-environment numerator.
 
 The raw job log of CI [42554311787](https://github.com/penghongzhong/HBL/actions/runs/42554311787),
 job **128956509687**, verified the actual same-background radial-conjugated
-Hartree shell norm at commit \`903b870\`; original audit:
-Lean 4.35.0-rc3, pinned Mathlib \`a98628e16c11f5167f16124105ddce53efa9bfe5\`,
-\`--trust=0 -DwarningAsError=true\`, exact \`#check\` and \`#print axioms\`,
-only \`propext\`, \`Classical.choice\`, \`Quot.sound\`, artifact **13647485540**.
+Hartree shell norm at commit `903b870`; original audit:
+Lean 4.35.0-rc3, pinned Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`--trust=0 -DwarningAsError=true`, exact `#check` and `#print axioms`,
+only `propext`, `Classical.choice`, `Quot.sound`, artifact **13647485540**.
 This *does not* upgrade §2.13: the coarse pointwise shell bound incurs
-\`20 R^(13/4)\`, which for \`R≈ell^-1\` and \`ell^(5/2)\`
-loses \`ell^(-3/4)\` rather than gaining a positive scale order.
+`20 R^(13/4)`, which for `R≈ell^-1` and `ell^(5/2)`
+loses `ell^(-3/4)` rather than gaining a positive scale order.
 
 **Non-circular improvement identified from already present Lean code.**
-\`ActualHartreeMatchedShellWeightedGain.lean\` proves, on a
+`ActualHartreeMatchedShellWeightedGain.lean` proves, on a
 *source-matched C¹ interface* with the same scaled Kummer source equation
 and its stated regularity and coefficient smallness,
 \[
@@ -100,11 +100,18 @@ and its stated regularity and coefficient smallness,
   \le 20C [C_{\rm in}R^{-3/4}
     + C_{\rm K}(\mu,\theta)R^{13/4}/a^2]N_F.
 \]
-The \`R^-4\` pointwise mismatch gain is produced by **matching + common
-differential equation before** applying the shell norm. If the actual
-profile yields \`a≥R²\` with uniform spectral coefficient,
-the full displayed norm gains \`R^-3/4\`; this extra premise is **not**
-silently supplied for the moving physical four-piece profile.
+The `R^-4` pointwise mismatch gain is produced by **matching + common
+differential equation before** applying the shell norm.
+For the original canonical Hartree overlap,
+`R=L/2`, `L=ell^(-1/16)>=6` and the actual uniquely selected
+source condition `a>=L^3` imply
+`R^(13/4)/a² <= R^(-11/4)/64 <= R^(-3/4)/64`.
+Hence `R^(-3/4)=2^(3/4)*ell^(3/64)` is a genuine **scale**
+gain, without assuming a blowup law. This deduction still requires
+uniform spectral coefficients, the full original shell smallness
+condition, and the matching equation for the **spectrally corrected**
+field; a positive `ell` power is not automatically a
+renormalized-time `s^(-delta)` power.
 The proof accepts no independent mismatch amplitude as input.
 
 **Next original-PDE closure gate:** instantiate that matched-shell
@@ -116,10 +123,10 @@ differences in their own source norms; then iterate and dynamically
 derive the Type-II scale. Until that concrete same-source reduction and
 time-positive original PDE norm estimate are proved, **11/13**.
 
-The initial spectral 3-C¹ failures \`42531033761/768\` and joint
-\`42531467165/166\` were traced to raw Lean elaboration errors:
-\`HasDerivAt\` pullback mismatch and a redundant \`dsimp\`.
-The no-progress \`dsimp\` is absent on the current source;
+The initial spectral 3-C¹ failures `42531033761/768` and joint
+`42531467165/166` were traced to raw Lean elaboration errors:
+`HasDerivAt` pullback mismatch and a redundant `dsimp`.
+The no-progress `dsimp` is absent on the current source;
 pullback source repair committed as
 [068db26b](https://github.com/penghongzhong/HBL/commit/068db26babe4ba8fdf8db6c92ef05d742e9a61d2).
 Current strict workflows **42558721414**, **42558721545**,
