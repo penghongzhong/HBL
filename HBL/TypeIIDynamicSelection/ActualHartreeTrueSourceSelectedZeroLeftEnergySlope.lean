@@ -181,8 +181,9 @@ theorem actual_Hartree_true_source_unique_speed_zero_left_energy_slope
               actualMomentLockedScaledScaleSource a c x) +
             (-(p.2 : ℂ)) *
               actualMomentLockedScaledPhaseSource a c x) volume (L / a) B :=
-        (hFIspeed.1.const_mul _).add (hFIspeed.2.const_mul _)
-      simpa only [Fadj] using hFI0.add hSum
+        (hFIspeed.1.const_mul (-(p.1 : ℂ))).add
+          (hFIspeed.2.const_mul (-(p.2 : ℂ)))
+      simpa only [Fadj, add_assoc] using hFI0.add hSum
     have hFadjSquare (x : ℝ) (hx : x ∈ Icc (L / a) B) :
         ‖Fadj x‖ ≤ Qa / x ^ 2 := by
       have hRaw := hAdjusted x hx
