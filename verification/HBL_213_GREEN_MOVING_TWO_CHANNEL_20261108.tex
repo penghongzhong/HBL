@@ -5513,4 +5513,110 @@ analytic inputs but do not alone construct the required corrected
 four-zone Hartree trajectory. Consequently revised~\S2.13 and the
 final PDE-derived Type--II rate are still open at 11/13.
 
+
+
+\medskip
+\noindent\textbf{Localized moving Kummer shell: recovery of three eighths of a time order (9 November; paper-level conditional estimate, not a Lean acceptance).}
+A global substitution of the true Kummer repair bound
+$|H_K|\lesssim s^{-\rho+1/2}W$ loses a full half-order
+before exploiting its annular support.  The correct \emph{original
+three-dimensional radial Riesz} calculation gives a sharper
+conditional bound and identifies the remaining loss.
+
+Let $X\ge1$, $A_X=\{x\in\mathbb R^3:X\le|x|\le2X\}$,
+and assume the radial physical background and its original
+Hartree potential satisfy
+\[
+ |U(r)|\le C_0(1+r)^{-1/2},\qquad
+ |I_2[|U|^4](r)|\le C_1(1+r)^{-1}.
+\]
+Suppose $H$ is supported in $A_X$ and obeys
+$|H|\le e$ and $eX^{1/2}\le c_0$, where $e\ge0$.
+With the genuine quartic density
+$\mathcal D_1=D(|U|^4)[H]$ and
+$\mathcal D_R=|U+H|^4-|U|^4-\mathcal D_1$,
+the original complex cubic expansion gives, on the shell,
+\[
+ |\mathcal D_1|\lesssim eX^{-3/2},\quad
+ |\mathcal D_R|\lesssim e^2X^{-1},\quad
+ |C_1|\lesssim eX^{-1},\quad
+ |C_R|\lesssim e^2X^{-1/2}.
+\]
+The constants depend on $C_0,c_0$.
+For every $r\ge0$, the actual inverse-square kernel yields
+\[
+ \begin{split}
+ |I_2[\mathcal D_R](r)|
+ &\le C e^2\min\{1,X^2/r^2\},\\
+ |I_2[\mathcal D_1](r)|
+ &\le C eX^{-1/2}\min\{1,X^2/r^2\},
+ \end{split}
+\]
+where the minimum is interpreted as $1$ at $r=0$.
+Indeed, on writing $x=Xz$ and $y=Xw$,
+\[
+ \int_{A_X}\frac{dy}{|x-y|^2}
+ =X\int_{1\le|w|\le2}\frac{dw}{|z-w|^2}
+ \le C X \min\{1,X^2/|x|^2\}.
+\]
+The dimension-three local integrability of $|z-w|^{-2}$
+and the estimate $|z-w|\ge |z|/2$ for $|z|\ge4$
+give the uniform constant in this bound.
+
+Expanding the \emph{complete} original nonlinear Taylor source,
+\[
+ \mathcal R_{\rm H}^{\ge2}
+  =P_0C_R+P_1(C_1+C_R)+P_R(C_0+C_1+C_R),
+ \quad P_j=I_2[\mathcal D_j],
+\]
+therefore gives
+\[
+ |\mathcal R_{\rm H}^{\ge2}(r)|
+ \le C e^2X^{-3/2}\quad(X\le r\le2X).
+\]
+Off the shell, $C_1=C_R=P_1=0$, and only $P_RC_0$
+remains.  Consequently,
+\[
+ |\mathcal R_{\rm H}^{\ge2}(r)|
+ \le C e^2(1+r)^{-3/2}
+   \begin{cases}
+    1,&0\le r\le4X,\\
+    X^2/r^2,&r>4X.
+   \end{cases}
+\]
+The two displayed bounds, integrated against the native weight,
+give
+\[
+ \begin{split}
+ \|\mathcal R_{\rm H}^{\ge2}\|_{L^{2,7/4}(dr)}^2
+ &\le C e^4\left[
+   \int_0^{4X}(1+r)^{1/2}\,dr
+  +X^4\int_{4X}^{\infty}r^{-7/2}\,dr\right]\\
+ &\le C e^4X^{3/2},\\
+ \boxed{\ 
+ \|\mathcal R_{\rm H}^{\ge2}\|_{L^{2,7/4}(dr)}
+ \le C e^2X^{3/4}.\ }
+ \end{split}
+\]
+Thus for a \emph{constructed} physical shell with
+$e(s)\le C_Ds^{-\rho}$ and $X(s)\le C_Xs^{1/2}$,
+\[
+ \|\mathcal R_{\rm H}^{\ge2}(s)\|_{L^{2,7/4}}
+ \lesssim s^{-2\rho+3/8}
+ =s^{-15/8}\quad\text{when }\rho=9/8.
+\]
+This improves on the coarse global-envelope estimate
+$s^{-5/4}$ and produces a genuine \emph{relative}
+$s^{-3/4}$ gain over the first $s^{-9/8}$ shell amplitude.
+It does \emph{not} recover the previously desired
+$s^{-9/4}$ quadratic order.  More importantly, it is a
+conditional \emph{static spatial} estimate: the same-source
+moving four-region correction, its entire time-differentiated
+linearized PDE defect, the selected-speed parameter difference,
+and the finite physical profile recurrence have not been constructed
+or strictly checked.  One must verify that the original recurrence
+can close with the weaker $3/4$ positive relative gain rather than
+silently assuming the stronger full-bubble $s^{-9/4}$ bound.
+This computation does not change the accepted 11/13 environments.
+
 \end{document}
