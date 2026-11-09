@@ -5314,8 +5314,12 @@ Its successive strict compilation failures \texttt{42649085863}
 and \texttt{42650866787} were concrete real-power/natural-power
 cast mismatches; commit \texttt{4dda33f} replaced both invalid
 definitional equalities by \texttt{Real.rpow\_natCast} normalization.
-Strict replay \texttt{42652808504} was running at this checkpoint
-and is \emph{not} labelled accepted until the final audit succeeds.
+Strict replay \texttt{42652808504} failed: a generic \texttt{simp}
+at the same cast equalities made no progress. Commit \texttt{3750282}
+replaces those conversions by explicit \texttt{congrArg} applied to
+\texttt{Real.rpow\_natCast}; strict CI \texttt{42654440810} is
+currently running. The weighted-L2 theorem is \emph{not} labelled
+accepted until exact type and axiom replay succeeds.
 
 Separately the original finite four-piece nonlinear Hartree PDE
 telescoping identity \texttt{actual\_Hartree\_finite\_spectral\_Fredholm\_four\_piece\_full\_PDE\_telescopes}
