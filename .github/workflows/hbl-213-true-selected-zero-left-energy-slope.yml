@@ -4,6 +4,9 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceSelectedZeroLeftEnergySlope.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeZeroLeftInverseSquareEnergySlopeCore.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeTrueSourceSelectedCorrectedNorm.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSelectedAdjustedRegularGreenAllRadii.lean'
       - 'HBL/TypeIIDynamicSelection/ActualHartreeKummerRegularTailGain.lean'
       - '.github/workflows/hbl-213-true-selected-zero-left-energy-slope.yml'
   workflow_dispatch:
