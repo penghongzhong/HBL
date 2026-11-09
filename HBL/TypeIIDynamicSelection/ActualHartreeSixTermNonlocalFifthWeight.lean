@@ -70,7 +70,7 @@ theorem actual_Hartree_six_original_nonlocal_Taylor_products_fifth_weight
         simp only [norm_mul]
       _ ≤ ‖P0‖*‖CR‖+
           (‖P1‖+‖PR‖)*(‖C1‖+‖CR‖) :=
-        add_le_add_left hPMul _
+        add_le_add_right hPMul _
       _ ≤ (‖P0‖+‖P1‖+‖PR‖)*(‖C1‖+‖CR‖) := by
         nlinarith [mul_nonneg (norm_nonneg P0) (norm_nonneg C1)]
   have hGnormTime :
