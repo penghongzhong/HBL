@@ -486,3 +486,10 @@ U_ell(r) = V_c(r) + Z_ell(r)
 Also supplies the linear-density, background-cubic and linear-cubic estimates with the same physical `M_ell(r)`. This avoids the false uniform `M*bubble` assumption. At `r~ell^-1`, `M_ell(r)=O(sqrt(ell))`, so if `e(r)=O(ell*s^-rho)` the *local* quartic-density remainder has scale `O(ell^3*s^(-2rho))`, not an artificial `ell^(-5/2)` loss. **This local scaling heuristic is not the nonlocal Riesz integral estimate.**
 
 Acceptance gate for the new theorem: original GitHub Actions Success, raw job logs, exact Lean type and three-axiom audit. Until then the statement remains **unverified**. The next physical step is integrating the true `M_ell(r)`-weighted density remainders through the original logarithmic radial inverse-square Riesz kernel, handling all four-region supports and their time and parameter differences. Original environment count **11/13**.
+
+
+### 2026-11-09 strict trapped-time factor acceptance (auxiliary only)
+
+**Strict SUCCESS** for [CI 42619593894](https://github.com/penghongzhong/HBL/actions/runs/42619593894), source commit `f3e309db178d6a85d154435f6da1dee6bd0ffd76`, original job **129168006311**, artifact **13676876666**. Original job log confirms pinned Lean 4.35.0-rc3, exact Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, `--trust=0 -DwarningAsError=true`, zero-byte strict.log, exact three `#check` and `#print axioms` reports, each listing exclusively `propext`, `Classical.choice`, `Quot.sound`. The three literal accepted types are `actual_Hartree_plateau_spectral_time_gain_positive`, `actual_Hartree_plateau_spectral_shell_trapped_time_factor` and `actual_Hartree_plateau_spectral_shell_source_to_time_gain`. This is the derived **physical plateau** factor `kappa_spec=19*beta/64`, conditional on visible intermediate bootstrap `ell(s)<=s^(-beta)` and **current** source budget; no four-zone full PDE time estimate is asserted.
+
+**Manuscript environment count remains 11/13**; this is not a paper environment and says nothing about the still-missing four-zone principal linear correction solvability, original weighted residual/Lipschitz or resulting Type-II dynamics.
