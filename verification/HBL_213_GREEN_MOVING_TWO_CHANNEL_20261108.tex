@@ -4156,4 +4156,56 @@ full four-domain Hartree residual estimate or Type--II rate
 has been inserted as an assumption. Revised original
 environment acceptance remains \(11/13\).
 
+
+\paragraph{Actual quartic-source realization of the backward spectral shell.}
+The preceding fixed-source spectral estimate is now composed with
+the \emph{original} physical Hartree source on the entire plateau.
+Writing \(L=\operatorname{actualHartreeSlowInnerRadius}(\ell)\),
+\(R=L/2\), and
+\[
+ F_+=\operatorname{Re}(r\chi_L\mathcal S_{\rm H})+
+             p_2G_{\omega},\qquad
+ F_-=\operatorname{Im}(r\chi_L\mathcal S_{\rm H})+
+             p_1G_b,
+\]
+let \(J\) be the canonical Fredholm Cauchy jet at \(L\), and put
+\[
+ v(y)=\operatorname{OriginMatchedKummer}
+    (L/a,B,F_{\rm adj},J_1,J_2)(y/a),\qquad
+ E_\delta(y)=a^{-2}\delta v(y).
+\]
+The original quartic plateau identity proves, rather than assumes,
+\[
+ \mathcal L^a_{\mu,\theta}v
+      =-\frac{F_+(y)+iF_-(y)}{y},\qquad R\le y\le L;
+ \qquad (v(L),v'(L))=J_{\rm inner}.
+\]
+Consequently, for \(a\ge L^3\) and the displayed weak Kummer
+absorption condition, the backward same-source estimate gives
+\[
+ \big\|\mathbf 1_{(R,2R)}\,yE_\delta(y)
+       \big\|_{L^{2,7/4}(dy)}
+ \le 20\,|\delta|\,
+ \left[C_{\rm val}\bigl(\|F_+\|_{L^{2,7/4}}
+                   +\|F_-\|_{L^{2,7/4}}\bigr)
+       +8R^2\,\mathcal A_{\rm shell}\right]R^{-3/4}.
+\]
+The new source-specific Lean proof target
+\texttt{ActualHartreePhysicalPlateauSpectralShellSource.lean}
+constructs these two adjusted weighted memberships and the plateau
+equation from the same physical source and its Cauchy jet;
+global measurability of the original Green pullback is retained
+as a visible regularity premise, not a size hypothesis.
+The strict CI \texttt{42564445964} is pending, not an accepted result.
+The companion raw CI \texttt{42563548889} failed on an unterminated
+nested Lean comment token in the matched-value source;
+commit \texttt{fa3d78fb} repairs that exact source-text error.
+The separate plateau spectral CI \texttt{42563426525} failed on
+an unused Lean binder with \texttt{warningAsError}; commit
+\texttt{f379fbfc} repairs it. Fresh strict CI and exact axiom checks
+are required for both.  Nothing here supplies a spectral time rate
+\(\delta(s)\), the moving-interface source norm outside the plateau,
+parameter Lipschitz bounds, a verified finite PDE recursion or
+the dynamical Type--II speed. The original count stays \(11/13\).
+
 \end{document}
