@@ -887,3 +887,57 @@ A sufficient non-circular target is a PDE-produced differential bound
 That bound is **unproved for the actual four-region orbit**.
 This explicitly delineates where a dynamical rate must enter the
 proof *before* the original §2.13 power closure. No new original environment.
+
+
+### 2026-11-09 strict replays and full-source weighted shell norm — original evidence, no original count increment
+
+The earlier requested CI set is now reconciled with **later** strict evidence,
+not naively treated as permanently failed: `42531450638` (zero-left
+regularized Volterra radial slope, artifact `13638185198`), `42531500587`
+(matched zero-left spectral weighted C¹, artifact `13637228884`),
+and `42531018076` (genuine selected full original Green, artifact
+`13637702928`) each reported **SUCCESS**. The initial four-piece
+three-C¹ CIs `42531033761/768` and the initial selected-source
+joint C¹/quadratic CIs `42531467165/166` had an actual upstream
+`HasDerivAt`-type mismatch (and one `dsimp` no-progress error).
+The later corrected **SUCCESS** runs are
+`42532174427` (physical spectral four-piece three C¹),
+`42532174429` (same uniquely real-selected source and three C¹),
+`42532363535` (true selected spectral quadratic and three C¹),
+and the fully joint selected physical source/no-left-loss radial H¹
+and spectral three-C¹ certificate `42539718869`.
+The last run's original audit prints exactly
+`[propext, Classical.choice, Quot.sound]`, artifact `13641491217`.
+All of these are **auxiliary** strict proofs, not the original §2.13 PDE theorem.
+
+The initially failing finite-field nonlinear telescope
+`42530158681` had already been repaired and fully strictly
+accepted in `42532174421`, with renewed original strict
+`42536552509` SUCCESS, original evidence artifact `13639851938`.
+This is an **exact** telescope of the untruncated original nonlinear
+PDE residual on a sum of spectral four-piece fields, not a claim
+that the increments are positive time order. A further current-HEAD
+replay was triggered from source commit
+[`2f83bf26e`](https://github.com/penghongzhong/HBL/commit/2f83bf26eecf4d8d8eb3c67c7da3114507aff3ae),
+[CI `42553800224`](https://github.com/penghongzhong/HBL/actions/runs/42553800224);
+it must be separately checked before advertising the new replay as successful.
+
+The new `ActualHartreeOneGlobalCoreConjugatedShellWeighted.lean`
+treats the *literal* same-background Hartree correction residual in
+the original conjugated norm, exposing the shell factor
+\(R^{13/4}\). Initial [CI `42553324852`](https://github.com/penghongzhong/HBL/actions/runs/42553324852)
+failed on an **elementary Lean coefficient reassociation** at line 115:
+`add_le_add_left` was applied to a bound ending in
+`(...)*1` rather than the simplified coefficient. The mathematical
+claim and all premises were preserved; fix commit
+[`c830face`](https://github.com/penghongzhong/HBL/commit/c830face510691682b1709866fc1f5edb08018f0)
+rewrites `hh2` using `mul_one` before adding the nonnegative
+coefficient. Replacement [strict CI `42554265089`](https://github.com/penghongzhong/HBL/actions/runs/42554265089)
+is **pending** at this ledger checkpoint; do not add it to accepted
+proofs until job logs, exact `#check`, `#print axioms`, and
+`--trust=0` are confirmed. A conditional shell norm without the
+global four-region correction or actual selected-speed derivative is
+still **not** an accepted original section.
+
+Exact original-environment ledger: **11/13 (84.62%)**, §2.13 open,
+final dynamically obtained Type-II theorem open.
