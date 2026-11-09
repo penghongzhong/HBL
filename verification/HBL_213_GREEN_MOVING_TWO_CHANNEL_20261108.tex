@@ -5314,12 +5314,21 @@ Its successive strict compilation failures \texttt{42649085863}
 and \texttt{42650866787} were concrete real-power/natural-power
 cast mismatches; commit \texttt{4dda33f} replaced both invalid
 definitional equalities by \texttt{Real.rpow\_natCast} normalization.
-Strict replay \texttt{42652808504} failed: a generic \texttt{simp}
-at the same cast equalities made no progress. Commit \texttt{3750282}
-replaces those conversions by explicit \texttt{congrArg} applied to
-\texttt{Real.rpow\_natCast}; strict CI \texttt{42654440810} is
-currently running. The weighted-L2 theorem is \emph{not} labelled
-accepted until exact type and axiom replay succeeds.
+Strict replay \texttt{42652808504} failed at the same casts.
+Commit \texttt{3750282} switched to explicit \texttt{congrArg}
+and \texttt{Real.rpow\_natCast}; run \texttt{42654440810}
+then exposed an unused-variable linter error. Commit \texttt{3dda10e8}
+corrected the binding, and the complete pinned
+\texttt{--trust=0}, \texttt{warningAsError} replay
+\textbf{strictly succeeded}: CI \texttt{42655852845},
+job \texttt{129294010050}, artifact \texttt{13692702508}.
+Both exact theorem checks, including the native weighted \(L^2\)
+specialization, report only \texttt{propext},
+\texttt{Classical.choice}, \texttt{Quot.sound}. The theorem
+is a genuine original Riesz--cubic weighted estimate, but is
+\emph{conditional on the displayed physical }\(H\le eW\)
+\emph{ bound}; it does not by itself construct the full matched
+correction, all other nonlinear atoms, or positive PDE time gain.
 
 Separately the original finite four-piece nonlinear Hartree PDE
 telescoping identity \texttt{actual\_Hartree\_finite\_spectral\_Fredholm\_four\_piece\_full\_PDE\_telescopes}
