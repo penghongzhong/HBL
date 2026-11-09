@@ -4819,4 +4819,28 @@ Consequently the physical finite-profile stage remains unverified:
 no time-positive all-region nonlinear Hartree PDE residual or actual
 finite generated-layer closure follows from this spatial estimate.
 
+
+\medskip
+\noindent\textbf{Operator-scope warning (unshifted versus shifted).}
+The existing Lean declarations
+\texttt{actual\_Hartree\_matched\_spectral\_original\_unshifted\_source}
+and
+\texttt{actual\_Hartree\_plateau\_original\_Kummer\_PDE\_spectral\_source}
+show on the actual Hartree plateau that, with
+\(u_0=G_0[F_{\rm adj}],\quad u_1=G_0[\delta u_0]\),
+\[
+ \mathcal L_0(u_0-u_1)-F_{\rm adj}=-\delta u_0,
+ \qquad
+ (\mathcal L_0+\delta)(u_0-u_1)-F_{\rm adj}=-\delta u_1.
+\]
+Thus the new quadratic shell estimate does \emph{not} permit replacing
+the genuinely unshifted PDE error \(-\delta u_0\) by
+\(-\delta u_1\). The actual equation must first be identified
+with the corresponding moving coefficient operator, and the residual
+must retain all differences between this operator and the complete
+original four-zone Hartree PDE. The existing first-order physical
+shell bound \texttt{actual\_Hartree\_true\_plateau\_original\_spectral\_shell\_source\_norm}
+therefore remains a separate main-chain input. No independent
+time-rate assumption is made here.
+
 \end{document}
