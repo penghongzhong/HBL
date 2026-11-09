@@ -3233,4 +3233,70 @@ $r^2dr$; the complete four-region nonlocal Hartree residual and
 positive slow-time order, parameter Lipschitz, finite source recurrence
 and derived Type--II explosion law remain separate obligations.
 
+
+\medskip
+\noindent\textbf{Strict current replay of physical three-$C^1$ matching
+and the nonlinear four-region PDE telescope (9 November 2026).}
+The earlier failures at Cramer/Volterra and four-piece compilation were
+corrected in later source revisions. Original GitHub Actions
+\texttt{42532174427} proves the exact corrected three-interface
+$C^1$ statement, \texttt{42532174429} instantiates the same original
+quartic Hartree source and unique real Cramer speed, and
+\texttt{42532363535} joins this with the fixed-basis spectral
+quadratic correction; each completed with strict CI success.
+More importantly, the originally failed genuine spectral finite
+nonlinear PDE telescope was strictly replayed on CI
+\texttt{42536552509} (\texttt{Success}; original artifact
+\texttt{13639851938}). Its exact checked Lean theorem is
+\texttt{actual\_Hartree\_finite\_spectral\_Fredholm\_four\_piece\_full\_PDE\_telescopes}.
+With $\mathcal R_{\mathrm H}$ denoting the \emph{original} nonlocal
+renormalized Hartree PDE residual and $\Phi_j$ the actual corrected
+four-piece moving fields, it certifies the exact identity
+\[
+ \mathcal R_{\mathrm H}\!\left(Z+\sum_{j=1}^{n}\Phi_j\right)
+ -\mathcal R_{\mathrm H}(Z)
+ =
+ \sum_{j=1}^{n}\left[
+ \mathcal R_{\mathrm H}\!\left(Z+\sum_{k=j}^{n}\Phi_k\right)
+ -
+ \mathcal R_{\mathrm H}\!\left(Z+\sum_{k=j+1}^{n}\Phi_k\right)
+ \right].
+\]
+The strict Lean audit includes \texttt{--trust=0},
+\texttt{warningAsError}, an exact \texttt{\#check}, and the target's
+\texttt{\#print axioms}; the original job printed exactly
+\texttt{[propext, Classical.choice, Quot.sound]}.
+No false linearity of the quartic Hartree map is used.
+This identity is \emph{not} a positive-time-order estimate.
+
+Further independent strict jobs \texttt{42539393349},
+\texttt{42539718869}, and \texttt{42539730025} have succeeded
+for the unique genuine source-selected, no-left-radius zero-left
+radial-energy slope, its conjunction with the same selected
+three-$C^1$ interfaces, and the full outgoing Fredholm jet algebraic
+decomposition. They do not yet establish an actual classical/a.e.
+$\dot H^1$ derivative of the full field.
+
+\medskip
+\noindent\textbf{Physical-clock repair and open dynamical barrier.}
+The first attempted rate-free shell-clock proof failed on the Lean
+strict warning \texttt{hell is not explicitly referenced} at line
+39 (CI \texttt{42540076575}). In commit \texttt{9745d3b},
+the proof now explicitly uses the genuine $\ell>0$
+hypothesis to establish $(\ell^2\ge0)$; replacement CI
+\texttt{42540898273} must not be counted before a successful
+independent replay. The intended, still conditional physical-clock
+mechanism is
+\[
+ 0\le\|\mathcal E_{\rm shell}(s,r)\|
+ \le C_{\rm shell}\ell(s)^{5/2}
+ =C_{\rm shell}\sqrt{\ell(s)}\,\frac{dt}{ds}.
+\]
+A finite physical-time tail and uniform integrated \emph{four-domain}
+error, direct parameter/endpoint Lipschitz control, genuine
+nonlinear finite-layer recursion, and a dynamical deduction of the
+Type--II scale remain open; neither a scale-decay trap nor the
+blow-up rate is an allowed input. The strict revised original
+environment count remains $11/13$.
+
 \end{document}
