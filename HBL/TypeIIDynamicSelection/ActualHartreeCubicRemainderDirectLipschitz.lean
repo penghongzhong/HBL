@@ -78,7 +78,7 @@ theorem actual_Hartree_original_cubic_Taylor_remainder_direct_Lipschitz
     dsimp [A]
     rw [norm_mul,Complex.norm_real,Real.norm_eq_abs,htwo]
     calc
-      2 * |p h|*‖h-k‖ ≤ (2*(M*e))*d := by
+      2 * |p h| * ‖h-k‖ ≤ (2*(M*e))*d := by
         have hp : 2 * |p h| ≤ 2*(M*e) :=
           mul_le_mul_of_nonneg_left hPair (by norm_num)
         exact mul_le_mul hp hdelta (norm_nonneg _) (by positivity)
@@ -89,7 +89,7 @@ theorem actual_Hartree_original_cubic_Taylor_remainder_direct_Lipschitz
     dsimp [B]
     rw [norm_mul,Complex.norm_real,Real.norm_eq_abs,htwo]
     calc
-      2 * |p h-p k|*‖k‖ ≤ (2*(M*d))*e := by
+      2 * |p h-p k| * ‖k‖ ≤ (2*(M*d))*e := by
         have hp : 2 * |p h-p k| ≤ 2*(M*d) :=
           mul_le_mul_of_nonneg_left hPairDiff (by norm_num)
         exact mul_le_mul hp hk (norm_nonneg _) (by positivity)
