@@ -49,7 +49,6 @@ theorem actual_Hartree_quartic_density_remainder_direct_Lipschitz
   have hPdiff : |p h-p k| ≤ M*d := by
     have hid : p h-p k = actualHartreeComplexRealPair u (h-k) := by
       dsimp [p, actualHartreeComplexRealPair]
-      rw [Complex.sub_re, Complex.sub_im]
       ring
     rw [hid]
     calc
@@ -72,17 +71,27 @@ theorem actual_Hartree_quartic_density_remainder_direct_Lipschitz
         mul_le_mul hSum hdelta (norm_nonneg _) (by positivity)
       _ = 2*e*d := by ring
   have hAbsA : |a| ≤ 2*M*e+e^2 := by
-    have h := abs_add_le (2*p h) (‖h‖^2)
-    have heq : |2*p h| = 2*|p h| := by
-      rw [abs_mul, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 2)]
-    rw [heq, abs_of_nonneg (sq_nonneg _)] at h
-    nlinarith [hPairH, hH2]
+    change |2*p h+‖h‖^2| ≤ _
+    calc
+      _ ≤ |2*p h| + |‖h‖^2| := abs_add_le _ _
+      _ = 2*|p h|+‖h‖^2 := by
+        rw [abs_mul, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 2),
+          abs_of_nonneg (sq_nonneg (‖h‖))]
+      _ ≤ 2*(M*e)+e^2 :=
+        add_le_add
+          (mul_le_mul_of_nonneg_left hPairH (by norm_num)) hH2
+      _ = _ := by ring
   have hAbsB : |b| ≤ 2*M*e+e^2 := by
-    have h := abs_add_le (2*p k) (‖k‖^2)
-    have heq : |2*p k| = 2*|p k| := by
-      rw [abs_mul, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 2)]
-    rw [heq, abs_of_nonneg (sq_nonneg _)] at h
-    nlinarith [hPairK, hK2]
+    change |2*p k+‖k‖^2| ≤ _
+    calc
+      _ ≤ |2*p k| + |‖k‖^2| := abs_add_le _ _
+      _ = 2*|p k|+‖k‖^2 := by
+        rw [abs_mul, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 2),
+          abs_of_nonneg (sq_nonneg (‖k‖))]
+      _ ≤ 2*(M*e)+e^2 :=
+        add_le_add
+          (mul_le_mul_of_nonneg_left hPairK (by norm_num)) hK2
+      _ = _ := by ring
   have hSumAB : |a+b| ≤ 4*M*e+2*e^2 := by
     exact (abs_add_le a b).trans (by linarith [hAbsA, hAbsB])
   have hDiffAB : |a-b| ≤ (2*M+2*e)*d := by
@@ -104,7 +113,7 @@ theorem actual_Hartree_quartic_density_remainder_direct_Lipschitz
   have hSqDiff :
       |a^2-b^2| ≤ ((2*M+2*e)*d)*(4*M*e+2*e^2) := by
     calc
-      _ = |a-b|*|a+b| := by
+      _ = |a-b| * |a+b| := by
         rw [show a^2-b^2=(a-b)*(a+b) by ring, abs_mul]
       _ ≤ ((2*M+2*e)*d)*(4*M*e+2*e^2) :=
         mul_le_mul hDiffAB hSumAB (abs_nonneg _) (by positivity)
