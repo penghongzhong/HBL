@@ -12,8 +12,13 @@ positive temporal order is assumed. The TRUE ORIGINAL logarithmic radial
 potential of the background density, its real-linear variation, and
 the full quadratic density remainder is produced from arbitrary measurable
 complex U,H with physically valid uniform L-infinity, half-radial U,
-and bubble-small H. The exact complex nonlinear Taylor identity then
-gives the complete six-term native L^(2,7/4) bound with O(e^2).
+and bubble-small H. The exact nonlinear Taylor identity gives a genuine six-term native
+L^(2,7/4) estimate, but this LEGACY theorem's coarse numerical constant
+has a spurious A0*B1=O(e) contribution: it proves only O(e) for the
+norm, not O(e^2). For the genuinely quadratic coefficient and its
+complete physically sourced proof use
+ActualHartreeFullNonlocalPhysicalWeightedL2Sharp. No missing source
+bound is silently assumed here.
 
 The physical four-piece Fredholm/Kummer correction must still be
 constructed and shown to meet these field/velocity estimates, solve
