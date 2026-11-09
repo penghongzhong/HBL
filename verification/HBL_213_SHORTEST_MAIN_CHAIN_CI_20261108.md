@@ -856,3 +856,34 @@ final-threshold input. The physical clock/shell route bypasses
 `htrap` for selected overlap-shell terms only; global Kummer repair,
 selected-speed derivative and recursion still need a rate-free source
 of gain. **Original acceptance: 11/13.**
+
+
+### Kinematic counterexample to obtaining a power bootstrap from the physical clock alone
+
+Even the correct modulation kinematics and a finite physical terminal time
+**do not** force \(\ell(s)\lesssim s^{-\beta}\) for any
+\(\beta>1/2\). On \(s\ge1\), take the smooth positive scale
+\[
+ \ell(s)=\frac{s^{-1/2}}{\log(s+e)},\qquad
+ b(s)=\frac{1}{2s}+\frac{1}{(s+e)\log(s+e)},\qquad
+ t(s)=t(1)+\int_1^s\ell(\tau)^2\,d\tau.
+\]
+Then
+\[
+ \ell_s=-b\ell,\quad t_s=\ell^2,\quad b>0,\qquad
+ \int_1^\infty \ell(s)^2\,ds
+  =\int_1^\infty\frac{ds}{s\log^2(s+e)}<\infty,
+\]
+yet for **every** \(\beta>1/2\),
+\(s^\beta\ell(s)=s^{\beta-1/2}/\log(s+e)\to\infty\).
+This is an exact classical counterexample at the **kinematic** level,
+not an assertion that this trajectory solves the Hartree PDE. Therefore
+the \`htrap\` powers in the old Kummer/finite profile gains require a
+genuine **additional modulation equation derived from Hartree**, not
+just \(\ell_s=-b\ell\) and \(t_s=\ell^2\).
+A sufficient non-circular target is a PDE-produced differential bound
+\(b(s)\ge(1/2+\delta)/s\), \(\delta>0\), which integrates to
+\(\ell(s)\le C s^{-1/2-\delta}\).
+That bound is **unproved for the actual four-region orbit**.
+This explicitly delineates where a dynamical rate must enter the
+proof *before* the original §2.13 power closure. No new original environment.
