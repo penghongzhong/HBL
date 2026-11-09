@@ -5945,4 +5945,53 @@ This addresses only a fixed-slice spectral correction, not the
 unproved true time derivative, four-region residual, or §2.13
 finite PDE induction. The original count remains $11/13$.
 
+
+\medskip
+\noindent\textbf{Necessary power budget for absolute time integration of the shell-sensitive source.}
+The static annular estimate, applied with the conditional scales
+$e(s)\lesssim s^{-9/8}$ and $X(s)\lesssim s^{1/2}$, yields at best
+\[
+ \|\mathcal R_{\rm H}^{\ge2}(s)\|_{L^{2,7/4}}\lesssim s^{-15/8}.
+\]
+A nonoscillatory, undamped future-time Duhamel integration on this
+specific absolute source class gives the sharp scalar model
+\[
+ \int_s^\infty \tau^{-15/8}\,d\tau
+   =\frac87s^{-7/8},\qquad
+ \frac{(8/7)s^{-7/8}}{s^{-9/8}}
+   =\frac87s^{1/4}\longrightarrow\infty.
+\]
+Thus a spatial gain $s^{-3/4}$ relative to the first $s^{-9/8}$
+profile is not sufficient, by itself, to establish a time-integrated
+recurrence in the same $s^{-9/8}$ class: a full $s$ power is lost
+in the primitive. This is only an obstruction to absolute,
+undamped time-Duhamel closure. It does not preclude oscillatory
+resolvent gains, a localized inverse, cancellations from the
+unique real speed, or a different PDE-based recurrence.
+
+For a source shell with actual amplitude $s^{-\rho}$ and spatial
+radius $s^\alpha$, the static shell-bound exponent is
+$-2\rho+3\alpha/4$. A bare time primitive can preserve a
+$s^{-\rho}$ first-profile class only if
+\[
+ 2\rho-\frac34\alpha-1\ge\rho,
+ \qquad\boxed{\rho\ge 1+\frac34\alpha}.
+\]
+With $\rho=9/8$ this requires $\alpha\le1/6$; with
+$\alpha=1/2$ it requires $\rho\ge11/8$. At the currently
+proposed $(\rho,\alpha)=(9/8,1/2)$, the actual nonlinear PDE
+inverse would have to gain a further factor $s^{-1/4}$ beyond
+the plain absolute primitive, or the physical source must exhibit
+compensating cancellation or stronger bounds. None of these
+additional estimates has been proved.
+
+The four exact real-power/threshold relations have been submitted
+as \texttt{ActualHartreeShellDuhamelExponent.lean} for a separate
+strict pinned audit, workflow \texttt{hbl-213-shell-duhamel-exponent.yml},
+initial CI \texttt{42710992024}. They are not labelled strictly
+accepted without original successful job logs and an axiom audit.
+These necessary exponent relations alone establish neither a
+Hartree PDE recurrence nor revised original Section 2.13;
+the formal count remains $11/13$.
+
 \end{document}
