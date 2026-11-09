@@ -557,3 +557,12 @@ However `ActualHartreeOneOrbitFullShellTimeGain.lean`, theorem `actual_Hartree_o
 `(htrap : ell s ≤ s ^ (-beta))` and `(hbeta : 1/2 < beta)`, only then converting `ell(s)^(5/2)` to `s^(-1-(5 beta / 2-1))`. **That is not yet a deduction from the actual orbit PDE.** It may be an intermediate bootstrap condition but is categorically **not permitted as a final §2.13 or Type-II theorem assumption** under this project's acceptance rules. It cannot be used as evidence of a derived time order until its entry-and-persistence dynamics (or a rate-free integrable scale mechanism) are strictly closed.
 
 This is the concrete current math bottleneck behind the remaining full four-domain time-positive residual: need PDE-produced `ell,b,modulation` dynamics and source/endpoint quantitative parameter Lipschitz, and a verified induction in the resulting scale without assuming the Type-II rate. The strict identity `actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes` is still only an equality. Original score stays **11/13**.
+
+### Rate-free original PDE-shell clock bridge (strict replay pending)
+
+An alternative to the forbidden unproved `ell(s)≤s^{-beta}` trap has now been implemented in `ActualHartreeOneOrbitFullShellClockGain.lean` (commit [3913342b](https://github.com/penghongzhong/HBL/commit/3913342bf9d1077ffd713c5086cae89fec4869c2)). For the **real original nonlocal Hartree PDE shell** `actual_Hartree_one_orbit_full_shell_from_PDE_moment_and_Strauss`, the established `‖E_shell(s,r)‖≤C ell(s)² sqrt(ell(s))`, coupled to the **actual** physical renormalization `HasDerivAt time (ell(s)²) s` and the small-scale range `0<ell(s)≤1`, yields the **rate-free physical clock density control**
+[
+\|E_{\rm shell}(s,r)\|\le C\,\ell(s)^2\sqrt{\ell(s)}
+\le C\,t_s(s)=C\,\frac{dt}{ds}.
+]
+The clock derivative is produced from the same orbit kinematics, **not** a guessed (s^{-\rho}) residual order. Under an eventual finite physical horizon (t(s)\uparrow T), integrating this *would* yield \(\int_s^\infty \|E_{\rm shell}(\sigma,r(\sigma))\|d\sigma\le C(T-t(s))\) once integrated shell measurability/uniform spatial control are certified; the finite horizon and full four-domain residual are **not** proved by this new pointwise theorem. This avoids forcing a Type-II exponent *at the shell conversion step* but does not replace the full dynamical closure. Exact source type and axiom workflow [CI 42540076575](https://github.com/penghongzhong/HBL/actions/runs/42540076575) **pending** at submission. Original count 11/13.
