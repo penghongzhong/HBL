@@ -5985,11 +5985,20 @@ the plain absolute primitive, or the physical source must exhibit
 compensating cancellation or stronger bounds. None of these
 additional estimates has been proved.
 
-The four exact real-power/threshold relations have been submitted
-as \texttt{ActualHartreeShellDuhamelExponent.lean} for a separate
-strict pinned audit, workflow \texttt{hbl-213-shell-duhamel-exponent.yml},
-initial CI \texttt{42710992024}. They are not labelled strictly
-accepted without original successful job logs and an axiom audit.
+The four exact real-power/threshold relations have now
+\emph{strictly passed} their independent pinned Lean audit,
+\texttt{ActualHartreeShellDuhamelExponent.lean}, workflow
+\texttt{hbl-213-shell-duhamel-exponent.yml},
+CI \texttt{42710992024}, original job \texttt{129480154155},
+evidence artifact \texttt{13715119032}. The original job
+confirms Lean 4.35.0-rc3, the exact pinned Mathlib commit,
+\texttt{--trust=0}, warning-as-error and four individual
+\texttt{\#check}/\texttt{\#print axioms} reports with only
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+The time integral itself is elementary paper calculus;
+the formal four-declaration check covers the exact power identities
+and the two algebraic necessary conditions, not an indefinite or
+improper integral theorem.
 These necessary exponent relations alone establish neither a
 Hartree PDE recurrence nor revised original Section 2.13;
 the formal count remains $11/13$.
