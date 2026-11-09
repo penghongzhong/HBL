@@ -3462,4 +3462,66 @@ Lipschitz increment, finite real Hartree iteration,
 and the PDE-derived finite-time Type--II rate remain
 indispensable.  The formal manuscript count remains $11/13$.
 
+
+
+\medskip
+\noindent\textbf{Actual time-integrated full Hartree shell residual and
+the core-path correction obstruction.}
+The universal-constant shell estimate above can be integrated
+\emph{along one genuine moving Hartree shell trajectory}
+$r(s)\in[R(s),2R(s)]$, with fixed physical bounds
+$M,B,A,J$ valid on $[s_0,s_1]$.  Put
+\[
+ \mathcal E_{\rm sh}(s):=
+ \left\|
+ \mathcal R[\chi_{R}f](s,r(s))-
+ \chi_{R(s)}(r(s))\mathcal R[f](s,r(s))
+ \right\|.
+\]
+For the true physical clock $t_s=\ell^2$, $0<\ell\le1$,
+the original PDE shell flux and full nonlocal quartic
+interaction yield the candidate consequence
+\[
+ \boxed{\quad
+ \int_{s_0}^{s_1}\mathcal E_{\rm sh}(s)\,ds
+ \le K(M,B,A,J)\,[t(s_1)-t(s_0)].
+ \quad}
+\]
+Here continuity of the literal complex shell residual along
+the selected trajectory is an \emph{explicit regularity
+premise}, rather than an independent small or
+time-decaying envelope.  The generated
+\texttt{ActualHartreeUniformFullShellClockIntegral.lean}
+and its independent CI \texttt{42546689719} must
+not be called verified until its exact \texttt{\#check},
+\texttt{\#print axioms} and \texttt{--trust=0}
+strict run succeed.  Even if accepted this controls only
+the moving overlap shell, not the full spatially weighted
+four-region error or the rate-defining modulation ODE.
+
+The earlier correction residual class currently uses two
+core-parameter paths satisfying
+\[
+ c_0'=-bc_0+m,\qquad
+ c_1'=-(b+\Delta b)c_1+m
+\]
+and assumes $c_1(s)=c_0(s)$ \emph{for every} $s\ge1$.
+Differentiating this exact equality at $s>1$ forces
+\[
+ \boxed{\qquad \Delta b(s)c_0(s)=0.\qquad}
+\]
+Thus the existing source class covers the degenerate
+same-core case, not an arbitrary nonzero physical scale
+correction.  To construct a legitimate nonlinear Hartree
+iteration for the final theorem, the intermediate correction
+identity must be revised to retain the genuine
+$c_1-c_0$ and core-tangent contributions and to bound
+their complete quartic nonlocal residuals.  Prescribing
+$\Delta b=0$ or postulating the missing positive order
+would change the theorem's mathematical content.
+This issue does not invalidate the already strictly
+proved fixed-time Green, spectral and $C^1$ statements,
+but it prevents accepting the full finite-order
+residual ledger from the old atom alone.
+
 \end{document}
