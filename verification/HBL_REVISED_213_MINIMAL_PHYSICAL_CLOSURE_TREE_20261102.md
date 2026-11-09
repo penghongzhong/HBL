@@ -345,3 +345,11 @@ is **pending** and includes precise three-theorem `#check` /
 has also been added in `931eec37`, but it remains **unaccepted until
 the newer strict CI succeeds**. No original environment is closed:
 **11/13**.
+
+
+### 2026-11-09 10:57 UTC exact source-to-cubic proof repair
+
+- [CI 42603288411](https://github.com/penghongzhong/HBL/actions/runs/42603288411), raw job `129112754147`, evidence `13667028657`: **failure**, with two precise compiler errors on the *new composite source-to-cubic target*: (i) pre-repair raw real-power rewrite at line 255; (ii) `hBound.trans hSpatial` at line 425 failed because the source norm groups `((a^2)^-1 * |delta|) * (2 G^2 ...)` as a nested factor while the scalar cubic lemma left-associates multiplication. Neither error changes the mathematical bound.
+- The scalar-power rewrite is corrected by [915e8952](https://github.com/penghongzhong/HBL/commit/915e8952ef), original follow-up [CI 42603968381](https://github.com/penghongzhong/HBL/actions/runs/42603968381) independently confirms the **scalar rewrite no longer fails**; its sole raw remaining compiler error is the second source-composite multiplication association at line 427, artifact `13666464203`.
+- [a5dcde496](https://github.com/penghongzhong/HBL/commit/a5dcde496232fd90e8f7c71bc5c81914e3b10143) repairs this second error with a separate `hSpatialAssoc` ring-normalized inequality and a genuine `hBound.trans` chain. Strict three-target rerun: [CI 42605032312](https://github.com/penghongzhong/HBL/actions/runs/42605032312), pending original job `129118702633`. This composite must not be counted successful before original strict log and exact axiom readback.
+- The underlying source-specific *quadratic* physical shell bound remains strictly accepted at [CI 42595684617](https://github.com/penghongzhong/HBL/actions/runs/42595684617), original job `129087607890`. Original manuscript **11/13**; the missing time-dependent all-region Hartree residual, Lipschitz, actual finite recursion, and dynamical Type-II rate have not been proved.
