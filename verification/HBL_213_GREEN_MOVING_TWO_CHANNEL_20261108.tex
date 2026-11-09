@@ -3952,6 +3952,49 @@ first-order spectral term all contribute to
 The source-difference norm and time/parameter budgets must
 therefore be derived at \emph{each physical recursion layer}.
 
+
+The original source/partition theorem
+\texttt{actual\_Hartree\_moment\_locked\_plateau\_scaled\_source}
+yields a stronger statement \emph{on the physical source plateau}.
+Let
+\[
+ F_\pm=\operatorname{Re,Im}\bigl[y\chi_L(y)
+          \mathcal S_{\mathrm H}(y)\bigr],\qquad
+ F_+^{\rm adj}=F_+ +p_2G_\omega,\quad
+ F_-^{\rm adj}=F_-+p_1G_b ,
+\]
+and use the same real selector \(p=(p_1,p_2)\) in the
+normalized outer forcing \(F_{\rm adj}\). Since
+\(\chi_L(y)=1\) for \(0<y\le L\),
+\[
+ S_{\rm in}^{\rm adj}(y)
+     +a^{-2}F_{\rm adj}(y/a)=0
+ \quad(0<y\le L),\qquad
+ \boxed{\ \mathfrak M_\delta(y)
+   =-a^{-2}\delta\,u_0(y/a)\quad(0<y\le L).\ }
+\]
+Thus the \emph{entire true quartic Hartree forcing} and both
+physical real speed channels cancel exactly on the backward
+overlap \(R=L/2\le y\le2R=L\); there is no need to assume an
+independent matching envelope or a vanishing spectral source.
+The first-order \(\delta u_0\) remains and cannot be replaced
+by the shifted-operator quadratic term \(\delta u_1\).
+The complementary support region \(y>L\) and its nonlocal
+feedback require separate control.
+
+The actual weighted Green bound already established for
+\(u_0(x)\) covers \(x\in[L/a,B]\), whereas this backward overlap
+requires \(x=y/a\in[L/(2a),L/a]\).  Applying that right-hand
+estimate on the left interval would be an \emph{invalid
+extrapolation}.  The new original-PDE plateau lemma
+\texttt{ActualHartreePlateauSpectralOriginalSourceCancel.lean}
+expresses the exact first-order forcing in Lean; its strict
+CI is pending.  The next quantitative proof must propagate
+the original matched Cauchy jet \emph{backward} through this
+dyadic interval with constants independent of \(a/L\), then
+control the genuine spatial/time weighted norm and parameter
+Lipschitz difference of \(a^{-2}\delta u_0(y/a)\).
+
 The fixed-inner defect \(E_{\rm in}\) has the previously
 verified \(R^{-4}+a^{-2}\) norm budget.  It is \emph{not}
 legitimate to apply the common-source matched-shell gain unless
