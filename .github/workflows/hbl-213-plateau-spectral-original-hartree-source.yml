@@ -71,16 +71,17 @@ jobs:
           lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
           lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
           test ! -s evidence/strict.log
-          cat > HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean <<'EOF'
+          cat > HartreePlateauSpectralOriginalSourceAudit.lean <<'EOF'
           import HBL.TypeIIDynamicSelection.ActualHartreePlateauSpectralOriginalSourceCancel
           set_option pp.all true
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_plateau_spectral_original_source_exact_cancel
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_plateau_original_Kummer_PDE_spectral_source
           set_option pp.all false in
-          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_source_selected_spectral_quadratic_and_three_C1
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_plateau_spectral_original_source_exact_cancel
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_plateau_original_Kummer_PDE_spectral_source
           EOF
-          lake env lean --trust=0 -DwarningAsError=true HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean > evidence/audit.log 2>&1
+          lake env lean --trust=0 -DwarningAsError=true HartreePlateauSpectralOriginalSourceAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
           import re, pathlib
           data=pathlib.Path('evidence/audit.log').read_text()
@@ -96,7 +97,7 @@ jobs:
           mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
           cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
           sha256sum "$target" > evidence/source-hashes.txt
-          cp HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean evidence/
+          cp HartreePlateauSpectralOriginalSourceAudit.lean evidence/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
