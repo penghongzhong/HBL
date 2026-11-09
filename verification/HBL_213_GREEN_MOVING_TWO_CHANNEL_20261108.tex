@@ -3819,4 +3819,55 @@ parameter differences must still be derived, with no
 global weighted source or Type--II law asserted. Manuscript
 environment count remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Matched-shell replacement for the crude $R^{13/4}$ cost
+(precise conditional route, not a closed PDE estimate).}
+The factor $R^{13/4}$ in the previous pointwise-to-weighted
+argument is genuine, but it need not be the final cost for an
+\emph{exactly matched} inner--Kummer difference.
+The already verified
+\texttt{ActualHartreeMatchedShellWeightedGain.lean} gives, for
+$u$ the original normalized two-channel Fredholm response,
+$v$ a regular exterior solution of the \emph{same scaled Kummer
+source equation} on $(R,2R)$, and at a common interface $r_0$
+\[
+ u(r_0)=v(r_0),\qquad u_r(r_0)=v_r(r_0),
+\]
+the genuine Kummer cutoff commutator of $d=u-v$ obeys
+\[
+ \bigl\|\mathbf1_{(R,2R)}r\,
+ [\,\mathcal L_K(\chi_Rd)-\chi_R\mathcal L_Kd\,]\bigr\|_{L^{2,7/4}}
+ \le
+ 20C\left(C_{\rm in}R^{-3/4}
+   +C_{\rm K}(\mu,\theta)\frac{R^{13/4}}{a^2}\right)
+ (N_++N_-).
+\]
+This conclusion requires \emph{all} of the genuine theorem's
+regularity, common-source, exact matching, $R>2$, and
+$16R^2(1+\|b(\mu,\theta)\|)/a^2\le1$ hypotheses.
+If in addition the physical geometry derives $a\ge R^2$
+and $C_{\rm K}(\mu,\theta)$ is uniformly bounded, then the
+right side is $O(R^{-3/4}(N_++N_-))$.
+This is a \emph{different} mechanism from applying
+the unconditional $R^{13/4}$ shell-volume estimate
+to a radius-independent scalar residual bound:
+the matching and common differential equation first
+produce the additional $R^{-4}$ factor.
+
+For the actual \emph{spectrally corrected} four-piece field,
+the exterior equation contains its true quadratic spectral defect,
+so the common-source hypothesis above cannot simply be asserted.
+The required next identity is a decomposition of the \emph{literal
+original nonlocal PDE residual} into this matched commutator,
+the quantitatively controlled spectral defect, the moving
+basis/interface/selected-speed derivatives, and all nonlocal
+cross-region interactions. Every term must be controlled in its
+actual region-appropriate source norm and then in two-parameter
+Lipschitz differences. No such decomposition-and-gain theorem
+has yet been strictly accepted; neither original Section~2.13 nor
+the terminal dynamical blowup result follows from the present
+matched-shell estimate. The revised original count remains $11/13$.
+
 \end{document}
