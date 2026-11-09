@@ -5245,4 +5245,39 @@ weighted-L2 Lean theorem. The remaining nonlocal Taylor products,
 linearized four-zone principal equation, moving-time effects and
 direct parameter differences are not implied by this one bound.
 
+
+\medskip
+\noindent\textbf{Strict original PDE conditional quadratic remainder (November 9).}
+Two further exact original-nonlinearity theorem modules now have
+independent pinned strict GitHub CI success. In
+\texttt{ActualHartreeOneGlobalPhysicalPDEStep.lean},
+CI \texttt{42622366690}, raw job \texttt{129177480271},
+artifact \texttt{13678045616}, identifies the actual global
+PDE residual as a linearized principal defect plus the controlled
+higher-order nonlocal Taylor remainder. In
+\texttt{ActualHartreeOneGlobalPhysicalPDEQuadratic.lean},
+CI \texttt{42622459316}, raw job \texttt{129177784657},
+artifact \texttt{13677486774}, preserves the sharp quadratic
+time factor and yields $s^{-9/4}$ for $\rho=9/8$ under explicit
+principal-equation cancellation and the theorem's displayed
+global-bubble majorants. Each original job printed only the
+three allowed Lean axioms for its two exact targets.
+
+\emph{These successes are conditional}: the globally
+uniform $MW$ background input of the second theorem
+cannot be supplied for arbitrary nonzero $Z_\ell$.
+The genuine physical two-scale source-to-Riesz theorem has
+separately passed CI \texttt{42622739092},
+job \texttt{129178724385}, artifact \texttt{13677416454}.
+Furthermore the real inverse-square radial Riesz spatial-decay
+domination has passed CI \texttt{42622286088},
+job \texttt{129177210820}, artifact \texttt{13677084306}.
+The newly identified half-radial inequality above makes the
+genuine nonlocal density remainder times original cubic a
+candidate for $s^{-9/4}$ in the native weighted source norm.
+It does not yet prove the \emph{other} nonlinear Hartree Taylor
+products, the actual four-zone linearized principal cancellation,
+or the two-coordinate residual Lipschitz bound.
+No revised original theorem environment is promoted beyond 11/13.
+
 \end{document}
