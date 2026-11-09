@@ -214,4 +214,62 @@ theorem actual_Hartree_true_plateau_moving_spectral_quadratic_backward_shell_nor
     Fp Fm hp hm hcp hcm Fo hFo hSame' delta hInt' hIntR' hMeas'
   simpa only [hTwoR, L, R, Fp, Fm, Fo] using hResult
 
+/-- Under the same physical separation a >= (2R)^3, the actual
+quadratic Volterra shell coefficient has a *negative* power of the
+physical radius. This is strictly a spatial statement and contains
+no presupposed modulation-time rate. -/
+theorem actual_Hartree_quadratic_backward_shell_cubic_spatial_factor
+    (a R G D : ℝ) (delta : ℂ)
+    (hR : 2 < R) (hCubic : (2 * R) ^ 3 ≤ a)
+    (hD : 0 ≤ D) :
+    20 * R ^ (13 / 4 : ℝ) *
+        ((a ^ 2)⁻¹ * ‖delta‖) *
+        (2 * G ^ 2 * ((2 * R / a) * ‖delta‖ * D)) ≤
+      (5 / 32 : ℝ) * G ^ 2 * R ^ (-(19 / 4 : ℝ)) *
+        ‖delta‖ ^ 2 * D := by
+  have hRpos : 0 < R := by linarith
+  have hapos : 0 < a :=
+    (pow_pos (by positivity : 0 < 2 * R) 3).trans_le hCubic
+  have hbase : 0 ≤ (2 * R) ^ 3 := by positivity
+  have hden : (2 * R) ^ 9 ≤ a ^ 3 := by
+    have h := pow_le_pow_left₀ hbase hCubic 3
+    convert h using 1 <;> ring
+  have hR9 : 0 < (2 * R) ^ 9 := by positivity
+  have hpow : R ^ (17 / 4 : ℝ) / R ^ 9 =
+      R ^ (-(19 / 4 : ℝ)) := by
+    rw [← Real.rpow_natCast R 9, ← Real.rpow_sub hRpos]
+    norm_num
+  have hfactor : R ^ (17 / 4 : ℝ) / a ^ 3 ≤
+      R ^ (-(19 / 4 : ℝ)) / 512 := by
+    calc
+      R ^ (17 / 4 : ℝ) / a ^ 3 ≤
+          R ^ (17 / 4 : ℝ) / (2 * R) ^ 9 :=
+        div_le_div_of_nonneg_left (Real.rpow_nonneg hRpos.le _)
+          hR9 hden
+      _ = (R ^ (17 / 4 : ℝ) / R ^ 9) / 512 := by
+        have h9 : (2 * R) ^ 9 = 512 * R ^ 9 := by ring
+        rw [h9, mul_comm (512 : ℝ) (R ^ 9), div_mul_eq_div_div]
+      _ = R ^ (-(19 / 4 : ℝ)) / 512 := by rw [hpow]
+  have hpower : R ^ (13 / 4 : ℝ) * R =
+      R ^ (17 / 4 : ℝ) := by
+    rw [← Real.rpow_one R, ← Real.rpow_add hRpos]
+    norm_num
+  have hcoef : 0 ≤ 80 * G ^ 2 * ‖delta‖ ^ 2 * D := by positivity
+  calc
+    20 * R ^ (13 / 4 : ℝ) *
+          ((a ^ 2)⁻¹ * ‖delta‖) *
+          (2 * G ^ 2 * ((2 * R / a) * ‖delta‖ * D)) =
+        (80 * G ^ 2 * ‖delta‖ ^ 2 * D) *
+          ((R ^ (13 / 4 : ℝ) * R) / a ^ 3) := by
+      field_simp [hapos.ne']
+      ring
+    _ = (80 * G ^ 2 * ‖delta‖ ^ 2 * D) *
+          (R ^ (17 / 4 : ℝ) / a ^ 3) := by rw [hpower]
+    _ ≤ (80 * G ^ 2 * ‖delta‖ ^ 2 * D) *
+          (R ^ (-(19 / 4 : ℝ)) / 512) :=
+      mul_le_mul_of_nonneg_left hfactor hcoef
+    _ = (5 / 32 : ℝ) * G ^ 2 * R ^ (-(19 / 4 : ℝ)) *
+          ‖delta‖ ^ 2 * D := by ring
+
+
 end HBL.TypeIIDynamicSelection
