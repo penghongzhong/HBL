@@ -502,3 +502,16 @@ Acceptance gate for the new theorem: original GitHub Actions Success, raw job lo
 - **PENDING** [CI 42621587679](https://github.com/penghongzhong/HBL/actions/runs/42621587679): `ActualHartreeBoundedBackgroundQuadraticRiesz.lean`, true *nonlocal* logarithmic inverse-square Riesz potential of the polynomial quartic density remainder. It requires only `||U||_infty<=M` and `||H(r)||<=e*bubble(r)`, not a false uniform `||U||<=M*bubble`; proves original Riesz absolute integrability and `|P[densityRemainder]|<=C_row*(6M^2+4Me+e^2)*e^2`. The proposed result is NOT certified until original success and exact audit. The actual U=Vc+Zell can meet the first hypothesis under the independently proved Strauss envelope when ell<=1, but producing the **actual four-zone correction H** with the second hypothesis, weighted source bound, moving time derivatives and parameter Lipschitz remains outstanding. Do not promote §2.13 on a local source derivative, bounded Riesz potential, or frozen shell time factor alone.
 
 **Acceptance 11/13.** The finite-order 9/4 parametrix and dynamic Type-II theorem remain mathematically open.
+
+### 2026-11-09 original nonlocal density remainder strictly accepted
+
+**Strict Success** [CI 42621587679](https://github.com/penghongzhong/HBL/actions/runs/42621587679), raw job **129174844836**, evidence **13676543343**, Lean 4.35.0-rc3 / pinned Mathlib, trust-zero, warning-as-error, exact #check and #print axioms accepted with only propext, Classical.choice, Quot.sound.
+
+True nonlocal inverse-square/logarithmic Riesz kernel: when ||U||_infty <= M and |H(r)| <= e*W(r), the genuine quartic density Taylor remainder is absolutely Riesz-integrable and satisfies
+
+    |I_2[densityRemainder(U,H)](r)| <= C_row*(6M^2+4Me+e^2)*e^2 .
+
+This is a strict original nonlocal **quadratic density source** bound, not a full nonlinear PDE time gain or a prescribed order.
+Uniform L-infinity is available for the physical high-regularity Vc+Zell background when 0<ell<=1, unlike the false uniform single-bubble envelope. The explicit physical specialization under CI **42622739092** and the general sharp (1+r)^(-1) Riesz decay under CI **42622286088** remain pending until their actual job and axiom logs are checked.
+
+Original linearized four-zone Fredholm/Kummer principal-defect solvability, moving terms, original source norm and threshold Lipschitz, real orbit/rate remain open: **11/13**.
