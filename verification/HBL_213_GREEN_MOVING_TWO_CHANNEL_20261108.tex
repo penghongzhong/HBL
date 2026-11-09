@@ -3524,4 +3524,85 @@ proved fixed-time Green, spectral and $C^1$ statements,
 but it prevents accepting the full finite-order
 residual ledger from the old atom alone.
 
+
+
+\medskip
+\noindent\textbf{Nonlinear next-layer correction on one global Hartree background:
+strict proof without incompatible core paths.}
+The former finite correction atom assumed the global identity
+$c_1\equiv c_0$ despite the distinct equations
+$c_0'=-bc_0+m$ and $c_1'=-(b+\Delta b)c_1+m$.
+These three conditions imply $\Delta b\,c_0=0$ on the open
+time interval; hence that atom does not represent generic
+nonzero-speed profile corrections.
+
+A revised construction takes a \emph{single} evolving complex
+background $U(s,r)$ and its actual correction $H(s,r)$, and
+retains every term in the original quartic nonlocal Hartree PDE.
+Let $\mathcal P_U(H;\Delta b,\Delta\omega)$ denote the full
+linearized Hartree evolution around $U$, including
+$i\Delta b\Lambda U+\Delta\omega U$ but excluding only the
+quadratic cross terms on $H$.  Define the \emph{literal} residual
+\[
+ \mathcal E_{U,H}:=
+ \mathcal R(U+H;b+\Delta b,\omega+\Delta\omega)
+ -\mathcal R(U;b,\omega)-\mathcal P_U(H;\Delta b,\Delta\omega).
+\]
+The original Hartree PDE correction identity then gives
+\begin{equation}
+ \mathcal E_{U,H}
+ =i\Delta b\,\Lambda H+\Delta\omega\,H
+   +\mathcal Q_{\HH}(U,H),
+ \label{eq:hbl-genuine-single-core-nonlinear-remainder}
+\end{equation}
+where $\mathcal Q_{\HH}(U,H)$ is the exact nonlocal
+quartic Hartree Taylor remainder, not an independent local
+source or an assigned order label.
+
+Assume the explicitly stated regularity of $U,H$ and,
+for $\rho\ge\kappa_{\rm phys}>0$, the actual bounds
+\[
+ |U(s,r)|\le M\,W(r),\qquad
+ |H(s,r)|\le C_Hs^{-\rho}W(r),\qquad
+ |\Lambda H(s,r)|\le C_{Hd}s^{-\rho},
+\]
+\[
+ |\Delta b(s)|+|\Delta\omega(s)|
+ \le C_{\rm speed}s^{-\rho}.
+\]
+Using the original nonlocal Hartree Taylor estimate and
+the proved speed cross bound, without prescribing a new
+residual order, gives
+\[
+ \boxed{\quad
+ |\mathcal E_{U,H}(s,r)|
+ \le\left\{
+   C_{\rm speed}(C_{Hd}+C_H)
+   +63(M+C_H)^5C_H^2W(r)^5
+ \right\}s^{-(\rho+\kappa_{\rm phys})}.
+ \quad}
+\]
+The exact identity and the quantitative next-layer estimate
+are \emph{strictly accepted} in
+\texttt{ActualHartreeOneGlobalCoreCorrectionNextLayer.lean},
+[CI \texttt{42547533614}], original artifact
+\texttt{13644785150}; the two exact
+\texttt{\#check}/\texttt{\#print axioms} audits under
+\texttt{--trust=0} yield only
+\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound} (universe annotations allowed).
+The downstream genuinely realized residual-atom wrapper,
+\texttt{ActualHartreeOneGlobalCoreCorrectionResidualAtom.lean},
+has separate CI \texttt{42547935578} and is \emph{pending}
+until that CI is strictly successful.
+
+The remaining non-circular step is to produce the relevant
+full four-region $U,H$ from the \emph{same actual orbit} and
+solve their corresponding principal Hartree equations, with
+time-dependent Green/Kummer interfaces, original weighted
+Fredholm norms, parameter Lipschitz and finite recursion.
+The verified estimate alone neither constructs those fields
+nor proves the final dynamical blowup rate. Revised original
+count remains $11/13$.
+
 \end{document}
