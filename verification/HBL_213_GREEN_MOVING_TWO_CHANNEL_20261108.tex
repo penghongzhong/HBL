@@ -4688,4 +4688,31 @@ Success and exact axiom verification; this manuscript does
 not count it as accepted in advance. The original count
 remains $11/13$.
 
+
+
+\medskip
+\noindent\textbf{2026-11-09: canonical physical jet for the backward quadratic Green estimate.}
+The retried strict run \texttt{42591217589} (original job
+\texttt{129073011766}) failed at line 212 of
+\texttt{ActualHartreePhysicalPlateauMovingSpectralQuadraticShellGain.lean},
+after all $4237$ imports compiled. The precise issue was the dependent
+\texttt{IntervalIntegrable} input: its Green integrand used the local
+canonical jet $J$ at $L/a$, whereas the invoked weighted Green theorem
+requires the literal canonical jet at $2R/a$. The equality $2R=L$ was
+available for real-number rewriting but did not supply a definitional
+identification of the two dependent integrability propositions.
+The source proof, source identity, and numerical estimate were not refuted.
+Commit \texttt{33abb6c0} changes the \emph{local proof abbreviation} to
+$J=\mathcal J(F_+,F_-;a,2R/a)$, so that the physical matching equality
+$2R=L$ is used only when transporting the conclusion; the theorem's
+public statement and all original physical-source hypotheses remain fixed.
+The new exact pinned strict run is \texttt{42595684617}.
+Until its original build, \texttt{--trust=0} check and
+\texttt{\#print axioms} have completed successfully,
+this quadratic composite is \emph{not} strict-accepted.
+Neither this frozen-shell result nor its earlier spectral finite
+telescope proves the moving full Hartree nonlocal residual gain,
+parameter Lipschitz, actual finite nonlinear recursion or
+PDE-derived Type--II blowup law. Revised original count: $11/13$.
+
 \end{document}
