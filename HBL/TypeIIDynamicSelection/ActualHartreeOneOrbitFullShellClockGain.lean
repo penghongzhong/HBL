@@ -36,7 +36,7 @@ open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 shell weight.  No beta, no s^(-rho) trap, and no assumed blowup rate. -/
 theorem actual_Hartree_shell_ell_two_sqrt_le_true_clock_derivative
     (ell time : ℝ → ℝ) (s : ℝ)
-    (hell : 0 < ell s) (hOne : ell s ≤ 1)
+    (_hell : 0 < ell s) (hOne : ell s ≤ 1)
     (hClock : HasDerivAt time ((ell s) ^ 2) s) :
     (ell s) ^ 2 * Real.sqrt (ell s) ≤ deriv time s := by
   have hSqrt : Real.sqrt (ell s) ≤ 1 := by
