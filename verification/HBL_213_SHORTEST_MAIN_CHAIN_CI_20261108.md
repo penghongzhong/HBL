@@ -1394,9 +1394,9 @@ derivative, four-domain nonlinear error, or II-type rate is inferred.
 **Revised original environments remain 11/13.**
 
 
-### 9 November: genuine radial Hdot1 energy of same matched spectral correction (CI pending)
+### 9 November: genuine radial Hdot1 energy of same matched spectral correction (strictly accepted auxiliary)
 
-Source: `HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralRadialEnergy.lean` (source commit `b0f310544cf879ffacf61b4bd34b7cba911f71a7`). Strict pinned trust-zero exact theorem/axiom workflow created in `9614958a5a1c3d5a69ebe73127e2ccce511e7450`: [42706314302](https://github.com/penghongzhong/HBL/actions/runs/42706314302). **Pending, not accepted** until original job Success and printed theorem/axioms audited.
+Source: `HBL/TypeIIDynamicSelection/ActualHartreeMatchedSpectralRadialEnergy.lean` (source commit `b0f310544cf879ffacf61b4bd34b7cba911f71a7`). Strict pinned trust-zero exact theorem/axiom workflow created in `9614958a5a1c3d5a69ebe73127e2ccce511e7450`: [42706314302](https://github.com/penghongzhong/HBL/actions/runs/42706314302), **Success**, original job `129463914783`, evidence artifact `13713044362`. Original decoded job logs confirm pinned Lean 4.35.0-rc3, exact Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, `--trust=0`, warning-as-error, a zero-byte `strict.log`, the exact one-declaration `#check` / `#print axioms` audit with transitive axioms solely `propext`, `Classical.choice`, `Quot.sound`; no `sorryAx`.
 
 The *same* original Hartree source-matched (u_0) produces (q=d u_0) and the actual classical zero-left Green correction (u_1). New candidate concludes both actual density `IntegrableOn (fun r => r^2 * ‖deriv u₁ r‖^2) (Icc a b) volume` and
 
