@@ -3795,9 +3795,14 @@ The source file
 \texttt{ActualHartreeOneGlobalCoreConjugatedShellWeighted.lean},
 commit \texttt{3223bb8}, and exact-audit workflow
 \texttt{hbl-213-one-global-core-conjugated-shell-weighted.yml},
-commit \texttt{e707b646}, are under strict CI
-\texttt{42553324852}; do not claim Success before checking its
-original logs and artifact.
+commit \texttt{e707b646}, were initially tested under
+strict CI \texttt{42553324852}.  That job \emph{failed only}
+at the Lean proof of an ordered sum inequality, line 115,
+not on a PDE or spatial estimate.  Source commit
+\texttt{903b870} replaces the tactic with the correctly
+oriented \texttt{add\_le\_add}; strict replacement CI
+\texttt{42554311787} remains pending until original
+Success and exact type/axiom evidence are independently checked.
 For an additional \emph{derived} upper radius bound
 \(R(s)\le C_Rs^{1/2}\) the displayed coarse shell estimate behaves as
 \(O(s^{-(\rho+\kappa-13/8)})\); it reaches \(s^{-9/4}\)
