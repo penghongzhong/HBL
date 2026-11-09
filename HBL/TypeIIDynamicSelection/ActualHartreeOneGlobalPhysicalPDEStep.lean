@@ -23,6 +23,7 @@ open Set MeasureTheory
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- For an actual ONE-global-background correction which solves the exact
 linearized original Hartree PDE, the residual of the corrected field has
