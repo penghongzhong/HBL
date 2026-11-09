@@ -3146,4 +3146,41 @@ Green slope with a derivative of the actual field before asserting
 a radial $\dot H^1$ theorem.
 The original revised environment count is still $11/13$.
 
+
+
+\medskip
+\noindent\textbf{Rate-free physical-clock alternative for the actual
+Hartree moving-shell commutator (strict CI pending).}
+There is a direct way to avoid converting the physical
+\(\ell^{5/2}\) estimate through the unproved
+\(\ell(s)\le s^{-\beta}\) trap. The original PDE orbit uses
+\[
+ t_s(s)=\ell(s)^2,\qquad 0<\ell(s)\le1.
+\]
+Therefore the same authentic complete nonlocal Riesz shell term obeys
+\begin{equation*}
+ \boxed{\quad
+ \|\mathcal E_{\rm shell}(s)\|
+ \le C_{\rm sh}\ell(s)^2\sqrt{\ell(s)}
+ \le C_{\rm sh}\,t_s(s).
+ \quad}
+\end{equation*}
+This inequality is independent of any assumed \(\beta\) or
+Type--II scale exponent. Under a \emph{separately established}
+finite physical horizon \(t(s)\to T<\infty\), absolute
+continuity and a uniform integrated shell norm would yield the
+rate-free time-tail mechanism
+\[
+ \int_s^\infty\|\mathcal E_{\rm shell}(\sigma)\|\,d\sigma
+ \le C_{\rm sh}\,[T-t(s)].
+\]
+Neither the finite physical time \(T\), a global norm on all
+four interfaces, nor this integrated inequality is concluded from
+the currently \emph{pointwise} Lean theorem. Its source is
+\texttt{ActualHartreeOneOrbitFullShellClockGain.lean},
+strict CI \texttt{42540076575} pending original evidence.
+This suggests a shorter non-circular route for the shell but
+does not yet close the global nonlinear recursion or derive
+the blow-up rate.
+
 \end{document}
