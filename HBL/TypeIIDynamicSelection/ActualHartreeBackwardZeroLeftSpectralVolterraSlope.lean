@@ -31,7 +31,7 @@ open HBL.Profile.Kummer
 the LEFT of the zero-Cauchy matching anchor. -/
 theorem actual_Hartree_zero_left_backward_original_Green_slope_identity
     {mu theta scale : ℝ} (K : OriginKummerPair mu theta scale)
-    (a b C : ℝ) (ha : 0 < a) (hab : a ≤ b)
+    (a b C : ℝ) (_ha : 0 < a) (hab : a ≤ b)
     (hK : OriginBasisOn K a b C)
     (F : ℝ → ℂ) (r : ℝ) (hr : 0 < r) :
     (r : ℂ) ^ 2 * actualOriginMatchedKummerSlope K a b F 0 0 r =
