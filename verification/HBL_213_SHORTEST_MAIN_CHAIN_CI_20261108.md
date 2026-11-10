@@ -2179,3 +2179,20 @@ Additional original ZIP audit: CI [42529092477](https://github.com/penghongzhong
 - For the actual nonlinear Hartree PDE residual of smooth moving data, if this jump persists, the second radial derivative induces a jump in the residual. A source \(F\) with any nonzero jump \(J\) has \(\langle-\Delta g,F\rangle/(4π)=R²g'(R)J+\int r²g'F'_{\rm pw}\,dr\). The tests \(g_\varepsilon=\sqrt\varepsilon\,\phi((r-R)/\varepsilon)\) have bounded radial Morawetz norm but \(g'_\varepsilon(R)\sim\varepsilon^{-1/2}\). Therefore **the proposed Morawetz-energy dual source norm fails for a genuinely jumping residual**. \`#check\`/axiom-approved C¹ and pointwise PDE telescope cannot be promoted to C² or \(F'\in L²\).
 - Explicit original-source curvature candidate: replace the affine repair by \(\chi_B(y/a)[w(B)+(y/a-B)w'(B)+\frac12(y/a-B)^2w''(B)]\), which matches the outer second jet and is zero near \(2aB\); separately establish a physical Fredholm/Kummer second-jet match at \(L\) and bound the newly generated terms and their moving-parameter derivatives. No free curvature datum or rate is introduced.
 - Full proof: [HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md). **Paper analysis only; no independent new Lean CI. Original revised acceptance: 11/13 (84.62%)**.
+
+
+### 10 November — exact a^(-2) physical derivative gain (paper identity, not full source)
+
+For \(E_a(y)=a^{-2}G(y/a)\), \(a\ge1\), the *exact* radial change of variables gives
+\(\|E_a\|_{L²(dy)}=a^{-3/2}\|G\|_{L²(dr)}\) and
+\(\|(1+y²)\partial_yE_a\|_{L²(dy)}\le a^{-1/2}\|(1+r²)G'(r)\|_{L²(dr)}\).
+Together with the already paper-derived Hartree Hessian source norms, this gives
+\(\mathcal D_-(E_a)\le2a^{-1/2}\|(1+r²)G'\|_2+\frac32a^{-3/2}\|G\|_2\) and
+\(\mathcal D_+(E_a)\le2a^{-1/2}\|(1+r²)G'\|_2+\frac{33}2a^{-3/2}\|G\|_2\).
+The exact original affine-Kummer \`a^{-2}\` residual pullback is already a Lean result in
+\`ActualKummerPhysicalInterfaceRepair.lean\`; the *full four-region source*, its
+weighted derivative after matching, \(a(s)\) growth, and a propagator bounded
+from the **same** source norm to the desired energy space are still **OPEN**.
+This is no direct unconditional Duhamel argument and no original-environment success.
+See [the interface/scale audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+**11/13 unchanged**.
