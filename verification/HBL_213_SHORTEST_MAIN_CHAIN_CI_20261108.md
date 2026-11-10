@@ -1860,3 +1860,45 @@ Neither the limiting \(\mu_\infty\), finite physical terminal time nor the power
 * **Remaining main physical gap**: the same-orbit full-four-region nonlinear source/inverse estimate still loses \(s^{1/4}\) under the naive absolute Duhamel bound. The original shell \(s^{-15/8}\) calculation remains **conditional**, not a verified global nonlinear residual.
 
 **13 original retained environments; strictly accepted 11/13 (84.62%); revised §2.13 and final main remain OPEN.**
+
+
+### 10 Nov — replacement one-flux modulation bootstrap (mathematical, not yet a PDE proof)
+
+For the **revised** main theorem retaining genuine Hartree finite-time
+II-type existence and the **dynamically generated sharp power law**, one
+genuine projected modulation estimate now suffices for BOTH positivity of
+the modulation trap and convergence of the dynamic rate. If an actual
+PDE orbit and real two-channel projection give
+\(\mu_s=e_{\rm proj}\), \(\mu(s_0)>9/16+\varepsilon\), and
+\[
+\int_{s_0}^{\infty}
+(1+\log(s/s_0))|e_{\rm proj}(s)|\,ds\le\varepsilon,
+\]
+then
+\(\mu(s_0)-\varepsilon\le\mu(s)\le\mu(s_0)+\varepsilon\)
+and \(\mu(s)\to\mu_\infty>9/16\); the same weighted
+flux yields the sharp rate through the established clock
+calculus. A candidate projected bound
+\(|e_{\rm proj}(s)|\le Cs^{-15/8}\) would have
+\[
+\int_{s_0}^\infty
+(1+\log(s/s_0))s^{-15/8}\,ds
+=\frac{120}{49}s_0^{-7/8},
+\]
+small for \(s_0\) sufficiently large.
+
+**Unproved:** the *actual* four-region Hartree PDE projection
+equals this \(e_{\rm proj}\) and satisfies such a time-decay bound
+with controlled Cramer determinant and moving basis.
+The existing \(s^{-15/8}\) shell calculation is STATIC and
+conditional. The unprojected Duhamel \(s^{1/4}\) deficit is
+unaffected. No new external axiom, source-order premise,
+prescribed exponent or original paper acceptance is claimed.
+
+**Lean correspondence:** strict one-terminal
+actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap,
+CI 42766649238 (Job 129664601628, artifact 13739896709);
+this proves the consequences of a real trap but does NOT
+claim to produce the Hartree PDE flux or the physical orbit.
+
+**Formal original count: 11/13 (84.62%), unchanged.**
