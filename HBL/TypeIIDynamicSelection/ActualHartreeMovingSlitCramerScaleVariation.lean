@@ -80,4 +80,70 @@ theorem actual_Hartree_original_Cramer_shell_covers_moving_slow_slit
   refine ⟨(le_min hsourceS hsourceT).trans hmin, ?_⟩
   exact hUpper x hx
 
+
+/-- Local moving-slit domain inclusion along a genuinely continuous scale and
+slow radius. Unlike the quantitative full-interval variation lemma above,
+this requires NO assumed variation budget for a(s): continuity and the
+strict physical gap ell(s) < 1 produce a common neighborhood for both
+the intermediate time and the moving radius endpoint. It can therefore
+supply the domain condition in a LOCAL time derivative/MVT argument,
+but supplies no estimate for the size of the physical source derivative. -/
+theorem actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
+    (a ell : ℝ → ℝ) (s B : ℝ)
+    (ha : 0 < a s) (he : 0 < ell s) (heSmall : ell s < 1)
+    (hCa : ContinuousAt a s) (hCe : ContinuousAt ell s)
+    (hB : actualHartreeSlowInnerRadius (ell s) / a s < B) :
+    ∃ U : Set ℝ, U ∈ nhds s ∧
+      ∀ t ∈ U, ∀ τ ∈ U,
+        ∀ x ∈ uIoc
+          (actualHartreeSlowInnerRadius (ell t) / a t)
+          (actualHartreeSlowInnerRadius (ell s) / a s),
+          x ∈ Icc (1 / a τ) B := by
+  let L : ℝ → ℝ := fun u => (1 : ℝ) / a u
+  let R : ℝ → ℝ := fun u => actualHartreeSlowInnerRadius (ell u) / a u
+  have hSlow : 1 < actualHartreeSlowInnerRadius (ell s) := by
+    unfold actualHartreeSlowInnerRadius
+    exact Real.one_lt_rpow_of_pos_of_lt_one_of_neg
+      he heSmall (by norm_num : (-1 / 16 : ℝ) < 0)
+  have hLc : ContinuousAt L s := by
+    dsimp [L]
+    exact continuousAt_const.div hCa (ne_of_gt ha)
+  have hSlowC :
+      ContinuousAt (fun u => actualHartreeSlowInnerRadius (ell u)) s := by
+    change ContinuousAt (fun u => (ell u) ^ (-1 / 16 : ℝ)) s
+    exact hCe.rpow_const (Or.inl (ne_of_gt he))
+  have hRc : ContinuousAt R s := by
+    dsimp [R]
+    exact hSlowC.div hCa (ne_of_gt ha)
+  have hLR : L s < R s := by
+    change (1 : ℝ) / a s < actualHartreeSlowInnerRadius (ell s) / a s
+    exact div_lt_div_of_pos_right hSlow ha
+  have hRB : R s < B := hB
+  let m : ℝ := (L s + R s) / 2
+  have hLm : L s < m := by
+    dsimp [m]
+    linarith
+  have hmR : m < R s := by
+    dsimp [m]
+    linarith
+  have hE1 : {u : ℝ | L u < m} ∈ nhds s :=
+    hLc.eventually (Iio_mem_nhds hLm)
+  have hE2 : {u : ℝ | m < R u} ∈ nhds s :=
+    hRc.eventually (Ioi_mem_nhds hmR)
+  have hE3 : {u : ℝ | R u < B} ∈ nhds s :=
+    hRc.eventually (Iio_mem_nhds hRB)
+  let U : Set ℝ := {u | L u < m ∧ m < R u ∧ R u < B}
+  have hU : U ∈ nhds s := by
+    exact Filter.inter_mem hE1 (Filter.inter_mem hE2 hE3)
+  refine ⟨U, hU, ?_⟩
+  intro t ht τ hτ x hx
+  change L t < m ∧ m < R t ∧ R t < B at ht
+  change L τ < m ∧ m < R τ ∧ R τ < B at hτ
+  change x ∈ Ioc (min (R t) (R s)) (max (R t) (R s)) at hx
+  have hmx : m ≤ x :=
+    (le_min (le_of_lt ht.2.1) (le_of_lt hmR)).trans hx.1.le
+  have hxB : x ≤ B :=
+    hx.2.le.trans (max_le (le_of_lt ht.2.2) (le_of_lt hRB))
+  exact ⟨(le_of_lt hτ.1).trans hmx, hxB⟩
+
 end HBL.TypeIIDynamicSelection
