@@ -1,0 +1,110 @@
+name: HBL synchronize normalized overlap and physical energy manuscript
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths:
+      - '.github/workflows/hbl-213-sync-normalized-energy-paper.yml'
+      - 'verification/HBL_213_NORMALIZED_MOVING_RADIUS_STABILITY_20261110.tex'
+      - 'verification/HBL_213_PHYSICAL_ENERGY_QUADRATIC_NO_SHELL_LOSS_20261110.tex'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  synchronize-explicit-inserts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hbl-213-spectral-c1-trace-20261109
+          fetch-depth: 1
+      - name: Update only the designated manuscript and original-environment ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          main=Path('verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex')
+          ledger=Path('verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md')
+          text=main.read_text()
+          assert text.count('\\end{document}') == 1, 'Unexpected manuscript terminator'
+          for tag,filename in [
+            ('HBL_NORMALIZED_MOVING_RADIUS_20261110','HBL_213_NORMALIZED_MOVING_RADIUS_STABILITY_20261110.tex'),
+            ('HBL_PHYSICAL_ENERGY_NO_SHELL_LOSS_20261110','HBL_213_PHYSICAL_ENERGY_QUADRATIC_NO_SHELL_LOSS_20261110.tex')]:
+            start='% BEGIN '+tag
+            end='% END '+tag
+            snippet=(Path('verification')/filename).read_text()
+            block=start+'\n'+snippet+'\n'+end+'\n'
+            if start in text:
+              assert text.count(start)==1 and text.count(end)==1
+              left,tail=text.split(start,1)
+              _,right=tail.split(end,1)
+              text=left+block+right
+            else:
+              assert end not in text
+              text=text.replace('\\end{document}',block+'\n\\end{document}')
+          main.write_text(text)
+          marker='<!-- HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->'
+          old=ledger.read_text()
+          if marker not in old:
+            addition='''
+
+          <!-- HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->
+          ## 10 November 2026 — original-source normalized overlap and physical-energy nonlinear bound
+
+          **Original revised environments remain 11/13. Neither §2.13 nor the final Type-II theorem is accepted.**
+
+          The manuscript now contains the fixed-interval derivation from
+          `verification/HBL_213_NORMALIZED_MOVING_RADIUS_STABILITY_20261110.md`.
+          The actual change y=L*x gives effective scale a/L and source
+          G=L^2*(K_a e)(L*x). Under the explicitly stated weak-coefficient
+          condition, the genuine zero-jet inverse has value/first/second
+          derivative constants 2, 4, 18. Parameter differences are controlled
+          by the original source differences, not an assumed inverse norm.
+          The material source derivative still contains L_s*x*f_y; physical
+          time-positive estimates of this term have not been proved.
+
+          The corresponding exact Lean targets are in
+          `ActualHartreeBackwardVolterraParameterDifference.lean`,
+          `ActualHartreeMovingRadiusNormalizedC2Stability.lean`, and
+          `ActualHartreeOriginalMovingRadiusPullback.lean`.
+          This synchronization does not certify their build status. Only
+          the original strict workflow and exact type/axiom evidence can
+          certify those auxiliary statements; no new acceptance count is
+          inferred from this documentation job.
+
+          The additional paper proof in
+          `verification/HBL_213_PHYSICAL_ENERGY_QUADRATIC_NO_SHELL_LOSS_20261110.md`
+          controls the **entire original seven-linear nonlocal Hartree**
+          Taylor remainder in physical dot-H1 by
+          21*C_T*(norm_X(U)+norm_X(H))^5*norm_X(H)^2,
+          with X=dot-H1 intersect L6 intersect L-infinity. It derives the
+          unweighted physical potential-gradient bound from the exact
+          Fourier multiplier, without a shell-volume factor. The actual
+          four-region correction's X decay and the appropriate energy
+          evolution inverse are NOT proved. In particular y=a*r multiplies
+          the normalized radial gradient energy by a. This budget cannot
+          be omitted. The weighted Fredholm/Kato-dual norm is a separate
+          interface, not replaced by the physical-energy calculation.
+
+          These are restricted mathematical advances and explicit remaining
+          gates; there is no complete nonlinear PDE trajectory, finite
+          recurrence, or dynamically selected Type-II rate in this entry.
+          <!-- END HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->
+          '''
+            import textwrap
+            ledger.write_text(old+textwrap.dedent(addition))
+          for path in (main,ledger):
+            print('SYNCHRONIZED',path,hashlib.sha256(path.read_bytes()).hexdigest())
+          PY
+          git diff --check
+          git diff --stat
+          git add verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Synchronize source-exact normalized C2 overlap and full physical Hartree energy remainder; original 11/13 unchanged'
+            git push origin HEAD:hbl-213-spectral-c1-trace-20261109
+          fi
+          git rev-parse HEAD
