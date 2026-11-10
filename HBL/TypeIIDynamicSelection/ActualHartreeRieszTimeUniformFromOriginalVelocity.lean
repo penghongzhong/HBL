@@ -26,7 +26,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Uniform original Riesz-potential time derivative for actual quartic
 radiation: the velocity is the computed polarisation of the SAME field,
