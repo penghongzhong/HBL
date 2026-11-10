@@ -108,6 +108,87 @@ Important: Kim's **inhomogeneous** estimate (4.10) by itself is an \(L_t^2\mathr
 
 The existing shell \(s^{-15/8}\) bound is a conditional static shell result, and it is currently in the wrong spatial source norm for (B). A successful scalar \(L^2_s\) power computation (CI 42776359428) does not bridge this gap. The original Hartree phase zero mode \(W\), scaling mode \(\Lambda W\), nonlocal real Hessian, and unstable modes must be treated correctly, not hidden in a free propagator assumption.
 
+## 4. Exact Hartree phase/real Morawetz-dual source criterion (paper calculation; NOT a new Lean acceptance)
+
+The preceding counterexample identifies a **missing derivative**, not just an
+unspecified functional space. One can state an entirely explicit sufficient
+spatial source condition using **both actual Hartree Hessian blocks**, without
+replacing the nonlocal real block by NLS.
+
+Write \(\mathcal I f=\kappa_{\rm H}(|x|^{-2}*f)\),
+\(\langle r\rangle=(1+r^2)^{1/2}\),
+\(v(r)=r g(r)\), and let \(F,g\) be real smooth compactly
+supported radial test functions. The correct operators are
+\[
+ L_-g=-\Delta g-3W^4g,\qquad
+ L_+g=-\Delta g-9W^4g-4W^3\mathcal I(W^3g).
+\]
+Radial integration by parts and symmetry of the **actual Riesz convolution**
+give the following exact equalities:
+\[
+ \frac{\langle L_-g,F\rangle_{\mathbb R^3}}{4\pi}
+ =\int_0^\infty\!
+ \left[v'(r)\,rF'(r)
+ -v(r)\bigl(F'(r)+3rW(r)^4F(r)\bigr)\right]dr,
+\]
+\[
+ \frac{\langle L_+g,F\rangle_{\mathbb R^3}}{4\pi}
+ =\int_0^\infty\!
+ \left[v'(r)\,rF'(r)
+ -v(r)\left(F'(r)+9rW(r)^4F(r)
+ +4rW(r)^3\mathcal I(W^3F)(r)\right)\right]dr.
+\]
+Here \(r^2 g'=r v'-v\), and the symmetry step is
+\(\langle W^3\mathcal I(W^3g),F\rangle
+=\langle g,W^3\mathcal I(W^3F)\rangle\).
+Define the explicitly weighted test norm
+\[
+ \|g\|_{{\rm Mor},0}^2
+ =\int_0^\infty\!
+ \left(\frac{|v'|^2}{\langle r\rangle^2}
+ +\frac{|v|^2}{\langle r\rangle^4}\right)dr
+\]
+and the **sufficient**, not necessarily sharp, physical source norms
+\[
+ \begin{aligned}
+ \mathcal D_-(F)
+ &=\|\langle r\rangle\,rF'\|_{L^2(dr)}
+   +\|\langle r\rangle^2(F'+3rW^4F)\|_{L^2(dr)},\\
+ \mathcal D_+(F)
+ &=\|\langle r\rangle\,rF'\|_{L^2(dr)}
+   +\|\langle r\rangle^2
+       (F'+9rW^4F+4rW^3\mathcal I(W^3F))\|_{L^2(dr)}.
+ \end{aligned}
+\]
+Cauchy--Schwarz now proves, **with no hidden source-norm hypothesis**,
+\[
+ |\langle L_-g,F\rangle_{\mathbb R^3}|
+ \le4\pi\|g\|_{{\rm Mor},0}\mathcal D_-(F),\qquad
+ |\langle L_+g,F\rangle_{\mathbb R^3}|
+ \le4\pi\|g\|_{{\rm Mor},0}\mathcal D_+(F).
+\]
+The Hamiltonian matrix bound follows by applying these to its two
+components. The real-channel formula retains the full nonlocal integral.
+
+**Precise, still OPEN physical producer:** for the actual, selected,
+projected, moving four-region Hartree residual
+\(F_{\rm full}=(F_1,F_2)\), prove a correctly projected and
+moving-stable counterpart of
+\[
+ \mathcal D_-(F_1(s))+\mathcal D_+(F_2(s))
+ \lesssim s^{-15/8}
+\]
+or a *weaker equivalent* bound in the dual space of the eventual
+Hartree homogeneous smoothing theorem. The strong sufficient norm
+above **cannot** be inferred from existing shell \(L^2_{7/4}\):
+moving-cutoff radial derivatives, nonlocal cross-density and the
+projection can lose powers. Nor does it establish the coupled
+Hamiltonian adjoint Kato estimate, embedded-spectrum exclusion,
+parameter Lipschitz, any new \(s^{-9/4}\) residual gain, an orbit,
+or the Type-II rate. The identities in this section are human
+paper algebra, not a compiled Lean theorem. Revised original
+13-environment acceptance remains **11/13 (84.62%)**.
+
 **Next direct producer:** prove the true four-piece moving source functional bound in (B), or produce the real four-piece linearized PDE inverse with source norm strictly better than the absolute-integration threshold; do not spend another run proving shell-power identities or abstract packet termination.
 
 **Public evidence retained:** finite spectral four-piece PDE telescope CI 42536552509 is strict Success, but is an exact identity only. Original revised acceptance remains **11/13**. The final Type-II strong orbit and its dynamically selected rate remain unproved.
