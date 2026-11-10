@@ -10092,4 +10092,92 @@ No original-environment acceptance follows; the retained tally is
 \(11/13\).
 % END HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110
 
+
+% BEGIN HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110
+\medskip
+\noindent\textbf{Exact spherical diagonalization of the original nonlocal Hartree stationary Hessian.}
+The critical inverse-square quartic kernel admits a useful
+\emph{exact}, not assumed, spectral reduction. Set
+\(W=(1+|x|^2)^{-1/2}\), \(\kappa_{\mathrm H}=3/\pi^2\), and
+\[
+ \Xi(x)=\left(\frac{2x}{1+|x|^2},
+                \frac{|x|^2-1}{1+|x|^2}\right)\in\mathbb S^3,
+ \qquad
+ \mathscr K\Phi(\xi)=
+ \int_{\mathbb S^3}\frac{\Phi(\eta)}{|\xi-\eta|^2}\,d\omega(\eta).
+\]
+Since \(d\omega=8W^6dx\) and
+\(|\Xi(x)-\Xi(y)|=2W(x)W(y)|x-y|\), the
+\emph{literal physical convolution} obeys
+\[
+ \mathcal I(W^4\Phi\circ\Xi)
+ =\frac{\kappa_{\mathrm H}}2W^2\mathscr K\Phi\circ\Xi.
+\]
+Consequently for \(g=W\Phi\circ\Xi\) the exact original
+phase and genuinely nonlocal real Hessians are
+\[
+ \begin{split}
+ L_-g&=W^5[-4\Delta_{\mathbb S^3}\Phi]\circ\Xi,\\
+ L_+g&=W^5[-4\Delta_{\mathbb S^3}\Phi-6\Phi
+     -(6/\pi^2)\mathscr K\Phi]\circ\Xi.
+ \end{split}
+\]
+The Funk--Hecke formula yields
+\(\mathscr K Y_k=2\pi^2(k+1)^{-1}Y_k\)
+for every degree-\(k\) spherical harmonic on \(\mathbb S^3\).
+The exact coefficients are therefore
+\[
+ h_k^-=4k(k+2),\qquad
+ h_k^+=4k(k+2)-6-\frac{12}{k+1}.
+\]
+This establishes the \emph{stationary} inertia of the actual
+Hartree Hessian: the real channel has one negative degree-zero
+direction, four degree-one zero directions (only the scaling one
+is radial), and a positive degree-\(\ge2\) complement; the phase
+channel has one degree-zero resonance and a positive complement.
+The physical energy is exactly
+\[
+ \|g\|_{\dot H^1}^2
+ =\frac18\sum_{k\ge0}(4k(k+2)+3)\|\Pi_k\Phi\|_2^2.
+\]
+Thus on the corresponding genuine spherical projections,
+\[
+ \begin{split}
+ \Pi_0\Phi=0&:\qquad
+     \langle g,L_-g\rangle\ge\frac45\|g\|_{\dot H^1}^2,\\
+ \Pi_0\Phi=\Pi_1\Phi=0&:\qquad
+     \langle g,L_+g\rangle\ge\frac{22}{35}\|g\|_{\dot H^1}^2.
+ \end{split}
+\]
+Moreover for physical \(F\) with \((1+|x|^2)F\in L^2\),
+the exact phase moment
+\(\int_{\mathbb R^3}WF\,dx=0\) is the degree-zero
+spherical solvability condition. The resulting stationary
+phase inverse satisfies
+\[
+ \|L_-^{-1}F\|_{\dot H^1}
+ \le\sqrt{5/48}\,\|(1+|x|^2)F\|_2
+ \quad\text{(zero spherical degree-zero projection).}
+\]
+For a source with zero spherical degree-zero and degree-one
+projections, the full \emph{nonlocal real} stationary inverse
+satisfies
+\[
+ \|L_+^{-1}F\|_{\dot H^1}
+ \le\frac{\sqrt{35}}{22}\,\|(1+|x|^2)F\|_2.
+\]
+These inverses have no hidden moving left-radius factor, but they
+are \emph{elliptic and stationary}. The physical time derivative
+has factor \(W\), rather than the \(W^5\) Hessian factor, so the
+coupled nonlocal Hamiltonian evolution is \emph{not} diagonalized
+by this spherical basis. Positive-energy Kato smoothing,
+time-varying parameter control, the actual four-region nonlinear
+Hartree source's time gain, finite-profile construction, strong
+PDE orbit and dynamically selected Type-II rate remain open.
+The exact proof and operator domain are recorded in
+\texttt{verification/HBL\_213\_EXACT\_CONFORMAL\_HARTREE\_HESSIAN\_SPECTRUM\_20261110.md}.
+This is a new \emph{paper proof}, not a compiled Lean target,
+and does not change the \(11/13\) original-environment tally.
+% END HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110
+
 \end{document}
