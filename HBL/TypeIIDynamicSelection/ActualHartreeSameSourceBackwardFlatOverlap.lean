@@ -83,14 +83,12 @@ theorem actual_Hartree_same_source_backward_flat_overlap_regions
     unfold actualHartreeFlatInnerTransition
     apply cutoff_zero_of_le_one
     apply (div_le_one hIn).2
-    dsimp
     linarith
   have hEta1 (y : ℝ) (hy : 3 * L / 4 ≤ y) :
       actualHartreeFlatInnerTransition L y = 1 := by
     unfold actualHartreeFlatInnerTransition
     apply cutoff_one_of_two_le
     apply (le_div_iff₀ hIn).2
-    dsimp
     linarith
   have hChi1 (y : ℝ)
       (hy : y ≤ L + 5 * ((a * B - L) / 8)) :
@@ -100,7 +98,6 @@ theorem actual_Hartree_same_source_backward_flat_overlap_regions
        ((a * B - L) / 8)) = 0 := by
       apply cutoff_zero_of_le_one
       apply (div_le_one hOut).2
-      dsimp
       linarith
     rw [hc]
     ring
@@ -112,7 +109,6 @@ theorem actual_Hartree_same_source_backward_flat_overlap_regions
        ((a * B - L) / 8)) = 1 := by
       apply cutoff_one_of_two_le
       apply (le_div_iff₀ hOut).2
-      dsimp
       linarith
     rw [hc]
     ring
