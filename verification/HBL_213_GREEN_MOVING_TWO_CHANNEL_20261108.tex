@@ -6612,4 +6612,137 @@ nonlinear four-region remainder bound remain unproved.
 The revised original manuscript acceptance remains
 \textbf{11/13}; neither local geometry declaration increases it.
 
+
+
+\medskip
+\noindent\textbf{Two-stage dynamical Type--II proof reduction, after the
+Rapha\"el--Rodnianski method (10 November 2026).}
+An inspection of Rapha\"el--Rodnianski,
+\emph{Publ. Math. IH\'ES} 115 (2012), \S6--\S7,
+shows a useful logical separation: a coarse modulation/energy
+bootstrap first yields actual finite-time blowup; a precise flux
+law and sharp blowup rate are proved only afterwards.
+The corresponding HBL reduction below is purely kinematic until
+the original nonlocal PDE produces an actual trapped modulation orbit.
+It does \emph{not} replace the final theorem's required emergent
+power-law asymptotic.
+
+Let \(q_0,\lambda_0>0\) and \(0<m\le M\). Suppose one
+\emph{genuine Hartree PDE orbit}, with its physically selected two
+real modulation channels, generates \(C^1\) coordinates
+\(q(s)>0\), \(\lambda(s)>0\), \(\mu(s)\) such that
+\[
+ q(s_0)=q_0,\qquad \lambda(s_0)=\lambda_0,\qquad
+ q_s=4\mu,\qquad
+ \frac{\lambda_s}{\lambda}=\frac{1+4\mu}{2q},
+ \qquad m\le\mu(s)\le M.
+\]
+The last inequality must be shown to be an invariant physical
+trapping interval; it is \emph{not} currently a PDE result.
+Integration gives the exact comparison
+\[
+ q_0+4m(s-s_0)\le q(s)\le q_0+4M(s-s_0).
+\]
+The coupled clock identities integrate \emph{without} first
+specifying a terminal time or any exponent:
+\[
+ \begin{aligned}
+ \frac{d}{ds}\log\frac q{\lambda^2}&=-\frac1q,\\
+ \tau(s):=\frac{q(s)}{\lambda(s)^2}
+ &=\frac{q_0}{\lambda_0^2}
+   \exp\left(-\int_{s_0}^s\frac{du}{q(u)}\right),\\
+ \tau_s&=-\lambda^{-2}.
+ \end{aligned}
+\]
+Because \(q(s)\le q_0+4M(s-s_0)\),
+\[
+ \int_{s_0}^{s}\frac{du}{q(u)}
+ \ge\frac1{4M}\log\left(1+\frac{4M(s-s_0)}{q_0}\right)
+ \longrightarrow+\infty.
+\]
+Therefore \(\tau(s)\downarrow0\); with \(t_s=\lambda^{-2}\)
+and \(t(s_0)=t_0\) one obtains
+\[
+ T:=t_0+\frac{q_0}{\lambda_0^2}<\infty,\qquad
+ t(s)\uparrow T,\qquad
+ \tau(s)=T-t(s).
+\]
+Moreover \(q(s)\to+\infty\), whence
+\[
+ \boxed{\quad
+ \frac{\lambda(s)^{-1}}{\sqrt{T-t(s)}}
+   =q(s)^{-1/2}\longrightarrow0.
+ \quad}
+\]
+This is the strictly super-self-similar \emph{Type--II concentration
+criterion}, not yet a Hartree blowup existence theorem: the same
+physical solution must still be constructed with bounded
+\(\dot H^1\) and a nonextendible concentrating bubble.
+
+Only \emph{after} that coarse PDE construction should the
+sharp original conclusion be recovered. An
+\emph{integrated} physical modulation-flux estimate
+\[
+ \int_{s_0}^{\infty}
+ \left(1+\log\frac{s}{s_0}\right)|\mu_s(s)|\,ds<\infty
+ \quad(s_0>0)
+\]
+already suffices for the final scalar asymptotics, provided the
+resulting \(\mu_\infty>9/16\). Indeed
+\[
+ \int_{s_0}^\infty
+    \frac{|\mu(s)-\mu_\infty|}{s}\,ds
+ \le\int_{s_0}^\infty
+      \log(s/s_0)|\mu_s(s)|\,ds<\infty,
+\]
+and with \(q(s)\sim4\mu_\infty s\) the exact clock formula
+implies
+\[
+ \lambda(t)^{-1}
+ =C_\lambda(T-t)^{1/2+2\mu_\infty}(1+o(1)).
+\]
+This removes the earlier need to prove the pointwise
+\(|\mu_s(s)|\lesssim s^{-1-\delta}\) merely for the
+\emph{scalar rate-conversion step}. It does \emph{not} claim
+that the weighted physical flux has been bounded, nor may it
+replace the physical PDE, four-region matching, or
+HLS/nonlocal error estimates.
+The sharp final HBL theorem retains its original statement.
+
+\medskip
+\noindent\textbf{The quantitative defect that cannot be deleted.}
+For the actual Hartree shell budget currently in the verification
+ledger, the quadratic source estimate \(s^{-15/8}\) gives under
+an absolute backward Duhamel bound
+\[
+ \int_s^\infty u^{-15/8}\,du=\frac87 s^{-7/8}.
+\]
+To close an \(o(s^{-9/8})\) correction using \emph{that} absolute
+inverse alone, the source must improve to
+\(O(s^{-17/8-\eta})\) for some \(\eta>0\), or the true
+projected nonlocal propagator must supply a further
+\(s^{-1/4-\eta}\) gain. The formerly pursued
+\(s^{-9/4}\) residual is stronger than this \emph{one}
+absolute-Duhamel threshold by \(s^{-1/8}\); it must
+not be weakened in any other manuscript estimate without
+a complete balance check.
+The previously strictly verified Frobenius moving-slit
+spatial \(R\) gain cannot be substituted into the
+\emph{full} PDE source unless the same original Cramer-selected
+time derivative, moving basis, all four regional nonlocal terms,
+and their common-domain parameter controls preserve it.
+
+Thus the shortest currently honest PDE spine is:
+original Hartree source and strict Cramer/Green/C\textsuperscript{1}
+transfer; one genuinely quantitative full-four-region projected
+source/inverse estimate closing this defect; one true physical
+strong solution with modulation trapping; the preceding
+\emph{automatic} Type--II criterion; then the weighted-flux
+refinement for the original sharp rate.
+No new \texttt{theorem}/\texttt{lemma} environment is created
+by this organizational reduction. Original revised acceptance
+remains \(11/13\). A detailed reference comparison and proof
+is available in
+\texttt{verification/HBL\_213\_TYPEII\_TWO\_STAGE\_PROOF\_REDUCTION\_20261110.md}.
+
 \end{document}
