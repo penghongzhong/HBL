@@ -6980,10 +6980,25 @@ provides the q bounds; the new exact derivative
 \texttt{actual\_Hartree\_dynamic\_remaining\_time\_from\_two\_channel\_equations}
 and clock cancellation
 \texttt{actual\_Hartree\_dynamic\_terminal\_clock\_local\_conservation}
-are submitted to dedicated strict CI.
-The displayed \(\beta_*\) and log-\(L^1\) inequalities
-have **not** yet been audited as complete Lean
-declarations and must not be reported as such.
+and the logarithmic Lyapunov estimate
+\texttt{actual\_Hartree\_dynamic\_mu\_trap\_log\_scale\_gain}
+now have a single \emph{strictly successful} pinned Lean kernel replay:
+GitHub CI \texttt{42773792399}, original job \texttt{129687475318},
+evidence artifact \texttt{13742663263}, source commit
+\texttt{b3351e421aceab877e54a4aa1b08e81ce69ac4cc}.
+The four exact theorem declarations were each checked by
+\texttt{\#check}/\texttt{\#print axioms}, with \texttt{--trust=0},
+\texttt{warningAsError}, Lean \texttt{4.35.0-rc3}, and the pinned
+Mathlib revision \texttt{a98628e16c11f5167f16124105ddce53efa9bfe5}.
+The transitive axioms in each case are exactly
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+The displayed \(\beta_*\) estimate follows by elementary exponentiation
+from the strictly checked logarithmic inequality and the coarse
+\(q\)-bounds; the separate weighted log-\(L^1\) integral is a
+paper computation, \emph{not} a Lean-audited integral declaration.
+All four checks are conditional on genuine PDE-produced modulation
+equations and trapping: no Hartree solution or original §2.13
+time-gain theorem is constructed by these scalar certificates.
 Original manuscript accepted environment count remains \(11/13\).
 
 \end{document}
