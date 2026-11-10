@@ -1,5 +1,6 @@
 import HBL.TypeIIDynamicSelection.ActualHartreeMomentLockedPlateauSource
 import HBL.TypeIIDynamicSelection.ActualHartreeMatchedSpectralOriginalPDEMismatch
+import HBL.TypeIIDynamicSelection.ActualHartreeSpectralCorrectedFourPieceThreeC1
 import Mathlib.Tactic
 
 /-!
@@ -26,7 +27,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Profile.Kummer
+open HBL.Profile.Kummer HBL.Profile.ActualInner HBL.L2Kernel
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- At every actual inner plateau point, the literal original Hartree
@@ -132,5 +133,88 @@ theorem actual_Hartree_inner_C1_spectral_curvature_jump_from_sources
     mu theta a L u v hValue hSlope, hInnerSource, hCorrectedSource]
   simp only [Complex.real_smul]
   ring
+
+
+/-- The actual Fredholm two-channel INNER field and the actual Cramer
+selected, spectrally corrected Kummer OUTER field meet with identical
+value and slope, but their curvature jump is the exact ORIGINAL
+physical Kummer operator on the same inner field minus the full
+spectral source F - delta*u0. No independent source or curvature is
+introduced; controlling the first term via the true Hartree Hessian
+remains a distinct unproved PDE obligation. -/
+theorem actual_Hartree_true_inner_spectral_C1_curvature_jump
+    {mu theta scale B : ℝ} (K : OriginKummerPair mu theta scale)
+    (L a : ℝ) (hL : 0 < L) (ha : 0 < a)
+    (hOrder : L / a ≤ B) (hB : B < scale)
+    (Fp Fm : ℝ → ℝ)
+    (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+    (hm : InWeightedL2 (7 / 4 : ℝ) Fm)
+    (F : ℝ → ℂ)
+    (hF : ∀ r ∈ Ioo (0 : ℝ) scale, ContinuousAt F r)
+    (d : ℂ) :
+    let u := actualHartreeTwoChannelInner Fp Fm hp hm
+    let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
+    let v := actualHartreeMatchedSpectralPhysicalValue K a (L / a) B
+      F J.1 J.2 d
+    deriv (deriv u) L - deriv (deriv v) L =
+      actualMatchedScaledKummerApply mu theta a u L -
+        ((a ^ 2)⁻¹ : ℝ) •
+          (F (L / a) -
+            d * actualOriginMatchedKummerValue K (L / a) B
+              F J.1 J.2 (L / a)) := by
+  dsimp only
+  let u := actualHartreeTwoChannelInner Fp Fm hp hm
+  let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
+  let v0 := actualOriginMatchedKummerPullback K a (L / a) B F J.1 J.2
+  let w := actualHartreeMatchedSpectralCorrectedValue
+    K (L / a) B F J.1 J.2 d
+  let v := actualHartreeMatchedSpectralPhysicalValue
+    K a (L / a) B F J.1 J.2 d
+  have hr0 : 0 < L / a := div_pos hL ha
+  have hOld :=
+    actual_Hartree_moment_locked_pullback_actual_inner_jet
+      K L a hL ha hOrder hB Fp Fm hp hm F hF
+  dsimp only at hOld
+  have hOriginal :=
+    actual_origin_matched_Kummer_actual_endpoint_jets
+      K hr0 hOrder hB F hF J.1 J.2
+  have hSelected :=
+    actual_Hartree_matched_spectral_corrected_left_C1_and_exact_equation
+      K (L / a) B hr0 hOrder hB F hF J.1 J.2 d
+  dsimp only at hSelected
+  have hJvalue : J.1 = u L := by
+    calc
+      J.1 = actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 (L / a) :=
+        hOriginal.1.symm
+      _ = v0 L := rfl
+      _ = u L := hOld.1
+  have hValue : u L = v L := by
+    calc
+      u L = J.1 := hJvalue.symm
+      _ = v L := hSelected.1.symm
+  have hV0 : HasDerivAt v0 ((1 / a : ℝ) • J.2) L := by
+    have h := hOriginal.2.1.scomp L ((hasDerivAt_id L).div_const a)
+    simpa only [v0, Function.comp_def, id_eq, one_div,
+      Complex.real_smul, Complex.ofReal_inv, mul_comm] using h
+  have hV : HasDerivAt v ((1 / a : ℝ) • J.2) L := by
+    have h := hSelected.2.1.scomp L ((hasDerivAt_id L).div_const a)
+    simpa only [v, actualHartreeMatchedSpectralPhysicalValue,
+      Function.comp_def, id_eq, one_div,
+      Complex.real_smul, Complex.ofReal_inv] using h
+  have hSlope : deriv u L = deriv v L := by
+    rw [hV.deriv, hV0.unique hOld.2.1]
+  have hRange : L < a * scale := by
+    have h := (div_lt_iff₀ ha).1 (hOrder.trans_lt hB)
+    simpa only [mul_comm] using h
+  have hPDE :=
+    actual_Hartree_matched_spectral_original_physical_source
+      K a (L / a) B ha hr0 hOrder hB F hF J.1 J.2 d L
+      ⟨hL, hRange⟩
+  have hJump :=
+    actual_Hartree_inner_C1_curvature_jump_eq_original_source_jump
+      mu theta a L u v hValue hSlope
+  dsimp only at hPDE
+  rw [hPDE] at hJump
+  exact hJump
 
 end HBL.TypeIIDynamicSelection
