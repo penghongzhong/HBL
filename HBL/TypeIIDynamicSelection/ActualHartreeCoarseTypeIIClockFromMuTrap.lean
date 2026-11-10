@@ -112,4 +112,43 @@ theorem actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
         (by norm_num : (0 : ℝ) < (1 / 2 : ℝ))).comp hGrowth
   exact ⟨hBounds, hGrowth, hTypeII⟩
 
+
+
+/-- The physical remaining-time clock is NOT an independent prescribed
+terminal law. Given the SAME two-channel modulation equations
+q_s = 4*mu and ell_s = -((1+4*mu)/(2*q))*ell, its exact physical
+derivative is -ell². The true PDE must still furnish these scalar
+identities; the theorem does not assume a terminal exponent. -/
+theorem actual_Hartree_dynamic_remaining_time_from_two_channel_equations
+    (q ell mu : ℝ → ℝ) (s : ℝ)
+    (hqpos : 0 < q s)
+    (hq : HasDerivAt q (4 * mu s) s)
+    (hell : HasDerivAt ell
+      (-((1 + 4 * mu s) / (2 * q s)) * ell s) s) :
+    HasDerivAt (fun t => q t * (ell t) ^ 2)
+      (-(ell s) ^ 2) s := by
+  have h := hq.mul (hell.pow 2)
+  convert h using 1
+  · funext t
+    rfl
+  · field_simp [hqpos.ne']
+    ring
+
+/-- Adding the ORIGINAL physical-time equation t_s = ell² cancels
+the remaining-time derivative exactly. This gives the conserved
+terminal clock from the physical modulation equations, rather than
+postulating an independent terminal time or blowup law. -/
+theorem actual_Hartree_dynamic_terminal_clock_local_conservation
+    (q ell mu time : ℝ → ℝ) (s : ℝ)
+    (hqpos : 0 < q s)
+    (hq : HasDerivAt q (4 * mu s) s)
+    (hell : HasDerivAt ell
+      (-((1 + 4 * mu s) / (2 * q s)) * ell s) s)
+    (htime : HasDerivAt time ((ell s) ^ 2) s) :
+    HasDerivAt (fun t => time t + q t * (ell t) ^ 2) 0 s := by
+  have h := htime.add
+    (actual_Hartree_dynamic_remaining_time_from_two_channel_equations
+      q ell mu s hqpos hq hell)
+  simpa only [add_neg_cancel] using h
+
 end HBL.TypeIIDynamicSelection
