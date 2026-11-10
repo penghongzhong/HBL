@@ -2529,3 +2529,33 @@ For smooth actual radial complex \(u\) with \(U=\|u\|_{L²(dr)}\), \(H=\|(1+r²)
 \(\|\mathcal R_H(u)\|_{L²(dr)}+\|(1+r²)\mathcal R_H(u)'\|_{L²(dr)}
 \le C_H(U+H)^2\).
 The fixed \(C_H\) uses the published weighted \(A_2\) Riesz-transform theorem in \(\mathbb R^3\), with \(|x|^{-2}\in A_2\), and **not** a new Lean axiom. The paper gives all true potential-density, gradient and cubic polynomial coefficients explicitly. Its physical \(\lambda\) scaling is exact: \(L²\) source \(\lambda^{-2}\), and weighted derivative \(\lambda^{-1}\). This **eliminates the nonlinear remainder envelope**, but does NOT control the linearized Hartree generator, moving interfaces, selected-speed derivatives, the required \(U(s),H(s)\) for the same actual orbit, Kato inverse or the dynamical rate. This derivation has **no new strict Lean CI**. Existing local Taylor polynomial identity is already proved in \`ActualHartreeComplexTaylor.lean\`; the full nonlocal weighted derivative claim is currently paper-level only. **Formal revised acceptance: 11/13, no 12/13 claim.**
+
+
+### 10 November — actual two-field quadratic Lipschitz from original Hartree potential
+
+The source-faithful quadratic weighted-\(H^1(dr)\) bound has been strengthened to
+\(\|\mathcal R_H(u)-\mathcal R_H(v)\|_Y
+\le C(R_*)(\|u\|_X+\|v\|_X)\|u-v\|_X\) on \(\|u\|_X,\|v\|_X\le R_*\).
+Here \(X=L²(dr)\cap\{(1+r²)u'\in L²(dr)\}\), \(Y\) is the identical source norm,
+and \(\mathcal R_H\) contains the **full original** inverse-square quartic
+Riesz interaction after subtracting its actual nonlocal linearization.
+The proof uses the genuine 2–7 multilinear terms, exact polynomial
+telescoping and Hytönen's published weighted \(A_2\) bound, not a free
+source Lipschitz packet. Details and calculations: 
+[HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md](HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md).
+**Still OPEN:** actual moving correction \(X\)-smallness/\(X\)-Lipschitz, full
+linear/time/transport residual, Hartree Hamiltonian spectral inverse
+and real PDE orbit. No new Lean CI for this functional estimate, no extra axiom,
+**11/13 unchanged**.
+
+Exact nonlocal polynomial source identity has been submitted to pinned Lean in
+\`HBL/TypeIIDynamicSelection/ActualHartreeWholeOriginalQuadraticRieszSplit.lean\`
+with workflow
+\`.github/workflows/hbl-213-original-full-quartic-riesz-split.yml\`.
+The first CI 42806264027 failed solely on an unresolved
+\`hartreeRadialLog\` namespace (its original job log has been read);
+the source was corrected by opening the original
+\`HBL.Modulation.AffineTail\` namespace, and a new source-audited run
+42806979073 was triggered on commit \`eb90a66d\`.
+As of this ledger synchronization, the replacement has **not** yet been
+accepted, and the original revised score is **11/13**.
