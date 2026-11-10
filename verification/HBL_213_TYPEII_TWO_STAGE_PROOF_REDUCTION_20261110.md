@@ -302,3 +302,111 @@ trap potentially produced by (J). It proves growing
 \(q\) and vanishing Type-I-normalized concentration.
 No additional helper Lean theorem, axiom or numbered paper
 environment is introduced merely for (J)–(L).
+
+
+## 7. A more viable nonresonant inverse: dual-Kato \(L_s^2\) smoothing rather than bare \(L_s^1\) integration
+
+**New, directly relevant external references (verified 10 November 2026).**
+Tobias Schmid, *Blow up dynamics for the 3D energy-critical nonlinear
+Schrödinger equation*, *Calculus of Variations and Partial Differential
+Equations* **65** (2026), article 69, published 16 February 2026,
+[DOI 10.1007/s00526-025-03240-x](https://doi.org/10.1007/s00526-025-03240-x),
+constructs genuine 3D energy-critical NLS single-bubble Type II solutions,
+via a highly developed KST/Perelman spectral parametrix. **His
+NLS rates are chosen in the approximate solution**: they cannot by
+themselves prove the distinct HBL goal of an emergent rate.
+
+Taegyu Kim, *Smooth radial quantized Type II blow-up for the
+three-dimensional energy-critical nonlinear Schrödinger equation*,
+[arXiv:2610.26127](https://arxiv.org/abs/2610.26127),
+submitted 19 October **2026**, is a **preprint**, not to be
+represented as a peer-reviewed top-journal article. Its abstract
+reports a forward modulation/energy construction and replaces an
+unavailable repulsivity argument by Kato smoothing and a global
+spacetime Morawetz estimate for the linearized flow. This is the
+specific part that may help HBL avoid its backward \(L_s^1\) deficit.
+
+**The actual Hartree linearization is genuinely nonlocal.** Define
+\(I_2 f=\kappa_{\rm H}(|x|^{-2}*f)\) and
+\(V_W=I_2(W^4)\) for the stationary real \(W\). For
+\(h=h_1+ih_2\), the real linearization is
+\[
+L_-h_2=-\Delta h_2-V_W W^2h_2,\qquad
+L_+h_1=-\Delta h_1-3V_W W^2h_1
+           -4W^3 I_2(W^3h_1).
+\]
+The time generator in the real coordinates is
+\(\mathcal H_{\rm H}=\left(\begin{smallmatrix}0&L_-\\-L_+&0\end{smallmatrix}\right)\).
+**Do not omit the final nonlocal integral operator in \(L_+\)**;
+replacing it by a local NLS potential would invalidate the argument.
+
+On a **genuinely constructed** nonresonant continuous spectral
+subspace, after retaining the true generalized threshold modes and
+unstable direction, the proposed new load-bearing target is a
+projected dual-Kato/limiting-absorption estimate for the **actual**
+Hartree propagator (including admissible moving modulation perturbations)
+of the form
+\[
+\boxed{
+\left\|
+ \int_s^\infty U_{\rm H}(s,\sigma)
+ P_{\rm nr} F(\sigma)\,d\sigma
+\right\|_{X_s}
+ \le C_{\rm Kato}
+ \left(\int_s^\infty\|F(\sigma)\|_{Y_\sigma}^2d\sigma\right)^{1/2}.
+}
+\tag{M}
+\]
+Here \(X_s,Y_s\) must be the explicitly derived physical
+weighted energy/source spaces, not freely chosen norm packets.
+Neither \(P_{\rm nr}\), the limiting-absorption estimate nor
+the nonautonomous flow needed for (M) is presently constructed for
+the original nonlocal Hartree Hamiltonian. The NLS references
+do **not** imply (M).
+
+**Why (M) is potentially decisive:** If the **full physical PDE**
+nonresonant forcing were genuinely bounded in \(Y_s\) by
+\(C_Fs^{-15/8}\) (currently known only for a **conditional static
+shell**, not yet the entire source), then
+\[
+\int_s^\infty (C_F\sigma^{-15/8})^2d\sigma
+=\frac4{11}C_F^2s^{-11/4},
+\qquad
+\left(\int_s^\infty (C_F\sigma^{-15/8})^2d\sigma\right)^{1/2}
+=\frac{2C_F}{\sqrt{11}}s^{-11/8}.
+\tag{N}
+\]
+This gains a full \(s^{-1/2}\) relative to the failed absolute
+\(s^{-7/8}\) estimate and, more importantly, would be
+\(s^{-1/4}\) smaller than the desired \(s^{-9/8}\) first correction:
+\[
+s^{-11/8}=s^{-1/4}s^{-9/8}.
+\]
+A successful **Hartree-specific** weighted Kato/Morawetz bound can
+therefore genuinely circumvent the obstruction identified in §4,
+without forcing the nonlinear physical source up to order \(>17/8\).
+It is *not* an automatic consequence of an \(L_s^2\) source bound:
+the boundedness of the **causal inverse** in (M), after extracting
+zero-resonant modes and accounting for the nonlocal kernel, must
+actually be proved.
+
+**Shortest recommended implementation order:**
+first establish the genuine Hartree \(L_\pm\) factorization and
+nonlocal spectral/threshold projection; next a resolvent or
+Kato smoothing bound on the projected continuous space; then
+the same-source four-region \(Y_s\)-norm control, followed by
+the nonlinear weighted fixed point. Keep the previously strict
+fixed-\(K_0\) spectral cancellation and three C¹ joins; use the
+original two-real-channel modulation equations for the emergent
+rate separately. Avoid reverting to a prescribed NLS-style
+blowup exponent.
+
+**Lean synchronization:** The existing original
+ActualHartreeShellDuhamelExponent.lean now includes one precise
+squared-time-tail integral declaration
+actual_Hartree_shell_squared_source_exact_L2_time_tail.
+Its dedicated six-target pinned trust-zero CI is enabled.
+A successful CI verifies (N)'s scalar power integral **only**.
+The analytic dual-Kato operator estimate (M) is still the real
+physical PDE obstacle; neither it nor original §2.13 may be counted
+from that auxiliary scalar proof.
