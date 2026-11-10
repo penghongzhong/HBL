@@ -6129,4 +6129,64 @@ uniform moving Kummer-basis derivative, the required weighted
 recurrence or the dynamically derived Type--II rate. The original
 section acceptance remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{Sharper moving-interface source-density factors from the true origin IVP.}
+The original normalized Kummer fundamental functions satisfy
+\[
+ X(r)=\frac{K.x(r)}{r},\qquad
+ Y(r)=\frac{K.y(r)}{r},\qquad
+ \left|W(r)^{-1}\right|=r^2,\qquad 0<r\le B.
+\]
+Under the actual regularized ODE bound
+\(\lVert K.x(r)\rVert+\lVert K.y(r)\rVert\le 2G\),
+the exact two Green source multipliers obey
+\[
+ \left|\frac{X(r)}{W(r)}\right|\le Gr,\qquad
+ \left|\frac{Y(r)}{W(r)}\right|\le Gr.
+\]
+The common weakened upper bound \(GB\) has been separately strictly
+accepted in CI \texttt{42732663207}, job \texttt{129554267366},
+artifact \texttt{13724284456}, including both exact Lean theorem
+types and permitted axiom audits.
+
+More sharply, the original regular Frobenius solution is
+\(X(r)=1+O(r^2)\).  If the frozen coefficient has budget \(D\ge0\)
+and its original normalized IVP has budget \(G\ge0\), the exact
+origin-ODE asymptotic estimate implies
+\[
+ \left|\frac{X(r)}{W(r)}\right|
+ \le \bigl(1+(D+1)GB^2\bigr)r^2,\qquad 0<r\le B.
+\]
+This \(r^2\) is a genuine *quadratic positive radius gain*
+on the singular/outgoing Green source density, and should not be
+confused with an inverse power of the moving left interface.
+For the physical moving slit
+\(I_{s,t}=[r_0(s),r_0(t)]\) with \(0<r\le R\), the exact mixed
+source/endpoint identity consequently has the conditional bound
+\[
+ \|\Delta_{s,t}A\|
+ \le \bigl(1+(D+1)GR^2\bigr)R^2 E\,
+        |t-s|\,|r_0(t)-r_0(s)|,
+\]
+provided the *same genuine Cramer-selected nonlocal Hartree source*
+has \(\|\partial_\tau F(\tau,r)\|\le E\) on the intervening
+time segment, with the original Riesz dominated-integral hypotheses.
+No independently specified positive-time source order is introduced.
+The two corresponding Lean targets have been submitted for separate
+strict verification in CI \texttt{42733766825} and
+\texttt{42733767288}; at this manuscript checkpoint they are
+\emph{pending, not accepted}. Both true Green coefficient
+time derivatives have also been composed into a common
+same-orbit source theorem under explicit original physical
+time regularity and geometry, with its independent
+CI \texttt{42732925914} pending strict acceptance.
+
+These bounds improve the moving-interface algebraic budget but
+neither provide the unproved time-derivative majorant from
+the full four-region PDE nor overcome the absolute-Duhamel
+\(s^{-7/8}\) obstruction. The projected time inverse, finite
+correction recurrence and dynamically selected Type--II rate
+remain to be established. Formal original acceptance is \(11/13\).
+
 \end{document}
