@@ -116,7 +116,6 @@ theorem actual_Hartree_true_moving_singular_Green_cross_Frobenius_one_inverse_ra
         ((1 + (D + 1) * G * R ^ 2) * x ^ 2) * (E / x) =
           (1 + (D + 1) * G * R ^ 2) * x * E := by
       field_simp [hxpos.ne']
-      ring
     have hXProd :
         ((1 + (D + 1) * G * R ^ 2) * x ^ 2) * (E / x) ≤
           (1 + (D + 1) * G * R ^ 2) * R * E := by
