@@ -7073,4 +7073,98 @@ four-region Hartree orbit. Extra Cramer/Green identities
 alone do not repair this deficit. Formal original acceptance
 remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Shorter Kummer proof spine: freeze one original basis and
+use the actual quadratic moving-spectrum cancellation.}
+The former main-chain presentation repeatedly differentiated
+an entire moving origin-normalized Kummer pair. This is
+unnecessary for the \emph{spatial spectral residual}:
+keep the original reference pair \(K_0\) at fixed real
+\((\mu_0,\vartheta_0)\), and put
+\[
+ \delta(s):=\operatorname{frozenZeroCoeff}
+    (\mu(s),\vartheta(s))
+   -\operatorname{frozenZeroCoeff}(\mu_0,\vartheta_0)
+   =(\vartheta(s)-\vartheta_0)
+       -i(\mu(s)-\mu_0).
+\]
+The original same-orbit Hartree source
+\(F_{\rm adj}\) is still the actual three-Riesz
+quartic forcing with its uniquely selected two
+real Cramer speeds. Let
+\[
+ u_0(s,\cdot)=\mathcal G_{K_0}[F_{\rm adj}(s);
+             \text{matched Cauchy data}],\qquad
+ u_1(s,\cdot)=\mathcal G_{K_0}[\delta(s)u_0(s);
+             0,0].
+\]
+The exact fixed-reference current-coefficient identity
+strictly checked by
+\texttt{actual\_Hartree\_plateau\_current\_moving\_spectrum\_exact\_quadratic\_source}
+(\texttt{CI 42565184656}, original job
+\texttt{128990057404}) establishes on the true
+inner plateau, after the original two Fredholm source
+channels have been included,
+\[
+ \boxed{\quad
+ \mathcal L_{\mu(s),\vartheta(s)}^{(a)}(u_0-u_1)
+      +\mathcal S_{\rm inner}
+    =-a(s)^{-2}\delta(s)u_1.
+ \quad}
+\]
+This is an \emph{exact} cancellation of the first-order
+spectral defect from the physical operator and source.
+The residual is quadratic in \(\delta\) after
+applying the existing original Volterra source bound,
+without differentiating a moving fundamental pair.
+
+The genuine spectral-corrected four-region field
+already has all three classical \(C^1\) interface
+joins strictly audited in
+\texttt{CI 42648994008}, original job
+\texttt{129269904089},
+theorem
+\texttt{actual\_Hartree\_spectral\_inner\_four\_piece\_three\_C1\_joins}.
+The nonlinear full-field PDE telescope is separately
+strict in \texttt{CI 42648496792}, original job
+\texttt{129268151514}; as before, its identity
+does \emph{not} supply a numerical time exponent.
+
+In this frozen-basis arrangement,
+\[
+ \delta_s=\vartheta_s-i\mu_s,\qquad
+ |\delta_s|\le|\vartheta_s|+|\mu_s|,
+\]
+so quantitative control of the moving coefficient
+requires the \emph{true projected phase and scale
+modulation fluxes}. Differentiating
+\(\mathcal G_{K_0}[\delta u_0]\) at fixed
+endpoints produces
+\(\mathcal G_{K_0}[\delta_su_0+\delta u_{0,s}]\);
+only the genuine moving endpoint terms then
+remain in addition, not the derivative of
+\(K_{\mu(s),\vartheta(s)}\).
+The moving-slit geometry and original Green-time
+interfaces have already been audited, but their
+full common-domain weighted bounds along the actual
+PDE orbit still require production. This is a
+\emph{strict shortening of the required Kummer
+main chain}, not an assertion that the entire
+nonlocal four-region time-dependent source has
+been closed.
+
+Consequently the revised §2.13 proof should
+take as its remaining single quantitative target:
+the same Hartree physical four-region residual and
+parameter difference after the above cancellation,
+including \(\delta_s\), the two Cramer source-time
+terms and the actual moving endpoint corrections,
+with a true gain sufficient for the nonresonant
+projected inverse. The source positivity/weighted
+order and its parameter Lipschitz are still
+\emph{unproved}; the formally accepted original
+tally remains \(11/13\).
+
 \end{document}
