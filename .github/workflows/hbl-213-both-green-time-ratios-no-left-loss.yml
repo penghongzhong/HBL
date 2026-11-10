@@ -72,10 +72,10 @@ jobs:
           import HBL.TypeIIDynamicSelection.ActualHartreeBothGreenTimeRatiosNoLeftLoss
           set_option pp.all true
           set_option pp.maxSteps 10000000
-                 #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_regular_Green_density_ratio_no_left_radius
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_regular_Green_density_ratio_no_left_radius
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_both_Green_density_ratios_no_left_radius
           set_option pp.all false in
-                    #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_regular_Green_density_ratio_no_left_radius
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_regular_Green_density_ratio_no_left_radius
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_both_Green_density_ratios_no_left_radius
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeBothGreenRatiosNoLeftLossAudit.lean > evidence/audit.log 2>&1
@@ -87,7 +87,7 @@ jobs:
           assert all(k in s for k in ['actual_Hartree_original_regular_Green_density_ratio_no_left_radius',goal]), 'missing precise theorem check'
           assert 'sorryAx' not in s and 'admit' not in s
           audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
-          assert len(audits)==2, f'expected one axiom report, got {len(audits)}'
+          assert len(audits)==2, f'expected two axiom reports, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
             names={v.strip() for v in report.split(',') if v.strip()}
