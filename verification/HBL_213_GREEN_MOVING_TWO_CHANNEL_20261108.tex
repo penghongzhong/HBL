@@ -9294,4 +9294,61 @@ See
 \texttt{verification/HBL\_213\_BACKWARD\_FLAT\_OVERLAP\_VOLterra\_PDE\_GRADIENT\_20261110.md}.
 The official acceptance remains \(11/13\).
 
+
+\paragraph{Moving-radius backward Volterra parameter estimate.}
+The fixed-radius estimate is not directly applicable to different
+physical interface radii \(L_j\). For the original source-selected
+differences \(e_j\) with
+\(\mathcal K_{a_j,Q_j}e_j=f_j\) and
+\(e_j(L_j)=e_j'(L_j)=0\), put
+\[
+ x=y/L_j,\quad E_j(x)=e_j(L_jx),\quad
+ \tau_j=L_j^2/a_j^2,\quad
+ G_j(x)=L_j^2f_j(L_jx),\qquad x\in I_*=[1/2,1].
+\]
+The actual pulled-back radial equation retains its
+imaginary drift and zero-order potential:
+\[
+ E_j''+(2/x+i\tau_jx/2)E_j'
+         +\tau_jQ_jE_j=G_j,\qquad
+ E_j(1)=E_j'(1)=0.
+\]
+Writing \(D=E_1-E_2\), we obtain the exact original-source
+coefficient difference
+\[
+ \mathscr K_{\tau_1,Q_1}D
+ =G_1-G_2-\tfrac{ix}{2}(\tau_1-\tau_2)E_2'
+      -(\tau_1Q_1-\tau_2Q_2)E_2.
+\]
+Let \(M_j=\exp(1+(|Q_j|+3/2)\tau_j/4)\) and
+\(C_j=1+M_j[8+(|Q_j|+2)\tau_j/2]\).
+The same backward-Volterra estimate as above gives
+\[
+ \begin{aligned}
+ \|E_1''-E_2''\|_{L^2(I_*)}\le C_1\bigg[
+ &\|G_1-G_2\|_{L^2(I_*)}\\
+ &+M_2\left(|\tau_1-\tau_2|
+     +\tfrac12|\tau_1Q_1-\tau_2Q_2|\right)
+     \|G_2\|_{L^2(I_*)}\bigg].
+ \end{aligned}
+\]
+This is a \emph{paper-level} estimate conditional
+on the genuine original-source equation. The critical
+moving source variation is not an external hypothesis:
+\[
+ \partial_\alpha[L(\alpha)^2f_\alpha(L(\alpha)x)]
+ =2LL_\alpha f_\alpha(Lx)
+  +L^2(\partial_\alpha f_\alpha)(Lx)
+  +L^2xL_\alpha(\partial_yf_\alpha)(Lx).
+\]
+The original nonlinear Hartree PDE must prove all three
+terms with their true four-region nonlocal interactions.
+The fixed-physical-radius operator-difference Lean CI
+is an auxiliary audit only; no complete moving-source
+Lipschitz, time-positive residual or strong orbit has
+been deduced. The explicit proof and domain change
+appear in
+\texttt{verification/HBL\_213\_BACKWARD\_FLAT\_OVERLAP\_VOLterra\_PDE\_GRADIENT\_20261110.md}.
+The revised original count remains \(11/13\).
+
 \end{document}
