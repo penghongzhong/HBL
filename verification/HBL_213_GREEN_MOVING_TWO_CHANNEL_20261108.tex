@@ -9441,4 +9441,49 @@ four-region orbit. This paper identity introduces
 no new axiom or original accepted environment;
 the count remains \(11/13\).
 
+
+\paragraph{A source-regular outer flat-cutoff alternative to curvature point traces.}
+The strictly verified quadratic outer repair is genuine
+but consumes \(w''(B)\), whose bound does not follow
+from the original weighted \(L^2\) source norm.
+A shorter \emph{alternative} leaves the actual
+same-source spectral Kummer solution \(w=u_0-u_1\)
+in place and multiplies it by the already verified
+\(C^\infty\) cutoff \(\chi\) supported strictly inside
+\((r_0,B)\), with \(\chi\equiv1\) near its left join
+and \(\chi\equiv0\) near its right join.
+For \(h=(B-r_0)/4\), \(r_*=r_0+h\), take
+\(\chi(r)=1-\operatorname{cutoff}((r-r_*)/h)\).
+The derivative support lies in
+\([r_0+2h,r_0+3h]\Subset(r_0,B)\),
+so the literal field \(\chi(y/a)w(y/a)\)
+joins smoothly to \(w(y/a)\) and zero
+without evaluating \(F(B)\).
+For \(\mathcal Kw=w''+Aw'+Qw=f\),
+\(A=2/r+ir/2\), \(f=F-\delta u_0\),
+the exact full original-Kummer commutator satisfies
+\[
+ \begin{aligned}
+ \mathcal C&=\mathcal K(\chi w)-\chi\mathcal Kw
+       =2\chi'w'+(\chi''+A\chi')w,\\
+ \mathcal C'&=2\chi'f+(3\chi''-A\chi')w'
+       +(\chi'''+A\chi''+A'\chi'-2Q\chi')w.
+ \end{aligned}
+\]
+Thus the commutator-gradient source budget requires
+only actual \(L^2\) norms of \(f,w,w'\),
+the geometric \(h^{-1},h^{-2},h^{-3}\)
+cutoff costs and the already verified \(C^3\)
+fixed cutoff, \emph{not} the unbounded \(F(B)\)
+point trace. A full explicit bound is recorded
+in \texttt{verification/HBL\_213\_SOURCE\_LOCKED\_OUTER\_FLAT\_CUTOFF\_NO\_POINT\_TRACE\_20261110.md}.
+The remaining derivative of \(\chi f\),
+the real nonlinear nonlocal source, moving
+parameters and the true time-positive PDE gain
+must still be proved. This is a paper-route
+revision, not an implemented replacement of
+the previously accepted Lean four-piece field,
+and gives no new original environment.
+Original count \(11/13\).
+
 \end{document}
