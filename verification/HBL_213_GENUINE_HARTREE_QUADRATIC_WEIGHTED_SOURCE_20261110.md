@@ -317,3 +317,56 @@ controlled in \(X\) and \(X\)-Lipschitz in \(\alpha\).
 Those physical source/selector/endpoint bounds, and
 the nonautonomous spectral inverse, remain missing.
 No new Lean or original-environment acceptance is claimed.
+
+
+## 6. Exact worst-shell obstruction: a quadratic source inequality is NOT a positive-time proof
+
+The spatial quadratic inequality (Q12) is useful only when the
+**actual weighted norm** \(U(s)+H(s)\) is small at a derived rate.
+A pointwise shell amplitude cannot be substituted for this norm.
+
+To see the scale issue with no Hartree modeling assumptions, take
+\(X(s)=s^{1/2}\), \(e(s)=s^{-9/8}\), a fixed nonzero smooth
+\(\phi\in C_c^\infty((1,2))\), and the actual radial shell function
+\[
+ u_s(r)=e(s)\phi(r/X(s)).
+\]
+The two norms in (Q4), by the exact substitution \(r=Xz\), satisfy
+\[
+ \begin{aligned}
+ \|u_s\|_{L^2(dr)}
+ &=e(s)X(s)^{1/2}\|\phi\|_{L^2(dz)}
+   =s^{-7/8}\|\phi\|_2,\\
+ \|(1+r^2)\partial_r u_s\|_{L^2(dr)}
+ &=e(s)X(s)^{-1/2}
+    \|(1+X(s)^2z^2)\phi'(z)\|_{L^2(dz)}\\
+ &\asymp e(s)X(s)^{3/2}
+   =s^{-3/8},
+ \end{aligned}\tag{Q19}
+\]
+for large \(s\) (the constants are positive because
+\(\phi'\not\equiv0\)).
+Therefore the generic quadratic right side in (Q12) is only
+\[
+ (U(s)+H(s))^2\asymp s^{-3/4},
+ \tag{Q20}
+\]
+far larger than the manuscript's desired source gain.
+This does **not** assert that the *true* corrected Hartree
+field attains this worst shell example or that the true
+nonlinear remainder cannot be smaller. It proves that
+*amplitude \(e=s^{-9/8}\) plus allowed radius \(X=s^{1/2}\)*
+alone is insufficient to use the new global weighted
+\(H^1(dr)\) quadratic bound as a \(s^{-9/4}\)
+source estimate. Any such promotion would require a
+PDE-produced derivative cancellation, a tighter physical
+moving-radius budget, the proper scale-normalized source
+space, or a genuinely dispersive inverse.
+
+The next original producer must therefore give **direct
+physical \(X\)-norm decay** of the same source-selected
+flat-overlap four-piece correction, with exact moving
+derivatives and all cross-interaction terms. The already
+strict-successful \(C^2\)/flat-overlap geometry and exact
+telescoping are prerequisites, not substitutes. Formal
+original acceptance is **11/13**.
