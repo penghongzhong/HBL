@@ -275,3 +275,66 @@ the unknown physical derivative of \(G_s\), and the actual
 growth rate of \(a(s)\) must be derived, not imposed.
 
 **Remaining acceptance: 11/13. No new strict Lean CI claimed.**
+
+
+## 6. No C² curvature budget follows from the existing weighted-L² source hypotheses
+
+The obstacle is not solely a missing Lean differentiability lemma:
+the **pointwise source trace \(F(B)\)** appearing in the C² curvature
+budget is not controlled by the previously accepted
+\(L^2_{7/4}\) (or any local bounded-weight \(L^2\)) assumption.
+
+Fix \(0<B<\mathrm{scale}\) away from the zero-radius singularity,
+and choose a smooth nonzero real bump
+\(\phi\in C_c^\infty(-1,1)\) with \(\phi(0)=1\).
+For \(0<\varepsilon\ll B\), set
+\[
+ F_\varepsilon(r)=\varepsilon^{-1/2}
+                     \phi((r-B)/\varepsilon).
+\]
+Because the HBL radial weights are uniformly equivalent to constants
+on any fixed annulus around \(B\),
+\[
+ \|F_\varepsilon\|_{L^2_{7/4}}
+   \le C_B \|\phi\|_{L^2(\mathbb R)},\qquad
+ |F_\varepsilon(B)|=\varepsilon^{-1/2}\to\infty,
+\tag{G10}
+\]
+and all \(F_\varepsilon\) are continuous and smooth. In the
+*already-proved true Kummer spectral-corrected differential equation*,
+\[
+ w''(B)
+ =F(B)-d\,w_1(B)-c_1(B)w'(B)
+       -(c_0+d)w(B),
+\quad c_1(B)=\mathrm{frozenFirstCoeff}(B),\
+c_0=\mathrm{frozenZeroCoeff}(\mu,\theta),
+\tag{G11}
+\]
+where \(w_1\) is the same genuine first spectral correction, and
+\(w,w_1\) are the actual Cramer/Green fields, not free coefficients.
+Thus any claimed bound for the quadratic repair
+\(\chi_B(y/a)\frac12(y/a-B)^2w''(B)\)
+**based solely** on \(\|F\|_{L^2_{7/4}}\) would require either
+a new pointwise source trace theorem or a demonstrable cancellation
+of the peak \(F(B)\) by the other source-dependent Cramer values.
+Neither is furnished by the old \(C^1\) or Volterra weighted
+value/derivative estimates.
+
+This does **not** assert \(w_\varepsilon''(B)\to\infty\) for
+every \(\varepsilon\)-dependent selected spectral parameter:
+proving that requires a uniform bound for all the other terms
+on the right-hand side of (G11) and the correct same-source selection.
+The rigorous obstruction already established by (G10) is that
+the required trace is **not** a consequence of the advertised
+current source regularity. The shortest legitimate fix is to
+extract a stronger \(W^{1,2}\) / physical PDE source-derivative
+estimate (which also supplies a trace locally), or to prove a
+special physical cancellation at the genuinely selected interface.
+Do not insert \(\|F(B)\|\lesssim\|F\|_{L^2_{7/4}}\) as an axiom
+or mistake a formal endpoint C² jet identity for a budget.
+
+**Source theorem:** \`actual_Hartree_matched_spectral_corrected_left_C1_and_exact_equation\`
+in \`ActualHartreeMatchedSpectralLeftC1Exact.lean\` supplies (G11);
+its strict historical successes remain auxiliary. No claim that
+the original four-region strong PDE residual is now in \(H^1\).
+The revised original count remains **11/13**.
