@@ -9859,4 +9859,45 @@ The estimate does not by itself give a positive-order
 residual or any part of a genuine PDE orbit.
 % END HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
 
+% HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900
+\medskip
+\noindent\textbf{Strict original-source inner/spectral curvature
+budget (10 November 2026).}
+The exact true two-channel Fredholm inner field $u$ and its
+Cramer-jet-matched, spectrally corrected original Kummer continuation $v$
+satisfy, on $0<L$, $0<a$, $L/a\le B<R_K$, and $2<R\le L$,
+\[
+ \|u''(L)-v''(L)\|
+ \le \mathcal B_{\mathrm{inner}}(\mu,\theta,a,R,F_+,F_-)
+       +a^{-2}|\delta|\,|u_0(L/a)|,
+\]
+provided that the literal source channels $F_\pm$ are continuous,
+belong to their original $7/4$-weighted Fredholm spaces, the
+original Kummer forcing is continuous on its prescribed open domain,
+and the exact same-source condition
+\[
+ a^{-2}F(L/a)+\mathcal S_{\mathrm{inner}}(L)=0
+\]
+holds.  The source equality has a separate true original Hartree
+plateau producer; the quantitative sizes, all four moving regions,
+and their material-time derivatives are \emph{not} inferred from this
+pointwise estimate.  In particular the spectral defect
+$a^{-2}\delta u_0(L/a)$ is \emph{first order} in $\delta$.
+
+The exact Lean declaration is
+\texttt{actual\_Hartree\_true\_inner\_spectral\_C2\_jump\_native\_shell\_budget}
+in \texttt{ActualHartreeInnerSpectralC2PlateauSourceLock.lean}.
+Independent strict CI \texttt{42854633900}, job
+\texttt{129964186672}, artifact \texttt{13782747879},
+was successful on 10 November 2026 (Lean 4.35.0-rc3,
+Mathlib \texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, \texttt{warningAsError},
+five exact theorem-type checks and five axiom reports, all with only
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}).
+This is an \emph{auxiliary} fixed-slice curvature bound and not
+an accepted §2.13 Hartree PDE orbit, time-positive nonlinear residual,
+finite profile recurrence or emergent Type-II rate.
+The original revised manuscript remains at \textbf{11/13}.
+% END HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900
+
 \end{document}
