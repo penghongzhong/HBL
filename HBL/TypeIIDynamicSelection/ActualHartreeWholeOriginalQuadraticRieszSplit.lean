@@ -21,7 +21,7 @@ set_option autoImplicit false
 open Set MeasureTheory
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Additivity of the actual radial inverse-square Hartree convolution.
 The integrability hypotheses refer to the real physical kernel. -/
