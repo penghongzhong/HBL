@@ -1,4 +1,7 @@
-% 2026-10-29 corrected main target: DYNAMICAL RATE SELECTION, not prescribed-rate existence.
+% 2026-11-10 revised main target: DYNAMICAL RATE SELECTION, no prescribed exponent.
+% Mathematical strengthening with a separate pointwise mu_s decay estimate
+% is deferred; the theorem still requires an emerged sharp power law.
+% This revision changes no underlying original-13 environment acceptance.
 % The former fixed nu=sqrt(2) proposal was rejected as changing the research question.
 % NOT YET PROVED; retain targettheorem rather than theorem.
 % Historical original acceptance 9/21 and all old strict Lean results remain unchanged.
@@ -35,14 +38,14 @@ $\gamma:[t_0,T)\to\mathbb R$，
  \qquad
  \mu(s)=\frac{2b(s)\mathfrak q(s)-1}{4}.
 \]
-则存在 $\delta\in(0,1)$、$C>0$ 及一个由此真实动力学产生的极限
+则存在一个由此真实 Hartree 调制动力学产生、而非预先指定的极限
 $\mu_\infty>9/16$，使
 \[
- \lim_{s\to\infty}\mu(s)=\mu_\infty,
- \qquad |\mu_s(s)|\le Cs^{-1-\delta},
- \qquad |\mu(s)-\mu_\infty|\le\frac C\delta s^{-\delta}
- \quad(s\gg1).
+ \lim_{s\to\infty}\mu(s)=\mu_\infty.
 \]
+该极限由实际方程的投影调制方程与时间积分控制导出；不把
+$|\mu_s|$ 的额外点态幂次衰减作为 II 型爆破解存在性或
+下面精确幂律渐近的定理结论。
 因此有一个由实际解确定、而非预先指定的集中指数
 \[
  a_\infty(u_0):=\frac12+2\mu_\infty>\frac12,
@@ -93,13 +96,16 @@ $\mu_\infty>9/16$，使
 % of the mu interval must be constructed from the ORIGINAL physical source.
 % None follows merely from these scalar identities.
 %
-% Stage II — retain the full original main-theorem claim above, including
-%   |mu_s| <= C s^(-1-delta) and emergent mu_infty > 9/16,
-% then use the already accepted kinematic clock algebra to obtain the sharp
+% Stage II — retain emergent mu_infty > 9/16 and the sharp physical
+% power law in the revised main theorem, without also imposing an
+% unnecessary pointwise mu_s decay as a separate theorem conclusion.
+% The original pointwise decay goal remains an optional strengthening.
+% Apply the verified kinematic clock algebra to obtain the sharp
 %   lambda(t)^(-1) = C_lambda (T-t)^(1/2+2mu_infty)(1+o(1)).
-% A log-weighted L1 bound on mu_s would suffice for the asymptotic factor,
-% but it does NOT establish the separately stated pointwise bound, and cannot
-% silently replace the latter without a transparent theorem revision.
+% A log-weighted L1 bound on mu_s suffices for the asymptotic factor;
+% this is a TRANSPARENT weakening of the former *additional* pointwise
+% claim, not a claim that any physical flux estimate is already proved.
+% Actual Hartree PDE must still yield this log-L1 drift and an invariant trap.
 %
 % The unproved physical inverse/energy step, rather than the number of Lean
 % helper environments, is the current load-bearing obstacle: for the
