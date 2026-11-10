@@ -62,6 +62,7 @@ theorem actual_Hartree_second_jet_three_piece_C2_interfaces
     (hasDerivAt_const b (0 : ℂ)) hvb hg2b hZero2
   have hNearA : full =ᶠ[𝓝 a] pieceA := by
     filter_upwards [Iio_mem_nhds hab] with y hy
+    change y < b at hy
     by_cases hya : y ≤ a
     · simp [full, pieceA, actualHartreeSecondJetThreePiece,
         actualHartreeSecondJetTwoPiece, hya]
@@ -70,13 +71,16 @@ theorem actual_Hartree_second_jet_three_piece_C2_interfaces
         actualHartreeSecondJetTwoPiece, hya, hyb]
   have hNearB : full =ᶠ[𝓝 b] pieceB := by
     filter_upwards [Ioi_mem_nhds hab] with y hy
+    change a < y at hy
     have hya : ¬ y ≤ a := not_le.mpr hy
     simp [full, pieceB, actualHartreeSecondJetThreePiece,
       actualHartreeSecondJetTwoPiece, hya]
   have hDerNearA : deriv full =ᶠ[𝓝 a] deriv pieceA := by
     filter_upwards [Iio_mem_nhds hab] with x hx
+    change x < b at hx
     have hLoc : full =ᶠ[𝓝 x] pieceA := by
       filter_upwards [Iio_mem_nhds hx] with y hy
+      change y < b at hy
       by_cases hya : y ≤ a
       · simp [full, pieceA, actualHartreeSecondJetThreePiece,
           actualHartreeSecondJetTwoPiece, hya]
@@ -86,8 +90,10 @@ theorem actual_Hartree_second_jet_three_piece_C2_interfaces
     exact hLoc.deriv_eq
   have hDerNearB : deriv full =ᶠ[𝓝 b] deriv pieceB := by
     filter_upwards [Ioi_mem_nhds hab] with x hx
+    change a < x at hx
     have hLoc : full =ᶠ[𝓝 x] pieceB := by
       filter_upwards [Ioi_mem_nhds hx] with y hy
+      change a < y at hy
       have hya : ¬ y ≤ a := not_le.mpr hy
       simp [full, pieceB, actualHartreeSecondJetThreePiece,
         actualHartreeSecondJetTwoPiece, hya]
