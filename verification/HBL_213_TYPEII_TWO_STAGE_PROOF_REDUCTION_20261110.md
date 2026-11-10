@@ -169,6 +169,31 @@ then this particular Duhamel norm closes when
 \(\theta>1/4\); currently the available theorem is a *conditional
 Green mixed-difference bound*, **not** this four-region estimate.
 
+### Why adding more finite-profile helper lemmas will not resolve 11/13
+
+An actual code audit of
+[ActualHartreePhysicalFiniteProfile.lean](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreePhysicalFiniteProfile.lean)
+shows that its theorem on finite termination takes a *pre-supplied*
+list of abstract regional \`ActualHartreeLayerPacket\` objects and
+assumes the step inequality
+\(\mathrm{weight}(j)+\kappa\le\mathrm{weight}(j+1)\).
+Its \`ActualHartreePacketCertified\` also contains the tautology
+\`Q.tangent = Q.tangent\`, not a physical threshold-tangent
+equation. Thus the accepted algebra of finite termination
+**does not construct** a single stage from the original nonlocal
+four-region Hartree PDE.
+
+This is the concrete point where many previously compiled
+lemmas cease to be load-bearing. Stop extending this
+conditional packet-consumer branch. The next proof must produce
+a source-faithful packet (or replace the packet recursion with
+one genuinely closed projected-energy bootstrap), including
+the same-source full PDE defect, exact charge/matching and a
+quantitative gain on the *actual* next residual. No percentage
+increase follows from another conditional finite-termination
+theorem.
+
+
 ## 5. Revised short dependency graph for ONE physical orbit
 
 ```text
