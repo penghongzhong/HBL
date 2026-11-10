@@ -2169,3 +2169,5 @@ The source-date/CI linkage is SHA-specific; this audit certifies the
 targets at their original commits, not a fresh full-HEAD Lean rebuild.
 All remain *auxiliary* for original retained revised §2.13 and the
 physical Type-II main theorem. Formal acceptance: **11/13**.
+
+Additional original ZIP audit: CI [42529092477](https://github.com/penghongzhong/HBL/actions/runs/42529092477), artifact **13637410229**, source commit `4976f32a95904452d3bec6ecd2b70d5bc0161992`, exact theorem `HBL.TypeIIDynamicSelection.actual_Hartree_spectral_corrected_physical_two_outer_C1_joins`: empty strict.log; audit.log prints precisely `[propext, Classical.choice, Quot.sound]`. This is also an auxiliary proof only, so the original revised count remains **11/13**.
