@@ -71,8 +71,14 @@ jobs:
           set_option pp.all true
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_remaining_time_from_two_channel_equations
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_remaining_time_from_two_channel_equations
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeCoarseTypeIIClockAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -81,9 +87,12 @@ jobs:
           s=Path('evidence/audit.log').read_text()
           goal='HBL.TypeIIDynamicSelection.actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap'
           assert goal in s, 'missing exact #check'
+          for target in ('HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_remaining_time_from_two_channel_equations',
+                         'HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation'):
+            assert target in s, f'missing required target {target}'
           assert 'sorryAx' not in s and 'admit' not in s
           audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
-          assert len(audits)==1, f'expected one axiom report, got {len(audits)}'
+          assert len(audits)==3, f'expected three axiom reports, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
             names={v.strip() for v in report.split(',') if v.strip()}
