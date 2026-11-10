@@ -222,3 +222,145 @@ strict Lean axioms remain only
 \`propext\`, \`Classical.choice\`, \`Quot.sound\`.
 Neither revised original §2.13 nor the Type-II
 main theorem is thereby accepted; **11/13**.
+
+
+## 6. Actual full original quartic Hartree nonlinearity: a no-radius-loss weighted radial gradient and two-field Lipschitz estimate
+
+The preceding fixed-bubble operator estimate can be used
+without **any** linearization: the nonlocal convolution
+in the actual physical Hartree PDE is the same original
+operator \(\mathcal I\), applied to the full quartic density
+rather than to a fixed \(W^3F\). This gives an
+unconditional **functional estimate** for the full nonlinearity
+whenever its explicit physical profile norms are finite.
+
+For a complex-valued radial profile \(V=V(r)\), define
+\[
+ \rho_V(r):=|V(r)|^4,\qquad
+ h_V(r):=|V(r)|^2V(r),\qquad
+ \mathcal N(V)(r)=\mathcal I(\rho_V)(r)\,h_V(r).
+\]
+Let \(m(r):=1+r^2\), \(w(r):=m(r)^{1/2}\). Define
+\[
+\begin{aligned}
+ P_V&:=\|\rho_V\|_{L^2(dr)},&
+ Q_V&:=\|w^3\rho_V\|_{L^2(dr)},\\
+ A_V&:=\|m h_V\|_{L^\infty(dr)},&
+ B_V&:=\|m h_V'\|_{L^\infty(dr)}.
+\end{aligned}
+\tag{N1}
+\]
+Here \(w^3\rho_V=(1+r^2)^{3/2}|V|^4\), and
+\(h_V'=|V|^2V'+2\mathrm{Re}(\bar V V')V\)
+for an absolutely continuous \(V\). All spaces are in
+**radial \(dr\) measure**, and no moving inner endpoint
+is hidden in the norms.
+
+For any radial density \(\rho\) such that
+\(w^3\rho\in L^2(dr)\), write
+\(\rho=W^3F\) with \(F=w^3\rho\). The **already proved**
+Hilbert--Schmidt formula gives
+\[
+ \|\mathcal I(\rho)\|_{L^2(dr)}
+ \le3\|w^3\rho\|_{L^2(dr)}.
+\tag{N2}
+\]
+Independently the \(A_2\)-Riesz result from §2 above gives
+\[
+ \|\partial_r\mathcal I(\rho)\|_{L^2(dr)}
+ \le6C_\omega\|\rho\|_{L^2(dr)}.
+\tag{N3}
+\]
+Apply the distributional product rule to
+\(\mathcal N(V)=\mathcal I(\rho_V)h_V\).
+The **complete** original quartic Hartree nonlinearity obeys
+\[
+ \boxed{
+ \begin{aligned}
+ \|m\,\mathcal N(V)\|_{L^2(dr)}
+       &\le 3 A_V Q_V,\\
+ \|m\,\partial_r\mathcal N(V)\|_{L^2(dr)}
+       &\le 6C_\omega A_VP_V+3B_VQ_V.
+ \end{aligned}}
+\tag{N4}
+\]
+These are full-nonlinearity, not Hessian-only,
+functional estimates. They do not assume an independent
+nonlocal derivative envelope: the full density and amplitude
+appear explicitly in their original PDE forms.
+
+More importantly, the exact nonlinear splitting
+\[
+ \mathcal N(V)-\mathcal N(Z)
+   =\mathcal I(\rho_V-\rho_Z)h_V+
+       \mathcal I(\rho_Z)(h_V-h_Z)
+\tag{N5}
+\]
+gives a true two-field, **source-exact** Lipschitz bound.
+Set
+\[
+\begin{aligned}
+ P_\Delta&=\|\rho_V-\rho_Z\|_2,&
+ Q_\Delta&=\|w^3(\rho_V-\rho_Z)\|_2,\\
+ A_\Delta&=\|m(h_V-h_Z)\|_\infty,&
+ B_\Delta&=\|m(h_V'-h_Z')\|_\infty .
+\end{aligned}
+\]
+Then
+\[
+ \boxed{\begin{aligned}
+ \|m[\mathcal N(V)-\mathcal N(Z)]\|_2
+   &\le3(A_VQ_\Delta+A_\Delta Q_Z),\\
+ \|m\partial_r[\mathcal N(V)-\mathcal N(Z)]\|_2
+   &\le 6C_\omega(A_VP_\Delta+A_\Delta P_Z)\\
+   &\qquad+3(B_VQ_\Delta+B_\Delta Q_Z).
+ \end{aligned}}
+ \tag{N6}
+\]
+For complex radial profiles no hidden gauge argument is
+needed: pointwise
+\[
+\begin{aligned}
+ |\rho_V-\rho_Z|
+  &\le4(|V|+|Z|)^3|V-Z|,\\
+ |h_V-h_Z|
+  &\le3(|V|+|Z|)^2|V-Z|,\\
+ |h_V'-h_Z'|
+  &\le3(|V|+|Z|)^2|V'-Z'|
+    +3(|V|+|Z|)(|V'|+|Z'|)|V-Z|.
+\end{aligned}
+\tag{N7}
+\]
+This converts every \(\Delta\)-norm in (N6) into
+**physical field and derivative** products,
+not a hypothesized Riesz envelope.
+All estimates hold initially for smooth radial fields,
+then under any stated norm-convergent approximation
+preserving the product bounds.
+
+**Precise gain and limitation.**
+(N4)–(N7) close the spatial derivative of the *genuine
+complete original quartic nonlocal Hartree map*
+and give an explicit weighted two-field Lipschitz
+estimate, at paper level, from actual profile norms.
+The operator constants \(3\) and \(6C_\omega\)
+are independent of all interface radii. The physical
+norms \(A_V,B_V,P_V,Q_V\), however, may themselves
+depend on the moving physical scales; their required
+smallness and time-order are **not** established here.
+Neither is the nonlocal commutator between separate
+physical regions, since (N4) is for the *assembled*
+profile and a full source difference must be taken
+against the correct selected PDE background.
+One must still prove: real \(C^2\) joins including
+the Fredholm inner one; the moving cutoff/parameter
+terms; the exact full-source time-decay and Lipschitz
+budgets for the selected same-PDE orbit; the
+projected actual Hartree inverse; and the nonlinear
+fixed point/Type-II modulation selection.
+
+**These are paper inequalities from a published
+weighted harmonic-analysis theorem, not Lean
+certificates, added axioms, positive-time residual
+claims, or original accepted environments.
+Official tally: 11/13.**
