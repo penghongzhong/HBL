@@ -338,3 +338,62 @@ in \`ActualHartreeMatchedSpectralLeftC1Exact.lean\` supplies (G11);
 its strict historical successes remain auxiliary. No claim that
 the original four-region strong PDE residual is now in \(H^1\).
 The revised original count remains **11/13**.
+
+
+## 7. A *derived*, radius-explicit source-trace bound when the genuine H¹ producer is available
+
+The spike obstruction in §6 does not mean the source curvature
+can never be estimated. It identifies exactly how the missing
+**physical derivative bound** must enter. Under the original
+strict Kummer geometry \(0<r_0<B<\mathrm{scale}\), put
+\[
+ \ell=\tfrac12\min\{B-r_0,\mathrm{scale}-B\}>0,
+ \qquad I_B=[B-\ell,B+\ell]\subset(r_0,\mathrm{scale}).
+\]
+For any actual absolutely continuous complex radial forcing
+\(F\in H^1(I_B)\), the one-dimensional fundamental theorem of
+calculus and averaging yield the **fully explicit**
+\[
+ \boxed{
+ |F(B)|\le(2\ell)^{-1/2}\|F\|_{L^2(I_B)}
+             +\sqrt{2\ell}\,\|F'\|_{L^2(I_B)}.
+ }\tag{G12}
+\]
+Indeed, average \(F(t)\) over \(t\in I_B\), write
+\(F(B)-F(t)=\int_t^B F'(\tau)d\tau\) and apply
+Cauchy--Schwarz; the \(L^2\) average contributes the
+first term. This is a *paper proof*, not a Lean-compiled theorem.
+
+Insert (G12) into the genuine corrected spectral Kummer equation
+\[
+ \begin{aligned}
+ |w''(B)| \le {}&
+ (2\ell)^{-1/2}\|F\|_{L^2(I_B)}
+  +\sqrt{2\ell}\,\|F'\|_{L^2(I_B)}
+  +|d|\,|w_1(B)|\\
+ &+|c_1(B)|\,|w'(B)|
+  +\bigl(|c_0|+|d|\bigr)|w(B)|.
+ \end{aligned}\tag{G13}
+\]
+Thus the source-trace/curvature budget is *not* a separate
+fundamental analytic gate **if and only if** one first derives
+the missing \(H^1\) physical source estimate and controls
+the **explicit margin cost** \(\ell^{-1/2}\) on the moving
+selected scales. In contrast, no version of (G13) with a
+constant independent of \(\ell\) follows from the old source
+\(L^2\) estimate. The same actual Kummer/Volterra Cramer
+value-slope budgets may bound \(w(B),w'(B),w_1(B)\) when
+their true hypotheses and parameters match, but that
+has not yet been composed into (G13) in Lean.
+
+**Practical branch choice:** if the physical residual already
+supplies \(H^1\) source regularity with a sufficiently wide
+Kummer margin, use the explicit C² repair and (G13);
+otherwise the flat interior-overlap scheme in
+\`HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md\`
+avoids sampling \(F(B)\), at the cost of explicit
+\((aB-L)^{-j}\) cutoff commutators. Both routes still
+require the full actual Hartree projected inverse,
+nonlocal interactions, and modulation/parameter bounds.
+This does not prove revised §2.13, and the
+**original acceptance remains 11/13**.
