@@ -549,3 +549,31 @@ estimates remain **open**. The exact derivation is in
 [\`HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md\`](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 This repairs the *proof architecture*, not the actual PDE orbit.
 **Original 13-environment acceptance remains 11/13.**
+
+
+## 11. Prefer source-faithful flat overlaps if the curvature point trace is too expensive
+
+The selected true Kummer equation has
+\(w''(B)=F(B)-dw_1(B)-c_1(B)w'(B)-(c_0+d)w(B)\).
+The existing \(L^2_{7/4}\) source class admits smooth fixed-annulus
+spikes with bounded norm and arbitrarily large \(F(B)\).
+Consequently a quadratic jet-matched repair is a \emph{valid formal}
+C² construction but has no uniform curvature budget without a
+stronger physical source trace or a special cancellation.
+
+The source-aligned alternative is the flat overlap:
+\(h=(aB-L)/8>0\),
+\(\eta(y)=\mathrm{cutoff}((y-L-h)/h)\),
+\(\chi(y)=1-\mathrm{cutoff}((y-aB+4h)/h)\),
+\(U=(1-\eta)u+\eta\chi v\), with unchanged genuine
+Hartree Fredholm inner \(u\) and corrected selected Kummer \(v\).
+This removes the point-jet obstruction by construction while
+displaying \(h^{-j}\) and moving-material commutators explicitly.
+It must still prove the actual complete nonlocal PDE source
+weighted radial \(H^1\) / smoothing-dual control and
+\(h^{-j}\) geometry, not simply rely on smooth cutoff algebra.
+See [exact overlap note](HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md).
+The coupled Hartree spectral adjoint Kato inverse remains an
+independent hard gate. None of these new notes implies a
+nonlinear orbit or a dynamically produced Type-II rate.
+**Strict original 13-environment count: 11/13**.
