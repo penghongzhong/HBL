@@ -3028,3 +3028,33 @@ as a combined second-derivative theorem, not an estimate of its
 time evolution and not a full Hartree residual positive
 time order. No new original paper environment; revised acceptance
 remains **11/13**.
+
+
+#### Independent original ZIP-byte check (CI 42824686940, artifact 13768893225)
+
+Downloaded the **actual** 17,092-byte ZIP evidence of
+CI **42824686940**; inspected \`build.log\`, \`strict.log\`,
+\`audit.log\`, \`compiler-version.txt\`,
+\`commit.txt\`, and the original source SHA-256 record.
+The build ended literally
+\`Built HBL.TypeIIDynamicSelection.ActualHartreeInnerSpectralC2PlateauSourceLock\`
+and \`Build completed successfully (4233 jobs)\`.
+\`strict.log\` is **zero bytes**.
+\`compiler-version.txt\` contains
+Lean **4.35.0-rc3** / compiler commit
+\`470d5ce1400764999581fd26d5d72b00d990b0f4\`;
+\`commit.txt\` is
+\`32580956d03ef2c892333acfb696be94cfa0b036\`.
+The *original audit.log*, independently parsed from the ZIP,
+has **exactly one** transitive \`#print axioms\` report
+for the exact theorem:
+\`[propext, Classical.choice, Quot.sound]\`.
+Neither \`sorryAx\` nor \`admit\` occurs in that output.
+The pinned \`lake-manifest.json\` entry at that SHA
+specifies Mathlib
+\`a98628e16c11f5167f16124105ddce53efa9bfe5\`,
+and the workflow rechecks this commit on the runner before
+\`--trust=0 -DwarningAsError=true\`.
+Thus this is **actual strict verified Lean source cancellation**,
+not merely a green badge. It remains **auxiliary**, not original §2.13.
+The original revised acceptance remains **11/13**.
