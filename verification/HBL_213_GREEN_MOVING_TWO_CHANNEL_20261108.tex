@@ -7477,4 +7477,69 @@ homogeneous Kato smoothing, plus parameter Lipschitz and
 a genuine PDE orbit. No original numbered environment or
 strict Lean acceptance has been added; the count is \(11/13\).
 
+
+\paragraph{No nonlocal-radius loss in the exact radial Hessian dual norm.}
+The preceding sufficient source criterion admits an explicit reduction.
+The stationary normalization at the origin gives
+\[
+3=-\Delta W(0)=\kappa_{\mathrm H}
+  \int_{\mathbb R^3}|y|^{-2}W(y)^4\,dy
+ =\pi^2\kappa_{\mathrm H},
+ \qquad \kappa_{\mathrm H}=3/\pi^2.
+\]
+For a real radial test source \(F\), exact angular integration
+and the variable \(t=r/s\) give
+\[
+\mathcal I(W^3F)(r)
+ =\int_0^\infty K(r,s)F(s)\,ds,\quad
+K(r,s)=2\pi\kappa_{\mathrm H}W(s)^3
+    \frac{s}{r}\log\frac{r+s}{|r-s|}.
+\]
+The substitutions \(t=\tanh u\) below \(1\) and
+\(t=\coth u\) above \(1\) yield
+\[
+\int_0^\infty\left[\frac1t
+  \log\frac{1+t}{|1-t|}\right]^2dt
+ =4\int_0^\infty u^2
+   (\sinh^{-2}u+\cosh^{-2}u)\,du
+ =4\bigl(\zeta(2)+\eta(2)\bigr)=\pi^2.
+\]
+Since \(\int_0^\infty s(1+s^2)^{-3}ds=1/4\),
+\[
+\|K\|_{L^2(dr\,ds)}^2
+ =(2\pi\kappa_{\mathrm H})^2
+   \frac14\pi^2=9,\qquad
+\|\mathcal I(W^3F)\|_{L^2(dr)}
+ \le3\|F\|_{L^2(dr)}.
+\]
+Here \(dr\), not \(r^2dr\), is the measure in the
+Morawetz-reduced radial norm, and \(3\) is a Hilbert--Schmidt
+upper bound, not the exact operator norm.
+The elementary bounds
+\[
+\langle r\rangle r\le\langle r\rangle^2,\quad
+\langle r\rangle^2rW^4\le\tfrac12,\quad
+\langle r\rangle^2rW^3\le1
+\]
+make both explicit dual source norms depend only on one
+weighted derivative and the radial \(L^2\)-size:
+\[
+\begin{aligned}
+\mathcal D_-(F)&\le
+ 2\|\langle r\rangle^2F'\|_{L^2(dr)}
+   +\tfrac32\|F\|_{L^2(dr)},\\
+\mathcal D_+(F)&\le
+ 2\|\langle r\rangle^2F'\|_{L^2(dr)}
+   +\tfrac{33}2\|F\|_{L^2(dr)}.
+\end{aligned}
+\]
+This is a \emph{paper-level exact radial kernel computation};
+it introduces no new Lean declaration or PDE estimate.
+The decisive still unproved source step is a genuine
+\(O(s^{-15/8})\) bound on these norms for the
+\emph{projected, moving, full four-region Hartree residual}.
+The separate full coupled Hartree homogeneous adjoint smoothing,
+moving-parameter Lipschitz and strong orbit remain missing.
+The original revised count is \(11/13\).
+
 \end{document}
