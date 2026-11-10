@@ -303,3 +303,103 @@ terms; the homogeneous-adjoint Hartree Kato inverse,
 actual orbit and dynamically selected blowup rate
 remain unproved. No additional Lean axiom or original
 13-environment acceptance is introduced.
+
+
+## 6. The entire **nonlinear** source estimate is exact at every moving bubble scale
+
+This is a useful difference from applying a fixed-bubble result at a
+wrong physical radius. For arbitrary \(\lambda>0\), let
+\[
+ W_\lambda(r)=\lambda^{-1/2}W(r/\lambda),\quad
+ u_\lambda(r)=\lambda^{-1/2}u(r/\lambda),\quad
+ V_\lambda=W_\lambda+u_\lambda .
+\]
+Because the **original** cubic-quartic Riesz nonlinearity is
+energy-critical in \(3D\),
+\[
+ \boxed{\quad
+ \mathcal N_{\rm H}(V_\lambda)(\lambda \rho)
+   =\lambda^{-5/2}\mathcal N_{\rm H}(W+u)(\rho).
+ \quad}\tag{N19}
+\]
+Indeed, the complete convolution obeys
+\[
+ \mathcal I(|V_\lambda|^4)(\lambda\rho)
+ =\lambda^{-1}\mathcal I(|W+u|^4)(\rho)
+\]
+(the volume/kernel/density factors are
+\(\lambda^3\lambda^{-2}\lambda^{-2}\)), while the
+complex cubic multiplier \(Q(V_\lambda)\) contributes
+\(\lambda^{-3/2}\).
+No local-NLS approximation or independent nonlocal
+source term has been substituted.
+
+Define the **true physical** norms
+\[
+ U_\lambda=\|u_\lambda\|_{L^2(dr)},\qquad
+ H_\lambda=\|(\lambda^2+r^2)\partial_r u_\lambda\|_{L^2(dr)}.
+\]
+The exact change of variables gives
+\[
+ U_\lambda=U,\quad H_\lambda=\lambda H,
+ \tag{N20}
+\]
+and, by differentiating (N19),
+\[
+ \begin{aligned}
+ &\|\mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)\|_{L^2(dr)}
+   =\lambda^{-2}
+    \|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)\|_{L^2(d\rho)},\\
+ &\|(\lambda^2+r^2)\partial_r[
+   \mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)]\|_{L^2(dr)}
+   =\lambda^{-1}
+    \|(1+\rho^2)\partial_\rho[
+      \mathcal N_{\rm H}(W+u)
+      -\mathcal N_{\rm H}(W)]\|_{L^2(d\rho)} .
+ \end{aligned}\tag{N21}
+\]
+Introduce \(h=H_\lambda/\lambda\),
+\(k=1+\sqrt{\pi/2}\,h\), and
+\(a_*=(12/\pi)k^3(2\sqrt\pi\,h+\sqrt{3\pi}\,U_\lambda)\).
+In the same exact physical norm as (N21), the
+fully derived original nonlinear Hartree estimate is
+\[
+ \boxed{\begin{aligned}
+ \|\mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)\|_{L^2(dr)}
+ &\le\lambda^{-2}\left[
+ a_* k^2(\sqrt{\pi/2}+U_\lambda)
+ +9k^2U_\lambda\right],\\
+ \|(\lambda^2+r^2)\partial_r[
+   \mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)]\|_{L^2(dr)}
+ &\le\lambda^{-1}\Big[
+ (24C_{\rm A2}k^6+9k^2+18k)U_\lambda+9k^2h\\
+ &\hspace{1.9cm}+
+ a_*(3\sqrt\pi/4+3k^2h+6kU_\lambda)\Big].
+ \end{aligned}}\tag{N22}
+\]
+This holds for **every** positive \(\lambda\), with
+no independently postulated \(u\)-envelope, derivative
+source norm, modulation path, or blowup rate. Conversely,
+for an arbitrary true moving correction
+\(u_{\rm phys}(s,r)\), define the normalized
+\(u(s,\rho)=\sqrt{\lambda(s)}
+u_{\rm phys}(s,\lambda(s)\rho)\);
+(N22) then applies at each \(s\) **if** its physical
+two norms are finite, without presupposing how the PDE
+selects \(\lambda(s)\).
+
+The estimate precisely fixes the scale factors
+\(\lambda^{-2}\) and \(\lambda^{-1}\) that must enter
+the **actual PDE source budget**. They are neither
+positive-time gains nor proof of a nonlinear orbit:
+the original modulation law and physical residual
+must control \(U_\lambda(s)\), \(H_\lambda(s)\), and
+their parameter/time derivatives in the correct
+spaces. The full moving-cutoff Laplacian and the
+real-Hartree linearized matrix resolvent remain
+separately unclosed. Original **11/13** unchanged;
+this is paper analysis, not a new Lean CI or axiom.
