@@ -153,7 +153,6 @@ theorem actual_Hartree_dynamic_terminal_clock_local_conservation
     (actual_Hartree_dynamic_remaining_time_from_two_channel_equations
       q ell mu s hqpos hq hell)
   convert h using 1
-  funext t
-  rfl
+  ring
 
 end HBL.TypeIIDynamicSelection
