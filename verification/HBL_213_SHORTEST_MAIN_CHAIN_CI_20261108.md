@@ -2483,3 +2483,36 @@ The full two displayed inequalities are in
 No scale-growth law, positive time order or
 true PDE orbit has been assumed or established.
 The strict original **11/13** count remains unchanged.
+
+
+### 10 November — full original *two-field* nonlocal quartic Hartree source Lipschitz (paper-level)
+
+The previous global full original quartic nonlinear \(H^1\) source
+bound now has a **genuine two-field difference version**:
+\(D=\|u-v\|_2\), \(J=\|(1+r²)(u'-v')\|_2\),
+\(K=1+\sqrt{\pi/2}\max(H_u,H_v)\);
+\(A_{uv}=(12/\pi)K³(2\sqrt\pi J+\sqrt{3\pi}D)\),
+\(A_v=(12/\pi)K³(2\sqrt\pi H_v+\sqrt{3\pi}U_v)\),
+\(B_{uv}=3K²+3\sqrt\pi K(\sqrt\pi/2+H_v)\).
+The *actual nonlocal* density subtraction gives
+\[
+ \begin{aligned}
+ &\|(1+r²)\partial_r[\mathcal N_H(W+u)-\mathcal N_H(W+v)]\|_2\\
+ &\quad\le(24C_{A2}K^6+9K²)D
+ +3K² A_{uv}(\sqrt\pi/4+H_u)
+ +[(3+A_v)B_{uv}+36\sqrt\pi C_{A2}K^5U_v]J,\\
+ &\|\mathcal N_H(W+u)-\mathcal N_H(W+v)\|_2
+ \le A_{uv}K²(\sqrt{\pi/2}+U_u)
+      +3(3+A_v)K²D .
+ \end{aligned}
+\]
+Hence local Lipschitz of the genuine full inverse-square quartic Hartree
+map in the **physical radial correction \(L²+H^1_{(1+r²)}\)** norm
+without a free Riesz-gradient or full-source Lipschitz hypothesis.
+Full proof:
+[HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md](HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md).
+This is **not** the missing Lipschitz dependence
+\(\alpha\mapsto u_\alpha\) of the constructed, selected
+moving physical PDE orbit, and not a time-positive complete residual.
+No new strict Lean CI (external published \(A_2\) input),
+no original §2.13/full theorem acceptance; **11/13**.
