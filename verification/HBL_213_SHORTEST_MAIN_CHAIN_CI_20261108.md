@@ -1635,3 +1635,54 @@ four-region PDE positive-time remainder, projected time inverse,
 finite-layer recursion or dynamic Type-II blowup rate.
 
 **Formal revised original environment count remains 11/13 (84.62%).**
+
+
+### 2026-11-10 — radius-weighted true Cramer source to the original moving Green slit
+
+First actual strict Success for ORIGINAL nonlocal Riesz derivative rows:
+[CI 42741408285](https://github.com/penghongzhong/HBL/actions/runs/42741408285),
+original job **129583087521**, original artifact **13729787564**,
+pinned Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
+Lean 4.35.0-rc3, trust=0, warning-as-error, both exact target #check
+and #print axioms audited against precisely allowed
+Classical.choice / Quot.sound / propext.
+**Only two auxiliary analysis interfaces**, not original environment closure.
+Replaces original failed run 42740229567 with corrected namespace.
+
+The original real-Cramer selected source-time inequality, rewritten
+in exactly radius-weighted form, is
+\[
+ r\|D\|\le r\|\dot F_0\|
+   +(1024C_s/B^2)\|\dot{\mathfrak Z}
+        +p_b\dot{\mathfrak b}+p_\omega\dot{\mathfrak w}\|
+   +|p_b|r\|\dot S_b\|+|p_\omega|r\|\dot S_\omega\|.
+\]
+The new theorem
+actual_Hartree_true_moving_selected_source_radius_weighted_time_budget
+in ActualHartreeSelectedSourceWeightedTimeBudget.lean has strict
+[CI 42742271094](https://github.com/penghongzhong/HBL/actions/runs/42742271094)
+(**pending**). It derives both real speed derivatives rather than
+assuming a differentiated independent selected source.
+
+The true original selected physical Hartree Green moving-slit
+mixed-difference criterion then gives
+\[
+ \|\Delta A_{s,t}\|
+  \le C_{\rm Frob}(R)R E |t-s|\,|r_0(t)-r_0(s)|
+\]
+under the physically meaningful time-source budget
+\(r\|\partial_tF_{\rm adj}\|\le E\), versus the existing conditional
+\(R^2 E\) when an UNIFORM derivative bound is available, and
+NO \(R\) gain for a possible source derivative \(E/r^2\).
+The original genuine same-Cramer, same-fourth-power Hartree source
+theorem
+actual_Hartree_true_moving_singular_Green_cross_Frobenius_one_inverse_radius
+in ActualHartreeTrueMovingGreenOneRadiusGain.lean was submitted in
+[CI 42742808852](https://github.com/penghongzhong/HBL/actions/runs/42742808852)
+(**pending**).
+
+The central physical producer for the time rate \(E(s)\) in the
+actual four-piece PDE is still absent. No original revised environment
+closed: **11/13**. The original nonlocal weighted PDE residual,
+parameter Lipschitz, finite profile recursion and dynamic Type-II
+blowup-rate theorem remain OPEN.
