@@ -53,7 +53,7 @@ theorem actual_Hartree_C2_repair_polynomial_hasDerivAt
       simp only [Pi.pow_apply]
       push_cast
       ring
-    · norm_num <;> ring
+    · norm_num
   convert ((hlin.add hquad).const_add p) using 1
   ext x
   simp only [Pi.add_apply]
