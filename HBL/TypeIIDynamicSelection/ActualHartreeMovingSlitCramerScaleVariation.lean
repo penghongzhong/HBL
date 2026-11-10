@@ -104,14 +104,15 @@ theorem actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
   have hSlow : 1 < actualHartreeSlowInnerRadius (ell s) := by
     unfold actualHartreeSlowInnerRadius
     exact Real.one_lt_rpow_of_pos_of_lt_one_of_neg
-      he heSmall (by norm_num : (-1 / 16 : ℝ) < 0)
+      he heSmall (by norm_num : (-(1 / 16 : ℝ)) < 0)
   have hLc : ContinuousAt L s := by
     dsimp [L]
     exact continuousAt_const.div hCa (ne_of_gt ha)
   have hSlowC :
       ContinuousAt (fun u => actualHartreeSlowInnerRadius (ell u)) s := by
-    change ContinuousAt (fun u => (ell u) ^ (-1 / 16 : ℝ)) s
-    exact hCe.rpow_const (Or.inl (ne_of_gt he))
+    simpa only [actualHartreeSlowInnerRadius, Function.comp_def] using
+      (hCe.rpow_const (Or.inl (ne_of_gt he)) :
+        ContinuousAt (fun u => (ell u) ^ (-(1 / 16 : ℝ))) s)
   have hRc : ContinuousAt R s := by
     dsimp [R]
     exact hSlowC.div hCa (ne_of_gt ha)
@@ -143,7 +144,7 @@ theorem actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
   have hmx : m ≤ x :=
     (le_min (le_of_lt ht.2.1) (le_of_lt hmR)).trans hx.1.le
   have hxB : x ≤ B :=
-    hx.2.le.trans (max_le (le_of_lt ht.2.2) (le_of_lt hRB))
+    hx.2.trans (max_le (le_of_lt ht.2.2) (le_of_lt hRB))
   exact ⟨(le_of_lt hτ.1).trans hmx, hxB⟩
 
 
