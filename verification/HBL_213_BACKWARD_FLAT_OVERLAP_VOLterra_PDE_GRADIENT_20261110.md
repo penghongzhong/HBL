@@ -361,3 +361,136 @@ new unverified hypothesis. This is **not** the
 global four-region PDE parameter-Lipschitz or a
 new strict Lean theorem. Formal original count
 remains **11/13**.
+
+
+## 6. Moving-radius parameter transport: normalize the genuine Cauchy points BEFORE comparing
+
+The fixed-\(L\) equation (V15)–(V18) does **not** compare
+two parameter values whose actual slow inner radii differ.
+There is nevertheless an exact *source-faithful* repair of
+that domain mismatch, with no new abstract solution operator.
+
+Let \(L_j>4\), \(a_j>0\), \(Q_j\in\mathbb C\),
+\(I_j=[L_j/2,L_j]\), and suppose the **actual**
+Fredholm–Kummer field differences \(e_j\in H^2(I_j)\)
+satisfy the physical original equation
+\[
+ \mathcal K_{a_j,Q_j}e_j=f_j\in L^2(I_j),\qquad
+ e_j(L_j)=e_j'(L_j)=0,\quad
+ \mathcal K_{a,Q}
+ =\partial_y^2+
+   (2/y+iy/(2a^2))\partial_y+Q/a^2.
+\tag{V19}
+\]
+The \(f_j\) are precisely the physical same-source defects
+from (V2), evaluated at the respective parameter values;
+there is no newly assumed forcing norm.
+
+Define the **exact moving Cauchy coordinate**
+\[
+ x=y/L_j\in I_\ast=[1/2,1],\qquad
+ E_j(x)=e_j(L_jx),\quad
+ \tau_j=L_j^2/a_j^2,\quad
+ G_j(x)=L_j^2 f_j(L_jx).
+\tag{V20}
+\]
+The ordinary chain rule gives
+\[
+ \boxed{\;
+ E_j''+\left(\frac2x+\frac{i\tau_j x}2\right)E_j'
+       +\tau_jQ_jE_j=G_j,\qquad
+ E_j(1)=E_j'(1)=0.
+ \;}
+\tag{V21}
+\]
+The same transform \(H_j=xE_j\) now gives
+\[
+ H_j''+\frac{i\tau_jx}2H_j'
+ +\tau_j(Q_j-i/2)H_j=xG_j.
+\tag{V22}
+\]
+For the two **actual** normalized fields \(D=E_1-E_2\)
+the difference equation, with no lost moving-interface
+boundary term, is exactly
+\[
+ \boxed{\quad
+ \begin{aligned}
+ \mathscr K_{\tau_1,Q_1}D={}&G_1-G_2
+ -\frac{ix}{2}(\tau_1-\tau_2)E_2'\\
+ &-(\tau_1Q_1-\tau_2Q_2)E_2,\qquad
+ D(1)=D'(1)=0,
+ \end{aligned}\quad}
+\tag{V23}
+\]
+where
+\(\mathscr K_{\tau,Q}
+ =\partial_x^2+(2/x+i\tau x/2)\partial_x+\tau Q\).
+In particular, variations of the true Fredholm
+radius enter only through the explicit
+\(\tau_j=L_j^2/a_j^2\) coefficients and the
+**genuinely transported** physical sources \(G_j\);
+the zero Cauchy traces remain exactly zero at \(x=1\).
+
+The same already derived Volterra bound (V7)–(V9),
+now on \(I_\ast\), gives
+\[
+ \begin{gathered}
+ M_j=\exp\{1+(|Q_j|+3/2)\tau_j/4\},\\
+ C_j=1+M_j[8+(|Q_j|+2)\tau_j/2],\\
+ \|E_2'\|_{L^2(I_\ast)}\le2M_2\|G_2\|_2,\qquad
+ \|E_2\|_2\le\tfrac12M_2\|G_2\|_2,
+ \end{gathered}
+\tag{V24}
+\]
+and hence the **full true moving-radius coefficient budget**
+\[
+ \boxed{\begin{aligned}
+ \|E_1''-E_2''\|_{L^2(I_\ast)}
+ \le C_1\Big[&
+ \|G_1-G_2\|_2\\
+ &+M_2\big(
+   |\tau_1-\tau_2|+
+   \tfrac12|\tau_1Q_1-\tau_2Q_2|
+  \big)\|G_2\|_2\Big].
+ \end{aligned}}
+\tag{V25}
+\]
+Here \(C_1\) denotes the explicit \(C_j\) at \(j=1\),
+**not** a cutoff derivative constant. The physical
+rescaling gives exactly
+\(\|G_j\|_{L^2(I_\ast)}
+ =L_j^{3/2}\|f_j\|_{L^2(I_j)}\) and
+\(\|E_j''\|_{L^2(I_\ast)}
+ =L_j^{3/2}\|e_j''\|_{L^2(I_j)}\).
+No identification between \(I_1\) and \(I_2\)
+was made before their exact pullbacks.
+
+For a smooth real parameter \(\alpha\), the remaining
+*source* transport is also explicit:
+\[
+ \boxed{\;
+ \partial_\alpha G_\alpha(x)
+ =2L L_\alpha f_\alpha(Lx)
+ +L^2(\partial_\alpha f_\alpha)(Lx)
+ +L^2 x L_\alpha(\partial_y f_\alpha)(Lx).
+ \;}
+\tag{V26}
+\]
+Thus the **remaining original-PDE parameter Lipschitz
+producer is sharply identified:** the three source
+terms in (V26), including the local derivative of the
+full actual Hartree nonlocal source, and the
+\(L_\alpha,a_\alpha,Q_\alpha\) variation must be
+estimated using the real modulation equations and
+the true moving four-region profiles. It cannot be
+replaced by a free Lipschitz assumption on \(G_j\).
+
+(V19)–(V26) are **paper-level conditional-on-the-actual-source
+identities and quantitative Volterra bounds**; they do
+not construct the original Hartree physical PDE orbit,
+give a time-positive residual, or replace the projected
+Hartree dispersive inverse. The coefficient identities
+are not yet separately audited in Lean. The source
+regularity for (V26), the global four-region nonlinear
+terms, the spectral inverse and modulation selection
+remain **open**. Revised original count: **11/13**.
