@@ -149,3 +149,74 @@ Thus (CJ) yields the completely source-faithful bound
 The right side is not an independently postulated curvature envelope: both \(\mathcal B_{\rm inner}\) and the source equality are present as proven **producers** in the repository. To instantiate them together one must identify \(F_\pm\) exactly with the *same* physical transmission and real speed channels and confirm their continuity and weighted membership for the actual selected PDE orbit. The size of their actual weighted norms and the spectral factor \(a^{-2}\delta u_0(L/a)\) along that orbit remains unproved. The condition \(R>2\), \(R\le L\) is necessary for directly invoking the existing shell estimate; do not quietly use it for \(L\le 2\).
 
 Inserting (CB) into (LB) quantifies the precise source-size and patch-width budget. Note that (LB) is a **lower** bound on the actual local Kummer patch derivative, while (CB) is an **upper** bound on \(|\Delta_2|\): one cannot combine the two to infer decay of the entire nonlinear residual without an upper bound on the total patch source and its nonlocal interactions.
+
+
+<!-- HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900 -->
+## 7. Strictly audited true inner/spectral C² shell budget (10 November 2026)
+
+The fifth exact original-source curvature-budget theorem is **now strictly
+accepted as an auxiliary Lean declaration**, not as the retained original
+§2.13 environment:
+
+- [GitHub Actions 42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900):
+  **Success**, completed 2026-11-10 16:40:02 UTC; original job
+  **129964186672**, strict-evidence artifact **13782747879**;
+  audited source commit `24eba94fb9fa2e05d5bf303fc5b910e8049b87c4`.
+- The original job log checks exact **five** `#check @...` types and
+  **five** `#print axioms` reports, with Lean **4.35.0-rc3**,
+  Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+  `lake env lean --trust=0 -DwarningAsError=true`.
+  Every theorem's full transitive axiom list is exactly
+  `[propext, Classical.choice, Quot.sound]`; the guard excludes
+  `sorryAx`/`admit` and tests the exact number of reports.
+
+The newly audited fifth declaration is
+`HBL.TypeIIDynamicSelection.actual_Hartree_true_inner_spectral_C2_jump_native_shell_budget`.
+Writing `u` for the actual two-channel Fredholm inner field, `v`
+for its Cramer-jet-matched spectrally corrected original Kummer outer
+field, `u_0` for the original matched Green field, it proves
+[
+\left\|u''(L)-v''(L)\right\|
+\le \mathcal B_{\mathrm{inner}}(\mu,\theta,a,R,F_+,F_-)
+ +a^{-2}|\delta|\,|u_0(L/a)|.
+]
+The exact Lean theorem requires `0<L`, `0<a`,
+`L/a ≤ B < scale`, `2<R≤L`, continuity and `7/4`-weighted
+membership of both **literal** inner source channels and, crucially,
+**the explicit source-identity hypothesis**
+[
+  a^{-2}F(L/a)+S_{\mathrm{inner}}(L)=0.
+]
+The identical physical-source identity is separately **proved**
+for the genuinely specialized Hartree plateau by
+`actual_Hartree_moment_locked_plateau_scaled_source`;
+this fifth theorem has **not** automatically specialized all its
+continuity, weighted-domain and scale assumptions to a constructed
+physical trajectory. Neither norm smallness nor the time exponent is
+part of its conclusion.
+
+The first four audited declarations in the same job are the
+original-plateau spectral-source cancellation, exact local C¹
+curvature/source-jump identity, spectral curvature discrepancy algebra,
+and the real inner/spectral C¹-jump instantiation. All five are
+auxiliary and **do not** prove an actual C²-repaired *four-region*
+Hartree residual gain or a dynamically selected blowup rate.
+
+For clarity, the predecessor runs 42531033761/768 and
+42531467165/166 **failed** (actual compiler type mismatch at
+`ActualHartreeSpectralCorrectedFourPieceThreeC1.lean:98:4`);
+the corrected **later** C¹ workflows passed as runs
+[42648496754](https://github.com/penghongzhong/HBL/actions/runs/42648496754)
+and [42648496870](https://github.com/penghongzhong/HBL/actions/runs/42648496870).
+The nonlinear spectral four-piece *telescoping identity* also strictly
+passed [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509),
+job **128902012127**, with the permitted three-axiom audit.
+It is not a signed estimate of positive time order.
+
+**Original manuscript environment count: 11/13 (84.62%)**.
+Unproved: same-orbit quantitative source norm along a constructed
+moving Hartree flow, C² patch material-time and all nonlocal cross terms,
+the projected nonresonant inverse / energy estimate resolving the
+one-quarter-power Duhamel deficit, original finite recurrence, and the
+PDE-selected modulation flux and blowup rate.
+<!-- END HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900 -->
