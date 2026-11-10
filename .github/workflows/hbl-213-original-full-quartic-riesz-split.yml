@@ -73,10 +73,13 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_radial_original_potential_add
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_quartic_Riesz_second_order_split
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_full_original_nonlinear_quadratic_split
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_radial_original_potential_add
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_quartic_Riesz_second_order_split
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_full_original_nonlinear_quadratic_split
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeWholeOriginalQuadraticRieszAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -85,7 +88,8 @@ jobs:
           data = Path('evidence/audit.log').read_text()
           targets = [
               'HBL.TypeIIDynamicSelection.actual_Hartree_radial_original_potential_add',
-              'HBL.TypeIIDynamicSelection.actual_Hartree_original_quartic_Riesz_second_order_split'
+              'HBL.TypeIIDynamicSelection.actual_Hartree_original_quartic_Riesz_second_order_split',
+              'HBL.TypeIIDynamicSelection.actual_Hartree_full_original_nonlinear_quadratic_split'
           ]
           assert all(t in data for t in targets), 'Missing exact theorem type'
           assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom'
