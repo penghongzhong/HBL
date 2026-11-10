@@ -221,3 +221,99 @@ the actual orbit and derivation of the Type-II rate.
 The weighted \(A_2\) theorem is not yet a Lean import;
 this new *paper* proof has **no strict Lean CI**.
 Original **11/13**.
+
+
+## 5. Quadratic Lipschitz bound for the *actual* nonlinear remainder
+
+The previous result also gives the correct form of the **nonlinear**
+parameter-difference estimate without postulating any independent
+Riesz-source Lipschitz envelope. This is a consequence of the
+same polynomial/Riesz decomposition, not of the crude
+full-nonlinearity local Lipschitz inequality.
+
+Let
+\[
+ X=\bigl\{u:
+      \|u\|_X:=\|u\|_{L^2(dr)}
+       +\|(1+r^2)u'\|_{L^2(dr)}<\infty\bigr\},\qquad
+ Y=\bigl\{F:
+      \|F\|_Y:=\|F\|_{L^2(dr)}
+       +\|(1+r^2)F'\|_{L^2(dr)}<\infty\bigr\}.
+\]
+The weighted FTC (Q5) provides the **linear** embeddings
+\[
+ \|u\|_\infty\le c\|u\|_X,\qquad
+ \|W^{-1}u\|_\infty\le d\|u\|_X.
+ \tag{Q14}
+\]
+For any \(R_*>0\), the original quartic density/cubic
+Taylor formulas (Q2) express
+\(\mathcal R_{\rm H}(u)\) as a finite sum of real
+multilinear terms in \(u,\bar u\), of orders \(k=2,\dots,7\),
+with coefficients depending only on \(W\). Each term has
+**the genuine Riesz convolution**, not a separate coefficient
+chosen as a source.
+
+Here are the only two analytic ingredients needed to bound
+every term and its derivative. First, for its true radial
+density \(f\),
+\[
+ \|\mathcal If\|_\infty
+ \le\frac3{\pi^2}\bigl(4\pi\|f\|_\infty+
+                    \|f\|_{L^1(\mathbb R^3)}\bigr),\qquad
+ \|(\mathcal If)'\|_{L^2(dr)}
+ \le6C_{A_2}\|f\|_{L^2(dr)}.
+ \tag{Q15}
+\]
+Second, (Q14) and \(r^2W^2\le1\) imply, for example,
+\[
+ \begin{aligned}
+ &\int_{\mathbb R^3}W^2|u||v|\,dx
+   \le 4\pi\|u\|_{L^2(dr)}\|v\|_{L^2(dr)},\\
+ &\|W^2uv\|_{L^2(dr)}
+   \le c\,\|u\|_X\,\|v\|_{L^2(dr)},\\
+ &\|(1+r^2)\partial_r(W^2uv)\|_2\\
+ &\qquad\le
+   \|u\|_\infty\|v\|_2
+    +\|v\|_\infty\|(1+r^2)u'\|_2
+    +\|u\|_\infty\|(1+r^2)v'\|_2 .
+ \end{aligned}\tag{Q16}
+\]
+The same product bounds with additional factors \(W,u,\bar u\)
+apply to every higher-degree density/cubic monomial:
+\(W\le1\), \(\|(1+r^2)(W^2)'\|_\infty\le1\),
+and the extra \(W\) powers from the true bubble produce the
+needed \(L^1(\mathbb R^3)\) density integrability.
+For the finitely many monomials of degree \(k\),
+write their bounded real multilinear map as \(T_k\),
+so \(\|T_k(u_1,\ldots,u_k)\|_Y
+\le C_k\prod_j\|u_j\|_X\). There is **no
+differentiation of an independent potential**: its
+derivative is covered by (Q15).
+
+Because \(\mathcal R_{\rm H}(u)=\sum_{k=2}^7T_k(u,\ldots,u)\),
+the exact telescoping identity
+\[
+ T_k(u,\dots,u)-T_k(v,\dots,v)
+ =\sum_{j=1}^k
+ T_k(\underbrace{u,\ldots,u}_{j-1},u-v,
+     \underbrace{v,\ldots,v}_{k-j})
+\tag{Q17}
+\]
+gives, for \(\|u\|_X,\|v\|_X\le R_*\),
+\[
+ \boxed{\quad
+ \|\mathcal R_{\rm H}(u)-\mathcal R_{\rm H}(v)\|_Y
+ \le C(R_*,C_{A_2})
+   \bigl(\|u\|_X+\|v\|_X\bigr)\|u-v\|_X .
+ \quad}\tag{Q18}
+\]
+This is a full **paper-level** nonlinear difference estimate
+for the genuine Hartree quadratic remainder, not the
+linearized \(D\mathcal N_{\rm H}(W)\) term. It implies a
+nonlinear parameter-Lipschitz bound **if and only if**
+the actual PDE-produced fields \(u_\alpha\) are themselves
+controlled in \(X\) and \(X\)-Lipschitz in \(\alpha\).
+Those physical source/selector/endpoint bounds, and
+the nonautonomous spectral inverse, remain missing.
+No new Lean or original-environment acceptance is claimed.
