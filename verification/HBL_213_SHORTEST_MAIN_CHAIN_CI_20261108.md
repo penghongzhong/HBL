@@ -2767,3 +2767,40 @@ actual success and complete transitive allowlist audit.
 New C2 replay [42810399482](https://github.com/penghongzhong/HBL/actions/runs/42810399482)
 also remained in strict compilation at that
 snapshot. Official original revised count remains **11/13**.
+
+
+### 10 November — genuine fixed-bubble Hartree Riesz derivative is origin-uniform (new load-bearing paper proof)
+
+The earlier exact radial Riesz Fourier computation already identified
+\(\nabla\mathcal I=6\mathcal R\). The previously retained
+annular \(\|\partial_r\mathcal I(W^3F)\|_{L²(R,\infty;dr)}
+\le4(\sqrt3 R)^{-1}\|F\|_2\) is **nonsharp near the origin**:
+it discards radial cancellation before taking the weighted norm.
+Apply the *published* weighted \(A_2\) Calderón--Zygmund theorem
+(Hytönen, *Ann. Math.* **175** (2012), 1473–1506, DOI
+10.4007/annals.2012.175.3.9) to the explicit physical
+weight \(\omega(x)=|x|^{-2}\in A_2(\mathbb R^3)\).
+A direct two-case ball argument yields ball \(A_2\) characteristic
+\(\le81\), and weighted Riesz boundedness gives a global
+\(6C_\omega\) constant *independent of \(r_0\)*:
+\[
+ \|\partial_r\mathcal I(W^3F)\|_{L²(dr)}
+   \le6C_\omega\|F\|_{L²(dr)},\qquad
+ \|(1+r²)\partial_r[W^3\mathcal I(W^3F)]\|_2
+   \le(6C_\omega+2\sqrt3)\|F\|_2.
+\]
+The previously exact physical Hilbert--Schmidt value
+\(\|\mathcal I(W^3F)\|_2\le3\|F\|_2\) is also retained.
+An independent Mellin proof reduces the original radial logarithmic
+kernel's derivative to a **truncated Hilbert transform plus \(L^1\) kernel**.
+Full equations, range, and source scope:
+[\`HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md\`](HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md).
+
+**Scientific boundary:** this is a **genuine, unconditional operator bound
+for the actual fixed-bubble Hartree real Hessian**, not the complete
+moving quartic source \(F_{\rm full}\), nor the coupled non-self-adjoint
+Hartree propagator. It is a cited published analytic theorem in the
+paper, **not an unverified new Lean axiom**, and has *not* been
+formalized as a new source-level Lean declaration. No original
+§2.13/Type-II environment is closed: **11/13**.
+
