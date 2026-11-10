@@ -240,4 +240,77 @@ theorem actual_Hartree_true_inner_spectral_C1_curvature_jump
   rw [hPDE] at hJump
   exact hJump
 
+
+/-- This gives an ACTUAL source-faithful curvature budget by composing the
+old genuine original two-channel Kummer defect theorem, the exact
+Cramer/spectral inner C¹ jump, and the same-source plateau identity.
+The latter is an equality (not an assumed decay envelope); it is
+produced by the existing physical Hartree plateau theorem when the
+two source channels and selected real speeds agree. This theorem
+does not claim decay for their weighted norms or the spectral shift. -/
+theorem actual_Hartree_true_inner_spectral_C2_jump_native_shell_budget
+    {mu theta scale B : ℝ} (K : OriginKummerPair mu theta scale)
+    (L a R : ℝ) (hL : 0 < L) (ha : 0 < a)
+    (hOrder : L / a ≤ B) (hB : B < scale)
+    (Fp Fm : ℝ → ℝ)
+    (hp : InWeightedL2 (7 / 4 : ℝ) Fp)
+    (hm : InWeightedL2 (7 / 4 : ℝ) Fm)
+    (hFp : Continuous Fp) (hFm : Continuous Fm)
+    (hR : 2 < R) (hRL : R ≤ L)
+    (F : ℝ → ℂ)
+    (hF : ∀ r ∈ Ioo (0 : ℝ) scale, ContinuousAt F r)
+    (d : ℂ)
+    (hSameSource :
+      ((a ^ 2)⁻¹ : ℝ) • F (L / a) +
+        actualHartreeTwoChannelPhysicalSource Fp Fm L = 0) :
+    let u := actualHartreeTwoChannelInner Fp Fm hp hm
+    let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
+    let v := actualHartreeMatchedSpectralPhysicalValue K a (L / a) B
+      F J.1 J.2 d
+    ‖deriv (deriv u) L - deriv (deriv v) L‖ ≤
+      actualHartreeTwoChannelShellBudget mu theta a R Fp Fm +
+        ((a ^ 2)⁻¹ : ℝ) * ‖d‖ *
+          ‖actualOriginMatchedKummerValue K (L / a) B
+              F J.1 J.2 (L / a)‖ := by
+  dsimp only
+  let u := actualHartreeTwoChannelInner Fp Fm hp hm
+  let J := actualMomentLockedCanonicalInnerJet Fp Fm hp hm a (L / a)
+  let v := actualHartreeMatchedSpectralPhysicalValue
+    K a (L / a) B F J.1 J.2 d
+  let U : ℂ :=
+    actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 (L / a)
+  let S : ℂ := actualHartreeTwoChannelPhysicalSource Fp Fm L
+  have hDelta :=
+    actual_Hartree_true_inner_spectral_C1_curvature_jump
+      K L a hL ha hOrder hB Fp Fm hp hm F hF d
+  dsimp only at hDelta
+  have hNative :=
+    actual_Hartree_two_channel_inner_Kummer_defect_bound
+      mu theta a Fp Fm hp hm hFp hFm R L hR hRL
+  have hSame : ((a ^ 2)⁻¹ : ℝ) • F (L / a) + S = 0 :=
+    hSameSource
+  have hEq :
+      deriv (deriv u) L - deriv (deriv v) L =
+        (actualMatchedScaledKummerApply mu theta a u L + S) +
+          ((a ^ 2)⁻¹ : ℝ) • (d * U) := by
+    rw [hDelta]
+    simp only [Complex.real_smul] at hSame ⊢
+    linear_combination -hSame
+  have hCoeff : 0 ≤ (a ^ 2)⁻¹ := by positivity
+  have hScaledNorm :
+      ‖((a ^ 2)⁻¹ : ℝ) • (d * U)‖ =
+        ((a ^ 2)⁻¹ : ℝ) * ‖d‖ * ‖U‖ := by
+    rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hCoeff, norm_mul]
+    ring
+  calc
+    ‖deriv (deriv u) L - deriv (deriv v) L‖ =
+        ‖(actualMatchedScaledKummerApply mu theta a u L + S) +
+          ((a ^ 2)⁻¹ : ℝ) • (d * U)‖ := congrArg norm hEq
+    _ ≤ ‖actualMatchedScaledKummerApply mu theta a u L + S‖ +
+        ‖((a ^ 2)⁻¹ : ℝ) • (d * U)‖ := norm_add_le _ _
+    _ ≤ actualHartreeTwoChannelShellBudget mu theta a R Fp Fm +
+        ((a ^ 2)⁻¹ : ℝ) * ‖d‖ * ‖U‖ := by
+      rw [hScaledNorm]
+      exact add_le_add hNative le_rfl
+
 end HBL.TypeIIDynamicSelection
