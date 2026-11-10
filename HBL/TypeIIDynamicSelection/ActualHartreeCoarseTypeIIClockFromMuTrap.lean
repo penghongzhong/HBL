@@ -342,7 +342,7 @@ theorem actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope
   have hlog : Real.log L ≤ Real.log R := by
     rw [hLlog, hRlog]
     exact hLogTimesTwo
-  have hpow := (Real.log_le_log_iff hLpos hRpos).2 hlog
+  have hpow := (Real.log_le_log_iff hLpos hRpos).1 hlog
   simpa only [L, R, Q, d] using hpow
 
 end HBL.TypeIIDynamicSelection
