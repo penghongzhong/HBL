@@ -8453,4 +8453,45 @@ These statements are paper calculus; the underlying
 unshifted Kummer identities alone were previously
 Lean-certified. Original theorem count stays \(11/13\).
 
+
+\paragraph{Source-locked curvature and exact material transport.}
+For the real source-dependent corrected Kummer field,
+fix the original Kummer radius \(B\) and put
+\(P_0(s)=w(s,B)\), \(P_1(s)=\partial_r w(s,B)\),
+\(J(s)=\partial_r^2w(s,B)\).
+With \(a(s)>0\), \(z=y/a(s)\), and the original
+cutoff \(\chi_B\), the true physical quadratic repair is
+\[
+ R(s,y)=G(s,z),\qquad
+ G(s,z)=\chi_B(z)
+ [P_0(s)+(z-B)P_1(s)+\tfrac12(z-B)^2J(s)].
+\]
+Its actual radial material derivative is the
+\emph{exact} identity
+\[
+ (\partial_s+by\partial_y)R
+ =\chi_B(z)[P_0'+(z-B)P_1'+\tfrac12(z-B)^2J']
+ +\left(b-\frac{a_s}{a}\right)zG_z.
+\]
+This keeps the physical cutoff transport combined with
+the dilation, rather than treating them as independently
+estimated error atoms. The same-source original unshifted
+equation gives
+\(J=F(s,B)-\delta(s)u_0(s,B)
+ -p(B)P_1(s)-q(s)P_0(s)\), whence
+\[
+ J_s=F_s(s,B)-\delta_su_0-\delta(u_0)_s
+     -p(B)(P_1)_s-q_sP_0-q(P_0)_s,
+\]
+with all traces evaluated at \(B\).
+Consequently the actual source time gradient and real
+two-channel selection rate are \emph{explicit unresolved
+inputs}, not independent curvature speeds or asserted
+time powers. The material identity and this time-chain
+formula are paper algebra, while the exact source-locked
+outer second jet has a separate strict Lean test
+without any new original environment.
+Original §2.13 and the final theorem remain unclosed,
+with \(11/13\) accepted.
+
 \end{document}
