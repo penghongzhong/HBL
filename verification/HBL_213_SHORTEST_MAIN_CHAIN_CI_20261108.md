@@ -1791,7 +1791,11 @@ The revised shortest main proof chain is:
    The former stronger pointwise
    \(|\mu_s|\lesssim s^{-1-\delta}\) is not needed
    merely to convert the *constructed* dynamics into a
-   scalar asymptotic rate.
+   scalar asymptotic rate. **But this pointwise bound is itself
+   explicitly in the currently retained original final theorem.
+   The weaker log-L¹ condition does NOT prove that part of the
+   statement. Preserve and prove it separately unless the main
+   theorem is deliberately and transparently revised.**
 
 **The real obstruction, quantified:** the accepted source
 analysis yields a physical shell remainder \(s^{-15/8}\).
