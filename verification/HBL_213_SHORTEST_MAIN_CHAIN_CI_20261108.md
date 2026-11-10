@@ -3535,3 +3535,19 @@ inverse gains can change the proof strategy. No new Lean theorem,
 axiom, claimed physical orbit, or CI acceptance is associated
 with this paper correction. Strict original count **11/13**.
 <!-- END HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110 -->
+
+
+<!-- HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110 -->
+### 10 November 2026 — original Hartree phase Hessian: exact zero-energy Fredholm moment (paper, NOT CI)
+
+The new [exact derivation](HBL_213_EXACT_PHASE_RESONANCE_FREDHOLM_GATE_20261110.md) establishes, without replacing the original nonlocal real Hessian, the physical phase factorization
+\[
+L_-(Wv)=-[r^2W^2v']'/(r^2W),\qquad
+\int(|\nabla g|^2-3W^4|g|^2)=\int W^2|\nabla(g/W)|^2\ge0.
+\]
+For **smooth compactly supported radial** forcing \(F\), the regular radial zero-energy equation \(L_-g=F\) has an \(\dot H^1\) solution **iff**
+\(\int_0^\infty r^2W(r)F(r)\,dr=0\). Under this exact moment condition an explicit compactly supported physical radial inverse is constructed; its entire regular \(\dot H^1\) solution family differs by \(cW\), where \(W\in\dot H^1\setminus L^2\). In particular the phase block has a genuine zero resonance, and an unqualified zero-regular projected resolvent or a guessed phase compatibility condition is invalid.
+
+**Scope:** This closes only the original frozen **phase-channel** zero-energy algebra on paper. The source of the moving Hartree four-region packet has NOT been proved compactly supported or moment-orthogonal; neither the fully nonlocal **real** block, coupled generator's spectral/Kato smoothing, residual time gain, parameter Lipschitz, true physical orbit nor dynamical Type-II rate is obtained. This calculation has **no new Lean 4.35.0-rc3 --trust=0 CI**. Earlier exact-target CI [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509) and [42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900) remain Success under their existing assumptions, and were independently re-read in original job logs this run. This is no basis for promoting an auxiliary statement to an original paper environment. **Original revised acceptance stays 11/13 (84.62%).**
+
+<!-- END HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110 -->
