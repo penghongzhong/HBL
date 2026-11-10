@@ -7947,4 +7947,38 @@ adjoint Kato estimate, or the actual blowup orbit.
 See \texttt{verification/HBL\_213\_GLOBAL\_RIESZ\_A2\_NO\_INNER\_RADIUS\_LOSS\_20261110.md}.
 The strict original count is \(11/13\).
 
+
+\paragraph{The same global estimate on a moving spatial bubble scale.}
+For the true energy-critical family
+\(W_\lambda(r)=\lambda^{-1/2}W(r/\lambda)\),
+let \(N_\lambda(F)=W_\lambda^3
+\mathcal I(W_\lambda^3F)\) and
+\(F_\lambda^\sharp(\rho)=F(\lambda\rho)\).
+The original three-dimensional inverse-square
+convolution scales exactly as
+\[
+ N_\lambda(F)(\lambda\rho)
+    =\lambda^{-2}N(F^\sharp_\lambda)(\rho).
+\]
+The preceding global \(A_2\) bound therefore implies,
+for every \(\lambda>0\), without a chosen blowup rate,
+\[
+ \boxed{\begin{aligned}
+ \|(\lambda^2+r^2)N_\lambda(F)\|_{L^2(dr)}
+   &\le3\|F\|_{L^2(dr)},\\
+ \|(\lambda^2+r^2)\partial_rN_\lambda(F)\|_{L^2(dr)}
+   &\le (6C_{\rm A2}+2\sqrt3)\lambda^{-1}
+          \|F\|_{L^2(dr)} .
+ \end{aligned}}
+\]
+The \(\lambda^{-1}\) is the exact spatial chain-rule
+factor, not a hidden radius loss.
+This does \emph{not} control \(\lambda_s\) or
+parameter differences, or the entire quartic
+nonlinear moving PDE residual.
+The published weighted Calder\'on--Zygmund input
+remains at paper level, not a new Lean axiom or
+original-environment acceptance.
+The acceptance count stays \(11/13\).
+
 \end{document}
