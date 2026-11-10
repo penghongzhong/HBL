@@ -94,4 +94,43 @@ theorem actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation
         ((a ^ 2)⁻¹ : ℝ) • (delta * u0 (y / a)) := by abel
     _ = -((a ^ 2)⁻¹ : ℝ) • (delta * u0 (y / a)) := by rw [hSame]; simp
 
+
+/-- At a genuine C¹ inner interface the ORIGINAL physical Kummer
+operator's source jump is exactly the radial curvature jump.
+All drift, potential and parameter-dependent coefficients cancel.
+This does not claim that the original Fredholm Hessian is this Kummer
+operator; identifying that physical source remains a separate gate. -/
+theorem actual_Hartree_inner_C1_curvature_jump_eq_original_source_jump
+    (mu theta a L : ℝ) (u v : ℝ → ℂ)
+    (hValue : u L = v L)
+    (hSlope : deriv u L = deriv v L) :
+    deriv (deriv u) L - deriv (deriv v) L =
+      actualMatchedScaledKummerApply mu theta a u L -
+        actualMatchedScaledKummerApply mu theta a v L := by
+  unfold actualMatchedScaledKummerApply complexRadialLaplacian
+  simp only [Complex.real_smul, hValue, hSlope]
+  ring
+
+/-- If the INNER original source and the spectrally corrected OUTER
+original source have the exact first-order delta*u0 discrepancy,
+their C¹ splice has precisely that second-jet defect. In particular
+the first-order ORIGINAL PDE residual cannot be silently replaced by
+a quadratic shifted-operator residual. No independent source bound
+or a physical-orbit realization is assumed. -/
+theorem actual_Hartree_inner_C1_spectral_curvature_jump_from_sources
+    (mu theta a L : ℝ) (u v : ℝ → ℂ)
+    (S delta u0 : ℂ)
+    (hValue : u L = v L)
+    (hSlope : deriv u L = deriv v L)
+    (hInnerSource : actualMatchedScaledKummerApply mu theta a u L = S)
+    (hCorrectedSource :
+      actualMatchedScaledKummerApply mu theta a v L =
+        S - ((a ^ 2)⁻¹ : ℝ) • (delta * u0)) :
+    deriv (deriv u) L - deriv (deriv v) L =
+      ((a ^ 2)⁻¹ : ℝ) • (delta * u0) := by
+  rw [actual_Hartree_inner_C1_curvature_jump_eq_original_source_jump
+    mu theta a L u v hValue hSlope, hInnerSource, hCorrectedSource]
+  simp only [Complex.real_smul]
+  ring
+
 end HBL.TypeIIDynamicSelection
