@@ -1661,7 +1661,10 @@ The new theorem
 actual_Hartree_true_moving_selected_source_radius_weighted_time_budget
 in ActualHartreeSelectedSourceWeightedTimeBudget.lean has strict
 [CI 42742271094](https://github.com/penghongzhong/HBL/actions/runs/42742271094)
-(**pending**). It derives both real speed derivatives rather than
+(**SUCCESS**, original job `129585960999`; zero-output strict build under Lean
+4.35.0-rc3, Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`--trust=0 -DwarningAsError=true`, exact `#check/#print axioms`;
+only `propext`, `Classical.choice`, `Quot.sound`). It derives both real speed derivatives rather than
 assuming a differentiated independent selected source.
 
 The true original selected physical Hartree Green moving-slit
@@ -1679,10 +1682,26 @@ theorem
 actual_Hartree_true_moving_singular_Green_cross_Frobenius_one_inverse_radius
 in ActualHartreeTrueMovingGreenOneRadiusGain.lean was submitted in
 [CI 42742808852](https://github.com/penghongzhong/HBL/actions/runs/42742808852)
-(**pending**).
+(**FAILED**; original job `129587751629` shows `No goals to be solved`
+at Lean line 119: `field_simp` already closes the inverse-radius
+cancellation, leaving a redundant `ring`). Removed precisely that
+redundant line without changing the theorem type at commit
+[`2b93a05c`](https://github.com/penghongzhong/HBL/commit/2b93a05c250938902ff1bf2a4a31a32e297ed3d5);
+replacement actual strict workflow
+[42744295852](https://github.com/penghongzhong/HBL/actions/runs/42744295852)
+was triggered and must be judged by its new original job and exact axiom audit.
 
 The central physical producer for the time rate \(E(s)\) in the
 actual four-piece PDE is still absent. No original revised environment
 closed: **11/13**. The original nonlocal weighted PDE residual,
 parameter Lipschitz, finite profile recursion and dynamic Type-II
 blowup-rate theorem remain OPEN.
+
+
+### 10 Nov 2026 — physical Riesz velocity follow-through and revived finite telescope
+
+The prior exact four-region *nonlinear PDE telescope* failure [42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681) was superseded by independently pinned strict **SUCCESS** [42648496792](https://github.com/penghongzhong/HBL/actions/runs/42648496792), original job `129268151514`. The job compiled `ActualHartreeSpectralFourPieceFinitePDETelescoping.lean` with `--trust=0 -DwarningAsError=true`, checked the exact declaration `actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes`, and audited exactly `[propext, Classical.choice, Quot.sound]` with no `sorryAx`. **The result is an exact nonlinear telescope, not an O(s^-9/4) gain.** The same-physical-source spectral three-C1 success [42648496711](https://github.com/penghongzhong/HBL/actions/runs/42648496711) also supersedes old failed four-piece C1 attempts; on subsequent source commit `1040cd5ee`, exact same-source spectral quadratic/C1 CI [42650515902](https://github.com/penghongzhong/HBL/actions/runs/42650515902) and [42650515961](https://github.com/penghongzhong/HBL/actions/runs/42650515961) succeeded independently. The historical failed runs cannot themselves count as accepted.
+
+New ORIGINAL physical half-radial velocity producers are strictly successful: [42743207667](https://github.com/penghongzhong/HBL/actions/runs/42743207667), original job `129589066733`, checks **three** exact target theorem types; and [42743242786](https://github.com/penghongzhong/HBL/actions/runs/42743242786), original job `129589176394`, checks **two** target types. Original logs show zero-output `--trust=0` warning-as-error compilation and exact audit prints containing only `propext`, `Classical.choice`, `Quot.sound`. These derive the *genuine differentiated quartic potential row* from pointwise half-radial field and time-velocity budgets, but have **not** propagated the needed quantitative budgets from one complete physical four-region PDE orbit.
+
+The current mathematical obstruction remains substantive, not merely a proof-script lint: the original moving Cramer source derivative bound still needs scale-accurate estimates for `r‖Fdot‖`, `Zdot + pb bdot + pw wdot`, and the two differentiated modulation source directions on the same orbit. One must then control moving Kummer basis/endpoint derivatives, four-region source positive order and parameter Lipschitz, finite physical recurrence, and derive—not assume—the II-type law. **Strict original revised paper count: 11/13 (84.62%), not 12/13.**
