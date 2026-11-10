@@ -561,12 +561,26 @@ Consequently a quadratic jet-matched repair is a \emph{valid formal}
 C² construction but has no uniform curvature budget without a
 stronger physical source trace or a special cancellation.
 
-The source-aligned alternative is the flat overlap:
-\(h=(aB-L)/8>0\),
-\(\eta(y)=\mathrm{cutoff}((y-L-h)/h)\),
-\(\chi(y)=1-\mathrm{cutoff}((y-aB+4h)/h)\),
-\(U=(1-\eta)u+\eta\chi v\), with unchanged genuine
-Hartree Fredholm inner \(u\) and corrected selected Kummer \(v\).
+The source-aligned alternative is a **backward** flat overlap
+on the true original Fredholm/Kummer shell \([L/2,L]\).
+Use \(h_{\rm in}=L/8\), \(h_{\rm out}=(aB-L)/8\) and
+\[
+ \eta(y)=\mathrm{cutoff}((y-L+4h_{\rm in})/h_{\rm in}),\qquad
+ \chi(y)=1-\mathrm{cutoff}((y-aB+4h_{\rm out})/h_{\rm out}),
+ \qquad U=(1-\eta)u+\eta\chi v.
+\]
+The earlier forward-inner overlap \(y>L\) is withdrawn
+because its Fredholm estimates were not established there.
+The real inner cutoff transition is contained in
+\([5L/8,3L/4]\); the actual Kummer value/slope
+match at \(L\) supplies \(e(L)=e'(L)=0\).
+For a local \(H²\) mismatch with \(E=\|e''\|_{L²([L/2,L])}\),
+the exact undifferentiated inner cutoff commutator has no
+negative overlap-width power:
+\(\|\mathcal C_{\rm in}\|_2
+\le(2\sqrt3C_1+3C_2+3C_1M_0h_{\rm in})E\);
+its spatial derivative retains a fully explicit
+\(h_{\rm in}^{-1}E\) cost.
 This removes the point-jet obstruction by construction while
 displaying \(h^{-j}\) and moving-material commutators explicitly.
 It must still prove the actual complete nonlocal PDE source
