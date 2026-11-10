@@ -170,4 +170,38 @@ Accordingly, to place the **spatial derivative of the PDE residual** in an ordin
 
 **Next genuine proof obligation:** Insert the *same-source* selected Fredholm/Green/spectral four-region packet into (M13), exploit (M10) for the full nonlinear dilation commutator, and control the remaining interface curvature measures, modulation and endpoint derivatives, all nonlocal cross interactions, projected dual Kato source norm and time/parameter powers. Only after actual positive-order and Lipschitz bounds, a full nonlinear orbit and finite recursion, can §2.13 and the dynamic Type-II theorem be accepted.
 
+
+## 5. Explicit obstruction: the untruncated dilation forcing is NOT phase Fredholm-compatible
+
+For the exact physical bubble and critical scaling mode,
+\[
+W(r)=(1+r^2)^{-1/2},\qquad
+\Lambda W=\frac12W+rW'
+ =\frac{1-r^2}{2(1+r^2)^{3/2}}
+ =-\frac h2 W.
+\tag{M16}
+\]
+The phase-channel zero-resonance moment of the bare scale-transport forcing can be **integrated exactly**:
+\[
+\begin{aligned}
+\mathcal M_{\Lambda}(R)
+ &:=\int_0^Rr^2W(r)\Lambda W(r)\,dr\\
+ &=\int_0^R\frac{r^2(1-r^2)}{2(1+r^2)^2}\,dr\\
+ &=\boxed{\arctan R-\frac R2-\frac{R}{2(1+R^2)}}
+ =-\frac R2+\frac\pi2+O(R^{-1}).
+\end{aligned}
+\tag{M17}
+\]
+In particular the whole-space moment \(\int_0^\infty r^2W\Lambda W\,dr\) **does not exist as a finite quantity** (it diverges to \(-\infty\)), and
+\((1+r^2)\Lambda W\notin L^2(\mathbb R^3)\).
+For a nonzero modulation slope \(b=\lambda_s/\lambda\), the bare bubble \(\Phi\equiv1\) has the exact moving-source mismatch
+\[
+i\Phi_s-\mathcal R(\Phi)-\vartheta_s\Phi-ibD\Phi
+ =-\vartheta_s+\frac{ib}{2}h.
+\tag{M18}
+\]
+The real scalar phase speed \(\vartheta_s\) cannot cancel the imaginary spatially varying transport term \(ibh/2\). This is a **failure of the bare untruncated bubble strategy**, not a nonexistence result for a corrected four-region Hartree orbit.
+
+**Consequences for the shortest chain:** the previously derived weighted-source elliptic phase inverse, whose domain requires \((1+r^2)F\in L^2\) and \(\int WF=0\), cannot be applied to this isolated bare scaling source. The genuine Fredholm/Kummer correction and the physical outer radiation must be shown to cancel the phase-resonant far-field moment *in the complete same-orbit residual*. No independent moment orthogonality, artificial cutoff or presumed smallness can replace that proof. This is the exact place where a stationary-resolvent shortcut would otherwise smuggle in a missing hypothesis.
+
 **Strict acceptance:** existing exact-target CI 42536552509 (nonlinear spectral finite-PDE telescoping) and 42854633900 (original source C² jump) have succeeded in their actual prior statements; neither proves (M13)–(M15) in Lean. No new axiom, sorry, admit or acceptance increment is asserted. **11/13 (84.62%).**
