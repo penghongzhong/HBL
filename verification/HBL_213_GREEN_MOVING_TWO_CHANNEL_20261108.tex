@@ -8231,4 +8231,118 @@ weighted \(A_2\) theorem as a paper-level input,
 not a new Lean axiom, and does not change the
 original \(11/13\) acceptance.
 
+
+\paragraph{A genuine quadratic bound for the original nonlocal Hartree source.}
+Write \(W=(1+r^2)^{-1/2}\),
+\(\mathcal If=(3/\pi^2)(|x|^{-2}*f)\),
+\(Q(z)=|z|^2z\), and
+\(\mathcal N_{\rm H}(V)=\mathcal I(|V|^4)Q(V)\).
+For a radial complex correction \(u=u_1+iu_2\),
+the exact real linearization is
+\[
+ D\mathcal N_{\rm H}(W)u
+   =9W^4u_1+3iW^4u_2+
+     4W^3\mathcal I(W^3u_1).
+\]
+The genuinely quadratic remainder
+\(\mathcal R_{\rm H}(u)
+ =\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)
+-D\mathcal N_{\rm H}(W)u\) is not replaced by a local quintic
+surrogate. Define
+\[
+ \begin{aligned}
+ \rho_1&=4W^3u_1,&
+ \rho_2&=|W+u|^4-W^4-\rho_1,\\
+ Q_1&=W^2(u+2u_1),&
+ Q_2&=W(|u|^2+2u_1u)+|u|^2u,\\
+ P_1&=\mathcal I(\rho_1),&
+ P_2&=\mathcal I(\rho_2).
+ \end{aligned}
+\]
+Then
+\[
+ \boxed{\ 
+ \mathcal R_{\rm H}(u)
+ =3W^2Q_2+P_1(Q_1+Q_2)+P_2Q(W+u).
+ \ }
+\]
+Let
+\[
+ U=\|u\|_{L^2(dr)},\quad
+ H=\|(1+r^2)u'\|_{L^2(dr)},\quad
+ c=\sqrt\pi/2,\quad d=\sqrt{\pi/2},\quad
+ h=dH,\quad K=1+h,
+\]
+and set
+\[
+ \begin{gathered}
+ A_1=\frac{12}{\pi}
+    (2\sqrt\pi H+\sqrt{3\pi}U),\qquad
+ A_2=\frac{72}{\pi}K^2(c^2H^2+U^2),\\
+ Z=3cHU+6cH^2+3c^2H^3.
+ \end{gathered}
+\]
+The weighted fundamental theorem of calculus gives
+\(\|u\|_\infty\le cH\) and
+\(|u(r)|\le dHW(r)\). Using the *actual* three-dimensional
+Riesz potential and the published weighted \(A_2\)
+Calderón--Zygmund bound for \(|x|^{-2}\),
+\[
+ \|P_1\|_\infty\le A_1,\quad
+ \|P_1'\|_{L^2(dr)}\le24C_{A_2}U,\quad
+ \|P_2\|_\infty\le A_2,\quad
+ \|P_2'\|_{L^2(dr)}
+   \le36C_{A_2}K^2cHU.
+\]
+The exact cubic Taylor terms satisfy
+\[
+ \begin{aligned}
+ \|Q_2\|_2&\le(3+h)cHU,\\
+ \|(1+r^2)(Q_1+Q_2)\|_\infty
+ &\le3cH+(3+h)cdH^2,\\
+ \|(1+r^2)Q_1'\|_2&\le3(U+H),\qquad
+ \|(1+r^2)Q_2'\|_2\le Z .
+ \end{aligned}
+\]
+The complete product rule, retaining all nonlocal
+density derivatives, yields
+\[
+ \begin{aligned}
+ \|\mathcal R_{\rm H}(u)\|_2
+ &\le 3(3+h)cHU+
+ A_1[3U+(3+h)cHU]+
+ A_2K^2(\sqrt{\pi/2}+U),\\
+ \|(1+r^2)\mathcal R_{\rm H}(u)'\|_2
+ &\le3(3+h)cHU+3Z\\
+ &\quad+24C_{A_2}U[3cH+(3+h)cdH^2]
+       +A_1[3(U+H)+Z]\\
+ &\quad+36C_{A_2}K^5cHU+
+       3A_2K^2(\sqrt\pi/4+H).
+ \end{aligned}
+\]
+Hence for \(U,H\le1\) there is a fixed
+\(C_{\rm H}=C(C_{A_2})\) with
+\[
+ \boxed{\
+  \|\mathcal R_{\rm H}(u)\|_2+
+  \|(1+r^2)\mathcal R_{\rm H}(u)'\|_2
+  \le C_{\rm H}(U+H)^2.\
+ }
+\]
+For \(W_\lambda(r)=\lambda^{-1/2}W(r/\lambda)\),
+\(u_\lambda(r)=\lambda^{-1/2}u(r/\lambda)\),
+the source norms above scale respectively as
+\(\lambda^{-2}\) and \(\lambda^{-1}\) with the
+matching physical weight \(\lambda^2+r^2\);
+no scale law is imposed. The complete derivation is
+in
+\texttt{verification/HBL\_213\_GENUINE\_HARTREE\_QUADRATIC\_WEIGHTED\_SOURCE\_20261110.md}.
+This is a \emph{paper proof} using a published weighted
+Riesz theorem, not an independently Lean-compiled
+weighted Sobolev estimate. The remaining linear
+and moving PDE source components still require
+quantitative bounds on the actual four-region orbit.
+Original §2.13 and the full dynamical Type-II theorem
+remain open; strict acceptance is \(11/13\).
+
 \end{document}
