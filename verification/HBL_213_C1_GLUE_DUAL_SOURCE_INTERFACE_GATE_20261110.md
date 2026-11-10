@@ -495,3 +495,79 @@ by itself eliminate (R1)–(R4)'s quantitative gap.
 
 **Formal original acceptance remains 11/13, no new
 Hartree nonlinear time-order or Type-II orbit.**
+
+
+## 7. Exact moving-physical-repair transport identity; no independent speed envelope
+
+The source-locked \(C^2\) repair has a particularly useful
+time-transport cancellation. Keep the Kummer outer radius \(B\)
+**fixed**, as it is in the actual four-piece Lean packet; let
+\(a(s)>0\) and let
+\[
+ P_0(s)=w(s,B),\quad P_1(s)=\partial_r w(s,B),\quad
+ J(s)=\partial_r^2w(s,B).
+\]
+Write
+\[
+ G(s,z)=\chi_B(z)
+     \bigl[P_0(s)+(z-B)P_1(s)+\tfrac12(z-B)^2J(s)\bigr],
+ \quad R(s,y)=G(s,y/a(s)),\quad z=y/a(s).
+\]
+For differentiable physical parameters, **no separate upper-jet
+velocity parameter** is introduced. The exact partial derivative
+at fixed physical \(y\) is
+\[
+ \partial_sR(s,y)
+ =\chi_B(z)
+   [P_0'(s)+(z-B)P_1'(s)+\tfrac12(z-B)^2J'(s)]
+  -\frac{a_s}{a}z\,\partial_zG(s,z).
+\tag{M1}
+\]
+Since \(yR_y=zG_z\), the actual radial dilation
+material derivative obeys the **exact cancellation**
+\[
+ \boxed{
+ (\partial_s+b(s)y\partial_y)R(s,y)
+  =\chi_B(z)
+   [P_0'+(z-B)P_1'+\tfrac12(z-B)^2J']
+   +\left(b-\frac{a_s}{a}\right)zG_z.
+ }
+\tag{M2}
+\]
+Thus the moving-cutoff transport is not an independent source:
+it is precisely a mismatch between the **true physical**
+dilation velocity \(b\) and the derivative of the **actual**
+physical scale \(a\). Whether this mismatch is small is a
+separate original Hartree modulation-PDE statement, not a
+definition or free assumption.
+
+The exact unshifted Kummer identity (R1) determines \(J\)
+from the same physical source. At fixed \(B\), differentiating
+it in the parameter/time variable gives, **provided the actual
+derivatives are produced by the PDE**,
+\[
+ \begin{aligned}
+ J'(s)={}&\partial_s F(s,B)
+ -\delta_s(s)u_0(s,B)-\delta(s)\partial_su_0(s,B)\\
+ &-p(B)\partial_s P_1(s)
+ -q_s(s)P_0(s)-q(s)\partial_sP_0(s).
+ \end{aligned}
+\tag{M3}
+\]
+Here \(p(r)=\mathrm{frozenFirstCoeff}(r)\) is fixed and
+\(q(s)=\mathrm{frozenZeroCoeff}(\mu(s),\theta(s))\).
+This formula identifies exactly where the moving
+Kummer basis and selected source time derivatives enter,
+rather than hiding them in a presumed bound for \(J_s\).
+
+**Analytic consequence:** proving the *material*
+source estimate for (M2) may be shorter than estimating
+separately \(\partial_sR\) and \(byR_y\). The real remaining
+inputs are \(b-a_s/a\), \(P_0',P_1',\partial_sF\),
+\(\delta_s\), the original Hartree nonlocal source gradients
+and the current physical \(L^2\)/Lipschitz budgets.
+
+(M1)–(M3) are **paper calculus identities**. They are
+not a Lean CI acceptance or a time-positive PDE residual
+bound; they prescribe no physical scale or Type-II rate.
+Original theorem acceptance remains **11/13**.
