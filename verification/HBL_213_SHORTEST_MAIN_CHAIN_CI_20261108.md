@@ -3205,3 +3205,46 @@ inverse or real orbit.
 This is paper-level reduction only, with no new
 Lean target/axiom or original-paper environment.
 **11/13 unchanged.**
+
+
+### 10 November — sharper alternative OUTER cutoff avoids uncontrolled source curvature point trace
+
+Previously accepted C² polynomial repair still depends
+on the **unbounded** original Cramer curvature point
+trace \(w''(B)\) when only weighted \(L²\) source data
+are supplied. A new source-faithful \emph{alternative}
+retains the true original spectral Green solution
+\(w=u_0-u_1\) over a *flat outer overlap entirely
+inside* \(r_0<r<B<\mathrm{scale}\), and cuts it
+off smoothly before \(B\). With
+\(h=(B-r_0)/4\), \(r_*=r_0+h\),
+\(\chi(r)=1-\mathrm{cutoff}((r-r_*)/h)\),
+the cutoff derivative support is
+\([r_0+2h,r_0+3h]\Subset(r_0,B)\).
+
+For the actual original Kummer equation
+\(w''+Aw'+Qw=f=F-\delta u_0\), \(A=2/r+ir/2\),
+the *exact* outer commutator derivative is
+\[
+\mathcal C'
+ =2\chi'f+(3\chi''-A\chi')w'
+   +(\chi'''+A\chi''+A'\chi'-2Q\chi')w .
+\]
+This expression uses only true \(L²\) norms of
+\(f,w,w'\), the verified physical \(C³\) cutoff,
+and explicit geometric widths \(h^{-1},h^{-2},h^{-3}\).
+It needs **no \(F(B)\), no \(F'\) for this commutator**,
+and no newly postulated outer curvature. When
+\(B\ge2r_0\), the commutator's explicit constants
+have no left-radius \(r_0^{-1}\) loss.
+[Complete paper derivation and exact bound](HBL_213_SOURCE_LOCKED_OUTER_FLAT_CUTOFF_NO_POINT_TRACE_20261110.md).
+
+This is only a candidate replacement of the
+*auxiliary outer repair*: it must be implemented
+and strictly audited in Lean before using it in
+the original four-piece source, and the rest
+of the full Hartree PDE residual retains
+\(\chi f'\), nonlocal interactions and moving
+material/parameter derivatives. No positive
+time order, spectral inverse or actual orbit
+is asserted. **Original acceptance 11/13.**
