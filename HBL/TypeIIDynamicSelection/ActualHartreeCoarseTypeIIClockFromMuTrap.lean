@@ -127,10 +127,11 @@ theorem actual_Hartree_dynamic_remaining_time_from_two_channel_equations
       (-((1 + 4 * mu s) / (2 * q s)) * ell s) s) :
     HasDerivAt (fun t => q t * (ell t) ^ 2)
       (-(ell s) ^ 2) s := by
-  have h := hq.mul (hell.pow 2)
+  have hSquare := hell.mul hell
+  have h := hq.mul hSquare
   convert h using 1
   · funext t
-    rfl
+    ring
   · field_simp [hqpos.ne']
     ring
 
@@ -149,6 +150,6 @@ theorem actual_Hartree_dynamic_terminal_clock_local_conservation
   have h := htime.add
     (actual_Hartree_dynamic_remaining_time_from_two_channel_equations
       q ell mu s hqpos hq hell)
-  simpa only [add_neg_cancel] using h
+  simpa only [Pi.add_apply, add_neg_cancel] using h
 
 end HBL.TypeIIDynamicSelection
