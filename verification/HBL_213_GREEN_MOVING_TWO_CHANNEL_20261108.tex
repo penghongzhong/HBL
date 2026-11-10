@@ -9731,4 +9731,60 @@ a physical orbit and the dynamically produced Type-II rate
 remain unproved. Revised original acceptance is \(11/13\).
 % END HBL_ORIGINAL_L2_VOLTERRA_GATE_20261110
 
+
+% BEGIN HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
+% Exact source identity; strict Lean target in progress; no original acceptance.
+\paragraph{The inner spectral curvature mismatch is determined by the original sources.}
+Write \(u\) for the actual two-channel Fredholm inner field,
+\(J\) for its canonical Cauchy trace, \(u_0\) for the original
+Cramer-matched Green continuation and
+\(v(y)=w_\delta(y/a)\) for its source-matched zero-left-jet spectral
+correction. The verified \(C^1\) interface relations give
+\(u(L)=v(L)\), \(u'(L)=v'(L)\).
+Applying the literal original Kummer operator, without replacing the
+nonlocal Hartree inner equation by a frozen Kummer equation, yields
+\[
+\begin{split}
+\Delta_2
+&:=u''(L)-v''(L)
+ =K_{a,Q}u(L)-K_{a,Q}v(L)\\
+&=K_{a,Q}u(L)-a^{-2}F(L/a)
+  +a^{-2}\delta u_0(L/a).
+\end{split}
+\]
+The last term is first order in the real spectral displacement.
+The preceding difference \(K_{a,Q}u(L)-a^{-2}F(L/a)\) is
+\emph{not} automatically zero: the true Hartree Hessian/Fredholm
+operator and the frozen Kummer operator are different.
+Thus the actual \(C^1\) matching cannot be promoted to \(C^2\)
+without controlling these two original-source defects.
+
+To see why a narrow source-faithful \(C^2\) patch is not a free
+source-norm gain, fix a smooth cutoff \(\chi\), supported in
+\([0,1)\) and identically one near zero, and set
+\(\phi(x)=x^2\chi(x)/2\). For \(0<h<L\) put
+\[
+P_{L,h}(y)=\Delta_2h^2\phi((y-L)/h),
+\quad L\le y\le L+h,
+\]
+extended by zero to the right. Its left value and slope vanish
+and its left curvature equals \(\Delta_2\), so adding this
+patch to the right branch matches the actual inner curvature.
+For \(m=0,1,2,3\), exact change of variables gives
+\[
+\|\partial_y^mP_{L,h}\|_{L^2([L,L+h])}
+=|\Delta_2|h^{5/2-m}\|\phi^{(m)}\|_{L^2([0,1])}.
+\]
+In particular, the \(L^2\) curvature is \(O(|\Delta_2|\sqrt h)\),
+whereas the derivative of the resulting original Kummer source
+contains \(O(|\Delta_2|/\sqrt h)\) from \(P'''\).
+Shrinking \(h\) improves the former and worsens the latter.
+The genuine time derivatives of \(L\), \(h\), \(\Delta_2\),
+all moving coefficients, and the complete nonlocal Hartree
+interaction with this patch still require estimates from the
+same actual PDE. None of these estimates, or the needed
+projected Hamiltonian inverse, follows from an exact residual
+telescope. The revised original count remains \(11/13\).
+% END HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
+
 \end{document}
