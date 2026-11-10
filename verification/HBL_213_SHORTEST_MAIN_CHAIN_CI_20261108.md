@@ -3258,3 +3258,34 @@ is asserted. **Original acceptance 11/13.**
 - The concurrent source-aligned actual moving-radius normalized \(C^2\) theorem is being strictly audited at [42834533439](https://github.com/penghongzhong/HBL/actions/runs/42834533439). This is an auxiliary zero-Cauchy original-operator norm theorem, not the original §2.13 nonlinear PDE orbit.
 
 **No theorem acceptance change:** original retained revised environments **11/13 (84.62%)**. The independent physical moving nonlinear source, parameter/time derivative, genuine Hartree projected inverse, full finite recursion and dynamically generated Type-II theorem remain open.
+
+
+### 10 November — strict SUCCESS after raw V15 namespace repair
+
+[CI **42833841260**](https://github.com/penghongzhong/HBL/actions/runs/42833841260)
+on source commit \`70d035d17fdd4563cb01e8802c940869981196c8\`
+completed **Success**, job **129890644963**, original
+artifact **13773721109**. The decoded job log directly
+shows the pinned \`lake env lean --trust=0
+-DwarningAsError=true\` source run, exact \`#check @\`
+and \`#print axioms\` for all three:
+\`HBL.TypeIIDynamicSelection.actual_Hartree_original_Kummer_coefficient_difference\`,
+\`HBL.TypeIIDynamicSelection.actual_Hartree_original_Kummer_sub_of_classical\`,
+\`HBL.TypeIIDynamicSelection.actual_Hartree_backward_original_parameter_source_difference\`.
+The strict source step requires zero-byte \`strict.log\`,
+and the exact generated axiom audit prints, for each
+of the three theorems, *only*
+\`[propext, Classical.choice.{u}, Quot.sound.{u}]\`,
+allowing universe level annotations. All three
+declared functions are the original Hartree/Kummer
+operator, rather than a substituted linear model.
+This supersedes original failing CI 42832295130:
+its concrete issue was source namespace elaboration,
+not a missing mathematical estimate.
+
+**Strict boundary:** these are source-exact algebraic
+original-operator identities; the actual *nonlinear
+Hartree source* parameter Lipschitz bound in the
+moving physical norm, real projected propagator,
+PDE orbit and Type-II rate are NOT proved. There is
+**no new accepted original revised environment: 11/13**.
