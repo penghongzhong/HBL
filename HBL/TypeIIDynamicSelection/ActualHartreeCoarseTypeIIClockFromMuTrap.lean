@@ -131,8 +131,10 @@ theorem actual_Hartree_dynamic_remaining_time_from_two_channel_equations
   have h := hq.mul hSquare
   convert h using 1
   · funext t
+    simp only [Pi.mul_apply, Pi.pow_apply]
     ring
-  · field_simp [hqpos.ne']
+  · simp only [Pi.mul_apply] 
+    field_simp [hqpos.ne']
     ring
 
 /-- Adding the ORIGINAL physical-time equation t_s = ell² cancels
@@ -150,6 +152,8 @@ theorem actual_Hartree_dynamic_terminal_clock_local_conservation
   have h := htime.add
     (actual_Hartree_dynamic_remaining_time_from_two_channel_equations
       q ell mu s hqpos hq hell)
-  simpa only [Pi.add_apply, add_neg_cancel] using h
+  convert h using 1
+  funext t
+  rfl
 
 end HBL.TypeIIDynamicSelection
