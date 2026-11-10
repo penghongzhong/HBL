@@ -1,0 +1,54 @@
+# HBL §2.13: the true Fredholm/spectral inner C² jump and the non-free patch cost (10 November 2026)
+
+**Original revised theorem count stays 11/13.** The exact original-source algebra and its concrete two-profile instantiation have been submitted to the pinned strict Lean job; no new §2.13 acceptance or PDE time-decay claim follows from this note.
+
+## 1. Source-exact curvature defect at the genuine left interface
+
+Let `u` be the original physical two-channel Fredholm inner response, `J` its canonical physical value/slope, `u_0` the same-source Cramer–Green continuation, and `v(y)=w_\delta(y/a)` the zero-left-jet *spectrally corrected* continuation with original spectral source `F`. The original normalized equation is
+
+\[
+w_\delta''+p w_\delta'+Qw_\delta
+=F-\delta u_0,
+\quad
+K_{a,Q}v(y)=a^{-2}\{F(y/a)-\delta u_0(y/a)\}.
+\]
+
+The already verified same-source C¹ endpoint matching gives `u(L)=v(L)`, `u'(L)=v'(L)`. The **literal** original physical Kummer operator, with no auxiliary source norm or independent curvature input, therefore satisfies
+
+\[
+\boxed{
+\Delta_2:=u''(L)-v''(L)
+= K_{a,Q}u(L)-a^{-2}F(L/a)+a^{-2}\delta u_0(L/a).
+}
+\tag{CJ}
+\]
+
+The first term `K_{a,Q}u(L)-a^{-2}F(L/a)` is **not known to vanish** merely because `u` solves the original Hartree Hessian Fredholm equations: those equations and the frozen Kummer operator are different operators. In particular, the spectral shift produces a **first-order** term `a^{-2}delta*u_0`, not solely the `delta²` shifted-operator defect.
+
+The Lean target `actual_Hartree_true_inner_spectral_C1_curvature_jump` is intended to instantiate (CJ) with the actual `actualHartreeTwoChannelInner`, `actualMomentLockedCanonicalInnerJet`, `actualOriginMatchedKummerValue` and `actualHartreeMatchedSpectralPhysicalValue`. Until the latest CI has succeeded and the precise theorem axioms are checked, treat it as **not accepted**.
+
+## 2. A C² correction is possible, but making its support arbitrarily thin worsens the derivative source
+
+Choose a fixed smooth `chi∈C_c^∞([0,1))` equal to one near zero, `phi(t)=t²chi(t)/2`. On `L≤y≤L+h`, let the right-hand correction be
+
+\[
+P_{L,h}(y)=\Delta_2 h^2\phi((y-L)/h),\qquad 0<h<L.
+\]
+
+The exact left jets are `P(L)=P'(L)=0`, `P''(L)=Delta_2`; the patch and all its derivatives vanish at the other end, so the actual field is C² at the inner join and unchanged beyond `L+h`. Changing variables gives for `m=0,1,2,3`
+
+\[
+\boxed{
+\|\partial_y^mP_{L,h}\|_{L^2([L,L+h])}
+=|\Delta_2|\,h^{5/2-m}\|\phi^{(m)}\|_{L^2([0,1])}.
+}
+\tag{PC}
+\]
+
+In particular, `∥P''∥₂ ∼ |Delta_2|√h` but `∥P'''∥₂ ∼ |Delta_2|/√h`. Thus (unlike a C¹ splice) a C² splice eliminates the artificial distributional delta produced by a jump of curvature, but the *classical derivative* of the full Kummer source contains a real cost `|Delta_2|/sqrt(h)`. Simply shrinking the patch width does not produce positive time order in a weighted source norm requiring one spatial derivative. For a generic nonconstant plateau cutoff, `∥phi'''∥₂>0`.
+
+To close the original physical PDE norm, one must prove (CJ)'s same-source `Delta_2(s)` bound, choose the actual moving `h(s)`, differentiate `L(s)` and `h(s)` in the patch, include the Hartree cross interactions from this patch, and close the entire weighted derivative and parameter-Lipschitz budget. These remain **unproved**.
+
+## 3. What counts
+
+Existing three C¹ joins, exact nonlinear PDE telescoping and source-locked outer C² jets are useful prerequisites but **not** proof of actual inner C² matching or a positive-order four-region residual. The retained manuscript numerator remains **11/13**, with §2.13 and the final PDE-generated Type-II theorem open. The original nonlocal Hartree PDE trajectory, projected inverse, finite recurrence and rate are still absent.
