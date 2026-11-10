@@ -78,7 +78,6 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_real_overlap_cutoff_third_hasDerivAt
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_overlap_cutoff_uniform_C3_spatial_scaling
-          set_option pp.all false in
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeOneLayerSpatialOverlapC3Audit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
