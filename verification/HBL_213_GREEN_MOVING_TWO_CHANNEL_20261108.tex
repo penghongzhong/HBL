@@ -9802,6 +9802,27 @@ interaction still require estimates from the same actual PDE.
 None of these estimates, or the needed projected Hamiltonian
 inverse, follows from an exact residual telescope.
 The revised original count remains \(11/13\).
+The source-derivative thickness cost can be made quantitative for
+the original \emph{local} physical Kummer part
+\(K_{a,Q}P=P''+A P'+(Q/a^2)P\), where
+\(A(y)=2/y+iy/(2a^2)\). On \(I=[L,L+h]\), define
+\(c_j=\|\phi^{(j)}\|_{L^2([0,1])}\),
+\(A_*=2/L+(L+h)/(2a^2)\), and
+\(B_*=2/L^2+(1/2+|Q|)/a^2\).
+Direct differentiation and the reverse triangle inequality yield
+\[
+\|(1+y^2)(K_{a,Q}P)'\|_{L^2(I)}
+\ge(1+L^2)|\Delta_2|h^{-1/2}
+ (c_3-A_*c_2h-B_*c_1h^2)_+.
+\]
+As \(c_3>0\), when
+\(A_*c_2h+B_*c_1h^2\le c_3/2\)
+this is at least
+\(\tfrac12(1+L^2)c_3|\Delta_2|h^{-1/2}\).
+This lower bound concerns the \emph{local Kummer source}
+contributed by this patch. It cannot be transferred to the full
+nonlocal Hartree PDE residual without controlling all possible
+cancellations against its interaction and moving terms.
 % END HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
 
 \end{document}
