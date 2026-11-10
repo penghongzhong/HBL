@@ -8988,4 +8988,55 @@ This is human paper algebra; no new Lean theorem,
 new axiom, independent source bound, or original environment
 acceptance is claimed. Revised original total remains \(11/13\).
 
+
+\paragraph{Exact physical-plateau cancellation removes the inner \(C^2\) forcing mismatch.}
+There is a stronger consequence of the original
+\texttt{actual\_Hartree\_moment\_locked\_plateau\_scaled\_source}
+identity, which uses the same genuine quartic Hartree
+interaction, both real projected speed channels and the
+physical \(a^{-2}\) pullback:
+\[
+ S_{\rm in}(y)+a^{-2}F_o(y/a)=0,\qquad0<y\le L.
+\]
+For the original source-selected spectral correction
+\(F_{\rm cor}=F_o-\delta u_0\), this becomes
+\[
+ S_{\rm in}(L)+a^{-2}F_{\rm cor}(L/a)
+ =-a^{-2}\delta u_0(L/a).
+\]
+Consequently the previous precise inner second-jet
+identity simplifies to the genuinely \emph{same-PDE}
+formula
+\[
+ \boxed{
+ \Delta_2=u_{\rm inner}''(L)-v_{\rm corrected}''(L)
+  =D_{\rm in}(L)+a^{-2}\delta u_0(L/a).
+ }
+\]
+Under the existing actual Fredholm shell hypotheses
+\(L>2\) and source continuity,
+\[
+ \boxed{
+ |\Delta_2|
+ \le\left(\frac{C_{\rm in}}{L^4}
+  +\frac{C_{\rm K}(\mu,\theta)}{a^2}\right)
+   (\|F_+\|_{2,7/4}+\|F_-\|_{2,7/4})
+  +a^{-2}|\delta|\,|u_0(L/a)|.
+ }
+\]
+This is an \emph{algebraic source cancellation}
+using existing verified source types and an already
+proved plateau theorem: no free curvature source,
+independent \(F_o(L/a)\) trace bound or prescribed
+blowup rate is needed. Its dedicated Lean composition
+\texttt{ActualHartreeInnerSpectralC2PlateauSourceLock.lean}
+is submitted for separate strict CI; the complete
+second-jet difference estimate is not yet itself a
+strictly accepted theorem. The inner quadratic patch
+still has an explicit third-derivative and moving-time
+budget; the original Hartree nonlinear residual,
+parameter Lipschitz, PDE orbit and Type-II dynamical
+selection remain unproved. The original count stays
+\(11/13\).
+
 \end{document}
