@@ -372,3 +372,39 @@ unresolved \(R^{-1}\) loss; a stronger radial cancellation argument
 would be needed before claiming radius-independent control there.
 This calculation is not yet a Lean certificate.
 **Official original acceptance stays 11/13.**
+
+
+## 7. Origin-uniform upgrade via explicit A₂ weights (10 November; paper result)
+
+The \(R^{-1}\) loss in (R2)–(R3) is a loss of the
+*elementary annular Plancherel argument*, not of the true
+Hartree nonlocal Hessian. The exact multiplier is
+\(\nabla\mathcal I=6\nabla(-\Delta)^{-1/2}\).
+For \(\omega(x)=|x|^{-2}\in A_2(\mathbb R^3)\),
+the published \(A_2\)-weighted Riesz theorem implies
+\[
+ \big\||x|^{-1}\nabla\mathcal If\big\|_2
+ \le6C_\omega\big\||x|^{-1}f\big\|_2.
+\]
+For \(f(x)=W(|x|)^3F(|x|)\), radial integration converts
+these spaces to \(L²(dr)\), yielding **globally**
+\[
+ \|\partial_r\mathcal I(W^3F)\|_{L²(dr)}
+ \le6C_\omega\|F\|_{L²(dr)},\quad
+ \|(1+r²)\partial_r[W^3\mathcal I(W^3F)]\|_2
+ \le(6C_\omega+2\sqrt3)\|F\|_2.
+\]
+Thus **the previously displayed inner-radius \(R^{-1}\)
+defect is completely removed for the actual fixed-bubble
+nonlocal Hessian**, not merely hidden in a constant.
+The full proof, explicit \(A_2\) verification,
+source and operator domain and an independent Mellin proof
+are in [HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md](HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md).
+Reference: T. P. Hytönen, *Annals of Mathematics*
+175 (2012), 1473–1506, DOI 10.4007/annals.2012.175.3.9.
+This is an **external published harmonic-analysis theorem**,
+not a Lean axiom and not a full moving Hartree quartic
+source derivative or a spectral/energy inverse.
+All remaining gates are unchanged; official
+original acceptance **11/13**.
+
