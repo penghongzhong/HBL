@@ -7981,4 +7981,73 @@ remains at paper level, not a new Lean axiom or
 original-environment acceptance.
 The acceptance count stays \(11/13\).
 
+
+\paragraph{Full original quartic Hartree source: a global nonlinear \(H^1\) difference estimate.}
+The same weighted \(A_2\) argument extends from the real
+linearized Hessian to the \emph{complete original} nonlocal
+\(\mathcal N_{\rm H}(V)=\mathcal I(|V|^4)|V|^2V\)
+when one keeps the exact stationary-bubble subtraction.
+Let \(V=W+u\), \(M=\max(1,\|V\|_\infty)\),
+\(S=\|(1+r^2)|V|^3\|_\infty\),
+\(U=\|u\|_{L^2(dr)}\),
+\(H=\|(1+r^2)u'\|_{L^2(dr)}\), and
+\[
+ A=\kappa_{\rm H}\left(
+ 4\pi\||V|^4-W^4\|_{L^\infty(\mathbb R^3)}
+ +\||V|^4-W^4\|_{L^1(\mathbb R^3)}\right).
+\]
+These are \emph{functionals of the genuine full field},
+not independent source or decay hypotheses.
+The actual Riesz potential difference
+\(\Delta P=\mathcal I(|V|^4-W^4)\) obeys
+\[
+ \|\Delta P\|_\infty\le A,\qquad
+ \|(\Delta P)'\|_{L^2(dr)}
+   \le24 C_{\rm A2}M^3U .
+\]
+For \(Q(z)=|z|^2z\),
+\[
+ |Q(V)-Q(W)|\le3M^2|u|,\qquad
+ |(Q(V)-Q(W))'|
+ \le3M^2|u'|+6M|u||W'|.
+\]
+Since \(P_W=\mathcal I(W^4)=3W^2\) and
+\(\|(1+r^2)(W^3)'\|_{L^2(dr)}=3\sqrt\pi/4\),
+differentiating the \emph{exact} full nonlinear identity
+\[
+ \mathcal N_{\rm H}(V)-\mathcal N_{\rm H}(W)
+  =\Delta P\,Q(V)+P_W[Q(V)-Q(W)]
+\]
+gives
+\[
+ \boxed{\begin{aligned}
+ \|(1+r^2)\partial_r[
+   \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)]\|_2
+ \le{}&
+  (24C_{\rm A2}SM^3+9M^2+18M)U+9M^2H\\
+ &+A\bigl(3\sqrt\pi/4+3M^2H+6MU\bigr),
+ \end{aligned}}
+\]
+and
+\[
+ \|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)\|_2
+ \le A M^2(\sqrt{\pi/2}+U)+9M^2U .
+\]
+All these inequalities are valid on \(r>0\), without
+an artificial inner-radius cutoff or a separate
+postulated Riesz-gradient envelope, for smooth fields
+with the displayed finite norms.
+The decomposition is essential: bounding
+\((1+r^2)W'\) in \(L^2(dr)\) directly would fail.
+This is a \emph{paper-level full-quartic source
+inequality}, not yet a proof that the actual
+source-selected four-region field satisfies
+time-positive or parameter-Lipschitz estimates.
+The local moving cutoff and
+spectral/adjoint-Hartree inverse, true PDE orbit
+and dynamically generated Type-II rate remain open.
+The full derivation is
+\texttt{verification/HBL\_213\_FULL\_NONLINEAR\_HARTREE\_A2\_SOURCE\_DIFFERENCE\_20261110.md}.
+No new original Lean theorem is accepted: \(11/13\).
+
 \end{document}
