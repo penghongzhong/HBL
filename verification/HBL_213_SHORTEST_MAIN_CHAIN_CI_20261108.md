@@ -1989,3 +1989,34 @@ The original decoded log checks **six** exact theorem types and six matching axi
 **Shortest implementation:** retain the already strictly audited fixed Kummer \(K_0\) exact quadratic source cancellation (CI 42565184656), three spectral-corrected \(C^1\) interfaces (CI 42648994008), and nonlinear PDE telescope (CI 42648496792). Next primary analytic task is the **nonlocal projected Hartree smoothing/energy inequality** with source-faithful \(X_s,Y_s\), and the actual nonlinear forcing in the corresponding weighted \(L_s^2\) norm. Preserve genuine two-channel modulation and dynamic sharp exponent as second stage.
 
 **Formal original revised 13-environment count: 11/13 (84.62%), unchanged.**
+
+
+### Nonlocal Hartree spectral assets and missing continuous-resolvent gate
+
+The existing public Lean module HBL/WeightedHartreeBirmanSchwinger.lean
+explicitly builds the real radial conjugated original logarithmic
+inverse-square Hartree kernel
+\(8\pi\kappa_{\rm H}W(r)W(\rho)\log[(r+\rho)/|r-\rho|]\).
+Its named declarations include weightedHartreeKernel_sq_integrable,
+weightedHartreeOperator_kernel_certificate,
+weightedHartreeOperator_selfAdjoint,
+weightedHartreeOperator_compact and
+weightedBirmanSchwingerOperator_compact. These are concrete source
+producers for the **static compact nonlocal perturbation** and should
+be REUSED, not re-proved under a new synthetic kernel.
+
+The actual non-selfadjoint Hamiltonian matrix still requires
+positive-energy limiting absorption, removal of zero and other
+embedded eigenvalues, true generalized threshold projection,
+and a global weighted dual-Kato bound with nonautonomous modulation.
+The October 2026 Taegyu Kim *NLS* preprint explicitly cites a
+separate nonzero-embedded-eigenvalue exclusion to obtain its
+spacetime Morawetz estimate. No corresponding original Hartree
+exclusion theorem or resolvent smoothing CI has been
+verified in this HBL audit.
+
+**Hence the new one-point-of-failure for the proposed shorter
+nonresonant route is the actual Hartree spectral smoothing estimate,
+NOT the scalar L2 power integral.** Keep the older frozen-Kummer
+physical profile alternative available if this new spectral gate
+is equally difficult. No extra original-paper claim: 11/13.
