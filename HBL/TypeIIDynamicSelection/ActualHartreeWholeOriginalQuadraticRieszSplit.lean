@@ -103,4 +103,48 @@ theorem actual_Hartree_original_quartic_Riesz_second_order_split
         radialHartreePotential f1 r + radialHartreePotential f2 r := by
       rw [actual_Hartree_radial_original_potential_add f0 f1 r h0 h1]
 
+/-- Exact full ORIGINAL quartic Hartree nonlinear quadratic remainder,
+including the complete Riesz potential and the genuine complex cubic.
+The three hypotheses are only absolute convergence of the original
+Riesz density rows; no quantitative source bound is postulated. -/
+theorem actual_Hartree_full_original_nonlinear_quadratic_split
+    (w : ℝ → ℝ) (u : ℝ → ℂ) (r : ℝ)
+    (h0 : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        ‖(w rho : ℂ)‖ ^ 4) (Ioi (0 : ℝ)))
+    (h1 : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualHartreeComplexDensityLinear (w rho : ℂ) (u rho))
+      (Ioi (0 : ℝ)))
+    (h2 : IntegrableOn
+      (fun rho => rho * hartreeRadialLog r rho *
+        actualHartreeComplexDensityRemainder (w rho : ℂ) (u rho))
+      (Ioi (0 : ℝ))) :
+    let p0 := radialHartreePotential
+      (fun rho => ‖(w rho : ℂ)‖ ^ 4) r
+    let p1 := radialHartreePotential
+      (fun rho => actualHartreeComplexDensityLinear
+        (w rho : ℂ) (u rho)) r
+    let p2 := radialHartreePotential
+      (fun rho => actualHartreeComplexDensityRemainder
+        (w rho : ℂ) (u rho)) r
+    let pFull := radialHartreePotential
+      (fun rho => ‖(w rho : ℂ) + u rho‖ ^ 4) r
+    let q0 := actualHartreeComplexCubic (w r : ℂ)
+    let q1 := actualHartreeComplexCubicLinear (w r : ℂ) (u r)
+    let q2 := actualHartreeComplexCubicRemainder (w r : ℂ) (u r)
+    (pFull : ℂ) * actualHartreeComplexCubic ((w r : ℂ) + u r) -
+      ((p0 : ℂ) * q0 + ((p0 : ℂ) * q1 + (p1 : ℂ) * q0)) =
+      (p0 : ℂ) * q2 + (p1 : ℂ) * (q1 + q2) +
+        (p2 : ℂ) * actualHartreeComplexCubic ((w r : ℂ) + u r) := by
+  have hp := actual_Hartree_original_quartic_Riesz_second_order_split
+    w u r h0 h1 h2
+  have hq := (actual_Hartree_complex_Taylor_polynomial_identity
+    (w r : ℂ) (u r)).2
+  dsimp only
+  rw [hp, hq]
+  push_cast
+  ring
+
+
 end HBL.TypeIIDynamicSelection
