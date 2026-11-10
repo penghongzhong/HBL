@@ -17,7 +17,7 @@ and frozen-Kummer multiplier are visible inputs, not PDE rate conclusions.
 noncomputable section
 set_option autoImplicit false
 open Set MeasureTheory Filter
-open scoped Topology
+open scoped Topology Interval
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.Kummer
 open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
