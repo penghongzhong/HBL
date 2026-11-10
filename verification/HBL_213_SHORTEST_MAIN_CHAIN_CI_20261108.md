@@ -1930,3 +1930,27 @@ without a separately assumed scale-decay bootstrap or a prescribed sharp physica
 This rules out proving that particular full nonresonant backward estimate using the **magnitude-only** \(\ell^{5/2}\) commutator estimate. It does **not** give a lower bound on the true nonlinear source: cancellations, new physical corrections or projected oscillatory inverse estimates could improve it, but remain unproved.
 
 **The original revised 13 environments remain 11/13 (84.62%); §2.13 and the true dynamic Type-II main remain unclosed.**
+
+
+### 10 Nov 2026 — delete one unnecessary Kummer main-chain derivative via already strict fixed-basis PDE cancellation
+
+**Shortest physical §2.13 source chain, now synchronized with the TeX:** Freeze ONE original Kummer pair \(K_0\), keep the original real two-speed Cramer-corrected three-Riesz quartic Hartree forcing, and define
+\[
+\delta(s)=(\theta(s)-\theta_0)-i(\mu(s)-\mu_0),\qquad
+u_1=\mathcal G_{K_0}[\delta u_0;0,0].
+\]
+The **actual moving-coefficient Hartree PDE plateau**, including its original inner Fredholm source channels, satisfies the exact already verified identity
+\[
+\mathcal L^{(a)}_{\mu(s),\theta(s)}(u_0-u_1)
+ +\mathcal S_{\mathrm{inner}}=-a(s)^{-2}\delta(s)u_1,
+\]
+not a synthetic source-order assumption. This *eliminates the first-order spectral mismatch* and makes the spatial residual quadratic in \(\delta\) once the already proved original Volterra estimate is invoked. Source-faithful direct Lean terminal:
+**CI [42565184656](https://github.com/penghongzhong/HBL/actions/runs/42565184656), original job 128990057404, Success**.
+
+The SAME corrected whole-four-piece original field has its three classical \(C^1\) joins strictly accepted in **[CI 42648994008](https://github.com/penghongzhong/HBL/actions/runs/42648994008), original job 129269904089**. Its exact full nonlinear PDE telescope is strictly accepted in **[CI 42648496792](https://github.com/penghongzhong/HBL/actions/runs/42648496792), original job 129268151514** (identity only). The original job logs of all three CIs confirm pinned Lean/Mathlib, trust-zero warning-as-error and exact theorem/axiom audit; no unapproved axiom is introduced.
+
+**Remove from the *load-bearing main proof*, but retain historical Lean source**: differentiating an entire time-dependent origin-Kummer fundamental pair. In the frozen-basis proof, \(\delta_s=\theta_s-i\mu_s\); fixed-endpoint differentiation of \(u_1\) instead needs \(\mathcal G_{K_0}[\delta_su_0+\delta u_{0,s}]\), plus actual moving-endpoint terms. The physical Cramer source-time derivatives and true Hartree nonlocal four-region nonlinear residual remain essential.
+
+**CRITICAL unproved producer:** the dynamic spectral pair \((\mu(s),\theta(s))\), the selected real Cramer speed and the actual physical strong Hartree orbit must be identified and controlled *together*, with PDE-derived \(\delta_s\), endpoint derivative, weighted positive-order residual, and parameter Lipschitz. The existing algebraic fixed-basis cancellations do NOT prove this physical source-time estimate. This is the one remaining quantitative parametrix interface that should replace the expanding hierarchy of auxiliary moving-basis statements.
+
+**Formal original acceptance unchanged at 11/13; no previously accepted CI is re-counted.**
