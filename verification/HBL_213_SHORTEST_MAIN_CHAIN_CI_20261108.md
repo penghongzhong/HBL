@@ -3551,3 +3551,22 @@ For **smooth compactly supported radial** forcing \(F\), the regular radial zero
 **Scope:** This closes only the original frozen **phase-channel** zero-energy algebra on paper. The source of the moving Hartree four-region packet has NOT been proved compactly supported or moment-orthogonal; neither the fully nonlocal **real** block, coupled generator's spectral/Kato smoothing, residual time gain, parameter Lipschitz, true physical orbit nor dynamical Type-II rate is obtained. This calculation has **no new Lean 4.35.0-rc3 --trust=0 CI**. Earlier exact-target CI [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509) and [42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900) remain Success under their existing assumptions, and were independently re-read in original job logs this run. This is no basis for promoting an auxiliary statement to an original paper environment. **Original revised acceptance stays 11/13 (84.62%).**
 
 <!-- END HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110 -->
+
+
+<!-- HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110 -->
+### 10 November 2026 — exact full original *nonlocal* Hartree Hessian spectrum and stationary projected inverse (paper, not Lean)
+
+New [full mathematical derivation](HBL_213_EXACT_CONFORMAL_HARTREE_HESSIAN_SPECTRUM_20261110.md) is now synchronized with HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex.
+For \(W=(1+r^2)^{-1/2}\), \(\kappa_{\rm H}=3/\pi^2\), and stereographic \(\Xi:\mathbb R^3\to\mathbb S^3\), the **actual** nonlocal Riesz operator satisfies
+\(\mathcal I(W^4\Phi\circ\Xi)=(\kappa_{\rm H}/2)W^2\mathscr K\Phi\circ\Xi\) with spherical kernel eigenvalues \(2\pi^2/(k+1)\). This exactly reduces the phase and real stationary Hessians to
+\(h_k^-=4k(k+2)\) and \(h_k^+=4k(k+2)-6-12/(k+1)\).
+
+**Proved as paper mathematics:** one real negative degree-zero mode, four real degree-one neutral modes (one radial), positive real modes \(k\ge2\); phase constant resonance and positive modes \(k\ge1\). Sharp physical-energy coercivity on the corresponding spherical projections: \(4/5\) (phase) and \(22/35\) (real). The exact projected stationary elliptic inverses, for genuine \(F\) with \((1+r^2)F\in L^2(\mathbb R^3)\), obey
+\(\|g_-\|_{\dot H^1}\le\sqrt{5/48}\|(1+r^2)F\|_2\)
+under \(\int WF\,dx=0\), and
+\(\|g_+\|_{\dot H^1}\le(\sqrt{35}/22)\|(1+r^2)F\|_2\)
+under zero degree-zero and degree-one spherical projections. No independent source-envelope hypothesis, fake physical radius gain or NLS substitution is used.
+
+**Important boundary:** These are **static elliptic** physical Hessian results, not time-dependent Hamiltonian spectrum or adjoint Kato smoothing: \(W\partial_t\Phi\) has a different weight from the \(W^5\) spherical elliptic output, and the coupled matrix evolution is not sphere-diagonal. No real moving four-region Hartree residual time gain, parameter Lipschitz, PDE orbit or dynamic Type-II rate has been established. The new derivation has **no new pinned --trust=0 Lean compilation / #print axioms**. Older CIs 42536552509 and 42854633900 retain their exact historical strict successes only. Official original revised environment tally remains **11/13 (84.62%)**; neither §2.13 nor final theorem is accepted.
+
+<!-- END HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110 -->
