@@ -9779,12 +9779,29 @@ In particular, the \(L^2\) curvature is \(O(|\Delta_2|\sqrt h)\),
 whereas the derivative of the resulting original Kummer source
 contains \(O(|\Delta_2|/\sqrt h)\) from \(P'''\).
 Shrinking \(h\) improves the former and worsens the latter.
-The genuine time derivatives of \(L\), \(h\), \(\Delta_2\),
-all moving coefficients, and the complete nonlocal Hartree
-interaction with this patch still require estimates from the
-same actual PDE. None of these estimates, or the needed
-projected Hamiltonian inverse, follows from an exact residual
-telescope. The revised original count remains \(11/13\).
+The genuine time derivative at fixed physical \(y\)
+makes the interface-transport cost explicit. Writing
+\(\xi=(y-L(s))/h(s)\) on the open moving patch gives
+\[
+\partial_sP_{yy}=\Delta_{2,s}\phi''(\xi)
+ -\frac{\Delta_2}{h}(L_s+\xi h_s)\phi'''(\xi),
+\]
+and hence
+\[
+\|\partial_sP_{yy}\|_{L^2([L,L+h])}
+\le|\Delta_{2,s}|\sqrt h\|\phi''\|_2
+ +|\Delta_2|h^{-1/2}
+   \bigl(|L_s|\|\phi'''\|_2+|h_s|\|\xi\phi'''\|_2\bigr).
+\]
+This is an interior material-time identity. Distributional
+differentiation at the moving junction belongs to the entire
+\(C^2\) glued field; its interface-measure cancellation requires
+the actual matching equations. The full time derivatives of
+the moving coefficients and complete nonlocal Hartree
+interaction still require estimates from the same actual PDE.
+None of these estimates, or the needed projected Hamiltonian
+inverse, follows from an exact residual telescope.
+The revised original count remains \(11/13\).
 % END HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
 
 \end{document}
