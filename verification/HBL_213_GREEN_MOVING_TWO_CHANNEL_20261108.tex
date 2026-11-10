@@ -10223,4 +10223,90 @@ remain unproved. This is paper algebra without new Lean
 is \(11/13\).
 % END HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110
 
+
+
+% BEGIN HBL_EXACT_MOVING_CONFORMAL_HARTREE_DILATION_20261110
+\medskip
+\noindent\textbf{The exact moving-scale and phase equation, including the full nonlocal Hartree dilation commutator.}
+A fixed conformal chart does not alone describe the moving
+four-region construction. For the original physical operator
+\(\mathcal H(u)=-\Delta u-\kappa_{\rm H}(|x|^{-2}*|u|^4)|u|^2u\),
+the genuine energy-critical scaling
+\((\mathsf S_\rho u)(x)=\rho^{1/2}u(\rho x)\) satisfies
+\[
+ \mathcal H(\mathsf S_\rho u)
+   =\rho^{5/2}\mathcal H(u)(\rho x),\qquad
+ \mathcal H'(u)[\Lambda u]-\Lambda\mathcal H(u)
+   =2\mathcal H(u),\quad \Lambda=\tfrac12+x\cdot\nabla .
+\]
+The derivative here is the real Fr\'echet derivative of the
+\emph{complete quartic nonlocal convolution}, not the derivative of
+an artificially local nonlinear term. In round-sphere coordinates
+\(h=\xi_4\), \(m=(1-h)^2/4\), and
+\(u=W\Phi\circ\Xi\), one computes
+\[
+ \Lambda(W\Phi\circ\Xi)=W(D\Phi)\circ\Xi,\qquad
+ D=\nabla_{\mathbb S^3}h\cdot\nabla_{\mathbb S^3}-h/2 .
+\]
+Writing \(A=3-4\Delta_{\mathbb S^3}\) and
+\(\mathcal M(\Phi)=A\Phi-
+ \frac{\kappa_{\rm H}}2\mathscr K(|\Phi|^4)|\Phi|^2\Phi\),
+the exact identities are
+\[
+ [A,D]=-2hA,\qquad [mA,D]=2mA,\qquad
+ \mathcal M'(\Phi)[D\Phi]
+   =\nabla h\cdot\nabla\mathcal M(\Phi)
+     -\frac{5h}{2}\mathcal M(\Phi).
+\]
+Thus for \(\mathcal R(\Phi)=m\mathcal M(\Phi)\),
+\[
+ \mathcal R'(\Phi)[D\Phi]-D\mathcal R(\Phi)
+   =2\mathcal R(\Phi).
+\]
+The \emph{entire} nonlinear Hartree scaling-transport commutator
+therefore has an exact source-algebraic form; no separate
+high-derivative scaling-commutator envelope is required.
+This assertion does not estimate the resulting physical source.
+
+Indeed, for the actual moving physical representation
+\[
+ u(t,x)=e^{i\gamma(t)}\lambda(t)^{-1/2}
+ W(x/\lambda)\,
+ \Phi(s,\Xi(x/\lambda)),\quad
+ s_t=\lambda^{-2},\quad
+ b=\lambda_s/\lambda,\quad
+ \vartheta(s)=\gamma(t(s)),
+\]
+the \emph{complete} original Hartree PDE becomes
+\[
+ \boxed{\quad
+ i\Phi_s=\mathcal R(\Phi)+\vartheta_s\Phi+i bD\Phi .
+ \quad}
+\]
+In particular, the scaling transport and phase terms cannot be
+discarded when using the static Hessian's spherical harmonic
+coefficients.
+
+For a piecewise \(C^3\) four-region packet with genuine \(C^1\)
+traces at all three moving interfaces, the physical Laplacian
+and the first time derivative have no interface Dirac measures.
+Nevertheless, if its second derivatives have jumps,
+\[
+ \partial_r^3 U
+ =(\partial_r^3U)_{\mathrm{piecewise}}
+ +\sum_{j=1}^3[\partial_r^2U]_{R_j}\,\delta_{R_j}.
+\]
+Consequently, the required \emph{differentiated} physical source
+norm must still control these interface measures or enforce real
+\(C^2\) repairs. The previous sharp \(L^{3/2}\) local patch loss
+cannot be erased merely by citing the verified three \(C^1\)
+joins or the finite-PDE telescoping identity.
+The exact proof, conventions and full nonlinear derivative are
+recorded in
+\texttt{verification/HBL\_213\_EXACT\_MOVING\_CONFORMAL\_DILATION\_COMMUTATOR\_20261110.md}.
+This is a paper calculation, not a new Lean-certified main theorem;
+the real time-positive, parameter-Lipschitz, finite-profile and
+dynamic Type-II closure remain unproved. The original count is \(11/13\).
+% END HBL_EXACT_MOVING_CONFORMAL_HARTREE_DILATION_20261110
+
 \end{document}
