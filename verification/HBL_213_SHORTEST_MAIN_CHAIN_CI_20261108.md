@@ -1902,3 +1902,31 @@ this proves the consequences of a real trap but does NOT
 claim to produce the Hartree PDE flux or the physical orbit.
 
 **Formal original count: 11/13 (84.62%), unchanged.**
+
+
+### 2026-11-10 — fifth exact physical power-scale theorem strictly accepted
+
+**CI [42774665314](https://github.com/penghongzhong/HBL/actions/runs/42774665314) — SUCCESS**, original GitHub job **129690252919**, evidence artifact **13743232284**, exact source commit **166d8ea2a5f7e549af454f39a83f81eaf510ccca**. The original decoded log confirms pinned Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, trust-zero warning-as-error, zero-output strict source replay, **five** exact type checks and **five** matching axiom prints. All five audits contain only propext, Classical.choice, Quot.sound. The initial 5-target CI 42774368917 failed only from reversed Real.log_le_log_iff direction, corrected without changing theorem type at 166d8ea2.
+
+New precise typed theorem:
+HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope
+in HBL/TypeIIDynamicSelection/ActualHartreeCoarseTypeIIClockFromMuTrap.lean. It proves from the actual *to-be-instantiated* two-channel modulation identities and trapped \(0<m\le\mu\le M\), \(q(s_0)>0\), \(\ell>0\),
+\[
+\boxed{\ell(s)^2q(s)[q(s_0)+4M(s-s_0)]^{1/(4M)}
+       \le \ell(s_0)^2q(s_0)^{1+1/(4M)}, \quad s\ge s_0.}
+\]
+Along with the **same-CI kernel-verified** lower q bound
+\(q(s)\ge(m/M)[q(s_0)+4M(s-s_0)]\), it derives
+\[
+\ell(s)\le \ell(s_0)\sqrt{M/m}
+ \left(\frac{q(s_0)+4M(s-s_0)}{q(s_0)}\right)^{-1/2-1/(8M)},
+\]
+without a separately assumed scale-decay bootstrap or a prescribed sharp physical exponent. The displayed logarithmic moment-flux integral remains paper-level; its true Hartree orbit/relative-flux continuity and full projected mu_s producer are separate PDE obligations.
+
+**Quantitative limit of the naive shell estimate:** For the revised main theorem target \(\mu_\infty>9/16\), the asymptotic physical inverse-scale exponent is \(\beta_\infty=1/2+1/(8\mu_\infty)<13/18\). The existing bare size estimate \(O(\ell^{5/2})\) from the true moving-cutoff commutator gives only an available bound with power \(5\beta_\infty/2<65/36\), while undamped absolute Duhamel integration preserving an \(s^{-9/8}\) first correction requires a source exponent **strictly above \(17/8\)**. The *best threshold power deficit* is
+\[
+17/8-65/36=23/72>0.
+\]
+This rules out proving that particular full nonresonant backward estimate using the **magnitude-only** \(\ell^{5/2}\) commutator estimate. It does **not** give a lower bound on the true nonlinear source: cancellations, new physical corrections or projected oscillatory inverse estimates could improve it, but remain unproved.
+
+**The original revised 13 environments remain 11/13 (84.62%); §2.13 and the true dynamic Type-II main remain unclosed.**
