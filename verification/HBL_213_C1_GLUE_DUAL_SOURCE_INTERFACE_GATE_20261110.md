@@ -197,3 +197,81 @@ dual source estimate. Any exact PDE telescope remains an identity
 even if classical second derivatives do not exist at a join.
 
 **Official revised original count: 11/13.**
+
+
+## 5. Exact derivative-budget scaling of an actual \(a^{-2}\) physical pullback
+
+This calculation supplies a **concrete possible gain**, without postulating
+that the whole four-region residual has the required form.
+Let \(a\ge1\) and \(G\) be an absolutely continuous radial function
+with \(G\in L^2(0,\infty;dr)\) and
+\((1+r^2)G'(r)\in L^2(0,\infty;dr)\). Put
+\[
+ E_a(y)=a^{-2}G(y/a).
+\]
+The exact physical derivative and change of variables are
+\[
+ \partial_yE_a(y)=a^{-3}G'(y/a),\qquad
+ \|E_a\|_{L^2(dy)}=a^{-3/2}\|G\|_{L^2(dr)},
+\]
+\[
+ \begin{aligned}
+ \|(1+y^2)\partial_yE_a\|_{L^2(dy)}
+ &=a^{-5/2}\!
+   \left(\int_0^\infty
+           (1+a^2r^2)^2|G'(r)|^2\,dr\right)^{1/2}\\
+ &\le a^{-1/2}
+       \|(1+r^2)G'\|_{L^2(dr)},
+       \qquad a\ge1.
+ \end{aligned}
+ \tag{G8}
+\]
+The last inequality is simply
+\(1+a^2r^2\le a^2(1+r^2)\).
+
+Combining this **exact scale calculation** with the previously
+derived true Hartree Hessian sufficient source norms yields
+\[
+ \begin{aligned}
+ \mathcal D_-(E_a)
+ &\le2a^{-1/2}\|(1+r^2)G'\|_2
+     +\tfrac32a^{-3/2}\|G\|_2,\\
+ \mathcal D_+(E_a)
+ &\le2a^{-1/2}\|(1+r^2)G'\|_2
+     +\tfrac{33}2a^{-3/2}\|G\|_2 .
+ \end{aligned}
+ \tag{G9}
+\]
+The factors \(a^{-1/2}\), \(a^{-3/2}\) are **not assumed**:
+they come from \(dy=a\,dr\), the exact physical \(a^{-2}\)
+Kummer residual factor, and the Morawetz weight.
+The existing Lean producer
+\`actual_Kummer_physical_interface_repair_scaled_residual_exact\`
+already proves the \(a^{-2}\) pullback identity for the
+**original affine physical Kummer repair**. The corresponding
+full source derivative, curvature-modified repair, and
+four-region nonlinear Hartree source remain open.
+
+If an actual physical forcing admits
+\[
+ F_{\rm full}(s,y)=a(s)^{-2}G_s(y/a(s))
+\]
+*in exactly the norm consumed by the intended linear inverse*,
+the genuine same-source bound
+\(\|(1+r^2)G_s'\|_2+\|G_s\|_2\lesssim s^{-15/8}\)
+and a PDE-derived scale \(a(s)\gtrsim s^\rho\)
+would yield a spatial source factor \(s^{-\rho/2}\).
+In an **absolute** time-integral norm, if its propagator
+is actually bounded on that *same* source/energy space,
+one needs \(\rho>1/2\) to overcome the original quarter-power
+deficit: \(\int_s^\infty u^{-15/8-\rho/2}\,du
+=O(s^{-7/8-\rho/2})=o(s^{-9/8})\).
+**This is a conditional exponent comparison, not a Hartree inversion**.
+The source norm \(\mathcal D_\pm\) does **not** automatically give
+bounded absolute Duhamel evolution into energy, so (G9) alone
+cannot replace the required spectral/dual-Kato estimate.
+Moving-modulation, inner region, nonlocal cross terms,
+the unknown physical derivative of \(G_s\), and the actual
+growth rate of \(a(s)\) must be derived, not imposed.
+
+**Remaining acceptance: 11/13. No new strict Lean CI claimed.**
