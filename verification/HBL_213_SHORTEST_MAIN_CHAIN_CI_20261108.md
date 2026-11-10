@@ -2646,3 +2646,28 @@ derivative control or PDE inverse has been
 proved by this cutoff geometry alone. Its strict
 CI result must be read before claiming success.
 **11/13** unchanged.
+
+
+### A smooth physical-cutoff annulus shows a real half-time-power source deficit
+
+For the exact radial commutator of the *same original* cutoff
+\(\chi_R(r)=1-\mathrm{cutoff}(r/R)\), the smooth test
+\(f_R(r)=e\,\phi(r/R)\), \(\phi\in C_c^\infty((1,2))\),
+has \(C_R(f_R)=eR^{-2}\mathscr C(r/R)\) with
+\(\mathscr C=2\chi'\phi'+(\chi''+2\chi'/z)\phi\).
+For \(\mathscr C'\ne0\),
+\(\|(1+r²)C_R(f_R)'\|_{L²(R,2R)}
+=eR^{-5/2}\|(1+R²z²)\mathscr C'\|_2
+\asymp eR^{-1/2}\).
+The test \(e=s^{-9/8}\), \(R=s^{1/2}\)
+therefore produces \(s^{-11/8}\), **not**
+the target \(s^{-15/8}\). This does not assert the
+actual Hartree correction is such a test: it
+proves geometry and generic smoothness alone
+cannot supply the needed half-time-power.
+Actual same-orbit transport/spectral cancellation or
+a PDE-derived stronger physical source bound is required.
+This is paper analysis, not a new original environment.
+Full argument:
+[original source/commutator gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+**11/13**.
