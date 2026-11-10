@@ -3289,3 +3289,47 @@ Hartree source* parameter Lipschitz bound in the
 moving physical norm, real projected propagator,
 PDE orbit and Type-II rate are NOT proved. There is
 **no new accepted original revised environment: 11/13**.
+
+
+<!-- HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->
+## 10 November 2026 — original-source normalized overlap and physical-energy nonlinear bound
+
+**Original revised environments remain 11/13. Neither §2.13 nor the final Type-II theorem is accepted.**
+
+The manuscript now contains the fixed-interval derivation from
+`verification/HBL_213_NORMALIZED_MOVING_RADIUS_STABILITY_20261110.md`.
+The actual change y=L*x gives effective scale a/L and source
+G=L^2*(K_a e)(L*x). Under the explicitly stated weak-coefficient
+condition, the genuine zero-jet inverse has value/first/second
+derivative constants 2, 4, 18. Parameter differences are controlled
+by the original source differences, not an assumed inverse norm.
+The material source derivative still contains L_s*x*f_y; physical
+time-positive estimates of this term have not been proved.
+
+The corresponding exact Lean targets are in
+`ActualHartreeBackwardVolterraParameterDifference.lean`,
+`ActualHartreeMovingRadiusNormalizedC2Stability.lean`, and
+`ActualHartreeOriginalMovingRadiusPullback.lean`.
+This synchronization does not certify their build status. Only
+the original strict workflow and exact type/axiom evidence can
+certify those auxiliary statements; no new acceptance count is
+inferred from this documentation job.
+
+The additional paper proof in
+`verification/HBL_213_PHYSICAL_ENERGY_QUADRATIC_NO_SHELL_LOSS_20261110.md`
+controls the **entire original seven-linear nonlocal Hartree**
+Taylor remainder in physical dot-H1 by
+21*C_T*(norm_X(U)+norm_X(H))^5*norm_X(H)^2,
+with X=dot-H1 intersect L6 intersect L-infinity. It derives the
+unweighted physical potential-gradient bound from the exact
+Fourier multiplier, without a shell-volume factor. The actual
+four-region correction's X decay and the appropriate energy
+evolution inverse are NOT proved. In particular y=a*r multiplies
+the normalized radial gradient energy by a. This budget cannot
+be omitted. The weighted Fredholm/Kato-dual norm is a separate
+interface, not replaced by the physical-energy calculation.
+
+These are restricted mathematical advances and explicit remaining
+gates; there is no complete nonlinear PDE trajectory, finite
+recurrence, or dynamically selected Type-II rate in this entry.
+<!-- END HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->
