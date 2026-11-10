@@ -79,3 +79,38 @@ Thus the physical moving-patch contribution to the \(L^2_y\) time derivative of 
 \tag{MC}
 \]
 The \(h^{-1/2}|L_s|\) term is the true physical interface-transport cost. It is not a Kummer-basis artifact and cannot be omitted by invoking source C¹ matching or the finite nonlinear PDE telescope. Formula (MT) is an interior classical identity; distributional differentiation across the moving join must be performed for the **full C² glued field**, where matching conditions can cancel interface measures. No claimed positive time exponent or Lipschitz control follows from (MC) alone.
+
+
+## 5. A quantitative, two-sided *local-operator* obstruction to thin C² patching
+
+The cost \(\|P'''\|_2=|\Delta_2|h^{-1/2}\|\phi'''\|_2\) is not just a formal term. For the **original physical local Kummer part**
+\[
+K_{a,Q}P=P''+A(y)P'+BP,\qquad
+A(y)=\frac2y+\frac{iy}{2a^2},\quad B=\frac{Q}{a^2},
+\]
+its derivative on \(I=[L,L+h]\), \(0<h<L\), is *exactly*
+\[
+(K_{a,Q}P)'=P'''+A P''+(A'+B)P',
+\quad A'=-\frac2{y^2}+\frac{i}{2a^2}.
+\]
+Let \(c_j=\|\phi^{(j)}\|_{L^2([0,1])}\), \(j=1,2,3\), and define
+\[
+A_*=\frac2L+\frac{L+h}{2a^2},\qquad
+B_*=\frac2{L^2}+\frac{1/2+|Q|}{a^2}.
+\]
+The reverse triangle inequality gives a **genuine lower bound**
+\[
+\boxed{
+\|(1+y^2)(K_{a,Q}P)'\|_{L^2(I)}
+\ge(1+L^2)|\Delta_2|h^{-1/2}
+\bigl(c_3-A_*c_2h-B_*c_1h^2\bigr)_+ .
+}\tag{LB}
+\]
+Because \(\phi\) is not quadratic on all of \([0,1]\) (it must be compactly cut off), \(c_3>0\). Therefore in any regime where
+\(A_*c_2h+B_*c_1h^2\le c_3/2\),
+\[
+\|(1+y^2)(K_{a,Q}P)'\|_2
+\ge \tfrac12(1+L^2)c_3|\Delta_2|h^{-1/2}.
+\tag{LB'}
+\]
+This rules out the *specific* strategy of making the **local original-source derivative** arbitrarily small merely by taking a thin curvature-matching patch with fixed nonzero \(\Delta_2\). It does **not** prove a lower bound for the entire Hartree nonlinear residual: the nonlocal and moving pieces would have to be shown unable to cancel the local term. Conversely, a genuine cancellation must be established in that full residual rather than assumed. The missing producer is a sufficiently small same-source \(\Delta_2\) and a compatible thickness \(h\), plus the exact nonlocal and time-dependent terms.
