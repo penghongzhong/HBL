@@ -470,3 +470,30 @@ harder than the existing fixed-Kummer direct
 profile route. Treat dual-Kato as a **single
 well-specified alternative**, not as license
 to add an unlimited second theorem tree.
+
+
+## 8. Published HARTREE spectral producer: exact real radial zero-mode classification (10 November 2026)
+
+**Authoritative, equation-matched literature** (not the local quintic NLS analogue):
+
+* X. Li, C. Liu, X. Tang and G. Xu, *The nondegeneracy of positive bubble solutions for generalized energy-critical Hartree equations*, **Science China Mathematics** (published 29 May 2026), DOI **10.1007/s11425-025-2549-6**, original [arXiv:2304.04139](https://arxiv.org/abs/2304.04139), **Theorem 1.4** and equation **(1.11)**. This covers every \\(N\\ge3\\), \\(0<\\lambda<N\\) with \\(p=(2N-\\lambda)/(N-2)\\), including **our exact \\(N=3,\\lambda=2,p=4\\)** inverse-square quartic nonlocal Hartree operator. The bounded, vanishing-at-infinity kernel of the real linearized operator is exactly the span of the scaling and spatial translation derivatives. On the **radial** subspace only the scaling derivative remains.
+* X. Li, C. Liu, X. Tang and G. Xu, *Dynamics of radial threshold solutions for generalized energy-critical Hartree equation*, **Forum Mathematicum** **37** (2025), 1469–1502, DOI **10.1515/forum-2024-0301**, [arXiv:2310.14646](https://arxiv.org/abs/2310.14646), §2.5 equations **(2.8)–(2.10)** and the energy-class nondegeneracy discussion. This already defines the genuine **nonlocal** Hartree two-component Hamiltonian, so a local-NLS surrogate must not be used as the core resolvent.
+
+With the physical normalization \\(\\mathcal I f=\\kappa_{\\rm H}(|x|^{-2}*f)\\), \\(W=(1+|x|^2)^{-1/2}\\), the exact complex linearization at the real bubble has blocks
+\\[
+ L_-h=-\\Delta h-\\mathcal I(W^4)W^2h,\\qquad
+ L_+h=-\\Delta h-3\\mathcal I(W^4)W^2h
+       -4W^3\\mathcal I(W^3h),\\qquad
+ \\mathcal H_{\\rm H}=\\begin{pmatrix}0&-L_-\\\\L_+&0\\end{pmatrix}.
+\\]
+The published **elliptic nondegeneracy** gives \\(\\ker L_+\\cap\\{\\text{radial, bounded, decaying}\\}=\\mathrm{span}\\{\\Lambda W\\}\\) and \\(L_-W=0\\) follows directly from the ground-state identity. These are eligible as *cited external analytic inputs*, subject to exact normalization and function-space translation; **no new Lean axiom has been inserted**.
+
+**Still NOT supplied by elliptic nondegeneracy:** absence of nonzero embedded eigenvalues or troublesome threshold resonances of the **full coupled Hamiltonian** \\(\\mathcal H_{\\rm H}\\), a uniformly bounded projected limiting-absorption resolvent in the physically matching nonlocal weighted dual spaces, and the associated **adjoint Kato homogeneous smoothing**; neither is the required **actual four-region Hartree PDE source** factored and controlled in the corresponding dual smoothing norm. Static Cramer/Fredholm coercivity and a zero-kernel classification cannot be relabelled as a dispersive estimate. Specifically, the rigorous abstract bridge would require
+\\[
+ \\|A U_{\\rm H}(\\cdot)^*P_{\\rm nr}h\\|_{L^2(\\mathbb R;Y)}
+    \\le C\\|h\\|_{\\mathcal E},\\qquad
+ P_{\\rm nr}F(s)=A^*g(s),\\quad \\|g(s)\\|_Y\\le C_Fs^{-15/8},
+\\]
+from which the **dualized** inverse has tail \\(\\|\\epsilon(s)\\|_{\\mathcal E}\\le (2CC_F/\\sqrt{11})s^{-11/8}\\); this is conditional and does **not** assert it for the Hartree model. Any moving-flow perturbation must also be absorbed with uniform and Lipschitz estimates. In particular **one needs the adjoint estimate for the actual Hartree projected group**, rather than only a spatial elliptic Green bound. This identifies a falsifiable and much narrower spectral task than simply adding further Cramer identities.
+
+**Existing exact arithmetic certificate:** CI 42776359428 proves only the scalar square-tail integral. **No §2.13 acceptance; 11/13 remains exact.**
