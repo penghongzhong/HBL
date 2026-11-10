@@ -1565,7 +1565,7 @@ A useful worst-case conditional power audit is: suppose one later proves only
 and integration over the true moving slit gives
 \[
 |\Delta_{s,t}A|\le
- C_{\rm Frob}(R)\bigl(\sup_{\tau\in[s,t]} E(\tau)\bigr)
+ C_{\rm Frob}(R)\bigl(\sup_{\tau\in[\min(s,t),\max(s,t)]} E(\tau)\bigr)
  |t-s|\,|r_0(t)-r_0(s)|.
 \]
 **No extra \(R^2\) remains**: the \(r^2\) Wronskian/Frobenius gain is spent cancelling the potential \(r^{-2}\) time-source singularity. This is a power-counting implication, not a proved estimate for the actual physical time derivative, and is not a contradiction to the already accepted conditional theorem.
