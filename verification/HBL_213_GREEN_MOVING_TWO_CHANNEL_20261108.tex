@@ -8166,4 +8166,69 @@ local residual and the Hartree projected inverse.
 This is a paper-level theorem, not a new strict Lean
 certificate. The original acceptance is \(11/13\).
 
+
+\paragraph{Two-field Lipschitz estimate for the full original nonlocal nonlinearity.}
+The weighted radial estimate admits a genuine
+\emph{difference} version needed for subsequent
+parameter-dependent nonlinear iteration.
+Let \(u,v\) be two actual radial complex corrections,
+\[
+ \begin{gathered}
+ U_u=\|u\|_2,\ H_u=\|(1+r^2)u'\|_2,\quad
+ U_v=\|v\|_2,\ H_v=\|(1+r^2)v'\|_2,\\
+ D=\|u-v\|_2,\ J=\|(1+r^2)(u'-v')\|_2,\quad
+ K=1+\sqrt{\pi/2}\max(H_u,H_v),\\
+ A_{uv}=\frac{12}{\pi}K^3
+     (2\sqrt\pi J+\sqrt{3\pi}D),\quad
+ A_v=\frac{12}{\pi}K^3
+     (2\sqrt\pi H_v+\sqrt{3\pi}U_v),\\
+ B_{uv}=3K^2+3\sqrt\pi K(\sqrt\pi/2+H_v).
+ \end{gathered}
+\]
+The original quartic density differences have
+\(\|\mathcal I(|W+u|^4-|W+v|^4)\|_\infty
+ \le A_{uv}\) and
+\[
+ \|\partial_r\mathcal I(|W+u|^4-|W+v|^4)\|_2
+ \le24C_{\rm A2}K^3D .
+\]
+The complex cubic real-differential bound
+\(\|DQ(z)-DQ(w)\|\le6K W|z-w|\) for
+\(|z|,|w|\le KW\), combined with
+\(\|(1+r^2)WW'\|_2=\sqrt\pi/2\),
+proves the full nonlinear Lipschitz estimates
+\[
+ \boxed{\begin{aligned}
+ &\|(1+r^2)\partial_r[
+    \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)]
+     \|_2\\
+ &\quad\le(24C_{\rm A2}K^6+9K^2)D
+  +3K^2 A_{uv}(\sqrt\pi/4+H_u)\\
+ &\qquad\quad+\bigl[(3+A_v)B_{uv}
+        +36\sqrt\pi C_{\rm A2}K^5U_v\bigr]J,\\
+ &\|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)\|_2
+ \le A_{uv}K^2(\sqrt{\pi/2}+U_u)
+        +3(3+A_v)K^2D .
+ \end{aligned}}
+\]
+In particular, bounded \(U_u+H_u+U_v+H_v\)
+give local Lipschitz continuity of the true
+nonlocal quartic Hartree map in
+\(\|u-v\|_2+\|(1+r^2)(u'-v')\|_2\).
+The factor \(36\sqrt\pi C_{\rm A2}K^5U_vJ\)
+retains the essential derivative of the
+\emph{nonlocal density potential} of the second
+field. This is not a local-NLS substitution.
+
+The resulting field-to-source Lipschitz theorem
+does not prove Lipschitz dependence of the
+actual source-selected Fredholm/Kummer fields
+on a moving parameter: that producer and the
+full moving transport, the physical-time source
+gain, the Hartree projected inverse, and orbit
+remain open. The argument invokes the published
+weighted \(A_2\) theorem as a paper-level input,
+not a new Lean axiom, and does not change the
+original \(11/13\) acceptance.
+
 \end{document}
