@@ -73,6 +73,8 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_covers_moving_slow_slit
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_covers_moving_slow_slit
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeMovingSlitVariationAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -81,9 +83,11 @@ jobs:
           s=Path('evidence/audit.log').read_text()
           goal='HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_covers_moving_slow_slit'
           assert goal in s, 'missing exact #check'
+          goal2='HBL.TypeIIDynamicSelection.actual_Hartree_original_Cramer_shell_local_from_continuous_orbit'
+          assert goal2 in s, 'missing continuous-orbit exact #check'
           assert 'sorryAx' not in s and 'admit' not in s
           audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
-          assert len(audits)==1, f'expected one axiom report, got {len(audits)}'
+          assert len(audits)==2, f'expected two axiom reports, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
             names={v.strip() for v in report.split(',') if v.strip()}
