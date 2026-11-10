@@ -1831,3 +1831,21 @@ the genuine original §2.13 by adding further helper
 theorem environments. The precise producer or a
 proved projected-energy bootstrap must come first.
 
+
+
+### 10 November 2026 — strict Lean acceptance: coarse dynamically trapped Type-II clock
+
+**Strict Success:** [CI 42766649238](https://github.com/penghongzhong/HBL/actions/runs/42766649238), original job **129664601628**, original artifact **13739896709**, pinned source SHA **9134d8fa4329e821c9e26f2d52cdb44d149c813e**. Original raw job log confirms Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, a zero-output trust-zero warning-as-error compilation, exact check of the declared target **HBL.TypeIIDynamicSelection.actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap**, and the corresponding axiom audit. The only transitive axioms are **Classical.choice, Quot.sound, propext**. Initial failed CI 42766361617 / 42766406883 had a literal mean-value-interval endpoint elaboration bug, fixed at source SHA 9134d8fa without changing the mathematical assertion.
+
+The SINGLE terminal is in **HBL/TypeIIDynamicSelection/ActualHartreeCoarseTypeIIClockFromMuTrap.lean**. It proves directly from the actually needed future physical modulation equation \(q_s=4\mu\) and a genuine yet-to-be-established invariant PDE trap \(0<m\le\mu(s)\le M\), with \(q(s_0)>0\):
+\[
+q(s_0)+4m(s-s_0)\le q(s)\le q(s_0)+4M(s-s_0),
+\qquad q(s)>0,\qquad q(s)\to+\infty,\qquad q(s)^{-1/2}\to0.
+\]
+Neither the limiting \(\mu_\infty\), finite physical terminal time nor the power-law exponent is assumed. The actual Hartree physical trajectory, modulation-trap invariance, finite-\(T\) reconstruction and the global nonlocal four-region PDE still require separate proof; do not misdescribe this as a verified Hartree blowup orbit.
+
+**Independent completed success:** [CI 42764968763](https://github.com/penghongzhong/HBL/actions/runs/42764968763), original job **129659190491**, successfully audits all THREE true moving Cramer-slit geometric declarations, including the local continuous-orbit segment bridge. Pinned compiler, Mathlib, trust zero, warning-as-error, precise checks and only the three authorized axioms. It does not produce the quantitative PDE time source bound.
+
+**Paper correspondence:** The unnumbered two-stage proof plan in verification/typeii-minimal-main-replacement.tex and the extended original source in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex both retain the original theorem's sharp rate and its own pointwise \(|\mu_s(s)|\le Cs^{-1-\delta}\) condition. A weaker weighted L1 drift suffices for the asymptotic conversion ONLY, not that additional pointwise assertion.
+
+**Original revised manuscript remains 11/13 (84.62%).**
