@@ -6043,4 +6043,62 @@ investigate, \emph{not} an asserted oscillatory improvement, positive
 time order, finite-layer recursion, or Type--II rate. Original strict
 acceptance remains 11/13.
 
+
+\medskip
+\noindent\textbf{The same source's moving Green coefficient time calculus (10 November).}
+Fix one origin-normalized Kummer pair \(K\) on the physical annulus.
+Set \(r_0(s)=\ell(s)^{-1/16}/a(s)\), and let
+\(F(s,r)\) be the \emph{same} genuine quartic nonlocal Hartree Riesz
+source, adjusted by the unique two real Cramer-selected modulation
+directions. The two Green coefficients at the common fixed upper
+endpoint \(B\) are
+\[
+ A_*(s)=\int_{r_0(s)}^{B}
+    \frac{X(r)F(s,r)}{W(r)}\,dr,\qquad
+ B_*(s)=\int_{r_0(s)}^{B}
+    \frac{Y(r)F(s,r)}{W(r)}\,dr.
+\]
+Under the original interval-integrability, pointwise differentiability,
+and integrable source-time dominating conditions, as well as the actual
+physical parameter derivatives, the two (componentwise) Leibniz
+identities are
+\[
+\begin{aligned}
+ A_*'(s)
+ &=\int_{r_0(s)}^B
+     \frac{X(r)\partial_sF(s,r)}{W(r)}\,dr
+    -r_0'(s)\frac{X(r_0(s))F(s,r_0(s))}{W(r_0(s))},\\
+ B_*'(s)
+ &=\int_{r_0(s)}^B
+     \frac{Y(r)\partial_sF(s,r)}{W(r)}\,dr
+    -r_0'(s)\frac{Y(r_0(s))F(s,r_0(s))}{W(r_0(s))},
+\end{aligned}
+\]
+where the lower-endpoint velocity follows by the physical chain rule,
+\[
+ r_0'(s)=
+ \frac{-\frac1{16}\ell(s)^{-17/16}\ell'(s)a(s)
+           -\ell(s)^{-1/16}a'(s)}{a(s)^2}.
+\]
+The cross term in the joint source/endpoint difference is controlled,
+on its actual moving interval, by
+\(O(|t-s|\,|r_0(t)-r_0(s)|)\). Thus its time derivative vanishes
+without positing an independently vanishing error term.
+
+The original \emph{regular} coefficient \(B_*\) is already
+strictly audited in GitHub CI \texttt{42727196085}, original job
+\texttt{129535736440}, evidence \texttt{13723108682}. The
+original \emph{singular} coefficient \(A_*\) has now been coded in
+\texttt{ActualOriginGreenMovingSingularChannel.lean} and
+\texttt{ActualHartreeOnePhysicalMovingSingularGreenFullDerivative.lean};
+its separate strict CI \texttt{42728546668} is pending confirmation
+at this manuscript checkpoint, and is \emph{not} marked passed.
+For both, the source derivative majorants, differentiability of the
+physical path and the original Wronskian density bounds are explicit
+analytic premises. In particular these identities do not imply a
+uniform moving Kummer-basis derivative, the required weighted
+\(s^{-9/4}\) four-region PDE residual, the parameter-Lipschitz
+recurrence or the dynamically derived Type--II rate. The original
+section acceptance remains \(11/13\).
+
 \end{document}
