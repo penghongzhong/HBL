@@ -410,3 +410,63 @@ A successful CI verifies (N)'s scalar power integral **only**.
 The analytic dual-Kato operator estimate (M) is still the real
 physical PDE obstacle; neither it nor original §2.13 may be counted
 from that auxiliary scalar proof.
+
+
+### 7.1 Existing Hartree code that substantially reduces the new spectral task
+
+A branch source audit confirms
+HBL/WeightedHartreeBirmanSchwinger.lean has the **actual
+conjugated nonlocal kernel**
+\[
+ K_{\mathrm H}(r,\rho)
+ =8\pi\kappa_{\rm H}W(r)W(\rho)
+   \log\frac{r+\rho}{|r-\rho|},
+\]
+and the concrete declarations
+weightedHartreeKernel_sq_integrable,
+weightedHartreeOperator_kernel_certificate,
+weightedHartreeOperator_selfAdjoint,
+weightedHartreeOperator_compact,
+weightedBirmanSchwingerOperator_compact.
+The compact nonlocal kernel and its symmetry are
+**not missing in principle**; these are already encoded as
+Lean proofs and are promising dependencies to reuse, without
+creating yet another Hartree potential approximation.
+
+**But they are zero-energy/compact perturbation input only.**
+They do not prove the uniform positive-energy boundary
+values of the *non-selfadjoint matrix* Hartree resolvent,
+absence of nonzero embedded eigenvalues, or the global
+projected local-smoothing estimate (M). In Kim's
+October 2026 NLS preprint, the global Morawetz
+construction explicitly relies on a **separate companion
+result excluding nonzero embedded eigenvalues**
+(see its introductory Remark 1.2). An analogous
+**Hartree-specific** spectral exclusion is therefore
+an actual high-priority analytic gate, not a mere
+additional Lean tactic.
+
+The shortest honest new source chain is:
+\[
+\boxed{
+\begin{gathered}
+ \text{existing symmetric compact Hartree radial kernel}\\
+ \Downarrow\quad
+ \text{real nonlocal }L_\pm \text{ and exact zero modes}\\
+ \Downarrow\quad
+ \text{matrix resolvent + no embedded eigenvalues
+       + threshold limits}\\
+ \Downarrow\quad
+ \text{projected dual Kato / Morawetz in physical spaces}\\
+ \Downarrow\quad
+ \text{same four-region Hartree nonlinear source in }L_s^2Y_s\\
+ \Downarrow\quad
+ \text{physical stable inverse / actual one-orbit construction}.
+\end{gathered}}
+\]
+The first item has concrete original Lean producers.
+The last four arrows are **OPEN** and may be
+harder than the existing fixed-Kummer direct
+profile route. Treat dual-Kato as a **single
+well-specified alternative**, not as license
+to add an unlimited second theorem tree.
