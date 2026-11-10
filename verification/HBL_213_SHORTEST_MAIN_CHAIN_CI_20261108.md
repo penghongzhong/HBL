@@ -1529,3 +1529,17 @@ positive order, physical parameter Lipschitz or finite-layer recurrence.
 The absolute-Duhamel exponent obstruction is unchanged.
 **Original-paper acceptance remains 11/13**; neither Section 2.13 nor
 the dynamically derived final Type-II blowup theorem is closed.
+
+
+### 10 Nov — common Wronskian cancellation in BOTH original moving Green time channels
+
+**STRICT SUCCESS**, independently pinned [CI 42732663207](https://github.com/penghongzhong/HBL/actions/runs/42732663207), original job 129554267366, evidence artifact 13724284456. The original job log confirms Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, warningAsError, both exact #check types, and two #print axioms reports containing only propext, Classical.choice, Quot.sound (universe parameters permitted). File: HBL/TypeIIDynamicSelection/ActualHartreeBothGreenTimeRatiosNoLeftLoss.lean. For 0<r<=B<=scale and original normalized mode bounds ‖K.x(r)‖,‖K.y(r)‖<=G:
+    ‖X(r)/W(r)‖, ‖Y(r)/W(r)‖ <= G B.
+This follows from the *original* physical Wronskian |1/W|=r² and X=K.x/r, Y=K.y/r; it does NOT infer that physical Y is itself uniformly bounded.
+
+The same TRUE quartic Riesz source, same two real Cramer-selected speed channels and same physical moving r0(s)=ell(s)^(-1/16)/a(s) have been composed in:
+- ActualHartreeOnePhysicalBothMovingGreenJointNoRadius.lean, pinned CI [42732925914](https://github.com/penghongzhong/HBL/actions/runs/42732925914), **unaccepted until completed success**. It derives both time derivatives from the same original source and the above Wronskian estimates, with actual original Riesz source differentiability, domination, and moving-sliver geometry explicit.
+- ActualHartreeSingularGreenFrobeniusQuadraticRadius.lean, corrected CI [42733766825](https://github.com/penghongzhong/HBL/actions/runs/42733766825), **unaccepted until success**. The ORIGINAL regular Frobenius physical solution X(r)=1+O(r²) gives sharper |X/W| <= (1+(D+1)G B²) r² under the already existing origin-ODE certificate. Initial [42733342019](https://github.com/penghongzhong/HBL/actions/runs/42733342019) failed at Lean lines 54 and 62 due to specific rewriting and addition orientation mismatches; repaired directly from decoded logs at commit dc6dddddc6359aa93a3cbbd7f3b4f24683f87bbe.
+- ActualHartreeTrueSingularGreenFrobeniusMovingCross.lean, corrected CI [42733767288](https://github.com/penghongzhong/HBL/actions/runs/42733767288), **unaccepted until success**. It targets the true selected source's moving-slit cross estimate with an additional physical R² factor, requiring the original Riesz time-derivative majorant rather than a postulated time decay order.
+
+None of these static/local-in-time source-derivative interfaces supplies the four-region nonlocal PDE residual's positive time order, projected oscillatory time inversion, true parameter Lipschitz or dynamical II-Type rate. **Original main acceptance stays 11/13.** Do not count pending or auxiliary theorems as original environments.
