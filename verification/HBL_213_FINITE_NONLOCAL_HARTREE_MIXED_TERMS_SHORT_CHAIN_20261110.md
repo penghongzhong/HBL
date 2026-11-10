@@ -87,3 +87,93 @@ If the PDE-derived field bounds in (F2) and the \(p_j\) source sizes have an act
 **Proved here at paper level:** a concrete reduction of the finite nonlocal Hartree mixed-interaction source estimate to the *actual selected profile* \(X\)-budget, via the published weighted Riesz theorem; the whole quartic kernel is retained.
 
 **NOT proved:** the physical \(X\)-budget, residual time positive gain, parameter transport, Hartree projected inverse, strong orbit or final theorem. No new Lean axiom, no original environment increment. **11/13 (84.62%).**
+
+
+## 4. Exact time differentiation of the original nonlinear Riesz term under a moving bubble
+
+The **same original** nonlinear quartic Hartree map has a
+strict scale covariance, independent of any chosen Type-II rate:
+\[
+ V_\lambda(s,r)=\lambda(s)^{-1/2}V(s,r/\lambda(s)),
+ \quad
+ \mathcal N(V_\lambda)(s,r)
+ =\lambda(s)^{-5/2}\mathcal N(V(s,\cdot))(r/\lambda(s)).
+\tag{F7}
+\]
+For a correction \(u(s)\) define the genuine bubble-subtracted source
+\(\mathscr R(u)=\mathcal N(W+u)-\mathcal N(W)\).
+Under the same scale,
+\(\mathscr R_\lambda(s,r)=\lambda^{-5/2}
+\mathscr R(u(s))(r/\lambda)\).
+Writing \(\rho=r/\lambda(s)\), the ordinary chain rule yields
+the **exact material time derivative**
+\[
+ \boxed{\quad
+ \partial_s\mathscr R_\lambda(s,r)
+ =\lambda^{-5/2}\left[
+ D\mathscr R(u)[\partial_s u](\rho)
+ -\frac{\lambda_s}{\lambda}
+   \left(\frac52\mathscr R(u)(\rho)
+          +\rho\partial_\rho\mathscr R(u)(\rho)\right)
+ \right].
+ \quad}
+ \tag{F8}
+\]
+Here the complex-real Fréchet derivative is *not* replaced
+by a local-NLS expression. It is determined by
+\[
+ \begin{aligned}
+ D\mathcal N(V)[h]
+ &=\mathcal I\bigl(4|V|^2
+       \operatorname{Re}(\overline Vh)\bigr)\,|V|^2V\\
+ &\quad+\mathcal I(|V|^4)
+     \bigl(|V|^2h+
+          2\operatorname{Re}(\overline Vh)V\bigr),\\
+ D\mathscr R(u)[h]&=D\mathcal N(W+u)[h].
+ \end{aligned}
+ \tag{F9}
+\]
+The derivative is real-Fréchet on complex radial
+functions; the \(A_2\) estimates underlying (F1)
+give \(\|D\mathscr R(u)[h]\|_Y\le C_R\|h\|_X\)
+on bounded \(X\) balls by differentiation of the
+explicit polynomial/Riesz expression (or by the
+difference estimate and a justified smooth limit).
+
+For every \(F\in Y\), the elementary scale-invariant
+radial inequality
+\[
+ \|\,\rho F'(\rho)\,\|_{L^2(d\rho)}
+ \le\tfrac12\|(1+\rho^2)F'(\rho)\|_2
+ \quad\bigl(2\rho\le1+\rho^2\bigr)
+\]
+gives, with **no independent nonlocal source derivative**,
+\[
+ \boxed{\begin{aligned}
+ \|\partial_s\mathscr R_\lambda(s)\|_{L^2(dr)}
+ \le \lambda^{-2}\Big[
+ &C_R\|\partial_su(s)\|_X\\
+ &+\Big|\frac{\lambda_s}{\lambda}\Big|
+  \bigl(\tfrac52\|\mathscr R(u(s))\|_2
+       +\tfrac12\|(1+\rho^2)
+             \partial_\rho\mathscr R(u(s))\|_2\bigr)
+ \Big].
+ \end{aligned}}\tag{F10}
+\]
+The \(\lambda^{-2}\) factor follows from
+\(dr=\lambda\,d\rho\) and the original
+\(\lambda^{-5/2}\) Hartree critical scaling.
+
+**Load-bearing limitation:** (F8)–(F10) require
+the *actual* normalized physical profile to possess
+\(\partial_su\in X\) and its *PDE-selected* scale to
+possess \(\lambda_s/\lambda\); the current source-selected
+static Green/Cramer and \(C^2\) interface proofs do
+**not** produce either quantitative bound. The moving
+Kummer endpoints, selected two-channel speed and
+full nonlinear evolution are embedded in
+\(\partial_su\), and are not made small by this algebra.
+This is a correctly normalized **paper-level
+nonlocal source time-chain identity**, not a claimed
+new positive time order or Lean CI. Original count
+**11/13**.
