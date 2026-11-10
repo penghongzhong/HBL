@@ -7167,4 +7167,116 @@ order and its parameter Lipschitz are still
 \emph{unproved}; the formally accepted original
 tally remains \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Replacing one failed absolute backward integral by
+projected dual Kato smoothing (candidate main-PDE alternative).}
+A particularly relevant comparison is T.~Schmid,
+\emph{Blow up dynamics for the 3D energy-critical nonlinear
+Schr\"odinger equation}, \emph{Calc. Var. PDE} \textbf{65}
+(2026), article 69,
+DOI 10.1007/s00526-025-03240-x.
+The more recent work of T.~Kim,
+\emph{Smooth radial quantized Type II blow-up for the
+three-dimensional energy-critical nonlinear Schr\"odinger
+equation}, arXiv:2610.26127 (submitted 19 October 2026,
+\emph{preprint}), reports a forward modulation/energy
+construction using Kato smoothing and a global spacetime
+Morawetz estimate rather than a missing repulsive structure.
+These papers concern \emph{local NLS}, not Hartree;
+their prescribed/quantized exponents do \emph{not}
+replace our dynamically selected \(\mu_\infty\).
+
+For the \emph{original} stationary Hartree bubble \(W\), let
+\(I_2[f]=\kappa_{\rm H}(|x|^{-2}*f)\) and \(V_W=I_2[W^4]\).
+The true complex Hartree linearization has real components
+\[
+ \begin{aligned}
+ L_-h_2&=-\Delta h_2-V_WW^2h_2,\\
+ L_+h_1&=-\Delta h_1-3V_WW^2h_1
+           -4W^3I_2[W^3h_1],\\
+ \mathcal H_{\rm H}
+   &=\begin{pmatrix}0&L_-\\-L_+&0\end{pmatrix}.
+ \end{aligned}
+\]
+The last term of \(L_+\) is the \emph{genuine
+nonlocal Hartree derivative}; it cannot be
+replaced by a local NLS potential. The imaginary
+gauge and real scaling resonances, unstable
+direction and the retained triangular threshold
+coupling must be handled within the same
+physical projected domain.
+
+The proposed replacement for the particular
+nonresonant backward estimate is
+\[
+ \boxed{\quad
+ \left\|\int_s^\infty
+ U_{\rm H}(s,\sigma)P_{\rm nr}F(\sigma)\,d\sigma
+ \right\|_{X_s}
+ \le C_{\rm Kato}
+ \left(\int_s^\infty
+  \|F(\sigma)\|_{Y_\sigma}^2\,d\sigma\right)^{1/2}.
+ \quad}
+\]
+Here \(P_{\rm nr}\) is the \emph{actual}
+nonresonant projection and \(X_s,Y_s\) are
+the genuine energy and spatially weighted source
+spaces. Their compatibility with the nonlocal
+Hartree generator, moving modulation and
+current Fredholm--Kummer matching is
+\emph{not yet proved}; in particular the
+estimate cannot be assumed simply because
+the NLS analogue is known.
+
+If the \emph{entire physical} \(P_{\rm nr}F\)
+could be shown to satisfy
+\(\|F(s)\|_{Y_s}\le C_Fs^{-15/8}\), then the
+right-hand side would be
+\[
+ C_{\rm Kato}C_F
+ \left(\int_s^\infty\sigma^{-15/4}\,d\sigma\right)^{1/2}
+ =\frac{2C_{\rm Kato}C_F}{\sqrt{11}}s^{-11/8}
+ =\frac{2C_{\rm Kato}C_F}{\sqrt{11}}\,
+   s^{-1/4}s^{-9/8}.
+\]
+This is **one quarter-power better** than
+the required first-layer \(s^{-9/8}\) norm,
+whereas the ordinary absolute \(L_s^1\)
+primitive is \(s^{-7/8}\).
+Neither the proposed dual Kato mapping nor
+the necessary \emph{full four-region} physical
+\(Y_s\) source bound has been established.
+The currently proved \(s^{-15/8}\) calculation
+concerns a conditional static shell,
+so is not yet the input to this estimate.
+
+The most economical revised PDE chain is now:
+retain the already strict \emph{frozen} \(K_0\)
+real-source quadratic spectral cancellation
+and three \(C^1\) interfaces; prove the true
+Hartree resolvent/Kato estimate on the
+projected nonresonant space; control the full
+time-dependent source and Cramer modulation
+terms there; then close the nonlinear
+one-orbit construction and the dynamical
+two-stage rate. The proof does not need
+an additional hierarchy of abstract packet
+or moving-Kummer-basis environments.
+
+The purely scalar squared integral
+\(\int_s^\infty\sigma^{-15/4}\,d\sigma
+ =\frac4{11}s^{-11/4}\)
+has been added as an exact Lean target
+\texttt{actual\_Hartree\_shell\_squared\_source\_exact\_L2\_time\_tail}
+in the existing
+\texttt{ActualHartreeShellDuhamelExponent.lean}
+and submitted for six-target strict audit.
+Its passing would certify only this power
+calculation, never the Kato estimate,
+the original physical nonlinear source or
+the revised §2.13.
+Formal original-paper acceptance remains \(11/13\).
+
 \end{document}
