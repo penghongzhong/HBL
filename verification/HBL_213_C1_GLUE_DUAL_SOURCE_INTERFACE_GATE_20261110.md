@@ -571,3 +571,82 @@ and the current physical \(L^2\)/Lipschitz budgets.
 not a Lean CI acceptance or a time-positive PDE residual
 bound; they prescribe no physical scale or Type-II rate.
 Original theorem acceptance remains **11/13**.
+
+
+## 8. Exact original radial cutoff commutator source derivative: why C³, not just C², is needed
+
+The original \`actual_one_layer_physical_cutoff_radial_commutator\`
+already provides the genuine radial Laplacian commutator
+on a positive-radius overlap:
+\[
+ C_R(f):=[\partial_r^2+2r^{-1}\partial_r,\chi_R]f
+   =2\chi_R' f'+(\chi_R''+2r^{-1}\chi_R')f.
+\tag{C1}
+\]
+Differentiating this *same original commutator*, rather than
+replacing it by an arbitrary source atom, gives the exact identity
+\[
+ \boxed{
+ C_R(f)'=
+  2\chi_R'f''+
+  (3\chi_R''+2r^{-1}\chi_R')f'
+  +(\chi_R'''+2r^{-1}\chi_R''-2r^{-2}\chi_R')f .
+ }
+\tag{C2}
+\]
+The original cutoff is \(\chi_R=1-\mathrm{cutoff}(r/R)\).
+The existing strict source certifies
+\(|\chi_R'|\le C_1/R\) and
+\(|\chi_R''|\le C_2/R^2\);
+**a third derivative is genuinely needed for (C2)**.
+A new source module
+\`ActualHartreeOneLayerSpatialOverlapC3.lean\`
+derives, using the **same** original \(C^\infty\) cutoff,
+a fixed constant \(C_3>0\) for
+\(|\chi_R'''|\le C_3/R^3\), with a pinned
+trust-zero strict CI requested separately.
+The result is **not yet to be counted** until that CI
+has passed its original compilation and axiom audit.
+
+On the actual annulus \(R\le r\le2R\), \(R>0\),
+the coefficient bounds now give the *paper* inequality
+\[
+ \boxed{
+ |C_R(f)'(r)|
+ \le \frac{2C_1}{R}|f''(r)|
+    +\frac{3C_2+2C_1}{R^2}|f'(r)|
+    +\frac{C_3+2C_2+2C_1}{R^3}|f(r)|.
+ }
+\tag{C3}
+\]
+Consequently the physically weighted radial norm obeys
+\[
+ \begin{aligned}
+ &\|(1+r^2)C_R(f)'\|_{L^2(R,2R)}\\
+ &\quad\le (1+4R^2)
+ \bigg[
+  \frac{2C_1}{R}\|f''\|_{L^2(R,2R)}
+  +\frac{3C_2+2C_1}{R^2}\|f'\|_{L^2(R,2R)}
+  +\frac{C_3+2C_2+2C_1}{R^3}\|f\|_{L^2(R,2R)}
+ \bigg].
+ \end{aligned}
+\tag{C4}
+\]
+This does **not** assume a cutoff-gradient envelope or
+any time power: it calculates the real geometric cost.
+For growing shells, the coefficient of \(f''\) behaves as
+\(O(R)\) under the global Morawetz weight, so one must
+produce the corresponding *extra physical second-derivative
+smallness* or use a genuinely radius-adapted dual source space.
+In particular the \(C_3\) cutoff fact does not by itself
+resolve the earlier \(s^{1/4}\) Duhamel deficiency.
+
+The proof obligation is now explicit:
+\[
+ \text{actual physical }f,\,f',\,f''\text{ on the moving annulus}
+ \longmapsto \text{actual }C_R(f)' \text{ with its displayed radius costs},
+\]
+plus the true Hartree nonlocal commutator derivative,
+material time cancellation, source-selected two-channel
+motion, and eventual inverse estimate.
+**No original-environment promotion: 11/13.**
