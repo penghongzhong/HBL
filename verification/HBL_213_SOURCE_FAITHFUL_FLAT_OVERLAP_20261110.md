@@ -394,3 +394,62 @@ for the full coupled Hartree Hamiltonian.
 This exact deduction is at the **paper level**; no new
 strict Lean theorem or original environment has been
 certified for (S14)--(S15). **11/13**.
+
+
+## 7. Exact backward Volterra control closes the previous *local* \(E=\|u''-v''\|_2\) input (new paper result, 10 November)
+
+The full proof is in
+[\`HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md\`](HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md).
+For the **actual** original quartic-Hartree plateau and corrected Kummer
+source, the mismatch \(e=u-v\) has zero genuine C¹ data
+at \(L\) and satisfies
+\[
+ \mathcal K_a e=f,\quad
+ f(y)=D_{\rm inner}(y)+a^{-2}\delta u_0(y/a)
+ \quad(L/2\le y\le L).
+\]
+This uses the existing strict plateau source cancellation
+and not an independently chosen forcing. With \(L>4\), the
+existing Fredholm shell theorem is valid at \(R=L/2>2\),
+so for the *actual original* two-channel weighted norm \(N\),
+\[
+ E_f:=\|f\|_{L^2(L/2,L)}
+ \le \sqrt{L/2}\left(
+ 16C_{\rm in}L^{-4}N+a^{-2}(C_KN+|\delta|M_0)\right),
+\]
+\(M_0=\sup_{[L/(2a),L/a]}|u_0|\) being the actual Green field.
+The precise radial conjugation \(h=ye\) obeys
+\[
+ h''+\frac{iy}{2a^2}h'
+       +\frac{Q-i/2}{a^2}h=yf,\qquad
+ h(L)=h'(L)=0 .
+\]
+Backward Gronwall yields **without an assumed inverse bound**
+\[
+ \|e''\|_{L^2(L/2,L)}\le
+ \left[1+e^{1+(|Q|+3/2)L^2/(4a^2)}
+ \left(8+\frac{(|Q|+2)L^2}{2a^2}\right)\right]E_f.
+\]
+Inserting this into the previously proved paper cutoff
+commutator derivative estimate, for the original
+\(h_{\rm in}=L/8\) backward overlap and original
+\(a\ge L^3\) geometry, now yields
+\[
+ \|(1+y^2)\partial_y\mathcal C_{\rm in}\|_{L^2(I_{\rm tr})}
+ \le\sqrt2(A_0+A_1)C_E
+ \{16C_{\rm in}L^{-5/2}N+
+  L^{-9/2}(C_KN+|\delta|M_0)\}.
+\]
+The constants \(A_0,A_1,C_E\) are **explicit** in the
+companion proof. This is a real source-faithful
+\(L^{-5/2}\) **inner local PDE commutator-gradient**
+gain without requiring \(F(B)\), an independent C²
+source or a prescribed time exponent.
+
+The statement remains **paper-level** and has not been
+compiled as one physical Lean source-bound theorem.
+This is not the whole nonlinear Hartree residual, and
+the moving cutoffs, global nonlocal mixed source,
+parameter-Lipschitz, projected inverse, genuine orbit
+and dynamical rate are still OPEN. Original §2.13 and
+final main theorem stay **11/13**.
