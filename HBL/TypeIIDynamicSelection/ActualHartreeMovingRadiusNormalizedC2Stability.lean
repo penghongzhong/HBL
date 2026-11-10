@@ -116,10 +116,12 @@ theorem actual_Hartree_normalized_original_source_C2_stability
     exact lt_of_lt_of_le (by norm_num) hx.1
   have hsmall1' : 16 * (1 / 2 : ℝ) ^ 2 *
       ((1 + ‖frozenZeroCoeff mu1 theta1‖) / a1 ^ 2) ≤ 1 := by
-    convert hsmall1 using 1 <;> ring
+    convert hsmall1 using 1
+    ring
   have hsmall2' : 16 * (1 / 2 : ℝ) ^ 2 *
       ((1 + ‖frozenZeroCoeff mu2 theta2‖) / a2 ^ 2) ≤ 1 := by
-    convert hsmall2 using 1 <;> ring
+    convert hsmall2 using 1
+    ring
   obtain ⟨C, _hC, hgain⟩ := actual_Hartree_matched_scaled_Kummer_shell_gain
   have hE2 (x : ℝ) (hx : x ∈ Icc (1 / 2 : ℝ) 1) :
       ‖e2 x‖ ≤ 2 * A2 ∧ ‖deriv e2 x‖ ≤ 4 * A2 := by
