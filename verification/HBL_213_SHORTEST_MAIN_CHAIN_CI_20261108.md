@@ -2325,7 +2325,7 @@ for the actual 3D Riesz-transform vector removes it completely:
 for \(\omega(x)=|x|^{-2}\), an elementary two-case estimate proves ball-based \(A_2\le81\)
 and (using the circumscribed-ball/cube volume ratio
 \(\pi\sqrt3/2\)) classical cube-based
-\([\omega]_{A_2}\le81\pi\sqrt3/2\).
+\([\omega]_{A_2}\le81(\pi\sqrt3/2)^2\).
 Primary theorem: T. P. Hytönen, \emph{Annals of Mathematics}
 \textbf{175} (2012), 1473--1506,
 DOI 10.4007/annals.2012.175.3.9. The exact original
