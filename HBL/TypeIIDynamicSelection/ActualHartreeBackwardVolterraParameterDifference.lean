@@ -18,6 +18,7 @@ open Set Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Profile.Kummer HBL.Modulation.Monopole HBL.Modulation.AffineTail
 open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Profile.Kummer
 
 /-- Exact coefficient change of the original physical Kummer operator.
