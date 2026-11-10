@@ -78,7 +78,6 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_spectral_second_jet_from_same_original_source
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_spectral_source_locked_outer_C2_repair_jets
-          set_option pp.all false in
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeSpectralSourceOuterSecondJetAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
