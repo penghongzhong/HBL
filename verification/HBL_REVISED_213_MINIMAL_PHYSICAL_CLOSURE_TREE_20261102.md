@@ -198,36 +198,36 @@ New source-faithful spectral `ActualHartreeOnePhysicalSourceSpectralQuadraticThr
 
 ### 2026-11-09 all-finite backward spectral Neumann direction (new strict target)
 
-At branch commit `df33da3f` a *genuine original Cramer-Green operator* finite recursion was introduced in
-`HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralNeumannFiniteGain.lean`,
+At branch commit \`df33da3f\` a *genuine original Cramer-Green operator* finite recursion was introduced in
+\`HBL/TypeIIDynamicSelection/ActualHartreeBackwardSpectralNeumannFiniteGain.lean\`,
 with dedicated pinned workflow
-`.github/workflows/hbl-213-backward-spectral-neumann-finite-gain.yml`.
+\`.github/workflows/hbl-213-backward-spectral-neumann-finite-gain.yml\`.
 The lemma iterates the actual zero-jet Green field
-`u_(n+1)=G_K0[delta*u_n;0,0]`; no independent positive-order
+\`u_(n+1)=G_K0[delta*u_n;0,0]\`; no independent positive-order
 field envelope is inserted at any step. The base input is the
 already source-produced original matched field's backward-shell
-value `D_R`, plus explicitly stated Green-source interval-integrability.
+value \`D_R\`, plus explicitly stated Green-source interval-integrability.
 
 The new **target** (not accepted until its raw job and exact axiom audit
-show Success) is the all-`n` estimate
-`sup_[r0/2,r0] |u_n| <= (2 G² r0 |delta|)^n D_R`.
-Source-level induction: the actual source `delta*u_n(x)` obeys
-`|delta*u_n(x)| <= (r0 |delta| (2 G² r0 |delta|)^n D_R)/x`
-because `x<=r0`; invoke the already strictly accepted reverse
+show Success) is the all-\`n\` estimate
+\`sup_[r0/2,r0] |u_n| <= (2 G² r0 |delta|)^n D_R\`.
+Source-level induction: the actual source \`delta*u_n(x)\` obeys
+\`|delta*u_n(x)| <= (r0 |delta| (2 G² r0 |delta|)^n D_R)/x\`
+because \`x<=r0\`; invoke the already strictly accepted reverse
 Wronskian/Cramer theorem at each step.
 
 Analytically, the physical conjugated shell then satisfies
-`||1_(R,2R) y a^(-2) delta u_n(y/a)||_(L^{2,7/4})
-<= (5/16) (G²/2)^n R^(-(11/4+2n)) |delta|^(n+1) D_R`
-when `a>=(2R)^3`; the `n=1` coefficient is precisely
-`(5/32)G²R^(-19/4)`, matching the separately strict one-step
-source theorem. This all-`n` scale consequence and the
+\`||1_(R,2R) y a^(-2) delta u_n(y/a)||_(L^{2,7/4})
+<= (5/16) (G²/2)^n R^(-(11/4+2n)) |delta|^(n+1) D_R\`
+when \`a>=(2R)^3\`; the \`n=1\` coefficient is precisely
+\`(5/32)G²R^(-19/4)\`, matching the separately strict one-step
+source theorem. This all-\`n\` scale consequence and the
 operator-residual telescoping are **not yet separate strict Lean targets**.
 
 Only under *additional PDE-produced* time decay
-`|delta|≲s^(-(2beta-1))`, `D_R≲ell^(1/8)` and
-`ell≲s^(-beta)` does this family give the conditional order
-`rho_n=(n+1)(2beta-1)+(19+8n)beta/64`. The finite spectral
+\`|delta|≲s^(-(2beta-1))\`, \`D_R≲ell^(1/8)\` and
+\`ell≲s^(-beta)\` does this family give the conditional order
+\`rho_n=(n+1)(2beta-1)+(19+8n)beta/64\`. The finite spectral
 recursion cannot be silently substituted for the *nonlinear*
 finite physical Hartree profile in the retained original 2.13.
 All moving-time, outer Riesz feedback, parameter-Lipschitz, global
@@ -570,12 +570,12 @@ Even after successful local geometric certification, the true one-orbit bounds f
 
 ### 2026-11-10 independently audited true-clock and trapped-scale logarithmic gain
 
-The raw GitHub workflow run [42773792399](https://github.com/penghongzhong/HBL/actions/runs/42773792399) completed **Success** at source commit `b3351e421aceab877e54a4aa1b08e81ce69ac4cc`, original job **129687475318**, original evidence artifact **13742663263**. The job explicitly pins Lean `4.35.0-rc3`, Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, `--trust=0`, `-DwarningAsError=true` and individual exact `#check`/`#print axioms` for all four declarations in `ActualHartreeCoarseTypeIIClockFromMuTrap.lean`. All four axiom audits contain precisely `{propext, Classical.choice, Quot.sound}`, and the strict build log is empty. The four verified declarations are:
+The raw GitHub workflow run [42773792399](https://github.com/penghongzhong/HBL/actions/runs/42773792399) completed **Success** at source commit \`b3351e421aceab877e54a4aa1b08e81ce69ac4cc\`, original job **129687475318**, original evidence artifact **13742663263**. The job explicitly pins Lean \`4.35.0-rc3\`, Mathlib \`a98628e16c11f5167f16124105ddce53efa9bfe5\`, \`--trust=0\`, \`-DwarningAsError=true\` and individual exact \`#check\`/\`#print axioms\` for all four declarations in \`ActualHartreeCoarseTypeIIClockFromMuTrap.lean\`. All four axiom audits contain precisely \`{propext, Classical.choice, Quot.sound}\`, and the strict build log is empty. The four verified declarations are:
 
-1. `actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap`: trapped positive mu and q_s=4 mu imply linear bounds, q→∞, q^(-1/2)→0.
-2. `actual_Hartree_dynamic_remaining_time_from_two_channel_equations`: the **same** q and ell equations imply (q ell²)_s=-ell².
-3. `actual_Hartree_dynamic_terminal_clock_local_conservation`: with t_s=ell², (t+q ell²)_s=0.
-4. `actual_Hartree_dynamic_mu_trap_log_scale_gain`: with the same positive trapped mu, original scale law, and Q(s)=q(s0)+4M(s-s0), the precise **derived** monotonicity
+1. \`actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap\`: trapped positive mu and q_s=4 mu imply linear bounds, q→∞, q^(-1/2)→0.
+2. \`actual_Hartree_dynamic_remaining_time_from_two_channel_equations\`: the **same** q and ell equations imply (q ell²)_s=-ell².
+3. \`actual_Hartree_dynamic_terminal_clock_local_conservation\`: with t_s=ell², (t+q ell²)_s=0.
+4. \`actual_Hartree_dynamic_mu_trap_log_scale_gain\`: with the same positive trapped mu, original scale law, and Q(s)=q(s0)+4M(s-s0), the precise **derived** monotonicity
    \[
    \log\ell(s)+\tfrac12\log q(s)+\tfrac1{8M}\log Q(s)
    \le \log\ell(s_0)+\tfrac12\log q(s_0)+\tfrac1{8M}\log q(s_0)
