@@ -201,6 +201,7 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
       change actualKummerRepairCutoff B y *
           actualHartreeC2RepairPolynomial B (w B) (deriv w B) j y =
         actualHartreeC2RepairPolynomial B (w B) (deriv w B) j y
+      have hy' : y < B + B / 3 := hy
       have hc : cutoff ((y - B) / (B / 3)) = 0 :=
         cutoff_zero_of_le_one _
           ((div_le_one (by positivity)).2 (by linarith))
@@ -213,6 +214,7 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
       filter_upwards [Ioi_mem_nhds hx] with y hy
       change actualKummerRepairCutoff B y *
           actualHartreeC2RepairPolynomial B (w B) (deriv w B) j y = 0
+      have hy' : B + 2 * (B / 3) < y := hy
       have hc : cutoff ((y - B) / (B / 3)) = 1 :=
         cutoff_one_of_two_le _
           ((le_div_iff₀ (by positivity)).2 (by linarith))
@@ -237,7 +239,7 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
   have hAB : B < 2 * B := by linarith
   have hThree := actual_Hartree_second_jet_three_piece_C2_interfaces
     B (2 * B) hAB w rep (deriv w B) (deriv (deriv w) B)
-    hW hRep1 hVal hW2 hRep2 hFar1 hFar hFar2
+    hW hRep1 hVal.symm hW2 hRep2 hFar1 hFar hFar2
   simpa only [full, actualHartreeSecondJetThreePiece] using hThree
 
 
