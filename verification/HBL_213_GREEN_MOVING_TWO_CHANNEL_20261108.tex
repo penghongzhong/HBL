@@ -7644,4 +7644,67 @@ The physical source, its derivative, the \(C^2\)
 interfaces, parameter dependence and projected Hartree
 smoothing remain unproved. Original acceptance: \(11/13\).
 
+
+\paragraph{A flat-overlap alternative avoiding unproved second-jet traces.}
+Although the source-dependent quadratic outer repair exactly matches
+\(w''(B)\), the presently accepted weighted \(L^2_{7/4}\)
+source hypothesis does not control that point trace:
+\[
+ F_\varepsilon(r)=\varepsilon^{-1/2}
+   \phi((r-B)/\varepsilon),\qquad
+ \|F_\varepsilon\|_{L^2_{7/4}}\lesssim1,\quad
+ |F_\varepsilon(B)|=\varepsilon^{-1/2}.
+\]
+The actual corrected Kummer equation identifies
+\(w''(B)\) with \(F(B)\) minus the same-source
+spectral and Green value/slope terms. Hence a uniform
+curvature budget cannot be inferred merely from the
+existing weighted \(L^2\) estimates. An alternative is
+to remove the artificial joins through flat overlap.
+
+Precisely, for \(D=aB-L>0\), \(h=D/8\), let
+\(c=\mathrm{cutoff}\) be the existing fixed smooth
+cutoff and define
+\[
+ \eta(y)=c((y-L-h)/h),\qquad
+ \chi(y)=1-c((y-aB+4h)/h),
+ \qquad W=\chi v,\quad U=(1-\eta)u+\eta W,
+\]
+where \(u\) and \(v(y)=w(y/a)\) are the \emph{same}
+actual physical inner and original selected Kummer fields.
+Then \(U=u\) for \(y\le L+2h\),
+\(U=v\) on \([L+3h,L+5h]\), and
+\(U=0\) for \(y\ge L+6h\). Both transition
+annuli lie strictly inside the original positive
+Kummer domain, so no artificial pointwise second
+jet or continuation beyond \(B\) is required.
+For \(\mathcal L_0=\partial_y^2+c_1(y)\partial_y+c_0(y)\)
+the complete interior product rule is
+\[
+\begin{aligned}
+ \mathcal L_0 U={}&
+ (1-\eta)\mathcal L_0u+\eta\chi\mathcal L_0v\\
+ &+2\eta'(W'-u')+(\eta''+c_1\eta')(W-u)\\
+ &+\eta\{2\chi'v'+(\chi''+c_1\chi')v\}.
+\end{aligned}
+\]
+The moving material operator \(T_b=\partial_s+by\partial_y\)
+also gives
+\[
+ T_bU=(1-\eta)T_bu+\eta\chi T_bv
+      +(T_b\eta)(W-u)+\eta(T_b\chi)v.
+\]
+The full Hartree nonlinearity remains
+\(\mathcal N_{\mathrm H}(U)\), including all nonlocal
+mixed-density terms. Differentiation of these identities
+to the actual smoothing-dual source norm still requires
+local \(H^3\) or equivalent true \(H^1\) source regularity,
+uniform control of \(h^{-j}=8^j(aB-L)^{-j}\),
+moving-parameter derivatives, and the genuine Hartree
+projected inverse. This is a source-faithful
+\emph{alternative construction}, not an accepted
+PDE residual gain or an improvement to \(11/13\).
+The exact commutator and geometry are recorded in
+\texttt{verification/HBL\_213\_SOURCE\_FAITHFUL\_FLAT\_OVERLAP\_20261110.md}.
+
 \end{document}
