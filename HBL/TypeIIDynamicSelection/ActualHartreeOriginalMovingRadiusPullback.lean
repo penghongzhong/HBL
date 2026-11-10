@@ -63,7 +63,7 @@ theorem actual_Hartree_original_moving_radius_operator_pullback
   have haC : (a : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr ha.ne'
   have hLC : (L : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hL.ne'
   have hxC : (x : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hx.ne'
-  field_simp [haC, hLC, hxC] <;> ring
+  field_simp [haC, hLC, hxC]
 
 /-- The ORIGINAL moving endpoint's two zero jets become fixed endpoint
 zero jets. No additional boundary datum or inverse is postulated. -/
