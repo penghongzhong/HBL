@@ -146,4 +146,34 @@ theorem actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
     hx.2.le.trans (max_le (le_of_lt ht.2.2) (le_of_lt hRB))
   exact ⟨(le_of_lt hτ.1).trans hmx, hxB⟩
 
+
+/-- Every intermediate time on a short physical orbit segment lies in
+the SAME original Cramer shell as the moving two-endpoint Green slit.
+This removes the quantitative scale-variation input from local MVT
+applications; a bound for the original nonlinear source time
+derivative remains a separate PDE obligation. -/
+theorem actual_Hartree_original_Cramer_shell_local_segment_from_continuous_orbit
+    (a ell : ℝ → ℝ) (s B : ℝ)
+    (ha : 0 < a s) (he : 0 < ell s) (heSmall : ell s < 1)
+    (hCa : ContinuousAt a s) (hCe : ContinuousAt ell s)
+    (hB : actualHartreeSlowInnerRadius (ell s) / a s < B) :
+    ∃ l u : ℝ, l < s ∧ s < u ∧
+      ∀ t ∈ Ioo l u, ∀ τ ∈ Icc (min s t) (max s t),
+        ∀ x ∈ uIoc
+          (actualHartreeSlowInnerRadius (ell t) / a t)
+          (actualHartreeSlowInnerRadius (ell s) / a s),
+          x ∈ Icc (1 / a τ) B := by
+  obtain ⟨U, hU, hCover⟩ :=
+    actual_Hartree_original_Cramer_shell_local_from_continuous_orbit
+      a ell s B ha he heSmall hCa hCe hB
+  obtain ⟨l, u, hs, hSub⟩ :=
+    (mem_nhds_iff_exists_Ioo_subset.mp hU)
+  refine ⟨l, u, hs.1, hs.2, ?_⟩
+  intro t ht τ hτ x hx
+  have hτI : τ ∈ Ioo l u := by
+    have hlo : l < min s t := lt_min hs.1 ht.1
+    have hhi : max s t < u := max_lt hs.2 ht.2
+    exact ⟨hlo.trans_le hτ.1, hτ.2.trans_lt hhi⟩
+  exact hCover t (hSub ht) τ (hSub hτI) x hx
+
 end HBL.TypeIIDynamicSelection
