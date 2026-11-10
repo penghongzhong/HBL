@@ -2315,3 +2315,34 @@ This explicit identity is paper-level composition
 of already established Lean components; it
 has **not yet been separately compiled in Lean**.
 No new original environment is accepted: **11/13**.
+
+
+### 10 November 2026 — real Hartree nonlocal Hessian gradient is globally radius-free (classical weighted A2, paper-only)
+
+The previously retained \(4/(\sqrt3R)\) Riesz-gradient estimate is
+**not sharp in its radius dependence**. The weighted \(A_2\) theorem
+for the actual 3D Riesz-transform vector removes it completely:
+for \(\omega(x)=|x|^{-2}\), an elementary two-case ball estimate
+proves \([\omega]_{A_2}\le81\). The exact original
+Fourier multiplier is \(\nabla\mathcal I=6\mathbf R\);
+weighted 3D \(L^2(\omega\,dx)\) of radial data is precisely
+\(4\pi L^2(dr)\). Hence
+\(\|\partial_r\mathcal I(W^3F)\|_{L^2(dr)}
+\le6C_{\rm A2}\|F\|_{L^2(dr)}\) *globally*,
+without \(R^{-1}\). The earlier explicit Hilbert–Schmidt
+constant \(3\) and the derivative of \(W^3\) give
+\[
+ \|(1+r^2)\partial_r[W^3\mathcal I(W^3F)]\|_{L^2(dr)}
+ \le(6C_{\rm A2}+2\sqrt3)\|F\|_{L^2(dr)} .
+\]
+This is an **external published classical analytic theorem applied
+to the true linearized Hartree Riesz term**, not new Lean
+axioms/strict CI, and not a whole quartic nonlinear PDE residual.
+The weighted \(A_2\) reference and full proof are
+[HBL_213_GLOBAL_RIESZ_A2_NO_INNER_RADIUS_LOSS_20261110.md](HBL_213_GLOBAL_RIESZ_A2_NO_INNER_RADIUS_LOSS_20261110.md).
+The radial inner-radius artifact is removed from **this one
+Hessian producer**, while the same-source complete residual's
+local weighted derivative, moving/time Lipschitz, true
+Hamiltonian resolvent/Kato bound, physical orbit and emergent
+Type-II blowup rate stay OPEN.
+**Original revised acceptance 11/13 (84.62%).**
