@@ -8802,4 +8802,86 @@ a published external theorem, not a Lean axiom
 or a newly accepted original §2.13 environment:
 the tally remains \(11/13\).
 
+
+\paragraph{Curvature trace and the full third-derivative budget of the same-source outer repair.}
+The corrected Kummer source determines the second outer trace:
+\[
+ j=w''(B)
+ =F(B)-\delta u_0(B)
+ -A(B)w'(B)-Qw(B),\qquad
+ A=\mathrm{frozenFirstCoeff},\quad Q=\mathrm{frozenZeroCoeff}.
+\]
+The existing \(L^2(dr)\) source control alone does not bound \(F(B)\).
+A sufficient, separately required source condition is
+\(F\in L^2(dr)\), locally absolutely continuous, and
+\(H_F=\|(1+r^2)F'\|_{L^2(dr)}<\infty\).
+Then \(F(\infty)=0\), and Cauchy--Schwarz supplies
+\[
+ |F(B)|\le H_F\left(\int_B^\infty(1+r^2)^{-2}\,dr\right)^{1/2}
+ \le \sqrt{\frac\pi2}\,(1+B^2)^{-1/2}H_F.
+\]
+Consequently the curvature is controlled by the \emph{same}
+source and Green data:
+\[
+ |j|\le \sqrt{\frac\pi2}\,(1+B^2)^{-1/2}H_F
+   +|\delta|\,|u_0(B)|+|A(B)|\,|w'(B)|+|Q|\,|w(B)|.
+\]
+This bound introduces no separate curvature parameter and no
+inverse left-interface radius. It is conditional on the
+\emph{actual full physical Kummer source} meeting the
+required weighted derivative norm.
+
+Put
+\[
+ D_2=|w(B)|+B|w'(B)|+\tfrac12B^2|j|,\qquad
+ P(r)=w(B)+(r-B)w'(B)+\tfrac12(r-B)^2j,
+ \quad R(r)=\chi_B(r)P(r).
+\]
+Let \(C_k\) be the fixed bounds on the first three
+derivatives of the original smooth cutoff.
+On \(B\le r\le2B\), the literal cutoff
+\(\chi_B=1-\mathrm{cutoff}(3(r-B)/B)\) gives
+\[
+ \begin{aligned}
+ |R'|&\le(3C_1+2)D_2/B,\\
+ |R''|&\le(9C_2+12C_1+2)D_2/B^2,\\
+ |R'''|&\le(27C_3+54C_2+18C_1)D_2/B^3.
+ \end{aligned}
+\]
+Thus for the actual frozen Kummer repair source
+\(G=R''+AR'+QR\),
+\[
+ G'=R'''+A'R'+AR''+QR',
+\]
+and
+\[
+ \|G'\|_{L^2(B,2B)}
+ \le\sqrt B\,D_2\left[
+ \frac{d_3}{B^3}
+ +\left(\frac2{B^2}+\frac12+|Q|\right)\frac{d_1}{B}
+ +\left(\frac2B+B\right)\frac{d_2}{B^2}
+ \right],
+\]
+where \(d_1=3C_1+2\), \(d_2=9C_2+12C_1+2\),
+\(d_3=27C_3+54C_2+18C_1\).
+For \(a\ge1\), the physical scaled repair source
+\(E_a(y)=a^{-2}G(y/a)\) satisfies
+\[
+ \|(1+y^2)E_a'(y)\|_{L^2(aB,2aB)}
+ \le a^{-1/2}(1+4B^2)\|G'\|_{L^2(B,2B)}.
+\]
+The normalized \emph{same-source} spectral Green/repair/zero
+\(C^2\) splice has been submitted for a pinned Lean strict CI:
+\texttt{actual\_Hartree\_spectral\_same\_source\_outer\_splice\_C2}
+in \texttt{ActualHartreeSpectralSourceOuterSecondJet.lean}.
+The preceding estimates are explicit paper deductions,
+not a claimed \(O(s^{-15/8})\) physical source,
+not a parameter-Lipschitz result, and not an original
+\(\S2.13\) acceptance. The moving four-region
+nonlinear Hartree source, inner Fredholm second jet,
+projected inverse, and dynamical Type-II orbit still
+require separate proofs. The revised original tally
+remains \(11/13\).
+
+
 \end{document}
