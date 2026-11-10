@@ -83,7 +83,7 @@ jobs:
           goal='HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_selected_Green_joint_derivative_from_original_sources'
           assert goal in s, 'missing precise theorem check'
           assert 'sorryAx' not in s and 'admit' not in s
-          audits=re.findall(r'depends on axioms:\\s*\\[([^\\]]*)\\]', s)
+          audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
           assert len(audits)==1, f'expected one axiom report, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
