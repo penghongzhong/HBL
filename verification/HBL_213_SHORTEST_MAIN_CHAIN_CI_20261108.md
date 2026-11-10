@@ -2322,8 +2322,13 @@ No new original environment is accepted: **11/13**.
 The previously retained \(4/(\sqrt3R)\) Riesz-gradient estimate is
 **not sharp in its radius dependence**. The weighted \(A_2\) theorem
 for the actual 3D Riesz-transform vector removes it completely:
-for \(\omega(x)=|x|^{-2}\), an elementary two-case ball estimate
-proves \([\omega]_{A_2}\le81\). The exact original
+for \(\omega(x)=|x|^{-2}\), an elementary two-case estimate proves ball-based \(A_2\le81\)
+and (using the circumscribed-ball/cube volume ratio
+\(\pi\sqrt3/2\)) classical cube-based
+\([\omega]_{A_2}\le81\pi\sqrt3/2\).
+Primary theorem: T. P. Hytönen, \emph{Annals of Mathematics}
+\textbf{175} (2012), 1473--1506,
+DOI 10.4007/annals.2012.175.3.9. The exact original
 Fourier multiplier is \(\nabla\mathcal I=6\mathbf R\);
 weighted 3D \(L^2(\omega\,dx)\) of radial data is precisely
 \(4\pi L^2(dr)\). Hence
