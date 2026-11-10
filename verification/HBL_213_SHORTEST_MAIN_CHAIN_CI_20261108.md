@@ -2559,3 +2559,38 @@ the source was corrected by opening the original
 42806979073 was triggered on commit \`eb90a66d\`.
 As of this ledger synchronization, the replacement has **not** yet been
 accepted, and the original revised score is **11/13**.
+
+
+### 10 November 2026 — actual spectrally corrected source regularity is independently insufficient
+
+The *original unshifted* exact Kummer source theorem
+\`actual_Hartree_matched_spectral_original_unshifted_source\`
+supplies \(w''+p w'+q w=F-\delta u_0\) with only \(F\in C^0\).
+The *original physical scaled* exact source theorem
+\`actual_Hartree_matched_spectral_original_physical_source\`
+supplies \(\mathcal K_av=a^{-2}(F-\delta u_0)(y/a)\).
+On any actual flat Kummer plateau interval \(aJ\), the
+needed (weak) differentiated source norm, **if it exists**, is exactly
+\[
+\|(1+y²)(\mathcal K_a v)'\|_{L²(aJ)}
+=a^{-5/2}\|(1+a²r²)(F'-\delta u_0')\|_{L²(J)}
+\le a^{-1/2}\|(1+r²)(F'-\delta u_0')\|_{L²(J)}\quad(a\ge1).
+\]
+A \(C^0\) source \(\psi(r)|r-r_*|^{1/4}\) is permitted
+by current hypotheses yet has non-\(L²\) derivative; subtraction of
+the \(C²\) original Green field \(u_0\) cannot remove that defect.
+Thus **perfect C² gluing still cannot entail the physical Morawetz-dual
+source derivative bound** from the present source hypotheses.
+The inner Fredholm source is still only weighted \(L²\). Actual
+physical source \(H¹\) and moving-Lipschitz production (or a genuinely
+proved weaker dual smoothing theorem) are load-bearing.
+
+The exact original-source-locked curvature is now encoded in
+\`HBL/TypeIIDynamicSelection/ActualHartreeSpectralSourceOuterSecondJet.lean\`
+and has a dedicated pinned strict CI workflow,
+\`.github/workflows/hbl-213-spectral-source-outer-second-jet.yml\`.
+**Do not count it as Success without seeing that CI's original logs**.
+Neither the curvature certificate nor the ODE/source-regularity argument
+establishes a full Hartree physical PDE residual time gain.
+See [source-regularity and C² gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+Original count stays **11/13**.
