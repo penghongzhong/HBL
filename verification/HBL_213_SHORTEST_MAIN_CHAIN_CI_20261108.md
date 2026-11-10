@@ -2281,3 +2281,37 @@ cost in its spatial derivative. \(E\), physical
 positive-time gains, projected Hartree smoothing and
 the nonlinear full-source Lipschitz still remain
 **OPEN**. No new original environment accepted: **11/13**.
+
+
+### 10 November — actual original inner-Hartree/unshifted-Kummer PDE curvature identity
+
+The backward inner flat-overlap commutator has an exact
+nonabstract \(E=\|e''\|_{L²([L/2,L])}\) producer:
+compose **existing actual**
+\`actual_Hartree_moment_locked_inner_physical_equations\`
+with
+\`actual_Hartree_matched_spectral_original_physical_source\`.
+For the genuine phase/real Fredholm fields
+\(u=U_{\rm re}+iU_{\rm im}\) and real nonlocal
+Hartree convolution \(\mathcal I\), the physical difference
+is
+\[
+ e''=-2e'/y-S_{\rm re}-iS_{\rm im}
+   -9W⁴U_{\rm re}-3iW⁴U_{\rm im}
+   -4W³\mathcal I(W³U_{\rm re})
+   -a^{-2}(F(y/a)-\delta u_0(y/a))
+   +a^{-2}(iyv'/2+c_0v).
+\]
+**Crucial:** the original unshifted PDE retains the
+first-order \(-\delta u_0\) source; using only a
+shifted quadratic defect would be an erroneous
+substitution. Cauchy–Schwarz/triangle reduces
+\(E\) to the literal actual source groups.
+The still-open quantitative task is their
+same-orbit moving \(L²\), weighted derivative,
+parameter-Lipschitz and time-positive estimates,
+plus the coupled Hartree resolvent/Kato inverse.
+This explicit identity is paper-level composition
+of already established Lean components; it
+has **not yet been separately compiled in Lean**.
+No new original environment is accepted: **11/13**.
