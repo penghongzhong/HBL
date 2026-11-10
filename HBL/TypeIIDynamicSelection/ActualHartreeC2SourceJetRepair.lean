@@ -48,12 +48,16 @@ theorem actual_Hartree_C2_repair_polynomial_hasDerivAt
       HasDerivAt
         (fun x : ℝ => (((x - B : ℝ) : ℂ) ^ 2) * j / 2)
         (((r - B : ℝ) : ℂ) * j) r := by
-    convert (hb.pow 2).mul_const (j / 2) using 1 <;> ring
-  convert ((hlin.add hquad).const_add p) using 1
-  · ext x
-    unfold actualHartreeC2RepairPolynomial
+    convert (hb.pow 2).mul_const (j / 2) using 1
+    ext x
+    simp only [Pi.pow_apply]
+    push_cast
     ring
-  · ring
+  convert ((hlin.add hquad).const_add p) using 1
+  ext x
+  simp only [Pi.add_apply, Pi.pow_apply]
+  push_cast
+  ring
 
 theorem actual_Hartree_C2_repair_polynomial_second_hasDerivAt
     (B r : ℝ) (p q j : ℂ) :
@@ -145,14 +149,14 @@ theorem actual_Hartree_C2_source_jet_repair_endpoint_jets
   have hLeftFirst :
       HasDerivAt (actualHartreeC2SourceJetRepair B p q j) q B := by
     have hp := actual_Hartree_C2_repair_polynomial_hasDerivAt B B p q j
-    have hpq : q + ((B - B : ℝ) : ℂ) * j = q := by ring
+    have hpq : q + ((B - B : ℝ) : ℂ) * j = q := by simp
     rw [hpq] at hp
     exact hp.congr_of_eventuallyEq hNearLeft
   have hLeftSecond :
       HasDerivAt (deriv (actualHartreeC2SourceJetRepair B p q j))
         j B :=
-    (actual_Hartree_C2_repair_polynomial_second_hasDerivAt B B p q j)
-      .congr_of_eventuallyEq hDerivNearLeft
+    (actual_Hartree_C2_repair_polynomial_second_hasDerivAt B B p q j).congr_of_eventuallyEq
+      hDerivNearLeft
   have hRightFirst :
       HasDerivAt (actualHartreeC2SourceJetRepair B p q j) 0 (2 * B) :=
     (hasDerivAt_const (2 * B) (0 : ℂ)).congr_of_eventuallyEq hNearRight
