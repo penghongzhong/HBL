@@ -271,3 +271,93 @@ also strictly validated (CI 42825266426), but this
 flat-overlap route **avoids** the historic \(F_o(B)\)
 point-trace obstruction altogether; the two routes
 should not be conflated or double-counted.
+
+
+## 5. NEW exact physical parameter Lipschitz of the backward Green mismatch at fixed L
+
+The same radial Volterra inverse gives a **quantitative
+coefficient-stability estimate**, not just a one-parameter
+bound. Fix the same physical \(L>4\) and two original
+parameter/source tuples \((a_j,Q_j,f_j)\), \(j=1,2\),
+with \(a_j>0\), and let the **actual original**
+Fredholm/Kummer differences \(e_j\) satisfy
+\[
+ \mathcal K_{a_j,Q_j}e_j=f_j,\qquad
+ e_j(L)=e_j'(L)=0,\qquad
+ \mathcal K_{a,Q}
+ =\partial_y^2+\left(\frac2y+\frac{iy}{2a^2}\right)\partial_y
+    +\frac{Q}{a^2}.
+\]
+No independently chosen solution operator is inserted:
+\(e_j\) are the actual source-matched fields whenever
+the previously established physical source identities
+hold. The difference \(d=e_1-e_2\) has zero terminal jet
+and satisfies the **exact** same-physical-region equation
+\[
+ \boxed{
+ \mathcal K_{a_1,Q_1}d
+ =f_1-f_2
+  -\frac{iy}{2}(a_1^{-2}-a_2^{-2})e_2'
+  -(Q_1a_1^{-2}-Q_2a_2^{-2})e_2 .
+ }\tag{V15}
+\]
+This is an algebraic identity for the original operator,
+not an *assumed Lipschitz estimate*.
+
+The same actual backward Gronwall inequality (V7),
+with \(M_{\rm V,2}\) evaluated at \((a_2,Q_2)\),
+also proves the concrete zero-jet bounds
+\[
+ \|e_2'\|_{L^2(I)}
+ \le 2L M_{\rm V,2}\|f_2\|_{L^2(I)},\qquad
+ \|e_2\|_{L^2(I)}
+ \le \frac12 L^2M_{\rm V,2}\|f_2\|_{L^2(I)} .
+ \tag{V16}
+\]
+Consequently the **actual** right-hand side \(g\) of
+(V15) obeys
+\[
+ \boxed{\quad
+ \|g\|_{L^2(I)}
+ \le\|f_1-f_2\|_2
+ +M_{\rm V,2}L^2
+ \left(
+ |a_1^{-2}-a_2^{-2}|
+ +\frac12|Q_1a_1^{-2}-Q_2a_2^{-2}|
+ \right)\|f_2\|_2 .
+ \quad}\tag{V17}
+\]
+Applying (V9) to \(d\) yields the fully explicit
+**fixed-original-radius parameter stability**
+\[
+ \boxed{\quad
+ \|(e_1-e_2)''\|_{L^2(I)}
+ \le C_E(L,a_1,Q_1)
+ \left[\|f_1-f_2\|_2+
+ M_{\rm V,2}L^2
+ \left(|a_1^{-2}-a_2^{-2}|+
+ \tfrac12|Q_1a_1^{-2}-Q_2a_2^{-2}|\right)
+ \|f_2\|_2\right].
+ \quad}\tag{V18}
+\]
+The corresponding \(L^2\) and \(H^1\) bounds follow
+with the precise \(L^2M_{\rm V,1}/2\) and
+\(2LM_{\rm V,1}\) factors from (V16),
+applied to \(d\) and the new right side \(g\).
+
+Thus **the local linear coefficient/parameter
+Lipschitz obstruction is removed on paper
+for a common physical \(L\)**, conditional only on
+the *genuine nonlinear source difference*
+\(\|f_1-f_2\|_2\) and actual original coefficients.
+A moving \(L=L(s,\alpha)\) requires pulling both
+solutions to one normalized interval, including
+its time and parameter derivatives and true
+source-domain transport. Likewise the original
+quartic Hartree source difference must be derived
+from the PDE profiles using the already calculated
+nonlocal Lipschitz estimate, not supplied as a
+new unverified hypothesis. This is **not** the
+global four-region PDE parameter-Lipschitz or a
+new strict Lean theorem. Formal original count
+remains **11/13**.
