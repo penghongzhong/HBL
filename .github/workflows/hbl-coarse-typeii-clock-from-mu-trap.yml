@@ -74,6 +74,7 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_remaining_time_from_two_channel_equations
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_log_scale_gain
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
           set_option pp.all false in
@@ -82,6 +83,8 @@ jobs:
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_log_scale_gain
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeCoarseTypeIIClockAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -92,11 +95,12 @@ jobs:
           assert goal in s, 'missing exact #check'
           for target in ('HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_remaining_time_from_two_channel_equations',
                          'HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_terminal_clock_local_conservation',
-                         'HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_log_scale_gain'):
+                         'HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_log_scale_gain',
+                         'HBL.TypeIIDynamicSelection.actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope'):
             assert target in s, f'missing required target {target}'
           assert 'sorryAx' not in s and 'admit' not in s
           audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
-          assert len(audits)==4, f'expected four axiom reports, got {len(audits)}'
+          assert len(audits)==5, f'expected five axiom reports, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
             names={v.strip() for v in report.split(',') if v.strip()}
