@@ -7707,4 +7707,43 @@ PDE residual gain or an improvement to \(11/13\).
 The exact commutator and geometry are recorded in
 \texttt{verification/HBL\_213\_SOURCE\_FAITHFUL\_FLAT\_OVERLAP\_20261110.md}.
 
+
+\paragraph{No hidden curvature trace: explicit Sobolev margin.}
+For the actual matching interval \(0<r_0<B<\mathrm{scale}\),
+set
+\[
+ \ell=\tfrac12\min\{B-r_0,\mathrm{scale}-B\}>0,\qquad
+ I_B=[B-\ell,B+\ell].
+\]
+If the \emph{same physical source} is actually
+\(F\in H^1(I_B)\), averaging the fundamental theorem
+of calculus and applying Cauchy--Schwarz give
+\[
+ |F(B)|\le(2\ell)^{-1/2}\|F\|_{L^2(I_B)}
+                 +\sqrt{2\ell}\|F'\|_{L^2(I_B)}.
+\]
+The exact corrected Kummer equation then yields
+\[
+\begin{aligned}
+ |w''(B)|\le {}&
+ (2\ell)^{-1/2}\|F\|_{L^2(I_B)}
+ +\sqrt{2\ell}\|F'\|_{L^2(I_B)}
+ +|d|\,|w_1(B)|\\
+ &+|c_1(B)|\,|w'(B)|
+ +(|c_0|+|d|)|w(B)|.
+\end{aligned}
+\]
+This is a legitimate \emph{conditional} repair budget,
+not a newly assumed trace bound. The moving margin
+\(\ell^{-1/2}\), the \emph{physical} \(H^1\) source
+regularity, the same-source Cramer terms and the
+nonlinear Hartree inverse must all be controlled.
+The previously proved weighted \(L^2_{7/4}\)
+bounds alone cannot justify this inequality uniformly
+on the selected moving scales. Both the quadratic
+\(C^2\) repair and flat-overlap alternative therefore
+remain intermediate constructions; neither closes
+the source norm or original §2.13. Strict original
+acceptance remains \(11/13\).
+
 \end{document}
