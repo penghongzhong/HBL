@@ -3421,3 +3421,54 @@ is pending the actual CI job outcome.** The existing accepted
 three-$C^1$ result, original PDE telescope and outer $C^2$ traces
 are unchanged. **No new original environment is accepted: 11/13.**
 <!-- END HBL_INNER_TRUE_CURVATURE_SOURCE_JUMP_20261110 -->
+
+
+<!-- HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900 -->
+### 10 November 2026 — strict success of the original-source inner/spectral C² shell budget
+
+The previously pending concrete fifth declaration is now **strictly accepted
+only as an auxiliary theorem**:
+[CI 42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900)
+**Success** at 2026-11-10 16:40:02 UTC, original job **129964186672**,
+source commit `24eba94fb9fa2e05d5bf303fc5b910e8049b87c4`,
+unaltered original strict evidence artifact **13782747879**.
+Its exact five `#check @...` theorem types and five `#print axioms`
+results passed under the pinned Lean **4.35.0-rc3**,
+Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`--trust=0 -DwarningAsError=true`; each transitive axiom list
+is exactly `[propext, Classical.choice, Quot.sound]`, with no
+`sorryAx`, `admit` or new axiom.
+
+The fifth exact theorem type is
+`HBL.TypeIIDynamicSelection.actual_Hartree_true_inner_spectral_C2_jump_native_shell_budget`.
+It bounds the **true** inner/spectral second-derivative jump by the
+already verified native two-channel Fredholm shell budget plus
+`a⁻² * ‖delta‖ * ‖u0(L/a)‖`. The theorem assumes
+`2<R≤L`, actual weighted `Fp,Fm` membership and continuity, and an
+explicit **same-source equality** `a⁻² F(L/a) + S_inner(L)=0`.
+The original Hartree plateau identity producing this equality exists
+independently; the theorem does **not** construct or bound the moving
+physical orbit or prove the source is small in time. The full proof
+statement and its caveats are synchronized in
+[HBL_213_TRUE_INNER_CURVATURE_SOURCE_DEFECT_20261110.md](HBL_213_TRUE_INNER_CURVATURE_SOURCE_DEFECT_20261110.md)
+and `HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+
+The old C¹ failures **42531033761/768** and **42531467165/166**
+remain historical failures, repaired in later success runs
+[42648496754](https://github.com/penghongzhong/HBL/actions/runs/42648496754)
+and [42648496870](https://github.com/penghongzhong/HBL/actions/runs/42648496870).
+The original four-piece nonlinear PDE telescope failed initially
+**42530158681** and strictly succeeded in
+[42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509),
+original job **128902012127**; this is an exact PDE **identity**, not
+a positive-time residual estimate.
+
+**Original environments: 11/13 (84.62%)**, unchanged.
+Strict §2.13 acceptance still requires the SAME actual moving nonlocal
+four-region source: true source-derivative and parameter-Lipschitz
+bounds, complete positive-time residual and the projected inverse
+closing the `s^(1/4)` undamped-Duhamel gap, followed by an actual
+nonlinear orbit and finite recurrence. The final original theorem
+additionally needs actual PDE modulation flux and the
+dynamically **derived** sharp Type-II rate.
+<!-- END HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900 -->
