@@ -1,0 +1,125 @@
+name: HBL original source normalized moving radius C2 strict
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths:
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeBackwardVolterraParameterDifference.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeMovingRadiusNormalizedC2Stability.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeOriginalMovingRadiusPullback.lean'
+      - '.github/workflows/hbl-213-normalized-moving-volterra.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict-original-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install pinned compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          test -f "$archive" || curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache@v4
+        with:
+          path: .lake/packages
+          key: hbl-pinned-mathlib-tactics-${{ runner.os }}-a98628e16c11f5167f16124105ddce53efa9bfe5-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}
+      - name: Resolve exact dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, subprocess, textwrap
+          old=subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'],text=True)
+          chunk=old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+          lake exe cache get Mathlib.Tactic > evidence/tactic-cache.log 2>&1 || true
+          lean --version | tee evidence/compiler-version.txt
+          grep -F '4.35.0-rc3' evidence/compiler-version.txt
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          git rev-parse HEAD | tee evidence/commit.txt
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hbl-normalized-volterra-build-${{ runner.os }}-a98628e16-${{ github.sha }}
+          restore-keys: |
+            hbl-normalized-volterra-build-${{ runner.os }}-a98628e16-
+      - name: Strict kernel, exact type and transitive axiom checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          module=HBL.TypeIIDynamicSelection.ActualHartreeOriginalMovingRadiusPullback
+          lake build "$module" > evidence/build.log 2>&1 || { tail -220 evidence/build.log; exit 1; }
+          for name in ActualHartreeBackwardVolterraParameterDifference ActualHartreeMovingRadiusNormalizedC2Stability ActualHartreeOriginalMovingRadiusPullback; do
+            file="HBL/TypeIIDynamicSelection/$name.lean"
+            lake env lean --trust=0 -DwarningAsError=true "$file" > "evidence/$name.strict.log" 2>&1 || { cat "evidence/$name.strict.log"; exit 1; }
+            test ! -s "evidence/$name.strict.log"
+            mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
+            cp "$file" evidence/sources/HBL/TypeIIDynamicSelection/
+            sha256sum "$file" >> evidence/source-hashes.txt
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          names = [
+            'actual_Hartree_original_Kummer_coefficient_difference',
+            'actual_Hartree_original_Kummer_sub_of_classical',
+            'actual_Hartree_backward_original_parameter_source_difference',
+            'actual_Hartree_normalized_original_source_C2_stability',
+            'actual_Hartree_original_moving_radius_operator_pullback',
+            'actual_Hartree_original_moving_radius_zero_jet_pullback',
+          ]
+          prefix='HBL.TypeIIDynamicSelection.'
+          text='import HBL.TypeIIDynamicSelection.ActualHartreeOriginalMovingRadiusPullback\nset_option pp.all true\nset_option pp.maxSteps 10000000\n'
+          for name in names:
+            text += '#check @'+prefix+name+'\nset_option pp.all false in\n#print axioms '+prefix+name+'\n'
+          Path('NormalizedMovingRadiusAudit.lean').write_text(text)
+          Path('evidence/target-names.txt').write_text('\n'.join(prefix+n for n in names)+'\n')
+          PY
+          lake env lean --trust=0 -DwarningAsError=true NormalizedMovingRadiusAudit.lean > evidence/audit.log 2>&1 || { cat evidence/audit.log; exit 1; }
+          cat evidence/audit.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          data=Path('evidence/audit.log').read_text()
+          goals=Path('evidence/target-names.txt').read_text().splitlines()
+          assert all(name in data for name in goals), 'Missing exact theorem type'
+          assert 'sorryAx' not in data and 'admit' not in data
+          assert '⋯' not in data and '...' not in data, 'Truncated exact theorem output'
+          reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
+          assert len(reports)==len(goals), (len(reports),len(goals))
+          assert {n for n,_ in reports}==set(goals), 'Wrong axiom audit targets'
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name,report in reports:
+            axioms={re.sub(r'\.\{.*\}$','',x.strip()) for x in report.split(',') if x.strip()}
+            assert axioms <= allowed, (name,axioms)
+            print('STRICT ORIGINAL SOURCE TARGET:',name,'AXIOMS:',sorted(axioms))
+          print('Original revised manuscript environments remain 11/13. No PDE time-order or Type-II claim.')
+          PY
+          cp NormalizedMovingRadiusAudit.lean evidence/
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .lake/build
+          key: hbl-normalized-volterra-build-${{ runner.os }}-a98628e16-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hbl-normalized-moving-radius-original-source-evidence
+          path: evidence
+          retention-days: 14
