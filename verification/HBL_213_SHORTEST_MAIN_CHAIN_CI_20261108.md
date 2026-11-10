@@ -2363,3 +2363,42 @@ Thus uniformly for every *PDE-selected* \(\lambda>0\),
 No \(\lambda_s\), Lipschitz source bound, Type-II
 rate or nonlinear orbit is assumed or proved.
 The original **11/13** count is unchanged.
+
+
+### 10 November — global **full original quartic Hartree** nonlinear source \(H^1\) inequality (paper-only)
+
+The fixed-bubble Hessian is not the only source eligible for the
+global \(A_2\) Riesz bound. For the complete ORIGINAL
+\(\mathcal N_{\rm H}(V)=\mathcal I(|V|^4)|V|^2V\) and the genuine
+difference \(V=W+u\), write
+\(\rho=|V|^4-W^4\), \(\Delta P=\mathcal I\rho\),
+\(P_W=3W^2\), \(Q(z)=|z|^2z\), and define from the
+**actual physical field** the explicit
+\(M=\max(1,\|V\|_\infty)\), \(S=\|(1+r^2)|V|^3\|_\infty\),
+\(U=\|u\|_{L²(dr)}\), \(H=\|(1+r^2)u'\|_{L²(dr)}\),
+\(A=\kappa_H(4\pi\|\rho\|_\infty+\|\rho\|_{L¹(\mathbb R³)})\).
+The exact weighted \(A_2\) bound and near/far Riesz split give
+\(\|(\Delta P)'\|_{L²(dr)}\le24C_{A2}M³U\),
+\(\|\Delta P\|_\infty\le A\). Complex-real Fréchet
+differentiation of \(Q\), the *exact* stationary
+\(P_W=\mathcal I(W^4)=3W²\), and the real radial bubble
+derivatives then prove
+\[
+\begin{aligned}
+ \|(1+r²)\partial_r[\mathcal N_H(W+u)-\mathcal N_H(W)]\|_2
+ &\le(24C_{A2}SM³+9M²+18M)U+9M²H\\
+ &\quad+A(3\sqrt\pi/4+3M²H+6MU),\\
+ \|\mathcal N_H(W+u)-\mathcal N_H(W)\|_2
+ &\le AM²(\sqrt{\pi/2}+U)+9M²U .
+\end{aligned}
+\]
+This **genuine nonlocal quartic** analytic inequality no longer hides
+an \(R^{-1}\) origin loss and does not insert a free Riesz source
+gradient estimate. The actual four-piece field must STILL
+be proved to meet these explicit norms with the true time
+and parameter exponents; the rest of the PDE, true
+projected Hartree inverse, Lipschitz recursion and
+Type-II dynamic rate are OPEN. No trust-zero CI for
+the new published-weighted-\(A_2\) paper result.
+Proof: [HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md](HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md).
+**11/13 (84.62%) unchanged**.
