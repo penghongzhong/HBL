@@ -2938,3 +2938,27 @@ cancellation** for pinned trust-zero / three-axiom CI; do not report it green
 without original log and artifact inspection. This is not a completed
 \(C^2\) whole-four-region profile, positive residual gain, parameter-Lipschitz
 or final orbit, and remains **auxiliary only**. Original acceptance: **11/13**.
+
+
+### 10 November — original geometry gives genuine L^(-5/2) inner C2 repair spatial gradient (paper only)
+
+Using the already existing exact original Hartree plateau source cancellation,
+the true inner curvature identity \(\Delta_2=D_{\rm in}(L)+a^{-2}\delta u_0(L/a)\)
+and original shell defect bound, choose the *actual admissible*
+repair width \(h=L/4\). For fixed \(B>0\),
+\(L\ge2\), \(a\ge L^3\), \(L^2\ge5/(4B)\), \(|Q|\le Q_0\),
+this fits inside \(L+h\le aB\) and **derives**
+\[
+ \|(1+y^2)(\mathcal K_aP_{L/4})'\|_{L^2}
+ \le C_{\eta,Q_0}\bigl[
+    C_{\rm in}L^{-5/2}N+
+    L^{-9/2}(C_{\rm K}N+|\delta|\,|u_0(L/a)|)\bigr].
+\]
+Here \(C_{\eta,Q_0}=\frac{29}{32}(4M_3+\frac{21}{8}M_2+
+(\frac58+\frac{Q_0}{4})M_1)\) and \(N\) is the
+two-channel original weighted Fredholm source norm.
+Full proof:
+[\`HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md\`](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md), §5.
+This is a **true local spatial-order gain**, not the missing complete four-region
+nonlinear Hartree residual time order or \(L_s^2\) dual-Kato inverse.
+No new original paper environment; **11/13**.
