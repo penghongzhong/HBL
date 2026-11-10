@@ -2196,3 +2196,29 @@ from the **same** source norm to the desired energy space are still **OPEN**.
 This is no direct unconditional Duhamel argument and no original-environment success.
 See [the interface/scale audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 **11/13 unchanged**.
+
+
+### 10 November — a no-point-trace smooth overlap alternative to the quadratic jet patch
+
+The actual corrected spectral equation gives
+\`w''(B)=F(B)-d w1(B)-frozenFirstCoeff(B) w'(B)-(frozenZeroCoeff+d)w(B)\`.
+The old weighted-\`L²_7/4\` source bounds do NOT control \`F(B)\`:
+\`F_ε(r)=ε^{-1/2}φ((r-B)/ε)\` has uniformly bounded weighted-\`L²\`
+norm and \`F_ε(B)=ε^{-1/2}\`. Thus the newly constructed
+\`ActualHartreeC2SourceJetRepair.lean\` endpoint-jet module, even if
+it passes its exact pinned CI, cannot by itself bound the new curvature.
+A practical alternative avoids artificial outer second-jet traces:
+take \`D=aB-L>0\`, \`h=D/8\`, and the ORIGINAL smooth cutoff \`c\`, set
+\`η(y)=c((y-L-h)/h)\`, \`χ(y)=1-c((y-aB+4h)/h)\`, and splice
+\`U=(1-η)u+ηχv\` with the **same genuine physical Hartree
+Fredholm/Kummer source**. It is u near L, v on
+\`[L+3h,L+5h]\`, and 0 beyond \`L+6h\`; no Kummer continuation
+beyond original B or \(w''(B)\) point evaluation is used.
+The exact second-order differential and moving-material
+commutators are derived in
+[\`HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md\`](HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md).
+This alternative exposes actual \`h^{-j}\` losses, nonlocal cross terms,
+and the still **open** source \(H^1\), projected Hartree smoothing,
+time/parameter Lipschitz, PDE orbit and emergent Type-II rate.
+There is no extra original environment or full residual estimate:
+**11/13 unchanged**.
