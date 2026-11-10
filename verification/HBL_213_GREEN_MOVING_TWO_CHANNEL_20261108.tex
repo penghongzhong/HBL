@@ -8916,4 +8916,76 @@ geometric shortcut}, not to the Type-II problem.
 The original \(11/13\) tally is unchanged.
 
 
+
+\paragraph{Exact same-source Fredholm--Kummer curvature mismatch at the inner join.}
+The inner second derivative is not an additional free shooting datum.
+Write \(u=u_{\rm in}\), \(v(y)=w(y/a)\),
+\(r_0=L/a\), \(Q=\mathrm{frozenZeroCoeff}(\mu,\theta)\), and
+\[
+ \mathcal K_a=\partial_y^2+
+  \left(\frac2y+\frac{iy}{2a^2}\right)\partial_y+
+  \frac{Q}{a^2},\quad
+ S_{\rm in}(y)=\frac{F_+(y)+iF_-(y)}y,\quad
+ F_{\rm cor}=F-\delta u_0.
+\]
+The already matched value and slope at \(L\), the actual
+Fredholm-inner equation and original source-corrected Green
+equation, assuming source continuity for classical second traces,
+give the \emph{exact} identity
+\[
+ \boxed{
+ u_{yy}(L)-v_{yy}(L)
+ =\bigl[(\mathcal K_a u)(L)+S_{\rm in}(L)\bigr]
+   -S_{\rm in}(L)-a^{-2}F_{\rm cor}(L/a).
+ }
+\]
+For \(L>2\) the first bracket has the existing genuine Fredholm
+shell bound
+\[
+ |(\mathcal K_a u)(L)+S_{\rm in}(L)|
+ \le\left(\frac{C_{\rm in}}{L^4}+
+ \frac{C_{\rm K}(\mu,\theta)}{a^2}\right)
+ \bigl(\|F_+\|_{2,7/4}+\|F_-\|_{2,7/4}\bigr).
+\]
+The single remaining inner curvature producer is therefore the
+\emph{same-PDE source mismatch}
+\(S_{\rm in}(L)+a^{-2}F_{\rm cor}(L/a)\),
+not a fourth independently chosen trace. A genuine source identity
+may cancel or control it, but no such cancellation is assumed.
+
+For \(\Delta_2=u_{yy}(L)-v_{yy}(L)\),
+the one-sided repair
+\(P_h(y)=\tfrac12\Delta_2(y-L)^2
+\eta((y-L)/h)\), \(L\le y\le L+h<aB\),
+matches the second jet. With
+\(
+ E_1=z\eta+\frac12z^2\eta',
+ E_2=\eta+2z\eta'+\frac12z^2\eta'',
+ E_3=3\eta'+3z\eta''+\frac12z^2\eta'''
+\)
+and \(M_j=\|E_j\|_\infty\), its
+complete scaled Kummer residual has the explicit derivative bound
+\[
+\begin{split}
+ \|(1+y^2)(\mathcal K_aP_h)'\|_{L^2(L,L+h)}
+ &\le(1+(L+h)^2)|\Delta_2|\sqrt h
+ \bigg[
+ \frac{M_3}{h}+
+ \left(\frac2L+\frac{L+h}{2a^2}\right)M_2\\
+ &\qquad\qquad
+ +h\left(\frac2{L^2}+
+   \frac{1/2+|Q|}{a^2}\right)M_1
+ \bigg].
+\end{split}
+\]
+An arbitrarily short patch has a potentially \(\sim h^{-1/2}\)
+gradient cost. Hence the physical matching-shell overlap, true
+source cancellation, time derivatives and parameter-Lipschitz
+must be established before this repair can feed the original
+four-region PDE inverse. The exact derivation is
+\texttt{verification/HBL\_213\_INNER\_C2\_EXACT\_SOURCE\_MISMATCH\_20261110.md}.
+This is human paper algebra; no new Lean theorem,
+new axiom, independent source bound, or original environment
+acceptance is claimed. Revised original total remains \(11/13\).
+
 \end{document}
