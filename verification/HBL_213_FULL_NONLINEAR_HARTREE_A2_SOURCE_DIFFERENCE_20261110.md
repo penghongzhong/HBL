@@ -187,3 +187,119 @@ Thus this is a *finished analytic norm inequality for the true
 nonlocal source*, **not** the original \(\S2.13\) assertion of
 positive time gain and not yet any new three-axiom Lean CI.
 Neither \(12/13\) nor \(13/13\) is claimed.
+
+
+## 5. Eliminate ALL independently stated pointwise source envelopes using the **same correction** \(u\)
+
+The preceding \(M,S,A\) are already defined from the actual
+field; they can in fact all be **derived from just the two
+physical radial correction norms \(U,H\)**, without taking
+\(L^\infty\) or 3D density bounds as additional hypotheses.
+
+For any radial complex \(u\in L^2(dr)\) that is locally
+absolutely continuous with \(H=\|(1+r^2)u'\|_{L^2(dr)}<\infty\),
+the weighted derivative is integrable at infinity:
+\[
+ \int_r^\infty|u'(t)|dt\le H
+    \left(\int_r^\infty(1+t^2)^{-2}dt\right)^{1/2}.
+\]
+Thus \(u(\infty)\) exists, and \(u\in L^2(dr)\) forces
+\(u(\infty)=0\). The fundamental theorem of calculus gives
+\[
+ \begin{aligned}
+ |u(r)|
+ &\le H\left(\int_r^\infty(1+t^2)^{-2}dt\right)^{1/2},\\
+ \|u\|_{L^\infty(dr)}
+ &\le\frac{\sqrt\pi}{2}H,\\
+ \boxed{\qquad
+ \sup_{r\ge0}\sqrt{1+r^2}|u(r)|
+ &\le\sqrt{\frac\pi2}\,H .
+ \qquad}
+ \end{aligned}
+ \tag{N13}
+\]
+The last line uses the **no-radius-loss** inequality
+\[
+ (1+r^2)\int_r^\infty(1+t^2)^{-2}dt
+ \le\int_r^\infty(1+t^2)^{-1}dt\le\frac\pi2.
+\]
+Therefore, with no independent field or source envelope,
+\[
+ \boxed{
+ |W(r)+u(r)|\le K\,W(r),\qquad
+ K:=1+\sqrt{\frac\pi2}\,H ,
+ }\tag{N14}
+\]
+so \(M\le K\), \(S\le K^3\) in (N1).
+
+The actual quartic density difference enjoys the **extra
+bubble weight**
+\[
+ |\rho(r)|=\big||W+u|^4-W^4\big|
+ \le4K^3W(r)^3|u(r)|.
+\tag{N15}
+\]
+For the true 3D Riesz potential, this gives directly
+\[
+ \begin{aligned}
+ \|\rho\|_\infty
+ &\le2\sqrt\pi K^3H,\\
+ \|\rho\|_{L^1(\mathbb R^3)}
+ &\le16\pi K^3
+    \left(\int_0^\infty\frac{r^4}{(1+r^2)^3}dr\right)^{1/2}
+    U\\
+ &=4\pi\sqrt{3\pi}\,K^3 U,
+ \qquad
+ \int_0^\infty\frac{r^4}{(1+r^2)^3}dr=\frac{3\pi}{16}.
+ \end{aligned}
+ \tag{N16}
+\]
+Consequently the exact deterministic \(A\) from (N1)
+has the **fully reduced original-field budget**
+\[
+ \boxed{\qquad
+ A\le A_\ast(U,H):=
+ \frac{12}{\pi}K^3\bigl(
+     2\sqrt\pi\,H+\sqrt{3\pi}\,U\bigr),
+ \qquad K=1+\sqrt{\frac\pi2}\,H .
+ \qquad}
+ \tag{N17}
+\]
+There is no separately assumed \(\|V\|_\infty\),
+\(\|\rho\|_{L^1}\), \(\|\rho\|_\infty\), nor
+nonlocal Riesz-gradient source bound.
+
+Substitution in the original full quartic (N11)--(N12)
+produces the completely explicit source-faithful nonlinear map
+\[
+ \boxed{\begin{aligned}
+ &\|(1+r^2)\partial_r[
+       \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)]
+       \|_{L^2(dr)}\\
+ &\quad\le
+ (24C_{\rm A2}K^6+9K^2+18K)\,U+9K^2H
+ +A_\ast(U,H)
+  \bigl(3\sqrt\pi/4+3K^2H+6KU\bigr),\\[2pt]
+ &\|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)\|_{L^2(dr)}
+ \le A_\ast(U,H)K^2(\sqrt{\pi/2}+U)+9K^2U .
+ \end{aligned}}\tag{N18}
+\]
+This is **not** a schematic or assumed small-source
+statement: each coefficient is an explicit expression
+in the actual \(U=\|u\|_{L^2(dr)}\),
+\(H=\|(1+r^2)u'\|_{L^2(dr)}\) and the universal
+published fixed-weight Riesz constant \(C_{\rm A2}\).
+
+As \(U+H\to0\), \(K\to1\) and the right-hand side
+is \(O(U+H)\). This is a genuine nonlinear local
+continuity result in a radial weighted Sobolev topology,
+**not** a proof that the full time-moving selected
+four-region correction satisfies \(U(s)+H(s)=O(s^{-\nu})\).
+That latter estimate must come from the original
+Fredholm/Kummer PDE and true physical modulation law.
+The full spatial residual also retains local Laplacian,
+moving-cutoff transport, spectral and parameter derivative
+terms; the homogeneous-adjoint Hartree Kato inverse,
+actual orbit and dynamically selected blowup rate
+remain unproved. No additional Lean axiom or original
+13-environment acceptance is introduced.
