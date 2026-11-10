@@ -91,9 +91,8 @@ theorem actual_Hartree_original_quartic_velocity_half_radial_to_bubble_sq
     _ ≤ 8 * ((M * Real.sqrt (bubble r)) ^ 3 *
           (D * Real.sqrt (bubble r))) :=
       mul_le_mul_of_nonneg_left hProduct (by norm_num)
-    _ = (8 * M ^ 3 * D) * bubble r ^ 2 := by
-      rw [mul_pow, ← pow_succ, hRoot4]
-      ring
+    _ = (8 * M ^ 3 * D) * (Real.sqrt (bubble r)) ^ 4 := by ring
+    _ = (8 * M ^ 3 * D) * bubble r ^ 2 := by rw [hRoot4]
 
 /-- Quantitative ORIGINAL inverse-square Riesz time differentiation
 from the true field and velocity, with no assumed potential derivative
