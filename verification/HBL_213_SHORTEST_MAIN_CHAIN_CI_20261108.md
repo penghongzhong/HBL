@@ -3058,3 +3058,43 @@ and the workflow rechecks this commit on the runner before
 Thus this is **actual strict verified Lean source cancellation**,
 not merely a green badge. It remains **auxiliary**, not original §2.13.
 The original revised acceptance remains **11/13**.
+
+
+### 10 November — strict actual same-source spectral C² outer splice and decisive point-trace gap
+
+Original workflow [42825266426](https://github.com/penghongzhong/HBL/actions/runs/42825266426)
+has **completed successfully**, job **129860806977**, evidence artifact
+**13768179716**, source SHA \`23359602dd5f34921b2f3cb23aaeb1a153c41fff\`.
+Decoded original job logs show \`lake env lean --trust=0 -DwarningAsError=true\`,
+three exact \`#check\` and corresponding \`#print axioms\` for
+\`actual_Hartree_spectral_second_jet_from_same_original_source\`,
+\`actual_Hartree_spectral_source_locked_outer_C2_repair_jets\`, and
+\`actual_Hartree_spectral_same_source_outer_splice_C2\`, with only
+\`propext\`, \`Classical.choice\`, \`Quot.sound\` in their transitive
+axioms. Thus the historical unresolved outer-splice C² Lean error
+**has been repaired**; the green status is specific to the stated
+original source SHA and does not certify any later HEAD.
+
+New mathematically sharp audit:
+[HBL_213_SOURCE_LOCKED_OUTER_C2_DERIVATIVE_BUDGET_20261110.md](HBL_213_SOURCE_LOCKED_OUTER_C2_DERIVATIVE_BUDGET_20261110.md).
+On the physical outer repair annulus, the *actual original frozen
+Kummer differential residual* derivative has a derived coefficient
+\(a^{-1/2}(1+4B²)\sqrt B\,[O(B^{-3})+O((1+|Q|)/B)]D\)
+with \(D=|w(B)|+B|w'(B)|+B²|w''(B)|\). The **same-source**
+curvature identity gives
+\(w''(B)=F(B)-\delta u_0(B)-A(B)w'(B)-Qw(B)\).
+Old source \(L²_{7/4}\) membership and continuity do **not**
+control \(F(B)\): fixed-\(B\) smooth bumps
+\(F_N(r)=\sqrt N\,\psi(N(r-B))\) keep weighted \(L²\) bounded,
+but exact Cramer values/slopes are \(O(N^{-1/2})\) for zero
+input jets, so the actual same-source Kummer curvature grows
+like \(\sqrt N\). The first new **physical** producer must
+supply a genuine source trace/Sobolev and moving-parameter
+bound from the original quartic Hartree PDE, *not* a fresh
+independent curvature envelope or an unproved rate.
+
+**No numbered-original §2.13 acceptance:** the C² joins
+do not show the actual four-region weighted derivative,
+\(s\)-positive order, parameter Lipschitz, spectral inverse
+or physical PDE orbit. **Strict original count remains
+11/13 (84.62%).**
