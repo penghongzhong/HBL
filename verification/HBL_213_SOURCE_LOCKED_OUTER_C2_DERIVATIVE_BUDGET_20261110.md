@@ -161,6 +161,34 @@ cancellation. The true quartic Hartree forcing is more structured
 than an arbitrary \(F_N\); the example establishes exactly
 the missing implication, **not** nonexistence of the desired orbit.
 
+
+
+For fixed \(K,r_0,B,\mu,\theta\), one can make the preceding
+failure of the source-to-curvature estimate quantitative using the
+\emph{original matched} integral solution. Take \(\delta=0\),
+\(U=DU=0\), with \(F_N\) as above. On a fixed compact
+neighbourhood of \(B>r_0>0\), the two normalized Cramer Green
+integrands are a smooth bounded Kummer basis times \(F_N\)
+divided by a nonzero continuous Wronskian. Therefore
+\[
+ |u_{0,N}(B)|+|u_{0,N}'(B)|
+ \lesssim_{K,r_0,B}\|F_N\|_{L^1(B-\varepsilon,B+\varepsilon)}
+ =O(N^{-1/2}).
+\]
+The exact unshifted Kummer equation at \(B\) gives
+\[
+ |u_{0,N}''(B)|
+ \ge |F_N(B)|-|A(B)|\,|u_{0,N}'(B)|
+   -|Q|\,|u_{0,N}(B)|
+ =\sqrt N-O(N^{-1/2})\longrightarrow\infty.
+\]
+Thus the original **source-selected** curvature \(j\) itself
+cannot be bounded by the previous weighted \(L^2\) source norm
+alone, even after the Cramer inversion. This is a norm-level
+counterexample, not merely an inability to estimate a chosen
+right-hand side of (O7), and it does **not** apply to the yet-to-be-proved
+special regularity of the actual moving nonlinear Hartree source.
+
 **Next non-negotiable original PDE producer:** a source-aligned,
 moving-parameter-uniform trace/Sobolev control such as
 \[
