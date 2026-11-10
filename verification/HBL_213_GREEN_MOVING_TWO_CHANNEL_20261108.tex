@@ -7542,4 +7542,66 @@ The separate full coupled Hartree homogeneous adjoint smoothing,
 moving-parameter Lipschitz and strong orbit remain missing.
 The original revised count is \(11/13\).
 
+
+\paragraph{A second-jet obstruction in the literal three-\(C^1\) splice.}
+The presently strict-successful four-region field joins the original
+corrected Kummer solution \(w\) to the existing physical affine
+repair
+\[
+ R_{\rm aff}(y)=\chi_B(y/a)\bigl[w(B)+(y/a-B)w'(B)\bigr],
+\]
+where \(\chi_B\equiv1\) near \(B\) and \(\chi_B\equiv0\)
+near \(2B\). Thus the exact one-sided curvature jump at
+\(y=aB\) is
+\[
+ [\partial_y^2U]_{aB}
+ :=\partial_y^2U(aB+)-\partial_y^2U(aB-)
+ =-a^{-2}w''(B).
+\]
+The matched first jet is not a matched second jet. Under a
+differentiable moving interface, first-jet matching also
+matches the one-sided partial time derivatives, while the
+Hartree nonlocal source is continuous for the smooth
+physical fields in question. Consequently the full
+nonlinear PDE residual generically inherits this curvature
+jump. It cannot be assigned a weighted \(L^2\) spatial
+derivative merely from the verified \(C^1\) identities.
+Indeed, for a residual \(F\) with jump \(J\ne0\) at
+a positive radius \(R\),
+\[
+ \frac{(-\Delta g,F)_{L^2(\mathbb R^3)}}{4\pi}
+ =R^2g'(R)J+\int_0^\infty r^2g'(r)F'_{\rm pw}(r)\,dr
+\]
+for tests supported near \(R\). The choice
+\(g_\varepsilon(r)=\varepsilon^{1/2}
+\phi((r-R)/\varepsilon)\) with \(\phi'(0)\ne0\)
+has a uniformly bounded radial Morawetz norm but
+\(g_\varepsilon'(R)=\varepsilon^{-1/2}\phi'(0)\),
+so the energy-dual pairing is unbounded if \(J\ne0\).
+This supplies a rigorous, interface-level obstruction
+to the proposed direct Kato source-norm upgrade.
+
+A source-faithful \(C^2\) \emph{candidate} is
+\[
+ R_{(2)}(y)=\chi_B(y/a)
+ \left[w(B)+(y/a-B)w'(B)
+        +\tfrac12(y/a-B)^2w''(B)\right].
+\]
+Its left value, slope, and curvature coincide with
+the corrected Kummer field; all three vanish near
+\(2aB\). The separate \(y=L\) Fredholm--Kummer
+join still requires an actual second-jet matching
+correction, stronger physical source regularity, and
+full time/parameter Lipschitz budgets. The curvature
+patch also generates new local PDE residual terms;
+none is assumed small. A different smoothing dual
+space that tolerates the actual joins is a possible
+alternative, but has not been established.
+The exact computation and required interface producer
+are documented in
+\texttt{verification/HBL\_213\_C1\_GLUE\_DUAL\_SOURCE\_INTERFACE\_GATE\_20261110.md}.
+This is a mathematical diagnosis and construction,
+\emph{not} a new strict Lean or original-environment
+acceptance. The count remains \(11/13\).
+
 \end{document}
