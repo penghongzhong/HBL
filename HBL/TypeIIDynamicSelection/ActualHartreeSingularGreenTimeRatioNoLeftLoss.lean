@@ -63,7 +63,6 @@ theorem actual_Hartree_original_singular_Green_density_ratio_no_left_radius
   calc
     (‖K.x r‖ / r) * r ^ 2 = ‖K.x r‖ * r := by
       field_simp [hr.ne']
-      ring
     _ ≤ G * r := mul_le_mul_of_nonneg_right hX hr.le
     _ ≤ G * B := mul_le_mul_of_nonneg_left hrB hG
 
