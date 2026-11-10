@@ -52,3 +52,30 @@ To close the original physical PDE norm, one must prove (CJ)'s same-source `Delt
 ## 3. What counts
 
 Existing three C¹ joins, exact nonlinear PDE telescoping and source-locked outer C² jets are useful prerequisites but **not** proof of actual inner C² matching or a positive-order four-region residual. The retained manuscript numerator remains **11/13**, with §2.13 and the final PDE-generated Type-II theorem open. The original nonlocal Hartree PDE trajectory, projected inverse, finite recurrence and rate are still absent.
+
+
+## 4. Exact material-time source cost (paper identity)
+
+With \(L=L(s)\), \(h=h(s)>0\) and \(\Delta_2=\Delta_2(s)\), work **inside** the actual moving open patch \(L(s)<y<L(s)+h(s)\). Set
+\[
+\xi(s,y)=\frac{y-L(s)}{h(s)},\qquad
+\partial_s\xi=-\frac{L_s+\xi h_s}{h}.
+\]
+Since \(P_{yy}=\Delta_2\phi''(\xi)\), differentiating **at fixed physical \(y\)** gives exactly
+\[
+\boxed{\partial_s P_{yy}
+=(\Delta_2)_s\phi''(\xi)
+-\frac{\Delta_2}{h}(L_s+\xi h_s)\phi'''(\xi).}
+\tag{MT}
+\]
+Thus the physical moving-patch contribution to the \(L^2_y\) time derivative of its curvature satisfies
+\[
+\boxed{
+\|\partial_s P_{yy}\|_{L^2([L,L+h])}
+\le |\Delta_{2,s}|\sqrt h\|\phi''\|_2
++|\Delta_2|h^{-1/2}
+\bigl(|L_s|\|\phi'''\|_2+|h_s|\|\xi\phi'''\|_2\bigr).
+}
+\tag{MC}
+\]
+The \(h^{-1/2}|L_s|\) term is the true physical interface-transport cost. It is not a Kummer-basis artifact and cannot be omitted by invoking source C¹ matching or the finite nonlinear PDE telescope. Formula (MT) is an interior classical identity; distributional differentiation across the moving join must be performed for the **full C² glued field**, where matching conditions can cancel interface measures. No claimed positive time exponent or Lipschitz control follows from (MC) alone.
