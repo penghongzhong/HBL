@@ -155,4 +155,98 @@ theorem actual_Hartree_dynamic_terminal_clock_local_conservation
   convert h using 1
   ring
 
+
+
+/-- The same dynamical trap also forces a STRICTLY better than
+self-similar physical scale envelope. This logarithmic form avoids
+prescribing the terminal exponent or a separate ell(s) bootstrap:
+G(s) = log ell(s) + log q(s)/2 + log Q(s)/(8*M)
+is nonincreasing, where Q(s)=q(s0)+4*M*(s-s0).
+
+The explicit physical exponent 1/2 + 1/(8*M) is a direct
+corollary by exponentiation and the already verified q bounds.
+The actual Hartree PDE must still construct the trapped orbit. -/
+theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
+    (q ell mu : ℝ → ℝ) (s0 m M : ℝ)
+    (hq0 : 0 < q s0) (hm : 0 < m)
+    (hq : ∀ s ∈ Ici s0, HasDerivAt q (4 * mu s) s)
+    (hell : ∀ s ∈ Ici s0,
+      HasDerivAt ell
+        (-((1 + 4 * mu s) / (2 * q s)) * ell s) s)
+    (hellPos : ∀ s ∈ Ici s0, 0 < ell s)
+    (htrap : ∀ s ∈ Ici s0, m ≤ mu s ∧ mu s ≤ M) :
+    ∀ s : ℝ, s0 ≤ s →
+      Real.log (ell s) + Real.log (q s) / 2 +
+        Real.log (q s0 + 4 * M * (s - s0)) / (8 * M) ≤
+      Real.log (ell s0) + Real.log (q s0) / 2 +
+        Real.log (q s0) / (8 * M) := by
+  obtain ⟨hBounds, _hGrowth, _hTypeII⟩ :=
+    actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
+      q mu s0 m M hq0 hm hq htrap
+  have hs0mem : s0 ∈ Ici s0 := by simp
+  have hM : 0 < M := lt_of_lt_of_le hm (htrap s0 hs0mem).2
+  let Q : ℝ → ℝ := fun s => q s0 + 4 * M * (s - s0)
+  let G : ℝ → ℝ := fun s =>
+    Real.log (ell s) + Real.log (q s) / 2 +
+      Real.log (Q s) / (8 * M)
+  have hQpos (s : ℝ) (hs : s ∈ Ici s0) : 0 < Q s :=
+    (hBounds s hs).2.2.trans_le (hBounds s hs).2.1
+  have hQderiv (s : ℝ) : HasDerivAt Q (4 * M) s := by
+    have hbase := ((hasDerivAt_id s).sub_const s0).const_mul (4 * M)
+    have htotal := (hasDerivAt_const s (q s0)).add hbase
+    convert htotal using 1
+    · funext x
+      dsimp [Q]
+      ring
+    · ring
+  have hGderiv (s : ℝ) (hs : s ∈ Ici s0) :
+      HasDerivAt G
+        (-1 / (2 * q s) + 1 / (2 * Q s)) s := by
+    have heLog := (hell s hs).log (hellPos s hs).ne'
+    have hqLog := (hq s hs).log (hBounds s hs).2.2.ne'
+    have hQLog := (hQderiv s).log (hQpos s hs).ne'
+    have htotal := (heLog.add (hqLog.div_const 2)).add
+      (hQLog.div_const (8 * M))
+    convert htotal using 1
+    · funext x
+      dsimp [G]
+      simp only [Pi.add_apply, Pi.div_apply]
+    · dsimp only [Q]
+      field_simp [hq0.ne', (hBounds s hs).2.2.ne',
+        (hQpos s hs).ne', hM.ne']
+      ring
+  have hGcont : ContinuousOn G (Ici s0) := by
+    intro s hs
+    exact (hGderiv s hs).continuousAt.continuousWithinAt
+  have hGdiff : DifferentiableOn ℝ G (interior (Ici s0)) := by
+    intro s hs
+    exact (hGderiv s (interior_subset hs)).differentiableAt.differentiableWithinAt
+  have hGdecrease : ∀ s ∈ interior (Ici s0), deriv G s ≤ 0 := by
+    intro s hs
+    have hsI : s ∈ Ici s0 := interior_subset hs
+    have hposQ : 0 < Q s := hQpos s hsI
+    have hposq : 0 < q s := (hBounds s hsI).2.2
+    have hcomp : q s ≤ Q s := (hBounds s hsI).2.1
+    have hInv : (1 : ℝ) / (2 * Q s) ≤ 1 / (2 * q s) := by
+      apply (div_le_div_iff₀ (by positivity : 0 < 2 * Q s)
+        (by positivity : 0 < 2 * q s)).2
+      nlinarith
+    rw [(hGderiv s hsI).deriv]
+    linarith
+  intro s hs
+  have hsI : s ∈ Ici s0 := hs
+  have hNonincrease :=
+    Convex.image_sub_le_mul_sub_of_deriv_le
+      (convex_Ici s0) hGcont hGdiff hGdecrease
+      s0 hs0mem s hsI hs
+  have hQ0 : Q s0 = q s0 := by dsimp [Q]; ring
+  dsimp [G] at hNonincrease
+  rw [hQ0] at hNonincrease
+  change
+    Real.log (ell s) + Real.log (q s) / 2 +
+      Real.log (Q s) / (8 * M) ≤
+    Real.log (ell s0) + Real.log (q s0) / 2 +
+      Real.log (q s0) / (8 * M)
+  linarith
+
 end HBL.TypeIIDynamicSelection
