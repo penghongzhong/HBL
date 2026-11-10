@@ -6780,4 +6780,43 @@ a rigorously source-aligned projected Hamiltonian energy
 bootstrap. Further conditional recursion environments will
 not be counted towards the current original \(11/13\).
 
+
+\medskip
+\noindent\textbf{Lean synchronization of the two-stage dynamical clock.}
+The new direct terminal
+\texttt{ActualHartreeCoarseTypeIIClockFromMuTrap.lean}
+has no surrogate Hartree source, no external modulation exponent and
+no assumed limit \(\mu_\infty\). It takes the physically necessary
+future PDE output
+\[
+ \operatorname{HasDerivAt}(q,4\mu(s),s),\qquad
+ 0<m\le\mu(s)\le M,\qquad q(s_0)>0
+\]
+and deduces at once
+\[
+ q(s_0)+4m(s-s_0)\le q(s)\le
+ q(s_0)+4M(s-s_0),\qquad
+ \lim_{s\to\infty}q(s)=+\infty,\qquad
+ \lim_{s\to\infty}q(s)^{-1/2}=0.
+\]
+The proof uses the real mean-value theorem over the physical
+half-line and the exact negative-power limit; no prescribed rate
+or asymptotic is an input. It is the
+\emph{coarse dynamical clock consequence}, not a proof of a
+physical Hartree orbit or of the original sharp-rate main
+theorem. Its strict pinned Lean CI is governed by
+\texttt{.github/workflows/hbl-coarse-typeii-clock-from-mu-trap.yml};
+acceptance requires the actual completed strict log with exact
+\texttt{\#check}, \texttt{\#print axioms} and the three
+allowed axioms.
+
+The paper's original main target and all its quantitative
+statements are retained in
+\texttt{verification/typeii-minimal-main-replacement.tex};
+the two-stage proof order is added without a new theorem
+environment. The original 13-environment tally
+remains \textbf{11/13} until the actual
+four-region Hartree orbit and the final dynamic rate
+are both kernel-audited.
+
 \end{document}
