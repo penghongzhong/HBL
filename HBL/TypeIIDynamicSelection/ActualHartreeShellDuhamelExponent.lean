@@ -86,4 +86,26 @@ theorem actual_Hartree_shell_exact_absolute_Duhamel_integral
   rw [hpow]
   ring
 
+
+
+/-- Exact SQUARED future-time shell-source integral: the numerical
+prerequisite for replacing a failed absolute L¹-time Duhamel bound
+by a GENUINE dual-Kato/projected L²-time smoothing estimate.
+The square-root of this integral decays as s^(-11/8),
+which is stronger than the first correction order s^(-9/8).
+
+This is ONLY an exponent calculation. In particular it does not
+assume, construct or prove a dual-Kato estimate for the nonlocal
+Hartree Hamiltonian linearization, nor identify the full physical
+four-region Hartree source with the shell model. -/
+theorem actual_Hartree_shell_squared_source_exact_L2_time_tail
+    (s : ℝ) (hs : 0 < s) :
+    (∫ t : ℝ in Set.Ioi s, t ^ (-(15 / 4 : ℝ))) =
+      (4 / 11 : ℝ) * s ^ (-(11 / 4 : ℝ)) := by
+  rw [integral_Ioi_rpow_of_lt
+    (show -(15 / 4 : ℝ) < -1 by norm_num) hs]
+  have hpow : -(15 / 4 : ℝ) + 1 = -(11 / 4 : ℝ) := by norm_num
+  rw [hpow]
+  ring
+
 end HBL.TypeIIDynamicSelection
