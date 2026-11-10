@@ -49,13 +49,15 @@ theorem actual_Hartree_C2_repair_polynomial_hasDerivAt
         (fun x : ℝ => (((x - B : ℝ) : ℂ) ^ 2) * j / 2)
         (((r - B : ℝ) : ℂ) * j) r := by
     convert (hb.pow 2).mul_const (j / 2) using 1
-    ext x
-    simp only [Pi.pow_apply]
-    push_cast
-    ring
+    · ext x
+      simp only [Pi.pow_apply]
+      push_cast
+      ring
+    · norm_num <;> ring
   convert ((hlin.add hquad).const_add p) using 1
   ext x
-  simp only [Pi.add_apply, Pi.pow_apply]
+  simp only [Pi.add_apply]
+  unfold actualHartreeC2RepairPolynomial
   push_cast
   ring
 
