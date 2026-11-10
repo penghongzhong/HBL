@@ -131,8 +131,8 @@ theorem actual_Hartree_normalized_original_source_C2_stability
       (fun y hy => hS2.2 y (by norm_num at hy ⊢; exact hy))
       x (by norm_num at hx ⊢; exact hx)
     constructor
-    · simpa using hh.2.1
-    · simpa using hh.2.2.1
+    · simpa [show (8 : ℝ) * (2 ^ 2)⁻¹ = 2 by norm_num] using hh.2.1
+    · simpa [show (8 : ℝ) * (2 : ℝ)⁻¹ = 4 by norm_num] using hh.2.2.1
   have hd : ∀ x ∈ Ioi (0 : ℝ), DifferentiableAt ℝ d x := by
     intro x hx
     exact (he1 x hx).sub (he2 x hx)
@@ -145,7 +145,8 @@ theorem actual_Hartree_normalized_original_source_C2_stability
   have hdd0 : deriv d 1 = 0 := by
     have h := ((he1 1 (by norm_num)).hasDerivAt.sub
       (he2 1 (by norm_num)).hasDerivAt).deriv
-    simpa only [hdzero1, hdzero2, sub_self] using h
+    change deriv (e1 - e2) 1 = 0
+    exact h
   have hsource (x : ℝ) (hx : x ∈ Icc (1 / 2 : ℝ) 1) :
       ‖actualMatchedScaledKummerApply mu1 theta1 a1 d x‖ ≤ B := by
     have hx0 : 0 < x := lt_of_lt_of_le (by norm_num) hx.1
@@ -179,7 +180,10 @@ theorem actual_Hartree_normalized_original_source_C2_stability
       _ ≤ (‖G1 x - G2 x‖ +
           ‖kdiff • (Complex.I * (x : ℂ) / 2 * deriv e2 x)‖) +
           ‖zdiff * e2 x‖ :=
-        (norm_sub_le _ _).trans (add_le_add_right (norm_sub_le _ _) _)
+        (norm_sub_le _ _).trans
+          (add_le_add_right (norm_sub_le (G1 x - G2 x)
+            (kdiff • (Complex.I * (x : ℂ) / 2 * deriv e2 x)))
+            (‖zdiff * e2 x‖))
       _ ≤ (Ad + |kdiff| * ((1 / 2) * (4 * A2))) + ‖zdiff‖ * (2 * A2) :=
         add_le_add (add_le_add (hSd.2 x hx) htransport) hzero
       _ = B := by dsimp [B]; ring
@@ -189,8 +193,10 @@ theorem actual_Hartree_normalized_original_source_C2_stability
     (fun y hy => hdd y (by norm_num at hy ⊢; exact hy)) hd0 hdd0
     (fun y hy => hsource y (by norm_num at hy ⊢; exact hy))
     x (by norm_num at hx ⊢; exact hx)
-  have hv : ‖d x‖ ≤ 2 * B := by simpa using hh.2.1
-  have hder : ‖deriv d x‖ ≤ 4 * B := by simpa using hh.2.2.1
+  have hv : ‖d x‖ ≤ 2 * B := by
+    simpa [show (8 : ℝ) * (2 ^ 2)⁻¹ = 2 by norm_num] using hh.2.1
+  have hder : ‖deriv d x‖ ≤ 4 * B := by
+    simpa [show (8 : ℝ) * (2 : ℝ)⁻¹ = 4 by norm_num] using hh.2.2.1
   have hlap : ‖complexRadialLaplacian d x‖ ≤ 2 * B := hh.1
   have hx0 : 0 < x := lt_of_lt_of_le (by norm_num) hx.1
   have hc : ‖(2 : ℂ) / (x : ℂ)‖ ≤ (4 : ℝ) := by
