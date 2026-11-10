@@ -2696,3 +2696,49 @@ A real selected Hartree \(H^1\) trace estimate
 is required. Detail in
 [actual source/curvature gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 **11/13 unchanged**.
+
+
+### 10 November — original raw CI failure/replay and exact new cutoff CI identifiers
+
+- Full original quartic Hartree Riesz second-order Taylor source **strict success**
+  [42806979073](https://github.com/penghongzhong/HBL/actions/runs/42806979073)
+  (job **129798500879**, artifact **13761535285**).
+  Its exact \`#check\` targets are
+  \`actual_Hartree_radial_original_potential_add\`,
+  \`actual_Hartree_original_quartic_Riesz_second_order_split\`, and
+  \`actual_Hartree_full_original_nonlinear_quadratic_split\`.
+  The original job log confirms pinned \`--trust=0\`,
+  \`warningAsError\`, and three precisely printed
+  \`#print axioms\` outputs, each with
+  \`propext, Classical.choice, Quot.sound\` only.
+  **These are exact source identities, not a physical time gain.**
+- Source-locked outer \(C^2\) curvature initial
+  [42808846760](https://github.com/penghongzhong/HBL/actions/runs/42808846760)
+  **failed** at Lean line 53:
+  \`dsimp only at hSource\` made no progress after
+  instantiating the exact original unshifted source theorem.
+  The original job log was read; this is not a new physical
+  Hartree mathematical obstruction. Removed the redundant
+  tactic in commit **b21b636aa26d** and actually triggered
+  [42810399482](https://github.com/penghongzhong/HBL/actions/runs/42810399482).
+  **At the most recent live read this replay remained in progress;
+  do not mark Success or any new axiom acceptance until its original
+  job logs and artifact have been examined.**
+- Original smooth-cutoff third derivative \(R^{-3}\)
+  pinned strict CI actually triggered as
+  [42810002316](https://github.com/penghongzhong/HBL/actions/runs/42810002316),
+  targeting
+  \`actual_Hartree_real_overlap_cutoff_third_hasDerivAt\` and
+  \`actual_Hartree_overlap_cutoff_uniform_C3_spatial_scaling\`.
+  **At the most recent live read it was still in progress.**
+  Even future Success would be a local derivative
+  certificate, not the full differentiated PDE residual.
+- Source faithfulness and original theorem boundary:
+  **11/13 (84.62%)**. The strict successful finite nonlinear
+  physical PDE telescope [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509)
+  supersedes its failed first attempt [42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681)
+  but establishes **only an identity**. The real missing
+  producer remains the original four-region Hartree PDE
+  **weighted source derivative/trace + moving parameter
+  Lipschitz + nonresonant energy inverse**, followed by
+  true finite recursion, orbit construction and rate selection.
