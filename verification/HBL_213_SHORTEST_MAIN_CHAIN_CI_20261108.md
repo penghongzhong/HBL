@@ -2742,3 +2742,28 @@ is required. Detail in
   **weighted source derivative/trace + moving parameter
   Lipschitz + nonresonant energy inverse**, followed by
   true finite recursion, orbit construction and rate selection.
+
+
+### 10 November — actual original cutoff C3 first CI failure repaired
+
+Original job log (not just workflow badge) of
+[42810002316](https://github.com/penghongzhong/HBL/actions/runs/42810002316)
+(job **129808751512**) reached the new
+\`ActualHartreeOneLayerSpatialOverlapC3.lean\` but failed
+at **line 105** with Lean error
+\`No goals to be solved\`: \`field_simp [hR]\`
+had already closed the real third-derivative
+denominator identity, leaving a redundant \`ring\`
+tactic. This is a precise tactic-sequencing error,
+not a mathematical contradiction or axiom issue.
+The redundant \`ring\` was deleted in commit
+**2d3ddc4a2b1d**, which automatically started
+[42811250712](https://github.com/penghongzhong/HBL/actions/runs/42811250712).
+At last live query it was still in the strict build
+stage. Neither original 42810002316 nor 42811250712
+is to be counted as an accepted certificate absent an
+actual success and complete transitive allowlist audit.
+
+New C2 replay [42810399482](https://github.com/penghongzhong/HBL/actions/runs/42810399482)
+also remained in strict compilation at that
+snapshot. Official original revised count remains **11/13**.
