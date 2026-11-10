@@ -211,7 +211,7 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
     convert htotal using 1
     dsimp only [Q]
     field_simp [hq0.ne', (hBounds s hs).2.2.ne',
-      (hQpos s hs).ne', hM.ne']
+      (hQpos s hs).ne', (hellPos s hs).ne', hM.ne']
     ring
   have hGcont : ContinuousOn G (Ici s0) := by
     intro s hs
