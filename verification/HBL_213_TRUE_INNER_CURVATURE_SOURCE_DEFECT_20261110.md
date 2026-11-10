@@ -175,18 +175,18 @@ The newly audited fifth declaration is
 Writing `u` for the actual two-channel Fredholm inner field, `v`
 for its Cramer-jet-matched spectrally corrected original Kummer outer
 field, `u_0` for the original matched Green field, it proves
-[
+\[
 \left\|u''(L)-v''(L)\right\|
 \le \mathcal B_{\mathrm{inner}}(\mu,\theta,a,R,F_+,F_-)
  +a^{-2}|\delta|\,|u_0(L/a)|.
-]
+\]
 The exact Lean theorem requires `0<L`, `0<a`,
 `L/a ≤ B < scale`, `2<R≤L`, continuity and `7/4`-weighted
 membership of both **literal** inner source channels and, crucially,
 **the explicit source-identity hypothesis**
-[
+\[
   a^{-2}F(L/a)+S_{\mathrm{inner}}(L)=0.
-]
+\]
 The identical physical-source identity is separately **proved**
 for the genuinely specialized Hartree plateau by
 `actual_Hartree_moment_locked_plateau_scaled_source`;
