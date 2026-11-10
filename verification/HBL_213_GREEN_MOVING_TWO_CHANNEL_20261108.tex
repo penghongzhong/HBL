@@ -9200,4 +9200,98 @@ emergent Type-II rate. Full proof and counterexample:
 \texttt{verification/HBL\_213\_SOURCE\_LOCKED\_OUTER\_C2\_DERIVATIVE\_BUDGET\_20261110.md}.
 Formal original revised acceptance remains \(11/13\).
 
+
+\paragraph{Backward Volterra closes the local flat-overlap \(H^2\) source gate.}
+The genuine source-matched spectral continuation \(v\)
+and Fredholm inner profile \(u\) satisfy
+\(e(L)=e_y(L)=0\) for \(e=u-v\), and the
+same original quartic Hartree plateau identity
+yields, on the original backward overlap \(I=[L/2,L]\),
+\[
+ \mathcal K_a e=f,\qquad
+ f=D_{\mathrm{in}}+a^{-2}\delta u_0(y/a),
+ \quad
+ \mathcal K_a=\partial_y^2+
+      (2/y+iy/(2a^2))\partial_y+Q/a^2.
+\]
+This equation retains the actual spectral correction
+and the physical drift. For \(L>4\), the already
+verified original Fredholm shell theorem applies at
+\(R=L/2>2\), proving
+\[
+ E_f:=\|f\|_{L^2(I)}
+ \le\sqrt{L/2}\bigl[
+ 16C_{\mathrm{in}}L^{-4}N+
+ a^{-2}(C_KN+|\delta|M_0)\bigr],\quad
+ M_0=\sup_{[L/(2a),L/a]}|u_0|.
+\]
+The direct radial conjugation \(h=ye\) gives
+\[
+ h''+\frac{iy}{2a^2}h'
+    +\frac{Q-i/2}{a^2}h=yf,\qquad
+ h(L)=h'(L)=0.
+\]
+With \(Z=|h'|+2|h|/L\) and
+\(\beta=2/L+L(|Q|+3/2)/(2a^2)\),
+one has the \emph{derived backward Volterra inequality}
+\[
+ Z(y)\le\int_y^L[t|f(t)|+\beta Z(t)]\,dt.
+\]
+Consequently
+\[
+ \sup_I Z\le
+ e^{1+(|Q|+3/2)L^2/(4a^2)}
+ \frac{L^{3/2}}{\sqrt2}E_f,\quad
+ \|e''\|_{L^2(I)}\le C_E(L,a,Q)E_f,
+\]
+\[
+ C_E(L,a,Q)=
+ 1+e^{1+(|Q|+3/2)L^2/(4a^2)}
+  \left(8+\frac{(|Q|+2)L^2}{2a^2}\right).
+\]
+This is the **previously missing explicit
+source-to-\(H^2\) estimate** for the true inner
+backward overlap, not an imposed inverse envelope.
+For the actual smooth flat overlap
+\(I_{\mathrm{tr}}=[5L/8,3L/4]\),
+\(h_{\mathrm{in}}=L/8\), the original
+Kummer commutator \(\mathcal C_{\mathrm{in}}\)
+satisfies the \emph{complete paper inequality}
+\[
+ \boxed{
+ \begin{aligned}
+ \|(1+y^2)\partial_y\mathcal C_{\mathrm{in}}\|_{L^2(I_{\mathrm{tr}})}
+ &\le\sqrt2(A_0+A_1)C_E(L,a,Q)\\
+ &\quad\times
+ \bigl[16C_{\mathrm{in}}L^{-5/2}N+
+ L^{-9/2}(C_KN+|\delta|M_0)\bigr],
+ \end{aligned}}
+\]
+under the original geometric condition \(a\ge L^3\),
+where
+\[
+ \begin{split}
+ A_0&=(19+4\sqrt3)C_1+(12+24\sqrt3)C_2+24C_3,\\
+ A_1&=(\sqrt3/2+3/16)C_1+3C_2/2
+ \end{split}
+\]
+and the \(C_j\) are genuine fixed-cutoff derivative
+constants. This is a direct \(L^{-5/2}\)
+inner **spatial** source gain, requiring no outer
+point trace \(F(B)\), no independent curvature budget,
+and no assumed time-decay exponent. If
+\(|Q|\le Q_0\) follows from the dynamics,
+\(C_E\) becomes uniform using
+\(L^2/a^2\le L^{-4}\);
+such modulation trapping is not asserted here.
+The full original nonlocal Hartree residual,
+its moving source/parameter derivatives,
+the complete projected inverse and actual
+PDE orbit remain to be proved. This calculation
+has \emph{not} been formalized as a new Lean
+theorem nor accepted as original revised §2.13.
+See
+\texttt{verification/HBL\_213\_BACKWARD\_FLAT\_OVERLAP\_VOLterra\_PDE\_GRADIENT\_20261110.md}.
+The official acceptance remains \(11/13\).
+
 \end{document}
