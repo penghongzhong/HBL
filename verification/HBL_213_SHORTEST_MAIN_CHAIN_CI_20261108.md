@@ -2620,3 +2620,29 @@ the dedicated source-locked outer second-jet module still
 needs its own strict CI result. See
 [original C2/source/transport audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 **11/13 unchanged**.
+
+
+### Original radial commutator derivative requires true third cutoff derivative
+
+For the same original radial \(\chi_R=1-\mathrm{cutoff}(r/R)\),
+\([\Delta_r,\chi_R]f=2\chi_R'f'+(\chi_R''+2\chi_R'/r)f\).
+Differentiating gives exactly
+\(2\chi_R'f''+(3\chi_R''+2\chi_R'/r)f'
++(\chi_R'''+2\chi_R''/r-2\chi_R'/r²)f\).
+The concrete fixed-cutoff \(C^3\) producer,
+\`ActualHartreeOneLayerSpatialOverlapC3.lean\`, has been
+submitted to separate pinned trust-zero CI
+\`hbl-213-original-overlap-C3-source-derivative.yml\`.
+The coefficient calculation then gives the actual annular
+bound
+\(|([\Delta_r,\chi_R]f)'|
+ \le2C_1R^{-1}|f''|+(3C_2+2C_1)R^{-2}|f'|
+ +(C_3+2C_2+2C_1)R^{-3}|f|\).
+After the real Morawetz weight \(1+r²\), the
+leading coefficient can cost \(O(R)\) rather than
+giving a free positive time order. No original
+source second-derivative producer, nonlocal
+derivative control or PDE inverse has been
+proved by this cutoff geometry alone. Its strict
+CI result must be read before claiming success.
+**11/13** unchanged.
