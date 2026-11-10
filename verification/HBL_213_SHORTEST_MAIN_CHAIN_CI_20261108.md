@@ -3572,3 +3572,32 @@ under zero degree-zero and degree-one spherical projections. No independent sour
 **Important boundary:** These are **static elliptic** physical Hessian results, not time-dependent Hamiltonian spectrum or adjoint Kato smoothing: \(W\partial_t\Phi\) has a different weight from the \(W^5\) spherical elliptic output, and the coupled matrix evolution is not sphere-diagonal. No real moving four-region Hartree residual time gain, parameter Lipschitz, PDE orbit or dynamic Type-II rate has been established. The new derivation has **no new pinned --trust=0 Lean compilation / #print axioms**. Older CIs 42536552509 and 42854633900 retain their exact historical strict successes only. Official original revised environment tally remains **11/13 (84.62%)**; neither §2.13 nor final theorem is accepted.
 
 <!-- END HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110 -->
+
+
+<!-- HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110 -->
+### 10 November 2026 — decisive static-to-dynamic obstruction in EXACT original nonlinear conformal Hartree equation
+
+The full original focusing quartic inverse-square Hartree PDE under the
+**fixed** stereographic field \(u(t,x)=W(x)\Phi(t,\Xi(x))\) is **exactly**
+\[
+i\Phi_t=\frac{(1-\xi_4)^2}{4}
+ \left[(3-4\Delta_{\mathbb S^3})\Phi
+  -\frac{3}{2\pi^2}\mathscr K(|\Phi|^4)|\Phi|^2\Phi\right].
+\]
+No Hartree nonlocal density interaction is dropped. The coefficient
+\((1-\xi_4)^2/4=W^4\) vanishes at the sphere north pole
+(physical infinity), and harmonic degrees mix under its
+multiplication. Hence the newly proved exact stationary conformal
+Hessian eigen-form gaps, while valid, **cannot be promoted**
+to a uniform physical Hamiltonian evolution inverse or a Kato
+smoothing theorem by appealing to the compactness of \(\mathbb S^3\).
+A genuine moving four-region HBL PDE further adds modulation transport,
+moving-basis/endpoint derivatives and speed-selection terms.
+
+Paper proof and sphere operator domain:
+[HBL_213_EXACT_CONFORMAL_HARTREE_HESSIAN_SPECTRUM_20261110.md](HBL_213_EXACT_CONFORMAL_HARTREE_HESSIAN_SPECTRUM_20261110.md),
+synchronized to HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex.
+**No newly completed pinned Lean theorem**, and no same-orbit
+time-positive residual, Kato estimate or PDE-derived Type-II rate.
+Original 13 manuscript environments: **11/13 (84.62%)**.
+<!-- END HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110 -->
