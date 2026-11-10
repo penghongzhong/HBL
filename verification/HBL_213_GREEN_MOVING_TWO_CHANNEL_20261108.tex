@@ -7890,4 +7890,61 @@ unproved. No independent bound for \(e''\) or
 new blowup rate has been inserted. Original strict
 acceptance remains \(11/13\).
 
+
+\paragraph{Global nonlocal radial gradient without an artificial inner-radius loss.}
+The preceding \(R^{-1}\) estimate for the real-Hartree Riesz
+gradient is valid but needlessly loses the inner radius.
+The exact original physical coupling and Fourier multiplier are
+\[
+ \kappa_{\rm H}=3/\pi^2,\qquad
+ \widehat{\nabla\mathcal I f}(\xi)
+ =6i\frac{\xi}{|\xi|}\widehat f(\xi).
+\]
+The weight \(\omega(x)=|x|^{-2}\) belongs to the classical
+Muckenhoupt \(A_2(\mathbb R^3)\): splitting arbitrary balls
+according to \(|x_0|\ge2R\) or \(|x_0|<2R\) proves explicitly
+\([\,\omega\,]_{A_2}\le81\).
+The published weighted \(A_2\) theorem for Riesz transforms
+(e.g.\ Lacey, \emph{The Linear Bound in \(A_2\) for
+Calder\'on--Zygmund Operators: A Survey}, 2010)
+therefore gives a finite universal \(C_{\rm A2}\) with
+\[
+ \|\nabla\mathcal I f\|_{L^2(\omega dx)}
+ \le6C_{\rm A2}\|f\|_{L^2(\omega dx)}.
+\]
+For radial \(f\), both squared weighted three-dimensional
+norms are exactly \(4\pi\) times the corresponding
+\(L^2(dr)\) norm. Hence
+\[
+ \|\partial_r\mathcal I(W^3F)\|_{L^2(dr)}
+ \le6C_{\rm A2}\|F\|_{L^2(dr)}.
+\]
+Combining the earlier exact radial Hilbert--Schmidt
+bound \(\|\mathcal I(W^3F)\|_{L^2(dr)}\le3\|F\|_2\),
+the inequality \((1+r^2)W^3\le1\), and
+\(\sup_{r\ge0}(1+r^2)|(W^3)'|=2/\sqrt3\), we obtain
+the \emph{global} genuine linearized real-Hartree source bounds
+\[
+ \boxed{
+ \begin{aligned}
+ \|(1+r^2)W^3\mathcal I(W^3F)\|_{L^2(dr)}
+    &\le3\|F\|_2,\\
+ \|(1+r^2)\partial_r[W^3\mathcal I(W^3F)]\|_{L^2(dr)}
+    &\le(6C_{\rm A2}+2\sqrt3)\|F\|_2 .
+ \end{aligned}}
+\]
+Unlike the previous \(4/(\sqrt3R)\) outer-shell
+estimate, there is no radius loss in this \emph{linear
+nonlocal Hessian} contribution, including at the origin.
+The argument explicitly invokes a published weighted
+Calder\'on--Zygmund theorem as a \emph{paper-level
+analytic input}; it is neither a new Lean axiom nor a
+new strictly compiled original-paper theorem.
+It does not establish the corresponding source bounds for
+the full nonlinear moving Hartree residual, the local
+moving-cutoff derivative budget, the projected homogeneous
+adjoint Kato estimate, or the actual blowup orbit.
+See \texttt{verification/HBL\_213\_GLOBAL\_RIESZ\_A2\_NO\_INNER\_RADIUS\_LOSS\_20261110.md}.
+The strict original count is \(11/13\).
+
 \end{document}
