@@ -198,7 +198,7 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
     have htotal := (hasDerivAt_const s (q s0)).add hbase
     convert htotal using 1
     · funext x
-      dsimp [Q]
+      rfl
     · ring
   have hGderiv (s : ℝ) (hs : s ∈ Ici s0) :
       HasDerivAt G
