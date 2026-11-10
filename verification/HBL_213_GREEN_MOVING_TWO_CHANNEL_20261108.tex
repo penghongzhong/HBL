@@ -8494,4 +8494,42 @@ without any new original environment.
 Original §2.13 and the final theorem remain unclosed,
 with \(11/13\) accepted.
 
+
+\paragraph{Exact third-cutoff derivative in the physical Hartree commutator.}
+For the original radial overlap \(\chi_R=1-\mathrm{cutoff}(r/R)\)
+and the radial Laplacian \(\Delta_r=\partial_r^2+2r^{-1}\partial_r\),
+the actual commutator and its spatial derivative are
+\[
+ [\Delta_r,\chi_R]f
+ =2\chi_R'f'+(\chi_R''+2r^{-1}\chi_R')f,
+\]
+\[
+ \partial_r([\Delta_r,\chi_R]f)
+ =2\chi_R'f''+(3\chi_R''+2r^{-1}\chi_R')f'
+  +(\chi_R'''+2r^{-1}\chi_R''-2r^{-2}\chi_R')f.
+\]
+Thus a true Morawetz-dual source-gradient estimate needs the
+original physical \emph{third} cutoff derivative. The
+true \(C^\infty\) cutoff yields constants \(C_k>0\)
+such that \(|\chi_R^{(k)}|\le C_k/R^k\) for
+\(k=1,2,3\). On \(R\le r\le2R\),
+\[
+ \bigl|\partial_r([\Delta_r,\chi_R]f)\bigr|
+ \le\frac{2C_1}{R}|f''|
+ +\frac{3C_2+2C_1}{R^2}|f'|
+ +\frac{C_3+2C_2+2C_1}{R^3}|f|.
+\]
+The global physical weight \(1+r^2\) costs up
+to \(1+4R^2\), so the leading \(f''\)
+coefficient is \(O(R)\) on growing shells.
+No hidden radius-independent source envelope
+or positive time order is asserted.
+The actual cutoff \(C_3/R^3\) producer is
+implemented for separate pinned Lean verification
+in
+\texttt{ActualHartreeOneLayerSpatialOverlapC3.lean};
+the complete differentiated commutator estimate
+and its Hartree PDE time budget remain paper level.
+The original count remains \(11/13\).
+
 \end{document}
