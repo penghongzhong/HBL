@@ -120,9 +120,9 @@ and hence the **dynamically selected** rate
 \]
 This does **not** prescribe \(\mu_\infty\): it is the limit of the
 **actually constructed** real modulation coordinate.
-The new required projected PDE estimate is the *logarithmically weighted
-time integral* (F), not the earlier stronger pointwise rate
-\(|\mu_s|\le Cs^{-1-\delta}\).
+For the **pure-power rate conversion alone**, the *logarithmically weighted
+time integral* (F) suffices in place of the earlier stronger pointwise rate
+\(|\mu_s|\le Cs^{-1-\delta}\). **Important:** the current original main theorem additionally states the quantitative bound \(|\mu_s|\le Cs^{-1-\delta}\) as its own conclusion; that assertion is **not implied** by (F). It must still be proved if the theorem statement is unchanged, or explicitly moved into a separate sharpened theorem with a genuine manuscript revision.
 However (F) has **not** yet been derived from the HBL PDE; this is a
 mathematically valid conditional reduction, **not a Lean acceptance**.
 
