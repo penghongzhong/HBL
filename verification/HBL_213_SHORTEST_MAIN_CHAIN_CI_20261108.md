@@ -2208,12 +2208,18 @@ norm and \`F_ε(B)=ε^{-1/2}\`. Thus the newly constructed
 \`ActualHartreeC2SourceJetRepair.lean\` endpoint-jet module, even if
 it passes its exact pinned CI, cannot by itself bound the new curvature.
 A practical alternative avoids artificial outer second-jet traces:
-take \`D=aB-L>0\`, \`h=D/8\`, and the ORIGINAL smooth cutoff \`c\`, set
-\`η(y)=c((y-L-h)/h)\`, \`χ(y)=1-c((y-aB+4h)/h)\`, and splice
-\`U=(1-η)u+ηχv\` with the **same genuine physical Hartree
-Fredholm/Kummer source**. It is u near L, v on
-\`[L+3h,L+5h]\`, and 0 beyond \`L+6h\`; no Kummer continuation
-beyond original B or \(w''(B)\) point evaluation is used.
+take \(h_{\rm in}=L/8\), \(h_{\rm out}=(aB-L)/8\).
+The old *forward* Fredholm transition past \(L\) would
+have used unproved inner estimates; it is withdrawn.
+Use the ORIGINAL smooth cutoff \(c\) instead with
+\(\eta(y)=c((y-L+4h_{\rm in})/h_{\rm in})\),
+\(\chi(y)=1-c((y-aB+4h_{\rm out})/h_{\rm out})\)
+and \(U=(1-\eta)u+\eta\chi v\).
+The TRUE inner transition is \([5L/8,3L/4]\subset[L/2,L]\),
+where both physical fields are valid; the outer transition
+is \([L+5h_{\rm out},L+6h_{\rm out}]\subset(L,aB)\).
+This avoids the actual point trace \(w''(B)\) without
+claiming any free curvature cancellation.
 The exact second-order differential and moving-material
 commutators are derived in
 [\`HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md\`](HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md).
@@ -2245,3 +2251,33 @@ It does not prove a bound for the complete nonlinear moving
 four-region PDE residual, Kato limiting absorption, orbit, or Type-II.
 No new Lean CI was claimed for this Fourier calculation;
 the official original count remains **11/13**.
+
+
+### 10 November — corrected backward-domain flat overlap and zero-jet commutator
+
+Exact source inspection of
+\`ActualHartreeMomentLockedKummerPullback.lean\` shows
+the true Fredholm/Kummer transmission at \(y=L\) is
+anchored on the **backward physical shell \([L/2,L]\)**.
+The earlier forward-inner overlap using \(u\) to the
+right of \(L\) was not justified by physical source
+estimates and is superseded by the corrected two
+cutoffs in the source-aligned
+[flat-overlap note](HBL_213_SOURCE_FAITHFUL_FLAT_OVERLAP_20261110.md).
+For \(e=u-v\) satisfying the genuine zero value/slope
+at \(L\), let \(E=\|e''\|_{L²([L/2,L])}\) if the
+physical source produces \(H²_{\rm loc}\).
+The exact cutoff commutator now has
+\(\|\mathcal C_{\rm in}\|_{L²(I_{\rm in})}
+\le(2\sqrt3C_1+3C_2+3C_1M_0h)E\)
+and differentiated norm
+\(\|\mathcal C'_{\rm in}\|_2
+\le[(2C_1+3\sqrt3C_2+3C_3)/h
++(\sqrt3C_1+3C_2)M_0+3C_1M_1h]E\).
+This is the first explicitly quantified, source-jet-faithful
+inner spatial smoothing budget: **no inverse-width cost in
+the undifferentiated commutator**, one explicit \(h^{-1}\)
+cost in its spatial derivative. \(E\), physical
+positive-time gains, projected Hartree smoothing and
+the nonlinear full-source Lipschitz still remain
+**OPEN**. No new original environment accepted: **11/13**.
