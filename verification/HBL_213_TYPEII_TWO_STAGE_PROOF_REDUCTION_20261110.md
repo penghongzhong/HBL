@@ -689,3 +689,38 @@ Hartree-specific trace and weighted residual source control
 including moving time/parameter derivatives, projected
 nonlocal Hamiltonian inverse, nonlinear finite recursion,
 and dynamical Type-II rate. Original count **11/13**.
+
+
+## 12. Source-faithful backward Volterra closes former unknown E in the *inner* smooth overlap
+
+Using the actual original quartic Hartree plateau
+\(S_{\rm in}+a^{-2}F_o=0\) and the original Cramer
+spectral correction, the true backward mismatch
+\(e=u_{\rm inner}-v_{\rm corr}\) satisfies
+\(\mathcal K_a e=D_{\rm in}+a^{-2}\delta u_0(y/a)\),
+\(e(L)=e'(L)=0\), on \(L/2\le y\le L\).
+The original Fredholm shell estimate, now at
+\(R=L/2>2\), bounds the right side in \(L^2\)
+without any uncontrolled point trace. Direct radial
+Volterra/Gronwall yields the explicit **local** \(H^2\)
+bound and in turn
+\[
+ \|(1+y^2)(\mathcal C_{\rm in})'\|_{L^2([5L/8,3L/4])}
+ \le C_{\rm explicit}(L,a,Q)
+  [\,L^{-5/2}N+
+   L^{-9/2}(C_KN+|\delta|M_0)\,]
+\]
+under \(a\ge L^3\). Every coefficient including
+the physical drift and the true third cutoff
+derivative is retained. The complete proof is
+[HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md](HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md).
+
+This **closes the old unknown inner backward E estimate
+on paper**; it makes the smooth-overlap path preferable
+to imposing the uncontrolled outer \(F(B)\) source
+trace. It does *not* close the outer shell, full
+nonlocal interactions, actual moving time residual,
+modulation/parameter Lipschitz, projected Hartree
+inverse or final orbit. The bound awaits actual
+single-target Lean formalization on the main
+source chain; original **11/13**.
