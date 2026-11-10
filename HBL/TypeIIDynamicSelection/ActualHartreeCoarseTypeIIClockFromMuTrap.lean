@@ -258,4 +258,91 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
       Real.log (q s0) / (8 * M)
   linarith
 
+
+
+/-- Exponentiating the previous directly verified logarithmic
+inequality gives the positive original physical scale envelope
+WITHOUT assuming any separate decay rate for ell.  The only
+dynamical input is the positive trapped two-channel modulation
+path, while the full nonlocal Hartree orbit remains to be built. -/
+theorem actual_Hartree_dynamic_mu_trap_physical_scale_power_envelope
+    (q ell mu : ℝ → ℝ) (s0 m M : ℝ)
+    (hq0 : 0 < q s0) (hm : 0 < m)
+    (hq : ∀ s ∈ Ici s0, HasDerivAt q (4 * mu s) s)
+    (hell : ∀ s ∈ Ici s0,
+      HasDerivAt ell
+        (-((1 + 4 * mu s) / (2 * q s)) * ell s) s)
+    (hellPos : ∀ s ∈ Ici s0, 0 < ell s)
+    (htrap : ∀ s ∈ Ici s0, m ≤ mu s ∧ mu s ≤ M) :
+    ∀ s : ℝ, s0 ≤ s →
+      ell s ^ 2 * q s *
+        (q s0 + 4 * M * (s - s0)) ^ (1 / (4 * M) : ℝ) ≤
+      ell s0 ^ 2 * q s0 * (q s0) ^ (1 / (4 * M) : ℝ) := by
+  obtain ⟨hBounds, _hGrowth, _hTypeII⟩ :=
+    actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
+      q mu s0 m M hq0 hm hq htrap
+  have hs0I : s0 ∈ Ici s0 := by simp
+  have hM : 0 < M :=
+    lt_of_lt_of_le hm ((htrap s0 hs0I).1.trans (htrap s0 hs0I).2)
+  let d : ℝ := 1 / (4 * M)
+  let Q : ℝ → ℝ := fun s => q s0 + 4 * M * (s - s0)
+  intro s hs
+  have hsI : s ∈ Ici s0 := hs
+  have he0 : 0 < ell s0 := hellPos s0 hs0I
+  have he : 0 < ell s := hellPos s hsI
+  have hqpos : 0 < q s := (hBounds s hs).2.2
+  have hQpos : 0 < Q s :=
+    hqpos.trans_le (hBounds s hs).2.1
+  have hLogBase :=
+    actual_Hartree_dynamic_mu_trap_log_scale_gain
+      q ell mu s0 m M hq0 hm hq hell hellPos htrap s hs
+  have hLogTimesTwo :
+      2 * Real.log (ell s) + Real.log (q s) +
+        Real.log (Q s) / (4 * M) ≤
+      2 * Real.log (ell s0) + Real.log (q s0) +
+        Real.log (q s0) / (4 * M) := by
+    have hTwo := mul_le_mul_of_nonneg_left hLogBase
+      (by norm_num : (0 : ℝ) ≤ 2)
+    have hDiv : ∀ x : ℝ, 2 * (x / (8 * M)) = x / (4 * M) := by
+      intro x
+      field_simp [hM.ne']
+      ring
+    dsimp only [Q] at *
+    rw [← hDiv (Real.log (q s0 + 4 * M * (s - s0))),
+      ← hDiv (Real.log (q s0))]
+    linarith only [hTwo]
+  let L : ℝ := ell s ^ 2 * q s * (Q s) ^ d
+  let R : ℝ := ell s0 ^ 2 * q s0 * (q s0) ^ d
+  have hLpos : 0 < L := by dsimp [L]; positivity
+  have hRpos : 0 < R := by dsimp [R]; positivity
+  have hLlog :
+      Real.log L =
+      2 * Real.log (ell s) + Real.log (q s) +
+        Real.log (Q s) / (4 * M) := by
+    dsimp [L]
+    rw [Real.log_mul
+        (mul_pos (sq_pos_of_pos he) hqpos).ne'
+        (Real.rpow_pos_of_pos hQpos d).ne',
+      Real.log_mul (sq_pos_of_pos he).ne' hqpos.ne',
+      Real.log_pow, Real.log_rpow hQpos]
+    dsimp [d]
+    ring
+  have hRlog :
+      Real.log R =
+      2 * Real.log (ell s0) + Real.log (q s0) +
+        Real.log (q s0) / (4 * M) := by
+    dsimp [R]
+    rw [Real.log_mul
+        (mul_pos (sq_pos_of_pos he0) hq0).ne'
+        (Real.rpow_pos_of_pos hq0 d).ne',
+      Real.log_mul (sq_pos_of_pos he0).ne' hq0.ne',
+      Real.log_pow, Real.log_rpow hq0]
+    dsimp [d]
+    ring
+  have hlog : Real.log L ≤ Real.log R := by
+    rw [hLlog, hRlog]
+    exact hLogTimesTwo
+  have hpow := (Real.log_le_log_iff hLpos hRpos).2 hlog
+  simpa only [L, R, Q, d] using hpow
+
 end HBL.TypeIIDynamicSelection
