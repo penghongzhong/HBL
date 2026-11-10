@@ -1689,7 +1689,25 @@ redundant line without changing the theorem type at commit
 [`2b93a05c`](https://github.com/penghongzhong/HBL/commit/2b93a05c250938902ff1bf2a4a31a32e297ed3d5);
 replacement actual strict workflow
 [42744295852](https://github.com/penghongzhong/HBL/actions/runs/42744295852)
-was triggered and must be judged by its new original job and exact axiom audit.
+is now **strict SUCCESS** (completed 2026-11-10 02:50 UTC).
+Its original successful job is `129592601952`, and the independently
+inspected raw log confirms the exact source commit `2b93a05c`,
+Lean `4.35.0-rc3`, Mathlib
+`a98628e16c11f5167f16124105ddce53efa9bfe5`,
+`lake env lean --trust=0 -DwarningAsError=true`, exact
+`#check @HBL.TypeIIDynamicSelection.actual_Hartree_true_moving_singular_Green_cross_Frobenius_one_inverse_radius`
+and one corresponding `#print axioms`. The accepted axiom list is
+exactly `Classical.choice`, `Quot.sound`, `propext`; archived raw
+evidence artifact `13730793163`. This is the one-positive-**spatial**
+radius bound on the moving slit **conditional on the selected source
+time-derivative budget at every intermediate time**. In particular
+the Cramer annular source-time estimate, valid for radii
+`1 / a(τ) ≤ r ≤ B`, does not automatically supply the Green
+hypothesis on *every* `r` between two moving inner endpoints
+and *every* `τ` between the times: the moving-slit/annulus
+domain inclusion must be proved from the true parameter geometry.
+Neither this inclusion nor the time-positive four-region PDE
+residual follows from the one-radius Green estimate.
 
 The central physical producer for the time rate \(E(s)\) in the
 actual four-piece PDE is still absent. No original revised environment
