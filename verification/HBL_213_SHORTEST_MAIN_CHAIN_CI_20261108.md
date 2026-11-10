@@ -3174,3 +3174,34 @@ original job log and axiom allowlist are inspected.
 Formal original count: **11/13**, since neither the
 full nonlinear source bound, a true PDE orbit nor
 the dynamic Type-II rate follows from these identities.
+
+
+### 10 November — full nonlocal Hartree finite-layer mixed terms reduced to original physical profile budget
+
+The entire original quartic Riesz nonlinearity, not a local NLS
+surrogate, has a two-field weighted radial derivative Lipschitz
+estimate (N31) at paper level from the genuine published
+three-dimensional \(A_2\) theorem. New precise finite-layer
+application: for the *same original-PDE* partial sums
+\(V_j=V_0+\sum_{k\le j}p_k\) with
+\(\max_j\|V_j-W\|_X\le R\), where
+\(\|u\|_X=\|u\|_{L²(dr)}+\|(1+r²)u'\|_{L²(dr)}\),
+the genuine nonlinear source satisfies
+\[
+\|\mathcal N(V_n)-\mathcal N(V_0)\|_Y
+\le C_{2R}\sum_{k=1}^n\|p_k\|_X,\quad
+Y=L²(dr)\cap\{(1+r²)F'\in L²(dr)\}.
+\]
+This *retains every nonlocal density cross term*
+inside an actual nonlinear difference; no
+independent Riesz envelope or false superposition
+is assumed. The indispensable physical \(X\)-bounds
+for actual selected four-piece profiles and their
+time/parameter variation have **not** been proved;
+nor has the corresponding full four-region PDE
+residual positive time order, projected energy
+inverse or real orbit.
+[Full derivation](HBL_213_FINITE_NONLOCAL_HARTREE_MIXED_TERMS_SHORT_CHAIN_20261110.md).
+This is paper-level reduction only, with no new
+Lean target/axiom or original-paper environment.
+**11/13 unchanged.**
