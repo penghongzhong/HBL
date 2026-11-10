@@ -1,6 +1,6 @@
 # HBL §2.13 — sharp lower bound for any one-sided C² curvature repair (2026-11-10)
 
-**Paper-level rigorous lemma; no new Lean compile and no original-environment acceptance. Original revised strict count: 11/13.** This note complements the original same-source inner/spectral C² identity and broad-patch upper bound in \`HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md\`.
+**Paper-level rigorous lemma; no new Lean compile and no original-environment acceptance. Original revised strict count: 11/13.** This note complements the original same-source inner/spectral C² identity and broad-patch upper bound in `HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md`.
 
 ## 1. A source derivative trace obstruction independent of repair width and shape
 
@@ -104,6 +104,6 @@ If one wishes to estimate **the patch forcing derivative as a separate source te
  \tag{S8}
 \]
 
-Here \(p\) may be \(15/8\), \(17/8+\eta\), or \(9/4\), according to the *stated* target norm. The modulation law yields only a slowly growing \(L(s)\), not \(L\sim s^{1/2}\); see \`HBL_213_ACTUAL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110.md\`.
+Here \(p\) may be \(15/8\), \(17/8+\eta\), or \(9/4\), according to the *stated* target norm. The modulation law yields only a slowly growing \(L(s)\), not \(L\sim s^{1/2}\); see `HBL_213_ACTUAL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110.md`.
 
 **Exact scope.** (S5)–(S8) are **not** a lower bound for the complete four-region nonlinear Hartree PDE residual: the original source may cancel the local patch forcing at the same spatial location, and a projected propagator might exploit further structure. Nor does this imply \(\Delta_2\ne0\). What is decisively ruled out is a proposed shortcut that makes the *separately estimated C² patch derivative* arbitrarily cheaper by only optimizing its cutoff shape or support length. A shorter genuine closure route must instead exploit the **same-source curvature cancellation/physical \(\Delta_2\)** or prove a cancellation **after combining the full nonlocal PDE residual**, together with true moving-parameter derivatives and a Hartree-specific projected inverse. The revised-original counter stays **11/13**.
