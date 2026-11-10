@@ -2913,3 +2913,28 @@ The **decisive same-PDE forcing cancellation** to derive and bound is
 A one-sided quadratic curvature patch with overlap width \(h\) makes the join \(C^2\), but its *actual scaled Kummer PDE source gradient* has leading upper-bound cost \((1+L^2)|\Delta_2|/\sqrt h\). Simply shrinking \(h\) can worsen the dual source norm. The exact coefficients, cutoff third-derivative and source requirements are in
 [\`HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md\`](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md).
 **Paper analysis only**; no new source cancellation, full Hartree PDE estimate, original §2.13 acceptance, or Type-II orbit. Formal count **11/13**.
+
+
+### 10 November — source-faithful inner curvature cancellation (original proof spine)
+
+The **original** source input to the preceding inner \(C^2\) mismatch is now
+specialized to the actual published Lean producer
+\`actual_Hartree_moment_locked_plateau_scaled_source\`, which proves
+\(S_{\rm in}(y)+a^{-2}F_o(y/a)=0\) throughout \(0<y\le L\) for the exact
+physical inverse-square quartic Hartree interaction and both genuine speed directions.
+With the actual first spectral correction \(F_{\rm cor}=F_o-\delta u_0\), **not
+an independent prescribed source**, this gives
+\[
+ S_{\rm in}(L)+a^{-2}F_{\rm cor}(L/a)=-a^{-2}\delta u_0(L/a),\qquad
+ u_{\rm inner}''(L)-v_{\rm corr}''(L)=D_{\rm inner}(L)+a^{-2}\delta u_0(L/a).
+\]
+Thus the inner \(C^2\) mismatch is controlled by the existing actual Fredholm shell norm
+and the *derived* spectral displacement, with **no additional outer forcing point trace**.
+The original source identification is mathematical and corresponds to an existing
+strict dependency. A new dedicated
+\`ActualHartreeInnerSpectralC2PlateauSourceLock.lean\` / workflow
+\`hbl-213-inner-spectral-c2-plateau-source-lock.yml\` submits the **exact source
+cancellation** for pinned trust-zero / three-axiom CI; do not report it green
+without original log and artifact inspection. This is not a completed
+\(C^2\) whole-four-region profile, positive residual gain, parameter-Lipschitz
+or final orbit, and remains **auxiliary only**. Original acceptance: **11/13**.
