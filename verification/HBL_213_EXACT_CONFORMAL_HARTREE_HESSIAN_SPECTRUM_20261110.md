@@ -79,6 +79,15 @@ In particular
  h_0^-=0,\quad h_{k\ge1}^->0;\qquad
  h_0^+=-18,\quad h_1^+=0,\quad h_{k\ge2}^+\ge22.
 \]
+**Spectral interpretation:** The coefficients \(h_k^\pm\) are the exact
+diagonal entries of the **conformally conjugated generalized elliptic
+problem** \(W^{-5}L_\pm W\) and of the physical energy quadratic forms.
+They are **NOT the eigenvalues of \(L_\pm\) on physical
+\(L^2(\mathbb R^3,dx)\)**: the map \(g=W\Phi\circ\Xi\) and output
+weight \(W^5\) do not implement a unitary \(L^2\) conjugation.
+In particular these numbers alone say nothing about the positive-energy
+limiting-absorption estimate or the time-dependent matrix Hamiltonian.
+
 Thus the original nonlocal **real** Hessian has exactly one negative
 quadratic direction (degree-zero), four neutral directions
 (degree-one, three translations plus scaling), and a positive complement.
