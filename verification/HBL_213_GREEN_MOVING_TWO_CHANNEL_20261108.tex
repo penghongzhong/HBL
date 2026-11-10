@@ -9823,6 +9823,40 @@ This lower bound concerns the \emph{local Kummer source}
 contributed by this patch. It cannot be transferred to the full
 nonlocal Hartree PDE residual without controlling all possible
 cancellations against its interaction and moving terms.
+
+The pre-existing original inner-shell Kummer bound supplies a
+shorter, source-faithful curvature budget. When \(F_\pm\) are
+continuous with the stated original \(7/4\)-weighted membership
+and \(2<R\le L\), let
+\(S=\operatorname{actualHartreeTwoChannelPhysicalSource}
+ (F_+,F_-)\).
+The already established two-channel shell theorem gives
+\[
+\|K_{a,Q}u(L)+S(L)\|
+\le \mathcal B_{\rm inner},\qquad
+\mathcal B_{\rm inner}
+=\left(\frac{C_{\rm inner}}{R^4}
++\frac{C_{\rm Kummer}(\mu,\theta)}{a^2}\right)
+\bigl(\|F_+\|_{7/4}+\|F_-\|_{7/4}\bigr).
+\]
+At the actual source-selected inner plateau the *same*
+physical Hartree source and real two-speed directions obey
+\(a^{-2}F(L/a)+S(L)=0\). Hence the exact original
+source-join identity yields
+\[
+\boxed{\quad
+|\Delta_2|\le\mathcal B_{\rm inner}
++a^{-2}|\delta|\,|u_0(L/a)|.\quad}
+\]
+This is a norm bound inherited from the original fixed inner
+inverse, not an independent envelope. To apply it in the
+evolving four-region packet one must establish the actual
+weighted-source size, continuity, same-source identification
+and spectral displacement bounds at every physical time.
+In particular the native shell theorem requires \(R>2\)
+and \(R\le L\); it cannot be applied outside this range.
+The estimate does not by itself give a positive-order
+residual or any part of a genuine PDE orbit.
 % END HBL_TRUE_INNER_SPECTRAL_C2_JUMP_AND_PATCH_COST_20261110
 
 \end{document}
