@@ -651,3 +651,41 @@ using a weaker source norm. Without one of those producers,
 no §2.13 acceptance is justified. Detail:
 [the source-regularity audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 **11/13 unchanged**.
+
+
+## 11. Actual original C² outer splice has compiled; remaining point-trace gate is mathematical
+
+CI **42825266426** (job **129860806977**, evidence **13768179716**)
+proves the actual source-dependent spectral outer curvature,
+source-locked \(C^2\) repair jets and true joined outer twice-
+differentiable field under trust-zero, warningAsError and exact
+three-axiom audit. Its source SHA is **23359602dd5f34921b2f3cb23aaeb1a153c41fff**.
+
+The now explicit physical PDE-gradient estimate for this repaired
+outer shell (not full Hartree residual) is
+\[
+ \|(1+y^2)E_a'\|_{L^2(aB,2aB)}
+ \le a^{-1/2}(1+4B^2)\sqrt B\,D
+   \{(A_3+2A_1+2A_2)/B^3+
+     (A_1/2+A_2+|Q|A_1)/B\},
+\]
+where \(D=|w(B)|+B|w'(B)|+B^2|w''(B)|\)
+and the original nonlocal source fixes
+\(w''(B)=F(B)-\delta u_0(B)-A(B)w'(B)-Qw(B)\).
+The \(\|F\|_{L^2_{7/4}}\) source norm does **not** control
+the point evaluation \(F(B)\): even after Cramer inversion,
+\(F_N=\sqrt N\psi(N(r-B))\) produces
+\(|w''_N(B)|\sim\sqrt N\) with bounded source \(L^2\).
+This is a mathematically decisive failure of the
+implicit old source-class-to-C² estimate, not a Lean
+elaboration error. It does not rule out stronger genuine
+PDE source regularity; that must now be derived for the
+selected same-orbit Hartree source and moving parameters.
+Complete proof:
+[HBL_213_SOURCE_LOCKED_OUTER_C2_DERIVATIVE_BUDGET_20261110.md](HBL_213_SOURCE_LOCKED_OUTER_C2_DERIVATIVE_BUDGET_20261110.md).
+
+**Still open and mandatory:** inner \(C^2\) physical splice,
+Hartree-specific trace and weighted residual source control
+including moving time/parameter derivatives, projected
+nonlocal Hamiltonian inverse, nonlinear finite recursion,
+and dynamical Type-II rate. Original count **11/13**.
