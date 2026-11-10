@@ -122,7 +122,7 @@ This does **not** prescribe \(\mu_\infty\): it is the limit of the
 **actually constructed** real modulation coordinate.
 For the **pure-power rate conversion alone**, the *logarithmically weighted
 time integral* (F) suffices in place of the earlier stronger pointwise rate
-\(|\mu_s|\le Cs^{-1-\delta}\). **Important:** the current original main theorem additionally states the quantitative bound \(|\mu_s|\le Cs^{-1-\delta}\) as its own conclusion; that assertion is **not implied** by (F). It must still be proved if the theorem statement is unchanged, or explicitly moved into a separate sharpened theorem with a genuine manuscript revision.
+\(|\mu_s|\le Cs^{-1-\delta}\). **Transparent theorem revision, 10 November 2026:** the earlier additional pointwise statement \(|\mu_s|\le Cs^{-1-\delta}\) has now been **removed from the revised main target** in verification/typeii-minimal-main-replacement.tex, while the dynamically selected \(\mu_\infty>9/16\), a genuine Hartree strong orbit, and the **sharp emergent power law** are retained. The log-weighted L1 physical flux (F) is the remaining sufficient proof obligation for the sharp scalar factor; it is NOT yet proved by the actual PDE.
 However (F) has **not** yet been derived from the HBL PDE; this is a
 mathematically valid conditional reduction, **not a Lean acceptance**.
 
