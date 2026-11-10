@@ -59,7 +59,7 @@ lies in the radial Riesz bubble-squared class under half-radial
 bounds for the field AND its real temporal velocity. -/
 theorem actual_Hartree_original_quartic_velocity_half_radial_to_bubble_sq
     (z dz : ℝ → ℂ) (M D : ℝ)
-    (hM : 0 ≤ M) (hD : 0 ≤ D)
+    (hM : 0 ≤ M) (_hD : 0 ≤ D)
     (hZ : ∀ r : ℝ, 0 < r →
       ‖z r‖ ≤ M * Real.sqrt (bubble r))
     (hDZ : ∀ r : ℝ, 0 < r →
