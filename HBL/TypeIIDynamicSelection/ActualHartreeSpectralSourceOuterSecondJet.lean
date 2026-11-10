@@ -158,7 +158,14 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
     filter_upwards [Ioo_mem_nhds hBdomain.1 hBdomain.2] with x hx
     change deriv (fun y => u0 y - w1 y) x =
       deriv u0 x - deriv w1 x
-    exact ((hU x hx).1.sub (hV x hx).1).deriv
+    calc
+      deriv (fun y => u0 y - w1 y) x =
+          actualOriginMatchedKummerSlope K r0 B F U DU x -
+            actualOriginMatchedKummerSlope K r0 B q 0 0 x := by
+              simpa only [Pi.sub_apply] using
+                ((hU x hx).1.sub (hV x hx).1).deriv
+      _ = deriv u0 x - deriv w1 x := by
+          rw [← (hU x hx).1.deriv, ← (hV x hx).1.deriv]
   have hW2 : HasDerivAt (deriv w) (deriv (deriv w) B) B := by
     have hdiff := (hU B hBdomain).2.1.sub (hV B hBdomain).2.1
     have h := hdiff.congr_of_eventuallyEq hNearDeriv
@@ -179,6 +186,7 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
     change actualKummerRepairCutoff B x *
         actualHartreeC2RepairPolynomial B (w B) (deriv w B) j x =
       actualHartreeC2RepairPolynomial B (w B) (deriv w B) j x
+    have hx' : x < B + B / 3 := hx
     have hc : cutoff ((x - B) / (B / 3)) = 0 :=
       cutoff_zero_of_le_one _
         ((div_le_one (by positivity)).2 (by linarith))
@@ -187,6 +195,7 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
     filter_upwards [Ioi_mem_nhds hRightBound] with x hx
     change actualKummerRepairCutoff B x *
         actualHartreeC2RepairPolynomial B (w B) (deriv w B) j x = 0
+    have hx' : B + 2 * (B / 3) < x := hx
     have hc : cutoff ((x - B) / (B / 3)) = 1 :=
       cutoff_one_of_two_le _
         ((le_div_iff₀ (by positivity)).2 (by linarith))
