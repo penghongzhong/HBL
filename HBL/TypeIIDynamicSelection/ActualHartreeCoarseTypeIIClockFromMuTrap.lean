@@ -34,7 +34,7 @@ concentration parameter q^(-1/2) vanishes. Neither a mu-limit
 nor an asymptotic rate is required. -/
 theorem actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
     (q mu : ℝ → ℝ) (s0 m M : ℝ)
-    (hq0 : 0 < q s0) (hm : 0 < m) (hmM : m ≤ M)
+    (hq0 : 0 < q s0) (hm : 0 < m)
     (hq : ∀ s ∈ Ici s0, HasDerivAt q (4 * mu s) s)
     (htrap : ∀ s ∈ Ici s0, m ≤ mu s ∧ mu s ≤ M) :
     (∀ s : ℝ, s0 ≤ s →
