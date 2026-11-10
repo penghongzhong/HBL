@@ -293,7 +293,7 @@ same-source inner interface*.
 
 Keep a fixed admissible \(B>0\), and suppose
 \[
- L\ge2,\qquad a\ge L^3,\qquad
+ L>2,\qquad a\ge L^3,\qquad
  L^2\ge \frac{5}{4B},\qquad
  |Q|\le Q_0,\qquad Q_0\ge0 .
  \tag{I15}
