@@ -3472,3 +3472,30 @@ nonlinear orbit and finite recurrence. The final original theorem
 additionally needs actual PDE modulation flux and the
 dynamically **derived** sharp Type-II rate.
 <!-- END HBL_INNER_C2_NATIVE_SHELL_STRICT_42854633900 -->
+
+
+<!-- HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110 -->
+### 10 November 2026 — explicit sufficient source-decay thresholds for the true C² patch
+
+The same-source paper inequality (I19), **not** a time decay
+theorem, gives under the extra *unproved* moving-geometry hypothesis
+`L(s) ≥ c s^gamma`, `a(s)≥L(s)^3` and bounded original Kummer
+coefficients and native parameter factor
+`C_K(mu(s),theta(s))`:
+`J_patch(s) ≲ s^(-5gamma/2) N(s) + s^(-9gamma/2)(N(s)+|delta(s)u0(s,L/a)|)`,
+where `N(s)` is the **literal** original two-channel Fredholm
+`7/4`-weighted source norm. If **conditionally**
+`gamma=1/2`, the leading patch source is `s^(-5/4) N(s)`;
+this particular bound suffices for `s^(-15/8)`,
+`s^(-17/8-eta)` (absolute Duhamel threshold), and
+`s^(-9/4)` if respectively
+`N(s)=O(s^(-5/8))`, `O(s^(-7/8-eta))`, and
+`O(s^(-1))`, subject to the separate spectral term
+and the other four-region physical source components.
+These are **sufficient**, not necessary, and are
+**not known** on an actual Hartree trajectory. This
+conditional calculation is synchronized in the paper
+`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`
+and [the source-exact patch note](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md).
+Nothing here upgrades the original **11/13** tally.
+<!-- END HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110 -->
