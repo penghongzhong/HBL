@@ -6810,11 +6810,18 @@ half-line and the exact negative-power limit; no prescribed rate
 or asymptotic is an input. It is the
 \emph{coarse dynamical clock consequence}, not a proof of a
 physical Hartree orbit or of the original sharp-rate main
-theorem. Its strict pinned Lean CI is governed by
-\texttt{.github/workflows/hbl-coarse-typeii-clock-from-mu-trap.yml};
-acceptance requires the actual completed strict log with exact
-\texttt{\#check}, \texttt{\#print axioms} and the three
-allowed axioms.
+theorem. Its original pinned strict CI \texttt{42766649238} completed
+with \emph{Success} (10 November 2026, 06:11 UTC), original
+job \texttt{129664601628}, artifact \texttt{13739896709}.
+The raw log audits the exact
+\texttt{actual\_Hartree\_coarse\_TypeII\_clock\_from\_dynamical\_mu\_trap}
+type with \texttt{\#check} and \texttt{\#print axioms}
+under pinned Lean/Mathlib, \texttt{--trust=0} and
+warning-as-error; the only transitive axioms are
+\texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}. This is a strictly checked
+\emph{conditional scalar kinematic lemma}, not a
+constructed Hartree PDE orbit.
 
 The paper's original main target and all its quantitative
 statements are retained in
