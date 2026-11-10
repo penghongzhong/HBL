@@ -2132,3 +2132,40 @@ The calculation is synchronized to the original §2.13 TeX and
 the dedicated obstruction note. **No new Lean theorem or CI** is
 claimed, no extra original numbered environment is added,
 and acceptance remains **11/13 (84.62%)**.
+
+
+### 10 November — fresh direct ZIP/artifact audit of original requested CI targets (not inferred from green badge)
+
+Downloaded the original GitHub Actions ZIP evidence for CI
+42530313725 / 42531500587 / 42531018076 / 42531450638 /
+42532363535 / 42536552509 / 42561772339. Re-read each
+actual generated Lean audit.log, strict.log, compiler-version.txt,
+commit.txt and exact target name. The strict.log is **empty for
+each**. Actual #print axioms output for every target is exactly the
+allowlist {propext, Classical.choice, Quot.sound}, allowing the usual
+.{u} universe levels; there is **no sorryAx/admit in the actual
+printed theorem dependencies**. Compiler: Lean 4.35.0-rc3,
+commit 470d5ce1400764999581fd26d5d72b00d990b0f4. The exact
+Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5
+is pinned by the relevant original strict job and dependency logs.
+
+Raw audited artifact IDs and target counts:
+13636899879 (1 theorem; CI 42530313725);
+13637228884 (2; 42531500587);
+13637702928 (1; 42531018076);
+13638185198 (3; 42531450638);
+13638605835 (1; 42532363535);
+13639851938 (1; 42536552509);
+13650137059 (1; 42561772339).
+Total **10 directly printed target theorem statements**, all with
+only the three allowed axioms (not 10 original paper environments).
+Some historical CI scripts merely ran #print axioms and grep'ed
+sorryAx rather than programmatically asserting the exact allowlist:
+the stronger exact-allowlist conclusion above is from **this run's
+independent inspection of their original audit.log ZIP bytes**,
+not from assuming the workflow badge enforces that condition.
+
+The source-date/CI linkage is SHA-specific; this audit certifies the
+targets at their original commits, not a fresh full-HEAD Lean rebuild.
+All remain *auxiliary* for original retained revised §2.13 and the
+physical Type-II main theorem. Formal acceptance: **11/13**.
