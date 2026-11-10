@@ -8532,4 +8532,34 @@ the complete differentiated commutator estimate
 and its Hartree PDE time budget remain paper level.
 The original count remains \(11/13\).
 
+
+\paragraph{A smooth-shell stress test for the differentiated cutoff commutator.}
+Set \(\chi_R(r)=\chi(r/R)\), \(\chi=1-\mathrm{cutoff}\),
+and \(f_R(r)=e\,\phi(r/R)\) with fixed
+\(\phi\in C_c^\infty((1,2))\). If
+\[
+ \mathscr C(z)=2\chi'(z)\phi'(z)
+   +[\chi''(z)+2z^{-1}\chi'(z)]\phi(z)
+\]
+has \(\mathscr C'\not\equiv0\), the \emph{literal}
+radial commutator satisfies
+\[
+ [\Delta_r,\chi_R]f_R=eR^{-2}\mathscr C(r/R),
+ \qquad
+ \|(1+r^2)\partial_r[\Delta_r,\chi_R]f_R\|_{L^2(R,2R)}
+ =eR^{-5/2}\|(1+R^2z^2)\mathscr C'\|_{L^2(1,2)}
+ \asymp eR^{-1/2}.
+\]
+For the test \(e=s^{-9/8}\), \(R=s^{1/2}\),
+the dual-source commutator norm is \(s^{-11/8}\),
+not \(s^{-15/8}\). The mismatch is a
+\emph{half-power} of time even with an
+arbitrarily smooth field and the original
+smooth cutoff. This is a stress test, not a
+claim that the true Hartree orbit equals the
+test shell; the physical proof must derive
+a cancellation or a stronger actual shell
+estimate from the same selected PDE.
+No original §2.13 acceptance is asserted.
+
 \end{document}
