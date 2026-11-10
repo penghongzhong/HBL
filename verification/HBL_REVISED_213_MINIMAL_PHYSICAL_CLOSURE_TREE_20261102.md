@@ -583,3 +583,18 @@ The raw GitHub workflow run [42773792399](https://github.com/penghongzhong/HBL/a
    eliminates an independent assumed positive s-time scale exponent. In particular, via q(s)≥(m/M)Q(s), \(\ell(s)\le \ell(s_0)\sqrt{M/m}\,(Q(s)/q(s_0))^{-1/2-1/(8M)}\).
 
 The last exponentiation and the true Hartree radiation-moment log-L1 primitive are **paper consequences**, not additional accepted Lean declarations. None of the four Lean proofs constructs or traps a nonlinear Hartree PDE orbit; all operate on differential equations passed as hypotheses. The original four-piece nonlocal source time positive order, its Lipschitz counterpart, real fixed-point recursion, and dynamically realized blowup remain **OPEN**. Official original revised environment count: **11/13**, not inflated by auxiliary proof successes.
+
+
+### 2026-11-10 exact width-independent weighted trace lower bound for authentic C² repair (paper; not Lean-accepted)
+
+See \`verification/HBL_213_SHARP_C2_PATCH_WEIGHTED_TRACE_OBSTRUCTION_20261110.md\` and synchronized \`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`. For every compact one-sided \(C^3\) repair \(P\) with \(P(L)=P'(L)=0\), \(P''(L)=\Delta_2\), and all three jets zero at \(L+h\), write \(f=\mathcal K_aP\) for the **same original** frozen Kummer operator. The literal endpoints \(f(L)=\Delta_2\), \(f(L+h)=0\) and the weighted one-dimensional fundamental theorem of calculus prove
+
+\[
+ \|(1+y^2)(\mathcal K_aP)'\|_{L^2(L,L+h)}
+ \ge\frac{|\Delta_2|}{\left(\int_L^{L+h}(1+y^2)^{-2}dy\right)^{1/2}}
+ \ge\sqrt3 L^{3/2}|\Delta_2|.
+\]
+
+For the actual \(h=L/4\), the constant improves to \(\sqrt{375/61}\). The independently derived broad-patch upper bound has precisely this \(L^{3/2}|\Delta_2|\) scaling when \(a\ge L^3\) and \(Q\) is bounded. Therefore no adjustment of compact C² patch width, cutoff shape, or location can improve the **separately estimated weighted source-gradient** scaling. In particular an independent \(O(s^{-p})\) patch source derivative estimate requires \(|D_{\rm in}(s,L)+a^{-2}\delta(s)u_0(s,L/a)|\lesssim L(s)^{-3/2}s^{-p}\), **not** an inferred \(s\)-gain from geometric cutoff tuning.
+
+This is **not** a lower bound on the entire four-piece nonlocal Hartree PDE residual: same-source cancellation with other residual pieces, spectral projection, or Hartree propagation can improve the full term. The actual \(\Delta_2\) may itself be small or zero. The sharp analytic obstruction redirects the shortest original proof chain to an actual physical source cancellation or a genuine projected inverse, rather than more auxiliary cutoff redesign. The strict Lean source-dependent C² bound from CI **42854633900**, original job **129964186672**, remains valid, with exact axioms \`propext\`, \`Classical.choice\`, \`Quot.sound\`, but does **not** prove the new trace inequality, time-positive residual, nonlinear orbit, or dynamic blowup rate. This new note has **no independent Lean CI**. **Original revised acceptance: 11/13.**
