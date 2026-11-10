@@ -2804,3 +2804,14 @@ paper, **not an unverified new Lean axiom**, and has *not* been
 formalized as a new source-level Lean declaration. No original
 §2.13/Type-II environment is closed: **11/13**.
 
+
+
+### 10 November 2026 — first actually accepted original moving-cutoff C³ certificate (auxiliary)
+
+The **superseding original strict CI [42812564318](https://github.com/penghongzhong/HBL/actions/runs/42812564318)** is **Success**, job **129817408819**, original artifact **13763847061**, at exact commit **20ec40feb609b9c99eb2d0138ffe4e0191c8bf8e**. Downloaded and independently inspected the original artifact ZIP. The original \`build.log\` ends with \`Built HBL.TypeIIDynamicSelection.ActualHartreeOneLayerSpatialOverlapC3\` and \`Build completed successfully (3986 jobs)\`; \`strict.log\` is **empty**; \`compiler-version.txt\` is Lean **4.35.0-rc3**; the workflow independently verifies exact Mathlib **a98628e16c11f5167f16124105ddce53efa9bfe5**, and executes both source and audit with \`--trust=0 -DwarningAsError=true\`. Its exact generated \`#check\` types and two transitive \`#print axioms\` reports are:
+
+\`HBL.TypeIIDynamicSelection.actual_Hartree_real_overlap_cutoff_third_hasDerivAt\` — \`[propext, Classical.choice, Quot.sound]\`;
+
+\`HBL.TypeIIDynamicSelection.actual_Hartree_overlap_cutoff_uniform_C3_spatial_scaling\` — \`[propext, Classical.choice, Quot.sound]\`.
+
+The corresponding original failed runs [42810002316](https://github.com/penghongzhong/HBL/actions/runs/42810002316) (redundant Lean \`ring\` after a closed \`field_simp\` at line 105) and [42811250712](https://github.com/penghongzhong/HBL/actions/runs/42811250712) (**source build and zero-warning strict compilation already succeeded**, but the *generated axiom-audit file* contained a trailing invalid \`set_option pp.all false in\` and failed \`unexpected end of input\`) have been repaired. Successful CI **42812564318** is the definitive strict certificate, not either failed older run. The mathematical output is **only** the exact **original cutoff** \(C^3/R^3\) derivative budget. It does **not** certify the actual moving source derivative, PDE residual time gain, parameter-Lipschitz, a nonlinear orbit or Type-II rate. Official original manuscript tally remains **11/13**, NOT 12/13.
