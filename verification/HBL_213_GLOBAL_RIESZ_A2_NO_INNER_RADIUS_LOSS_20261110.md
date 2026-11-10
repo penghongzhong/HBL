@@ -152,3 +152,60 @@ However:
    is claimed from this paper calculation.
 
 **Original revised 13-environment acceptance remains 11/13 (84.62%).**
+
+
+## 4. Exact moving-bubble scale covariance — no imposed physical rate
+
+The original energy-critical stationary family is
+\[
+ W_\lambda(r)=\lambda^{-1/2}W(r/\lambda),
+ \qquad \lambda>0.
+\]
+Define its **actual** nonlocal real-Hessian operator
+\[
+ N_\lambda(F)(r):=
+ W_\lambda(r)^3\,\mathcal I(W_\lambda^3F)(r),
+ \qquad F^\sharp_\lambda(\rho):=F(\lambda\rho).
+\]
+The true physical convolution, with its original
+\(\mathbb R^3\) measure, obeys exactly
+\[
+ \mathcal I(W_\lambda^3 F)(\lambda\rho)
+  =\lambda^{-1/2}\mathcal I(W^3 F^\sharp_\lambda)(\rho),
+ \qquad
+ \boxed{\quad
+ N_\lambda(F)(\lambda\rho)
+  =\lambda^{-2}N(F^\sharp_\lambda)(\rho).
+ \quad}
+ \tag{A7}
+\]
+Indeed, the convolution change of variables contributes
+\(\lambda^3\) from volume, \(\lambda^{-2}\) from
+the inverse-square kernel and \(\lambda^{-3/2}\)
+from \(W_\lambda^3\), yielding \(\lambda^{-1/2}\).
+The exterior \(W_\lambda^3\) supplies the remaining
+\(\lambda^{-3/2}\).
+
+Using \(\|F^\sharp_\lambda\|_{L^2(d\rho)}
+=\lambda^{-1/2}\|F\|_{L^2(dr)}\) and (A6)
+gives the *uniform in all positive \(\lambda\)* bounds
+\[
+ \boxed{\begin{aligned}
+ \|(\lambda^2+r^2)N_\lambda(F)\|_{L^2(dr)}
+   &\le3\|F\|_{L^2(dr)},\\
+ \|(\lambda^2+r^2)\partial_rN_\lambda(F)\|_{L^2(dr)}
+   &\le(6C_{\rm A2}+2\sqrt3)\lambda^{-1}
+     \|F\|_{L^2(dr)} .
+ \end{aligned}}\tag{A8}
+\]
+For the first line, \(\lambda^2+r^2\) exactly compensates
+the \(\lambda^{-2}\) profile factor. For the
+derivative line, the chain rule supplies an extra
+\(\lambda^{-1}\). This is a *moving-spatial-scale*
+estimate in the precise scale-covariant weight;
+it **does not** bound \(\partial_sN_{\lambda(s)}\),
+nor infer any \(\lambda_s\), selected speed, Lipschitz
+control or blowup rate. Any application to moving
+time needs the correct PDE-dynamical modulation law.
+No new independent source estimate, axiom or strict
+Lean acceptance is inserted; the original count is 11/13.
