@@ -2097,3 +2097,38 @@ smoothing, parameter Lipschitz, four-region residual
 \(O(s^{-9/4})\), physical strong orbit and dynamically selected
 Type-II exponent are likewise OPEN. No original theorem was
 reclassified: **11/13**.
+
+
+### 10 November — exact radial Hartree kernel reduces the dual source gate to one weighted derivative (paper algebra only)
+
+The original normalized quartic inverse-square Hartree bubble has
+\(\kappa_{\rm H}=3/\pi^2\). Direct radial angular integration gives
+\[
+ K(r,s)=2\pi\kappa_{\rm H}W(s)^3
+ \frac{s}{r}\log\frac{r+s}{|r-s|},
+ \quad
+ \int_0^\infty\!\int_0^\infty |K(r,s)|^2dr\,ds=9.
+\]
+The scalar kernel identity uses
+\(\int_0^\infty[t^{-1}\log((1+t)/|1-t|)]^2dt=\pi^2\)
+(from \(t=\tanh u,\coth u\)), and
+\(\int_0^\infty sW(s)^6ds=1/4\).
+Thus for the exact physical radial Riesz operator,
+\(\|\mathcal I(W^3F)\|_{L^2(dr)}\le3\|F\|_{L^2(dr)}\).
+Together with the two true Hessian block weak identities,
+\[
+ \mathcal D_-(F)\le2\|\langle r\rangle^2F'\|_2
+                     +\frac32\|F\|_2,\qquad
+ \mathcal D_+(F)\le2\|\langle r\rangle^2F'\|_2
+                     +\frac{33}2\|F\|_2.
+\]
+This provides a precise sufficient **same-source** Hartree
+Morawetz-dual norm, and proves the nonlocal part itself has no
+independent shell-radius loss in this reduction. However the actual
+moving four-region projected source's **weighted radial derivative**
+remains unproved with \(O(s^{-15/8})\) decay, and so do
+the Hartree-specific homogeneous adjoint Kato/spectral estimates.
+The calculation is synchronized to the original §2.13 TeX and
+the dedicated obstruction note. **No new Lean theorem or CI** is
+claimed, no extra original numbered environment is added,
+and acceptance remains **11/13 (84.62%)**.
