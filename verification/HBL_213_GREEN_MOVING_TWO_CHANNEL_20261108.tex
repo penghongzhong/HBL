@@ -6604,8 +6604,15 @@ and
 \texttt{actual\_Hartree\_original\_Cramer\_shell\_local\_segment\_from\_continuous\_orbit}.
 Both are submitted for independent pinned trust-zero
 \texttt{\#check}/\texttt{\#print axioms} CI; at this checkpoint
-CI \texttt{42763633557} is \emph{pending}, not yet strict
-accepted. This reduces the local moving-slit \emph{domain} question
+initial CI \texttt{42763633557} \emph{failed} at the source
+proof's exact representation of the negative exponent, the
+continuity unfolding and a redundant \texttt{.le} on an already
+weak endpoint inequality. The raw job log was inspected and
+these three Lean expression errors were repaired without altering
+the theorem statements in commit \texttt{18bd6dd8}.
+The corrected complete three-target strict audit
+\texttt{42764968763} is \emph{pending}; do not mark it
+strictly accepted until its raw job and axiom audit pass. This reduces the local moving-slit \emph{domain} question
 to ordinary physical parameter continuity, but the
 original time-weighted source derivative and its
 nonlinear four-region remainder bound remain unproved.
