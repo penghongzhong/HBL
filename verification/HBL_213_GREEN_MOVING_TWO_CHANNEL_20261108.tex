@@ -7662,22 +7662,31 @@ curvature budget cannot be inferred merely from the
 existing weighted \(L^2\) estimates. An alternative is
 to remove the artificial joins through flat overlap.
 
-Precisely, for \(D=aB-L>0\), \(h=D/8\), let
-\(c=\mathrm{cutoff}\) be the existing fixed smooth
-cutoff and define
+The physical Fredholm estimates presently apply on the backward
+inner shell \([L/2,L]\); an earlier proposed inner cutoff transition
+to the \emph{right} of \(L\) cannot be justified by them and is
+withdrawn. The corrected source-faithful smooth overlap stays
+inside the actual common domain. With
+\(h_{\rm in}=L/8\), \(h_{\rm out}=(aB-L)/8\),
+let \(c=\mathrm{cutoff}\) be the original smooth cutoff, and put
 \[
- \eta(y)=c((y-L-h)/h),\qquad
- \chi(y)=1-c((y-aB+4h)/h),
- \qquad W=\chi v,\quad U=(1-\eta)u+\eta W,
+ \begin{split}
+ \eta(y)&=c((y-L+4h_{\rm in})/h_{\rm in}),\\
+ \chi(y)&=1-c((y-aB+4h_{\rm out})/h_{\rm out}),\\
+ W(y)&=\chi(y)v(y),\qquad
+ U(y)=(1-\eta(y))u(y)+\eta(y)W(y),
+ \end{split}
 \]
-where \(u\) and \(v(y)=w(y/a)\) are the \emph{same}
-actual physical inner and original selected Kummer fields.
-Then \(U=u\) for \(y\le L+2h\),
-\(U=v\) on \([L+3h,L+5h]\), and
-\(U=0\) for \(y\ge L+6h\). Both transition
-annuli lie strictly inside the original positive
-Kummer domain, so no artificial pointwise second
-jet or continuation beyond \(B\) is required.
+where \(v(y)=w(y/a)\) is the same true selected Kummer field.
+Then \(\eta\) transitions only on \([5L/8,3L/4]\),
+strictly within the available backward Fredholm/Kummer shell,
+and \(\chi\) transitions only on
+\([L+5h_{\rm out},L+6h_{\rm out}]\subset(L,aB)\).
+Thus the real inner field is used only on \(y\le3L/4<L\),
+the Kummer profile is used only where
+\(0<y/a<B<\mathrm{scale}\), and no
+curvature trace \(w''(B)\) is sampled.
+
 For \(\mathcal L_0=\partial_y^2+c_1(y)\partial_y+c_0(y)\)
 the complete interior product rule is
 \[
@@ -7696,14 +7705,55 @@ also gives
 \]
 The full Hartree nonlinearity remains
 \(\mathcal N_{\mathrm H}(U)\), including all nonlocal
-mixed-density terms. Differentiation of these identities
-to the actual smoothing-dual source norm still requires
-local \(H^3\) or equivalent true \(H^1\) source regularity,
-uniform control of \(h^{-j}=8^j(aB-L)^{-j}\),
-moving-parameter derivatives, and the genuine Hartree
-projected inverse. This is a source-faithful
+mixed-density terms. For the inner cutoff commutator alone, differentiation
+uses only \(u'',v''\) (no third derivative of either field);
+the true unlocalized PDE sources still require their
+own spatial derivative control.
+Both \(h_{\rm in}^{-j}=(8/L)^j\) and
+\(h_{\rm out}^{-j}=(8/(aB-L))^j\) are explicit.
+Moving-parameter derivatives and the genuine Hartree
+projected inverse are still unproved. This is a source-faithful
 \emph{alternative construction}, not an accepted
 PDE residual gain or an improvement to \(11/13\).
+
+The already verified true first-jet match at \(L\)
+gives \(e(L)=e'(L)=0\) for \(e=u-v\). If the
+actual fields additionally satisfy \(e\in H^2([L/2,L])\),
+the fundamental theorem of calculus gives
+\[
+ |e'(y)|\le(L-y)^{1/2}E,\qquad
+ |e(y)|\le(3^{-1}(L-y)^3)^{1/2}E,\qquad
+ E:=\|e''\|_{L^2([L/2,L])}.
+\]
+On the corrected inner shell
+\(I_{\rm in}=[L-3h,L-2h]\), \(h=L/8\),
+put \(M_0=\sup_{I_{\rm in}}|c_1|\) and
+\(M_1=\sup_{I_{\rm in}}|c_1'|\),
+with actual cutoff derivative constants \(C_j\).
+Since \(\chi=1\) there, the complete inner commutator is
+\(\mathcal C_{\rm in}=-2\eta'e'-(\eta''+c_1\eta')e\).
+The sharp elementary bounds are
+\[
+ \|\mathcal C_{\rm in}\|_{L^2(I_{\rm in})}
+ \le[2\sqrt3 C_1+3C_2+3C_1M_0h]\,E,
+\]
+\[
+ \|\partial_y\mathcal C_{\rm in}\|_{L^2(I_{\rm in})}
+ \le\left[
+ \frac{2C_1+3\sqrt3 C_2+3C_3}{h}
+ +(\sqrt3 C_1+3C_2)M_0+3C_1M_1h
+ \right]E .
+\]
+Thus the \emph{genuine} zero first jet removes the
+naive negative-power loss in the \emph{undifferentiated}
+\(L^2\) inner commutator; one explicit \(h^{-1}\)
+remains for its spatial derivative. The still-open
+original-PDE task is to bound \(E\) with the actual
+two-channel Hartree source and moving coefficients,
+then handle the outer commutator and all nonlocal
+mixed interactions. These formulas are paper-level,
+not yet new Lean proofs or a strong orbit.
+
 The exact commutator and geometry are recorded in
 \texttt{verification/HBL\_213\_SOURCE\_FAITHFUL\_FLAT\_OVERLAP\_20261110.md}.
 
