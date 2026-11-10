@@ -6493,4 +6493,69 @@ finite physical profile recursion, and dynamically deduced Type--II
 rate also remain unproved. Strict revised original-environment
 acceptance is exactly \textbf{11/13}.
 
+
+
+\medskip
+\noindent\textbf{The moving-slit physical-shell bridge from scale variation
+(10 November 2026; independent strict Lean replay pending).}
+For the \emph{actual} modulation scale $a(\tau)>0$ and slow inner
+cutoff $L(\tau)=\ell(\tau)^{-1/16}$, put
+\[
+ r_-(\tau)=\frac{L(\tau)}{a(\tau)},\qquad
+ J_{s,t}=[\min(s,t),\max(s,t)],\qquad
+ V_{s,t}=\int_{J_{s,t}}|a'(\tau)|\,d\tau.
+\]
+Assume $a$ is absolutely continuous on $J_{s,t}$,
+$\ell(s),\ell(t)>0$ and the two actual slow inner endpoints
+satisfy $r_-(s),r_-(t)\le B$. The explicit scale-variation conditions
+\[
+ \boxed{\quad
+ V_{s,t} L(s)\le a(s)(L(s)-1),\qquad
+ V_{s,t} L(t)\le a(t)(L(t)-1)
+ \quad}
+\]
+imply for every $\tau\in J_{s,t}$ and every normalized radius
+$x$ between the two slow inner endpoints,
+\[
+ \boxed{\quad
+ \frac{1}{a(\tau)}
+ \le \min\{r_-(s),r_-(t)\}
+ \le x \le \max\{r_-(s),r_-(t)\}\le B .
+ \quad}
+\]
+Indeed, the physical-scale fundamental theorem of calculus gives
+$|a(\tau)-a(s)|,|a(\tau)-a(t)|\le V_{s,t}$ and therefore
+$a(\tau)\ge a(s)-V_{s,t}\ge a(s)/L(s)$, and similarly
+$a(\tau)\ge a(t)/L(t)$. Inverting these inequalities proves the
+two endpoint comparisons without postulating a new source envelope.
+Thus the previously verified \emph{original} Cramer source-time
+theorem is valid at each moving-slit radius and each intermediate
+time, provided its original parameter/derivative hypotheses hold
+along the orbit. Equivalently, the scale criterion is
+\[
+ \frac{V_{s,t}}{a(s)}\le 1-\ell(s)^{1/16},
+ \qquad
+ \frac{V_{s,t}}{a(t)}\le 1-\ell(t)^{1/16}.
+\]
+This criterion is locally achievable whenever $0<\ell(s)<1$,
+$a(s)>0$, and $a,\ell$ are continuous with locally integrable
+$a'$: at $t=s$ the scale variation is zero and the endpoint
+slack is strictly positive. It does \emph{not} assert a global
+large-time comparison or a Type--II rate. The necessary bound on
+$V_{s,t}$ for the final \emph{same} nonlinear Hartree modulation
+orbit must be produced from its genuine dynamical equations.
+
+The corresponding Lean geometry theorem,
+\texttt{actual\_Hartree\_original\_Cramer\_shell\_covers\_moving\_slow\_slit},
+is checked against the two actual slow-inner radii in
+\texttt{ActualHartreeMovingSlitCramerScaleVariation.lean}; it
+derives the shell inclusion from the primitive variation and margin
+inequalities, not from an assumed shell inclusion. Its dedicated
+strict CI was triggered as \texttt{42756618784} and remains
+\emph{pending} at this manuscript checkpoint. No original-environment
+count is increased. Even after this geometric step, one must obtain
+the physical source/moment derivative time budget, moving-basis
+bounds, genuine full nonlinear residual positive gain, parameter
+Lipschitz bounds and finite PDE recursion before §2.13 can close.
+
 \end{document}
