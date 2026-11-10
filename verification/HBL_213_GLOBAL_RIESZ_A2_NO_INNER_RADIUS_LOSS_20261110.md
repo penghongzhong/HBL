@@ -35,7 +35,7 @@ completely explicit elementary bound. For any ball \(B(x_0,R)\):
   \fint_B|x|^{-2}\,dx\le9R^{-2},\qquad
   \fint_B|x|^2\,dx\le9R^2.
   \]
-  Thus the **ball-based** \(A_2\) characteristic is at most \(81\). For the standard **cube-based** \(A_2\) characteristic, enclose each cube of side \(\ell\) in its circumscribed ball of radius \(R=\sqrt3\ell/2\). The enclosing-ball/cube volume ratio is \(\pi\sqrt3/2\), so the identical two-case argument yields the explicit cube-based bound \(81\pi\sqrt3/2\). Both estimates are nonsharp, but verify the exact classical \(A_2\) condition required by Hytönen's theorem.
+  Thus the **ball-based** \(A_2\) characteristic is at most \(81\). For the standard **cube-based** \(A_2\) characteristic, enclose each cube of side \(\ell\) in its circumscribed ball of radius \(R=\sqrt3\ell/2\). The enclosing-ball/cube volume ratio is \(\pi\sqrt3/2\), and **both** weight averages acquire this factor, so the identical two-case argument yields the explicit cube-based bound \(81(\pi\sqrt3/2)^2\). Both estimates are nonsharp, but verify the exact classical \(A_2\) condition required by Hytönen's theorem.
 
 The standard (already published) **weighted \(A_2\) theorem for
 Calderón–Zygmund/Riesz transforms** supplies a finite constant \(C_{\rm A2}\),
