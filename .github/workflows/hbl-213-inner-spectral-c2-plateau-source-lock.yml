@@ -81,6 +81,9 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_inner_C1_spectral_curvature_jump_from_sources
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_inner_C1_spectral_curvature_jump_from_sources
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_true_inner_spectral_C1_curvature_jump
+          set_option pp.all false in
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_true_inner_spectral_C1_curvature_jump
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeInnerSpectralC2PlateauSourceLockAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -91,6 +94,7 @@ jobs:
               'HBL.TypeIIDynamicSelection.actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation',
               'HBL.TypeIIDynamicSelection.actual_Hartree_inner_C1_curvature_jump_eq_original_source_jump',
               'HBL.TypeIIDynamicSelection.actual_Hartree_inner_C1_spectral_curvature_jump_from_sources',
+              'HBL.TypeIIDynamicSelection.actual_Hartree_true_inner_spectral_C1_curvature_jump',
           ]
           assert all(t in data for t in targets), 'Missing exact theorem type'
           assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom'
