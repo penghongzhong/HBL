@@ -114,3 +114,38 @@ Because \(\phi\) is not quadratic on all of \([0,1]\) (it must be compactly cut 
 \tag{LB'}
 \]
 This rules out the *specific* strategy of making the **local original-source derivative** arbitrarily small merely by taking a thin curvature-matching patch with fixed nonzero \(\Delta_2\). It does **not** prove a lower bound for the entire Hartree nonlinear residual: the nonlocal and moving pieces would have to be shown unable to cancel the local term. Conversely, a genuine cancellation must be established in that full residual rather than assumed. The missing producer is a sufficiently small same-source \(\Delta_2\) and a compatible thickness \(h\), plus the exact nonlocal and time-dependent terms.
+
+
+## 6. Shorter chain: reuse the *already proved* inner Kummer defect bound
+
+The exact source curvature mismatch (CJ) can be **bounded by a previously verified native theorem**, without deriving a new independent \(C^2\) Fredholm envelope. Define the *actual physical two-channel source*
+\[
+S(y)=\operatorname{actualHartreeTwoChannelPhysicalSource}(F_+,F_-)(y).
+\]
+The existing Lean declaration
+\(\texttt{actual_Hartree_two_channel_inner_Kummer_defect_bound}\)
+establishes, when \(F_\pm\) are continuous and in the actual weighted inverse domain, \(2<R\le L\),
+\[
+\|K_{a,Q}u(L)+S(L)\|
+\le \mathcal B_{\rm inner}
+:=\left(\frac{C_{\rm inner}}{R^4}
+ +\frac{C_{\rm Kummer}(\mu,\theta)}{a^2}\right)
+ \bigl(\|F_+\|_{7/4}+\|F_-\|_{7/4}\bigr).
+\tag{IB}
+\]
+For the **same real selected-speed physical channels** in the existing
+\(\texttt{actual_Hartree_moment_locked_plateau_scaled_source}\),
+the original Hartree source identity on \(0<L\) is
+\[
+a^{-2}F(L/a)+S(L)=0.\tag{SC}
+\]
+Thus (CJ) yields the completely source-faithful bound
+\[
+\boxed{\quad
+|\Delta_2|\le \mathcal B_{\rm inner}
++a^{-2}|\delta|\,|u_0(L/a)|.
+\quad}\tag{CB}
+\]
+The right side is not an independently postulated curvature envelope: both \(\mathcal B_{\rm inner}\) and the source equality are present as proven **producers** in the repository. To instantiate them together one must identify \(F_\pm\) exactly with the *same* physical transmission and real speed channels and confirm their continuity and weighted membership for the actual selected PDE orbit. The size of their actual weighted norms and the spectral factor \(a^{-2}\delta u_0(L/a)\) along that orbit remains unproved. The condition \(R>2\), \(R\le L\) is necessary for directly invoking the existing shell estimate; do not quietly use it for \(L\le 2\).
+
+Inserting (CB) into (LB) quantifies the precise source-size and patch-width budget. Note that (LB) is a **lower** bound on the actual local Kummer patch derivative, while (CB) is an **upper** bound on \(|\Delta_2|\): one cannot combine the two to infer decay of the entire nonlinear residual without an upper bound on the total patch source and its nonlocal interactions.
