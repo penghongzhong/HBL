@@ -18,6 +18,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 namespace HBL.TypeIIDynamicSelection
 open HBL.Profile.Kummer
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 theorem actual_Hartree_one_physical_selected_Green_joint_derivative_from_original_sources
     {mu theta scale lo hi basisBound : ℝ}
