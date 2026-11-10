@@ -2051,3 +2051,49 @@ The old CI **42531033761/42531033768** both failed on a *Lean definitional elabo
 - **[42650515911](https://github.com/penghongzhong/HBL/actions/runs/42650515911): Success**, job \`129275285212\`, artifact \`13691385712\`, exact \`#check\` and \`#print axioms\` for \`HBL.TypeIIDynamicSelection.actual_Hartree_true_source_selected_spectral_quadratic_and_three_C1\`.
 
 The original decoded logs for these successor jobs show \`lake env lean --trust=0 -DwarningAsError=true\`; each successful workflow executes the exact theorem-type and transitive-axiom allowlist audit (only \`propext\`, \`Classical.choice\`, \`Quot.sound\`). These are substantial **strict auxiliary successes**, not proof of physical time-order/Lipschitz or a corrected strong Hartree orbit. Original acceptance remains **11/13**, not 12/13. The finite nonlinear PDE *telescoping identity* also has independent strict [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509) Success; that is not a residual gain.
+
+
+### 10 November 2026 — exact two-Hessian Hartree Morawetz-dual sufficient norm; physical source remains OPEN
+
+Current retained original 13-environment acceptance is **11/13 (84.62%)**.
+Original successful CI [42531450638](https://github.com/penghongzhong/HBL/actions/runs/42531450638)
+covers zero-left Volterra weighted C¹ slope;
+[42531500587](https://github.com/penghongzhong/HBL/actions/runs/42531500587)
+covers matched spectral C¹ response and derivative; and
+[42531018076](https://github.com/penghongzhong/HBL/actions/runs/42531018076)
+covers selected original Green without left-radius loss.
+Initial CI [42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681)
+failed in the imported ActualHartreeSpectralCorrectedFourPieceThreeC1.lean
+on four unknown InWeightedL2 identifiers and a type mismatch. The
+exact finite nonlinear PDE telescope **was already successfully recompiled**
+in [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509),
+job 128902012127, with pinned Lean 4.35.0-rc3,
+Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
+trust zero and warning-as-error, exact target check/print axioms,
+and only propext, Classical.choice, Quot.sound. That success
+is an algebraic identity, **not** a positive-time residual estimate.
+
+New **paper calculation**, synchronized to the §2.13 TeX and
+fully derived in
+verification/HBL_213_DUAL_KATO_SOURCE_NORM_OBSTRUCTION_20261110.md:
+for the exact radial Hartree Hessians
+\(L_-=-\Delta-3W^4\) and
+\(L_+g=-\Delta g-9W^4g-4W^3\mathcal I(W^3g)\),
+the test substitution \(v=rg\), symmetry of the genuine Riesz convolution
+and radial integration by parts yield the **explicit sufficient** dual bound
+\[
+ |\langle L_\pm g,F\rangle_{\mathbb R^3}|
+ \le4\pi\|g\|_{\mathrm{Mor},0}\mathcal D_\pm(F).
+\]
+Here \(\mathcal D_\pm\) includes a correctly weighted source derivative
+\(F'\), and \(\mathcal D_+\) additionally includes the true nonlocal
+\(4rW^3\mathcal I(W^3F)\). This identifies a missing derivative
+and rules out the false shortcut "shell L² implies Morawetz dual".
+This elementary sufficient criterion is a **paper identity, not a new
+compiled Lean declaration**. Its evaluation on the actual selected,
+projected, moving four-region source at \(O(s^{-15/8})\)
+is still unproved. The separate Hartree-specific projected adjoint
+smoothing, parameter Lipschitz, four-region residual
+\(O(s^{-9/4})\), physical strong orbit and dynamically selected
+Type-II exponent are likewise OPEN. No original theorem was
+reclassified: **11/13**.
