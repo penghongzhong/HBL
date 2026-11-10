@@ -5,16 +5,9 @@ import Mathlib.Tactic
 /-!
 # Exact original Hartree/Kummer backward-Volterra parameter difference
 
-No frozen coefficient is substituted for the physical source: the
-actualMatchedScaledKummerApply expression is the original radial
-Laplacian, imaginary transport and true frozenZeroCoeff, all retained.
-At a shared physical radius this source-level identity identifies the
-precise two parameter defects needed to estimate the difference of
-two source-selected Fredholm/Kummer corrections.
-
-These theorems are *algebraic/ODE compatibility only*. They do not
-assume or conclude a global physical PDE source bound, time gain,
-parametric Lipschitz continuity, a nonlinear orbit or Type-II rate.
+The original radial Laplacian, imaginary transport and frozenZeroCoeff
+are retained. These are algebraic/ODE identities, not physical decay,
+parameter Lipschitz, a nonlinear orbit, or the Type-II theorem.
 -/
 
 noncomputable section
@@ -25,10 +18,10 @@ open Set Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
+open HBL.Modulation.Monopole HBL.Modulation.AffineTail HBL.Profile.Kummer
 
 /-- Exact coefficient change of the original physical Kummer operator.
-The radial Laplacian cancels, but neither the imaginary radial drift
-nor the genuine zero-order coefficient is dropped. No inverse estimate. -/
+Neither the imaginary radial drift nor its zero-order coefficient is dropped. -/
 theorem actual_Hartree_original_Kummer_coefficient_difference
     (mu1 theta1 mu2 theta2 a1 a2 r : ℝ) (e : ℝ → ℂ) :
     actualMatchedScaledKummerApply mu1 theta1 a1 e r -
@@ -38,12 +31,10 @@ theorem actual_Hartree_original_Kummer_coefficient_difference
       ((((a1 ^ 2)⁻¹ : ℝ) • frozenZeroCoeff mu1 theta1) -
         (((a2 ^ 2)⁻¹ : ℝ) • frozenZeroCoeff mu2 theta2)) * e r := by
   unfold actualMatchedScaledKummerApply
-  simp only [Complex.real_smul]
+  simp only [Complex.real_smul, Complex.ofReal_sub]
   ring
 
-/-- The ORIGINAL scaled Hartree/Kummer operator is linear in the field
-at a fixed physical parameter, with real differentiability checked for
-both first and second radial derivatives. -/
+/-- Linearity at fixed physical parameters, with both radial derivatives checked. -/
 theorem actual_Hartree_original_Kummer_sub_of_classical
     (mu theta a r : ℝ) (e1 e2 : ℝ → ℂ)
     (he1 : ∀ x : ℝ, DifferentiableAt ℝ e1 x)
@@ -70,10 +61,8 @@ theorem actual_Hartree_original_Kummer_sub_of_classical
   simp only [Complex.real_smul]
   ring
 
-/-- Exact source-driven parameter difference at the SAME physical radius.
-This is the rigorously typed counterpart of the paper identity (V15);
-the two inhomogeneities are the actual original-operator evaluations,
-not independently postulated Lipschitz or decay envelopes. -/
+/-- Exact same-radius source difference. The forcing values are the
+original operator evaluations, not independent decay envelopes. -/
 theorem actual_Hartree_backward_original_parameter_source_difference
     (mu1 theta1 mu2 theta2 a1 a2 r : ℝ)
     (e1 e2 : ℝ → ℂ) (f1 f2 : ℂ)
