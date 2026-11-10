@@ -35,7 +35,7 @@ completely explicit elementary bound. For any ball \(B(x_0,R)\):
   \fint_B|x|^{-2}\,dx\le9R^{-2},\qquad
   \fint_B|x|^2\,dx\le9R^2.
   \]
-  Thus \([\,|x|^{-2}\,]_{A_2}\le81\). The bound is not intended sharp.
+  Thus the **ball-based** \(A_2\) characteristic is at most \(81\). For the standard **cube-based** \(A_2\) characteristic, enclose each cube of side \(\ell\) in its circumscribed ball of radius \(R=\sqrt3\ell/2\). The enclosing-ball/cube volume ratio is \(\pi\sqrt3/2\), so the identical two-case argument yields the explicit cube-based bound \(81\pi\sqrt3/2\). Both estimates are nonsharp, but verify the exact classical \(A_2\) condition required by Hytönen's theorem.
 
 The standard (already published) **weighted \(A_2\) theorem for
 Calderón–Zygmund/Riesz transforms** supplies a finite constant \(C_{\rm A2}\),
@@ -45,9 +45,12 @@ depending only on dimension and the above fixed \(A_2\) characteristic, such tha
  \le C_{\rm A2}\|f\|_{L^2(\omega\,dx)} .
  \tag{A2}
 \]
-One convenient reference is M. T. Lacey,
-*The Linear Bound in \(A_2\) for Calderón–Zygmund Operators: A Survey*
-(2010), arXiv:1011.5784, and the original weighted \(A_2\) literature.
+A directly published primary source is **T. P. Hytönen,**
+*The sharp weighted bound for general Calderón–Zygmund operators*,
+**Annals of Mathematics 175** (2012), 1473–1506,
+DOI **10.4007/annals.2012.175.3.9**,
+https://annals.math.princeton.edu/2012/175-3/p09 .
+The theorem is stated for **cube-based classical \(A_2\)** and hence applies by the explicit cube check above.
 **Do not miscite the smaller Poisson-\(A_2\) class** as if it comprised
 all classical \(A_2\) weights.
 
