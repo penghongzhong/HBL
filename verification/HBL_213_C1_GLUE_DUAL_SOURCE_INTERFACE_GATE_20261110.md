@@ -650,3 +650,61 @@ plus the true Hartree nonlocal commutator derivative,
 material time cancellation, source-selected two-channel
 motion, and eventual inverse estimate.
 **No original-environment promotion: 11/13.**
+
+
+## 9. Sharp smooth-shell test: the genuine cutoff commutator may consume half a time power
+
+The exact derivative formula (C2) also makes the *physical
+radius-loss mechanism* quantitative without any unproved Hartree
+assumption. Let \(R\to\infty\), \(e>0\),
+\(f_R(r)=e\,\phi(r/R)\) for a fixed smooth compactly
+supported \(\phi\subset(1,2)\), and
+\(\chi_R(r)=\chi(r/R)\) with
+\(\chi(z)=1-\mathrm{cutoff}(z)\). Select \(\phi\)
+so that the following nonzero smooth commutator shape
+has \(\mathscr C'\not\equiv0\):
+\[
+ \mathscr C(z)=2\chi'(z)\phi'(z)
+  +(\chi''(z)+2z^{-1}\chi'(z))\phi(z).
+\]
+The *literal* radial Laplacian commutator obeys
+\[
+ [\Delta_r,\chi_R]f_R(r)=eR^{-2}\mathscr C(r/R),
+ \qquad
+ \partial_r[\Delta_r,\chi_R]f_R(r)
+       =eR^{-3}\mathscr C'(r/R).
+\]
+Hence
+\[
+ \boxed{
+ \|(1+r^2)\partial_r[\Delta_r,\chi_R]f_R\|_{L^2(R,2R)}
+ = eR^{-5/2}
+ \left\|(1+R^2z^2)\mathscr C'(z)\right\|_{L^2(1,2)}
+ \asymp eR^{-1/2}.}
+\tag{C5}
+\]
+For the **test** values \(R(s)=s^{1/2}\),
+\(e(s)=s^{-9/8}\), the weighted commutator source
+has size
+\[
+ \boxed{\;\asymp s^{-11/8},\;}
+\]
+which is a factor \(s^{1/2}\) larger than the desired
+\(s^{-15/8}\) dual-Kato source target.
+
+This is a direct calculation for the actual smooth
+cutoff and radial Laplacian; it is **not** a claim
+that the real selected Hartree correction has exactly
+the shape \(e(s)\phi(r/R(s))\). It demonstrates that
+one cannot promote the \(C^3\) geometry alone to the
+required time gain, even with an arbitrarily smooth
+field. A real proof must identify cancellation with
+the material transport, the selected two-channel
+modulation flux, or the PDE-corrected Kummer source;
+derive a stronger physical shell profile;
+or use a demonstrably weaker dual norm.
+The true nonlocal Hartree commutator and parameter
+Lipschitz requirements remain additional to this
+radial geometric obstruction.
+
+**The original 11/13 score is unchanged.**
