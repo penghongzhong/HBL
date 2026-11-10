@@ -1846,6 +1846,17 @@ Neither the limiting \(\mu_\infty\), finite physical terminal time nor the power
 
 **Independent completed success:** [CI 42764968763](https://github.com/penghongzhong/HBL/actions/runs/42764968763), original job **129659190491**, successfully audits all THREE true moving Cramer-slit geometric declarations, including the local continuous-orbit segment bridge. Pinned compiler, Mathlib, trust zero, warning-as-error, precise checks and only the three authorized axioms. It does not produce the quantitative PDE time source bound.
 
-**Paper correspondence:** The unnumbered two-stage proof plan in verification/typeii-minimal-main-replacement.tex and the extended original source in verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex both retain the original theorem's sharp rate and its own pointwise \(|\mu_s(s)|\le Cs^{-1-\delta}\) condition. A weaker weighted L1 drift suffices for the asymptotic conversion ONLY, not that additional pointwise assertion.
+**Paper correspondence and explicit theorem revision (10 November 2026):** The single main target in verification/typeii-minimal-main-replacement.tex still asserts a **genuine strong radial 3D Hartree Type-II blowup orbit, bounded critical norm, nonextension, the actual dynamically selected limit \(\mu_\infty>9/16\), and the sharp physical power-law \(\lambda^{-1}=C_\lambda(T-t)^{1/2+2\mu_\infty}(1+o(1))\)**. The extra pointwise rate \(|\mu_s|\le Cs^{-1-\delta}\) and its explicit power-tail estimate were transparently removed as **nonessential strengthening**, not silently assumed. The replacement proof obligation for deriving the sharp factor is the actual projected source's logarithmically weighted L1 modulation drift; that nonlinear estimate remains **UNPROVED**. Lean's new coarse Type-II terminal proves only the scalar trapped-clock consequences, not physical existence. No new numbered environment and no increase in the accepted original count.
 
 **Original revised manuscript remains 11/13 (84.62%).**
+
+
+### Revised main theorem scope and proof chain (10 November 2026; no acceptance change)
+
+* **Existence and Type II** (OPEN physical PDE): build a single same-source four-region radial strong Hartree orbit; prove two-real-channel modulation trapping and nonextendibility with bounded \(\dot H^1\).
+* **Coarse kinematics** (strict Lean Success 42766649238): from \(q_s=4\mu\) and \(0<m\le\mu\le M\), derive \(q\to\infty\), \(q^{-1/2}\to0\). This is a true direct mathematical consequence but not a Hartree PDE existence result.
+* **Finite-time reconstruction** (paper scalar calculus; not yet checked by the new terminal): use \(\tau=q/\lambda^2\), \(\tau_s=-\lambda^{-2}\) and \(q\lesssim s\) to infer finite \(T\).
+* **Sharp dynamic exponent** (OPEN PDE forcing): prove \(\int_{s_0}^\infty(1+\log(s/s_0))|\mu_s|ds<\infty\) from the actual projected Hartree residual, ensuring \(\mu_\infty>9/16\); deduce the exact power asymptotic. The removed additional pointwise \(\mu_s=O(s^{-1-\delta})\) is no longer a goal of this single revised main theorem.
+* **Remaining main physical gap**: the same-orbit full-four-region nonlinear source/inverse estimate still loses \(s^{1/4}\) under the naive absolute Duhamel bound. The original shell \(s^{-15/8}\) calculation remains **conditional**, not a verified global nonlinear residual.
+
+**13 original retained environments; strictly accepted 11/13 (84.62%); revised §2.13 and final main remain OPEN.**
