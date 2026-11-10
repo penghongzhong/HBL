@@ -191,3 +191,94 @@ inverse, a PDE orbit and dynamically selected Type-II rate
 remain load-bearing obligations.
 
 Existing original environments: **11/13**, not 12/13.
+
+
+## 4. The actual HBL original plateau ALREADY CANCELS the entire unmatched physical source
+
+**This refines §1 from a general source-mismatch criterion to a
+strictly source-aligned identity.** The source \(F\) in §1
+is not arbitrary in the original HBL selected-speed construction:
+the current, already developed
+\`ActualHartreeMomentLockedPlateauSource.lean\`
+contains the exact theorem
+\`actual_Hartree_moment_locked_plateau_scaled_source\`.
+
+At any \(0<y\le L=\mathrm{actualHartreeSlowInnerRadius}(\ell)\),
+and with the original selected real speed coefficients
+\(d_b,d_\omega\), that theorem gives, **before spectral
+correction**, the exact equality
+\[
+ \boxed{
+ S_{\rm in}(y)+a^{-2}F_o(y/a)=0,
+ }\tag{I11}
+\]
+where
+\[
+ \begin{aligned}
+ F_+(y)&=
+  \mathrm{actualHartreeTransmissionPlusSource}(\ell,c,z)(y)
+    +d_\omega\,\mathrm{actualMomentLockedInnerPhaseSource}(L,c)(y),\\
+ F_-(y)&=
+  \mathrm{actualHartreeTransmissionMinusSource}(\ell,c,z)(y)
+    +d_b\,\mathrm{actualMomentLockedInnerScaleSource}(L,c)(y),\\
+ F_o(r)&=-\mathrm{actualHartreeLaplacianScaledKummerSource}(a,\ell,c,z)(r)
+ -d_b\,\mathrm{actualMomentLockedScaledScaleSource}(a,c)(r)
+ -d_\omega\,\mathrm{actualMomentLockedScaledPhaseSource}(a,c)(r).
+ \end{aligned}
+\]
+The full quartic nonlocal Riesz interaction is inside these
+definitions; they are not an NLS surrogate, a separate
+source envelope or an additional axiom.
+
+For the spectrally corrected **same original Green field**,
+\[
+ F_{\rm cor}(r)=F_o(r)-\delta u_0(r),
+ \qquad
+ u_0=\mathrm{actualOriginMatchedKummerValue}(F_o).
+\]
+The prior exact statement (I11) immediately yields
+\[
+ \boxed{
+ S_{\rm in}(L)+a^{-2}F_{\rm cor}(L/a)
+ =-a^{-2}\delta u_0(L/a).
+ }\tag{I12}
+\]
+Substituting this into (I4) **completely eliminates**
+the formerly open independent original-source mismatch:
+\[
+ \boxed{
+ \Delta_2=D_{\rm in}(L)+a^{-2}\delta u_0(L/a).
+ }\tag{I13}
+\]
+Thus the true inner spectral \(C^2\) curvature mismatch is
+bounded by **already-existing physical source norms and the actual
+spectral coefficient only**:
+\[
+ \boxed{
+ |\Delta_2|
+ \le\left(\frac{C_{\rm in}}{L^4}
+      +\frac{C_{\rm K}(\mu,\theta)}{a^2}\right)
+      \bigl(\|F_+\|_{2,7/4}+\|F_-\|_{2,7/4}\bigr)
+  +\frac{|\delta|}{a^2}|u_0(L/a)| .
+ }\tag{I14}
+\]
+Here the \(F_\pm\) have the literal source definitions above,
+the old shell bound requires continuity and \(L>2\), and
+the actual spectral Green field must have its stated \(C^2\)
+regularity. **No pointwise bound on the independent outer value
+\(F_o(L/a)\) survives the cancellation.**
+
+A dedicated no-new-axiom Lean module now encodes the *exact*
+same-source spectral cancellation (I12):
+\`HBL/TypeIIDynamicSelection/ActualHartreeInnerSpectralC2PlateauSourceLock.lean\`;
+workflow \`hbl-213-inner-spectral-c2-plateau-source-lock.yml\`.
+Its new strict CI must be checked for completion before a successful
+audit is claimed. The composite full curvature identity (I13),
+the complete four-region global \(C^2\) field and quantitative
+time/parameter derivative gains have **not** yet been
+formally checked by a new strict CI.
+
+**This closes the paper-level original-source identification
+for the inner \(C^2\) jet. It does not close §2.13,
+the genuine finite PDE orbit or the dynamically selected
+Type-II rate; original strict accepted count remains 11/13.**
