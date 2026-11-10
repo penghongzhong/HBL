@@ -76,12 +76,14 @@ jobs:
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_growth_threshold
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_amplitude_threshold
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_shell_exact_absolute_Duhamel_integral
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_shell_squared_source_exact_L2_time_tail
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_source_one_time_width
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_accumulation_relative_factor
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_growth_threshold
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_amplitude_threshold
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_exact_absolute_Duhamel_integral
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_shell_squared_source_exact_L2_time_tail
           EOF
           lake env lean --trust=0 -DwarningAsError=true HartreeShellDuhamelExponentAudit.lean > evidence/audit.log 2>&1
           python3 - <<'PY'
@@ -89,10 +91,10 @@ jobs:
           import re
           s=Path('evidence/audit.log').read_text()
           goal='HBL.TypeIIDynamicSelection.actual_Hartree_shell_source_one_time_width'
-          assert all(v in s for v in [goal, 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_accumulation_relative_factor', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_growth_threshold', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_amplitude_threshold', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_exact_absolute_Duhamel_integral']), 'missing exact Lean theorem check'
+          assert all(v in s for v in [goal, 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_accumulation_relative_factor', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_growth_threshold', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_plain_Duhamel_amplitude_threshold', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_exact_absolute_Duhamel_integral', 'HBL.TypeIIDynamicSelection.actual_Hartree_shell_squared_source_exact_L2_time_tail']), 'missing exact Lean theorem check'
           assert 'sorryAx' not in s and 'admit' not in s
           audits=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', s)
-          assert len(audits)==5, f'expected five axiom reports, got {len(audits)}'
+          assert len(audits)==6, f'expected six axiom reports, got {len(audits)}'
           allowed=('propext','Classical.choice','Quot.sound')
           for report in audits:
             names={v.strip() for v in report.split(',') if v.strip()}
