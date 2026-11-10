@@ -517,3 +517,35 @@ with moving parameters and threshold/unstable spectral pieces controlled.
 The counterexample does not rule out favorable cancellations of the
 special PDE source and is not a Lean theorem. All original environment
 acceptance counts remain **11/13**.
+
+
+## 10. Original affine outer repair is only C¹: explicit interface delta-prime gate (10 November)
+
+The actual matched spectral four-region Lean source uses an affine physical repair
+\(\chi_B(y/a)[w(B)+(y/a-B)w'(B)]\). Since the old
+cutoff is **one near \(B\)**, the **outer splice**
+has the explicit second-derivative jump
+\([U_{yy}]_{aB}=-a^{-2}w''(B)\) unless the real physical
+source happens to cancel it. The strict C¹ proofs have no second-jet
+hypothesis. Under a sufficiently smooth moving interface, the nonlinear
+PDE residual therefore inherits a jump. An arbitrary residual
+jump \(J\ne0\) produces the boundary term
+\(R^2 g'(R)J\) in \(\langle-\Delta g,F\rangle/(4π)\);
+unit-Morawetz-norm narrow-shell tests make this term unbounded.
+Thus *even the more explicit weighted \(F'\)-sufficient source norm*
+in the preceding section cannot be consumed without stronger
+interface regularity or a differently proved smoothing duality.
+
+A direct source-faithful candidate is to replace the old affine
+repair with
+\[
+ \chi_B(y/a)\{w(B)+(y/a-B)w'(B)
+           +\tfrac12(y/a-B)^2 w''(B)\},
+\]
+and repair the separate Fredholm--Kummer second jet at \(L\).
+The entire curvature budget, additional physical PDE commutator,
+moving basis/endpoint/selector derivatives and parameter-Lipschitz
+estimates remain **open**. The exact derivation is in
+[\`HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md\`](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+This repairs the *proof architecture*, not the actual PDE orbit.
+**Original 13-environment acceptance remains 11/13.**
