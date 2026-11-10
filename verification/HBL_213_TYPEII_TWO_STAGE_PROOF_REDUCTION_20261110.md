@@ -244,3 +244,61 @@ time controls, and check its transitive axiom set with the pinned
 This research note is cross-referenced from
 `verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`
 and `verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md`.
+
+
+## 6. One physical projected-flux estimate can supply BOTH trapping and sharp selection
+
+This removes a second logical redundancy in the former main proof. Suppose
+one *constructed real Hartree orbit* supplies the exact projected modulation
+identity \(\mu_s=e_{\rm proj}(s)\), locally absolutely continuously.
+Fix \(\mu(s_0)>9/16+\varepsilon\), \(\varepsilon>0\).
+A **single genuine nonlinear projected-flux bound**
+\[
+\int_{s_0}^\infty
+  (1+\log(s/s_0))\,|e_{\rm proj}(s)|\,ds\le\varepsilon
+\tag{J}
+\]
+then gives, for every \(s\ge s_0\),
+\[
+ \mu(s_0)-\varepsilon\le \mu(s)\le \mu(s_0)+\varepsilon,
+ \qquad \mu(s)\to\mu_\infty>9/16,
+\tag{K}
+\]
+and the log-weighted tail required for the dynamically generated sharp
+power law. Thus one need not separately establish an independent
+uniform modulation trap *and then* derive a new sharp-flux estimate.
+The same input (J) carries both.
+
+A **conditional and potentially more favorable source target** is
+\(|e_{\rm proj}(s)|\le Cs^{-15/8}\), because
+\[
+\int_{s_0}^\infty
+  (1+\log(s/s_0))\,s^{-15/8}\,ds
+ =\left(\frac87+\frac{64}{49}\right)s_0^{-7/8}
+ =\frac{120}{49}s_0^{-7/8}.
+\tag{L}
+\]
+For sufficiently large \(s_0\), this would give (J) with an
+arbitrarily small drift. **Crucial distinction:** the \(s^{-15/8}\)
+figure in the current manuscript comes from a **conditional spatial
+shell remainder**, not from the actual projected modulation ODE on
+a constructed whole Hartree orbit. The implication to
+\(e_{\rm proj}\) is *unproved*: one must identify the exact
+real two-channel projection, moving basis and normalization,
+all four physical nonlocal regions and the correct denominator.
+No \(O(s^{-15/8})\) projected flux is asserted here.
+
+The required physical thresholds are now separated: the
+**projected modulation flux** needs only a sufficiently small
+log-weighted \(L^1\) time bound for positive trapping and an
+emergent exponent, while the **full nonresonant correction**
+still faces the \(s^{1/4}\) undamped Duhamel deficit. Both
+must ultimately come from the same true physical Hartree orbit.
+
+Lean correspondence: the SINGLE certified
+actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
+(CI 42766649238, exact three-axiom audit) consumes the
+trap potentially produced by (J). It proves growing
+\(q\) and vanishing Type-I-normalized concentration.
+No additional helper Lean theorem, axiom or numbered paper
+environment is introduced merely for (J)–(L).
