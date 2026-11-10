@@ -2962,3 +2962,38 @@ Full proof:
 This is a **true local spatial-order gain**, not the missing complete four-region
 nonlinear Hartree residual time order or \(L_s^2\) dual-Kato inverse.
 No new original paper environment; **11/13**.
+
+
+### 10 November — new source-locked inner and outer C² strict replay (CI state not yet green)
+
+- New *source-derived* inner plateau/spectral cancellation target:
+  \`HBL.TypeIIDynamicSelection.actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation\`
+  in \`ActualHartreeInnerSpectralC2PlateauSourceLock.lean\`; workflow
+  [42824686940](https://github.com/penghongzhong/HBL/actions/runs/42824686940)
+  at SHA \`32580956d03ef2c892333acfb696be94cfa0b036\`, **in progress
+  when checked**. It invokes pinned Lean/Mathlib, trust zero, warnings-as-errors,
+  exact type check and three-axiom allowlist. **Do not claim CI success until
+  the actual job and artifact audit are complete.**
+- The source-locked actual spectral outer \(C^2\) *full splice* target
+  \`HBL.TypeIIDynamicSelection.actual_Hartree_spectral_same_source_outer_splice_C2\`
+  previously failed [42821873350](https://github.com/penghongzhong/HBL/actions/runs/42821873350)
+  on a \`Pi.sub\`/pointwise derivative mismatch and two filter-neighbourhood
+  inequality coercions. The fix \`5c776e39d832...\` removed the two
+  arithmetic errors, but raw job log
+  [42823735554](https://github.com/penghongzhong/HBL/actions/runs/42823735554)
+  still reported one \`Pi.sub\` versus pointwise subtraction mismatch at
+  source line 165. Commit \`23359602dd5f34921b2f3cb23aaeb1a153c41fff\`
+  explicitly identifies the equal functions by extensionality before
+  applying \`HasDerivAt.deriv\`; its new strict CI
+  [42825266426](https://github.com/penghongzhong/HBL/actions/runs/42825266426)
+  was **in progress when checked**. **No success is inferred.**
+- Mathematical progress on the main original *physical* source is the exact
+  plateau cancellation
+  \(S_{\rm in}+a^{-2}F_o=0\), yielding
+  \(\Delta_2=D_{\rm in}(L)+a^{-2}\delta u_0(L/a)\) and the
+  explicit \(L^{-5/2}\) weighted inner repair-gradient bound derived in
+  [the companion paper calculation](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md).
+  These do **not** prove the full moving four-region nonlocal Hartree PDE
+  residual's true positive time gain, modulation/parameter Lipschitz,
+  projected Hartree inverse or dynamical Type-II orbit. The original
+  **13-environment count remains 11/13**.
