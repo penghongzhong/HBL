@@ -189,6 +189,86 @@ or the Type-II rate. The identities in this section are human
 paper algebra, not a compiled Lean theorem. Revised original
 13-environment acceptance remains **11/13 (84.62%)**.
 
+
+## 5. Explicit radial Riesz Hilbert--Schmidt constant: the nonlocal term itself costs NO extra shell radius
+
+The sufficient norms in §4 can be reduced further. With the physical
+bubble normalization \(W=(1+r^2)^{-1/2}\), evaluation of its stationary
+equation at the origin gives the **fixed** coupling
+\[
+ 3=-\Delta W(0)=\mathcal I(W^4)(0)
+ =4\pi\kappa_{\rm H}\int_0^\infty(1+s^2)^{-2}ds
+ =\pi^2\kappa_{\rm H},
+ \qquad \kappa_{\rm H}=\frac3{\pi^2}.
+\]
+For radial \(F\) and \(r,s>0\), exact angular integration yields
+\[
+ \mathcal I(W^3F)(r)
+   =\int_0^\infty K(r,s)F(s)\,ds,\qquad
+ K(r,s)=2\pi\kappa_{\rm H}W(s)^3
+       \frac{s}{r}\log\frac{r+s}{|r-s|}.
+\]
+Set \(h(t)=t^{-1}\log\frac{1+t}{|1-t|}\).
+The substitutions \(t=\tanh u\) on \((0,1)\) and
+\(t=\coth u\) on \((1,\infty)\) give the exact integral
+\[
+ \int_0^\infty h(t)^2dt
+ =4\int_0^\infty u^2
+      \left(\frac1{\sinh^2u}+\frac1{\cosh^2u}\right)du
+ =4\bigl(\zeta(2)+\eta(2)\bigr)=\pi^2,
+\]
+where \(\eta(2)=\sum_{n\ge1}(-1)^{n-1}/n^2=\pi^2/12\).
+Since \(\int_0^\infty sW(s)^6ds=1/4\), Tonelli and \(r=st\)
+prove the actual Hilbert--Schmidt identity
+\[
+ \begin{aligned}
+ \int_0^\infty\!\int_0^\infty |K(r,s)|^2\,dr\,ds
+ &=(2\pi\kappa_{\rm H})^2
+    \left(\int_0^\infty sW(s)^6ds\right)
+    \left(\int_0^\infty h(t)^2dt\right)\\
+ &=\pi^4\kappa_{\rm H}^2=9.
+ \end{aligned}
+\]
+Consequently, in the **one-dimensional radial measure \(dr\)**
+(rather than the physical \(r^2dr\) measure),
+\[
+ \boxed{\ 
+ \|\mathcal I(W^3F)\|_{L^2(dr)}
+ \le 3\|F\|_{L^2(dr)}.
+ \ }
+\]
+This coefficient is exact as a Hilbert--Schmidt **upper bound**, not
+an assertion that the operator norm equals \(3\).
+
+The pointwise weights satisfy
+\[
+ \langle r\rangle r\le\langle r\rangle^2,\qquad
+ \langle r\rangle^2rW^4=\frac r{1+r^2}\le\frac12,\qquad
+ \langle r\rangle^2rW^3=\frac r{\sqrt{1+r^2}}\le1.
+\]
+Substitution into §4 therefore yields the explicit two-channel bounds
+\[
+ \boxed{\begin{aligned}
+ \mathcal D_-(F)&\le
+       2\|\langle r\rangle^2F'\|_{L^2(dr)}
+       +\frac32\|F\|_{L^2(dr)},\\
+ \mathcal D_+(F)&\le
+       2\|\langle r\rangle^2F'\|_{L^2(dr)}
+       +\frac{33}{2}\|F\|_{L^2(dr)}.
+ \end{aligned}}
+\]
+Thus the **nonlocal Hartree Hessian itself does not require a new
+independent Riesz source envelope** for this sufficient dual estimate:
+it is uniformly bounded by the *unweighted radial source \(L^2\)*.
+The true remaining missing source producer is its
+**weighted radial derivative**, at the actual moving physical scales
+and after the genuine nonresonant projection, in addition to the
+separate homogeneous adjoint Kato/spectral gate. This is a useful
+analytic narrowing but **does not** prove that the actual residual
+meets the required \(O(s^{-15/8})\) norm, construct a Hartree orbit,
+or justify an increase from **11/13**. These are human derivations
+and have **no new trust-zero Lean CI**.
+
 **Next direct producer:** prove the true four-piece moving source functional bound in (B), or produce the real four-piece linearized PDE inverse with source norm strictly better than the absolute-integration threshold; do not spend another run proving shell-power identities or abstract packet termination.
 
 **Public evidence retained:** finite spectral four-piece PDE telescope CI 42536552509 is strict Success, but is an exact identity only. Original revised acceptance remains **11/13**. The final Type-II strong orbit and its dynamically selected rate remain unproved.
