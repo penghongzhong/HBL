@@ -72,3 +72,45 @@ $\mu_\infty>9/16$，使
 %    They alone DO NOT prove convergence/positivity of mu or PDE existence.
 % 5. The historical fixed-speed source remains an auxiliary calculation only.
 %    Never use it to claim closure of this dynamical main theorem.
+
+
+% TWO-STAGE PROOF ORDER (10 November 2026). This text introduces NO additional
+% numbered theorem environment, and makes no unsupported PDE existence claim.
+%
+% Stage I — construct one actual radial strong Hartree orbit and close a coarse
+% two-channel modulation/energy/bootstrap trap.  Once its physically selected
+% C1 coordinates satisfy q_s=4mu and 0<m<=mu<=M for all sufficiently large s,
+% q grows linearly, and q=(T-t)lambda^2 gives
+%
+%      lambda(t)^(-1) / sqrt(T-t) = q(s(t))^(-1/2) -> 0.
+%
+% Derive T from the *same* original clock rather than imposing a rate:
+% tau=q/lambda^2, tau_s=-1/lambda^2 and
+% tau(s)=(q0/lambda0^2) exp(-int_{s0}^s 1/q(u) du).
+% As q(s) <= q0+4M(s-s0), the integral diverges; therefore
+% T=t0+q0/lambda0^2 is finite and t(s) -> T.
+% The 3D Hartree PDE solution, error control, nonextension, and invariance
+% of the mu interval must be constructed from the ORIGINAL physical source.
+% None follows merely from these scalar identities.
+%
+% Stage II — retain the full original main-theorem claim above, including
+%   |mu_s| <= C s^(-1-delta) and emergent mu_infty > 9/16,
+% then use the already accepted kinematic clock algebra to obtain the sharp
+%   lambda(t)^(-1) = C_lambda (T-t)^(1/2+2mu_infty)(1+o(1)).
+% A log-weighted L1 bound on mu_s would suffice for the asymptotic factor,
+% but it does NOT establish the separately stated pointwise bound, and cannot
+% silently replace the latter without a transparent theorem revision.
+%
+% The unproved physical inverse/energy step, rather than the number of Lean
+% helper environments, is the current load-bearing obstacle: for the
+% conditional actual Hartree shell size s^(-15/8), undamped absolute
+% Duhamel integration gives s^(-7/8), losing s^(1/4) relative to an
+% s^(-9/8) correction. The actual full-four-region PDE must provide a
+% source order better than 17/8 for this particular inverse, or a genuine
+% projected nonlocal inverse / normal form gain; all other source norms need
+% their own threshold audit.
+%
+% Lean companion terminal (conditional kinematics, NOT original theorem):
+% HBL/TypeIIDynamicSelection/ActualHartreeCoarseTypeIIClockFromMuTrap.lean
+% Full proof-roadmap and source audit:
+% verification/HBL_213_TYPEII_TWO_STAGE_PROOF_REDUCTION_20261110.md
