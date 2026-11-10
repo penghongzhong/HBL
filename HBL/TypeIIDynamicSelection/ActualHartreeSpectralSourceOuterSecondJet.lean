@@ -162,8 +162,15 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
       deriv (fun y => u0 y - w1 y) x =
           actualOriginMatchedKummerSlope K r0 B F U DU x -
             actualOriginMatchedKummerSlope K r0 B q 0 0 x := by
-              simpa only [Pi.sub_apply] using
-                ((hU x hx).1.sub (hV x hx).1).deriv
+              have hFunction :
+                  (actualOriginMatchedKummerValue K r0 B F U DU -
+                    actualOriginMatchedKummerValue K r0 B q 0 0) =
+                    (fun y => u0 y - w1 y) := by
+                funext y
+                rfl
+              have hPair := ((hU x hx).1.sub (hV x hx).1).deriv
+              rw [hFunction] at hPair
+              exact hPair
       _ = deriv u0 x - deriv w1 x := by
           rw [← (hU x hx).1.deriv, ← (hV x hx).1.deriv]
   have hW2 : HasDerivAt (deriv w) (deriv (deriv w) B) B := by
