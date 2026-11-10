@@ -272,3 +272,103 @@ and have **no new trust-zero Lean CI**.
 **Next direct producer:** prove the true four-piece moving source functional bound in (B), or produce the real four-piece linearized PDE inverse with source norm strictly better than the absolute-integration threshold; do not spend another run proving shell-power identities or abstract packet termination.
 
 **Public evidence retained:** finite spectral four-piece PDE telescope CI 42536552509 is strict Success, but is an exact identity only. Original revised acceptance remains **11/13**. The final Type-II strong orbit and its dynamically selected rate remain unproved.
+
+
+## 6. New exact radial nonlocal derivative producer on a genuine outer annulus
+
+The preceding Hilbert--Schmidt \(L^2(dr)\) estimate is for the *value*
+of the original real Hessian Riesz term. Its spatial derivative can also
+be controlled **without assuming a separate Riesz derivative envelope**,
+provided the physical radial annulus starts at a stated positive radius.
+
+Use the nonunitary Euclidean Fourier transform
+\(\widehat f(\xi)=\int_{\mathbb R^3}e^{-ix\cdot\xi}f(x)\,dx\).
+The Abel-regularized radial computation
+\[
+ \widehat{|x|^{-2}}(\xi)
+  =\frac{4\pi}{|\xi|}
+     \int_0^\infty\frac{\sin(|\xi|r)}r\,dr
+  =\frac{2\pi^2}{|\xi|}
+\]
+is valid in tempered distributions. Since the bubble-normalized
+coefficient is \(\kappa_{\rm H}=3/\pi^2\),
+\[
+ \widehat{\nabla\mathcal I f}(\xi)
+   =6\,\frac{i\xi}{|\xi|}\widehat f(\xi).
+\]
+Plancherel therefore gives the **sharp full-vector multiplier
+constant** (for \(f\in L^2(\mathbb R^3)\))
+\[
+ \boxed{\quad
+ \|\nabla\mathcal I f\|_{L^2(\mathbb R^3)}
+ =6\|f\|_{L^2(\mathbb R^3)}.
+ \quad}
+ \tag{R1}
+\]
+The equality is understood for the distributional gradient; it does not
+claim that \(\mathcal I f\in L^2\). In particular the true Hartree
+nonlocal derivative is an order-zero Riesz transform, **not**
+a freely assumed derivative estimate.
+
+For a radial scalar \(F\in L^2((0,\infty),dr)\),
+\(f(x)=W(|x|)^3 F(|x|)\) satisfies
+\[
+ \frac{\|f\|_{L^2(\mathbb R^3)}}{\sqrt{4\pi}}
+ =\|rW^3F\|_{L^2(dr)}
+ \le\frac{2}{3\sqrt3}\|F\|_{L^2(dr)},
+ \qquad
+ \sup_{r>0}\frac r{(1+r^2)^{3/2}}
+ =\frac2{3\sqrt3}.
+\]
+For every **explicit** \(R>0\), radial Plancherel and
+\(r^2\ge R^2\) now imply
+\[
+ \boxed{\quad
+ \|\partial_r\mathcal I(W^3F)\|_{L^2((R,\infty),dr)}
+ \le\frac{4}{\sqrt3\,R}\|F\|_{L^2(dr)}.
+ \quad}\tag{R2}
+\]
+There is no hidden dependence on a remote endpoint or spectral
+Wronskian. The factor \(R^{-1}\) is displayed and is **not
+discarded** in moving-small-radius regimes.
+
+Moreover, for the exact nonlocal real-Hessian factor
+\(N(F)=W^3\mathcal I(W^3F)\), use
+\((W^3)'=-3r(1+r^2)^{-5/2}\),
+\[
+ \sup_{r>0}(1+r^2)W^3=1,\qquad
+ \sup_{r>0}(1+r^2)|(W^3)'|=\frac2{\sqrt3}.
+\]
+The product rule, (R2), and the independent **proved paper**
+Hilbert--Schmidt bound
+\(\|\mathcal I(W^3F)\|_{L^2(dr)}\le3\|F\|_2\)
+give
+\[
+ \boxed{
+ \begin{aligned}
+ \|(1+r^2)\partial_r N(F)\|_{L^2((R,\infty),dr)}
+ &\le\left(\frac4{\sqrt3 R}+2\sqrt3\right)\|F\|_{L^2(dr)},\\
+ \|(1+r^2)N(F)\|_{L^2((R,\infty),dr)}
+ &\le3\|F\|_{L^2(dr)}.
+ \end{aligned}
+ }\tag{R3}
+\]
+All derivatives are interpreted weakly; the displayed estimates
+extend by smooth radial approximation. The source in (R3) is exactly
+the **true** \(W^3\mathcal I(W^3F)\) real-Hartree Hessian kernel,
+not its local NLS replacement.
+
+This closes the *paper* nonlocal-derivative estimate in the
+\(r\ge R>0\) stationary bubble region, reducing that particular
+component's weighted \(H^1\) budget to an explicit
+\((1+R^{-1})\|F\|_{L^2(dr)}\). It does **NOT** control the
+derivative of the whole time-moving quartic nonlinear residual
+\(\mathcal N(V)\), since the latter involves the actual
+four-region \(|V|^4\) density, its derivatives, nonlinear mixed
+interactions and selected speeds. Nor does it establish any
+Hartree matrix resolvent, adjoint Kato estimate or a PDE orbit.
+For the *inner* \(R\downarrow0\) region, (R2)--(R3) have an explicit
+unresolved \(R^{-1}\) loss; a stronger radial cancellation argument
+would be needed before claiming radius-independent control there.
+This calculation is not yet a Lean certificate.
+**Official original acceptance stays 11/13.**
