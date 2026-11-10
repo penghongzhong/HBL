@@ -403,3 +403,154 @@ spaces. The full moving-cutoff Laplacian and the
 real-Hartree linearized matrix resolvent remain
 separately unclosed. Original **11/13** unchanged;
 this is paper analysis, not a new Lean CI or axiom.
+
+
+## 7. GENUINE two-field nonlinear Lipschitz bound in the SAME weighted source space
+
+The full nonlinear source must be Lipschitz under the genuine
+moving parameter dependence of the physical field. This
+requires a **difference inequality**, not merely (N18)
+at one field.
+
+Let the two actual complex radial corrections be \(u,v\)
+with \(U_u=\|u\|_2\), \(H_u=\|(1+r^2)u'\|_2\),
+\(U_v,H_v\) similarly. Set
+\[
+ D=\|u-v\|_2,\quad
+ J=\|(1+r^2)(u'-v')\|_2,\quad
+ K=1+\sqrt{\pi/2}\max(H_u,H_v).
+ \tag{N23}
+\]
+As established by the same weighted FTC in (N13),
+\[
+ |W+u|,|W+v|\le K W,\quad
+ \|u-v\|_\infty\le\frac{\sqrt\pi}{2}J.
+ \tag{N24}
+\]
+For any pair of profiles \(a,b\), define
+\[
+ A_{ab}:=\frac{12}{\pi}K^3
+   \bigl(2\sqrt\pi\,H_{a-b}
+            +\sqrt{3\pi}\,U_{a-b}\bigr).
+\]
+In particular let \(A_{uv}\) use \(D,J\),
+and let \(A_v\) denote the right side with \(U_v,H_v\).
+The exact original quartic density differences satisfy
+\[
+ \begin{aligned}
+ &\|\mathcal I(|W+u|^4-|W+v|^4)\|_\infty\le A_{uv},\\
+ &\|\partial_r\mathcal I(|W+u|^4-|W+v|^4)\|_{L^2(dr)}
+     \le24C_{\rm A2}K^3D,\\
+ &\|\mathcal I(|W+v|^4-W^4)\|_\infty\le A_v,\\
+ &\|\partial_r\mathcal I(|W+v|^4-W^4)\|_{L^2(dr)}
+     \le24C_{\rm A2}K^3U_v.
+ \end{aligned}\tag{N25}
+\]
+Each \(A\) is a derived explicit polynomial in the
+true same-field correction norms, **not** a separate
+assumed bound.
+
+Write \(X=W+u\), \(Y=W+v\),
+\(P_Z=\mathcal I(|Z|^4)\), \(Q(Z)=|Z|^2Z\).
+The original nonlinear difference decomposition is
+\[
+ \boxed{\quad
+ \mathcal N_{\rm H}(X)-\mathcal N_{\rm H}(Y)
+   =[P_X-P_Y]Q(X)+P_Y[Q(X)-Q(Y)] .
+ \quad}\tag{N26}
+\]
+Both absolute and differentiated difference estimates
+follow from the real Fréchet derivative
+\(DQ(z)h=|z|^2h+2\operatorname{Re}(\bar zh)z\):
+\[
+ \begin{aligned}
+ |Q(X)-Q(Y)|&\le3K^2W^2|u-v|,\\
+ |(Q(X)-Q(Y))'|
+ &\le3K^2W^2|u'-v'|
+      +6KW|u-v|\,|W'+v'|.
+ \end{aligned}\tag{N27}
+\]
+The **critical weighted radial** identities are
+\[
+ \|(1+r^2)W^2\|_\infty=1,\quad
+ \|(1+r^2)WW'\|_2=\frac{\sqrt\pi}{2},\quad
+ \|W'\|_2=\frac{\sqrt\pi}{4}.
+\]
+From (N24)–(N27),
+\[
+ \begin{aligned}
+ \|(1+r^2)(Q(X)-Q(Y))'\|_2
+ &\le B_{uv}\,J,\\
+ B_{uv}&:=3K^2+3\sqrt\pi\,K
+                     \left(\frac{\sqrt\pi}{2}+H_v\right),\\
+ \|(1+r^2)Q(X)\|_\infty&\le K^3,\qquad
+ \|(1+r^2)Q(X)'\|_2\le
+          3K^2\left(\frac{\sqrt\pi}{4}+H_u\right).
+ \end{aligned}\tag{N28}
+\]
+Here **there is no nonintegrable
+\(\|(1+r^2)W'\|_2\) term**:
+the exact \(W\) or \(W^2\) factors from
+the original cubic difference remain present.
+
+Differentiating the *real original Riesz convolution* in (N26)
+and applying (N25)–(N28) now proves
+\[
+ \boxed{\begin{aligned}
+ &\|(1+r^2)\partial_r[
+   \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)]
+   \|_{L^2(dr)}\\
+ &\quad\le
+  (24C_{\rm A2}K^6+9K^2)D
+  +3K^2A_{uv}\Bigl(\frac{\sqrt\pi}{4}+H_u\Bigr)\\
+ &\qquad\quad+
+ \Bigl[(3+A_v)B_{uv}
+       +36\sqrt\pi\,C_{\rm A2}K^5U_v\Bigr]J ,
+ \end{aligned}}\tag{N29}
+\]
+together with
+\[
+ \boxed{\quad
+ \|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)\|_{L^2(dr)}
+ \le A_{uv}K^2(\sqrt{\pi/2}+U_u)
+          +3(3+A_v)K^2D .
+ \quad}\tag{N30}
+\]
+For clarity, the new mixed term
+\(36\sqrt\pi\,C_{\rm A2}K^5U_v J\)
+comes from the **nonlocal real derivative**
+\(\partial_r[P_Y-P_W]\) multiplied by
+\((1+r^2)[Q(X)-Q(Y)]\); it is not dropped
+as in a local-NLS surrogate.
+
+For \(H_u,H_v,U_u,U_v\) bounded by a fixed
+\(R_*\), the explicit coefficients in
+(N29)–(N30) are bounded by a polynomial
+\(C(R_*,C_{\rm A2})\) and
+\(A_{uv}\lesssim_{R_*}D+J\). Thus the
+actual original quartic Hartree map is
+**locally Lipschitz**
+\[
+ \boxed{
+ \|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)\|_2
+ +\|(1+r^2)\partial_r[
+    \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)]\|_2
+ \le C(R_*,C_{\rm A2})(D+J).
+ }\tag{N31}
+\]
+
+**Precise §2.13 status:** this is a genuine *spatial
+nonlinear source* Lipschitz estimate derived directly
+from the original Hartree PDE and two actual
+correction fields. For a moving parameter \(\alpha\),
+it applies to \(u_\alpha-u_\beta\) once the PDE
+constructs those fields and proves **their**
+parameter-Lipschitz control in \(D+J\).
+It does not construct the parameter-dependent
+corrections, prove a time-positive source order,
+or bound the remaining Laplacian/moving-cutoff terms.
+The projected Hartree homogeneous adjoint Kato
+inverse and physical orbit remain OPEN.
+It is a human paper theorem invoking an externally
+published weighted \(A_2\) result, not a
+new Lean CI or axiom. Original **11/13** unchanged.
