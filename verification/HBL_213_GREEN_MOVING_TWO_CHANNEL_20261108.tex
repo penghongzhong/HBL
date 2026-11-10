@@ -8591,4 +8591,84 @@ even if Lean-certified, cannot substitute
 for that quantitative result.
 No original environment is added.
 
+
+\paragraph{Origin-uniform derivative bound for the genuine radial
+nonlocal Hartree Hessian.}
+The \(R^{-1}\) in the preceding annular estimate (R2) is
+\emph{not} intrinsic. There is a global bound without an
+inner-radius factor, obtained by retaining the radial
+Calder\'on--Zygmund cancellation before estimating the
+three-dimensional Riesz transform.
+
+Indeed, for \(\mathcal If=\frac{3}{\pi^2}
+(|x|^{-2}*f)\) one has
+\[
+ \widehat{\nabla\mathcal If}(\xi)
+   =6i\frac{\xi}{|\xi|}\widehat f(\xi).
+\]
+The explicit weight \(\omega(x)=|x|^{-2}\)
+belongs to \(A_2(\mathbb R^3)\), since the power
+criterion is \(-3<-2<3\). Equivalently, an elementary
+two-case ball argument gives
+\((\fint_B\omega)(\fint_B\omega^{-1})\le81\).
+The weighted Calder\'on--Zygmund theorem
+of Hyt\"onen~\cite{Hytonen2012A2} for the
+Riesz transform vector implies a fixed
+\(C_\omega<\infty\) with
+\[
+ \big\||x|^{-1}\nabla(-\Delta)^{-1/2}f\big\|_2
+ \le C_\omega\big\||x|^{-1}f\big\|_2.
+\]
+For \(f(x)=W(|x|)^3F(|x|)\) the radial
+measure identity
+\(\||x|^{-1}f\|_{L^2(\mathbb R^3)}
+=\sqrt{4\pi}\|W^3F\|_{L^2(dr)}\)
+and its gradient counterpart now give
+\[
+ \boxed{
+ \|\partial_r\mathcal I(W^3F)\|_{L^2(dr)}
+   \le6C_\omega\|F\|_{L^2(dr)}
+ }
+\]
+for every \(F\in L^2(dr)\), independently
+of the left radius \(r_0\), including
+\(r_0\downarrow0\). Thus the earlier
+annular \(R^{-1}\) bound is valid but nonsharp.
+
+Combined with the already calculated exact
+Hilbert--Schmidt estimate
+\(\|\mathcal I(W^3F)\|_{L^2(dr)}
+\le3\|F\|_{L^2(dr)}\),
+the genuine, nonlocal real-Hessian term
+\(N(F)=W^3\mathcal I(W^3F)\) satisfies
+\[
+ \boxed{
+ \|(1+r^2)N(F)\|_{L^2(dr)}
+ +\|(1+r^2)N'(F)\|_{L^2(dr)}
+ \le(3+6C_\omega+2\sqrt3)\|F\|_{L^2(dr)} .
+ }
+\]
+The calculation uses the fixed physical
+bubble and \(\|(1+r^2)W^3\|_\infty\le1\),
+\(\|(1+r^2)(W^3)'\|_\infty
+\le2/\sqrt3\); the derivatives are weak
+and the estimate extends by density.
+An independent one-dimensional Mellin
+reduction of the exact radial logarithmic
+kernel to a truncated Hilbert transform
+plus an \(L^1\) kernel is given in
+\texttt{verification/HBL\_213\_RIESZ\_NO\_LEFT\_RADIUS\_WEIGHTED\_A2\_20261110.md}.
+
+This \emph{published weighted-harmonic-analysis input}
+closes the fixed-bubble Riesz-derivative
+radius-loss obstacle on paper, with no
+new Hartree source assumption. It is
+\emph{not} a proof of the full moving
+quartic density gradient, \(C^2\) interfaces,
+projected Hartree Kato smoothing, a positive
+time-order PDE residual, or a true orbit.
+No new Lean theorem, accepted original
+environment, or external axiom is claimed:
+\(11/13\).
+
 \end{document}
