@@ -7378,4 +7378,42 @@ Lean evidence in CI~42776359428; the original
 §2.13 and final main theorem are not closed.
 The original revised count stays \(11/13\).
 
+
+\paragraph{A nonlocal Hartree Kato source-norm obstruction (10 November 2026).}
+There is a structural distinction between the original spatial
+weighted-\(L^2\) shell certificate and the \emph{Morawetz-dual}
+source norm actually required by an adjoint Kato inversion.
+For the normalized original Hartree ground state,
+\[
+-\Delta W=3W^5,\qquad
+ L_-=-\Delta-3W^4.
+\]
+Fix real \(0\ne\chi\in C_c^\infty((1,2))\), set
+\(F_N(r)=\chi(r)\sin(Nr)\), \(g_N=N^{-1}F_N\).
+Their respective fixed-annulus \(L^2_{7/4}\)-source and
+Morawetz-test norms stay bounded, whereas direct radial integration
+by parts yields
+\[
+  (L_-g_N,F_N)_{L^2(\mathbb R^3)}
+  =\frac{4\pi}{N}\int_1^2
+      \bigl(|F_N'(r)|^2-3W(r)^4|F_N(r)|^2\bigr)r^2\,dr
+  =2\pi N\int_1^2 r^2\chi(r)^2\,dr+o(N)\longrightarrow+\infty.
+\]
+Thus shell \(L^2_{7/4}\) bounds cannot \emph{automatically} be
+upgraded to the adjoint \(H_{\rm H}\)-weighted
+Morawetz-dual source functional required for an
+\(L_s^\infty\mathcal E\) gain; even the genuine phase
+block gives a counterexample. This does not rule out a special
+divergence/source cancellation for the \emph{actual four-region}
+Hartree residual, but that producer has yet to be proved in
+the matching physical dual norm. The separate adjoint homogeneous
+smoothing/limiting-absorption estimate for the nonlocal
+coupled Hartree generator is likewise open.
+The full proof and explicit source-norm acceptance gate are
+recorded in
+\texttt{verification/HBL\_213\_DUAL\_KATO\_SOURCE\_NORM\_OBSTRUCTION\_20261110.md}.
+This note is a paper counterexample, not a Lean theorem
+or a positive-order PDE estimate. The original revised
+environment count remains \(11/13\).
+
 \end{document}
