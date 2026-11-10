@@ -6754,4 +6754,23 @@ remains \(11/13\). A detailed reference comparison and proof
 is available in
 \texttt{verification/HBL\_213\_TYPEII\_TWO\_STAGE\_PROOF\_REDUCTION\_20261110.md}.
 
+
+\medskip
+\noindent\textbf{Audit of the existing finite-profile recursion interface.}
+The source
+\texttt{HBL/TypeIIDynamicSelection/ActualHartreePhysicalFiniteProfile.lean}
+takes a finite list of \texttt{ActualHartreeLayerPacket} objects
+and the strict recurrence of their formal weights \emph{as data}.
+The \texttt{ActualHartreePacketCertified} definition even
+contains the tautology
+\(\mathtt{Q.tangent=Q.tangent}\), not an original Hartree
+threshold-tangent identity. Its proved finite termination is
+therefore a conditional consumer theorem, \emph{not} a
+production of physical Kummer/inner/remote corrections.
+The shortest main proof must supply this missing original-PDE
+packet producer, or replace the packet construction by
+a rigorously source-aligned projected Hamiltonian energy
+bootstrap. Further conditional recursion environments will
+not be counted towards the current original \(11/13\).
+
 \end{document}
