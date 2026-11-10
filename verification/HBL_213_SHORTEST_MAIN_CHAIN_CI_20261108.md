@@ -3140,3 +3140,37 @@ not a full Hartree residual or time gain.
 Open: entire outer+nonlocal+time+parameter derivative
 source, true projected inverse, finite PDE recursion,
 dynamical Type-II selection. Formal **11/13**.
+
+
+### 10 November — original backward Volterra moving-radius source transport; pinned Lean parameter-difference CI
+
+For \(e_j\) satisfying the original same-physical-Hartree-source
+\(K_{a_j,Q_j}e_j=f_j\) with matching zero Cauchy data
+at distinct physical \(L_j\), the exact coordinate
+\(x=y/L_j\) yields a common interval \([1/2,1]\),
+coefficients \(\tau_j=L_j^2/a_j^2\) and actual
+transported sources \(G_j(x)=L_j^2f_j(L_jx)\).
+The normalized difference equation and explicit
+\(H^2\) coefficient-stability bound are (V23)–(V25) in
+[HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md](HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md).
+The *unproved* source parameter variation is now the exact
+three-term expression (V26), including the moving
+radial derivative \(\partial_y f_\alpha\) of the
+genuine four-region nonlinear Hartree source.
+Neither the \(L_j\) change nor the corresponding
+source transport has been silently absorbed into a
+free Lipschitz premise.
+
+The exact fixed-physical-radius Lean statements in
+\`ActualHartreeBackwardVolterraParameterDifference.lean\`
+are the original operator coefficient difference,
+classically regular field subtraction, and actual
+original-operator source parameter difference.
+Dedicated \`--trust=0\`, warningAsError, exact
+\`#check\`/\`#print axioms\` workflow:
+[CI 42832295130](https://github.com/penghongzhong/HBL/actions/runs/42832295130).
+Do **not** count this CI as strict success before the
+original job log and axiom allowlist are inspected.
+Formal original count: **11/13**, since neither the
+full nonlinear source bound, a true PDE orbit nor
+the dynamic Type-II rate follows from these identities.
