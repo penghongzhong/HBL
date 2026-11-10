@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.Tactic
 
 /-!
@@ -184,7 +185,8 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
     actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
       q mu s0 m M hq0 hm hq htrap
   have hs0mem : s0 ∈ Ici s0 := by simp
-  have hM : 0 < M := lt_of_lt_of_le hm (htrap s0 hs0mem).2
+  have hM : 0 < M :=
+    lt_of_lt_of_le hm ((htrap s0 hs0mem).1.trans (htrap s0 hs0mem).2)
   let Q : ℝ → ℝ := fun s => q s0 + 4 * M * (s - s0)
   let G : ℝ → ℝ := fun s =>
     Real.log (ell s) + Real.log (q s) / 2 +
@@ -197,7 +199,6 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
     convert htotal using 1
     · funext x
       dsimp [Q]
-      ring
     · ring
   have hGderiv (s : ℝ) (hs : s ∈ Ici s0) :
       HasDerivAt G
@@ -232,7 +233,10 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
         (by positivity : 0 < 2 * q s)).2
       nlinarith
     rw [(hGderiv s hsI).deriv]
-    linarith
+    calc
+      -1 / (2 * q s) + 1 / (2 * Q s) =
+          1 / (2 * Q s) - 1 / (2 * q s) := by ring
+      _ ≤ 0 := sub_nonpos.mpr hInv
   intro s hs
   have hsI : s ∈ Ici s0 := hs
   have hNonincrease :=
