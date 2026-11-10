@@ -10185,4 +10185,42 @@ This is a new \emph{paper proof}, not a compiled Lean target,
 and does not change the \(11/13\) original-environment tally.
 % END HBL_FULL_NONLOCAL_CONFORMAL_HESSIAN_SPECTRUM_20261110
 
+
+% HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110
+\medskip
+\noindent\textbf{The full original nonlinear Hartree equation remains exact on the conformal sphere but its time generator degenerates.}
+For the fixed physical stereographic frame \(u(t,x)=W(x)\Phi(t,\Xi(x))\),
+the complete quartic-density Riesz Hartree nonlinearity obeys
+\[
+ \mathcal N(W\Phi\circ\Xi)
+ =\frac{\kappa_{\rm H}}2W^5
+   [\mathscr K(|\Phi|^4)|\Phi|^2\Phi]\circ\Xi,\qquad
+ -\Delta(W\Phi\circ\Xi)
+ =W^5[(3-4\Delta_{\mathbb S^3})\Phi]\circ\Xi.
+\]
+Consequently the \emph{unabridged} physical PDE
+\(iu_t+\Delta u+\mathcal N(u)=0\) is exactly
+\[
+ i\Phi_t=
+ \frac{(1-\xi_4)^2}{4}\left[
+ (3-4\Delta_{\mathbb S^3})\Phi
+ -\frac{\kappa_{\rm H}}2
+    \mathscr K(|\Phi|^4)|\Phi|^2\Phi\right].
+\]
+The exact multiplier \(W^4=(1-\xi_4)^2/4\) vanishes at
+the north pole \(\xi_4=1\), which represents physical infinity.
+Thus spherical elliptic diagonalization alone supplies
+\emph{no} uniform time-dependent Hartree Hamiltonian Kato
+estimate: the actual time generator couples harmonic degrees
+and has a degenerating coefficient. The constant
+\(\Phi=1\) is an exact equilibrium, and its linearization
+recovers the full nonlocal real and phase Hessians above.
+A moving HBL modulation frame requires additional physical
+transport and selected-speed terms, not given by this fixed-frame
+identity. The full time-positive residual and genuine orbit
+remain unproved. This is paper algebra without new Lean
+\texttt{--trust=0} certification; retained original acceptance
+is \(11/13\).
+% END HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110
+
 \end{document}
