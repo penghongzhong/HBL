@@ -497,3 +497,23 @@ The published **elliptic nondegeneracy** gives \\(\\ker L_+\\cap\\{\\text{radial
 from which the **dualized** inverse has tail \\(\\|\\epsilon(s)\\|_{\\mathcal E}\\le (2CC_F/\\sqrt{11})s^{-11/8}\\); this is conditional and does **not** assert it for the Hartree model. Any moving-flow perturbation must also be absorbed with uniform and Lipschitz estimates. In particular **one needs the adjoint estimate for the actual Hartree projected group**, rather than only a spatial elliptic Green bound. This identifies a falsifiable and much narrower spectral task than simply adding further Cramer identities.
 
 **Existing exact arithmetic certificate:** CI 42776359428 proves only the scalar square-tail integral. **No §2.13 acceptance; 11/13 remains exact.**
+
+
+## 9. Decisive norm-interface obstruction: shell \(L^2\) is not Morawetz-dual (10 November 2026)
+
+The full proof and source/propagator acceptance conditions are in
+[\`verification/HBL_213_DUAL_KATO_SOURCE_NORM_OBSTRUCTION_20261110.md\`](HBL_213_DUAL_KATO_SOURCE_NORM_OBSTRUCTION_20261110.md).
+For the exact stationary Hartree bubble, \(L_-=-\Delta-3W^4\).
+Taking \(F_N=\chi\sin(Nr)\), \(g_N=N^{-1}F_N\) on \(1<r<2\)
+gives uniformly bounded shell \(L^2_{7/4}\) and test Morawetz norms,
+but \((L_-g_N,F_N)_{L^2(\mathbb R^3)}\sim
+2\pi N\int_1^2 r^2\chi^2\,dr\to+\infty\).
+Consequently the existing *spatial* original Hartree source-norm proofs
+cannot be fed unchanged into the *energy-dual* Hartree Kato/Morawetz estimate.
+To use that route one must prove the **actual** four-piece source
+in the matching adjoint range/functional norm, **and** the true projected
+Hartree Hamiltonian homogeneous smoothing/limiting-absorption bound,
+with moving parameters and threshold/unstable spectral pieces controlled.
+The counterexample does not rule out favorable cancellations of the
+special PDE source and is not a Lean theorem. All original environment
+acceptance counts remain **11/13**.
