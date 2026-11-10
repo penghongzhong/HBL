@@ -3688,3 +3688,31 @@ No Lean theorem was created or accepted for the new calculation;
 original revised tally remains **11/13 (84.62%)**.
 <!-- END HBL_BARE_DILATION_PHASE_RESONANCE_MOMENT_20261110 -->
 
+
+
+### HBL §2.13 — annular phase-resonance source derivative cost, 2026-11-10
+
+**New paper-level necessary obstruction (NOT a Lean theorem, NOT an original-env acceptance).**
+The exact actual-Hartree phase zero mode \(L_-W=0\) and bare scaling moment
+\(\int_0^R r^2W\Lambda W\,dr=\arctan R-R/2-R/[2(1+R^2)]\)
+give a sharper restriction on phase cancellation by an annular source.
+For \(R\ge2\pi\), \(0\le\chi_R\le1\), \(\chi_R=1\) on \([0,R]\), \(\chi_R=0\) after \(2R\),
+and \(G\in H^1_0((R,2R))\), **if**
+\(\int_0^\infty r^2W(b\chi_R\Lambda W+G)\,dr=0\), then
+\[
+\|(1+r^2)G'\|_{L^2(R,2R)}\ge |b|\sqrt R/2 .
+\]
+Proof: the physical scaling moment has magnitude at least \(|b|R/4\);
+integrating the annulus-only \(G\) moment by parts with
+\(A_R(r)=\int_R^rt^2W(t)dt\le (1+r^2)/2\) bounds it by
+\((\sqrt R/2)\|(1+r^2)G'\|_2\).
+If an **actually derived** scalar HBL trap supplies \(m\le\mu\le M\),
+\(q_s=4\mu\), \(b=(1+4\mu)/(2q)\), then \(b\ge c/s\).
+Therefore no *annular-only phase repair* at \(R(s)\ge2\pi\)
+can furnish the \(O(s^{-17/8-\eta})\) weighted differentiated
+absolute-Duhamel source that this specific strategy requires.
+This does **not** rule out the complete nonlocal Hartree source, whose
+long-range radiation and all-region cancellation need not be confined to
+the annulus, or a projected evolution gain.
+
+**Evidence discipline:** [explicit proof and hypotheses](HBL_213_ANNULAR_PHASE_RESONANCE_WEIGHTED_DERIVATIVE_LOWER_BOUND_20261110.md) and synchronized §2.13 TeX are paper only, not Lean formally audited for this inequality. Historical strict target CI [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509) (original PDE telescoping) and [42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900) (true C² curvature shell budget) were rechecked from original job logs; they do not imply residual time order. Revised original count stays **11/13 (84.62%)**, §2.13 and final Type-II theorem OPEN.
