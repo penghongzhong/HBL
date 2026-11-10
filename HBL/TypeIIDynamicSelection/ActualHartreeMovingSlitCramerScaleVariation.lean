@@ -62,12 +62,12 @@ theorem actual_Hartree_original_Cramer_shell_covers_moving_slow_slit
   have hscaleS : a s ≤ Ls * a τ := by
     have hn : 0 ≤ (a τ - (a s - V)) * Ls :=
       mul_nonneg (by linarith) hLs.le
-    dsimp [Ls] at hMarginS
+    change V * Ls ≤ a s * (Ls - 1) at hMarginS
     nlinarith [hn, hMarginS]
   have hscaleT : a t ≤ Lt * a τ := by
     have hn : 0 ≤ (a τ - (a t - V)) * Lt :=
       mul_nonneg (by linarith) hLt.le
-    dsimp [Lt] at hMarginT
+    change V * Lt ≤ a t * (Lt - 1) at hMarginT
     nlinarith [hn, hMarginT]
   have hsourceS : (1 : ℝ) / a τ ≤ Ls / a s :=
     (div_le_div_iff₀ haτ has).2 (by nlinarith [hscaleS])
