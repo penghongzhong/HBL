@@ -131,7 +131,7 @@ theorem actual_Hartree_dynamic_remaining_time_from_two_channel_equations
   have h := hq.mul hSquare
   convert h using 1
   · funext t
-    simp only [Pi.mul_apply, Pi.pow_apply]
+    simp only [Pi.mul_apply]
     ring
   · simp only [Pi.mul_apply] 
     field_simp [hqpos.ne']
