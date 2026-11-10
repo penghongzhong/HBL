@@ -6245,4 +6245,88 @@ oscillatory/compatibility cancellation before absolute values.
 This is a conditional power audit, not an additional Lean-accepted
 theorem, and does not change the original \(11/13\) count.
 
+
+
+\medskip
+\noindent\textbf{Primitive half-radial velocity criterion for the genuine Riesz time rows (10 November; strict CI in progress).}
+For the original three-dimensional radial inverse-square Hartree potential
+\[
+ {\cal I}_2[m](r)=\frac{2\pi\kappa}{r}
+ \int_0^\infty \rho\log\frac{r+\rho}{|r-\rho|}\,m(\rho)\,d\rho,
+ \qquad W(\rho)=(1+\rho^2)^{-1/2},
+\]
+the already established exact radial row estimate yields
+\[
+ |{\cal I}_2[m](r)|\le C_{\rm row} A,\qquad r>0,
+ \quad |m(\rho)|\le A W(\rho)^2,\ \rho>0.
+\]
+For the \emph{actual} complex field $z$ and its true time velocity $\dot z$,
+the exact quartic polarization gives
+\[
+ \partial_t|z|^4=4|z|^2\operatorname{Re}(\overline z\dot z),
+ \qquad |\partial_t|z|^4|\le8|z|^3|\dot z|.
+\]
+Hence the \emph{primitive} bounds
+\[
+ |z(t,\rho)|\le M_z(t)\sqrt{W(\rho)},\qquad
+ |\dot z(t,\rho)|\le D_z(t)\sqrt{W(\rho)}
+\]
+give the derived, rather than postulated, weighted velocity estimate
+\[
+ |\partial_t|z(t,\rho)|^4|
+ \le8M_z(t)^3D_z(t)W(\rho)^2.
+\]
+For the same real core $V$ and complex radiation $z$, the true mixed
+quartic density $m=|V+z|^4-|V|^4-|z|^4$ obeys
+\[
+ |\partial_t m(t,\rho)|
+ \le8\!\left[(M_V+M_z)^3(D_V+D_z)
+             +M_V^3D_V+M_z^3D_z\right]W(\rho)^2,
+\]
+whenever $|V|,|z|,|\partial_tV|,|\partial_tz|$ are respectively bounded by
+$M_V\sqrt W,M_z\sqrt W,D_V\sqrt W,D_z\sqrt W$.
+Under the original measurable/integrable logarithmic-kernel dominated
+differentiation hypotheses, these produce the \emph{true potential}
+time derivatives and the radius-uniform bounds
+\[
+ \left|\partial_t{\cal I}_2[|z|^4](t,r)\right|
+ \le8C_{\rm row}M_z^3D_z,\qquad
+ \left|\partial_t{\cal I}_2[m](t,r)\right|
+ \le8C_{\rm row}\left[(M_V+M_z)^3(D_V+D_z)
+             +M_V^3D_V+M_z^3D_z\right],
+ \quad r>0.
+\]
+The three prospective Lean modules are
+\texttt{ActualHartreeRieszTimeUniformFromOriginalVelocity.lean},
+\texttt{ActualHartreeHalfRadialVelocityTimeRiesz.lean}, and
+\texttt{ActualHartreeMixedHalfRadialVelocityTimeRiesz.lean};
+the strict replacement workflows are respectively
+\texttt{42741408285}, \texttt{42741413915}, and \texttt{42741684534}.
+These statements are \emph{not accepted until their actual strict CI
+and exact axiom audits have succeeded}. They retain the genuine
+nonlocal three-Riesz kernels and differentiated physical fields, rather
+than assuming a differentiated Hartree potential envelope.
+
+The necessary half-radial bounds on the \emph{two-stage critically scaled}
+core/radiation velocities have not yet been propagated by the physical
+four-region PDE. Even after those are obtained, the two evolving
+Cramer-selected modulation directions must be combined with the
+primitive source derivative using the exact existing bound
+\[
+ \|\partial_tF_{\rm adj}(t,r)\|
+ \le \|\partial_tF_0(t,r)\|+
+ \frac{1024C_s}{B^2r}
+       \|\dot{\mathfrak Z}+p_b\dot{\mathfrak b}
+                              +p_\omega\dot{\mathfrak w}\|
+ +|p_b|\|\partial_tS_b\|+|p_\omega|\|\partial_tS_\omega\|.
+\]
+In particular the primitive Riesz row bounds \emph{alone} do not
+establish the required weighted estimate
+$r\|\partial_tF_{\rm adj}(t,r)\|\lesssim E(t)$, much less the
+full four-region $s^{-9/4}$ residual or its parameter Lipschitz norm.
+A true $r^{-1}$ source-time budget would leave an additional
+$R$ factor after multiplication by the Frobenius $r^2$ Green
+multiplier, whereas the currently established possible $r^{-2}$
+budget leaves none. The original revised proof count remains $11/13$.
+
 \end{document}
