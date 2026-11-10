@@ -209,13 +209,10 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
     have htotal := (heLog.add (hqLog.div_const 2)).add
       (hQLog.div_const (8 * M))
     convert htotal using 1
-    · funext x
-      dsimp [G]
-      simp only [Pi.add_apply, Pi.div_apply]
-    · dsimp only [Q]
-      field_simp [hq0.ne', (hBounds s hs).2.2.ne',
-        (hQpos s hs).ne', hM.ne']
-      ring
+    dsimp only [Q]
+    field_simp [hq0.ne', (hBounds s hs).2.2.ne',
+      (hQpos s hs).ne', hM.ne']
+    ring
   have hGcont : ContinuousOn G (Ici s0) := by
     intro s hs
     exact (hGderiv s hs).continuousAt.continuousWithinAt
