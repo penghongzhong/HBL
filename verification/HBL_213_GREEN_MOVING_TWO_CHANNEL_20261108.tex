@@ -7604,4 +7604,44 @@ This is a mathematical diagnosis and construction,
 \emph{not} a new strict Lean or original-environment
 acceptance. The count remains \(11/13\).
 
+
+\paragraph{A positive physical-scale derivative gain, with its exact domain of validity.}
+For any source of the \emph{actual} scaled form
+\(E_a(y)=a^{-2}G(y/a)\), \(a\ge1\),
+change of variables and the chain rule give
+\[
+ \|E_a\|_{L^2(dy)}=a^{-3/2}\|G\|_{L^2(dr)},
+ \qquad
+ \|(1+y^2)\partial_yE_a\|_{L^2(dy)}
+ \le a^{-1/2}\|(1+r^2)G'(r)\|_{L^2(dr)}.
+\]
+Hence the two proven \emph{paper} sufficient Hessian source norms
+satisfy
+\[
+ \begin{split}
+ \mathcal D_-(E_a)&\le
+    2a^{-1/2}\|(1+r^2)G'\|_2+\tfrac32a^{-3/2}\|G\|_2,\\
+ \mathcal D_+(E_a)&\le
+    2a^{-1/2}\|(1+r^2)G'\|_2
+          +\tfrac{33}2a^{-3/2}\|G\|_2 .
+ \end{split}
+\]
+This calculation matches the exact \(a^{-2}\)
+\emph{single-repair} PDE pullback already recorded by
+\texttt{actual\_Kummer\_physical\_interface\_repair\_scaled\_residual\_exact},
+but is not yet a whole-four-region nonlinear source theorem.
+Even if \(G_s=O(s^{-15/8})\) in the displayed weighted
+derivative/source norm and \(a(s)\gtrsim s^\rho\)
+were derived from the PDE, applying the gain to a
+Duhamel estimate would still require a genuinely
+bounded inverse in the \emph{same} functional spaces.
+Only for a separately justified undamped absolute
+inverse does the comparison \(\rho>1/2\) resolve the
+\(s^{1/4}\) temporal deficit. In particular, a
+Morawetz dual source bound alone does not supply such
+an absolute-in-time energy inverse.
+The physical source, its derivative, the \(C^2\)
+interfaces, parameter dependence and projected Hartree
+smoothing remain unproved. Original acceptance: \(11/13\).
+
 \end{document}
