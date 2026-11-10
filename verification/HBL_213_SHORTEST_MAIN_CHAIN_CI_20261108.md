@@ -1497,9 +1497,31 @@ To treat the true outgoing/singular coefficient, newly committed:
   independent pinned compilation and five exact #check/#print axioms audits.
 
 The singular-channel [strict CI 42728546668](https://github.com/penghongzhong/HBL/actions/runs/42728546668)
-was **in progress** at this checkpoint and is **NOT** claimed accepted
-until Success and original logs confirm all exact theorem/axiom audits.
-Failures must be repaired at source and checked by fresh CI.
+is now **SUCCESS**, original job 129540373450, evidence artifact 13723728856,
+source HEAD 34a66566a59e1f33cd32bc17e00ac8062ac8c33a. Five exact
+#check and five #print axioms each passed at pinned compiler/Mathlib with
+--trust=0 and warningAsError. The decoded logs give transitive axioms
+only propext, Classical.choice and Quot.sound. This is acceptance
+of the explicit conditional source-and-endpoint time differentiation
+for the true singular outgoing Green coefficient, NOT Section 2.13.
+
+The original singular density X(r)/W(r) now has an independent
+**strict proof without inverse moving-left-radius loss**:
+for 0<r<=B<=scale and ‖K.x(r)‖<=G, G>=0,
+‖X(r)/W(r)‖ <= G B. The identity uses the exact normalized
+3D Wronskian |1/W(r)|=r^2 and X(r)=K.x(r)/r, so the
+density has size at most G*r, not G/r0.
+Source: ActualHartreeSingularGreenTimeRatioNoLeftLoss.lean,
+fixed after decoding original failed CI 42729750826
+(line 66: redundant ring tactic, since field_simp already closes);
+**strict corrected Success** [CI 42730062712](https://github.com/penghongzhong/HBL/actions/runs/42730062712),
+job 129545514697, evidence 13724177375, source HEAD fd9275d06b69e3210920a6bffbe5d7f55efaf394.
+Precisely checked theorem
+HBL.TypeIIDynamicSelection.actual_Hartree_original_singular_Green_density_ratio_no_left_radius;
+the raw log confirms the exact pinned toolchain, --trust=0,
+warningAsError, #check and #print axioms limited to the three
+authorized foundational axioms. A bounded K.x is an explicit
+original-regular-mode hypothesis, not a dynamic PDE decay estimate.
 
 Neither channel by itself produces a differentiated moving Kummer basis,
 a uniform projected time inverse, full four-region nonlocal Hartree residual
