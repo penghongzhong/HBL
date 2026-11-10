@@ -385,3 +385,62 @@ directions. The curvature identity (I13), paper-level
 gradient (I19), assembled physical \(C^2\) profile and
 full PDE orbit are **not** formal consequences yet; the
 original paper tally remains **11/13**.
+
+
+<!-- HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110 -->
+## 7. Quantitative time-exponent gate for the genuine broad C² curvature patch (paper corollary)
+
+Inequality (I19) is a pointwise-in-time upper bound, **not** a
+positive-order theorem. To expose exactly which physical source estimates
+could make this specific patch harmless, assume *conditionally* that the
+true moving radius satisfies `L(s) ≥ c s^gamma` with fixed
+`c>0`, `gamma>0`, that `a(s) ≥ L(s)^3`, and that the
+original frozen Kummer zero coefficient is uniformly bounded.
+Then, with the *actual* original source norm
+`N(s)=‖F_+(s)‖_{2,7/4}+‖F_-(s)‖_{2,7/4}`, (I19) implies
+[
+ \mathcal J_{\mathrm{patch}}(s)
+ \lesssim s^{-5\gamma/2}N(s)
+ +s^{-9\gamma/2}\bigl(N(s)+|\delta(s)|\,
+    |u_0(s,L(s)/a(s))|\bigr).
+ \tag{I20}
+]
+This is a **conditional conversion**, not a proven growth law
+for the true Hartree radius or any source smallness claim.
+
+For the illustrative and often-used `gamma=1/2` geometry,
+[
+ \mathcal J_{\mathrm{patch}}(s)
+ \lesssim s^{-5/4}N(s)
+ +s^{-9/4}(N(s)+|\delta(s)|\,|u_0(s,L/a)|).
+ \tag{I21}
+]
+Therefore the **explicit sufficient decay rates from this upper bound**
+for its leading true-Fredholm term are:
+- `N(s)=O(s^{-5/8})` to yield a patch contribution
+  `O(s^{-15/8})` (the earlier conditional *static-shell* order);
+- `N(s)=O(s^{-7/8-eta})` to yield
+  `O(s^{-17/8-eta})`, which is the genuinely required
+  absolute backward-Duhamel source threshold for an
+  `o(s^{-9/8})` correction;
+- `N(s)=O(s^{-1})` to yield
+  `O(s^{-9/4})`, the stronger full residual target
+  appearing elsewhere in the manuscript.
+
+In each case the second spectral term must separately obey its
+own bound; for example, if `|delta*u0|` remains bounded and
+`gamma=1/2`, the `s^{-9/4}` prefactor is sufficient for
+the patch *alone*. Other time-moving interfaces, nonlocal quartic
+cross terms, and the true propagated residual remain uncontrolled.
+A sharper cancellation might weaken these **sufficient**
+assumptions, so the displayed conditions must **not** be presented
+as necessary restrictions or counterexamples.
+
+**Concrete analytical obligation:** derive the needed decay for this
+**literal** physical weighted norm `N(s)` from a constructed
+Hartree orbit, or replace the absolute Duhamel estimate with a
+genuinely proven projected Hartree smoothing / normal-form gain.
+At this checkpoint neither is known. The new fixed-slice Lean
+C² estimate (CI 42854633900) supplies (I19)'s curvature side,
+**not** the temporal decay. The original tally remains **11/13**.
+<!-- END HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110 -->
