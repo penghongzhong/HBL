@@ -2594,3 +2594,29 @@ Neither the curvature certificate nor the ODE/source-regularity argument
 establishes a full Hartree physical PDE residual time gain.
 See [source-regularity and C² gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 Original count stays **11/13**.
+
+
+### 10 November — exact physical C2 repair material transport is algebraically available
+
+For original fixed Kummer \(B\), define
+\(P_0=w(s,B)\), \(P_1=w_r(s,B)\), \(J=w_{rr}(s,B)\),
+\(z=y/a(s)\), \(R(s,y)=\chi_B(z)[P_0+(z-B)P_1+\frac12(z-B)^2J]\).
+Under genuine source/parameter differentiability:
+\[
+(\partial_s+b y\partial_y)R
+=\chi_B(z)[P_0'+(z-B)P_1'+\tfrac12(z-B)^2J']
+ +(b-a_s/a)z\partial_zG(s,z).
+\]
+Furthermore, \(J=F(s,B)-\delta(s)u_0(s,B)-p(B)P_1-q(s)P_0\)
+from the **original unshifted** selected Kummer source, and
+\(J_s=F_s-\delta_su_0-\delta(u_0)_s-p(B)(P_1)_s-q_sP_0-q(P_0)_s\).
+This isolates a genuine *material-cancellation mechanism*:
+the only scale-velocity factor is the physically derived
+\(b-a_s/a\), rather than two artificial standalone
+moving-cutoff source terms. It does **not** derive estimates
+for \(\partial_sF,\delta_s,b-a_s/a\) or full Hartree nonlocal
+PDE residual. The new identities are paper calculus;
+the dedicated source-locked outer second-jet module still
+needs its own strict CI result. See
+[original C2/source/transport audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+**11/13 unchanged**.
