@@ -591,3 +591,31 @@ The coupled Hartree spectral adjoint Kato inverse remains an
 independent hard gate. None of these new notes implies a
 nonlinear orbit or a dynamically produced Type-II rate.
 **Strict original 13-environment count: 11/13**.
+
+
+## Full original Hartree nonlinear remainder is now *quadratic* in actual field norms (paper)
+
+A direct computation on the true inverse-square quartic nonlocal
+\(\mathcal N_{\rm H}\) identifies its real derivative
+\(9W⁴u_1+3iW⁴u_2+4W³\mathcal I(W³u_1)\)
+and the exact full remainder
+\(3W²Q_2+\mathcal I(4W³u_1)(Q_1+Q_2)+
+\mathcal I(\rho_2)Q(W+u)\).
+The genuine radial weighted norms \(U=\|u\|_{L²(dr)}\),
+\(H=\|(1+r²)u'\|_{L²(dr)}\), together with the established
+weighted \(A_2\) Riesz theorem, yield an explicit universal
+\[
+ \|\mathcal R_{\rm H}(u)\|_2+
+ \|(1+r²)\mathcal R_{\rm H}(u)'\|_2
+ \le C(U+H)^2,\qquad 0\le U,H\le1.
+\]
+The complete coefficients and the exact critical-scale
+\(\lambda^{-2}\), \(\lambda^{-1}\) factors are recorded in
+[\`HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md\`](HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md).
+This **removes the need for a separately assumed nonlinear
+Hartree remainder**, but not the original linearized term or
+any PDE orbit construction. Next producer is true \(U(s),H(s)\)
+on the source-selected moving Fredholm/Kummer field
+and its time/parameter derivatives, plus the full coupled
+Hamiltonian projected inverse. There is no new strict Lean
+nonlocal Sobolev theorem or acceptance: **11/13**.
