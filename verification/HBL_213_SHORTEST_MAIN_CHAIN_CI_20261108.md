@@ -1954,3 +1954,38 @@ The SAME corrected whole-four-piece original field has its three classical \(C^1
 **CRITICAL unproved producer:** the dynamic spectral pair \((\mu(s),\theta(s))\), the selected real Cramer speed and the actual physical strong Hartree orbit must be identified and controlled *together*, with PDE-derived \(\delta_s\), endpoint derivative, weighted positive-order residual, and parameter Lipschitz. The existing algebraic fixed-basis cancellations do NOT prove this physical source-time estimate. This is the one remaining quantitative parametrix interface that should replace the expanding hierarchy of auxiliary moving-basis statements.
 
 **Formal original acceptance unchanged at 11/13; no previously accepted CI is re-counted.**
+
+
+### 10 November 2026 — genuine Hartree Hamiltonian dual-Kato route; strict scalar L2 test
+
+New relevant references: Tobias Schmid, *Blow up dynamics for the 3D energy-critical nonlinear Schrödinger equation*, *Calculus of Variations and Partial Differential Equations* **65** (2026), article 69, DOI [10.1007/s00526-025-03240-x](https://doi.org/10.1007/s00526-025-03240-x), **published**; and Taegyu Kim, *Smooth radial quantized Type II blow-up for the three-dimensional energy-critical nonlinear Schrödinger equation*, [arXiv:2610.26127](https://arxiv.org/abs/2610.26127), submitted 19 October **2026, preprint**. Kim's approach replaces unavailable repulsivity by Kato smoothing and spacetime Morawetz estimates for a Hamiltonian 3D NLS flow. Neither work proves Hartree or our dynamically selected blowup exponent.
+
+**Original nonlocal Hartree linearization, not local NLS:** with
+\[
+I_2[f]=\kappa_{\rm H}(|x|^{-2}*f),\quad V_W=I_2[W^4],\qquad
+L_-=-\Delta-V_WW^2,\quad
+L_+h=-\Delta h-3V_WW^2h-4W^3I_2[W^3h].
+\]
+The last term is **nonlocal** and must be retained in the physical resolvent, threshold projection and dual Kato estimate. Proposed nonresonant causal inverse target:
+\[
+\left\|\int_s^\infty U_{\rm H}(s,\sigma)P_{\rm nr}F(\sigma)d\sigma\right\|_{X_s}
+\le C_{\rm Kato}
+\left(\int_s^\infty\|F(\sigma)\|_{Y_\sigma}^2d\sigma\right)^{1/2}.
+\]
+**UNPROVED:** Hartree limiting absorption/Kato smoothing, zero-mode/unstable spectral treatment and the whole-source \(Y_s\) estimate. The NLS result is not a valid black-box substitute.
+
+**Potential closure of the original one-quarter Duhamel gap:** instead of absolute \(L_s^1\) integration (giving \(s^{-7/8}\) for a hypothetical full \(s^{-15/8}\) source), a genuine projected dual-Kato \(L_s^2\)-time inverse would give
+\[
+\left(\int_s^\infty \sigma^{-15/4}d\sigma\right)^{1/2}
+=\frac2{\sqrt{11}}s^{-11/8}=\frac2{\sqrt{11}}s^{-1/4}s^{-9/8}.
+\]
+The **scalar squared integral has been strictly kernel checked**:
+[CI 42776359428](https://github.com/penghongzhong/HBL/actions/runs/42776359428) **SUCCESS**, original job **129695653414**, artifact **13744390948**, original module
+HBL/TypeIIDynamicSelection/ActualHartreeShellDuhamelExponent.lean,
+new terminal
+HBL.TypeIIDynamicSelection.actual_Hartree_shell_squared_source_exact_L2_time_tail.
+The original decoded log checks **six** exact theorem types and six matching axiom prints with pinned Lean 4.35.0-rc3/Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, trust zero and warning-as-error; only propext, Classical.choice, Quot.sound. **This does not certify the physical dual-Kato inverse, true complete four-region projected forcing or II-type orbit.**
+
+**Shortest implementation:** retain the already strictly audited fixed Kummer \(K_0\) exact quadratic source cancellation (CI 42565184656), three spectral-corrected \(C^1\) interfaces (CI 42648994008), and nonlinear PDE telescope (CI 42648496792). Next primary analytic task is the **nonlocal projected Hartree smoothing/energy inequality** with source-faithful \(X_s,Y_s\), and the actual nonlinear forcing in the corresponding weighted \(L_s^2\) norm. Preserve genuine two-channel modulation and dynamic sharp exponent as second stage.
+
+**Formal original revised 13-environment count: 11/13 (84.62%), unchanged.**
