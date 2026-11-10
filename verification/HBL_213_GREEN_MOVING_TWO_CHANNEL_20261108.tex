@@ -9088,4 +9088,27 @@ It is currently a paper calculation, not a newly
 strictly compiled original \(\S2.13\) environment.
 The original total stays \(11/13\).
 
+
+\paragraph{Strict Lean source-lock verification of the original inner curvature cancellation.}
+The new theorem
+\texttt{HBL.TypeIIDynamicSelection.actual\_Hartree\_original\_plateau\_spectral\_inner\_C2\_source\_cancellation}
+has been checked by the actual pinned GitHub CI
+\texttt{42824686940} (\emph{Success}), job
+\texttt{129858810050}, original artifact
+\texttt{13768893225}.
+The original job logs confirm \texttt{lake env lean
+--trust=0 -DwarningAsError=true}, exact
+\texttt{\#check} and \texttt{\#print axioms},
+and the literal full transitive axiom list
+\texttt{[propext, Classical.choice, Quot.sound]}.
+The theorem cancels the true quartic Hartree plateau
+source against the original physical Kummer forcing
+and leaves precisely the first source-dependent spectral
+term \(-a^{-2}\delta u_0\); it does \emph{not}
+prove the full inner \(C^2\) join or the bounded
+nonlocal Hartree PDE inverse. The \(L^{-5/2}\)
+repair gradient remains an independent paper-level
+estimate, not a compiled original theorem environment.
+The revised original tally remains \(11/13\).
+
 \end{document}
