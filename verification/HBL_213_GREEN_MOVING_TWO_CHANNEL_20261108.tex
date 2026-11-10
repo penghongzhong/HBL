@@ -6091,11 +6091,39 @@ strictly audited in GitHub CI \texttt{42727196085}, original job
 original \emph{singular} coefficient \(A_*\) has now been coded in
 \texttt{ActualOriginGreenMovingSingularChannel.lean} and
 \texttt{ActualHartreeOnePhysicalMovingSingularGreenFullDerivative.lean};
-its separate strict CI \texttt{42728546668} is pending confirmation
-at this manuscript checkpoint, and is \emph{not} marked passed.
-For both, the source derivative majorants, differentiability of the
-physical path and the original Wronskian density bounds are explicit
-analytic premises. In particular these identities do not imply a
+its separate strict CI \texttt{42728546668} is now
+\emph{Success}, original job \texttt{129540373450}, evidence
+\texttt{13723728856}, with five exact \texttt{\#check} and
+\texttt{\#print axioms} passing the required toolchain,
+\texttt{--trust=0}, warning-as-error and only the allowed three axioms.
+
+Moreover, the original singular-channel ratio itself has a
+radius-uniform cancellation.  Since the actual normalized
+regular mode is \(K.x(r)\), the physical singular density numerator
+is \(X(r)=K.x(r)/r\); the exact original Wronskian satisfies
+\(\lvert W(r)^{-1}\rvert=r^2\) for \(r>0\).
+Therefore for \(0<r\le B\le\mathrm{scale}\), provided
+\(\lVert K.x(r)\rVert\le G\),
+\[
+ \boxed{\quad
+ \left\lVert\frac{X(r)}{W(r)}\right\rVert
+   =r\,\lVert K.x(r)\rVert\le G B .\quad}
+\]
+No factor \(r_0(s)^{-1}\) is hidden in this
+original outgoing-channel time multiplier. The precise result
+\texttt{actual\_Hartree\_original\_singular\_Green\_density\_ratio\_no\_left\_radius}
+is \emph{strictly verified}: corrected CI \texttt{42730062712},
+original job \texttt{129545514697}, artifact \texttt{13724177375}.
+Original CI \texttt{42729750826} failed solely because
+\texttt{field\_simp} had already closed the goal, making the trailing
+\texttt{ring} tactic superfluous; this was removed before successful
+reverification. This establishes the *geometric absence* of a shrinking
+left-radius loss under the explicit original regularized-mode bound,
+not an a priori time-decay estimate.
+
+For both original physical Green coefficients, the source derivative
+majorants, differentiability of the physical path, and original
+Wronskian density bounds are explicit analytic premises. In particular these identities do not imply a
 uniform moving Kummer-basis derivative, the required weighted
 \(s^{-9/4}\) four-region PDE residual, the parameter-Lipschitz
 recurrence or the dynamically derived Type--II rate. The original
