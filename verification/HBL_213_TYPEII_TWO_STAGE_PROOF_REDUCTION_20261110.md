@@ -2,8 +2,8 @@
 
 **Status and audit:** The original 13 retained revised paper environments are still **11/13**. This is a **mathematical reduction of the proof obligations**, not an accepted new environment, a Lean theorem, or a constructed Hartree PDE trajectory. No prescribed \(\nu\), blowup exponent, numerical residual, external source estimate, or new Lean axiom is introduced.
 
-**Current public branch at start:** \`hbl-213-spectral-c1-trace-20261109\`, HEAD \`ffc4e007ebb90fca7e8a30830435f9dfa8f31d8b\`.
-The preceding moving-slit annulus theorem passed [CI 42756618784](https://github.com/penghongzhong/HBL/actions/runs/42756618784), original job **129632373174**, evidence **13736666241**. Decoded log confirms pinned Lean 4.35.0-rc3, Mathlib \`a98628e16c11f5167f16124105ddce53efa9bfe5\`, \`--trust=0 -DwarningAsError=true\`, exact \`#check\` / \`#print axioms\` and only \`Classical.choice\`, \`Quot.sound\`, \`propext\`. The existing continuous-orbit local-domain theorem in that file was **not** an audited target of this job; do not treat it as independently accepted.
+**Current public branch at start:** `hbl-213-spectral-c1-trace-20261109`, HEAD `ffc4e007ebb90fca7e8a30830435f9dfa8f31d8b`.
+The preceding moving-slit annulus theorem passed [CI 42756618784](https://github.com/penghongzhong/HBL/actions/runs/42756618784), original job **129632373174**, evidence **13736666241**. Decoded log confirms pinned Lean 4.35.0-rc3, Mathlib `a98628e16c11f5167f16124105ddce53efa9bfe5`, `--trust=0 -DwarningAsError=true`, exact `#check` / `#print axioms` and only `Classical.choice`, `Quot.sound`, `propext`. The existing continuous-orbit local-domain theorem in that file was **not** an audited target of this job; do not treat it as independently accepted.
 
 ## 1. What the comparison with established blowup papers actually suggests
 
@@ -168,7 +168,7 @@ Green mixed-difference bound*, **not** this four-region estimate.
 
 ## 5. Revised short dependency graph for ONE physical orbit
 
-\`\`\`text
+```text
 ACTUAL 3D NONLOCAL HARTREE PDE + nonzero smooth radial terminal radiation
    |
    +-- [strict auxiliary] true mixed/pure/core Riesz source and velocity
@@ -196,7 +196,7 @@ ACTUAL 3D NONLOCAL HARTREE PDE + nonzero smooth radial terminal radiation
    |
    +-- [NOT ACCEPTED] original revised §2.13 -> 12/13
    +-- [NOT ACCEPTED] original dynamical Type-II main -> 13/13
-\`\`\`
+```
 
 **Remove from the required spine, but do not delete verified sources:**
 repeated derivative rewrappings, multiple equivalent fixed-basis Green
@@ -211,8 +211,8 @@ Before claiming progress to 12/13, compile one source-aligned theorem
 that really constructs (not assumes) the corrected physical four-region
 Hartree orbit with the necessary quantitative error and common-domain
 time controls, and check its transitive axiom set with the pinned
-\`--trust=0\` workflow.
+`--trust=0` workflow.
 
 This research note is cross-referenced from
-\`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`
-and \`verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md\`.
+`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`
+and `verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md`.
