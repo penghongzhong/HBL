@@ -194,13 +194,32 @@ theorem actual_Hartree_true_inner_spectral_C1_curvature_jump
       _ = v L := hSelected.1.symm
   have hV0 : HasDerivAt v0 ((1 / a : ℝ) • J.2) L := by
     have h := hOriginal.2.1.scomp L ((hasDerivAt_id L).div_const a)
-    simpa only [v0, Function.comp_def, id_eq, one_div,
-      Complex.real_smul, Complex.ofReal_inv, mul_comm] using h
+    have hV0' : HasDerivAt
+        (fun y : ℝ =>
+          actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 (y / a))
+        ((1 / a : ℝ) • J.2) L := by
+      simpa only [Function.comp_def, id_eq, one_div,
+        Complex.real_smul, Complex.ofReal_inv, mul_comm] using h
+    change HasDerivAt
+      (fun y : ℝ =>
+        actualOriginMatchedKummerValue K (L / a) B F J.1 J.2 (y / a))
+      ((1 / a : ℝ) • J.2) L
+    exact hV0'
   have hV : HasDerivAt v ((1 / a : ℝ) • J.2) L := by
     have h := hSelected.2.1.scomp L ((hasDerivAt_id L).div_const a)
-    simpa only [v, actualHartreeMatchedSpectralPhysicalValue,
-      Function.comp_def, id_eq, one_div,
-      Complex.real_smul, Complex.ofReal_inv] using h
+    have hV' : HasDerivAt
+        (fun y : ℝ =>
+          actualHartreeMatchedSpectralCorrectedValue
+            K (L / a) B F J.1 J.2 d (y / a))
+        ((1 / a : ℝ) • J.2) L := by
+      simpa only [Function.comp_def, id_eq, one_div,
+        Complex.real_smul, Complex.ofReal_inv] using h
+    change HasDerivAt
+      (fun y : ℝ =>
+        actualHartreeMatchedSpectralCorrectedValue
+          K (L / a) B F J.1 J.2 d (y / a))
+      ((1 / a : ℝ) • J.2) L
+    exact hV'
   have hSlope : deriv u L = deriv v L := by
     rw [hV.deriv, hV0.unique hOld.2.1]
   have hRange : L < a * scale := by
@@ -213,7 +232,11 @@ theorem actual_Hartree_true_inner_spectral_C1_curvature_jump
   have hJump :=
     actual_Hartree_inner_C1_curvature_jump_eq_original_source_jump
       mu theta a L u v hValue hSlope
-  dsimp only at hPDE
+  change actualMatchedScaledKummerApply mu theta a v L =
+    ((a ^ 2)⁻¹ : ℝ) •
+      (F (L / a) -
+        d * actualOriginMatchedKummerValue K (L / a) B
+          F J.1 J.2 (L / a)) at hPDE
   rw [hPDE] at hJump
   exact hJump
 
