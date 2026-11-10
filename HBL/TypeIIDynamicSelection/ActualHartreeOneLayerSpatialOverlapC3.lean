@@ -102,7 +102,6 @@ theorem actual_Hartree_real_overlap_cutoff_third_hasDerivAt
       simp only [Pi.neg_apply, Function.comp_def]
       ring
     · field_simp [hR]
-      ring
   exact hreal.ofReal_comp
 
 /-- The third physical derivative costs exactly R^{-3},
