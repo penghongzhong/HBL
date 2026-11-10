@@ -78,6 +78,7 @@ theorem actual_Hartree_second_jet_two_piece_has_second_derivative
     · have hlocal :
           actualHartreeSecondJetTwoPiece R f g =ᶠ[𝓝 x] f := by
         filter_upwards [Iio_mem_nhds hx] with y hy
+        change y < R at hy
         simp [actualHartreeSecondJetTwoPiece, le_of_lt hy]
       change deriv (actualHartreeSecondJetTwoPiece R f g) x =
         (if x ≤ R then deriv f x else deriv g x)
@@ -91,6 +92,7 @@ theorem actual_Hartree_second_jet_two_piece_has_second_derivative
     · have hlocal :
           actualHartreeSecondJetTwoPiece R f g =ᶠ[𝓝 x] g := by
         filter_upwards [Ioi_mem_nhds hx] with y hy
+        change R < y at hy
         simp [actualHartreeSecondJetTwoPiece, not_le.mpr hy]
       change deriv (actualHartreeSecondJetTwoPiece R f g) x =
         (if x ≤ R then deriv f x else deriv g x)
