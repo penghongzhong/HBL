@@ -7271,10 +7271,22 @@ The purely scalar squared integral
 has been added as an exact Lean target
 \texttt{actual\_Hartree\_shell\_squared\_source\_exact\_L2\_time\_tail}
 in the existing
-\texttt{ActualHartreeShellDuhamelExponent.lean}
-and submitted for six-target strict audit.
-Its passing would certify only this power
-calculation, never the Kato estimate,
+\texttt{ActualHartreeShellDuhamelExponent.lean}.
+This scalar integral and all five earlier
+diagnostic statements have now \emph{strictly
+passed} in pinned \texttt{CI 42776359428},
+original job \texttt{129695653414},
+evidence artifact \texttt{13744390948}.
+All six exact \texttt{\#check} and matching
+\texttt{\#print axioms} were accepted with
+\texttt{--trust=0}, warning-as-error,
+Lean \texttt{4.35.0-rc3} and pinned Mathlib;
+the only transitive axioms are
+\texttt{propext}, \texttt{Classical.choice},
+and \texttt{Quot.sound}.
+This certificate proves only the scalar
+\(L_s^2\) time-power comparison, \emph{not}
+the Hartree-specific Kato estimate,
 the original physical nonlinear source or
 the revised §2.13.
 Formal original-paper acceptance remains \(11/13\).
