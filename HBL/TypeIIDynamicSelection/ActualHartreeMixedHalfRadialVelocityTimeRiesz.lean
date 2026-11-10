@@ -15,6 +15,8 @@ potential-time derivative bound at every positive observation radius.
 This is not a prescribed time decay or a synthetic local Hartree source:
 the full nonlocal logarithmic kernel is retained. Constructing all
 half-radial bounds on one actual four-region PDE orbit remains open.
+The strict build imports the corrected physical half-radial velocity
+producer; no original 13-environment acceptance is claimed here.
 -/
 
 noncomputable section
