@@ -1,0 +1,80 @@
+% Included in HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex.
+% No new numbered theorem environment and no original-paper acceptance.
+\paragraph{A fixed interval for the actual moving backward overlap.}
+Let
+\[
+ K_{a,Q}e=e_{yy}+\left(\frac2y+\frac{iy}{2a^2}\right)e_y
+              +\frac{Q}{a^2}e,
+ \qquad Q=\mathrm{frozenZeroCoeff}(\mu,\theta).
+\]
+For the genuine source-matched difference, put
+\(E(x)=e(Lx)\), \(k=L^2/a^2\), \(z=kQ\), and
+\(G(x)=L^2(K_{a,Q}e)(Lx)\).  The original physical
+operator, not an independent model inverse, gives
+\begin{equation}
+ E_{xx}+\left(\frac2x+\frac{ikx}{2}\right)E_x+zE=G,
+ \qquad E(1)=E_x(1)=0,
+ \qquad x\in J=[1/2,1].
+ \label{eq:hbl-normalized-moving-original}
+\end{equation}
+The effective Kummer scale is \(a/L\).  The already proved radial
+weak-term absorption estimate, at \(R=1/2\), implies for
+\(4k(1+|Q|)\le1\)
+\[
+ \|E\|_\infty\le2\|G\|_\infty,\qquad
+ \|E_x\|_\infty\le4\|G\|_\infty,\qquad
+ \|E_{xx}\|_\infty\le18\|G\|_\infty.
+\]
+Here and below all suprema are on \(J\).  The last estimate follows
+from \(\|E_{xx}+2E_x/x\|_\infty\le2\|G\|_\infty\) and
+\(2/x\le4\); it requires no independent inverse budget.
+
+For two actual fields, possibly with different physical radii,
+normalize each as in \eqref{eq:hbl-normalized-moving-original}.
+Writing \(D=E_1-E_2\), their original equations yield
+\[
+ K_{k_1,z_1}D
+ =G_1-G_2-\frac{ix}{2}(k_1-k_2)(E_2)_x-(z_1-z_2)E_2.
+\]
+Consequently, with the explicitly source-dependent quantity
+\[
+ B=\|G_1-G_2\|_\infty+
+       2\bigl(|k_1-k_2|+|z_1-z_2|\bigr)\|G_2\|_\infty,
+\]
+the same inverse proves
+\begin{equation}
+ \|D\|_\infty\le2B,\qquad
+ \|D_x\|_\infty\le4B,\qquad
+ \|D_{xx}\|_\infty\le18B.
+ \label{eq:hbl-normalized-moving-C2}
+\end{equation}
+Thus \eqref{eq:hbl-normalized-moving-C2} replaces repeated
+moving-basis differentiation on this local overlap by a source-exact
+coefficient-stability estimate.  Its source norms are literal suprema
+of the original operator evaluations, not postulated envelopes.
+
+For a sufficiently regular actual parameter family, differentiating
+\eqref{eq:hbl-normalized-moving-original} gives
+\[
+ K_{k,z}E_s=G_s-\frac{ix}{2}k_sE_x-z_sE,
+ \qquad E_s(1)=(E_s)_x(1)=0.
+\]
+The indispensable forcing is the material derivative
+\[
+ G_s(s,x)=2LL_sf(s,Lx)+L^2\{f_s(s,Lx)+L_sxf_y(s,Lx)\},
+ \qquad f=K_{a,Q}e.
+\]
+In particular \(L_sxf_y\) must not be omitted.  On returning to the
+physical coordinate, \(e_s=E_s-(L_s/L)xE_x\); neither this connection
+term nor the derivative of the original nonlinear source has yet been
+estimated for the full four-region Hartree trajectory.
+
+The companion Lean targets are
+\texttt{actual\_Hartree\_normalized\_original\_source\_C2\_stability},
+\texttt{actual\_Hartree\_original\_moving\_radius\_operator\_pullback},
+and \texttt{actual\_Hartree\_original\_moving\_radius\_zero\_jet\_pullback}.
+They assert the stated local classical identities and bounds, not
+whole-PDE time gain, a nonlinear solution, or Type-II selection.
+The material-time formulas are paper calculations and are not part of
+these initial strict Lean targets.  Exact CI acceptance belongs to the
+original evidence ledger; the manuscript count remains \(11/13\).
