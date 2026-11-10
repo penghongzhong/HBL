@@ -3369,3 +3369,22 @@ Hamiltonian inverse, same-orbit finite recursive construction,
 and dynamically emergent Type-II blow-up exponent remain OPEN.
 **Formal original revised count stays strictly 11/13 (84.62%).**
 <!-- END HBL_ORIGINAL_L2_SOURCE_TRANSPORT_GATE_20261110 -->
+
+<!-- HBL_STRICT_ORIGINAL_MOVING_C2_42838601005 -->
+### 10 November 2026 — strict original normalized moving-radius C² certificate (CI 42838601005)
+
+**Actual public Actions run** [42838601005](https://github.com/penghongzhong/HBL/actions/runs/42838601005), **original job 129907385734**, **head** `865c9c5998cbeac7a15b2d1445e0e9b2f6683c90`: `completed/success`. Original raw decoded job log confirms pinned Lean **4.35.0-rc3**, Mathlib **a98628e16c11f5167f16124105ddce53efa9bfe5**, exact per-file `lake env lean --trust=0 -DwarningAsError=true`, zero-output strict compilation, `#check @...` and `#print axioms ...` for **six exact target declarations**:
+
+1. `HBL.TypeIIDynamicSelection.actual_Hartree_original_Kummer_coefficient_difference`
+2. `HBL.TypeIIDynamicSelection.actual_Hartree_original_Kummer_sub_of_classical`
+3. `HBL.TypeIIDynamicSelection.actual_Hartree_backward_original_parameter_source_difference`
+4. `HBL.TypeIIDynamicSelection.actual_Hartree_normalized_original_source_C2_stability`
+5. `HBL.TypeIIDynamicSelection.actual_Hartree_original_moving_radius_operator_pullback`
+6. `HBL.TypeIIDynamicSelection.actual_Hartree_original_moving_radius_zero_jet_pullback`
+
+All **six exact transitive axiom** reports contain exclusively `propext`, `Classical.choice`, `Quot.sound` (no new axiom, `sorryAx`, `admit`); the strict job validates full, untruncated printed Lean types.
+
+**Scope boundary:** target 4 assumes `ContinuousOn` of the **original** source on the fixed normalized overlap and uses its literal L-infinity source suprema. Targets 5–6 prove original operator and zero-jet pullback, not a moving-time material source bound or moving-parameter L-infinity Lipschitz. The new true-source L² Volterra estimate in [the paper derivation](HBL_213_MOVING_OVERLAP_L2_VOLTERRA_SOURCE_GATE_20261110.md) is not among the certified Lean declarations.
+
+**Original revised acceptance remains strictly 11/13 (84.62%).** Full same-orbit four-region nonlinear Hartree PDE residual's time-positive order, projected Hamiltonian inverse, actual evolution orbit and dynamically derived Type-II rate remain mathematically OPEN.
+<!-- END HBL_STRICT_ORIGINAL_MOVING_C2_42838601005 -->
