@@ -1,6 +1,6 @@
 # HBL §2.13: the true Fredholm/spectral inner C² jump and the non-free patch cost (10 November 2026)
 
-**Original revised theorem count stays 11/13.** The exact original-source algebra and its concrete two-profile instantiation have been submitted to the pinned strict Lean job; no new §2.13 acceptance or PDE time-decay claim follows from this note.
+**Original revised theorem count stays 11/13.** The two original-source curvature-jump algebra declarations have now passed a strict pinned Lean job [42851609990](https://github.com/penghongzhong/HBL/actions/runs/42851609990), raw job 129953504774; the concrete two-profile Fredholm-to-spectral instantiation is subject to a separate later strict audit. Neither is an acceptance of §2.13 or the final theorem.
 
 ## 1. Source-exact curvature defect at the genuine left interface
 
@@ -25,7 +25,7 @@ The already verified same-source C¹ endpoint matching gives `u(L)=v(L)`, `u'(L)
 
 The first term `K_{a,Q}u(L)-a^{-2}F(L/a)` is **not known to vanish** merely because `u` solves the original Hartree Hessian Fredholm equations: those equations and the frozen Kummer operator are different operators. In particular, the spectral shift produces a **first-order** term `a^{-2}delta*u_0`, not solely the `delta²` shifted-operator defect.
 
-The Lean target `actual_Hartree_true_inner_spectral_C1_curvature_jump` is intended to instantiate (CJ) with the actual `actualHartreeTwoChannelInner`, `actualMomentLockedCanonicalInnerJet`, `actualOriginMatchedKummerValue` and `actualHartreeMatchedSpectralPhysicalValue`. Until the latest CI has succeeded and the precise theorem axioms are checked, treat it as **not accepted**.
+The Lean target `actual_Hartree_true_inner_spectral_C1_curvature_jump` is intended to instantiate (CJ) with the actual `actualHartreeTwoChannelInner`, `actualMomentLockedCanonicalInnerJet`, `actualOriginMatchedKummerValue` and `actualHartreeMatchedSpectralPhysicalValue`. The concrete profile instantiation is **not independently accepted until its later four-target CI succeeds**. The two algebraic bridge theorems have passed exact `#check` / `#print axioms` under Lean 4.35.0-rc3, pinned Mathlib, `--trust=0` and `warningAsError`, using only `propext`, `Classical.choice`, `Quot.sound` (including the previously accepted first target).
 
 ## 2. A C² correction is possible, but making its support arbitrarily thin worsens the derivative source
 
