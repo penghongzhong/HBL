@@ -19,7 +19,8 @@ is evaluated on the SUM of these fields; consequently every nonlocal
 cross interaction, moving endpoint contribution and time derivative is
 retained inside the genuine differential operator.
 
-This target is revalidated against the corrected spectral three-C1 producer.\nThe telescope below is an exact identity of these nonlinear residuals,
+This target is revalidated against the corrected spectral three-C1 producer.
+The telescope below is an exact identity of these nonlinear residuals,
 not an invalid linear superposition. It provides the correct FINITE
 spectral-corrected target for the next source-norm estimates, but does not
 by itself prove positive time order or dynamically selected blowup.
@@ -147,7 +148,8 @@ theorem actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes
               ell c time z b omega s r := by
         unfold actualHartreeSpectralFiniteFourPiecePDEGap
         rw [hEq]
-        ring
+        -- Nonlinear PDE operators remain opaque; only an additive telescope is used.
+        abel
       rw [hSplit, ih]
       rfl
 
