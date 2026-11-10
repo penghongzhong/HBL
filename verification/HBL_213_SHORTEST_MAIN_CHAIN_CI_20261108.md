@@ -2671,3 +2671,28 @@ This is paper analysis, not a new original environment.
 Full argument:
 [original source/commutator gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
 **11/13**.
+
+
+### True source-locked C2 curvature still lacks any bound under mere L2 input
+
+The unshifted actual spectral equation gives
+\(w''(B)=F(B)-\delta u_0(B)-p(B)w'(B)-qw(B)\).
+For smooth sources \(F_N(r)=\sqrt N\,\psi(N(r-B))\),
+\(0<r_0<B<\mathrm{scale}\), \(\psi(0)=1\), one has
+\(\|F_N\|_2=\|\psi\|_2\) and \(\|F_N\|_1=O(N^{-1/2})\),
+while \(F_N(B)=\sqrt N\).
+On the fixed positive-radius Kummer interval
+the same Volterra IVP with zero initial jets and
+fixed \(\delta\) produces \(u_0(B),u_0'(B),w(B),w'(B)
+=O(N^{-1/2})\). Therefore the *actual*
+source-locked second jet
+\(w_N''(B)=\sqrt N+O(N^{-1/2})\).
+This is a direct source-class counterexample:
+strictly proving the algebraic \(C^2\) endpoint jets
+cannot provide a uniform curvature envelope from
+the existing weighted \(L^2\) source producer.
+A real selected Hartree \(H^1\) trace estimate
+(or a different legitimate physical inverse)
+is required. Detail in
+[actual source/curvature gate](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+**11/13 unchanged**.
