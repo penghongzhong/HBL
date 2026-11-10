@@ -2407,3 +2407,57 @@ Type-II dynamic rate are OPEN. No trust-zero CI for
 the new published-weighted-\(A_2\) paper result.
 Proof: [HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md](HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md).
 **11/13 (84.62%) unchanged**.
+
+
+### 10 November — no free physical nonlinear source envelope: exact full quartic Hartree estimate solely in actual two-norm data
+
+The full nonlinear source \(H^1\) result has been **strengthened** so its earlier
+\(M=\max(1,\|W+u\|_\infty)\), \(S=\|(1+r²)|W+u|³\|_\infty\),
+and \(A=\kappa_H(4π\|\rho\|_\infty+\|\rho\|_{L¹(\mathbb R³)})\) are
+**not additional source assumptions**. For the **actual radial correction**
+\(U=\|u\|_{L²(dr)}\), \(H=\|(1+r²)u'\|_{L²(dr)}\), weighted FTC/Cauchy--Schwarz
+yields \(\sup_r\sqrt{1+r²}|u(r)|\le\sqrt{\pi/2}H\).
+Set \(K=1+\sqrt{\pi/2}H\) and
+\(A_*=(12/\pi)K³(2\sqrt\pi\,H+\sqrt{3\pi}\,U)\).
+Then \(|W+u|\le KW\), \(M\le K\), \(S\le K³\),
+and the original density obeys
+\(\|\rho\|_\infty\le2\sqrt\pi K³H\),
+\(\|\rho\|_{L¹(\mathbb R³)}\le4π\sqrt{3π}\,K³U\).
+Consequently the *complete original quartic nonlocal Hartree difference* has
+\[
+\begin{aligned}
+\|(1+r²)\partial_r[\mathcal N_H(W+u)-\mathcal N_H(W)]\|_2
+&\le(24C_{A2}K^6+9K²+18K)U+9K²H\\
+&\quad + A_*(3\sqrt\pi/4+3K²H+6KU),\\
+\|\mathcal N_H(W+u)-\mathcal N_H(W)\|_2
+&\le A_*K²(\sqrt{\pi/2}+U)+9K²U.
+\end{aligned}
+\]
+Source: [original full-quartic A2 paper derivation and proof of field-only reduction](HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md).
+External published analytic input only (Hytönen 2012 weighted A2 theorem), no new axiom.
+**Critical still open:** prove PDE-derived \(U(s)+H(s)\) time-positive
+and Lipschitz for *true source-selected four-region* field, with full
+local Laplacian/time/moving-cutoff residual and Hartree projected
+Hamiltonian stable inverse and physical orbit.
+**Not a Lean compiler certification nor §2.13 acceptance. 11/13.**
+
+### 10 November — successful strict selected backward-flat-overlap region CI
+
+After inspecting original failing run 42798983960 job 129771323988,
+four error messages in
+\`ActualHartreeSameSourceBackwardFlatOverlap.lean\`
+at lines 86,93,103,115 were exactly \`dsimp made no progress\`
+under strict \`warningAsError\`. Removed those four redundant
+\`dsimp\` tactics in commit \`a500babe1a2170934b9716e793a9a37248522806\`.
+The automatically triggered replacement **CI 42800933161**,
+job **129777931815**, **strict Success**,
+artifact **13757271636**, compiled exact
+\`HBL.TypeIIDynamicSelection.actual_Hartree_same_source_backward_flat_overlap_regions\`
+with \`lake env lean --trust=0 -DwarningAsError=true\`,
+exact \`#check\`, and exact transitive \`#print axioms\`
+\`['propext','Classical.choice','Quot.sound']\`.
+This is the **physical same-source flat-overlap support
+and plateau identity**, NOT an \(H^1\) residual budget,
+nonlinear source smallness, moving Lipschitz or PDE orbit.
+It is an auxiliary environment only, and does **not**
+increase the original **11/13 (84.62%)** count.
