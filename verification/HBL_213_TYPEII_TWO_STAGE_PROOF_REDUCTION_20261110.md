@@ -619,3 +619,35 @@ on the source-selected moving Fredholm/Kummer field
 and its time/parameter derivatives, plus the full coupled
 Hamiltonian projected inverse. There is no new strict Lean
 nonlocal Sobolev theorem or acceptance: **11/13**.
+
+
+## 11. Weighted source regularity is not supplied by C² gluing
+
+The true original Hartree/Kummer spectral equation has
+\(w''+p w'+qw=F-\delta u_0\), and the original scaled
+operator on the flat plateau has
+\(\mathcal K_a v=a^{-2}(F-\delta u_0)(y/a)\).
+Current \(F\in C^0\) is insufficient for a Morawetz-dual
+weighted \(H^1\) source: choose a compactly supported
+continuous \(F=\psi|r-r_*|^{1/4}\), which has
+\(F'\notin L²_{\rm loc}\); \(u_0'\in L²_{\rm loc}\)
+does not cancel it. The inner Fredholm forcing is only
+weighted \(L²\), too. A successful \(C²\) endpoint
+repair does not make \(F'\) exist or small.
+For actual \(F\in H^1\), the exact frozen
+Kummer source derivative scales as
+\(\|(1+y²)(\mathcal K_a v)'\|_{L²(aJ)}
+=a^{-5/2}\|(1+a²r²)(F'-\delta u_0')\|_{L²(J)}
+\le a^{-1/2}\|(1+r²)(F'-\delta u_0')\|_{L²(J)}\)
+when \(a\ge1\). This is a useful correct scaling identity,
+not a derived time gain.
+
+To shorten the *actual* proof rather than increase auxiliary
+declarations, next derive this \(F'\) bound for the uniquely
+selected same-orbit quartic physical Hartree source, together
+with the inner forcing gradients and all moving interfaces,
+or prove a real Hartree continuous-spectrum smoothing inverse
+using a weaker source norm. Without one of those producers,
+no §2.13 acceptance is justified. Detail:
+[the source-regularity audit](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md).
+**11/13 unchanged**.
