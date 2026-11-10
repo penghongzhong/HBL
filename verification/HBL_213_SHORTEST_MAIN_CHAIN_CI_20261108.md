@@ -1817,3 +1817,17 @@ not a certified **global four-region** time gain.
 **Formal original revised environment count unchanged:
 11/13 (84.62%).** Neither §2.13 nor the final
 dynamic Type-II Hartree theorem has been claimed proved.
+
+
+**Source-code dependency diagnosis:** The existing
+ActualHartreePhysicalFiniteProfile.lean "finite recursion"
+still requires as **inputs** an abstract list of
+ActualHartreeLayerPacket instances and the positive
+hstep inequality; ActualHartreePacketCertified includes
+only the tautological tangent field equation
+Q.tangent = Q.tangent. This file is a conditional consumer,
+not the original-Hartree PDE producer, and cannot close
+the genuine original §2.13 by adding further helper
+theorem environments. The precise producer or a
+proved projected-energy bootstrap must come first.
+
