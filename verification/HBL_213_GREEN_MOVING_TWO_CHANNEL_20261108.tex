@@ -7838,4 +7838,56 @@ establish the projected Kato inverse, or construct a PDE orbit.
 The calculation is on paper, not a new Lean axiom, certificate,
 or accepted original environment. The strict count is \(11/13\).
 
+
+\paragraph{Same-source curvature mismatch from the original, unshifted PDE.}
+The actual inner classical Hartree response and the \emph{unshifted}
+spectral Kummer PDE, both already available as source-faithful Lean
+identities, give a more useful producer for the mismatch
+\(e=u-v\) on the legitimate backward shell \(I=[L/2,L]\).
+For the exact moment-locked source, put
+\[
+ u=U_{\mathrm{re}}+iU_{\mathrm{im}},\qquad
+ U_{\mathrm{re}}=q_\omega/y,\quad U_{\mathrm{im}}=q_b/y,
+ \quad S_{\mathrm{re}}=\chi_R\,\mathrm{actualMomentLockedCore},
+ \quad S_{\mathrm{im}}=\chi_R\,\mathrm{actualMomentLockedScaleProfile}.
+\]
+The original Hartree inner Hessian equations yield
+\[
+ u''+\frac2y u'
+ =-S_{\mathrm{re}}-iS_{\mathrm{im}}
+   -9W^4U_{\mathrm{re}}-3iW^4U_{\mathrm{im}}
+   -4W^3\mathcal I(W^3U_{\mathrm{re}}).
+\]
+The actual spectral Kummer continuation \(v=w(y/a)\)
+satisfies the \emph{unshifted} original physical equation
+\[
+ v''+\frac2y v'=
+ a^{-2}\{F(y/a)-\delta u_0(y/a)\}
+ -a^{-2}\{iyv'/2+c_0v\},
+\]
+where \(u_0\) is the genuine uncorrected Cramer Green
+value and \(c_0=\mathrm{frozenZeroCoeff}(\mu,\theta)\).
+Therefore
+\[
+\begin{aligned}
+ e''={}&-\frac2y e'-S_{\mathrm{re}}-iS_{\mathrm{im}}
+ -9W^4U_{\mathrm{re}}-3iW^4U_{\mathrm{im}}
+ -4W^3\mathcal I(W^3U_{\mathrm{re}})\\
+ &-a^{-2}\{F(y/a)-\delta u_0(y/a)\}
+ +a^{-2}\{iyv'/2+c_0v\}.
+\end{aligned}
+\]
+In particular the real source retains the
+\emph{first-order} spectral defect \(-\delta u_0\):
+the shifted quadratic spectral residual does not erase
+it from the original Hartree PDE. Taking the \(L^2(I)\)
+norm now reduces the genuine second-derivative
+mismatch budget to precisely the displayed original
+physical source terms, including the true nonlocal
+integral and all moving coefficients. Their
+actual time decay and parameter Lipschitz remain
+unproved. No independent bound for \(e''\) or
+new blowup rate has been inserted. Original strict
+acceptance remains \(11/13\).
+
 \end{document}
