@@ -1,4 +1,4 @@
-import HBL.TypeIIDynamicSelection.ActualHartreeOnePhysicalMovingGreenJoint
+import HBL.TypeIIDynamicSelection.ActualHartreeOnePhysicalGreenJointFromDerivative
 import HBL.TypeIIDynamicSelection.ActualHartreeTrueMovingSelectedRegularGreenDerivative
 import Mathlib.Tactic
 
@@ -8,8 +8,10 @@ import Mathlib.Tactic
 This connects the genuine Cramer-selected nonlocal Hartree source derivative
 and the original slow-inner moving endpoint. The fixed-endpoint source
 derivative is now a theorem output, rather than an independent hypothesis.
-The time-Lipschitz bound on the moving sliver and integrable derivative
-majorants are explicitly assumed; no full-PDE decay or blowup rate follows.
+The moving-slit density Lipschitz inequality is also a theorem output,
+via the physical adjusted-source time derivative and Wronskian MVT.
+The original derivative majorants, uniform source time-derivative norm,
+and frozen-Kummer multiplier are visible inputs, not PDE rate conclusions.
 -/
 
 noncomputable section
@@ -28,7 +30,7 @@ theorem actual_Hartree_one_physical_selected_Green_joint_derivative_from_origina
     (ell a c : ℝ → ℝ) (z : ℝ → ℝ → ℂ)
     (b w Z bdot wdot Zdot : ℝ → ℂ)
     (Fdot Sdot Pdot : ℝ → ℝ → ℂ)
-    (s ellDot aDot C : ℝ)
+    (s ellDot aDot CK D : ℝ)
     (T : Set ℝ) (bound : ℝ → ℝ) (hT : T ∈ 𝓝 s)
     (hEll : HasDerivAt ell ellDot s)
     (hA : HasDerivAt a aDot s)
@@ -101,15 +103,21 @@ theorem actual_Hartree_one_physical_selected_Green_joint_derivative_from_origina
         (originGreenSourceB K
           (actualHartreeOnePhysicalMovingGreenSource a ell c z b w Z s))
         volume (actualHartreeOnePhysicalMovingGreenLower ell a s) hi)
-    (hLip : ∀ t ∈ T,
+    (hRatio : ∀ t ∈ T,
       ∀ x ∈ uIoc
         (actualHartreeOnePhysicalMovingGreenLower ell a t)
         (actualHartreeOnePhysicalMovingGreenLower ell a s),
-      ‖originGreenSourceB K
-        (actualHartreeOnePhysicalMovingGreenSource a ell c z b w Z t) x -
-        originGreenSourceB K
-        (actualHartreeOnePhysicalMovingGreenSource a ell c z b w Z s) x‖ ≤
-          C * |t-s|) :
+      ‖originPhysicalValue K.y x / originGreenWronskian K x‖ ≤ CK)
+    (hSourceTime : ∀ t ∈ T,
+      ∀ x ∈ uIoc
+        (actualHartreeOnePhysicalMovingGreenLower ell a t)
+        (actualHartreeOnePhysicalMovingGreenLower ell a s),
+      ∀ τ ∈ Icc (min s t) (max s t),
+        ∃ d : ℂ,
+          HasDerivAt
+            (fun u => actualHartreeTrueMovingAdjustedSource
+              a ell c z b w Z u x) d τ ∧
+          ‖d‖ ≤ D) :
     HasDerivAt
       (fun t => originGreenCoeffB K
         (actualHartreeOnePhysicalMovingGreenLower ell a t)
@@ -130,9 +138,9 @@ theorem actual_Hartree_one_physical_selected_Green_joint_derivative_from_origina
       a ell c z b w Z bdot wdot Zdot Fdot Sdot Pdot
       T bound hT hHi haT hb hw hZ hColumns hDet
       hPhysicalDeriv hMeas hSourceInt hDotMeas hBound hBoundInt
-  exact actual_Hartree_one_physical_selected_Green_joint_time_derivative
-    K hBasis hlohi ell a c z b w Z s ellDot aDot C
+  exact actual_Hartree_one_physical_Green_joint_from_source_derivative
+    K hBasis hlohi ell a c z b w Z s ellDot aDot CK D
     T hT hEll hA hEllPos ha hr0 hFcont
-    hMovingInt hLip _ hSource
+    hMovingInt hRatio hSourceTime _ hSource
 
 end HBL.TypeIIDynamicSelection
