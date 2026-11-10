@@ -10032,4 +10032,64 @@ No new Lean theorem or original-environment acceptance is claimed:
 the tally remains $11/13$.
 % END HBL_C2_PATCH_SHARP_WEIGHTED_TRACE_OBSTRUCTION_20261110
 
+
+% BEGIN HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110
+\medskip
+\noindent\textbf{Exact radial zero-energy Fredholm reduction for the original Hartree phase Hessian.}
+The imaginary linearization of the actual quartic inverse-square
+Hartree nonlinearity at \(W=(1+r^2)^{-1/2}\) is
+\(L_-=-\Delta-3W^4\).  Since \(-\Delta W=3W^5\),
+for compactly supported radial smooth \(g=Wv\) one has
+\[
+ \int_{\mathbb R^3}(|\nabla g|^2-3W^4|g|^2)\,dx
+ =\int_{\mathbb R^3}W^2|\nabla(g/W)|^2\,dx
+ \ge0.
+\]
+The exact radial operator factorization is
+\[
+ L_-(Wv)
+ =-\frac{1}{r^2W}\partial_r(r^2W^2v_r).
+\]
+For compactly supported smooth radial forcing \(F\), any origin-regular
+solution of \(L_-g=F\) therefore satisfies
+\[
+ \partial_r(g/W)
+ =-\frac{1+r^2}{r^2}\int_0^r t^2W(t)F(t)\,dt.
+\]
+It belongs to \(\dot H^1(\mathbb R^3)\) only if the
+\emph{actual phase Fredholm moment} vanishes:
+\[
+ \mathcal M_-(F):=\int_0^\infty r^2W(r)F(r)\,dr=0.
+\]
+Indeed, otherwise the exterior solution tends to the nonzero constant
+\(-\mathcal M_-(F)\), contradicting the \(\dot H^1\hookrightarrow L^6\)
+embedding. Conversely, if \(F\) is supported in \(r<R\) and
+\(\mathcal M_-(F)=0\), the explicit original-channel inverse is
+\[
+ g_F(r)=W(r)\int_r^R
+       \frac{1+s^2}{s^2}
+       \left(\int_0^s t^2W(t)F(t)\,dt\right)\,ds
+ \quad(0<r<R),\qquad
+ g_F(r)=0\quad(r\ge R).
+\]
+It is regular and compactly supported; all regular radial
+\(\dot H^1\) solutions are \(g_F+cW\), since the independent
+homogeneous solution \(W(r)(r-r^{-1})\) is singular at the origin.
+Here \(W\in\dot H^1\setminus L^2\), so the phase channel has a
+zero-energy resonance and no \(L^2\) zero mode.
+
+This is a \emph{paper-level} exact original Hartree phase-channel
+Fredholm alternative, not a new Lean-compiled declaration.
+The current four-region source has not been shown to be compact,
+to satisfy \(\mathcal M_-(F)=0\), or to obey the necessary
+time-positive and moving-parameter estimates. The coupled generator
+also contains the genuinely nonlocal real block
+\(L_+=-\Delta-9W^4-4W^3\mathcal I(W^3\cdot)\);
+its positive-energy spectral/Kato control remains open.
+Full derivation:
+\texttt{verification/HBL\_213\_EXACT\_PHASE\_RESONANCE\_FREDHOLM\_GATE\_20261110.md}.
+No original-environment acceptance follows; the retained tally is
+\(11/13\).
+% END HBL_ACTUAL_PHASE_FREDHOLM_ZERO_ENERGY_20261110
+
 \end{document}
