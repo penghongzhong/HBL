@@ -7416,4 +7416,65 @@ This note is a paper counterexample, not a Lean theorem
 or a positive-order PDE estimate. The original revised
 environment count remains \(11/13\).
 
+
+\paragraph{An explicit dual test norm retaining the nonlocal Hartree Hessian.}
+The fixed-annulus counterexample above can be sharpened into a usable,
+though possibly stronger than necessary, sufficient source criterion.
+Let \(\mathcal If=\kappa_{\mathrm H}(|x|^{-2}*f)\),
+\(v=rg\), and take real compactly supported smooth radial \(g,F\).
+With \(L_-=-\Delta-3W^4\) and
+\(L_+g=-\Delta g-9W^4g-4W^3\mathcal I(W^3g)\),
+radial integration by parts and the symmetry of the genuine Riesz
+operator give
+\[
+\begin{aligned}
+ \frac{(L_-g,F)_{L^2(\mathbb R^3)}}{4\pi}
+ &=\int_0^\infty
+     \bigl[v'rF'-v(F'+3rW^4F)\bigr]\,dr,\\
+ \frac{(L_+g,F)_{L^2(\mathbb R^3)}}{4\pi}
+ &=\int_0^\infty
+   \bigl[v'rF'-v\{F'+9rW^4F+
+                4rW^3\mathcal I(W^3F)\}\bigr]\,dr.
+\end{aligned}
+\]
+Indeed \(r^2g'=rv'-v\), and
+\((\mathcal I(W^3g),W^3F)=(g,W^3\mathcal I(W^3F))\).
+For
+\[
+\|g\|_{\mathrm{Mor},0}^{2}
+=\int_0^\infty
+\left(\frac{|v'|^2}{\langle r\rangle^2}
+      +\frac{|v|^2}{\langle r\rangle^4}\right)\,dr
+\]
+define
+\[
+\begin{aligned}
+\mathcal D_-(F)
+ &=\|\langle r\rangle rF'\|_{L^2(dr)}
+  +\|\langle r\rangle^2(F'+3rW^4F)\|_{L^2(dr)},\\
+\mathcal D_+(F)
+ &=\|\langle r\rangle rF'\|_{L^2(dr)}
+  +\|\langle r\rangle^2(F'+9rW^4F+
+             4rW^3\mathcal I(W^3F))\|_{L^2(dr)}.
+\end{aligned}
+\]
+Cauchy--Schwarz proves
+\[
+ |(L_\pm g,F)_{L^2(\mathbb R^3)}|
+ \le 4\pi\|g\|_{\mathrm{Mor},0}\mathcal D_\pm(F).
+\]
+This is an exact \emph{paper calculation} for both true Hartree
+Hessian blocks; it has not been separately Lean-formalized.
+For the actual projected moving four-piece residual,
+\(\mathcal D_-(F_1(s))+\mathcal D_+(F_2(s))
+\lesssim s^{-15/8}\), or an appropriately weaker
+homogeneous-adjoint-smoothing dual bound, remains
+\emph{unproved}. Moving-cutoff differentiation and the
+nonlocal mixed interactions must be estimated at their
+physical scales. Even this source estimate would still
+require Hartree-specific spectral exclusion and projected
+homogeneous Kato smoothing, plus parameter Lipschitz and
+a genuine PDE orbit. No original numbered environment or
+strict Lean acceptance has been added; the count is \(11/13\).
+
 \end{document}
