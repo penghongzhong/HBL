@@ -50,7 +50,6 @@ theorem actual_Hartree_spectral_second_jet_from_same_original_source
   have hSource :=
     actual_Hartree_matched_spectral_original_unshifted_source
       K r0 B hr0 hOrder hB F hF U DU delta B hBDomain
-  dsimp only at hSource
   calc
     deriv (deriv w) B =
         (deriv (deriv w) B +
