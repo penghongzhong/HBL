@@ -7746,4 +7746,46 @@ remain intermediate constructions; neither closes
 the source norm or original §2.13. Strict original
 acceptance remains \(11/13\).
 
+
+\paragraph{Exact nonlocal Hartree derivative bound, with its visible inner-radius cost.}
+For the true inverse-square Riesz convolution with
+\(\kappa_{\mathrm H}=3/\pi^2\), using the Euclidean Fourier convention
+\(\widehat f(\xi)=\int e^{-ix\cdot\xi}f(x)\,dx\) yields
+\[
+ \widehat{\nabla\mathcal I f}(\xi)
+   =6i\frac{\xi}{|\xi|}\widehat f(\xi),\qquad
+ \|\nabla\mathcal I f\|_{L^2(\mathbb R^3)}
+   =6\|f\|_{L^2(\mathbb R^3)}.
+\]
+The exact source density \(f=W^3F\) is in physical
+\(L^2(\mathbb R^3)\) whenever the radial source
+\(F\in L^2(dr)\), since
+\(\sup_{r>0}rW(r)^3=2/(3\sqrt3)\).
+For each \emph{explicit} positive physical radius \(R\),
+\[
+ \|\partial_r\mathcal I(W^3F)\|_{L^2((R,\infty),dr)}
+   \le\frac4{\sqrt3R}\|F\|_{L^2(dr)}.
+\]
+Writing \(N(F)=W^3\mathcal I(W^3F)\), the product rule
+and the earlier exact Hilbert--Schmidt upper bound give
+\[
+ \begin{split}
+ \|(1+r^2)N(F)\|_{L^2((R,\infty),dr)}
+ &\le3\|F\|_{L^2(dr)},\\
+ \|(1+r^2)\partial_rN(F)\|_{L^2((R,\infty),dr)}
+ &\le\left(\frac4{\sqrt3R}+2\sqrt3\right)
+       \|F\|_{L^2(dr)}.
+ \end{split}
+\]
+Thus this \emph{genuine} nonlocal real-Hartree Hessian
+component has an explicit outer-annulus weighted \(H^1\)
+bound without an independently postulated Riesz-gradient
+envelope. The \(R^{-1}\) loss is retained, not concealed
+in a constant: the inner region and moving small-radius
+regimes need additional argument. This does not bound
+the whole four-region time-moving quartic Hartree residual,
+establish the projected Kato inverse, or construct a PDE orbit.
+The calculation is on paper, not a new Lean axiom, certificate,
+or accepted original environment. The strict count is \(11/13\).
+
 \end{document}
