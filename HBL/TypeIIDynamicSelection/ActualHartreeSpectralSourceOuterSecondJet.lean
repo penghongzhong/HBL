@@ -160,8 +160,8 @@ theorem actual_Hartree_spectral_same_source_outer_splice_C2
       deriv u0 x - deriv w1 x
     exact ((hU x hx).1.sub (hV x hx).1).deriv
   have hW2 : HasDerivAt (deriv w) (deriv (deriv w) B) B := by
-    have h := ((hU B hBdomain).2.1.sub (hV B hBdomain).2.1)
-      .congr_of_eventuallyEq hNearDeriv
+    have hdiff := (hU B hBdomain).2.1.sub (hV B hBdomain).2.1
+    have h := hdiff.congr_of_eventuallyEq hNearDeriv
     exact h.differentiableAt.hasDerivAt
   have hJ : deriv (deriv w) B = j :=
     actual_Hartree_spectral_second_jet_from_same_original_source
