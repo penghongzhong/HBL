@@ -3655,3 +3655,36 @@ time-positive/Lipschitz source bound. §2.13, nonlinear physical orbit,
 finite-profile recurrence and PDE-derived Type-II rate remain open.
 **Original revised manuscript environments: 11/13 (84.62%).**
 <!-- END HBL_EXACT_MOVING_CONFORMAL_HARTREE_DILATION_20261110 -->
+
+<!-- HBL_BARE_DILATION_PHASE_RESONANCE_MOMENT_20261110 -->
+### Exact divergence of bare moving bubble's ORIGINAL Hartree phase Fredholm moment (paper; not CI)
+
+With \(W(r)=(1+r^2)^{-1/2}\),
+\(\Lambda W=(1-r^2)/[2(1+r^2)^{3/2}]\), the
+original physical phase-zero-resonance pairing is **exactly**
+\[
+\int_0^R r^2W\Lambda W\,dr
+=\arctan R-\frac R2-\frac{R}{2(1+R^2)}
+=-\frac R2+\frac\pi2+O(R^{-1}).
+\]
+Thus the untruncated scaling source is not even in the
+weighted \(L^2\) domain of the previously constructed
+projected stationary phase inverse, and its Fredholm moment
+diverges linearly. In the exact moving nonlinear conformal
+equation, the constant bubble \(\Phi=1\) produces defect
+\(-\vartheta_s+ib\xi_4/2\), where \(b=\lambda_s/\lambda\);
+real phase modulation alone cannot cancel this imaginary
+spatial transport. **This is an explicit obstruction to a
+bare-bubble stationary inverse shortcut, not to a true
+corrected Hartree orbit.** The complete same-orbit
+Fredholm/Green/outer-radiation source must *produce* the
+required cancellation and suitable dual source decay, without
+assuming its orthogonality or time order.
+
+The exact primitive and the full nonlinear scaling identity
+are in [the moving conformal analysis](HBL_213_EXACT_MOVING_CONFORMAL_DILATION_COMMUTATOR_20261110.md),
+also inserted in [the paper](HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex).
+No Lean theorem was created or accepted for the new calculation;
+original revised tally remains **11/13 (84.62%)**.
+<!-- END HBL_BARE_DILATION_PHASE_RESONANCE_MOMENT_20261110 -->
+
