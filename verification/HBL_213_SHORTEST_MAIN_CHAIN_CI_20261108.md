@@ -1543,3 +1543,33 @@ The same TRUE quartic Riesz source, same two real Cramer-selected speed channels
 - ActualHartreeTrueSingularGreenFrobeniusMovingCross.lean, corrected CI [42733767288](https://github.com/penghongzhong/HBL/actions/runs/42733767288), **STRICT SUCCESS**, original job 129557918186, artifact 13726343061, original source SHA dc6dddddc6359aa93a3cbbd7f3b4f24683f87bbe. The decoded job log confirms precise `#check` of `HBL.TypeIIDynamicSelection.actual_Hartree_true_moving_singular_Green_cross_Frobenius_radius_gain`, exact `#print axioms` limited to `propext`, `Classical.choice`, `Quot.sound`, pinned compiler/Mathlib and `--trust=0 -DwarningAsError=true`. It proves the *same selected-source*, actual-moving-slit mixed term bound with (R^2) Frobenius gain under explicit source-time differentiability majorant, not an unconditional global PDE time gain. It targets the true selected source's moving-slit cross estimate with an additional physical R² factor, requiring the original Riesz time-derivative majorant rather than a postulated time decay order.
 
 None of these static/local-in-time source-derivative interfaces supplies the four-region nonlocal PDE residual's positive time order, projected oscillatory time inversion, true parameter Lipschitz or dynamical II-Type rate. **Original main acceptance stays 11/13.** Do not count pending or auxiliary theorems as original environments.
+
+
+### 10 Nov 2026 — source-time weight cancels the formal Frobenius \(r^2\) gain (conditional analytic audit)
+
+The strictly accepted original Green density estimate [42733766825](https://github.com/penghongzhong/HBL/actions/runs/42733766825) is
+\[
+\left|X(r)/W(r)\right|\le C_{\rm Frob}(R)r^2,
+\qquad C_{\rm Frob}(R)=1+(D+1)GR^2,\quad 0<r\le R.
+\]
+The genuine-source moving-slit cross theorem [42733767288](https://github.com/penghongzhong/HBL/actions/runs/42733767288) deduces the *additional* \(R^2\) only under its explicit `hSourceTime` hypothesis
+\(\|\partial_t F_{\rm adj}(t,r)\|\le E\), **uniform in the moving radius**. This is **not** supplied by the previous original-Hartree source envelope \(\|F_{\rm adj}(t,r)\|\lesssim Q(t)r^{-2}\), which does not control a time derivative at all.
+
+A useful worst-case conditional power audit is: suppose one later proves only
+\(\|\partial_tF_{\rm adj}(t,r)\|\le E(t)r^{-2}\). Then the fixed-basis density derivative satisfies only
+\[
+\bigl|\partial_t\{X(r)F_{\rm adj}(t,r)/W(r)\}\bigr|
+\le C_{\rm Frob}(R)E(t)
+\quad (r>0),
+\]
+and integration over the true moving slit gives
+\[
+|\Delta_{s,t}A|\le
+ C_{\rm Frob}(R)\bigl(\sup_{\tau\in[s,t]} E(\tau)\bigr)
+ |t-s|\,|r_0(t)-r_0(s)|.
+\]
+**No extra \(R^2\) remains**: the \(r^2\) Wronskian/Frobenius gain is spent cancelling the potential \(r^{-2}\) time-source singularity. This is a power-counting implication, not a proved estimate for the actual physical time derivative, and is not a contradiction to the already accepted conditional theorem.
+
+For a genuine additional \(R^\eta\) gain, \(\eta>0\), the source-to-selector PDE bridge must prove a correspondingly sharper *true differentiated adjusted source*, e.g.
+\(\|\partial_tF_{\rm adj}(t,r)\|\lesssim E(t)r^{-2+\eta}\),
+or identify an exact oscillatory/projection cancellation **before** taking absolute values. The genuine differentiated three-Riesz integrals, moving basis, and two Cramer-speed terms must all enter this estimate. In particular the source magnitude envelope or fixed-radius `HasDerivAt` theorem cannot be used as an unproved uniform `hSourceTime` bound. No formal theorem or revised original-paper environment is added: **11/13**.
