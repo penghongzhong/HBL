@@ -9394,4 +9394,51 @@ and its precise hypotheses are in
 \texttt{verification/HBL\_213\_FINITE\_NONLOCAL\_HARTREE\_MIXED\_TERMS\_SHORT\_CHAIN\_20261110.md}.
 No change to strict original acceptance: \(11/13\).
 
+
+\paragraph{The exact moving Hartree nonlinear-source time chain.}
+Let \(\mathscr R(u)=\mathcal N_{\rm H}(W+u)
+-\mathcal N_{\rm H}(W)\) and
+\(\mathscr R_\lambda(s,r)
+=\lambda(s)^{-5/2}\mathscr R(u(s))(r/\lambda(s))\).
+For \(u_s\) in the actual radial \(X\)-space and
+a differentiable \(\lambda(s)>0\),
+\[
+ \partial_s\mathscr R_\lambda(s,r)
+ =\lambda^{-5/2}
+ \left[
+ D\mathscr R(u)[u_s]
+ -\frac{\lambda_s}{\lambda}
+ \left(\frac52\mathscr R(u)+
+       \rho\partial_\rho\mathscr R(u)\right)
+ \right]_{\rho=r/\lambda}.
+\]
+The derivative retains both original Riesz interactions:
+\[
+ D\mathcal N_{\rm H}(V)[h]
+ =\mathcal I(4|V|^2\operatorname{Re}(\bar Vh))\,|V|^2V
+ +\mathcal I(|V|^4)
+  (|V|^2h+2\operatorname{Re}(\bar Vh)V).
+\]
+With the genuine \(X\to Y\) local Lipschitz
+estimate, \(2\rho\le1+\rho^2\), and the
+critical radial \(L^2(dr)\) Jacobian, the exact
+norm budget is
+\[
+ \|\partial_s\mathscr R_\lambda\|_{L^2(dr)}
+ \le\lambda^{-2}\left[
+ C_R\|u_s\|_X+
+ \left|\frac{\lambda_s}{\lambda}\right|
+ \left(\frac52\|\mathscr R(u)\|_2+
+       \frac12\|(1+\rho^2)\mathscr R(u)'\|_2\right)
+ \right].
+\]
+This identifies which true moving scale and
+field time derivatives the Hartree PDE must
+produce. Neither \(u_s\), \(\lambda_s/\lambda\),
+a positive time order, nor a projected inverse
+has been established for the physical selected
+four-region orbit. This paper identity introduces
+no new axiom or original accepted environment;
+the count remains \(11/13\).
+
 \end{document}
