@@ -6551,11 +6551,65 @@ is checked against the two actual slow-inner radii in
 \texttt{ActualHartreeMovingSlitCramerScaleVariation.lean}; it
 derives the shell inclusion from the primitive variation and margin
 inequalities, not from an assumed shell inclusion. Its dedicated
-strict CI was triggered as \texttt{42756618784} and remains
-\emph{pending} at this manuscript checkpoint. No original-environment
+strict CI \texttt{42756618784} completed with \emph{Success}
+(10 November 2026, 04:45 UTC), original job
+\texttt{129632373174}, artifact \texttt{13736666241}.
+The raw job log confirms the exact theorem type, trust-zero
+warning-as-error compilation, pinned Mathlib and the transitive
+axioms \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}. No original-environment
 count is increased. Even after this geometric step, one must obtain
 the physical source/moment derivative time budget, moving-basis
 bounds, genuine full nonlinear residual positive gain, parameter
 Lipschitz bounds and finite PDE recursion before §2.13 can close.
+
+
+
+\medskip
+\noindent\textbf{Local moving-slit inclusion needs no quantitative
+scale-variation assumption (new proof candidate).}
+The preceding finite-$V_{s,t}$ criterion is useful on a large interval
+but is unnecessarily strong for differentiating the Green coefficient
+locally. Fix a physical slice $s_0$ with
+\[
+ a(s_0)>0,\qquad 0<\ell(s_0)<1,\qquad
+ r_-(s_0)=\frac{\ell(s_0)^{-1/16}}{a(s_0)}<B.
+\]
+Assume only that $a,\ell$ are continuous at $s_0$.
+The strict physical radius gap
+\[
+ \frac{1}{a(s_0)}<r_-(s_0)<B
+\]
+allows a middle radius $m$ with
+$1/a(s_0)<m<r_-(s_0)$. By continuity, a sufficiently
+small open interval $J=(s_-,s_+)$ about $s_0$ satisfies
+\[
+ \frac{1}{a(\tau)}<m<r_-(t)<B
+ \qquad (t,\tau\in J).
+\]
+Consequently, every $t\in J$, every intermediate
+$\tau\in[\min(s_0,t),\max(s_0,t)]$ and every radius
+$x$ between the \emph{actual} moving endpoints satisfy
+\[
+ \boxed{\quad \frac{1}{a(\tau)}
+ \le x\le B.\quad}
+\]
+No $V_{s,t}$, no prescribed Type--II exponent and no separate
+source envelope are inputs to this \emph{local geometric} argument.
+The exact original Hartree radii and real-Cramer source shell
+are used in
+\texttt{ActualHartreeMovingSlitCramerScaleVariation.lean},
+theorems
+\texttt{actual\_Hartree\_original\_Cramer\_shell\_local\_from\_continuous\_orbit}
+and
+\texttt{actual\_Hartree\_original\_Cramer\_shell\_local\_segment\_from\_continuous\_orbit}.
+Both are submitted for independent pinned trust-zero
+\texttt{\#check}/\texttt{\#print axioms} CI; at this checkpoint
+CI \texttt{42763633557} is \emph{pending}, not yet strict
+accepted. This reduces the local moving-slit \emph{domain} question
+to ordinary physical parameter continuity, but the
+original time-weighted source derivative and its
+nonlinear four-region remainder bound remain unproved.
+The revised original manuscript acceptance remains
+\textbf{11/13}; neither local geometry declaration increases it.
 
 \end{document}
