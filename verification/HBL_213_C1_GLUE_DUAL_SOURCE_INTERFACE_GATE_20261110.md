@@ -397,3 +397,101 @@ require the full actual Hartree projected inverse,
 nonlocal interactions, and modulation/parameter bounds.
 This does not prove revised §2.13, and the
 **original acceptance remains 11/13**.
+
+
+## 6. A deeper independent obstruction: C² matching alone does not produce \(H^1\) forcing
+
+The **actual code contract**, not an abstract Taylor model, is
+\`actual_Hartree_matched_spectral_original_unshifted_source\`
+in \`ActualHartreeMatchedSpectralOriginalPDEMismatch.lean\`.
+For the same real source \(F\), original selected Cramer field \(u_0\),
+and spectral-corrected field \(w\), it proves on \(0<r<\mathrm{scale}\)
+\[
+ w''(r)+p(r)w'(r)+q\,w(r)=F(r)-\delta\,u_0(r),\quad
+ p(r)=\mathrm{frozenFirstCoeff}(r),\quad
+ q=\mathrm{frozenZeroCoeff}(\mu,\theta).
+\tag{R1}
+\]
+The **original unshifted** right hand side is
+\(F-\delta u_0\), *not* merely the shifted quadratic
+\(-\delta u_1\). The current Lean source hypotheses demand
+\(F\in C^0_{\mathrm{loc}}((0,\mathrm{scale}))\);
+they do not demand \(F\in H^1_{\mathrm{loc}}\).
+
+On an open interval \(J\Subset(0,\mathrm{scale})\) where the
+source-selected flat-overlap construction equals the genuine
+spectral Kummer continuation, \(v(y)=w(y/a)\), the *actual
+scaled Kummer operator* has the identity
+\[
+ \mathcal K_a v(y)
+   =a^{-2}(F(y/a)-\delta u_0(y/a)).
+\tag{R2}
+\]
+This identity is already a Lean theorem,
+\`actual_Hartree_matched_spectral_original_physical_source\`.
+**Conditional on** \(F\in H^1(J)\) and the true \(u_0\in H^1(J)\),
+the weak derivative is exactly
+\[
+ \partial_y(\mathcal K_a v)(y)
+  =a^{-3}(F'-\delta u_0')(y/a)
+\]
+and the exact change-of-variables formula is
+\[
+ \boxed{
+ \|(1+y^2)\partial_y(\mathcal K_a v)\|_{L^2(aJ)}
+ =a^{-5/2}
+ \|(1+a^2r^2)(F'-\delta u_0')\|_{L^2(J)}.
+ }
+\tag{R3}
+\]
+For \(a\ge1\) this gives the radius-free sufficient upper bound
+\[
+ \|(1+y^2)\partial_y(\mathcal K_a v)\|_{L^2(aJ)}
+ \le a^{-1/2}\|(1+r^2)(F'-\delta u_0')\|_{L^2(J)}.
+\tag{R4}
+\]
+These are **paper calculus identities**; only (R1)–(R2)
+have the cited prior Lean proofs. They do *not* imply
+the physical right-hand norm is bounded at any time rate.
+
+**Explicit insufficiency of the current source regularity:**
+fix \(r_*\in J\), take
+\(F(r)=\psi(r)|r-r_*|^{1/4}\) for a smooth
+\(\psi\in C_c^\infty(J)\) with \(\psi(r_*)\ne0\).
+Then \(F\in C^0(J)\cap L^2(J)\) but
+\[
+ F'(r)\sim\frac14\psi(r_*)
+  \operatorname{sgn}(r-r_*)|r-r_*|^{-3/4},
+ \qquad F'\notin L^2(J).
+\]
+The matched Green \(u_0\) and the corrected \(w\)
+are \(C^2\) from the genuine continuous forcing,
+so \(u_0'\in L^2(J)\). Consequently
+\((F-\delta u_0)'\notin L^2(J)\) and (R2) shows that
+**even on a perfectly smooth flat plateau, with no
+gluing interfaces at all**, the scaled Kummer source
+need not lie in the required weighted \(H^1\)
+spatial source class. Thus neither adding the source-locked
+outer \(C^2\) curvature nor proving a globally \(C^2\) splice
+can establish the Morawetz-dual forcing estimate under
+the current \(C^0\)/weighted-\(L^2\) producer hypotheses.
+
+The inner Fredholm forcing is currently only in
+\`InWeightedL2 (7/4)\`, so the analogous stronger
+derivative producer is also genuinely missing there.
+
+**Smallest noncircular repair**: derive \(F'\) and the
+inner Fredholm source derivatives with quantitatively
+correct *weighted* norms from the SAME original moving
+quartic Hartree source and the unique physical two-real
+channel selection; or replace the Kato-dual space with
+a separately proved projected Hartree smoothing estimate
+that permits these lower regularity sources. A bare
+assumption \(F\in H^1\), an independently inserted time
+power, or the phrase "smooth PDE source" would not
+close original §2.13. The source-locked outer endpoint
+curvature is separately being Lean-tested, but cannot
+by itself eliminate (R1)–(R4)'s quantitative gap.
+
+**Formal original acceptance remains 11/13, no new
+Hartree nonlinear time-order or Type-II orbit.**
