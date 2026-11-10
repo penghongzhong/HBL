@@ -2346,3 +2346,20 @@ local weighted derivative, moving/time Lipschitz, true
 Hamiltonian resolvent/Kato bound, physical orbit and emergent
 Type-II blowup rate stay OPEN.
 **Original revised acceptance 11/13 (84.62%).**
+
+
+**Moving spatial bubble scale (same published A2 producer):**
+For \(W_\lambda(r)=\lambda^{-1/2}W(r/\lambda)\),
+\(N_\lambda(F)=W_\lambda^3\mathcal I(W_\lambda^3F)\),
+the EXACT physical Riesz scaling is
+\(N_\lambda(F)(\lambda\rho)=
+\lambda^{-2}N(F(\lambda\cdot))(\rho)\).
+Thus uniformly for every *PDE-selected* \(\lambda>0\),
+\[
+ \|(\lambda^2+r^2)N_\lambda(F)\|_2\le3\|F\|_2,\quad
+ \|(\lambda^2+r^2)\partial_rN_\lambda(F)\|_2
+ \le(6C_{\rm A2}+2\sqrt3)\lambda^{-1}\|F\|_2.
+\]
+No \(\lambda_s\), Lipschitz source bound, Type-II
+rate or nonlinear orbit is assumed or proved.
+The original **11/13** count is unchanged.
