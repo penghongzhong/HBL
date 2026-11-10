@@ -7291,4 +7291,38 @@ the original physical nonlinear source or
 the revised §2.13.
 Formal original-paper acceptance remains \(11/13\).
 
+
+\medskip
+\noindent\textbf{What can be reused for the new Hartree Kato
+spectral route.}
+The existing original Lean module
+\texttt{HBL/WeightedHartreeBirmanSchwinger.lean}
+already constructs the conjugated symmetric
+integral kernel
+\[
+ K_{\mathrm H}(r,\rho)=8\pi\kappa_{\rm H}
+ W(r)W(\rho)\log\frac{r+\rho}{|r-\rho|},
+\]
+proves its weighted product-\(L^2\) integrability
+and realizes the corresponding nonlocal
+operator as a symmetric, self-adjoint and compact
+operator in its radial Hilbert space.
+Those static results can be reused in the
+Hartree limiting-absorption analysis without
+repeating their kernel estimates. They are
+\emph{not} a uniform matrix-propagator smoothing
+estimate. In particular positive-energy
+limiting resolvents, absence of nonzero
+embedded eigenvalues, threshold resonant
+projections and the actual time-dependent
+physical energy weights remain open.
+The cited October 2026 NLS preprint's
+global Morawetz method itself invokes a
+separate absence-of-embedded-eigenvalue
+result. That same hurdle must be overcome
+specifically for the nonlocal Hartree
+linearization before the proposed \(L_s^2\)
+inverse can be used. No original environment
+is newly accepted by this observation.
+
 \end{document}
