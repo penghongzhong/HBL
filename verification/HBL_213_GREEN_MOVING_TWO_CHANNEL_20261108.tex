@@ -6206,4 +6206,43 @@ the full four-region PDE nor overcome the absolute-Duhamel
 correction recurrence and dynamically selected Type--II rate
 remain to be established. Formal original acceptance is \(11/13\).
 
+
+\medskip
+\noindent\textbf{Conditional source-time weight audit (10 November 2026).}
+The strictly proved Frobenius estimate for the original moving outgoing
+Green density is
+\[
+ \left|\frac{X(r)}{W(r)}\right|
+ \le C_{\mathrm{Frob}}(R)r^2,\qquad
+ C_{\mathrm{Frob}}(R)=1+(D+1)GR^2,\qquad 0<r\le R.
+\]
+The audited mixed Green result with an extra \(R^2\) requires
+\emph{uniform} \(\lvert\partial_t F_{\mathrm{adj}}(t,r)\rvert\le E\)
+on the moving slit. The original weighted source envelope
+\(\lvert F_{\mathrm{adj}}(t,r)\rvert\lesssim Q(t)r^{-2}\)
+does not imply any such derivative bound.
+Indeed, even if an independent original-PDE calculation yielded only
+\(\lvert\partial_t F_{\mathrm{adj}}(t,r)\rvert\le E(t)r^{-2}\),
+the fixed-basis Green density would obey only
+\[
+ \left|\partial_t\left(
+   \frac{X(r)F_{\mathrm{adj}}(t,r)}{W(r)}\right)\right|
+ \le C_{\mathrm{Frob}}(R)E(t).
+\]
+Integrating over the \emph{actual} moving slit gives the conditional bound
+\[
+ |\Delta_{s,t}A|
+ \le C_{\mathrm{Frob}}(R)\sup_{\tau\in[s,t]}E(\tau)\,
+   |t-s|\,|r_0(t)-r_0(s)|,
+\]
+without an additional \(R^2\). Thus the Frobenius radius gain removes
+the possible inverse-radius loss but cannot alone furnish a time-positive
+source estimate. Recovering an \(R^\eta\) gain requires a
+PDE-derived improvement
+\(\lvert\partial_tF_{\mathrm{adj}}\rvert
+\lesssim E(t)r^{-2+\eta}\), \(\eta>0\), or a proved
+oscillatory/compatibility cancellation before absolute values.
+This is a conditional power audit, not an additional Lean-accepted
+theorem, and does not change the original \(11/13\) count.
+
 \end{document}
