@@ -9663,4 +9663,72 @@ acceptance.  The revised count stays \(11/13\).
 
 % END HBL_PHYSICAL_ENERGY_NO_SHELL_LOSS_20261110
 
+
+% BEGIN HBL_ORIGINAL_L2_VOLTERRA_GATE_20261110
+\paragraph{A source-exact \(L^2\)-Volterra alternative to sup-norm parameter transport.}
+For the genuine original radial operator \(K_{a,Q}\), retain the actual
+matched difference \(e\) with \(e(L)=e_y(L)=0\), and put
+\(x=y/L\in J=[1/2,1]\), \(k=L^2/a^2\), \(z=kQ\),
+\(E(x)=e(Lx)\), \(G(x)=L^2(K_{a,Q}e)(Lx)\).
+The radial conjugation \(w=xE\), with \(w(1)=w_x(1)=0\),
+gives exactly
+\[
+w_{xx}+\frac{ikx}{2}w_x+
+\left(z-\frac{ik}{2}\right)w=xG.
+\]
+For \(4(k+|z|)\le1\), backwards integration and
+\(\int_Jx^2dx=7/24\) yield
+\[
+\|w_x\|_\infty\le\sqrt{\frac7{24}}\|G\|_2+
+\left(\frac k4+\frac{|z|}8\right)\|w_x\|_\infty
+\le\sqrt{\frac7{24}}\|G\|_2+\frac1{16}\|w_x\|_\infty.
+\]
+Writing \(C_0=\frac{16}{15}\sqrt{7/24}\), this implies
+\(\|E\|_\infty\le C_0\|G\|_2\),
+\(\|E_x\|_\infty\le4C_0\|G\|_2\). The original equation
+then gives \(C_2=1+\frac{67}{4\sqrt2}C_0<8\) and
+\begin{equation}
+\|e_{yy}\|_{L^2([L/2,L])}
+\le C_2\|K_{a,Q}e\|_{L^2([L/2,L])}.
+\label{eq:hbl-original-l2-volterra-curvature}
+\end{equation}
+There is no loss of a negative power of the physical left radius:
+both sides of \eqref{eq:hbl-original-l2-volterra-curvature}
+carry the identical factor \(L^{-3/2}\) after normalization.
+The right-hand side is the literal same-source difference of
+the existing physical Fredholm and original spectral equations,
+not an independently assumed profile envelope.
+
+For two normalized physical radii the same Volterra argument gives,
+with \(\Delta k=k_1-k_2\), \(\Delta z=z_1-z_2\),
+\[
+\begin{split}
+B_2={}&\|G_1-G_2\|_{L^2(J)}
++\frac{C_0}{\sqrt2}
+(2|\Delta k|+|\Delta z|)\|G_2\|_{L^2(J)},\\
+\|E_1-E_2\|_\infty&\le C_0B_2,\qquad
+\|(E_1-E_2)_x\|_\infty\le4C_0B_2.
+\end{split}
+\]
+The moving source \(G_L(x)=L^2 f(Lx)\) is Lipschitz into
+\(L^2(J)\) if \(f\in H^1([L_-/2,L_+])\):
+\[
+\|G_{L_1}-G_{L_2}\|_2
+\le|L_1-L_2|\left(2\sqrt{L_+}\|f\|_2+
+L_+^{3/2}\|f_y\|_2\right).
+\]
+By contrast, \(H^1\) does not provide moving-radius Lipschitz
+continuity in \(L^\infty(J)\): a local cusp
+\(f(y)=\chi(y)|y-y_0|^\alpha\), \(1/2<\alpha<1\),
+has \(H^1\) regularity but point variation of order
+\(|L_1-L_2|^\alpha\). Consequently the legitimate
+\(L^2\)-source argument avoids an unjustified
+supremum-source parameter upgrade. These are analytic
+paper estimates, not yet strict Lean certificates.
+In particular the true four-region Hartree residual,
+its time-positive PDE order, the projected Hamiltonian inverse,
+a physical orbit and the dynamically produced Type-II rate
+remain unproved. Revised original acceptance is \(11/13\).
+% END HBL_ORIGINAL_L2_VOLTERRA_GATE_20261110
+
 \end{document}
