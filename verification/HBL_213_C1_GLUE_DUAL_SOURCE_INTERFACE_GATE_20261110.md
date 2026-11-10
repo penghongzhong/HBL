@@ -708,3 +708,72 @@ Lipschitz requirements remain additional to this
 radial geometric obstruction.
 
 **The original 11/13 score is unchanged.**
+
+
+## 10. Quantitative source-trace obstruction created by the authentic C² curvature
+
+The strictly checked source-locked curvature equation
+(R1) at \(r=B\) gives
+\[
+ J=F(B)-\delta u_0(B)-p(B)w'(B)-q w(B).
+\tag{T1}
+\]
+It is important **not to infer a bound on \(J\)**
+from the existing \(L^2\)/weighted-\(L^2\) source norms:
+evaluation \(F\mapsto F(B)\) is not continuous
+from \(L^2\) to the scalars, even for smooth \(F\).
+
+Fix \(0<r_0<B<\mathrm{scale}\) and a nonzero
+\(\psi\in C_c^\infty((-1,1))\) with \(\psi(0)=1\).
+Take the entirely smooth, supported source
+\[
+ F_N(r)=N^{1/2}\psi(N(r-B)),
+ \qquad N\gg1.
+\]
+It has
+\[
+ \|F_N\|_{L^2(dr)}=\|\psi\|_2,\quad
+ \|F_N\|_{L^1(dr)}=N^{-1/2}\|\psi\|_1,\quad
+ F_N(B)=N^{1/2}.
+\tag{T2}
+\]
+On a **fixed positive-radius compact interval**, the
+actual smooth-coefficient Kummer IVP/Cramer Green
+maps the \(L^1\) source into a uniformly bounded
+value-and-first-derivative pair. With zero initial
+Cauchy data and fixed spectral \(\delta\),
+\[
+ |u_{0,N}(B)|+|u_{0,N}'(B)|
+ +|w_N(B)|+|w_N'(B)|=O(N^{-1/2}).
+\tag{T3}
+\]
+The spectral first correction has source
+\(\delta u_{0,N}\), so (T3) follows again by the
+same finite-interval Volterra bound.
+Substitution into the exact curvature equation gives
+\[
+ \boxed{\quad J_N=N^{1/2}+O(N^{-1/2}),\quad}
+\tag{T4}
+\]
+and therefore **no finite constant** \(C=C(r_0,B,\mu,\theta,\delta)\)
+can make \(|J|\le C\|F\|_{L^2(dr)}\) hold for all
+the smooth source data allowed by the existing
+Kummer producer contracts.
+
+This is not a counterexample to the full physical
+Hartree construction: its *special* selected original
+nonlinear source may enjoy much better trace bounds.
+It is a rigorous obstruction to promoting the
+existing \(C^1\)/weighted-\(L^2\) Cramer source
+estimates to **uniformly controlled** \(C^2\)
+curvature solely by algebraic replacement of
+\(j\) with \(w''(B)\). The same true source must
+produce quantitative endpoint regularity
+(e.g. a correctly weighted \(H^1\) estimate near \(B\),
+which supplies the needed one-dimensional trace).
+The new strict Lean source-locked curvature lemma, if
+successfully compiled, identifies \(J\) exactly but
+**cannot** yield its smallness, time gain or
+parameter Lipschitz without that producer.
+
+**Official 11/13 unchanged.**
