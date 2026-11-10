@@ -3333,3 +3333,39 @@ These are restricted mathematical advances and explicit remaining
 gates; there is no complete nonlinear PDE trajectory, finite
 recurrence, or dynamically selected Type-II rate in this entry.
 <!-- END HBL_NORMALIZED_ENERGY_SCOPE_20261110 -->
+
+
+<!-- HBL_ORIGINAL_L2_SOURCE_TRANSPORT_GATE_20261110 -->
+### 10 November 2026 — genuine original-backward source L² Volterra C¹/H² estimate (paper only)
+
+The independent derivation
+[HBL_213_MOVING_OVERLAP_L2_VOLTERRA_SOURCE_GATE_20261110.md](HBL_213_MOVING_OVERLAP_L2_VOLTERRA_SOURCE_GATE_20261110.md)
+has now been synchronized with the §2.13 manuscript, with the source
+defined as the *actual same-field physical operator* \(f=K_{a,Q}e\):
+\[
+\|e''\|_{L^2([L/2,L])}
+ \le\left(1+\frac{67}{4\sqrt2}\cdot
+      \frac{16}{15}\sqrt{\frac7{24}}\right)
+ \|K_{a,Q}e\|_{L^2([L/2,L])}
+ <8\|K_{a,Q}e\|_2.
+\]
+This requires the exact original matching \(e(L)=e'(L)=0\) and explicit
+smallness \(4(L^2/a^2+|(L^2/a^2)Q|)\le1\).
+No \(L^{-1}\) loss or independent \(L^\infty\) source envelope is inserted.
+
+**Decisive functional-space check:** the moving-radius composition
+\(G_L=L^2f(L\cdot)\) is Lipschitz into \(L^2(J)\) from actual \(H^1\)
+source regularity, but **not** uniformly Lipschitz into \(L^\infty(J)\)
+from merely \(H^1\). The strict \(\sup\)-source normalized C² theorem
+cannot by itself be promoted to moving-parameter Lipschitz by quoting
+the previously derived \(H^1\) source estimate; the new \(L^2\) route
+is the correct candidate for that interface.
+
+**Verification boundary:** this \(L^2\) theorem is a paper proof,
+NOT an audited Lean declaration. Its RHS has not been proved
+small with the needed positive time order along the full original
+four-region nonlocal Hartree PDE. The actual projected Hartree
+Hamiltonian inverse, same-orbit finite recursive construction,
+and dynamically emergent Type-II blow-up exponent remain OPEN.
+**Formal original revised count stays strictly 11/13 (84.62%).**
+<!-- END HBL_ORIGINAL_L2_SOURCE_TRANSPORT_GATE_20261110 -->
