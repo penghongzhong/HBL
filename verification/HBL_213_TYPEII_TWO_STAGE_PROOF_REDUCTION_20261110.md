@@ -128,9 +128,12 @@ mathematically valid conditional reduction, **not a Lean acceptance**.
 
 ## 4. The real obstruction is earlier than the final rate
 
-The latest original PDE audit records an **actual nonlocal** quadratic
-physical-shell remainder of size \(O(s^{-15/8})\) from an
-\(s^{-9/8}\) first correction. An **undamped absolute backward
+The earlier **conditional static spatial-shell calculation** for the
+actual nonlocal Hartree kernel yields an \(O(s^{-15/8})\) remainder
+from an \(s^{-9/8}\) first correction **provided** the assumed
+physical shell amplitude, support and background controls hold.
+This estimate has **not** been verified as the entire moving
+four-region PDE remainder. An **undamped absolute backward
 Duhamel estimate** gives
 \[
 \int_s^\infty u^{-15/8}\,du
