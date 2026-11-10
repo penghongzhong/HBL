@@ -7325,4 +7325,57 @@ linearization before the proposed \(L_s^2\)
 inverse can be used. No original environment
 is newly accepted by this observation.
 
+
+\paragraph{Hartree-specific published spectral input and its exact limitation.}
+The exact three-dimensional inverse-square quartic Hartree
+linearization is not the local quintic NLS linearization.
+Write \(\mathcal I f=\kappa_{\mathrm H}(|x|^{-2}*f)\).
+At the normalized real bubble \(W=(1+|x|^2)^{-1/2}\),
+the two real blocks are
+\[
+ L_-h=-\Delta h-\mathcal I(W^4)W^2h,\qquad
+ L_+h=-\Delta h-3\mathcal I(W^4)W^2h
+               -4W^3\mathcal I(W^3h).
+\]
+Theorem~1.4 of X.~Li, C.~Liu, X.~Tang and G.~Xu,
+\emph{The nondegeneracy of positive bubble solutions for
+generalized energy-critical Hartree equations},
+\emph{Science China Mathematics} (2026),
+DOI \texttt{10.1007/s11425-025-2549-6},
+applies specifically to \(N=3\), inverse-square
+kernel exponent \(2\) and \(p=4\). It identifies the
+bounded decaying real radial kernel of \(L_+\)
+with \(\operatorname{span}\{\Lambda W\}\).
+The same authors, \emph{Dynamics of radial threshold
+solutions for generalized energy-critical Hartree equation},
+\emph{Forum Mathematicum} \textbf{37} (2025),
+1469--1502, DOI \texttt{10.1515/forum-2024-0301},
+write the genuine nonlocal Hamiltonian in
+Section~2.5, equations (2.8)--(2.10).
+These published facts are valid candidates for
+cited analytic spectral inputs, not newly asserted
+Lean axioms. In particular, elliptic nondegeneracy does
+\emph{not} imply absence of embedded Hamiltonian
+eigenvalues, a weighted limiting-absorption estimate,
+or projected adjoint Kato smoothing.
+The indispensable unproved bound remains a
+source-faithful projected spacetime inequality of the form
+\[
+ \|A U_{\mathrm H}(\cdot)^*P_{\mathrm{nr}}h\|_{L_s^2Y}
+ \le C_{\mathrm K}\|h\|_{\mathcal E},\qquad
+ P_{\mathrm{nr}}F(s)=A^*g(s),\quad
+ \|g(s)\|_Y\le C_Fs^{-15/8},
+\]
+whose dual, if proved for the actual Hartree Hamiltonian
+and perturbatively stable under the true moving orbit,
+would produce
+\(\|\epsilon(s)\|_{\mathcal E}
+ \le 2C_{\mathrm K}C_Fs^{-11/8}/\sqrt{11}\).
+Neither this smoothing inequality nor the entire
+four-region physical source bound has been proved.
+The scalar \(L_s^2\) tail identity alone has strict
+Lean evidence in CI~42776359428; the original
+§2.13 and final main theorem are not closed.
+The original revised count stays \(11/13\).
+
 \end{document}
