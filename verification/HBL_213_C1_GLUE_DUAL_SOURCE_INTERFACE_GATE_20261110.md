@@ -777,3 +777,121 @@ successfully compiled, identifies \(J\) exactly but
 parameter Lipschitz without that producer.
 
 **Official 11/13 unchanged.**
+
+
+## 11. Source-to-curvature trace *without* a new free boundary datum; exact C³ cost of the quadratic repair
+
+The exact previously strict-accepted original-source identity is
+\[
+ j=w''(B)=F(B)-\delta u_0(B)-A(B)w'(B)-Qw(B),
+ \qquad A(r)=\mathrm{frozenFirstCoeff}(r),\quad Q=\mathrm{frozenZeroCoeff}.
+ \tag{T5}
+\]
+This does not yet bound \(|j|\): the bump counterexample in §10
+shows that weighted \(L^2\) alone is insufficient.
+
+There is a *sharp enough and physically testable* positive producer.
+If \(F\in L^2(dr)\) has a locally absolutely continuous representative
+and \(H_F=\|(1+r^2)F'\|_2<\infty\), then \(F(\infty)=0\)
+by integrability of \(F'\) on every tail and \(F\in L^2(dr)\).
+Cauchy--Schwarz gives, **with no moving-left-radius factor**,
+\[
+ \begin{aligned}
+ |F(B)|&\le H_F\left(\int_B^\infty\frac{dr}{(1+r^2)^2}\right)^{1/2}\\
+ &\le \min\!\left\{\frac{\sqrt\pi}{2},
+    \sqrt{\frac\pi2}(1+B^2)^{-1/2}\right\}H_F,
+ \qquad B>0,\\
+ |F(B)|&\le\frac{H_F}{\sqrt3\,B^{3/2}},\qquad B\ge1.
+ \end{aligned}
+ \tag{T6}
+\]
+Inserting (T6) into (T5) gives the **explicit source-locked
+curvature budget**
+\[
+ \boxed{
+ |j|\le\sqrt{\frac\pi2}(1+B^2)^{-1/2}H_F
+  +|\delta|\,|u_0(B)|
+  +|A(B)|\,|w'(B)|+|Q|\,|w(B)|.
+ }
+ \tag{T7}
+\]
+The last three terms use the *same* Cramer/Volterra solution,
+its genuine first derivative, and the actual spectral selection;
+none is a new interpolation coefficient. The remaining missing
+producer is the actual four-region Hartree PDE source in the
+weighted \(H^1(dr)\) norm, not an abstract \(F(B)\) hypothesis.
+
+The correction's geometric cost is also explicit. Let
+\[
+ D_2=|w(B)|+B|w'(B)|+\tfrac12B^2|j|,\quad
+ P(r)=w(B)+(r-B)w'(B)+\tfrac12(r-B)^2j,\quad
+ Q_2(r)=\chi_B(r)P(r).
+\]
+Use the *actual* cutoff \(\chi_B(r)
+=1-\mathrm{cutoff}(3(r-B)/B)\), whose fixed first,
+second and third derivatives are bounded by
+\(3C_1/B,\ 9C_2/B^2,\ 27C_3/B^3\),
+respectively. This is precisely the smooth cutoff whose
+\(C^3\) bound is now compiled in CI **42812564318**.
+On \(B\le r\le2B\),
+\[
+ |P|\le D_2,\qquad |P'|\le\frac{2D_2}{B},
+ \qquad |P''|\le\frac{2D_2}{B^2}.
+\]
+Ordinary Leibniz differentiation therefore gives
+\[
+ \boxed{
+ \begin{aligned}
+ |Q_2'|&\le (3C_1+2)\frac{D_2}{B},\\
+ |Q_2''|&\le (9C_2+12C_1+2)\frac{D_2}{B^2},\\
+ |Q_2'''|&\le(27C_3+54C_2+18C_1)\frac{D_2}{B^3}.
+ \end{aligned}}
+ \tag{T8}
+\]
+These bounds genuinely include the **new source curvature**
+\(j=w''(B)\); they do not recycle affine-repair bounds that
+would miss \(j\).
+
+Let \(G=Q_2''+A(r)Q_2'+Q Q_2\)
+be the complete *frozen original* Kummer repair source.
+Its radial derivative is exactly
+\[
+ G'=Q_2'''+A'Q_2'+AQ_2''+Q Q_2'.
+ \tag{T9}
+\]
+For \(A(r)=2/r+\tfrac i2r\), or the corresponding
+signed original convention, \(|A(r)|\le2/B+B\),
+\(|A'(r)|\le2/B^2+1/2\) on the annulus.
+Put \(d_1=3C_1+2\), \(d_2=9C_2+12C_1+2\),
+\(d_3=27C_3+54C_2+18C_1\). Then
+\[
+ \boxed{
+ \|G'\|_{L^2(B,2B)}\le
+ \sqrt B D_2\left[
+ \frac{d_3}{B^3}
+ +\left(\frac2{B^2}+\frac12+|Q|\right)\frac{d_1}{B}
+ +\left(\frac2B+B\right)\frac{d_2}{B^2}
+ \right].
+ }
+ \tag{T10}
+\]
+After the **actual** physical pullback \(E_a(y)=a^{-2}G(y/a)\),
+the chain rule, \(dy=a\,dr\), and \(a\ge1\) give
+\[
+ \boxed{
+ \|(1+y^2)E_a'(y)\|_{L^2(aB,2aB)}
+ \le a^{-1/2}(1+4B^2)\,\|G'\|_{L^2(B,2B)}.
+ }
+ \tag{T11}
+\]
+Thus the *entire local frozen Kummer C² repair's weighted
+source derivative* is controlled by **one explicit, same-source
+curvature budget \(D_2\)** and the genuine \(C^3\) cutoff
+constants. This closes its *geometric* source-derivative accounting
+on paper. It does **not** yield a time-positive bound for \(D_2(s)\),
+control \(\partial_sE_{a(s)}\), complete the inner Fredholm
+second-jet join, control the nonlocal Hartree cross terms,
+construct the Hartree projected inverse, or produce an orbit.
+A genuine \(a(s)\) law also must be derived from the PDE, not assumed.
+No new Lean theorem or original environment is accepted by
+(T6)–(T11); the strict original count is **11/13**.
