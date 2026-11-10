@@ -8693,4 +8693,34 @@ weighted source gain and Lipschitz budgets
 remain unproved; the accepted original
 manuscript count remains \(11/13\).
 
+
+\paragraph{Strict source-locked outer \(C^2\) certificate.}
+The original corrected Green source produces
+\[
+  w''(B)=F(B)-\delta\,u_0(B)
+          -p(B)w'(B)-q\,w(B)
+\]
+without an independent second-jet datum, and
+the original \(C^\infty\) cutoff times the
+corresponding quadratic polynomial matches
+all six outer \(C^2\) endpoint jets.
+Both exact Lean statements are strictly verified
+in CI~42812204346, job~129816188415,
+source commit \texttt{a606cbb26cc2},
+original evidence artifact~13763487493.
+The target and audit use Lean 4.35.0-rc3,
+\texttt{--trust=0}, \texttt{warningAsError};
+the source \texttt{strict.log} is empty,
+and each transitive \texttt{\#print axioms}
+is exactly \texttt{[propext, Classical.choice, Quot.sound]}.
+This rigorously identifies the correct \emph{same-source}
+outer curvature and makes the endpoint-level correction
+available, but does not supply a uniform bound on
+\(F(B)\) from the old weighted \(L^2\) source contract.
+The actual physical \(C^2\) field with its Fredholm
+inner second join, complete nonlinear residual
+gradient, moving-time derivatives, parameter Lipschitz
+and PDE orbit remain unproved. The original
+accepted-paper count remains \(11/13\).
+
 \end{document}
