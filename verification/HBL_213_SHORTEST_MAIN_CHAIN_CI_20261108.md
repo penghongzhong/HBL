@@ -2874,3 +2874,11 @@ and the projected Kato/energy inverse. The operator
 inequality neither supplies those missing time scales
 nor establishes an actual Hartree solution.
 **Original 11/13**, no new Lean axiom/environment.
+
+
+### 10 November — actual same-source quadratic repair composed with genuine C² exterior (strict CI pending)
+
+- New Lean target \`HBL.TypeIIDynamicSelection.actual_Hartree_spectral_same_source_outer_splice_C2\` has been added to \`ActualHartreeSpectralSourceOuterSecondJet.lean\`: the original source \(F\), actual Cramer solution \(u_0\), spectrally corrected \(w\), and **derived** curvature \(j=F(B)-\delta u_0(B)-A(B)w'(B)-Qw(B)=w''(B)\) determine an actual Green/curvature-repair/zero normalized field. It proves \`HasDerivAt\` both the field and its genuine derivative at **both outer joins** using the earlier strictly accepted general three-piece C² transmission lemma, not merely equality of boundary numbers.
+- Dedicated updated exact audit checks the new theorem's complete \`#check\` type and \`#print axioms\`, with only \`propext\`, \`Classical.choice\`, \`Quot.sound\` allowed. New runs include [42820141903](https://github.com/penghongzhong/HBL/actions/runs/42820141903), and **must not be reported successful before original logs/artifacts confirm it**.
+- Fresh paper equations (T6)–(T11) in \`HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md\` give **explicit** original-source curvature trace if the same full source is in weighted \(H^1(dr)\); a calculated, rather than assumed, third-derivative budget for the actual quadratic repair; and its exact scaled \(a^{-1/2}\) Morawetz-weight derivative gain. These are paper deductions, not a new Lean source-regularity theorem or physical residual positive-time gain.
+- The inner Fredholm C² join and all full nonlinear PDE/time/Lipschitz bounds are still OPEN. No replacement of original spectral/source dynamics by an independent curvature datum, no prescribed rate and no new original \(\S2.13\) acceptance. **Formal count stays 11/13.**
