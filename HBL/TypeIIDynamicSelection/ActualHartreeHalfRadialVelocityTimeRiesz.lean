@@ -50,7 +50,6 @@ theorem actual_Hartree_original_quartic_velocity_norm_bound
           unfold actualRadialQuarticMomentVelocity
           rw [abs_mul, abs_mul, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 4),
             abs_of_nonneg (sq_nonneg _)]
-          ring
     _ ≤ (4 * ‖u‖ ^ 2) * (2 * ‖u‖ * ‖du‖) :=
       mul_le_mul_of_nonneg_left hPolar hNonneg
     _ = 8 * ‖u‖ ^ 3 * ‖du‖ := by ring
@@ -89,8 +88,13 @@ theorem actual_Hartree_original_quartic_velocity_half_radial_to_bubble_sq
         8 * ‖z r‖ ^ 3 * ‖dz r‖ :=
       actual_Hartree_original_quartic_velocity_norm_bound _ _
     _ ≤ 8 * ((M * Real.sqrt (bubble r)) ^ 3 *
-          (D * Real.sqrt (bubble r))) :=
-      mul_le_mul_of_nonneg_left hProduct (by norm_num)
+          (D * Real.sqrt (bubble r))) := by
+      calc
+        8 * ‖z r‖ ^ 3 * ‖dz r‖ =
+            8 * (‖z r‖ ^ 3 * ‖dz r‖) := by ring
+        _ ≤ 8 * ((M * Real.sqrt (bubble r)) ^ 3 *
+              (D * Real.sqrt (bubble r))) :=
+          mul_le_mul_of_nonneg_left hProduct (by norm_num)
     _ = (8 * M ^ 3 * D) * (Real.sqrt (bubble r)) ^ 4 := by ring
     _ = (8 * M ^ 3 * D) * bubble r ^ 2 := by rw [hRoot4]
 
