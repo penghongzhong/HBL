@@ -1797,8 +1797,10 @@ The revised shortest main proof chain is:
    statement. Preserve and prove it separately unless the main
    theorem is deliberately and transparently revised.**
 
-**The real obstruction, quantified:** the accepted source
-analysis yields a physical shell remainder \(s^{-15/8}\).
+**The real obstruction, quantified:** the existing **conditional
+static spatial shell** analysis gives a candidate physical
+nonlocal remainder \(s^{-15/8}\), but does **not** yet construct
+or bound the entire same-orbit four-region PDE remainder.
 Its undamped absolute backward Duhamel integral is
 \(\frac87s^{-7/8}\), **larger** than the first
 correction \(s^{-9/8}\) by a factor \(s^{1/4}\).
