@@ -6992,10 +6992,30 @@ The four exact theorem declarations were each checked by
 Mathlib revision \texttt{a98628e16c11f5167f16124105ddce53efa9bfe5}.
 The transitive axioms in each case are exactly
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
-The displayed \(\beta_*\) estimate follows by elementary exponentiation
-from the strictly checked logarithmic inequality and the coarse
-\(q\)-bounds; the separate weighted log-\(L^1\) integral is a
-paper computation, \emph{not} a Lean-audited integral declaration.
+The \emph{additional} strict physical power-envelope terminal
+\texttt{actual\_Hartree\_dynamic\_mu\_trap\_physical\_scale\_power\_envelope}
+is now independently included in the same five-target successful
+Lean audit, CI \texttt{42774665314}, job \texttt{129690252919},
+artifact \texttt{13743232284}, source commit
+\texttt{166d8ea2a5f7e549af454f39a83f81eaf510ccca}.
+Its exact conclusion is
+\[
+\ell(s)^2q(s)\,
+  \bigl(q_0+4M_+(s-s_0)\bigr)^{1/(4M_+)}
+\le\ell_0^2q_0^{\,1+1/(4M_+)},
+\qquad s\ge s_0.
+\]
+The zero-output \texttt{--trust=0} warning-as-error
+compilation and all five exact type/axiom checks are confirmed
+by the original job log. The only dependencies are
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+Together with the already strict lower clock bound, this
+certifies the algebraic source of the displayed
+\(\beta_*>1/2\) envelope, \emph{conditional on} the
+true PDE modulated trap. The separately displayed
+weighted log-\(L^1\) moment integral remains a
+paper calculation, \emph{not} a Lean-audited integral
+declaration and not the full projected \(\mu_s\) budget.
 All four checks are conditional on genuine PDE-produced modulation
 equations and trapping: no Hartree solution or original §2.13
 time-gain theorem is constructed by these scalar certificates.
