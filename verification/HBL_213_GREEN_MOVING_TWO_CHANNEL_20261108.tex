@@ -8345,4 +8345,57 @@ quantitative bounds on the actual four-region orbit.
 Original §2.13 and the full dynamical Type-II theorem
 remain open; strict acceptance is \(11/13\).
 
+
+\paragraph{Quadratic Lipschitz dependence of the true nonlinear remainder.}
+The same original density and cubic identities in the preceding
+paragraph, together with \(|x|^{-2}\in A_2(\mathbb R^3)\),
+also yield a *two-field* estimate. Define the radial norms
+\[
+ \|u\|_X=\|u\|_{L^2(dr)}
+       +\|(1+r^2)u'\|_{L^2(dr)},\qquad
+ \|F\|_Y=\|F\|_{L^2(dr)}
+       +\|(1+r^2)F'\|_{L^2(dr)}.
+\]
+Since \(\|u\|_\infty\lesssim\|u\|_X\),
+\(\|W^{-1}u\|_\infty\lesssim\|u\|_X\),
+the genuine quartic Hartree remainder can be written as a
+finite sum of bounded real multilinear expressions
+of orders \(2\) through \(7\), with the original Riesz
+operator and the exact bubble weights. The multilinear
+bounds follow from
+\[
+ \begin{gathered}
+ \|\mathcal If\|_\infty
+ \le\tfrac3{\pi^2}(4\pi\|f\|_\infty+\|f\|_{L^1(\mathbb R^3)}),
+ \qquad
+ \|(\mathcal If)'\|_{L^2(dr)}
+       \le6C_{A_2}\|f\|_{L^2(dr)},\\
+ \int_{\mathbb R^3}W^2|u v|\,dx
+       \le4\pi\|u\|_{L^2(dr)}\|v\|_{L^2(dr)},\qquad
+ \|(1+r^2)(W^2uv)'\|_2
+       \lesssim\|u\|_X\|v\|_X.
+ \end{gathered}
+\]
+Telescoping each multilinear monomial therefore gives
+\[
+ \boxed{\quad
+ \|\mathcal R_{\rm H}(u)-\mathcal R_{\rm H}(v)\|_Y
+ \le C(R_*,C_{A_2})
+       (\|u\|_X+\|v\|_X)\|u-v\|_X,
+ \quad
+ \|u\|_X,\|v\|_X\le R_* .
+ \quad}
+\]
+Thus the \emph{true nonlinear} Hartree residual has a
+quadratic parameter-difference estimate once its
+*actual selected physical corrections* have a verified
+\(X\)-Lipschitz dependence. Such dependence has
+\emph{not} been established from the moving Fredholm
+and spectral Green producers; nor does this estimate
+construct a projected Hartree propagator. This is a
+paper proof, not a strict Lean acceptance. The
+full source proof is in
+\texttt{verification/HBL\_213\_GENUINE\_HARTREE\_QUADRATIC\_WEIGHTED\_SOURCE\_20261110.md};
+the revised original count remains \(11/13\).
+
 \end{document}
