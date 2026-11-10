@@ -1573,3 +1573,65 @@ and integration over the true moving slit gives
 For a genuine additional \(R^\eta\) gain, \(\eta>0\), the source-to-selector PDE bridge must prove a correspondingly sharper *true differentiated adjusted source*, e.g.
 \(\|\partial_tF_{\rm adj}(t,r)\|\lesssim E(t)r^{-2+\eta}\),
 or identify an exact oscillatory/projection cancellation **before** taking absolute values. The genuine differentiated three-Riesz integrals, moving basis, and two Cramer-speed terms must all enter this estimate. In particular the source magnitude envelope or fixed-radius `HasDerivAt` theorem cannot be used as an unproved uniform `hSourceTime` bound. No formal theorem or revised original-paper environment is added: **11/13**.
+
+
+### 2026-11-10 — actual Riesz time rows from primitive physical quartic velocities (pending strict CI)
+
+For the genuine radial inverse-square three-dimensional Hartree kernel,
+the preexisting strict original row bound gives
+\(|{\cal I}_2[q](r)|\le C_{\rm row}M\) at **every** \(r>0\),
+whenever the measurable ORIGINAL quartic velocity density satisfies
+\(|q(\rho)|\le MW(\rho)^2\). Combining with the previously proved
+differentiation of the ACTUAL logarithmic Riesz integral produces
+the potential time derivative rather than assuming it.
+
+New proof-chain candidates, **not accepted until their actual original
+strict CI and individual axiom audits complete**:
+
+- ActualHartreeRieszTimeUniformFromOriginalVelocity.lean:
+  two precise theorem targets ending in
+  ...radial_Riesz_time_derivative_uniform_from_quartic_velocity
+  and ...mixed_Riesz_time_derivative_uniform_from_quartic_velocity.
+  Initial [CI 42740229567](https://github.com/penghongzhong/HBL/actions/runs/42740229567)
+  **FAILED** at original job 129579176280:
+  Lean reported unknown identifier bubble at lines 58 and 108.
+  Corrected the open HBL.Modulation namespace in source SHA
+  5ae5744a; replacement
+  [42741408285](https://github.com/penghongzhong/HBL/actions/runs/42741408285)
+  submitted (**pending**).
+
+- ActualHartreeHalfRadialVelocityTimeRiesz.lean:
+  exact complex quartic polarization yields the derived
+  \(|\partial_t|z|^4|\le8M_z^3D_z W^2\) under actual field
+  and actual time-velocity pointwise bounds by
+  \(M_z\sqrt W,D_z\sqrt W\); composing with the original integral
+  yields a uniform potential-time row. Three independent exact
+  #check / #print axioms targets in replacement
+  [42741413915](https://github.com/penghongzhong/HBL/actions/runs/42741413915),
+  **pending**. Earlier 42741050557 used an older SHA.
+
+- ActualHartreeMixedHalfRadialVelocityTimeRiesz.lean:
+  for actual real core V and complex radiation z, the *original*
+  mixed polarization
+  \(q_{\rm mix}=q_{V+z}-q_V-q_z\) produces
+  \[
+    |q_{\rm mix}|\le
+    8[(M_V+M_z)^3(D_V+D_z)+M_V^3D_V+M_z^3D_z]W^2.
+  \]
+  Combined with original dominated Riesz differentiation this
+  controls the true mixed potential time derivative uniformly at
+  all observation radii. Two exact-target strict audits submitted:
+  [42741684534](https://github.com/penghongzhong/HBL/actions/runs/42741684534),
+  **pending**.
+
+**Mathematical boundary.** The physical four-region Hartree orbit has not
+yet produced the required half-radial norms on its TWO-STAGE scaled
+core/radiation time velocities, nor the moving original Cramer
+compatibility-column time derivative budget. The true selected source
+also includes the differentiated real speed directions, of possible
+size O(1/r). Hence these velocity-to-Riesz estimates are not
+the full same-orbit moving-source bound and do not prove the original
+four-region PDE positive-time remainder, projected time inverse,
+finite-layer recursion or dynamic Type-II blowup rate.
+
+**Formal revised original environment count remains 11/13 (84.62%).**
