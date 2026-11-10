@@ -6329,4 +6329,64 @@ $R$ factor after multiplication by the Frobenius $r^2$ Green
 multiplier, whereas the currently established possible $r^{-2}$
 budget leaves none. The original revised proof count remains $11/13$.
 
+
+
+\medskip
+\noindent\textbf{True Cramer source to one-radius Frobenius gain (10 November; strict CI pending).}
+The already proved unique real Cramer-selected derivative
+\(\partial_tF_{\rm adj}=D\), with exact original Hartree source
+\(F_0\) and two differentiated scale/phase directions, has the
+radius-weighted consequence
+\[
+ \boxed{\quad
+ r\|D\|\le r\|\dot F_0\|
+   +\frac{1024C_s}{B^2}
+     \|\dot{\mathfrak Z}+p_b\dot{\mathfrak b}
+                          +p_\omega\dot{\mathfrak w}\|
+   +|p_b|r\|\dot S_b\|+|p_\omega|r\|\dot S_\omega\|.
+ \quad}
+\]
+The \(r^{-1}\) bound of the original differentiation theorem
+has cancelled \emph{exactly}; no modulus of the moving left interface
+\(r_0^{-1}\) is introduced. A new Lean target
+\texttt{actual\_Hartree\_true\_moving\_selected\_source\_radius\_weighted\_time\_budget}
+uses the true physical source and real Cramer determinant directly;
+its submitted strict CI is
+\texttt{42742271094} (pending at writing).
+
+Inserting the physically differentiated \emph{same selected source}
+into the exact Frobenius outgoing Green kernel gives a sharper
+moving-slit estimate at the threshold
+\[
+ r\|\partial_tF_{\rm adj}(t,r)\|\le E(t),
+ \quad 0<r\le R,\qquad
+ \left|\frac{X(r)}{W(r)}\right|
+ \le C_{\mathrm{Frob}}(R)r^2.
+\]
+For a uniform bound \(E\) on the true intervening time segment,
+the original moving-interface mixed difference then satisfies
+\[
+ \boxed{\quad
+ \|\Delta_{s,t}A\|
+ \le C_{\rm Frob}(R)\,R E\,
+      |t-s|\,|r_0(t)-r_0(s)|.
+ \quad}
+\]
+In particular an \(r^{-1}\), rather than \(r^{-2}\),
+physical source derivative leaves a full \emph{positive spatial
+radius} \(R\) after multiplying the exact Green density.
+This remains different from an \emph{a priori positive time-order}.
+The genuine nonlocal selected-source Green theorem is submitted
+as \texttt{actual\_Hartree\_true\_moving\_singular\_Green\_cross\_Frobenius\_one\_inverse\_radius},
+CI \texttt{42742808852} (pending at writing).
+Neither theorem is accepted before the exact strict jobs succeed.
+
+The final step is not an abstract weighted-source premise: the
+right-hand side of the first displayed inequality must be estimated
+from the SAME physical two-stage scaled core/radiation PDE orbit and
+its differentiated moment/Cramer data, with correct \(s\)-dependence,
+and then inserted into all four Kummer-region residuals and their
+Lipschitz comparison. No finite physical recurrence or Type-II rate
+is proved here; unchanged formal count \(11/13\).
+
 \end{document}
