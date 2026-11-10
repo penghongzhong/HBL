@@ -283,3 +283,114 @@ more economical than the invalid forward-inner-overlap
 construction. It also avoids needing the source trace
 \(F(B)\) just to define a globally smooth profile.
 **No original-environment gain: 11/13.**
+
+
+## 6. Exact physical PDE producer of the inner mismatch curvature
+
+The \(E\) in (S8)--(S11) need not remain an abstract
+independently bounded packet: it can be expressed using **the
+two actual, previously formalized Hartree PDE equations**.
+The original source declarations are
+\`actual_Hartree_moment_locked_inner_physical_equations\`
+in \`ActualHartreeMomentLockedInnerClassical.lean\`,
+and \`actual_Hartree_matched_spectral_original_physical_source\`
+in \`ActualHartreeMatchedSpectralOriginalPDEMismatch.lean\`.
+Importantly, the latter is the **unshifted ORIGINAL**
+Kummer/PDE source \(F-\delta u_0\), rather than the
+quadratic source arising from a shifted spectral operator.
+
+To avoid silently changing the source, fix the same physical
+moment-locked parameters \((R,c)\) used in the first theorem,
+and define the physical Fredholm component fields
+\[
+ U_{\rm re}(y)=q_\omega(y)/y,\qquad
+ U_{\rm im}(y)=q_b(y)/y,\qquad
+ u=U_{\rm re}+iU_{\rm im}.
+\]
+Here the same true Fredholm responses
+\(q_\omega,q_b\) and their source cutoff
+\(\chi_R(y)=\mathrm{actualHartreeInnerSourceCutoff}(R,y)\)
+are used; **do not confuse this \(R\) with the later
+Cramer overlap radius B**. Let
+\[
+ S_{\rm re}(y)=\chi_R(y)\,
+   \mathrm{actualMomentLockedCore}(c,y),\qquad
+ S_{\rm im}(y)=\chi_R(y)\,
+   \mathrm{actualMomentLockedScaleProfile}(c,y).
+\]
+Set \(W(y)=(1+y^2)^{-1/2}\) and
+\(\mathcal I f=\kappa_{\rm H}(|x|^{-2}*f)\)
+with the actual original coupling.
+Then the two exact physical inner Hartree equations give
+\[
+ \begin{aligned}
+ u''+\frac2y u'={}&
+ -S_{\rm re}-iS_{\rm im}
+ -9W^4 U_{\rm re}-3iW^4 U_{\rm im}\\
+ &-4W^3\mathcal I(W^3 U_{\rm re}).
+ \end{aligned}\tag{S12}
+\]
+The nonlocal integral cannot be omitted. For the
+**same-original-source selected Kummer** field
+\(v(y)=w(y/a)\), where \(u_0\) is the
+original matched Green value before the spectral correction,
+the previously proved physical source identity gives
+\[
+ v''+\frac2y v'
+ =a^{-2}\{F(y/a)-\delta\,u_0(y/a)\}
+ -a^{-2}\left\{\frac{iy}{2}v'(y)+c_0v(y)\right\},
+ \qquad c_0=\mathrm{frozenZeroCoeff}(\mu,\theta).
+ \tag{S13}
+\]
+Both displays hold on the physically admissible smooth
+positive-radius domains of their actual source theorems.
+**Notice the FIRST-order \(-\delta u_0\) error.**
+The shifted-spectral quadratic estimate cannot erase it
+from the original unshifted Hartree PDE.
+
+For the true backward-overlap mismatch \(e=u-v\),
+(S12)--(S13) yield the **exact same-orbit curvature identity**
+\[
+ \boxed{\begin{aligned}
+ e''={}&-\frac2y e'
+  -S_{\rm re}-iS_{\rm im}
+  -9W^4U_{\rm re}-3iW^4U_{\rm im}
+  -4W^3\mathcal I(W^3U_{\rm re})\\
+ &-a^{-2}\{F(y/a)-\delta\,u_0(y/a)\}
+  +a^{-2}\left\{\frac{iy}{2}v'(y)+c_0v(y)\right\}.
+ \end{aligned}}\tag{S14}
+\]
+This is a real physical source identity (not an
+independently assumed mismatch envelope), so it
+reduces \(E=\|e''\|_{L^2([L/2,L];dy)}\) to the
+explicit \(L^2\) norms of the **exact** seven displayed
+source/coefficient groups. Under genuine integrability,
+the triangle inequality gives
+\[
+ \begin{aligned}
+ E\le{}&
+ \|2e'/y\|_{L^2(I)}
+ +\|S_{\rm re}+iS_{\rm im}\|_{L^2(I)}
+ +9\|W^4U_{\rm re}\|_{L^2(I)}
+ +3\|W^4U_{\rm im}\|_{L^2(I)}\\
+ &+4\|W^3\mathcal I(W^3U_{\rm re})\|_{L^2(I)}
+ +a^{-2}\|F(\cdot/a)-\delta u_0(\cdot/a)\|_{L^2(I)}\\
+ &+a^{-2}\|iyv'/2+c_0v\|_{L^2(I)},
+ \qquad I=[L/2,L].
+ \end{aligned}\tag{S15}
+\]
+The **unclosed gate is now quantitative**: prove that
+the RHS on the actual moving scales is small enough,
+including its selected-speed derivative and parameter
+Lipschitz dependence, for the physical finite
+recursion. Previous Volterra/Cramer bounds control
+some terms but not their full common moving and
+nonlocal nonlinear source norm. Equation (S14)
+does not itself yield any \(s^{-\nu}\) gain: the
+genuine rate of the RHS must be established.
+It also does not provide an adjoint Kato estimate
+for the full coupled Hartree Hamiltonian.
+
+This exact deduction is at the **paper level**; no new
+strict Lean theorem or original environment has been
+certified for (S14)--(S15). **11/13**.
