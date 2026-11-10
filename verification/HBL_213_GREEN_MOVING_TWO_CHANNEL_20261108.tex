@@ -9931,4 +9931,51 @@ same-orbit nonlinear Hartree evolution, and the complete
 projected inverse and modulation dynamics remain open.
 % END HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110
 
+
+
+% HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110
+\medskip
+\noindent\textbf{Compatibility correction for the illustrative $C^2$ patch time exponent.}
+The preceding assumption $L(s)\ge cs^{1/2}$ is only an algebraic
+illustration and is \emph{incompatible} with the original HBL
+modulation trapping if $L=\ell^{-1/16}$. Indeed, conditional on
+the actual-PDE-derived identities
+$q_s=4\mu$, $\ell_s/\ell=-(1+4\mu)/(2q)$ and a genuine
+$9/16<m\le\mu\le M$, logarithmic differentiation gives
+\[
+ \ell(s)=\ell_0\sqrt{\frac{q_0}{q(s)}}
+ \exp\!\left(-\frac12\int_{s_0}^s\frac{dv}{q(v)}\right),
+ \qquad q_s=4\mu,
+\]
+and therefore, for large $s$,
+\[
+ c s^{\gamma_{\min}}\le L(s)\le C s^{\gamma_{\max}},
+ \quad
+ \gamma_{\min}=\frac1{32}+\frac1{128M},\qquad
+ \gamma_{\max}=\frac1{32}+\frac1{128m}<\frac{13}{288}.
+\]
+For the specific local patch bound already established above,
+\[
+ {\mathcal J}_{\rm patch}(s)\lesssim
+ s^{-5\gamma_{\min}/2}N(s)
+ +s^{-9\gamma_{\min}/2}
+   (N(s)+|\delta(s)|\,|u_0(s,L(s)/a(s))|),
+\]
+provided the same extra Kummer-parameter and physical-source
+conditions are independently verified. Thus a sufficient decay
+for its leading part at target $O(s^{-p})$ is
+$N(s)=O(s^{-[p-5\gamma_{\min}/2]})$, not the half-power-radius
+thresholds in the illustrative paragraph. Even the most favorable
+trapping exponent $\gamma_{\min}<13/288$ makes the source-power
+requirement stricter than $1015/576$, $1159/576+\eta$,
+and $1231/576$, respectively, for $p=15/8$, $17/8+\eta$,
+and $9/4$. The spectral term has its own independent decay condition.
+These are only sufficient exponents for this particular patch
+estimate; possible exact PDE cancellation and projected propagator
+gain are not ruled out. The modulation trap itself has not been
+constructed. This is a paper consistency correction without a
+new Lean declaration or original theorem acceptance:
+$11/13$ remains.
+% END HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110
+
 \end{document}

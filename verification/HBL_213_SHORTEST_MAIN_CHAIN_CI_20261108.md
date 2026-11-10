@@ -3499,3 +3499,39 @@ conditional calculation is synchronized in the paper
 and [the source-exact patch note](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md).
 Nothing here upgrades the original **11/13** tally.
 <!-- END HBL_C2_PATCH_TIME_EXPONENT_GATE_20261110 -->
+
+
+<!-- HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110 -->
+### 10 November 2026 — original modulation dynamics rules out the illustrative \(L\ge c\sqrt s\) patch shortcut
+
+[Full exact scalar check](HBL_213_ACTUAL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110.md)
+is synchronized to \`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`.
+For a genuine eventual orbit with original \(L=\ell^{-1/16}\),
+\(q_s=4\mu\), \(\ell_s/\ell=-(1+4\mu)/(2q)\), and
+\(9/16<m\le\mu\le M\), the exact identity
+\(\ell=\ell_0\sqrt{q_0/q}\exp(-\frac12\int_{s_0}^s q^{-1})\)
+yields \(c s^{\gamma_{\min}}\le L(s)\le C s^{\gamma_{\max}}\),
+\(\gamma_{\min}=1/32+1/(128M)\),
+\(\gamma_{\max}=1/32+1/(128m)<13/288\).
+Thus the preceding *illustrative* \(L\ge c\sqrt s\)
+assumption cannot describe any orbit satisfying the required
+modulation trap. The previous \(s^{-5/4}N(s)\) illustrative
+leading patch gain **must not** be advertised as a
+dynamically admissible positive time order.
+
+For the actual conditional geometry, the same local patch
+estimate instead gives
+\({\cal J}_{\rm patch}\lesssim s^{-5\gamma_{\min}/2}N
++s^{-9\gamma_{\min}/2}(N+|\delta u_0|)\), assuming all
+frozen original coefficient bounds have independent true-PDE
+producers. To achieve a target \(s^{-p}\) by this bound alone,
+it suffices to prove \(N=O(s^{-[p-5\gamma_{\min}/2]})\)
+and the companion spectral-source condition. The leading
+required exponents are stricter than \(1015/576\),
+\(1159/576+\eta\), \(1231/576\) for \(p=15/8\),
+\(17/8+\eta\), \(9/4\), respectively. These are **not
+necessary bounds on the full PDE**; cancellation or projected
+inverse gains can change the proof strategy. No new Lean theorem,
+axiom, claimed physical orbit, or CI acceptance is associated
+with this paper correction. Strict original count **11/13**.
+<!-- END HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110 -->
