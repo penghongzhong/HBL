@@ -204,6 +204,14 @@ theorem actual_Hartree_dynamic_mu_trap_log_scale_gain
       HasDerivAt G
         (-1 / (2 * q s) + 1 / (2 * Q s)) s := by
     have heLog := (hell s hs).log (hellPos s hs).ne'
+    have hEllCancel :
+        (-((1 + 4 * mu s) / (2 * q s)) * ell s) / ell s =
+          -((1 + 4 * mu s) / (2 * q s)) := by
+      calc
+        _ = -((1 + 4 * mu s) / (2 * q s)) *
+              (ell s / ell s) := by ring
+        _ = _ := by rw [div_self (hellPos s hs).ne', mul_one]
+    rw [hEllCancel] at heLog
     have hqLog := (hq s hs).log (hBounds s hs).2.2.ne'
     have hQLog := (hQderiv s).log (hQpos s hs).ne'
     have htotal := (heLog.add (hqLog.div_const 2)).add
