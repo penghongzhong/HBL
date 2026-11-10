@@ -3098,3 +3098,45 @@ do not show the actual four-region weighted derivative,
 \(s\)-positive order, parameter Lipschitz, spectral inverse
 or physical PDE orbit. **Strict original count remains
 11/13 (84.62%).**
+
+
+### 10 November — *actual same-source backward Volterra closes the missing local flat-overlap E bound (paper proof)*
+
+[Full mathematical proof](HBL_213_BACKWARD_FLAT_OVERLAP_VOLterra_PDE_GRADIENT_20261110.md).
+For the original physical two-channel Hartree Fredholm \(u\)
+and same original-source spectral Green continuation \(v\),
+the original plateau producer supplies
+\(\mathcal K_a(u-v)=
+D_{\mathrm{inner}}+a^{-2}\delta u_0(y/a)\)
+and the strict C¹ matching gives true zero Cauchy data at \(L\).
+The **existing strict** physical Fredholm source shell
+applies on the entire backwards original region
+\(L/2\le y\le L\) by using \(R=L/2>2\);
+this is why **L>4**, not merely L>2, is now required.
+No \(F(B)\) point trace or newly assumed source envelope
+is used. The exact conjugation \(h=y(u-v)\) gives
+\(h''+iyh'/(2a^2)+(Q-i/2)h/a^2=yf\).
+Gronwall applied *backwards* from the actual zero
+Cauchy data produces the **explicit**
+\[
+ \|u''-v''\|_{L^2(L/2,L)}
+ \le\left[
+ 1+e^{1+(|Q|+3/2)L^2/(4a^2)}
+ (8+(|Q|+2)L^2/(2a^2))\right]\|f\|_{L^2}.
+\]
+The genuine original cutoffs, including strict
+third derivative CI 42812564318, then yield a
+true physical **inner local spatial PDE commutator
+derivative**
+\(O(C_E L^{-5/2}N+
+ C_E L^{-9/2}(C_KN+|\delta|M_0))\)
+in the original weighted dual norm, under
+\(a\ge L^3\) and source continuity.
+This is the first *explicit* genuine physical
+source-to-backward-H² budget removing the earlier
+unknown \(E=\|u''-v''\|_2\) quantity;
+not a full Hartree residual or time gain.
+**Paper proof only**, not newly compiled Lean.
+Open: entire outer+nonlocal+time+parameter derivative
+source, true projected inverse, finite PDE recursion,
+dynamical Type-II selection. Formal **11/13**.
