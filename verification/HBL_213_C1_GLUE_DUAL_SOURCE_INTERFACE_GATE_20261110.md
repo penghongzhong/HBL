@@ -895,3 +895,68 @@ construct the Hartree projected inverse, or produce an orbit.
 A genuine \(a(s)\) law also must be derived from the PDE, not assumed.
 No new Lean theorem or original environment is accepted by
 (T6)–(T11); the strict original count is **11/13**.
+
+
+## 12. A sharp obstruction to **the geometric scale factor alone** closing the Duhamel quarter-power gap
+
+The already retained physical overlap hypothesis is \(L(s)=\ell(s)^{-1/16}\)
+and \(a(s)\ge L(s)^3=\ell(s)^{-3/16}\). Therefore the
+\(a^{-1/2}\) factor in (T11) guarantees **only**
+\[
+ a(s)^{-1/2}\le\ell(s)^{3/32}.
+ \tag{S1}
+\]
+Do not replace this one-sided inequality by an assumed stronger growth
+law for \(a(s)\).
+
+On a hypothetical **genuinely constructed** Hartree modulation orbit
+satisfying the originally projected kinematic identities
+\[
+ q_s=4\mu,\qquad
+ \ell_s/\ell=-\frac{1+4\mu}{2q},
+ \qquad 9/16<m\le\mu(s)\le M,
+ \tag{S2}
+\]
+one has \(q_0+4m(s-s_0)\le q(s)\le q_0+4M(s-s_0)\).
+Writing \(\tau=q\ell^2\), one computes exactly
+\[
+ \tau_s=-\ell^2,\qquad
+ (\log\tau)_s=-1/q.
+\]
+Integration of the inequalities for \(q\) yields the two-sided
+power-rate bracket
+\[
+ C_1 s^{-\beta_{\max}}\le\ell(s)
+ \le C_2 s^{-\beta_{\min}},\qquad
+ \beta_{\min}=\tfrac12+\frac1{8M},\quad
+ \beta_{\max}=\tfrac12+\frac1{8m}<\tfrac{13}{18},
+ \tag{S3}
+\]
+with \(C_1,C_2>0\) depending on the initial parameters and
+\(m,M\), for all sufficiently large \(s\). These relations are
+**conditional consequences** of (S2); no orbit or invariant trap
+has been constructed.
+
+Combining (S1) with the **derived** upper bound on \(\ell\) in
+(S3), the only uniform decay *certified by the original geometric
+assumption* is
+\[
+ a^{-1/2}\le C_2^{3/32}s^{-3\beta_{\min}/32}.
+ \tag{S4}
+\]
+Even in the most favorable permissible physical trapping regime,
+\(3\beta_{\min}/32\le 3\beta_{\max}/32<13/192<1/4\).
+Consequently this minimal geometric assumption **cannot by itself**
+close the \(s^{1/4}\) loss from undamped \(L_s^1\) Duhamel integration.
+The missing improvement requires at least one separately derived
+ingredient: stronger genuine physical \(a(s)\) growth than merely
+\(a\ge L^3\), cancellation improving the *entire* source, or an
+actual projected Hartree dispersive inverse (dual-Kato/parametrix).
+
+This is a **no-go for a proposed shortcut**, not a no-go theorem
+for the true Hartree II-type construction. Nor does (S4) justify
+using the Morawetz dual source norm as an ordinary energy input
+without proving its matching inverse. The other unchanged gates
+are source-faithful inner C², moving time/parameter derivatives,
+full four-region nonlocal PDE residual and actual finite profile.
+**Original acceptance remains 11/13.**
