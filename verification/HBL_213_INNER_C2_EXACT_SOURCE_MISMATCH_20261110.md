@@ -395,7 +395,7 @@ positive-order theorem. To expose exactly which physical source estimates
 could make this specific patch harmless, assume *conditionally* that the
 true moving radius satisfies `L(s) ≥ c s^gamma` with fixed
 `c>0`, `gamma>0`, that `a(s) ≥ L(s)^3`, and that the
-original frozen Kummer zero coefficient is uniformly bounded.
+original frozen Kummer zero coefficient and the native shell parameter factor `C_K(mu,theta)` are uniformly bounded.
 Then, with the *actual* original source norm
 `N(s)=‖F_+(s)‖_{2,7/4}+‖F_-(s)‖_{2,7/4}`, (I19) implies
 \[
