@@ -2222,3 +2222,26 @@ and the still **open** source \(H^1\), projected Hartree smoothing,
 time/parameter Lipschitz, PDE orbit and emergent Type-II rate.
 There is no extra original environment or full residual estimate:
 **11/13 unchanged**.
+
+
+### 10 November — exact true Hartree Riesz gradient outer annulus, with honest radius loss
+
+A new *paper proof* in
+[HBL_213_DUAL_KATO_SOURCE_NORM_OBSTRUCTION_20261110.md](HBL_213_DUAL_KATO_SOURCE_NORM_OBSTRUCTION_20261110.md)
+uses the exact \(3/\pi^2\) original Hartree coupling and the
+Fourier transform \(\widehat{|x|^{-2}}=2\pi^2|\xi|^{-1}\):
+\(\|\nabla\mathcal I f\|_{L²(\mathbb R³)}=6\|f\|_{L²(\mathbb R³)}\).
+For the **actual nonlocal real-Hessian factor**
+\(N(F)=W³\mathcal I(W³F)\), every explicit \(R>0\) obeys
+\[
+ \|(1+r²)N(F)\|_{L²(dr;r>R)}\le3\|F\|_{L²(dr)},\qquad
+ \|(1+r²)N'(F)\|_{L²(dr;r>R)}
+ \le(4/(\sqrt3 R)+2\sqrt3)\|F\|_{L²(dr)}.
+\]
+This derives, rather than assumes, a weighted H¹ envelope for
+the real nonlocal Hessian term on a positive outer annulus.
+**The \(R^{-1}\) cost is explicit and unresolved for \(R\downarrow0\)**.
+It does not prove a bound for the complete nonlinear moving
+four-region PDE residual, Kato limiting absorption, orbit, or Type-II.
+No new Lean CI was claimed for this Fourier calculation;
+the official original count remains **11/13**.
