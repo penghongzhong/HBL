@@ -2887,3 +2887,29 @@ nor establishes an actual Hartree solution.
 ### 10 November — exact geometric-only quarter-power no-go; no PDE claim
 
 The retained original scale assumption \(L=\ell^{-1/16}\), \(a\ge L^3\) gives only \(a^{-1/2}\le\ell^{3/32}\). On a **conditional real PDE modulation orbit** with \(q_s=4\mu\), \(\ell_s/\ell=-(1+4\mu)/(2q)\), \(9/16<m\le\mu\le M\), the derived two-sided scale bracket has \(\beta_{\min}=1/2+1/(8M)\le\beta_{\max}=1/2+1/(8m)<13/18\). Thus the geometric \(a^{-1/2}\) derivative bonus is guaranteed only at \(s^{-3\beta_{\min}/32}\), with \(3\beta_{\min}/32<13/192<1/4\). **It cannot alone compensate the actual absolute Duhamel quarter-power deficit**. One must obtain stronger *PDE-derived* growth, cancellation, or a true nonlocal Hartree spectral inverse. This is a rigorous conditional comparison, not a disproof of Hartree Type-II or a new Lean environment. Details in [HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md](HBL_213_C1_GLUE_DUAL_SOURCE_INTERFACE_GATE_20261110.md); original count **11/13**.
+
+
+### 10 November — exact ORIGINAL inner Fredholm/Kummer second-jet source gate (paper, not Lean)
+
+A new direct source audit of
+\`ActualHartreeTwoChannelMatchedShell.lean\` and
+\`ActualHartreeMomentLockedKummerPullback.lean\` derives the
+one-jet-normalized \`y=L\` second derivative mismatch **with no free jet**:
+\[
+ \Delta_2=u_{\rm inner}''(L)-v_{\rm Kummer}''(L)
+ =D_{\rm inner}(L)-S_{\rm inner}(L)-a^{-2}[F(L/a)-\delta u_0(L/a)]
+\]
+where the actual Fredholm defect is
+\(D_{\rm inner}=\mathcal K_a u_{\rm inner}+S_{\rm inner}\)
+and has the existing genuine shell bound
+\(\lvert D_{\rm inner}(L)\rvert\lesssim
+ (L^{-4}+a^{-2})(\|F_+\|_{2,7/4}+\|F_-\|_{2,7/4})\),
+assuming \(L>2\) and continuity for classical traces.
+The **decisive same-PDE forcing cancellation** to derive and bound is
+\[
+ \frac{F_+(L)+iF_-(L)}{L}
+ +a^{-2}\,[F(L/a)-\delta u_0(L/a)].
+\]
+A one-sided quadratic curvature patch with overlap width \(h\) makes the join \(C^2\), but its *actual scaled Kummer PDE source gradient* has leading upper-bound cost \((1+L^2)|\Delta_2|/\sqrt h\). Simply shrinking \(h\) can worsen the dual source norm. The exact coefficients, cutoff third-derivative and source requirements are in
+[\`HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md\`](HBL_213_INNER_C2_EXACT_SOURCE_MISMATCH_20261110.md).
+**Paper analysis only**; no new source cancellation, full Hartree PDE estimate, original §2.13 acceptance, or Type-II orbit. Formal count **11/13**.
