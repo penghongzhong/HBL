@@ -6389,4 +6389,76 @@ and then inserted into all four Kummer-region residuals and their
 Lipschitz comparison. No finite physical recurrence or Type-II rate
 is proved here; unchanged formal count \(11/13\).
 
+
+
+\medskip
+\noindent\textbf{Strict original PDE telescope and physical Riesz velocity evidence
+(10 November; no new original theorem acceptance).}
+The nonlinear finite spectral four-piece Hartree PDE identity
+\[
+  \mathcal E_{\rm H}\bigl(U_0+\sum_{j=1}^n w_j\bigr)
+  -\mathcal E_{\rm H}(U_0)
+ =\sum_{j=1}^n
+   \left[
+     \mathcal E_{\rm H}\bigl(U_0+\sum_{k=j}^n w_k\bigr)
+    -\mathcal E_{\rm H}\bigl(U_0+\sum_{k=j+1}^n w_k\bigr)
+   \right]
+\]
+is now strictly compiled for the \emph{literal original complex quartic
+nonlocal Hartree residual}, with each $w_j$ the genuine
+spectral-corrected four-region field. The original pinned
+\texttt{--trust=0}, warning-as-error job is
+\texttt{42648496792}, job \texttt{129268151514}; the exact
+\texttt{\#check}/\texttt{\#print axioms} audit of
+\texttt{actual\_Hartree\_finite\_spectral\_Fredholm\_four\_piece\_full\_PDE\_telescopes}
+reports only \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}. The early prerequisite failure
+\texttt{42530158681} was superseded, not silently relabelled.
+The true same-selected-source spectral three-$C^1$ and quadratic
+tests additionally passed in \texttt{42648496711},
+\texttt{42650515902} and \texttt{42650515961}.
+This formula is a \emph{telescoping identity}; it gives no upper bound
+for any nonlinear summand and no $s^{-9/4}$ conclusion.
+
+The original quartic Riesz derivative rows from the full true
+half-radial physical field/velocity polarizations have since passed
+independently in \texttt{42743207667} (original job
+\texttt{129589066733}; three exact audited declarations) and
+\texttt{42743242786} (job \texttt{129589176394}; two declarations).
+The source-time Cramer radius-weight cancellation has also passed
+in \texttt{42742271094}, job \texttt{129585960999}.
+Every cited successful raw audit uses the fixed compiler and Mathlib,
+\texttt{--trust=0}, warning-as-error, and only the three authorised
+transitive axioms. These statements require genuine original
+pointwise bounds on the physical time velocities and moment derivatives;
+the bounds have not yet been propagated from the final four-region PDE.
+
+The first targeted true-source moving-slit Frobenius one-radius theorem,
+CI \texttt{42742808852}, \emph{failed} at its original job
+\texttt{129587751629}: line 119 of its Lean proof contained a
+redundant \texttt{ring} after an already goal-closing
+\texttt{field\_simp}. Removing precisely that proof-tactic line
+at commit \texttt{2b93a05c} preserved its exact theorem type and
+triggered corrected CI \texttt{42744295852}; it must not be
+declared strict Success before the corresponding raw job and
+axiom audit are accepted.
+
+The remaining core PDE obligation is not the algebraic
+Cramer radius cancellation, but the \emph{same-orbit} quantitative
+right-hand side
+\[
+ r\|\partial_sF_{\rm adj}\|
+ \le r\|\dot F_0\|+
+    \frac{1024C_s}{B^2}
+     \|\dot{\mathfrak Z}+p_b\dot{\mathfrak b}
+       +p_\omega\dot{\mathfrak w}\|
+   +|p_b|r\|\dot S_b\|+|p_\omega|r\|\dot S_\omega\|,
+\]
+together with the moving Kummer basis/endpoint derivatives and a
+positive-time gain for \emph{each} of the genuine four-region nonlocal
+Hartree residual terms. The quantitative parameter-Lipschitz estimate,
+finite physical profile recursion, and dynamically deduced Type--II
+rate also remain unproved. Strict revised original-environment
+acceptance is exactly \textbf{11/13}.
+
 \end{document}
