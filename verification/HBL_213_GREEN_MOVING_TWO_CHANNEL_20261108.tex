@@ -6178,8 +6178,15 @@ strict verification in CI \texttt{42733766825} and
 \texttt{42733767288}. The first is now \emph{strictly accepted}
 (original job \texttt{129557911762}, artifact \texttt{13725837641},
 corrected source with pinned toolchain and only three allowed axioms);
-the genuine Hartree moving-slit cross estimate in the second CI
-is still pending at this manuscript checkpoint. Both true Green coefficient
+the genuine Hartree moving-slit cross estimate in
+the second CI is also \emph{strictly accepted}: original job
+\texttt{129557918186}, artifact \texttt{13726343061},
+with the same pinned toolchain, \texttt{--trust=0},
+warning-as-error, exact \texttt{\#check}, and \texttt{\#print axioms}
+limited to \texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}. It proves the \emph{conditional} actual-source
+moving-slit mixed-difference estimate stated above, not a positive
+time decay derived from the full physical PDE. Both true Green coefficient
 time derivatives have also been composed into a common
 same-orbit source theorem under explicit original physical
 time regularity and geometry, with its independent
