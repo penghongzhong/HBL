@@ -8724,4 +8724,82 @@ gradient, moving-time derivatives, parameter Lipschitz
 and PDE orbit remain unproved. The original
 accepted-paper count remains \(11/13\).
 
+
+\paragraph{Source-faithful full quartic Hartree spatial gradient and two-field Lipschitz.}
+The preceding weighted \(A_2\) estimate applies to the
+\emph{complete} nonlocal Hartree PDE nonlinearity,
+not only to the fixed-bubble Hessian. For a smooth
+complex radial physical field \(V\), set
+\[
+ \rho_V=|V|^4,\quad h_V=|V|^2V,\quad
+ \mathcal N(V)=\mathcal I(\rho_V)h_V,\quad
+ m(r)=1+r^2,\quad w(r)=\sqrt{1+r^2}.
+\]
+Define the explicit profile budgets
+\[
+ \begin{aligned}
+  P_V&=\|\rho_V\|_{L^2(dr)},&
+  Q_V&=\|w^3\rho_V\|_{L^2(dr)},\\
+  A_V&=\|m h_V\|_{L^\infty(dr)},&
+  B_V&=\|m h_V'\|_{L^\infty(dr)}.
+ \end{aligned}
+\]
+The same original radial Riesz kernel
+satisfies
+\[
+ \|\mathcal I(\rho)\|_{L^2(dr)}
+  \le3\|w^3\rho\|_{L^2(dr)},\qquad
+ \|\partial_r\mathcal I(\rho)\|_{L^2(dr)}
+  \le6C_\omega\|\rho\|_{L^2(dr)}.
+\]
+Consequently, by the exact product rule,
+\[
+ \boxed{\begin{aligned}
+ \|m\mathcal N(V)\|_2&\le3A_VQ_V,\\
+ \|m\,\partial_r\mathcal N(V)\|_2
+   &\le6C_\omega A_VP_V+3B_VQ_V.
+ \end{aligned}}
+\]
+This supplies a physical spatial gradient for
+the \emph{full quartic nonlocal operator},
+without an independently assumed Riesz derivative
+bound and with constants independent of \(r_0\).
+
+For another physical field \(Z\), set
+\[
+  P_\Delta=\|\rho_V-\rho_Z\|_2,\quad
+  Q_\Delta=\|w^3(\rho_V-\rho_Z)\|_2,\quad
+  A_\Delta=\|m(h_V-h_Z)\|_\infty,\quad
+  B_\Delta=\|m(h_V'-h_Z')\|_\infty.
+\]
+The original source identity
+\(\mathcal N(V)-\mathcal N(Z)
+=\mathcal I(\rho_V-\rho_Z)h_V+
+ \mathcal I(\rho_Z)(h_V-h_Z)\)
+yields the **true** two-field Lipschitz estimates
+\[
+ \begin{aligned}
+  \|m[\mathcal N(V)-\mathcal N(Z)]\|_2
+    &\le3(A_VQ_\Delta+A_\Delta Q_Z),\\
+  \|m\,\partial_r[\mathcal N(V)-\mathcal N(Z)]\|_2
+    &\le6C_\omega(A_VP_\Delta+A_\Delta P_Z)\\
+    &\qquad+3(B_VQ_\Delta+B_\Delta Q_Z).
+ \end{aligned}
+\]
+No velocity or blowup rate is prescribed here.
+The remaining source norms are expressions in
+the \emph{actual} moving physical field and must
+be derived with their time orders; they cannot be
+assumed as independent envelopes. The exact
+proof with pointwise complex-polynomial derivative
+bounds is in
+\texttt{verification/HBL\_213\_RIESZ\_NO\_LEFT\_RADIUS\_WEIGHTED\_A2\_20261110.md}.
+The inner \(C^2\) join, complete selected four-region
+residual with moving time/parameter terms, Hartree
+projected inverse and actual PDE orbit remain open.
+This is paper-level operator calculus using
+a published external theorem, not a Lean axiom
+or a newly accepted original §2.13 environment:
+the tally remains \(11/13\).
+
 \end{document}
