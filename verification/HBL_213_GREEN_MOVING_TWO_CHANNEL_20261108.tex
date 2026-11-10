@@ -8398,4 +8398,59 @@ full source proof is in
 \texttt{verification/HBL\_213\_GENUINE\_HARTREE\_QUADRATIC\_WEIGHTED\_SOURCE\_20261110.md};
 the revised original count remains \(11/13\).
 
+
+\paragraph{A genuine source-regularity gate surviving even perfect \(C^2\) gluing.}
+For the original spectral-corrected Cramer field \(w\), the
+\emph{unshifted} normalized Kummer equation, already strictly
+Lean-verified, is
+\[
+ w''+p(r)w'+q w=F-\delta u_0.
+\]
+Here the hypothesis on the original radial forcing \(F\)
+is only continuity, while the Fredholm forcing data
+currently belong merely to the weighted \(L^2\) class.
+On a true flat-overlap Kummer plateau
+\(v(y)=w(y/a)\), the already verified original
+scaled-operator equation is
+\[
+ \mathcal K_a v(y)=a^{-2}
+    [F(y/a)-\delta u_0(y/a)].
+\]
+Consequently, \emph{only if} \(F\) has the needed
+weighted weak derivative, the spatial derivative obeys
+the exact source-faithful scale identity
+\[
+ \bigl\|(1+y^2)\partial_y(\mathcal K_a v)\bigr\|_{L^2(aJ)}
+ =a^{-5/2}\bigl\|(1+a^2r^2)(F'-\delta u_0')\bigr\|_{L^2(J)}
+ \le a^{-1/2}\bigl\|(1+r^2)(F'-\delta u_0')\bigr\|_{L^2(J)}
+\]
+for \(a\ge1\) and a compact positive-radius interval \(J\)
+in the actual spectral Kummer plateau. This estimate
+has no new independent nonlocal source-envelope input;
+its time decay is still to be proved from the original
+moving Hartree PDE.
+
+The current continuous-source hypothesis is
+insufficient even for this \emph{local} estimate.
+For \(r_*\in J\), the admissible continuous source
+\(F(r)=\psi(r)|r-r_*|^{1/4}\), where
+\(\psi\in C_c^\infty(J)\) and \(\psi(r_*)\ne0\),
+has \(F'\notin L^2(J)\). The matched Cramer field
+\(u_0\) remains \(C^2\), so \(F'-\delta u_0'\)
+is likewise not \(L^2\). Hence no improvement
+of outer-interface \(C^1\) to \(C^2\) alone can
+produce the full derivative norm of the true source.
+The missing mathematical input is the
+PDE-derived weighted \(H^1\) regularity and
+time/parameter bounds of the \emph{same}
+real two-channel Hartree forcing (and the inner
+Fredholm source), or a genuine projected Hartree
+inverse using a different dual space.
+The detailed counterexample and scale computation
+are recorded in
+\texttt{verification/HBL\_213\_C1\_GLUE\_DUAL\_SOURCE\_INTERFACE\_GATE\_20261110.md}.
+These statements are paper calculus; the underlying
+unshifted Kummer identities alone were previously
+Lean-certified. Original theorem count stays \(11/13\).
+
 \end{document}
