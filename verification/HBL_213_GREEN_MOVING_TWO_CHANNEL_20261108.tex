@@ -9351,4 +9351,47 @@ appear in
 \texttt{verification/HBL\_213\_BACKWARD\_FLAT\_OVERLAP\_VOLterra\_PDE\_GRADIENT\_20261110.md}.
 The revised original count remains \(11/13\).
 
+
+\paragraph{Whole-quartic finite nonlocal telescope in the genuine radial source norm.}
+Define, for radial complex corrections,
+\[
+ \|u\|_X=\|u\|_{L^2(dr)}
+       +\|(1+r^2)u'\|_{L^2(dr)},\qquad
+ \|F\|_Y=\|F\|_{L^2(dr)}
+       +\|(1+r^2)F'\|_{L^2(dr)}.
+\]
+The already derived two-field original Hartree \(A_2\)
+source estimate provides, on bounded \(X\) balls,
+\[
+ \|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W+v)\|_Y
+ \le C_R\|u-v\|_X,\qquad
+ \|u\|_X+\|v\|_X\le R.
+\]
+This is a paper consequence of the published
+weighted three-dimensional Riesz theorem, not a
+new Lean statement. For the literal same-PDE finite
+partial sums \(V_j=V_0+\sum_{k\le j}p_k\),
+put \(u_j=V_j-W\). If the original PDE construction
+supplies the \emph{physical profile} bound
+\(\max_{0\le j\le n}\|u_j\|_X\le R\), then
+\[
+ \begin{aligned}
+ \mathcal N_{\rm H}(V_n)-\mathcal N_{\rm H}(V_0)
+   &=\sum_{j=1}^n[
+     \mathcal N_{\rm H}(V_j)-\mathcal N_{\rm H}(V_{j-1})],\\
+ \|\mathcal N_{\rm H}(V_n)-\mathcal N_{\rm H}(V_0)\|_Y
+   &\le C_{2R}\sum_{j=1}^n\|p_j\|_X.
+ \end{aligned}
+\]
+Hence \emph{all} mixed quartic nonlocal Riesz cross
+terms are included without separately postulating a
+nonlocal source envelope; the real missing producer
+is the actual finite physical profile \(X\)-budget.
+In particular, current strict Lean PDE telescoping
+does not verify this \(X\)-budget, a time gain, or a
+full coupled Hartree energy inverse. The full proof
+and its precise hypotheses are in
+\texttt{verification/HBL\_213\_FINITE\_NONLOCAL\_HARTREE\_MIXED\_TERMS\_SHORT\_CHAIN\_20261110.md}.
+No change to strict original acceptance: \(11/13\).
+
 \end{document}
