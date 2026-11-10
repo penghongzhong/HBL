@@ -8117,4 +8117,53 @@ remain open. This is a paper proof using the
 published weighted \(A_2\) theorem, not yet a
 strict Lean certificate; original acceptance stays \(11/13\).
 
+
+\paragraph{Exact original nonlinear Hartree scaling at an arbitrary moving bubble scale.}
+The above full-quartic source inequality can be applied
+without assuming a law for the PDE-selected scale
+\(\lambda>0\).
+Put \(W_\lambda(r)=\lambda^{-1/2}W(r/\lambda)\),
+\(u_\lambda(r)=\lambda^{-1/2}u(r/\lambda)\) and
+\(V_\lambda=W_\lambda+u_\lambda\).
+The original \(3D\) inverse-square quartic convolution has
+the \emph{exact} covariance
+\[
+ \mathcal N_{\rm H}(V_\lambda)(\lambda\rho)
+ =\lambda^{-5/2}\mathcal N_{\rm H}(W+u)(\rho).
+\]
+With the literal physical norms
+\[
+ U_\lambda=\|u_\lambda\|_{L^2(dr)}=U,\qquad
+ H_\lambda=\|(\lambda^2+r^2)u_\lambda'\|_{L^2(dr)}
+       =\lambda H,
+\]
+write \(h=H_\lambda/\lambda\),
+\(k=1+\sqrt{\pi/2}\,h\), and
+\(a_*=(12/\pi)k^3(2\sqrt\pi h+\sqrt{3\pi}\,U_\lambda)\).
+For every \(\lambda>0\),
+\[
+ \boxed{\begin{aligned}
+ &\|\mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)\|_{L^2(dr)}
+ \le\lambda^{-2}
+   \bigl[a_*k^2(\sqrt{\pi/2}+U_\lambda)
+        +9k^2U_\lambda\bigr],\\
+ &\|(\lambda^2+r^2)\partial_r[
+    \mathcal N_{\rm H}(V_\lambda)
+   -\mathcal N_{\rm H}(W_\lambda)]\|_{L^2(dr)}\\
+ &\quad\le\lambda^{-1}\bigl[
+    (24C_{\rm A2}k^6+9k^2+18k)U_\lambda+9k^2h
+     +a_*(3\sqrt\pi/4+3k^2h+6kU_\lambda)\bigr].
+ \end{aligned}}
+\]
+The scale factors follow from the original physical
+Riesz convolution, not from a prescribed Type-II rate.
+The next still-open producer must control the
+two displayed correction norms and their time/parameter
+variation on the \emph{genuine PDE orbit} and combine
+these bounds with the entire moving four-region
+local residual and the Hartree projected inverse.
+This is a paper-level theorem, not a new strict Lean
+certificate. The original acceptance is \(11/13\).
+
 \end{document}
