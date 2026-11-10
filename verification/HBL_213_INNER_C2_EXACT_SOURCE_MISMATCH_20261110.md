@@ -364,3 +364,24 @@ the genuine \(s\)-positive time order. This *one patch*
 estimate is not an \(O(s^{-15/8})\) or \(O(s^{-9/4})\)
 estimate for the full PDE residual. Strict original acceptance
 remains **11/13**.
+
+
+## 6. Strict verified original-source plateau/spectral cancellation
+
+The exact Lean theorem
+\`HBL.TypeIIDynamicSelection.actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation\`
+has **now passed** dedicated
+[CI 42824686940](https://github.com/penghongzhong/HBL/actions/runs/42824686940),
+job **129858810050**, original ZIP artifact **13768893225**.
+The original full job logs show the pinned \`lake env lean
+--trust=0 -DwarningAsError=true\`, exact target
+\`#check\`, \`#print axioms\`, and precisely the
+transitive axiom list \`[propext, Classical.choice, Quot.sound]\`.
+The theorem formalizes the genuine source identity (I12):
+\(S_{\rm in}(y)+a^{-2}(F_o(y/a)-\delta u_0(y/a))
+=-a^{-2}\delta u_0(y/a)\), using the exact original
+quartic Hartree transmission source and two real modulation
+directions. The curvature identity (I13), paper-level
+gradient (I19), assembled physical \(C^2\) profile and
+full PDE orbit are **not** formal consequences yet; the
+original paper tally remains **11/13**.
