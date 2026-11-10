@@ -9111,4 +9111,93 @@ repair gradient remains an independent paper-level
 estimate, not a compiled original theorem environment.
 The revised original tally remains \(11/13\).
 
+
+\paragraph{Quantified original-source outer \(C^2\) derivative budget and point-trace obstruction.}
+The repaired outer profile uses the source-determined curvature
+\[
+ j=w''(B)=F(B)-\delta u_0(B)
+   -A(B)w'(B)-Qw(B),\quad
+ A(r)=2/r+ir/2,\quad Q=\mathrm{frozenZeroCoeff}(\mu,\theta).
+\]
+Set \(p=w(B)\), \(q=w'(B)\),
+\(D=|p|+B|q|+B^2|j|\),
+\[
+ P(r)=p+(r-B)q+\tfrac12(r-B)^2j,\qquad
+ S(r)=\chi_B(r)P(r),\qquad \chi_B=1-\mathrm{cutoff}(3(r-B)/B).
+\]
+Let \(C_k=\|\mathrm{cutoff}^{(k)}\|_\infty\)
+for \(k=1,2,3\). On \(B\le r\le2B\),
+\[
+ \begin{gathered}
+ |S'|\le A_1D/B,\quad
+ |S''|\le A_2D/B^2,\quad |S'''|\le A_3D/B^3,\\
+ A_1=3C_1+1,\quad A_2=9C_2+6C_1+1,\quad
+ A_3=27C_3+27C_2+9C_1.
+ \end{gathered}
+\]
+The actual frozen Kummer operator
+\(\mathcal K S=S''+AS'+QS\) therefore satisfies
+\[
+ |(\mathcal KS)'|
+ \le D\left[\frac{A_3+2A_1+2A_2}{B^3}
+   +\frac{\frac12A_1+A_2+|Q|A_1}{B}\right].
+\]
+This follows from the exact derivative
+\((\mathcal KS)'=S'''+A'S'+AS''+QS'\)
+with \(A'=-2/r^2+i/2\); the moving drift is
+not silently dropped. For \(a\ge1\), on the \emph{actual
+physical repair branch} \(aB\le y\le2aB\), the
+correct \(a^{-2}\)-scaled Kummer source
+\(E_a(y)=a^{-2}(\mathcal KS)(y/a)\) obeys
+\[
+ \boxed{
+ \begin{aligned}
+ \|(1+y^2)E_a'(y)\|_{L^2(aB,2aB)}
+ &\le a^{-1/2}(1+4B^2)\sqrt B\,D\\
+ &\qquad\times\left[
+ \frac{A_3+2A_1+2A_2}{B^3}
+ +\frac{\frac12A_1+A_2+|Q|A_1}{B}\right].
+ \end{aligned}}
+\]
+The \(a^{-1/2}\) gain is physical and exact, but its
+coefficient \(D\) still contains the trace \(F(B)\):
+\[
+ D\le(1+B^2|Q|)|w(B)|
+  +(3B+\tfrac12B^3)|w'(B)|
+  +B^2(|F(B)|+|\delta|\,|u_0(B)|).
+\]
+Continuity plus the previously verified original weighted
+\(L^2_{7/4}\) source bound cannot control \(F(B)\).
+For any fixed positive \(B\), the smooth bump sources
+\(F_N(r)=\sqrt N\,\psi(N(r-B))\), \(\psi(0)=1\),
+have uniformly bounded weighted \(L^2\) norm but
+\(|F_N(B)|=\sqrt N\). With fixed zero Green
+Cauchy data and zero first spectral coefficient,
+the actual Cramer integral representation yields
+\(|u_{0,N}(B)|+|u'_{0,N}(B)|=O(N^{-1/2})\).
+The original Kummer equation thus forces
+\(|u_{0,N}''(B)|\ge\sqrt N-O(N^{-1/2})\).
+This proves a \emph{genuine point-trace obstruction}
+to upgrading the existing general source-class results
+into a uniform \(C^2\) source derivative bound.
+The special physical Hartree PDE source may have extra
+regularity, but it must be produced from the same orbit,
+including moving-parameter bounds, not assumed.
+
+The strict source-locked two-outer-\(C^2\) theorem
+\texttt{actual\_Hartree\_spectral\_same\_source\_outer\_splice\_C2}
+has now passed CI \texttt{42825266426}, job
+\texttt{129860806977}, original artifact
+\texttt{13768179716}, at source SHA \texttt{23359602dd5f34921b2f3cb23aaeb1a153c41fff}.
+The job ran the exact three \texttt{\#check}/\texttt{\#print axioms}
+targets under pinned trust-zero and returned only
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+The weighted repair-gradient calculation above is still
+\emph{paper only}; neither it nor the \(C^2\) interfaces
+establishes the full moving nonlocal Hartree residual's time
+gain, a projected smoothing theorem, a genuine orbit or an
+emergent Type-II rate. Full proof and counterexample:
+\texttt{verification/HBL\_213\_SOURCE\_LOCKED\_OUTER\_C2\_DERIVATIVE\_BUDGET\_20261110.md}.
+Formal original revised acceptance remains \(11/13\).
+
 \end{document}
