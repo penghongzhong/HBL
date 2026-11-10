@@ -2461,3 +2461,25 @@ and plateau identity**, NOT an \(H^1\) residual budget,
 nonlinear source smallness, moving Lipschitz or PDE orbit.
 It is an auxiliary environment only, and does **not**
 increase the original **11/13 (84.62%)** count.
+
+
+**Exact full-quartic moving-bubble transfer (paper):** The original
+inverse-square nonlinearity obeys
+\(\mathcal N_H(V_\lambda)(\lambda\rho)=
+\lambda^{-5/2}\mathcal N_H(W+u)(\rho)\) for
+\(V_\lambda=W_\lambda+u_\lambda\),
+\(W_\lambda(r)=\lambda^{-1/2}W(r/\lambda)\),
+\(u_\lambda(r)=\lambda^{-1/2}u(r/\lambda)\).
+The **actual physical** correction norms are
+\(U_\lambda=\|u_\lambda\|_{L²(dr)}=U\),
+\(H_\lambda=\|(\lambda²+r²)u_\lambda'\|_{L²(dr)}=\lambda H\).
+Consequently the entire original **nonlinear** Hartree source
+difference is controlled by the earlier explicit \(U,H\)
+functionals with exact prefactors \(\lambda^{-2}\) for
+\(L²(dr)\) and \(\lambda^{-1}\) for
+the \((\lambda²+r²)\partial_rL²(dr)\) norm.
+The full two displayed inequalities are in
+[HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md](HBL_213_FULL_NONLINEAR_HARTREE_A2_SOURCE_DIFFERENCE_20261110.md).
+No scale-growth law, positive time order or
+true PDE orbit has been assumed or established.
+The strict original **11/13** count remains unchanged.
