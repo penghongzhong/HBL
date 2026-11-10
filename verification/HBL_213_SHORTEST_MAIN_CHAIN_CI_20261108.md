@@ -2997,3 +2997,34 @@ No new original paper environment; **11/13**.
   residual's true positive time gain, modulation/parameter Lipschitz,
   projected Hartree inverse or dynamical Type-II orbit. The original
   **13-environment count remains 11/13**.
+
+
+### 10 November — NEW strict green original physical plateau-to-spectral C² source lock (auxiliary only)
+
+**[CI 42824686940](https://github.com/penghongzhong/HBL/actions/runs/42824686940)
+= Success**, pinned source SHA
+\`32580956d03ef2c892333acfb696be94cfa0b036\`,
+job **129858810050**, original evidence artifact
+**13768893225**. The actual original job logs show
+\`lake env lean --trust=0 -DwarningAsError=true\`,
+compilation of
+\`ActualHartreeInnerSpectralC2PlateauSourceLock.lean\`,
+exact
+\`#check @HBL.TypeIIDynamicSelection.actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation\`,
+and
+\`#print axioms HBL.TypeIIDynamicSelection.actual_Hartree_original_plateau_spectral_inner_C2_source_cancellation\`.
+Audit explicitly printed precisely
+\`['propext', 'Classical.choice', 'Quot.sound']\`
+with no extra axioms, sorry or admit. The theorem's complete type
+states the literal actual Hartree plateau source identity after
+the original first spectral correction:
+\(a^{-2}(F_o(y/a)-\delta u_0(y/a))+S_{\rm inner}(y)
+ =-a^{-2}\delta u_0(y/a)\), with both real original physical
+speed/source channels and original Cramer Green \(u_0\).
+This is genuinely source-aligned and is **not** an assumed
+source envelope. It is **not** a strict proof of
+\(\Delta_2=D_{\rm inner}(L)+a^{-2}\delta u_0(L/a)\)
+as a combined second-derivative theorem, not an estimate of its
+time evolution and not a full Hartree residual positive
+time order. No new original paper environment; revised acceptance
+remains **11/13**.
