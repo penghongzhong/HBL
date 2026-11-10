@@ -3388,3 +3388,36 @@ All **six exact transitive axiom** reports contain exclusively `propext`, `Class
 
 **Original revised acceptance remains strictly 11/13 (84.62%).** Full same-orbit four-region nonlinear Hartree PDE residual's time-positive order, projected Hamiltonian inverse, actual evolution orbit and dynamically derived Type-II rate remain mathematically OPEN.
 <!-- END HBL_STRICT_ORIGINAL_MOVING_C2_42838601005 -->
+
+
+<!-- HBL_INNER_TRUE_CURVATURE_SOURCE_JUMP_20261110 -->
+### 10 November 2026 — true inner/spectral source curvature defect and sharp patch-width cost
+
+The complete source-faithful identity and its exact one-sided $C^2$
+patch scaling are documented in
+[HBL_213_TRUE_INNER_CURVATURE_SOURCE_DEFECT_20261110.md](HBL_213_TRUE_INNER_CURVATURE_SOURCE_DEFECT_20261110.md)
+and appended to `HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+The actual Fredholm inner field $u$ and the corrected Cramer/Green
+outer field $v$ already share their *true* value and slope at $L$;
+the next target explicitly identifies
+$$
+u''(L)-v''(L)=K_{a,Q}u(L)-a^{-2}F(L/a)
++a^{-2}\delta u_0(L/a).
+$$
+The $K_{a,Q}u$ term cannot be silently replaced with the true Hartree
+Hessian source, and the spectral defect is first-order in $\delta$.
+A $C^2$ source-faithful patch supported in $[L,L+h]$ has exact
+$\|P^{(m)}\|_2\propto|\Delta_2|h^{5/2-m}$ for $m=0,1,2,3$;
+in particular its spatial forcing derivative costs
+$|\Delta_2|h^{-1/2}$, so an arbitrarily thin cutoff does not generate
+positive time order.
+
+The Lean modules
+`ActualHartreeInnerSpectralC2PlateauSourceLock.lean` and its strict
+workflow now contain targets for the original source-jump algebra and
+the instantiation with the genuine two-channel Fredholm and matched
+spectral Green fields. **The new exact type and transitive axiom audit
+is pending the actual CI job outcome.** The existing accepted
+three-$C^1$ result, original PDE telescope and outer $C^2$ traces
+are unchanged. **No new original environment is accepted: 11/13.**
+<!-- END HBL_INNER_TRUE_CURVATURE_SOURCE_JUMP_20261110 -->
