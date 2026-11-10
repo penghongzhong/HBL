@@ -198,3 +198,63 @@ No new Lean 4.35.0-rc3 --trust=0 build, exact #check or #print axioms
 exists for this computation. Earlier CI 42536552509 and 42854633900
 remain exact-target Success but do not establish this result.
 Original 13 environments accepted: **11/13 (84.62%)**.
+
+
+## 6. Exact *full nonlinear* conformal Hartree PDE and a concrete dynamical obstruction
+
+The same change of variables is valid for the **whole original
+nonlocal Hartree equation**, not only its Hessian. For any sufficiently
+regular complex field \(u(t,x)=W(x)\Phi(t,\Xi(x))\) (with *fixed*
+stereographic coordinates) and the original physical equation
+\[
+ i\partial_tu+\Delta_xu+
+   \mathcal I(|u|^4)|u|^2u=0,
+\]
+the true convolution and conformal Laplacian identities yield exactly
+\[
+ \mathcal N(W\Phi\circ\Xi)
+ =\frac{\kappa_{\rm H}}2W^5
+   \bigl[\mathscr K(|\Phi|^4)|\Phi|^2\Phi\bigr]\circ\Xi ,
+ \qquad
+ -\Delta_x(W\Phi\circ\Xi)
+ =W^5[(3-4\Delta_{\mathbb S^3})\Phi]\circ\Xi.
+ \tag{C14}
+\]
+Thus the **unabridged** nonlinear physical PDE is
+\[
+ \boxed{\quad
+ i\partial_t\Phi(t,\xi)
+ =\frac{(1-\xi_4)^2}{4}
+  \left[(3-4\Delta_{\mathbb S^3})\Phi
+      -\frac{\kappa_{\rm H}}2
+       \mathscr K(|\Phi|^4)|\Phi|^2\Phi\right](t,\xi).
+ \quad}
+ \tag{C15}
+\]
+All quartic-density nonlocal mixed interactions are retained in the
+literal nonlinear convolution. The factor
+\(W^4=(1-\xi_4)^2/4\) is **not optional**: at the north pole
+\(\xi_4=1\) (physical spatial infinity) it vanishes
+quadratically as a function of spherical height. Therefore the
+round-sphere spatial elliptic spectral gap **cannot** simply be
+reinterpreted as uniform sphere \(L^2\) dynamical coercivity or
+a positive-energy limiting-absorption/Kato estimate.
+Multiplication by \((1-\xi_4)^2\) mixes spherical harmonics and
+degenerates at the compactification point.
+
+For the exact equilibrium \(\Phi\equiv1\), the bracket in (C15)
+vanishes since
+\((3-4\Delta_{\mathbb S^3})1=3\) and
+\(\frac{\kappa_{\rm H}}2\mathscr K1
+=(3/2\pi^2)(2\pi^2)/2=3\).
+Linearization recovers (C5), including the full nonlocal real block.
+This is a useful **same-equation** stationary/dynamic consistency
+check, not an extra external model or physical blowup construction.
+
+Caveats: (C15) uses a fixed bubble/physical coordinate frame;
+the actual HBL time-dependent scaling, gauge, moving four interfaces,
+and selected velocity introduce material transport/parameter terms.
+They **must** be derived and estimated independently. This exact
+nonlinear coordinate identity is **not** a positive-time residual
+estimate, a nonlinear orbit, or a validated Lean theorem.
+Original revised acceptance remains 11/13.
