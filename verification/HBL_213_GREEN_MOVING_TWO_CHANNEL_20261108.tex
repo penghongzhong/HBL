@@ -10343,4 +10343,58 @@ This does not rule out a corrected Hartree Type-II orbit,
 and remains a paper calculation without new Lean acceptance.
 % END HBL_BARE_DILATION_PHASE_MOMENT_DIVERGENCE_20261110
 
+
+% HBL_ANNULAR_PHASE_RESONANCE_WEIGHTED_DERIVATIVE_BARRIER_20261110
+\medskip
+\noindent\textbf{A quantitative obstruction to annulus-only phase
+resonance compensation.}
+For the actual Hartree bubble
+$W=(1+r^2)^{-1/2}$ and its genuine phase kernel $L_-W=0$,
+let $R\ge2\pi$, $b\in\R$, and choose $0\le\chi_R\le1$
+with $\chi_R=1$ on $[0,R]$ and $\chi_R=0$ beyond $2R$.
+Assume that a correction source
+$G\in H^1_0((R,2R);\C)$ alone cancels the phase moment:
+\[
+ \int_0^\infty r^2W(r)\bigl(b\chi_R(r)\Lambda W(r)+G(r)\bigr)
+ \,dr=0.
+\]
+The exact bare moment already computed above satisfies
+\[
+ \int_0^\infty r^2W\chi_R\Lambda W\,dr
+ \le\arctan R-\frac R2-\frac{R}{2(1+R^2)}
+ \le-\frac R4 .
+\]
+With $A_R(r)=\int_R^rt^2W(t)\,dt$ one has
+$0\le A_R(r)\le(1+r^2)/2$ on $[R,2R]$.
+Integrating by parts, using the zero endpoint traces and then
+Cauchy--Schwarz, gives
+\[
+ \frac{|b|R}{4}
+ \le\left|\int_R^{2R}r^2WG\,dr\right|
+ =\left|\int_R^{2R}A_RG'\,dr\right|
+ \le\frac{\sqrt R}{2}
+ \|(1+r^2)G'\|_{L^2(R,2R)}.
+\]
+Thus the annular phase repair necessarily pays
+\[
+ \boxed{\quad\|(1+r^2)G'\|_{L^2(R,2R)}
+ \ge\frac{|b|}{2}\sqrt R.\quad}
+\]
+Conditionally on a true modulation trapping interval
+$0<m\le\mu\le M$, $q_s=4\mu$ and
+$b=(1+4\mu)/(2q)$ imply $b\ge c/s$.
+For $R(s)\ge2\pi$ an \emph{annulus-only} phase correction
+therefore cannot also have the
+$O(s^{-17/8-\eta})$, $\eta>0$, weighted differentiated
+source bound required by the absolute backward Duhamel strategy.
+This eliminates that \emph{local repair mechanism}, not the
+complete physical four-region Hartree solution: actual
+nonlocal radiation, coupled source moments, global cancellation,
+or an appropriate projected evolution inverse may evade the bound.
+The proof and all explicit hypotheses are recorded in
+\texttt{verification/HBL\_213\_ANNULAR\_PHASE\_RESONANCE\_WEIGHTED\_DERIVATIVE\_LOWER\_BOUND\_20261110.md}.
+This is a paper calculation, not a new Lean certificate;
+the revised-original acceptance remains $11/13$.
+% END HBL_ANNULAR_PHASE_RESONANCE_WEIGHTED_DERIVATIVE_BARRIER_20261110
+
 \end{document}
