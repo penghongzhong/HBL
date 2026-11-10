@@ -24,7 +24,7 @@ open Set MeasureTheory Filter
 open scoped Topology
 
 namespace HBL.TypeIIDynamicSelection
-open HBL.Modulation.Monopole HBL.Modulation.AffineTail
+open HBL.Modulation HBL.Modulation.Monopole HBL.Modulation.AffineTail
 
 /-- Explicit complex-coordinate quartic velocity bound, valid also at u=0. -/
 theorem actual_Hartree_original_quartic_velocity_norm_bound
