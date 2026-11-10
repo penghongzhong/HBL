@@ -25,62 +25,71 @@ We can instead eliminate *both* artificial derivative interfaces
 by using a **flat smooth overlap**, without introducing an
 independent second-jet datum or point-source trace.
 
-## 2. Exact geometry in the original physical coordinate
+## 2. Corrected geometry: keep the inner transition on the ORIGINAL backward overlap [L/2,L]
 
-Assume the actual original geometric input
+A source audit of \`actual_Hartree_moment_locked_pullback_actual_inner_jet\`
+in \`ActualHartreeMomentLockedKummerPullback.lean\` proves equality
+of the actual Fredholm and same-source Kummer **value and slope at y=L**
+and explicitly identifies the available backward shell
+\([L/2,L]\). The originally proposed transition
+\([L+2h,L+3h]\), with \(h=(aB-L)/8\), improperly demands
+Fredholm inner *physical estimates to the right of L*, where
+the inner region has not been justified. It is therefore **withdrawn**:
+the mere fact that the inner formula is defined globally does
+not validate its approximation estimates there.
+
+For the original physical geometry
 \[
- 0<L<aB,\qquad a>0,\qquad 0<L/a<B<\mathrm{scale},
- \quad D=aB-L>0,\quad h=D/8.
+ 0<L<aB,\quad a>0,\quad 0<L/a<B<\mathrm{scale},\quad
+ h_{\rm in}=L/8,\quad h_{\rm out}=(aB-L)/8,
 \]
-Use the **existing fixed \(C^\infty\) cutoff**
-\(c(z)=\mathrm{cutoff}(z)\), with \(c(z)=0\) on \(z\le1\)
-and \(c(z)=1\) on \(z\ge2\). Define
+use the SAME fixed smooth cutoff \(c\) and set instead
 \[
- \eta(y)=c((y-L-h)/h),\qquad
- \chi(y)=1-c((y-(aB-4h))/h).
-\tag{S1}
+ \boxed{\begin{aligned}
+ \eta(y)&=c\left(\frac{y-L+4h_{\rm in}}{h_{\rm in}}\right),\\
+ \chi(y)&=1-c\left(\frac{y-aB+4h_{\rm out}}{h_{\rm out}}\right),\\
+ U(y)&=(1-\eta(y))u(y)+\eta(y)\chi(y)v(y).
+ \end{aligned}}\tag{S1'}
 \]
-Then, purely by the literal cutoff definition,
+Here \(u\) is the genuine Fredholm inner field and \(v=w(y/a)\)
+is the same true source-selected, spectral-corrected Kummer field
+already verified on \(0<y<a\,\mathrm{scale}\), including **to the
+left of** \(y=L\). Their first two matching traces at L are
+not inserted as free data.
+
+Because \(c=0\) below \(1\) and \(c=1\) above \(2\),
 \[
  \begin{array}{rcl}
- \eta=0&\text{on}& y\le L+2h,\\
- \eta=1&\text{on}& y\ge L+3h,\\
- \chi=1&\text{on}& y\le aB-3h=L+5h,\\
- \chi=0&\text{on}& y\ge aB-2h=L+6h.
- \end{array}
-\tag{S2}
+ \eta=0&\text{on}&y\le L-3h_{\rm in}=5L/8,\\
+ \eta=1&\text{on}&y\ge L-2h_{\rm in}=3L/4,\\
+ \chi=1&\text{on}&y\le aB-3h_{\rm out}=L+5h_{\rm out},\\
+ \chi=0&\text{on}&y\ge aB-2h_{\rm out}=L+6h_{\rm out}.
+ \end{array}\tag{S2'}
 \]
-Thus the inner transition lies in \([L+2h,L+3h]\)
-and the outer transition lies in \([L+5h,L+6h]\);
-they are strictly disjoint and both lie in \((L,aB)\).
-At every point where the Kummer field is used nontrivially,
-\(y/a<B<\mathrm{scale}\): no **unproved continuation to
-\(2B\)** is required.
-
-Set \(u(y)=\) the actual original two-channel Fredholm inner field,
-\(v(y)=w(y/a)\), where \(w\) is the **same-source, true selected,
-spectral-corrected** original Kummer solution, and
+The two transition intervals are now
 \[
- W(y)=\chi(y)v(y),\qquad
- \boxed{U(y)=(1-\eta(y))u(y)+\eta(y)W(y).}
-\tag{S3}
+ I_{\rm in}=[5L/8,\,3L/4]\subset[L/2,L],\qquad
+ I_{\rm out}=[L+5h_{\rm out},\,L+6h_{\rm out}]
+            \subset(L,aB).
 \]
-Then the formula is identically \(u\) on \(y\le L+2h\),
-identically \(v\) on \([L+3h,L+5h]\), and identically
-zero for \(y\ge L+6h\). If \(u\) and \(v\) are \(C^k\)
-on their respective original interiors, \(U\) has no
-new artificial jumps at either transition, for any
-\(k\le\) their actual interior regularity. In particular,
-this architecture does **not** ask for the pointwise number
-\(w''(B)\) as an added interface datum.
+Thus the genuine inner profile is needed only where its
+physical approximation is actually intended,
+the Kummer field is evaluated only in its proven
+positive domain, and the original spectral upper endpoint B
+is not crossed. The field is identically \(u\) before
+\(I_{\rm in}\), identically \(v\) on the long middle plateau,
+and zero after \(I_{\rm out}\), with no artificial interface
+curvature or point evaluation \(F(B)\).
 
-**Important:** the currently available
-\(\mathrm{InWeightedL2}(7/4)\) hypotheses do not establish
-global \(C^2\)/\(H^3\) regularity of both genuine fields.
-When \(u\) is merely \(H^2_{\rm loc}\), (S3) is a
-\(H^2_{\rm loc}\) splice, not automatically \(H^3\).
-The weighted derivative source estimate remains a real
-regularity and nonlinear-PDE task.
+This corrected construction exposes BOTH true geometric
+denominators \(h_{\rm in}^{-j}=(8/L)^j\) and
+\(h_{\rm out}^{-j}=(8/(aB-L))^j\); it does not
+silently hide a dependency on L or on \(aB-L\).
+The still-open issue is whether the genuine source and
+physical spectral profile have sufficient regularity and
+a small enough \emph{actual} mismatch on the backward
+shell. The pre-existing weighted \(L^2\) assumptions do
+not themselves furnish a time-decaying nonlinear residual.
 
 ## 3. Exact second-order commutator; no source cancellation is assumed
 
@@ -103,16 +112,17 @@ derivative mismatches*, rather than artificially prescribed
 endpoint curvatures. No \(w''(B)\) or \(F(B)\) is sampled to
 construct the field. The derivatives of \(\eta,\chi\) obey
 \[
- \|\partial_y^j\eta\|_\infty+
- \|\partial_y^j\chi\|_\infty
- \le 2C_jh^{-j},\quad j=1,2,3,
-\tag{S5}
+ \|\partial_y^j\eta\|_\infty\le C_jh_{\rm in}^{-j},
+ \qquad
+ \|\partial_y^j\chi\|_\infty\le C_jh_{\rm out}^{-j},
+ \quad j=1,2,3,
+\tag{S5'}
 \]
-with \(C_j\) derived from the already available genuine smooth
-cutoff. The explicit denominator
-\(h^{-j}=8^j(aB-L)^{-j}\) must be carried into source
-estimates: this scheme must **not** silently claim
-uniform bounds as \(aB-L\to0\).
+where the fixed constants \(C_j\) come from the genuine
+already established smooth cutoff. Both
+\(h_{\rm in}^{-j}=8^jL^{-j}\) and
+\(h_{\rm out}^{-j}=8^j(aB-L)^{-j}\)
+are retained in all source estimates.
 
 For time-dependent \(L,a,B\), including \(B\) if permitted,
 the full time/transport operation
@@ -139,10 +149,12 @@ telescoping estimate, the exact nonlinear cross-density
 must remain in the source and be bounded from the same
 physical three-dimensional Riesz convolution.
 
-At the level of an \(H^1\) residual, differentiating
-(S4) uses \(u'',v''\) and up to \(\eta''',\chi'''\).
-A genuine local \(H^3\) or source \(H^1\) estimate is still
-needed. The construction removes **uncontrolled boundary
+At the level of a spatial \(H^1\) commutator, differentiating
+(S4) uses only the actual \(u'',v''\) and up to
+\(\eta''',\chi'''\); no third derivative of \(u,v\)
+occurs in these *cutoff commutators*. Derivatives of the
+unlocalized original PDE sources, however, still require
+their own legitimate local Sobolev control. The construction removes **uncontrolled boundary
 point traces**, not the underlying PDE regularity requirement.
 
 ## 4. Strict next acceptance gate
@@ -157,7 +169,7 @@ piecewise three-\(C^1\) outer matching is:
  \text{existing true Fredholm and spectral Green fields
        in the overlapping domain}\\
  \downarrow\\
- \text{flat two-cutoff field (S3), geometry (S2)
+ \text{flat two-cutoff field (S1'), geometry (S2')
        and exact commutators (S4),(S6)}\\
  \downarrow\quad\boxed{\text{OPEN: local physical source }H^1
                    \text{ and all radius/motion derivative budgets}}\\
@@ -180,3 +192,94 @@ a C² endpoint identity.
 **No new \`#check\`, no independent Lean CI and no revised-original
 environment acceptance are claimed for (S1)–(S7). The original
 acceptance remains exactly 11/13.**
+
+
+
+## 5. Quantitative inner-glue estimate from the **already-proved** true zero C¹ jet
+
+The proof \`actual_Hartree_moment_locked_pullback_actual_inner_jet\`
+produces \(e(L)=e'(L)=0\) for the genuine difference
+\(e=u-v\). Under the additional, **not yet certified on
+the full nonlinear PDE orbit**, local \(e\in H^2([L/2,L])\),
+let \(E=\|e''\|_{L^2([L/2,L])}\).
+The one-dimensional fundamental theorem of calculus gives
+for every \(y\in[L/2,L]\)
+\[
+ e'(y)=-\int_y^L e''(t)\,dt,\qquad
+ e(y)=\int_y^L(t-y)e''(t)\,dt ,
+\]
+hence, by Cauchy--Schwarz,
+\[
+ |e'(y)|\le\sqrt{L-y}\,E,\qquad
+ |e(y)|\le\frac{(L-y)^{3/2}}{\sqrt3}\,E .
+ \tag{S8}
+\]
+On the ACTUAL backward inner transition
+\(I_{\rm in}=[L-3h,L-2h]\), \(h=h_{\rm in}=L/8\),
+\[
+ \sup_{I_{\rm in}}|e'|\le\sqrt{3h}\,E,\qquad
+ \sup_{I_{\rm in}}|e|\le3h^{3/2}E .
+ \tag{S9}
+\]
+Since \(\chi\equiv1\) on this interval, the **complete
+linear inner cutoff commutator**, without dropping the drift,
+is exactly
+\[
+ \mathcal C_{\rm in}
+ =-2\eta'e'-(\eta''+c_1\eta')e
+\]
+with \(c_1\) the original physical first-derivative
+coefficient. Let \(M_0=\sup_{I_{\rm in}}|c_1|\)
+and \(M_1=\sup_{I_{\rm in}}|c_1'|\), keeping their true
+physical parameter dependence explicit. If
+\(\|\eta^{(j)}\|_\infty\le C_jh^{-j}\), then
+(S9) and the exact transition length \(h\) imply
+\[
+ \boxed{\quad
+ \|\mathcal C_{\rm in}\|_{L^2(I_{\rm in})}
+ \le\bigl[2\sqrt3 C_1+3C_2+3C_1M_0h\bigr]E .
+ \quad}\tag{S10}
+\]
+This is an important structural saving: matching the **genuine**
+zero value and slope at L cancels the naive \(h^{-2}\)
+commutator amplification. The resulting unweighted
+\(L^2\) estimate costs no negative power of \(h\).
+
+One further spatial derivative, requiring only the same
+\(e''\in L^2\) (not \(e'''\)), yields the *exact*
+\[
+ \begin{aligned}
+ -\partial_y\mathcal C_{\rm in}
+ ={}&2\eta'e''+3\eta''e'+\eta'''e
+  +c_1\eta'e'+(c_1'\eta'+c_1\eta'')e .
+ \end{aligned}
+\]
+Consequently
+\[
+ \boxed{\begin{aligned}
+ \|\partial_y\mathcal C_{\rm in}\|_{L^2(I_{\rm in})}
+ \le\biggl[
+   \frac{2C_1+3\sqrt3 C_2+3C_3}{h}
+   +(\sqrt3C_1+3C_2)M_0
+   +3C_1M_1h\biggr] E .
+ \end{aligned}}\tag{S11}
+\]
+In a weighted target,
+multiply the RHS by the *actual maximum*
+of the weight over the moving interval, rather than
+writing \(O(1)\) for the entire radial range.
+Both (S10) and (S11) are paper deductions from
+same-source zero-jet matching, with **one concrete
+remaining producer**: estimate \(E=\|u''-v''\|_{L^2}\)
+from the true two-region Hartree PDE sources and
+tracked physical coefficients. A bound on \(E\)
+is not supplied by the previous \(C^1\) Lean proof
+alone, and no decay exponent is asserted here.
+The outer cutoff and complete nonlocal quartic
+Hartree interaction must still be bounded independently.
+
+This corrected backward-overlap route is substantially
+more economical than the invalid forward-inner-overlap
+construction. It also avoids needing the source trace
+\(F(B)\) just to define a globally smooth profile.
+**No original-environment gain: 11/13.**
