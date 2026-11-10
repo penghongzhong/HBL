@@ -100,8 +100,8 @@ By the exact scaling of the *same original* frozen Kummer operator,
  =a^{-2}(\mathcal KS)(y/a),\quad
  \partial_y E_a=a^{-3}(\mathcal KS)'(y/a).
 \]
-For \(a\ge1\), support in \(aB\le y\le2aB\) and the physical radial
-measure \(dy\), (O5) gives
+For \(a\ge1\), **restricted to the physical repair branch**
+\(aB\le y\le2aB\), in the radial measure \(dy\), (O5) gives
 \[
  \boxed{\ 
  \begin{aligned}
