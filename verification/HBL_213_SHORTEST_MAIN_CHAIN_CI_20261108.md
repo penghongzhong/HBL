@@ -3601,3 +3601,57 @@ synchronized to HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex.
 time-positive residual, Kato estimate or PDE-derived Type-II rate.
 Original 13 manuscript environments: **11/13 (84.62%)**.
 <!-- END HBL_FULL_NONLINEAR_CONFORMAL_HARTREE_PDE_20261110 -->
+
+
+<!-- HBL_EXACT_MOVING_CONFORMAL_HARTREE_DILATION_20261110 -->
+### 10 November 2026 — exact *moving* physical Hartree dilation; nonlinear commutator and C² interface distribution
+
+[Full paper calculation](HBL_213_EXACT_MOVING_CONFORMAL_DILATION_COMMUTATOR_20261110.md)
+has been committed and synchronized with
+[§2.13 TeX](HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex).
+For the same original quartic-density inverse-square Hartree operator
+\(\mathcal H=-\Delta-\kappa_{\mathrm H}(|x|^{-2}*|u|^4)|u|^2u\)
+and physical critical scaling \(\mathsf S_\rho u(x)=\rho^{1/2}u(\rho x)\),
+the **entire nonlocal** convolution satisfies
+\(\mathcal H(\mathsf S_\rho u)=\rho^{5/2}\mathcal H(u)(\rho x)\).
+Consequently, \(\mathcal H'(u)[\Lambda u]-\Lambda\mathcal H(u)=2\mathcal H(u)\),
+with \(\Lambda=\frac12+x\cdot\nabla\).
+For the conformal multiplier \(m=(1-\xi_4)^2/4\), original spherical source
+\(\mathcal M(\Phi)=(3-4\Delta_{\mathbb S^3})\Phi
+-(3/(2\pi^2))\mathscr K(|\Phi|^4)|\Phi|^2\Phi\),
+and \(D=\nabla_{\mathbb S^3}\xi_4\cdot\nabla_{\mathbb S^3}-\xi_4/2\),
+the exact original nonlinear identities give
+\(\mathcal M'(\Phi)[D\Phi]=\nabla\xi_4\cdot\nabla\mathcal M(\Phi)-5\xi_4\mathcal M(\Phi)/2\)
+and \(\mathcal R'(\Phi)[D\Phi]-D\mathcal R(\Phi)=2\mathcal R(\Phi)\), \(\mathcal R=m\mathcal M\).
+This **removes an unnecessary independently estimated scaling-commutator source**.
+
+For any genuinely moving critical-scale field
+\(u(t,x)=e^{i\gamma(t)}\lambda(t)^{-1/2}W(x/\lambda)\Phi(s,\Xi(x/\lambda))\)
+with \(s_t=\lambda^{-2}\), its exact original *nonlinear* PDE is
+\(i\Phi_s=\mathcal R(\Phi)+\gamma_s\Phi+i(\lambda_s/\lambda)D\Phi\).
+This has **not** been established for the specifically selected
+four-region Fredholm/Kummer field as an exact-type Lean theorem.
+Its moving packet still has time derivatives of its true profile,
+selected speed and each moving boundary.
+
+Distributionally the verified three \(C^1\) interfaces eliminate
+shell Dirac measures from the **undifferentiated** radial PDE and
+moving time derivative, but
+\(\partial_r^3U=(\partial_r^3U)_{\rm piecewise}
++\sum_j[U_{rr}]_{R_j}\delta_{R_j}\).
+Thus a Morawetz-dual **differentiated** residual still needs
+honest source-space control of these C² jumps, or a proved direct
+distributional interface pairing. This is a precise remaining
+source-norm gate; no time gain is inferred from the commutator identity.
+
+**Acceptance:** new calculation is **paper only**; no newly completed
+pinned Lean --trust=0 #check or three-axiom #print axioms. Previous
+strict CI [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509)
+validated the exact spectral finite-PDE telescoping algebra,
+and [42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900)
+validated the original plateau C² source-jump declaration,
+but neither claims the newly derived moving-frame identity or the
+time-positive/Lipschitz source bound. §2.13, nonlinear physical orbit,
+finite-profile recurrence and PDE-derived Type-II rate remain open.
+**Original revised manuscript environments: 11/13 (84.62%).**
+<!-- END HBL_EXACT_MOVING_CONFORMAL_HARTREE_DILATION_20261110 -->
