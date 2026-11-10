@@ -1723,3 +1723,91 @@ The prior exact four-region *nonlinear PDE telescope* failure [42530158681](http
 New ORIGINAL physical half-radial velocity producers are strictly successful: [42743207667](https://github.com/penghongzhong/HBL/actions/runs/42743207667), original job `129589066733`, checks **three** exact target theorem types; and [42743242786](https://github.com/penghongzhong/HBL/actions/runs/42743242786), original job `129589176394`, checks **two** target types. Original logs show zero-output `--trust=0` warning-as-error compilation and exact audit prints containing only `propext`, `Classical.choice`, `Quot.sound`. These derive the *genuine differentiated quartic potential row* from pointwise half-radial field and time-velocity budgets, but have **not** propagated the needed quantitative budgets from one complete physical four-region PDE orbit.
 
 The current mathematical obstruction remains substantive, not merely a proof-script lint: the original moving Cramer source derivative bound still needs scale-accurate estimates for `r‖Fdot‖`, `Zdot + pb bdot + pw wdot`, and the two differentiated modulation source directions on the same orbit. One must then control moving Kummer basis/endpoint derivatives, four-region source positive order and parameter Lipschitz, finite physical recurrence, and derive—not assume—the II-type law. **Strict original revised paper count: 11/13 (84.62%), not 12/13.**
+
+
+### 10 November 2026 — two-stage dynamical Type-II rate reduction after published methods
+
+**Latest strict GitHub verification:** physical Cramer moving-slit
+variation [CI 42756618784](https://github.com/penghongzhong/HBL/actions/runs/42756618784)
+is **Success**, original job 129632373174 and artifact
+13736666241. The original log has pinned Lean 4.35.0-rc3 /
+Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
+trust zero, warnings as errors, exact type check and three-axiom audit
+(only propext, Classical.choice, Quot.sound).
+This verifies the true geometric domain inclusion **conditional**
+on scale-variation premises, not an actual physical Hartree
+PDE bound on the scale variation. Independent local
+continuous-orbit variants in CI 42763633557 must
+retain their separate final verdict.
+
+**Top-journal proof-architecture lesson:** Raphaël–Rodnianski,
+*Publ. Math. IHÉS* 115 (2012), §6 proves actual finite-time
+blowup by coarse modulation/energy bootstrap; §7 establishes
+the sharp rate separately. Merle–Raphaël–Rodnianski,
+*Invent. Math.* 193 (2013) gives a Hamiltonian critical geometric
+counterpart. Collot–Merle–Raphaël, *JAMS* 33 (2020) employs
+energy bootstrap for a *parabolic* problem and cannot supply
+Hartree's missing coercivity. Krieger–Schlag–Tataru,
+*Duke Math. J.* 147 (2009) is useful for spectral
+parametrices but prescribes the rate, incompatible with
+the HBL goal of dynamic rate selection.
+
+The full proof and all original citations are documented in
+verification/HBL_213_TYPEII_TWO_STAGE_PROOF_REDUCTION_20261110.md
+and synchronized with the §2.13 manuscript. **No additional
+Lean auxiliary theorem has been created merely to count.**
+
+The revised shortest main proof chain is:
+
+1. Retain the original quartic nonlocal Hartree source,
+   unique real Cramer two-speed selection, exact Wronskian
+   and the true Green / spectral corrected three-C¹ interface
+   producer, all of which have already passed strict
+   auxiliary audits.
+2. **OPEN:** prove one full four-region actual PDE residual
+   and projected inverse/energy estimate with common-domain
+   source/time controls, rather than endlessly repackaging
+   local Kummer and Cramer identities.
+3. **OPEN:** construct a single honest physical Hartree orbit
+   with \(\dot H^1\) control, one unstable-mode selection and
+   a forward invariant trapping interval
+   \(9/16<m\le \mu(s)\le M\). Then
+   \(q_s=4\mu\) implies
+   \(q(s)\ge q(s_0)+4m(s-s_0)\to\infty\).
+   The coupled exact scalar identity
+   \(\frac{d}{ds}\log(q/\lambda^2)=-1/q\)
+   reconstructs a finite \(T\), so
+   \(\lambda^{-1}/\sqrt{T-t}=q^{-1/2}\to0\):
+   strict Type-II concentration **without any prescribed rate**.
+   This does NOT itself construct an orbit or prove strong
+   nonextension.
+4. To retain the **original sharper final theorem**,
+   subsequently derive from the same projected physical PDE
+   the **log-weighted L¹ drift**
+   \(\int_{s_0}^\infty(1+\log(s/s_0))|\mu_s|ds<\infty\).
+   With \(\mu_\infty>9/16\) selected by the actual dynamics,
+   this suffices for
+   \(\lambda^{-1}\sim C_\lambda(T-t)^{1/2+2\mu_\infty}\).
+   The former stronger pointwise
+   \(|\mu_s|\lesssim s^{-1-\delta}\) is not needed
+   merely to convert the *constructed* dynamics into a
+   scalar asymptotic rate.
+
+**The real obstruction, quantified:** the accepted source
+analysis yields a physical shell remainder \(s^{-15/8}\).
+Its undamped absolute backward Duhamel integral is
+\(\frac87s^{-7/8}\), **larger** than the first
+correction \(s^{-9/8}\) by a factor \(s^{1/4}\).
+For this **particular** Duhamel comparison an actual PDE
+source \(s^{-17/8-\eta}\) or a genuine projected
+Hamiltonian inverse gain \(s^{-1/4-\eta}\) is needed.
+The previously targeted \(s^{-9/4}\) may be
+stronger than needed **for that comparison**, but
+cannot be dropped from other original estimates before
+their own exponents are audited. The proved Frobenius
+\(R\) factor is an original moving-slit Green estimate,
+not a certified **global four-region** time gain.
+
+**Formal original revised environment count unchanged:
+11/13 (84.62%).** Neither §2.13 nor the final
+dynamic Type-II Hartree theorem has been claimed proved.
