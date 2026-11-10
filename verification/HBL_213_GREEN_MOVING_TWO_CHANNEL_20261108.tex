@@ -9978,4 +9978,58 @@ new Lean declaration or original theorem acceptance:
 $11/13$ remains.
 % END HBL_MODULATION_PATCH_GEOMETRY_CORRECTION_20261110
 
+
+% HBL_C2_PATCH_SHARP_WEIGHTED_TRACE_OBSTRUCTION_20261110
+\medskip
+\noindent\textbf{A sharp width-independent obstruction to smoothing the
+same-source inner curvature repair by cutoff design alone.}
+At the genuine inner/spectral $C^1$ join $y=L$, let $P$ be a
+one-sided $C^3$ curvature repair satisfying
+$P(L)=P'(L)=0$, $P''(L)=\Delta_2$ and
+$P(L+h)=P'(L+h)=P''(L+h)=0$, where
+\[
+ \Delta_2=D_{\rm in}(L)+a^{-2}\delta u_0(L/a)
+\]
+is the actual plateau-source curvature mismatch. Set
+\[
+ \mathcal K_aP=P''+
+ \left(\frac2y+\frac{iy}{2a^2}\right)P'
+ +\frac{Q}{a^2}P,\qquad f=\mathcal K_aP.
+\]
+The endpoint jets give $f(L)=\Delta_2$ and $f(L+h)=0$.
+The fundamental theorem of calculus and weighted
+Cauchy--Schwarz therefore give the \emph{necessary} inequality
+\[
+ \begin{aligned}
+ \big\|(1+y^2)(\mathcal K_aP)'\big\|_{L^2(L,L+h)}
+ &\ge
+ \frac{|\Delta_2|}
+ {\left(\int_L^{L+h}(1+y^2)^{-2}\,dy\right)^{1/2}}\\
+ &\ge\sqrt3\,L^{3/2}|\Delta_2|,
+ \end{aligned}
+\]
+since $\int_L^\infty(1+y^2)^{-2}dy\le(3L^3)^{-1}$.
+For the original $h=L/4$, the constant improves to
+$\sqrt{375/61}$.
+Under the explicitly conditional original broad-patch geometry
+$a\ge L^3$, bounded $Q$, $L>2$, and $aB\ge5L/4$,
+the previously derived upper estimate has the same factor
+$C_{\eta,Q_0}L^{3/2}|\Delta_2|$.
+Thus cutoff width/shape optimization cannot remove the
+$L^{3/2}$ weighted-gradient price \emph{when the patch forcing
+is bounded independently}. In particular, an independent
+$O(s^{-p})$ patch-source derivative bound necessitates
+\[
+ |D_{\rm in}(s,L(s))+a(s)^{-2}\delta(s)u_0(s,L(s)/a(s))|
+ \lesssim L(s)^{-3/2}s^{-p}.
+\]
+This is not a lower bound for the \emph{full} nonlinear Hartree PDE
+residual: the actual original source and other four-region terms
+may cancel the patch forcing, and a projected evolution may gain.
+It does not assert nonzero curvature mismatch or a constructed
+orbit. Only the local compact-patch geometric shortcut is excluded.
+No new Lean theorem or original-environment acceptance is claimed:
+the tally remains $11/13$.
+% END HBL_C2_PATCH_SHARP_WEIGHTED_TRACE_OBSTRUCTION_20261110
+
 \end{document}
