@@ -8053,4 +8053,68 @@ The full derivation is
 \texttt{verification/HBL\_213\_FULL\_NONLINEAR\_HARTREE\_A2\_SOURCE\_DIFFERENCE\_20261110.md}.
 No new original Lean theorem is accepted: \(11/13\).
 
+
+\paragraph{Closing the nonlocal source estimate in genuine two-norm form.}
+The preceding nonlinear source estimate requires no independent
+pointwise field or density envelopes. Let
+\[
+ U=\|u\|_{L^2(dr)},\quad
+ H=\|(1+r^2)u'\|_{L^2(dr)},\quad
+ K=1+\sqrt{\pi/2}\,H,\quad
+ A_*=\frac{12}{\pi}K^3(2\sqrt\pi H+\sqrt{3\pi}\,U).
+\]
+If the true radial correction is locally absolutely continuous,
+\(U+H<\infty\) implies \(u(\infty)=0\).
+Weighted Cauchy--Schwarz yields
+\[
+ |u(r)|\le H\left(\int_r^\infty
+        (1+t^2)^{-2}dt\right)^{1/2},\qquad
+ \sup_{r\ge0}\sqrt{1+r^2}|u(r)|
+ \le\sqrt{\pi/2}\,H.
+\]
+Indeed,
+\((1+r^2)\int_r^\infty(1+t^2)^{-2}dt
+\le\pi/2\). Thus \(|W+u|\le KW\),
+so the earlier actual field factors satisfy
+\(M\le K\), \(S\le K^3\), while
+\[
+ \begin{gathered}
+ \bigl||W+u|^4-W^4\bigr|\le4K^3W^3|u|,\\
+ \||W+u|^4-W^4\|_{L^\infty}
+  \le2\sqrt\pi K^3H,\\
+ \||W+u|^4-W^4\|_{L^1(\mathbb R^3)}
+  \le4\pi\sqrt{3\pi}\,K^3U .
+ \end{gathered}
+\]
+These are \emph{proved inequalities in exactly the true
+correction field}, not assumed independent source envelopes.
+Substitution gives the entirely explicit bound
+\[
+ \boxed{\begin{aligned}
+ &\|(1+r^2)\partial_r[
+  \mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)]
+       \|_{L^2(dr)}\\
+ &\quad\le
+ (24C_{\rm A2}K^6+9K^2+18K)U+9K^2H\\
+ &\qquad\quad+
+ A_*\bigl(3\sqrt\pi/4+3K^2H+6KU\bigr),\\
+ &\|\mathcal N_{\rm H}(W+u)-\mathcal N_{\rm H}(W)\|_{L^2(dr)}
+ \le A_*K^2(\sqrt{\pi/2}+U)+9K^2U .
+ \end{aligned}}
+\]
+The bound is globally radius-free and the right-hand
+side tends to zero with \(U+H\).
+It controls the \emph{entire original nonlocal quartic
+Hartree nonlinearity difference}; it does not control
+the separate local Laplacian, spectral correction,
+moving cutoffs or modulation transport.
+Nor does it prove that the actual selected moving
+four-region correction has a PDE-derived small
+\(U(s)+H(s)\) and the needed Lipschitz/flux bound.
+The projected Hartree stable inverse,
+constructed genuine orbit, and dynamic Type-II rate
+remain open. This is a paper proof using the
+published weighted \(A_2\) theorem, not yet a
+strict Lean certificate; original acceptance stays \(11/13\).
+
 \end{document}
