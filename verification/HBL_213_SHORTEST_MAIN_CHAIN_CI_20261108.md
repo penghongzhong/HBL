@@ -3716,3 +3716,49 @@ long-range radiation and all-region cancellation need not be confined to
 the annulus, or a projected evolution gain.
 
 **Evidence discipline:** [explicit proof and hypotheses](HBL_213_ANNULAR_PHASE_RESONANCE_WEIGHTED_DERIVATIVE_LOWER_BOUND_20261110.md) and synchronized §2.13 TeX are paper only, not Lean formally audited for this inequality. Historical strict target CI [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509) (original PDE telescoping) and [42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900) (true C² curvature shell budget) were rechecked from original job logs; they do not imply residual time order. Revised original count stays **11/13 (84.62%)**, §2.13 and final Type-II theorem OPEN.
+
+
+<!-- HBL_EXACT_PHASE_WRONSKIAN_FLUX_OUTGOING_TRACE_20261110 -->
+### Exact physical phase Wronskian flux and outgoing C¹ matching requirement (paper, not CI)
+
+The regular zero-energy physical Hartree phase linearization obeys
+\[
+R^2[W(R)g'(R)-W'(R)g(R)]
+=-\int_0^Rr^2W(r)L_-g(r)\,dr,\qquad
+W=(1+r^2)^{-1/2}.
+\]
+No compact support or global Fredholm orthogonality is presumed in this
+finite-radius identity. For the **actual** phase source split
+\(L_-g=b\Lambda W+E\) on \([0,R]\), define
+\(M_E(R)=\int_0^Rr^2WE\,dr\). From the exact bare phase
+moment \(I(R)\le -R/4\) at \(R\ge2\pi\), obtain the necessary matched
+outgoing trace
+\[
+|g_{\mathrm{out}}'(R)|+|g_{\mathrm{out}}(R)|/R
+\ge |b|/4-|M_E(R)|/R.
+\]
+This identifies the **same-PDE source/outer radiation flux dichotomy**:
+a negligible outer first jet can occur only if the full Hartree phase
+remainder supplies the corresponding compensating moment. The exact
+origin-regular particular solution for bare \(L_-g=\Lambda W\) is
+\[
+g=W\left[\frac{r^2}{4}
+-\left(r-\frac1r\right)\arctan r+\log(1+r^2)-1\right],
+\quad g'(r)\to1/4,
+\]
+which is not in \(\dot H^1\). The proof of these new mathematical facts
+uses the original radial Wronskian identity, not a local replacement
+of the nonlocal Hartree real channel.
+
+[Full explicit calculation](HBL_213_EXACT_PHASE_WRONSKIAN_FLUX_MATCHING_20261110.md)
+is committed and incorporated into
+[§2.13 TeX](HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex).
+This is **not** a Lean 4.35.0-rc3-certified statement. Existing
+[CI 42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509)
+checks an exact nonlinear PDE telescoping identity, and
+[CI 42854633900](https://github.com/penghongzhong/HBL/actions/runs/42854633900)
+checks a fixed-slice original-source C² jump budget; their audited
+axioms are the allowed three only. Neither proves a time gain,
+parameter Lipschitz, actual finite profile or a dynamical Type-II orbit.
+**Original environments unchanged: 11/13; §2.13 and final main theorem OPEN.**
+<!-- END HBL_EXACT_PHASE_WRONSKIAN_FLUX_OUTGOING_TRACE_20261110 -->
