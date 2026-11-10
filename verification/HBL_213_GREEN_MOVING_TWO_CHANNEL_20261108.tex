@@ -6835,4 +6835,48 @@ remains \textbf{11/13} until the actual
 four-region Hartree orbit and the final dynamic rate
 are both kernel-audited.
 
+
+\medskip
+\noindent\textbf{One projected Hartree flux can replace two rate bootstraps.}
+There is no need to prove an invariant interval for \(\mu\) and
+a second independent sharp-rate tail bound. For a
+\emph{constructed} physical Hartree solution, suppose the original
+two-real-channel PDE projection produces
+\(\mu_s=e_{\mathrm{proj}}\) and for some \(s_0>0\),
+\(\mu(s_0)>9/16+\varepsilon\) with
+\[
+ \int_{s_0}^\infty
+  \left(1+\log\frac{s}{s_0}\right)|e_{\mathrm{proj}}(s)|\,ds
+ \le\varepsilon.
+\]
+Then, by the fundamental theorem of calculus,
+\[
+ \mu(s_0)-\varepsilon\le\mu(s)\le
+ \mu(s_0)+\varepsilon,\qquad
+ \mu(s)\longrightarrow\mu_\infty>9/16.
+\]
+Thus the same bound supplies the positive trap needed by
+the strictly Lean-checked coarse clock and the logarithmic
+tail needed for the sharp physical exponent in the
+\emph{revised} main theorem.
+It is worth distinguishing the projected time-integrability
+threshold from the full backward Green inverse:
+\[
+ \int_{s_0}^\infty
+  \left(1+\log\frac{s}{s_0}\right)s^{-15/8}\,ds
+   =\frac{120}{49}s_0^{-7/8}.
+\]
+An original-PDE projection estimate
+\(|e_{\mathrm{proj}}(s)|\lesssim s^{-15/8}\)
+would therefore suffice for this \emph{projected}
+modulation task after increasing \(s_0\).
+However the earlier \(s^{-15/8}\) bound was a conditional
+\emph{spatial shell} estimate, not a constructed full-orbit
+time-derivative projection; no such PDE bound has been
+proved here. Nor would the projected flux alone control
+the nonresonant field correction, for which the absolute
+Duhamel \(s^{1/4}\) gap remains.
+This is a reorganization of the original physical obligations,
+not a new numbered or Lean-accepted environment.
+
 \end{document}
