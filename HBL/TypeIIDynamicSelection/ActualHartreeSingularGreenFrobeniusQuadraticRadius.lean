@@ -50,16 +50,18 @@ theorem actual_Hartree_original_singular_Green_density_Frobenius_quadratic_radiu
         ‖originPhysicalValue K.x r - 1‖ + 1 := by
       have hEq : originPhysicalValue K.x r =
           (originPhysicalValue K.x r - 1) + 1 := by ring
-      rw [hEq]
-      simpa only [norm_one] using
-        (norm_add_le (originPhysicalValue K.x r - 1) (1 : ℂ))
+      calc
+        _ = ‖(originPhysicalValue K.x r - 1) + 1‖ := congrArg norm hEq
+        _ ≤ ‖originPhysicalValue K.x r - 1‖ + 1 := by
+          simpa only [norm_one] using
+            (norm_add_le (originPhysicalValue K.x r - 1) (1 : ℂ))
     have h2 : r ^ 2 ≤ B ^ 2 := by nlinarith [sq_nonneg (B-r)]
     have hDG : 0 ≤ (D + 1) * G :=
       mul_nonneg (by linarith) hG
     calc
       _ ≤ ‖originPhysicalValue K.x r - 1‖ + 1 := hNorm
-      _ ≤ (D + 1) * G * r ^ 2 + 1 :=
-        add_le_add_right hAsym 1
+      _ ≤ (D + 1) * G * r ^ 2 + 1 := by
+        linarith only [hAsym]
       _ ≤ 1 + (D + 1) * G * B ^ 2 := by
         nlinarith [mul_le_mul_of_nonneg_left h2 hDG]
   have hW :
