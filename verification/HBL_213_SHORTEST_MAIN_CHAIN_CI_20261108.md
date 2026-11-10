@@ -1468,3 +1468,42 @@ Type-II theorem remain open. Do not add one for this auxiliary check.
 - New theorem **HBL.TypeIIDynamicSelection.actual_Hartree_one_physical_selected_Green_joint_derivative_from_original_sources** in **HBL/TypeIIDynamicSelection/ActualHartreeOnePhysicalMovingGreenFullDerivative.lean** combines (a) the genuine four-piece physical Hartree Riesz source with the unique real two-channel Cramer speed and its true differentiated source directions, (b) source-time dominated differentiation under the original Wronskian Green integral, (c) mean-value derivation of the moving-slit density Lipschitz bound, and (d) the physical radius R(s)=ell(s)^(-1/16)/a(s) endpoint flux, including the exact mixed cross cancellation.
 - For **fixed** origin-normalized Kummer pair K, its exact conclusion is the joint derivative `G'(s)=G[dot F](s)-R'(s) J_K(F_s,R(s))`. The source's temporal differentiability / integrable derivative majorants and the uniform moving-slit *actual source* time derivative and Wronskian multiplier bounds are **visible hypotheses**, not closed PDE dynamic estimates. No independent Green integral differentiability or arbitrary moving-slit **Lipschitz bound** remains.
 - Original strict revised acceptance **11/13 (84.62%)**. The derivative of the moving Kummer basis itself, the complete true four-region nonlocal residual with **positive time order and threshold Lipschitz**, the genuine finite profile construction, and dynamic Type-II rate selection are still **OPEN**. This is a valid audited auxiliary bridge, **not §2.13 acceptance**.
+
+
+### 10 Nov — genuine moving Green regular/singular temporal channels
+
+The **regular** coefficient of the same genuine quartic Riesz forcing,
+with the true real Cramer-selected two-speed correction and moving lower radius
+r0(s)=ell(s)^(-1/16)/a(s), now has an independently strict source-plus-endpoint
+time derivative. **STRICT SUCCESS**: [42727196085](https://github.com/penghongzhong/HBL/actions/runs/42727196085),
+source HEAD 6f6f92f8, original job 129535736440, artifact 13723108682.
+Decoded raw logs confirm pinned Lean 4.35.0-rc3, Mathlib
+a98628e16c11f5167f16124105ddce53efa9bfe5,
+--trust=0 -DwarningAsError=true, precise #check, and #print axioms
+containing only propext, Classical.choice, Quot.sound. The moving-slit
+Lipschitz estimate is derived from the **same** selected source under
+explicit original source-time majorants, Wronskian ratio bounds and
+physical time differentiability premises.
+
+To treat the true outgoing/singular coefficient, newly committed:
+- ActualOriginGreenMovingSingularChannel.lean: original X/W Green-density
+  fixed-endpoint source differentiation, exact mixed source/endpoint
+  integral identity, O(|t-s||r0(t)-r0(s)|) bound and zero mixed derivative;
+- ActualHartreeOnePhysicalMovingSingularGreenFullDerivative.lean: actual
+  original Hartree Riesz source, Cramer speed, moving physical lower radius,
+  and resulting singular-channel temporal derivative, with explicit regularity
+  and domination premises;
+- .github/workflows/hbl-213-original-singular-green-full-derivative.yml:
+  independent pinned compilation and five exact #check/#print axioms audits.
+
+The singular-channel [strict CI 42728546668](https://github.com/penghongzhong/HBL/actions/runs/42728546668)
+was **in progress** at this checkpoint and is **NOT** claimed accepted
+until Success and original logs confirm all exact theorem/axiom audits.
+Failures must be repaired at source and checked by fresh CI.
+
+Neither channel by itself produces a differentiated moving Kummer basis,
+a uniform projected time inverse, full four-region nonlocal Hartree residual
+positive order, physical parameter Lipschitz or finite-layer recurrence.
+The absolute-Duhamel exponent obstruction is unchanged.
+**Original-paper acceptance remains 11/13**; neither Section 2.13 nor
+the dynamically derived final Type-II blowup theorem is closed.
