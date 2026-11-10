@@ -66,14 +66,16 @@ theorem actual_Hartree_coarse_TypeII_clock_from_dynamical_mu_trap
   have hLinear (s : ℝ) (hs : s0 ≤ s) :
       q s0 + 4 * m * (s-s0) ≤ q s ∧
       q s ≤ q s0 + 4 * M * (s-s0) := by
-    have hLower :=
+    have hs0I : s0 ∈ Ici s0 := by simp
+    have hsI : s ∈ Ici s0 := hs
+    have hLower : (4 * m) * (s - s0) ≤ q s - q s0 :=
       Convex.mul_sub_le_image_sub_of_le_deriv
         (convex_Ici s0) hCont hDiff hLowerDerivative
-        s0 (by exact le_rfl) s hs hs
-    have hUpper :=
+        s0 hs0I s hsI hs
+    have hUpper : q s - q s0 ≤ (4 * M) * (s - s0) :=
       Convex.image_sub_le_mul_sub_of_deriv_le
         (convex_Ici s0) hCont hDiff hUpperDerivative
-        s0 (by exact le_rfl) s hs hs
+        s0 hs0I s hsI hs
     constructor <;> linarith
   have hPos (s : ℝ) (hs : s0 ≤ s) : 0 < q s := by
     have hb := (hLinear s hs).1
