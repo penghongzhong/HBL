@@ -2516,3 +2516,16 @@ This is **not** the missing Lipschitz dependence
 moving physical PDE orbit, and not a time-positive complete residual.
 No new strict Lean CI (external published \(A_2\) input),
 no original §2.13/full theorem acceptance; **11/13**.
+
+
+### 10 November 2026 — exact original Hartree quadratic **weighted H¹** nonlinear remainder (paper, not Lean)
+
+The genuinely **complete** original nonlocal quartic interaction has been split without postulating a source envelope:
+\(\mathcal N(W+u)-\mathcal N(W)-D\mathcal N(W)u
+=3W²Q_2+\mathcal I(4W³\operatorname{Re}u)(Q_1+Q_2)+\mathcal I(\rho_2)Q(W+u)\).
+The exact \(\rho_2,Q_1,Q_2\) are genuine original density/cubic Taylor polynomials.
+The full new derivation is [HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md](HBL_213_GENUINE_HARTREE_QUADRATIC_WEIGHTED_SOURCE_20261110.md).
+For smooth actual radial complex \(u\) with \(U=\|u\|_{L²(dr)}\), \(H=\|(1+r²)u'\|_{L²(dr)}\), \(U,H\le1\), it proves the **nonlinear** weighted source norm bound
+\(\|\mathcal R_H(u)\|_{L²(dr)}+\|(1+r²)\mathcal R_H(u)'\|_{L²(dr)}
+\le C_H(U+H)^2\).
+The fixed \(C_H\) uses the published weighted \(A_2\) Riesz-transform theorem in \(\mathbb R^3\), with \(|x|^{-2}\in A_2\), and **not** a new Lean axiom. The paper gives all true potential-density, gradient and cubic polynomial coefficients explicitly. Its physical \(\lambda\) scaling is exact: \(L²\) source \(\lambda^{-2}\), and weighted derivative \(\lambda^{-1}\). This **eliminates the nonlinear remainder envelope**, but does NOT control the linearized Hartree generator, moving interfaces, selected-speed derivatives, the required \(U(s),H(s)\) for the same actual orbit, Kato inverse or the dynamical rate. This derivation has **no new strict Lean CI**. Existing local Taylor polynomial identity is already proved in \`ActualHartreeComplexTaylor.lean\`; the full nonlocal weighted derivative claim is currently paper-level only. **Formal revised acceptance: 11/13, no 12/13 claim.**
