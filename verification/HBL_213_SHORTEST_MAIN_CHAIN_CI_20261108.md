@@ -3248,3 +3248,13 @@ of the full Hartree PDE residual retains
 material/parameter derivatives. No positive
 time order, spectral inverse or actual orbit
 is asserted. **Original acceptance 11/13.**
+
+
+### 10 November — original CI failure read and repaired; actual independent strict status
+
+- CI [42830317706](https://github.com/penghongzhong/HBL/actions/runs/42830317706), job **129878320391**, artifact **13773080076**: **Success**. Source-level target:
+  \`HBL.TypeIIDynamicSelection.actual_Hartree_backward_original_radial_conjugation\`, exact physical radial identity \(h=ye\), retaining the \(-i/2\) zero-order correction. The original job log shows \`lake env lean --trust=0 -DwarningAsError=true\`, exact \`#check\` and \`#print axioms\`, zero-byte \`strict.log\` mandated, and recorded allowed transitive axioms exactly \`[propext, Classical.choice, Quot.sound]\`.
+- CI [42832295130](https://github.com/penghongzhong/HBL/actions/runs/42832295130), job **129885212904**, artifact **13772288776**: **FAILURE**. Original decoded compiler error in \`ActualHartreeBackwardVolterraParameterDifference.lean\`: unknown identifiers \`frozenZeroCoeff\` at lines 38/39/91/92 and \`complexRadialLaplacian\` at line 68, with cascading unsolved goals. These are Lean namespace qualification errors, **not** a demonstrated PDE contradiction. The same-public-branch source was repaired by opening the original \`HBL.Profile.Kummer\` and \`HBL.Modulation.Monopole\` namespaces, and normalizing real-to-complex coefficient subtraction. Successor pinned three-target runs: [42833841260](https://github.com/penghongzhong/HBL/actions/runs/42833841260) and [42834503545](https://github.com/penghongzhong/HBL/actions/runs/42834503545). Neither is to be called strict Success without rereading its *own* final original job log and exact axiom report.
+- The concurrent source-aligned actual moving-radius normalized \(C^2\) theorem is being strictly audited at [42834533439](https://github.com/penghongzhong/HBL/actions/runs/42834533439). This is an auxiliary zero-Cauchy original-operator norm theorem, not the original §2.13 nonlinear PDE orbit.
+
+**No theorem acceptance change:** original retained revised environments **11/13 (84.62%)**. The independent physical moving nonlinear source, parameter/time derivative, genuine Hartree projected inverse, full finite recursion and dynamically generated Type-II theorem remain open.
