@@ -2825,3 +2825,52 @@ The **corrected independent pinned trust-zero CI [42812204346](https://github.co
 - \`HBL.TypeIIDynamicSelection.actual_Hartree_spectral_source_locked_outer_C2_repair_jets\`, the actual *same-source* matched two-ended six \(C^2\) endpoint jets from this curvature, with no independently stipulated curvature datum; axioms exactly \`[propext, Classical.choice, Quot.sound]\`.
 
 Older [42808846760](https://github.com/penghongzhong/HBL/actions/runs/42808846760) had a redundant \`dsimp\` source proof tactic, fixed earlier. Older [42810399482](https://github.com/penghongzhong/HBL/actions/runs/42810399482) had the **correct target source compiled strictly with empty \`strict.log\` and correct axioms**, but the generated audit source ended in an invalid standalone \`set_option pp.all false in\`; this was removed in commit \`a606cbb26c\`, yielding actual green **42812204346**. The true mathematical limitation remains: this verifies **only** the outer \(C^2\) boundary traces; the Fredholm--Kummer *inner* second jet, complete four-region field, magnitude of \(F(B)\), source gradient, time gain, parameter-Lipschitz and genuine PDE orbit remain unproved. Existing \(L^2\) source membership **cannot** by itself bound \(F(B)\). It is *not* revised §2.13 and does not change **11/13 (84.62%)**.
+
+
+### 10 November — full original quartic Hartree spatial derivative and genuine two-field Lipschitz, without artificial Riesz-radius loss
+
+For the **literal complete** radial nonlocal map
+\(\mathcal N(V)=\mathcal I(|V|^4)|V|^2V\), put
+\(\rho_V=|V|^4\), \(h_V=|V|^2V\),
+\(m=1+r²\), \(w=\sqrt{1+r²}\), and define
+\(P_V=\|\rho_V\|_{L²(dr)}\),
+\(Q_V=\|w³\rho_V\|_{L²(dr)}\),
+\(A_V=\|mh_V\|_{L∞}\),
+\(B_V=\|mh_V'\|_{L∞}\).
+The **original** weighted-radial Riesz value/gradient maps
+\(\|\mathcal I(\rho)\|_2\le3\|w³\rho\|_2\) and
+\(\|\partial_r\mathcal I(\rho)\|_2\le6C_\omega\|\rho\|_2\)
+imply the *unconditional spatial norm inequalities*
+\[
+\|m\mathcal N(V)\|_2\le3A_VQ_V,\quad
+\|m\partial_r\mathcal N(V)\|_2
+ \le6C_\omega A_VP_V+3B_VQ_V.
+\]
+For two profiles \(V,Z\), the **exact original quartic source
+difference**
+\(\mathcal N(V)-\mathcal N(Z)=\mathcal I(\rho_V-\rho_Z)h_V+
+\mathcal I(\rho_Z)(h_V-h_Z)\) gives, with natural
+\(\Delta\)-profile budgets,
+\[
+\|m\partial_r[\mathcal N(V)-\mathcal N(Z)]\|_2
+\le6C_\omega(A_VP_\Delta+A_\Delta P_Z)
+    +3(B_VQ_\Delta+B_\Delta Q_Z).
+\]
+The same argument gives the L² value difference;
+complex chain rules bound every \(\Delta\)-budget
+from the actual profile differences.
+**This is not a linearized local-NLS surrogate**:
+the full \(\mathcal I(|V|^4)\) is retained.
+Operator constants \(3,6C_\omega\) are
+**origin-uniform**; the actual moving-field norms
+and time orders are **not** pre-bounded or assumed.
+The full proof is appended to
+[\`HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md\`](HBL_213_RIESZ_NO_LEFT_RADIUS_WEIGHTED_A2_20261110.md).
+**Paper-level mathematics only**:
+the actual complete renormalized PDE residual includes
+selected moving speeds, cutoff/transport,
+inner Fredholm second join, all regional interactions
+and the projected Kato/energy inverse. The operator
+inequality neither supplies those missing time scales
+nor establishes an actual Hartree solution.
+**Original 11/13**, no new Lean axiom/environment.
