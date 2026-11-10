@@ -6879,4 +6879,111 @@ Duhamel \(s^{1/4}\) gap remains.
 This is a reorganization of the original physical obligations,
 not a new numbered or Lean-accepted environment.
 
+
+\medskip
+\noindent\textbf{The coarse physical modulation trap automatically produces
+the strict scale exponent and logarithmic integrability of the true
+radiation-moment drift.}
+Let \(\ell=\lambda^{-1}\) be the actual scale and let
+\(q=(T-t)\lambda^2\) be the physically selected clock,
+not an independently assigned rate.
+On a single genuine Hartree modulation orbit, assume
+\[
+ q_s=4\mu,\qquad
+ \frac{\ell_s}{\ell}=-\frac{1+4\mu}{2q},\qquad
+ 0<m_-\le\mu(s)\le M_+<\infty,\qquad
+ q(s_0)=q_0>0,\quad \ell(s_0)=\ell_0>0.
+\]
+The first two identities are the actual projected-scale
+kinematics, while their production and the interval
+invariance remain physical PDE obligations.
+Put \(Q(s)=q_0+4M_+(s-s_0)\), \(s\ge s_0\).
+The kernel-checked coarse-clock inequality gives
+\[
+ q_0+4m_-(s-s_0)\le q(s)\le Q(s),
+ \qquad q(s)\ge\frac{m_-}{M_+}Q(s).
+\]
+For \(\tau(s)=q(s)\ell(s)^2\), exact differentiation yields
+\[
+ \tau_s=-\ell^2,\qquad
+ \frac{d}{ds}\log\bigl[
+   \tau(s)Q(s)^{1/(4M_+)}
+ \bigr]
+ =-\frac1{q(s)}+\frac1{Q(s)}\le0.
+\]
+It follows that
+\[
+ \boxed{\quad
+ \ell(s)\le\ell_0\sqrt{\frac{M_+}{m_-}}\,
+    \left(\frac{Q(s)}{q_0}\right)^{
+      -\beta_*},\qquad
+ \beta_*=\frac12+\frac1{8M_+}>\frac12.
+ \quad}
+\]
+Thus the strict \(\beta>1/2\) decay needed in the
+physical shell and cutoff estimates is not a new
+independent dynamical bootstrap: it follows from
+the same positive bounded \(\mu\)-trap. In particular
+\(\tau(s)\to0\), and the terminal time is determined
+by the actual clock via
+\(T=t(s_0)+q_0\ell_0^2\), provided \(t_s=\ell^2\).
+
+This also eliminates a separate weighted drift
+assumption for the \emph{true radiation-moment
+contribution}. Let
+\(\mathfrak m(t)=m_0[z(t)]>0\) be the original
+inverse-square quartic physical Hartree moment and
+\(\mathfrak m_t=\mathcal F_{\rm H}[z]\) its genuine
+PDE Laplacian flux. The already verified terminal
+continuity/positivity interface supplies, for
+the selected regular radiation on a sufficiently
+late window,
+\[
+ \frac{|\mathcal F_{\rm H}[z(t(s))]|}
+      {\mathfrak m(t(s))}\le J.
+\]
+The actual monopole-cutoff material drift contains
+\[
+ e_{\rm mon}(s)=\ell(s)^2\,
+   \frac{\mathcal F_{\rm H}[z(t(s))]}
+        {\mathfrak m(t(s))},\qquad
+ |e_{\rm mon}(s)|\le J\ell(s)^2.
+\]
+For the same \(Q\), direct integration gives
+\[
+ \begin{aligned}
+ \int_{s_0}^{\infty}
+ \left(1+\log\frac{Q(s)}{q_0}\right)
+ |e_{\rm mon}(s)|\,ds
+ &\le J\ell_0^2\frac{M_+}{m_-}
+ \frac{q_0}{4M_+}
+ \int_1^{\infty}(1+\log v)
+     v^{-1-1/(4M_+)}\,dv\\
+ &=\boxed{\
+ Jq_0\ell_0^2\frac{M_+}{m_-}(1+4M_+).\ }
+ \end{aligned}
+\]
+This is a \emph{derived} logarithmically weighted
+integrable contribution of the original physical
+Hartree radiation-moment flux, conditional only on
+the actual orbit and its common \(\mu\)-trap and
+terminal regularity. It does not establish
+\(\mu_s=e_{\rm mon}\): the original real Cramer
+two-channel projection additionally involves all
+other source/column, moving-basis and nonlocal
+four-region terms. It also does not repair the
+nonresonant \(s^{1/4}\) Duhamel deficit.
+
+Lean correspondence: the previously strict
+\texttt{actual\_Hartree\_coarse\_TypeII\_clock\_from\_dynamical\_mu\_trap}
+provides the q bounds; the new exact derivative
+\texttt{actual\_Hartree\_dynamic\_remaining\_time\_from\_two\_channel\_equations}
+and clock cancellation
+\texttt{actual\_Hartree\_dynamic\_terminal\_clock\_local\_conservation}
+are submitted to dedicated strict CI.
+The displayed \(\beta_*\) and log-\(L^1\) inequalities
+have **not** yet been audited as complete Lean
+declarations and must not be reported as such.
+Original manuscript accepted environment count remains \(11/13\).
+
 \end{document}
