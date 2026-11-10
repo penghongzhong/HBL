@@ -398,23 +398,23 @@ true moving radius satisfies `L(s) ≥ c s^gamma` with fixed
 original frozen Kummer zero coefficient is uniformly bounded.
 Then, with the *actual* original source norm
 `N(s)=‖F_+(s)‖_{2,7/4}+‖F_-(s)‖_{2,7/4}`, (I19) implies
-[
+\[
  \mathcal J_{\mathrm{patch}}(s)
  \lesssim s^{-5\gamma/2}N(s)
  +s^{-9\gamma/2}\bigl(N(s)+|\delta(s)|\,
     |u_0(s,L(s)/a(s))|\bigr).
  \tag{I20}
-]
+\]
 This is a **conditional conversion**, not a proven growth law
 for the true Hartree radius or any source smallness claim.
 
 For the illustrative and often-used `gamma=1/2` geometry,
-[
+\[
  \mathcal J_{\mathrm{patch}}(s)
  \lesssim s^{-5/4}N(s)
  +s^{-9/4}(N(s)+|\delta(s)|\,|u_0(s,L/a)|).
  \tag{I21}
-]
+\]
 Therefore the **explicit sufficient decay rates from this upper bound**
 for its leading true-Fredholm term are:
 - `N(s)=O(s^{-5/8})` to yield a patch contribution
