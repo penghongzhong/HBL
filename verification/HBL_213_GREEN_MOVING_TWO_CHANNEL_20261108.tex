@@ -6438,10 +6438,38 @@ CI \texttt{42742808852}, \emph{failed} at its original job
 \texttt{129587751629}: line 119 of its Lean proof contained a
 redundant \texttt{ring} after an already goal-closing
 \texttt{field\_simp}. Removing precisely that proof-tactic line
-at commit \texttt{2b93a05c} preserved its exact theorem type and
-triggered corrected CI \texttt{42744295852}; it must not be
-declared strict Success before the corresponding raw job and
-axiom audit are accepted.
+at commit \texttt{2b93a05c} preserved its exact theorem type.
+The corrected CI \texttt{42744295852} has now been independently
+confirmed \emph{strict Success} (10 November 2026, 02:50 UTC),
+original job \texttt{129592601952} and raw artifact
+\texttt{13730793163}. The decoded job log confirms pinned
+Lean 4.35.0-rc3, Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, warning-as-error, exact \texttt{\#check}
+and \texttt{\#print axioms} for
+\texttt{actual\_Hartree\_true\_moving\_singular\_Green\_cross\_Frobenius\_one\_inverse\_radius}.
+The transitive axiom list is exactly
+\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+
+For application of this lemma to the physically derived
+Cramer source-time inequality, a separate geometric bridge is
+still necessary: the latter is obtained only for
+\(1/a(\tau)\le r\le B\), whereas the former needs a source
+time derivative at every \(\tau\in[s,t]\) and every
+\(r\) in the slit between the \emph{two moving} lower endpoints.
+Consequently it is necessary to prove
+\[
+  \frac{1}{a(\tau)}
+   \le \min\left\{
+        \frac{\ell(s)^{-1/16}}{a(s)},
+        \frac{\ell(t)^{-1/16}}{a(t)}
+      \right\},\qquad
+ \tau\in[\min(s,t),\max(s,t)],
+\]
+or another explicit annulus extension from the same PDE orbit,
+before combining the two strict theorems. That domain inclusion
+is not an assumed positive time-order and is not yet proved
+for the final physical recurrence.
 
 The remaining core PDE obligation is not the algebraic
 Cramer radius cancellation, but the \emph{same-orbit} quantitative
