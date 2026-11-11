@@ -10935,4 +10935,34 @@ no-go for a smooth Hartree blowup orbit. See
 \texttt{HBL\_213\_C3\_SOURCE\_REGULARITY\_NECESSITY\_20261110.md}.
 No new Lean-certified PDE statement; original 11/13 unchanged.
 
+
+
+% HBL_SLOW_INNER_WEIGHTED_L2_20261111
+\paragraph{A source-produced half-power weighted norm on the genuine backward overlap.}
+For the actual original quartic nonlocal Hartree interaction
+\(\mathcal S_H\), write \(L=\ell^{-1/16}\) and
+\(G(r)=r(1-\chi(r/L))\mathcal S_H(r)\).
+The previously derived half-power source inequality, under the genuine
+radiation amplitude and Strauss inputs, gives
+\[
+\langle r\rangle^{7/4}|G(r)|
+\le K(B,A)\ell^{1/2}(1+r)^{-5/4}.
+\]
+Consequently, by direct integration,
+\[
+\int_0^\infty \langle r\rangle^{7/2}|G(r)|^2\,dr
+\le\frac23K(B,A)^2\ell.
+\]
+The same full interaction on the actual inner backward overlap obeys
+\[
+\|\mathcal S_H\|_{L^2(L/2,L)}
+\le \sqrt{127/7}\,K(B,A)\ell^{23/32}.
+\]
+These are component estimates, not the complete moving nonlinear
+Hartree residual. In particular they supply neither the selected-speed,
+spectral, temporal, nor full Hamiltonian smoothing estimates.
+The exact Lean integral theorem is audited in the separate strict workflow;
+the original §2.13 and dynamical Type-II theorem remain open (11/13).
+% END HBL_SLOW_INNER_WEIGHTED_L2_20261111
+
 \end{document}
