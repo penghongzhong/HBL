@@ -80,9 +80,11 @@ jobs:
           set_option pp.maxSteps 10000000
           #check @HBL.TypeIIDynamicSelection.actual_Kummer_parameter_difference_exact
           #check @HBL.TypeIIDynamicSelection.actual_Kummer_fixed_domain_source_parameter_stability
+          #check @HBL.TypeIIDynamicSelection.actual_Kummer_same_parameter_nonzero_matched_jet_source_gain
           set_option pp.all false
           #print axioms HBL.TypeIIDynamicSelection.actual_Kummer_parameter_difference_exact
           #print axioms HBL.TypeIIDynamicSelection.actual_Kummer_fixed_domain_source_parameter_stability
+          #print axioms HBL.TypeIIDynamicSelection.actual_Kummer_same_parameter_nonzero_matched_jet_source_gain
           EOF
           lake env lean --trust=0 -DwarningAsError=true HBLFixedDomainParameterAudit.lean > evidence/audit.log 2>&1 || { cat evidence/audit.log; exit 1; }
           cat evidence/audit.log
@@ -92,14 +94,14 @@ jobs:
           text=Path('evidence/audit.log').read_text()
           assert not any(s in text for s in ('sorryAx','admit','Lean.ofReduceBool','⋯','…'))
           allowed={'propext','Classical.choice','Quot.sound'}
-          for short in ['actual_Kummer_parameter_difference_exact','actual_Kummer_fixed_domain_source_parameter_stability']:
+          for short in ['actual_Kummer_parameter_difference_exact','actual_Kummer_fixed_domain_source_parameter_stability','actual_Kummer_same_parameter_nonzero_matched_jet_source_gain']:
               name='HBL.TypeIIDynamicSelection.'+short
               reports=re.findall(re.escape("'"+name+"'")+r' depends on axioms:\s*\[([^\]]*)\]',text)
               assert len(reports)==1,(name,reports)
               axioms={re.sub(r'\.\{.*\}$','',s.strip()) for s in reports[0].split(',') if s.strip()}
               assert axioms<=allowed,(name,axioms)
               print('STRICT TARGET:',name,'AXIOMS:',sorted(axioms))
-          print('SCOPE: operator source stability only. Actual moving Hartree source estimates, positive time order and the main theorem are NOT certified; original count 11/13 unchanged.')
+          print('SCOPE: same-parameter nonzero matched-jet source control plus existing parameter bridge; actual Hartree source time gain and main theorem NOT certified; original count 11/13 unchanged.')
           PY
           cp "$target" HBLFixedDomainParameterAudit.lean evidence/
           sha256sum evidence/*.lean > evidence/source-hashes.txt
