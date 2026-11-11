@@ -4087,3 +4087,52 @@ For moving \(b(s)\), the \(d_3'\) budget also contains \(-i(b'L+bL')d_2\), besid
 Paper evidence and actual constants: \`verification/HBL_213_WEAK_SOURCE_C1_BACKWARD_OVERLAP_20261111.md\` and matching \`.tex\`, included in \`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`.
 
 **Strict remaining proof gates:** (i) genuine weak \(W^{2,2}\) continuation of the selected Kummer source to the backward interval, including genuine physical source and selected modulation, (ii) actual PDE bounds for \(g\), moving endpoint/base/speed derivatives and complete nonlocal Hartree defect, (iii) positive-time weighted four-region residual and parameter Lipschitz, (iv) actual finite-layer recursion, and (v) PDE-derived Type-II blowup. No independent envelope, rate or auxiliary theorem counting is allowed. **Still 11/13**.
+
+
+## 11 November 2026 — actual Hartree nonlocal overlap commutator gate
+
+The paper-only backward smooth overlap calculation has a corrected equation orientation:
+in (WG11), because \`U=(1-\eta)u+\eta v\`, the compared Laplacian is
+\`(1-\eta)\Delta_r u+\eta\Delta_r v\`, **not** the swapped combination.
+The TeX already had the correct weights; the corresponding Markdown has
+been repaired. This preserves the verified polynomial/Volterra estimates.
+
+The original \`N_H(q)=\kappa_H(|x|^{-2}*|q|^4)|q|^2q\` has an exactly
+linear nonlocal overlap commutator, even when all *local* overlap jets
+coincide. With \(f=u-v\), \(U=u-\eta f\), and
+\(g_{u,f}=4|u|^2\operatorname{Re}(\bar u f)\), the real first variation is
+\[
+ \lim_{\epsilon\to0}
+ \epsilon^{-1}\big[N_H(u-\epsilon\eta f)
+ -(1-\eta)N_H(u)-\eta N_H(u-\epsilon f)\big]
+ =\kappa_H|u|^2u\{\eta(K*g_{u,f})-K*(\eta g_{u,f})\}
+ \quad\text{in }L^{6/5}(\mathbb R^3).
+\]
+A complete global HLS source budget is
+\[
+ \|N_H(U)-(1-\eta)N_H(u)-\eta N_H(v)\|_{6/5}
+ \le455|\kappa_H|C_{\rm HLS}(\|u\|_6+\|v\|_6)^6\|u-v\|_6.
+\]
+A **counterexample** to replacing the global \(\|u-v\|_6\) by the
+annular \(\|\Delta_r(u-v)\|_{2,r^2}\): choose nonnegative smooth radial
+\(u>0\) in the inner ball and outer interface; let \(f>0\) be supported
+strictly below \(5L/8\), with \(v=u-f\). Then \(f=f'=\Delta f=0\) on the
+entire backward joining annulus, the cut-off interpolation is \(U=u\)
+globally, but on the outer plateau \(\eta=1\) the full nonlocal defect
+is \(\kappa_H u^3 K*(u^4-v^4)\ne0\). This is a precise obstruction
+to using the *local* backward Volterra source as the only nonlinear
+strong-residual producer, **not** a no-go for the actual same-source
+Hartree PDE orbit. The next mathematical gate is global density
+commutator/\(L^6\)-mismatch production with genuine time weights and
+parameter Lipschitz, plus physical moving bases and finite recursion.
+
+Paper evidence:
+\`verification/HBL_213_NONLOCAL_OVERLAP_COMMUTATOR_GATE_20261111.md\`
+and \`.tex\` (included in the §2.13 master). **No new Lean theorem
+or CI**; the strictly audited [CI 42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409)
+continues to assert only algebraic PDE telescoping. Exact audit:
+Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
+\`--trust=0\`, \`warningAsError\`,
+\`#check\`/\`#print axioms\`, dependencies only \`propext\`,
+\`Classical.choice\`, \`Quot.sound\`.
+**Original 13 environments: 11/13 (84.62%), unchanged.**
