@@ -3905,3 +3905,32 @@ together with the original physical cutoff Laplacian commutator bound.
 The source difference and time gain have not been manufactured here.
 Manuscript supplement and separate exact acceptance ledger updated.
 **Original environment count 11/13; §2.13 and the final blowup theorem open.**
+
+
+### 2026-11-11 Hartree L6/5 -> regular outgoing Cramer source feedback (PAPER ONLY)
+
+The exact regular origin Green numerator and Wronskian yield
+\(\mathcal C_A(F)=\int_{r_0}^B r^2X_K(r)e^{ir^2/4}F(r)\,dr\).
+Existing \(X_K\) regular-origin bounds and physical radial Hölder imply
+\[
+|\mathcal C_A(F)|\le
+{C_X\over4\pi}(4\pi/3)^{1/6}B^{1/2}\|F^\sharp\|_{L^{6/5}(\mathbb R^3)},
+\quad C_X=1+(D+1)GB^2,
+\]
+with **no negative \(r_0\) power**. The previously derived real seven-degree Hartree
+\(L^{6/5}\) HLS bound and exact \(F_a(r)=a^2\Delta\mathcal N_H(ar)\) scaling supply
+an honest \(B^{1/2}a^{-1/2}\) nonlinear feedback factor into the *regular*
+outgoing Cramer obstruction of an actual finite-energy correction.
+
+**Critical distinction:** the singular Green numerator uses \(Y_K(r)=K.y(r)/r\),
+whose unrestricted \(L^6\) dual kernel has the sharp \(r_0^{-1/2}\) loss.
+Neither the selected real speeds nor full time/parameter estimates follow
+from the regular-channel bound. Original proof §2.13, full physical
+\(s^{-9/4}\) residual, nonlinear finite recursion and final dynamical rate
+remain OPEN. There is **no new strict Lean declaration or CI** for these
+paper calculations; the original acceptance is **11/13**.
+
+Detailed analytic proof:
+\`verification/HBL_213_L65_HARTREE_OUTGOING_CRAMER_FEEDBACK_20261111.md\`.
+Included TeX supplement:
+\`verification/HBL_213_L65_HARTREE_OUTGOING_CRAMER_FEEDBACK_20261111.tex\`.
