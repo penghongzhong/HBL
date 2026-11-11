@@ -10871,4 +10871,36 @@ The complete proof and scope are recorded in
 \texttt{HBL\_213\_INTERFACE\_REGULARITY\_GATE\_20261111.md}.
 Original revised acceptance stays $11/13$.
 
+
+
+% HBL_213_TRUE_HARTREE_C3_NONLOCAL_FEEDBACK_20261110
+\paragraph{Whole-space nonlocal feedback of the source-dependent third-jet repair.}
+For the original inverse-square quartic Hartree nonlinearity
+$\mathcal N_H(U)=\kappa_H(|x|^{-2}*|U|^4)|U|^2U$,
+Hardy--Littlewood--Sobolev and the critical Sobolev inequality imply
+\[
+\|\mathcal N_H(U+P)-\mathcal N_H(U)\|_{\dot H^{-1}}
+\le C(2\|\nabla U\|_2+\|\nabla P\|_2)^6\|\nabla P\|_2.
+\]
+For the actual source-dependent $C^3$ Hermite repair supported on
+$[L,L+h]$, put
+$V_{L,h}=4\pi((L+h)^3-L^3)/3$ and
+$M_j'=\max_{[0,1]}|\phi_j'|$. Direct radial integration gives
+\[
+\|\nabla P\|_2\le V_{L,h}^{1/2}
+(h|d_2|M_2'+h^2|d_3|M_3').
+\]
+Thus the genuine changed convolution is globally controlled in the
+energy-dual topology, not just on the repair shell; no independent
+source envelope has been assumed. The complete moving residual increment
+is exactly $iP_t+\Delta_rP+ib\Lambda P+\omega P+
+\mathcal N_H(U+P)-\mathcal N_H(U)$, with $P_t$ including the actual
+$\dot L,\dot h,\dot d_2,\dot d_3$ terms. This does NOT yet give the
+stronger differentiated Hessian--Morawetz source topology, the Cramer
+obstruction's continuity on $\dot H^{-1}$, selected-speed compatibility,
+or a positive time exponent. See
+\texttt{HBL\_213\_TRUE\_HARTREE\_C3\_NONLOCAL\_FEEDBACK\_20261110.md}.
+Paper proof only; no new Lean axiom audit or original-environment
+acceptance. Original 11/13 remains unchanged.
+
 \end{document}

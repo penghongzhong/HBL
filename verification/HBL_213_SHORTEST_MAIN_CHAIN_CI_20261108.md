@@ -3822,3 +3822,11 @@ compatibility after the nonlocal feedback, or a physical blowup orbit.
 
 The original numbered environments remain **11/13**. No new original
 environment is accepted by the polynomial construction.
+
+
+## Exact whole-space quartic Hartree feedback after C3 interface repair (paper; not Lean)
+
+[Full original-kernel proof](HBL_213_TRUE_HARTREE_C3_NONLOCAL_FEEDBACK_20261110.md): HLS and Sobolev prove a genuine energy-dual nonlinear estimate, not a telescope, for the physical C3 repair P constructed from the actual curvature and third-jet discrepancies:
+\(‖\mathcal N_H(U+P)-\mathcal N_H(U)\u2016_{\dot H^{-1}}\le C(2\u2016\nabla U\u2016_2+\u2016\nabla P\u2016_2)^6\u2016\nabla P\u2016_2\),
+\(\u2016\nabla P\u2016_2\le [4\pi((L+h)^3-L^3)/3]^{1/2}(h|d_2|M'_2+h^2|d_3|M'_3)\).
+This controls all nonlocal feedback, including outside the repair shell, and the note explicitly computes its moving-time derivative. It does **not** bound the differentiated source topology, moving actual jets, outgoing Cramer functional, two-speed feedback, or any time exponent. No new Lean certificate, no original §2.13 or Type-II acceptance. Revised original environments **11/13**.
