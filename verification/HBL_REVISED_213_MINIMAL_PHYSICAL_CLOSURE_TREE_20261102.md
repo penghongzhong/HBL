@@ -615,7 +615,14 @@ on the concentrated branch**, is locally nondegenerate because
 \(\partial_{\log\lambda}M_R=\lambda^2 I(R/\lambda)
 \le-\lambda R/4\) for \(R/\lambda\ge2\pi\). The corresponding
 scale derivative is then an **actual PDE mass-current quotient**,
-not a prescribed explosion rate. Energy alone still does not control
+not a prescribed explosion rate. The *unnormalized*
+\(\partial_{\log\lambda}M_R\sim-\lambda R/2\) degenerates as
+\(\lambda\to0\). At any matching root the equivalent mass gauge
+\(M_R/\lambda=0\) has Jacobian
+\(\partial_{\log\lambda}(M_R/\lambda)
+ =\lambda I(R/\lambda)\le-R/4\), but its PDE flux
+costs \(1/\lambda\): actual same-orbit \(O(\lambda)\) current
+and parameter-Lipschitz estimates remain compulsory. Energy alone still does not control
 the expanding-radius phase term: \(p=\varepsilon W\) on \([0,L]\),
 cut off by \(2L\), has \(O(\varepsilon)\) homogeneous energy but
 an \(\Omega(\varepsilon L)\) scaling moment. Compatibility with the
