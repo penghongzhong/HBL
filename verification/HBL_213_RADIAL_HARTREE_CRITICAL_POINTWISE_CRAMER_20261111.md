@@ -115,3 +115,29 @@ This is the **nonlinear endpoint** Lipschitz bridge, without a separately assume
 - To derive a time gain, one must quantify the *actual* energy distance (D(s)), the physical (L(s)), and all other residual components from the Hartree dynamics. No time-order or Type-II exponent is postulated.
 
 **Counting:** retained revised original paper remains **11/13**. §2.13 and the final dynamic Type-II theorem are not certified.
+
+
+## D. Sharpness: no improved physical-radius power from radial energy alone
+
+This optimality statement is **only for energy-class inputs**; it is not a counterexample to the selected Hartree PDE orbit. Choose any nonzero real nonnegative \(\phi\in C_c^\infty(\mathbb R^3)\) radial, supported where \(1<|x|<2\). For \(L\to\infty\), set
+\[
+u_L(x)=L^{-1/2}\phi(x/L),\qquad v_L=0,\qquad
+a_L=L^3,\quad r_{0,L}=L/a_L=L^{-2},\quad B=1.
+\]
+Then \(\|\nabla u_L\|_2=\|\nabla\phi\|_2\) and exact Hartree critical scaling gives
+\[
+\mathcal N_H(u_L)(L\rho)=L^{-5/2}\mathcal N_H(\phi)(\rho).
+\]
+For a fixed original origin-normalized Kummer mode with \(K.y(0)=1\), the **genuine** singular Cramer integral is
+\[
+\begin{aligned}
+\mathcal C_B^K[a_L^2\mathcal N_H(u_L)(a_L\,\cdot)]
+&=L^{-1/2}\int_1^2 \rho\,\mathcal N_H(\phi)(\rho)
+ K.y(\rho/L^2)e^{i\rho^2/(4L^4)}\,d\rho\\
+&=L^{-1/2}(M_\phi+o(1)),\qquad
+M_\phi=\int_1^2\rho\,\mathcal N_H(\phi)(\rho)\,d\rho>0.
+\end{aligned}\tag{RH8}
+\]
+The support of \(\mathcal N_H(u_L)\) agrees with that of \(u_L\) because the nonlinearity contains the local factor \(|u_L|^2u_L\); the convolution potential itself is nonlocal. Uniform convergence of the two smooth fixed-basis factors on \(1\le\rho\le2\) proves the limit. Thus the \(L^{-1/2}\) factor in (RH6) is **sharp in general** and no \(o(L^{-1/2})\) nonlinear Cramer gain follows solely from uniform radial \(\dot H^1\) norms, even for genuine inverse-square quartic Hartree nonlinearities.
+
+Consequently any additional *time* gain required by the original §2.13 must use **actual PDE-induced smallness or cancellation** of the selected correction (or a stronger structural restriction), not the radial energy estimate or large overlap radius by itself. This constructed family is not asserted to solve Hartree evolution and supplies neither a forbidden rate assumption nor a dynamical obstruction.
