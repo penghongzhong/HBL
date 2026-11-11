@@ -113,7 +113,7 @@ The result is stated in the **unrescaled physical** time/radius frame. Convertin
 
 The previous sections use unrescaled physical time \(t\). A **second exact algebraic consequence** applies directly to the renormalized PDE in the moving critical-scale and phase frame. This is relevant because the original HBL \(\S2.13\) works in precisely such a frame.
 
-Set \(y=r/\lambda(t)\), \(ds/dt=\lambda^{-2}\), \(b(s)=\lambda_s/\lambda\), and
+The sign convention in this subsection is **\(b=\lambda_s/\lambda\)**. In the existing original HBL Lean residual, the parameter is instead \(b_{\mathrm{HBL}}=-\lambda_s/\lambda=-b\), with \(\omega=-\gamma_s\); inserting these substitutions gives exactly its \(iU_s+\Delta U+\mathcal V_H[U]U+i b_{\mathrm{HBL}}\Lambda U+\omega U=0\). This is a notation conversion, not a change of PDE.\n\nSet \(y=r/\lambda(t)\), \(ds/dt=\lambda^{-2}\), \(b(s)=\lambda_s/\lambda\), and
 \(u(t,r)=\lambda^{-1/2}e^{i\gamma(s)}U(s,y)\). The exact original equation becomes
 \[
 \boxed{\quad
