@@ -1,0 +1,253 @@
+% Included by HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex.
+% Paper proof, except for the separately audited pointwise parameter bridge.
+% This supplement does not certify original environment 2.13.
+
+\medskip
+\noindent\textbf{Same-anchor backward overlap and fixed-domain source stability.}
+The original matched Green solution already solves its classical Kummer
+ODE at every positive point below its origin-basis radius, including points
+strictly to the left of its Cauchy anchor.  Thus the physical restriction
+to $[L/2,L]$ keeps the original anchor $L$, its actual Fredholm jets,
+its source, and its compatibility matrix.  No replacement of $L$ by $L/2$
+is required in that matrix.  This corrects the earlier proposed
+re-anchoring prerequisite.  Changing the physical field by smoothing is
+a different operation: its nonlocal feedback must still enter the next
+actual compatibility equation.
+
+Write
+\[
+ c_0=c_0(\mu,\theta),\qquad
+ \mathcal K_{a,c_0}D
+ =\Delta_rD+a^{-2}\left(\frac{ir}{2}\partial_rD+c_0D\right),
+ \qquad \Delta_rD=D''+\frac2rD'.
+\]
+At a fixed time let $D=u-v$, where $u$ and $v$ are the actual inner
+and matched outer fields, with $D(L)=D'(L)=0$.  The same statement applies
+to the spectral-corrected outer field, since its correction has zero
+left Cauchy jet.  On the fixed interval $J=[1/2,1]$ set
+\[
+ x=r/L,\qquad V(x)=D(Lx),\qquad k=L^2/a^2,\qquad
+ f(x)=L^2(\mathcal K_{a,c_0}D)(Lx),\qquad e=\Delta_xV.
+\]
+These definitions use the actual operator source, not an independently
+postulated envelope for $D$ or $D''$.  Direct differentiation gives
+\begin{equation}
+ e+k\left(\frac{ix}{2}V'+c_0V\right)=f,
+ \qquad V(1)=V'(1)=0.
+ \label{eq:fixed-domain-actual-kummer}
+\end{equation}
+
+Put $Y=L^2(J;x^2\,dx)$ and define the right-anchored radial Volterra inverse
+\[
+ (Te)(x)=\frac1x\int_x^1(y-x)y e(y)\,dy.
+\]
+For $Z=xTe$ one has
+\[
+ Z'=-\int_x^1y e(y)\,dy,\qquad Z''=xe,
+ \qquad Z(1)=Z'(1)=0.
+\]
+The $L^1$ norms of the two one-sided integration kernels on an interval
+of length $1/2$ are $1/2$ and $1/8$.  Young's inequality therefore yields
+\[
+ \|Z'\|_{L^2(J)}\le\tfrac12\|e\|_Y,
+ \qquad \|Z\|_{L^2(J)}\le\tfrac18\|e\|_Y.
+\]
+Since $x(Te)'=Z'-Z/x$ and $1/x\le2$ on $J$,
+\begin{equation}
+ \|Te\|_Y\le\tfrac18\|e\|_Y,
+ \qquad \|(Te)'\|_Y\le\tfrac34\|e\|_Y,
+ \qquad \Delta_xTe=e.
+ \label{eq:fixed-domain-volterra-bounds}
+\end{equation}
+These identities first hold for smooth $e$ and extend to all $e\in Y$
+by the bounded integral operators and weak differentiation.  Conversely,
+a function with radial Laplacian $e$ and the two zero traces at $1$
+is $Te$: the difference has $Z''=0$ and two zero traces.
+
+Define the bounded operator
+\[
+ B_{k,c_0}e=k\left(\frac{ix}{2}(Te)'+c_0Te\right),\qquad
+ q=\frac{k(3+|c_0|)}8.
+\]
+It follows from \eqref{eq:fixed-domain-volterra-bounds} that
+$\|B_{k,c_0}\|_{Y\to Y}\le q$.
+When $q\le1/2$, the norm-convergent series
+\[
+ (I+B_{k,c_0})^{-1}=\sum_{n=0}^{\infty}(-B_{k,c_0})^n
+\]
+has norm at most $2$.  Equation \eqref{eq:fixed-domain-actual-kummer}
+then has the unique zero-jet solution
+\begin{equation}
+ e=(I+B_{k,c_0})^{-1}f,\qquad V=Te,\qquad
+ \|e\|_Y\le2\|f\|_Y.
+ \label{eq:fixed-domain-source-inverse}
+\end{equation}
+In physical coordinates, with
+$B_{\rm src}=\|\mathcal K_{a,c_0}D\|_{L^2([L/2,L];r^2dr)}$,
+\[
+ \|\Delta_rD\|_{L^2(r^2dr)}\le2B_{\rm src},\qquad
+ \|D\|_{L^2(r^2dr)}\le\tfrac14L^2B_{\rm src},\qquad
+ \|D'\|_{L^2(r^2dr)}\le\tfrac32LB_{\rm src}.
+\]
+In particular the moving left endpoint $L/2$ introduces no independent
+inverse-radius loss into these estimates.
+
+\medskip
+\noindent\textbf{Parameters and actual time differentiation.}
+For two parameter/source triples $(k_j,c_j,f_j)$ satisfying $q_j\le1/2$,
+put $e_j=(I+B_{k_j,c_j})^{-1}f_j$.  Subtracting the equations gives
+\[
+ (I+B_{k_1,c_1})(e_1-e_2)
+ =f_1-f_2-(B_{k_1,c_1}-B_{k_2,c_2})e_2.
+\]
+Consequently,
+\begin{equation}
+ \|e_1-e_2\|_Y
+ \le2\|f_1-f_2\|_Y+
+ 4\left(\tfrac38|k_1-k_2|+
+          \tfrac18|k_1c_1-k_2c_2|\right)\|f_2\|_Y.
+ \label{eq:fixed-domain-source-lipschitz}
+\end{equation}
+This is a source-to-field estimate, not an assumption that the actual
+nonlinear Hartree source is Lipschitz with a prescribed time order.
+
+If the actual maps $f:I_s\to Y$, $k:I_s\to\R$ and
+$kc_0:I_s\to\C$ are $C^1$, the same inverse identity and the difference
+quotient in \eqref{eq:fixed-domain-source-lipschitz} prove that $e$ is
+$C^1$ and
+\[
+ (I+B_{k,c_0})e_s=f_s-(B_{k,c_0})_s e.
+\]
+Hence
+\begin{equation}
+ \|e_s\|_Y\le2\|f_s\|_Y+
+ \left(\tfrac32|k_s|+\tfrac12|(kc_0)_s|\right)\|f\|_Y.
+ \label{eq:fixed-domain-time-source-bound}
+\end{equation}
+No derivative of a selected Kummer basis and no third spatial jet at a
+moving interface occurs.  The differentiability and estimates of the
+\emph{actual} $f$, $k$, and $kc_0$ must, however, still be obtained from
+the physical source, parameter equations and unique compatibility
+selection; they are not proved merely by this operator calculation.
+
+\medskip
+\noindent\textbf{The genuine smoothing perturbation.}
+Choose a fixed smooth $\chi$ on $J$ with $0\le\chi\le1$,
+$\chi=1$ near $1/2$ and $\chi=0$ near $1$.  On $[L/2,L]$ replace
+the old inner field $u$ by $v+\chi(u-v)$.  Relative to the old field,
+the perturbation is $P=(\chi-1)D$, not $\chi D$.  Set
+\[
+ \eta=\chi-1,\quad M_j=\|\eta^{(j)}\|_{L^\infty(J)},\quad
+ C_\nabla=\tfrac34+\tfrac18M_1,\quad
+ C_\Delta=1+2M_1+\tfrac18M_2.
+\]
+Then $P(s,r)=\eta(r/L)V(s,r/L)$, extended by zero outside the shell.
+The traces $V(1)=V'(1)=0$, together with $\eta=0$ near $1/2$, give
+zero value and first derivative at both shell endpoints.  By the
+product rule and \eqref{eq:fixed-domain-volterra-bounds},
+\[
+ \|P\|_{L^2(r^2dr)}\le\tfrac18L^{3/2}\|e\|_Y,\qquad
+ \|P_r\|_{L^2(r^2dr)}\le L^{1/2}C_\nabla\|e\|_Y,
+ \qquad
+ \|\Delta_rP\|_{L^2(r^2dr)}\le L^{-1/2}C_\Delta\|e\|_Y.
+\]
+For $\alpha=L_s/L$, exact differentiation at fixed physical $r$ gives
+\[
+ P_s=\eta V_s-\alpha x(\eta'V+\eta V'),\qquad x=r/L.
+\]
+It follows that
+\begin{align*}
+ \|P_s\|_{L^2(r^2dr)}
+ &\le L^{3/2}\left(\tfrac18\|e_s\|_Y+
+        |\alpha|C_\nabla\|e\|_Y\right),\\
+ \|\partial_rP_s\|_{L^2(r^2dr)}
+ &\le L^{1/2}\left(C_\nabla\|e_s\|_Y+
+        |\alpha|(C_\Delta+C_\nabla)\|e\|_Y\right).
+\end{align*}
+For the second estimate use
+$\Phi=\eta V$ and
+$\Phi'+x\Phi''=x\Delta_x\Phi-\Phi'$.
+Thus only $e,e_s\in Y$ are needed; a curvature trace $e(1)$ is not
+required.  These are estimates for the actual moving smoothing field,
+not a formal cancellation of distributions at the interface.
+
+\medskip
+\noindent\textbf{Nonlocal feedback of the same physical perturbation.}
+For $U,P\in\dot H^1(\R^3)$ let
+\[
+ \mathcal N_H(U)=(\kappa_H|\cdot|^{-2}*|U|^4)|U|^2U,\qquad
+ M=\|\nabla U\|_2+\|\nabla P\|_2.
+\]
+The Hardy--Littlewood--Sobolev map $L^{3/2}\to L^3$, H\"older's
+inequality and $\dot H^1\subset L^6$ give, by the actual quartic and
+cubic difference expansions,
+\[
+ \|\mathcal N_H(U+P)-\mathcal N_H(U)\|_{\dot H^{-1}}
+ \le C_H M^6\|\nabla P\|_2.
+\]
+The radial estimates above enter the three-dimensional norm with factor
+$\sqrt{4\pi}$.  If the actual trajectories $U,P$ are $C^1$ in
+$\dot H^1$, differentiating the same polynomial convolution gives
+\begin{align*}
+ &\|\partial_s[\mathcal N_H(U+P)-\mathcal N_H(U)]\|_{\dot H^{-1}}\\
+ &\qquad\le C_H\left(
+ M^6\|\nabla P_s\|_2+
+ M^5\|\nabla P\|_2\|\nabla U_s\|_2\right).
+\end{align*}
+With the real-linear first variation subtracted, put
+$\mathcal Q_H(U,P)=\mathcal N_H(U+P)-\mathcal N_H(U)-D\mathcal N_H(U)P$.
+The second-order integral remainder yields
+\begin{align*}
+ \|\mathcal Q_H(U,P)\|_{\dot H^{-1}}
+ &\le C_H M^5\|\nabla P\|_2^2,\\
+ \|\partial_s\mathcal Q_H(U,P)\|_{\dot H^{-1}}
+ &\le C_H\left(
+ M^5\|\nabla P\|_2\|\nabla P_s\|_2+
+ M^4\|\nabla P\|_2^2\|\nabla U_s\|_2\right).
+\end{align*}
+These bounds include the full nonlocal perturbation, rather than only
+the local cutoff Laplacian.  Their dual-energy topology is not, by
+itself, the stronger original weighted residual topology.
+
+\medskip
+\noindent\textbf{Source substitution and precise remaining obligation.}
+On the same backward overlap define, with the same genuine Hartree source,
+\[
+ \mathcal T=\mathcal K_{a,c_0}u+\mathcal S_H,\qquad
+ \mathcal O=\mathcal K_{a,c_0}v+\mathcal S_H+a^{-2}\delta u_0,
+\]
+where $u_0$ is the actual uncorrected physical matched field and
+$\delta$ is the actual spectral shift.  The exact corrected Kummer ODE
+has $\mathcal O=0$ on its classical domain.  In general the identical
+source cancels, giving the exact source in
+\eqref{eq:fixed-domain-actual-kummer}:
+\[
+ f(s,x)=L^2\bigl(\mathcal T-\mathcal O+a^{-2}\delta u_0\bigr)(s,Lx).
+\]
+In particular the time derivative must be computed from this \emph{same}
+expression with its moving argument.  Neither an independent $f_s$
+envelope nor a preassigned positive time exponent has been introduced.
+For the actual real two-channel selection $M_{\rm sel}p=b_{\rm sel}$,
+any available differentiability must be used through
+\[
+ p_s=M_{\rm sel}^{-1}\bigl((b_{\rm sel})_s-(M_{\rm sel})_s p\bigr),
+\]
+not through a freely chosen speed derivative.  Smoothing changes the
+nonlocal source and therefore must be propagated through this equation.
+The original full weighted four-region $s^{-9/4}$ residual, its parameter
+Lipschitz bound, finite recursion and dynamically derived blowup rate
+remain separate, unaccepted obligations.
+
+\medskip
+\noindent\textbf{Lean boundary.}
+The source-level pointwise parameter estimate is implemented in
+\texttt{ActualHartreeKummerFixedDomainParameterStability.lean}.
+Its hypotheses are the two actual operator-source bounds, zero Cauchy
+jets, classical second derivatives and the stated weak-annulus
+smallness.  It derives both value/slope bounds and the cutoff Laplacian
+commutator; it does not assume them separately.  The $Y$-resolvent,
+strong time-differentiation and nonlocal feedback arguments in this
+supplement are paper proofs and are not claimed as Lean-accepted.
+The separate exact nonlinear telescope has been revalidated by
+CI 42958494409, but an identity is not a positive-time gain.
+No original environment count changes in this supplement.
