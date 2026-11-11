@@ -1,0 +1,91 @@
+name: HBL same-anchor fixed-domain manuscript evidence sync
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths: ['.github/workflows/hbl-213-sync-fixed-domain-evidence-20261111.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync-exact-documents:
+    if: github.repository == 'penghongzhong/HBL' && github.ref == 'refs/heads/hbl-213-spectral-c1-trace-20261109'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: hbl-213-spectral-c1-trace-20261109
+          fetch-depth: 0
+      - name: Apply additive scope-preserving manuscript and ledger synchronization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          branch='hbl-213-spectral-c1-trace-20261109'
+          assert subprocess.check_output(['git','branch','--show-current'],text=True).strip()==branch
+          paper=Path('verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex')
+          supplement=Path('verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex')
+          ledger=Path('verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md')
+          note=Path('verification/HBL_213_OVERLAP_VOLTERRA_REMOTE_NO_GO_20261111.md')
+          record=Path('verification/HBL_213_FIXED_DOMAIN_PARAMETER_STRICT_20261111.md')
+          for path in (paper,supplement,ledger,note,record):
+              assert path.is_file(), path
+          for commit in ('773a43295085c6c132a80daa88e2ddf6576a63d6','de4223e7f35fd5eb3d40f0d0feb75acfc8303818'):
+              subprocess.run(['git','merge-base','--is-ancestor',commit,'HEAD'],check=True)
+          text=paper.read_text()
+          marker='% HBL_FIXED_DOMAIN_SOURCE_STABILITY_20261111'
+          if marker not in text:
+              assert text.count(r'\end{document}')==1
+              block=(marker+'\n'+
+                  r'\IfFileExists{verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex}'+'\n'+
+                  r'  {\input{verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex}}'+'\n'+
+                  r'  {\input{HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex}}'+'\n\n')
+              paper.write_text(text.replace(r'\end{document}',block+r'\end{document}'))
+          text=supplement.read_text()
+          text=text.replace('In physical coordinates, with\n',
+              r'Using \eqref{eq:fixed-domain-source-inverse} in physical coordinates, with'+'\n')
+          text=text.replace('For the second estimate use\n',
+              r'Together with \eqref{eq:fixed-domain-time-source-bound}, these estimates'+'\n'+
+              'control the moving repair from its actual source. For the second estimate use\n')
+          text=text.replace('Its hypotheses are the two actual operator-source bounds, zero Cauchy\n',
+              'Strict CI 42959428731 accepted its exact declarations with only\n'+
+              r'\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.'+'\n'+
+              'Its hypotheses are the two actual operator-source bounds, zero Cauchy\n') if 'Strict CI 42959428731 accepted' not in text else text
+          supplement.write_text(text)
+          title='## Same-anchor fixed-domain source stability: strict CI and corrected shortest route (2026-11-11)'
+          text=ledger.read_text()
+          if title not in text:
+              text+='\n\n'+title+'\n\n'
+              text+='Full source/type/raw-log record: `verification/HBL_213_FIXED_DOMAIN_PARAMETER_STRICT_20261111.md`. '
+              text+='The new source-to-field parameter theorem passed strict run **42959428731**, original job **130322170093**, source SHA `de4223e7f35fd5eb3d40f0d0feb75acfc8303818`, artifact **13828428094** (SHA256 `3d3c43959c90b32bf580ba3774a33febc67b40323509bafa7cdd4ffa42fad2b3`). '
+              text+='The same-anchor classical pullback, actual inner jet, three actual C1 joins and exact nonlinear telescope passed revalidation **42958494409**, job **130319187052**, source SHA `773a43295085c6c132a80daa88e2ddf6576a63d6`, artifact **13828860296** (SHA256 `6b0be3c7c1f66701da7559796ece4415b9e5eae55f2248afc072be2407e014e3`). '
+              text+='Both raw logs show Lean 4.35.0-rc3, exact Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, warningAsError, untruncated named types and individual transitive axioms precisely propext/Classical.choice/Quot.sound.\n\n'
+              text+='**Correction of the preceding overlap prerequisite:** the same actual Kummer field already extends classically to the backward overlap [L/2,L], preserving the original anchor L and its unique compatibility selection. Re-anchoring and a new speed selection are not necessary merely for this restriction. Actual smoothing still changes the nonlocal source and must enter the genuine selection feedback.\n\n'
+              text+='The original TeX now includes `HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex`: explicit fixed-domain Volterra inversion, source-based parameter/time estimates without third interface jets, the correct physical perturbation P=(chi-1)D, and full Hartree feedback in the dual-energy norm. Those Hilbert/time/nonlocal estimates remain PAPER-ONLY; the strict Lean theorem is the separate pointwise source-conditional bridge. Its actual source difference is not yet produced with the required time order.\n\n'
+              text+='**Original count remains 11/13.** The full weighted four-region positive-time residual, actual parameter-Lipschitz estimate, finite nonlinear recursion and PDE-derived Type-II rate are not certified. The finite nonlinear telescope is an identity only.\n'
+              ledger.write_text(text)
+          marker='## Correction: retain the original anchor on the backward overlap (2026-11-11)'
+          text=note.read_text()
+          if marker not in text:
+              text+='\n\n'+marker+'\n\n'
+              text+='The earlier statement that one must first re-anchor the overlap and reassemble the compatibility matrix is superseded. The actual matched Kummer solution is classical at every positive point below the basis radius. Restriction to [L/2,L] retains the original anchor L, the actual zero mismatch jet and the original unique speed. See the complete fixed-domain proof in `HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex` and strict audit record `HBL_213_FIXED_DOMAIN_PARAMETER_STRICT_20261111.md`.\n\n'
+              text+='This does not discard nonlocal feedback: replacing the old inner field u by v+chi(u-v) changes the profile by P=(chi-1)(u-v), which must enter the actual source and selection equation. Fixed-domain source differentiation avoids a third interface jet and curvature trace. Producing the actual source time/difference estimates in the original weighted topology remains open; original count 11/13.\n'
+              note.write_text(text)
+          changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          allowed={str(p) for p in (paper,supplement,ledger,note)}
+          assert changed<=allowed, changed
+          print('Exact synchronized files:',sorted(changed))
+          print('Original environments unchanged: 11/13. Documentation synchronization is NOT theorem acceptance.')
+          PY
+          git diff --check
+          git diff --stat
+          if ! git diff --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex verification/HBL_213_SHORTEST_MAIN_CHAIN_CI_20261108.md verification/HBL_213_OVERLAP_VOLTERRA_REMOTE_NO_GO_20261111.md
+            git commit -m 'Sync verified fixed-domain Kummer source stability and same-anchor paper proof; retain original 11/13'
+            git push origin HEAD:refs/heads/hbl-213-spectral-c1-trace-20261109
+          fi
+          git rev-parse HEAD
