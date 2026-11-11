@@ -3781,7 +3781,7 @@ Combining its finite-radius Wronskian with the **actual** mass continuity law an
 \]
 Thus the previously unbounded-looking bare moment \(\int_0^Rr^2B B_t\,dr\) cancels **exactly** when the true PDE's mass transport and its own phase source are used together, instead of imposing independent phase Fredholm orthogonality or a small outgoing jet.
 
-More directly for the original moving-scale \(s\)-frame, with \(U=W+p+iq\), \(b=\lambda_s/\lambda\), and \(\rho=(W+p)^2+q^2\), the **pointwise** identity
+More directly for the original moving-scale \(s\)-frame, with \(U=W+p+iq\), \(b=\lambda_s/\lambda=-b_{\mathrm{HBL}}\) (the existing original Lean residual uses \(\ell_s=-b_{\mathrm{HBL}}\ell\) and \(\omega=-\gamma_s\)), and \(\rho=(W+p)^2+q^2\), the **pointwise** identity
 \[
  y^2[-W\Lambda(W+p)+\tfrac12(\rho+y\rho_y)]
  =\partial_y[\tfrac12y^3(p^2+q^2)]
