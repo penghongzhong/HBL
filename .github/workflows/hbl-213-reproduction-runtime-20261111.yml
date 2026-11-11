@@ -1,0 +1,141 @@
+name: HBL pinned local reproduction runtime 20261111
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths: ['.github/workflows/hbl-213-reproduction-runtime-20261111.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - name: Export only public tracked source files
+        run: |
+          set -euo pipefail
+          mkdir -p export/source
+          git archive HEAD | gzip -1 > export/source/HBL-source.tar.gz
+          git rev-parse HEAD > export/source/commit.txt
+          sha256sum export/source/HBL-source.tar.gz > export/source/SHA256SUMS
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-current-source-20261111
+          path: export/source
+          retention-days: 14
+          compression-level: 0
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
+          key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
+      - name: Install exact checksum-verified compiler
+        run: |
+          set -euo pipefail
+          mkdir -p evidence export/parts "$HOME/.cache/hbl-pinned-compiler" "$RUNNER_TEMP/hbl-compiler"
+          archive="$HOME/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst"
+          test -f "$archive" || curl --proto '=https' --tlsv1.2 -fL https://github.com/leanprover/lean4/releases/download/v4.35.0-rc3/lean-4.35.0-rc3-linux.tar.zst -o "$archive"
+          echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
+          echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
+          split -b 350M -d "$archive" export/parts/lean.part
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .lake/packages
+          key: hbl-pinned-mathlib-tactics-${{ runner.os }}-a98628e16c11f5167f16124105ddce53efa9bfe5-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}
+      - name: Resolve and verify exact dependencies
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, subprocess, textwrap
+          old = subprocess.check_output(['git','show','c640b3735f3cb08ac9a52d3136c33f3dd4163db7:.github/workflows/lean.yml'], text=True)
+          chunk = old.split('      - name: Resolve exact dependencies and obtain targeted Mathlib cache\n',1)[1].split('\n      - ',1)[0]
+          pathlib.Path('/tmp/hbl-dependencies.sh').write_text(textwrap.dedent(chunk.split('        run: |\n',1)[1]))
+          PY
+          bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
+          git -C .lake/packages/mathlib rev-parse HEAD > evidence/mathlib-commit.txt
+          lake exe cache get Mathlib.Tactic > evidence/tactic-cache.log 2>&1
+          lean --version | tee evidence/compiler-version.txt
+          grep -F '4.35.0-rc3' evidence/compiler-version.txt
+          git rev-parse HEAD > evidence/commit.txt
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .lake/build
+          key: hbl-overlap-reproduction-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+          restore-keys: |
+            hbl-spectral-four-piece-recheck-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-half-power-L2-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-half-power-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+      - name: Build the existing physical source and overlap dependency graph
+        run: |
+          set -euo pipefail
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeMatchedKummerShellGain HBL.TypeIIDynamicSelection.ActualHartreeSlowInnerHalfPowerWeightedL2 HBL.TypeIIDynamicSelection.ActualHartreeSpectralFourPieceFinitePDETelescoping > evidence/build.log 2>&1 || { tail -160 evidence/build.log; exit 1; }
+          lake env printenv LEAN_PATH > evidence/lean-path.txt
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .lake/build
+          key: hbl-overlap-reproduction-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+      - name: Package runtime without any Git configuration or credentials
+        run: |
+          set -euo pipefail
+          tar --exclude='.git' --exclude='*.c.o' --exclude='*.c.o.export' --exclude='*.c' --exclude='*.a' --exclude='*.ir' -cf - .lake/packages .lake/build | zstd -T0 -3 -o export/dependencies.tar.zst
+          split -b 350M -d export/dependencies.tar.zst export/parts/deps.part
+          sha256sum export/dependencies.tar.zst export/parts/* > evidence/runtime-SHA256SUMS
+          du -h export/dependencies.tar.zst export/parts/*
+          printf '%s\n' 'Runtime export is NOT a new theorem verification. Original environments remain 11/13.' > evidence/SCOPE.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: hbl-local-runtime-evidence-20261111
+          path: evidence
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-lean-20261111-part00
+          path: export/parts/lean.part00
+          compression-level: 0
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-lean-20261111-part01
+          path: export/parts/lean.part01
+          compression-level: 0
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-deps-20261111-part00
+          path: export/parts/deps.part00
+          compression-level: 0
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-deps-20261111-part01
+          path: export/parts/deps.part01
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-deps-20261111-part02
+          path: export/parts/deps.part02
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-deps-20261111-part03
+          path: export/parts/deps.part03
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-local-deps-20261111-part04
+          path: export/parts/deps.part04
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: ignore
