@@ -1,0 +1,75 @@
+\subsection*{The actual moving singular Cramer feedback: a differentiated source producer}
+The following is a paper-level estimate and is not claimed to be a newly audited Lean theorem.
+Let $S$ be the homogeneous Sobolev constant and put
+\[
+c_*=(4\pi)^{-1/2},\qquad
+C_*=(2\pi)^{-1}+(32\pi/3)^{1/3}S^4,\qquad
+C_0=\kappa_Hc_*^3C_*.
+\]
+For radial energy fields, the seven-real-linear Hartree form
+\[
+\mathfrak T(a_1,\ldots,a_7)=
+\kappa_H\bigl(|x|^{-2}*(a_1\bar a_2a_3\bar a_4)\bigr)
+a_5\bar a_6a_7
+\]
+satisfies
+\[
+\sup_{R>0}R^{5/2}|\mathfrak T(a_1,\ldots,a_7)(R)|
+\le C_0\prod_{j=1}^7\|\nabla a_j\|_2.
+\]
+Indeed the near convolution integral is $2\pi R$, the radial bound is
+$|a_j(r)|\le c_*r^{-1/2}\|\nabla a_j\|_2$, and the far kernel
+has $L^3$ norm $(32\pi/3)^{1/3}R^{-1}$.
+For $U,V\in C^1(J;\dot H^1_{\rm rad})$ let
+\[
+f=\mathcal N_H(U)-\mathcal N_H(V),\quad
+E=\|\nabla U\|_2+\|\nabla V\|_2,\quad
+D=\|\nabla(U-V)\|_2,\quad
+E_1=\|\nabla U_s\|_2+\|\nabla V_s\|_2,\quad
+D_1=\|\nabla(U_s-V_s)\|_2.
+\]
+The seven slots and their six-slot differences imply
+\[
+\sup_R R^{5/2}|f(s,R)|\le7C_0 E^6D,\qquad
+\sup_R R^{5/2}|\partial_sf(s,R)|
+\le C_0(7E^6D_1+42E^5E_1D).
+\]
+For the original origin-normalized numerator $k(s,r)=K_s.y(r)$,
+the exact change $y=ar$ in the actual singular-Wronskian coefficient gives
+\[
+\mathcal C(s)=\int_{L(s)}^{T(s)}
+y\,k(s,y/a(s))e^{iy^2/(4a(s)^2)}f(s,y)\,dy .
+\]
+Writing $B(s,y)=k(s,y/a)e^{iy^2/(4a^2)}$ and $z=y/a$,
+differentiation at fixed physical $y$ yields
+\[
+\begin{aligned}
+\mathcal C'={}&T'TB(s,T)f(s,T)-L'LB(s,L)f(s,L)
+ +\int_L^T yB\,\partial_sf\,dy\\
+&+\int_L^T ye^{iy^2/(4a^2)}f(s,y)
+\left(\partial_sk(s,z)-\frac{a'}a z\partial_rk(s,z)
+-i\frac{a'}a\frac{y^2}{2a^2}k(s,z)\right)dy .
+\end{aligned}
+\]
+Set $A_0=\sup_{L\le y\le T}|k(s,y/a)|$,
+$A_t=\sup_{L\le y\le T}|\partial_sk(s,y/a)|$ and
+$A_r=\sup_{L\le y\le T}|(y/a)\partial_rk(s,y/a)|$.
+Since $\int_L^T y^{-3/2}dy\le2L^{-1/2}$, the exact
+source-derived bound is
+\[
+\begin{aligned}
+|\mathcal C'|\le {}&
+7C_0A_0E^6D\bigl(|L'|L^{-3/2}+|T'|T^{-3/2}\bigr)\\
+&+2C_0A_0L^{-1/2}\bigl(7E^6D_1+42E^5E_1D\bigr)\\
+&+14C_0E^6DL^{-1/2}
+\left[A_t+\left|\frac{a'}a\right|
+\left(A_r+\frac{T^2}{2a^2}A_0\right)\right].
+\end{aligned}
+\]
+There is no negative power of the Kummer left radius $L/a$.
+The quantities $A_t,A_r,E_1,D_1$ are \emph{not} independently assumed
+small: they still must be produced at the necessary time order from
+the same physical Hartree trajectory and its moving Kummer basis.
+This controls only the nonlinear feedback increment, not the complete
+four-region PDE residual. It does not close the original \S2.13 or
+the final dynamically selected Type-II theorem; the count is $11/13$.
