@@ -1,0 +1,51 @@
+\subsection*{The nonlocal overlap commutator: a necessary global source input (11 November 2026)}
+\noindent
+The backward Volterra estimate controls the spatial commutator of the
+smooth transition, but the original quartic-density Hartree interaction
+has an additional first-order \emph{nonlocal} commutator.
+For $K(x)=|x|^{-2}$, $\mathcal N_H(q)=\kappa_H(K*|q|^4)|q|^2q$,
+$0\le\eta\le1$ real, $f=u-v$, and $U=u-\eta f$, let
+\[
+ \mathcal C_\eta(u,v)
+ =\mathcal N_H(U)-(1-\eta)\mathcal N_H(u)-\eta\mathcal N_H(v).
+\]
+Its exact first variation, with $g_{u,f}=4|u|^2\operatorname{Re}(\bar uf)$,
+is
+\[
+ \lim_{\epsilon\to0}\epsilon^{-1}\mathcal C_\eta(u,u-\epsilon f)
+ =\kappa_H|u|^2u\{\eta(K*g_{u,f})-K*(\eta g_{u,f})\}
+ \quad\text{in }L^{6/5}(\mathbb R^3).
+ \tag{NC-A}
+\]
+The local Fr\'echet derivative cancels; the full convolution commutator
+need not vanish. The HLS bound $K*:L^{3/2}\to L^3$ and the two
+polynomial difference inequalities give, with
+$E=\|u\|_6+\|v\|_6$, $D=\|u-v\|_6$,
+\[
+ \|\mathcal C_\eta(u,v)\|_{6/5}
+ \le455|\kappa_H|C_{\mathrm{HLS}}E^6D .
+ \tag{NC-B}
+\]
+Thus a source-faithful bound needs global control of the selected
+difference, not just a weak second derivative on the joining annulus.
+
+Indeed choose smooth positive radial $u$, and nonzero $f\ge0$ supported
+on $L/8<r<L/3$, with $f<u/2$. For the original
+$\eta_L(r)=\chi(8r/L-4)$ set $v=u-f$. Then $U=u$ globally and
+$f=f'=\Delta_r f=0$ throughout $[5L/8,L]$, whereas for
+$3L/4<|x|<L$,
+\[
+ \mathcal C_{\eta_L}(u,v)(x)
+ =\kappa_H u(x)^3
+  \int_{\mathbb R^3}|x-y|^{-2}(u(y)^4-v(y)^4)\,dy
+ \ne0,\qquad \kappa_H\ne0 .
+ \tag{NC-C}
+\]
+Hence no bound of the full nonlocal defect solely by the local overlap
+$\|\Delta_r(u-v)\|_{L^2([5L/8,L],r^2dr)}$ can hold for
+arbitrary radial profiles, even with zero matching Cauchy data.
+This does not rule out the true selected Hartree orbit: it isolates the
+additional \emph{global density commutator} or global $L^6$ difference
+that its PDE dynamics must produce with positive time weight and
+parameter Lipschitz regularity. This is a paper-level calculation
+only; strict original acceptance remains $11/13$.
