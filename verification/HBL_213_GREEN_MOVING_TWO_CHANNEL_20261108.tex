@@ -10454,4 +10454,78 @@ No Lean certificate was obtained for this new
 calculation; the original acceptance remains $11/13$.
 % END HBL_EXACT_PHASE_WRONSKIAN_FLUX_OUTGOING_TRACE_20261110
 
+
+% BEGIN HBL_MOVING_BUBBLE_ACTUAL_HARTREE_MASS_PHASE_FLUX_20261110
+\medskip
+\noindent\textbf{Exact moving-bubble phase-flux transport from the original nonlinear Hartree PDE.}
+The finite-radius phase Wronskian need not be repaired by an
+independently selected annular source.  In unrescaled physical
+coordinates let
+\[
+  B(t,r)=\lambda(t)^{-1/2}W(r/\lambda(t)),\qquad
+  W(y)=(1+y^2)^{-1/2},\qquad
+  u(t,r)=B(t,r)+p(t,r)+iq(t,r).
+\]
+Let the smooth radial field \(u\) solve the \emph{complete} quartic
+inverse-square Hartree equation
+\(iu_t+\Delta_ru+\mathcal V_{\rm H}[u]u=0\), where
+\[
+  \mathcal V_{\rm H}[f]
+  :=\kappa_{\rm H}(|x|^{-2}*|f|^4)|f|^2,\qquad
+  \kappa_{\rm H}=3/\pi^2,\qquad
+  \mathcal V_{\rm H}[B]=3B^4.
+\]
+The true phase equation and its regular Wronskian flux give
+\[
+ \begin{aligned}
+ (-\Delta_r-3B^4)q
+ &= B_t+p_t+(\mathcal V_{\rm H}[u]-3B^4)q,\\
+ R^2(Bq_r-B_rq)(t,R)
+ &=-\int_0^R r^2B
+    [B_t+p_t+(\mathcal V_{\rm H}[u]-3B^4)q]\,dr.
+ \end{aligned}
+\]
+For a \(C^1\) moving physical interface \(R=R(t)>0\), define
+\[
+ M(t)=\frac12\int_0^{R(t)}
+        r^2\bigl(|u|^2-B^2\bigr)\,dr.
+\]
+Because \(\mathcal V_{\rm H}[u]\) is \emph{real},
+the full nonlocal PDE has the exact continuity law
+\(\partial_t|u|^2=-2r^{-2}\partial_r
+(r^2\operatorname{Im}(\overline u\,u_r))\), with
+\(\operatorname{Im}(\overline u\,u_r)
+ =Bq_r-B_rq+pq_r-qp_r\).
+Combining its moving-endpoint integral with the
+\emph{same} Wronskian identity cancels the entire
+unestimated \(B_t=-(\lambda_t/\lambda)\Lambda B\) phase
+moment and yields
+\[
+ \boxed{\;
+ \begin{aligned}
+ \int_0^{R(t)}r^2B\bigl[
+ p_t+(\mathcal V_{\rm H}[u]-\mathcal V_{\rm H}[B])q
+ \bigr]\,dr
+ ={}&M'(t)
+ -\frac{R(t)^2R'(t)}2
+   (|u(t,R(t))|^2-B(t,R(t))^2)\\
+ &+R(t)^2(pq_r-qp_r)(t,R(t)).
+ \end{aligned}\;}
+\]
+Every term comes from a \emph{single} genuine PDE orbit, including
+the full Riesz convolution and the moving physical endpoint.
+This identity provides an alternative physical transport interface
+for the prior divergent bare scaling Fredholm moment; it
+does \emph{not} provide bounds on \(M'\), outgoing flux or
+the nonlocal density difference. It is a paper-level
+same-source identity only, not a genuine §2.13 nonlinear
+time-positive residual, parameter-Lipschitz estimate,
+finite-profile recurrence or PDE-selected Type-II rate.
+The moving-Kummer pullback remains a separate obligation.
+Detailed derivation:
+\texttt{verification/HBL\_213\_ACTUAL\_HARTREE\_MOVING\_BUBBLE\_MASS\_PHASE\_FLUX\_IDENTITY\_20261110.md}.
+No new Lean theorem or acceptance follows; revised original
+environment count remains \textbf{11/13}.
+% END HBL_MOVING_BUBBLE_ACTUAL_HARTREE_MASS_PHASE_FLUX_20261110
+
 \end{document}
