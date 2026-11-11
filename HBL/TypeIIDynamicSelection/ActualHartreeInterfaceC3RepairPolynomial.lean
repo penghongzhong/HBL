@@ -1,4 +1,5 @@
 import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Algebra.Polynomial.Roots
 import Mathlib.Tactic
 
 /-!
@@ -61,9 +62,15 @@ theorem actual_Hartree_C3_repair_factored_kernels :
     hartreeInterfaceHermite2 = C (1 / 2) * X ^ 2 * (1 - X) ^ 4 * (1 + C 4 * X) ∧
     hartreeInterfaceHermite3 = C (1 / 6) * X ^ 3 * (1 - X) ^ 4 := by
   constructor
-  · unfold hartreeInterfaceHermite2
+  · apply Polynomial.funext
+    intro x
+    simp only [hartreeInterfaceHermite2, eval_add, eval_sub, eval_mul,
+      eval_pow, eval_C, eval_X, eval_one]
     ring
-  · unfold hartreeInterfaceHermite3
+  · apply Polynomial.funext
+    intro x
+    simp only [hartreeInterfaceHermite3, eval_add, eval_sub, eval_mul,
+      eval_pow, eval_C, eval_X, eval_one]
     ring
 
 end HBL.TypeIIDynamicSelection
