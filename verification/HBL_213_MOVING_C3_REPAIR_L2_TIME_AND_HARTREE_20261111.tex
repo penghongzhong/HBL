@@ -1,0 +1,102 @@
+% Paper-only §2.13 bridge: same-orbit moving C3 Hermite repair, time-L2 Hartree feedback.
+\paragraph{Moving third-jet repair and exact radial \(L^2\) time cost.}
+At one actual C1 interface, take the original physical curvature
+and third-jet discrepancies
+$d_2=[W_{rr}]_- -[W_{rr}]_+$ and
+$d_3=[W_{rrr}]_- -[W_{rrr}]_+$,
+where the signs mean left minus right traces (not independent
+repair parameters).
+For $0<h\le L$ define on $[L,L+h]$
+\[
+ P=h^2d_2\phi_2(\xi)+h^3d_3\phi_3(\xi),\qquad
+ \xi=(r-L)/h,\qquad
+ \phi_2=\tfrac12\xi^2(1-\xi)^4(1+4\xi),\quad
+ \phi_3=\tfrac16\xi^3(1-\xi)^4,
+\]
+and extend by zero elsewhere. The origin-side jet is
+$(P,P_r,P_{rr},P_{rrr})(L+)=(0,0,d_2,d_3)$,
+and all four jets vanish at $L+h$. At fixed physical $r$,
+\[
+\begin{aligned}
+ P_s={}&h^2d_2'\phi_2+h^3d_3'\phi_3
+ +hh'd_2(2\phi_2-\xi\phi_2')
+ +h^2h'd_3(3\phi_3-\xi\phi_3')\\
+ &-L'(hd_2\phi_2'+h^2d_3\phi_3').
+\end{aligned}
+\]
+Write $M_j=\|\phi_j\|_{L^2(0,1)}$,
+$N_j=\|\phi_j'\|_{L^2(0,1)}$, and
+$Q_j=\|j\phi_j-\xi\phi_j'\|_{L^2(0,1)}$.
+Exact polynomial integration gives
+\[
+\begin{array}{c|ccc}
+j&M_j^2&N_j^2&Q_j^2\\\hline
+2&43/180180&73/18018&20/9009\\
+3&1/1621620&1/90090&4/405405
+\end{array}.
+\]
+Define the \emph{derived} real physical budgets
+\[
+\begin{aligned}
+\mathfrak G&=\sqrt{4\pi}(L+h)\sqrt h\,
+   (h|d_2|N_2+h^2|d_3|N_3),\\
+\mathfrak V&=\sqrt{4\pi}(L+h)\sqrt h\big[
+ h^2|d_2'|M_2+h^3|d_3'|M_3+
+ |h'|(h|d_2|Q_2+h^2|d_3|Q_3)\\
+ &\hspace{4cm}+|L'|(h|d_2|N_2+h^2|d_3|N_3)\big].
+\end{aligned}
+\]
+Then $\|\nabla P\|_{L^2(\mathbb R^3)}\le\mathfrak G$,
+$\|P_s\|_{L^2(\mathbb R^3)}\le\mathfrak V$;
+there are no moving-support Dirac terms in $P_s$ because
+$P$ vanishes at both shell ends.
+
+\paragraph{Full nonlocal feedback of the moving repair.}
+Let $W$ be the actual (unrepaired) radial physical field,
+assumed at this step to have a genuine $L^2$ time velocity.
+Put $E=2\|\nabla W\|_2+\mathfrak G$ and
+$V_W=\|W_s\|_2$. For the *actual* inverse-square quartic
+Hartree nonlinearity, the angularly integrated seven-linear
+inequality (RV3) gives
+\[
+\begin{aligned}
+\left|\int_L^{T_{\rm out}}rB(s,r)\partial_s
+ [\mathcal N_H(W+P)-\mathcal N_H(W)](r)\,dr\right|
+ \le 7\kappa_HA_0C_{\rm wk}L^{-3/2}
+ [E^6\mathfrak V+6E^5(2V_W+\mathfrak V)\mathfrak G].
+\end{aligned}
+\]
+The source is the whole-space nonlocal convolution, not a
+spurious compactly supported source. The same exact physical
+change of variables (MT3)--(MT4) yields
+\[
+\begin{aligned}
+|\mathcal C_{\rm repair}'(s)|\le{}&
+7C_0A_0E^6\mathfrak G
+ (|L'|L^{-3/2}+|T_{\rm out}'|T_{\rm out}^{-3/2})\\
+&+7\kappa_HA_0C_{\rm wk}L^{-3/2}
+ [E^6\mathfrak V+6E^5(2V_W+\mathfrak V)\mathfrak G]\\
+&+14C_0E^6\mathfrak G L^{-1/2}
+ [A_t+|a'/a|(A_r+T_{\rm out}^2A_0/(2a^2))].
+\end{aligned}
+\]
+All moving jets, basis suprema and velocities in this estimate
+must be \emph{produced} by the actual selected two-speed PDE orbit;
+no positive time order is asserted.
+
+\paragraph{Cancellation before differentiating the strong source.}
+With right-minus-left jumps,
+$[\Delta_rP]_L=d_2$ and $[\Delta_rW]_L=-d_2$.
+Consequently the distributional time derivatives separately
+contain $-L'd_2\delta_{r=L}$ and $+L'd_2\delta_{r=L}$,
+respectively, and these interface measures cancel in
+$\partial_s\Delta_r(W+P)$.
+No measure arises at $L+h$, where the jets of $P$ vanish.
+The $C^3$ repaired field also has a continuous first radial
+derivative of its Laplacian. Separately assigning finite strong
+norms to $\partial_s\Delta_rP$ and $\partial_s\Delta_rW$
+would be mathematically invalid. This is a paper-level interface
+identity, not a Lean-verified four-region time gain. Complete
+proof and quantitative constants:
+\texttt{HBL\_213\_MOVING\_C3\_REPAIR\_L2\_TIME\_AND\_HARTREE\_20261111.md}.
+The revised original theorem count remains $11/13$.
