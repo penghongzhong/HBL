@@ -4158,3 +4158,9 @@ The exact remaining source producer is therefore the **remote global
 mismatch**, along with moving parameters/time derivatives; a local
 curvature estimate alone provably cannot replace it. Paper and TeX
 supplement updated, **no new Lean CI, original count 11/13**.
+
+### 11 November: exact radial remote quartic monopole (paper-only, **11/13 unchanged**)
+
+Read the actual `ActualRadiation3DMoment.lean` definition: its strictly audited physical inverse-square radiation moment is `4π∫|z(r)|⁴dr`; this is **not** the `4π∫r²|z(r)|⁴dr` volume-density monopole that controls exterior leading order of the **same genuine** `|x|⁻²` Hartree kernel. They cannot be interchanged. For inner density support `r≤L/3` and exterior overlap `3L/4≤r≤L`, exact spherical integration and the logarithm series give `Q(r)=4πm₀/r²+E(r)`, `|E(r)|≤1024πM₂/(195L⁴)`, `|E'(r)|≤16384πM₂/(585L⁵)`. This isolates a precise **far-density volume-moment channel**, beyond already proved inverse-square slow-center control and local Volterra curvature, for a same-physical-orbit residual estimate.
+
+A paper-level exact Hartree mass/current identity generates the volume-moment time derivative from the actual PDE; the resulting `∫|z|²|∇z|²` term is NOT bounded from `Ḣ¹` alone and has no assigned positive time order. The exterior/near-diagonal kernel for noncompact density differences remains separate. Full proof: `verification/HBL_213_REMOTE_QUARTIC_VOLUME_MOMENT_BRIDGE_20261111.md`; TeX addendum is linked into `HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`. No new Lean strict CI was started for this addendum. The already-verified finite PDE telescope [42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409) is only an equality, not a residual gain. **Formal original revised acceptance: 11/13, 84.62%.**
