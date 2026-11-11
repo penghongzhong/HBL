@@ -3984,3 +3984,18 @@ not to the Hartree II-type blowup theorem; **11/13 remains unchanged**.
   \(\sup_{R>0}R^{5/2}|\partial_s[\mathcal N_H(U)-\mathcal N_H(V)](R)|\le C_0(7E^6D_1+42E^5E_1D)\)
   for actual strong-\(\dot H^1\) velocities \(U_s,V_s\). The original singular-Cramer coefficient has an exact physical-coordinate moving-endpoint/moving-basis derivative and an explicit bound with physical \(L^{-1/2}\), but no hidden \((L/a)^{-1}\).
 - **Not proved:** the actual selected four-region PDE supplies the required strong-energy velocities \(E_1,D_1\), moving Kummer basis derivatives, real speed derivatives, and integrably improved complete residual. No newly passed CI, no Lean acceptance, no independent source-time envelope, no assumed Type-II rate. **Formal original count: 11/13.**
+
+
+## 11 November 2026 — genuine singular-Cramer time derivative needs only radial L² velocity (paper-only)
+
+Derivation: [HBL_213_RADIAL_L2_VELOCITY_MOVING_SINGULAR_CRAMER_20261111.md](HBL_213_RADIAL_L2_VELOCITY_MOVING_SINGULAR_CRAMER_20261111.md); corresponding TeX is included from the main §2.13 manuscript.
+
+Instead of assuming a pointwise \(\partial_s\mathcal N_H\) envelope or requiring \(\dot H^1\) time derivatives, the *actual radial inverse-square convolution* is angular-integrated first. For three radial energy factors and one radial \(L^2\) factor, this yields a source-dependent \(R^{-2}\) potential bound. Inserted into each of the seven real-multilinear Hartree slots, it gives the genuine moving singular Cramer source derivative contribution
+\[
+\left|\int_L^T R B(R)\partial_s[\mathcal N_H(U)-\mathcal N_H(V)](R)\,dR\right|
+\le7\kappa_H A_0 C_{\rm wk}L^{-3/2}
+ [E^6D_2+6E^5V_2D],
+\]
+with \(D_2=\|U_s-V_s\|_2\) and \(V_2=\|U_s\|_2+\|V_s\|_2\), not the stronger \(\dot H^1\) velocity norms of the preceding MT5 source estimate. The near-shell angular logarithm has an explicit finite \(L^2\) integral; other source radii are treated by the actual 3D \(L^6\)-\(L^2\) Hölder bound. Sharpness holds by critical radial scaling with \(L^2\) velocity. The moving-endpoint and moving-Kummer derivative terms remain separately budgeted.
+
+**Audit:** mathematical paper proof only; NO new Lean theorem, compile result, or axiom report for RV1–RV4. Original exact four-region nonlinear telescope remains strictly certified by CI [42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409); it is still an identity, not a time-order gain. Original retained paper environment count stays **11/13**. To reach 12/13 requires PDE-produced physical \(D,D_2,V_2\), Kummer/endpoint derivatives and real two-speed Jacobian, complete four-region strong-residual time gain and parameter Lipschitz, and actual finite profile recursion. Neither a time order nor Type-II rate has been postulated.
