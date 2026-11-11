@@ -82,19 +82,19 @@ Use precisely the backward transition already defined in
 \]
 Its derivative is supported in \([5L/8,3L/4]\). Let \(A=\|\chi'\|_\infty\), \(B=\|\chi''\|_\infty\). Define the local interpolant
 \[
-U(s,r)=v(s,r)+\eta_{L(s)}(r)\,[u(s,r)-v(s,r)].
+U(s,r)=u(s,r)-\eta_{L(s)}(r)\,[u(s,r)-v(s,r)]\,=\,(1-\eta_L)u+\eta_Lv.
 \tag{WG10}
 \]
 Then
 \[
 \Delta_r U-(1-\eta_L)\Delta_rv-\eta_L\Delta_ru
-=2\eta_L'f'+(\eta_L''+2\eta_L'/r)f.
+=-2\eta_L'f'-(\eta_L''+2\eta_L'/r)f.
 \tag{WG11}
 \]
 Using \(|\eta_L'|\le8A/L\), \(|\eta_L''|\le64B/L^2\), \(2/r\le16/(5L)\), and (WG8), one obtains the explicit **strong source** estimate
 \[
 \boxed{\quad
-\|\Delta_r U-(1-\eta_L)\Delta_rv-\eta_L\Delta_ru\|_{r,2}
+\|\Delta_r U-(1-\eta_L)\Delta_ru-\eta_L\Delta_rv\|_{r,2}
 \le\left(\frac{384}{25}A+\frac{72}{5}B\right)\|g\|_{r,2}.
 \quad}
 \tag{WG12}
@@ -129,13 +129,13 @@ For the true global interpolated field \(U\), its restriction to \(I_L\) satisfi
 \[
 \begin{aligned}
 \mathscr R_{b,\omega}(U)
-={}&(1-\eta_L)\mathscr R_{b,\omega}(v)
-+\eta_L\mathscr R_{b,\omega}(u)\\
-&+2\eta_L'f'+(\eta_L''+2\eta_L'/r)f
-+i(\partial_s\eta_L+b r\eta_L')f\\
+={}&(1-\eta_L)\mathscr R_{b,\omega}(u)
++\eta_L\mathscr R_{b,\omega}(v)\\
+&-2\eta_L'f'-(\eta_L''+2\eta_L'/r)f
+-i(\partial_s\eta_L+b r\eta_L')f\\
 &+\Bigl\{
-\mathcal N_H(U)-(1-\eta_L)\mathcal N_H(v)
--\eta_L\mathcal N_H(u)\Bigr\}.
+\mathcal N_H(U)-(1-\eta_L)\mathcal N_H(u)
+-\eta_L\mathcal N_H(v)\Bigr\}.
 \end{aligned}\tag{WG16}
 \]
 The braces are the **full nonlocal inverse-square quartic Hartree interaction** computed from the complete three-dimensional fields, not a local cubic surrogate; they are not controlled by (WG12). The identity is valid only after specifying the actual globally defined interpolated packet and its true nonlocal potentials.
