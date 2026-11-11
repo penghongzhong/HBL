@@ -11006,4 +11006,59 @@ It is not a bound for the full selected modulation/spectral source
 and carries no prescribed time-integrability or rate.
 % END HBL_HALF_POWER_INNER_NORM_BRIDGE_20261111
 
+
+% HBL_OVERLAP_VOLERRA_AND_REMOTE_NO_GO_20261111
+\paragraph{Source-dependent overlap gluing without a third-order trace.}
+Let $L>0$, $0<h\le L$, $I=[L,L+h]$, and let $D=u_{\mathrm{in}}-u_{\mathrm{out}}$
+be the difference of the two actual overlapping physical fields,
+$D(L)=D'(L)=0$. Define the \emph{derived} source mismatch
+$E=D''+2r^{-1}D'$ and $A=\|E\|_{L^2(I;r^2dr)}$.
+The exact radial Volterra identity gives
+\[
+ D'(r)=r^{-2}\int_L^r\rho^2E(\rho)\,d\rho,\qquad
+ \|D'\|_{L^2(I;r^2dr)}\le4hA,\quad
+ \|D\|_{L^2(I;r^2dr)}\le4h^2A.
+\]
+For a smooth cutoff $\chi_{L,h}(r)=\chi_0((r-L)/h)$ equal to one
+near $L$ and zero near $L+h$, $P=\chi_{L,h}D$ satisfies
+\[
+ \Delta_rP=\chi_{L,h}E+
+  2\chi_{L,h}'D'+(\chi_{L,h}''+2r^{-1}\chi_{L,h}')D,
+ \qquad
+ \|\Delta_rP\|_{L^2(I;r^2dr)}
+  \le(1+16C_1+4C_2)A,
+\]
+where $|\chi_0'|\le C_1$, $|\chi_0''|\le C_2$.
+Also $\|\nabla P\|_{L^2(\mathbb R^3)}
+\le4\sqrt{4\pi}(1+C_1)hA$ and the complete quartic Hartree
+nonlinearity changes by at most
+$C_H(\|\nabla U\|_2+\|\nabla P\|_2)^6\|\nabla P\|_2$
+in $\dot H^{-1}$. The time-dependent cutoff contributes
+$\|(\partial_s\chi)D\|_{L^2(I;r^2dr)}
+\le4C_1h(|L_s|+|h_s|)A$.
+The actual mismatch $A$, $D_s$, moving speeds and nonlinear Cramer
+feedback still require physical PDE estimates; the overlap identity
+neither proves time gain nor supplies the original stronger
+Hessian--Morawetz dual source norm.
+
+\paragraph{Remote obstruction to extending the strict slow-inner half power.}
+For $c=0$, $V=W$, and fixed nonnegative smooth compact radiation
+$z=1$ on $[1,2]$, $Z_\ell(r)=\sqrt\ell\,z(\ell r)$,
+$r_\ell=\ell^{-1}$, the original radial Riesz potential satisfies
+\[
+ P_Z(r_\ell)\ge\frac{\pi\kappa_H}{4}\ell,\qquad
+ {\cal S}_H(r_\ell)\ge\frac{3\pi\kappa_H}{8}\ell^3.
+\]
+Thus $(1+r_\ell)^4|{\cal S}_H(r_\ell)|
+\ge(3\pi\kappa_H/8)\ell^{-1}$, excluding a uniform global
+$K\ell^{1/2}(1+r)^{-4}$ interaction bound under mere amplitude/Strauss
+inputs. This does not affect the strict $\ell^{1/2}$ estimate on
+$r\le2\ell^{-1/16}$ nor the weaker full-annulus $\ell^{1/8}$ bound.
+The full outer selector must be estimated on its actual physical
+interval; no rate or nonlocal source is assumed.
+The complete arguments and remaining obligations are in
+\texttt{HBL\_213\_OVERLAP\_VOLERRA\_REMOTE\_NO\_GO\_20261111.md}.
+Revised original-environment count: $11/13$.
+% END HBL_OVERLAP_VOLERRA_AND_REMOTE_NO_GO_20261111
+
 \end{document}

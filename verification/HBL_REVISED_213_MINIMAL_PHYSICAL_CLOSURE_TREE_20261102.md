@@ -708,3 +708,40 @@ At source SHA `75970cf2fa21ea8dfc09ebe051ce6cf5983c9ef3`, [CI 42952819526](https
 
 
 **HBL_HALF_POWER_INNER_NORM_BRIDGE_20261111 (paper only):** The exact real/imaginary projections of the *same localized original quartic Hartree source* satisfy `N_H≤(2/√3)K ell^(1/2)` (Parseval/Cauchy from pinned weighted L2), yielding `L^(-5/2)N_H≤(2/√3)K ell^(21/32)` on the genuine backward overlap. This is **not** the total selected-source `N` or the outer Cramer annulus `Q`; no temporal residual gain, orbit or original numbered-environment gain. Revised score remains **11/13**.
+
+
+## HBL_OVERLAP_VOLERRA_REMOTE_NO_GO_20261111: derived overlap source and genuine remote counterexample
+
+Original revised acceptance remains **11/13**. Mathematical derivations in
+\`verification/HBL_213_OVERLAP_VOLERRA_REMOTE_NO_GO_20261111.md\`
+are **paper-only** and make no claim of Lean or original-environment acceptance.
+For the actual two overlapping C¹-matched inner/outer fields,
+\(E=\Delta_r(u_{\rm in}-u_{\rm out})\) and
+\(A=\|E\|_{L^2([L,L+h];r^2dr)}\) are source-defined, not independently bounded.
+A direct radial Volterra representation proves
+\(\|D'\|_{2,r^2}\le4hA\), \(\|D\|_{2,r^2}\le4h^2A\);
+the smooth-overlap Laplacian cost is \((1+16C_1+4C_2)A\),
+with **no hidden inverse left radius** and **no third trace**.
+Global Hartree feedback is controlled in \(\dot H^{-1}\) by the actual
+energy difference, but the differentiated/moving correction and full
+selected-source norm are still open. This is a candidate topology/route
+change; it does NOT certify the stronger Hessian dual, a finite iteration,
+or the physical PDE orbit.
+
+Separately, a fixed smooth compact nonnegative radiation with
+\(z=1\) on [1,2], \(c=0\), and \(r=\ell^{-1}\)
+gives the *actual mixed Hartree* lower bound
+\(\mathcal S_H(r)\ge(3\pi\kappa_H/8)\ell^3\), so
+\((1+r)^4\mathcal S_H(r)\gtrsim\ell^{-1}\).
+This rigorously excludes extending the source-produced slow-inner
+\(\ell^{1/2}(1+r)^{-4}\) envelope to **every** remote radius under
+only the present amplitude/Strauss assumptions. It does not change
+the strict slow-inner theorem or invalidate the old weaker full Cramer
+annulus estimate. The actual cutoff location and source coupling must
+be kept in the main proof.
+
+Latest strict source runs already verified before this note:
+42954150551 and 42954150615, respectively job 130305143381 and
+130305668963, each trust-zero, warningAsError, exact check + individual
+axiom audit only propext/Classical.choice/Quot.sound.
+**No new Lean code and no new strict CI are claimed for this note.**
