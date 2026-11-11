@@ -10903,4 +10903,36 @@ or a positive time exponent. See
 Paper proof only; no new Lean axiom audit or original-environment
 acceptance. Original 11/13 remains unchanged.
 
+
+
+% HBL_213_C3_SOURCE_REGULARITY_NECESSITY_20261110
+\paragraph{Phase Fredholm compatibility does not supply the needed third spatial jet.}
+At a fixed actual positive-radius interface $R$, take
+$\chi\in C_c^\infty((R-\delta,R+\delta))$ equal to one near $R$,
+$W=(1+r^2)^{-1/2}$, $L_-=-\partial_r^2-2r^{-1}\partial_r-3W^4$,
+and
+\[
+ q(r)=\tfrac4{15}\chi(r)|r-R|^{5/2},\qquad F=L_-q.
+\]
+Then $q\in C_c^2$, $q''=|r-R|^{1/2}$ near $R$, whereas
+$q'''=\frac12\operatorname{sgn}(r-R)|r-R|^{-1/2}\notin L^2_{\rm loc}$.
+The source $F$ is continuous, compactly supported away from the
+origin, belongs to every locally regular weighted $L^2$ source
+space, and nevertheless is not in local $H^1$. Since $L_-W=0$,
+self-adjoint integration by parts gives the exact solvability condition
+\[
+ \int_0^\infty r^2W(r)F(r)\,dr=0.
+\]
+Thus even continuous, weighted-$L^2$, Fredholm-compatible phase forcing
+need not produce the third derivative demanded by the $C^3$ patch.
+The difference of any two solutions is a smooth homogeneous ODE field
+and cannot remove the cusp. The previously checked $C^3$ Hermite
+polynomial identities remain true, but they cannot be instantiated on
+the original source without a new $C^1$ (or appropriate trace)
+regularity producer for the actual physical Hartree source and its
+moving selected Green field. This is a proof-chain obstruction, not a
+no-go for a smooth Hartree blowup orbit. See
+\texttt{HBL\_213\_C3\_SOURCE\_REGULARITY\_NECESSITY\_20261110.md}.
+No new Lean-certified PDE statement; original 11/13 unchanged.
+
 \end{document}

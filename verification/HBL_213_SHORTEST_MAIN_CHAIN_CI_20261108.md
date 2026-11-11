@@ -3830,3 +3830,8 @@ environment is accepted by the polynomial construction.
 \(‖\mathcal N_H(U+P)-\mathcal N_H(U)\u2016_{\dot H^{-1}}\le C(2\u2016\nabla U\u2016_2+\u2016\nabla P\u2016_2)^6\u2016\nabla P\u2016_2\),
 \(\u2016\nabla P\u2016_2\le [4\pi((L+h)^3-L^3)/3]^{1/2}(h|d_2|M'_2+h^2|d_3|M'_3)\).
 This controls all nonlocal feedback, including outside the repair shell, and the note explicitly computes its moving-time derivative. It does **not** bound the differentiated source topology, moving actual jets, outgoing Cramer functional, two-speed feedback, or any time exponent. No new Lean certificate, no original §2.13 or Type-II acceptance. Revised original environments **11/13**.
+
+
+### Source regularity gate: even Fredholm-compatible continuous phase forcing can lack the third jet
+
+[Explicit phase ODE counterexample](HBL_213_C3_SOURCE_REGULARITY_NECESSITY_20261110.md): with the actual phase block \(L_-=-\partial_r^2-2r^{-1}\partial_r-3W^4\), let \(q=(4/15)\chi(r)|r-R|^{5/2}\), \(F=L_-q\). It has \(F\in C_c\cap L^2_{\rm weighted}\) and the **exact** compatibility \(\int r^2WF=0\), but \(q'''\notin L^2_{\rm loc}\) and \(F\notin H^1_{\rm loc}\). Changing the normalized solution by smooth homogeneous modes cannot cure it. Hence the accepted weighted-L²/continuous original source assumptions do not imply the third spatial jet demanded by the new strict Hermite polynomial lemma; actual Hartree source spatial differentiation and time/parameter control must be proved, or the strong differentiated source topology changed. This is a paper-level decisive gap in the **current proof strategy**, not a disproof of the Type-II theorem. No added Lean axiom or original-environment acceptance. **11/13** unchanged.
