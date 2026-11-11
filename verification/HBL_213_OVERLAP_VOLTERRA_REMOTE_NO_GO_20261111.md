@@ -163,7 +163,7 @@ Consequently, setting
 the *proven* zero-jet Volterra bounds (OS1) imply
 \[
  A\le B+\Theta A,\qquad
- \boxed{\ \Theta\le\tfrac12\ \Longrightarrow\
+ \boxed{\ \text{if }\Theta\le\tfrac12,\quad
  A\le2B,\quad
  \|\nabla P\|_2\le8\sqrt{4\pi}(1+C_1)hB.\ }\tag{OS9}
 \]
