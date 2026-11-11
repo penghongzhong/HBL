@@ -1,0 +1,53 @@
+% HBL_213_MOVING_C3_STRONG_SOURCE_WIDTH_GATE_20261111
+% PAPER ONLY. This note is not a new Lean acceptance or strong residual gain.
+\paragraph{A sharp moving Hermite repair source-space gate.}
+For the actual $C^1$ physical field's interface discrepancy $d_2,d_3$,
+write $P=h^2d_2\phi_2((r-L)/h)+h^3d_3\phi_3((r-L)/h)$
+on $L<r<L+h$, with the usual compactly supported $C^3$ endpoint
+polynomials. Exact polynomial integration gives
+\[
+ \begin{array}{c|ccc}
+ j&\|\phi_j'\|_2^2&\|\phi_j''\|_2^2&\|\phi_j'''\|_2^2\\ \hline
+ 2&73/18018&50/231&100/7\\
+ 3&1/90090&2/3465&4/63
+ \end{array}.
+\]
+With $N_j=\|\phi_j'\|_2$, $C_j=\|\phi_j''\|_2$,
+$T_j=\|\phi_j'''\|_2$, the exact physical radial Laplacian gives
+\[
+ \Delta_rP=d_2\phi_2''+hd_3\phi_3''
+   +\frac2r(hd_2\phi_2'+h^2d_3\phi_3'),\quad
+ \|\Delta P\|_2\le \sqrt{4\pi}(L+h)\sqrt h
+ \sum_{j=2}^3h^{j-2}|d_j|
+  \left(C_j+\frac{2h}{L}N_j\right).
+\]
+At a moving left endpoint the time derivative has a singular part
+$-L'd_2\delta_{r=L}$; it cancels the \emph{opposite} singular
+part of $\partial_s\Delta_rW$ only after the original four-region
+physical field and its repair are combined.
+For the admissible test family $d_3=h'=d_2'=0$, $0<h\le L/10$,
+the regular contribution satisfies
+\[
+ \|\Delta P\|_2\ge \tfrac12\sqrt{4\pi}C_2L\sqrt h\,|d_2|,
+ \quad
+ \|(\partial_s\Delta P)_{\rm reg}\|_2
+ \ge\tfrac12\sqrt{4\pi}T_2
+ \frac{L}{\sqrt h}|L'd_2|,
+\]
+hence
+\[
+ \|\Delta P\|_2\|(\partial_s\Delta P)_{\rm reg}\|_2
+ \ge\pi C_2T_2 L^2|L'||d_2|^2,\qquad
+ \frac{\|(\partial_s\Delta P)_{\rm reg}\|_2}{\|P_s\|_2}
+ \ge\frac{5T_2}{11N_2}h^{-2}.
+\]
+Thus a narrow $C^3$ repair shell alone does not produce smallness
+of the time-differentiated \emph{strong} PDE source, even though
+$\|P_s\|_2$ becomes small. Actual PDE jet/velocity bounds and
+whole-field cancellations remain necessary. This is an obstruction
+to the geometry-only shortcut, not to the proposed Type-II
+Hartree solution. All displayed bounds are paper-only.
+The full calculation is in
+\texttt{HBL\_213\_MOVING\_C3\_STRONG\_SOURCE\_WIDTH\_GATE\_20261111.md}.
+Original revised theorem count: $11/13$.
+% END HBL_213_MOVING_C3_STRONG_SOURCE_WIDTH_GATE_20261111
