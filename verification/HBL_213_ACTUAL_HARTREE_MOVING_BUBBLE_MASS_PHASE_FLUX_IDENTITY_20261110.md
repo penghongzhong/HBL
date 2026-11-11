@@ -1,6 +1,6 @@
 # HBL revised §2.13 — exact moving-bubble mass/phase-flux identity (10 November 2026)
 
-**Acceptance status:** This is a new paper proof for a smooth radial strong solution of the **complete original** quartic-density inverse-square Hartree PDE. It is not a Lean certificate, not an actual constructed HBL four-region trajectory, and not a time-positive error bound. The original revised count is **11/13**, with §2.13 and the final Type-II theorem still open.
+**Acceptance status:** (MP1)–(MP9) are a new paper proof for a smooth radial strong solution of the **complete original** quartic-density inverse-square Hartree PDE, not an actual constructed HBL four-region trajectory or a time-positive error bound. The finite-dimensional jet algebra behind (MP10) and the phase-current/Wronskian composition have now been separately certified in strict Lean; this does **not** certify the unproved physical PDE orbit or the full analytic chain. The original revised count is **11/13**, with §2.13 and the final Type-II theorem still open.
 
 ## 1. Complete physical PDE and genuinely moving bubble
 
@@ -169,6 +169,19 @@ y^2\left[-W\Lambda(W+p)+\tfrac12(\rho+y\rho_y)\right]
 +y^2\left[(\Lambda W)p-(p^2+q^2)\right].
 \quad}\tag{MP10}
 \]
-The origin endpoint vanishes for a regular radial packet. Integrating (MP10) yields the last two lines of (MP9), with the **whole bare** \(-b\int_0^L y^2W\Lambda W\,dy\) canceled exactly. No hypothetical \(L\sim\sqrt{s}\), independent source envelope, Fredholm moment vanishing, or preassigned Type-II rate is used. The algebraic equality (MP10) was independently checked by symbolic expansion; (MP6)–(MP9) are **paper proofs**, not new Lean compilation.
+The origin endpoint vanishes for a regular radial packet. Integrating (MP10) yields the last two lines of (MP9), with the **whole bare** \(-b\int_0^L y^2W\Lambda W\,dy\) canceled exactly. No hypothetical \(L\sim\sqrt{s}\), independent source envelope, Fredholm moment vanishing, or preassigned Type-II rate is used. The algebraic equality (MP10) was independently checked by symbolic expansion and subsequently strictly Lean-certified as a pointwise jet identity; the passage from the actual nonlocal PDE through differentiability, radial integration and a moving endpoint in (MP6)–(MP9) remains a **paper proof**, not a Lean-compiled nonlinear PDE trajectory.
 
 The remaining \(\mathscr M_s\), full Riesz cross-density term, \(L_s\), \(b\) times perturbations, and outgoing C¹ trace still require honest **quantitative estimates from one nonlinear solution**, with differentiated source norms and parameter Lipschitz. Neither (MP9) nor the historical exact PDE telescope proves that such a solution exists or that these terms gain a positive time power. The revised original count is unchanged at **11/13**.
+
+
+### Exact Lean scope and current-source CI
+
+The source [ActualHartreeRenormalizedMassPhaseFluxAlgebra.lean](../HBL/TypeIIDynamicSelection/ActualHartreeRenormalizedMassPhaseFluxAlgebra.lean) contains exactly three **auxiliary algebraic** results:
+
+* actual_Hartree_local_mass_phase_current_splits — radial imaginary mass-current split into the true phase Wronskian plus quadratic perturbation current;
+* actual_Hartree_renormalized_bare_scaling_phase_mass_jet_cancels — pointwise real-jet polynomial equality underlying (MP10), with the total derivative written as its exact derivative jet;
+* actual_Hartree_same_orbit_phase_mass_source_cancels — algebraic elimination of the identical moving-bubble moment when the *two analytic flux identities are separately supplied as hypotheses*.
+
+**Strict GitHub CI [42929423991](https://github.com/penghongzhong/HBL/actions/runs/42929423991)**: Success (2026-11-11 00:13 UTC); original job **130224109335**, evidence artifact **13816021136**. The raw job log confirms Lean 4.35.0-rc3, pinned Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, -DwarningAsError=true, exact three #check / #print axioms reports; their transitive axioms are limited to propext, Classical.choice, Quot.sound. No sorry, admit or new axiom was introduced.
+
+**Crucial scope:** no amount of algebraically certified jet cancellation asserts the existence of an actual nonlinear solution with the required regularity, a parameter-Lipschitz or time-decaying differentiated **four-region Hartree residual**, a bounded projected evolution inverse, or a dynamically derived Type-II rate. The original revised manuscript stays **11/13**, and original \(\S2.13\) remains OPEN.
