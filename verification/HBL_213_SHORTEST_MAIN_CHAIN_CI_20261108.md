@@ -3865,3 +3865,14 @@ Full source/type/raw-log record: `verification/HBL_213_FIXED_DOMAIN_PARAMETER_ST
 The original TeX now includes `HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex`: explicit fixed-domain Volterra inversion, source-based parameter/time estimates without third interface jets, the correct physical perturbation P=(chi-1)D, and full Hartree feedback in the dual-energy norm. Those Hilbert/time/nonlocal estimates remain PAPER-ONLY; the strict Lean theorem is the separate pointwise source-conditional bridge. Its actual source difference is not yet produced with the required time order.
 
 **Original count remains 11/13.** The full weighted four-region positive-time residual, actual parameter-Lipschitz estimate, finite nonlinear recursion and PDE-derived Type-II rate are not certified. The finite nonlinear telescope is an identity only.
+
+
+<!-- HBL_213_NONZERO_MATCHED_JET_CORRECTION_20261111 -->
+### Nonzero actual Cauchy jet and parameter-theorem applicability correction — 2026-11-11
+
+A direct comparison of the exact strict theorem types detects a material hypothesis mismatch: `actual_Kummer_fixed_domain_source_parameter_stability` assumes **each** comparison field has zero value and slope at `r0`, whereas the physical Fredholm/Kummer matching theorem `actual_Hartree_moment_locked_pullback_actual_inner_jet` proves **equality** of generally nonzero jets. The latter does not discharge the former's four individual zero-jet hypotheses. Previously successful CI 42959428731 and 42958494409 remain valid **as stated**, but alone do not prove the physical two-parameter Lipschitz step.
+
+The corrected PAPER-only analytic comparison is in `verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex` (already included in the main §2.13 TeX). The explicit radial harmonic lift `H(r)=U+r0 V(1-r0/r)` has exact jets `(U,V)`, satisfies `Delta_r H=0`, and has `|K_{a,c}H| ≤ a^{-2}(|c||U|+2R(1+|c|)|V|)` on `[R,2R]`. Subtracting this lift converts the genuine possibly unequal selected jets into the zero-jet form required by the existing strict theorem, with explicit physical source and selected-jet difference budgets. The moving-anchor derivative is also written out. No third spatial jet or hidden inverse-left-radius source is introduced.
+
+**Not Lean certified as an extension.** The genuinely time/parameter-controlled same-orbit Hartree source, Fredholm selected jets, complete weighted residual, finite recursion and dynamically derived Type-II rate are still missing. Original 13-environment tally is **11/13**, unchanged.
+<!-- END HBL_213_NONZERO_MATCHED_JET_CORRECTION_20261111 -->
