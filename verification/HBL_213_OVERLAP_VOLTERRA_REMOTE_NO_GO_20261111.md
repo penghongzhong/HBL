@@ -172,3 +172,10 @@ No smallness of \(A\) and no extra third-jet hypothesis has been inserted: \(A\)
 For example, moving the normalized match to the left edge \(L_0=L_{\mathrm{slow}}/2\) of the *already estimated* backward overlap \([L_{\mathrm{slow}}/2,L_{\mathrm{slow}}]\), with \(h=L_0\), gives \(\Theta=(1+|c_0|)L_{\mathrm{slow}}^2/a^2\). This is small when the actual geometric and Kummer parameters satisfy the displayed explicit inequality; it is **not** claimed unconditionally. This re-anchoring requires reconstructing the genuine selected two-channel matching data at \(L_0\) and ensuring the outer Kummer source equation holds on the full chosen interval. Neither step follows from the existing \(C^1\) theorem at \(L_{\mathrm{slow}}\).
 
 The remaining true analytic inputs are now visible and non-circular: derive the two actual defects \(T,O\) on one common overlap from the existing original Hartree source/Green laws, control \(B\) with the *correct original outer annulus* (not with the restricted half-power bound), and control \(D_s\), moving endpoints, and the reselected real speeds. The identity (OS9) is a **paper-level reduction**, not a proof of these inputs or a new Lean acceptance.
+
+
+## Correction: retain the original anchor on the backward overlap (2026-11-11)
+
+The earlier statement that one must first re-anchor the overlap and reassemble the compatibility matrix is superseded. The actual matched Kummer solution is classical at every positive point below the basis radius. Restriction to [L/2,L] retains the original anchor L, the actual zero mismatch jet and the original unique speed. See the complete fixed-domain proof in `HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex` and strict audit record `HBL_213_FIXED_DOMAIN_PARAMETER_STRICT_20261111.md`.
+
+This does not discard nonlocal feedback: replacing the old inner field u by v+chi(u-v) changes the profile by P=(chi-1)(u-v), which must enter the actual source and selection equation. Fixed-domain source differentiation avoids a third interface jet and curvature trace. Producing the actual source time/difference estimates in the original weighted topology remains open; original count 11/13.

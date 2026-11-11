@@ -82,7 +82,7 @@ then has the unique zero-jet solution
  \|e\|_Y\le2\|f\|_Y.
  \label{eq:fixed-domain-source-inverse}
 \end{equation}
-In physical coordinates, with
+Using \eqref{eq:fixed-domain-source-inverse} in physical coordinates, with
 $B_{\rm src}=\|\mathcal K_{a,c_0}D\|_{L^2([L/2,L];r^2dr)}$,
 \[
  \|\Delta_rD\|_{L^2(r^2dr)}\le2B_{\rm src},\qquad
@@ -164,7 +164,8 @@ It follows that
  &\le L^{1/2}\left(C_\nabla\|e_s\|_Y+
         |\alpha|(C_\Delta+C_\nabla)\|e\|_Y\right).
 \end{align*}
-For the second estimate use
+Together with \eqref{eq:fixed-domain-time-source-bound}, these estimates
+control the moving repair from its actual source. For the second estimate use
 $\Phi=\eta V$ and
 $\Phi'+x\Phi''=x\Delta_x\Phi-\Phi'$.
 Thus only $e,e_s\in Y$ are needed; a curvature trace $e(1)$ is not
@@ -242,6 +243,8 @@ remain separate, unaccepted obligations.
 \noindent\textbf{Lean boundary.}
 The source-level pointwise parameter estimate is implemented in
 \texttt{ActualHartreeKummerFixedDomainParameterStability.lean}.
+Strict CI 42959428731 accepted its exact declarations with only
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
 Its hypotheses are the two actual operator-source bounds, zero Cauchy
 jets, classical second derivatives and the stated weak-annulus
 smallness.  It derives both value/slope bounds and the cutoff Laplacian
