@@ -124,6 +124,32 @@ Finally, the **exact original** Wronskian in (SB1), with
 The two bounds (SB6)–(SB7), together with \(|K.y|\le C_Y\),
 give (SB2) with no \(r_0^{-1/2}\) loss.
 
+## 2a. Explicit geometric gain on the actual large-radius overlap
+
+If \(0<h\le L\), then
+\[
+V_{L,h}\le\frac{28\pi}{3}L^3,\qquad
+L^{-3/2}V_{L,h}^{1/3}\le
+\left(\frac{28\pi}{3}\right)^{1/3}L^{-1/2}.
+\]
+Consequently (SB2) implies the single-factor estimate
+\[
+|\mathcal C_B^K[F_a]|
+\le C_Y\kappa_H L^{-1/2}D
+\left[
+\frac{16\sqrt2}{(4\pi)^{3/2}}
+\left(\frac{28\pi}{3}\right)^{1/3}E^3A^3
++\frac{7C_{\rm HLS}}{4\pi}
+\left(\frac{32\pi}{3}\right)^{1/6}A^6
+\right].
+\tag{SB10}
+\]
+In the current slow-inner overlap convention \(L=\ell^{-1/16}\),
+this produces a **geometric** \(\ell^{1/32}\) factor *provided*
+\(C_Y,E,A,D\) remain suitably controlled along the actual packet.
+It is NOT a time-positive original PDE residual bound, and no blowup
+rate or time law for \(\ell\) is inferred.
+
 ## 3. Exact relation to the current C³ repair and the acceptance gate
 
 For the original source-generated Hermite correction
