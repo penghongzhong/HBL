@@ -3958,3 +3958,21 @@ This follows directly by radial Strauss on \(|x-y|\le R/2\) and \(L^3\)-\(L^{3/2
 without compact support of \(u-v\), and a fixed-basis physical endpoint Lipschitz bound \(C_YC_{\rm pt}E^6D\,L_*^{-3/2}(|\Delta L|+|\Delta T|)\). This removes the nonlinear source's otherwise apparent \(r_0^{-1/2}\) \(L^{6/5}\)-duality loss **at this actual positive physical starting radius**. It does not control the other original forcing terms, the moving Kummer basis, real two-speed feedback, true time derivatives, full \(s^{-9/4}\) residual, or finite recursion.
 
 **Formal status: paper only; no additional Lean declaration or successful CI and no promotion of original §2.13. Retained original 11/13.** Full derivation: \`verification/HBL_213_RADIAL_HARTREE_CRITICAL_POINTWISE_CRAMER_20261111.md\`, synchronized TeX: \`verification/HBL_213_RADIAL_HARTREE_CRITICAL_POINTWISE_CRAMER_20261111.tex\`.
+
+
+**Sharpness (new):** For any nonzero radial nonnegative
+\(\phi\in C_c^\infty(\{1<|x|<2\})\),
+take \(u_L(x)=L^{-1/2}\phi(x/L)\), \(a=L^3\), \(r_0=L^{-2}\), \(B=1\).
+The radial \(\dot H^1\)-norm is independent of \(L\), but the
+**genuine** quartic nonlocal singular coefficient obeys
+\[
+\mathcal C_B^K[a^2\mathcal N_H(u_L)(a\,\cdot)]
+= L^{-1/2}(M_\phi+o(1)),\qquad M_\phi>0,
+\]
+because the fixed original Kummer factor has \(K.y(0)=1\).
+Therefore the \(L^{-1/2}\) overlap factor is the **best possible
+energy-only exponent**, not a source of arbitrary \(s\)-decay.
+A higher positive time power requires a distinct PDE-specific
+smallness/cancellation producer for the *actual selected* packet.
+This is a counterexample to the generic-energy improvement,
+not to the Hartree II-type blowup theorem; **11/13 remains unchanged**.
