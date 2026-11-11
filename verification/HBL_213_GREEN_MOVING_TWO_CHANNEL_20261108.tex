@@ -10963,6 +10963,12 @@ Hartree residual. In particular they supply neither the selected-speed,
 spectral, temporal, nor full Hamiltonian smoothing estimates.
 The exact Lean integral theorem is audited in the separate strict workflow;
 the original §2.13 and dynamical Type-II theorem remain open (11/13).
+The improved source bound applies only to the slow-inner physical region
+\(0<r\le 2L\). The existing Cramer selector integrates the scaled
+source over \(\rho\in[L/a,B]\), corresponding to the potentially larger
+physical annulus \([L,aB]\). Therefore its original
+\(Q=C_{\rm phys}(B,A)\ell^{1/8}\) remains unchanged; no full-selector
+\(\ell^{1/2}\) estimate follows from the present inner bound.
 % END HBL_SLOW_INNER_WEIGHTED_L2_20261111
 
 \end{document}

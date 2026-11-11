@@ -3840,3 +3840,5 @@ This controls all nonlocal feedback, including outside the repair shell, and the
 ## HBL_SLOW_INNER_WEIGHTED_L2_20261111: derived full-Hartree source norm, not full original §2.13
 
 The actual slow-inner ten-term nonlocal Hartree source has source-produced pointwise length `ell^(1/2)` and weighted squared L² bound `K(B,A)^2 ell * ∫_(0,∞)(1+r)^(-5/2)dr`; on its true backward overlap, its physical L² source component is bounded by `sqrt(127/7) K ell^(23/32)`. Proof and exact scope: `verification/HBL_213_SLOW_INNER_WEIGHTED_L2_20261111.md`. A dedicated pinned strict CI checks only `actual_Hartree_slow_inner_half_power_weighted_L2` and its three-axiom audit; no Success is claimed before inspection. Other real modulation/spectral/time/nonlocal residual components and the PDE orbit remain open. Original **11/13** unchanged.
+
+**HBL_HALF_POWER_NOT_OUTER_SELECTOR_20261111:** The new `ell^(1/2)` bound is restricted to the original slow-inner cutoff `r≤2L`; it CANNOT replace the original `Q=C_phys ell^(1/8)` in the true two-speed selector on physical `[L,aB]`, which can extend far beyond `2L`. No full annular selector or residual time improvement is claimed.

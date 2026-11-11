@@ -38,3 +38,7 @@ This is a genuine source component in the same overlap used by the radius-unifor
 The existing C³ repair is still uninstantiable from mere weighted L² plus continuous source inputs, as proved by the Fredholm-compatible \(C^2\) counterexample. The source-faithful *smooth backward overlap*, which does not sample \(F(B)\) or \(F'(B)\), remains the shorter candidate; the actual curvature RHS and full nonlocal time/parameter estimates must be proved. The earlier exact four-piece PDE telescope remains an identity only.
 
 **Acceptance:** §2.13 and the final PDE-derived Type-II rate are open; formal original count **11/13**. No auxiliary Lean pass raises that count.
+
+## HBL_HALF_POWER_NOT_OUTER_SELECTOR_20261111: the selected-speed outer annulus is NOT covered
+
+The stronger square-root source bound is valid on the **actual slow-inner domain** (0<r\le2L), (L=\ell^{-1/16}), and for its radially conjugated cutoff. It cannot replace the (Q=C_{\rm phys}(B,A)\ell^{1/8}) bound in `actual_Hartree_true_nonlocal_source_selects_unique_real_speed` on its **full original outer Cramer interval**: there (F(\rho)=-a^2\mathcal S_H(a\rho)) and physical (y=a\rho\in[L,aB]), with admissible choices (aB\gg2L). Thus the selector's original (\ell^{1/8}) constant must be retained until a separate all-annulus source argument is proved. This spatial support restriction prevents an illegitimate global time-gain upgrade.
