@@ -87,7 +87,7 @@ U(s,r)=u(s,r)-\eta_{L(s)}(r)\,[u(s,r)-v(s,r)]\,=\,(1-\eta_L)u+\eta_Lv.
 \]
 Then
 \[
-\Delta_r U-(1-\eta_L)\Delta_rv-\eta_L\Delta_ru
+\Delta_r U-(1-\eta_L)\Delta_ru-\eta_L\Delta_rv
 =-2\eta_L'f'-(\eta_L''+2\eta_L'/r)f.
 \tag{WG11}
 \]
@@ -114,7 +114,7 @@ On the support of \(\chi'\), \(r\le3L/4\). Therefore
 \quad}
 \tag{WG14}
 \]
-These are **genuine moving-interface bounds** for the already coded overlap, based on the *actual spatial equation difference*. They require neither third spatial traces nor time differentiation of a piecewise Laplacian; the moving-interface delta terms never arise because the interpolation is smooth.
+The field weights in (WG11) now follow the literal interpolation \(U=(1-\eta_L)u+\eta_Lv\), consistently with (WG12) and (WG16). These are **genuine moving-interface bounds** for the already coded overlap, based on the *actual spatial equation difference*. They require neither third spatial traces nor time differentiation of a piecewise Laplacian; the moving-interface delta terms never arise because the interpolation is smooth.
 
 ## 3. Exact Hartree PDE identity and its remaining nonlocal term
 
