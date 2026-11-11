@@ -90,3 +90,31 @@ bounds for the selected profiles must be produced, not assumed.
 This calculation has not been Lean-compiled, and original revised
 acceptance remains $11/13$. Revised original \S2.13 and the
 PDE-dynamical Type--II blowup theorem are still open.
+
+
+\medskip
+\noindent\textbf{Sharpness of the geometric factor at fixed energy.}
+Choose a nonzero real nonnegative radial
+$\phi\in C_c^\infty(\mathbb R^3)$ supported in $1<|x|<2$.
+For $L\to\infty$ put
+\[
+ u_L(x)=L^{-1/2}\phi(x/L),\quad v_L=0,\quad
+ a_L=L^3,\quad r_{0,L}=L^{-2},\quad B=1.
+\]
+The energy norm remains fixed and the true inverse-square
+quartic Hartree nonlinearity obeys
+$\mathcal N_H(u_L)(L\rho)=L^{-5/2}\mathcal N_H(\phi)(\rho)$.
+With the actual fixed origin-normalized mode $K.y(0)=1$,
+\[
+ \mathcal C_B^K[a_L^2\mathcal N_H(u_L)(a_L\,\cdot)]
+ =L^{-1/2}\int_1^2 \rho\,\mathcal N_H(\phi)(\rho)
+ K.y(\rho/L^2)e^{i\rho^2/(4L^4)}\,d\rho
+ =L^{-1/2}(M_\phi+o(1)),\quad M_\phi>0.
+\]
+This sharpness example is constructed from the genuine nonlocal
+Hartree map, but \emph{not} from a proven evolving PDE orbit.
+It excludes any stronger generic power of the physical starting
+radius based only on a uniform radial energy bound; an additional
+positive time order must arise from actual selected-PDE decay or
+cancellation. No improvement in original environment acceptance is
+asserted.
