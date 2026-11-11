@@ -124,3 +124,45 @@ which proves (SR1). Differentiating \({\cal M}/(\sigma R)\) **at a root only** p
 The present proposition removes the *scalar* root-existence and endpoint-Jacobian obstruction **for a concrete near-bubble class**. It cannot be inserted into original §2.13 until the same nonlocal Hartree PDE and already selected Cramer/Green correction yield the required physical \(L^\infty\) remainder on the entire shrinking ball, along with differentiable parameter dependence; this may fail for the actual singular Kummer/Fredholm inner correction. Furthermore, fixing the extra scalar scale must be compatible with the two original real compatibility conditions, and the mass-flux evolution must produce quantitative time-positive and parameter-Lipschitz bounds. None of those statements is inferred from (SR1)–(SR3).
 
 No new Lean code, CI success, added axiom or original-environment acceptance is claimed here. Historical CI [42929423991](https://github.com/penghongzhong/HBL/actions/runs/42929423991) checks only three jet-algebra declarations; [42927397872](https://github.com/penghongzhong/HBL/actions/runs/42927397872) checks only the full nonlinear PDE telescope **as an equality**, not its residual bound. **11/13**, both original §2.13 and the PDE-derived Type-II theorem remain OPEN.
+
+
+## Sharpened two-sided conditioning and a genuine Hartree PDE current–speed identity
+
+The same bounds also give the *lower* derivative estimate, since \(J_x\le R\), \(|a-\sigma|/\sigma\le1/8\), and \(|E'|\le4\varepsilon R\):
+\[
+-\frac{3R(\sigma)}5\le {\cal M}'_u(\sigma)\le-\frac{R(\sigma)}6,\qquad \sigma\in I.\tag{SR4a}
+\]
+The numerical lower constant follows from \(9/16+1/512<3/5\). Thus at the root
+\[
+-\frac35\le
+\left.\partial_{\log\sigma}\frac{{\cal M}_u(\sigma)}
+{\sigma R(\sigma)}\right|_{\sigma_*}
+\le-\frac16.\tag{SR4b}
+\]
+
+Suppose **in addition** that \(u(t,r)\) is a sufficiently regular radial solution to the *actual* three-dimensional nonlocal Hartree PDE
+\[
+i u_t+\Delta_r u+
+\kappa_H(|x|^{-2}*|u|^4)|u|^2u=0,
+\]
+on a time interval around \(t_0\), with local physical \(C^1\) temporal dependence and with \(u(t_0)=B_a+z\) satisfying the preceding hypotheses (so the scalar implicit function theorem applies). Then the root condition uniquely determines a local \(C^1\) scale \(\sigma(t)\) without assigning a blowup law.
+
+Since the Hartree convolution potential is real, the original PDE gives the genuine local continuity equation
+\[
+\partial_t|u|^2=-2r^{-2}\partial_r(r^2j),\qquad
+j=\Im(\overline u\,\partial_r u).
+\]
+Differentiate \({\cal M}_{u(t)}(\sigma(t))=0\) at \(t_0\), **including** the \(\sigma\)-dependent endpoint already present in \({\cal M}'_u\). Differentiating the physical field at frozen \(\sigma\) contributes \(-R^2j(t_0,R)\). Hence
+\[
+\boxed{\quad
+\dot\sigma(t_0)=\frac{R(\sigma_*)^2
+ j(t_0,R(\sigma_*))}
+ {{\cal M}'_{u(t_0)}(\sigma_*)},\qquad
+\frac53R(\sigma_*)|j(t_0,R(\sigma_*))|
+\le |\dot\sigma(t_0)|
+\le6R(\sigma_*)|j(t_0,R(\sigma_*))|.
+\quad}\tag{SR5a}
+\]
+Whenever \(j\ne0\), the scale speed has the sign *opposite* to the outward radial current. This is a **PDE-derived local identity and comparison**, not a Type-II blowup rate, a source time-decay estimate, or a claim that the selected original two-channel modulation law equals this scalar law.
+
+The user's original main-theorem threshold is unaffected: the actual four-region field must first be constructed in the requisite physical class, its extra gauge made consistent with the original two real Fredholm speeds, and its time-differentiated *nonlocal* residual and parameter Lipschitz bounds proved. The simple continuity equation alone provides no quantitative current \(j(t,R(t))\), and hence no dynamic rate.
