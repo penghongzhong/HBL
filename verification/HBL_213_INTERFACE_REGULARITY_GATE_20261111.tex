@@ -1,0 +1,74 @@
+
+% HBL_INTERFACE_REGULARITY_GATE_20261111
+\paragraph{Actual interface regularity must precede the energy-dual source estimate.}
+Assume the one-sided original Hartree fields are classical, have
+continuous time traces, and meet with $[U]=[U_r]=0$ along $r=L(s)>0$.
+The moving trace identity gives $[U_s]=-L_s[U_r]=0$.
+Where the actual nonlocal potential is continuous, the complete
+renormalized physical residual satisfies
+\[
+ [F_{\rm full}]=[U_{rr}].
+\]
+Thus a nonzero curvature discrepancy in the literal four-piece
+construction produces a jump in the actual source, not a Dirac
+mass in the undifferentiated PDE. This distinction is important.
+For $J=[F]_{r=R}\ne0$, choose a real compactly supported smooth
+$\phi$ with $\phi'(0)=1$ and set
+$g_\epsilon(r)=\sqrt\epsilon\,\phi((r-R)/\epsilon)$.
+For the genuine phase block $L_-=-\Delta_r-3W^4$,
+\[
+ \|g_\epsilon\|_{\rm Mor}=O(1),\qquad
+ (L_-g_\epsilon,F)_{L^2(\mathbb R^3)}
+   =4\pi R^2J\epsilon^{-1/2}+O(\epsilon^{1/2}).
+\]
+Consequently the proposed Hessian--Morawetz-dual source norm is
+infinite whenever this jump is nonzero. The bounded nonlocal
+lower-order operator in $L_+$ does not remove the principal
+obstruction. A nonzero jump also excludes local $H^{1/2}$
+regularity, by the divergent integral of $(x+y)^{-2}$ across the
+interface. A small positive time factor cannot make this infinite
+per-time norm finite. These are conditional statements about
+nonzero jumps, not a proof that every selected orbit has such a jump.
+
+Merely repairing through $C^2$ is also insufficient for a general
+moving-interface $H^1$-source Lipschitz assertion. Near $r=a$,
+$U_a=(r-a)_+^3/6$ is $C^2$, but
+$\partial_r\Delta_rU_a$ has a unit jump. After a smooth fixed-annulus
+localization,
+\[
+ \|\Delta_r U_{a+h}-\Delta_r U_a\|_{H^1}\ge c\sqrt{|h|}.
+\]
+A finite repair through the third spatial jet removes this
+particular source-derivative jump. With the \emph{actual} mismatch
+jets $d_2=U_{\rm in}''-U_{\rm out}''$ and
+$d_3=U_{\rm in}'''-U_{\rm out}'''$ at $L$, put
+\[
+ P(r)=h^2d_2\phi_2((r-L)/h)+h^3d_3\phi_3((r-L)/h),
+\]
+\[
+ \phi_2(t)=\tfrac12t^2(1-t)^4(1+4t),\qquad
+ \phi_3(t)=\tfrac16t^3(1-t)^4.
+\]
+Its endpoint jets are exactly
+\[
+ (P,P',P'',P''')(L)=(0,0,d_2,d_3),\qquad
+ (P,P',P'',P''')(L+h)=(0,0,0,0).
+\]
+Only these polynomial identities and their factorizations are
+assigned to the companion Lean module. The analytic obstruction
+and the global physical splice are separate paper arguments.
+For $k\le4$ the explicit source costs are
+\[
+ \|P^{(k)}\|_2\le
+ h^{5/2-k}|d_2|\|\phi_2^{(k)}\|_2+
+ h^{7/2-k}|d_3|\|\phi_3^{(k)}\|_2.
+\]
+No time-positive exponent follows from these formulas.
+The full nonlocal Hartree source and the original two-speed
+compatibility must be recomputed for the repaired field; preserving
+boundary values and slopes alone does not preserve the convolution
+or prove that the old speeds are still compatible. Actual moving
+jet, fourth-derivative and parameter estimates remain open.
+The complete proof and scope are recorded in
+\texttt{HBL\_213\_INTERFACE\_REGULARITY\_GATE\_20261111.md}.
+Original revised acceptance stays $11/13$.
