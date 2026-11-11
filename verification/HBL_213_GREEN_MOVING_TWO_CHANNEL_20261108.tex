@@ -10762,6 +10762,38 @@ unique real two-speed selector; and no four-region residual time
 gain, parameter Lipschitz estimate, physical orbit or dynamical
 Type-II rate follows.  This calculation has not been Lean compiled
 and does not change the accepted original count $11/13$.
+
+\noindent\textbf{Two-sided shrinking-gauge conditioning and PDE-selected
+local speed.}  The same proof gives the full derivative interval
+\[
+ -\frac35R(\sigma)\le\mathcal M'_u(\sigma)
+ \le-\frac16R(\sigma),\qquad
+ -\frac35\le
+ \left.\partial_{\log\sigma}
+  \frac{\mathcal M_u(\sigma)}{\sigma R(\sigma)}
+ \right|_{\sigma_*}\le-\frac16.
+\]
+If, in addition, the physical field is a sufficiently regular solution
+of the \emph{original} Hartree equation and the scalar root is
+continued locally in time, its real nonlocal potential cancels in the
+radial mass continuity law.  With
+$j=\Im(\overline u\,\partial_r u)$, exact differentiation at the root
+gives the \emph{PDE-derived} kinematic identity
+\[
+ \dot\sigma=\frac{R(\sigma)^2j(t,R(\sigma))}
+                  {\partial_\sigma\mathcal M_{u(t)}(\sigma)},
+ \qquad
+ \frac53 R(\sigma)|j(t,R(\sigma))|
+ \le|\dot\sigma|
+ \le6R(\sigma)|j(t,R(\sigma))|.
+\]
+The moving endpoint is already present in
+$\partial_\sigma\mathcal M$.  The current is not independently
+estimated, so this identity cannot be converted into a Type-II rate
+without a constructed same-source radiative orbit and its
+quantitative transport; compatibility with the two-real-speed
+Fredholm selector remains unproved.  There is no new Lean acceptance.
+
 % END HBL_SHRINKING_GAUGE_ROOT_JACOBIAN_20261110
 
 \end{document}
