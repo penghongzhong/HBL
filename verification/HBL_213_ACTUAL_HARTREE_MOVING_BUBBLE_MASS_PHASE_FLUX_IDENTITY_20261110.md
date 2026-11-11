@@ -281,6 +281,24 @@ cannot be copied unchanged. Compatibility of this mass gauge with the
 **existing unique real two-channel Cramer/Fredholm selector** has not
 been established.
 
+**Conditioning at the concentrating endpoint.** The derivative in
+(MG4) is nonzero for each \(\lambda>0\), but
+\(\lambda^2 I(R/\lambda)\sim-\lambda R/2\to0\) as
+\(\lambda\downarrow0\); its inverse is **not uniformly bounded** in the
+raw physical mass coordinate. At a root of the **equivalent**
+normalized gauge \(G_R=M_R/\lambda=0\), however,
+\[
+ \partial_{\log\lambda}G_R
+ =\lambda I(R/\lambda)\le -R/4
+ \qquad (R/\lambda\ge2\pi).
+\]
+This supplies a uniformly nonzero *scalar normalization Jacobian* for
+fixed positive physical \(R\), but the normalized physical flux is
+\(R^2\Im(\bar u u_r)/\lambda\), so the actual PDE must still prove the
+corresponding \(O(\lambda)\) current and its parameter-Lipschitz
+control. Renormalization alone does not establish either such a
+current gain or the required HBL Kummer matching.
+
 **Sharp limitation of an energy-only argument.** Choose
 \(p_{\varepsilon,L}(y)=\varepsilon W(y)\chi(y/L)\), \(q=0\), where
 \(\chi\equiv1\) on \([0,1]\), \(\chi\equiv0\) on \([2,\infty)\) and
