@@ -4186,3 +4186,19 @@ and its included TeX. This neither bounds the nontruncated outer
 near-diagonal interaction nor proves the selected full-packet density
 derivative, time-positive residual, parameter Lipschitz, recursion or
 PDE-derived Type-II speed. **Paper only, no new Lean CI, original 11/13.**
+
+
+**PDE-produced localized density velocity (same supplement, paper only):**
+For the actual Hartree radiation satisfying
+i z_t+Delta z+N_H(z)=0, ell_s=-b ell and t_s=ell^2,
+the exact scaling derivative is
+Z_s=-b(Z/2+r Z_r)+i ell^(5/2)(Delta z+N_H(z))(t,ell r).
+Thus its inverse-radial-quartic norm is bounded by
+ell^(1/4)|b| [M(z)^(1/4)/2+M(q z_q)^(1/4)]
++ell^(9/4)M(Delta z+N_H(z))^(1/4), yielding the actual J1 bound
+for rho=|V+Z|^4-|V|^4 with fixed V. The same scaling has a
+fourth-root-length parameter comparison at fixed physical t.
+This closes a *formula/producer* for the specialized radiation channel,
+not bounds on the physical high-regularity flux, modulation speed,
+outer density, assembled packet residual or time rates. No new Lean
+CI; original 11/13.

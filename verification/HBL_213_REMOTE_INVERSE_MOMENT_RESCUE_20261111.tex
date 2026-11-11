@@ -75,3 +75,43 @@ Neither $J_1$ nor $L'$ has been assigned a decay rate;
 the outer near-diagonal density and all remaining dynamic
 strong-residual steps remain open. No new Lean CI or original
 environment acceptance is claimed: $11/13$.
+
+\paragraph{The genuine PDE producer of the density time derivative.}
+If $iz_t+\Delta z+\mathcal N_H(z)=0$ with the original quartic
+inverse-square Hartree operator, $\ell_s=-b\ell$, $t_s=\ell^2$ and
+$Z(s,r)=\sqrt{\ell(s)}z(t(s),\ell(s)r)$, then at fixed $r$,
+\[
+ Z_s=-b\left(\frac12Z+rZ_r\right)
+ +i\ell^{5/2}[\Delta z+\mathcal N_H(z)](t,\ell r).
+\]
+Let $\mathfrak M(w)=4\pi\int_0^\infty|w(q)|^4dq$, and denote
+$A=\mathfrak M(V)^{1/4}$,
+$B=\mathfrak M(z)^{1/4}$,
+$D=\mathfrak M(qz_q)^{1/4}$ and
+$P=\mathfrak M(\Delta z+\mathcal N_H(z))^{1/4}$.
+With fixed $V$ and $\rho=|V+Z|^4-|V|^4$, the precise scaling and
+the original PDE yield
+\[
+ \mathfrak M(Z_s)^{1/4}
+ \le\ell^{1/4}|b|(B/2+D)+\ell^{9/4}P,
+\]
+\[
+ J_0\le4(2A+\ell^{1/4}B)^3\ell^{1/4}B,\quad
+ J_1\le4(A+\ell^{1/4}B)^3
+ [\ell^{1/4}|b|(B/2+D)+\ell^{9/4}P].
+\]
+In particular, the formerly unquantified $J_1$ channel in the
+moving physical potential bound is produced directly by the same
+PDE, rather than by inserting an independent time-rate premise.
+The energy/regularity bounds on $D,P,b,L'/L$ and their extension
+to the full four-piece packet are still unproved.
+For comparison at fixed physical time,
+\[
+ \partial_{\log\ell}Z_\ell
+ =\frac12Z_\ell+r\partial_rZ_\ell,\qquad
+ \|Z_{\ell_1}-Z_{\ell_2}\|_{L^4(4\pi dr)}
+ \le4(B/2+D)|\ell_1^{1/4}-\ell_2^{1/4}|.
+\]
+This gives a true scaling-parameter comparison for radiation but
+not the complete selected spectral/Kummer parametrix.
+Paper only, $11/13$ original environments.

@@ -96,3 +96,55 @@ No hard-cutoff density trace, prescribed rate or hidden left Kummer radius r0=L/
 The original telescope initially failed in CI 42530158681 due to upstream InWeightedL2 and type issues. CI 42958494409, original job 130319187052, is Success under pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0 and warningAsError. Exact #check and #print axioms for its four specified declarations show only propext, Classical.choice and Quot.sound. **This is an algebraic PDE telescope; no strict CI audits IM1--IM9.**
 
 What is still open: actual same-PDE-orbit bounds on J0 and J1 for the **selected complete four-piece difference**, the untruncated near-diagonal outer density, moving Kummer basis/endpoint/unique two-speed derivatives, complete strong residual positive time order and parameter Lipschitz, true finite recursion and a PDE-derived Type-II rate. No independent source envelope or rate has been inserted. Revised originals **11/13**.
+
+
+## 5. Actual PDE generation of the density-velocity budget for the physical radiation channel
+
+The term J1 in (IM7)--(IM9) need not be **postulated** for the special physical bubble-plus-radiation channel. Let the physical radiation z(t,q) solve the ORIGINAL (nonlocal) equation
+\[
+ iz_t+\Delta z+{\cal N}_H(z)=0,\quad
+ {\cal N}_H(z)=\kappa_H(|x|^{-2}*|z|^4)|z|^2z.
+\]
+Let ell(s)>0, ell_s=-b(s)ell(s), t_s=ell(s)^2, and Z(s,r)=sqrt(ell(s))*z(t(s),ell(s)r), evaluated at fixed r. The complete chain rule yields
+\[
+ \boxed{Z_s=-b\left(\frac12 Z+rZ_r\right)
+   +i\ell^{5/2}[\Delta z+{\cal N}_H(z)](t,\ell r).}
+ \tag{IM10}
+\]
+There is no freely assigned temporal source bound in this identity. Put
+\[
+ A={\cal M}(V)^{1/4},\quad
+ B={\cal M}(z(t))^{1/4},\quad
+ D={\cal M}(qz_q(t,q))^{1/4},\quad
+ P={\cal M}((\Delta z+{\cal N}_H(z))(t))^{1/4}
+\]
+and assume these quantities are finite, with fixed background V independent of s.
+The exact L4(dr) scaling gives
+\[
+ \boxed{{\cal M}(Z_s)^{1/4}
+ \le\ell^{1/4}|b|(B/2+D)+\ell^{9/4}P.}
+ \tag{IM11}
+\]
+For rho(s,r)=|V(r)+Z(s,r)|^4-|V(r)|^4, the genuine density and its time derivative therefore satisfy
+\[
+ \boxed{J_0\le4(2A+\ell^{1/4}B)^3\ell^{1/4}B,\quad
+ J_1\le4(A+\ell^{1/4}B)^3
+  [\ell^{1/4}|b|(B/2+D)+\ell^{9/4}P].}
+ \tag{IM12}
+\]
+Inserting (IM12) into (IM8)--(IM9) is a completely explicit source-derived moving-potential bound in the original physical scaling, with no new volume moment or independent density-velocity rate. It **does not** bound P, D, b, L'/L or their full assembled-packet analogues; those are true regular-flow and modulation obligations, and no decay in s follows without them. If z solves a forced equation, IM10 must retain its actual forcing as an additional term.
+
+A second useful parameter interface follows by differentiating the *same* physical scaling at fixed t:
+\[
+ \partial_{\log\ell} Z_\ell=\frac12 Z_\ell+r\partial_r Z_\ell,\qquad
+ \|\partial_{\log\ell}Z_\ell\|_{L^4(4\pi dr)}
+ \le\ell^{1/4}(B/2+D).
+ \tag{IM13}
+\]
+Integrating in log ell for 0<ell1,ell2 with fixed physical z gives the non-singular parameter estimate
+\[
+ \boxed{\|Z_{\ell_1}-Z_{\ell_2}\|_{L^4(4\pi dr)}
+ \le4(B/2+D)|\ell_1^{1/4}-\ell_2^{1/4}|.}
+ \tag{IM14}
+\]
+Time variation of z and spectral/Kummer parameters cannot be discarded when using IM14 for the actual moving four-piece packet. Equations IM10--IM14 are newly derived paper-level consequences of the physical PDE and radial rescaling, not yet Lean compiled. **Original count remains 11/13.**
