@@ -1,0 +1,41 @@
+name: HBL pinned runtime interpreter IR recovery
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths: ['.github/workflows/hbl-213-runtime-ir-recovery-20261111.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .lake/packages
+          key: hbl-pinned-mathlib-tactics-Linux-a98628e16c11f5167f16124105ddce53efa9bfe5-fe747adcef240754f19753d93002879e118ffd684e861de5e81f0a00cbce29a4
+          fail-on-cache-miss: true
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .lake/build
+          key: hbl-overlap-reproduction-Linux-fe747adcef240754f19753d93002879e118ffd684e861de5e81f0a00cbce29a4-c4f075098dbcdf070dfe67b34e72bcc5e59a167b
+          fail-on-cache-miss: true
+      - name: Export only compiled interpreter IR and its checksums
+        run: |
+          set -euo pipefail
+          mkdir -p export
+          find .lake/packages .lake/build -type f -name '*.ir' -print0 > /tmp/ir-files
+          test -s /tmp/ir-files
+          tar --null -T /tmp/ir-files -cf - | zstd -T0 -3 -o export/interpreter-ir.tar.zst
+          sha256sum export/interpreter-ir.tar.zst > export/SHA256SUMS
+          git rev-parse HEAD > export/commit.txt
+          du -h export/interpreter-ir.tar.zst
+          printf '%s\n' 'Runtime repair only: this export is not theorem acceptance.' > export/SCOPE.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-runtime-interpreter-ir-20261111
+          path: export
+          compression-level: 0
+          retention-days: 14
