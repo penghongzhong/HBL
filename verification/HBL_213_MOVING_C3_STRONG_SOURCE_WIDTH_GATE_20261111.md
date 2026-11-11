@@ -1,6 +1,6 @@
 # HBL §2.13 — sharp strong-source cost of a moving C³ Hermite interface patch
 
-11 November 2026. **Paper-level source-space gate, not a new Lean theorem or original §2.13 acceptance.** This is a quantitative continuation of \`HBL_213_MOVING_C3_REPAIR_L2_TIME_AND_HARTREE_20261111.md\`. It isolates the local second-order PDE source cost *before* estimating the genuine Hartree convolution, and shows why shrinking an interface layer cannot by itself produce a small time-differentiated strong residual.
+11 November 2026. **Paper-level source-space gate, not a new Lean theorem or original §2.13 acceptance.** This is a quantitative continuation of `HBL_213_MOVING_C3_REPAIR_L2_TIME_AND_HARTREE_20261111.md`. It isolates the local second-order PDE source cost *before* estimating the genuine Hartree convolution, and shows why shrinking an interface layer cannot by itself produce a small time-differentiated strong residual.
 
 Write \(t=(r-L(s))/h(s)\), \(0<h\le L\), and
 \[
@@ -107,4 +107,4 @@ This is a *counterexample to an attempted geometry-only inference*, **not** a no
 
 ## 4. Honest acceptance boundary
 
-All formulas (SS1)–(SS9) are paper calculations. No new \`--trust=0\` Lean build, axiom audit, completed four-region temporal gain, parameter Lipschitz, original §2.13 theorem, or dynamic Type-II rate is asserted. The verified four-region PDE telescope is algebraic and does not remove this analytic requirement. The **only valid original-environment count remains 11/13**. The next essential producer is the *same selected physical PDE orbit*: actual \(d_j,d_j',L',h'\), full \(W_s\), two-real-speed Jacobian, and a joint strong residual estimate **after** distributional cancellation; then finite-layer induction and a dynamically derived Type-II law.
+All formulas (SS1)–(SS9) are paper calculations. No new `--trust=0` Lean build, axiom audit, completed four-region temporal gain, parameter Lipschitz, original §2.13 theorem, or dynamic Type-II rate is asserted. The verified four-region PDE telescope is algebraic and does not remove this analytic requirement. The **only valid original-environment count remains 11/13**. The next essential producer is the *same selected physical PDE orbit*: actual \(d_j,d_j',L',h'\), full \(W_s\), two-real-speed Jacobian, and a joint strong residual estimate **after** distributional cancellation; then finite-layer induction and a dynamically derived Type-II law.
