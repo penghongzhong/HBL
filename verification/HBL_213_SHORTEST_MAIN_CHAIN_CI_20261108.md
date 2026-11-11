@@ -3876,3 +3876,32 @@ The corrected PAPER-only analytic comparison is in `verification/HBL_213_FIXED_D
 
 **Not Lean certified as an extension.** The genuinely time/parameter-controlled same-orbit Hartree source, Fredholm selected jets, complete weighted residual, finite recursion and dynamically derived Type-II rate are still missing. Original 13-environment tally is **11/13**, unchanged.
 <!-- END HBL_213_NONZERO_MATCHED_JET_CORRECTION_20261111 -->
+
+
+### 2026-11-11: strict nonzero matched Cauchy jet (same frozen Kummer operator)
+
+The verified physical inner/Fredholm and corrected Kummer outer fields share a
+generally nonzero value and first derivative at their original matching anchor.
+For the same frozen operator at one time, subtract the fields *first*.
+The difference has zero jet, so the existing actual operator source-to-field
+absorption theorem applies without claiming that either individual field has
+zero jet and without a harmonic lift. A separate varying-parameter argument
+still requires the paper-level harmonic lift.
+
+New independent strict declaration:
+\`HBL.TypeIIDynamicSelection.actual_Kummer_same_parameter_nonzero_matched_jet_source_gain\`,
+compiled/audited via [CI 42972001935](https://github.com/penghongzhong/HBL/actions/runs/42972001935)
+(**Success**, job \`130362390841\`, pinned Lean/Mathlib, \`--trust=0\`,
+\`warningAsError\`, exact \`#check\` and \`#print axioms\`, only \`propext\`,
+\`Classical.choice\`, \`Quot.sound\`). If \(K\) is the exact same frozen
+operator and the two physical fields match at \(r_0\in[R,2R]\), then
+\[
+ \|Ku-Kv\|_{L^\infty([R,2R])}\le A
+ \quad\Longrightarrow\quad
+ \|\Delta_r(u-v)\|\le2A,\quad
+ \|u-v\|\le8R^2 A,\quad\|(u-v)'\|\le8RA,
+\]
+together with the original physical cutoff Laplacian commutator bound.
+The source difference and time gain have not been manufactured here.
+Manuscript supplement and separate exact acceptance ledger updated.
+**Original environment count 11/13; §2.13 and the final blowup theorem open.**
