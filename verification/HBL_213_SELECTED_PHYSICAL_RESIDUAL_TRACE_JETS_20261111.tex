@@ -113,3 +113,48 @@ that assumption. The source-to-continuity bridge for the
 \emph{actual chosen physical orbit} is therefore a separate, exact
 obligation, followed by the stronger spatial and temporal source
 differentiability necessary for the \(C^3\) interface repair.
+
+
+\medskip
+\noindent\textbf{The literal renormalized Hartree residual adds a moving dilation drift.}
+The preceding formulas for \(\mathscr R_W=iW_s+\Delta_rW+\N_{\HH}(W)\)
+refer to the unrenormalized physical operator. The Lean definition
+\texttt{complexRadialRenormalizedResidual} has in addition
+\[
+ \mathscr R_{b,\omega}(W)
+ =iW_s+\Delta_rW+\N_{\HH}(W)
+   +ib\bigl(\tfrac12W+rW_r\bigr)+\omega W.
+\]
+For the \emph{actual} target of the strict finite-PDE telescope,
+the correct source-produced jump relations become
+\begin{equation}
+ \boxed{\quad
+ d_2=-[\mathscr R_{b,\omega}(W)],\qquad
+ d_3=-[\partial_r\mathscr R_{b,\omega}(W)]
+          +\bigl(iL'-2/L-ibL\bigr)d_2.
+ \quad}\label{eq:hbl-renormalized-source-jet}
+\end{equation}
+The new term \(-ibLd_2\) follows from
+\([\partial_r(rW_r)]=L[W_{rr}]=-Ld_2\);
+the \(\omega W\) term has no value or first-derivative jump.
+For a moving \(b=b(s)\), differentiation along the interface gives
+\begin{align*}
+ d_2'&=-[\partial_s\mathscr R_{b,\omega}]
+        -L'[\partial_r\mathscr R_{b,\omega}],\\
+ d_3'&=-[\partial_s\partial_r\mathscr R_{b,\omega}]
+        -L'[\partial_r^2\mathscr R_{b,\omega}]\\
+   &\quad+\bigl(iL''+2L'/L^2-i(b'L+bL')\bigr)d_2
+        +\bigl(iL'-2/L-ibL\bigr)d_2'.
+\end{align*}
+Here \(\partial_s\mathscr R_{b,\omega}\) differentiates the
+\emph{fully composed} modulation-dependent residual. These
+equalities require the indicated regularity and derive no temporal
+decay. Once the same-orbit Hermite repair makes \(U=W+P\)
+\(C^3\), the complete renormalized residual satisfies
+\(
+ [\mathscr R_{b,\omega}(U)]
+ =[\partial_r\mathscr R_{b,\omega}(U)]=0
+\),
+but a small full strong residual and its two-parameter
+Lipschitz gain remain unproved. All statements here are paper-only;
+the original accepted count is \(11/13\).
