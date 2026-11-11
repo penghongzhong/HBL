@@ -116,3 +116,20 @@ f(s,x)=L(s)^2\bigl(\mathcal T-\mathcal O+a^{-2}\delta u_0\bigr)(s,L(s)x)
 \]
 
 and its time and parameter differences from the same physical Hartree trajectory and the same unique real two-channel speed. No independent bound on \(f_s\), no positive time order and no blowup rate may be assumed. The subsequent full four-region weighted gain, finite recursion and final dynamic rate are still unaccepted.
+
+
+## 2026-11-11 applicability correction: real matched jets are not individually zero
+
+A statement-level issue was detected during the actual-source audit. The accepted theorem `actual_Kummer_fixed_domain_source_parameter_stability` assumes `u r0=0, deriv u r0=0, v r0=0, deriv v r0=0`. However the original matched Fredholm/Kummer physical fields satisfy only `u(r0)=v(r0)=U` and `u'(r0)=v'(r0)=V`, usually **nonzero**; see exact strict producer `actual_Hartree_moment_locked_pullback_actual_inner_jet`. Its zero-jet *difference* cannot by itself discharge the four hypotheses of the parameter theorem.
+
+The manuscript supplement `verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex` now derives a **paper-level** explicit harmonic Cauchy lift
+[
+H_{U,V}(r)=U+r_0V(1-r_0/r),\qquad H(r_0)=U,\quad H'(r_0)=V,\quad \Delta_rH=0.
+]
+On `[R,2R]` with `r0 in [R,2R]` its Kummer source is bounded by
+[
+|K_{a,c}H|\le a^{-2}(|c||U|+2R(1+|c|)|V|),
+]
+**without any inverse left-radius Laplacian loss**. Applying the previously accepted zero-jet source estimate to the two lifted differences yields explicit parameter comparison estimates involving the genuine jet differences `Delta U`, `Delta V` and the full actual operator source difference, rather than assuming each physical field has zero jet. It also includes the exact derivative of this lift when the physical anchor moves.
+
+**Acceptance:** the harmonic-lift extension has not been Lean-compiled or individually audited; no new Lean theorem or original environment is counted. The already accepted theorem remains correct with its *actual stronger hypotheses*. For §2.13 the remaining proof obligation is to control the **real** Fredholm jets and their time/parameter differences, the shared quartic nonlocal Hartree source, and the nonzero-jet lift in the original strong residual topology, thereby establishing a positive time order. The original revised ledger remains **11/13**.
