@@ -90,3 +90,48 @@ This is exact interface **regularity**; it is not \(\|\mathscr R_U\|_X\lesssim s
 3. Establish genuine positive time gain and two-parameter Lipschitz in the **original strong source topology**, then finite-layer recursion and a PDE-derived II-type blowup law. Do not turn (JT10) into a residual decay estimate.
 
 The accepted nonlinear PDE telescoping theorem in [CI 42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409) is only an algebraic identity and does not prove these trace estimates. All of (JT1)–(JT10) are paper derivations: **no new Lean compilation or axiom audit is claimed**. Original revised §2.13 and the final theorem remain open; verified count **11/13 (84.62%)**.
+
+
+## 5. Source regularity is a genuine, currently unproved prerequisite
+
+The currently strictly accepted **three-C¹ interface** theorem
+\`HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins\`
+([Lean source](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreeSpectralCorrectedFourPieceThreeC1.lean))
+takes **only** \`hp hm : InWeightedL2 (7 / 4 : ℝ) Fp/Fm\` and
+\`hF : ∀ r ∈ Ioo 0 scale, ContinuousAt F r\`. Its conclusion is three
+\`HasDerivAt\` statements. It supplies neither the one-sided third
+derivatives of the Fredholm inner response nor any time derivative of
+the source. The separate true nonlocal speed-selector
+\`actual_Hartree_true_nonlocal_source_selects_unique_real_speed\`
+assumes \`Continuous Fp\`, \`Continuous Fm\`, and only a measurable
+\`z\` with its physical size bounds; it does **not** produce
+\(C^1_r\) source derivatives, \(C^1_s\) selected speeds, or a
+\(C^3\) physical field from those premises.
+
+This distinction cannot be erased by naming the shell a C³ repair:
+a generic continuous source is insufficient to define its third
+interface jet. A model radial forcing demonstrates this exactly.
+For \(L>0\), \(0<\beta<1\), set \(f(r)=|r-L|^\beta\) near \(L\) and
+\[
+ u'(r)=r^{-2}\int_L^r t^2 f(t)\,dt,\qquad
+ u(r)=\int_L^r u'(t)\,dt.
+\]
+Then \(\Delta_r u=f\), and \(u\in C^2\) near \(L\), but
+\[
+ u'''(r)=f'(r)-\frac2r u''(r)+\frac{2}{r^2}u'(r)
+\]
+does not have a finite trace at \(r=L\). This is a **regularity
+counterexample to an inference from continuity alone**, not a claim
+that the actual chosen Hartree source has this cusp.
+
+**Required next proof, not a permissible independent hypothesis:**
+derive from the actual physical Hartree source and inner Fredholm
+equation the spatial differentiability needed for the one-sided
+\(d_3\) traces and, for (JT6)–(JT7), their moving temporal derivative
+bounds; likewise establish differentiable two-real-speed selection
+from the true \(2\times2\) compatibility matrix. Alternatively,
+prove a revised full strong-residual argument that avoids third
+pointwise jets entirely. Until one of these is done, (JT5)–(JT10)
+are conditional classical identities, not an application to every
+packet admitted by the current C¹ Lean theorem. **No original
+environment is promoted.**
