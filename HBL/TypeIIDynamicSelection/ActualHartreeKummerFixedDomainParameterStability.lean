@@ -195,4 +195,72 @@ theorem actual_Kummer_fixed_domain_source_parameter_stability :
   exact hgain mu1 theta1 a1 d U R A r0 hU hSub ha1 hR hA
     hsmall1 hr0 hd hd2 hd0 hdd0 hsource
 
+
+/-!
+The two *physical* fields in the original matched overlap share a possibly
+nonzero Fredholm Cauchy jet. When their frozen operator parameters agree,
+their difference itself has zero jet. No harmonic subtraction and no
+spurious assumption that either individual field vanishes is required.
+This handles the same-time, same-operator piece only: parameter differences
+and the actual full nonlinear residual time gain are separate obligations.
+-/
+
+/-- Genuine nonzero-matched-jet source-to-C¹ control. The individual fields
+are not assumed zero at the matching radius. Only the difference of their
+actual Kummer operator sources is bounded, and the zero initial data of
+their DIFFERENCE are proved from their common Cauchy jet. -/
+theorem actual_Kummer_same_parameter_nonzero_matched_jet_source_gain :
+    ∃ C : ℝ, 0 < C ∧
+      ∀ (mu theta a R r0 A : ℝ)
+        (u v : ℝ → ℂ) (U : Set ℝ),
+        IsOpen U → Icc R (2 * R) ⊆ U →
+        0 < a → 0 < R → 0 ≤ A →
+        16 * R ^ 2 * ((1 + ‖frozenZeroCoeff mu theta‖) / a ^ 2) ≤ 1 →
+        r0 ∈ Icc R (2 * R) →
+        (∀ x ∈ U, DifferentiableAt ℝ u x) →
+        (∀ x ∈ U, DifferentiableAt ℝ v x) →
+        (∀ x ∈ Icc R (2 * R), DifferentiableAt ℝ (deriv u) x) →
+        (∀ x ∈ Icc R (2 * R), DifferentiableAt ℝ (deriv v) x) →
+        u r0 = v r0 → deriv u r0 = deriv v r0 →
+        (∀ x ∈ Icc R (2 * R),
+          ‖actualMatchedScaledKummerApply mu theta a u x -
+            actualMatchedScaledKummerApply mu theta a v x‖ ≤ A) →
+        let d := fun x => u x - v x
+        ∀ r ∈ Icc R (2 * R),
+          ‖complexRadialLaplacian d r‖ ≤ 2 * A ∧
+          ‖d r‖ ≤ 8 * R ^ 2 * A ∧
+          ‖deriv d r‖ ≤ 8 * R * A ∧
+          ‖complexRadialLaplacian
+              (fun x => actualOneLayerInnerOverlapCutoff R x * d x) r -
+            actualOneLayerInnerOverlapCutoff R r * complexRadialLaplacian d r‖ ≤
+            C * A := by
+  obtain ⟨C, hC, hgain⟩ := actual_Hartree_matched_scaled_Kummer_shell_gain
+  refine ⟨C, hC, ?_⟩
+  intro mu theta a R r0 A u v U hU hSub ha hR hA hsmall hr0
+    hu hv hu2 hv2 hvalue hslope hsource
+  dsimp only
+  let d := fun x => u x - v x
+  have hd (x : ℝ) (hx : x ∈ U) : DifferentiableAt ℝ d x :=
+    (hu x hx).sub (hv x hx)
+  have hd2 (x : ℝ) (hx : x ∈ Icc R (2 * R)) :
+      DifferentiableAt ℝ (deriv d) x :=
+    (kummer_difference_classical mu theta a u v U hU hu hv
+      x (hSub hx) (hu2 x hx) (hv2 x hx)).1
+  have hd0 : d r0 = 0 := by
+    dsimp [d]
+    rw [hvalue]
+    ring
+  have hdd0 : deriv d r0 = 0 := by
+    have h := (hu r0 (hSub hr0)).hasDerivAt.sub (hv r0 (hSub hr0)).hasDerivAt
+    have he : deriv d r0 = deriv u r0 - deriv v r0 := h.deriv
+    rw [he, hslope]
+    ring
+  have hactual (x : ℝ) (hx : x ∈ Icc R (2 * R)) :
+      ‖actualMatchedScaledKummerApply mu theta a d x‖ ≤ A := by
+    rw [(kummer_difference_classical mu theta a u v U hU hu hv
+      x (hSub hx) (hu2 x hx) (hv2 x hx)).2]
+    exact hsource x hx
+  exact hgain mu theta a d U R A r0 hU hSub ha hR hA hsmall
+    hr0 hd hd2 hd0 hdd0 hactual
+
 end HBL.TypeIIDynamicSelection
