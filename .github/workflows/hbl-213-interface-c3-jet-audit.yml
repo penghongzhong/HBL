@@ -66,7 +66,6 @@ jobs:
           import HBL.TypeIIDynamicSelection.ActualHartreeInterfaceC3RepairPolynomial
           set_option pp.all true
           set_option pp.maxSteps 10000000
-          set_option pp.maxDepth 1000000
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_physical_C3_repair_endpoint_jets
           set_option pp.all false in
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_physical_C3_repair_endpoint_jets
@@ -81,6 +80,7 @@ jobs:
           data=Path('evidence/audit.log').read_text()
           goals=['HBL.TypeIIDynamicSelection.actual_Hartree_physical_C3_repair_endpoint_jets','HBL.TypeIIDynamicSelection.actual_Hartree_C3_repair_factored_kernels']
           assert 'sorryAx' not in data and 'Lean.ofReduceBool' not in data
+          assert '⋯' not in data and '…' not in data, 'Truncated theorem type'
           allowed={'propext','Classical.choice','Quot.sound'}
           for goal in goals:
               assert goal in data, goal
