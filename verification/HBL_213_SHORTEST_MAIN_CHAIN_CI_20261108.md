@@ -3762,3 +3762,34 @@ axioms are the allowed three only. Neither proves a time gain,
 parameter Lipschitz, actual finite profile or a dynamical Type-II orbit.
 **Original environments unchanged: 11/13; §2.13 and final main theorem OPEN.**
 <!-- END HBL_EXACT_PHASE_WRONSKIAN_FLUX_OUTGOING_TRACE_20261110 -->
+
+
+<!-- HBL_ACTUAL_HARTREE_MOVING_BUBBLE_MASS_PHASE_FLUX_20261110 -->
+### Original PDE moving-bubble mass ↔ phase Wronskian flux, with full scaling-moment cancellation (paper)
+
+[Exact strong-flow derivation](HBL_213_ACTUAL_HARTREE_MOVING_BUBBLE_MASS_PHASE_FLUX_IDENTITY_20261110.md) is now synchronized with [§2.13 TeX](HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex).
+
+For a genuine smooth radial solution of the original nonlocal PDE \(iu_t+\Delta_r u+\mathcal V_H[u]u=0\), write the actual moving bubble \(B(t,r)=\lambda^{-1/2}W(r/\lambda)\) and \(u=B+p+iq\). The imaginary PDE gives the **same-source**, non-localized relation
+\[
+(-\Delta_r-3B^4)q=B_t+p_t+(\mathcal V_H[u]-3B^4)q.
+\]
+Combining its finite-radius Wronskian with the **actual** mass continuity law and moving-endpoint Leibniz formula, for \(M=\frac12\int_0^{R(t)}r^2(|u|^2-B^2)\,dr\), gives
+\[
+\int_0^R r^2B[p_t+(\mathcal V_H[u]-3B^4)q]\,dr
+=M_t-\frac{R^2R_t}{2}(|u|^2-B^2)(t,R)
++R^2(pq_r-qp_r)(t,R).
+\]
+Thus the previously unbounded-looking bare moment \(\int_0^Rr^2B B_t\,dr\) cancels **exactly** when the true PDE's mass transport and its own phase source are used together, instead of imposing independent phase Fredholm orthogonality or a small outgoing jet.
+
+More directly for the original moving-scale \(s\)-frame, with \(U=W+p+iq\), \(b=\lambda_s/\lambda\), and \(\rho=(W+p)^2+q^2\), the **pointwise** identity
+\[
+ y^2[-W\Lambda(W+p)+\tfrac12(\rho+y\rho_y)]
+ =\partial_y[\tfrac12y^3(p^2+q^2)]
+  +y^2[(\Lambda W)p-(p^2+q^2)]
+\]
+removes the entire bare \(-b\int_0^L y^2W\Lambda W\) term in the exact combined phase/mass identity. What remains is \(\mathscr M_s\), moving-endpoint flux, the complete nonlocal potential difference, and terms involving actual perturbations \(p,q\) and \(b\). This is a **specific alternative to the impossible annulus-only source repair**, not a bound on any of these remaining terms.
+
+**No original promotion:** this proof is paper-only. The algebra was independently cross-checked by symbolic expansion, not formally checked by Lean. The §2.13 time-positive differentiated residual and parameter Lipschitz still require a constructed same-orbit solution and appropriate projected evolution control. Actual finite nonlinear recursion and PDE-derived Type-II rate are open. **Revised original tally: 11/13.**
+
+**Exact current-source telescope re-run:** original failed [42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681) was superseded by strictly successful [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509), job 128902012127, which checked the exact named theorem actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes under --trust=0/warningAsError and only the three permitted axioms. Re-audit source commit dc186fd04f07dd6a0c8dc82e2fbf99bc91ea040d uses only additive telescope cancellation (abel, not an illegitimate linear Hartree expansion), and triggered [new strict CI 42927397872](https://github.com/penghongzhong/HBL/actions/runs/42927397872). On initial inspection the new job was **in progress**, not Success. This re-audit is a genuine current-source compilation attempt; the theorem remains an identity, **not** a positive-power estimate.
+<!-- END HBL_ACTUAL_HARTREE_MOVING_BUBBLE_MASS_PHASE_FLUX_20261110 -->
