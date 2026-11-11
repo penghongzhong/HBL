@@ -1,0 +1,124 @@
+
+\subsection*{An integrable-forcing $C^1$ Green bridge and a weak backward overlap (11 November 2026)}
+\noindent\textbf{Scope.}
+The results in this subsection are paper-level arguments, not new Lean-accepted
+statements. In particular, revised \S2.13 and the dynamical Type-II theorem
+remain unproved; the original-environment count remains $11/13$.
+
+\medskip
+\noindent\textbf{Green--Wronskian regularization.}
+On a compact positive annulus $[r_0,B]$, suppose the actual two Kummer
+fundamental modes $X,Y$ are $C^2$, their exact Wronskian
+$W=XY'-X'Y$ does not vanish, and the \emph{actual} Hartree forcing
+$F$ is locally integrable. Define the unswapped Green coefficients
+\[
+ A(r)=\int_r^B\frac{X(t)F(t)}{W(t)}\,dt,\qquad
+ D(r)=\int_{r_0}^r\frac{Y(t)F(t)}{W(t)}\,dt,\qquad
+ w(r)=Y(r)A(r)+X(r)(D(r)+\gamma).
+\]
+Both coefficients are absolutely continuous. For almost every $r$,
+the exact Wronskian cancellation yields
+\[
+\begin{split}
+ w'(r)&=Y'(r)A(r)+X'(r)(D(r)+\gamma)
+      +Y(r)A'(r)+X(r)D'(r)\\
+ &=Y'(r)A(r)+X'(r)(D(r)+\gamma)=:H(r).
+\end{split}
+\]
+Since $H$ is continuous, the fundamental theorem for absolutely
+continuous functions implies
+\[
+ w(r_2)-w(r_1)=\int_{r_1}^{r_2}H(t)\,dt,\qquad
+ w\in C^1([r_0,B]).
+ \tag{WG-C1}
+\]
+Thus the true merely measurable, interval-integrable Hartree source
+still produces a classical \emph{first} derivative at positive radii.
+The jump-forcing example in the previous subsection obstructs
+classical second derivatives, not the intrinsically regularized
+first derivative. The zero-left spectral correction has forcing
+$d\,w\in C^0$, and is likewise $C^1$. Replacing the stronger
+\texttt{ContinuousAt F} hypotheses in the existing Lean
+three-interface result by this integrable-source argument requires
+a new, separately audited Lean declaration.
+
+\medskip
+\noindent\textbf{Backwards smooth overlap in place of a $C^3$ shell.}
+Let $L>0$, $I_L=[5L/8,L]$ and suppose the same physical Fredholm
+inner field $u$ and corrected Kummer continuation $v$ belong to
+$W^{2,2}(I_L)$ and have their \emph{actual} matched Cauchy pair at $L$.
+Set
+\[
+ f=u-v,\qquad f(L)=f'(L)=0,\qquad
+ g=\Delta_r f=f''+\frac2r f',\qquad
+ \|h\|_{L^2_r(I_L)}^2=\int_{I_L}r^2|h(r)|^2\,dr.
+\]
+The exact radial flux and two backward Volterra integrations give
+\[
+ f'(r)=-\frac1{r^2}\int_r^L t^2g(t)\,dt,\qquad
+ f(r)=-\int_r^L f'(t)\,dt,
+\]
+and hence
+\[
+ \|f'\|_{L^2_r}\le\frac{3L}{5}\|g\|_{L^2_r},
+ \qquad
+ \|f\|_{L^2_r}\le\frac{9L^2}{40}\|g\|_{L^2_r}.
+ \tag{WG-V}
+\]
+These bounds have no inverse left-radius factor.
+
+Use the already coded smooth transition
+$\eta_L(r)=\chi(8r/L-4)$, equal to zero on $r\le5L/8$ and one
+on $r\ge3L/4$. It has the physically correct orientation
+\[
+ U=(1-\eta_L)u+\eta_Lv=u-\eta_Lf.
+\]
+Writing $A_\chi=\|\chi'\|_\infty$ and
+$B_\chi=\|\chi''\|_\infty$, direct differentiation and (WG-V)
+prove
+\[
+ \left\|\Delta_rU-(1-\eta_L)\Delta_ru-\eta_L\Delta_rv
+ \right\|_{L^2_r}
+ \le
+ \left(\frac{384}{25}A_\chi+\frac{72}{5}B_\chi\right)
+ \|g\|_{L^2_r}.
+ \tag{WG-L}
+\]
+For $L=L(s)\in C^1$ and real $b(s)$,
+\[
+ \|(\partial_s\eta_L+b r\partial_r\eta_L)f\|_{L^2_r}
+ \le\frac{27}{20}A_\chi
+ \bigl(L|L'|+L^2|b|\bigr)\|g\|_{L^2_r}.
+ \tag{WG-T}
+\]
+The \emph{complete} inverse-square quartic Hartree nonlinearity
+is retained in the following identity, valid in the corresponding
+weak space for the globally defined full packet:
+\[
+\begin{aligned}
+ \mathcal R_{b,\omega}(U)
+ ={}&(1-\eta_L)\mathcal R_{b,\omega}(u)
+ +\eta_L\mathcal R_{b,\omega}(v)\\
+ &-2\eta_L'f'-(\eta_L''+2\eta_L'/r)f
+ -i(\partial_s\eta_L+b r\eta_L')f\\
+ &+\mathcal N_H(U)-(1-\eta_L)\mathcal N_H(u)
+ -\eta_L\mathcal N_H(v).
+\end{aligned}
+ \tag{WG-PDE}
+\]
+No third spatial trace is needed for this smooth local interpolation,
+and no singular moving-interface measure is introduced.
+
+\medskip
+\noindent\textbf{Remaining original proof obligations.}
+The actual selected Kummer Green solution must be controlled on
+the backward interval, including the second weak derivative, rather
+than postulating an independent extension. The same physical Hartree
+PDE trajectory must estimate its original $g$, the moving endpoint,
+basis and selected speeds, and the \emph{full nonlocal} defect in
+(WG-PDE). Genuine positive time gain and parameter Lipschitz,
+finite-layer iteration and the dynamically produced Type-II rate
+have not been established by (WG-C1)--(WG-PDE).
+The previous strict nonlinear telescoping
+\texttt{CI~42958494409} verifies an identity only. No new Lean CI
+or original environment acceptance is claimed here.
