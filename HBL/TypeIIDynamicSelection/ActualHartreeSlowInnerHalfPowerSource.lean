@@ -121,7 +121,7 @@ private theorem ten_term_core_bound
         Cz * (s * d) * (D + 2 * E * (s * d)) ^ 2 * D +
         C4 * (2 * D + E * (s * d)) ^ 2 * E) * s := by
       field_simp [hd.ne']
-      ring
+      all_goals ring
     _ ≤ (Cm * (D ^ 3 + (2 * D + E * 3) ^ 2 * (E * 3)) +
         Cz * 3 * (D + 2 * E * 3) ^ 2 * D +
         C4 * (2 * D + E * 3) ^ 2 * E) * s :=

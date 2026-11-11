@@ -4,6 +4,7 @@ on:
     branches: [hbl-213-spectral-c1-trace-20261109]
     paths:
       - 'HBL/TypeIIDynamicSelection/ActualHartreeSlowInnerHalfPowerWeightedL2.lean'
+      - 'HBL/TypeIIDynamicSelection/ActualHartreeSlowInnerHalfPowerSource.lean'
       - '.github/workflows/hbl-213-slow-inner-half-power-weighted-L2.yml'
   workflow_dispatch:
 permissions:
@@ -60,6 +61,7 @@ jobs:
           key: hbl-half-power-L2-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
           restore-keys: |
             hbl-half-power-L2-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-half-power-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
       - name: Build actual source module
         shell: bash
         run: |
