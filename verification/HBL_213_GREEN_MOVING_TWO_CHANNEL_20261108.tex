@@ -10691,4 +10691,77 @@ nonlocal residual remain to be established.  This new necessary
 condition is paper-level only; the strict original count stays 11/13.
 % END HBL_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110
 
+
+% BEGIN HBL_SHRINKING_GAUGE_ROOT_JACOBIAN_20261110
+\medskip
+\noindent\textbf{A constructive but conditional shrinking-radius mass-gauge root.}
+The fixed-radius obstruction above does not imply nonexistence of a root
+at the original shrinking interface.  The missing existence and
+moving-endpoint Jacobian can be established, with explicit constants,
+\emph{provided} the physical field obeys an independently verified
+pointwise near-bubble condition.  Let
+\[
+ \beta=15/16,\quad R(\sigma)=\sigma^\beta,\quad
+ B_a(r)=\frac{\sqrt a}{\sqrt{a^2+r^2}},\quad
+ u=B_a+z,\quad
+ \|z\|_{L^\infty(0,2a^\beta)}\le M,
+\]
+with $z$ continuous, $a^{-1/16}\ge16\pi$, and
+\[
+ \varepsilon=M a^{7/16}+M^2 a^{7/8}\in(0,1/2048],
+ \qquad \delta=128\varepsilon.
+\]
+For
+\[
+ \mathcal M_u(\sigma)=\frac12\int_0^{R(\sigma)}
+ r^2\bigl(|u(r)|^2-B_\sigma(r)^2\bigr)\,dr
+\]
+there exists exactly one
+$\sigma_*\in[ae^{-\delta},ae^\delta]$ satisfying
+\[
+ \mathcal M_u(\sigma_*)=0,\qquad
+ \frac{|\sigma_*-a|}{a}\le\frac{80}{3}\varepsilon,
+ \qquad
+ \mathcal M_u'(\sigma)\le-\frac{R(\sigma)}6
+ \quad(ae^{-\delta}\le\sigma\le ae^\delta).
+\]
+Consequently, for the root-normalized scalar gauge,
+\[
+ \left.
+ \partial_{\log\sigma}\frac{\mathcal M_u(\sigma)}
+ {\sigma R(\sigma)}\right|_{\sigma=\sigma_*}
+ =\frac{\mathcal M'_u(\sigma_*)}{R(\sigma_*)}
+ \le-\frac16.
+\]
+Indeed, with $J(x,R)=xR-x^2\arctan(R/x)$ one has
+\[
+ J_x=R-2x\arctan(R/x)+\frac{Rx^2}{x^2+R^2},
+ \quad J_R=\frac{xR^2}{x^2+R^2},
+ \quad R/2\le J_x\le R,\quad
+ |\partial_xJ_R|\le1
+\]
+throughout the indicated interval.  Writing
+$\mathcal M_u=\tfrac12(J(a,R)-J(\sigma,R))+E$, one gets
+\[
+ |E|\le \frac12M\sqrt a\,R^2+\frac16M^2R^3
+ \le\frac{10}{3}\varepsilon a^{31/16},
+ \qquad
+ \frac{|E'|}{R}\le4\varepsilon,
+\]
+and therefore the endpoint signs, strict monotonicity, root
+localization, and the \emph{complete} moving-boundary Jacobian above.
+The complete proof and explicit smallness hypotheses are in
+\texttt{verification/HBL\_213\_SHRINKING\_GAUGE\_ROOT\_JACOBIAN\_20261110.md}.
+
+This is a pointwise conditional field result, not an independent
+bound on the Hartree source or on its time derivative.  In particular,
+the actual two-channel Kummer/Fredholm correction has not yet been
+shown to have the necessary physical $L^\infty$ remainder; the new
+scalar scale root has not been proved compatible with the original
+unique real two-speed selector; and no four-region residual time
+gain, parameter Lipschitz estimate, physical orbit or dynamical
+Type-II rate follows.  This calculation has not been Lean compiled
+and does not change the accepted original count $11/13$.
+% END HBL_SHRINKING_GAUGE_ROOT_JACOBIAN_20261110
+
 \end{document}
