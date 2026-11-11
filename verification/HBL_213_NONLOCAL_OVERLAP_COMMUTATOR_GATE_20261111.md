@@ -122,6 +122,49 @@ quartic-density feedback. The example does **not** claim to be a
 selected solution of the original Hartree PDE, nor does it rule out
 dynamical cancellation for that solution.
 
+## Quantitative near/far split: the shortest correct replacement
+
+The Volterra data do control the **local portion** of the global mismatch.
+Under the genuine Cauchy match \(f(L)=f'(L)=0\), (WG7) and Cauchy--Schwarz give, with \(A_L=\{5L/8\le|x|\le L\}\),
+\[
+ |f'(r)|\le r^{-2}
+ \Bigl(\int_r^L t^2|g(t)|^2dt\Bigr)^{1/2}
+ \Bigl(\int_r^L t^2dt\Bigr)^{1/2}
+ \le \frac{64}{25\sqrt3}L^{-1/2}\|g\|_{r,2}.
+\]
+Consequently
+\[
+ \|f\|_{L^\infty(A_L)}
+ \le \frac{24}{25\sqrt3}L^{1/2}\|g\|_{r,2}.
+\]
+Since \(|A_L|=(129\pi/128)L^3\), the **three-dimensional critical norm** satisfies
+\[
+ \boxed{
+ \|f\|_{L^6(A_L)}
+ \le C_{\rm ann} L\|g\|_{r,2},
+ \qquad C_{\rm ann}=\frac{24}{25\sqrt3}
+       \Bigl(\frac{129\pi}{128}\Bigr)^{1/6}.
+ }\tag{NC9}
+\]
+Define the indispensable remote mismatch
+\[
+ D_{\rm rem}=\|f\|_{L^6(\mathbb R^3\setminus A_L)}.
+\]
+Then \(\|f\|_6\le C_{\rm ann}L\|g\|_{r,2}+D_{\rm rem}\). Inserting this **actual near/far decomposition** into (NC5) gives
+\[
+ \boxed{
+ \|{\cal C}_{\eta_L}(u,v)\|_{6/5}
+ \le455|\kappa_H|C_{\rm HLS}E^6
+       \left(C_{\rm ann}L\|g\|_{r,2}+D_{\rm rem}\right).
+ }\tag{NC10}
+\]
+This explicitly separates the *already tractable* backward-overlap
+curvature mismatch from the **independent global remote-density**
+obligation. The no-go example (NC6)--(NC8) has \(g=0\) but
+\(D_{\rm rem}>0\), proving the additional term cannot be dropped
+without an actual selected-PDE mechanism. No temporal decay of
+\(D_{\rm rem}(s)\) has been proved.
+
 ## Corrected main-chain interface
 
 The genuine overlapping PDE identity and the spatial/transport
