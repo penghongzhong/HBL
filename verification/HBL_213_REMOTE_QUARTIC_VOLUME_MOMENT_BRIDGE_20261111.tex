@@ -1,0 +1,49 @@
+
+\medskip
+\noindent\textbf{Remote quartic-density monopole and its distinct physical moment (paper-level).}
+For a compactly supported real radial density \(\rho\) in \(0<s<R<r\),
+the \emph{genuine} three-dimensional inverse-square convolution admits
+\[
+ Q_\rho(r)=\frac{2\pi}{r}\int_0^R s\rho(s)
+       \log\frac{r+s}{r-s}\,ds
+ =\frac{4\pi}{r^2}\sum_{j\ge0}
+  \frac{\int_0^R s^{2j+2}\rho(s)\,ds}
+       {(2j+1)r^{2j}}.
+\]
+With \(m_0=\int_0^R s^2\rho(s)\,ds\) and
+\(M_2=\int_0^R s^4|\rho(s)|\,ds\), uniform convergence yields
+\[
+ \left|Q_\rho(r)-\frac{4\pi m_0}{r^2}\right|
+ \le\frac{4\pi M_2}{3r^4(1-(R/r)^2)},\qquad
+ \left|Q_\rho'(r)+\frac{8\pi m_0}{r^3}\right|
+ \le\frac{16\pi M_2}{3r^5(1-(R/r)^2)}.
+\]
+In the original overlap, \(R=L/3\), \(3L/4\le r\le L\),
+these remainders are at most
+\(1024\pi M_2/(195 L^4)\) and \(16384\pi M_2/(585L^5)\).
+If \(u-v\) is supported below \(L/3\), the original
+\(\eta_L\) vanishes there; nevertheless in the exterior overlap
+\[
+ {\cal C}_{\eta_L}(u,v)(r)
+ =\kappa_H|u(r)|^2u(r)Q_{|u|^4-|v|^4}(r).
+\]
+Thus a nonzero \emph{volume-weighted} quartic-density difference,
+\(4\pi\int s^2(|u|^4-|v|^4)\,ds\), survives at leading order.
+It is distinct from the already formalized inverse-square radiation
+moment \(4\pi\int|z(s)|^4\,ds\).
+For a smooth exact physical Hartree solution the required new
+volume moment satisfies
+\[
+ \frac{d}{dt}\int_{\R^3}|z|^4dx
+ =4\int_{\R^3}\nabla|z|^2\cdot
+     \operatorname{Im}(\overline z\nabla z)\,dx,
+ \quad
+ \left|\frac{d}{dt}\int_{\R^3}|z|^4dx\right|
+ \le8\int_{\R^3}|z|^2|\nabla z|^2dx.
+\]
+This identity supplies a possible same-orbit PDE producer, not a
+positive-time estimate under the current energy hypotheses.
+For noncompact density differences the exterior/near-diagonal kernel
+remains a separate obligation.
+No new strict Lean theorem or original \(\S2.13\) acceptance is
+asserted; original revised count remains \(11/13\).
