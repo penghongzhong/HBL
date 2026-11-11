@@ -364,3 +364,67 @@ still has \emph{individual zero-jet} hypotheses; these must not
 be silently replaced by the mere matched-difference zero jet.
 Strict original revised count is still $11/13$.
 % END HBL_NONZERO_MATCHED_JET_HARMONIC_LIFT_20261111
+
+
+% HBL_SAME_OPERATOR_NONZERO_MATCHED_JET_STRICT_20261111
+\medskip
+\noindent\textbf{Strict same-operator shortcut for the genuine nonzero matched
+jet.}
+For the actual \emph{same-time} physical inner and corrected matched
+Kummer fields, the original frozen operator parameters are identical
+on their common classical overlap.  In this special case the harmonic
+lifting construction above is not required. Put $D=u-v$ and assume only
+the actual matching equations
+\[
+ u(r_0)=v(r_0),\qquad u'(r_0)=v'(r_0),
+\]
+with \emph{no zero-value or zero-slope assumption on either field}.
+Linearity of this \emph{frozen Kummer operator}, not of the Hartree
+nonlinearity, gives exactly
+\[
+ D(r_0)=D'(r_0)=0,\qquad
+ {\cal K}_{a,c}D={\cal K}_{a,c}u-{\cal K}_{a,c}v.
+\]
+Thus if $r_0\in[R,2R]$, $a,R>0$,
+$16R^2(1+|c|)/a^2\le1$, and the actual operator-source
+difference satisfies
+\[
+ \sup_{R\le r\le2R}
+   |{\cal K}_{a,c}u(r)-{\cal K}_{a,c}v(r)|\le A,\qquad A\ge0,
+\]
+the fixed-domain zero-jet source theorem applied \emph{directly to $D$}
+gives, on the full annulus,
+\begin{equation}
+ |\Delta_rD|\le2A,\qquad |D|\le8R^2A,\qquad |D'|\le8RA,
+ \qquad
+ |\Delta_r(\chi_RD)-\chi_R\Delta_rD|\le C_\chi A.
+ \label{eq:nonzero-matched-same-operator-lean}
+\end{equation}
+Here the same existing smooth radial overlap cutoff $\chi_R$ and one
+constant $C_\chi>0$ work for every such matched pair, independent of
+the generally nonzero Cauchy data.
+
+Unlike the preceding harmonic lift, this result does \emph{not}
+compare two different frozen operators: when $(a,c)$ varies, the full
+source and selected-jet differences must still be controlled, using
+the harmonic lift or an equivalent source-resolvent estimate.
+Crucially, the physical-source difference $A$ in
+\eqref{eq:nonzero-matched-same-operator-lean} has \emph{not}
+been given an assumed time order. The current nonlinear Hartree
+trajectory must produce its full weighted norm and its time/parameter
+derivatives.
+
+The exact Lean theorem
+\texttt{actual\_Kummer\_same\_parameter\_nonzero\_matched\_jet\_source\_gain}
+in
+\texttt{ActualHartreeKummerFixedDomainParameterStability.lean}
+passed independent strict CI
+\texttt{42972001935}, job \texttt{130362390841}, with pinned Lean
+4.35.0-rc3, Mathlib
+\texttt{a98628e16c11f5167f16124105ddce53efa9bfe5},
+\texttt{--trust=0}, \texttt{warningAsError}, exact \texttt{\#check},
+and \texttt{\#print axioms}; its kernel axiom dependencies are precisely
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+This is a verified operator-source bridge, \emph{not} an
+accepted new original-paper environment. The strict count stays $11/13$.
+% END HBL_SAME_OPERATOR_NONZERO_MATCHED_JET_STRICT_20261111
