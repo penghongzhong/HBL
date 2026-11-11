@@ -1,0 +1,79 @@
+% HBL_213_MOVING_JET_OPERATOR_REDUCTION_20261111
+% Paper-level original-source identity; not an original Lean acceptance.
+\paragraph{Actual moving left jet and nonzero-Cauchy-jet operator comparison.}
+Let
+\[
+ \mathcal K_su=\Delta_ru+a(s)^{-2}
+  \bigl(\tfrac{i}{2}ru_r+c(s)u\bigr)=F(s,r),
+ \qquad \rho=\rho(s)>0.
+\]
+For the total moving data
+$U(s)=u(s,\rho(s))$, $V(s)=u_r(s,\rho(s))$,
+differentiate first at fixed radius and then along the moving endpoint:
+\[
+ \mathcal K_su_s=F_s+
+ 2\frac{a_s}{a^3}\bigl(\tfrac{i}{2}ru_r+cu\bigr)-a^{-2}c_su,
+ \qquad
+ \rho u_s=\rho U_s-\rho\rho_sV,
+\]
+\[
+ \boxed{\rho^2u_{sr}+\rho u_s
+ =\rho^2V_s+\rho U_s-
+ \rho_s\bigl[\rho^2F-\rho V
+  -a^{-2}(\tfrac{i}{2}\rho^3V+c\rho^2U)\bigr].}
+\]
+The weighted coordinates are precisely those of the original
+zero-left Volterra proof; the shrinking-left-radius inverse
+factor cancels algebraically. No independent Kummer basis
+derivative or time decay is assumed.
+
+For two genuine frozen equations
+$\mathcal K_ju_j=F_j$ on $[R,2R]$, with
+$\mathcal K_j=\Delta_r+\alpha_j(\tfrac{i}{2}r\partial_r+c_j)$,
+$\alpha_j=a_j^{-2}>0$,
+$16R^2\alpha_j(1+|c_j|)\le1$,
+and a common anchor $\rho\in[R,2R]$, put
+$U_j=u_j(\rho)$, $V_j=u_j'(\rho)$.
+Use the harmonic lift
+$H_{U,V}(r)=U+\rho V(1-\rho/r)$ and define
+\[
+ H^0(U,V)=|U|+2R|V|,\quad H^1(U,V)=4|V|,
+ \quad J_j(U,V)=\alpha_j
+ (|c_j||U|+2R(1+|c_j|)|V|).
+\]
+Writing $A_j=\sup|F_j|$, $B=\sup|F_1-F_2|$ and
+$Q_2=A_2+J_2(U_2,V_2)$, the already strictly
+accepted zero-jet absorption theorem applied to $u_2-H_{U_2,V_2}$
+gives
+\[
+ |u_2|\le H^0(U_2,V_2)+8R^2Q_2,\qquad
+ |u_2'|\le H^1(U_2,V_2)+8RQ_2.
+\]
+For $\delta U=U_1-U_2$, $\delta V=V_1-V_2$, define
+\[
+\begin{aligned}
+ Q_\delta={}&B+|\alpha_1-\alpha_2|R
+ (H^1(U_2,V_2)+8RQ_2)\\
+ &+|\alpha_1c_1-\alpha_2c_2|
+ (H^0(U_2,V_2)+8R^2Q_2)+J_1(\delta U,\delta V).
+\end{aligned}
+\]
+The source of $w=u_1-u_2-H_{\delta U,\delta V}$
+is the exact actual operator difference; $w(\rho)=w'(\rho)=0$.
+The same zero-jet theorem proves
+\[
+ \|\Delta_r(u_1-u_2)\|_{L^\infty}\le2Q_\delta,\qquad
+ \|u_1-u_2\|_{L^\infty}\le
+ |\delta U|+2R|\delta V|+8R^2Q_\delta,
+\]
+\[
+ \|u_1'-u_2'\|_{L^\infty}\le4|\delta V|+8RQ_\delta.
+\]
+This is a source-dependent \emph{fixed-anchor} reduction with
+nonzero original Cauchy data, not a true time-gain estimate.
+The physical moving-anchor pullback, four-region full Hartree
+residual in the strong source norm, and actual finite PDE
+iteration still require independent proofs.
+See \texttt{HBL\_213\_MOVING\_JET\_OPERATOR\_REDUCTION\_20261111.md}.
+Original revised acceptance remains $11/13$.
+% END HBL_213_MOVING_JET_OPERATOR_REDUCTION_20261111
