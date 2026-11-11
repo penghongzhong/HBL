@@ -1,0 +1,77 @@
+
+\subsection*{Localized nonlocal density bound by the original inverse-square moment}
+\noindent
+For $L>0$, put $R=L/3$ and
+$J=4\pi\int_0^R|\rho(q)|\,dq<\infty$.
+The original radial inverse-square Hartree kernel outside its
+inner density support has the absolutely convergent series
+\[
+ Q_\rho(r)=4\pi\sum_{j\ge0}
+  \frac{\int_0^R q^{2j+2}\rho(q)\,dq}{(2j+1)r^{2j+2}},
+ \qquad r>R.
+\]
+Since $|\int_0^R q^{2j+2}\rho|\le R^{2j+2}J/(4\pi)$,
+$(2j+2)/(2j+1)\le2$ and
+$(2j+2)(2j+3)/(2j+1)\le6(j+1)$, it follows that
+\[
+ |Q_\rho|\le\frac{R^2J}{r^2-R^2},\quad
+ |Q'_\rho|\le\frac{2R^2J}{r(r^2-R^2)},\quad
+ |Q''_\rho|\le\frac{6R^2J}{(r^2-R^2)^2}.
+\]
+Consequently, on the literal backward overlap $3L/4\le r\le L$,
+\[
+ \boxed{|Q_\rho|\le\frac{16J}{65},\quad
+ |Q'_\rho|\le\frac{128J}{195L},\quad
+ |Q''_\rho|\le\frac{13824J}{4225L^2}.}
+\]
+Thus a \emph{separate} volume-moment bound is not required for
+this localized inner density, correcting the scope of the preceding
+remote monopole discussion. For
+$\rho=|u|^4-|v|^4$ and
+$\mathfrak M(w)=4\pi\int_0^\infty|w(q)|^4\,dq$,
+\[
+ J\le4\big(\mathfrak M(u)^{1/4}
+ +\mathfrak M(v)^{1/4}\big)^3\mathfrak M(u-v)^{1/4}.
+\]
+With the verified physical pullback
+$Z_\ell(q)=\sqrt\ell\,z(\ell q)$,
+$\mathfrak M(Z_\ell)=\ell\mathfrak M(z)$, and the
+specific fields $u=V+Z_\ell$, $v=V$, this gives
+\[
+ \sup_{3L/4\le r\le L}|Q_{(|u|^4-|v|^4)\mathbf1_{[0,L/3]}}(r)|
+ \le\frac{64}{65}
+ \big[2\mathfrak M(V)^{1/4}
+       +(\ell\mathfrak M(z))^{1/4}\big]^3
+       (\ell\mathfrak M(z))^{1/4}.
+\]
+The $\ell^{1/4}$ factor is a spatial small-parameter gain,
+not a proved temporal rate or a full spectral four-piece residual.
+
+For a smooth cutoff $\chi(q/L(s))$, supported in $q\le L/3$,
+write $C_\chi=\|\chi'\|_\infty$ and
+$J_j=4\pi\int_0^{L/3}|\partial_s^j\rho|\,dq$, $j=0,1$.
+Differentiation of the \emph{actual} density cutoff gives
+\[
+ \partial_s(\chi(q/L)\rho)
+ =\chi(q/L)\partial_s\rho
+ -\frac{L'}{L}\frac qL\chi'(q/L)\rho.
+\]
+The complete moving traces at $r=\theta L(s)$,
+$3/4\le\theta\le1$ fixed, satisfy
+\[
+ \left|\frac{d}{ds}Q_L(s,\theta L(s))\right|
+ \le\frac{16J_1}{65}+
+ \frac{16C_\chi+128\theta}{195}
+ \frac{|L'|}{L}J_0,
+\]
+\[
+ \left|\frac{d}{ds}\partial_rQ_L(s,\theta L(s))\right|
+ \le\frac{128J_1}{195L}+
+ \left(\frac{128C_\chi}{585}
+ +\frac{13824\theta}{4225}\right)\frac{|L'|}{L^2}J_0.
+\]
+These formulas require genuine physical differentiability.
+Neither $J_1$ nor $L'$ has been assigned a decay rate;
+the outer near-diagonal density and all remaining dynamic
+strong-residual steps remain open. No new Lean CI or original
+environment acceptance is claimed: $11/13$.

@@ -4164,3 +4164,25 @@ supplement updated, **no new Lean CI, original count 11/13**.
 Read the actual `ActualRadiation3DMoment.lean` definition: its strictly audited physical inverse-square radiation moment is `4π∫|z(r)|⁴dr`; this is **not** the `4π∫r²|z(r)|⁴dr` volume-density monopole that controls exterior leading order of the **same genuine** `|x|⁻²` Hartree kernel. They cannot be interchanged. For inner density support `r≤L/3` and exterior overlap `3L/4≤r≤L`, exact spherical integration and the logarithm series give `Q(r)=4πm₀/r²+E(r)`, `|E(r)|≤1024πM₂/(195L⁴)`, `|E'(r)|≤16384πM₂/(585L⁵)`. This isolates a precise **far-density volume-moment channel**, beyond already proved inverse-square slow-center control and local Volterra curvature, for a same-physical-orbit residual estimate.
 
 A paper-level exact Hartree mass/current identity generates the volume-moment time derivative from the actual PDE; the resulting `∫|z|²|∇z|²` term is NOT bounded from `Ḣ¹` alone and has no assigned positive time order. The exterior/near-diagonal kernel for noncompact density differences remains separate. Full proof: `verification/HBL_213_REMOTE_QUARTIC_VOLUME_MOMENT_BRIDGE_20261111.md`; TeX addendum is linked into `HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`. No new Lean strict CI was started for this addendum. The already-verified finite PDE telescope [42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409) is only an equality, not a residual gain. **Formal original revised acceptance: 11/13, 84.62%.**
+
+
+### 11 November 2026 — localized inverse-square density rescue; source-faithful scope correction (paper only)
+
+The preceding volume-quartic monopole note was **too strong if read as requiring
+a new independent volume moment for the truncated inner Hartree source**.
+For a density supported at r<=L/3 and the original overlap 3L/4<=r<=L,
+the actual inverse-square potential satisfies
+|Q|<=16 J/65, |Q'|<=128 J/(195L), |Q''|<=13824 J/(4225 L^2),
+where J=4 pi integral_0^(L/3)|rho(r)|dr is exactly the inverse-square
+radial density measure. The difference density
+rho=|u|^4-|v|^4 admits a quartic Holder bound in the previously
+defined physical inverse-square field moments, and the actual
+Z_ell=sqrt(ell) z(ell r) scaling gives an O(ell^(1/4))
+inner far-field channel for the specific V+Z_ell vs V comparison.
+Moving-smooth-cutoff formulas also provide Q and Q_r traces with
+explicit L'/L and true density time derivatives, without a boundary
+delta or r0=L/a loss. See HBL_213_REMOTE_INVERSE_MOMENT_RESCUE_20261111.md
+and its included TeX. This neither bounds the nontruncated outer
+near-diagonal interaction nor proves the selected full-packet density
+derivative, time-positive residual, parameter Lipschitz, recursion or
+PDE-derived Type-II speed. **Paper only, no new Lean CI, original 11/13.**
