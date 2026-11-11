@@ -763,3 +763,38 @@ matching point to the left edge of the pre-existing backward annulus
 requires reconstructing the actual real two-speed selector/Green
 jets. No positive temporal order, new Lean theorem, or original
 environment acceptance is claimed. **11/13**.
+
+
+## 2026-11-11 — source-specific no-left-radius SINGULAR Cramer feedback of real shell repair (PAPER ONLY)
+
+On the original origin-normalized Green system, for the actual nonlocal quartic Hartree increment
+\(F_a(r)=a^2[\mathcal N_H(U+P)-\mathcal N_H(U)](ar)\) with
+\(P\) supported on a positive-radius *physical* shell \([L,L+h]\), the
+complete singular Green coefficient has **no negative power of the Green
+left endpoint** \(r_0\). The proof exploits (i) exact rescaling of
+\(Y_K/W_K\), (ii) shell support of the *density change*, (iii) genuine
+nonlocal feedback on the inner field controlled by the radial
+\(\dot H^1\) Strauss estimate, and (iv) HLS/Hölder outside
+\(r=L/2\). In the notation of the companion calculation,
+\[
+|\mathcal C_B^K(F_a)|\le
+C_Y\kappa_H\left[
+\frac{16\sqrt2}{(4\pi)^{3/2}}
+ E^3 L^{-3/2}V_{L,h}^{1/3}A^3D+
+\frac{7C_{\rm HLS}}{4\pi}
+ (32\pi/3)^{1/6}L^{-1/2}A^6D
+\right].
+\]
+This removes the *generic-source* \(r_0^{-1/2}\) obstruction from
+the full physical Hartree **shell-repair feedback**, without claiming
+the original unperturbed nonlinear source is shell-supported. The exact
+proof and its hypotheses are at
+`verification/HBL_213_TRUE_HARTREE_SHELL_SINGULAR_CRAMER_20261111.md`,
+with the TeX paper supplement included in
+`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+**Remaining:** original selected-speed feedback for the whole source;
+uniform moving Kummer bounds, actual third spatial jets and their time/
+parameter derivatives, four-region PDE positive time gain and Lipschitz,
+finite recursion, and dynamics-derived Type-II rate. This is **not**
+an additional accepted original environment, nor is it Lean-audited.
+Formal original count **11/13** unchanged.
