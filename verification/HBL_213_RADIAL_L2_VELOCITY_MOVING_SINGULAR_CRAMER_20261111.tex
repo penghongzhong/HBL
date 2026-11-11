@@ -1,0 +1,90 @@
+% HBL §2.13 radial L2 velocity into genuine moving singular Cramer, paper-only 20261111
+\paragraph{Radial \(L^2\) time velocity directly controls the integrated genuine Hartree source.}
+For radial \(h_1,h_2,h_3\in\dot H^1(\mathbb R^3)\) and
+\(w\in L^2_{\mathrm{rad}}(\mathbb R^3)\), the exact angular integral
+\[
+ \int_{S^2}|Re_3-\rho\omega|^{-2}\,d\omega
+ =\frac{2\pi}{R\rho}\log\frac{R+\rho}{|R-\rho|}
+\]
+and the source-radius split \(\rho\in[R/2,2R]\) and its complement give
+\[
+ \sup_{R>0} R^2
+ \bigl|\,(|x|^{-2}*(h_1\bar h_2h_3w))(R)\,\bigr|
+ \le C_{\rm rad}\|w\|_2\prod_{j=1}^3\|\nabla h_j\|_2,
+\]
+where, writing \(c_*=(4\pi)^{-1/2}\) and
+\(\|h\|_6\le S\|\nabla h\|_2\),
+\[
+ C_{\rm rad}=4S^3+2^{3/2}\sqrt\pi\,c_*^3
+ \left(\int_{1/2}^2
+  \log^2\frac{1+t}{|1-t|}\,dt\right)^{1/2}.
+\]
+Indeed the complementary source radii contribute at most
+\(4S^3R^{-2}\prod\|\nabla h_j\|_2\|w\|_2\).
+On the comparable-radius annulus, angular integration and radial Strauss
+followed by Cauchy--Schwarz in the physical \(4\pi\rho^2d\rho\) measure
+produce the remaining displayed constant. This proof does \emph{not}
+apply a false pointwise \(L^2\) bound to the singular three-dimensional
+kernel before radial angular integration.
+
+Let \(\mathfrak T\) be the genuine seven-real-linear Hartree expression
+in (MT1), and let \(B\) be bounded by \(A_0\) on \([L,T]\).
+If one of its seven radial factors lies in \(L^2\) and the remaining
+six lie in \(\dot H^1\), the preceding convolution bound when that
+factor occurs inside the quartic potential, and the genuine quartic
+radial potential bound (RH3) otherwise, yield
+\[
+ \left|\int_L^T R B(R)\,\mathfrak T(a_1,\ldots,a_7)(R)\,dR\right|
+ \le\kappa_H A_0 C_{\rm wk}L^{-3/2}
+     \|a_j\|_2\prod_{i\ne j}\|\nabla a_i\|_2,
+\]
+\[
+ C_{\rm wk}=\max\left\{
+       \tfrac23c_*^3C_{\rm rad},
+       \tfrac{c_*^2C_*}{\sqrt{12\pi}}\right\},
+ \qquad
+ C_*=\tfrac1{2\pi}
+      +(\tfrac{32\pi}{3})^{1/3}S^4.
+\]
+The two integrals determining the constants are
+\(\int_L^\infty R^{-5/2}dR=\tfrac23L^{-3/2}\)
+and
+\(\int_L^T R^{-1}|w(R)|dR
+ \le(12\pi)^{-1/2}L^{-3/2}\|w\|_2\).
+
+For smooth radial physical fields \(U,V\) write
+\(E=\|\nabla U\|_2+\|\nabla V\|_2\),
+\(D=\|\nabla(U-V)\|_2\),
+\(V_2=\|U_s\|_2+\|V_s\|_2\), and
+\(D_2=\|U_s-V_s\|_2\).
+The true seven-slot differentiation/telescoping then gives
+\[
+ \left|\int_L^T RB(R)\partial_s
+  [\mathcal N_H(U)-\mathcal N_H(V)](R)\,dR\right|
+ \le7\kappa_H A_0C_{\rm wk}L^{-3/2}
+      (E^6D_2+6E^5V_2D).
+\]
+Substituting this into the \emph{exact} moving Kummer identity (MT4),
+with \(C_0=\kappa_Hc_*^3C_*\) and the genuine basis suprema
+\(A_0,A_t,A_r\), yields
+\[
+\begin{aligned}
+|\mathcal C'(s)|\le{}&
+ 7C_0A_0E^6D
+  (|L'|L^{-3/2}+|T'|T^{-3/2})\\
+&+7\kappa_HA_0C_{\rm wk}L^{-3/2}
+  (E^6D_2+6E^5V_2D)\\
+&+14C_0E^6DL^{-1/2}
+ \left[A_t+\left|\frac{a'}a\right|
+ \left(A_r+\frac{T^2}{2a^2}A_0\right)\right].
+\end{aligned}
+\]
+Unlike the previous pointwise time-source route, this integrated
+estimate requires only \(L^2\) physical time velocities, not an
+independently postulated \(\dot H^1\) velocity envelope.
+Its \(L^{-3/2}\) radius factor is sharp for energy/\(L^2\) data.
+The selected physical trajectory's actual velocities, moving
+Kummer derivatives, real speed Jacobian and the complete four-region
+PDE residual's strong source-time gain are not yet established.
+These calculations have \emph{paper-only} status; strict acceptance
+remains \(11/13\). Detailed proof: \texttt{HBL\_213\_RADIAL\_L2\_VELOCITY\_MOVING\_SINGULAR\_CRAMER\_20261111.md}.
