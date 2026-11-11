@@ -47,5 +47,40 @@ arbitrary radial profiles, even with zero matching Cauchy data.
 This does not rule out the true selected Hartree orbit: it isolates the
 additional \emph{global density commutator} or global $L^6$ difference
 that its PDE dynamics must produce with positive time weight and
-parameter Lipschitz regularity. This is a paper-level calculation
+parameter Lipschitz regularity. 
+\paragraph{Explicit near/far decomposition.}
+The genuine zero-Cauchy backward radial flux identity with
+$g=\Delta_r(u-v)$ on $A_L=\{5L/8\le|x|\le L\}$ gives
+\[
+ |f'(r)|\le\frac{64}{25\sqrt3}L^{-1/2}\|g\|_{r,2},
+ \qquad
+ \|f\|_{L^\infty(A_L)}
+ \le\frac{24}{25\sqrt3}L^{1/2}\|g\|_{r,2}.
+\]
+Since $|A_L|=129\pi L^3/128$, this provides the explicit
+critical norm
+\[
+ \|f\|_{L^6(A_L)}
+ \le C_{\rm ann}L\|g\|_{r,2},\qquad
+ C_{\rm ann}=\frac{24}{25\sqrt3}
+ \Bigl(\frac{129\pi}{128}\Bigr)^{1/6}.
+ \tag{NC-D}
+\]
+Writing
+$D_{\rm rem}=\|f\|_{L^6(\mathbb R^3\setminus A_L)}$,
+the source-faithful estimate (NC-B) strengthens to
+\[
+ \boxed{
+ \|\mathcal C_{\eta_L}(u,v)\|_{6/5}
+ \le 455|\kappa_H|C_{\mathrm{HLS}}E^6
+  (C_{\rm ann}L\|g\|_{r,2}+D_{\rm rem}).
+ }\tag{NC-E}
+\]
+The counterexample (NC-C) satisfies $g=0$ yet
+$D_{\rm rem}>0$; the global remote mismatch is therefore
+indispensable unless the same Hartree PDE orbit supplies a
+new cancellation. The $D_{\rm rem}$ time-weighted and parameter
+Lipschitz budgets are not yet proved.
+
+This is a paper-level calculation
 only; strict original acceptance remains $11/13$.
