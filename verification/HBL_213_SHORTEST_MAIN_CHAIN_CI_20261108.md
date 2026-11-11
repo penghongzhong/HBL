@@ -4009,3 +4009,22 @@ with \(D_2=\|U_s-V_s\|_2\) and \(V_2=\|U_s\|_2+\|V_s\|_2\), not the stronger \(\
 - Outstanding physical production: bounds on **actual** \(F_s,U_s,V_s,\rho_s,a_s,c_s\), common moving-anchor pullback and source-difference commutator, actual two-real-speed Jacobian, three-interface \(C^2/C^3\) strong-source repair, full four-region nonlocal PDE positive temporal order and parameter Lipschitz, finite-layer recurrence, and dynamically *derived* II-type rate. No independent source envelope, rate, or temporal smallness was inserted.
 - Formal original environments: **11/13 (84.62%)**, §2.13 unaccepted; final original theorem unaccepted. No new strict CI or success is claimed for the paper reduction.
 
+
+
+## 11 November 2026 — moving C3 repair velocity and exact interface measure cancellation (paper only)
+
+New paper proof: [HBL_213_MOVING_C3_REPAIR_L2_TIME_AND_HARTREE_20261111.md](HBL_213_MOVING_C3_REPAIR_L2_TIME_AND_HARTREE_20261111.md), synchronized through the matching TeX supplement into the original §2.13 manuscript. The actual C³ Hermite patch of the retained C¹ field has a **computed**, non-independent physical radial \(L^2\)-time velocity:
+\[
+\begin{gathered}
+P=h^2d_2\phi_2((r-L)/h)+h^3d_3\phi_3((r-L)/h),\\
+\|\nabla P\|_2\le\mathfrak G(d_2,d_3,L,h),\qquad
+\|P_s\|_2\le\mathfrak V(d_2,d_3,d_2',d_3',L,L',h,h').
+\end{gathered}
+\]
+The new note calculates both budgets with **exact rational** polynomial \(L^2(0,1)\) constants. Substituting \(\mathfrak G,\mathfrak V\) into the already paper-proved mixed radial \(\dot H^1\)/\(L^2\) Hartree seven-linear estimate (RV3) yields an explicit nonlocal moving singular-Cramer source derivative controlled by the same **actual jet trajectories and the actual baseline \(L^2\) time velocity**, with the physical \(L^{-3/2}\) factor and no Kummer left-radius \(r_0^{-1}\) assumption.
+
+**New source-space gate made explicit:** \(\partial_s(\Delta_rP)\) **cannot** be estimated independently in the proposed strong norm: it has moving-interface measure \(-L'd_2\delta_{r=L}\). The unrepaired same-orbit \(C^1\) field has exactly the opposite measure \(+L'd_2\delta_{r=L}\) because \([\Delta_rW]_L=-d_2\), so the measure cancels *only after assembling the full repaired field*. The outgoing end of the patch has vanishing jets. This exact cancellation is required before any strong time-differentiated residual estimate. It is not itself positive temporal order or a new \(L^2\) bound for the entire PDE residual.
+
+**GitHub/CI provenance checked:** starting HEAD b92d491e6f2564db6c5bb546ac735a45198965f6. The original ActualHartreeSpectralFourPieceFinitePDETelescoping.lean source blob 3e5262c30d86645b290e3d12e6bbcf9144e2543a is **identical** at the strict successful [CI 42958494409](https://github.com/penghongzhong/HBL/actions/runs/42958494409) SHA 773a43295085c6c132a80daa88e2ddf6576a63d6 and at the start HEAD. Original job 130319187052 confirms Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, --trust=0, warningAsError, exact four #check and allowed-axioms-only audit. Exact original telescope theorem: HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes; it is **only algebraic telescoping**. [CI 42972001935](https://github.com/penghongzhong/HBL/actions/runs/42972001935), original job 130362390841, audits the same-parameter nonzero matching-source comparison with the permitted three axioms. Original failure [CI 42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681), job 128882355120, had InWeightedL2 unrecognized and derivative type mismatch; the later run is a real corrected strict recheck, not an unverified rerun claim.
+
+**Not accepted:** \(d_2,d_3\), **their actual time derivatives**, \(L',h'\), the whole selected physical \(W_s\), and both real-speed/trace Jacobians still require genuine PDE production; also pending are three-interface \(C^3\) repair, moving Kummer basis and endpoint controls, full strong residual positive time order and parameter Lipschitz, true finite-layer recursion, and dynamic II-type speed. This bridge is **paper only**, with no new target Lean theorem, compilation, #print axioms, or original-environment acceptance. **Original 11/13 (84.62%)**, not 12/13 or 13/13.
