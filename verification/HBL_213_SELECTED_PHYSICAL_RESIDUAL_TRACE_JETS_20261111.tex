@@ -1,0 +1,77 @@
+% 11 November 2026. Paper-only: exact selected Hartree physical residual
+% source/jet identities at moving interfaces; original count 11/13.
+\medskip
+\noindent\textbf{Physical residual traces determine the moving interface jets.}
+Let \(W\) be the full piecewise radial physical field, matched in \(C^1_r\)
+at a moving interface \(r=L(s)>0\). For one-sided traces write
+\([f]=f(s,L(s)+)-f(s,L(s)-)\). The full genuine inverse-square quartic
+Hartree operator and its residual are
+\[
+ \mathcal N_{\HH}(W)=\kappa_{\HH}
+   (|\cdot|^{-2}*|W|^4)|W|^2W,\qquad
+ \mathscr R_W=iW_s+W_{rr}+\frac2rW_r+\mathcal N_{\HH}(W).
+\]
+The nonlinear convolution is evaluated on the \emph{same global field},
+including all four-region cross interactions, not separately on
+individual artificial pieces. For smooth, decaying physical packets the
+potential and its radial derivative are continuous at the interface.
+Differentiating the two matched moving traces gives
+\[
+ [W]=[W_r]=[W_s]=0,\qquad [W_{sr}]=-L'[W_{rr}].
+\]
+Define \(d_j=W_{r^j}(s,L-)-W_{r^j}(s,L+)\) for \(j=2,3\). Directly taking
+the jumps of the true PDE residual and its radial derivative gives
+\begin{equation}
+ \boxed{\,d_2=-[\mathscr R_W],\qquad
+ d_3=-[\partial_r\mathscr R_W]+(iL'-2/L)d_2.\,}
+ \label{eq:hbl-selected-physical-interface-jets}
+\end{equation}
+Indeed \([\mathscr R_W]=[W_{rr}]\), whereas
+\[
+ [\partial_r\mathscr R_W]
+   =i[W_{sr}]+[W_{rrr}]+\frac2L[W_{rr}]
+   =-d_3-\left(\frac2L-iL'\right)d_2.
+\]
+The total time derivatives along the moving interface are
+\begin{align*}
+ d_2'&=-[\partial_s\mathscr R_W]-L'[\partial_r\mathscr R_W],\\
+ d_3'&=-[\partial_s\partial_r\mathscr R_W]
+       -L'[\partial_r^2\mathscr R_W]
+       +(iL''+2L'/L^2)d_2+(iL'-2/L)d_2',
+\end{align*}
+assuming the corresponding classical one-sided higher traces.
+These are \emph{identities}, not positive-time-order bounds.
+If both adjoining restrictions are exact solutions of the same
+complete physical Hartree PDE in a neighborhood, then
+\(\mathscr R_W=0\), hence \(d_2=d_3=0\), so a \(C^3\) shell is unnecessary
+at that interface. A \(C^1\) join and the selected two real speeds
+alone do not establish the required residual trace vanishing.
+
+If the genuine residual jumps do not vanish, use the existing Hermite
+correction
+\[
+ P=h^2d_2\phi_2((r-L)/h)+h^3d_3\phi_3((r-L)/h)
+ \quad (L<r<L+h),
+\]
+extended by zero, with the previously computed endpoint jets.
+Then \(U=W+P\) satisfies
+\[
+ [U]=[U_r]=[U_{rr}]=[U_{rrr}]=[U_s]=[U_{sr}]=0,
+ \qquad
+ \boxed{[\mathscr R_U]=[\partial_r\mathscr R_U]=0.}
+\]
+The full \(\mathcal N_{\HH}(W+P)-\mathcal N_{\HH}(W)\) is nonlocal and
+need not vanish at the patch endpoints: its \emph{jump} and the jump of
+its first radial derivative vanish. This is a trace regularity
+statement, not the strong \(s^{-9/4}\) residual gain, its time
+derivative, the two-parameter Lipschitz estimate, or the dynamical
+blowup law.
+
+The next source-producing computation is therefore the one-sided
+\([\mathscr R_W]\) and \([\partial_r\mathscr R_W]\) on each of the three
+actual interfaces, retaining the original unique real speed selection.
+Applying the identities to already \emph{assumed} small residual traces
+would be circular. The algebraic four-piece nonlinear PDE telescope
+(CI 42958494409) does not supply the missing decay.
+This paragraph is paper-only and does not change the retained
+original-environment acceptance \(11/13\).
