@@ -88,7 +88,7 @@ private theorem kummer_parameter_difference_bound
           ((a2 ^ 2)⁻¹ : ℝ) • frozenZeroCoeff mu2 theta2‖ * ‖v r‖ := by
       rw [norm_smul, Real.norm_eq_abs, norm_mul, norm_mul]
     _ ≤ _ := by
-      apply add_le_add_right
+      refine add_le_add ?_ (le_refl _)
       calc
         _ ≤ |(a1 ^ 2)⁻¹ - (a2 ^ 2)⁻¹| * (R * ‖deriv v r‖) :=
           mul_le_mul_of_nonneg_left
