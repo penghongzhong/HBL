@@ -10526,6 +10526,51 @@ Detailed derivation:
 \texttt{verification/HBL\_213\_ACTUAL\_HARTREE\_MOVING\_BUBBLE\_MASS\_PHASE\_FLUX\_IDENTITY\_20261110.md}.
 No new Lean theorem or acceptance follows; revised original
 environment count remains \textbf{11/13}.
+
+\medskip
+\noindent\textbf{The corresponding exact renormalized phase--mass
+identity eliminates the bare scaling Fredholm moment.}
+For \(u(t,r)=\lambda^{-1/2}e^{i\gamma(s)}U(s,r/\lambda)\),
+\(s_t=\lambda^{-2}\), \(b=\lambda_s/\lambda\), and
+\(U=W+p+iq\), the \emph{unabridged} moving-frame PDE and
+phase equation read
+\[
+ \begin{aligned}
+ iU_s+\Delta U+\mathcal V_{\rm H}[U]U
+   -ib\Lambda U-\gamma_sU&=0,\\
+ L_-q&=p_s-b\Lambda W-b\Lambda p
+  +(\mathcal V_{\rm H}[U]-3W^4)q-\gamma_sq.
+ \end{aligned}
+\]
+For \(L=L(s)>0\) let
+\(\mathscr M(s)=\frac12\int_0^{L(s)}y^2(|U|^2-W^2)\,dy\).
+Combining the exact phase Wronskian with the full
+renormalized mass continuity equation gives
+\[
+ \boxed{\;
+ \begin{aligned}
+ \int_0^L y^2W
+ [p_s+(\mathcal V_{\rm H}[U]-3W^4)q-\gamma_sq]\,dy
+ ={}&\mathscr M_s+L^2(pq_y-qp_y)(s,L)\\
+ &-\tfrac12L^2L_s(|U(s,L)|^2-W(L)^2)\\
+ &-\tfrac b2L^3(p^2+q^2)(s,L)\\
+ &-b\int_0^L y^2[(\Lambda W)p-(p^2+q^2)]\,dy.
+ \end{aligned}\;}
+\]
+The cancellation is a pointwise total derivative: with
+\(\rho=(W+p)^2+q^2\),
+\[
+ y^2\bigl[-W\Lambda(W+p)+\tfrac12(\rho+y\rho_y)\bigr]
+ =\partial_y[\tfrac12y^3(p^2+q^2)]
+  +y^2[(\Lambda W)p-(p^2+q^2)].
+\]
+Hence the divergent bare \(\int_0^L y^2W\Lambda W\)
+has \emph{no independent source-norm cost} in this exact
+same-orbit transport equality. It is replaced by actual
+mass variation, moving traces and perturbative terms whose
+time-decay and parameter controls remain to be proved.
+No original theorem environment is thereby accepted.
+
 % END HBL_MOVING_BUBBLE_ACTUAL_HARTREE_MASS_PHASE_FLUX_20261110
 
 \end{document}
