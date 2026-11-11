@@ -10635,4 +10635,60 @@ This is a paper-only exact reduction, not a new Lean
 verification or original-environment acceptance; $11/13$ remains.
 % END HBL_LOCAL_MASS_GAUGE_RESONANCE_GATE_20261110
 
+
+% BEGIN HBL_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110
+\medskip
+\noindent\textbf{Necessary correction: the fixed physical mass gauge can
+fail in the presence of nonzero terminal radiation.}
+The scale derivative and hypothetical local implicit-function theorem
+above do not imply the existence of a mass-matching root.  For the true
+shrinking physical scale $\ell$ and the original Hartree bubble
+$B_\ell(r)=\ell^{-1/2}W(r/\ell)$, one has the exact formula
+\[
+ \int_0^R r^2B_\ell(r)^2\,dr
+ =\ell[R-\ell\arctan(R/\ell)]\le \ell R.
+\]
+If $u(t_n)\to z$ in $L^2((r_-,r_+);r^2dr)$ for some
+$0<r_-<r_+<R$ with
+$m^2=\int_{r_-}^{r_+}r^2|z(r)|^2dr>0$, then for $\ell_n\downarrow0$
+\[
+ \boxed{\ 
+ \liminf_{n\to\infty}M_R(u(t_n),\ell_n)
+ \ge\tfrac12m^2>0.
+ \ }
+\]
+Thus the unsubtracted \emph{fixed physical radius} gauge has no root
+on any such nonzero-radiation concentrating branch.  Normalizing by
+$\ell$ does not restore a root.  This is a necessary radiation-scope
+restriction on the scalar gauge, not an obstruction to Hartree blowup.
+
+On the original \emph{shrinking} physical interface
+$R_\ell=\ell L(\ell)$, for bounded regular radiation $|z|\le M$ the
+unsubtracted self- and bubble--radiation cross-masses obey
+\[
+ \frac{\frac12\int_0^{R_\ell}r^2|z|^2dr}
+      {\frac12\ell^2(L-\arctan L)}
+ \le\frac{2M^2}{3}\ell L^2,\qquad
+ \frac{\left|\Re\int_0^{R_\ell}r^2B_\ell\bar z\,dr\right|}
+      {\frac12\ell^2(L-\arctan L)}
+ \le 2M\sqrt\ell\,L,\quad L\ge\pi .
+\]
+For $L=\ell^{-1/16}$ these are $O(\ell^{7/8})$ and
+$O(\ell^{7/16})$, respectively.  The exact moving-radius scale
+derivative, however, is
+\[
+ \partial_{\log\ell}M_{R_\ell}(u,\ell)
+ =\ell^2 I(L)
+  +\frac12R_\ell^2
+    (\partial_{\log\ell}R_\ell)
+    (|u(R_\ell)|^2-B_\ell(R_\ell)^2),
+\quad
+ I(L)=\arctan L-\frac L2-\frac{L}{2(1+L^2)}.
+\]
+The last endpoint term cannot be omitted, and actual matched
+remainder control, the original two-speed selector, and the full
+nonlocal residual remain to be established.  This new necessary
+condition is paper-level only; the strict original count stays 11/13.
+% END HBL_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110
+
 \end{document}

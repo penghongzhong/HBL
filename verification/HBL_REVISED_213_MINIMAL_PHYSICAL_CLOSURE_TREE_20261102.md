@@ -632,3 +632,10 @@ four-region Hartree residual **remain OPEN**. Details:
 No new Lean declaration; strict algebra CI 42929423991 and current-source
 PDE telescope CI 42927397872 are **auxiliary only**. **11/13**.
 
+
+
+### 2026-11-10 radiation obstruction to fixed-physical-radius mass-gauge shortcut (HBL_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110)
+
+A new finite-radius mass calculation rules out the suggested **unsubtracted fixed physical \(R\)** scalar normalization whenever a concentrating Hartree orbit retains nonzero \(L^2(r^2dr)\) radiation on an annulus inside \(R\): the bubble mass there is at most \(\ell R\to0\), while the actual field's annular radiation mass remains positive. Thus the root required for the conditional nonzero Jacobian in (MG4) **does not exist** on such a branch. The normalized gauge \(M_R/\ell=0\) has exactly the same missing roots.
+
+A shrinking physical interface \(R_\ell=\ell L\), as in the original matched profile, avoids this particular obstruction: bounded smooth radiation produces relative mixed/self mass \(O(\sqrt\ell L)\)/\(O(\ell L^2)\), yielding \(\ell^{7/16}\)/\(\ell^{7/8}\) for \(L=\ell^{-1/16}\). Its true scale Jacobian must include the moving-endpoint term. Full proof: [HBL_213_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110.md](HBL_213_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110.md). This is a **paper-level exclusion of an invalid proof shortcut**, not a residual time-gain, an actual PDE orbit, or Lean-verified §2.13. CI 42927397872 and 42929423991 retain their strictly audited identity/algebra scope. **Accepted original environments remain 11/13**; only §2.13 and the final PDE-derived Type-II main theorem can change the numerator.

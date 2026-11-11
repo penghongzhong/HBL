@@ -328,3 +328,25 @@ nonlocal PDE. Neither (MG1)–(MG5) nor the already strict three-jet
 algebra CI 42929423991 constitutes original §2.13, a nonlinear
 finite-level orbit, or the Type-II rate. **Formal retained count: 11/13.**
 
+
+
+## 7. Fixed physical-radius mass gauge: a radiation obstruction (HBL_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110)
+
+The exact gauge derivative (MG4) presupposes a root. For the **physical shrinking** scale \(\ell\), the original Hartree bubble satisfies
+\[
+\int_0^R r^2 B_\ell(r)^2dr
+=\ell[R-\ell\arctan(R/\ell)]\le \ell R.
+\]
+If along an actual concentrating sequence \(u(t_n)\to z\) in an annulus \(0<r_-<r<r_+<R\) and \(\int_{r_-}^{r_+}r^2|z|^2dr=m^2>0\), then
+\[
+\liminf_n M_R(u(t_n),\ell_n)\ge\tfrac12m^2>0 .
+\]
+Consequently the **unsubtracted fixed-\(R\) mass gauge cannot have roots** along that branch, regardless of the nonzero conditional scalar Jacobian. This blocks use of (MG4)–(MG5) whenever the chosen fixed \(R\) encloses persistent nonzero terminal radiation.
+
+An alternative is the **genuinely shrinking** interface \(R_\ell=\ell L\). For bounded radiation, its self- and cross-masses relative to the bubble half-mass are \(O(\ell L^2)\) and \(O(\sqrt\ell L)\); the original \(L=\ell^{-1/16}\) yields gains \(\ell^{7/8}\) and \(\ell^{7/16}\). But the moving-radius gauge now has the additional, non-negotiable endpoint term
+\[
+\partial_{\log\ell}M_{R_\ell}(u,\ell)
+=\ell^2I(L)
++\tfrac12R_\ell^2\partial_{\log\ell}R_\ell\,(|u(R_\ell)|^2-B_\ell(R_\ell)^2).
+\]
+See [complete proof and precise hypotheses](HBL_213_FIXED_RADIUS_MASS_GAUGE_RADIATION_OBSTRUCTION_20261110.md). The estimates do **not** prove that the actual selected Hartree remainder is small, that a root exists, or that an extra gauge is compatible with the original real two-speed Fredholm selection. No new Lean CI or revised-paper acceptance; **11/13 remains**.
