@@ -598,3 +598,30 @@ See `verification/HBL_213_SHARP_C2_PATCH_WEIGHTED_TRACE_OBSTRUCTION_20261110.md`
 For the actual \(h=L/4\), the constant improves to \(\sqrt{375/61}\). The independently derived broad-patch upper bound has precisely this \(L^{3/2}|\Delta_2|\) scaling when \(a\ge L^3\) and \(Q\) is bounded. Therefore no adjustment of compact C² patch width, cutoff shape, or location can improve the **separately estimated weighted source-gradient** scaling. In particular an independent \(O(s^{-p})\) patch source derivative estimate requires \(|D_{\rm in}(s,L)+a^{-2}\delta(s)u_0(s,L/a)|\lesssim L(s)^{-3/2}s^{-p}\), **not** an inferred \(s\)-gain from geometric cutoff tuning.
 
 This is **not** a lower bound on the entire four-piece nonlocal Hartree PDE residual: same-source cancellation with other residual pieces, spectral projection, or Hartree propagation can improve the full term. The actual \(\Delta_2\) may itself be small or zero. The sharp analytic obstruction redirects the shortest original proof chain to an actual physical source cancellation or a genuine projected inverse, rather than more auxiliary cutoff redesign. The strict Lean source-dependent C² bound from CI **42854633900**, original job **129964186672**, remains valid, with exact axioms `propext`, `Classical.choice`, `Quot.sound`, but does **not** prove the new trace inequality, time-positive residual, nonlinear orbit, or dynamic blowup rate. This new note has **no independent Lean CI**. **Original revised acceptance: 11/13.**
+
+
+### HBL_LOCAL_MASS_GAUGE_RESONANCE_GATE_20261110: exact mass-gauge phase-resonance reduction (paper only)
+The original Hartree bubble has \(\Lambda W=-W/2+W^3\). Combining
+this with the **same-PDE** moving phase/mass flux (MP9) yields the exact
+renormalized mass ODE
+\[
+(\lambda^{1/2}\mathscr M)_s
+=\lambda^{1/2}(\mathscr S-\mathscr B+bC-\tfrac34 bQ),
+\quad C=\int_0^Lr^2W^3p,\quad Q=\int_0^Lr^2(p^2+q^2).
+\]
+The linear \(C\) term has an \(L\)-uniform Sobolev bound.
+A fixed physical-radius matching gauge, **if its matching root exists
+on the concentrated branch**, is locally nondegenerate because
+\(\partial_{\log\lambda}M_R=\lambda^2 I(R/\lambda)
+\le-\lambda R/4\) for \(R/\lambda\ge2\pi\). The corresponding
+scale derivative is then an **actual PDE mass-current quotient**,
+not a prescribed explosion rate. Energy alone still does not control
+the expanding-radius phase term: \(p=\varepsilon W\) on \([0,L]\),
+cut off by \(2L\), has \(O(\varepsilon)\) homogeneous energy but
+an \(\Omega(\varepsilon L)\) scaling moment. Compatibility with the
+existing unique Fredholm selector and the actual differentiated
+four-region Hartree residual **remain OPEN**. Details:
+\`verification/HBL_213_ACTUAL_HARTREE_MOVING_BUBBLE_MASS_PHASE_FLUX_IDENTITY_20261110.md\`.
+No new Lean declaration; strict algebra CI 42929423991 and current-source
+PDE telescope CI 42927397872 are **auxiliary only**. **11/13**.
+
