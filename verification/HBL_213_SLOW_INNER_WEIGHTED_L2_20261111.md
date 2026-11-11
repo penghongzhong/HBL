@@ -42,3 +42,10 @@ The existing C³ repair is still uninstantiable from mere weighted L² plus cont
 ## HBL_HALF_POWER_NOT_OUTER_SELECTOR_20261111: the selected-speed outer annulus is NOT covered
 
 The stronger square-root source bound is valid on the **actual slow-inner domain** (0<r\le2L), (L=\ell^{-1/16}), and for its radially conjugated cutoff. It cannot replace the (Q=C_{\rm phys}(B,A)\ell^{1/8}) bound in `actual_Hartree_true_nonlocal_source_selects_unique_real_speed` on its **full original outer Cramer interval**: there (F(\rho)=-a^2\mathcal S_H(a\rho)) and physical (y=a\rho\in[L,aB]), with admissible choices (aB\gg2L). Thus the selector's original (\ell^{1/8}) constant must be retained until a separate all-annulus source argument is proved. This spatial support restriction prevents an illegitimate global time-gain upgrade.
+
+
+## HBL_HALF_POWER_WEIGHTED_L2_STRICT_42952819526: exact pinned Lean Success (spatial source component only)
+
+At source SHA `75970cf2fa21ea8dfc09ebe051ce6cf5983c9ef3`, [CI 42952819526](https://github.com/penghongzhong/HBL/actions/runs/42952819526), original job `130303403837`, evidence artifact `13826515899` (SHA256 `01e20b4ada001ca304d1a455f18318f4ef9da20dca5db76e1975e6136dea3b55`) have **strict Success**. GitHub's raw log shows the pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, `--trust=0`, `-DwarningAsError=true`, exact `#check` of `HBL.TypeIIDynamicSelection.actual_Hartree_slow_inner_half_power_weighted_L2` and its individual `#print axioms`, with precisely `[Classical.choice, Quot.sound, propext]`; no sorry/admit or extra axioms. The upstream physical source producer was actually rebuilt as a dependency at the repaired SHA. A separate workflow still audits the precise three upstream declarations; its earlier original run 42951761187 failed only on an extra `ring` command after a completed `field_simp`, now fixed.
+
+**This proves the spatial weighted-square-integral estimate only.** It does not upgrade the entire selected Cramer annulus, full moving PDE residual, temporal gain, finite profile, or the final rate. Original revised **11/13**.

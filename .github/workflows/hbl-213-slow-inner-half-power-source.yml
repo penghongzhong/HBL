@@ -1,4 +1,5 @@
 name: HBL actual slow-inner Hartree half-power source strict
+# Source-producer re-audit after fixing raw CI 42951761187 line 124 redundant tactic.
 on:
   push:
     branches: [hbl-213-spectral-c1-trace-20261109]

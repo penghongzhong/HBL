@@ -698,3 +698,10 @@ This controls all nonlocal feedback, including outside the repair shell, and the
 ## HBL_SLOW_INNER_WEIGHTED_L2_20261111: derived full-Hartree source norm, not full original §2.13
 
 The actual slow-inner ten-term nonlocal Hartree source has source-produced pointwise length `ell^(1/2)` and weighted squared L² bound `K(B,A)^2 ell * ∫_(0,∞)(1+r)^(-5/2)dr`; on its true backward overlap, its physical L² source component is bounded by `sqrt(127/7) K ell^(23/32)`. Proof and exact scope: `verification/HBL_213_SLOW_INNER_WEIGHTED_L2_20261111.md`. A dedicated pinned strict CI checks only `actual_Hartree_slow_inner_half_power_weighted_L2` and its three-axiom audit; no Success is claimed before inspection. Other real modulation/spectral/time/nonlocal residual components and the PDE orbit remain open. Original **11/13** unchanged.
+
+
+## HBL_HALF_POWER_WEIGHTED_L2_STRICT_42952819526: exact pinned Lean Success (spatial source component only)
+
+At source SHA `75970cf2fa21ea8dfc09ebe051ce6cf5983c9ef3`, [CI 42952819526](https://github.com/penghongzhong/HBL/actions/runs/42952819526), original job `130303403837`, evidence artifact `13826515899` (SHA256 `01e20b4ada001ca304d1a455f18318f4ef9da20dca5db76e1975e6136dea3b55`) have **strict Success**. GitHub's raw log shows the pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, `--trust=0`, `-DwarningAsError=true`, exact `#check` of `HBL.TypeIIDynamicSelection.actual_Hartree_slow_inner_half_power_weighted_L2` and its individual `#print axioms`, with precisely `[Classical.choice, Quot.sound, propext]`; no sorry/admit or extra axioms. The upstream physical source producer was actually rebuilt as a dependency at the repaired SHA. A separate workflow still audits the precise three upstream declarations; its earlier original run 42951761187 failed only on an extra `ring` command after a completed `field_simp`, now fixed.
+
+**This proves the spatial weighted-square-integral estimate only.** It does not upgrade the entire selected Cramer annulus, full moving PDE residual, temporal gain, finite profile, or the final rate. Original revised **11/13**.
