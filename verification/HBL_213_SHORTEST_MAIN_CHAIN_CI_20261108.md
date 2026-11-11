@@ -4136,3 +4136,25 @@ Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5,
 \`#check\`/\`#print axioms\`, dependencies only \`propext\`,
 \`Classical.choice\`, \`Quot.sound\`.
 **Original 13 environments: 11/13 (84.62%), unchanged.**
+
+
+**Explicit quantitative near/far upgrade** (same paper-only nonlocal-gate note): with the original zero-Cauchy
+matched difference \(f=u-v\), local annulus \(A_L=\{5L/8\le |x|\le L\}\),
+and \(g=\Delta_r f\), two exact backward radial integrations give
+\[
+ \|f\|_{L^6(A_L)}\le
+ \frac{24}{25\sqrt3}\Bigl(\frac{129\pi}{128}\Bigr)^{1/6}
+ L\|g\|_{L^2([5L/8,L],r^2dr)}=:C_{\rm ann}L\|g\|_{r,2}.
+\]
+Thus the full source defect has the mathematically valid global budget
+\[
+ \|{\cal C}_{\eta_L}(u,v)\|_{L^{6/5}(\mathbb R^3)}
+ \le455|\kappa_H|C_{\rm HLS}
+ (\|u\|_6+\|v\|_6)^6
+ [C_{\rm ann}L\|g\|_{r,2}
+ +\|u-v\|_{L^6(\mathbb R^3\setminus A_L)}].
+\]
+The exact remaining source producer is therefore the **remote global
+mismatch**, along with moving parameters/time derivatives; a local
+curvature estimate alone provably cannot replace it. Paper and TeX
+supplement updated, **no new Lean CI, original count 11/13**.
