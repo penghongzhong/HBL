@@ -4062,3 +4062,12 @@ The strictly accepted [CI 42958494409](https://github.com/penghongzhong/HBL/acti
 
 
 **Further exact source-chain import check:** \`actual_Hartree_origin_outgoing_gain_on_annulus\` supplies \`IntervalIntegrable F\` and an a.e. Kummer ODE from merely \`Measurable z\`, whereas \`actual_Hartree_spectral_inner_four_piece_three_C1_joins\` requires \`∀r, ContinuousAt F r\`. The latter premise is *not a consequence of the former stated type*. It must be derived for the chosen genuine Hartree orbit before importing the strict C¹ join, and then strengthened to spatial \(C^1\) plus moving temporal derivatives before defining its C³ repair. This is a concrete mathematical/formal interface gap; it is **not** a proof the actual PDE packet lacks regularity, nor a full-§2.13 rejection. Formal original count stays 11/13.
+
+
+**Exact original-renormalized residual correction to the moving jet branch:** the earlier \(d_3=-[\partial_r\mathscr R]+(iL'-2/L)d_2\) applies to the unrenormalized physical \(\mathscr R=iW_s+\Delta W+\mathcal N_H(W)\) only. The literal Lean \`complexRadialRenormalizedResidual\` includes \(+ib(\tfrac12W+rW_r)+\omega W\). Hence at each actual \(C^1\) join the correct jump formula for the *target of CI 42958494409* is
+\[
+ d_2=-[\mathscr R_{b,\omega}],\qquad
+ d_3=-[\partial_r\mathscr R_{b,\omega}]
+       +(iL'-2/L-ibL)d_2.
+\]
+For moving \(b(s)\), the \(d_3'\) budget also contains \(-i(b'L+bL')d_2\), besides the full residual traces. This follows by reading the exact \`complexRadialDilation\` and \`complexRadialRenormalizedResidual\` definitions in \`HBL/MonopoleComplexResidual.lean\`; it is now included in the master §2.13 TeX via the new supplement. This is **not** a new Lean theorem or full moving-modulation estimate. It closes a sign/normalization ambiguity but preserves the genuine \(C^3\) regularity and dynamic strong-residual obstacles. **11/13 unchanged.**
