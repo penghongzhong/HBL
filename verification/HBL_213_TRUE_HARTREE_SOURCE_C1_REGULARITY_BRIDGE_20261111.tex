@@ -1,0 +1,52 @@
+\paragraph{The genuine Hartree-source regularity import gate.}
+The strictly accepted source selector requires measurable radial radiation with
+the pointwise Strauss bounds, whereas the classical three-\(C^1\) transmission
+theorem additionally assumes positive-radius continuity of the forcing.
+The latter does not follow from the former. At \(c=0\), take the positive
+bubble \(V\), and a real radial radiation \(Z=t{\bf1}_{[R,2R]}\), \(t>0\).
+Writing \(Q_H=|x|^{-2}*|H|^4\) and
+\(\mathcal S_H(V,Z)=Q_{V+Z}(V+Z)^3-Q_VV^3-Q_ZZ^3\),
+the three Riesz potentials are continuous, but at \(R\) the physical
+source has the strictly positive jump
+\[
+ [\mathcal S_H]_R
+ =Q_{V+Z}(R)((V(R)+t)^3-V(R)^3)-Q_Z(R)t^3
+ \ge 3Q_Z(R)V(R)t(V(R)+t)>0.
+\]
+The admissible measurable choice \(z(y)=\varepsilon{\bf1}_{[1,2]}(y)\),
+\(Z_\ell(r)=\sqrt\ell z(\ell r)\) puts this jump at \(r=\ell^{-1}\);
+with suitable allowed \(L<\ell^{-1}<aB\), the scaled original source
+\(F_a(r)=a^2\mathcal S_H(V,Z_\ell)(ar)\) is discontinuous inside the
+Kummer annulus. This is a counterexample to automatic import of
+\texttt{ContinuousAt F}, not a claim of irregularity for the smooth
+orbit sought in the theorem.
+
+A constructive bridge is available for sufficiently regular physical
+radiation. If \(\rho\in L^1\cap L^\infty(\mathbb R^3)\) is locally
+\(C^{0,\alpha}\), \(0<\alpha\le1\), on a unit neighborhood of a fixed
+annulus \(A\), then \(P=|x|^{-2}*\rho\) is \(C^1\) on \(A\), with the
+absolutely convergent compensated representation
+\[
+ \nabla P(x)=-2\int_{\mathbb R^3}
+   \frac{x-y}{|x-y|^4}
+   \left(\rho(y)-\rho(x){\bf1}_{|x-y|<1}\right)\,dy,
+ \quad
+ \|\nabla P\|_{L^\infty(A)}
+ \le \frac{8\pi}{\alpha}[\rho]_{C^{0,\alpha}(A_1)}
+       +2\|\rho\|_{L^1}.
+\]
+In particular, for a locally \(C^1\) physical field \(W\) with
+\(|W|^4\in L^1\cap L^\infty\), the genuine nonlocal source
+\(\mathcal N_H(W)=\kappa_H P_W|W|^2W\) belongs to \(C^1(A)\), and
+\[
+ \partial_r\mathcal N_H(W)=\kappa_H\left[
+  (\partial_rP_W)|W|^2W+
+  P_W\left(2\operatorname{Re}(\bar WW_r)W+|W|^2W_r\right)
+ \right].
+\]
+The scaled physical source derivative carries the exact factor \(a^3\).
+The needed \(C^1_r\) radiation bounds, their genuine temporal estimates,
+moving selected speeds, nonlocal residual decay, and the finite recursion
+are \emph{not} consequences of this local regularity lemma. This
+calculation is paper-only, without a new Lean CI; the original revised
+environment count remains \(11/13\).
