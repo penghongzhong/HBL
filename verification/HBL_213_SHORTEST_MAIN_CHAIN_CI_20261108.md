@@ -3976,3 +3976,11 @@ A higher positive time power requires a distinct PDE-specific
 smallness/cancellation producer for the *actual selected* packet.
 This is a counterexample to the generic-energy improvement,
 not to the Hartree II-type blowup theorem; **11/13 remains unchanged**.
+
+## 2026-11-11 moving Cramer derivative of genuine nonlinear feedback (paper-only)
+
+- [Analytic proof](HBL_213_MOVING_CRAMER_ACTUAL_HARTREE_TIME_DERIVATIVE_20261111.md) and `HBL_213_MOVING_CRAMER_ACTUAL_HARTREE_TIME_DERIVATIVE_20261111.tex` are included in `HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex`.
+- The actual seven-real-multilinear inverse-square quartic Hartree map yields the *source-produced* derivative
+  \(\sup_{R>0}R^{5/2}|\partial_s[\mathcal N_H(U)-\mathcal N_H(V)](R)|\le C_0(7E^6D_1+42E^5E_1D)\)
+  for actual strong-\(\dot H^1\) velocities \(U_s,V_s\). The original singular-Cramer coefficient has an exact physical-coordinate moving-endpoint/moving-basis derivative and an explicit bound with physical \(L^{-1/2}\), but no hidden \((L/a)^{-1}\).
+- **Not proved:** the actual selected four-region PDE supplies the required strong-energy velocities \(E_1,D_1\), moving Kummer basis derivatives, real speed derivatives, and integrably improved complete residual. No newly passed CI, no Lean acceptance, no independent source-time envelope, no assumed Type-II rate. **Formal original count: 11/13.**
