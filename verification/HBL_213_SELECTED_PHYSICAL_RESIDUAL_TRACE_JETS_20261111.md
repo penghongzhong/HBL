@@ -159,3 +159,50 @@ source, followed by sufficient \(C^1_r\) and moving \(C^1_s\)
 control to define and estimate (JT4)–(JT7). Mere pointwise
 source-envelope bounds, weighted \(L^2\), and the a.e. equation do
 not justify replacing any of these by classical traces.
+
+
+## 6. Exact original **renormalized** residual: the dilation coefficient changes the third-jet formula
+
+The preceding \(\mathscr R_W=iW_s+\Delta_r W+\mathcal N_H(W)\) is the **unrenormalized physical** expression. For direct correspondence with the **literal** Lean definition in \`HBL/MonopoleComplexResidual.lean\`, the full time-slice residual must include
+\[
+ \boxed{
+ \mathscr R_{b,\omega}(W)
+ =iW_s+\Delta_r W+\mathcal N_H(W)
+ +ib\bigl(\tfrac12 W+rW_r\bigr)+\omega W .
+ } \tag{RJ1}
+\]
+Here \(b,\omega\) are real parameters constant in \(r\) at each fixed \(s\); for a moving trajectory write \(b=b(s)\), \(\omega=\omega(s)\). The exact source definition is \`complexRadialRenormalizedResidual\`, with \`complexRadialDilation v r = v(r)/2 + r*deriv v(r)\`. For \(C^1\) matching, the added terms have zero value jump; after one radial derivative, however, \(ib(rW_r)_r\) contributes the nonzero jump \(-ibL\,d_2\). Therefore the **actual formal-object trace identities** are
+\[
+ \boxed{\begin{aligned}
+ d_2&=-[\mathscr R_{b,\omega}(W)],\\
+ d_3&=-[\partial_r\mathscr R_{b,\omega}(W)]
+      +\bigl(iL'-2/L-ibL\bigr)d_2.
+ \end{aligned}} \tag{RJ2}
+\]
+Explicitly,
+\[
+ [\partial_r\mathscr R_{b,\omega}(W)]
+ =-d_3+\bigl(iL'-2/L-ibL\bigr)d_2.
+\]
+In particular the earlier unrenormalized formula (JT5) is **not** the correct formula if its residual symbol is silently replaced with the original Lean renormalized residual. The \(-ibL d_2\) term must remain in all moving Kummer/selected-speed matching estimates. The \(\omega\) term does not affect these jumps because \([W]=[W_r]=0\).
+
+If \(b=b(s)\), differentiating the total moving traces gives
+\[
+ \boxed{\begin{aligned}
+ d_2'&=-[\partial_s\mathscr R_{b,\omega}(W)]
+       -L'[\partial_r\mathscr R_{b,\omega}(W)],\\
+ d_3'&=-[\partial_s\partial_r\mathscr R_{b,\omega}(W)]
+       -L'[\partial_r^2\mathscr R_{b,\omega}(W)]\\
+ &\quad+\bigl(iL''+2L'/L^2-i(b'L+bL')\bigr)d_2
+ +\bigl(iL'-2/L-ibL\bigr)d_2'.
+ \end{aligned}} \tag{RJ3}
+\]
+The partial derivative \(\partial_s\mathscr R_{b,\omega}\) in (RJ3) is the derivative of the time-dependent **fully composed** renormalized residual (including \(b'(s),\omega'(s)\)), not merely a derivative holding modulation coefficients fixed. At fixed \(b,\omega\), specialize \(b'=0\). The formula is purely conditional on the displayed classical derivatives. A first radial derivative of the nonlinear convolution must still be justified for the actual packet.
+
+Both the original Hermite correction and the distributional measure cancellation survive unchanged: once \(U=W+P\) is \(C^3\), the full renormalized residual has
+\[
+ [\mathscr R_{b,\omega}(U)]
+ =[\partial_r\mathscr R_{b,\omega}(U)]=0.
+ \tag{RJ4}
+\]
+This does **not** control either residual norm, parameter Lipschitz, or positive time order. It identifies the correct extra modulation term in the actual source/jet producer.
