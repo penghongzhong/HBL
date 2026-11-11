@@ -12,13 +12,13 @@ permissions:
 jobs:
   strict-locked-gain:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     env:
       MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with: {fetch-depth: 0}
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: ~/.cache/hbl-pinned-compiler/lean-4.35.0-rc3-linux.tar.zst
           key: hbl-compiler-linux-4.35.0-rc3-1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997
@@ -32,7 +32,7 @@ jobs:
           echo "1526de16c0496f16b46a168f26c990af4e3796505273c3342fec17d72d763997  $archive" | sha256sum -c -
           tar --zstd -xf "$archive" -C "$RUNNER_TEMP/hbl-compiler"
           echo "$RUNNER_TEMP/hbl-compiler/lean-4.35.0-rc3-linux/bin" >> "$GITHUB_PATH"
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: .lake/packages
           key: hbl-pinned-mathlib-tactics-${{ runner.os }}-a98628e16c11f5167f16124105ddce53efa9bfe5-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}
@@ -48,55 +48,78 @@ jobs:
           PY
           bash -euo pipefail /tmp/hbl-dependencies.sh > evidence/dependencies.log 2>&1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a98628e16c11f5167f16124105ddce53efa9bfe5
-          lake exe cache get Mathlib.Tactic > evidence/tactic-cache.log 2>&1 || true
-          lean --version > evidence/compiler-version.txt
-          git rev-parse HEAD > evidence/commit.txt
-      - uses: actions/cache/restore@v4
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-commit.txt
+          lake exe cache get Mathlib.Tactic > evidence/tactic-cache.log 2>&1
+          lean --version | tee evidence/compiler-version.txt
+          grep -F '4.35.0-rc3' evidence/compiler-version.txt
+          git rev-parse HEAD | tee evidence/commit.txt
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: .lake/build
-          key: hbl-true-onephysical-kummer-quadratic-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+          key: hbl-spectral-four-piece-recheck-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
           restore-keys: |
+            hbl-spectral-four-piece-recheck-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-half-power-L2-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
+            hbl-half-power-build-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
             hbl-realized-atlas-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
-            hbl-kummer-atom-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-
-      - name: Strict locked physical gain audit
+      - name: Build current corrected dependency graph
         shell: bash
         run: |
           set -euo pipefail
-          target=HBL/TypeIIDynamicSelection/ActualHartreeSpectralFourPieceFinitePDETelescoping.lean
-          module=HBL.TypeIIDynamicSelection.ActualHartreeSpectralFourPieceFinitePDETelescoping
-          lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
-          lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
-          test ! -s evidence/strict.log
+          lake build HBL.TypeIIDynamicSelection.ActualHartreeSpectralFourPieceFinitePDETelescoping > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        if: always()
+        with:
+          path: .lake/build
+          key: hbl-spectral-four-piece-recheck-${{ runner.os }}-${{ hashFiles('lean-toolchain','lake-manifest.json','lakefile.lean') }}-${{ github.sha }}
+      - name: Strict source and exact per-theorem audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          for short in ActualHartreeMomentLockedKummerPullback ActualHartreeSpectralCorrectedFourPieceThreeC1 ActualHartreeSpectralFourPieceFinitePDETelescoping; do
+            target="HBL/TypeIIDynamicSelection/$short.lean"
+            lake env lean --trust=0 -DwarningAsError=true "$target" > "evidence/$short.strict.log" 2>&1 || { cat "evidence/$short.strict.log"; exit 1; }
+            test ! -s "evidence/$short.strict.log"
+            cp "$target" evidence/
+          done
           cat > HartreeSpectralFourPiecePDEAudit.lean <<'EOF'
           import HBL.TypeIIDynamicSelection.ActualHartreeSpectralFourPieceFinitePDETelescoping
           set_option pp.all true
           set_option pp.maxSteps 10000000
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet
+          #check @HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins
           #check @HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes
-          set_option pp.all false in
+          set_option pp.all false
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_matched_Kummer_pullback_classical
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_moment_locked_pullback_actual_inner_jet
+          #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_spectral_inner_four_piece_three_C1_joins
           #print axioms HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes
           EOF
-          lake env lean --trust=0 -DwarningAsError=true HartreeSpectralFourPiecePDEAudit.lean > evidence/audit.log 2>&1
+          lake env lean --trust=0 -DwarningAsError=true HartreeSpectralFourPiecePDEAudit.lean > evidence/audit.log 2>&1 || { cat evidence/audit.log; exit 1; }
+          cat evidence/audit.log
           python3 - <<'PY'
           from pathlib import Path
           import re
           data = Path('evidence/audit.log').read_text()
-          goal = 'HBL.TypeIIDynamicSelection.actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes'
-          assert goal in data, 'Missing exact target #check/#print axioms'
-          assert 'sorryAx' not in data and 'admit' not in data, 'Forbidden axiom in Lean audit'
-          reports = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', data)
-          assert len(reports) == 1, f'Expected exactly one theorem axiom report, found {len(reports)}'
-          actual = [s.strip() for s in reports[0].split(',') if s.strip()]
-          allowed = ('propext', 'Classical.choice', 'Quot.sound')
-          assert all(x in allowed or any(x.startswith(y + '.{') for y in allowed) for x in actual), actual
-          print('Strict --trust=0 original nonlinear PDE telescoping target; transitive axioms:', actual)
+          goals = ['actual_Hartree_matched_Kummer_pullback_classical', 'actual_Hartree_moment_locked_pullback_actual_inner_jet', 'actual_Hartree_spectral_inner_four_piece_three_C1_joins', 'actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes']
+          assert not any(s in data for s in ('sorryAx', 'Lean.ofReduceBool', 'admit', '⋯', '…')), 'Forbidden axiom or truncated type'
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for short in goals:
+              goal = 'HBL.TypeIIDynamicSelection.' + short
+              assert goal in data, goal
+              reports = re.findall(re.escape("'" + goal + "'") + r' depends on axioms:\s*\[([^\]]*)\]', data)
+              assert len(reports) == 1, (goal, reports)
+              actual = {re.sub(r'\.\{.*\}$', '', s.strip()) for s in reports[0].split(',') if s.strip()}
+              assert actual <= allowed, (goal, actual)
+              print('STRICT TARGET:', goal, 'AXIOMS:', sorted(actual))
+          print('SCOPE: same-anchor continuation, actual three C1 joins and exact nonlinear telescope; NOT a time-order gain. Original count remains 11/13.')
           PY
-          mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
-          cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
-          sha256sum "$target" > evidence/source-hashes.txt
           cp HartreeSpectralFourPiecePDEAudit.lean evidence/
-      - uses: actions/upload-artifact@v4
+          sha256sum evidence/*.lean > evidence/source-hashes.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: hbl-spectral-four-piece-nonlinear-PDE-telescope-evidence
           path: evidence
-          retention-days: 14
+          retention-days: 30
