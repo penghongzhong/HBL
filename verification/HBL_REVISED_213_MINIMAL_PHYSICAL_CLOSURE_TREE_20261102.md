@@ -713,7 +713,7 @@ At source SHA `75970cf2fa21ea8dfc09ebe051ce6cf5983c9ef3`, [CI 42952819526](https
 ## HBL_OVERLAP_VOLERRA_REMOTE_NO_GO_20261111: derived overlap source and genuine remote counterexample
 
 Original revised acceptance remains **11/13**. Mathematical derivations in
-\`verification/HBL_213_OVERLAP_VOLERRA_REMOTE_NO_GO_20261111.md\`
+\`verification/HBL_213_OVERLAP_VOLTERRA_REMOTE_NO_GO_20261111.md\`
 are **paper-only** and make no claim of Lean or original-environment acceptance.
 For the actual two overlapping C¹-matched inner/outer fields,
 \(E=\Delta_r(u_{\rm in}-u_{\rm out})\) and
@@ -745,3 +745,21 @@ Latest strict source runs already verified before this note:
 130305668963, each trust-zero, warningAsError, exact check + individual
 axiom audit only propext/Classical.choice/Quot.sound.
 **No new Lean code and no new strict CI are claimed for this note.**
+
+
+**HBL_SOURCE_FAITHFUL_OVERLAP_ABSORPTION_20261111 (paper-only).** On a genuine
+common physical overlap, defining the original frozen-operator defects
+\(T={\cal K}_au+\mathcal S_H\),
+\(O={\cal K}_av+\mathcal S_H+a^{-2}du_0\)
+gives the exact identity \(E=T-O+a^{-2}du_0-a^{-2}(irD'/2+c_0D)\).
+The verified zero-jet Volterra estimates on \(D\) imply
+\(A=\|E\|_{2,r^2}\le B+\Theta A\),
+\(B=\|T\|+\|O\|+a^{-2}|d|\|u_0\|\),
+\(\Theta=(4Lh+4|c_0|h^2)/a^2\).
+When \(\Theta\le1/2\), \(A\le2B\) and the actual smoothing correction
+has energy cost \(O(hB)\). **Unproved input:** the two same-source
+equations must both hold throughout the chosen overlap; moving the
+matching point to the left edge of the pre-existing backward annulus
+requires reconstructing the actual real two-speed selector/Green
+jets. No positive temporal order, new Lean theorem, or original
+environment acceptance is claimed. **11/13**.

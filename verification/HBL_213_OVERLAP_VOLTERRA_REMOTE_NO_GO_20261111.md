@@ -134,3 +134,41 @@ This counterexample proves that moving the strict slow-inner \(\ell^{1/2}\) boun
 ## Formal scope
 
 Previously strict original \(C^1\) and native \(C^2\) interface identities remain valid. Strict runs [42954150551](https://github.com/penghongzhong/HBL/actions/runs/42954150551) and [42954150615](https://github.com/penghongzhong/HBL/actions/runs/42954150615) prove, respectively, the exact slow-inner weighted squared integral and three original source pointwise declarations, under the pinned Lean/Mathlib toolchain, trust-zero and allowed three-axiom audits. **Neither (OS1)--(OS7) nor a full physical trajectory has been Lean-certified in this note.** The original finite PDE telescope is still an equality (strict [42927397872](https://github.com/penghongzhong/HBL/actions/runs/42927397872)), not a positive time-power estimate. Revised numbered acceptance remains **11/13**. 
+
+
+## 4. A source-faithful absorption estimate for the actual frozen Kummer mismatch
+
+This refines (OS1)--(OS3) without **assuming** the size of \(E\). On any overlap where both genuine inner and spectral outer fields solve their stated equations, let \(a>0\), \(c_0=\mathrm{frozenZeroCoeff}(\mu,\theta)\in\mathbb C\), and use the *actual* scaled Kummer operator from \`ActualHartreeMatchedKummerShellGain.lean\`:
+\[
+ {\cal K}_a f=\Delta_r f+a^{-2}\bigl(\tfrac{i r}{2}f'+c_0f\bigr).
+\]
+Let \(\mathcal S_H\) denote the **same** original quartic nonlocal Hartree source evaluated for the full physical field (not separately postulated inner and outer sources). Let \(u_0\) be the selected source-normalized Green field and \(d\) the spectral correction parameter, and define the actual equation defects on \(I\) by
+\[
+ T={\cal K}_a u+\mathcal S_H,\qquad
+ O={\cal K}_a v+\mathcal S_H+a^{-2}d\,u_0.
+\]
+The second defect vanishes if the original source-to-Kummer scaling identity and selected spectral outer equation hold **throughout this overlap**; this is not inferred from a single endpoint identity. Subtracting these two literal equations gives
+\[
+ E=\Delta_r(u-v)
+   =T-O+a^{-2}d\,u_0
+    -a^{-2}\bigl(\tfrac{i r}{2}D'+c_0D\bigr).
+\tag{OS8}
+\]
+Consequently, setting
+\[
+ B=\|T\|_{2,r^2}+\|O\|_{2,r^2}
+       +a^{-2}|d|\,\|u_0\|_{2,r^2},\quad
+ \Theta=\frac{4Lh+4|c_0|h^2}{a^2},
+\]
+the *proven* zero-jet Volterra bounds (OS1) imply
+\[
+ A\le B+\Theta A,\qquad
+ \boxed{\ \Theta\le\tfrac12\ \Longrightarrow\
+ A\le2B,\quad
+ \|\nabla P\|_2\le8\sqrt{4\pi}(1+C_1)hB.\ }\tag{OS9}
+\]
+No smallness of \(A\) and no extra third-jet hypothesis has been inserted: \(A\) is **absorbed** against the fixed operator's true first-/zero-order term. This is the exact place where the original source and its corrected spectral shift can be reused.
+
+For example, moving the normalized match to the left edge \(L_0=L_{\mathrm{slow}}/2\) of the *already estimated* backward overlap \([L_{\mathrm{slow}}/2,L_{\mathrm{slow}}]\), with \(h=L_0\), gives \(\Theta=(1+|c_0|)L_{\mathrm{slow}}^2/a^2\). This is small when the actual geometric and Kummer parameters satisfy the displayed explicit inequality; it is **not** claimed unconditionally. This re-anchoring requires reconstructing the genuine selected two-channel matching data at \(L_0\) and ensuring the outer Kummer source equation holds on the full chosen interval. Neither step follows from the existing \(C^1\) theorem at \(L_{\mathrm{slow}}\).
+
+The remaining true analytic inputs are now visible and non-circular: derive the two actual defects \(T,O\) on one common overlap from the existing original Hartree source/Green laws, control \(B\) with the *correct original outer annulus* (not with the restricted half-power bound), and control \(D_s\), moving endpoints, and the reselected real speeds. The identity (OS9) is a **paper-level reduction**, not a proof of these inputs or a new Lean acceptance.
