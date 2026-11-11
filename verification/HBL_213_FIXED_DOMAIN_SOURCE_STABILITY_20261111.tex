@@ -254,3 +254,113 @@ supplement are paper proofs and are not claimed as Lean-accepted.
 The separate exact nonlinear telescope has been revalidated by
 CI 42958494409, but an identity is not a positive-time gain.
 No original environment count changes in this supplement.
+
+
+% HBL_NONZERO_MATCHED_JET_HARMONIC_LIFT_20261111
+\medskip
+\noindent\textbf{Nonzero selected Cauchy jets: harmonic lift and genuine
+parameter-comparison correction (paper lemma).}
+The strict pointwise theorem
+\texttt{actual\_Kummer\_fixed\_domain\_source\_parameter\_stability}
+requires \emph{both} comparison fields to vanish with their first
+derivatives at the anchor. The original physical Fredholm inner and
+matched outer fields instead share the generally \emph{nonzero}
+Cauchy data $(U,V)$. Therefore that theorem cannot be applied directly
+to the two original fields merely because their \emph{difference}
+has a zero jet. The required correction has an exact radial harmonic
+form, so it creates no inverse-left-radius Laplacian source.
+
+Let $0<R$, $r_0,r\in[R,2R]$, $a>0$, $c\in\mathbb C$, and put
+\[
+ H_{U,V}(r)=U+r_0V(1-r_0/r),\qquad
+ {\cal K}_{a,c}=\Delta_r+a^{-2}(ir\partial_r/2+c).
+\]
+Then, by direct differentiation,
+\[
+ H_{U,V}(r_0)=U,\quad H'_{U,V}(r_0)=V,\quad
+ H'_{U,V}(r)=r_0^2V/r^2,\quad
+ \Delta_rH_{U,V}(r)=0,
+\]
+and on the entire annulus
+\begin{align*}
+ |H_{U,V}(r)|&\le |U|+2R|V|,\\
+ |H'_{U,V}(r)|&\le4|V|,\\
+ |{\cal K}_{a,c}H_{U,V}(r)|
+ &\le a^{-2}\bigl(|c|\,|U|+
+                       2R(1+|c|)|V|\bigr).
+\end{align*}
+In particular there is no $R^{-1}$ term in the source.
+
+For two \emph{original} comparison fields $u_j$ with
+$a_j>0$, $c_j\in\mathbb C$, $u_j(r_0)=U_j$ and
+$u'_j(r_0)=V_j$, define
+\[
+ \lambda_j=a_j^{-2},\quad
+ \Delta U=U_1-U_2,\quad\Delta V=V_1-V_2,\quad
+ Q=|\lambda_1-\lambda_2|+|\lambda_1c_1-\lambda_2c_2|.
+\]
+Assume the actual \emph{operator} sources on the common annulus obey
+\[
+ |{\cal K}_{a_2,c_2}u_2|\le A_2,\qquad
+ |{\cal K}_{a_1,c_1}u_1-
+       {\cal K}_{a_2,c_2}u_2|\le A_{12}.
+\]
+These are explicit source obligations, \emph{not} consequences of
+the identical-field residual telescope.  Set
+\begin{align*}
+ A_2^\sharp
+ &=A_2+\lambda_2
+       \bigl(|c_2||U_2|+2R(1+|c_2|)|V_2|\bigr),\\
+ A_\Delta
+ &=A_{12}
+   +Q\bigl(|U_2|+4R|V_2|+8R^2A_2^\sharp\bigr)\\
+ &\quad+\lambda_1
+   \bigl(|c_1||\Delta U|+
+                     2R(1+|c_1|)|\Delta V|\bigr).
+\end{align*}
+Under the same explicit small-annulus conditions
+$16R^2(1+|c_j|)\lambda_j\le1$ as the previously
+strict source-to-zero-jet bound, apply that bound first to
+$u_2-H_{U_2,V_2}$ and then to
+$D=u_1-u_2-H_{\Delta U,\Delta V}$.
+Indeed both have zero Cauchy jet; the exact coefficient-difference
+identity yields $|{\cal K}_{a_1,c_1}D|\le A_\Delta$.
+Hence
+\begin{equation}
+ \begin{split}
+ |\Delta_r(u_1-u_2)|&\le2A_\Delta,\\
+ |u_1(r)-u_2(r)|&\le
+                  |\Delta U|+2R|\Delta V|+8R^2A_\Delta,\\
+ |u'_1(r)-u'_2(r)|&\le4|\Delta V|+8RA_\Delta.
+ \end{split}
+ \label{eq:nonzero-jet-harmonic-lift-comparison}
+\end{equation}
+This is a valid nonzero-jet extension of the prior
+source-conditional pointwise estimate, with all selected-jet
+differences visible. For fixed $(U_j,V_j)$ the estimate is
+completely quantitative; in the genuine nonlinear Hartree
+comparison these jets and $A_{12}$ must instead be derived
+from the actual Fredholm producer and the unique selected speeds.
+
+If $r_0=r_0(s)$, differentiating the harmonic lift at fixed
+$r$ gives
+\[
+ \partial_s H_{U,V}(s,r)
+ =U_s+r_0V_s(1-r_0/r)+r_{0,s}V(1-2r_0/r),
+\quad
+ |\partial_sH_{U,V}|
+ \le |U_s|+2R|V_s|+3|r_{0,s}||V|.
+\]
+Thus this change of variables does not silently suppress the
+moving anchor or its time derivative.  The Cauchy-jet derivative,
+full nonlocal source, and selected-speed derivative still require
+their actual PDE estimates.  Nothing here asserts an
+$s^{-9/4}$ residual, parameter Lipschitz order, or a physical orbit.
+
+\noindent\emph{Verification boundary.}
+This harmonic-lift extension is a paper proof only, not a new
+\texttt{--trust=0} Lean acceptance.  The original strict theorem
+still has \emph{individual zero-jet} hypotheses; these must not
+be silently replaced by the mere matched-difference zero jet.
+Strict original revised count is still $11/13$.
+% END HBL_NONZERO_MATCHED_JET_HARMONIC_LIFT_20261111
