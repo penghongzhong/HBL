@@ -75,3 +75,28 @@ would be circular. The algebraic four-piece nonlinear PDE telescope
 (CI 42958494409) does not supply the missing decay.
 This paragraph is paper-only and does not change the retained
 original-environment acceptance \(11/13\).
+
+
+\medskip
+\noindent\textbf{A genuine regularity gate in the verified hypotheses.}
+The strictly accepted theorem
+\texttt{actual\_Hartree\_spectral\_inner\_four\_piece\_three\_C1\_joins}
+takes only weighted \(L^2\) data \(F_p,F_m\) and a continuous
+Kummer source \(F\); its conclusion is three first-derivative joins.
+The real-speed selection theorem adds continuity of \(F_p,F_m\),
+not differentiability of those physical sources or the real speeds
+in time. Hence the one-sided third traces needed in the displayed
+\(d_3\) formula are \emph{not} furnished by these exact Lean types.
+For example, fixing \(0<\beta<1\) and a positive \(L\), let
+\[
+ f(r)=|r-L|^\beta,\qquad
+ u'(r)=r^{-2}\int_L^r t^2f(t)\,dt.
+\]
+Then \(\Delta_r u=f\) has a \(C^2\) solution locally, but
+\(u'''=f'-2u''/r+2u'/r^2\) has no finite trace at \(L\).
+This is a counterexample to inferring a third jet from continuity
+alone, not to regularity of a separately constructed physical
+Hartree orbit. One must derive the required spatial and temporal
+regularity \emph{from that actual orbit}, or replace the C³ repair
+by a valid weaker-interface scheme before claiming the full
+strong-residual theorem. The count remains \(11/13\).
