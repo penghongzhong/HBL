@@ -10572,4 +10572,58 @@ No original theorem environment is thereby accepted.
 
 % END HBL_MOVING_BUBBLE_ACTUAL_HARTREE_MASS_PHASE_FLUX_20261110
 
+
+% BEGIN HBL_LOCAL_MASS_GAUGE_RESONANCE_GATE_20261110
+\medskip
+\noindent\textbf{Mass-gauge reduction of the true Hartree phase resonance.}
+For the same smooth original nonlocal Hartree orbit and moving
+renormalized interface as above, set
+\[
+ Q=\int_0^L y^2(p^2+q^2)\,dy,\quad
+ C=\int_0^L y^2W^3p\,dy,\quad
+ \mathscr S=\int_0^L y^2W
+ [p_s+(\mathcal V_{\rm H}[U]-3W^4)q-\gamma_sq]\,dy
+\]
+and let $\mathscr B$ denote the explicit three $C^1$ boundary
+contributions displayed in the preceding mass-flux identity.
+The specific exact bubble relation $\Lambda W=-W/2+W^3$ yields
+\[
+ \int_0^L y^2[(\Lambda W)p-(p^2+q^2)]\,dy
+   =-\tfrac12\mathscr M+C-\tfrac34 Q,
+ \qquad
+ \boxed{\ 
+ \partial_s(\lambda^{1/2}\mathscr M)
+  =\lambda^{1/2}(\mathscr S-\mathscr B+bC-\tfrac34 bQ).
+ \ }
+\]
+In particular, $|C|\lesssim\|\nabla p\|_{L^2(\R^3)}$
+uniformly in $L$, but neither the quadratic $Q$ nor the
+full differentiated Hartree source is automatically small.
+For a \emph{fixed physical} matching radius $R$ one has the
+exact scale derivative
+\[
+ \partial_{\log\lambda}M_R
+  =\lambda^2\left[
+    \arctan(R/\lambda)-\tfrac{R}{2\lambda}
+      -\tfrac{R/\lambda}{2(1+(R/\lambda)^2)}\right]
+  \le-\tfrac14\lambda R
+  \quad (R/\lambda\ge2\pi).
+\]
+If a smooth root $M_R=0$ exists, a local scale can thus
+be selected by the implicit-function theorem, and its
+actual PDE mass-current equation is
+$\dot\lambda/\lambda=R^2\Im(\bar u u_r)(t,R)/
+[\partial_{\log\lambda}M_R]$.
+A scale-dependent moving $R$ requires a different derivative.
+Such a gauge has \emph{not} been proved compatible with the
+original unique real two-channel Fredholm selector.
+Moreover an $O(\varepsilon)$-energy radial test field
+$p=\varepsilon W$ on $[0,L]$ retains a scaling term of
+size $\varepsilon(1+\varepsilon)|I(L)|\gtrsim\varepsilon L$,
+so energy alone cannot substitute for the missing
+same-orbit mass and boundary control.
+This is a paper-only exact reduction, not a new Lean
+verification or original-environment acceptance; $11/13$ remains.
+% END HBL_LOCAL_MASS_GAUGE_RESONANCE_GATE_20261110
+
 \end{document}
