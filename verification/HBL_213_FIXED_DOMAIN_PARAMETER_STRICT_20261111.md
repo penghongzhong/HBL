@@ -133,3 +133,50 @@ On `[R,2R]` with `r0 in [R,2R]` its Kummer source is bounded by
 **without any inverse left-radius Laplacian loss**. Applying the previously accepted zero-jet source estimate to the two lifted differences yields explicit parameter comparison estimates involving the genuine jet differences `Delta U`, `Delta V` and the full actual operator source difference, rather than assuming each physical field has zero jet. It also includes the exact derivative of this lift when the physical anchor moves.
 
 **Acceptance:** the harmonic-lift extension has not been Lean-compiled or individually audited; no new Lean theorem or original environment is counted. The already accepted theorem remains correct with its *actual stronger hypotheses*. For §2.13 the remaining proof obligation is to control the **real** Fredholm jets and their time/parameter differences, the shared quartic nonlocal Hartree source, and the nonzero-jet lift in the original strong residual topology, thereby establishing a positive time order. The original revised ledger remains **11/13**.
+
+
+## 2026-11-11: same-operator matched-nonzero-jet shortcut STRICTLY ACCEPTED
+
+The physical Fredholm inner and spectral-corrected outer fields have a common
+**generally nonzero** Cauchy jet. The earlier two-parameter source theorem
+requires both fields individually to have zero jet and is not directly
+applicable. But for **identical frozen operator parameters at the same time**
+the difference has the required zero jet without subtracting an auxiliary
+harmonic lift. That shortcut has now been written as an independent theorem
+and strictly replayed:
+
+- Lean name: \`HBL.TypeIIDynamicSelection.actual_Kummer_same_parameter_nonzero_matched_jet_source_gain\`.
+- Exact source: \`HBL/TypeIIDynamicSelection/ActualHartreeKummerFixedDomainParameterStability.lean\`.
+- Source commit: \`49aae3bfdecb60ebb06b0d4f64c003b8fe74beb4\`.
+- Workflow+audit commit: \`e01aaa99959a89cdbeb308a08028ecee579cb9e0\`.
+- Original strict CI: [42972001935](https://github.com/penghongzhong/HBL/actions/runs/42972001935), **Success**; original job **130362390841**, full decoded job log read.
+- Audit artifact: **13833806570**, \`hbl-fixed-domain-kummer-parameter-strict-evidence\`.
+- Compiler: Lean **4.35.0-rc3**, Mathlib **a98628e16c11f5167f16124105ddce53efa9bfe5**; \`lake env lean --trust=0 -DwarningAsError=true\`, exact untruncated \`#check\`, and \`#print axioms\`. Strict log empty and the complete original job succeeded.
+- The new exact declaration's axioms are **only** \`propext\`, \`Classical.choice\`, \`Quot.sound\`, with no \`sorryAx\`, \`admit\`, or fresh axiom. The two previously audited declarations were re-checked under the same strict workflow.
+
+**Exact theorem content.** Let \(u,v:\mathbb R\to\mathbb C\) be classical on
+the common open annulus, \(r_0\in[R,2R]\), \(a,R>0\), \(A\ge0\), with
+\[
+16R^2\frac{1+|\mathrm{frozenZeroCoeff}(\mu,\theta)|}{a^2}\le1,\qquad
+u(r_0)=v(r_0),\quad u'(r_0)=v'(r_0).
+\]
+If \(\lvert K_{\mu,\theta,a}u-K_{\mu,\theta,a}v\rvert\le A\) on
+\([R,2R]\), then for \(d=u-v\) and all \(r\in[R,2R]\),
+\[
+ |\Delta_rd|\le2A,\quad |d|\le8R^2A,\quad |d'|\le8RA,\quad
+ |\Delta_r(\chi_Rd)-\chi_R\Delta_rd|\le CA
+\]
+for a universal \(C>0\). This **removes the individual-zero-jet hypothesis
+on the original physical fields** in the same-time/same-operator comparison;
+it does not assume any standalone value or slope envelope.
+
+**Unresolved:** different frozen parameters still require the nonzero-jet
+harmonic lift or an equivalent parameter comparison, whose paper proof has
+not passed Lean. More importantly, \(A\) is the full actual physical
+source-difference norm and no time decay, parameter Lipschitz bound,
+nonlocal feedback bound in the original weighted topology, finite iteration,
+or dynamic Type-II trajectory is produced by this lemma.
+**Original revised acceptance stays 11/13.** Main paper supplement
+\`verification/HBL_213_FIXED_DOMAIN_SOURCE_STABILITY_20261111.tex\`
+is updated and included from
+\`verification/HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`.
