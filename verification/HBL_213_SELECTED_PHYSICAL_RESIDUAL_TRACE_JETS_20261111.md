@@ -135,3 +135,27 @@ pointwise jets entirely. Until one of these is done, (JT5)–(JT10)
 are conditional classical identities, not an application to every
 packet admitted by the current C¹ Lean theorem. **No original
 environment is promoted.**
+
+
+### Preceding C¹ source-continuity import is also nontrivial
+
+The exact source theorem
+\`actual_Hartree_origin_outgoing_gain_on_annulus\`
+([source](https://github.com/penghongzhong/HBL/blob/hbl-213-spectral-c1-trace-20261109/HBL/TypeIIDynamicSelection/ActualHartreeOriginOutgoingGain.lean))
+takes \`Measurable z\` with the original radiation pointwise bounds, produces
+\`IntervalIntegrable F\` and a **volume-a.e.** forced ODE identity.
+The selected-speed theorem uses this same measurable-source input.
+The three-C¹ classical theorem instead needs \`ContinuousAt F r\` on
+the open positive interval. An a.e. ODE statement does not itself give
+that classical continuity premise, let alone the radial \(C^1\)
+source regularity needed for a third spatial jet. It is possible
+that additional regularity of the *actual selected smooth physical
+orbit* supplies both, but that implication must be stated and proved,
+not obtained by combining the existing theorem types without a bridge.
+
+**Minimal exact import gate:** derive \(\mathrm{ContinuousAt}\,F\)
+on the physical overlap from the genuinely chosen radial Hartree
+source, followed by sufficient \(C^1_r\) and moving \(C^1_s\)
+control to define and estimate (JT4)–(JT7). Mere pointwise
+source-envelope bounds, weighted \(L^2\), and the a.e. equation do
+not justify replacing any of these by classical traces.
