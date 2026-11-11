@@ -1,0 +1,30 @@
+name: HBL 213 exact Lean source snapshot for dependency reuse
+on:
+  push:
+    branches: [hbl-213-spectral-c1-trace-20261109]
+    paths: ['.github/workflows/hbl-213-lean-source-snapshot.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Archive exact tracked Lean sources only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/commit.txt
+          git ls-files -z -- '*.lean' lean-toolchain lake-manifest.json > /tmp/hbl-source-list
+          tar --null -T /tmp/hbl-source-list -czf evidence/hbl-lean-source.tgz
+          git ls-files -- '*.lean' lean-toolchain lake-manifest.json > evidence/source-index.txt
+          sha256sum evidence/hbl-lean-source.tgz > evidence/archive-sha256.txt
+          printf '%s\n' 'SOURCE SNAPSHOT ONLY: this job is not Lean compilation or original theorem acceptance. Original count remains 11/13.' > evidence/scope.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hbl-213-exact-lean-source-snapshot
+          path: evidence
+          retention-days: 30
