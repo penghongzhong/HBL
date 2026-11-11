@@ -3793,3 +3793,32 @@ removes the entire bare \(-b\int_0^L y^2W\Lambda W\) term in the exact combined 
 
 **Exact current-source telescope re-run:** original failed [42530158681](https://github.com/penghongzhong/HBL/actions/runs/42530158681) was superseded by strictly successful [42536552509](https://github.com/penghongzhong/HBL/actions/runs/42536552509), job 128902012127, which checked the exact named theorem actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes under --trust=0/warningAsError and only the three permitted axioms. Re-audit source commit dc186fd04f07dd6a0c8dc82e2fbf99bc91ea040d uses only additive telescope cancellation (abel, not an illegitimate linear Hartree expansion), and triggered [new strict CI 42927397872](https://github.com/penghongzhong/HBL/actions/runs/42927397872). The new [strict CI 42927397872](https://github.com/penghongzhong/HBL/actions/runs/42927397872) is **Success** (completed 11 November 2026 00:11 UTC), original job 130217241868, original evidence artifact 13816030889. Its raw log confirms pinned Lean, --trust=0, -DwarningAsError=true, the exact target #check and #print axioms, with transitive axioms **only propext, Classical.choice, Quot.sound**. The theorem is still just a nonlinear residual **telescoping identity**, not a positive time-power estimate, physical orbit or original-environment acceptance.
 <!-- END HBL_ACTUAL_HARTREE_MOVING_BUBBLE_MASS_PHASE_FLUX_20261110 -->
+
+
+## HBL_INTERFACE_REGULARITY_GATE_20261111: actual source regularity gate and finite third-jet repair
+
+Original revised acceptance remains **11/13**. The new paper proof in
+`verification/HBL_213_INTERFACE_REGULARITY_GATE_20261111.md` shows that a
+nonzero second-jet jump of a classical C1 matched physical Hartree field
+makes its proposed Hessian--Morawetz-dual source norm infinite; temporal
+smallness of a nonzero jump cannot cure this. C2 matching alone also does
+not imply moving-interface H1-source Lipschitz continuity (an explicit
+square-root translation counterexample is given). These analytic results
+are paper proofs, not Lean certificates or a no-go for the main theorem.
+
+Strict auxiliary CI [42944437228](https://github.com/penghongzhong/HBL/actions/runs/42944437228)
+at source commit `a7403cf76be23c1654c830913c4614289785405b` checks ONLY the two precise declarations
+`actual_Hartree_physical_C3_repair_endpoint_jets` and
+`actual_Hartree_C3_repair_factored_kernels` in
+`HBL/TypeIIDynamicSelection/ActualHartreeInterfaceC3RepairPolynomial.lean`.
+The workflow requires the pinned Lean 4.35.0-rc3 and Mathlib
+`a98628e16c11f5167f16124105ddce53efa9bfe5`, trust=0, warningAsError,
+complete #check output and per-declaration allowed-axiom audit. Only
+propext, Classical.choice and Quot.sound are permitted. The successful
+Lean audit is restricted to the physical-width polynomial endpoint jets
+and the factored kernels. It does NOT prove the global repaired Hartree
+source, actual jet decay, parameter Lipschitz bounds, original same-speed
+compatibility after the nonlocal feedback, or a physical blowup orbit.
+
+The original numbered environments remain **11/13**. No new original
+environment is accepted by the polynomial construction.

@@ -651,3 +651,32 @@ Unlike a fixed-physical-radius mass normalization, the *shrinking* interface \(R
 **Further exact conditional step (same gate):** On the stated near-bubble class, the complete moving scale derivative is two-sided:
 \(-3R/5\le \partial_\sigma\mathcal M_u\le-R/6\), and the scalar root has uniformly bounded logarithmic normalized Jacobian between \(-3/5\) and \(-1/6\). If the *same field* is additionally a regular solution of the true Hartree equation, radial mass conservation gives the exact **PDE-current-selected** scale speed
 \(\dot\sigma=R(\sigma)^2\Im(\bar u u_r)(t,R(\sigma))/\partial_\sigma\mathcal M_{u(t)}(\sigma)\), hence \(5R|j|/3\le|\dot\sigma|\le6R|j|\) and opposite signs of speed/outward current. This is an exact conditional local kinematic law, not the dynamically established Type-II rate. Neither actual original four-region weighted remainder nor a bound for the current or compatible two-channel Cramer speed has been proved; **11/13** unchanged. See the appended derivation in [shrinking-gauge note](HBL_213_SHRINKING_GAUGE_ROOT_JACOBIAN_20261110.md).
+
+
+## HBL_INTERFACE_REGULARITY_GATE_20261111: actual source regularity gate and finite third-jet repair
+
+Original revised acceptance remains **11/13**. The new paper proof in
+`verification/HBL_213_INTERFACE_REGULARITY_GATE_20261111.md` shows that a
+nonzero second-jet jump of a classical C1 matched physical Hartree field
+makes its proposed Hessian--Morawetz-dual source norm infinite; temporal
+smallness of a nonzero jump cannot cure this. C2 matching alone also does
+not imply moving-interface H1-source Lipschitz continuity (an explicit
+square-root translation counterexample is given). These analytic results
+are paper proofs, not Lean certificates or a no-go for the main theorem.
+
+Strict auxiliary CI [42944437228](https://github.com/penghongzhong/HBL/actions/runs/42944437228)
+at source commit `a7403cf76be23c1654c830913c4614289785405b` checks ONLY the two precise declarations
+`actual_Hartree_physical_C3_repair_endpoint_jets` and
+`actual_Hartree_C3_repair_factored_kernels` in
+`HBL/TypeIIDynamicSelection/ActualHartreeInterfaceC3RepairPolynomial.lean`.
+The workflow requires the pinned Lean 4.35.0-rc3 and Mathlib
+`a98628e16c11f5167f16124105ddce53efa9bfe5`, trust=0, warningAsError,
+complete #check output and per-declaration allowed-axiom audit. Only
+propext, Classical.choice and Quot.sound are permitted. The successful
+Lean audit is restricted to the physical-width polynomial endpoint jets
+and the factored kernels. It does NOT prove the global repaired Hartree
+source, actual jet decay, parameter Lipschitz bounds, original same-speed
+compatibility after the nonlocal feedback, or a physical blowup orbit.
+
+The original numbered environments remain **11/13**. No new original
+environment is accepted by the polynomial construction.
