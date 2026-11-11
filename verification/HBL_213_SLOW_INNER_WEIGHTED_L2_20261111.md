@@ -49,3 +49,24 @@ The stronger square-root source bound is valid on the **actual slow-inner domain
 At source SHA `75970cf2fa21ea8dfc09ebe051ce6cf5983c9ef3`, [CI 42952819526](https://github.com/penghongzhong/HBL/actions/runs/42952819526), original job `130303403837`, evidence artifact `13826515899` (SHA256 `01e20b4ada001ca304d1a455f18318f4ef9da20dca5db76e1975e6136dea3b55`) have **strict Success**. GitHub's raw log shows the pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, `--trust=0`, `-DwarningAsError=true`, exact `#check` of `HBL.TypeIIDynamicSelection.actual_Hartree_slow_inner_half_power_weighted_L2` and its individual `#print axioms`, with precisely `[Classical.choice, Quot.sound, propext]`; no sorry/admit or extra axioms. The upstream physical source producer was actually rebuilt as a dependency at the repaired SHA. A separate workflow still audits the precise three upstream declarations; its earlier original run 42951761187 failed only on an extra `ring` command after a completed `field_simp`, now fixed.
 
 **This proves the spatial weighted-square-integral estimate only.** It does not upgrade the entire selected Cramer annulus, full moving PDE residual, temporal gain, finite profile, or the final rate. Original revised **11/13**.
+
+
+## HBL_HALF_POWER_INNER_NORM_BRIDGE_20261111: the genuine two real Fredholm inputs
+
+For the *exact same* radially conjugated physical source \(G\) above (rather than an independently introduced pair), define \(g_+=\Re G\) and \(g_-=\Im G\). The existing \`actual_Hartree_conjugated_slow_inner_unique_solve\` theorem uses precisely these two functions. Positivity of the Japanese weight and \(|G|^2=g_+^2+g_-^2\) yield, with the actual \`innerWeightedNorm\` definition,
+\[
+\|g_+\|_{2,7/4}^2+\|g_-\|_{2,7/4}^2
+=\|\langle r\rangle^{7/4}G\|_2^2
+\le \frac23 K^2\ell .
+\]
+By Cauchy–Schwarz,
+\[
+\boxed{N_{\rm H}:=\|g_+\|_{2,7/4}+\|g_-\|_{2,7/4}
+\le\frac{2}{\sqrt3}K\ell^{1/2}.}
+\]
+On the actual backward overlap the previously derived source-faithful flat-cutoff estimate has an inner Fredholm-source term \(L^{-5/2}N\). **Only for this actual localized Hartree contribution**,
+\[
+L^{-5/2}N_{\rm H}\le\frac2{\sqrt3}K\ell^{21/32},
+\qquad L=\ell^{-1/16}.
+\]
+This is an explicit bridge to the original two real half-line source norms and eliminates any invented second source envelope, but is *paper-only* (no additional strict Lean check). The total \(N\) in the full two-channel selected-speed/residual field also includes genuine modulation, spectral and off-slow-inner contributions, which are NOT covered by this inequality. No selected-speed or dynamical time-gain theorem follows.
