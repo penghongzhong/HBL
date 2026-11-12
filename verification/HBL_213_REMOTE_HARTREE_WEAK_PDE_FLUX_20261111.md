@@ -87,10 +87,10 @@ Since \(|\Phi|\le B_U^3\) and \(|\nabla\Phi|\le 3B_U^2(|\nabla V|+|\nabla Z|)\),
 &+4W_0B_U^3\|\mathcal N_H(Z)\|_{L^1(\Omega_L)}\\
 &+4|b|W_0B_U^3A_L^{1/2}
      \left(\frac{e_0}{2}+\frac L3e_1\right)\\
-&+4W_0(B_U^3+B_V^3)A_L^{1/2}v_s.
+&+12W_0B_U^2e_0v_s.
 \end{aligned} \tag{WF5}
 \]
-Also \(J_\rho\le4B_U^3 A_L^{1/2}e_0\). By the true 3D Hardy–Littlewood–Sobolev inequality, not a local-NLS replacement,
+Also \(J_\rho\le4B_U^3 A_L^{1/2}e_0\). The final term in WF5 uses the **cubic difference**, \(|\Phi-|V|^2\overline V|\le3B_U^2|Z|\), so it vanishes when the physical radiation vanishes; a crude sum of the two cubic magnitudes would lose this cancellation. By the true 3D Hardy–Littlewood–Sobolev inequality, not a local-NLS replacement,
 \[
  \|\mathcal N_H(Z)\|_{L^1(\Omega_L)}
  \le |\kappa_H|C_{\rm HLS}A_L^{1/6}\|Z\|_{L^6(\mathbb R^3)}^7. \tag{WF6}
