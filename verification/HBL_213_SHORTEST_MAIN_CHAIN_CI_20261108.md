@@ -4263,3 +4263,18 @@ recursion and dynamically inferred Type-II rate remain open.
 
 
 **Supplement SZ11–SZ13:** The *literal* frozen real two-speed affine compatibility \(H+p_b C_b+p_\omega C_\omega=0\) yields, **only assuming a differentiable same-orbit parameter path** and nonzero \(\mathcal D=\operatorname{Im}(\overline{C_b}C_\omega)\), exact \(p_b'=-\operatorname{Im}(\overline{C_\omega}G)/\mathcal D\), \(p_\omega'=\operatorname{Im}(\overline{C_b}G)/\mathcal D\), \(G=-H'-p_b C_b'-p_\omega C_\omega'\). This reduces the derivative of the unique real selector to the actual obstruction and both physical response-column derivatives, but those are not yet controlled; the separate complex spectral \`delta\` is **not** yet linked differentiably to the selected real pair. Synchronized manuscript supplement in \`HBL_213_SPECTRAL_ZERO_LEFT_MOVING_SLOPE_20261111.tex\`, already imported in main §2.13. **Paper-only; 11/13 unchanged.**
+
+
+### 11 November 2026 — origin-conjugated moving spectral Green, zero-left temporal slope (paper-only)
+
+**New same-operator analytic bridge:** [\`HBL_213_ORIGIN_CONJUGATED_MOVING_SPECTRAL_TIME_20261111.md\`](HBL_213_ORIGIN_CONJUGATED_MOVING_SPECTRAL_TIME_20261111.md). The literal frozen Hartree Kummer coefficient satisfies
+\(r\mathcal L_{\mu,\theta}u=X_{rr}+(ir/2)X_r+[\theta-i(\mu+1/4)]X\), \(X=ru\).
+The spectral correction source is *exactly* \(\delta X_0\); its origin-conjugated zero-left Cauchy response satisfies
+\(\sup(|X_1|+|X_{1,r}|)\le e^{(1+B_*/2+|\beta|)B_*}|\delta|H(B-a)\),
+with \(H=\sup|r u_0|\), no negative \(a\)-power and no abstract independent force bound.
+Moving differentiation gives the exact **nonzero** left temporal derivative
+\(X_{1,sr}(s,a)=-a'\delta X_0(s,a)\), and source
+\(\delta'X_0+\delta X_{0,s}-\beta'X_1\).
+The explicit Gronwall estimate RO8 and moving upper jet RO11 avoid differentiating special-function modes, while keeping all genuinely missing physical producers visible: \(F_{0,s}\), spectral selection \(\delta'\), \(\mu',\theta'\), matched jet \(U',D'\), and both moving endpoints. The original \(X_0\) derivative equation RO9–RO10 reduces the remaining time producer to *actual* physical source derivatives with no hidden left-radius loss.
+
+**Scope:** proved on paper with stated classical/swept-domain regularity; no Lean CI for this new derivation. It does not bound the full untruncated Hartree four-region nonlinear commutator, prove time-positive strong residual, establish selector/parameter Lipschitz or finite recursion, or infer the Type-II rate. Historical failures of the old 42530158681 telescope were repaired by strict Success 43124289518 / original job 130872307063 (four exact declarations, Lean 4.35.0-rc3, pinned Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, trust=0, warningAsError; allowed axioms only). **Original revised count remains 11/13, 84.62%.**
