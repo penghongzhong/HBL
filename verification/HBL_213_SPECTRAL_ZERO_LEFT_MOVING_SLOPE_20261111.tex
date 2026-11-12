@@ -1,0 +1,100 @@
+\subsection*{The nonzero time slope of a zero-left spectral Kummer correction}
+
+\noindent
+The frozen spectral repair preserves both left \emph{spatial} Cauchy
+coordinates. Differentiating those identities at a moving left
+endpoint does not preserve the zero \emph{temporal} Cauchy slope.
+This distinction supplies the precise missing time interface for the
+strictly verified weighted Volterra estimates.
+
+Let \(\mathcal L_s=\partial_{rr}+p(s,r)\partial_r+q(s,r)\),
+let \(\rho=\rho(s)>0\), and assume sufficient classical mixed
+regularity on a swept positive-radius interval. For the same actual
+source \(F\) and spectral displacement \(\delta\), set
+\[
+\mathcal L_su_0=F,\quad
+u_0(s,\rho)=U,\quad (u_0)_r(s,\rho)=D,
+\quad
+\mathcal L_su_1=\delta u_0,\quad
+u_1(s,\rho)=(u_1)_r(s,\rho)=0,\quad w=u_0-u_1.
+\]
+These are the defining differential equations of the original
+Cramer-matched spectral correction, not independently introduced
+Green fields. They imply
+\[
+\mathcal L_sw=F-\delta u_0,\qquad
+(\mathcal L_s+\delta)w=F-\delta u_1.
+\]
+Differentiating \emph{along} \(r=\rho(s)\), followed by use of
+the original equation at the endpoint, gives
+\begin{align*}
+(u_1)_s(s,\rho)&=0,&
+(u_1)_{sr}(s,\rho)&=-\rho'\delta U,\\
+w_s(s,\rho)&=U'-\rho'D,&
+w_{sr}(s,\rho)&=
+ D'-\rho'\{F(s,\rho)-p(s,\rho)D-(q(s,\rho)+\delta)U\}.
+\end{align*}
+In particular the original regularized derivative jet obeys
+\[
+\rho^2(u_1)_{sr}(s,\rho)+\rho(u_1)_s(s,\rho)
+=-\rho'\rho^2\delta U .
+\]
+For the corrected physical field the full identity is
+\[
+\begin{split}
+\rho^2w_{sr}(s,\rho)+\rho w_s(s,\rho)
+={}&\rho^2D'+\rho U'\\
+&-\rho'
+\{\rho^2F-\rho^2pD-\rho^2(q+\delta)U+\rho D\}_{r=\rho}.
+\end{split}
+\]
+For the actual moving regularized Kummer operator
+\(p=2/r+i\alpha(s)r/2\), the braces simplify to
+\(\rho^2F-(\rho+i\alpha\rho^3/2)D-\rho^2(q+\delta)U\).
+No explicit inverse power of the shrinking left radius is introduced.
+
+At a \emph{fixed} Kummer radius, direct operator
+differentiation, without independently differentiating the fundamental
+basis, gives the triangular system
+\[
+\begin{aligned}
+\mathcal L_s(u_0)_s
+ &=F_s-p_s(u_0)_r-q_su_0,\\
+\mathcal L_s(u_1)_s
+ &=\delta'u_0+\delta(u_0)_s
+ -p_s(u_1)_r-q_su_1.
+\end{aligned}
+\]
+Let \(h_s\) be the original homogeneous Kummer initial-value mode
+with \(h_s(\rho)=0\), \(\partial_rh_s(\rho)=1\).
+Then \((u_1)_s+\rho'\delta U h_s\) has zero left value
+\emph{and} slope, and solves the second inhomogeneous equation above.
+Only this modified response is eligible for direct application of
+the existing zero-left weighted Volterra estimate. The homogeneous
+mode's norm, the actual source derivative, and the selected
+spectral/compatibility derivative remain to be established.
+
+\noindent\textbf{Necessity of a genuine temporal producer.}
+For a fixed nonzero original Green response
+\(h=\mathcal G_\rho[u_0]\), choose
+\(\delta_N(s)=\varepsilon\sin(Ns)\).
+Then \(\sup_s\|\delta_N(s)h\|_X
+\le\varepsilon\|h\|_X\), with identical
+zero-left \(C^1\) spatial jets, while
+\(\|\partial_s(\delta_Nh)(0)\|_X
+=\varepsilon N\|h\|_X\).
+Thus the existing frozen-time theorem types alone cannot imply
+a time-positive residual. The \texttt{delta : Real -> Complex}
+field of the actual Lean moving packet has no derivative constraint.
+This example excludes an invalid \emph{logical inference}; it does
+not exclude a physically selected Hartree trajectory.
+
+\noindent\textbf{Verification boundary.}
+This is a paper calculation only and has no new Lean acceptance.
+CI 43124289518 strictly verifies the original four-region
+nonlinear PDE telescoping and three spatial \(C^1\) joins, not
+this time-differentiated Green system. The same-orbit
+\(F_s,\delta',\rho',p_s,q_s\) estimates, full untruncated Hartree
+source, parameter Lipschitz, real finite recursion and
+PDE-derived Type--II rate remain open. The retained original
+environment count is \(11/13\).
