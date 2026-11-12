@@ -1,0 +1,73 @@
+
+% BEGIN HBL_213_SHRINKING_FAR_TRUE_HARTREE_RIESZ_SPLICE_20261112
+\par\medskip
+\noindent\textbf{A shrinking far transport splice for the actual mixed Riesz channel.}
+This is a constructive principal-operator estimate, not a new proof
+environment or the missing full four-region residual theorem.
+For radial $z\in C_c^\infty(\mathbb R^3;\mathbb C)$ put
+\[
+ F_z=|x|^{-2}*(|x|^{-1}\operatorname{Re}z\,|z|^2),
+ \qquad \alpha=4\pi\operatorname{Re}z(0)|z(0)|^2.
+\]
+The exact angular integration
+\[
+ F_z(r)=\frac{2\pi}{r}\int_0^\infty
+  \rho\bigl(\rho^{-1}\operatorname{Re}z(\rho)|z(\rho)|^2\bigr)
+  \log\frac{r+\rho}{|r-\rho|}\,d\rho
+\]
+gives $F_z(r)=\alpha\log(1/r)+O(1)$ and $rF_z'(r)=O(1)$
+as $r\downarrow0$, whereas $F_z,rF_z'=O(r^{-2})$ at infinity.
+For real $\theta$, $\mu>1/4$, let
+\[
+ \beta=\theta+i(1/4-\mu),\quad p=2i\beta,\quad
+ A_{\mu,\theta}=\frac i2r\partial_r+\beta,\quad
+ G(r)=2i\int_r^\infty(r/\rho)^pF_z(\rho)\,\frac{d\rho}{\rho}.
+\]
+Then $A_{\mu,\theta}G=F_z$ and the radial Laplacian is
+controlled by the source's \emph{first} radial derivative:
+\[
+ rG'=pG-2iF_z,\qquad
+ r^2\Delta_{\rm rad}G=(p+1)(pG-2iF_z)-2irF_z'.
+\]
+Consequently $G= (\alpha/\beta)\log(1/r)+O(1)$,
+$rG'=O(1)$ and $r^2\Delta_{\rm rad}G=O(1)$ near zero,
+with all these terms $O(r^{-2})$ at infinity.
+For a fixed smooth cutoff $\chi$ which is zero on $[0,1]$ and
+one on $[2,\infty)$, write
+$G_\epsilon(r)=\chi(r/\epsilon)G(r)$.
+In $\mathscr H=L^2((0,\infty),4\pi r^2\,dr)$,
+\[
+ \begin{aligned}
+ &(A_{\mu,\theta}+\ell^2\Delta_{\rm rad})G_\epsilon-F_z\\
+ &\quad=-(1-\chi_\epsilon)F_z
+    +\frac{ir}{2}\chi_\epsilon'G+
+      \ell^2\chi_\epsilon\Delta_{\rm rad}G+
+      \ell^2\bigl(2\chi_\epsilon'G'
+       +(\chi_\epsilon''+2r^{-1}\chi_\epsilon')G\bigr).
+ \end{aligned}
+\]
+The radial $r^2dr$ volume yields, for $0<\gamma<1$,
+$\epsilon=\ell^\gamma$,
+\[
+ \boxed{
+ \left\|(A_{\mu,\theta}+\ell^2\Delta_{\rm rad})
+  G_{\ell^\gamma}-F_z\right\|_{\mathscr H}
+ \le C_\gamma(1+|\log\ell|)
+   \bigl(\ell^{3\gamma/2}+\ell^{2-\gamma/2}\bigr).
+ }
+\]
+For $\gamma=2/3$ this is $O(\ell(1+|\log\ell|))$.
+The original normalized Kummer scaling
+$\mathsf U_\ell h(r)=\ell^{3/2}h(\ell r)$
+transfers the same estimate to
+$\mathcal L_{\mu,\theta}\mathsf U_\ell G_{\ell^\gamma}
+-\mathsf U_\ell F_z$, without a radial norm loss.
+The shrinking shell lies at original Kummer radius
+$r\simeq\ell^{\gamma-1}\to\infty$, unlike a fixed-rescaled shell.
+This is \emph{not} the literal selected four-piece physical profile:
+the Cramer/Green matching, uniform time-regular actual radiation,
+full nonlocal PDE residual, parameter Lipschitz, finite recursion and
+dynamically produced Type--II rate are still unproved. No new Lean
+statement or strict CI verifies this paper calculation; original
+acceptance remains $11/13$.
+% END HBL_213_SHRINKING_FAR_TRUE_HARTREE_RIESZ_SPLICE_20261112
