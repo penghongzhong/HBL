@@ -107,6 +107,31 @@ including its near-diagonal \(K(y-v)\) singularity. Consequently,
 \]
 Multiplication by 4 proves (OM5). It also explains why no unproved small global \(L^3\) potential bound has been used.
 
+### Coefficient check against the exact fixed-core Green profile
+
+The preceding exact fixed-core convolution
+\[
+ A(r)=K*W^3(r)
+ =\frac{4\pi\operatorname{arsinh}r}{r\sqrt{1+r^2}}
+ =\frac{4\pi\log(2r)}{r^2}+O(r^{-4}\log r)
+ \qquad(r\to\infty)
+\]
+has the *formal* large-radius linear channel \(4\sqrt\ell\,c(t)A(r)\).
+At \(r=|y|/\ell\), this expression has leading logarithmic
+coefficient
+\[
+ 4\sqrt\ell\,c(t)A(|y|/\ell)
+ =16\pi c(t)\ell^{5/2}|y|^{-2}\log(1/\ell)
+  +O_y(\ell^{5/2}).
+ \tag{OM8a}
+\]
+This **exactly agrees** with the independently obtained moving-annulus
+coefficient in (OM5), supplying a useful check that the same core--radiation
+cross monomial is retained in both coordinate systems. The older
+fixed-core asymptotic is not uniform at \(r=|y|/\ell\), so (OM8a) is a
+coefficient consistency check rather than a justification for substituting
+moving radii into that expansion.
+
 ## 3. Original critical-clock covariant time derivative
 
 Let \(\ell_s=-b\ell\), \(t_s=\ell^2\) and \(D_b=\partial_s+b(1+x\cdot\nabla_x)\). For a term \(\ell^\alpha F_t(\ell x)\), the exact chain rule is
