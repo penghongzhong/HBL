@@ -80,7 +80,39 @@ In sharp contrast, for the pure radiation potential
 \]
 Thus **MC9 cannot be substituted for the full mixed source** in the selected four-region Hartree residual. The mixed linear-in-radiation density in MC4 has a distinct \(\sqrt\ell\) leading channel at fixed physical radius, and its \(b\)-transport does not cancel merely by applying the pure-radiation critical scaling identity.
 
-## 3. Precise repair obligation, not a counterexample to Type II
+## 3. Independent check directly inside the exact full Hartree covariant flux
+
+For a **real smooth radial radiation snapshot** \(z(t_0,\cdot)\) (for example the smooth real Gaussian initial datum), its actual Hartree PDE derivative \(z_t(t_0,\cdot)=i(\Delta z+\mathcal N_H(z))(t_0,\cdot)\) is purely imaginary. At this snapshot \(U=W+Z\), \(V=W\) and \(Z\) are real. In the exact original covariant identity (CF5)–(CF6), both
+\[
+ J=4\operatorname{Re}(i\Phi(U)\nabla Z),\qquad
+ -4\operatorname{Re}(i\nabla\Phi(U)\cdot\nabla Z)
+ +4\operatorname{Re}(i\Phi(U)\mathcal N_H(Z))
+\]
+**vanish pointwise**, for the actual PDE rather than for an imposed source. Since \(V_s=0\) and \(V_s+b\Lambda V=b\Lambda W\), CF5 reduces exactly at this instant to
+\[
+ D_b Q=4b\,K*[( (W+Z)^3-W^3)\Lambda W].
+\tag{MC10}
+\]
+The surviving contribution is the *mixed reference velocity* that is absent from the pure-radiation formula. At \(x=0\), its leading coefficient is fixed by the elementary exact bubble identity
+\[
+ \int_0^\infty W^2\Lambda W\,dr
+ =\tfrac12\int W^3dr+\tfrac13\int r(W^3)'dr
+ =\tfrac12-\tfrac13=\tfrac16.
+\tag{MC11}
+\]
+Consequently,
+\[
+ (D_bQ)(s_0,0)
+ =4\pi\,(12b\sqrt\ell\,c)\,\tfrac16
+    +O(|b|\ell)
+ =8\pi b\sqrt\ell\,c+O(|b|\ell),
+\tag{MC12}
+\]
+agreeing with (MC8). At the real snapshot \(\partial_tQ=0\) exactly because \(z_t\) is purely imaginary and \(W,Z\) are real. This confirms the leading mixed term **within the full physical Hartree covariant identity itself**; it is not an artifact of differentiating a freely assigned field.
+
+Again \(b\) here is an arbitrary \(C^1\) physical critical scaling clock. The uniquely selected two-speed Cramer path may have additional cancellations; it is essential to prove them if they are to be used in §2.13.
+
+## 4. Precise repair obligation, not a counterexample to Type II
 
 This calculation rules out the shortcut
 \[
