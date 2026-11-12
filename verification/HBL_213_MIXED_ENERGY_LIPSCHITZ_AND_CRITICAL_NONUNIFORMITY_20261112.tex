@@ -1,0 +1,81 @@
+% HBL_213_MIXED_ENERGY_LIPSCHITZ_AND_CRITICAL_NONUNIFORMITY_20261112
+% Original quartic inverse-square Hartree mixed channel; paper-only, 11/13.
+\paragraph{The true mixed Hartree channel at energy regularity.}
+For \(K(x)=|x|^{-2}\) on \(\mathbb R^3\), set
+\[
+ {\cal C}(z)=K*\bigl(|x|^{-1}\operatorname{Re}z\,|z|^2\bigr).
+\]
+Hardy's inequality \(\|z/|x|\|_2\le2\|\nabla z\|_2\),
+homogeneous Sobolev \(\|z\|_6\le S_3\|\nabla z\|_2\), and
+\(K*:L^{6/5}\to L^2\) give, with \(A_H=2C_{\rm HLS}S_3^2\),
+\[
+ \|{\cal C}(z)\|_2\le A_H\|\nabla z\|_2^3,
+ \qquad
+ \|{\cal C}(z)-{\cal C}(w)\|_2
+ \le A_H\bigl(\|\nabla z\|_2^2+
+ \|\nabla z\|_2\|\nabla w\|_2+\|\nabla w\|_2^2\bigr)
+ \|\nabla(z-w)\|_2.
+ \tag{HBL-E-LIP}
+\]
+The real Fr\'echet derivative, proved by polarizing the cubic
+nonlinearity, is
+\[
+ D{\cal C}(z)[h]=K*\left(
+ \frac{\operatorname{Re}h\,|z|^2+
+  2\operatorname{Re}z\,\operatorname{Re}(\bar z h)}{|x|}
+ \right),\qquad
+ \|D{\cal C}(z)[h]\|_2\le3A_H\|\nabla z\|_2^2\|\nabla h\|_2.
+\]
+The exact critical dilation
+\(z_\lambda(x)=\lambda^{1/2}z(\lambda x)\) satisfies
+\(\mathcal C(z_\lambda)(x)=\lambda^{3/2}\mathcal C(z)(\lambda x)\),
+so \(\|\mathcal C(z_\lambda)\|_2=\|\mathcal C(z)\|_2\).
+
+\paragraph{Sharp distinction between fixed-orbit decay and uniform decay.}
+For \(g_\ell(x)=\sqrt\ell(\ell^2+|x|^2)^{-1/2}\), define
+\[
+ \mathcal E_\ell(z)
+ =K*\left[\ell^{1/2}\partial_\ell
+ (|z+g_\ell|^4-g_\ell^4)
+ -2|x|^{-1}\operatorname{Re}z\,|z|^2\right],
+\]
+where \(\partial_\ell\) holds \(z\) fixed. Differentiating
+all four true quartic source monomials and using the same
+Hardy--Sobolev--HLS factorization proves
+\[
+ \mathcal E_\ell(z)\to0\text{ in }L^2\quad
+ \text{for each fixed }z\in\dot H^1(\mathbb R^3).
+ \tag{HBL-E-POINT}
+\]
+This convergence is locally energy-Lipschitz uniformly in \(\ell\),
+hence uniform on compact subsets of \(\dot H^1\). It is
+\emph{not} uniform on bounded energy balls. Indeed, choose
+\(0\le\psi\in C_c^\infty(\{2<|x|<3\})\), real, radial,
+nonzero and sufficiently small in amplitude, and put
+\(z_\ell(x)=\ell^{-1/2}\psi(x/\ell)\). Exact scaling gives
+\[
+ \|\nabla z_\ell\|_2=\|\nabla\psi\|_2,\qquad
+ \mathcal E_\ell(z_\ell)(x)
+ =\ell^{-3/2}\mathcal E_1(\psi)(x/\ell),\qquad
+ \|\mathcal E_\ell(z_\ell)\|_2
+ =\|\mathcal E_1(\psi)\|_2>0.
+ \tag{HBL-E-NOUNI}
+\]
+The strict positivity follows directly from the linear term
+\(12 k_{1,1}(r)g_1(r)^2\psi\), where
+\(k_{1,1}=(r^2-1)/(2(1+r^2)^{3/2})>0\) on \(2<r<3\).
+The exact global mixed covariant identity has the form
+\[
+ T_\ell^{-1}D_bQ+2b\mathcal C(z)
+ =-b\mathcal E_\ell(z)
+ +\ell^{3/2}K*\partial_t\rho_{\ell,z}.
+\]
+Consequently energy topology supplies a valid leading-channel
+parameter Lipschitz estimate and qualitative fixed-orbit
+static-scale convergence, but \emph{not} an energy-uniform scale
+rate, a time derivative from energy continuity alone, or the
+original positive-\(s\)-order four-zone PDE residual.
+Quantitative selected-orbit regularity or genuine selected
+Cramer/Kummer cancellation is still required. No new Lean
+CI validates these analytic statements; original acceptance
+remains \(11/13\).
