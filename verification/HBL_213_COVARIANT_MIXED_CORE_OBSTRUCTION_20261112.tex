@@ -1,0 +1,46 @@
+\subsection*{A mixed core--radiation obstruction to the pure-flux scale shortcut}
+The actual three-dimensional inverse-square potential at the origin satisfies
+\[
+ (|x|^{-2}*f)(0)=4\pi\int_0^\infty f(r)\,dr
+\]
+for radial integrable densities. Let
+\(W(r)=(1+r^2)^{-1/2}\), \(Z_{\ell,t}(r)=\ell^{1/2}z(t,\ell r)\),
+and \(Q_{\ell,t}=|x|^{-2}*(|W+Z_{\ell,t}|^4-W^4)\).
+Assume the genuine Hartree radiation \(z\) and its physical time derivative
+are locally uniformly radial Schwartz, so all derivatives below are
+justified. The complete quartic density difference, including the mixed
+linear term \(4W^3\operatorname{Re}Z_{\ell,t}\), gives
+\[
+ Q_{\ell,t}(0)=16\pi\sqrt{\ell}\operatorname{Re}z(t,0)+O_t(\ell),
+ \qquad
+ \ell\partial_\ell Q_{\ell,t}(0)
+ =8\pi\sqrt{\ell}\operatorname{Re}z(t,0)+O_t(\ell).
+\]
+Indeed, \(\int_0^\infty W^3dr=1\), \(\int_0^\infty rW^3dr=1\),
+and \(W^2\in L^1(dr)\), while the cubic and pure-radiation terms are
+\(O(\ell^{3/2}(1+|\log\ell|))\) and \(O(\ell)\), respectively.
+For \(\ell_s=-b\ell\), \(t_s=\ell^2\), set
+\(D_b=\partial_s+b(1+x\cdot\nabla)\). Since
+\(\partial_tQ_{\ell,t}(0)
+ =16\pi\sqrt{\ell}\operatorname{Re}z_t(t,0)+O_t(\ell)\),
+the exact chain rule yields
+\[
+ \boxed{\;
+ (D_bQ)(s,0)=8\pi b(s)\sqrt{\ell(s)}
+      \operatorname{Re}z(t(s),0)
+  +O_t\!\left(|b(s)|\ell(s)+\ell(s)^{5/2}\right).\;}
+\]
+The original Hartree coupling constant multiplies this identity.
+The pure-radiation potential instead satisfies
+\(D_b(|x|^{-2}*|Z|^4)
+ =\ell^3\partial_t(|x|^{-2}*|z|^4)(t,\ell x)\),
+whose \(L^2_x\) scale is \(\ell^{3/2}\). This latter gain does
+\emph{not} automatically pass to the mixed core--radiation potential.
+The pointwise calculation is not an estimate in the original
+four-piece weighted forcing space and does not exclude cancellation
+from the genuinely selected modulation equation. Such cancellation
+must be proved from the same physical Cramer/Kummer orbit rather
+than assumed. A full derivation is in
+\texttt{HBL\_213\_COVARIANT\_MIXED\_CORE\_OBSTRUCTION\_20261112.md}.
+This is a paper-only quantitative obstruction; revised original
+strict acceptance remains \(11/13\).
