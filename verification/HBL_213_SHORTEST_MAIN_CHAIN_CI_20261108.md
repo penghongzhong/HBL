@@ -4347,3 +4347,21 @@ rate remain OPEN. Calculation and TeX in
 verification/HBL_213_COVARIANT_FULL_HARTREE_FLUX_20261112.md; **no new strict Lean CI**; original
 revised environment count remains **11/13**.
 
+
+
+### 12 November 2026 UTC — mixed core–radiation covariant-flux scale obstruction
+
+**New paper-only mathematical result (no new Lean target):** exact full three-dimensional inverse-square Hartree convolution at the origin for the actual critical-scale radiation \(Z_{\ell,t}=\sqrt\ell\,z(t,\ell x)\) on the stationary Hartree core \(W=(1+r^2)^{-1/2}\). With \(Q=|x|^{-2}*(|W+Z|^4-W^4)\), for a smooth radial Schwartz Hartree radiation trajectory,
+\[
+Q_{\ell,t}(0)=16\pi\sqrt\ell\,\Re z(t,0)+O_t(\ell),\quad
+\ell\partial_\ell Q_{\ell,t}(0)=8\pi\sqrt\ell\,\Re z(t,0)+O_t(\ell).
+\]
+For the *actual critical scaling clock* \(\ell_s=-b\ell,\ t_s=\ell^2\), exact differentiation gives
+\[
+[\partial_s+b(1+x\cdot\nabla)]Q(s,0)
+=8\pi b(s)\sqrt{\ell(s)}\,\Re z(t(s),0)
+ +O_t(|b(s)|\ell(s)+\ell(s)^{5/2}).
+\]
+The leading coefficient follows from \(\int_0^\infty W^3dr=1\). Thus the \(\ell^{3/2}\) **\(L^2\) covariant derivative gain of the pure-radiation potential** from CF9–CF10 does *not* transfer by itself to the full **mixed** core–radiation potential. This quantitatively excludes a tempting direct reuse of the pure-radiation flux to close the complete source. It does NOT rule out cancellation from the genuine uniquely selected Cramer/Kummer modulation orbit and is not a lower bound for the original weighted four-zone residual. The actual selected reference velocity \(V_s+b\Lambda V\) must be inserted into the full CF5–CF8 identity with all region/endpoint/source terms, and its leading mixed channel either cancelled or bounded at the correct scale.
+
+New proofs: [HBL_213_COVARIANT_MIXED_CORE_OBSTRUCTION_20261112.md](HBL_213_COVARIANT_MIXED_CORE_OBSTRUCTION_20261112.md), corresponding TeX supplement imported in \`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`. Original strict run [43135036481](https://github.com/penghongzhong/HBL/actions/runs/43135036481) job 130908225390 (selected spectral quadratic / three C¹) and [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518) job 130872307063 (finite nonlinear PDE telescoping) were independently reread: both **Success**, pinned Lean 4.35.0-rc3 / Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, \`--trust=0\`, \`warningAsError\`, exact \`#check\`/\`#print axioms\` and only \`propext\`, \`Classical.choice\`, \`Quot.sound\` on audited theorems. The new origin asymptotic **has no Lean CI**, nor does it construct the missing genuine selected orbit. Official original manuscript acceptance unchanged: **11/13 (84.62%)**, §2.13 and final dynamic Type-II theorem open.
