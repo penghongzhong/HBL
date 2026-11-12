@@ -1,0 +1,52 @@
+% HBL_213_FULL_NEAR_DIAGONAL_HARTREE_WEAK_FLUX_20261112
+\paragraph{Untruncated near-diagonal Hartree potential: weak-flux bound and its scaling limit.}
+The following calculation applies to the genuine inverse-square kernel on all of
+$\mathbb R^3$, not solely the separated remote kernel. Put
+$K(x)=|x|^{-2}$,
+$\mathcal N_H(q)=\kappa_H(K*|q|^4)|q|^2q$,
+$Z_s=i(\Delta Z+\mathcal N_H(Z))-b(\frac12Z+x\cdot\nabla Z)$,
+$U=V+Z$, $\rho=|U|^4-|V|^4$,
+$\Phi(q)=|q|^2\overline q$, and $Q=K*\rho$.
+For sufficiently regular genuine fields, as an identity of distributions,
+\[
+ \rho_s=\operatorname{div}J+R,\qquad J=4\operatorname{Re}(i\Phi(U)\nabla Z),
+\]
+\begin{align*}
+ R={}&-4\operatorname{Re}(i\nabla\Phi(U)\cdot\nabla Z)
+  +4\operatorname{Re}(i\Phi(U)\mathcal N_H(Z))\\
+ &-4b\operatorname{Re}(\Phi(U)(\tfrac12Z+x\cdot\nabla Z))
+  +4\operatorname{Re}((\Phi(U)-\Phi(V))V_s).
+\end{align*}
+Consequently,
+\[
+ Q_s=\sum_{j=1}^3(\partial_jK)*J_j+K*R,\qquad
+ \|Q_s\|_2\le2\pi^2\|J\|_2+C_{\rm HLS}\|R\|_{6/5}.
+\]
+Here $\widehat K(\xi)=2\pi^2/|\xi|$ and
+$\partial_jK$ is a principal-value distribution, not the absolutely
+integrable function $-2x_j|x|^{-4}$.
+If $M=\max(\|U\|_\infty,\|V\|_\infty)$ and the displayed norms are finite,
+\begin{align*}
+\|Q_s\|_2\le{}&
+8\pi^2M^3\|\nabla Z\|_2+C_{\rm HLS}\big[
+12M^2\|\nabla U\|_3\|\nabla Z\|_2
++4M^3\|\mathcal N_H(Z)\|_{6/5}\\
+&\qquad+4|b|\|\Phi(U)(\tfrac12Z+x\cdot\nabla Z)\|_{6/5}
++4\|(\Phi(U)-\Phi(V))V_s\|_{6/5}\big].
+\end{align*}
+This replaces the untruncated near-diagonal absolute-kernel obstacle
+by Calder\'on--Zygmund cancellation and a single radiation derivative.
+Nevertheless, the \emph{exact} critical scaling
+$Z_\ell=\sqrt\ell\,z(t,\ell x)$ gives
+\[
+ \|\nabla Z_\ell\|_{L^2(\mathbb R^3)}
+ =\|\nabla z(t)\|_{L^2(\mathbb R^3)},\qquad
+ \|\nabla Z_\ell\|_{L^2(B_R)}
+ =\|\nabla z(t)\|_{L^2(B_{\ell R})}.
+\]
+The global energy term does not gain a positive power of $\ell$.
+A localized shrinking physical region and its nonlocal exterior,
+or a proved modulation cancellation, is indispensable for a genuine
+time-positive full PDE residual. No such bound is inferred from this
+paper calculation; revised original acceptance remains $11/13$.
+% END HBL_213_FULL_NEAR_DIAGONAL_HARTREE_WEAK_FLUX_20261112
