@@ -4260,3 +4260,6 @@ Full selected speed derivative, Kummer motion, true untruncated
 nonlinear Hartree remainder, parameter Lipschitz, finite PDE
 recursion and dynamically inferred Type-II rate remain open.
 **Retained original manuscript acceptance stays 11/13 (84.62%).**
+
+
+**Supplement SZ11–SZ13:** The *literal* frozen real two-speed affine compatibility \(H+p_b C_b+p_\omega C_\omega=0\) yields, **only assuming a differentiable same-orbit parameter path** and nonzero \(\mathcal D=\operatorname{Im}(\overline{C_b}C_\omega)\), exact \(p_b'=-\operatorname{Im}(\overline{C_\omega}G)/\mathcal D\), \(p_\omega'=\operatorname{Im}(\overline{C_b}G)/\mathcal D\), \(G=-H'-p_b C_b'-p_\omega C_\omega'\). This reduces the derivative of the unique real selector to the actual obstruction and both physical response-column derivatives, but those are not yet controlled; the separate complex spectral \`delta\` is **not** yet linked differentiably to the selected real pair. Synchronized manuscript supplement in \`HBL_213_SPECTRAL_ZERO_LEFT_MOVING_SLOPE_20261111.tex\`, already imported in main §2.13. **Paper-only; 11/13 unchanged.**
