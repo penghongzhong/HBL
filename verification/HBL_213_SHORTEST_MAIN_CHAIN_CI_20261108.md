@@ -4292,3 +4292,31 @@ Original log lines `STRICT TARGET` record exact transitive axiom sets **[`Classi
 Forensic repair trail: old workflows [42531467165](https://github.com/penghongzhong/HBL/actions/runs/42531467165) and [42531467166](https://github.com/penghongzhong/HBL/actions/runs/42531467166) failed on the original `ActualHartreeSpectralCorrectedFourPieceThreeC1.lean:98` `HasDerivAt` **definitionally different function** (lambda pullback versus named pullback) and, in the second job, `ActualHartreeTrueSelectedMatchedSpectralQuadratic.lean:123` no-progress `dsimp`. These are absent from the current successful locked build; never relabel those old runs Success. The repaired finite nonlinear telescope separately remains strict Success [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518), original job `130872307063`, with four checked declarations and the same permitted axiom set. It only supplies an exact algebraic PDE telescope.
 
 **Original revised paper count remains 11/13 (84.62%).** Fixed-time selected source + spatial matching + exact nonlinear residual telescope does not furnish a single physical smooth path with controlled `F_s`, `p_s`, `d_s`, moving Kummer coefficients and nonlocal four-region remainder of positive time order. In particular, the hypothesis `ContinuousAt F0` and its time-derivative strengthening must be produced from the same actual PDE orbit, not postulated. Only when the *whole* §2.13 statement with positive time gain and parameter Lipschitz is proved and audited can acceptance rise to 12/13; the dynamically derived Type-II blowup rate remains a separate last environment.
+
+
+## 12 November 2026: full near-diagonal weak-flux bridge (paper only)
+
+The actual same-orbit nonlocal density difference now has an **untruncated distributional velocity identity**:
+\[
+  \partial_s(K*(|V+Z|^4-|V|^4))
+     = \nabla K * J + K*R,
+\quad
+  \|\partial_sQ\|_2\le2\pi^2\|J\|_2+C_{\rm HLS}\|R\|_{6/5},
+\]
+with the true quartic Hartree radiation equation and explicit flux/source as in
+[\`HBL_213_FULL_NEAR_DIAGONAL_HARTREE_WEAK_FLUX_20261112.md\`](HBL_213_FULL_NEAR_DIAGONAL_HARTREE_WEAK_FLUX_20261112.md).
+The singular \(\nabla K\) is treated as a vector Riesz multiplier of exact
+\(L^2\) norm \(2\pi^2\), **not** by divergent absolute convolution.
+This removes the near-diagonal weak-derivative obstruction *under the explicitly
+stated actual-orbit norms*, without imposing a new independent time order.
+
+**Decisive scope limit:** critical scaling preserves
+\(\|\nabla Z_\ell\|_2=\|\nabla z(t)\|_2\). Thus the global estimate alone does
+**not** produce the required \(\ell^\gamma\), \(s^{-9/4}\), or parameter
+Lipschitz gain. Must quantify localized physical-ball energy, the complementary
+remote density and moving selected-speed/Kummer derivatives for one genuine
+four-piece Hartree orbit. ND1--ND9 are paper-only and **not** the exact Lean
+statement of §2.13; 11/13 strictly unchanged. Recent successful audits
+[43135036481](https://github.com/penghongzhong/HBL/actions/runs/43135036481)
+and [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518)
+remain restricted to spatial C1/quadratic and exact PDE telescoping, respectively.
