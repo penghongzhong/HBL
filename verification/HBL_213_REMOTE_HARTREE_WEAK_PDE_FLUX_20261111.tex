@@ -111,6 +111,44 @@ absolute-density-velocity bound $J_1$ in the localized
 remote channel. Unlike a local cubic replacement, it retains
 the genuine nonlocal quartic potential.
 
+
+\paragraph{Source-faithful critical scaling without second derivatives.}
+For the same actual regular Hartree radiation define
+$h_0=\|z(t)\|_{L^\infty(B_{\ell L/3})}$,
+$h_1=\|\nabla z(t)\|_{L^\infty(B_{\ell L/3})}$ and
+$h_N=\|\mathcal N_H(z(t))\|_{L^\infty(B_{\ell L/3})}$.
+These are field norms along the original orbit, not independent
+temporal source envelopes. The exact critical scaling gives
+\[
+ e_0\le\sqrt\ell\,h_0A_L^{1/2},\qquad
+ e_1\le\ell^{3/2}h_1A_L^{1/2},\qquad
+ \|\mathcal N_H(Z)\|_{L^1(\Omega_L)}
+ \le\ell^{5/2}h_NA_L .
+\]
+Write $\alpha=4\pi/81$, $c_0=144/65$,
+$c_1=(256+432C_\chi)/195$, $c_R=384/65$ and
+$B=B_U$. With $R'=\theta L'$, the preceding bound sharpens to
+\begin{align*}
+\left|\frac d{ds}Q_\chi(s,\theta L)\right|
+\le{}&
+ 4\alpha B^3\sqrt\ell\,h_0|L'|
+  (c_0C_\chi/3+\theta c_R)
+ +4c_1\alpha B^3\ell^{3/2}h_1\\
+&+12c_0B^2\bigl(
+ \sqrt\alpha\,\ell^{3/2}h_1L^{-1/2}v_1
+ +\alpha\ell^3h_1^2L\bigr)\\
+&+4c_0\alpha B^3\ell^{5/2}h_NL\\
+&+4|b|c_0\alpha B^3
+ \left(\tfrac12\sqrt\ell\,h_0L+
+       \tfrac13\ell^{3/2}h_1L^2\right)\\
+&+12c_0\sqrt\alpha\,B^2\sqrt\ell\,h_0L^{-1/2}v_s .
+\end{align*}
+In particular the original remote derivative-of-kernel
+flux gains $\ell^{3/2}h_1$ with \emph{no positive power of $L$}.
+This is a genuine critical-scaling small-parameter factor, but
+no decay in $s$ or prescribed II-type exponent is inferred
+without the missing physical modulation bounds.
+
 \medskip
 \noindent
 \textbf{Verification boundary.}
