@@ -1,4 +1,5 @@
 name: HBL actual spectral four-piece finite original Hartree nonlinear PDE telescope strict
+# strict dependency recheck after 2026-11-11 weak-flux paper sync; full nonlinear telescope source blob 3e5262c30d86645b290e3d12e6bbcf9144e2543a.
 on:
   push:
     branches: [hbl-213-spectral-c1-trace-20261109]
