@@ -123,3 +123,35 @@ This is a counterexample **only to deducing temporal control from the existing f
 Directly checked GitHub CI 43124289518 / original job 130872307063 is **Success** under Lean 4.35.0-rc3, Mathlib a98628e16c11f5167f16124105ddce53efa9bfe5, \`--trust=0\`, \`-DwarningAsError=true\`, exact \`#check\` and \`#print axioms\` on four specified existing targets; the only axioms are \`propext\`, \`Classical.choice\`, \`Quot.sound\`. That target is the exact nonlinear telescope, and does NOT certify (SZ1)–(SZ10).
 
 The missing original \(\S2.13\) chain remains: actual Hartree source \(F_s\) and unique real selector \(\delta'\) with time-positive weighted bounds; moving \(p_s,q_s,\rho'\) and source-matched regular IVP mode; full untruncated seven-linear Hartree commutator; complete four-region positive-order strong residual and parameter Lipschitz; finite profile recurrence. The final PDE-derived Type-II rate remains separate. **No new Lean declaration is claimed; original retained count stays 11/13 (84.62%).**
+
+
+## 6. Exact two-real-speed derivative interface from the already coded affine compatibility law
+
+The actual Lean declaration \`actual_Hartree_moment_locked_full_coupled_response\` has the precise **frozen** affine form
+\[
+H(s)+p_b(s)C_b(s)+p_\omega(s)C_\omega(s)=0,\tag{SZ11}
+\]
+where \(H\) is the actual outgoing obstruction from the physical Hartree source and reconstructed Fredholm jet, and \(C_b,C_\omega\) are the **actual inner-plus-outer** response columns (\`actualMomentLockedCoupledColumns\`), not arbitrary independent vectors. Suppose **in addition**, and not as a conclusion of current Lean code, that these three complex functions and the selected real speeds are \(C^1\) and
+\[
+\mathcal D(s)=\operatorname{Im}(\overline{C_b(s)}C_\omega(s))\ne0.
+\]
+Differentiating the genuine compatibility condition gives
+\[
+p_b'C_b+p_\omega'C_\omega
+=G:=-H'-p_b C_b'-p_\omega C_\omega'.\tag{SZ12}
+\]
+Complex Cramer's rule (with two **real** unknowns) now gives **exactly**
+\[
+\boxed{
+p_b'=-\frac{\operatorname{Im}(\overline{C_\omega}G)}{\mathcal D},
+\qquad
+p_\omega'=\frac{\operatorname{Im}(\overline{C_b}G)}{\mathcal D};
+\quad
+|p_b'|+|p_\omega'|
+\le \frac{|C_b|+|C_\omega|}{|\mathcal D|}
+  \bigl(|H'|+|p_b||C_b'|+|p_\omega||C_\omega'|\bigr).
+}\tag{SZ13}
+\]
+This is a complete finite-dimensional derivative reduction **without** a separately assumed speed derivative. The missing physical hypotheses are the true time derivatives of the nonlocal obstruction \(H\), both coupled response columns, the moving geometry and a determinant lower bound that remains uniform along the same orbit. Current \`actual_Hartree_true_nonlocal_source_selects_unique_real_speed\` is quantified for every frozen measurable \(z\) and returns a unique pair \emph{at each input}; its theorem type does **not** supply a \(C^1\) path. Moreover the separate complex spectral \(\delta(s)\) in the four-piece packet is **not yet proved to be** a differentiable function of that selected real pair, so (SZ13) must not be used as a bound on \(\delta'\) until that physical identification is established.
+
+**Formal acceptance unchanged: 11/13; SZ11–SZ13 are paper deductions conditional on stated differentiability, not additional Lean verified declarations.**
