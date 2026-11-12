@@ -4376,3 +4376,17 @@ New proofs: [HBL_213_COVARIANT_MIXED_CORE_OBSTRUCTION_20261112.md](HBL_213_COVAR
 - **Unclosed:** selected moving Kummer/Cramer cancellation of the nonconstant mixed mode; original four-zone weighted residual **positive renormalized-time order** and parameter Lipschitz; actual finite nonlinear profile recursion; dynamic Type-II rate. The above expansion is fixed-core and cannot be imposed at \(r\sim1/\ell\) or turned into a global \(L^3\) gain. No new strict Lean CI was run for it.
 - **Formal acceptance unchanged: 11/13 (84.62%); §2.13 and final original theorem both OPEN.**
 
+
+
+## 2026-11-12: moving annular \(r\sim\ell^{-1}\) exact mixed Hartree expansion (paper-only)
+
+- **New original-kernel calculation:** [HBL_213_OUTER_MOVING_HARTREE_MIXED_PROFILE_20261112.md](HBL_213_OUTER_MOVING_HARTREE_MIXED_PROFILE_20261112.md), integrated as a TeX supplement into \`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`. For \(y=\ell x\ne0\) and \(g_\ell(v)=\sqrt\ell/\sqrt{\ell^2+|v|^2}\), the untruncated original quartic interaction exactly obeys \(Q_{\ell,t}(y/\ell)=\ell K*(|z+g_\ell|^4-g_\ell^4)(y)\). Its moving-annulus expansion is
+  \[
+   Q_{\ell,t}(y/\ell)=\ell H_t(y)+4\ell^{3/2}C_t(y)+\ell^2D_t(y)
+   +16\pi\ell^{5/2}\log(1/\ell)\frac{\Re z(t,0)}{|y|^2}
+   +O_{\mathcal A}(\ell^{5/2}),
+  \]
+  with \(H_t=K*|z|^4\), \(C_t=K*(|v|^{-1}\Re z\,|z|^2)\), \(D_t=K*(|v|^{-2}(2|z|^2+4(\Re z)^2))\), uniformly on compact annuli separated from \(y=0\), for radial Schwartz physical radiation snapshots. The logarithm is evaluated by the exact radial integral of \((\ell^2+|v|^2)^{-3/2}\).
+- Original critical clock gives \(D_bQ(s,y/\ell)=-2b\ell^{3/2}C_t(y)-b\ell^2D_t(y)+\ell^3\partial_t H_t(y)+O(|b|\ell^{5/2}(1+|\log\ell|)+\ell^{7/2})\). Thus even at the moving far radius, the core--radiation mixed channel is generally not annihilated by pure-radiation scaling covariance. **Important distinction:** fixed-core leading mixed scale is \(b\sqrt\ell\); moving-annulus leading mixed scale is \(b\ell^{3/2}\), and neither is automatically a positive power of the renormalized time \(s\).
+- **Exact prior GitHub raw CI rereread:** 42531450638/42531500587/42531018076/42530313725/42529092477 completed Success; 42531033761/768, 42531467165/166 and initial telescope 42530158681 failed in their historical states with the recorded former upstream type/lookup errors. Current replacement [43135036481](https://github.com/penghongzhong/HBL/actions/runs/43135036481) job 130908225390 and [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518) job 130872307063 are strict Success with Lean 4.35.0-rc3, pinned Mathlib, \`--trust=0\`, \`warningAsError\`, exact \`#check\` and \`#print axioms\`; all selected audited declarations report only \`propext\`, \`Classical.choice\`, \`Quot.sound\`. This **does not** audit the new analytic expansion.
+- **Load-bearing remaining gap:** prove the same unique real Cramer selector transports this mixed annular profile with moving Kummer/endpoints and the full original nonlocal four-piece Hartree residual, obtaining positive *\(s\)-order* and parameter Lipschitz without postulates, then finite iteration and PDE-selected Type-II rate. **Formal original acceptance 11/13 (84.62%), unchanged.** No new Lean CI for this new paper lemma.
