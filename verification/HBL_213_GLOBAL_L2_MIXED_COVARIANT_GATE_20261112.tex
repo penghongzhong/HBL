@@ -1,0 +1,79 @@
+% Global original quartic Hartree mixed critical L2 gate; paper-only, 11/13.
+\paragraph{Global critical \(L^2\) mixed covariant Hartree channel.}
+Let \(K(x)=|x|^{-2}\), \(W(x)=(1+|x|^2)^{-1/2}\),
+\(Z(s,x)=\sqrt{\ell(s)}z(t(s),\ell(s)x)\),
+\(\ell_s=-b\ell\), \(t_s=\ell^2\), and
+\(Q=K*(|W+Z|^4-W^4)\). The radiation \(z\) is a smooth
+radial Schwartz solution of the original Hartree PDE with
+uniform Schwartz bounds for \(z,z_t\) on a compact time interval.
+This assumption is for a test orbit, not the final selected profile.
+Put
+\[
+D_b=\partial_s+b(1+x\cdot\nabla_x),\qquad
+C_t=K*(|v|^{-1}\operatorname{Re}z(t,v)|z(t,v)|^2),\qquad
+(T_\ell f)(x)=\ell^{3/2}f(\ell x).
+\]
+The original inverse-square HLS estimate \(K*:L^{6/5}\to L^2\)
+and the unitarity of \(T_\ell\) imply the global bound
+\[
+\boxed{
+\|T_\ell^{-1}D_bQ+2bC_t\|_2
+\le M(|b|\ell^{1/2}+\ell^{3/2}),\qquad0<\ell\le1.
+}\tag{HBL-G-L2}
+\]
+For its proof write \(y=\ell x\),
+\(g_\ell(v)=\sqrt\ell(\ell^2+|v|^2)^{-1/2}\),
+\(w=\operatorname{Re}z\), \(h=|z|^2\), \(m=2h+4w^2\).
+The exact full quartic density and critical-clock identity are
+\[
+\begin{gathered}
+\rho_{\ell,t}=|z+g_\ell|^4-g_\ell^4
+ =h^2+4g_\ell wh+g_\ell^2m+4g_\ell^3w,\\
+Q(s,x)=\ell(K*\rho_{\ell,t})(\ell x),\\
+T_\ell^{-1}D_bQ=-bK*[\ell^{1/2}\partial_\ell\rho_{\ell,t}]
+ +\ell^{3/2}K*[\partial_t\rho_{\ell,t}].
+\end{gathered}
+\]
+Direct differentiation gives
+\[
+\begin{aligned}
+\ell^{1/2}\partial_\ell g_\ell
+ &=\tfrac12(\ell^2+r^2)^{-1/2}-\ell^2(\ell^2+r^2)^{-3/2},\\
+\ell^{1/2}\partial_\ell(g_\ell^2)
+ &=\ell^{1/2}[(\ell^2+r^2)^{-1}-2\ell^2(\ell^2+r^2)^{-2}],\\
+\ell^{1/2}\partial_\ell(g_\ell^3)
+ &=\tfrac32\ell(\ell^2+r^2)^{-3/2}
+       -3\ell^3(\ell^2+r^2)^{-5/2}.
+\end{aligned}
+\]
+With \(p=6/5\), the exact kernel rescaling gives
+\[
+\|(\ell^2+r^2)^{-1/2}-r^{-1}\|_p
++\|\ell^2(\ell^2+r^2)^{-3/2}\|_p\lesssim\ell^{3/2},
+\]
+\[
+\|\ell^{1/2}\partial_\ell(g_\ell^2)m\|_p
+ \le3\ell^{1/2}\|r^{-2}m\|_p,\qquad
+\|\ell^{1/2}\partial_\ell(g_\ell^3)w\|_p
+ \lesssim\ell^{1/2}\|w\|_\infty.
+\]
+The Schwartz regularity yields
+\(\sup_{0<\ell\le1}\|\partial_t\rho_{\ell,t}\|_p<\infty\).
+Thus
+\(\|\ell^{1/2}\partial_\ell\rho_{\ell,t}
+-2r^{-1}wh\|_{6/5}\lesssim\ell^{1/2}\);
+HLS establishes (HBL-G-L2).
+For a real positive Gaussian snapshot,
+\(0<\|C_{t_*}\|_2<\infty\); if \(\ell\to0\),
+\(b\to b_*\ne0\), \(t\to t_*\), then
+\[
+\boxed{\quad\|D_bQ\|_{L^2_x}
+\longrightarrow2|b_*|\|C_{t_*}\|_{L^2_y}>0.\quad}
+\]
+The pointwise moving-annulus \(O(|b|\ell^{3/2})\) term
+therefore has no global unweighted \(L^2\) gain.
+This is not a lower bound for the selected four-zone PDE residual:
+the unique Cramer speed and moving Kummer correction may cancel it.
+No time-order gain, parameter Lipschitz, finite recurrence or
+dynamically selected Type-II blowup rate is claimed;
+official original acceptance remains \(11/13\).
