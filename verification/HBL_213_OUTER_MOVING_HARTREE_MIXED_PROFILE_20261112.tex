@@ -1,0 +1,100 @@
+% HBL §2.13 — paper-only exact moving-annulus full Hartree mixed expansion.
+% No strict Lean acceptance. Revised original environments: 11/13.
+\paragraph{Exact non-truncated mixed Hartree potential at a moving radius.}
+Let \(K(x)=|x|^{-2}\), \(W(x)=(1+|x|^2)^{-1/2}\), and let
+\(z(t,\cdot)\) be radial Schwartz data for the genuine
+three-dimensional energy-critical Hartree evolution. Set
+\(Z_{\ell,t}(x)=\sqrt{\ell}\,z(t,\ell x)\) and
+\(Q_{\ell,t}=K*(|W+Z_{\ell,t}|^4-W^4)\). On writing
+\(y=\ell x\ne0\) and
+\(g_\ell(v)=\sqrt{\ell}/\sqrt{\ell^2+|v|^2}\), homogeneity
+of the \emph{original} convolution gives the exact formula
+\[
+ Q_{\ell,t}(y/\ell)=
+ \ell K*\bigl(|z(t)+g_\ell|^4-g_\ell^4\bigr)(y).
+\]
+The four density channels in its integrand are
+\[
+ |z+g_\ell|^4-g_\ell^4
+ =|z|^4+4g_\ell\operatorname{Re}z\,|z|^2+
+ g_\ell^2\bigl(2|z|^2+4(\operatorname{Re}z)^2\bigr)
+ +4g_\ell^3\operatorname{Re}z.
+\]
+For \(y\ne0\), put
+\[
+ \begin{aligned}
+ H_t(y)&=K*|z(t)|^4(y),\\
+ C_t(y)&=K*\bigl(|v|^{-1}\operatorname{Re}z(t,v)|z(t,v)|^2\bigr)(y),\\
+ E_t(y)&=K*\bigl(|v|^{-2}
+       [2|z(t,v)|^2+4(\operatorname{Re}z(t,v))^2]\bigr)(y).
+ \end{aligned}
+\]
+For every compact annulus \(\mathcal A\Subset\mathbb R^3\setminus\{0\}\),
+uniformly in \(y\in\mathcal A\),
+\[
+ \begin{aligned}
+ Q_{\ell,t}(y/\ell)={}&
+ \ell H_t(y)+4\ell^{3/2}C_t(y)+\ell^2E_t(y)\\
+ &+16\pi\ell^{5/2}\log(1/\ell)
+   \frac{\operatorname{Re}z(t,0)}{|y|^2}
+   +O_{t,\mathcal A}(\ell^{5/2}).
+ \end{aligned}
+\]
+Indeed the first two nontrivial terms follow from dominated
+convergence and the differences
+\[
+ (\ell^2+|v|^2)^{-1/2}-|v|^{-1},
+ \qquad
+ (\ell^2+|v|^2)^{-1}-|v|^{-2},
+\]
+whose weighted convolution errors are
+\(O_{\mathcal A}(\ell^2(1+|\log\ell|))\) and
+\(O_{\mathcal A}(\ell)\), respectively. The sole displayed
+logarithm is produced by the cubic-in-core monomial:
+\[
+ \int_{|v|<\delta}(\ell^2+|v|^2)^{-3/2}\,dv
+ =4\pi\left[\operatorname{arsinh}(\delta/\ell)
+       -\frac{\delta}{\sqrt{\ell^2+\delta^2}}\right]
+ =4\pi\log(1/\ell)+O_\delta(1).
+\]
+This expansion covers the original moving far annulus and does
+\emph{not} extend the preceding fixed-core expansion beyond its
+proved range.
+
+\paragraph{Covariant derivative and surviving mixed channel.}
+Under the original clock
+\(\ell_s=-b\ell,\ t_s=\ell^2\), let
+\(D_b=\partial_s+b(1+x\cdot\nabla_x)\). For
+\(F_t\) with sufficient regularity, the exact chain rule is
+\[
+ D_b[\ell^\alpha F_t(\ell x)]
+ =(1-\alpha)b\ell^\alpha F_t(\ell x)
+   +\ell^{\alpha+2}\partial_tF_t(\ell x).
+\]
+Consequently, if \(z,z_t\) satisfy the stated Schwartz bounds,
+for \(y=\ell x\in\mathcal A\) one obtains
+\[
+ \begin{aligned}
+ D_bQ(s,y/\ell)={}&-2b\ell^{3/2}C_t(y)
+       -b\ell^2E_t(y)+\ell^3\partial_tH_t(y)\\
+ &+O_{t,\mathcal A}\left(
+ |b|\ell^{5/2}(1+|\log\ell|)+\ell^{7/2}\right).
+ \end{aligned}
+\]
+The pure-radiation \(\ell H_t\) transport cancels exactly,
+but the mixed \(\ell^{3/2}C_t\) transport generally does not.
+For nonnegative nonzero real smooth radial radiation data,
+\(C_t(y)>0\); this tests the physical mixed channel without
+assigning an artificial potential. The value of the \emph{unique
+selected} HBL speed and the true moving Kummer correction are not
+fixed by this snapshot.
+
+These are paper-level test-trajectory asymptotics, not a
+positive-renormalized-time-order four-piece PDE remainder or an
+assumption on the unknown original profile. To close the original
+\(\S2.13\), the same two-real-speed Cramer selection must control the
+mixed channel, moving basis/endpoints, all nonlocal PDE terms, and
+parameter Lipschitz, followed by genuine finite recursion.
+No further original theorem environment has been accepted:
+\(11/13\). The detailed proof and strict-CI boundary are recorded
+in \texttt{HBL\_213\_OUTER\_MOVING\_HARTREE\_MIXED\_PROFILE\_20261112.md}.
