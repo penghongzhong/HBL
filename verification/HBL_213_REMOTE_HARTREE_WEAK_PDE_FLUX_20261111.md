@@ -99,7 +99,43 @@ Indeed \(K*|Z|^4\in L^3\), \(|Z|^3\in L^{3/2}(\Omega_L)\), and finite-volume emb
 
 **Logical improvement over IM12:** WF5 requires \(\nabla Z\) and the genuine Hartree nonlinearity, but **not** the unbounded candidate \(P=\mathfrak M(\Delta z+\mathcal N_H(z))^{1/4}\), nor the absolute density velocity \(J_1=\int|\rho_s|\). This is a bound on the *derivative of the localized far-field potential*, not a pointwise bound on the density derivative. It uses only the original physical PDE and a valid weak integration-by-parts operation. The frozen reference \(V\) may move; its actual \(V_s\) remains explicitly present.
 
-## 4. What the method still does *not* close
+## 4. Source-faithful smooth-radiation scale corollary
+
+For the very same physical Hartree solution \(z(t)\), suppose on the actual physical ball \(B_{\ell L/3}\) the genuine field norms
+\[
+ h_0=\|z(t)\|_{L^\infty(B_{\ell L/3})},\quad
+ h_1=\|\nabla z(t)\|_{L^\infty(B_{\ell L/3})},\quad
+ h_N=\|\mathcal N_H(z(t))\|_{L^\infty(B_{\ell L/3})}
+\]
+are finite; these are **actual orbit norms**, not hypothesized independent envelopes or temporal orders. The exact critical scaling yields
+\[
+ e_0\le\sqrt\ell\,h_0 A_L^{1/2},\qquad
+ e_1\le\ell^{3/2}h_1 A_L^{1/2},\qquad
+ \|\mathcal N_H(Z)\|_{L^1(\Omega_L)}
+   \le\ell^{5/2}h_N A_L . \tag{WF7}
+\]
+Put \(\alpha=4\pi/81\), \(c_0=144/65\),
+\(c_1=(256+432C_\chi)/195\),
+\(c_R=384/65\), and \(B=B_U\). Substitution into WF5, with \(R'=\theta L'\), gives the **fully explicit parameter-smallness form**
+\[
+\begin{aligned}
+\left|\frac d{ds}Q_\chi(s,\theta L)\right|
+\le{}&
+4\alpha B^3\sqrt\ell\,h_0 |L'|
+   (c_0C_\chi/3+\theta c_R)
+ +4c_1\alpha B^3\ell^{3/2}h_1\\
+&+12c_0B^2\bigl(
+ \sqrt\alpha\,\ell^{3/2}h_1L^{-1/2}v_1
+ +\alpha\ell^3h_1^2L\bigr)
+ +4c_0\alpha B^3\ell^{5/2}h_N L\\
+&+4|b|c_0\alpha B^3
+ (\tfrac12\sqrt\ell\,h_0L+\tfrac13\ell^{3/2}h_1L^2)
+ +12c_0\sqrt\alpha\,B^2\sqrt\ell\,h_0L^{-1/2}v_s .
+\end{aligned} \tag{WF8}
+\]
+Every term contains a genuine positive power of \(\ell\), with explicit geometric factors \(L,L',b\); in particular the main gradient-kernel term is \(O(\ell^{3/2}h_1)\) **independent of the matching radius \(L\)**. However **WF8 is not a positive power of renormalized time** unless the actual modulation PDE bounds \(\ell L\), \(b\), \(L'\), \(v_1\), \(v_s\), \(h_i\). It also does not estimate the outer near-diagonal Hartree source. WF8 does not assume a Type-II rate.
+
+## 5. What the method still does *not* close
 
 The bounded-energy norms on the right of WF5 have **not** been proved with a positive order in the renormalized time \(s\). For regular radiation, \(B_Z\le\sqrt\ell\,\|z(t)\|_\infty\), \(\nabla Z(x)=\ell^{3/2}\nabla z(t,\ell x)\), and \(\|\nabla Z\|_{L^2(\Omega_L)}=\|\nabla z\|_{L^2(B_{\ell L/3})}\), providing a genuine route to source smallness if the original regular flow and modulation geometry control \(\ell L\), but no such time rate is assumed here. Differentiated observer kernel \(\partial_RK\) is covered; the *moving Kummer basis*, unique two-speed derivative, full untruncated near-diagonal interaction, complete four-piece mismatch, \(C^1\) radial time trace, parameter Lipschitz, finite PDE recursion, and dynamically produced Type-II exponent remain open.
 
