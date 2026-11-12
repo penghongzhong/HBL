@@ -95,7 +95,7 @@ jobs:
           assert not any(x in data for x in ('sorryAx','Lean.ofReduceBool','admit','⋯','…'))
           for goal in goals:
               assert goal in data, goal
-              reports=re.findall(re.escape("'" + goal + "'")+r'depends on axioms:\s*\[([^\]]*)\]',data)
+              reports=re.findall(re.escape("'" + goal + "'")+r' depends on axioms:\s*\[([^\]]*)\]',data)
               assert len(reports)==1,(goal,reports)
               actual={re.sub(r'\.\{[^}]+\}
           PY
