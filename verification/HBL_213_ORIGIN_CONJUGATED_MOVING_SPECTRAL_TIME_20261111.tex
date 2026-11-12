@@ -1,0 +1,79 @@
+% HBL §2.13: regular-origin moving spectral Green; paper-only, original 11/13.
+\subsubsection*{Origin-conjugated moving spectral Green control}
+For the frozen Kummer operator
+\[
+\mathcal L_{\mu,\theta}u=u_{rr}+
+(2/r+ir/2)u_r+
+\bigl(\theta+i(1/4-\mu)\bigr)u,
+\]
+let \(X=ru\) and \(\beta=\theta-i(\mu+1/4)\). The exact radial
+conjugation is
+\[
+r\mathcal L_{\mu,\theta}u
+=X_{rr}+\frac{ir}{2}X_r+\beta X.
+\]
+For the literal same-source matched Green field \(u_0\) and zero-left
+spectral correction \(\mathcal L_su_1=\delta(s)u_0\), set \(X_j=ru_j\).
+Then
+\[
+X_{1,rr}+\frac{ir}{2}X_{1,r}+\beta X_1=\delta X_0,
+\qquad X_1(s,a(s))=X_{1,r}(s,a(s))=0.
+\]
+Fix \(0<a(s)\le B(s)\le B_*\), \(H=\sup_{[a,B]}|X_0|\),
+\(M=1+B_*/2+|\beta|\), and \(E=\exp(MB_*)\). Gronwall for the
+first-order system \((X_1,X_{1,r})\) gives the no-left-radius-loss estimate
+\[
+\sup_{[a,B]}(|X_1|+|X_{1,r}|)
+\le E|\delta|H(B-a),\qquad
+\sup_{[a,B]}(|ru_1|+|r^2u_{1,r}+ru_1|)
+\le(1+B_*)E|\delta|H(B-a).
+\]
+Assuming classical mixed time derivatives on the actual swept
+domain, the fixed-radius time equation and moving left Cauchy data are
+\[
+\begin{aligned}
+(X_{1,s})_{rr}+\frac{ir}{2}(X_{1,s})_r+\beta X_{1,s}
+ &=\delta'X_0+\delta X_{0,s}-\beta'X_1,\\
+X_{1,s}(s,a)&=0,\qquad
+X_{1,sr}(s,a)=-a'\delta X_0(s,a),
+\qquad\beta'=\theta'-i\mu'.
+\end{aligned}
+\]
+With \(\ell=B-a\) and \(H_s=\sup_{[a,B]}|X_{0,s}|\), the
+same Volterra--Gronwall argument yields
+\[
+\sup_{[a,B]}(|X_{1,s}|+|X_{1,sr}|)
+\le E\Bigl[|a'||\delta|H+
+\ell\bigl(|\delta'|H+|\delta|H_s+
+|\beta'|E|\delta|H\ell\bigr)\Bigr].
+\]
+The first matched profile has the \emph{derived} moving left data
+\[
+\begin{aligned}
+X_{0,s}(s,a)&=a(U'-a'D),\\
+X_{0,sr}(s,a)&=U'+aD'+a'D-
+aa'[F_0(s,a)-(\theta+i(1/4-\mu))U-iaD/2],
+\end{aligned}
+\]
+and the exact time source
+\[
+(X_{0,s})_{rr}+\frac{ir}{2}(X_{0,s})_r+\beta X_{0,s}
+=rF_{0,s}-\beta'X_0.
+\]
+At the moving upper interface \(B(s)\),
+\[
+\begin{aligned}
+\frac{d}{ds}X_1(s,B)
+ &=X_{1,s}(s,B)+B'X_{1,r}(s,B),\\
+\frac{d}{ds}X_{1,r}(s,B)
+ &=X_{1,sr}(s,B)+B'
+ [-iBX_{1,r}(s,B)/2-\beta X_1(s,B)+\delta X_0(s,B)].
+\end{aligned}
+\]
+The time derivative producers \(F_{0,s}\), \(\delta'\), \(\mu'\),
+\(\theta'\), \(U'\), \(D'\), and moving endpoints must still be
+derived from the unique same-orbit Hartree selector. These identities
+neither presuppose nor establish positive time order of the full
+nonlocal four-region PDE residual. They do not close the finite-profile
+recursion or the dynamic Type-II rate; original revised acceptance
+remains \(11/13\). This is a paper proof, not a Lean audit.
