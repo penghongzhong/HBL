@@ -131,7 +131,7 @@ No relation between \(\ell\) and the renormalized time \(s\) is assumed. If \(z,
 \]
 In particular, the order-\(\ell\) pure-radiation potential is *exactly* killed by the transport covariance (up to its genuine \(\ell^3H_t\) physical PDE derivative), but the outer mixed \(\ell^{3/2}C_t\) contribution survives as \(-2b\ell^{3/2}C_t\).
 
-For a radial real nonzero Schwartz snapshot (e.g. \(z(t_0,v)=e^{-|v|^2}\)), \(C_t(y)>0\) for all \(y\neq0\). At that snapshot the genuine Hartree PDE makes \(z_t\) purely imaginary and \(H_t'=0\) as a time derivative. Hence the mixed covariant channel is not an artifact of freely prescribing a fake radiation source. Nevertheless, this **does not** determine the unique selected HBL speed \(b\), and it is not a lower bound for the original four-piece forcing norm.
+For a nonnegative, nonzero radial real Schwartz snapshot (e.g. \(z(t_0,v)=e^{-|v|^2}\)), \(C_t(y)>0\) for all \(y\neq0\). At that snapshot the genuine Hartree PDE makes \(z_t\) purely imaginary and \(H_t'=0\) as a time derivative. Hence the mixed covariant channel is not an artifact of freely prescribing a fake radiation source. Nevertheless, this **does not** determine the unique selected HBL speed \(b\), and it is not a lower bound for the original four-piece forcing norm.
 
 ## 4. Precise original-paper gate and audit boundary
 
