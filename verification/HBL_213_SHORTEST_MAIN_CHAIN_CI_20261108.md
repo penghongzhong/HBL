@@ -4222,3 +4222,41 @@ The separated physical radial kernel satisfies \(\|w\|_\infty\le144/(65L^2)\), \
 \`actual_Hartree_spectral_inner_four_piece_three_C1_joins\`,
 \`actual_Hartree_finite_spectral_Fredholm_four_piece_full_PDE_telescopes\`.
 Each target's actual transitive axiom set was exactly \`[Classical.choice, Quot.sound, propext]\`; no \`sorryAx\`, \`admit\`, new axiom, or warning survived. Current source blob \`3e5262c30d86645b290e3d12e6bbcf9144e2543a\` is byte-identical to the historical repaired successful telescope source, so this **current-workflow revalidation** is reproducible and not a newly proved source-norm estimate. The newly written WF4–WF8 remote weak-flux estimates remain **paper only** and have no separate Lean CI. **Formal revised originals stay 11/13; the full §2.13 physical producer, actual weighted time-positive remainder, parameter Lipschitz, finite recursion, and PDE-induced rate are still missing.**
+
+
+### Exact moving spectral zero-left time derivative — 11 November 2026
+
+**Paper mathematical result, NOT new Lean acceptance.** See
+[\`HBL_213_SPECTRAL_ZERO_LEFT_MOVING_SLOPE_20261111.md\`](HBL_213_SPECTRAL_ZERO_LEFT_MOVING_SLOPE_20261111.md)
+and its TeX included in \`HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex\`.
+For the **literal** original Cramer Green correction
+\(\mathcal L_su_1=\delta(s)u_0\), \(u_1(s,\rho(s))=(u_1)_r(s,\rho(s))=0\),
+where \(u_0(s,\rho)=U\), differentiation of the original moving traces gives
+\[
+(u_1)_s(s,\rho)=0,\qquad
+(u_1)_{sr}(s,\rho)=-\rho'(s)\delta(s)U(s).\tag{SZ3}
+\]
+Thus the frozen spatial **zero-left** Green correction does **not** have
+a zero-left time derivative slope. Use
+\((u_1)_s+\rho'\delta U h_s\) with the same homogeneous unit-slope
+Kummer IVP mode \(h_s\) to restore the proper zero-left data before
+applying the previously accepted weighted Volterra bound. The exact
+time-source is
+\(\delta'u_0+\delta(u_0)_s-p_s(u_1)_r-q_su_1\);
+neither the selected \(\delta'\) nor the full same-orbit \(F_s\)
+has yet been produced at positive time order. A fixed-operator
+counterexample \(\delta_N(s)=\varepsilon\sin(Ns)\) demonstrates why
+fixed-time C¹ and \(O(|\delta|^2)\) bounds alone cannot control
+\(\partial_su_1\). The existing Lean packet really has unconstrained
+\`delta : ℝ → ℂ\`; this only proves insufficiency of a proposed
+inference, not nonexistence of a physical Hartree orbit.
+
+**CI status:** Latest re-triggered pinned telescope CI
+[43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518),
+job 130872307063, remains **strict Success** with the four checked
+targets and only \`propext\`, \`Classical.choice\`, \`Quot.sound\`.
+This CI does **not** verify SZ3 or the new triangular time equations.
+Full selected speed derivative, Kummer motion, true untruncated
+nonlinear Hartree remainder, parameter Lipschitz, finite PDE
+recursion and dynamically inferred Type-II rate remain open.
+**Retained original manuscript acceptance stays 11/13 (84.62%).**
