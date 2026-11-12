@@ -36,6 +36,31 @@ The pure-radiation potential instead satisfies
  =\ell^3\partial_t(|x|^{-2}*|z|^4)(t,\ell x)\),
 whose \(L^2_x\) scale is \(\ell^{3/2}\). This latter gain does
 \emph{not} automatically pass to the mixed core--radiation potential.
+
+There is also an independent consistency check directly within
+the original physical Hartree covariant-flux identity.
+At a real radial Schwartz radiation snapshot the physical PDE gives
+\(z_t=i(\Delta z+\mathcal N_H(z))\), which is purely imaginary.
+For \(U=W+Z\) and \(V=W\), the \(i\)-weighted flux and radiation
+reaction terms therefore vanish at that instant, and the complete
+mixed covariant identity reduces to
+\[
+ D_bQ=4b\,|x|^{-2}*
+       \bigl[((W+Z)^3-W^3)\Lambda W\bigr].
+\]
+The exact bubble integral
+\[
+ \int_0^\infty W^2\Lambda W\,dr
+ =\frac12\int_0^\infty W^3dr+
+  \frac13\int_0^\infty r(W^3)'dr=\frac16
+\]
+recovers the coefficient \(4\pi\cdot 12b\sqrt{\ell}
+\operatorname{Re}z(t,0)\cdot\frac16
+=8\pi b\sqrt{\ell}\operatorname{Re}z(t,0)\).
+Thus the half-power term is precisely the mixed reference-velocity
+contribution in the genuine quartic Hartree PDE, not a fictitious
+free-source artifact.
+
 The pointwise calculation is not an estimate in the original
 four-piece weighted forcing space and does not exclude cancellation
 from the genuinely selected modulation equation. Such cancellation
