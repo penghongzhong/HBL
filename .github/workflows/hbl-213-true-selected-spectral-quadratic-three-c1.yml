@@ -69,8 +69,6 @@ jobs:
           lake build "$module" > evidence/build.log 2>&1 || { tail -260 evidence/build.log; exit 1; }
           lake env lean --trust=0 -DwarningAsError=true "$target" > evidence/strict.log 2>&1 || { cat evidence/strict.log; exit 1; }
           test ! -s evidence/strict.log
-          # The physical-source selected matched quadratic is a separate
-          # load-bearing imported statement, so check its exact source too.
           lake env lean --trust=0 -DwarningAsError=true HBL/TypeIIDynamicSelection/ActualHartreeTrueSelectedMatchedSpectralQuadratic.lean > evidence/selected-matched.strict.log 2>&1 || { cat evidence/selected-matched.strict.log; exit 1; }
           test ! -s evidence/selected-matched.strict.log
           cat > HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean <<'EOF'
@@ -97,19 +95,7 @@ jobs:
               assert goal in data, goal
               reports=re.findall(re.escape("'" + goal + "'")+r' depends on axioms:\s*\[([^\]]*)\]',data)
               assert len(reports)==1,(goal,reports)
-              actual={re.sub(r'\.\{[^}]+\}
-          PY
-          mkdir -p evidence/sources/HBL/TypeIIDynamicSelection
-          cp "$target" evidence/sources/HBL/TypeIIDynamicSelection/
-          sha256sum "$target" > evidence/source-hashes.txt
-          cp HartreeTrueSelectedSpectralQuadraticThreeC1Audit.lean evidence/
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: hbl-true-selected-spectral-quadratic-three-c1-strict-evidence
-          path: evidence
-          retention-days: 14
-,'',x.strip()) for x in reports[0].split(',') if x.strip()}
+              actual={re.sub(r'\.\{[^}]+\}$','',x.strip()) for x in reports[0].split(',') if x.strip()}
               assert actual <= allowed,(goal,actual)
               print('STRICT TARGET',goal,'AXIOMS',sorted(actual))
           PY
