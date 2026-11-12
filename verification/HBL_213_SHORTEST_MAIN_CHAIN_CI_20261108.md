@@ -4446,3 +4446,39 @@ New proofs: [HBL_213_COVARIANT_MIXED_CORE_OBSTRUCTION_20261112.md](HBL_213_COVAR
 - New source-faithful **paper-only** test for the latest genuine far Riesz splice: for \(z_\epsilon=\epsilon^{-1/2}\psi(\cdot/\epsilon)\), \(\epsilon=\ell^\gamma\), its \(\dot H^1\) energy is constant, but the entire cut-off far-principal Kummer defect has the strict lower bound \(\|1_{r<1}{\cal C}(\psi)\|_{L^2_{\rm rad}}>0\). Thus the preceding fixed-smooth-source \(O(\ell^{3\gamma/2}|\log\ell|+\ell^{2-\gamma/2}|\log\ell|)\) is **not uniform on energy balls**; a real HBL orbit must supply quantitative nonconcentration or an inner matched cancellation.
 - Full **moving-time identity** for the same mixed source: \(\partial_s(\mathsf U_\ell h_\ell)=\mathsf U_\ell[\partial_s h_\ell-b(3/2+r\partial_r)h_\ell]\). The source-dependent inverse has exact \(G_s=A^{-1}[\ell^2D{\cal C}(z)[z_t]-(\theta_s-i\mu_s)G]\), plus moving-cutoff derivative \(\gamma b(r/\epsilon)\chi'G\). Even for one smooth fixed profile, \(\Lambda_{L^2}h_\ell\to\Lambda_{L^2}G\ne0\) in \(L^2_{\rm rad}\): **static spatial gain does not imply a moving-time gain** without cancellation from the complete selected renormalized PDE.
 - Complete calculation: [HBL_213_MOVING_SHRINKING_SPLICE_DILATION_GATE_20261112.md](HBL_213_MOVING_SHRINKING_SPLICE_DILATION_GATE_20261112.md), synchronized TeX supplement in HBL_213_GREEN_MOVING_TWO_CHANNEL_20261108.tex. These identities and no-go are NOT Lean-verified. Historic fixed-time CI [43135036481](https://github.com/penghongzhong/HBL/actions/runs/43135036481) and nonlinear telescope CI [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518) remain strict Success on their exact prior targets, with only the allowed three axioms; neither validates this new note. **No increase: original §2.13 and final theorem OPEN, 11/13.**
+
+
+## 2026-11-12: selected-clock mixed-source freezing (conditional; paper only)
+
+New detailed note: HBL_213_SELECTED_CLOCK_MIXED_SOURCE_FREEZING_20261112.md,
+and synced §2.13 TeX inclusion. Under a SINGLE genuine physical Hartree
+solution's PDE-produced selected modulation trap q_s=4mu,
+0<m<=mu<=M, ell_s=-(1+4mu)ell/(2q), and t_s=ell^2,
+the terminal clock identity T-t(s)=q(s)ell(s)^2 is derived, with
+T-t(s)=O(s^{-1/(4M)}). If additionally the SAME regular physical
+Hartree radiation has a strong dot-H1 time velocity up to T, the true
+inverse-square cubic mixed Hartree channel C obeys
+\[
+\|2b(s)(C(z(t(s)))-C(z(T)))\|_2=O(s^{-1-1/(4M)}).
+\]
+If a Schwartz terminal representative is independently justified,
+the scale-collision error, after *subtracting* its nonzero frozen
+mixed channel and the physical-time quartic Riesz density derivative,
+has a positive-time power in L2. These are **conditional estimates on
+one physical orbit**, not a new assumed envelope, and neither a
+constructed PDE-selected mu trap nor a full four-region PDE residual
+estimate follows. In particular the nonzero frozen infinite-dimensional
+channel, the original moving Kummer basis/ends/selected-speed derivative,
+the actual nonlinear Hartree time derivative and parameter Lipschitz
+remain uncontrolled at the original target exponent.
+
+Reverified existing strict GitHub actions:
+https://github.com/penghongzhong/HBL/actions/runs/43135036481
+(selected source frozen spectral quadratic + literal three C1 joins),
+and https://github.com/penghongzhong/HBL/actions/runs/43124289518
+(finite original full-nonlinear-PDE telescope IDENTITY). Their target
+axiom audits show only propext, Classical.choice and Quot.sound under
+the pinned Lean/Mathlib toolchain and trust=0, warningAsError.
+The NEW conditional estimates have **no Lean compilation or CI**.
+Original revised §2.13 and the final Type-II theorem remain OPEN:
+**original strict count 11/13 (84.62%)**.

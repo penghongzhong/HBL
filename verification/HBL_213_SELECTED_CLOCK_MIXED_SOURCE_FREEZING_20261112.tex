@@ -1,0 +1,40 @@
+\paragraph{Conditional selected-clock mixed-source freezing.}
+Assume one genuine physical Hartree orbit supplies
+\[
+q_s=4\mu,\quad 0<m\le\mu\le M,\quad
+b=(1+4\mu)/(2q),\quad \ell_s=-b\ell,\quad t_s=\ell^2.
+\]
+For $h=s-s_0$, $H=1+4Mh/q_0$, $\alpha=1/(4M)$,
+one derives, rather than assumes, the terminal time and scale estimates
+\[
+ T=t(s_0)+q_0\ell_0^2,\quad
+ T-t(s)=q(s)\ell(s)^2\le q_0\ell_0^2 H^{-\alpha},\quad
+ \ell(s)^2\le\frac{q_0\ell_0^2H^{-\alpha}}{q_0+4mh}.
+\]
+Suppose further that the regular physical radiation continues to
+$T$ in $W^{1,\infty}(\dot H^1)$ with bounds $E,V$ on its
+energy norm and strong time derivative. The original
+inverse-square Hartree mixed channel
+\[
+ {\cal C}(z)=|x|^{-2}*
+       \left(|x|^{-1}\operatorname{Re}z\,|z|^2\right)
+\]
+then satisfies the quantitative Hardy--Sobolev--HLS estimate
+\[
+ \boxed{
+ \|2b(s)({\cal C}(z(t(s)))-{\cal C}(z(T)))\|_2
+ \le
+ \frac{3A_H(1+4M)E^2Vq_0\ell_0^2H^{-\alpha}}{q_0+4mh}
+ =O(s^{-1-\alpha}).}
+\]
+For terminal Schwartz radiation, the scale-collision source,
+after subtracting its nonzero frozen mixed channel and the
+physical-time Hartree density derivative, is
+$O(s^{-1-\delta})$ in $L^2$,
+where $\delta=\min\{1/(4M),1/4+1/(16M)\}>0$.
+This does not control those subtracted terms or the full four-region
+nonlinear PDE residual, and the physical modulation trap and strong
+terminal radiation are still unproved. This is a paper-only
+conditional refinement, not a new Lean theorem or a closed
+original environment; acceptance stays $11/13$. See
+the corresponding detailed mathematical note in verification.
