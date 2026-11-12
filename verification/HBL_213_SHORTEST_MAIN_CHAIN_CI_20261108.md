@@ -4320,3 +4320,30 @@ statement of §2.13; 11/13 strictly unchanged. Recent successful audits
 [43135036481](https://github.com/penghongzhong/HBL/actions/runs/43135036481)
 and [43124289518](https://github.com/penghongzhong/HBL/actions/runs/43124289518)
 remain restricted to spatial C1/quadratic and exact PDE telescoping, respectively.
+
+
+### 12 November: scale-covariant full Hartree potential flux (new paper calculation, not Lean)
+
+The true three-dimensional inverse-square kernel satisfies
+$K*(2\rho+x\cdot\nabla\rho)=(1+x\cdot\nabla)(K*\rho)$.
+For the **same actual** $U=V+Z$, $\rho=|U|^4-|V|^4$, and
+$Z_s+b\Lambda Z=i(\Delta Z+\mathcal N_H(Z))$, the covariant potential
+velocity $[\partial_s+b(1+x\cdot\nabla)](K*\rho)$ admits the
+untruncated CZ/HLS flux formula (CF5)–(CF8).
+It **exactly eliminates** the standalone $b\Phi(U)\Lambda Z$ term
+from the earlier noncovariant estimate. The residual interaction
+depends on $(\Phi(U)-\Phi(V))(V_s+b\Lambda V)$ and still needs the
+same **unique selected Cramer orbit** to produce its bounds.
+For pure physical radiation the covariant potential derivative is
+$\ell^3\partial_t(K*|z|^4)(t,\ell x)$, hence has exact $L^2$ scaling
+$\ell^{3/2}\|\partial_t(K*|z|^4)\|_2$ whenever the physical derivative
+exists. CF11–CF12 provide conditional parameter-Lipschitz gates.
+
+**No positive renormalized-time residual, source-independent
+envelope, or Type-II rate is assumed or inferred.** The complete
+mixed reference profile, moving Kummer basis/selector, four-region
+full Hartree remainder, actual finite iteration, and final dynamical
+rate remain OPEN. Calculation and TeX in
+verification/HBL_213_COVARIANT_FULL_HARTREE_FLUX_20261112.md; **no new strict Lean CI**; original
+revised environment count remains **11/13**.
+
