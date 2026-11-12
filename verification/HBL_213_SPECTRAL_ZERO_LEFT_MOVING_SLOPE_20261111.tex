@@ -98,3 +98,40 @@ this time-differentiated Green system. The same-orbit
 source, parameter Lipschitz, real finite recursion and
 PDE-derived Type--II rate remain open. The retained original
 environment count is \(11/13\).
+
+
+\paragraph{Two-real-speed Cramer derivative, retaining the actual columns.}
+The accepted frozen coupled compatibility is
+\[
+H(s)+p_b(s)C_b(s)+p_\omega(s)C_\omega(s)=0,
+\]
+where \(H\) is the physical outgoing obstruction and \(C_b,C_\omega\)
+are the original Fredholm-plus-Kummer response columns. Suppose,
+as an \emph{additional unproved temporal property}, that they and
+the real selected speeds are \(C^1\), and put
+\[
+\mathcal D=\operatorname{Im}(\overline{C_b}C_\omega)\ne0,\qquad
+G=-H'-p_b C_b'-p_\omega C_\omega'.
+\]
+Exact real Cramer's rule gives
+\[
+\boxed{\quad
+p_b'=-\frac{\operatorname{Im}(\overline{C_\omega}G)}{\mathcal D},
+\qquad
+p_\omega'=\frac{\operatorname{Im}(\overline{C_b}G)}{\mathcal D},
+\quad}
+\]
+and consequently
+\[
+|p_b'|+|p_\omega'|\le
+\frac{|C_b|+|C_\omega|}{|\mathcal D|}
+\left(|H'|+|p_b||C_b'|+|p_\omega||C_\omega'|\right).
+\]
+This is a finite-dimensional reduction, not an independent speed bound:
+the true Hartree PDE must generate the derivatives of the obstruction,
+both columns and the moving geometry, together with a uniform
+determinant lower bound. In the present Lean packet the complex
+spectral displacement \texttt{delta} has not been proved to be a
+differentiable function of the selected \emph{real} speed pair.
+Therefore these identities do not yet bound \(\delta'\).
+The retained original environment count remains \(11/13\).
