@@ -1,0 +1,89 @@
+% HBL §2.13 supplementary mathematical calculation; NO new Lean acceptance.
+\subsection*{A Mellin far-transport inverse and the non-gaining splice commutator}
+For the original frozen Hartree--Kummer radial operator put
+\[
+\mathcal L_{\mu,\theta}=\partial_r^2+
+ \left(\frac2r+\frac{ir}{2}\right)\partial_r+
+ \theta+i\left(\frac14-\mu\right),\qquad
+ A_{\mu,\theta}=\frac i2r\partial_r+\beta,\quad
+ \beta=\theta+i\left(\frac14-\mu\right).
+\]
+In the physical radial Hilbert space
+\(\mathscr H=L^2((0,\infty),4\pi r^2\,dr)\), the unitary logarithmic
+transform \(\mathsf Mf(x)=\sqrt{4\pi}e^{3x/2}f(e^x)\) gives
+\[
+ \mathsf MA_{\mu,\theta}\mathsf M^{-1}
+ =\frac i2\partial_x+\theta-i(\mu+\tfrac12).
+\]
+Fourier transformation in \(x\) therefore gives
+\[
+ \|A_{\mu,\theta}^{-1}F\|_{\mathscr H}
+ \le\frac{\|F\|_{\mathscr H}}{\mu+1/2},
+ \qquad \mu>-\frac12.
+\]
+The resolvent identity yields, uniformly for \(\mu_j+1/2\ge\eta_*>0\),
+\[
+\begin{aligned}
+\|A_{\mu_1,\theta_1}^{-1}F_1-A_{\mu_2,\theta_2}^{-1}F_2\|_{\mathscr H}
+&\le\eta_*^{-1}\|F_1-F_2\|_{\mathscr H}\\
+&\quad+\eta_*^{-2}(|\mu_1-\mu_2|+|\theta_1-\theta_2|)
+\|F_2\|_{\mathscr H}.
+\end{aligned}
+\]
+For the \emph{original untruncated} inverse-square mixed term
+\[
+ \mathcal C(z)=|x|^{-2}*
+ \bigl(|x|^{-1}\operatorname{Re}z\,|z|^2\bigr),
+ \qquad z\in\dot H^1_{\rm rad}(\mathbb R^3),
+\]
+Hardy, Sobolev and HLS give
+\[
+ \|A_{\mu,\theta}^{-1}\mathcal C(z)\|_{\mathscr H}
+ \le\frac{2C_{\rm HLS}S_3^2}{\mu+1/2}\|\nabla z\|_2^3.
+\]
+This gives a genuine infinite-dimensional \emph{far principal-part}
+response, unlike a two-speed finite-rank correction. It is not a
+full Kummer inverse and has no asserted renormalized-time decay.
+
+There are two exact obstructions to inserting this far inverse
+globally. For a smooth real radial radiation snapshot with \(z(0)\ne0\),
+angular integration of the original kernel gives
+\[
+ \mathcal C(z)(r)=4\pi z(0)^3\log(1/r)+O(1)\qquad(r\downarrow0).
+\]
+If \(\mu>1/4\) and \(p=2(\mu-1/4)+2i\theta=2i\beta\),
+the unique radial \(L^2\) inverse can be written
+\[
+ G(r)=2i\int_r^\infty(r/\rho)^p\mathcal C(z)(\rho)
+ \,\frac{d\rho}{\rho}
+ =\frac{4\pi z(0)^3}{\beta}\log(1/r)+O(1).
+\]
+Hence \(G\notin H^2(B_1)\); the actual radial Laplacian cannot
+be applied to it in global \(L^2\) merely from its far inverse bound.
+
+Moreover, for \(y=\ell r\), \((\mathsf U_\ell g)(r)=
+\ell^{3/2}g(\ell r)\), and a smooth cutoff \(\chi(y)\),
+\[
+ \mathcal L_{\mu,\theta}\mathsf U_\ell g
+ =\mathsf U_\ell(A_{\mu,\theta}+\ell^2\Delta_{\rm rad})g,
+\]
+\[
+ \boxed{
+ [A_{\mu,\theta}+\ell^2\Delta_{\rm rad},\chi]g
+ =\frac{iy}{2}\chi'g+
+ \ell^2\left(2\chi'g'+(\chi''+2\chi'/y)g\right).
+ }
+\]
+The first interface commutator carries \emph{no} small factor
+\(\ell\). Thus a generic cutoff does not produce a positive-time
+residual gain; this order-\(b\) term must be handled by the
+\emph{same actual} selected Fredholm/Cramer/Green interface and the
+complete Hartree PDE. The smooth-radiation calculation is a
+no-shortcut obstruction, not a counterexample to an unknown selected
+HBL trajectory.
+
+The positive \(\mu\) bound, the moving source and parameter
+derivatives, the full nonlocal four-region residual, its positive
+time order and Lipschitz control, and the finite physical recursion
+are all still open. This calculation is \emph{paper only};
+the revised original formal acceptance remains \(11/13\).
