@@ -1,0 +1,53 @@
+% HBL_213_MIXED_FINITE_RANK_NO_GO_20261112 — paper proof, NOT a new Lean theorem.
+\subsection*{The genuine Hartree mixed channel is not removable by two modulation directions alone}
+
+Let \(K(x)=|x|^{-2}\) on \(\R^3\) and
+\[
+ {\cal C}(z)=K*\bigl(|x|^{-1}\operatorname{Re}z\,|z|^2\bigr),
+ \qquad z\in\dot H^1(\R^3;\C).
+\]
+Hardy's inequality, Sobolev and HLS give
+\(\|{\cal C}(z)\|_2\le 2C_{\rm HLS}S_3^2\|\nabla z\|_2^3\).
+Choose nonzero nonnegative radial \(\phi_1,\phi_2,\phi_3\in C_c^\infty(\R^3)\)
+supported in pairwise disjoint annuli bounded away from the origin, and put
+\[
+ f_j=|x|^{-1}\phi_j^3,\qquad g_j=K*f_j.
+\]
+The genuine Riesz multiplier \(\widehat K(\xi)=2\pi^2/|\xi|\)
+implies that the three \(g_j\) are linearly independent in \(L^2\):
+from \(\sum_j a_jg_j=0\), multiply Fourier transforms by \(|\xi|\),
+invert the transform, and use the disjoint supports of \(f_j\).
+Hence the Gram matrix \(G_{jk}=\langle g_j,g_k\rangle_{L^2}\)
+is positive definite. Put \(\gamma=\sqrt{\lambda_{\min}(G)/3}>0\).
+
+For \emph{every} real linear subspace \(V\subset L^2\) with \(\dim V\le2\),
+\[
+ \boxed{\max_{1\le j\le3}\operatorname{dist}_{L^2}(g_j,V)\ge\gamma.}
+\]
+Indeed the projection \(P_V:\operatorname{span}\{g_1,g_2,g_3\}\to V\)
+has a nonzero kernel; for a unit coefficient vector \(a\) in this
+kernel,
+\[
+ \sqrt{\lambda_{\min}(G)}
+ \le\|\sum_j a_jg_j\|_2
+ =\|\sum_j a_j(I-P_V)g_j\|_2
+ \le\sqrt3\max_j\|(I-P_V)g_j\|_2.
+\]
+With \(z_{\ell,j}(x)=\ell^{-1/2}\phi_j(x/\ell)\) and unitary
+\(U_\ell f(x)=\ell^{-3/2}f(x/\ell)\), exact Hartree scaling yields
+\[
+ \|\nabla z_{\ell,j}\|_2=\|\nabla\phi_j\|_2,\qquad
+ {\cal C}(z_{\ell,j})=U_\ell g_j,\qquad
+ \boxed{\max_j\operatorname{dist}_{L^2}
+   ({\cal C}(z_{\ell,j}),V_\ell)\ge\gamma}
+\]
+for every \emph{shared} family of subspaces \(\dim V_\ell\le2\),
+even when \(V_\ell\) depends on \(\ell\).
+Thus a rank-two Cramer modulation selection, without its
+source-dependent nonresonant Green/PDE correction, cannot uniformly
+cancel the entire genuine cubic mixed channel on an energy ball.
+This does \emph{not} forbid cancellation on a specially selected
+Hartree trajectory, nor the infinite-dimensional Green response,
+and gives no positive-time remainder bound.
+It is an analysis-only gate, not a Lean-accepted statement;
+the original revised count remains \(11/13\).
