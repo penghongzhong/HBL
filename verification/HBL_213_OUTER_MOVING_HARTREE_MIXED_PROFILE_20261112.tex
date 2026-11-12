@@ -57,9 +57,17 @@ logarithm is produced by the cubic-in-core monomial:
        -\frac{\delta}{\sqrt{\ell^2+\delta^2}}\right]
  =4\pi\log(1/\ell)+O_\delta(1).
 \]
-This expansion covers the original moving far annulus and does
-\emph{not} extend the preceding fixed-core expansion beyond its
-proved range.
+This moving-annulus logarithmic coefficient independently agrees
+with the exact large-radius fixed-core convolution
+\[
+ 4\sqrt\ell\,c(t)(K*W^3)(r)
+ =16\pi c(t)\sqrt\ell\,\frac{\log(2r)}{r^2}
+   +O(\sqrt\ell\,r^{-4}\log r).
+\]
+Indeed, formally setting \(r=|y|/\ell\) reproduces
+\(16\pi c(t)\ell^{5/2}|y|^{-2}\log(1/\ell)\).
+This is a \emph{coefficient consistency check}, not a claim that the
+fixed-core remainder is uniform to moving radii.
 
 \paragraph{Covariant derivative and surviving mixed channel.}
 Under the original clock
