@@ -1,0 +1,88 @@
+% HBL 2.13 exact two-scale, paper-only, 11/13.
+\subsection*{The exact mixed Hartree covariant channel at fixed core radius}
+
+Let $K(x)=|x|^{-2}$, $W(r)=(1+r^2)^{-1/2}$ and
+$Z_{\ell,t}(x)=\sqrt{\ell}\,z(t,\ell x)$ for a smooth radial
+Hartree trajectory satisfying
+\[
+ iz_t+\Delta z+\kappa_H(K*|z|^4)|z|^2z=0.
+\]
+For the asymptotic calculation alone assume $z(t)$ and $z_t(t)$
+are Schwartz. Set
+\[
+ Q_{\ell,t}=K*(|W+Z_{\ell,t}|^4-W^4),\quad
+ c=\operatorname{Re}z(t,0),\quad
+ d=2|z(t,0)|^2+4c^2,\quad H=K*|z(t)|^4.
+\]
+The two \emph{exact} radial convolutions are
+\[
+ A(r):=(K*W^3)(r)
+ =\frac{4\pi\operatorname{arsinh}r}{r\sqrt{1+r^2}},
+ \qquad
+ B(r):=(K*W^2)(r)=\frac{2\pi^2\arctan r}{r},
+\]
+where $A(0)=4\pi$ and $B(0)=2\pi^2$. The first formula follows by
+integrating the radial inverse-square angular kernel by parts and
+substituting $s=\sinh v$, $u=\tanh v$; the second follows from
+$\widehat K=2\pi^2/|\xi|$ and
+$\widehat{W^2}=2\pi^2 e^{-|\xi|}/|\xi|$.
+
+The exact quartic expansion, dominated convergence in the mixed
+quadratic density, and the untruncated scaling
+$K*|Z_{\ell,t}|^4=\ell H(t,\ell\cdot)$ yield, uniformly for $x$ in
+any fixed compact set,
+\[
+ \boxed{\quad
+ Q_{\ell,t}(x)
+ =4c\sqrt\ell\,A(|x|)
+ +\ell\bigl[d B(|x|)+H(t,0)\bigr]+o(\ell).
+ \quad}
+\]
+Under the same Schwartz control this expansion differentiates in
+$\ell$ and $t$ with the corresponding little-$o$ remainder.
+The cubic mixed contribution is
+$O(\ell^{3/2}(1+|\log\ell|))$ on compact sets, while the linear
+Taylor error is $O(\ell^{3/2})$.
+
+For the original critical clock
+$\ell_s=-b\ell$, $t_s=\ell^2$, put
+$D_b=\partial_s+b(1+x\cdot\nabla)$. The resulting exact
+two-scale covariant expansion is
+\[
+ D_bQ(s,x)
+ =4bc\sqrt\ell\,\mathcal M(r)+b\ell d\,rB'(r)
+ +o(|b|\ell)+O(\ell^{5/2}),\qquad r=|x|,
+\]
+where
+\[
+ \mathcal M(r)
+ =\bigl(\tfrac12+r\partial_r\bigr)A(r)
+ =4\pi\left[
+ \frac{1}{1+r^2}
+ -\frac{(1+3r^2)\operatorname{arsinh}r}
+ {2r(1+r^2)^{3/2}}\right],
+ \qquad \mathcal M(0)=2\pi.
+\]
+In particular,
+\[
+ D_bQ(s,0)=8\pi bc\sqrt\ell+o(|b|\ell)+O(\ell^{5/2}),\qquad
+ \mathcal M(r)\sim\frac{4\pi}{r^2}
+ \left(1-\frac32\log(2r)\right)\quad(r\to\infty).
+\]
+The spatially constant pure-radiation term $\ell H(t,0)$
+cancels at order $b\ell$, but the spatially nonconstant mixed
+$\sqrt\ell$ channel survives. A purely spatially constant
+phase-frequency correction cannot cancel this profile on an
+annulus; cancellation by the \emph{actual} two-speed selector
+and moving Kummer correction remains an open obligation.
+
+These expansions are \emph{fixed-core} statements, not global
+$L^3$ estimates or statements on a radius $r\sim\ell^{-1}$.
+They neither imply a positive renormalized-time residual order
+nor establish a selected physical orbit, parameter Lipschitz
+estimate, finite recursion, or dynamical Type-II rate. The
+complete paper-level calculation is in
+\texttt{verification/HBL\_213\_MIXED\_HARTREE\_TWO\_SCALE\_EXACT\_PROFILES\_20261112.md}.
+The successful strict CIs 43135036481 and 43124289518 do not
+verify this new estimate. The original revised count remains
+\textbf{11/13}.
